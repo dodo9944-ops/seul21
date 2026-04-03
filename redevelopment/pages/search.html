@@ -45,19 +45,24 @@
        계산 모달 공통
        ══════════════════════════════ */
     .cm-overlay {
-        position:fixed; top:0; left:0; right:0; bottom:0; z-index:90;
+        position:fixed; top:104px; left:0; right:0; bottom:0; z-index:90;
         background:rgba(10,15,28,0.6); backdrop-filter:blur(4px);
-        display:flex; align-items:center; justify-content:center;
+        display:flex; align-items:flex-start; justify-content:center;
+        padding-top:24px;
         opacity:0; visibility:hidden; transition:all 0.3s ease;
     }
     .cm-overlay.open { opacity:1; visibility:visible; }
     .cm-modal {
         background:#fff; border-radius:16px; width:640px; max-width:92vw;
-        max-height:88vh; overflow-y:auto; position:relative;
+        max-height:calc(100vh - 140px); overflow-y:auto; position:relative;
         transform:translateY(16px) scale(0.98); transition:transform 0.3s ease;
         box-shadow:0 24px 80px rgba(0,0,0,0.2);
     }
     .cm-overlay.open .cm-modal { transform:translateY(0) scale(1); }
+    @media(max-width:768px) {
+        .cm-overlay { top:72px; padding-top:12px; }
+        .cm-modal { max-height:calc(100vh - 96px); }
+    }
 
     /* 모달 헤더 */
     .cm-header {
