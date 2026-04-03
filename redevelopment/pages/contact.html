@@ -163,17 +163,32 @@
             return;
         }
 
-        DataService.create('inquiries', {
-            name, email, phone, type, title, content,
-            status: '접수',
-            answer: '',
-            date: new Date().toISOString().slice(0, 10),
-            answeredAt: ''
-        });
+        var submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 전송 중...';
 
-        App.toast('문의가 성공적으로 접수되었습니다. 빠른 시일 내 답변 드리겠습니다.', 'success');
-        form.reset();
-        ['errName','errEmail','errType','errTitle','errContent'].forEach(id => showError(id, false));
+        fetch('../api/inquiries', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, phone, type, title, content })
+        })
+        .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+        .then(function(res) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> 문의 전송';
+            if (res.ok) {
+                App.toast('문의가 성공적으로 접수되었습니다. 빠른 시일 내 답변 드리겠습니다.', 'success');
+                form.reset();
+                ['errName','errEmail','errType','errTitle','errContent'].forEach(id => showError(id, false));
+            } else {
+                App.toast(res.data.error || '문의 접수에 실패했습니다.', 'error');
+            }
+        })
+        .catch(function() {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> 문의 전송';
+            App.toast('서버 연결에 실패했습니다.', 'error');
+        });
     });
 
     // 입력 시 에러 해제
