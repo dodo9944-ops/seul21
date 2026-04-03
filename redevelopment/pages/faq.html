@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자주 묻는 질문 — (주)세울엔지니어링</title>
+    <meta name="description" content="재개발·재건축에 대해 자주 묻는 질문과 답변을 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .faq-search { margin-bottom: 32px; position: relative; max-width: 480px; }
+    .faq-search .form-input { padding-left: 40px; height: 48px; font-size: 15px; }
+    .faq-search i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray-400); font-size: 16px; }
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item { border: 1px solid var(--gray-200); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 8px; transition: all var(--transition); }
+    .faq-item.open { border-left: 3px solid var(--accent); }
+    .faq-question {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 18px 20px; cursor: pointer; gap: 16px;
+        font-size: 15px; font-weight: 600; color: var(--gray-900);
+        transition: background var(--transition);
+    }
+    .faq-question:hover { background: var(--gray-50); }
+    .faq-question i { font-size: 14px; color: var(--gray-400); transition: transform 0.2s ease; flex-shrink: 0; }
+    .faq-item.open .faq-question i { transform: rotate(180deg); color: var(--accent); }
+    .faq-item.open .faq-question { color: var(--accent); }
+    .faq-answer {
+        max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+    }
+    .faq-answer-inner { padding: 0 20px 20px; font-size: 14px; line-height: 1.85; color: var(--gray-600); }
+    .faq-item.open .faq-answer { max-height: 500px; }
+    .faq-cat { font-size: 12px; font-weight: 600; color: var(--accent); margin-right: 10px; white-space: nowrap; }
+    .result-info { font-size: 14px; color: var(--gray-400); margin-bottom: 16px; }
+    .result-info strong { color: var(--gray-900); }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>자주 묻는 질문</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>자주 묻는 질문</h1>
+        <p>재개발·재건축에 대해 궁금한 점을 빠르게 찾아보세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <!-- 검색 -->
+        <div class="faq-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="form-input" id="faqSearch" placeholder="질문을 검색해보세요">
+        </div>
+
+        <!-- 카테고리 탭 -->
+        <div class="tabs" id="faqTabs" style="margin-bottom:24px;">
+            <button class="on" data-cat="전체">전체</button>
+            <button data-cat="일반">일반</button>
+            <button data-cat="계정">계정</button>
+            <button data-cat="시세">시세</button>
+            <button data-cat="투자">투자</button>
+        </div>
+
+        <div id="resultInfo" class="result-info" style="display:none;"></div>
+
+        <!-- FAQ 목록 -->
+        <div class="faq-list" id="faqList"></div>
+
+        <div class="empty-state" id="faqEmpty" style="display:none;">
+            <i class="fa-solid fa-circle-question"></i>
+            <h3>검색 결과가 없습니다</h3>
+            <p>다른 키워드로 검색하거나 카테고리를 변경해보세요</p>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    const allFaq = DataService.getAll('faq');
+    let currentCat = '전체';
+    let searchQuery = '';
+    let openId = null;
+
+    function render() {
+        let list = allFaq;
+
+        // 카테고리 필터
+        if (currentCat !== '전체') {
+            list = list.filter(f => f.category === currentCat);
+        }
+
+        // 검색 필터
+        if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            list = list.filter(f =>
+                f.question.toLowerCase().includes(q) ||
+                f.answer.toLowerCase().includes(q)
+            );
+        }
+
+        const container = document.getElementById('faqList');
+        const empty = document.getElementById('faqEmpty');
+        const info = document.getElementById('resultInfo');
+
+        if (searchQuery) {
+            info.style.display = 'block';
+            info.innerHTML = `검색 결과 <strong>${list.length}</strong>건`;
+        } else {
+            info.style.display = 'none';
+        }
+
+        if (!list.length) {
+            container.innerHTML = '';
+            empty.style.display = 'flex';
+            return;
+        }
+        empty.style.display = 'none';
+
+        container.innerHTML = list.map(f => `
+            <div class="faq-item ${openId === f.id ? 'open' : ''}" data-id="${f.id}">
+                <div class="faq-question">
+                    <div><span class="faq-cat">[${f.category}]</span>${f.question}</div>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">${f.answer}</div>
+                </div>
+            </div>
+        `).join('');
+
+        container.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.closest('.faq-item');
+                const id = item.dataset.id;
+                if (openId === id) {
+                    openId = null;
+                    item.classList.remove('open');
+                } else {
+                    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+                    openId = id;
+                    item.classList.add('open');
+                }
+            });
+        });
+    }
+
+    // 탭 이벤트
+    document.getElementById('faqTabs').addEventListener('click', e => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        document.querySelectorAll('#faqTabs button').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        currentCat = btn.dataset.cat;
+        openId = null;
+        render();
+    });
+
+    // 검색 이벤트
+    let timer;
+    document.getElementById('faqSearch').addEventListener('input', e => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            searchQuery = e.target.value.trim();
+            openId = null;
+            render();
+        }, 200);
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>

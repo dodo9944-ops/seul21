@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비례율 계산기 — (주)세울엔지니어링</title>
+    <meta name="description" content="재개발·재건축 비례율과 분담금을 간편하게 계산해보세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .calc-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    @media (max-width: 1024px) { .calc-layout { grid-template-columns: 1fr; } }
+    .calc-form { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 32px; }
+    .calc-form h2 { font-size: 20px; font-weight: 700; margin-bottom: 24px; }
+    .calc-result { display: flex; flex-direction: column; gap: 20px; }
+    .result-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px; text-align: center; }
+    .result-card .result-label { font-size: 13px; color: var(--gray-500); margin-bottom: 8px; }
+    .result-card .result-value { font-size: 36px; font-weight: 800; color: var(--gray-900); }
+    .result-card .result-value small { font-size: 16px; font-weight: 500; color: var(--gray-500); margin-left: 4px; }
+    .result-card .result-sub { font-size: 13px; margin-top: 8px; }
+    .result-card.highlight { border-color: var(--accent); background: var(--accent-light); }
+    .result-card.highlight .result-value { color: var(--accent); }
+    .verdict { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; margin-top: 8px; }
+    .verdict-good { background: #E6F9F0; color: var(--green); }
+    .verdict-warn { background: #FFF4E5; color: var(--orange); }
+    .info-section { margin-top: 60px; }
+    .info-section h2 { font-size: 22px; font-weight: 800; margin-bottom: 24px; }
+    .info-box { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 32px; }
+    .info-box h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: var(--gray-900); }
+    .info-box p { font-size: 14px; color: var(--gray-600); line-height: 1.8; margin-bottom: 16px; }
+    .info-box p:last-child { margin-bottom: 0; }
+    .info-box .formula { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 15px; font-weight: 600; color: var(--accent); text-align: center; margin: 16px 0; }
+    .optional-label { font-size: 11px; color: var(--gray-400); font-weight: 400; margin-left: 4px; }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>비례율 계산기</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>비례율 계산기</h1>
+        <p>재개발·재건축 사업의 비례율과 예상 분담금을 간편하게 계산해보세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="calc-layout">
+            <!-- 입력 폼 -->
+            <div class="calc-form">
+                <h2><i class="fa-solid fa-calculator" style="color:var(--accent);margin-right:8px;"></i>계산 입력</h2>
+                <div class="form-group">
+                    <label class="form-label">종전자산 총액 (억원)</label>
+                    <input type="number" class="form-input" id="beforeAsset" placeholder="예: 5000" step="any">
+                    <div class="form-hint">기존 토지·건물의 감정평가 총액</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">종후자산 총액 (억원)</label>
+                    <input type="number" class="form-input" id="afterAsset" placeholder="예: 12000" step="any">
+                    <div class="form-hint">신축 완료 후 전체 부동산의 예상 가치</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">총사업비 (억원)</label>
+                    <input type="number" class="form-input" id="totalCost" placeholder="예: 6500" step="any">
+                    <div class="form-hint">공사비, 설계비, 이주비 등 사업 전체 비용</div>
+                </div>
+                <hr class="divider" style="margin:24px 0;">
+                <div class="form-group">
+                    <label class="form-label">조합원 분양가 (억원)<span class="optional-label">선택</span></label>
+                    <input type="number" class="form-input" id="memberPrice" placeholder="예: 8" step="any">
+                    <div class="form-hint">조합원이 받을 세대의 분양가</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">종전자산 감정평가액 (억원)<span class="optional-label">선택, 분담금 계산용</span></label>
+                    <input type="number" class="form-input" id="myAsset" placeholder="예: 3" step="any">
+                    <div class="form-hint">내 기존 부동산의 감정평가액</div>
+                </div>
+                <button class="btn btn-accent btn-lg" style="width:100%;margin-top:8px;" id="calcBtn">
+                    <i class="fa-solid fa-calculator"></i> 계산하기
+                </button>
+            </div>
+
+            <!-- 결과 -->
+            <div class="calc-result" id="resultArea">
+                <div class="result-card highlight">
+                    <div class="result-label">비례율</div>
+                    <div class="result-value" id="ratioValue">-<small>%</small></div>
+                    <div class="result-sub" id="ratioVerdict"></div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">권리가액</div>
+                    <div class="result-value" id="rightValue">-<small>억원</small></div>
+                    <div class="result-sub" style="color:var(--gray-400);">종전감정평가액 x 비례율</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">예상 분담금</div>
+                    <div class="result-value" id="burdenValue">-<small>억원</small></div>
+                    <div class="result-sub" style="color:var(--gray-400);">조합원분양가 - 권리가액</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 비례율 이해하기 -->
+        <div class="info-section">
+            <h2>비례율 이해하기</h2>
+            <div class="info-box">
+                <h3>비례율이란?</h3>
+                <p>비례율은 재개발·재건축 사업의 수익성을 나타내는 핵심 지표입니다. 사업 완료 후 전체 자산가치에서 사업비를 차감한 순이익이 기존 자산 대비 몇 %인지를 보여줍니다.</p>
+                <div class="formula">비례율 = (종후자산 - 총사업비) / 종전자산 × 100 (%)</div>
+                <h3>비례율에 따른 의미</h3>
+                <p><strong>100% 이상:</strong> 조합원이 추가 분담금 없이 새 아파트를 받을 수 있습니다. 비례율이 높을수록 수익성이 좋은 사업입니다.</p>
+                <p><strong>100% 미만:</strong> 조합원이 새 아파트를 받기 위해 추가 분담금을 납부해야 합니다. 비례율이 낮을수록 분담금이 커집니다.</p>
+                <h3>권리가액과 분담금</h3>
+                <p><strong>권리가액</strong>은 조합원이 사업을 통해 받을 수 있는 자산의 가치입니다. 내 종전자산 감정평가액에 비례율을 곱하면 권리가액이 산출됩니다.</p>
+                <p><strong>분담금</strong>은 조합원이 희망하는 평형의 분양가에서 권리가액을 뺀 금액입니다. 분담금이 음수이면 환급금을 받게 됩니다.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    document.getElementById('calcBtn').addEventListener('click', calculate);
+
+    // Enter 키 지원
+    document.querySelectorAll('.calc-form input').forEach(inp => {
+        inp.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+    });
+
+    function calculate() {
+        const before = parseFloat(document.getElementById('beforeAsset').value);
+        const after = parseFloat(document.getElementById('afterAsset').value);
+        const cost = parseFloat(document.getElementById('totalCost').value);
+        const memberPrice = parseFloat(document.getElementById('memberPrice').value);
+        const myAsset = parseFloat(document.getElementById('myAsset').value);
+
+        if (isNaN(before) || isNaN(after) || isNaN(cost) || before <= 0) {
+            App.toast('종전자산, 종후자산, 총사업비를 입력해주세요.', 'error');
+            return;
+        }
+
+        // 비례율 계산
+        const ratio = ((after - cost) / before) * 100;
+        document.getElementById('ratioValue').innerHTML = ratio.toFixed(1) + '<small>%</small>';
+
+        const verdictEl = document.getElementById('ratioVerdict');
+        if (ratio >= 100) {
+            verdictEl.innerHTML = '<span class="verdict verdict-good"><i class="fa-solid fa-check-circle"></i> 양호</span>';
+        } else {
+            verdictEl.innerHTML = '<span class="verdict verdict-warn"><i class="fa-solid fa-exclamation-triangle"></i> 주의</span>';
+        }
+
+        // 권리가액
+        if (!isNaN(myAsset) && myAsset > 0) {
+            const right = myAsset * ratio / 100;
+            document.getElementById('rightValue').innerHTML = right.toFixed(2) + '<small>억원</small>';
+
+            // 분담금
+            if (!isNaN(memberPrice) && memberPrice > 0) {
+                const burden = memberPrice - right;
+                document.getElementById('burdenValue').innerHTML = burden.toFixed(2) + '<small>억원</small>';
+            } else {
+                document.getElementById('burdenValue').innerHTML = '-<small>억원</small>';
+            }
+        } else {
+            document.getElementById('rightValue').innerHTML = '-<small>억원</small>';
+            document.getElementById('burdenValue').innerHTML = '-<small>억원</small>';
+        }
+
+        App.toast('계산이 완료되었습니다.', 'success');
+    }
+})();
+</script>
+</body>
+</html>

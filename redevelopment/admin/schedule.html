@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일정 관리 — 관리자</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-wrap">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="admin-sidebar-header">
+            <div class="logo">세울 <small>관리자</small></div>
+        </div>
+        <nav class="admin-nav">
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">대시보드</div>
+                <a href="index.html"><i class="fa-solid fa-gauge-high"></i> 대시보드</a>
+            </div>
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">콘텐츠 관리</div>
+                <a href="areas.html"><i class="fa-solid fa-map-location-dot"></i> 구역 관리</a>
+                <a href="listings.html"><i class="fa-solid fa-building"></i> 매물 관리</a>
+                <a href="news.html"><i class="fa-solid fa-newspaper"></i> 뉴스 관리</a>
+                <a href="columns.html"><i class="fa-solid fa-pen-fancy"></i> 칼럼 관리</a>
+                <a href="community.html"><i class="fa-solid fa-comments"></i> 게시글 관리</a>
+                <a href="inquiries.html"><i class="fa-solid fa-envelope"></i> 문의 관리</a>
+            </div>
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">사이트 관리</div>
+                <a href="banners.html"><i class="fa-solid fa-images"></i> 배너 관리</a>
+                <a href="schedule.html" class="active"><i class="fa-solid fa-calendar-days"></i> 일정 관리</a>
+                <a href="members.html"><i class="fa-solid fa-users"></i> 회원 관리</a>
+                <a href="menus.html"><i class="fa-solid fa-bars"></i> 메뉴 관리</a>
+            </div>
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">설정</div>
+                <a href="settings.html"><i class="fa-solid fa-gear"></i> 사이트 설정</a>
+                <a href="seo.html"><i class="fa-solid fa-magnifying-glass-chart"></i> SEO 관리</a>
+            </div>
+        </nav>
+        <div class="admin-sidebar-footer">
+            <a href="../index.html" target="_blank"><i class="fa-solid fa-external-link-alt"></i> 사이트 보기</a>
+        </div>
+    </aside>
+    <div class="admin-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="admin-main">
+        <div class="admin-topbar">
+            <div class="admin-topbar-left">
+                <button class="admin-mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
+                <h2>일정 관리</h2>
+            </div>
+            <div class="admin-topbar-right">
+                <div class="admin-user"><span>안녕하세요, <strong id="adminName"></strong>님</span></div>
+                <button class="btn btn-sm btn-outline" id="adminLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
+            </div>
+        </div>
+
+        <div class="admin-content">
+            <!-- Table Header -->
+            <div class="admin-table-header">
+                <h3>일정 목록</h3>
+                <div class="admin-table-actions">
+                    <div class="admin-search">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="일정명 검색...">
+                    </div>
+                    <button class="btn btn-accent btn-sm" id="btnNew"><i class="fa-solid fa-plus"></i> 신규 등록</button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="admin-tbl-wrap">
+                <table class="admin-tbl">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>일정명</th>
+                            <th>날짜</th>
+                            <th>관련 구역</th>
+                            <th>설명</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+
+            <!-- Form Panel -->
+            <div class="admin-form-panel" id="formPanel" style="display:none; margin-top:24px;">
+                <h3 id="formTitle">일정 등록</h3>
+                <input type="hidden" id="editId">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                    <div class="form-group">
+                        <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">일정명 *</label>
+                        <input type="text" id="fTitle" class="form-control" placeholder="예: 한남3구역 조합원 총회">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">날짜 *</label>
+                        <input type="date" id="fDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">관련 구역</label>
+                        <input type="text" id="fArea" class="form-control" placeholder="예: 한남3구역">
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top:16px;">
+                    <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">설명</label>
+                    <textarea id="fDescription" class="form-control" rows="3" placeholder="일정 설명을 입력하세요" style="width:100%;resize:vertical;"></textarea>
+                </div>
+                <div class="admin-form-actions">
+                    <button class="btn btn-outline btn-sm" id="btnCancel">취소</button>
+                    <button class="btn btn-accent btn-sm" id="btnSave"><i class="fa-solid fa-check"></i> 저장</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script>
+(function() {
+    // Auth check
+    if (!DataService.isAdminLoggedIn()) { location.href = 'login.html'; return; }
+    document.getElementById('adminName').textContent = DataService.getAdminName();
+    document.getElementById('adminLogoutBtn').addEventListener('click', () => { DataService.adminLogout(); location.href = 'login.html'; });
+    document.getElementById('mobileToggle').addEventListener('click', () => {
+        document.getElementById('adminSidebar').classList.toggle('open');
+        document.getElementById('sidebarOverlay').classList.toggle('open');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+        document.getElementById('adminSidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('open');
+    });
+
+    function toast(msg, type='info') {
+        const c = document.getElementById('toastContainer');
+        const el = document.createElement('div');
+        el.className = 'toast toast-' + type;
+        el.innerHTML = '<i class="fa-solid fa-' + (type==='success'?'check-circle':type==='error'?'exclamation-circle':'info-circle') + '"></i> ' + msg;
+        c.appendChild(el);
+        setTimeout(() => { el.style.opacity='0'; setTimeout(() => el.remove(), 300); }, 3000);
+    }
+
+    function render(keyword='') {
+        const items = DataService.getAll('schedule');
+        const filtered = keyword ? items.filter(s => s.title.includes(keyword)) : items;
+        // Sort by date ascending
+        filtered.sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = filtered.map(s => {
+            const today = new Date().toISOString().slice(0, 10);
+            const isPast = s.date < today;
+            const isToday = s.date === today;
+            const dateClass = isToday ? 'status-active' : isPast ? 'status-inactive' : 'status-completed';
+            const dateLabel = isToday ? '오늘' : isPast ? '지남' : '예정';
+            return `
+            <tr>
+                <td>${s.id}</td>
+                <td class="name">${s.title}</td>
+                <td>${s.date} <span class="status ${dateClass}">${dateLabel}</span></td>
+                <td>${s.area || '-'}</td>
+                <td>${s.description || '-'}</td>
+                <td class="actions">
+                    <button title="수정" onclick="editItem('${s.id}')"><i class="fa-solid fa-pen"></i></button>
+                    <button class="danger" title="삭제" onclick="deleteItem('${s.id}','${s.title}')"><i class="fa-solid fa-trash"></i></button>
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    window.deleteItem = function(id, name) {
+        if (!confirm(`"${name}" 일정을 삭제하시겠습니까?`)) return;
+        DataService.remove('schedule', id);
+        render(document.getElementById('searchInput').value);
+        toast('삭제되었습니다.', 'success');
+    };
+
+    window.editItem = function(id) {
+        const s = DataService.getById('schedule', id);
+        if (!s) return;
+        document.getElementById('formTitle').textContent = '일정 수정';
+        document.getElementById('editId').value = id;
+        document.getElementById('fTitle').value = s.title || '';
+        document.getElementById('fDate').value = s.date || '';
+        document.getElementById('fArea').value = s.area || '';
+        document.getElementById('fDescription').value = s.description || '';
+        document.getElementById('formPanel').style.display = 'block';
+        document.getElementById('formPanel').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    document.getElementById('btnNew').addEventListener('click', () => {
+        document.getElementById('formTitle').textContent = '일정 등록';
+        document.getElementById('editId').value = '';
+        document.getElementById('fTitle').value = '';
+        document.getElementById('fDate').value = '';
+        document.getElementById('fArea').value = '';
+        document.getElementById('fDescription').value = '';
+        document.getElementById('formPanel').style.display = 'block';
+        document.getElementById('formPanel').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('btnCancel').addEventListener('click', () => {
+        document.getElementById('formPanel').style.display = 'none';
+    });
+
+    document.getElementById('btnSave').addEventListener('click', () => {
+        const title = document.getElementById('fTitle').value.trim();
+        const date = document.getElementById('fDate').value;
+        if (!title) { toast('일정명을 입력하세요.', 'error'); return; }
+        if (!date) { toast('날짜를 선택하세요.', 'error'); return; }
+        const data = {
+            title,
+            date,
+            area: document.getElementById('fArea').value.trim(),
+            description: document.getElementById('fDescription').value.trim()
+        };
+        const editId = document.getElementById('editId').value;
+        if (editId) {
+            DataService.update('schedule', editId, data);
+            toast('일정이 수정되었습니다.', 'success');
+        } else {
+            data.id = DataService._genId('s');
+            DataService.create('schedule', data);
+            toast('일정이 등록되었습니다.', 'success');
+        }
+        document.getElementById('formPanel').style.display = 'none';
+        render(document.getElementById('searchInput').value);
+    });
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+        render(this.value.trim());
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>

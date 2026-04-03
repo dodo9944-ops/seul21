@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재건축 구역 상세 — (주)세울엔지니어링</title>
+    <meta name="description" content="재건축 구역 상세 정보 — 사업 현황, 프리미엄, 안전진단 등급, 매물 정보를 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .detail-top { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+    .detail-top h1 { font-size: 28px; font-weight: 800; }
+    .detail-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+    .detail-desc { font-size: 15px; color: var(--gray-700); line-height: 1.8; margin: 24px 0 32px; padding: 24px; background: var(--gray-50); border-radius: var(--radius); }
+    .section-block { margin-bottom: 40px; }
+    .section-block h3 { font-size: 18px; font-weight: 700; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--gray-900); }
+    .premium-card { border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px 24px; margin-bottom: 20px; }
+    .premium-card .label { font-size: 13px; color: var(--gray-500); margin-bottom: 8px; }
+    .premium-card .value { font-size: 32px; font-weight: 800; color: var(--gray-900); }
+    .premium-card .unit { font-size: 14px; color: var(--gray-500); margin-left: 4px; }
+    .premium-card .change-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; font-size: 14px; }
+    .premium-card .ratio-row { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-100); }
+    .premium-card .ratio-row .label { margin-bottom: 4px; }
+    .premium-card .ratio-row .value { font-size: 24px; }
+    .sidebar-card { border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; }
+    .sidebar-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 16px; }
+    .consult-btn { width: 100%; height: 52px; font-size: 16px; }
+    .related-area-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
+    .related-area-item:last-child { border-bottom: none; }
+    .related-area-item .ra-name { font-size: 14px; font-weight: 600; }
+    .related-area-item .ra-stage { font-size: 12px; }
+    .related-area-item .ra-premium { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+    .related-area-item a { color: inherit; display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .related-listing { cursor: pointer; }
+    .news-item { padding: 14px 0; border-bottom: 1px solid var(--gray-100); }
+    .news-item:last-child { border-bottom: none; }
+    .news-item a { font-size: 14px; color: var(--gray-700); font-weight: 500; }
+    .news-item a:hover { color: var(--accent); }
+    .news-item .news-date { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
+    .safety-badge { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 700; background: var(--accent-light); color: var(--accent); }
+    .safety-info { border: 1px solid var(--accent-light); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 24px; background: var(--accent-light); }
+    .safety-info h4 { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+    .safety-info p { font-size: 13px; color: var(--gray-700); line-height: 1.7; }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb" id="breadcrumb"></div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div id="detailContent"></div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    const id = App.getParam('id');
+    if (!id) { location.href = 'reconstruction.html'; return; }
+
+    const area = DataService.getById('areas', id);
+    if (!area) {
+        document.getElementById('detailContent').innerHTML = '<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>구역 정보를 찾을 수 없습니다</h3><p>올바른 경로로 접속해주세요</p><a href="reconstruction.html" class="btn btn-primary btn-md">구역 목록으로</a></div>';
+        return;
+    }
+
+    // Breadcrumb
+    document.getElementById('breadcrumb').innerHTML = `
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <a href="reconstruction.html">재건축</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>${area.name}</span>`;
+
+    document.title = area.name + ' — 세울';
+
+    const isFav = DataService.isFavorite('areas', id);
+    const changeClass = area.changeDir === 'up' ? 'val-up' : area.changeDir === 'down' ? 'val-down' : 'val-flat';
+    const changeIcon = area.changeDir === 'up' ? '▲' : area.changeDir === 'down' ? '▼' : '-';
+    const stageStyle = 'background:var(' + App.stageColor(area.stage) + ');color:#fff;';
+
+    // 관련 매물
+    const relatedListings = DataService.query('listings', {
+        filter: { areaId: area.id },
+        pageSize: 3
+    }).data;
+
+    // 관련 뉴스
+    const allNews = DataService.getAll('news');
+    const relatedNews = allNews.filter(n =>
+        (n.title && n.title.includes(area.name)) ||
+        (n.tags && n.tags.some(t => area.name.includes(t) || t.includes(area.district)))
+    ).slice(0, 3);
+
+    // 관련 구역 (같은 type)
+    const relatedAreas = DataService.query('areas', {
+        filter: { type: '재건축' },
+        pageSize: 10
+    }).data.filter(a => a.id !== area.id).slice(0, 4);
+
+    // 안전진단 정보
+    let safetySection = '';
+    if (area.safetyGrade) {
+        safetySection = `
+        <div class="safety-info">
+            <h4><i class="fa-solid fa-shield-halved"></i> 안전진단 등급: ${area.safetyGrade}</h4>
+            <p>본 단지는 정밀안전진단 결과 ${area.safetyGrade} 등급을 받았습니다. 재건축 사업 추진이 가능한 상태입니다.</p>
+        </div>`;
+    } else {
+        safetySection = `
+        <div class="safety-info">
+            <h4><i class="fa-solid fa-shield-halved"></i> 안전진단 정보</h4>
+            <p>재건축 사업의 첫 단계인 안전진단은 구조안전성, 건축마감·설비, 주거환경, 비용분석 4개 항목을 종합 평가합니다. 종합점수 30점 이하(D등급)일 경우 재건축이 가능합니다.</p>
+        </div>`;
+    }
+
+    document.getElementById('detailContent').innerHTML = `
+        <div class="detail-top">
+            <h1>${area.name}</h1>
+            <span class="badge" style="${stageStyle}">${area.stage}</span>
+            <span class="badge badge-info">재건축</span>
+            <div class="detail-actions">
+                <button class="fav-btn ${isFav ? 'active' : ''}" id="favBtn" title="즐겨찾기">
+                    <i class="fa-${isFav ? 'solid' : 'regular'} fa-star"></i>
+                </button>
+                <div class="share-buttons">
+                    <button id="shareBtn" title="공유"><i class="fa-solid fa-share-nodes"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="two-col-layout">
+            <div class="detail-main">
+                ${safetySection}
+
+                <div class="section-block">
+                    <h3>구역 정보</h3>
+                    <div class="tbl-wrap">
+                        <table class="info-table">
+                            <tr><th>소재지</th><td>${area.district} ${area.dong}</td></tr>
+                            <tr><th>사업유형</th><td>${area.type}</td></tr>
+                            <tr><th>진행단계</th><td><span class="badge" style="${stageStyle}">${area.stage}</span></td></tr>
+                            <tr><th>시공사</th><td>${area.developer || '미정'}</td></tr>
+                            <tr><th>총세대수</th><td>${App.comma(area.totalHouseholds)}세대</td></tr>
+                            <tr><th>총면적</th><td>${App.comma(area.totalArea)}㎡</td></tr>
+                            <tr><th>건축면적</th><td>${App.comma(area.floorArea)}㎡</td></tr>
+                            <tr><th>용적률</th><td>${area.floorAreaRatio}%</td></tr>
+                            <tr><th>건폐율</th><td>${area.buildingCoverage}%</td></tr>
+                            ${area.approvalDate ? '<tr><th>인가일</th><td>' + area.approvalDate + '</td></tr>' : ''}
+                            ${area.completionDate ? '<tr><th>완공예정일</th><td>' + area.completionDate + '</td></tr>' : ''}
+                            ${area.safetyGrade ? '<tr><th>안전진단 등급</th><td><span class="safety-badge">' + area.safetyGrade + '</span></td></tr>' : ''}
+                        </table>
+                    </div>
+                </div>
+
+                <div class="detail-desc">${area.description}</div>
+
+                <div class="section-block">
+                    <h3>관련 매물</h3>
+                    ${relatedListings.length > 0 ? `
+                    <div class="card-grid-3" id="relatedListings">
+                        ${relatedListings.map(l => `
+                        <div class="listing-card related-listing" data-id="${l.id}">
+                            <div class="listing-thumb">
+                                <i class="fa-solid fa-city"></i>
+                                <span class="lt-badge" style="background:var(--accent)">${l.type}</span>
+                            </div>
+                            <div class="listing-body">
+                                <div class="area">${l.areaName} · ${l.district}</div>
+                                <h4>${l.sizeType}</h4>
+                                <div class="price">${l.priceText}</div>
+                                <div class="desc">${l.description.slice(0, 40)}...</div>
+                            </div>
+                        </div>`).join('')}
+                    </div>` : '<p style="color:var(--gray-500);font-size:14px;">등록된 매물이 없습니다.</p>'}
+                </div>
+
+                <div class="section-block">
+                    <h3>관련 뉴스</h3>
+                    ${relatedNews.length > 0 ? relatedNews.map(n => `
+                    <div class="news-item">
+                        <a href="news-detail.html?id=${n.id}">${n.title}</a>
+                        <div class="news-date">${n.date}</div>
+                    </div>`).join('') : '<p style="color:var(--gray-500);font-size:14px;">관련 뉴스가 없습니다.</p>'}
+                </div>
+            </div>
+
+            <aside class="detail-side">
+                <div class="premium-card">
+                    <div class="label">현재 프리미엄</div>
+                    <div><span class="value">${App.comma(area.premium)}</span><span class="unit">만원/3.3㎡</span></div>
+                    <div class="change-row">
+                        <span>전월 대비</span>
+                        <span class="${changeClass}">${changeIcon} ${App.comma(Math.abs(area.change))}만원</span>
+                    </div>
+                    <div class="ratio-row">
+                        <div class="label">비례율</div>
+                        <div class="value">${area.ratio ? area.ratio + '%' : '미정'}</div>
+                    </div>
+                </div>
+
+                <a href="contact.html" class="btn btn-accent consult-btn"><i class="fa-solid fa-headset"></i> 상담 문의하기</a>
+
+                <div class="sidebar-card" style="margin-top:20px">
+                    <h4>관련 재건축 구역</h4>
+                    ${relatedAreas.map(ra => `
+                    <div class="related-area-item">
+                        <a href="reconstruction-detail.html?id=${ra.id}">
+                            <div>
+                                <div class="ra-name">${ra.name}</div>
+                                <div class="ra-stage" style="color:var(--gray-500)">${ra.stage}</div>
+                            </div>
+                            <div class="ra-premium">${App.comma(ra.premium)}만원</div>
+                        </a>
+                    </div>`).join('')}
+                </div>
+            </aside>
+        </div>`;
+
+    // 즐겨찾기
+    document.getElementById('favBtn').addEventListener('click', function() {
+        DataService.toggleFavorite('areas', id);
+        const active = DataService.isFavorite('areas', id);
+        this.classList.toggle('active', active);
+        this.querySelector('i').className = active ? 'fa-solid fa-star' : 'fa-regular fa-star';
+        App.toast(active ? '즐겨찾기에 추가되었습니다' : '즐겨찾기에서 제거되었습니다', 'success');
+    });
+
+    // 공유
+    document.getElementById('shareBtn').addEventListener('click', function() {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(location.href);
+            App.toast('링크가 복사되었습니다', 'success');
+        }
+    });
+
+    // 관련 매물 클릭
+    document.querySelectorAll('.related-listing').forEach(card => {
+        card.addEventListener('click', function() {
+            location.href = 'listing-detail.html?id=' + this.dataset.id;
+        });
+    });
+})();
+</script>
+</body>
+</html>

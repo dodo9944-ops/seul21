@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자료실 — (주)세울엔지니어링</title>
+    <meta name="description" content="재개발·재건축 관련 서식, 법령, 가이드 자료를 다운로드하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    /* ── Search Bar ── */
+    .lib-search {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    .lib-search .form-input {
+        max-width: 360px;
+        height: 42px;
+        padding-left: 40px;
+        background-image: none;
+    }
+    .lib-search-wrap {
+        position: relative;
+        flex: 1;
+        max-width: 360px;
+    }
+    .lib-search-wrap i {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray-400);
+        font-size: 14px;
+        pointer-events: none;
+    }
+    .lib-search-wrap .form-input {
+        max-width: 100%;
+    }
+
+    /* ── Result Count ── */
+    .lib-result-count {
+        font-size: 14px;
+        color: var(--gray-500);
+        margin-bottom: 16px;
+        font-weight: 500;
+    }
+    .lib-result-count strong {
+        color: var(--gray-900);
+        font-weight: 700;
+    }
+
+    /* ── Library List ── */
+    .lib-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .lib-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 24px;
+        background: var(--white);
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        transition: all var(--transition);
+    }
+    .lib-item:hover {
+        border-color: var(--gray-300);
+        box-shadow: var(--shadow-hover);
+    }
+
+    /* File icon */
+    .lib-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 20px;
+        color: var(--white);
+        background: var(--brand-dark);
+    }
+    .lib-icon.hwp  { background: #2A7DE1; }
+    .lib-icon.pdf  { background: #D6423A; }
+    .lib-icon.xlsx { background: #1E8C5E; }
+
+    /* Middle content */
+    .lib-content {
+        flex: 1;
+        min-width: 0;
+    }
+    .lib-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 4px;
+        line-height: 1.4;
+    }
+    .lib-desc {
+        font-size: 13px;
+        color: var(--gray-500);
+        line-height: 1.5;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 8px;
+    }
+    .lib-tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    /* Right meta */
+    .lib-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+        flex-shrink: 0;
+        min-width: 120px;
+    }
+    .lib-meta-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .lib-date {
+        font-size: 12px;
+        color: var(--gray-400);
+        white-space: nowrap;
+    }
+    .lib-downloads {
+        font-size: 12px;
+        color: var(--gray-400);
+        white-space: nowrap;
+    }
+    .lib-downloads i {
+        margin-right: 3px;
+    }
+    .btn-download {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 34px;
+        padding: 0 14px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--gold);
+        background: transparent;
+        border: 1.5px solid var(--gold);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all var(--transition);
+        font-family: var(--font);
+        white-space: nowrap;
+    }
+    .btn-download:hover {
+        background: var(--gold);
+        color: var(--white);
+    }
+
+    .lib-cat-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1;
+    }
+    .lib-cat-서식 { background: var(--accent-light); color: var(--accent); }
+    .lib-cat-법령 { background: #FDECEA; color: var(--red); }
+    .lib-cat-가이드 { background: #E6F9F0; color: var(--green); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .lib-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+        }
+        .lib-meta {
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+            min-width: 0;
+        }
+        .lib-meta-top {
+            flex: 1;
+        }
+        .lib-search-wrap {
+            max-width: 100%;
+        }
+    }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>자료실</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>자료실</h1>
+        <p>재개발·재건축 관련 서식, 법령, 가이드 자료를 다운로드하세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <!-- Category Tabs -->
+        <div class="tabs" id="categoryTabs" style="margin-bottom:20px;">
+            <button class="on" data-cat="전체">전체</button>
+            <button data-cat="서식">서식</button>
+            <button data-cat="법령">법령</button>
+            <button data-cat="가이드">가이드</button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="lib-search">
+            <div class="lib-search-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="form-input" id="searchInput" placeholder="자료명을 검색하세요">
+            </div>
+        </div>
+
+        <!-- Result Count -->
+        <div class="lib-result-count" id="resultCount">총 <strong>0</strong>건</div>
+
+        <!-- Library List -->
+        <div class="lib-list" id="libList"></div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <i class="fa-solid fa-folder-open"></i>
+            <h3>검색 결과가 없습니다</h3>
+            <p>다른 검색어 또는 카테고리를 선택해주세요</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination"></div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    let currentCat = '전체';
+    let searchQuery = '';
+    const allItems = DataService.getAll('library');
+
+    const iconMap = {
+        hwp:  { icon: 'fa-file-lines', cls: 'hwp' },
+        pdf:  { icon: 'fa-file-pdf',   cls: 'pdf' },
+        xlsx: { icon: 'fa-file-excel', cls: 'xlsx' }
+    };
+
+    const catBadgeMap = {
+        '서식': 'lib-cat-서식',
+        '법령': 'lib-cat-법령',
+        '가이드': 'lib-cat-가이드'
+    };
+
+    function getFiltered() {
+        let items = allItems;
+        if (currentCat !== '전체') {
+            items = items.filter(i => i.category === currentCat);
+        }
+        if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            items = items.filter(i => i.title.toLowerCase().includes(q));
+        }
+        return items;
+    }
+
+    function render() {
+        const filtered = getFiltered();
+        const list = document.getElementById('libList');
+        const empty = document.getElementById('emptyState');
+        const count = document.getElementById('resultCount');
+
+        count.innerHTML = '총 <strong>' + filtered.length + '</strong>건';
+
+        if (!filtered.length) {
+            list.innerHTML = '';
+            empty.style.display = 'flex';
+            return;
+        }
+        empty.style.display = 'none';
+
+        list.innerHTML = filtered.map(item => {
+            const fi = iconMap[item.fileType] || iconMap.pdf;
+            const catCls = catBadgeMap[item.category] || '';
+            const tagsHtml = (item.tags || []).map(t => '<span class="tag">' + t + '</span>').join('');
+
+            return '<div class="lib-item">' +
+                '<div class="lib-icon ' + fi.cls + '">' +
+                    '<i class="fa-solid ' + fi.icon + '"></i>' +
+                '</div>' +
+                '<div class="lib-content">' +
+                    '<div class="lib-title">' + item.title + '</div>' +
+                    '<div class="lib-desc">' + item.description + '</div>' +
+                    '<div class="lib-tags">' + tagsHtml + '</div>' +
+                '</div>' +
+                '<div class="lib-meta">' +
+                    '<div class="lib-meta-top">' +
+                        '<span class="lib-cat-badge ' + catCls + '">' + item.category + '</span>' +
+                        '<span class="lib-date">' + item.date + '</span>' +
+                        '<span class="lib-downloads"><i class="fa-solid fa-download"></i>' + item.downloads + '</span>' +
+                    '</div>' +
+                    '<button class="btn-download" data-id="' + item.id + '">' +
+                        '<i class="fa-solid fa-arrow-down"></i>' +
+                        item.fileSize + ' 다운로드' +
+                    '</button>' +
+                '</div>' +
+            '</div>';
+        }).join('');
+    }
+
+    /* Tab click */
+    document.getElementById('categoryTabs').addEventListener('click', function(e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        document.querySelectorAll('#categoryTabs button').forEach(function(b) { b.classList.remove('on'); });
+        btn.classList.add('on');
+        currentCat = btn.dataset.cat;
+        render();
+    });
+
+    /* Search input */
+    document.getElementById('searchInput').addEventListener('keyup', function(e) {
+        searchQuery = e.target.value.trim();
+        render();
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>

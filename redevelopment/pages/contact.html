@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객센터 — (주)세울엔지니어링</title>
+    <meta name="description" content="세울 고객센터에 1:1 문의를 남겨주세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .contact-layout { display: grid; grid-template-columns: 1fr 380px; gap: 40px; }
+    @media (max-width: 1024px) { .contact-layout { grid-template-columns: 1fr; } }
+    .contact-form-box { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 32px; }
+    .contact-form-box h2 { font-size: 20px; font-weight: 700; margin-bottom: 24px; }
+    .contact-info { display: flex; flex-direction: column; gap: 20px; }
+    .info-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px; }
+    .info-card .info-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .info-card .info-icon i { font-size: 20px; color: var(--accent); }
+    .info-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .info-card p { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
+    .info-card .phone-num { font-size: 28px; font-weight: 800; color: var(--gray-900); margin-bottom: 4px; }
+    .form-error-msg { display: none; font-size: 12px; color: var(--red); margin-top: 4px; }
+    .form-error-msg.show { display: block; }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>고객센터</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>고객센터</h1>
+        <p>궁금한 점이 있으시면 1:1 문의를 남겨주세요. 빠르게 답변 드리겠습니다.</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="contact-layout">
+            <!-- 문의 폼 -->
+            <div class="contact-form-box">
+                <h2><i class="fa-solid fa-pen-to-square" style="color:var(--accent);margin-right:8px;"></i>1:1 문의</h2>
+                <form id="contactForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">이름 <span style="color:var(--red);">*</span></label>
+                            <input type="text" class="form-input" id="cName" placeholder="홍길동" required>
+                            <div class="form-error-msg" id="errName">이름을 입력해주세요.</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">이메일 <span style="color:var(--red);">*</span></label>
+                            <input type="email" class="form-input" id="cEmail" placeholder="example@email.com" required>
+                            <div class="form-error-msg" id="errEmail">올바른 이메일을 입력해주세요.</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">연락처</label>
+                            <input type="tel" class="form-input" id="cPhone" placeholder="010-0000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">문의유형 <span style="color:var(--red);">*</span></label>
+                            <select class="form-select" id="cType" required>
+                                <option value="">선택해주세요</option>
+                                <option value="시세문의">시세문의</option>
+                                <option value="투자상담">투자상담</option>
+                                <option value="법률상담">법률상담</option>
+                                <option value="매물문의">매물문의</option>
+                                <option value="서비스문의">서비스문의</option>
+                                <option value="기타">기타</option>
+                            </select>
+                            <div class="form-error-msg" id="errType">문의유형을 선택해주세요.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">제목 <span style="color:var(--red);">*</span></label>
+                        <input type="text" class="form-input" id="cTitle" placeholder="문의 제목을 입력해주세요" required>
+                        <div class="form-error-msg" id="errTitle">제목을 입력해주세요.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">내용 <span style="color:var(--red);">*</span></label>
+                        <textarea class="form-textarea" id="cContent" placeholder="문의 내용을 상세히 작성해주세요" rows="6" required></textarea>
+                        <div class="form-error-msg" id="errContent">내용을 입력해주세요.</div>
+                    </div>
+                    <button type="submit" class="btn btn-accent btn-lg" style="width:100%;">
+                        <i class="fa-solid fa-paper-plane"></i> 문의 전송
+                    </button>
+                </form>
+            </div>
+
+            <!-- 고객센터 안내 -->
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                    <h3>전화 문의</h3>
+                    <div class="phone-num">1588-0000</div>
+                    <p>평일 09:00 ~ 18:00<br>토요일 09:00 ~ 13:00<br>(공휴일 휴무)</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
+                    <h3>운영시간</h3>
+                    <p>평일: 오전 9시 ~ 오후 6시<br>토요일: 오전 9시 ~ 오후 1시<br>일요일·공휴일: 휴무</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <h3>이메일 문의</h3>
+                    <p style="font-size:16px;font-weight:600;color:var(--gray-900);margin-bottom:4px;">info@jaegaebal.com</p>
+                    <p>이메일 접수 후 1~2영업일 내 회신 드립니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    const form = document.getElementById('contactForm');
+
+    function showError(id, show) {
+        const el = document.getElementById(id);
+        if (show) el.classList.add('show');
+        else el.classList.remove('show');
+    }
+
+    function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const name = document.getElementById('cName').value.trim();
+        const email = document.getElementById('cEmail').value.trim();
+        const phone = document.getElementById('cPhone').value.trim();
+        const type = document.getElementById('cType').value;
+        const title = document.getElementById('cTitle').value.trim();
+        const content = document.getElementById('cContent').value.trim();
+
+        let valid = true;
+
+        showError('errName', !name); if (!name) valid = false;
+        showError('errEmail', !email || !validateEmail(email)); if (!email || !validateEmail(email)) valid = false;
+        showError('errType', !type); if (!type) valid = false;
+        showError('errTitle', !title); if (!title) valid = false;
+        showError('errContent', !content); if (!content) valid = false;
+
+        if (!valid) {
+            App.toast('필수 입력 항목을 확인해주세요.', 'error');
+            return;
+        }
+
+        DataService.create('inquiries', {
+            name, email, phone, type, title, content,
+            status: '접수',
+            answer: '',
+            date: new Date().toISOString().slice(0, 10),
+            answeredAt: ''
+        });
+
+        App.toast('문의가 성공적으로 접수되었습니다. 빠른 시일 내 답변 드리겠습니다.', 'success');
+        form.reset();
+        ['errName','errEmail','errType','errTitle','errContent'].forEach(id => showError(id, false));
+    });
+
+    // 입력 시 에러 해제
+    ['cName','cEmail','cType','cTitle','cContent'].forEach(id => {
+        document.getElementById(id).addEventListener('input', () => {
+            const errId = 'err' + id.charAt(1).toUpperCase() + id.slice(2);
+            showError(errId, false);
+        });
+    });
+})();
+</script>
+</body>
+</html>

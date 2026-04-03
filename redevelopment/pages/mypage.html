@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지 — (주)세울엔지니어링</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .my-layout { display: grid; grid-template-columns: 260px 1fr; gap: 32px; }
+    @media (max-width: 1024px) { .my-layout { grid-template-columns: 1fr; } }
+
+    /* 사이드 메뉴 */
+    .my-sidebar { position: sticky; top: 100px; align-self: start; }
+    .my-profile-card {
+        background: var(--white); border: 1px solid var(--gray-200);
+        border-radius: var(--radius); padding: 28px 24px; text-align: center; margin-bottom: 16px;
+    }
+    .my-avatar {
+        width: 72px; height: 72px; border-radius: 50%;
+        background: var(--accent-light); color: var(--accent);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 28px; font-weight: 800; margin: 0 auto 14px;
+    }
+    .my-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .my-email { font-size: 13px; color: var(--gray-500); margin-bottom: 16px; }
+    .my-joined { font-size: 12px; color: var(--gray-400); }
+    .my-nav {
+        background: var(--white); border: 1px solid var(--gray-200);
+        border-radius: var(--radius); overflow: hidden;
+    }
+    .my-nav a {
+        display: flex; align-items: center; gap: 10px;
+        padding: 14px 20px; font-size: 14px; font-weight: 500;
+        color: var(--gray-600); border-bottom: 1px solid var(--gray-100);
+        transition: all var(--transition);
+    }
+    .my-nav a:last-child { border-bottom: none; }
+    .my-nav a:hover { background: var(--gray-50); color: var(--gray-900); }
+    .my-nav a.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+    .my-nav a i { width: 20px; text-align: center; font-size: 15px; }
+
+    /* 콘텐츠 영역 */
+    .my-content { min-height: 400px; }
+    .my-section { display: none; }
+    .my-section.active { display: block; }
+    .my-section-title { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .my-section-desc { font-size: 14px; color: var(--gray-500); margin-bottom: 28px; }
+
+    /* 프로필 편집 */
+    .profile-form { max-width: 480px; }
+    .profile-form .form-group { margin-bottom: 20px; }
+
+    /* 통계 카드 */
+    .my-stats {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px;
+    }
+    @media (max-width: 768px) { .my-stats { grid-template-columns: repeat(2, 1fr); } }
+    .stat-card {
+        background: var(--white); border: 1px solid var(--gray-200);
+        border-radius: var(--radius-sm); padding: 20px; text-align: center;
+        transition: all var(--transition);
+    }
+    .stat-card:hover { border-color: var(--accent); }
+    .stat-card .stat-num { font-size: 28px; font-weight: 800; color: var(--accent); }
+    .stat-card .stat-label { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
+
+    /* 리스트 아이템 */
+    .my-list-item {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 16px 0; border-bottom: 1px solid var(--gray-100);
+    }
+    .my-list-item:last-child { border-bottom: none; }
+    .my-list-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+    .my-list-meta { font-size: 12px; color: var(--gray-400); }
+    .my-list-badge { font-size: 12px; }
+
+    /* 로그아웃 버튼 */
+    .logout-section { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--gray-200); }
+
+    @media (max-width: 1024px) {
+        .my-sidebar { position: static; }
+        .my-nav { display: flex; overflow-x: auto; }
+        .my-nav a { border-bottom: none; border-right: 1px solid var(--gray-100); white-space: nowrap; padding: 12px 16px; font-size: 13px; }
+        .my-nav a:last-child { border-right: none; }
+    }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html"><i class="fa-solid fa-house"></i></a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>마이페이지</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>마이페이지</h1>
+        <p>내 정보와 활동 내역을 관리하세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="my-layout">
+            <!-- 사이드바 -->
+            <div class="my-sidebar">
+                <div class="my-profile-card">
+                    <div class="my-avatar" id="userAvatar"></div>
+                    <div class="my-name" id="userName"></div>
+                    <div class="my-email" id="userEmail"></div>
+                    <div class="my-joined" id="userJoined"></div>
+                </div>
+                <nav class="my-nav">
+                    <a href="#info" class="active" data-tab="info"><i class="fa-solid fa-user"></i> 내 정보</a>
+                    <a href="#areas" data-tab="areas"><i class="fa-solid fa-star"></i> 관심구역</a>
+                    <a href="#listings" data-tab="listings"><i class="fa-solid fa-heart"></i> 관심매물</a>
+                    <a href="#posts" data-tab="posts"><i class="fa-solid fa-pen"></i> 내 글</a>
+                    <a href="#inquiries" data-tab="inquiries"><i class="fa-solid fa-headset"></i> 문의 내역</a>
+                </nav>
+            </div>
+
+            <!-- 콘텐츠 -->
+            <div class="my-content">
+                <!-- 내 정보 -->
+                <div class="my-section active" id="sec-info">
+                    <h2 class="my-section-title">내 정보</h2>
+                    <p class="my-section-desc">회원 정보를 확인하고 수정할 수 있습니다.</p>
+
+                    <div class="my-stats">
+                        <div class="stat-card">
+                            <div class="stat-num" id="statAreas">0</div>
+                            <div class="stat-label">관심구역</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-num" id="statListings">0</div>
+                            <div class="stat-label">관심매물</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-num" id="statPosts">0</div>
+                            <div class="stat-label">내 글</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-num" id="statInquiries">0</div>
+                            <div class="stat-label">문의</div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-head">
+                            <h3 class="panel-title">프로필 수정</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="profile-form" id="profileForm">
+                                <div class="form-group">
+                                    <label class="form-label" for="editName">이름</label>
+                                    <input type="text" class="form-input" id="editName" maxlength="20">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">이메일</label>
+                                    <input type="email" class="form-input" id="editEmail" disabled style="background:var(--gray-50);color:var(--gray-500);">
+                                    <div class="form-hint">이메일은 변경할 수 없습니다.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="editPhone">전화번호</label>
+                                    <input type="tel" class="form-input" id="editPhone" placeholder="010-0000-0000" maxlength="13">
+                                </div>
+                                <button type="submit" class="btn btn-accent btn-md">
+                                    <i class="fa-solid fa-check"></i> 정보 수정
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="logout-section">
+                        <button class="btn btn-outline btn-md" id="logoutBtn">
+                            <i class="fa-solid fa-right-from-bracket"></i> 로그아웃
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 관심구역 -->
+                <div class="my-section" id="sec-areas">
+                    <h2 class="my-section-title">관심구역</h2>
+                    <p class="my-section-desc">즐겨찾기한 재개발·재건축 구역 목록입니다.</p>
+                    <div id="favAreasContent"></div>
+                    <div style="margin-top:20px;">
+                        <a href="favorites.html" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-right"></i> 전체 관심 목록 보기</a>
+                    </div>
+                </div>
+
+                <!-- 관심매물 -->
+                <div class="my-section" id="sec-listings">
+                    <h2 class="my-section-title">관심매물</h2>
+                    <p class="my-section-desc">즐겨찾기한 매물 목록입니다.</p>
+                    <div id="favListingsContent"></div>
+                    <div style="margin-top:20px;">
+                        <a href="favorites.html" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-right"></i> 전체 관심 목록 보기</a>
+                    </div>
+                </div>
+
+                <!-- 내 글 -->
+                <div class="my-section" id="sec-posts">
+                    <h2 class="my-section-title">내 글</h2>
+                    <p class="my-section-desc">커뮤니티에 작성한 글 목록입니다.</p>
+                    <div id="myPostsContent"></div>
+                </div>
+
+                <!-- 문의 내역 -->
+                <div class="my-section" id="sec-inquiries">
+                    <h2 class="my-section-title">문의 내역</h2>
+                    <p class="my-section-desc">1:1 문의 내역을 확인할 수 있습니다.</p>
+                    <div id="myInquiriesContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    // 로그인 체크
+    if (!DataService.isUserLoggedIn()) {
+        location.href = 'login.html';
+        return;
+    }
+
+    var user = DataService.getCurrentUser();
+    var member = DataService.getById('members', user.id);
+
+    // 프로필 카드
+    document.getElementById('userAvatar').textContent = (user.name || '?')[0];
+    document.getElementById('userName').textContent = user.name || '';
+    document.getElementById('userEmail').textContent = user.email || '';
+    document.getElementById('userJoined').textContent = member ? '가입일: ' + member.joinDate : '';
+
+    // 프로필 편집 폼 초기값
+    document.getElementById('editName').value = user.name || '';
+    document.getElementById('editEmail').value = user.email || '';
+    document.getElementById('editPhone').value = (member && member.phone) || '';
+
+    // 전화번호 포맷
+    document.getElementById('editPhone').addEventListener('input', function() {
+        var val = this.value.replace(/[^0-9]/g, '');
+        if (val.length > 3 && val.length <= 7) val = val.slice(0, 3) + '-' + val.slice(3);
+        else if (val.length > 7) val = val.slice(0, 3) + '-' + val.slice(3, 7) + '-' + val.slice(7, 11);
+        this.value = val;
+    });
+
+    // 통계
+    var favAreas = DataService.getFavorites('areas');
+    var favListings = DataService.getFavorites('listings');
+    var myPosts = DataService.getAll('community').filter(function(p) { return p.authorId === user.id || p.author === user.name; });
+    var myInquiries = DataService.getAll('inquiries').filter(function(q) { return q.email === user.email || q.authorId === user.id; });
+
+    document.getElementById('statAreas').textContent = favAreas.length;
+    document.getElementById('statListings').textContent = favListings.length;
+    document.getElementById('statPosts').textContent = myPosts.length;
+    document.getElementById('statInquiries').textContent = myInquiries.length;
+
+    // 탭 전환
+    document.querySelectorAll('.my-nav a').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('.my-nav a').forEach(function(a) { a.classList.remove('active'); });
+            this.classList.add('active');
+            var tab = this.dataset.tab;
+            document.querySelectorAll('.my-section').forEach(function(s) { s.classList.remove('active'); });
+            document.getElementById('sec-' + tab).classList.add('active');
+
+            // 콘텐츠 로드
+            if (tab === 'areas') renderFavAreas();
+            if (tab === 'listings') renderFavListings();
+            if (tab === 'posts') renderMyPosts();
+            if (tab === 'inquiries') renderMyInquiries();
+        });
+    });
+
+    // URL 해시로 탭 전환
+    var hash = location.hash.replace('#', '');
+    if (hash) {
+        var navLink = document.querySelector('.my-nav a[data-tab="' + hash + '"]');
+        if (navLink) navLink.click();
+    }
+
+    // 관심구역 렌더링
+    function renderFavAreas() {
+        var container = document.getElementById('favAreasContent');
+        var ids = DataService.getFavorites('areas');
+        if (ids.length === 0) {
+            container.innerHTML = '<div class="empty-state"><i class="fa-regular fa-star"></i><h3>관심구역이 없습니다</h3><p>구역 목록에서 관심구역을 추가해보세요.</p><a href="areas.html" class="btn btn-accent btn-sm">구역 둘러보기</a></div>';
+            return;
+        }
+        var html = '';
+        ids.forEach(function(id) {
+            var area = DataService.getById('areas', id);
+            if (!area) return;
+            html += '<div class="my-list-item"><div><div class="my-list-title"><a href="area-detail.html?id=' + area.id + '">' + area.name + '</a></div><div class="my-list-meta">' + area.district + ' · ' + area.stage + ' · 프리미엄 ' + App.comma(area.premium) + '만원</div></div><button class="fav-btn active" data-type="areas" data-id="' + area.id + '" title="즐겨찾기 해제"><i class="fa-solid fa-star"></i></button></div>';
+        });
+        container.innerHTML = html;
+        bindFavButtons(container);
+    }
+
+    // 관심매물 렌더링
+    function renderFavListings() {
+        var container = document.getElementById('favListingsContent');
+        var ids = DataService.getFavorites('listings');
+        if (ids.length === 0) {
+            container.innerHTML = '<div class="empty-state"><i class="fa-regular fa-heart"></i><h3>관심매물이 없습니다</h3><p>매물 목록에서 관심매물을 추가해보세요.</p><a href="listings.html" class="btn btn-accent btn-sm">매물 둘러보기</a></div>';
+            return;
+        }
+        var html = '';
+        ids.forEach(function(id) {
+            var listing = DataService.getById('listings', id);
+            if (!listing) return;
+            html += '<div class="my-list-item"><div><div class="my-list-title"><a href="listing-detail.html?id=' + listing.id + '">' + listing.title + '</a></div><div class="my-list-meta">' + (listing.areaName || '') + ' · ' + App.comma(listing.price) + '만원</div></div><button class="fav-btn active" data-type="listings" data-id="' + listing.id + '" title="즐겨찾기 해제"><i class="fa-solid fa-star"></i></button></div>';
+        });
+        container.innerHTML = html;
+        bindFavButtons(container);
+    }
+
+    // 즐겨찾기 버튼 바인딩
+    function bindFavButtons(container) {
+        container.querySelectorAll('.fav-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var type = this.dataset.type;
+                var id = this.dataset.id;
+                DataService.toggleFavorite(type, id);
+                App.toast('즐겨찾기가 해제되었습니다.', 'success');
+                // 통계 업데이트
+                document.getElementById('statAreas').textContent = DataService.getFavorites('areas').length;
+                document.getElementById('statListings').textContent = DataService.getFavorites('listings').length;
+                // 다시 렌더링
+                if (type === 'areas') renderFavAreas();
+                else renderFavListings();
+            });
+        });
+    }
+
+    // 내 글 렌더링
+    function renderMyPosts() {
+        var container = document.getElementById('myPostsContent');
+        if (myPosts.length === 0) {
+            container.innerHTML = '<div class="empty-state"><i class="fa-regular fa-pen-to-square"></i><h3>작성한 글이 없습니다</h3><p>커뮤니티에서 글을 작성해보세요.</p><a href="community.html" class="btn btn-accent btn-sm">커뮤니티 가기</a></div>';
+            return;
+        }
+        var html = '';
+        myPosts.forEach(function(post) {
+            html += '<div class="my-list-item"><div><div class="my-list-title"><a href="community-detail.html?id=' + post.id + '">' + post.title + '</a></div><div class="my-list-meta">' + (post.category || '자유') + ' · ' + App.timeAgo(post.createdAt) + ' · 조회 ' + (post.views || 0) + '</div></div><span class="badge badge-gray">' + (post.commentCount || 0) + '댓글</span></div>';
+        });
+        container.innerHTML = html;
+    }
+
+    // 문의 내역 렌더링
+    function renderMyInquiries() {
+        var container = document.getElementById('myInquiriesContent');
+        if (myInquiries.length === 0) {
+            container.innerHTML = '<div class="empty-state"><i class="fa-regular fa-envelope"></i><h3>문의 내역이 없습니다</h3><p>궁금한 사항이 있으면 문의해주세요.</p><a href="contact.html" class="btn btn-accent btn-sm">문의하기</a></div>';
+            return;
+        }
+        var html = '';
+        myInquiries.forEach(function(inq) {
+            var statusClass = inq.status === '완료' ? 'badge-success' : inq.status === '처리중' ? 'badge-info' : 'badge-pending';
+            html += '<div class="my-list-item"><div><div class="my-list-title">' + inq.title + '</div><div class="my-list-meta">' + (inq.category || '일반') + ' · ' + (inq.createdAt || '') + '</div></div><span class="badge ' + statusClass + '">' + (inq.status || '접수') + '</span></div>';
+        });
+        container.innerHTML = html;
+    }
+
+    // 프로필 수정
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var newName = document.getElementById('editName').value.trim();
+        var newPhone = document.getElementById('editPhone').value.trim();
+
+        if (!newName) {
+            App.toast('이름을 입력해주세요.', 'error');
+            return;
+        }
+
+        if (member) {
+            DataService.update('members', member.id, { name: newName, phone: newPhone });
+        }
+        // 세션 업데이트
+        var sess = JSON.parse(sessionStorage.getItem('rdc_user'));
+        sess.name = newName;
+        sessionStorage.setItem('rdc_user', JSON.stringify(sess));
+
+        document.getElementById('userName').textContent = newName;
+        document.getElementById('userAvatar').textContent = newName[0];
+        App.toast('회원 정보가 수정되었습니다.', 'success');
+    });
+
+    // 로그아웃
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+        DataService.userLogout();
+        App.toast('로그아웃되었습니다.', 'success');
+        setTimeout(function() { location.href = '../index.html'; }, 500);
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO 관리 — 관리자</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-wrap">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="admin-sidebar-header">
+            <div class="logo">세울 <small>관리자</small></div>
+        </div>
+        <nav class="admin-nav">
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">대시보드</div>
+                <a href="index.html"><i class="fa-solid fa-gauge-high"></i> 대시보드</a>
+            </div>
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">콘텐츠 관리</div>
+                <a href="areas.html"><i class="fa-solid fa-map-location-dot"></i> 구역 관리</a>
+                <a href="listings.html"><i class="fa-solid fa-building"></i> 매물 관리</a>
+                <a href="news.html"><i class="fa-solid fa-newspaper"></i> 뉴스 관리</a>
+                <a href="columns.html"><i class="fa-solid fa-pen-fancy"></i> 칼럼 관리</a>
+                <a href="community.html"><i class="fa-solid fa-comments"></i> 게시글 관리</a>
+                <a href="inquiries.html"><i class="fa-solid fa-envelope"></i> 문의 관리</a>
+            </div>
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">사이트 관리</div>
+                <a href="banners.html"><i class="fa-solid fa-images"></i> 배너 관리</a>
+                <a href="schedule.html"><i class="fa-solid fa-calendar-days"></i> 일정 관리</a>
+                <a href="members.html"><i class="fa-solid fa-users"></i> 회원 관리</a>
+                <a href="menus.html"><i class="fa-solid fa-bars"></i> 메뉴 관리</a>
+            </div>
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">설정</div>
+                <a href="settings.html"><i class="fa-solid fa-gear"></i> 사이트 설정</a>
+                <a href="seo.html" class="active"><i class="fa-solid fa-magnifying-glass-chart"></i> SEO 관리</a>
+            </div>
+        </nav>
+        <div class="admin-sidebar-footer">
+            <a href="../index.html" target="_blank"><i class="fa-solid fa-external-link-alt"></i> 사이트 보기</a>
+        </div>
+    </aside>
+    <div class="admin-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="admin-main">
+        <div class="admin-topbar">
+            <div class="admin-topbar-left">
+                <button class="admin-mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
+                <h2>SEO 관리</h2>
+            </div>
+            <div class="admin-topbar-right">
+                <div class="admin-user"><span>안녕하세요, <strong id="adminName"></strong>님</span></div>
+                <button class="btn btn-sm btn-outline" id="adminLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
+            </div>
+        </div>
+
+        <div class="admin-content">
+            <!-- 기본 SEO -->
+            <div class="admin-form-panel">
+                <h3><i class="fa-solid fa-globe"></i> 기본 SEO 설정</h3>
+                <div class="form-group">
+                    <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">Title 태그 템플릿</label>
+                    <input type="text" id="fTitleTemplate" class="form-control" placeholder="%page% — 세울">
+                    <small style="color:var(--gray-500);font-size:12px;">%page% 자리에 페이지별 제목이 들어갑니다.</small>
+                </div>
+                <div class="form-group" style="margin-top:16px;">
+                    <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">기본 Meta Description</label>
+                    <textarea id="fMetaDescription" class="form-control" rows="2" style="width:100%;resize:vertical;" placeholder="사이트의 기본 메타 설명"></textarea>
+                </div>
+                <div class="form-group" style="margin-top:16px;">
+                    <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">OG Image URL</label>
+                    <input type="text" id="fOgImage" class="form-control" placeholder="/assets/img/og-image.png">
+                </div>
+            </div>
+
+            <!-- 페이지별 SEO -->
+            <div class="admin-form-panel" style="margin-top:24px;">
+                <h3><i class="fa-solid fa-file-lines"></i> 페이지별 SEO 설정</h3>
+                <p style="font-size:13px;color:var(--gray-500);margin-bottom:16px;">비워두면 기본 설정이 적용됩니다.</p>
+                <div id="pagesSeoContainer"></div>
+            </div>
+
+            <!-- robots.txt -->
+            <div class="admin-form-panel" style="margin-top:24px;">
+                <h3><i class="fa-solid fa-robot"></i> robots.txt 미리보기</h3>
+                <textarea id="fRobotsTxt" class="form-control" rows="8" style="width:100%;resize:vertical;font-family:monospace;font-size:13px;background:var(--gray-100);"></textarea>
+                <small style="color:var(--gray-500);font-size:12px;">참고용 미리보기입니다. 실제 robots.txt 파일은 서버에서 별도 관리합니다.</small>
+            </div>
+
+            <!-- sitemap.xml -->
+            <div class="admin-form-panel" style="margin-top:24px;">
+                <h3><i class="fa-solid fa-sitemap"></i> sitemap.xml 미리보기</h3>
+                <textarea id="fSitemapXml" class="form-control" rows="12" style="width:100%;resize:vertical;font-family:monospace;font-size:13px;background:var(--gray-100);" readonly></textarea>
+                <small style="color:var(--gray-500);font-size:12px;">현재 사이트 구조 기반의 자동 생성 미리보기입니다.</small>
+            </div>
+
+            <div style="margin-top:24px; text-align:right;">
+                <button class="btn btn-accent" id="btnSave"><i class="fa-solid fa-check"></i> SEO 설정 저장</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script>
+(function() {
+    // Auth check
+    if (!DataService.isAdminLoggedIn()) { location.href = 'login.html'; return; }
+    document.getElementById('adminName').textContent = DataService.getAdminName();
+    document.getElementById('adminLogoutBtn').addEventListener('click', () => { DataService.adminLogout(); location.href = 'login.html'; });
+    document.getElementById('mobileToggle').addEventListener('click', () => {
+        document.getElementById('adminSidebar').classList.toggle('open');
+        document.getElementById('sidebarOverlay').classList.toggle('open');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+        document.getElementById('adminSidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('open');
+    });
+
+    function toast(msg, type='info') {
+        const c = document.getElementById('toastContainer');
+        const el = document.createElement('div');
+        el.className = 'toast toast-' + type;
+        el.innerHTML = '<i class="fa-solid fa-' + (type==='success'?'check-circle':type==='error'?'exclamation-circle':'info-circle') + '"></i> ' + msg;
+        c.appendChild(el);
+        setTimeout(() => { el.style.opacity='0'; setTimeout(() => el.remove(), 300); }, 3000);
+    }
+
+    const pages = [
+        { key: 'home', label: '메인 페이지', url: '/' },
+        { key: 'areas', label: '구역 정보', url: '/pages/areas.html' },
+        { key: 'listings', label: '매물 정보', url: '/pages/listings.html' },
+        { key: 'news', label: '뉴스', url: '/pages/news.html' },
+        { key: 'columns', label: '칼럼', url: '/pages/columns.html' },
+        { key: 'community', label: '커뮤니티', url: '/pages/community.html' },
+        { key: 'calculator', label: '비례율 계산기', url: '/pages/calculator.html' },
+        { key: 'contact', label: '상담 문의', url: '/pages/contact.html' }
+    ];
+
+    function loadSettings() {
+        const s = DataService.getSettings();
+        const seo = s.seo || {};
+
+        document.getElementById('fTitleTemplate').value = seo.titleTemplate || '%page% — ' + (s.siteName || '세울');
+        document.getElementById('fMetaDescription').value = seo.metaDescription || s.siteDescription || '';
+        document.getElementById('fOgImage').value = seo.ogImage || s.ogImage || '/assets/img/og-image.png';
+
+        // Page-specific SEO
+        const container = document.getElementById('pagesSeoContainer');
+        container.innerHTML = pages.map(p => {
+            const pageSeo = (seo.pages && seo.pages[p.key]) || {};
+            return `
+            <div style="border:1px solid var(--gray-200);border-radius:8px;padding:16px;margin-bottom:12px;">
+                <div style="font-weight:600;font-size:14px;color:var(--gray-800);margin-bottom:12px;">${p.label} <small style="color:var(--gray-400);font-weight:400;">${p.url}</small></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <div class="form-group">
+                        <label style="display:block;font-size:12px;font-weight:500;color:var(--gray-600);margin-bottom:4px;">Title</label>
+                        <input type="text" class="form-control page-title" data-page="${p.key}" value="${pageSeo.title || ''}" placeholder="기본 템플릿 사용">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block;font-size:12px;font-weight:500;color:var(--gray-600);margin-bottom:4px;">Description</label>
+                        <input type="text" class="form-control page-desc" data-page="${p.key}" value="${pageSeo.description || ''}" placeholder="기본 설명 사용">
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+
+        // robots.txt
+        document.getElementById('fRobotsTxt').value = seo.robotsTxt || 'User-agent: *\nAllow: /\n\nSitemap: https://jaegaebal.com/sitemap.xml';
+
+        // sitemap.xml preview
+        const today = new Date().toISOString().slice(0, 10);
+        const sitemapUrls = pages.map(p =>
+            `  <url>\n    <loc>https://jaegaebal.com${p.url}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${p.key === 'home' ? '1.0' : '0.8'}</priority>\n  </url>`
+        ).join('\n');
+        document.getElementById('fSitemapXml').value =
+            '<?xml version="1.0" encoding="UTF-8"?>\n' +
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+            sitemapUrls + '\n</urlset>';
+    }
+
+    document.getElementById('btnSave').addEventListener('click', () => {
+        const pagesData = {};
+        document.querySelectorAll('.page-title').forEach(el => {
+            const key = el.dataset.page;
+            if (!pagesData[key]) pagesData[key] = {};
+            pagesData[key].title = el.value.trim();
+        });
+        document.querySelectorAll('.page-desc').forEach(el => {
+            const key = el.dataset.page;
+            if (!pagesData[key]) pagesData[key] = {};
+            pagesData[key].description = el.value.trim();
+        });
+
+        const seo = {
+            titleTemplate: document.getElementById('fTitleTemplate').value.trim(),
+            metaDescription: document.getElementById('fMetaDescription').value.trim(),
+            ogImage: document.getElementById('fOgImage').value.trim(),
+            pages: pagesData,
+            robotsTxt: document.getElementById('fRobotsTxt').value
+        };
+
+        DataService.updateSettings({ seo });
+        toast('SEO 설정이 저장되었습니다.', 'success');
+    });
+
+    loadSettings();
+})();
+</script>
+</body>
+</html>

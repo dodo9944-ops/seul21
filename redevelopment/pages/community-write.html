@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글쓰기 — (주)세울엔지니어링</title>
+    <meta name="description" content="재개발·재건축 커뮤니티에 새 글을 작성합니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .write-wrap { max-width: 800px; margin: 0 auto; }
+        .write-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            padding: 40px 36px;
+        }
+        .write-card h2 {
+            font-size: 22px; font-weight: 800; color: var(--gray-900);
+            margin-bottom: 32px; padding-bottom: 16px;
+            border-bottom: 2px solid var(--gray-900);
+        }
+        .form-group { margin-bottom: 24px; }
+        .form-label { display: block; font-size: 14px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px; }
+        .form-label .required { color: var(--red); margin-left: 2px; }
+        .write-textarea {
+            width: 100%; min-height: 300px; padding: 16px;
+            border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+            font-size: 14px; font-family: var(--font); color: var(--gray-900);
+            outline: none; resize: vertical; line-height: 1.7; background: var(--white);
+            transition: border-color var(--transition);
+        }
+        .write-textarea:focus { border-color: var(--accent); }
+        .write-textarea::placeholder { color: var(--gray-400); }
+        .char-count { font-size: 12px; color: var(--gray-400); text-align: right; margin-top: 4px; }
+        .form-actions {
+            display: flex; justify-content: flex-end; gap: 10px;
+            margin-top: 32px; padding-top: 24px;
+            border-top: 1px solid var(--gray-200);
+        }
+        .validation-msg {
+            font-size: 12px; color: var(--red); margin-top: 4px;
+            display: none;
+        }
+        .validation-msg.show { display: block; }
+
+        @media (max-width: 540px) {
+            .write-card { padding: 24px 20px; }
+            .write-card h2 { font-size: 19px; }
+        }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="write-wrap">
+            <div class="breadcrumb">
+                <a href="../index.html">홈</a> <i class="fa-solid fa-chevron-right"></i>
+                <a href="community.html">커뮤니티</a> <i class="fa-solid fa-chevron-right"></i>
+                <span>글쓰기</span>
+            </div>
+            <div class="write-card">
+                <h2>새 글 작성</h2>
+                <form id="writeForm" novalidate>
+                    <div class="form-group">
+                        <label class="form-label">카테고리 <span class="required">*</span></label>
+                        <select class="form-select" id="postCategory" required>
+                            <option value="">카테고리를 선택해주세요</option>
+                            <option value="질문">질문</option>
+                            <option value="정보">정보</option>
+                            <option value="후기">후기</option>
+                            <option value="분석">분석</option>
+                            <option value="칼럼">칼럼</option>
+                        </select>
+                        <div class="validation-msg" id="catError">카테고리를 선택해주세요.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">제목 <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="postTitle" placeholder="제목을 입력해주세요" maxlength="100" required>
+                        <div class="validation-msg" id="titleError">제목을 입력해주세요.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">내용 <span class="required">*</span></label>
+                        <textarea class="write-textarea" id="postContent" placeholder="내용을 입력해주세요. 재개발·재건축에 대한 질문, 정보, 후기 등을 자유롭게 작성하세요." maxlength="5000" required></textarea>
+                        <div class="char-count"><span id="charCount">0</span> / 5,000</div>
+                        <div class="validation-msg" id="contentError">내용을 입력해주세요.</div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline btn-md" id="cancelBtn">취소</button>
+                        <button type="submit" class="btn btn-accent btn-md"><i class="fa-solid fa-check"></i> 등록</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        // 로그인 체크
+        if (!DataService.isUserLoggedIn()) {
+            App.toast('로그인이 필요합니다.', 'info');
+            setTimeout(function() { location.href = 'login.html'; }, 1000);
+            return;
+        }
+
+        const form = document.getElementById('writeForm');
+        const categoryEl = document.getElementById('postCategory');
+        const titleEl = document.getElementById('postTitle');
+        const contentEl = document.getElementById('postContent');
+        const charCount = document.getElementById('charCount');
+
+        // 글자수 카운트
+        contentEl.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+
+        // 취소
+        document.getElementById('cancelBtn').addEventListener('click', function() {
+            location.href = 'community.html';
+        });
+
+        // 유효성 검사
+        function validate() {
+            let valid = true;
+
+            const catError = document.getElementById('catError');
+            const titleError = document.getElementById('titleError');
+            const contentError = document.getElementById('contentError');
+
+            if (!categoryEl.value) {
+                catError.classList.add('show');
+                valid = false;
+            } else {
+                catError.classList.remove('show');
+            }
+
+            if (!titleEl.value.trim()) {
+                titleError.classList.add('show');
+                valid = false;
+            } else {
+                titleError.classList.remove('show');
+            }
+
+            if (!contentEl.value.trim()) {
+                contentError.classList.add('show');
+                valid = false;
+            } else {
+                contentError.classList.remove('show');
+            }
+
+            return valid;
+        }
+
+        // 등록
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!validate()) {
+                App.toast('필수 항목을 모두 입력해주세요.', 'error');
+                return;
+            }
+
+            const user = DataService.getCurrentUser();
+            const now = new Date();
+            const dateStr = now.getFullYear() + '-' +
+                String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                String(now.getDate()).padStart(2, '0') + ' ' +
+                String(now.getHours()).padStart(2, '0') + ':' +
+                String(now.getMinutes()).padStart(2, '0');
+
+            const newPost = {
+                title: titleEl.value.trim(),
+                category: categoryEl.value,
+                content: contentEl.value.trim(),
+                author: user.name,
+                date: dateStr,
+                views: 0,
+                comments: 0,
+                likes: 0
+            };
+
+            DataService.create('community', newPost);
+            App.toast('게시글이 등록되었습니다.', 'success');
+            setTimeout(function() { location.href = 'community.html'; }, 800);
+        });
+
+        // 입력 시 에러 제거
+        categoryEl.addEventListener('change', function() { document.getElementById('catError').classList.remove('show'); });
+        titleEl.addEventListener('input', function() { document.getElementById('titleError').classList.remove('show'); });
+        contentEl.addEventListener('input', function() { document.getElementById('contentError').classList.remove('show'); });
+    });
+})();
+</script>
+</body>
+</html>

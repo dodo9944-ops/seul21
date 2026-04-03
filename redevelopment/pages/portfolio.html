@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>업무실적 — (주)세울엔지니어링</title>
+    <meta name="description" content="(주)세울엔지니어링의 재개발·재건축·소규모정비 업무 수행실적을 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    /* ── KPI 요약 ── */
+    .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-bottom: 48px;
+    }
+    @media (max-width: 1024px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+    @media (max-width: 540px) { .kpi-grid { grid-template-columns: 1fr; gap: 12px; } }
+    .kpi-card {
+        background: var(--brand-dark);
+        border-radius: var(--radius);
+        padding: 28px 24px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .kpi-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 40px; height: 3px;
+        background: var(--gold);
+        border-radius: 2px;
+    }
+    .kpi-card .kpi-icon {
+        font-size: 20px;
+        color: var(--gold);
+        margin-bottom: 12px;
+    }
+    .kpi-card .kpi-value {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--gold);
+        line-height: 1.2;
+        margin-bottom: 6px;
+    }
+    .kpi-card .kpi-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: rgba(255,255,255,0.6);
+    }
+
+    /* ── 대표 수행실적 (Featured) ── */
+    .featured-section { margin-bottom: 56px; }
+    .featured-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+    @media (max-width: 1024px) { .featured-grid { grid-template-columns: 1fr; gap: 16px; } }
+    .featured-card {
+        background: var(--white);
+        border: 1px solid var(--gray-200);
+        border-left: 4px solid var(--gold);
+        border-radius: var(--radius);
+        padding: 28px 24px 24px;
+        transition: all 0.25s ease;
+        display: flex;
+        flex-direction: column;
+    }
+    .featured-card:hover {
+        border-color: var(--gold);
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-4px);
+    }
+    .featured-card .fc-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+    .featured-card .fc-name {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--gray-900);
+        margin-bottom: 12px;
+        line-height: 1.4;
+    }
+    .featured-card .fc-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 14px;
+    }
+    .featured-card .fc-info {
+        font-size: 13px;
+        color: var(--gray-600);
+        margin-bottom: 6px;
+    }
+    .featured-card .fc-info span {
+        font-weight: 600;
+        color: var(--gray-900);
+    }
+    .featured-card .fc-desc {
+        font-size: 14px;
+        color: var(--gray-500);
+        line-height: 1.65;
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid var(--gray-100);
+    }
+
+    /* ── 전체 수행실적 카드 ── */
+    .pf-card {
+        cursor: default;
+    }
+    .pf-card .pf-name {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+    .pf-card .pf-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 14px;
+    }
+    .pf-card .pf-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--gray-600);
+        margin-bottom: 4px;
+    }
+    .pf-card .pf-info span:last-child {
+        font-weight: 600;
+        color: var(--gray-900);
+    }
+
+    /* ── Badge Variants ── */
+    .badge-type {
+        background: var(--brand-dark);
+        color: var(--white);
+    }
+    .badge-role {
+        background: var(--gray-100);
+        color: var(--gray-700);
+        font-weight: 600;
+    }
+    .badge-status-진행중 {
+        background: rgba(195,165,105,0.15);
+        color: var(--gold);
+    }
+    .badge-status-완료 {
+        background: var(--brand-dark);
+        color: var(--white);
+    }
+
+    /* ── Section Divider ── */
+    .section-divider {
+        margin: 48px 0;
+        border: none;
+        border-top: 1px solid var(--gray-200);
+    }
+
+    .result-count {
+        font-size: 14px;
+        color: var(--gray-500);
+        padding: 8px 0;
+    }
+    .result-count strong { color: var(--gray-900); }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>업무실적</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>업무실적</h1>
+        <p>세울엔지니어링의 재개발·재건축·소규모정비 수행실적을 한눈에 확인하세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <!-- KPI 요약 -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="kpi-value">10건</div>
+                <div class="kpi-label">총 수행실적</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="fa-solid fa-spinner"></i></div>
+                <div class="kpi-value">7건</div>
+                <div class="kpi-label">진행중 사업</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="kpi-value">3건</div>
+                <div class="kpi-label">완료 사업</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="fa-solid fa-house-chimney"></i></div>
+                <div class="kpi-value">약 40,000세대</div>
+                <div class="kpi-label">총 관리세대</div>
+            </div>
+        </div>
+
+        <!-- 대표 수행실적 -->
+        <div class="featured-section">
+            <div class="section-head">
+                <h2 class="section-title">대표 수행실적</h2>
+            </div>
+            <div class="featured-grid" id="featuredGrid"></div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 전체 수행실적 -->
+        <div class="section-head">
+            <h2 class="section-title">전체 수행실적</h2>
+        </div>
+
+        <div class="filter-bar">
+            <select class="form-select" id="filterType">
+                <option value="전체">유형 전체</option>
+                <option value="재개발">재개발</option>
+                <option value="재건축">재건축</option>
+                <option value="소규모정비">소규모정비</option>
+            </select>
+            <select class="form-select" id="filterStatus">
+                <option value="전체">상태 전체</option>
+                <option value="진행중">진행중</option>
+                <option value="완료">완료</option>
+            </select>
+        </div>
+
+        <div class="result-count" id="resultCount"></div>
+        <div class="card-grid-3" id="portfolioGrid"></div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+
+    /* ── 대표 수행실적 렌더 ── */
+    function renderFeatured() {
+        const items = MOCK.portfolio.filter(function(p) { return p.featured === true; });
+        var grid = document.getElementById('featuredGrid');
+
+        grid.innerHTML = items.map(function(p) {
+            return '<div class="featured-card">' +
+                '<div class="fc-header">' +
+                    '<span class="badge badge-type">' + p.type + '</span>' +
+                    '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
+                '</div>' +
+                '<div class="fc-name">' + p.name + '</div>' +
+                '<div class="fc-info"><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:4px"></i> ' + p.district + ' &middot; ' + p.year + '년</div>' +
+                '<div class="fc-info">규모: <span>' + p.scale + '</span></div>' +
+                '<div class="fc-info">역할: <span>' + p.role + '</span></div>' +
+                '<div class="fc-desc">' + p.description + '</div>' +
+            '</div>';
+        }).join('');
+    }
+
+    /* ── 필터 값 ── */
+    function getFilters() {
+        return {
+            type: document.getElementById('filterType').value,
+            status: document.getElementById('filterStatus').value
+        };
+    }
+
+    /* ── 전체 실적 렌더 ── */
+    function renderAll() {
+        var filters = getFilters();
+        var items = MOCK.portfolio.filter(function(p) {
+            if (filters.type !== '전체' && p.type !== filters.type) return false;
+            if (filters.status !== '전체' && p.status !== filters.status) return false;
+            return true;
+        });
+
+        document.getElementById('resultCount').innerHTML =
+            '총 <strong>' + items.length + '</strong>건';
+
+        var grid = document.getElementById('portfolioGrid');
+
+        if (items.length === 0) {
+            grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">' +
+                '<i class="fa-solid fa-search"></i>' +
+                '<h3>해당 조건의 실적이 없습니다</h3>' +
+                '<p>다른 조건으로 검색해보세요</p>' +
+            '</div>';
+            return;
+        }
+
+        grid.innerHTML = items.map(function(p) {
+            return '<div class="card pf-card">' +
+                '<div class="pf-name">' + p.name + '</div>' +
+                '<div class="pf-badges">' +
+                    '<span class="badge badge-type">' + p.type + '</span>' +
+                    '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
+                '</div>' +
+                '<div class="pf-info"><span>지역</span><span>' + p.district + ' &middot; ' + p.year + '년</span></div>' +
+                '<div class="pf-info"><span>규모</span><span>' + p.scale + '</span></div>' +
+                '<div class="pf-info"><span>역할</span><span>' + p.role + '</span></div>' +
+            '</div>';
+        }).join('');
+    }
+
+    /* ── 이벤트 ── */
+    document.getElementById('filterType').addEventListener('change', renderAll);
+    document.getElementById('filterStatus').addEventListener('change', renderAll);
+
+    /* ── 초기 렌더 ── */
+    renderFeatured();
+    renderAll();
+
+})();
+</script>
+</body>
+</html>

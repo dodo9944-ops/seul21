@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정비구역 지도 — (주)세울엔지니어링</title>
+    <meta name="description" content="서울 전역 정비구역의 위치를 지도에서 확인하고 구역별 프리미엄·사업단계를 비교하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    /* ── Map Page Layout ── */
+    .map-layout {
+        display: flex;
+        gap: 0;
+        min-height: 700px;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: var(--white);
+    }
+
+    /* ── Left Sidebar ── */
+    .map-sidebar {
+        width: 360px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid var(--gray-200);
+        background: var(--white);
+    }
+    .sidebar-filters {
+        padding: 20px;
+        border-bottom: 1px solid var(--gray-100);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .sidebar-filters label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--gray-600);
+        letter-spacing: 0.3px;
+    }
+    .filter-select {
+        width: 100%;
+        height: 40px;
+        padding: 0 12px;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius-sm);
+        font-size: 14px;
+        color: var(--gray-900);
+        background: var(--white);
+        outline: none;
+        transition: border-color var(--transition);
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+    }
+    .filter-select:focus {
+        border-color: var(--gold);
+    }
+
+    /* Type filter buttons */
+    .type-filters {
+        display: flex;
+        gap: 6px;
+    }
+    .type-btn {
+        flex: 1;
+        height: 34px;
+        border: 1px solid var(--gray-200);
+        border-radius: 6px;
+        background: var(--white);
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--gray-600);
+        cursor: pointer;
+        transition: all var(--transition);
+    }
+    .type-btn:hover {
+        border-color: var(--gray-400);
+        color: var(--gray-900);
+    }
+    .type-btn.active {
+        background: var(--brand-dark);
+        border-color: var(--brand-dark);
+        color: var(--gold);
+        font-weight: 600;
+    }
+
+    /* Search input */
+    .search-wrap {
+        position: relative;
+    }
+    .search-wrap i {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 13px;
+        color: var(--gray-400);
+    }
+    .search-input {
+        width: 100%;
+        height: 40px;
+        padding: 0 12px 0 36px;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius-sm);
+        font-size: 14px;
+        color: var(--gray-900);
+        outline: none;
+        transition: border-color var(--transition);
+    }
+    .search-input::placeholder {
+        color: var(--gray-400);
+    }
+    .search-input:focus {
+        border-color: var(--gold);
+    }
+
+    /* Result count */
+    .result-count {
+        padding: 10px 20px;
+        font-size: 13px;
+        color: var(--gray-500);
+        border-bottom: 1px solid var(--gray-100);
+        background: var(--gray-50);
+    }
+    .result-count strong {
+        color: var(--gold);
+        font-weight: 700;
+    }
+
+    /* Card list */
+    .area-card-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0;
+    }
+    .area-card-list::-webkit-scrollbar {
+        width: 5px;
+    }
+    .area-card-list::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .area-card-list::-webkit-scrollbar-thumb {
+        background: var(--gray-300);
+        border-radius: 3px;
+    }
+    .area-card {
+        display: block;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--gray-100);
+        transition: background var(--transition);
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+    }
+    .area-card:hover {
+        background: var(--gold-light);
+    }
+    .area-card-top {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+    }
+    .area-card-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--gray-900);
+        flex: 1;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .badge-type {
+        display: inline-flex;
+        align-items: center;
+        height: 22px;
+        padding: 0 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .badge-type.재개발 {
+        background: rgba(42, 125, 225, 0.1);
+        color: #2A7DE1;
+    }
+    .badge-type.재건축 {
+        background: rgba(30, 140, 94, 0.1);
+        color: #1E8C5E;
+    }
+    .badge-stage {
+        display: inline-flex;
+        align-items: center;
+        height: 22px;
+        padding: 0 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+        flex-shrink: 0;
+        background: var(--gray-100);
+        color: var(--gray-600);
+    }
+    .area-card-location {
+        font-size: 13px;
+        color: var(--gray-500);
+        margin-bottom: 8px;
+    }
+    .area-card-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .area-card-premium {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--gray-900);
+    }
+    .area-card-premium small {
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--gray-500);
+        margin-left: 2px;
+    }
+    .area-card-change {
+        font-size: 12px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+    }
+    .area-card-change.up {
+        color: #D6423A;
+    }
+    .area-card-change.down {
+        color: #2A7DE1;
+    }
+    .area-card-change.flat {
+        color: var(--gray-400);
+    }
+
+    /* Empty state */
+    .card-empty {
+        padding: 60px 20px;
+        text-align: center;
+        color: var(--gray-400);
+    }
+    .card-empty i {
+        font-size: 36px;
+        margin-bottom: 12px;
+        display: block;
+    }
+    .card-empty p {
+        font-size: 14px;
+    }
+
+    /* ── Right Map Area ── */
+    .map-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+    .map-canvas {
+        flex: 1;
+        min-height: 500px;
+        position: relative;
+        background: var(--brand-dark);
+        overflow: hidden;
+    }
+
+    /* Blueprint grid overlay */
+    .map-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(195,165,105,0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(195,165,105,0.06) 1px, transparent 1px),
+            linear-gradient(rgba(195,165,105,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(195,165,105,0.03) 1px, transparent 1px);
+        background-size:
+            100px 100px,
+            100px 100px,
+            20px 20px,
+            20px 20px;
+        pointer-events: none;
+    }
+
+    /* Map pins */
+    .map-pin {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translate(-50%, -100%);
+        cursor: pointer;
+        transition: transform 0.15s ease;
+        z-index: 2;
+    }
+    .map-pin:hover {
+        transform: translate(-50%, -100%) scale(1.15);
+        z-index: 10;
+    }
+    .map-pin-icon {
+        width: 28px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand-dark);
+        font-size: 11px;
+        font-weight: 700;
+        position: relative;
+    }
+    .map-pin-icon svg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    .map-pin-label {
+        margin-top: 2px;
+        padding: 2px 8px;
+        background: rgba(10,15,28,0.85);
+        border: 1px solid rgba(195,165,105,0.3);
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--gold);
+        white-space: nowrap;
+        backdrop-filter: blur(4px);
+    }
+    .map-pin.hot .map-pin-label {
+        background: rgba(195,165,105,0.15);
+        border-color: var(--gold);
+        color: #fff;
+    }
+
+    /* Map center overlay text */
+    .map-overlay-text {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 5;
+        pointer-events: none;
+    }
+    .map-overlay-text span {
+        display: inline-block;
+        padding: 8px 20px;
+        background: rgba(10,15,28,0.7);
+        border: 1px solid rgba(195,165,105,0.2);
+        border-radius: 8px;
+        font-size: 13px;
+        color: rgba(195,165,105,0.7);
+        backdrop-filter: blur(6px);
+        letter-spacing: 0.5px;
+    }
+
+    /* Compass rose */
+    .map-compass {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+        z-index: 5;
+        opacity: 0.25;
+    }
+    .map-compass svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* ── Stats Row ── */
+    .map-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid var(--gray-200);
+        background: var(--gray-50);
+    }
+    .map-stat {
+        padding: 16px 20px;
+        text-align: center;
+        border-right: 1px solid var(--gray-100);
+    }
+    .map-stat:last-child {
+        border-right: none;
+    }
+    .map-stat-label {
+        font-size: 11px;
+        color: var(--gray-500);
+        font-weight: 500;
+        margin-bottom: 4px;
+        letter-spacing: 0.3px;
+    }
+    .map-stat-value {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--gray-900);
+    }
+    .map-stat-value .unit {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--gray-500);
+        margin-left: 2px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+        .map-layout {
+            flex-direction: column;
+            min-height: auto;
+        }
+        .map-sidebar {
+            width: 100%;
+            border-right: none;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .area-card-list {
+            max-height: 360px;
+        }
+        .map-canvas {
+            min-height: 350px;
+        }
+        .map-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .map-stat {
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .sidebar-filters {
+            padding: 16px;
+        }
+        .result-count {
+            padding: 8px 16px;
+        }
+        .area-card {
+            padding: 14px 16px;
+        }
+        .map-pin-label {
+            font-size: 10px;
+        }
+    }
+    @media (max-width: 480px) {
+        .type-filters {
+            flex-wrap: wrap;
+        }
+        .type-btn {
+            flex: none;
+            padding: 0 14px;
+        }
+    }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>정비구역 지도</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>정비구역 지도</h1>
+        <p>서울 재개발·재건축 정비구역의 위치와 사업 현황을 지도에서 한눈에 확인하세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="map-layout">
+            <!-- Left Sidebar -->
+            <div class="map-sidebar">
+                <div class="sidebar-filters">
+                    <div>
+                        <label>구 선택</label>
+                        <select class="filter-select" id="filterDistrict">
+                            <option value="전체">전체</option>
+                            <option value="용산구">용산구</option>
+                            <option value="동작구">동작구</option>
+                            <option value="동대문구">동대문구</option>
+                            <option value="강동구">강동구</option>
+                            <option value="영등포구">영등포구</option>
+                            <option value="성북구">성북구</option>
+                            <option value="은평구">은평구</option>
+                            <option value="강남구">강남구</option>
+                            <option value="성동구">성동구</option>
+                            <option value="서초구">서초구</option>
+                            <option value="송파구">송파구</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>사업유형</label>
+                        <div class="type-filters">
+                            <button class="type-btn active" data-type="전체">전체</button>
+                            <button class="type-btn" data-type="재개발">재개발</button>
+                            <button class="type-btn" data-type="재건축">재건축</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label>구역 검색</label>
+                        <div class="search-wrap">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" class="search-input" id="filterSearch" placeholder="구역명으로 검색...">
+                        </div>
+                    </div>
+                </div>
+                <div class="result-count" id="resultCount">
+                    검색 결과 <strong>0</strong>건
+                </div>
+                <div class="area-card-list" id="areaCardList">
+                    <!-- Cards rendered by JS -->
+                </div>
+            </div>
+
+            <!-- Right Map Area -->
+            <div class="map-main">
+                <div class="map-canvas" id="mapCanvas">
+                    <div class="map-grid"></div>
+                    <!-- Compass -->
+                    <div class="map-compass">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" r="22" stroke="rgba(195,165,105,0.5)" stroke-width="1"/>
+                            <path d="M24 4 L27 20 L24 18 L21 20 Z" fill="#C3A569"/>
+                            <path d="M24 44 L27 28 L24 30 L21 28 Z" fill="rgba(195,165,105,0.3)"/>
+                            <path d="M4 24 L20 21 L18 24 L20 27 Z" fill="rgba(195,165,105,0.3)"/>
+                            <path d="M44 24 L28 21 L30 24 L28 27 Z" fill="rgba(195,165,105,0.3)"/>
+                            <text x="24" y="14" text-anchor="middle" fill="#C3A569" font-size="7" font-weight="700">N</text>
+                        </svg>
+                    </div>
+                    <!-- Pins rendered by JS -->
+                    <div id="mapPins"></div>
+                    <div class="map-overlay-text">
+                        <span><i class="fa-solid fa-location-dot" style="margin-right:6px;"></i>지도 서비스 준비 중 · Kakao Map API 연동 예정</span>
+                    </div>
+                </div>
+                <div class="map-stats" id="mapStats">
+                    <!-- Stats rendered by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    /* ── Data ── */
+    const allAreas = DataService.getAll('areas');
+
+    /* ── DOM refs ── */
+    const districtSel = document.getElementById('filterDistrict');
+    const searchInput = document.getElementById('filterSearch');
+    const typeBtns    = document.querySelectorAll('.type-btn');
+    const cardList    = document.getElementById('areaCardList');
+    const resultCount = document.getElementById('resultCount');
+    const mapPins     = document.getElementById('mapPins');
+    const mapStats    = document.getElementById('mapStats');
+    const mapCanvas   = document.getElementById('mapCanvas');
+
+    let currentType = '전체';
+
+    /* ── Helpers ── */
+    function stageLabel(stage) {
+        const colors = {
+            '정비구역지정': '#888',
+            '조합설립인가': '#D97706',
+            '사업시행인가': '#1259AA',
+            '관리처분인가': '#2A7DE1',
+            '착공':        '#1E8C5E',
+            '입주예정':     '#1E8C5E',
+            '준공':        '#1E8C5E'
+        };
+        return colors[stage] || '#888';
+    }
+
+    function changeIcon(dir) {
+        if (dir === 'up')   return '<i class="fa-solid fa-caret-up"></i>';
+        if (dir === 'down') return '<i class="fa-solid fa-caret-down"></i>';
+        return '<i class="fa-solid fa-minus"></i>';
+    }
+
+    function changeText(area) {
+        if (!area.change) return '<span class="area-card-change flat">' + changeIcon('flat') + ' 보합</span>';
+        const cls = area.changeDir || (area.change > 0 ? 'up' : 'down');
+        const sign = area.change > 0 ? '+' : '';
+        return '<span class="area-card-change ' + cls + '">' + changeIcon(cls) + ' ' + sign + App.comma(area.change) + '만</span>';
+    }
+
+    /* ── Filter logic ── */
+    function getFiltered() {
+        const district = districtSel.value;
+        const search   = searchInput.value.trim().toLowerCase();
+        return allAreas.filter(a => {
+            if (district !== '전체' && a.district !== district) return false;
+            if (currentType !== '전체' && a.type !== currentType) return false;
+            if (search && !a.name.toLowerCase().includes(search) && !(a.dong || '').toLowerCase().includes(search)) return false;
+            return true;
+        });
+    }
+
+    /* ── Render Cards ── */
+    function renderCards(areas) {
+        resultCount.innerHTML = '검색 결과 <strong>' + areas.length + '</strong>건';
+
+        if (!areas.length) {
+            cardList.innerHTML = '<div class="card-empty"><i class="fa-solid fa-map-location-dot"></i><p>조건에 맞는 구역이 없습니다</p></div>';
+            return;
+        }
+
+        cardList.innerHTML = areas.map(a => {
+            const premiumText = a.premium ? App.comma(a.premium) + '만원' : '-';
+            return '' +
+            '<a class="area-card" href="area-detail.html?id=' + a.id + '">' +
+                '<div class="area-card-top">' +
+                    '<span class="area-card-name">' + a.name + '</span>' +
+                    '<span class="badge-type ' + a.type + '">' + a.type + '</span>' +
+                    '<span class="badge-stage">' + a.stage + '</span>' +
+                '</div>' +
+                '<div class="area-card-location"><i class="fa-solid fa-location-dot" style="margin-right:4px;font-size:11px;color:var(--gray-400);"></i>' + a.district + ' ' + a.dong + '</div>' +
+                '<div class="area-card-bottom">' +
+                    '<span class="area-card-premium">P ' + premiumText + '</span>' +
+                    changeText(a) +
+                '</div>' +
+            '</a>';
+        }).join('');
+    }
+
+    /* ── Render Map Pins ── */
+    function renderPins(areas) {
+        /* Map lat/lng ranges for Seoul approximate bounding box:
+           lat: 37.43 ~ 37.70,  lng: 126.76 ~ 127.18
+           We convert to percentage positions within the map canvas */
+        const LAT_MIN = 37.43, LAT_MAX = 37.68;
+        const LNG_MIN = 126.80, LNG_MAX = 127.20;
+
+        mapPins.innerHTML = areas.filter(a => a.lat && a.lng).map(a => {
+            const xPct = ((a.lng - LNG_MIN) / (LNG_MAX - LNG_MIN) * 80 + 10).toFixed(1);
+            const yPct = ((LAT_MAX - a.lat) / (LAT_MAX - LAT_MIN) * 80 + 10).toFixed(1);
+            const hotClass = (a.hot || a.featured) ? ' hot' : '';
+            return '' +
+            '<div class="map-pin' + hotClass + '" style="left:' + xPct + '%;top:' + yPct + '%;" data-id="' + a.id + '" title="' + a.name + '">' +
+                '<div class="map-pin-icon">' +
+                    '<svg viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                        '<path d="M14 0C6.27 0 0 6.27 0 14c0 10.5 14 22 14 22s14-11.5 14-22C28 6.27 21.73 0 14 0z" fill="#C3A569"/>' +
+                        '<circle cx="14" cy="13" r="5" fill="#0A0F1C"/>' +
+                    '</svg>' +
+                '</div>' +
+                '<span class="map-pin-label">' + a.name + '</span>' +
+            '</div>';
+        }).join('');
+
+        /* Pin click -> navigate */
+        mapPins.querySelectorAll('.map-pin').forEach(pin => {
+            pin.addEventListener('click', () => {
+                location.href = 'area-detail.html?id=' + pin.dataset.id;
+            });
+        });
+    }
+
+    /* ── Render Stats ── */
+    function renderStats(areas) {
+        const total = areas.length;
+        const avgPremium = total ? Math.round(areas.reduce((s, a) => s + (a.premium || 0), 0) / total) : 0;
+        const totalHouseholds = areas.reduce((s, a) => s + (a.totalHouseholds || 0), 0);
+        const inProgress = areas.filter(a => ['착공','사업시행인가','관리처분인가'].includes(a.stage)).length;
+
+        mapStats.innerHTML = '' +
+            '<div class="map-stat">' +
+                '<div class="map-stat-label">전체 구역</div>' +
+                '<div class="map-stat-value">' + App.comma(total) + '<span class="unit">개</span></div>' +
+            '</div>' +
+            '<div class="map-stat">' +
+                '<div class="map-stat-label">평균 프리미엄</div>' +
+                '<div class="map-stat-value">' + App.comma(avgPremium) + '<span class="unit">만원</span></div>' +
+            '</div>' +
+            '<div class="map-stat">' +
+                '<div class="map-stat-label">총 세대수</div>' +
+                '<div class="map-stat-value">' + App.comma(totalHouseholds) + '<span class="unit">세대</span></div>' +
+            '</div>' +
+            '<div class="map-stat">' +
+                '<div class="map-stat-label">사업 추진 중</div>' +
+                '<div class="map-stat-value">' + App.comma(inProgress) + '<span class="unit">구역</span></div>' +
+            '</div>';
+    }
+
+    /* ── Master render ── */
+    function render() {
+        const filtered = getFiltered();
+        renderCards(filtered);
+        renderPins(filtered);
+        renderStats(filtered);
+    }
+
+    /* ── Events ── */
+    districtSel.addEventListener('change', render);
+    searchInput.addEventListener('input', render);
+
+    typeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            typeBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentType = btn.dataset.type;
+            render();
+        });
+    });
+
+    /* ── Initial render ── */
+    render();
+})();
+</script>
+</body>
+</html>

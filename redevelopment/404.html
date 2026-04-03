@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지를 찾을 수 없습니다 — (주)세울엔지니어링</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/common.css">
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .error-content { max-width: 480px; }
+        .error-code {
+            font-size: 120px;
+            font-weight: 900;
+            color: var(--gray-200);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .error-content h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+        }
+        .error-content p {
+            font-size: 15px;
+            color: var(--gray-500);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+        .error-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div class="error-page">
+    <div class="error-content">
+        <div class="error-code">404</div>
+        <h1>페이지를 찾을 수 없습니다</h1>
+        <p>요청하신 페이지가 존재하지 않거나, 이동되었거나, 삭제되었을 수 있습니다.<br>주소를 다시 확인해주세요.</p>
+        <div class="error-actions">
+            <a href="index.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-house"></i> 메인으로</a>
+            <button onclick="history.back()" class="btn btn-outline btn-lg"><i class="fa-solid fa-arrow-left"></i> 이전 페이지</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

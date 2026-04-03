@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>세울의 길 — (주)세울엔지니어링</title>
+    <meta name="description" content="(주)세울엔지니어링의 브랜드 철학과 성장 방향 — 도시정비의 기준을 만들어가는 회사">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    /* ── 섹션 간격 ── */
+    .vision-section { margin-bottom: 64px; }
+    .vision-section:last-child { margin-bottom: 0; }
+    .vision-section .section-title { margin-bottom: 28px; }
+
+    /* ── Section 1: Opening Statement ── */
+    .opening-statement {
+        border-left: 4px solid var(--gold);
+        padding: 40px 40px 40px 36px;
+        background: linear-gradient(135deg, rgba(195,165,105,0.04) 0%, transparent 60%);
+        border-radius: 0 var(--radius) var(--radius) 0;
+        position: relative;
+    }
+    .opening-statement::before {
+        content: '\201C';
+        position: absolute;
+        top: 20px; left: 24px;
+        font-size: 64px;
+        font-weight: 900;
+        color: var(--gold);
+        opacity: 0.15;
+        line-height: 1;
+        font-family: Georgia, serif;
+    }
+    .opening-statement p {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 2;
+        color: var(--gray-800);
+        white-space: pre-line;
+        position: relative;
+        z-index: 1;
+    }
+    .opening-statement p strong {
+        color: var(--brand-navy);
+        font-weight: 700;
+    }
+    @media (max-width: 768px) {
+        .opening-statement {
+            padding: 28px 20px 28px 24px;
+        }
+        .opening-statement::before {
+            top: 12px; left: 14px; font-size: 48px;
+        }
+        .opening-statement p {
+            font-size: 15px;
+            line-height: 1.9;
+        }
+    }
+
+    /* ── Section 2: 왜 도시정비인가 ── */
+    .why-section-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+    .why-section-header .why-icon {
+        width: 52px; height: 52px;
+        border-radius: 14px;
+        background: var(--brand-navy);
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+    }
+    .why-section-header .why-icon i {
+        font-size: 22px; color: var(--gold);
+    }
+    .why-section-header h2 {
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--gray-900);
+    }
+    .why-body p {
+        font-size: 15px;
+        line-height: 1.9;
+        color: var(--gray-700);
+        margin-bottom: 20px;
+    }
+    .why-body p:last-child { margin-bottom: 0; }
+
+    /* ── Section 3: 원칙 카드 ── */
+    .principle-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+    .principle-grid .principle-card:nth-child(4),
+    .principle-grid .principle-card:nth-child(5) {
+        /* 4, 5번 카드는 2열 중앙 배치 */
+    }
+    .principle-card {
+        background: var(--white);
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        padding: 28px 24px;
+        transition: all var(--transition);
+    }
+    .principle-card:hover {
+        border-color: var(--gold);
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-2px);
+    }
+    .principle-card .p-icon {
+        width: 48px; height: 48px;
+        border-radius: 12px;
+        background: var(--brand-navy);
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 18px;
+    }
+    .principle-card .p-icon i {
+        font-size: 20px;
+        color: var(--gold);
+    }
+    .principle-card h4 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 8px;
+    }
+    .principle-card p {
+        font-size: 13px;
+        color: var(--gray-500);
+        line-height: 1.7;
+    }
+    /* 하단 2개 카드 중앙 정렬 */
+    .principle-bottom-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        margin-top: 24px;
+        max-width: 66.666%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media (max-width: 1024px) {
+        .principle-grid { grid-template-columns: repeat(2, 1fr); }
+        .principle-bottom-row {
+            grid-template-columns: 1fr;
+            max-width: 50%;
+        }
+    }
+    @media (max-width: 768px) {
+        .principle-grid { grid-template-columns: 1fr; }
+        .principle-bottom-row {
+            grid-template-columns: 1fr;
+            max-width: 100%;
+            margin-top: 0;
+            gap: 0;
+        }
+        .principle-bottom-row .principle-card {
+            margin-top: 24px;
+        }
+    }
+
+    /* ── Section 4: 성장 스토리 (타임라인) ── */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+        content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px;
+        width: 2px; background: var(--gray-200);
+    }
+    .timeline-item { position: relative; margin-bottom: 32px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before {
+        content: ''; position: absolute; left: -24px; top: 7px;
+        width: 10px; height: 10px; border-radius: 50%;
+        background: var(--gold); border: 2px solid var(--white);
+        box-shadow: 0 0 0 2px var(--gold);
+    }
+    .timeline-year {
+        font-size: 20px; font-weight: 800; color: var(--gold); margin-bottom: 8px;
+    }
+    .timeline-events { list-style: none; }
+    .timeline-events li {
+        position: relative; padding-left: 16px; font-size: 14px;
+        color: var(--gray-700); line-height: 1.8;
+    }
+    .timeline-events li::before {
+        content: ''; position: absolute; left: 0; top: 10px;
+        width: 5px; height: 5px; border-radius: 50%; background: var(--gray-400);
+    }
+
+    /* ── Section 5: 앞으로의 방향 (Full-width Banner) ── */
+    .direction-banner {
+        background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-navy) 100%);
+        padding: 72px 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius);
+    }
+    .direction-banner::before {
+        content: '';
+        position: absolute;
+        top: -80px; right: -80px;
+        width: 300px; height: 300px;
+        background: radial-gradient(circle, rgba(195,165,105,0.06) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+    .direction-banner::after {
+        content: '';
+        position: absolute;
+        bottom: -60px; left: -60px;
+        width: 240px; height: 240px;
+        background: radial-gradient(circle, rgba(195,165,105,0.04) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+    .direction-banner .dir-content {
+        position: relative;
+        z-index: 1;
+        max-width: 640px;
+        margin: 0 auto;
+    }
+    .direction-banner .dir-label {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        color: var(--gold);
+        text-transform: uppercase;
+        margin-bottom: 16px;
+    }
+    .direction-banner h3 {
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--white);
+        margin-bottom: 24px;
+        line-height: 1.4;
+    }
+    .direction-banner p {
+        font-size: 15px;
+        line-height: 2;
+        color: rgba(255,255,255,0.6);
+        white-space: pre-line;
+    }
+    .direction-banner .dir-divider {
+        width: 48px;
+        height: 2px;
+        background: var(--gold);
+        margin: 0 auto 24px;
+        opacity: 0.5;
+    }
+    @media (max-width: 768px) {
+        .direction-banner {
+            padding: 48px 24px;
+            border-radius: 0;
+            margin-left: -20px;
+            margin-right: -20px;
+        }
+        .direction-banner h3 { font-size: 20px; }
+        .direction-banner p { font-size: 14px; line-height: 1.9; }
+    }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <a href="about.html">회사소개</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>세울의 길</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>세울의 길</h1>
+        <p>도시정비의 기준을 만들어가는 세울엔지니어링의 철학과 방향</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <!-- Section 1: Opening Statement -->
+        <div class="vision-section">
+            <div class="opening-statement">
+                <p>세울(SEUL)은 '바로 세우다'에서 출발합니다.
+무너진 도시의 질서를 다시 세우고,
+흐트러진 절차를 바로 세우고,
+사업의 가치를 올곧게 세우는 것.
+그것이 세울엔지니어링이 걸어가는 길입니다.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: 왜 도시정비인가 -->
+        <div class="vision-section">
+            <div class="why-section-header">
+                <div class="why-icon">
+                    <i class="fa-solid fa-city"></i>
+                </div>
+                <h2>왜 도시정비에 집중하는가</h2>
+            </div>
+            <div class="why-body">
+                <p>도시정비사업은 단순한 건설 행위가 아닙니다. 수십 년간 삶의 터전이었던 공간을 허물고, 그 위에 새로운 공동체를 세우는 일입니다. 그 과정에서 수백, 수천 명의 재산권이 걸려 있고, 행정기관의 인허가와 법률적 판단이 매 단계마다 뒤따릅니다. 하나의 절차가 어긋나면 수년간의 노력이 무너질 수 있는, 가장 엄밀함을 요구하는 분야입니다.</p>
+                <p>세울엔지니어링은 바로 그 지점에 주목했습니다. 도시정비는 건축·토목 기술만으로 완성되지 않습니다. 「도시 및 주거환경정비법」을 비롯한 관련 법령에 대한 깊은 이해, 조합 운영과 총회 의결에 관한 행정적 역량, 그리고 서로 다른 이해관계를 가진 조합원·시행사·시공사·행정기관 사이에서 균형을 잡아내는 조율 능력까지 — 이 모든 것이 하나로 결합되어야 비로소 사업이 앞으로 나아갑니다.</p>
+                <p>우리가 도시정비에 집중하는 이유는 명확합니다. 이 분야야말로 전문가의 양심과 역량이 가장 절실하게 필요한 영역이기 때문입니다. 쉬운 길이 아니라 옳은 길을 택했고, 그 선택이 세울의 정체성이 되었습니다.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: 우리가 지키는 원칙 -->
+        <div class="vision-section">
+            <h2 class="section-title">우리가 지키는 원칙</h2>
+            <div class="principle-grid">
+                <div class="principle-card">
+                    <div class="p-icon"><i class="fa-solid fa-gavel"></i></div>
+                    <h4>절차의 정합성</h4>
+                    <p>법령과 지침에 근거한 정확한 절차를 준수합니다. 모든 의사결정은 법적 기반 위에서 이루어지며, 절차적 하자가 발생하지 않도록 사전에 검증합니다.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="p-icon"><i class="fa-solid fa-file-shield"></i></div>
+                    <h4>문서의 정확성</h4>
+                    <p>모든 공문서·보고서·의사록을 엄밀하게 작성합니다. 기록의 정확성이 곧 사업의 신뢰이며, 향후 발생할 수 있는 분쟁에 대한 가장 확실한 방어입니다.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="p-icon"><i class="fa-solid fa-handshake"></i></div>
+                    <h4>이해관계 조율</h4>
+                    <p>조합원·시행사·행정기관 사이에서 균형 있는 소통을 이끕니다. 어느 한쪽에 치우치지 않는 중립적 관점으로 최선의 합의점을 도출합니다.</p>
+                </div>
+            </div>
+            <div class="principle-bottom-row">
+                <div class="principle-card">
+                    <div class="p-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h4>실행력</h4>
+                    <p>계획에서 그치지 않고 현장에서 결과를 만들어냅니다. 보고서 위의 전략이 아닌 실제 인허가 취득과 사업 진행으로 증명합니다.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="p-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4>책임감</h4>
+                    <p>맡은 사업장에 대해 끝까지 책임지는 자세로 임합니다. 사업 완료까지 현장을 떠나지 않으며, 어떤 난관에서도 해법을 찾아냅니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: 성장 스토리 -->
+        <div class="vision-section">
+            <h2 class="section-title">성장 스토리</h2>
+            <div class="timeline" id="timeline"></div>
+        </div>
+
+        <!-- Section 5: 앞으로의 방향 -->
+        <div class="vision-section">
+            <div class="direction-banner">
+                <div class="dir-content">
+                    <span class="dir-label">Our Future</span>
+                    <h3>앞으로의 방향</h3>
+                    <div class="dir-divider"></div>
+                    <p>세울엔지니어링은 단순한 사업 대행을 넘어,
+도시정비의 기준을 만들어가는 회사가 되겠습니다.
+절차의 투명성, 사업의 실현 가능성, 조합원의 이익 보호 —
+이 세 가지를 한 번도 타협하지 않는 회사.
+그것이 세울이 그리는 미래입니다.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    const info = MOCK.companyInfo;
+
+    /* ── 성장 스토리 타임라인 ── */
+    document.getElementById('timeline').innerHTML = info.history.map(h => `
+        <div class="timeline-item">
+            <div class="timeline-year">${h.year}</div>
+            <ul class="timeline-events">
+                ${h.items.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+        </div>
+    `).join('');
+})();
+</script>
+</body>
+</html>
