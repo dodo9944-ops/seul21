@@ -17,12 +17,15 @@ async function ghFetch(path, opts = {}) {
 
 async function getMembers() {
   const data = await ghFetch(`/repos/${REPO}/contents/${FILE_PATH}`);
-  const content = Buffer.from(data.content, 'base64').toString('utf-8');
+  const raw = Buffer.from(data.content, 'base64');
+  const content = new TextDecoder('utf-8').decode(raw);
   return { members: JSON.parse(content), sha: data.sha };
 }
 
 async function saveMembers(members, sha) {
-  const content = Buffer.from(JSON.stringify(members, null, 2), 'utf-8').toString('base64');
+  const jsonStr = JSON.stringify(members, null, 2);
+  const bytes = new TextEncoder().encode(jsonStr);
+  const content = Buffer.from(bytes).toString('base64');
   await ghFetch(`/repos/${REPO}/contents/${FILE_PATH}`, {
     method: 'PUT',
     body: JSON.stringify({
