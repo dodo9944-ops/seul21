@@ -13,29 +13,91 @@
     <style>
     /* ── CEO 인사말 ── */
     .ceo-section {
-        display: flex; gap: 40px; align-items: flex-start;
+        display: flex; align-items: stretch;
+        background: #FAFBFC;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.06);
     }
-    .ceo-avatar {
-        flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 12px;
+
+    /* 좌: 텍스트 */
+    .ceo-text-area {
+        flex: 1; min-width: 0;
+        padding: 48px 52px 44px;
+        display: flex; flex-direction: column; justify-content: center;
     }
-    .ceo-avatar .avatar-icon {
-        width: 120px; height: 120px; border-radius: 50%;
-        overflow: hidden; border: 3px solid var(--gold);
-        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    .ceo-quote {
+        font-size: 52px; color: var(--gold); opacity: 0.15;
+        font-family: Georgia, serif; line-height: 0.8;
+        margin-bottom: 6px; user-select: none;
     }
-    .ceo-avatar .avatar-icon img {
-        width: 100%; height: 100%; object-fit: cover;
+    .ceo-headline {
+        font-size: 21px; font-weight: 800; color: var(--brand-dark);
+        line-height: 1.55; margin-bottom: 22px; letter-spacing: -0.5px;
     }
-    .ceo-avatar .ceo-name { font-size: 17px; font-weight: 700; color: var(--gray-900); }
-    .ceo-avatar .ceo-title { font-size: 13px; color: var(--gray-500); margin-top: -6px; }
+    .ceo-accent-line {
+        width: 32px; height: 2px;
+        background: linear-gradient(90deg, var(--gold), rgba(195,165,105,0.15));
+        border-radius: 1px; margin-bottom: 22px;
+    }
     .ceo-greeting {
-        flex: 1; padding-left: 28px; border-left: 3px solid var(--gold);
-        font-size: 15px; line-height: 1.85; color: var(--gray-700); white-space: pre-line;
+        font-size: 14.5px; line-height: 2; color: var(--gray-600);
+        white-space: pre-line; word-break: keep-all;
     }
-    @media (max-width: 768px) {
-        .ceo-section { flex-direction: column; gap: 24px; }
-        .ceo-avatar { flex-direction: row; gap: 14px; }
-        .ceo-greeting { padding-left: 16px; }
+
+    /* 우: 사진 */
+    .ceo-photo-area {
+        flex-shrink: 0; width: 380px;
+        position: relative;
+        display: flex; align-items: center; justify-content: center;
+        background: linear-gradient(160deg, #f0f1f3 0%, #e8e9ec 100%);
+        padding: 0;
+        margin: -20px 0;
+    }
+    .ceo-photo-area img {
+        width: 100%; height: calc(100% + 40px);
+        object-fit: contain;
+        object-position: center 58%;
+        display: block;
+    }
+    /* 좌측 스무스 */
+    .ceo-photo-area::before {
+        content: ''; position: absolute; inset: 0; z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(to right, #FAFBFC 0%, rgba(250,251,252,0.5) 6%, rgba(250,251,252,0.15) 14%, transparent 24%);
+    }
+    /* 하단 스무스 */
+    .ceo-photo-area::after {
+        content: ''; position: absolute; inset: 0; z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(to top, #FAFBFC 0%, rgba(250,251,252,0.5) 6%, rgba(250,251,252,0.15) 14%, transparent 24%);
+    }
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        .ceo-photo-area { width: 320px; }
+    }
+    @media (max-width: 860px) {
+        .ceo-section { flex-direction: column; }
+        .ceo-text-area { padding: 36px 28px 32px; }
+        .ceo-photo-area {
+            width: 100%; order: -1;
+            margin: 0; max-height: 420px;
+        }
+        .ceo-photo-area::before {
+            background:
+                linear-gradient(to bottom, transparent 85%, rgba(250,251,252,0.5) 94%, #FAFBFC 100%),
+                linear-gradient(to top, transparent 85%, rgba(250,251,252,0.3) 94%, #FAFBFC 100%);
+        }
+        .ceo-headline { font-size: 19px; }
+    }
+    @media (max-width: 480px) {
+        .ceo-text-area { padding: 28px 22px 24px; }
+        .ceo-headline { font-size: 17px; }
+        .ceo-greeting { font-size: 13.5px; line-height: 1.85; }
+        .ceo-quote { font-size: 38px; }
+        .ceo-photo-area { max-height: 360px; }
     }
 
     /* ── 회사연혁 ── */
@@ -220,14 +282,15 @@
         <div class="about-section">
             <h2 class="section-title">CEO 인사말</h2>
             <div class="ceo-section">
-                <div class="ceo-avatar">
-                    <div class="avatar-icon">
-                        <img src="../jpg/이창우.jpg" alt="이창우 대표이사">
-                    </div>
-                    <div class="ceo-name" id="ceoName"></div>
-                    <div class="ceo-title" id="ceoTitle"></div>
+                <div class="ceo-text-area">
+                    <div class="ceo-quote">&ldquo;</div>
+                    <div class="ceo-headline">도시의 가치를 높이고,<br>주민의 삶을 바꾸는 정비사업을 만들겠습니다.</div>
+                    <div class="ceo-accent-line"></div>
+                    <div class="ceo-greeting" id="ceoGreeting"></div>
                 </div>
-                <div class="ceo-greeting" id="ceoGreeting"></div>
+                <div class="ceo-photo-area">
+                    <img src="../jpg/대표사진1.png" alt="이창우 대표이사">
+                </div>
             </div>
         </div>
 
@@ -306,8 +369,6 @@
     const info = MOCK.companyInfo;
 
     /* ── CEO 인사말 ── */
-    document.getElementById('ceoName').textContent = info.ceoName;
-    document.getElementById('ceoTitle').textContent = info.ceoTitle;
     document.getElementById('ceoGreeting').textContent = info.ceoGreeting;
 
     /* ── 회사연혁 ── */
