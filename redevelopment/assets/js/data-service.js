@@ -149,20 +149,25 @@ const DataService = (() => {
     const members = getAll('members');
     const user = members.find(m => m.email === email);
     if (user) {
-      sessionStorage.setItem('rdc_user', JSON.stringify({ loggedIn: true, id: user.id, name: user.name, email: user.email }));
+      sessionStorage.setItem('seul_user', JSON.stringify({ loggedIn: true, id: user.id, name: user.name, email: user.email, grade: user.grade || '일반' }));
       return user;
     }
     return null;
   }
   function isUserLoggedIn() {
-    const s = sessionStorage.getItem('rdc_user');
-    return s ? JSON.parse(s).loggedIn : false;
+    const s = sessionStorage.getItem('seul_user');
+    if (!s) return false;
+    try { return !!JSON.parse(s).name; } catch(e) { return false; }
   }
   function getCurrentUser() {
-    const s = sessionStorage.getItem('rdc_user');
-    return s ? JSON.parse(s) : null;
+    const s = sessionStorage.getItem('seul_user');
+    if (!s) return null;
+    try {
+      const u = JSON.parse(s);
+      return { loggedIn: true, id: u.id, name: u.name, email: u.email || '', grade: u.grade || '일반' };
+    } catch(e) { return null; }
   }
-  function userLogout() { sessionStorage.removeItem('rdc_user'); }
+  function userLogout() { sessionStorage.removeItem('seul_user'); }
 
   /* ── reset ── */
   function resetAll() {
