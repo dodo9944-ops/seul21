@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /assets/data/
 
-Sitemap: https://jaegaebal.com/sitemap.xml
+Sitemap: https://seul21.com/sitemap.xml

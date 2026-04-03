@@ -90,7 +90,7 @@
 <loc>https://example.com/</loc>
 
 <!-- 변경 후 -->
-<loc>https://jaegaebal.com/</loc>
+<loc>https://seul21.com/</loc>
 ```
 
 ### robots.txt 확인
@@ -101,7 +101,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jaegaebal.com/sitemap.xml
+Sitemap: https://seul21.com/sitemap.xml
 ```
 
 - [ ] 관리자 페이지 크롤링 차단 확인 (필요 시):
@@ -123,7 +123,7 @@ Disallow: /admin/
 - [ ] `og:image` 메타 태그의 이미지 경로가 절대 경로(전체 URL)로 설정되어 있는지 확인
 
 ```html
-<meta property="og:image" content="https://jaegaebal.com/assets/img/og-image.png">
+<meta property="og:image" content="https://seul21.com/assets/img/og-image.png">
 ```
 
 - [ ] OG 이미지 파일이 서버에 존재하는지 확인
@@ -188,8 +188,8 @@ adminAccount: {
 ```html
 <meta property="og:title" content="세울 - 대한민국 No.1 재개발·재건축 정보">
 <meta property="og:description" content="전국 정비구역 현황, 실시간 시세, 매물 정보...">
-<meta property="og:image" content="https://jaegaebal.com/assets/img/og-image.png">
-<meta property="og:url" content="https://jaegaebal.com/">
+<meta property="og:image" content="https://seul21.com/assets/img/og-image.png">
+<meta property="og:url" content="https://seul21.com/">
 <meta property="og:type" content="website">
 ```
 

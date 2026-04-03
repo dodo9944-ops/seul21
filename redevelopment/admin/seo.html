@@ -177,12 +177,12 @@
         }).join('');
 
         // robots.txt
-        document.getElementById('fRobotsTxt').value = seo.robotsTxt || 'User-agent: *\nAllow: /\n\nSitemap: https://jaegaebal.com/sitemap.xml';
+        document.getElementById('fRobotsTxt').value = seo.robotsTxt || 'User-agent: *\nAllow: /\n\nSitemap: https://seul21.com/sitemap.xml';
 
         // sitemap.xml preview
         const today = new Date().toISOString().slice(0, 10);
         const sitemapUrls = pages.map(p =>
-            `  <url>\n    <loc>https://jaegaebal.com${p.url}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${p.key === 'home' ? '1.0' : '0.8'}</priority>\n  </url>`
+            `  <url>\n    <loc>https://seul21.com${p.url}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${p.key === 'home' ? '1.0' : '0.8'}</priority>\n  </url>`
         ).join('\n');
         document.getElementById('fSitemapXml').value =
             '<?xml version="1.0" encoding="UTF-8"?>\n' +
