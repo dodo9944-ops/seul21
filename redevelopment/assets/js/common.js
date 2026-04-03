@@ -360,4 +360,13 @@ const App = (() => {
 })();
 
 /* DOM Ready */
-document.addEventListener('DOMContentLoaded', () => App.init());
+document.addEventListener('DOMContentLoaded', () => {
+  App.init();
+  // AI 챗봇 자동 로드 (admin 페이지 제외)
+  if (!location.pathname.includes('/admin/') && !location.pathname.includes('/intranet/')) {
+    const b = App.basePath();
+    const s = document.createElement('script');
+    s.src = b + '/assets/js/chatbot.js';
+    document.body.appendChild(s);
+  }
+});
