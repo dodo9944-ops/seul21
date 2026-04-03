@@ -82,7 +82,10 @@ body{font-family:var(--font);background:var(--gray-50);display:flex;align-items:
             <button type="submit" class="login-btn">로그인</button>
         </form>
 
-        <div class="demo-box">
+        <div style="margin-top:20px;text-align:center">
+            <button type="button" id="demoToggleBtn" onclick="var b=document.getElementById('demoBox');var t=this;if(b.style.display==='none'){b.style.display='';t.textContent='테스트 계정 숨기기';}else{b.style.display='none';t.textContent='테스트 계정 보기';}" style="background:none;border:1px solid rgba(195,165,105,0.25);border-radius:6px;padding:8px 18px;font-size:12px;font-weight:600;color:var(--gold);cursor:pointer;font-family:var(--font);transition:all 0.2s">테스트 계정 보기</button>
+        </div>
+        <div class="demo-box" id="demoBox" style="display:none">
             <strong>테스트 계정 안내</strong><br>
             관리자: <strong>admin</strong> / admin1234<br>
             실무자: <strong>user1</strong> / user1234<br>

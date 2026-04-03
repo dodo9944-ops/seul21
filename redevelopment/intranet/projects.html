@@ -363,26 +363,26 @@ button,input,select,textarea{font-family:inherit}
 
     <!-- Filters -->
     <div class="proj-filters">
-      <select class="proj-filter-select">
-        <option>전체 유형</option>
-        <option>재개발</option>
-        <option>재건축</option>
-        <option>소규모</option>
+      <select class="proj-filter-select" id="filterType">
+        <option value="">전체 유형</option>
+        <option value="재개발">재개발</option>
+        <option value="재건축">재건축</option>
+        <option value="소규모">소규모</option>
       </select>
-      <select class="proj-filter-select">
-        <option>전체 상태</option>
-        <option>진행중</option>
-        <option>완료</option>
-        <option>준비중</option>
+      <select class="proj-filter-select" id="filterStatus">
+        <option value="">전체 상태</option>
+        <option value="진행중">진행중</option>
+        <option value="완료">완료</option>
+        <option value="준비중">준비중</option>
       </select>
-      <button class="proj-add-btn"><i class="fa-solid fa-plus"></i> 사업장 등록</button>
+      <button class="proj-add-btn" id="addProjectBtn"><i class="fa-solid fa-plus"></i> 사업장 등록</button>
     </div>
 
     <!-- Project Cards Grid -->
     <div class="proj-cards-grid">
 
       <!-- Card 1 -->
-      <div class="proj-card">
+      <div class="proj-card" data-type="재개발" data-status="진행중">
         <div class="proj-card-header">
           <div>
             <div class="proj-card-title">한남3구역 주택재개발</div>
@@ -418,7 +418,7 @@ button,input,select,textarea{font-family:inherit}
       </div>
 
       <!-- Card 2 -->
-      <div class="proj-card">
+      <div class="proj-card" data-type="재개발" data-status="진행중">
         <div class="proj-card-header">
           <div>
             <div class="proj-card-title">흑석9구역 주택재개발</div>
@@ -454,7 +454,7 @@ button,input,select,textarea{font-family:inherit}
       </div>
 
       <!-- Card 3 -->
-      <div class="proj-card">
+      <div class="proj-card" data-type="재개발" data-status="진행중">
         <div class="proj-card-header">
           <div>
             <div class="proj-card-title">이문1구역 주택재개발</div>
@@ -490,7 +490,7 @@ button,input,select,textarea{font-family:inherit}
       </div>
 
       <!-- Card 4 -->
-      <div class="proj-card">
+      <div class="proj-card" data-type="재건축" data-status="완료">
         <div class="proj-card-header">
           <div>
             <div class="proj-card-title">둔촌주공 재건축</div>
@@ -526,7 +526,7 @@ button,input,select,textarea{font-family:inherit}
       </div>
 
       <!-- Card 5 -->
-      <div class="proj-card">
+      <div class="proj-card" data-type="소규모" data-status="완료">
         <div class="proj-card-header">
           <div>
             <div class="proj-card-title">성수동 가로주택 정비</div>
@@ -562,7 +562,7 @@ button,input,select,textarea{font-family:inherit}
       </div>
 
       <!-- Card 6 -->
-      <div class="proj-card">
+      <div class="proj-card" data-type="재개발" data-status="준비중">
         <div class="proj-card-header">
           <div>
             <div class="proj-card-title">수색13구역 주택재개발</div>
@@ -604,5 +604,30 @@ button,input,select,textarea{font-family:inherit}
 
 <script src="intranet.js"></script>
 <script>if(!Intra.init('사업장 관리','staff')) throw '';</script>
+<script>
+(function() {
+  var filterType = document.getElementById('filterType');
+  var filterStatus = document.getElementById('filterStatus');
+  var addBtn = document.getElementById('addProjectBtn');
+  var cards = document.querySelectorAll('.proj-card');
+
+  function applyFilters() {
+    var type = filterType.value;
+    var status = filterStatus.value;
+    cards.forEach(function(card) {
+      var matchType = !type || card.dataset.type === type;
+      var matchStatus = !status || card.dataset.status === status;
+      card.style.display = (matchType && matchStatus) ? '' : 'none';
+    });
+  }
+
+  filterType.addEventListener('change', applyFilters);
+  filterStatus.addEventListener('change', applyFilters);
+
+  addBtn.addEventListener('click', function() {
+    alert('프로젝트 추가 기능은 관리자 페이지에서 이용하세요.');
+  });
+})();
+</script>
 </body>
 </html>

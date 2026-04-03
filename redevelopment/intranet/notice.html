@@ -417,12 +417,11 @@ button,input,select,textarea{font-family:inherit}
         </div>
 
         <!-- Pagination -->
-        <div class="pagination">
-            <div class="page-btn arrow"><i class="fa-solid fa-chevron-left"></i></div>
-            <div class="page-btn active">1</div>
-            <div class="page-btn">2</div>
-            <div class="page-btn">3</div>
-            <div class="page-btn arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="pagination" id="pagination">
+            <div class="page-btn arrow" id="pagePrev"><i class="fa-solid fa-chevron-left"></i></div>
+            <div class="page-btn active" data-page="1">1</div>
+            <div class="page-btn" data-page="2">2</div>
+            <div class="page-btn arrow" id="pageNext"><i class="fa-solid fa-chevron-right"></i></div>
         </div>
 
     </div>
@@ -432,22 +431,77 @@ button,input,select,textarea{font-family:inherit}
 <script>
 if(!Intra.init('공지사항','viewer')) throw '';
 
-function filterNotice(type, el) {
-    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-    document.querySelectorAll('.notice-table-row').forEach(row => {
-        if (type === 'all') { row.style.display = ''; return; }
-        row.style.display = row.dataset.type === type ? '' : 'none';
+var PAGE_SIZE = 5;
+var currentPage = 1;
+var currentFilter = 'all';
+var currentKeyword = '';
+
+function getFilteredRows() {
+    var rows = Array.from(document.querySelectorAll('.notice-table-row'));
+    return rows.filter(function(row) {
+        var matchType = currentFilter === 'all' || row.dataset.type === currentFilter;
+        var matchSearch = !currentKeyword || row.querySelector('.notice-row-title').textContent.toLowerCase().includes(currentKeyword);
+        return matchType && matchSearch;
     });
 }
 
-function searchNotice(keyword) {
-    const kw = keyword.toLowerCase();
-    document.querySelectorAll('.notice-table-row').forEach(row => {
-        const title = row.querySelector('.notice-row-title').textContent.toLowerCase();
-        row.style.display = title.includes(kw) ? '' : 'none';
+function renderPagination(filtered) {
+    var totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = totalPages;
+    var container = document.getElementById('pagination');
+    var html = '<div class="page-btn arrow" id="pagePrev"><i class="fa-solid fa-chevron-left"></i></div>';
+    for (var i = 1; i <= totalPages; i++) {
+        html += '<div class="page-btn' + (i === currentPage ? ' active' : '') + '" data-page="' + i + '">' + i + '</div>';
+    }
+    html += '<div class="page-btn arrow" id="pageNext"><i class="fa-solid fa-chevron-right"></i></div>';
+    container.innerHTML = html;
+    bindPaginationEvents(totalPages);
+}
+
+function bindPaginationEvents(totalPages) {
+    document.querySelectorAll('#pagination .page-btn[data-page]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            currentPage = parseInt(this.dataset.page);
+            applyAll();
+        });
+    });
+    var prev = document.getElementById('pagePrev');
+    var next = document.getElementById('pageNext');
+    if (prev) prev.addEventListener('click', function() {
+        if (currentPage > 1) { currentPage--; applyAll(); }
+    });
+    if (next) next.addEventListener('click', function() {
+        if (currentPage < totalPages) { currentPage++; applyAll(); }
     });
 }
+
+function applyAll() {
+    var allRows = document.querySelectorAll('.notice-table-row');
+    allRows.forEach(function(row) { row.style.display = 'none'; });
+    var filtered = getFilteredRows();
+    var start = (currentPage - 1) * PAGE_SIZE;
+    var end = start + PAGE_SIZE;
+    filtered.forEach(function(row, idx) {
+        row.style.display = (idx >= start && idx < end) ? '' : 'none';
+    });
+    renderPagination(filtered);
+}
+
+function filterNotice(type, el) {
+    document.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
+    el.classList.add('active');
+    currentFilter = type;
+    currentPage = 1;
+    applyAll();
+}
+
+function searchNotice(keyword) {
+    currentKeyword = keyword.toLowerCase();
+    currentPage = 1;
+    applyAll();
+}
+
+applyAll();
 </script>
 </body>
 </html>

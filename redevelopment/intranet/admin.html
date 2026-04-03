@@ -494,12 +494,61 @@ button,input,select,textarea{font-family:inherit}
 <script>
 if(!Intra.init('관리자','admin')) throw '';
 
-/* Toggle 클릭 이벤트 */
-document.querySelectorAll('.toggle').forEach(btn => {
-    btn.addEventListener('click', function(){
-        this.classList.toggle('on');
-        this.title = this.classList.contains('on') ? '활성' : '비활성';
-    });
+/* Toast notification style */
+(function(){
+  var s = document.createElement('style');
+  s.textContent = '.admin-toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;'+
+    'background:var(--dark);color:var(--gold);padding:12px 24px;border-radius:8px;font-size:13px;font-weight:600;'+
+    'z-index:9999;pointer-events:none;transition:opacity 0.3s,transform 0.3s;box-shadow:0 4px 16px rgba(0,0,0,0.15)}'+
+    '.admin-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}'+
+    '.admin-table tbody tr.row-flash{background:rgba(195,165,105,0.08);transition:background 0.3s}';
+  document.head.appendChild(s);
+})();
+
+function showToast(msg){
+  var t = document.createElement('div');
+  t.className = 'admin-toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  requestAnimationFrame(function(){ t.classList.add('show'); });
+  setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ t.remove(); },300); },1800);
+}
+
+/* Toggle 클릭 이벤트 + sessionStorage 저장 */
+document.querySelectorAll('.toggle').forEach(function(btn, idx){
+  var key = 'admin_toggle_' + idx;
+
+  // Restore from sessionStorage
+  var saved = sessionStorage.getItem(key);
+  if(saved !== null){
+    if(saved === 'on'){
+      btn.classList.add('on');
+      btn.title = '활성';
+    } else {
+      btn.classList.remove('on');
+      btn.title = '비활성';
+    }
+  }
+
+  btn.addEventListener('click', function(){
+    this.classList.toggle('on');
+    var isOn = this.classList.contains('on');
+    this.title = isOn ? '활성' : '비활성';
+    sessionStorage.setItem(key, isOn ? 'on' : 'off');
+
+    // Visual confirmation: row flash
+    var row = this.closest('tr');
+    if(row){
+      row.classList.add('row-flash');
+      setTimeout(function(){ row.classList.remove('row-flash'); }, 600);
+    }
+
+    // Toast
+    var userName = '';
+    var nameEl = this.closest('tr') && this.closest('tr').querySelector('.u-name');
+    if(nameEl) userName = nameEl.textContent;
+    showToast(userName + ' 계정 상태: ' + (isOn ? '활성' : '비활성'));
+  });
 });
 </script>
 </body>

@@ -508,6 +508,19 @@ button,input,select,textarea{font-family:inherit}
 <script src="intranet.js"></script>
 <script>if(!Intra.init('내부연락처','viewer')) throw '';
 
+// Wire up contact action buttons (call, email, message)
+document.querySelectorAll('.contact-card').forEach(card => {
+  const phoneRow = card.querySelector('.contact-info-row:nth-child(1)');
+  const emailRow = card.querySelector('.contact-info-row:nth-child(2)');
+  const phone = phoneRow ? phoneRow.textContent.trim() : '';
+  const email = emailRow ? emailRow.textContent.trim() : '';
+  const btns = card.querySelectorAll('.contact-action-btn');
+  // btn[0] = call, btn[1] = email, btn[2] = message
+  if(btns[0]) btns[0].addEventListener('click', function(){ location.href = 'tel:' + phone.replace(/\s/g,''); });
+  if(btns[1]) btns[1].addEventListener('click', function(){ location.href = 'mailto:' + email.replace(/\s/g,''); });
+  if(btns[2]) btns[2].addEventListener('click', function(){ alert('사내 메신저 기능은 준비 중입니다.'); });
+});
+
 // Department filter
 document.querySelectorAll('.dept-tab').forEach(tab => {
   tab.addEventListener('click', () => {

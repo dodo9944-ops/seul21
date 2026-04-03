@@ -296,14 +296,14 @@ button,input,select,textarea{font-family:inherit}
 
         <!-- QUICK ACTIONS -->
         <div class="quick-grid">
-            <div class="quick-btn"><i class="fa-solid fa-plus-circle"></i><span>사업 등록</span></div>
-            <div class="quick-btn"><i class="fa-solid fa-calendar-plus"></i><span>총회 일정 등록</span></div>
-            <div class="quick-btn"><i class="fa-solid fa-file-arrow-up"></i><span>문서 업로드</span></div>
-            <div class="quick-btn"><i class="fa-solid fa-paper-plane"></i><span>업무 보고</span></div>
-            <div class="quick-btn"><i class="fa-solid fa-clipboard-list"></i><span>체크리스트</span></div>
-            <div class="quick-btn"><i class="fa-solid fa-handshake"></i><span>조합 연락처</span></div>
-            <div class="quick-btn"><i class="fa-solid fa-print"></i><span>서식 출력</span></div>
-            <div class="quick-btn"><i class="fa-solid fa-chart-pie"></i><span>사업성 분석</span></div>
+            <div class="quick-btn" onclick="location.href='projects.html'"><i class="fa-solid fa-plus-circle"></i><span>새 프로젝트</span></div>
+            <div class="quick-btn" onclick="location.href='documents.html'"><i class="fa-solid fa-file-arrow-up"></i><span>문서 업로드</span></div>
+            <div class="quick-btn" onclick="location.href='notice.html'"><i class="fa-solid fa-paper-plane"></i><span>공지 작성</span></div>
+            <div class="quick-btn" onclick="location.href='calendar.html'"><i class="fa-solid fa-calendar-plus"></i><span>일정 추가</span></div>
+            <div class="quick-btn" onclick="location.href='documents.html'"><i class="fa-solid fa-clipboard-list"></i><span>회의록 작성</span></div>
+            <div class="quick-btn" onclick="location.href='contacts.html'"><i class="fa-solid fa-handshake"></i><span>직원 검색</span></div>
+            <div class="quick-btn" onclick="location.href='projects.html'"><i class="fa-solid fa-chart-pie"></i><span>보고서</span></div>
+            <div class="quick-btn" onclick="location.href='admin.html'"><i class="fa-solid fa-gear"></i><span>설정</span></div>
         </div>
 
         <!-- PROJECTS + SCHEDULE -->
@@ -536,11 +536,6 @@ button,input,select,textarea{font-family:inherit}
 <script src="intranet.js"></script>
 <script>
 if(!Intra.init('대시보드','viewer')) throw '';
-// 오늘 날짜
-const d = new Date();
-const days = ['일','월','화','수','목','금','토'];
-document.getElementById('todayDate').textContent =
-    `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} (${days[d.getDay()]})`;
 </script>
 </body>
 </html>
