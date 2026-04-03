@@ -232,7 +232,7 @@
     if (authCode) {
       var provider = sessionStorage.getItem('social_provider');
       var savedState = sessionStorage.getItem('social_state');
-      if (provider && savedState === authState) {
+      if (provider && (savedState === authState || provider === 'kakao')) {
         errorEl.style.display = 'none';
         var statusEl = document.createElement('div');
         statusEl.style.cssText = 'text-align:center;padding:16px;color:var(--accent);font-weight:600;';
@@ -254,7 +254,9 @@
             App.toast('환영합니다, ' + res.data.user.name + '님!', 'success');
             setTimeout(function() { location.href = '../index.html'; }, 800);
           } else {
-            statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:var(--red)"></i> ' + (res.data.error || '소셜 로그인에 실패했습니다.');
+            var errMsg = res.data.error || '소셜 로그인에 실패했습니다.';
+            if (res.data.detail) errMsg += ' (' + JSON.stringify(res.data.detail) + ')';
+            statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:var(--red)"></i> ' + errMsg;
             form.style.display = '';
           }
         })

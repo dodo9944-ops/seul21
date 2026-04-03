@@ -82,7 +82,7 @@ module.exports = async function handler(req, res) {
         })
       });
       const tokenData = await tokenRes.json();
-      if (!tokenData.access_token) return res.status(401).json({ error: '카카오 인증 실패' });
+      if (!tokenData.access_token) return res.status(401).json({ error: '카카오 인증 실패', detail: tokenData });
 
       const profileRes = await fetch('https://kapi.kakao.com/v2/user/me', {
         headers: { 'Authorization': `Bearer ${tokenData.access_token}` }
