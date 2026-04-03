@@ -413,7 +413,8 @@
         .pm-overlay.open { opacity: 1; visibility: visible; }
         .pm-modal {
             background: #fff; border-radius: 16px; width: 640px; max-width: 92vw;
-            max-height: 85vh; overflow-y: auto; position: relative;
+            max-height: 85vh; overflow: hidden; display: flex; flex-direction: column;
+            position: relative;
             transform: translateY(20px) scale(0.98); transition: transform 0.35s ease;
             box-shadow: 0 24px 80px rgba(0,0,0,0.25);
         }
@@ -421,7 +422,7 @@
         .pm-header {
             background: linear-gradient(135deg, #0A0F1C, #142644);
             padding: 32px 36px 28px; border-radius: 16px 16px 0 0;
-            position: relative;
+            position: relative; flex-shrink: 0;
         }
         .pm-header::after {
             content: ''; position: absolute; bottom: 0; left: 36px; right: 36px;
@@ -445,7 +446,7 @@
             font-size: 16px; cursor: pointer; transition: all 0.2s;
         }
         .pm-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
-        .pm-body { padding: 32px 36px; }
+        .pm-body { padding: 32px 36px; overflow-y: auto; flex: 1; }
         .pm-section { margin-bottom: 28px; }
         .pm-section:last-child { margin-bottom: 0; }
         .pm-section-title {
@@ -463,7 +464,7 @@
         .pm-highlight strong { color: #0A0F1C; }
         .pm-footer {
             padding: 20px 36px 28px; display: flex; align-items: center; justify-content: space-between;
-            border-top: 1px solid #E5E5E5;
+            border-top: 1px solid #E5E5E5; flex-shrink: 0;
         }
         .pm-nav-btn {
             display: inline-flex; align-items: center; gap: 8px;

@@ -110,7 +110,7 @@ button, input, select, textarea { font-family: inherit; }
 
 /* ── HEADER WRAP (sticky container) ── */
 .header-wrap {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
 }
 
 /* ── UTILITY BAR ── */
@@ -567,12 +567,13 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 .modal-overlay.open { opacity: 1; pointer-events: auto; }
 .modal {
   background: var(--white); border-radius: var(--radius);
-  width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto;
+  width: 100%; max-width: 520px; max-height: 90vh; overflow: hidden;
+  display: flex; flex-direction: column;
   box-shadow: 0 16px 48px rgba(0,0,0,0.2);
 }
 .modal-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 24px; border-bottom: 1px solid var(--gray-100);
+  padding: 20px 24px; border-bottom: 1px solid var(--gray-100); flex-shrink: 0;
 }
 .modal-header h3 { font-size: 18px; font-weight: 700; }
 .modal-close {
@@ -582,10 +583,10 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
   font-size: 18px; color: var(--gray-500); border-radius: 50%;
 }
 .modal-close:hover { background: var(--gray-100); }
-.modal-body { padding: 24px; }
+.modal-body { padding: 24px; overflow-y: auto; flex: 1; }
 .modal-footer {
   display: flex; justify-content: flex-end; gap: 8px;
-  padding: 16px 24px; border-top: 1px solid var(--gray-100);
+  padding: 16px 24px; border-top: 1px solid var(--gray-100); flex-shrink: 0;
 }
 
 /* ── TOAST ── */
