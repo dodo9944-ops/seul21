@@ -58,5 +58,21 @@
     "memo": "google 소셜 로그인",
     "provider": "google",
     "providerId": "101867314716423959177"
+  },
+  {
+    "id": "mnjbev9q",
+    "name": "이창우",
+    "phone": "",
+    "email": "",
+    "password": "",
+    "zipcode": "",
+    "address": "",
+    "area": "",
+    "grade": "일반",
+    "status": "활성",
+    "date": "2026-04-03",
+    "memo": "kakao 소셜 로그인",
+    "provider": "kakao",
+    "providerId": "4829346582"
   }
 ]
