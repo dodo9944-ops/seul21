@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관심 목록 — (주)세울엔지니어링</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .fav-tabs {
+        display: flex; gap: 4px; margin-bottom: 32px;
+        border-bottom: 2px solid var(--gray-200); padding-bottom: 0;
+    }
+    .fav-tabs button {
+        padding: 12px 24px; font-size: 15px; font-weight: 600;
+        color: var(--gray-500); background: none; border: none;
+        cursor: pointer; font-family: var(--font);
+        border-bottom: 2px solid transparent; margin-bottom: -2px;
+        transition: all var(--transition);
+    }
+    .fav-tabs button:hover { color: var(--gray-700); }
+    .fav-tabs button.active {
+        color: var(--accent); border-bottom-color: var(--accent);
+    }
+    .fav-count {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-width: 20px; height: 20px; padding: 0 6px;
+        border-radius: 10px; font-size: 11px; font-weight: 700;
+        background: var(--gray-100); color: var(--gray-500); margin-left: 6px;
+    }
+    .fav-tabs button.active .fav-count { background: var(--accent-light); color: var(--accent); }
+    .fav-tab-content { display: none; }
+    .fav-tab-content.active { display: block; }
+
+    /* 구역 카드 */
+    .fav-area-card {
+        display: flex; align-items: center; gap: 20px;
+        padding: 20px 24px; border: 1px solid var(--gray-200);
+        border-radius: var(--radius); margin-bottom: 12px;
+        transition: all var(--transition); cursor: pointer;
+    }
+    .fav-area-card:hover { border-color: var(--gray-300); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .fav-area-icon {
+        width: 56px; height: 56px; border-radius: var(--radius-sm);
+        background: var(--accent-light); color: var(--accent);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 22px; flex-shrink: 0;
+    }
+    .fav-area-info { flex: 1; min-width: 0; }
+    .fav-area-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .fav-area-meta { font-size: 13px; color: var(--gray-500); }
+    .fav-area-premium { text-align: right; flex-shrink: 0; }
+    .fav-area-premium .val { font-size: 20px; font-weight: 800; }
+    .fav-area-premium .unit { font-size: 12px; color: var(--gray-500); }
+    .fav-area-premium .change { font-size: 13px; font-weight: 600; }
+    .fav-remove-btn {
+        width: 36px; height: 36px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        background: none; border: 1px solid var(--gray-200);
+        color: var(--yellow); cursor: pointer; font-size: 16px;
+        transition: all var(--transition); flex-shrink: 0;
+    }
+    .fav-remove-btn:hover { background: #FDECEA; border-color: var(--red); color: var(--red); }
+
+    /* 매물 카드 */
+    .fav-listing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 1024px) { .fav-listing-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .fav-listing-grid { grid-template-columns: 1fr; } }
+    .fav-listing-card {
+        border: 1px solid var(--gray-200); border-radius: var(--radius);
+        overflow: hidden; transition: all var(--transition); cursor: pointer; position: relative;
+    }
+    .fav-listing-card:hover { border-color: var(--gray-300); box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+    .fav-listing-thumb {
+        height: 160px; background: var(--gray-50);
+        display: flex; align-items: center; justify-content: center;
+    }
+    .fav-listing-thumb i { font-size: 40px; color: var(--gray-300); }
+    .fav-listing-body { padding: 16px 20px 20px; }
+    .fav-listing-area { font-size: 12px; color: var(--gray-500); margin-bottom: 4px; }
+    .fav-listing-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
+    .fav-listing-price { font-size: 20px; font-weight: 800; color: var(--gray-900); }
+    .fav-listing-price small { font-size: 13px; font-weight: 400; color: var(--gray-500); }
+    .fav-listing-remove {
+        position: absolute; top: 12px; right: 12px;
+        width: 32px; height: 32px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(255,255,255,0.9); border: none; cursor: pointer;
+        color: var(--yellow); font-size: 16px; transition: all var(--transition);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .fav-listing-remove:hover { background: #FDECEA; color: var(--red); }
+    .fav-listing-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+    .fav-listing-tags span { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--gray-100); color: var(--gray-600); }
+
+    @media (max-width: 768px) {
+        .fav-area-card { flex-wrap: wrap; gap: 12px; }
+        .fav-area-premium { text-align: left; }
+    }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html"><i class="fa-solid fa-house"></i></a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <a href="mypage.html">마이페이지</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>관심 목록</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>관심구역 · 관심매물</h1>
+        <p>즐겨찾기한 구역과 매물을 한 곳에서 관리하세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="fav-tabs">
+            <button class="active" data-tab="areas">
+                <i class="fa-solid fa-building"></i> 관심구역
+                <span class="fav-count" id="areaCount">0</span>
+            </button>
+            <button data-tab="listings">
+                <i class="fa-solid fa-house"></i> 관심매물
+                <span class="fav-count" id="listingCount">0</span>
+            </button>
+        </div>
+
+        <div class="fav-tab-content active" id="tab-areas"></div>
+        <div class="fav-tab-content" id="tab-listings"></div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    // 로그인 체크
+    if (!DataService.isUserLoggedIn()) {
+        location.href = 'login.html';
+        return;
+    }
+
+    // 탭 전환
+    document.querySelectorAll('.fav-tabs button').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.fav-tabs button').forEach(function(b) { b.classList.remove('active'); });
+            this.classList.add('active');
+            var tab = this.dataset.tab;
+            document.querySelectorAll('.fav-tab-content').forEach(function(c) { c.classList.remove('active'); });
+            document.getElementById('tab-' + tab).classList.add('active');
+        });
+    });
+
+    function renderAll() {
+        renderAreas();
+        renderListings();
+    }
+
+    function renderAreas() {
+        var container = document.getElementById('tab-areas');
+        var ids = DataService.getFavorites('areas');
+        document.getElementById('areaCount').textContent = ids.length;
+
+        if (ids.length === 0) {
+            container.innerHTML = '<div class="empty-state"><i class="fa-regular fa-star" style="font-size:56px;"></i><h3>관심구역이 없습니다</h3><p>구역 목록에서 별 아이콘을 클릭하여 관심구역을 추가해보세요.</p><a href="areas.html" class="btn btn-accent btn-md" style="margin-top:8px;">구역 둘러보기</a></div>';
+            return;
+        }
+
+        var html = '';
+        ids.forEach(function(id) {
+            var a = DataService.getById('areas', id);
+            if (!a) return;
+            var changeClass = a.changeDir === 'up' ? 'val-up' : a.changeDir === 'down' ? 'val-down' : 'val-flat';
+            var changeIcon = a.changeDir === 'up' ? '▲' : a.changeDir === 'down' ? '▼' : '-';
+            html += '<div class="fav-area-card" data-id="' + a.id + '">' +
+                '<div class="fav-area-icon"><i class="fa-solid fa-building"></i></div>' +
+                '<div class="fav-area-info">' +
+                    '<div class="fav-area-name">' + a.name + '</div>' +
+                    '<div class="fav-area-meta">' + a.district + ' ' + a.dong + ' · <span class="badge" style="background:var(' + App.stageColor(a.stage) + ');color:#fff;font-size:11px;padding:2px 8px;">' + a.stage + '</span> · ' + App.comma(a.totalHouseholds) + '세대</div>' +
+                '</div>' +
+                '<div class="fav-area-premium">' +
+                    '<div><span class="val">' + App.comma(a.premium) + '</span> <span class="unit">만원/3.3㎡</span></div>' +
+                    '<div class="change ' + changeClass + '">' + changeIcon + ' ' + App.comma(Math.abs(a.change)) + '</div>' +
+                '</div>' +
+                '<button class="fav-remove-btn" data-type="areas" data-id="' + a.id + '" title="관심구역 해제"><i class="fa-solid fa-star"></i></button>' +
+            '</div>';
+        });
+        container.innerHTML = html;
+
+        // 카드 클릭 → 상세
+        container.querySelectorAll('.fav-area-card').forEach(function(card) {
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('.fav-remove-btn')) return;
+                location.href = 'area-detail.html?id=' + this.dataset.id;
+            });
+        });
+
+        // 즐겨찾기 해제
+        container.querySelectorAll('.fav-remove-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                DataService.toggleFavorite(this.dataset.type, this.dataset.id);
+                App.toast('관심구역에서 해제되었습니다.', 'success');
+                renderAll();
+            });
+        });
+    }
+
+    function renderListings() {
+        var container = document.getElementById('tab-listings');
+        var ids = DataService.getFavorites('listings');
+        document.getElementById('listingCount').textContent = ids.length;
+
+        if (ids.length === 0) {
+            container.innerHTML = '<div class="empty-state"><i class="fa-regular fa-heart" style="font-size:56px;"></i><h3>관심매물이 없습니다</h3><p>매물 목록에서 하트 아이콘을 클릭하여 관심매물을 추가해보세요.</p><a href="listings.html" class="btn btn-accent btn-md" style="margin-top:8px;">매물 둘러보기</a></div>';
+            return;
+        }
+
+        var html = '<div class="fav-listing-grid">';
+        ids.forEach(function(id) {
+            var l = DataService.getById('listings', id);
+            if (!l) return;
+            html += '<div class="fav-listing-card" data-id="' + l.id + '">' +
+                '<button class="fav-listing-remove" data-type="listings" data-id="' + l.id + '" title="관심매물 해제"><i class="fa-solid fa-heart"></i></button>' +
+                '<div class="fav-listing-thumb"><i class="fa-solid fa-house"></i></div>' +
+                '<div class="fav-listing-body">' +
+                    '<div class="fav-listing-area">' + (l.areaName || l.district || '') + '</div>' +
+                    '<div class="fav-listing-title">' + l.title + '</div>' +
+                    '<div class="fav-listing-price">' + App.comma(l.price) + '<small>만원</small></div>' +
+                    (l.tags && l.tags.length ? '<div class="fav-listing-tags">' + l.tags.map(function(t) { return '<span>' + t + '</span>'; }).join('') + '</div>' : '') +
+                '</div>' +
+            '</div>';
+        });
+        html += '</div>';
+        container.innerHTML = html;
+
+        // 카드 클릭 → 상세
+        container.querySelectorAll('.fav-listing-card').forEach(function(card) {
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('.fav-listing-remove')) return;
+                location.href = 'listing-detail.html?id=' + this.dataset.id;
+            });
+        });
+
+        // 즐겨찾기 해제
+        container.querySelectorAll('.fav-listing-remove').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                DataService.toggleFavorite(this.dataset.type, this.dataset.id);
+                App.toast('관심매물에서 해제되었습니다.', 'success');
+                renderAll();
+            });
+        });
+    }
+
+    // URL 파라미터로 탭 선택
+    var tabParam = new URLSearchParams(location.search).get('tab');
+    if (tabParam === 'listings') {
+        document.querySelector('.fav-tabs button[data-tab="listings"]').click();
+    }
+
+    renderAll();
+})();
+</script>
+</body>
+</html>

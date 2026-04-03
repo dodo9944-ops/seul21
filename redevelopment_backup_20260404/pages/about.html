@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회사소개 — (주)세울엔지니어링</title>
+    <meta name="description" content="(주)세울엔지니어링 회사소개 — CEO 인사말, 연혁, 조직도, 사업분야를 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    /* ── CEO 인사말 ── */
+    .ceo-section {
+        display: flex; align-items: stretch;
+        background: #FAFBFC;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* 좌: 텍스트 */
+    .ceo-text-area {
+        flex: 1; min-width: 0;
+        padding: 48px 52px 44px;
+        display: flex; flex-direction: column; justify-content: center;
+    }
+    .ceo-quote {
+        font-size: 52px; color: var(--gold); opacity: 0.15;
+        font-family: Georgia, serif; line-height: 0.8;
+        margin-bottom: 6px; user-select: none;
+    }
+    .ceo-headline {
+        font-size: 21px; font-weight: 800; color: var(--brand-dark);
+        line-height: 1.55; margin-bottom: 22px; letter-spacing: -0.5px;
+    }
+    .ceo-accent-line {
+        width: 32px; height: 2px;
+        background: linear-gradient(90deg, var(--gold), rgba(195,165,105,0.15));
+        border-radius: 1px; margin-bottom: 22px;
+    }
+    .ceo-greeting {
+        font-size: 14.5px; line-height: 2; color: var(--gray-600);
+        white-space: pre-line; word-break: keep-all;
+    }
+
+    /* 우: 사진 */
+    .ceo-photo-area {
+        flex-shrink: 0; width: 380px;
+        position: relative;
+        display: flex; align-items: center; justify-content: center;
+        background: linear-gradient(160deg, #f0f1f3 0%, #e8e9ec 100%);
+        padding: 0;
+        margin: -20px 0;
+    }
+    .ceo-photo-area img {
+        width: 100%; height: calc(100% + 40px);
+        object-fit: contain;
+        object-position: center 58%;
+        display: block;
+    }
+    /* 좌측 스무스 */
+    .ceo-photo-area::before {
+        content: ''; position: absolute; inset: 0; z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(to right, #FAFBFC 0%, rgba(250,251,252,0.5) 6%, rgba(250,251,252,0.15) 14%, transparent 24%);
+    }
+    /* 하단 스무스 */
+    .ceo-photo-area::after {
+        content: ''; position: absolute; inset: 0; z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(to top, #FAFBFC 0%, rgba(250,251,252,0.5) 6%, rgba(250,251,252,0.15) 14%, transparent 24%);
+    }
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        .ceo-photo-area { width: 320px; }
+    }
+    @media (max-width: 860px) {
+        .ceo-section { flex-direction: column; }
+        .ceo-text-area { padding: 36px 28px 32px; }
+        .ceo-photo-area {
+            width: 100%; order: -1;
+            margin: 0; max-height: 420px;
+        }
+        .ceo-photo-area::before {
+            background:
+                linear-gradient(to bottom, transparent 85%, rgba(250,251,252,0.5) 94%, #FAFBFC 100%),
+                linear-gradient(to top, transparent 85%, rgba(250,251,252,0.3) 94%, #FAFBFC 100%);
+        }
+        .ceo-headline { font-size: 19px; }
+    }
+    @media (max-width: 480px) {
+        .ceo-text-area { padding: 28px 22px 24px; }
+        .ceo-headline { font-size: 17px; }
+        .ceo-greeting { font-size: 13.5px; line-height: 1.85; }
+        .ceo-quote { font-size: 38px; }
+        .ceo-photo-area { max-height: 360px; }
+    }
+
+    /* ── 회사연혁 ── */
+    .history-wrap {
+        display: flex; gap: 48px; align-items: stretch;
+    }
+    .history-left { flex: 1; min-width: 0; }
+    .history-right {
+        width: 340px; flex-shrink: 0;
+        background: transparent;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius); padding: 40px 32px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        position: relative; overflow: hidden;
+    }
+    /* 우측 배경 그리드 */
+    .history-right::before {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            linear-gradient(rgba(195,165,105,0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(195,165,105,0.06) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+    /* S 모노그램 */
+    .history-emblem { position: relative; z-index: 1; margin-bottom: 28px; }
+    .history-emblem svg { width: 100px; height: 100px; }
+    /* 빌딩 실루엣 */
+    .history-skyline {
+        position: absolute; bottom: 0; left: 0; right: 0; height: 40%; opacity: 0.08; z-index: 0;
+        background:
+            linear-gradient(to top, rgba(195,165,105,0.3) 0%, transparent 100%) no-repeat 15% bottom / 24px 50%,
+            linear-gradient(to top, rgba(195,165,105,0.3) 0%, transparent 100%) no-repeat 30% bottom / 32px 70%,
+            linear-gradient(to top, rgba(195,165,105,0.3) 0%, transparent 100%) no-repeat 45% bottom / 20px 45%,
+            linear-gradient(to top, rgba(195,165,105,0.3) 0%, transparent 100%) no-repeat 60% bottom / 36px 80%,
+            linear-gradient(to top, rgba(195,165,105,0.3) 0%, transparent 100%) no-repeat 75% bottom / 26px 55%,
+            linear-gradient(to top, rgba(195,165,105,0.3) 0%, transparent 100%) no-repeat 88% bottom / 30px 65%;
+    }
+    /* 키워드 */
+    .history-keywords {
+        position: relative; z-index: 1; display: flex; flex-direction: column;
+        align-items: center; gap: 12px; text-align: center;
+    }
+    .history-keywords .hk-main {
+        font-size: 18px; font-weight: 800; color: var(--gray-900); letter-spacing: -0.3px;
+    }
+    .history-keywords .hk-sub {
+        font-size: 11px; font-weight: 500; letter-spacing: 2px;
+        color: var(--gray-400); text-transform: uppercase;
+    }
+    .history-keywords .hk-divider {
+        width: 32px; height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gray-300), transparent);
+    }
+    .history-stats {
+        position: relative; z-index: 1; display: flex; gap: 24px; margin-top: 28px;
+    }
+    .history-stat { text-align: center; }
+    .history-stat-val {
+        font-size: 28px; font-weight: 900; color: #C3A569; line-height: 1.2;
+    }
+    .history-stat-label {
+        font-size: 10px; font-weight: 600; color: var(--gray-400);
+        letter-spacing: 1px; margin-top: 4px;
+    }
+    @media (max-width: 768px) {
+        .history-wrap { flex-direction: column; gap: 24px; }
+        .history-right { width: 100%; padding: 32px 24px; }
+    }
+
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+        content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px;
+        width: 2px; background: var(--gray-200);
+    }
+    .timeline-item { position: relative; margin-bottom: 32px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before {
+        content: ''; position: absolute; left: -24px; top: 7px;
+        width: 10px; height: 10px; border-radius: 50%;
+        background: var(--gold); border: 2px solid var(--white);
+        box-shadow: 0 0 0 2px var(--gold);
+    }
+    .timeline-year {
+        font-size: 20px; font-weight: 800; color: var(--gold); margin-bottom: 8px;
+    }
+    .timeline-events { list-style: none; }
+    .timeline-events li {
+        position: relative; padding-left: 16px; font-size: 14px;
+        color: var(--gray-700); line-height: 1.8;
+    }
+    .timeline-events li::before {
+        content: ''; position: absolute; left: 0; top: 10px;
+        width: 5px; height: 5px; border-radius: 50%; background: var(--gray-400);
+    }
+
+    /* ── 조직도 ── */
+    .org-chart { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+    .org-ceo-card {
+        background: var(--brand-navy); color: var(--white); border-radius: var(--radius);
+        padding: 20px 48px; text-align: center;
+    }
+    .org-ceo-card .org-role { font-size: 13px; color: var(--gold); margin-bottom: 4px; }
+    .org-ceo-card .org-name { font-size: 18px; font-weight: 700; }
+    .org-connector {
+        width: 2px; height: 24px; background: var(--gray-300);
+    }
+    .org-departments {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%;
+    }
+    .org-dept-card {
+        background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius);
+        padding: 24px; text-align: center; position: relative;
+    }
+    .org-dept-card::before {
+        content: ''; position: absolute; top: -13px; left: 50%;
+        transform: translateX(-50%); width: 2px; height: 12px; background: var(--gray-300);
+    }
+    .org-dept-card h4 {
+        font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 12px;
+        padding-bottom: 12px; border-bottom: 1px solid var(--gray-100);
+    }
+    .org-dept-card .team-list { list-style: none; }
+    .org-dept-card .team-list li {
+        font-size: 13px; color: var(--gray-600); line-height: 2;
+    }
+    @media (max-width: 768px) {
+        .org-departments { grid-template-columns: 1fr; }
+    }
+
+    /* ── 사업분야 ── */
+    .biz-grid {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    }
+    .biz-card {
+        background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius);
+        padding: 28px 24px; transition: all var(--transition);
+    }
+    .biz-card:hover { border-color: var(--gold); box-shadow: var(--shadow-hover); }
+    .biz-card .biz-icon {
+        width: 56px; height: 56px; border-radius: 14px;
+        background: var(--brand-navy); display: flex; align-items: center; justify-content: center;
+        margin-bottom: 18px;
+    }
+    .biz-card .biz-icon i { font-size: 24px; color: var(--gold); }
+    .biz-card h4 { font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+    .biz-card p { font-size: 13px; color: var(--gray-500); line-height: 1.7; }
+    @media (max-width: 1024px) {
+        .biz-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+        .biz-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── 섹션 간격 ── */
+    .about-section { margin-bottom: 56px; }
+    .about-section:last-child { margin-bottom: 0; }
+    .about-section .section-title { margin-bottom: 28px; }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>회사소개</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>회사소개</h1>
+        <p>재개발·재건축 전문 정비사업관리 파트너, (주)세울엔지니어링을 소개합니다</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <!-- CEO 인사말 -->
+        <div class="about-section">
+            <h2 class="section-title">CEO 인사말</h2>
+            <div class="ceo-section">
+                <div class="ceo-text-area">
+                    <div class="ceo-quote">&ldquo;</div>
+                    <div class="ceo-headline">도시의 가치를 높이고,<br>주민의 삶을 바꾸는 정비사업을 만들겠습니다.</div>
+                    <div class="ceo-accent-line"></div>
+                    <div class="ceo-greeting" id="ceoGreeting"></div>
+                </div>
+                <div class="ceo-photo-area">
+                    <img src="../jpg/대표사진1.png" alt="이창우 대표이사">
+                </div>
+            </div>
+        </div>
+
+        <!-- 회사연혁 -->
+        <div class="about-section">
+            <h2 class="section-title">회사연혁</h2>
+            <div class="history-wrap">
+                <div class="history-left">
+                    <div class="timeline" id="timeline"></div>
+                </div>
+                <div class="history-right">
+                    <div class="history-skyline"></div>
+                    <div class="history-emblem">
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="8" width="104" height="104" rx="4" stroke="#C3A569" stroke-width="1" opacity="0.3"/>
+                            <rect x="28" y="24" width="52" height="6" rx="1" fill="#C3A569"/>
+                            <rect x="28" y="24" width="6" height="28" rx="1" fill="#C3A569"/>
+                            <rect x="40" y="52" width="52" height="6" rx="1" fill="#C3A569" opacity="0.6"/>
+                            <rect x="86" y="58" width="6" height="28" rx="1" fill="#C3A569"/>
+                            <rect x="40" y="86" width="52" height="6" rx="1" fill="#C3A569"/>
+                            <path d="M86 24 L92 18 L98 24" stroke="#C3A569" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <div class="history-keywords">
+                        <div class="hk-sub">Since 2019</div>
+                        <div class="hk-divider"></div>
+                        <div class="hk-main">도시의 미래를<br>다시 세우다</div>
+                        <div class="hk-sub">SEUL ENGINEERING</div>
+                    </div>
+                    <div class="history-stats">
+                        <div class="history-stat">
+                            <div class="history-stat-val">7+</div>
+                            <div class="history-stat-label">YEARS</div>
+                        </div>
+                        <div class="history-stat">
+                            <div class="history-stat-val">10+</div>
+                            <div class="history-stat-label">PROJECTS</div>
+                        </div>
+                        <div class="history-stat">
+                            <div class="history-stat-val">4만+</div>
+                            <div class="history-stat-label">세대</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 조직도 -->
+        <div class="about-section">
+            <h2 class="section-title">조직도</h2>
+            <div class="org-chart">
+                <div class="org-ceo-card">
+                    <div class="org-role">대표이사</div>
+                    <div class="org-name" id="orgCeoName"></div>
+                </div>
+                <div class="org-connector"></div>
+                <div class="org-departments" id="orgDepartments"></div>
+            </div>
+        </div>
+
+        <!-- 사업분야 -->
+        <div class="about-section">
+            <h2 class="section-title">사업분야</h2>
+            <div class="biz-grid" id="bizGrid"></div>
+        </div>
+
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    const info = MOCK.companyInfo;
+
+    /* ── CEO 인사말 ── */
+    document.getElementById('ceoGreeting').textContent = info.ceoGreeting;
+
+    /* ── 회사연혁 ── */
+    document.getElementById('timeline').innerHTML = info.history.map(h => `
+        <div class="timeline-item">
+            <div class="timeline-year">${h.year}</div>
+            <ul class="timeline-events">
+                ${h.items.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+        </div>
+    `).join('');
+
+    /* ── 조직도 ── */
+    document.getElementById('orgCeoName').textContent = info.ceoName;
+    document.getElementById('orgDepartments').innerHTML = info.departments.map(d => `
+        <div class="org-dept-card">
+            <h4>${d.name}</h4>
+            <ul class="team-list">
+                ${d.teams.map(t => `<li>${t}</li>`).join('')}
+            </ul>
+        </div>
+    `).join('');
+
+    /* ── 사업분야 ── */
+    document.getElementById('bizGrid').innerHTML = info.businessAreas.map(b => `
+        <div class="biz-card">
+            <div class="biz-icon"><i class="${b.icon}"></i></div>
+            <h4>${b.title}</h4>
+            <p>${b.desc}</p>
+        </div>
+    `).join('');
+})();
+</script>
+</body>
+</html>

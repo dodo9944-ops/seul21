@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /assets/data/
+
+Sitemap: https://seul21.com/sitemap.xml

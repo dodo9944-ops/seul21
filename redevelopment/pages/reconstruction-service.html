@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주택재건축 정비사업 — (주)세울엔지니어링</title>
+    <meta name="description" content="노후 공동주택 재건축 사업의 재건축진단부터 준공까지 전 과정을 관리합니다. 2025 개정 도시정비법 반영.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .rd-section { margin-bottom:56px; }
+    .rd-section:last-child { margin-bottom:0; }
+    .rd-section .section-title { margin-bottom:28px; }
+
+    /* 비주얼 히어로 */
+    .rd-visual {
+        background:linear-gradient(135deg,#0A0F1C 0%,#142644 100%);
+        border-radius:16px; padding:48px 52px; position:relative; overflow:hidden;
+        display:flex; align-items:center; gap:40px;
+    }
+    .rd-visual::before {
+        content:''; position:absolute; right:-80px; top:-80px; width:300px; height:300px;
+        background:radial-gradient(circle,rgba(195,165,105,0.06) 0%,transparent 70%); border-radius:50%;
+    }
+    .rd-visual::after {
+        content:''; position:absolute; left:-40px; bottom:-40px; width:200px; height:200px;
+        background:radial-gradient(circle,rgba(195,165,105,0.04) 0%,transparent 70%); border-radius:50%;
+    }
+    .rd-visual-text { position:relative; z-index:1; flex:1; }
+    .rd-visual-badge {
+        display:inline-flex; align-items:center; gap:8px;
+        font-size:11px; font-weight:700; color:var(--gold); letter-spacing:1.5px;
+        margin-bottom:16px; text-transform:uppercase;
+    }
+    .rd-visual-badge i { font-size:14px; }
+    .rd-visual h2 { font-size:28px; font-weight:800; color:#fff; line-height:1.45; margin-bottom:14px; letter-spacing:-0.5px; }
+    .rd-visual p { font-size:15px; color:rgba(255,255,255,0.55); line-height:1.8; }
+    .rd-visual-stats {
+        position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:16px; flex-shrink:0;
+    }
+    .rd-vstat {
+        background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06);
+        border-radius:12px; padding:20px 24px; text-align:center; min-width:130px;
+    }
+    .rd-vstat .vn { font-size:24px; font-weight:800; color:var(--gold); margin-bottom:4px; }
+    .rd-vstat .vd { font-size:11px; color:rgba(255,255,255,0.5); }
+    @media(max-width:860px){
+        .rd-visual{flex-direction:column;padding:36px 28px;}
+        .rd-visual h2{font-size:22px;}
+        .rd-visual-stats{grid-template-columns:repeat(4,1fr);width:100%;}
+    }
+    @media(max-width:540px){
+        .rd-visual-stats{grid-template-columns:repeat(2,1fr);}
+    }
+
+    /* 추진 절차 타임라인 */
+    .rd-timeline { position:relative; padding-left:36px; }
+    .rd-timeline::before {
+        content:''; position:absolute; left:15px; top:0; bottom:0; width:2px;
+        background:linear-gradient(to bottom, var(--gold), var(--gray-200));
+    }
+    .rd-tl-item { position:relative; margin-bottom:36px; }
+    .rd-tl-item:last-child { margin-bottom:0; }
+    .rd-tl-dot {
+        position:absolute; left:-36px; top:2px;
+        width:32px; height:32px; border-radius:50%;
+        background:var(--brand-dark); border:3px solid var(--gold);
+        display:flex; align-items:center; justify-content:center;
+        font-size:12px; font-weight:800; color:var(--gold); z-index:2;
+    }
+    .rd-tl-content {
+        background:#fff; border:1px solid var(--gray-200); border-radius:12px;
+        padding:24px 28px; transition:all 0.2s;
+    }
+    .rd-tl-content:hover { border-color:var(--gold); box-shadow:0 6px 20px rgba(0,0,0,0.05); }
+    .rd-tl-content h4 { font-size:17px; font-weight:700; color:var(--gray-900); margin-bottom:8px; }
+    .rd-tl-content p { font-size:14px; color:var(--gray-600); line-height:1.8; margin-bottom:12px; }
+    .rd-tl-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .rd-tl-tag {
+        padding:4px 12px; border-radius:16px; font-size:11px; font-weight:600;
+        background:rgba(195,165,105,0.08); color:var(--gold); border:1px solid rgba(195,165,105,0.12);
+    }
+    .rd-tl-seul {
+        margin-top:12px; padding:12px 16px; border-radius:8px;
+        background:rgba(20,38,68,0.03); border-left:3px solid var(--brand-navy);
+        font-size:13px; color:var(--gray-700); line-height:1.7;
+    }
+    .rd-tl-seul strong { color:var(--brand-navy); }
+
+    /* 왜 세울인가 */
+    .rd-why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    .rd-why-card {
+        background:#fff; border:1px solid var(--gray-200); border-radius:12px;
+        padding:32px 28px; text-align:center; transition:all 0.2s;
+    }
+    .rd-why-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); transform:translateY(-2px); }
+    .rd-why-icon {
+        width:56px; height:56px; border-radius:14px; background:var(--brand-dark);
+        display:flex; align-items:center; justify-content:center; margin:0 auto 18px;
+    }
+    .rd-why-icon i { font-size:22px; color:var(--gold); }
+    .rd-why-card h4 { font-size:16px; font-weight:700; color:var(--gray-900); margin-bottom:10px; }
+    .rd-why-card p { font-size:13px; color:var(--gray-600); line-height:1.75; }
+    @media(max-width:768px){ .rd-why-grid{grid-template-columns:1fr;} }
+
+    /* FAQ */
+    .rd-faq-item { border-bottom:1px solid var(--gray-200); }
+    .rd-faq-q {
+        display:flex; align-items:center; justify-content:space-between; gap:16px;
+        padding:20px 0; cursor:pointer; font-size:15px; font-weight:600; color:var(--gray-900);
+    }
+    .rd-faq-q i { color:var(--gold); transition:transform 0.2s; font-size:14px; flex-shrink:0; }
+    .rd-faq-q.open i { transform:rotate(180deg); }
+    .rd-faq-a {
+        max-height:0; overflow:hidden; transition:max-height 0.3s ease;
+        font-size:14px; color:var(--gray-600); line-height:1.8; padding:0 0 0 4px;
+    }
+    .rd-faq-a.open { max-height:300px; padding-bottom:20px; }
+
+    /* CTA */
+    .rd-cta {
+        background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:16px;
+        padding:56px 52px; text-align:center; position:relative; overflow:hidden;
+    }
+    .rd-cta::before { content:''; position:absolute; right:-60px; top:-60px; width:250px; height:250px; background:radial-gradient(circle,rgba(195,165,105,0.06) 0%,transparent 70%); border-radius:50%; }
+    .rd-cta::after { content:''; position:absolute; left:-40px; bottom:-40px; width:180px; height:180px; background:radial-gradient(circle,rgba(195,165,105,0.04) 0%,transparent 70%); border-radius:50%; }
+    .rd-cta-inner { position:relative; z-index:1; }
+    .rd-cta h3 { font-size:26px; font-weight:800; color:#fff; margin-bottom:12px; letter-spacing:-0.3px; }
+    .rd-cta p { font-size:15px; color:rgba(255,255,255,0.5); line-height:1.8; margin-bottom:28px; max-width:560px; margin-left:auto; margin-right:auto; }
+    .rd-cta-btns { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+    .rd-cta-btn {
+        display:inline-flex; align-items:center; gap:8px; padding:15px 32px;
+        border-radius:8px; font-size:15px; font-weight:700; text-decoration:none;
+    }
+    .rd-cta-btn.primary { background:var(--gold); color:#0A0F1C; }
+    .rd-cta-btn.primary:hover { background:var(--gold-hover); }
+    .rd-cta-btn.outline { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.2); }
+    .rd-cta-btn.outline:hover { border-color:var(--gold); color:var(--gold); }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="services.html">사업분야</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>주택재건축 정비사업</span>
+        </div>
+        <h1>주택재건축 정비사업</h1>
+        <p>노후 공동주택의 재건축진단부터 조합 운영, 관리처분, 입주까지 재건축 사업 전 과정을 체계적으로 관리합니다</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <!-- 비주얼 히어로 -->
+        <div class="rd-section">
+            <div class="rd-visual">
+                <div class="rd-visual-text">
+                    <div class="rd-visual-badge"><i class="fa-solid fa-building-columns"></i> HOUSING RECONSTRUCTION</div>
+                    <h2>조합원의 자산가치를 지키며<br>사업을 완성합니다</h2>
+                    <p>재건축은 기존 공동주택 소유자들의 재산권이 직접 걸린 사업입니다. 비례율과 분담금 한 줄의 차이가 수천만 원의 차이를 만듭니다. 세울엔지니어링은 숫자 하나까지 놓치지 않는 정밀한 사업 관리로 조합원의 자산가치를 지킵니다.</p>
+                </div>
+                <div class="rd-visual-stats">
+                    <div class="rd-vstat"><div class="vn">20+</div><div class="vd">년 현장 경험</div></div>
+                    <div class="rd-vstat"><div class="vn">전 과정</div><div class="vd">재건축진단~준공</div></div>
+                    <div class="rd-vstat"><div class="vn">정밀</div><div class="vd">분담금 시뮬레이션</div></div>
+                    <div class="rd-vstat"><div class="vn">실행</div><div class="vd">중심 사업 관리</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 추진 절차 -->
+        <div class="rd-section">
+            <h2 class="section-title">재건축 사업 추진 절차</h2>
+            <p style="font-size:14px;color:var(--gray-500);margin-bottom:28px;">각 단계마다 세울엔지니어링이 어떤 역할을 하는지 확인하세요</p>
+
+            <div class="rd-timeline">
+                <div class="rd-tl-item">
+                    <div class="rd-tl-dot">1</div>
+                    <div class="rd-tl-content">
+                        <h4>정비구역 지정 및 조합설립 <span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(195,165,105,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></h4>
+                        <p>준공 후 30년 이상 경과한 공동주택은 <strong>재건축진단 없이도 정비구역 입안과 조합설립을 동시에 추진</strong>할 수 있습니다. 조합설립 동의율도 기존 75%에서 <strong>70%로 완화</strong>되었습니다. 정비계획 수립, 도시계획위 심의, 창립총회까지 병행 추진이 가능해져 사업 기간이 대폭 단축됩니다.</p>
+                        <div class="rd-tl-tags">
+                            <span class="rd-tl-tag">30년 이상 진단 면제</span>
+                            <span class="rd-tl-tag">동의율 70%</span>
+                            <span class="rd-tl-tag">정비구역+조합설립 동시</span>
+                            <span class="rd-tl-tag">전자투표 도입</span>
+                        </div>
+                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 동시 추진 전략 수립, 동의율 확보(70% 기준), 전자투표·온라인 의결 운영 지원, 정비계획 자문 및 도시계획위 심의 대응</div>
+                    </div>
+                </div>
+
+                <div class="rd-tl-item">
+                    <div class="rd-tl-dot">2</div>
+                    <div class="rd-tl-content">
+                        <h4>재건축진단 <span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(195,165,105,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">명칭·기준 변경</span></h4>
+                        <p>기존 '안전진단'이 <strong>'재건축진단'</strong>으로 명칭이 변경되었습니다. <strong>사업시행인가 전까지만 통과</strong>하면 되므로 사업 초기에 반드시 선행할 필요가 없습니다. 평가 비중도 구조안전성 50%→<strong>30%</strong>, 주거환경 15%→<strong>30%</strong>, 설비노후도 25%→<strong>30%</strong>로 조정되어 통과 가능성이 높아졌습니다.</p>
+                        <div class="rd-tl-tags">
+                            <span class="rd-tl-tag">안전진단→재건축진단</span>
+                            <span class="rd-tl-tag">구조안전성 30%</span>
+                            <span class="rd-tl-tag">주거환경 30%</span>
+                            <span class="rd-tl-tag">설비노후도 30%</span>
+                        </div>
+                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 재건축진단 용역 선정 지원, 변경된 평가 비중에 맞춘 사전 준비, 결과 분석 및 대응 전략, 최적 추진 시점 자문</div>
+                    </div>
+                </div>
+
+                <div class="rd-tl-item">
+                    <div class="rd-tl-dot">3</div>
+                    <div class="rd-tl-content">
+                        <h4>시공사 선정 및 사업시행인가</h4>
+                        <p>경쟁입찰로 시공사를 선정하고 사업시행계획을 수립합니다. 건축 설계, 사업비 추정, 분양 계획을 포함한 사업시행계획서를 작성하여 행정기관의 인가를 받습니다. <strong>재건축진단은 이 단계 전까지 완료</strong>해야 합니다.</p>
+                        <div class="rd-tl-tags">
+                            <span class="rd-tl-tag">시공사 입찰</span>
+                            <span class="rd-tl-tag">사업시행계획</span>
+                            <span class="rd-tl-tag">사업시행인가</span>
+                            <span class="rd-tl-tag">재건축진단 완료 시점</span>
+                        </div>
+                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 입찰 평가기준 설계, 시공사 PT 운영, 사업시행계획서 작성, 재건축진단 완료 일정 관리</div>
+                    </div>
+                </div>
+
+                <div class="rd-tl-item">
+                    <div class="rd-tl-dot">4</div>
+                    <div class="rd-tl-content">
+                        <h4>관리처분인가</h4>
+                        <p>감정평가, 비례율 산정, 분양설계를 통해 조합원별 분담금을 확정합니다. 비례율과 분담금이 이 단계에서 결정되므로 조합원에게 가장 중요한 절차입니다.</p>
+                        <div class="rd-tl-tags">
+                            <span class="rd-tl-tag">감정평가</span>
+                            <span class="rd-tl-tag">비례율 산정</span>
+                            <span class="rd-tl-tag">분양설계</span>
+                            <span class="rd-tl-tag">관리처분계획</span>
+                        </div>
+                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 감정평가 검토, 비례율 시뮬레이션, 분양설계 분석, 조합원 설명회 운영</div>
+                    </div>
+                </div>
+
+                <div class="rd-tl-item">
+                    <div class="rd-tl-dot">5</div>
+                    <div class="rd-tl-content">
+                        <h4>이주·철거·착공·분양</h4>
+                        <p>조합원 이주를 완료하고 기존 건물을 철거한 후 신축 공사를 시작합니다. 일반분양도 이 시기에 진행됩니다.</p>
+                        <div class="rd-tl-tags">
+                            <span class="rd-tl-tag">이주 관리</span>
+                            <span class="rd-tl-tag">철거</span>
+                            <span class="rd-tl-tag">착공</span>
+                            <span class="rd-tl-tag">일반분양</span>
+                        </div>
+                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 이주 일정 관리, 보상 절차 지원, 시공 품질 관리</div>
+                    </div>
+                </div>
+
+                <div class="rd-tl-item">
+                    <div class="rd-tl-dot">6</div>
+                    <div class="rd-tl-content">
+                        <h4>준공·입주·조합 해산</h4>
+                        <p>공사 완료 후 준공인가를 받고, 조합원과 일반분양자가 입주합니다. 소유권 이전 등기, 하자관리, 조합 해산·청산까지 사업의 최종 마무리 단계입니다.</p>
+                        <div class="rd-tl-tags">
+                            <span class="rd-tl-tag">준공인가</span>
+                            <span class="rd-tl-tag">소유권 이전</span>
+                            <span class="rd-tl-tag">하자관리</span>
+                            <span class="rd-tl-tag">조합 청산</span>
+                        </div>
+                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 입주 지원, 하자관리 체계 구축, 조합 해산 절차 지원</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 왜 세울인가 -->
+        <div class="rd-section">
+            <h2 class="section-title">왜 세울엔지니어링인가</h2>
+            <div class="rd-why-grid">
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h4>사업성 정밀 분석</h4>
+                    <p>비례율·분담금·총사업비를 사업 초기부터 정밀하게 분석하여 조합원이 납득할 수 있는 근거를 제시합니다.</p>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-gavel"></i></div>
+                    <h4>총회 완벽 운영</h4>
+                    <p>총회·이사회·대의원회의 안건 작성부터 의결, 의사록까지. 법적 하자 없는 의사결정을 보장합니다.</p>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-handshake"></i></div>
+                    <h4>시공사 협상력</h4>
+                    <p>시공사 입찰 평가기준 설계, 계약 조건 검토, 불리한 조항 수정. 조합에 유리한 계약을 이끌어냅니다.</p>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-people-arrows"></i></div>
+                    <h4>조합원 소통 전문</h4>
+                    <p>분담금 설명, 민원 대응, 반대 의견 청취. 갈등을 키우지 않고 합의로 이끄는 현장 소통력을 갖추고 있습니다.</p>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-file-signature"></i></div>
+                    <h4>인허가 원스톱</h4>
+                    <p>재건축진단부터 준공까지 모든 인허가 서류를 직접 작성하고 행정기관과 협의합니다.</p>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-clock"></i></div>
+                    <h4>일정·원가 통제</h4>
+                    <p>사업 지연은 곧 금융비용 증가입니다. 핵심 일정을 놓치지 않는 관리 체계로 비용을 통제합니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 자주 묻는 질문 -->
+        <div class="rd-section">
+            <h2 class="section-title">재건축 사업 Q&A</h2>
+            <div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>재건축진단 없이도 사업을 시작할 수 있나요?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">2025년 개정 도시정비법에 따라, 준공 후 30년 이상 경과한 공동주택은 재건축진단 없이 정비구역 입안과 조합설립을 동시에 추진할 수 있습니다. 다만 사업시행인가 전까지는 반드시 재건축진단을 통과해야 합니다. 세울엔지니어링은 최적의 재건축진단 시점을 자문하고, 변경된 평가 비중(구조안전성 30%, 주거환경 30%, 설비노후도 30%)에 맞춘 사전 준비를 지원합니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>재개발과 재건축의 가장 큰 차이는?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">재개발은 토지와 건물이 함께 노후된 지역 전체를 정비하는 사업이고, 재건축은 기존 공동주택(아파트) 중심으로 진행되는 사업입니다. 핵심 차이는 재건축진단 필수 여부입니다. 재건축은 사업시행인가 전까지 재건축진단을 통과해야 하며, 2025년 개정으로 조합설립 동의율이 70%로 완화되고 정비구역 지정과 조합설립을 동시 추진할 수 있게 되었습니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>비례율이 높으면 무조건 좋은 건가요?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">비례율이 높을수록 조합원에게 유리한 것은 맞지만, 사업비를 과소 추정하여 비례율을 인위적으로 높이면 추후 추가 분담금이 발생할 위험이 있습니다. 세울엔지니어링은 낙관적 시나리오뿐 아니라 보수적 시나리오까지 함께 검토하여 현실적인 사업성을 분석합니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>시공사는 언제 선정하는 것이 유리한가요?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">사업시행인가 전후가 일반적인 시공사 선정 시기입니다. 너무 이른 시점에 선정하면 조합의 교섭력이 약화되고, 너무 늦으면 사업이 지연될 수 있습니다. 세울엔지니어링은 사업 진행 상황과 시장 여건을 고려하여 최적의 선정 시기를 자문합니다.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="rd-section">
+            <div class="rd-cta">
+                <div class="rd-cta-inner">
+                    <h3>재건축 사업, 전문가와 함께 시작하세요</h3>
+                    <p>세울엔지니어링이 사업장 현황을 분석하고 최적의 추진 방향을 제안합니다.<br>초기 상담은 무료로 진행됩니다.</p>
+                    <div class="rd-cta-btns">
+                        <a href="contact.html" class="rd-cta-btn primary"><i class="fa-solid fa-paper-plane"></i> 무료 상담 신청</a>
+                        <a href="search.html" class="rd-cta-btn outline"><i class="fa-solid fa-calculator"></i> 사업성 검토 도구</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+</body>
+</html>

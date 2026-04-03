@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사업성 분석 및 추진전략 수립 — (주)세울엔지니어링</title>
+    <meta name="description" content="정비사업의 사업성 분석과 추진전략 수립 서비스. 비례율·분담금·총사업비 분석부터 단계별 추진 로드맵까지 체계적으로 수행합니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .fs-section { margin-bottom:56px; }
+    .fs-section:last-child { margin-bottom:0; }
+    .fs-section .section-title { margin-bottom:28px; }
+
+    /* 인트로 배너 */
+    .fs-intro {
+        background:linear-gradient(135deg,rgba(195,165,105,0.04),transparent 60%);
+        border-left:4px solid var(--gold); border-radius:0 var(--radius) var(--radius) 0;
+        padding:36px 40px 36px 36px; position:relative;
+    }
+    .fs-intro p { font-size:16px; line-height:2; color:var(--gray-800); }
+    .fs-intro p strong { color:var(--brand-navy); }
+    @media(max-width:768px){ .fs-intro{padding:24px 20px 24px 24px;} .fs-intro p{font-size:14px;} }
+
+    /* 핵심 수치 카드 */
+    .fs-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+    .fs-stat {
+        background:var(--brand-dark); border-radius:var(--radius); padding:28px 24px; text-align:center;
+        color:#fff;
+    }
+    .fs-stat .num { font-size:28px; font-weight:800; color:var(--gold); margin-bottom:6px; }
+    .fs-stat .desc { font-size:13px; color:rgba(255,255,255,0.6); }
+    @media(max-width:768px){ .fs-stats{grid-template-columns:repeat(2,1fr);} }
+
+    /* 서비스 상세 카드 */
+    .fs-service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+    .fs-service-card {
+        background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius);
+        padding:32px 28px; transition:all 0.2s;
+    }
+    .fs-service-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); }
+    .fs-service-card .fs-icon {
+        width:48px; height:48px; border-radius:12px; background:var(--brand-dark);
+        display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+    }
+    .fs-service-card .fs-icon i { font-size:20px; color:var(--gold); }
+    .fs-service-card h4 { font-size:17px; font-weight:700; color:var(--gray-900); margin-bottom:10px; }
+    .fs-service-card p { font-size:14px; color:var(--gray-600); line-height:1.8; }
+    .fs-service-card ul { margin-top:12px; padding-left:18px; }
+    .fs-service-card li { font-size:13px; color:var(--gray-600); line-height:1.8; list-style:disc; }
+    @media(max-width:768px){ .fs-service-grid{grid-template-columns:1fr;} }
+
+    /* 프로세스 흐름 */
+    .fs-process { display:flex; gap:0; align-items:flex-start; counter-reset:step; }
+    .fs-step {
+        flex:1; text-align:center; position:relative; padding:0 12px;
+    }
+    .fs-step::before {
+        counter-increment:step; content:counter(step);
+        display:flex; align-items:center; justify-content:center;
+        width:44px; height:44px; border-radius:50%; margin:0 auto 14px;
+        background:var(--brand-dark); color:var(--gold);
+        font-size:16px; font-weight:800; position:relative; z-index:2;
+    }
+    .fs-step::after {
+        content:''; position:absolute; top:22px; left:calc(50% + 22px); right:calc(-50% + 22px);
+        height:2px; background:var(--gray-200); z-index:1;
+    }
+    .fs-step:last-child::after { display:none; }
+    .fs-step h5 { font-size:14px; font-weight:700; color:var(--gray-900); margin-bottom:6px; }
+    .fs-step p { font-size:12px; color:var(--gray-500); line-height:1.6; }
+    @media(max-width:768px){
+        .fs-process{flex-direction:column;gap:20px;}
+        .fs-step{text-align:left;display:flex;gap:14px;padding:0;}
+        .fs-step::before{flex-shrink:0;margin:0;}
+        .fs-step::after{display:none;}
+    }
+
+    /* CTA */
+    .fs-cta {
+        background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:var(--radius);
+        padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px;
+        position:relative; overflow:hidden;
+    }
+    .fs-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(195,165,105,0.08) 0%,transparent 70%); border-radius:50%; }
+    .fs-cta h3 { font-size:22px; font-weight:800; color:#fff; margin-bottom:8px; }
+    .fs-cta p { font-size:15px; color:rgba(255,255,255,0.55); }
+    .fs-cta-btn {
+        display:inline-flex; align-items:center; gap:8px; padding:14px 28px;
+        background:var(--gold); color:#0A0F1C; border-radius:8px; font-size:14px; font-weight:700;
+        text-decoration:none; white-space:nowrap;
+    }
+    .fs-cta-btn:hover { background:var(--gold-hover); }
+    @media(max-width:640px){ .fs-cta{flex-direction:column;padding:32px 24px;text-align:center;} }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="services.html">사업분야</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>사업성 분석 및 추진전략 수립</span>
+        </div>
+        <h1>사업성 분석 및 추진전략 수립</h1>
+        <p>정비사업의 경제적 타당성을 분석하고, 성공적 추진을 위한 단계별 전략을 수립합니다</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <!-- 인트로 -->
+        <div class="fs-section">
+            <div class="fs-intro">
+                <p>정비사업은 <strong>수십억~수천억 원 규모의 사업</strong>입니다. 사업 초기에 비례율, 분담금, 총사업비, 수익 구조를 정확하게 분석하지 않으면 사업 중반 이후 예상치 못한 추가 부담이 발생할 수 있습니다. 세울엔지니어링은 사업 착수 전 <strong>객관적이고 체계적인 사업성 분석</strong>을 통해 조합과 토지등소유자가 올바른 의사결정을 내릴 수 있도록 지원합니다.</p>
+            </div>
+        </div>
+
+        <!-- 핵심 지표 -->
+        <div class="fs-section">
+            <h2 class="section-title">핵심 분석 지표</h2>
+            <div class="fs-stats">
+                <div class="fs-stat">
+                    <div class="num"><i class="fa-solid fa-percent" style="font-size:22px;"></i></div>
+                    <div class="desc">추정 비례율 산정</div>
+                </div>
+                <div class="fs-stat">
+                    <div class="num"><i class="fa-solid fa-calculator" style="font-size:22px;"></i></div>
+                    <div class="desc">조합원 분담금 추정</div>
+                </div>
+                <div class="fs-stat">
+                    <div class="num"><i class="fa-solid fa-coins" style="font-size:22px;"></i></div>
+                    <div class="desc">총사업비 검증</div>
+                </div>
+                <div class="fs-stat">
+                    <div class="num"><i class="fa-solid fa-shield-halved" style="font-size:22px;"></i></div>
+                    <div class="desc">리스크 사전 분석</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 서비스 상세 -->
+        <div class="fs-section">
+            <h2 class="section-title">서비스 상세</h2>
+            <div class="fs-service-grid">
+                <div class="fs-service-card">
+                    <div class="fs-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h4>사업성 기초 분석</h4>
+                    <p>사업 착수 전 핵심 경제 지표를 분석하여 사업 추진 여부를 판단합니다.</p>
+                    <ul>
+                        <li>종전·종후 자산가치 비교 분석</li>
+                        <li>추정 비례율 및 분담금 산정</li>
+                        <li>감정평가 기초자료 검토</li>
+                        <li>사업성 유무 판단 보고서 작성</li>
+                    </ul>
+                </div>
+                <div class="fs-service-card">
+                    <div class="fs-icon"><i class="fa-solid fa-coins"></i></div>
+                    <h4>총사업비 검증</h4>
+                    <p>공사비, 금융비용, 보상비 등 전체 사업비를 항목별로 산정하고 적정성을 검증합니다.</p>
+                    <ul>
+                        <li>서울시 예산회계규정 기준 산정</li>
+                        <li>공사비 단가 적정성 비교 분석</li>
+                        <li>금융비용·이주비·보상비 추정</li>
+                        <li>사업비 증감 시나리오 분석</li>
+                    </ul>
+                </div>
+                <div class="fs-service-card">
+                    <div class="fs-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <h4>리스크 분석 및 대응</h4>
+                    <p>사업 추진 과정에서 발생할 수 있는 위험 요인을 사전에 파악하고 대응 방안을 수립합니다.</p>
+                    <ul>
+                        <li>공사비 상승·분양가 하락 시뮬레이션</li>
+                        <li>사업 지연 시 금융비용 증가 분석</li>
+                        <li>조합원 분담금 변동 시나리오</li>
+                        <li>리스크 완화 전략 수립</li>
+                    </ul>
+                </div>
+                <div class="fs-service-card">
+                    <div class="fs-icon"><i class="fa-solid fa-route"></i></div>
+                    <h4>추진전략 및 로드맵</h4>
+                    <p>사업 단계별 최적의 추진 전략과 일정을 수립하여 사업 완료까지의 로드맵을 제시합니다.</p>
+                    <ul>
+                        <li>정비구역 지정 ~ 준공 단계별 전략</li>
+                        <li>시공사 선정 시기·방식 자문</li>
+                        <li>동의율 확보 전략 및 일정 관리</li>
+                        <li>행정기관 협의·인허가 대응 전략</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 추진 프로세스 -->
+        <div class="fs-section">
+            <h2 class="section-title">분석 프로세스</h2>
+            <div class="fs-process">
+                <div class="fs-step">
+                    <div>
+                        <h5>기초자료 수집</h5>
+                        <p>구역 현황, 토지대장, 건축물대장, 감정평가 자료 수집</p>
+                    </div>
+                </div>
+                <div class="fs-step">
+                    <div>
+                        <h5>사업성 분석</h5>
+                        <p>비례율·분담금·총사업비·수익률 산정 및 시나리오 비교</p>
+                    </div>
+                </div>
+                <div class="fs-step">
+                    <div>
+                        <h5>리스크 검토</h5>
+                        <p>공사비 변동, 분양가 리스크, 금융비용 등 위험 요인 분석</p>
+                    </div>
+                </div>
+                <div class="fs-step">
+                    <div>
+                        <h5>전략 수립</h5>
+                        <p>단계별 추진 로드맵, 시공사 선정 전략, 동의율 확보 방안</p>
+                    </div>
+                </div>
+                <div class="fs-step">
+                    <div>
+                        <h5>보고서 제출</h5>
+                        <p>사업성 분석 보고서 및 추진전략 보고서 납품</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 온라인 검토 도구 안내 -->
+        <div class="fs-section">
+            <h2 class="section-title">온라인 사업성 검토 도구</h2>
+            <div style="background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius); padding:32px; display:flex; align-items:center; gap:28px;">
+                <div style="width:56px; height:56px; border-radius:14px; background:var(--brand-dark); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    <i class="fa-solid fa-chart-line" style="font-size:24px; color:var(--gold);"></i>
+                </div>
+                <div style="flex:1;">
+                    <h4 style="font-size:16px; font-weight:700; margin-bottom:6px;">간편 사업성 검토 계산기</h4>
+                    <p style="font-size:14px; color:var(--gray-600); line-height:1.7;">비례율, 분담금, 총사업비, 리스크, 수익성을 온라인에서 직접 계산해볼 수 있습니다.</p>
+                </div>
+                <a href="search.html" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; background:var(--brand-dark); color:var(--gold); border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap;">
+                    <i class="fa-solid fa-calculator"></i> 검토 도구 바로가기
+                </a>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="fs-section">
+            <div class="fs-cta">
+                <div style="position:relative;z-index:1;">
+                    <h3>사업성 분석이 필요하신가요?</h3>
+                    <p>세울엔지니어링이 정비사업의 경제적 타당성을 체계적으로 분석해드립니다</p>
+                </div>
+                <a href="contact.html" class="fs-cta-btn"><i class="fa-solid fa-paper-plane"></i> 분석 문의하기</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+</body>
+</html>

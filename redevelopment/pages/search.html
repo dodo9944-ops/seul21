@@ -3,677 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사업장 검색 — (주)세울엔지니어링</title>
-    <meta name="description" content="서울시 재개발·재건축 등 정비사업장의 현황을 검색하고 확인할 수 있습니다. (주)세울엔지니어링">
+    <title>사업성 검토 — (주)세울엔지니어링</title>
+    <meta name="description" content="정비사업 기초정보를 바탕으로 예상 비례율, 분담금, 수익성 및 주요 리스크를 검토합니다. (주)세울엔지니어링">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
-    <!--
-      ▼ 카카오맵 API 키 설정 ▼
-      1. https://developers.kakao.com 에서 앱 등록 후 JavaScript 키 발급
-      2. 아래 YOUR_APP_KEY를 발급받은 키로 교체
-      3. 키가 없으면 CSS 폴백 지도가 자동 표시됨 (50개 마커 정상 작동)
-      4. 키를 넣으면 실제 카카오맵으로 즉시 전환됨
-    -->
-    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY&libraries=clusterer"></script>
     <style>
-    /* ══════════════════════════════════════════════
-       사업장 검색 페이지 — 전체 스타일
-       ══════════════════════════════════════════════ */
+    /* ── 카드 그리드 ── */
+    .calc-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:56px; }
+    .calc-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-bottom:56px; }
+    @media(max-width:900px){ .calc-grid-3{grid-template-columns:1fr;} .calc-grid-2{grid-template-columns:1fr;} }
 
-    /* ── FILTER SECTION ── */
-    .filter-section {
-        background: var(--white);
-        border-bottom: 1px solid var(--gray-200);
-        padding: 24px 0 20px;
-        position: relative;
-        z-index: 20;
+    .calc-card {
+        background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius);
+        padding:32px 28px; text-align:center; cursor:pointer;
+        transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
-    .filter-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 12px;
-        margin-bottom: 12px;
+    .calc-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.08); transform:translateY(-3px); }
+    .calc-card .cc-icon {
+        width:52px; height:52px; border-radius:14px; background:var(--brand-dark);
+        display:flex; align-items:center; justify-content:center; margin:0 auto 18px;
     }
-    .filter-grid select {
-        width: 100%;
-        height: 42px;
-        padding: 0 36px 0 14px;
-        border: 1px solid var(--gray-200);
-        border-radius: var(--radius-sm);
-        font-size: 13.5px;
-        color: var(--gray-700);
-        background: var(--white);
-        appearance: none;
-        -webkit-appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 12px center;
-        cursor: pointer;
-        transition: border-color var(--transition);
-    }
-    .filter-grid select:focus {
-        outline: none;
-        border-color: var(--brand-navy);
-        box-shadow: 0 0 0 3px rgba(20,38,68,0.08);
-    }
-    .filter-keyword-row {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-    .filter-keyword-row input {
-        flex: 1;
-        height: 42px;
-        padding: 0 14px;
-        border: 1px solid var(--gray-200);
-        border-radius: var(--radius-sm);
-        font-size: 13.5px;
-        color: var(--gray-700);
-        transition: border-color var(--transition);
-    }
-    .filter-keyword-row input:focus {
-        outline: none;
-        border-color: var(--brand-navy);
-        box-shadow: 0 0 0 3px rgba(20,38,68,0.08);
-    }
-    .filter-keyword-row input::placeholder { color: var(--gray-400); }
-    .btn-search {
-        height: 42px;
-        padding: 0 24px;
-        background: var(--brand-navy);
-        color: var(--white);
-        border: none;
-        border-radius: var(--radius-sm);
-        font-size: 13.5px;
-        font-weight: 600;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        transition: background var(--transition);
-        white-space: nowrap;
-    }
-    .btn-search:hover { background: var(--brand-dark); }
-    .btn-reset {
-        height: 42px;
-        padding: 0 18px;
-        background: var(--white);
-        color: var(--gray-600);
-        border: 1px solid var(--gray-300);
-        border-radius: var(--radius-sm);
-        font-size: 13px;
-        font-weight: 500;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        transition: all var(--transition);
-        white-space: nowrap;
-    }
-    .btn-reset:hover { border-color: var(--gray-500); color: var(--gray-800); }
+    .calc-card .cc-icon i { font-size:22px; color:var(--gold); }
+    .calc-card h4 { font-size:16px; font-weight:700; color:var(--gray-900); margin-bottom:8px; }
+    .calc-card p { font-size:13px; color:var(--gray-500); line-height:1.7; }
+    .calc-card .cc-arrow { margin-top:14px; font-size:12px; color:var(--gold); font-weight:600; opacity:0; transition:opacity 0.2s; }
+    .calc-card:hover .cc-arrow { opacity:1; }
 
-    /* ── ACTIVE FILTER TAGS ── */
-    .filter-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 12px;
-        min-height: 0;
-    }
-    .filter-tags:empty { display: none; }
-    .filter-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        height: 30px;
-        padding: 0 10px 0 12px;
-        background: rgba(20,38,68,0.06);
-        border: 1px solid rgba(20,38,68,0.12);
-        border-radius: 20px;
-        font-size: 12px;
-        color: var(--brand-navy);
-        font-weight: 500;
-    }
-    .filter-tag .remove-tag {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: rgba(20,38,68,0.1);
-        color: var(--brand-navy);
-        font-size: 9px;
-        cursor: pointer;
-        transition: background var(--transition);
-        border: none;
-        padding: 0;
-        line-height: 1;
-    }
-    .filter-tag .remove-tag:hover { background: rgba(20,38,68,0.2); }
+    /* ── CTA 배너 ── */
+    .cta-banner-review { background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:var(--radius); padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px; position:relative; overflow:hidden; }
+    .cta-banner-review::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(195,165,105,0.08) 0%,transparent 70%); border-radius:50%; }
+    .cta-banner-review h3 { font-size:22px; font-weight:800; color:#fff; margin-bottom:8px; }
+    .cta-banner-review p { font-size:15px; color:rgba(255,255,255,0.55); }
+    .cta-banner-review .cta-btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:var(--gold); color:#0A0F1C; border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap; }
+    .cta-banner-review .cta-btn:hover { background:var(--gold-hover); }
+    @media(max-width:640px){ .cta-banner-review{flex-direction:column;padding:32px 24px;text-align:center;} }
 
-    /* ── RESULT HEADER ── */
-    .result-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 16px 0;
-        border-bottom: 1px solid var(--gray-200);
-        flex-wrap: wrap;
-        gap: 10px;
+    /* ══════════════════════════════
+       계산 모달 공통
+       ══════════════════════════════ */
+    .cm-overlay {
+        position:fixed; inset:0; z-index:9000;
+        background:rgba(10,15,28,0.6); backdrop-filter:blur(4px);
+        display:flex; align-items:center; justify-content:center;
+        opacity:0; visibility:hidden; transition:all 0.3s ease;
     }
-    .result-count {
-        font-size: 14px;
-        color: var(--gray-700);
-        font-weight: 500;
+    .cm-overlay.open { opacity:1; visibility:visible; }
+    .cm-modal {
+        background:#fff; border-radius:16px; width:640px; max-width:92vw;
+        max-height:88vh; overflow-y:auto; position:relative;
+        transform:translateY(16px) scale(0.98); transition:transform 0.3s ease;
+        box-shadow:0 24px 80px rgba(0,0,0,0.2);
     }
-    .result-count strong {
-        color: var(--brand-navy);
-        font-weight: 700;
-    }
-    .result-controls {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .sort-select {
-        height: 34px;
-        padding: 0 30px 0 10px;
-        border: 1px solid var(--gray-200);
-        border-radius: 6px;
-        font-size: 12.5px;
-        color: var(--gray-600);
-        background: var(--white);
-        appearance: none;
-        -webkit-appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 10px center;
-        cursor: pointer;
-    }
-    .view-toggle {
-        display: none;
-        gap: 4px;
-    }
-    .view-toggle button {
-        width: 34px;
-        height: 34px;
-        border: 1px solid var(--gray-200);
-        background: var(--white);
-        color: var(--gray-400);
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all var(--transition);
-    }
-    .view-toggle button.active {
-        background: var(--brand-navy);
-        color: var(--white);
-        border-color: var(--brand-navy);
-    }
+    .cm-overlay.open .cm-modal { transform:translateY(0) scale(1); }
 
-    /* ── MAIN TWO-PANEL LAYOUT ── */
-    .search-layout {
-        display: flex;
-        height: calc(100vh - 320px);
-        min-height: 520px;
+    /* 모달 헤더 */
+    .cm-header {
+        background:linear-gradient(135deg,#0A0F1C,#142644);
+        padding:28px 32px 24px; border-radius:16px 16px 0 0; position:relative;
     }
-    .search-list-panel {
-        width: 420px;
-        flex-shrink: 0;
-        overflow-y: auto;
-        border-right: 1px solid var(--gray-200);
+    .cm-header::after { content:''; position:absolute; bottom:0; left:32px; right:32px; height:1px; background:linear-gradient(90deg,transparent,rgba(195,165,105,0.2),transparent); }
+    .cm-header h3 { font-size:20px; font-weight:800; color:#fff; margin-bottom:4px; }
+    .cm-header p { font-size:13px; color:rgba(255,255,255,0.5); }
+    .cm-close {
+        position:absolute; top:18px; right:18px; width:36px; height:36px; border-radius:8px;
+        display:flex; align-items:center; justify-content:center;
+        background:rgba(255,255,255,0.06); border:none; color:rgba(255,255,255,0.5);
+        font-size:16px; cursor:pointer; transition:all 0.2s;
     }
-    .search-map-panel {
-        flex: 1;
-        position: relative;
-        background: #E8ECF0;
-        min-width: 0;
-    }
+    .cm-close:hover { background:rgba(255,255,255,0.12); color:#fff; }
 
-    /* ── LIST SCROLLBAR ── */
-    .search-list-panel::-webkit-scrollbar { width: 6px; }
-    .search-list-panel::-webkit-scrollbar-track { background: transparent; }
-    .search-list-panel::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
+    /* 모달 본문 */
+    .cm-body { padding:28px 32px; }
+    .cm-section-title { font-size:13px; font-weight:700; color:var(--gray-900); margin-bottom:14px; padding-left:10px; border-left:3px solid var(--gold); }
 
-    /* ── RESULT CARD ── */
-    .result-card {
-        display: flex;
-        padding: 18px 20px;
-        border-bottom: 1px solid var(--gray-100);
-        cursor: pointer;
-        transition: background var(--transition);
-        position: relative;
+    /* 입력 그리드 */
+    .cm-inputs { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:28px; }
+    @media(max-width:540px){ .cm-inputs{grid-template-columns:1fr;} }
+    .cm-field { position:relative; }
+    .cm-field label { display:block; font-size:12px; font-weight:600; color:var(--gray-600); margin-bottom:5px; }
+    .cm-field input {
+        width:100%; height:42px; padding:0 36px 0 14px; border:1.5px solid var(--gray-200);
+        border-radius:8px; font-size:14px; color:var(--gray-900); outline:none;
+        transition:border-color 0.2s; text-align:right; font-family:var(--font);
     }
-    .result-card:hover { background: var(--gray-50); }
-    .result-card.active { background: rgba(20,38,68,0.04); }
-    .result-card.active::before {
-        content: '';
-        position: absolute;
-        left: 0; top: 0; bottom: 0;
-        width: 3px;
-        background: var(--gold);
-    }
-    .card-type-bar {
-        width: 3px;
-        flex-shrink: 0;
-        border-radius: 2px;
-        margin-right: 14px;
-        align-self: stretch;
-    }
-    .card-type-bar.type-rebuild { background: #2563EB; }
-    .card-type-bar.type-redevelop { background: #DC2626; }
-    .card-type-bar.type-small { background: #059669; }
-    .card-type-bar.type-garo { background: #D97706; }
-    .card-body { flex: 1; min-width: 0; }
-    .card-badges {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 6px;
-        flex-wrap: wrap;
-    }
-    .badge {
-        display: inline-flex;
-        align-items: center;
-        height: 22px;
-        padding: 0 8px;
-        border-radius: 4px;
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: -0.2px;
-        white-space: nowrap;
-    }
-    .badge-rebuild { background: rgba(37,99,235,0.1); color: #2563EB; }
-    .badge-redevelop { background: rgba(220,38,38,0.1); color: #DC2626; }
-    .badge-small { background: rgba(5,150,105,0.1); color: #059669; }
-    .badge-garo { background: rgba(217,119,6,0.1); color: #D97706; }
-    .badge-stage {
-        background: var(--gray-100);
-        color: var(--gray-600);
-    }
-    .card-name {
-        font-size: 15px;
-        font-weight: 700;
-        color: var(--gray-900);
-        margin-bottom: 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .card-info {
-        font-size: 12.5px;
-        color: var(--gray-500);
-        line-height: 1.7;
-    }
-    .card-info span + span::before {
-        content: ' · ';
-        color: var(--gray-300);
-    }
-    .card-meta {
-        display: flex;
-        gap: 12px;
-        margin-top: 6px;
-        font-size: 12px;
-        color: var(--gray-400);
-    }
-    .card-meta i { margin-right: 3px; font-size: 11px; }
+    .cm-field input:focus { border-color:var(--gold); }
+    .cm-field .unit { position:absolute; right:12px; top:28px; font-size:12px; color:var(--gray-400); pointer-events:none; }
 
-    /* ── EMPTY STATE ── */
-    .empty-state {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 60px 20px;
-        text-align: center;
+    /* 결과 카드 */
+    .cm-results { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:20px; }
+    .cm-result-card {
+        background:var(--gray-50); border:1px solid var(--gray-100); border-radius:10px;
+        padding:16px; text-align:center;
     }
-    .empty-state i {
-        font-size: 48px;
-        color: var(--gray-300);
-        margin-bottom: 16px;
-    }
-    .empty-state h4 {
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--gray-600);
-        margin-bottom: 8px;
-    }
-    .empty-state p {
-        font-size: 13px;
-        color: var(--gray-400);
-    }
+    .cm-result-card .label { font-size:11px; color:var(--gray-500); margin-bottom:6px; font-weight:500; }
+    .cm-result-card .value { font-size:20px; font-weight:800; color:var(--brand-dark); }
+    .cm-result-card .value.highlight { color:var(--gold); }
+    .cm-result-card .value.negative { color:var(--red); }
 
-    /* ── KAKAO MAP & FALLBACK ── */
-    #kakao-map {
-        width: 100%;
-        height: 100%;
+    /* 해석 문구 */
+    .cm-interpret {
+        background:rgba(195,165,105,0.06); border:1px solid rgba(195,165,105,0.12);
+        border-radius:8px; padding:14px 18px; font-size:13px; color:var(--gray-600); line-height:1.7; margin-bottom:16px;
     }
+    .cm-interpret i { color:var(--gold); margin-right:6px; }
 
-    /* ── CSS FALLBACK MAP ── */
-    .fallback-map {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        background: linear-gradient(145deg, #E8ECF0, #D5DCE3);
-        overflow: hidden;
-    }
-    .fallback-map-title {
-        position: absolute;
-        top: 16px;
-        left: 16px;
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--brand-navy);
-        z-index: 5;
-        background: rgba(255,255,255,0.9);
-        padding: 8px 14px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .fallback-map-title i { color: var(--gold); margin-right: 4px; }
-    .map-marker {
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        z-index: 3;
-        border: 2px solid var(--white);
-        box-shadow: 0 1px 4px rgba(0,0,0,0.25);
-        transform: translate(-50%, -50%);
-    }
-    .map-marker.type-rebuild { background: #2563EB; }
-    .map-marker.type-redevelop { background: #DC2626; }
-    .map-marker.type-small { background: #059669; }
-    .map-marker.type-garo { background: #D97706; }
-    .map-marker:hover {
-        width: 16px;
-        height: 16px;
-        z-index: 10;
-    }
-    .map-marker.active {
-        width: 18px;
-        height: 18px;
-        z-index: 10;
-        box-shadow: 0 0 0 4px rgba(195,165,105,0.5), 0 2px 8px rgba(0,0,0,0.3);
-    }
-    .map-marker-tooltip {
-        position: absolute;
-        bottom: calc(100% + 8px);
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--brand-dark);
-        color: var(--white);
-        font-size: 11px;
-        font-weight: 500;
-        padding: 5px 10px;
-        border-radius: 6px;
-        white-space: nowrap;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.15s ease;
-        z-index: 20;
-    }
-    .map-marker-tooltip::after {
-        content: '';
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        border: 5px solid transparent;
-        border-top-color: var(--brand-dark);
-    }
-    .map-marker:hover .map-marker-tooltip,
-    .map-marker.active .map-marker-tooltip {
-        opacity: 1;
-    }
-    .map-legend {
-        position: absolute;
-        bottom: 16px;
-        left: 16px;
-        background: rgba(255,255,255,0.95);
-        padding: 12px 16px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        z-index: 5;
-        display: flex;
-        gap: 14px;
-        font-size: 11px;
-        color: var(--gray-600);
-    }
-    .map-legend-item {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-    .map-legend-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-    }
+    /* 리스크 게이지 */
+    .risk-gauge { height:12px; background:var(--gray-100); border-radius:6px; overflow:hidden; margin:8px 0 4px; }
+    .risk-gauge-fill { height:100%; border-radius:6px; transition:width 0.5s ease; }
+    .risk-low { background:#1E8C5E; }
+    .risk-mid { background:#E8A317; }
+    .risk-high { background:#D97706; }
+    .risk-critical { background:#D6423A; }
+    .risk-badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700; }
 
-    /* ── DETAIL PANEL ── */
-    .detail-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.35);
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-    }
-    .detail-overlay.open {
-        opacity: 1;
-        pointer-events: auto;
-    }
-    .detail-panel {
-        position: fixed;
-        top: 0;
-        right: -500px;
-        width: 480px;
-        max-width: 100vw;
-        height: 100vh;
-        background: var(--white);
-        z-index: 1000;
-        box-shadow: -4px 0 24px rgba(0,0,0,0.15);
-        transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
-    .detail-panel.open { right: 0; }
-    .detail-header {
-        background: linear-gradient(135deg, var(--brand-dark), var(--brand-navy));
-        padding: 28px 28px 24px;
-        flex-shrink: 0;
-    }
-    .detail-header-top {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        margin-bottom: 12px;
-    }
-    .detail-close {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        border: 1px solid rgba(255,255,255,0.2);
-        background: rgba(255,255,255,0.08);
-        color: rgba(255,255,255,0.7);
-        font-size: 16px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all var(--transition);
-        flex-shrink: 0;
-    }
-    .detail-close:hover {
-        background: rgba(255,255,255,0.15);
-        color: var(--white);
-    }
-    .detail-badges {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 10px;
-        flex-wrap: wrap;
-    }
-    .detail-badges .badge {
-        font-size: 11.5px;
-        height: 24px;
-        padding: 0 10px;
-    }
-    .detail-name {
-        font-size: 22px;
-        font-weight: 800;
-        color: var(--white);
-        margin-bottom: 6px;
-        letter-spacing: -0.3px;
-        line-height: 1.3;
-    }
-    .detail-location {
-        font-size: 13px;
-        color: rgba(255,255,255,0.5);
-    }
-    .detail-location i { margin-right: 4px; }
-    .detail-body {
-        flex: 1;
-        overflow-y: auto;
-        padding: 28px;
-    }
-    .detail-body::-webkit-scrollbar { width: 5px; }
-    .detail-body::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
-    .detail-section {
-        margin-bottom: 28px;
-    }
-    .detail-section:last-child { margin-bottom: 0; }
-    .detail-section-title {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--gray-900);
-        margin-bottom: 14px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid var(--gray-200);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-    .detail-section-title i {
-        color: var(--gold);
-        font-size: 13px;
-    }
-    .detail-info-table {
-        width: 100%;
-    }
-    .detail-info-table tr {
-        border-bottom: 1px solid var(--gray-100);
-    }
-    .detail-info-table tr:last-child { border-bottom: none; }
-    .detail-info-table th {
-        width: 100px;
-        padding: 10px 0;
-        font-size: 12.5px;
-        font-weight: 600;
-        color: var(--gray-500);
-        text-align: left;
-        vertical-align: top;
-    }
-    .detail-info-table td {
-        padding: 10px 0;
-        font-size: 13px;
-        color: var(--gray-800);
-        line-height: 1.6;
-    }
-    .detail-description {
-        font-size: 13.5px;
-        color: var(--gray-700);
-        line-height: 1.8;
-        background: var(--gray-50);
-        padding: 16px 18px;
-        border-radius: var(--radius-sm);
-        border-left: 3px solid var(--gold);
-    }
-    .detail-cta-box {
-        background: linear-gradient(135deg, rgba(20,38,68,0.04), rgba(195,165,105,0.06));
-        border: 1px solid rgba(195,165,105,0.2);
-        border-radius: var(--radius);
-        padding: 20px;
-        text-align: center;
-    }
-    .detail-cta-box p {
-        font-size: 13px;
-        color: var(--gray-600);
-        line-height: 1.7;
-        margin-bottom: 14px;
-    }
-    .detail-cta-box .btn-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        height: 40px;
-        padding: 0 24px;
-        background: var(--brand-navy);
-        color: var(--white);
-        border: none;
-        border-radius: var(--radius-sm);
-        font-size: 13.5px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background var(--transition);
-        text-decoration: none;
-    }
-    .detail-cta-box .btn-cta:hover { background: var(--brand-dark); }
+    /* 구성비 바 */
+    .comp-bar { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+    .comp-bar .comp-label { width:80px; font-size:12px; color:var(--gray-600); text-align:right; flex-shrink:0; }
+    .comp-bar .comp-track { flex:1; height:20px; background:var(--gray-100); border-radius:4px; overflow:hidden; position:relative; }
+    .comp-bar .comp-fill { height:100%; background:var(--brand-navy); border-radius:4px; transition:width 0.4s; min-width:2px; }
+    .comp-bar .comp-val { width:50px; font-size:11px; color:var(--gray-500); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-        .view-toggle { display: flex; }
-        .search-layout { height: auto; min-height: 0; flex-direction: column; }
-        .search-list-panel {
-            width: 100%;
-            border-right: none;
-            max-height: none;
-            overflow: visible;
-        }
-        .search-map-panel {
-            width: 100%;
-            height: 450px;
-            display: none;
-        }
-        .search-layout.view-map .search-list-panel { display: none; }
-        .search-layout.view-map .search-map-panel { display: block; }
+    /* 면책 문구 */
+    .cm-disclaimer { font-size:11px; color:var(--gray-400); text-align:center; padding-top:12px; border-top:1px solid var(--gray-100); }
+
+    /* 출력 버튼 */
+    .cm-print-btn {
+        display:flex; align-items:center; justify-content:center; gap:8px;
+        width:100%; height:46px; margin-top:16px;
+        background:var(--brand-dark); color:var(--gold); border:none; border-radius:8px;
+        font-size:14px; font-weight:700; cursor:pointer; font-family:var(--font);
+        transition:background 0.2s;
     }
-    @media (max-width: 768px) {
-        .filter-grid {
-            grid-template-columns: 1fr 1fr;
-        }
-        .filter-keyword-row {
-            flex-wrap: wrap;
-        }
-        .filter-keyword-row input { min-width: 0; }
-        .result-header { padding: 12px 0; }
-        .result-card { padding: 14px 16px; }
-        .card-name { font-size: 14px; }
-        .detail-panel { width: 100vw; }
-        .detail-header { padding: 24px 20px 20px; }
-        .detail-body { padding: 20px; }
-        .detail-name { font-size: 19px; }
-        .search-map-panel { height: 360px; }
+    .cm-print-btn:hover { background:#142644; }
+
+    /* ── 인쇄 전용 스타일 ── */
+    @media print {
+        body > *:not(#print-area) { display:none !important; }
+        #print-area { display:block !important; }
+        body { padding:0 !important; background:#fff !important; margin:0 !important; }
+        @page { size:A4; margin:12mm 14mm; }
     }
-    @media (max-width: 480px) {
-        .filter-grid {
-            grid-template-columns: 1fr;
-        }
-        .map-legend {
-            flex-wrap: wrap;
-            gap: 8px;
-        }
+    #print-area { display:none; }
+    #print-area .print-page {
+        max-width:700px; margin:0 auto; padding:0; font-family:'Noto Sans KR',sans-serif; color:#1A1A1A;
+    }
+    #print-area .print-header {
+        text-align:center; border-bottom:2px solid #0A0F1C; padding-bottom:12px; margin-bottom:14px;
+    }
+    #print-area .print-header h1 { font-size:18px; font-weight:800; color:#0A0F1C; margin-bottom:2px; }
+    #print-area .print-header p { font-size:10px; color:#888; }
+    #print-area .print-logo { font-size:10px; color:#888; margin-bottom:4px; }
+    #print-area .print-section { margin-bottom:12px; }
+    #print-area .print-section h3 {
+        font-size:12px; font-weight:700; color:#0A0F1C; margin-bottom:6px;
+        padding-left:8px; border-left:3px solid #C3A569;
+    }
+    #print-area table { width:100%; border-collapse:collapse; font-size:11px; }
+    #print-area table th { background:#F3F3F3; padding:4px 8px; text-align:left; font-weight:600; border:1px solid #ddd; }
+    #print-area table td { padding:4px 8px; border:1px solid #ddd; }
+    #print-area table td.val { text-align:right; font-weight:700; }
+    #print-area .print-result {
+        display:flex; gap:10px; margin-bottom:10px;
+    }
+    #print-area .print-result-card {
+        flex:1; background:#F9F9F9; border:1px solid #e5e5e5; border-radius:6px;
+        padding:8px; text-align:center;
+    }
+    #print-area .print-result-card .rl { font-size:9px; color:#888; margin-bottom:2px; }
+    #print-area .print-result-card .rv { font-size:15px; font-weight:800; color:#0A0F1C; }
+    #print-area .print-result-card .rv.gold { color:#C3A569; }
+    #print-area .print-interpret {
+        background:#FAFBFC; border:1px solid #e5e5e5; border-radius:4px;
+        padding:8px 12px; font-size:10px; color:#555; line-height:1.6;
+    }
+    #print-area .print-footer {
+        margin-top:14px; padding-top:8px; border-top:1px solid #ddd;
+        text-align:center; font-size:9px; color:#aaa;
+    }
+    #print-area .print-date { font-size:10px; color:#888; text-align:right; margin-bottom:2px; }
+
+    /* 총사업비 자동산정 행 */
+    .cost-auto-row {
+        display:flex; align-items:center; padding:10px 0;
+        border-bottom:1px solid var(--gray-100); gap:12px;
+    }
+    .cost-auto-row:last-child { border-bottom:none; }
+    .cost-auto-label { width:90px; font-size:13px; font-weight:600; color:var(--gray-800); flex-shrink:0; }
+    .cost-auto-note { flex:1; font-size:11px; color:var(--gray-400); }
+    .cost-auto-pct {
+        display:flex; align-items:center; gap:4px; flex:1;
+    }
+    .cost-auto-pct input {
+        width:56px; height:32px; text-align:center; border:1.5px solid var(--gray-200);
+        border-radius:6px; font-size:13px; font-weight:600; color:var(--brand-dark);
+        outline:none; font-family:var(--font);
+    }
+    .cost-auto-pct input:focus { border-color:var(--gold); }
+    .cost-auto-pct span { font-size:12px; color:var(--gray-400); }
+    .cost-auto-val { width:140px; text-align:right; font-size:13px; font-weight:700; color:var(--gray-800); flex-shrink:0; }
+    .cost-auto-total { background:var(--gray-50); border-radius:8px; padding:12px 14px !important; margin-top:8px; border:1px solid var(--gray-200) !important; }
+    .cost-auto-total .cost-auto-label { font-size:14px; font-weight:800; color:var(--brand-dark); }
+    @media(max-width:540px){
+        .cost-auto-row { flex-wrap:wrap; gap:6px; }
+        .cost-auto-val { width:100%; text-align:left; padding-left:90px; }
     }
     </style>
 </head>
@@ -685,122 +220,247 @@
         <div class="breadcrumb">
             <a href="../index.html">홈</a>
             <i class="fa-solid fa-chevron-right"></i>
-            <span>사업장 검색</span>
+            <span>사업성 검토</span>
         </div>
-        <h1>서울시 정비사업장 검색</h1>
-        <p>서울특별시 재개발·재건축 등 정비사업장의 현황을 검색하고 위치를 확인합니다</p>
+        <h1>정비사업 사업성 검토</h1>
+        <p>기초정보를 바탕으로 예상 비례율, 분담금, 사업비, 수익성 및 주요 리스크를 검토합니다</p>
     </div>
 </div>
 
-<!-- ── FILTER SECTION ── -->
-<div class="filter-section">
+<div class="page-body">
     <div class="inner">
-        <div class="filter-grid">
-            <select id="filter-gu">
-                <option value="">자치구 전체</option>
-            </select>
-            <select id="filter-type">
-                <option value="">사업구분 전체</option>
-                <option value="재건축">재건축</option>
-                <option value="재개발(주택정비형)">재개발(주택정비형)</option>
-                <option value="가로주택정비">가로주택정비</option>
-                <option value="소규모재건축">소규모재건축</option>
-            </select>
-            <select id="filter-stage">
-                <option value="">진행단계 전체</option>
-                <option value="정비계획수립">정비계획수립</option>
-                <option value="추진위원회승인">추진위원회승인</option>
-                <option value="조합설립인가">조합설립인가</option>
-                <option value="사업시행인가">사업시행인가</option>
-                <option value="관리처분인가">관리처분인가</option>
-                <option value="착공">착공</option>
-                <option value="준공인가">준공인가</option>
-                <option value="이주·철거">이주·철거</option>
-            </select>
-            <select id="filter-method">
-                <option value="">시행방식 전체</option>
-                <option value="조합방식">조합방식</option>
-                <option value="신탁시행자방식">신탁시행자방식</option>
-                <option value="공공">공공</option>
-            </select>
-        </div>
-        <div class="filter-keyword-row">
-            <input type="text" id="filter-keyword" placeholder="사업장명, 주소, 지번으로 검색하세요">
-            <button class="btn-search" id="btn-search"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
-            <button class="btn-reset" id="btn-reset"><i class="fa-solid fa-rotate-left"></i> 초기화</button>
-        </div>
-        <div class="filter-tags" id="filter-tags"></div>
-    </div>
-</div>
 
-<!-- ── RESULT HEADER ── -->
-<div class="inner">
-    <div class="result-header">
-        <div class="result-count">검색결과 <strong id="result-count">0</strong>건</div>
-        <div class="result-controls">
-            <select class="sort-select" id="sort-select">
-                <option value="name">사업장명순</option>
-                <option value="gu">자치구순</option>
-                <option value="stage">진행단계순</option>
-            </select>
-            <div class="view-toggle">
-                <button class="active" id="btn-view-list" title="리스트 보기"><i class="fa-solid fa-list"></i></button>
-                <button id="btn-view-map" title="지도 보기"><i class="fa-solid fa-map"></i></button>
+        <!-- 안내 -->
+        <div style="text-align:center; padding:40px 0 48px;">
+            <div style="display:inline-flex; align-items:center; justify-content:center; width:72px; height:72px; border-radius:18px; background:linear-gradient(145deg,#0E1628,#1B3156); margin-bottom:20px;">
+                <i class="fa-solid fa-chart-line" style="font-size:28px; color:#C3A569;"></i>
+            </div>
+            <h2 style="font-size:24px; font-weight:800; color:#0A0F1C; margin-bottom:12px;">정비사업 사업성 검토 서비스</h2>
+            <p style="font-size:15px; color:#666; line-height:1.8; max-width:640px; margin:0 auto;">
+                각 항목을 클릭하면 계산기가 열립니다.<br>핵심 수치를 입력하면 실시간으로 검토 결과를 확인할 수 있습니다.
+            </p>
+        </div>
+
+        <!-- 3열 카드 -->
+        <div class="calc-grid-3">
+            <div class="calc-card" data-modal="ratio">
+                <div class="cc-icon"><i class="fa-solid fa-percent"></i></div>
+                <h4>추정 비례율</h4>
+                <p>종전자산 대비 종후자산의 비율을 산정하여 사업의 경제적 타당성을 판단합니다</p>
+                <div class="cc-arrow"><i class="fa-solid fa-calculator"></i> 클릭하여 계산하기</div>
+            </div>
+            <div class="calc-card" data-modal="burden">
+                <div class="cc-icon"><i class="fa-solid fa-calculator"></i></div>
+                <h4>추정 분담금</h4>
+                <p>조합원별 예상 분담금을 추정하여 실질적인 사업 참여 비용을 검토합니다</p>
+                <div class="cc-arrow"><i class="fa-solid fa-calculator"></i> 클릭하여 계산하기</div>
+            </div>
+            <div class="calc-card" data-modal="risk">
+                <div class="cc-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h4>내 분담금 변동 시뮬레이션</h4>
+                <p>공사비 상승, 분양가 하락, 사업 지연 시 내 분담금이 얼마나 변하는지 시나리오별로 확인합니다</p>
+                <div class="cc-arrow"><i class="fa-solid fa-calculator"></i> 클릭하여 시뮬레이션</div>
             </div>
         </div>
-    </div>
-</div>
 
-<!-- ── MAIN LAYOUT ── -->
-<div class="inner" style="padding-bottom:0;">
-    <div class="search-layout" id="search-layout">
-        <!-- Left: Result cards -->
-        <div class="search-list-panel" id="list-panel">
-            <div id="result-list"></div>
-            <div class="empty-state" id="empty-state">
-                <i class="fa-solid fa-building-circle-xmark"></i>
-                <h4>검색 조건에 맞는 사업장이 없습니다</h4>
-                <p>필터 조건을 변경하거나 키워드를 확인해 주세요</p>
+        <!-- 2열 카드 -->
+        <div class="calc-grid-2">
+            <div class="calc-card" data-modal="cost">
+                <div class="cc-icon"><i class="fa-solid fa-coins"></i></div>
+                <h4>총사업비 검토</h4>
+                <p>공사비, 설계비, 감리비, 금융비용 등 총사업비 항목을 체계적으로 검토합니다</p>
+                <div class="cc-arrow"><i class="fa-solid fa-calculator"></i> 클릭하여 계산하기</div>
+            </div>
+            <div class="calc-card" data-modal="profit">
+                <div class="cc-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                <h4>수익성 분석</h4>
+                <p>일반분양 수입, 보류지 처분 등을 종합하여 수익 구조를 분석합니다</p>
+                <div class="cc-arrow"><i class="fa-solid fa-calculator"></i> 클릭하여 분석하기</div>
             </div>
         </div>
-        <!-- Right: Map -->
-        <div class="search-map-panel" id="map-panel">
-            <div id="kakao-map"></div>
+
+        <!-- CTA 배너 -->
+        <div class="cta-banner-review">
+            <div style="position:relative;z-index:1;">
+                <h3>사업성 검토가 필요하신가요?</h3>
+                <p>세울엔지니어링이 정비사업의 사업성을 체계적으로 분석해드립니다</p>
+            </div>
+            <a href="contact.html" class="cta-btn"><i class="fa-solid fa-paper-plane"></i> 검토 문의하기</a>
         </div>
     </div>
 </div>
 
-<!-- ── DETAIL PANEL ── -->
-<div class="detail-overlay" id="detail-overlay"></div>
-<div class="detail-panel" id="detail-panel">
-    <div class="detail-header">
-        <div class="detail-header-top">
-            <div class="detail-badges" id="detail-badges"></div>
-            <button class="detail-close" id="detail-close"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="detail-name" id="detail-name"></div>
-        <div class="detail-location" id="detail-location"><i class="fa-solid fa-location-dot"></i> <span></span></div>
+<!-- ══════════════════════════════════════
+     5개 계산 모달
+     ══════════════════════════════════════ -->
+
+<!-- 1) 추정 비례율 -->
+<div class="cm-overlay" id="modal-ratio">
+<div class="cm-modal">
+    <div class="cm-header">
+        <h3>추정 비례율 계산</h3>
+        <p>종전자산 대비 종후자산 비율을 산정합니다</p>
+        <button class="cm-close"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <div class="detail-body">
-        <div class="detail-section">
-            <div class="detail-section-title"><i class="fa-solid fa-clipboard-list"></i> 사업 정보</div>
-            <table class="detail-info-table" id="detail-info-table">
-                <tbody></tbody>
-            </table>
+    <div class="cm-body">
+        <div class="cm-section-title">입력 항목</div>
+        <div class="cm-inputs">
+            <div class="cm-field"><label>종전자산평가총액</label><input type="text" data-calc="ratio" data-key="prev" value="50,000,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>총수입</label><input type="text" data-calc="ratio" data-key="income" value="80,000,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>총사업비</label><input type="text" data-calc="ratio" data-key="cost" value="45,000,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>기타 공제액</label><input type="text" data-calc="ratio" data-key="deduct" value="0"><span class="unit">원</span></div>
         </div>
-        <div class="detail-section">
-            <div class="detail-section-title"><i class="fa-solid fa-file-lines"></i> 사업 개요</div>
-            <div class="detail-description" id="detail-description"></div>
-        </div>
-        <div class="detail-section">
-            <div class="detail-section-title"><i class="fa-solid fa-building"></i> 세울엔지니어링 안내</div>
-            <div class="detail-cta-box">
-                <p>본 정비사업 관련 실무 지원이 필요하시면<br>(주)세울엔지니어링에 문의하세요.</p>
-                <a href="contact.html" class="btn-cta"><i class="fa-solid fa-paper-plane"></i> 사업문의</a>
-            </div>
-        </div>
+        <div class="cm-section-title">계산 결과</div>
+        <div class="cm-results" id="res-ratio"></div>
+        <div class="cm-interpret" id="interp-ratio"></div>
+        <div class="cm-disclaimer">※ 본 계산 결과는 참고용 추정치이며, 실제 사업성은 전문 검토를 통해 확인하시기 바랍니다.</div>
+        <button class="cm-print-btn" onclick="printModal('ratio')"><i class="fa-solid fa-print"></i> 결과 출력</button>
     </div>
 </div>
+</div>
+
+<!-- 2) 추정 분담금 -->
+<div class="cm-overlay" id="modal-burden">
+<div class="cm-modal">
+    <div class="cm-header">
+        <h3>추정 분담금 계산</h3>
+        <p>조합원별 예상 분담금을 추정합니다</p>
+        <button class="cm-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cm-body">
+        <div class="cm-section-title">입력 항목</div>
+        <div class="cm-inputs">
+            <div class="cm-field"><label>종전자산평가액</label><input type="text" data-calc="burden" data-key="prev" value="500,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>분양가액(종후자산)</label><input type="text" data-calc="burden" data-key="after" value="1,200,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>비례율</label><input type="text" data-calc="burden" data-key="ratio" value="110"><span class="unit">%</span></div>
+            <div class="cm-field"><label>가산/공제 조정액</label><input type="text" data-calc="burden" data-key="adjust" value="0"><span class="unit">원</span></div>
+        </div>
+        <div class="cm-section-title">계산 결과</div>
+        <div class="cm-results" id="res-burden"></div>
+        <div class="cm-interpret" id="interp-burden"></div>
+        <div class="cm-disclaimer">※ 본 계산 결과는 참고용 추정치이며, 실제 분담금은 감정평가·분양가·사업비 변동에 따라 달라집니다.</div>
+        <button class="cm-print-btn" onclick="printModal('burden')"><i class="fa-solid fa-print"></i> 결과 출력</button>
+    </div>
+</div>
+</div>
+
+<!-- 3) 내 분담금 변동 시뮬레이션 -->
+<div class="cm-overlay" id="modal-risk">
+<div class="cm-modal" style="width:720px;">
+    <div class="cm-header">
+        <h3>내 분담금 변동 시뮬레이션</h3>
+        <p>상황이 바뀌면 내 분담금이 얼마나 달라지는지 직접 확인해보세요</p>
+        <button class="cm-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cm-body">
+        <!-- 내 기본 정보 -->
+        <div class="cm-section-title">내 기본 정보</div>
+        <div class="cm-inputs">
+            <div class="cm-field"><label>내 종전자산 평가액</label><input type="text" data-calc="risk" data-key="myAsset" value="500,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>희망 분양가(신축)</label><input type="text" data-calc="risk" data-key="newPrice" value="1,200,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>현재 추정 비례율</label><input type="text" data-calc="risk" data-key="curRatio" value="110"><span class="unit">%</span></div>
+            <div class="cm-field"><label>현재 추정 총사업비</label><input type="text" data-calc="risk" data-key="curCost" value="45,000,000,000"><span class="unit">원</span></div>
+        </div>
+
+        <!-- 기본 시나리오 결과 -->
+        <div class="cm-section-title">현재 기준 내 분담금</div>
+        <div class="cm-results" id="res-risk-base"></div>
+
+        <!-- 변동 시나리오 -->
+        <div class="cm-section-title" style="margin-top:24px;">만약 이렇게 바뀐다면?</div>
+        <div class="cm-inputs">
+            <div class="cm-field"><label>공사비 상승률</label><input type="text" data-calc="risk" data-key="conUp" value="20"><span class="unit">%</span></div>
+            <div class="cm-field"><label>분양가 하락률</label><input type="text" data-calc="risk" data-key="priceDown" value="10"><span class="unit">%</span></div>
+            <div class="cm-field"><label>사업 지연 기간</label><input type="text" data-calc="risk" data-key="delay" value="2"><span class="unit">년</span></div>
+            <div class="cm-field"><label>연간 금융이자율</label><input type="text" data-calc="risk" data-key="intRate" value="5"><span class="unit">%</span></div>
+        </div>
+
+        <!-- 시나리오 비교 결과 -->
+        <div class="cm-section-title">시나리오 비교</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:20px;" id="res-risk-scenarios"></div>
+
+        <!-- 항목별 민감도 -->
+        <div class="cm-section-title">항목별 분담금 변동 영향</div>
+        <div id="res-risk-sensitivity" style="margin-bottom:20px;"></div>
+
+        <div class="cm-interpret" id="interp-risk"></div>
+        <div class="cm-disclaimer">※ 본 시뮬레이션은 단순 추정이며, 실제 분담금은 감정평가·관리처분계획에 따라 확정됩니다.</div>
+        <button class="cm-print-btn" onclick="printModal('risk')"><i class="fa-solid fa-print"></i> 결과 출력</button>
+    </div>
+</div>
+</div>
+
+<!-- 4) 총사업비 -->
+<div class="cm-overlay" id="modal-cost">
+<div class="cm-modal" style="width:720px;">
+    <div class="cm-header">
+        <h3>총사업비 자동 산정</h3>
+        <p>연면적과 평당공사비를 입력하면 서울시 예산회계규정 기준으로 사업비를 자동 산출합니다</p>
+        <button class="cm-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cm-body">
+        <!-- 기본 입력 -->
+        <div class="cm-section-title">기본 정보 입력</div>
+        <div class="cm-inputs">
+            <div class="cm-field"><label>총 건축연면적</label><input type="text" data-calc="cost" data-key="area" value="150,000"><span class="unit">㎡</span></div>
+            <div class="cm-field"><label>평당공사비 (3.3㎡)</label><input type="text" data-calc="cost" data-key="unitCost" value="7,500,000"><span class="unit">원/평</span></div>
+        </div>
+        <div class="cm-results" id="res-cost-base" style="margin-bottom:24px;"></div>
+
+        <!-- 자동 산정 항목 (서울시 기준) -->
+        <div class="cm-section-title">서울시 예산회계규정 기준 자동 산정 <span style="font-size:11px;color:var(--gray-400);font-weight:400;margin-left:8px;">비율 직접 수정 가능</span></div>
+        <div style="margin-bottom:24px;">
+            <div class="cost-auto-row"><span class="cost-auto-label">공사비</span><span class="cost-auto-note">연면적 × 평당공사비</span><span class="cost-auto-val" id="auto-con">-</span></div>
+            <div class="cost-auto-row"><span class="cost-auto-label">설계비</span><div class="cost-auto-pct"><input type="text" data-calc="cost" data-key="rDesign" value="4.5"><span>%</span></div><span class="cost-auto-val" id="auto-design">-</span></div>
+            <div class="cost-auto-row"><span class="cost-auto-label">감리비</span><div class="cost-auto-pct"><input type="text" data-calc="cost" data-key="rSuper" value="2.8"><span>%</span></div><span class="cost-auto-val" id="auto-super">-</span></div>
+            <div class="cost-auto-row"><span class="cost-auto-label">철거비</span><div class="cost-auto-pct"><input type="text" data-calc="cost" data-key="rDemo" value="3.5"><span>%</span></div><span class="cost-auto-val" id="auto-demo">-</span></div>
+            <div class="cost-auto-row"><span class="cost-auto-label">금융비용</span><div class="cost-auto-pct"><input type="text" data-calc="cost" data-key="rFin" value="7.0"><span>%</span></div><span class="cost-auto-val" id="auto-fin">-</span></div>
+            <div class="cost-auto-row"><span class="cost-auto-label">조합운영비</span><div class="cost-auto-pct"><input type="text" data-calc="cost" data-key="rOper" value="3.5"><span>%</span></div><span class="cost-auto-val" id="auto-oper">-</span></div>
+            <div class="cost-auto-row"><span class="cost-auto-label">보상비</span><div class="cost-auto-pct"><input type="text" data-calc="cost" data-key="rComp" value="4.0"><span>%</span></div><span class="cost-auto-val" id="auto-comp">-</span></div>
+            <div class="cost-auto-row"><span class="cost-auto-label">부대비</span><div class="cost-auto-pct"><input type="text" data-calc="cost" data-key="rMisc" value="2.5"><span>%</span></div><span class="cost-auto-val" id="auto-misc">-</span></div>
+            <div class="cost-auto-row"><span class="cost-auto-label">예비비</span><div class="cost-auto-pct"><input type="text" data-calc="cost" data-key="rReserve" value="5.0"><span>%</span></div><span class="cost-auto-val" id="auto-reserve">-</span></div>
+            <div class="cost-auto-row cost-auto-total"><span class="cost-auto-label">총사업비 합계</span><span class="cost-auto-note"></span><span class="cost-auto-val" id="auto-total" style="color:var(--gold);font-size:16px;">-</span></div>
+        </div>
+
+        <!-- 구성비 그래프 -->
+        <div class="cm-section-title">항목별 구성비</div>
+        <div id="cost-bars" style="margin-bottom:20px;"></div>
+        <div class="cm-interpret" id="interp-cost"></div>
+        <div class="cm-disclaimer">※ 비율은 서울시 예산회계규정 및 정비사업 실무 기준을 참고한 기본값이며, 사업 특성에 따라 조정 가능합니다.</div>
+        <button class="cm-print-btn" onclick="printModal('cost')"><i class="fa-solid fa-print"></i> 결과 출력</button>
+    </div>
+</div>
+</div>
+
+<!-- 5) 수익성 분석 -->
+<div class="cm-overlay" id="modal-profit">
+<div class="cm-modal">
+    <div class="cm-header">
+        <h3>수익성 분석</h3>
+        <p>총수입과 사업비를 비교하여 수익 구조를 분석합니다</p>
+        <button class="cm-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cm-body">
+        <div class="cm-section-title">입력 항목</div>
+        <div class="cm-inputs">
+            <div class="cm-field"><label>총수입</label><input type="text" data-calc="profit" data-key="totalIncome" value="80,000,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>총사업비</label><input type="text" data-calc="profit" data-key="totalCost" value="45,000,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>종전자산평가총액</label><input type="text" data-calc="profit" data-key="prevTotal" value="50,000,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>일반분양수입</label><input type="text" data-calc="profit" data-key="genSales" value="55,000,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>보류지수입</label><input type="text" data-calc="profit" data-key="reserved" value="5,000,000,000"><span class="unit">원</span></div>
+            <div class="cm-field"><label>기타수입</label><input type="text" data-calc="profit" data-key="etcIncome" value="2,000,000,000"><span class="unit">원</span></div>
+        </div>
+        <div class="cm-section-title">분석 결과</div>
+        <div class="cm-results" id="res-profit"></div>
+        <div class="cm-interpret" id="interp-profit"></div>
+        <div class="cm-disclaimer">※ 수익률은 기본 참고지표이며, 실제 사업성 판단은 비례율·분담금·리스크와 함께 종합 검토해야 합니다.</div>
+        <button class="cm-print-btn" onclick="printModal('profit')"><i class="fa-solid fa-print"></i> 결과 출력</button>
+    </div>
+</div>
+</div>
+
+<!-- 인쇄 전용 영역 -->
+<div id="print-area"></div>
 
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js"></script>
@@ -809,565 +469,376 @@
 
 <script>
 /* ══════════════════════════════════════════════
-   사업장 검색 — 데이터 및 전체 기능
+   사업성 검토 — 5개 계산 모달 엔진
    ══════════════════════════════════════════════ */
+(function(){
 
-const PROJECTS = [
-    // ── 강남구 ──
-    { id:1, name:'개포주공1단지 재건축', gu:'강남구', address:'서울특별시 강남구 개포동 12', jibun:'개포동 12', type:'재건축', method:'조합방식', operation:'조합', stage:'관리처분인가', area:496000, households:5040, description:'개포동 일대 주공아파트 1단지를 재건축하여 최고 35층, 5,040세대 규모의 대단지 주거 복합단지를 조성하는 사업이다.', lat:37.4813, lng:127.0653 },
-    { id:2, name:'개포주공4단지 재건축', gu:'강남구', address:'서울특별시 강남구 개포동 170', jibun:'개포동 170', type:'재건축', method:'조합방식', operation:'조합', stage:'착공', area:198000, households:3375, description:'개포주공4단지를 철거하고 35층 규모 3,375세대 아파트를 건설하는 재건축 사업으로, 착공 단계에 있다.', lat:37.4780, lng:127.0586 },
-    { id:3, name:'대치쌍용1차 재건축', gu:'강남구', address:'서울특별시 강남구 대치동 955', jibun:'대치동 955', type:'재건축', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:34600, households:510, description:'대치동 쌍용1차 아파트를 재건축하여 510세대 규모의 신축 단지를 조성하는 사업으로 추진위원회가 구성되었다.', lat:37.4988, lng:127.0614 },
-
-    // ── 서초구 ──
-    { id:4, name:'반포주공1단지 재건축', gu:'서초구', address:'서울특별시 서초구 반포동 18-1', jibun:'반포동 18-1', type:'재건축', method:'조합방식', operation:'조합', stage:'관리처분인가', area:567000, households:5610, description:'반포주공1단지 1·2·4주구를 통합 재건축하여 최고 35층 5,610세대의 대규모 단지를 조성한다.', lat:37.5065, lng:127.0073 },
-    { id:5, name:'잠원동 신반포15차 재건축', gu:'서초구', address:'서울특별시 서초구 잠원동 69-9', jibun:'잠원동 69-9', type:'재건축', method:'조합방식', operation:'조합', stage:'사업시행인가', area:52300, households:1165, description:'신반포15차 아파트를 재건축하여 1,165세대 규모의 주거단지를 조성하는 사업이다.', lat:37.5107, lng:127.0123 },
-
-    // ── 송파구 ──
-    { id:6, name:'잠실주공5단지 재건축', gu:'송파구', address:'서울특별시 송파구 잠실동 40', jibun:'잠실동 40', type:'재건축', method:'조합방식', operation:'조합', stage:'사업시행인가', area:332000, households:6491, description:'잠실주공5단지를 재건축하여 최고 50층 6,491세대의 초대형 랜드마크 단지를 조성하는 서울 최대 규모 재건축 사업이다.', lat:37.5140, lng:127.0820 },
-    { id:7, name:'가락시영 재건축', gu:'송파구', address:'서울특별시 송파구 가락동 100', jibun:'가락동 100', type:'재건축', method:'조합방식', operation:'조합', stage:'착공', area:218000, households:4246, description:'가락시영아파트를 재건축하여 4,246세대 규모의 주거단지를 건설하는 사업으로 현재 착공 중이다.', lat:37.4967, lng:127.1185 },
-
-    // ── 강동구 ──
-    { id:8, name:'둔촌주공 재건축', gu:'강동구', address:'서울특별시 강동구 둔촌동 170', jibun:'둔촌동 170', type:'재건축', method:'조합방식', operation:'조합', stage:'준공인가', area:473000, households:12032, description:'둔촌주공 1~4단지를 통합 재건축한 12,032세대 규모의 올림픽파크포레온으로, 2024년 준공 인가를 받았다.', lat:37.5240, lng:127.1440 },
-    { id:9, name:'고덕주공 재건축', gu:'강동구', address:'서울특별시 강동구 고덕동 330', jibun:'고덕동 330', type:'재건축', method:'조합방식', operation:'조합', stage:'준공인가', area:165000, households:4066, description:'고덕주공 2·3단지를 재건축하여 그라시움으로 준공된 4,066세대 규모의 대단지 아파트이다.', lat:37.5550, lng:127.1570 },
-
-    // ── 용산구 ──
-    { id:10, name:'한남3구역 재개발', gu:'용산구', address:'서울특별시 용산구 한남동 710', jibun:'한남동 710', type:'재개발(주택정비형)', method:'신탁시행자방식', operation:'조합', stage:'사업시행인가', area:289000, households:5816, description:'한남동 일대 대규모 재개발 사업으로 최고 22층, 5,816세대를 건설하며 한남뉴타운의 핵심 사업이다.', lat:37.5340, lng:126.9980 },
-    { id:11, name:'한남2구역 재개발', gu:'용산구', address:'서울특별시 용산구 한남동 684', jibun:'한남동 684', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'관리처분인가', area:120000, households:2390, description:'한남2구역 재개발로 2,390세대 규모의 주거단지를 조성하며, 관리처분 인가를 받은 상태이다.', lat:37.5322, lng:126.9965 },
-    { id:12, name:'보광동 재개발', gu:'용산구', address:'서울특별시 용산구 보광동 310', jibun:'보광동 310', type:'재개발(주택정비형)', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:78000, households:1520, description:'보광동 일대 노후 주거지를 재개발하여 1,520세대 규모의 신규 주거단지를 조성하는 사업이다.', lat:37.5285, lng:126.9926 },
-
-    // ── 동작구 ──
-    { id:13, name:'흑석9구역 재개발', gu:'동작구', address:'서울특별시 동작구 흑석동 210', jibun:'흑석동 210', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'착공', area:103000, households:3090, description:'흑석뉴타운 9구역으로 3,090세대 규모의 주거단지를 건설 중이며, 현재 착공 단계이다.', lat:37.5070, lng:126.9630 },
-    { id:14, name:'흑석3구역 재개발', gu:'동작구', address:'서울특별시 동작구 흑석동 175', jibun:'흑석동 175', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'준공인가', area:87000, households:2189, description:'흑석뉴타운 3구역은 2,189세대 규모로 준공된 아크로리버하임 단지이다.', lat:37.5055, lng:126.9602 },
-    { id:15, name:'노량진1구역 재개발', gu:'동작구', address:'서울특별시 동작구 노량진동 100', jibun:'노량진동 100', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'조합설립인가', area:96000, households:2540, description:'노량진1구역은 노량진 일대 노후 주택가를 재개발하여 2,540세대를 건설하는 사업이다.', lat:37.5130, lng:126.9425 },
-
-    // ── 영등포구 ──
-    { id:16, name:'신길1구역 재개발', gu:'영등포구', address:'서울특별시 영등포구 신길동 405', jibun:'신길동 405', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'착공', area:124000, households:3620, description:'신길뉴타운 1구역으로 3,620세대 규모의 대단지를 조성하는 사업이며 현재 시공 중이다.', lat:37.5040, lng:126.9140 },
-    { id:17, name:'신길7구역 재개발', gu:'영등포구', address:'서울특별시 영등포구 신길동 290', jibun:'신길동 290', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'관리처분인가', area:55000, households:1470, description:'신길뉴타운 7구역은 1,470세대 규모의 재개발 사업으로, 관리처분인가를 완료하였다.', lat:37.5020, lng:126.9170 },
-
-    // ── 동대문구 ──
-    { id:18, name:'이문1구역 재개발', gu:'동대문구', address:'서울특별시 동대문구 이문동 292', jibun:'이문동 292', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'착공', area:299000, households:6790, description:'이문·휘경 뉴타운 내 최대 구역으로 6,790세대 규모의 대단지를 조성하는 사업이며, 착공 중이다.', lat:37.5960, lng:127.0580 },
-    { id:19, name:'전농3구역 재개발', gu:'동대문구', address:'서울특별시 동대문구 전농동 590', jibun:'전농동 590', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'사업시행인가', area:73000, households:1800, description:'전농·답십리 뉴타운 3구역으로 1,800세대 규모의 주거단지를 조성하는 사업이다.', lat:37.5810, lng:127.0460 },
-
-    // ── 성북구 ──
-    { id:20, name:'장위4구역 재개발', gu:'성북구', address:'서울특별시 성북구 장위동 235', jibun:'장위동 235', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'이주·철거', area:157000, households:3230, description:'장위뉴타운 4구역으로 3,230세대 규모의 주거단지 조성을 위한 이주 및 철거가 진행 중이다.', lat:37.6100, lng:127.0520 },
-    { id:21, name:'장위5구역 재개발', gu:'성북구', address:'서울특별시 성북구 장위동 198', jibun:'장위동 198', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'조합설립인가', area:120000, households:2680, description:'장위뉴타운 5구역은 2,680세대 규모의 재개발 사업으로 조합설립 인가를 받은 상태이다.', lat:37.6080, lng:127.0490 },
-    { id:22, name:'정릉4구역 재개발', gu:'성북구', address:'서울특별시 성북구 정릉동 1010', jibun:'정릉동 1010', type:'재개발(주택정비형)', method:'공공', operation:'추진위원회', stage:'정비계획수립', area:68000, households:1340, description:'정릉동 일대 노후 주거지를 공공재개발로 정비하여 1,340세대를 건설하는 정비계획이 수립 중이다.', lat:37.6050, lng:127.0100 },
-
-    // ── 은평구 ──
-    { id:23, name:'수색13구역 재개발', gu:'은평구', address:'서울특별시 은평구 수색동 225', jibun:'수색동 225', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'사업시행인가', area:88000, households:2150, description:'수색·증산 뉴타운 13구역은 2,150세대 규모의 재개발 사업으로, 사업시행인가를 받은 단계이다.', lat:37.5840, lng:126.9070 },
-    { id:24, name:'수색14구역 재개발', gu:'은평구', address:'서울특별시 은평구 수색동 210', jibun:'수색동 210', type:'재개발(주택정비형)', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:42000, households:980, description:'수색·증산 뉴타운 14구역으로 980세대 규모의 재개발을 추진 중이며, 추진위원회가 승인되었다.', lat:37.5820, lng:126.9050 },
-
-    // ── 마포구 ──
-    { id:25, name:'아현1구역 재개발', gu:'마포구', address:'서울특별시 마포구 아현동 618', jibun:'아현동 618', type:'재개발(주택정비형)', method:'조합방식', operation:'조합청산', stage:'준공인가', area:96000, households:3210, description:'아현뉴타운 1구역은 마포래미안푸르지오로 3,210세대 규모로 준공되어 조합청산 단계에 있다.', lat:37.5558, lng:126.9564 },
-    { id:26, name:'공덕1구역 재개발', gu:'마포구', address:'서울특별시 마포구 공덕동 370', jibun:'공덕동 370', type:'재개발(주택정비형)', method:'조합방식', operation:'조합청산', stage:'준공인가', area:50000, households:1690, description:'공덕1구역은 1,690세대 규모의 래미안공덕3차로 준공되어 입주가 완료된 사업이다.', lat:37.5442, lng:126.9501 },
-
-    // ── 성동구 ──
-    { id:27, name:'성수동 가로주택정비', gu:'성동구', address:'서울특별시 성동구 성수동2가 315', jibun:'성수동2가 315', type:'가로주택정비', method:'조합방식', operation:'조합', stage:'조합설립인가', area:8500, households:120, description:'성수동 일대 소규모 노후 주택을 가로주택정비사업으로 정비하여 120세대를 건설하는 사업이다.', lat:37.5470, lng:127.0560 },
-    { id:28, name:'왕십리뉴타운 재개발', gu:'성동구', address:'서울특별시 성동구 하왕십리동 968', jibun:'하왕십리동 968', type:'재개발(주택정비형)', method:'조합방식', operation:'조합청산', stage:'준공인가', area:220000, households:5420, description:'왕십리뉴타운은 텐즈힐 등 5,420세대 규모로 준공된 대규모 재개발 사업이다.', lat:37.5612, lng:127.0378 },
-
-    // ── 관악구 ──
-    { id:29, name:'봉천13구역 재개발', gu:'관악구', address:'서울특별시 관악구 봉천동 1620', jibun:'봉천동 1620', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'관리처분인가', area:76000, households:2210, description:'봉천동 일대 노후 주거지를 재개발하여 2,210세대를 건설하는 사업으로, 관리처분인가를 받았다.', lat:37.4780, lng:126.9550 },
-    { id:30, name:'신림1구역 재개발', gu:'관악구', address:'서울특별시 관악구 신림동 1645', jibun:'신림동 1645', type:'재개발(주택정비형)', method:'공공', operation:'추진위원회', stage:'정비계획수립', area:62000, households:1580, description:'신림동 일대를 공공재개발 방식으로 정비하여 1,580세대를 건설하는 사업이 정비계획 수립 중이다.', lat:37.4840, lng:126.9290 },
-
-    // ── 종로구 ──
-    { id:31, name:'돈의문뉴타운 재개발', gu:'종로구', address:'서울특별시 종로구 교남동 1', jibun:'교남동 1', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'이주·철거', area:145000, households:3580, description:'돈의문(교남) 뉴타운 재개발 사업으로, 3,580세대 규모의 주거단지 조성을 위해 이주가 진행 중이다.', lat:37.5705, lng:126.9670 },
-    { id:32, name:'창신·숭인 재개발', gu:'종로구', address:'서울특별시 종로구 창신동 300', jibun:'창신동 300', type:'재개발(주택정비형)', method:'공공', operation:'추진위원회', stage:'정비계획수립', area:185000, households:3200, description:'창신·숭인 일대를 도시재생과 연계한 공공재개발 방식으로 정비하는 사업이다.', lat:37.5750, lng:127.0110 },
-
-    // ── 중구 ──
-    { id:33, name:'회현제2구역 재개발', gu:'중구', address:'서울특별시 중구 회현동2가 55', jibun:'회현동2가 55', type:'재개발(주택정비형)', method:'신탁시행자방식', operation:'조합', stage:'사업시행인가', area:35000, households:890, description:'회현동 일대를 신탁시행자 방식으로 재개발하여 890세대 규모의 도심 주거단지를 조성하는 사업이다.', lat:37.5580, lng:126.9810 },
-
-    // ── 강북구 ──
-    { id:34, name:'미아3구역 재개발', gu:'강북구', address:'서울특별시 강북구 미아동 814', jibun:'미아동 814', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'착공', area:115000, households:2980, description:'미아뉴타운 3구역은 2,980세대 규모의 재개발 사업으로 현재 착공 중이다.', lat:37.6150, lng:127.0260 },
-    { id:35, name:'번1동 재개발', gu:'강북구', address:'서울특별시 강북구 번동 415', jibun:'번동 415', type:'재개발(주택정비형)', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:54000, households:1260, description:'번동 일대 노후 주거지를 재개발하여 1,260세대를 건설하는 사업으로 추진위원회 단계이다.', lat:37.6310, lng:127.0220 },
-
-    // ── 도봉구 ──
-    { id:36, name:'창동주공 재건축', gu:'도봉구', address:'서울특별시 도봉구 창동 720', jibun:'창동 720', type:'재건축', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:130000, households:2800, description:'창동주공아파트를 재건축하여 2,800세대 규모의 신규 주거단지를 조성하는 사업이다.', lat:37.6540, lng:127.0440 },
-
-    // ── 노원구 ──
-    { id:37, name:'상계주공5단지 재건축', gu:'노원구', address:'서울특별시 노원구 상계동 745', jibun:'상계동 745', type:'재건축', method:'조합방식', operation:'추진위원회', stage:'정비계획수립', area:210000, households:4200, description:'상계주공5단지를 재건축하여 4,200세대 규모의 대단지를 조성하는 사업으로 정비계획 수립 단계이다.', lat:37.6680, lng:127.0700 },
-
-    // ── 양천구 ──
-    { id:38, name:'신정뉴타운 재개발', gu:'양천구', address:'서울특별시 양천구 신정동 320', jibun:'신정동 320', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'조합설립인가', area:173000, households:4100, description:'신정뉴타운 일대를 재개발하여 4,100세대 규모의 주거단지를 조성하는 사업이다.', lat:37.5180, lng:126.8560 },
-
-    // ── 구로구 ──
-    { id:39, name:'가리봉동 재개발', gu:'구로구', address:'서울특별시 구로구 가리봉동 98', jibun:'가리봉동 98', type:'재개발(주택정비형)', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:89000, households:2350, description:'가리봉동 일대 노후 주거 밀집 지역을 재개발하여 2,350세대를 건설하는 사업이다.', lat:37.4840, lng:126.8870 },
-
-    // ── 금천구 ──
-    { id:40, name:'시흥5동 재개발', gu:'금천구', address:'서울특별시 금천구 시흥동 1000', jibun:'시흥동 1000', type:'재개발(주택정비형)', method:'공공', operation:'추진위원회', stage:'정비계획수립', area:47000, households:1120, description:'시흥동 일대를 공공재개발 방식으로 정비하여 1,120세대를 건설하는 정비계획이 수립 중이다.', lat:37.4570, lng:126.8970 },
-
-    // ── 서대문구 ──
-    { id:41, name:'북아현3구역 재개발', gu:'서대문구', address:'서울특별시 서대문구 북아현동 1-113', jibun:'북아현동 1-113', type:'재개발(주택정비형)', method:'조합방식', operation:'조합청산', stage:'준공인가', area:91000, households:3380, description:'북아현3구역은 e편한세상신촌으로 3,380세대 규모로 준공되어 입주가 완료되었다.', lat:37.5615, lng:126.9540 },
-    { id:42, name:'가재울뉴타운 재개발', gu:'서대문구', address:'서울특별시 서대문구 남가좌동 355', jibun:'남가좌동 355', type:'재개발(주택정비형)', method:'조합방식', operation:'조합청산', stage:'준공인가', area:250000, households:6200, description:'가재울뉴타운은 DMC파크뷰자이 등 6,200세대 규모로 준공된 대규모 뉴타운 사업이다.', lat:37.5720, lng:126.9180 },
-
-    // ── 광진구 ──
-    { id:43, name:'구의3구역 재개발', gu:'광진구', address:'서울특별시 광진구 구의동 600', jibun:'구의동 600', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'조합설립인가', area:67000, households:1650, description:'구의동 일대 노후 주거지를 재개발하여 1,650세대를 건설하는 사업으로 조합설립 인가를 받았다.', lat:37.5430, lng:127.0870 },
-
-    // ── 추가 프로젝트 (50개 달성) ──
-    { id:44, name:'신길5구역 재개발', gu:'영등포구', address:'서울특별시 영등포구 신길동 350', jibun:'신길동 350', type:'재개발(주택정비형)', method:'신탁시행자방식', operation:'조합', stage:'관리처분인가', area:72000, households:1890, description:'신길뉴타운 5구역으로 1,890세대 규모의 재개발 사업이며, 관리처분인가를 완료하였다.', lat:37.5030, lng:126.9155 },
-    { id:45, name:'장위8구역 재개발', gu:'성북구', address:'서울특별시 성북구 장위동 280', jibun:'장위동 280', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'사업시행인가', area:95000, households:2100, description:'장위뉴타운 8구역은 2,100세대 규모의 재개발 사업으로 사업시행인가를 받았다.', lat:37.6090, lng:127.0505 },
-    { id:46, name:'이문3구역 재개발', gu:'동대문구', address:'서울특별시 동대문구 이문동 310', jibun:'이문동 310', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'관리처분인가', area:132000, households:3400, description:'이문·휘경 뉴타운 3구역으로 3,400세대를 건설하는 사업이며, 관리처분인가를 받았다.', lat:37.5945, lng:127.0560 },
-    { id:47, name:'둔촌동 소규모재건축', gu:'강동구', address:'서울특별시 강동구 둔촌동 55', jibun:'둔촌동 55', type:'소규모재건축', method:'조합방식', operation:'조합', stage:'조합설립인가', area:6800, households:85, description:'둔촌동 소규모 노후 공동주택을 소규모재건축으로 정비하여 85세대를 건설하는 사업이다.', lat:37.5255, lng:127.1460 },
-    { id:48, name:'성수동 소규모재건축', gu:'성동구', address:'서울특별시 성동구 성수동1가 680', jibun:'성수동1가 680', type:'소규모재건축', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:5200, households:72, description:'성수동 소규모 공동주택을 재건축하여 72세대 규모의 신축 단지를 조성하는 사업이다.', lat:37.5485, lng:127.0545 },
-    { id:49, name:'봉천5구역 가로주택', gu:'관악구', address:'서울특별시 관악구 봉천동 890', jibun:'봉천동 890', type:'가로주택정비', method:'조합방식', operation:'조합', stage:'사업시행인가', area:7200, households:95, description:'봉천동 일대 소규모 노후 주택을 가로주택정비사업으로 정비하여 95세대를 건설한다.', lat:37.4795, lng:126.9540 },
-    { id:50, name:'미아동 가로주택', gu:'강북구', address:'서울특별시 강북구 미아동 720', jibun:'미아동 720', type:'가로주택정비', method:'조합방식', operation:'추진위원회', stage:'정비계획수립', area:4500, households:58, description:'미아동 소규모 노후 주택을 가로주택정비 방식으로 정비하여 58세대를 건설하는 사업이다.', lat:37.6165, lng:127.0280 }
-];
-
-/* ── 진행단계 순서 (정렬용) ── */
-const STAGE_ORDER = {
-    '정비계획수립': 1,
-    '추진위원회승인': 2,
-    '조합설립인가': 3,
-    '사업시행인가': 4,
-    '관리처분인가': 5,
-    '이주·철거': 6,
-    '착공': 7,
-    '준공인가': 8
-};
-
-/* ── 유틸 ── */
-function getTypeClass(type) {
-    if (type === '재건축') return 'rebuild';
-    if (type.includes('재개발')) return 'redevelop';
-    if (type === '가로주택정비') return 'garo';
-    if (type === '소규모재건축') return 'small';
-    return 'rebuild';
+/* ── 유틸 함수 ── */
+function comma(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+function uncomma(s){ return s.replace(/[^0-9.\-]/g, ''); }
+function toNum(s){ var v = parseFloat(uncomma(s)); return isNaN(v) ? 0 : v; }
+function fmtWon(v){
+    var a = Math.abs(v);
+    if(a >= 1e8) return comma(Math.round(v/1e8)) + '억원';
+    if(a >= 1e4) return comma(Math.round(v/1e4)) + '만원';
+    return comma(Math.round(v)) + '원';
 }
-function formatArea(n) {
-    if (!n) return '-';
-    return n.toLocaleString() + ' m²';
-}
-function formatHouseholds(n) {
-    if (!n) return '-';
-    return n.toLocaleString() + ' 세대';
-}
+function pct(v){ return (Math.round(v*100)/100).toFixed(2) + '%'; }
 
-/* ── DOM REFS ── */
-const filterGu = document.getElementById('filter-gu');
-const filterType = document.getElementById('filter-type');
-const filterStage = document.getElementById('filter-stage');
-const filterMethod = document.getElementById('filter-method');
-const filterKeyword = document.getElementById('filter-keyword');
-const btnSearch = document.getElementById('btn-search');
-const btnReset = document.getElementById('btn-reset');
-const filterTagsContainer = document.getElementById('filter-tags');
-const resultCountEl = document.getElementById('result-count');
-const sortSelect = document.getElementById('sort-select');
-const resultList = document.getElementById('result-list');
-const emptyState = document.getElementById('empty-state');
-const searchLayout = document.getElementById('search-layout');
-const btnViewList = document.getElementById('btn-view-list');
-const btnViewMap = document.getElementById('btn-view-map');
-
-const detailPanel = document.getElementById('detail-panel');
-const detailOverlay = document.getElementById('detail-overlay');
-const detailClose = document.getElementById('detail-close');
-const detailBadges = document.getElementById('detail-badges');
-const detailName = document.getElementById('detail-name');
-const detailLocation = document.getElementById('detail-location');
-const detailInfoTable = document.getElementById('detail-info-table').querySelector('tbody');
-const detailDescription = document.getElementById('detail-description');
-
-/* ── 자치구 옵션 자동 생성 ── */
-const guSet = [...new Set(PROJECTS.map(p => p.gu))].sort();
-guSet.forEach(g => {
-    const opt = document.createElement('option');
-    opt.value = g;
-    opt.textContent = g;
-    filterGu.appendChild(opt);
+/* ── 입력값 자동 콤마 포맷 ── */
+document.querySelectorAll('.cm-field input').forEach(function(inp){
+    inp.addEventListener('input', function(){
+        var pos = this.selectionStart;
+        var oldLen = this.value.length;
+        var raw = uncomma(this.value);
+        if(raw === '' || raw === '-'){ return; }
+        var unit = this.parentElement.querySelector('.unit').textContent;
+        if(unit === '%'){
+            /* 퍼센트 입력은 콤마 불필요 */
+        } else {
+            this.value = comma(raw);
+            var newLen = this.value.length;
+            this.setSelectionRange(pos + (newLen - oldLen), pos + (newLen - oldLen));
+        }
+    });
 });
 
-/* ── 상태 ── */
-let filteredProjects = [...PROJECTS];
-let activeProject = null;
-let kakaoMap = null;
-let kakaoMarkers = [];
-let usingKakao = false;
-
-/* ══════════════════════════════
-   필터 & 렌더
-   ══════════════════════════════ */
-function applyFilters() {
-    const gu = filterGu.value;
-    const type = filterType.value;
-    const stage = filterStage.value;
-    const method = filterMethod.value;
-    const keyword = filterKeyword.value.trim().toLowerCase();
-
-    filteredProjects = PROJECTS.filter(p => {
-        if (gu && p.gu !== gu) return false;
-        if (type && p.type !== type) return false;
-        if (stage && p.stage !== stage) return false;
-        if (method && p.method !== method) return false;
-        if (keyword) {
-            const hay = (p.name + p.address + p.jibun + p.gu).toLowerCase();
-            if (!hay.includes(keyword)) return false;
-        }
-        return true;
+/* ── 모달 열기/닫기 ── */
+document.querySelectorAll('.calc-card[data-modal]').forEach(function(card){
+    card.addEventListener('click', function(){
+        var id = 'modal-' + this.dataset.modal;
+        var ov = document.getElementById(id);
+        if(ov){ ov.classList.add('open'); document.body.style.overflow='hidden'; runCalc(this.dataset.modal); }
     });
+});
+document.querySelectorAll('.cm-close').forEach(function(btn){
+    btn.addEventListener('click', function(){ closeModal(this.closest('.cm-overlay')); });
+});
+document.querySelectorAll('.cm-overlay').forEach(function(ov){
+    ov.addEventListener('click', function(e){ if(e.target===ov) closeModal(ov); });
+});
+document.addEventListener('keydown', function(e){
+    if(e.key==='Escape'){
+        var open = document.querySelector('.cm-overlay.open');
+        if(open) closeModal(open);
+    }
+});
+function closeModal(ov){ ov.classList.remove('open'); document.body.style.overflow=''; }
 
-    applySorting();
-    renderTags();
-    renderList();
-    renderMapMarkers();
+/* ── 입력 변경 시 자동 재계산 ── */
+document.querySelectorAll('.cm-field input[data-calc]').forEach(function(inp){
+    inp.addEventListener('input', function(){ runCalc(this.dataset.calc); });
+});
+
+/* ── 계산 라우터 ── */
+function runCalc(type){
+    var inputs = document.querySelectorAll('input[data-calc="'+type+'"]');
+    var v = {};
+    inputs.forEach(function(i){ v[i.dataset.key] = toNum(i.value); });
+    switch(type){
+        case 'ratio':  calcRatio(v); break;
+        case 'burden': calcBurden(v); break;
+        case 'risk':   calcRisk(v); break;
+        case 'cost':   calcCost(v); break;
+        case 'profit': calcProfit(v); break;
+    }
 }
 
-function applySorting() {
-    const sort = sortSelect.value;
-    filteredProjects.sort((a, b) => {
-        if (sort === 'name') return a.name.localeCompare(b.name, 'ko');
-        if (sort === 'gu') return a.gu.localeCompare(b.gu, 'ko') || a.name.localeCompare(b.name, 'ko');
-        if (sort === 'stage') return (STAGE_ORDER[a.stage]||99) - (STAGE_ORDER[b.stage]||99);
-        return 0;
-    });
+/* ══ 1. 추정 비례율 ══ */
+function calcRatio(v){
+    var afterVal = v.income - v.cost - v.deduct;
+    var ratio = v.prev > 0 ? (afterVal / v.prev * 100) : 0;
+    document.getElementById('res-ratio').innerHTML =
+        '<div class="cm-result-card"><div class="label">추정 종후자산가치</div><div class="value">'+fmtWon(afterVal)+'</div></div>'+
+        '<div class="cm-result-card"><div class="label">추정 비례율</div><div class="value highlight">'+pct(ratio)+'</div></div>';
+    var msg = ratio >= 110 ? '비례율이 110% 이상으로 사업성이 양호합니다.'
+            : ratio >= 100 ? '비례율이 100~110% 구간으로 보통 수준입니다.'
+            : '비례율이 100% 미만으로, 사업성 보완 검토가 필요합니다.';
+    document.getElementById('interp-ratio').innerHTML = '<i class="fa-solid fa-lightbulb"></i> '+msg;
 }
 
-function renderTags() {
-    filterTagsContainer.innerHTML = '';
-    const filters = [
-        { key: 'gu', label: filterGu.value, el: filterGu },
-        { key: 'type', label: filterType.value, el: filterType },
-        { key: 'stage', label: filterStage.value, el: filterStage },
-        { key: 'method', label: filterMethod.value, el: filterMethod },
+/* ══ 2. 추정 분담금 ══ */
+function calcBurden(v){
+    var rights = v.prev * (v.ratio / 100);
+    var burden = v.after - rights + v.adjust;
+    document.getElementById('res-burden').innerHTML =
+        '<div class="cm-result-card"><div class="label">권리가액</div><div class="value">'+fmtWon(rights)+'</div></div>'+
+        '<div class="cm-result-card"><div class="label">추정 분담금</div><div class="value '+(burden>0?'negative':'highlight')+'">'+fmtWon(burden)+'</div></div>';
+    var msg = burden <= 0 ? '분담금이 없거나 환급이 예상됩니다. (무상 입주 가능 구간)'
+            : '추정 분담금은 향후 감정평가, 사업비, 분양가 변동에 따라 달라질 수 있습니다.';
+    document.getElementById('interp-burden').innerHTML = '<i class="fa-solid fa-lightbulb"></i> '+msg;
+}
+
+/* ══ 3. 내 분담금 변동 시뮬레이션 ══ */
+function calcRisk(v){
+    /* ── 기본 시나리오: 현재 조건 기준 분담금 ── */
+    var myRights = v.myAsset * (v.curRatio / 100);
+    var baseBurden = v.newPrice - myRights;
+
+    document.getElementById('res-risk-base').innerHTML =
+        '<div class="cm-result-card"><div class="label">내 권리가액</div><div class="value">'+fmtWon(myRights)+'</div></div>'+
+        '<div class="cm-result-card"><div class="label">현재 추정 분담금</div><div class="value highlight">'+fmtWon(baseBurden)+'</div></div>';
+
+    /* ── 변동 시나리오 계산 ── */
+    /* 공사비 상승 → 비례율 하락 효과 추정 */
+    var costIncrease = v.curCost * (v.conUp / 100);
+    /* 사업 지연 → 금융비용 추가 */
+    var delayCost = v.curCost * (v.intRate / 100) * v.delay;
+    /* 총 사업비 증가분 */
+    var totalAdded = costIncrease + delayCost;
+    /* 비례율 하락 추정: 사업비 증가분만큼 종후자산가치 감소 → 비례율 하락 */
+    var ratioDrop = v.curCost > 0 ? (totalAdded / v.curCost * v.curRatio * 0.5) : 0;
+    var worstRatio = Math.max(0, v.curRatio - ratioDrop);
+    /* 분양가 하락 적용 */
+    var worstNewPrice = v.newPrice * (1 - v.priceDown / 100);
+    /* 최악 시나리오 분담금 */
+    var worstRights = v.myAsset * (worstRatio / 100);
+    var worstBurden = worstNewPrice - worstRights;
+    /* 낙관 시나리오: 변동 없이 비례율 5%p 상승 가정 */
+    var bestRatio = v.curRatio + 5;
+    var bestRights = v.myAsset * (bestRatio / 100);
+    var bestBurden = v.newPrice - bestRights;
+    /* 분담금 변동액 */
+    var burdenChange = worstBurden - baseBurden;
+
+    /* ── 3개 시나리오 카드 ── */
+    function scenarioCard(title, burden, ratio, color, icon){
+        return '<div class="cm-result-card" style="border-left:3px solid '+color+'">'+
+            '<div class="label"><i class="'+icon+'" style="color:'+color+';margin-right:4px;"></i> '+title+'</div>'+
+            '<div class="value" style="color:'+color+';font-size:18px;">'+fmtWon(burden)+'</div>'+
+            '<div style="font-size:11px;color:#888;margin-top:4px;">비례율 '+ratio.toFixed(1)+'%</div></div>';
+    }
+    document.getElementById('res-risk-scenarios').innerHTML =
+        scenarioCard('낙관', bestBurden, bestRatio, '#1E8C5E', 'fa-solid fa-circle-up') +
+        scenarioCard('기본', baseBurden, v.curRatio, '#E8A317', 'fa-solid fa-minus-circle') +
+        scenarioCard('비관', worstBurden, worstRatio, '#D6423A', 'fa-solid fa-circle-down');
+
+    /* ── 항목별 민감도 분석 ── */
+    /* 각 요인이 단독으로 분담금에 미치는 영향 */
+    var sensCon = v.myAsset * ((v.curCost > 0 ? costIncrease / v.curCost * v.curRatio * 0.5 : 0) / 100);
+    var sensDelay = v.myAsset * ((v.curCost > 0 ? delayCost / v.curCost * v.curRatio * 0.5 : 0) / 100);
+    var sensPrice = v.newPrice * (v.priceDown / 100);
+
+    var items = [
+        { label:'공사비 '+v.conUp+'% 상승 시', val:sensCon, desc:'비례율 하락 → 권리가액 감소' },
+        { label:'사업 '+v.delay+'년 지연 시', val:sensDelay, desc:'금융비용 증가 → 비례율 하락' },
+        { label:'분양가 '+v.priceDown+'% 하락 시', val:sensPrice, desc:'신축 가치 하락 → 실질 부담 증가' }
     ];
-    const keyword = filterKeyword.value.trim();
-    if (keyword) {
-        filters.push({ key: 'keyword', label: '"' + keyword + '"', el: filterKeyword });
-    }
-    filters.forEach(f => {
-        if (!f.label) return;
-        const tag = document.createElement('span');
-        tag.className = 'filter-tag';
-        tag.innerHTML = f.label + '<button class="remove-tag" data-key="' + f.key + '"><i class="fa-solid fa-xmark"></i></button>';
-        filterTagsContainer.appendChild(tag);
+    var maxSens = Math.max.apply(null, items.map(function(x){return x.val;})) || 1;
+
+    var sensHTML = '';
+    items.forEach(function(it){
+        var w = Math.min(100, it.val / maxSens * 100);
+        var color = w > 70 ? '#D6423A' : w > 40 ? '#D97706' : '#E8A317';
+        sensHTML += '<div style="margin-bottom:12px;">'+
+            '<div style="display:flex;justify-content:space-between;margin-bottom:4px;">'+
+                '<span style="font-size:13px;font-weight:600;color:#1A1A1A;">'+it.label+'</span>'+
+                '<span style="font-size:13px;font-weight:700;color:'+color+';">+'+fmtWon(it.val)+'</span>'+
+            '</div>'+
+            '<div class="risk-gauge"><div class="risk-gauge-fill" style="width:'+w+'%;background:'+color+'"></div></div>'+
+            '<div style="font-size:11px;color:#888;">'+it.desc+'</div></div>';
     });
+    document.getElementById('res-risk-sensitivity').innerHTML = sensHTML;
+
+    /* ── 종합 해석 ── */
+    var totalImpact = sensCon + sensDelay + sensPrice;
+    var msg;
+    if(burdenChange <= 0){
+        msg = '<i class="fa-solid fa-circle-check" style="color:#1E8C5E"></i> 현재 입력 조건에서는 분담금 증가 위험이 낮습니다.';
+    } else if(burdenChange < 50000000){
+        msg = '<i class="fa-solid fa-circle-info" style="color:#E8A317"></i> 최악의 경우 분담금이 약 <strong>'+fmtWon(burdenChange)+'</strong> 증가할 수 있습니다. 사업비 관리가 중요합니다.';
+    } else if(burdenChange < 200000000){
+        msg = '<i class="fa-solid fa-triangle-exclamation" style="color:#D97706"></i> 비관 시나리오에서 분담금이 <strong>'+fmtWon(burdenChange)+'</strong> 증가합니다. 공사비·금융비용 통제가 핵심입니다.';
+    } else {
+        msg = '<i class="fa-solid fa-circle-exclamation" style="color:#D6423A"></i> 비관 시나리오에서 분담금이 <strong>'+fmtWon(burdenChange)+'</strong> 크게 증가합니다. 사업 구조 전반의 재검토를 권장합니다.';
+    }
+    document.getElementById('interp-risk').innerHTML = msg;
 }
 
-function renderList() {
-    resultCountEl.textContent = filteredProjects.length;
+/* ══ 4. 총사업비 (연면적 × 평당공사비 + 서울시 기준 자동 산정) ══ */
+function calcCost(v){
+    /* ── 공사비 산출: 연면적(㎡) ÷ 3.3058 × 평당공사비 ── */
+    var pyeong = v.area / 3.3058;
+    var conCost = pyeong * v.unitCost;
 
-    if (filteredProjects.length === 0) {
-        resultList.innerHTML = '';
-        emptyState.style.display = 'flex';
-        return;
-    }
-    emptyState.style.display = 'none';
+    /* 기본 정보 표시 */
+    document.getElementById('res-cost-base').innerHTML =
+        '<div class="cm-result-card"><div class="label">환산 평수</div><div class="value">'+comma(Math.round(pyeong))+'<span style="font-size:13px;color:#888"> 평</span></div></div>'+
+        '<div class="cm-result-card"><div class="label">공사비 (자동)</div><div class="value highlight">'+fmtWon(conCost)+'</div></div>';
 
-    let html = '';
-    filteredProjects.forEach(p => {
-        const cls = getTypeClass(p.type);
-        const isActive = activeProject && activeProject.id === p.id ? ' active' : '';
-        html += '<div class="result-card' + isActive + '" data-id="' + p.id + '">' +
-            '<div class="card-type-bar type-' + cls + '"></div>' +
-            '<div class="card-body">' +
-            '<div class="card-badges">' +
-            '<span class="badge badge-' + cls + '">' + p.type + '</span>' +
-            '<span class="badge badge-stage">' + p.stage + '</span>' +
-            '</div>' +
-            '<div class="card-name">' + p.name + '</div>' +
-            '<div class="card-info"><span>' + p.gu + '</span><span>' + p.jibun + '</span></div>' +
-            '<div class="card-info"><span>' + p.method + '</span><span>' + p.operation + '</span></div>' +
-            '<div class="card-meta">' +
-            '<span><i class="fa-solid fa-ruler-combined"></i>' + formatArea(p.area) + '</span>' +
-            '<span><i class="fa-solid fa-building"></i>' + formatHouseholds(p.households) + '</span>' +
-            '</div>' +
-            '</div></div>';
+    /* ── 서울시 예산회계규정 기준 항목별 자동 산정 ── */
+    var items = [
+        {k:'rDesign', id:'auto-design', l:'설계비'},
+        {k:'rSuper',  id:'auto-super',  l:'감리비'},
+        {k:'rDemo',   id:'auto-demo',   l:'철거비'},
+        {k:'rFin',    id:'auto-fin',    l:'금융비용'},
+        {k:'rOper',   id:'auto-oper',   l:'조합운영비'},
+        {k:'rComp',   id:'auto-comp',   l:'보상비'},
+        {k:'rMisc',   id:'auto-misc',   l:'부대비'},
+        {k:'rReserve',id:'auto-reserve',l:'예비비'}
+    ];
+
+    var total = conCost;
+    var breakdown = [{l:'공사비', v:conCost}];
+
+    document.getElementById('auto-con').textContent = fmtWon(conCost);
+
+    items.forEach(function(it){
+        var rate = v[it.k] || 0;
+        var amount = conCost * (rate / 100);
+        total += amount;
+        breakdown.push({l:it.l, v:amount});
+        var el = document.getElementById(it.id);
+        if(el) el.textContent = fmtWon(amount);
     });
-    resultList.innerHTML = html;
+
+    document.getElementById('auto-total').textContent = fmtWon(total);
+
+    /* ── 구성비 막대그래프 ── */
+    var bars = '';
+    var maxItem = {l:'', v:0};
+    breakdown.forEach(function(it){
+        var ratio = total > 0 ? (it.v / total * 100) : 0;
+        if(it.v > maxItem.v){ maxItem = {l:it.l, v:it.v}; }
+        bars += '<div class="comp-bar"><span class="comp-label">'+it.l+'</span><div class="comp-track"><div class="comp-fill" style="width:'+ratio+'%"></div></div><span class="comp-val">'+ratio.toFixed(1)+'%</span></div>';
+    });
+    document.getElementById('cost-bars').innerHTML = bars;
+
+    /* ── 해석 문구 ── */
+    var conPct = total > 0 ? (conCost/total*100).toFixed(1) : 0;
+    var finAmt = conCost * ((v.rFin||0)/100);
+    var finPct = total > 0 ? (finAmt/total*100).toFixed(1) : 0;
+    var msg = '총사업비 <strong>'+fmtWon(total)+'</strong> 중 공사비 비중 '+conPct+'%, 금융비용 비중 '+finPct+'%. ';
+    if(parseFloat(finPct) > 8) msg += '금융비용 비중이 높으므로 사업 기간 단축이 중요합니다.';
+    else msg += '항목별 비중이 적정 범위에 있습니다.';
+    document.getElementById('interp-cost').innerHTML = '<i class="fa-solid fa-lightbulb"></i> '+msg;
 }
 
-/* ══════════════════════════════
-   MAP — Kakao + CSS Fallback
-   ══════════════════════════════ */
+/* ══ 5. 수익성 분석 ══ */
+function calcProfit(v){
+    var totalRev = v.genSales + v.reserved + v.etcIncome;
+    var profit = v.totalIncome - v.totalCost;
+    var profitRate = v.totalCost > 0 ? (profit / v.totalCost * 100) : 0;
+    var bizIndex = v.prevTotal > 0 ? (profit / v.prevTotal * 100) : 0;
 
-/* Seoul bounding box for coordinate mapping */
-const SEOUL_BOUNDS = {
-    latMin: 37.42, latMax: 37.70,
-    lngMin: 126.76, lngMax: 127.18
+    document.getElementById('res-profit').innerHTML =
+        '<div class="cm-result-card"><div class="label">총수익</div><div class="value">'+fmtWon(totalRev)+'</div></div>'+
+        '<div class="cm-result-card"><div class="label">사업이익</div><div class="value '+(profit>=0?'highlight':'negative')+'">'+fmtWon(profit)+'</div></div>'+
+        '<div class="cm-result-card"><div class="label">수익률</div><div class="value '+(profitRate>=0?'highlight':'negative')+'">'+pct(profitRate)+'</div></div>'+
+        '<div class="cm-result-card"><div class="label">사업성 지표</div><div class="value">'+pct(bizIndex)+'</div></div>';
+
+    var msg = profitRate >= 20 ? '수익률이 양호한 수준입니다.'
+            : profitRate >= 10 ? '수익률이 보통 수준이며, 리스크 요인에 따라 변동 가능합니다.'
+            : profitRate >= 0 ? '수익률이 낮은 구간입니다. 사업비 절감 또는 분양가 조정 검토가 필요합니다.'
+            : '사업 손실이 예상됩니다. 사업 구조 전반의 재검토가 필요합니다.';
+    document.getElementById('interp-profit').innerHTML = '<i class="fa-solid fa-lightbulb"></i> '+msg;
+}
+
+/* ══ 인쇄 함수 ══ */
+window.printModal = function(type){
+    var titles = {ratio:'추정 비례율 계산서',burden:'추정 분담금 계산서',risk:'분담금 변동 시뮬레이션',cost:'총사업비 산정서',profit:'수익성 분석서'};
+    var now = new Date();
+    var dateStr = now.getFullYear()+'.'+String(now.getMonth()+1).padStart(2,'0')+'.'+String(now.getDate()).padStart(2,'0');
+
+    /* 입력값 수집 */
+    var inputs = document.querySelectorAll('input[data-calc="'+type+'"]');
+    var inputRows = '';
+    inputs.forEach(function(inp){
+        var labelEl = inp.parentElement.querySelector('label');
+        if(!labelEl) return; /* 비율 입력칸 등 label 없는 항목 건너뛰기 */
+        var unitEl = inp.parentElement.querySelector('.unit');
+        var unit = unitEl ? unitEl.textContent : '';
+        inputRows += '<tr><td>'+labelEl.textContent+'</td><td class="val">'+inp.value+' '+unit+'</td></tr>';
+    });
+
+    /* 결과 수집 */
+    var resultCards = '';
+    var resContainers = [];
+    if(type==='ratio') resContainers = ['res-ratio'];
+    else if(type==='burden') resContainers = ['res-burden'];
+    else if(type==='risk') resContainers = ['res-risk-base','res-risk-scenarios'];
+    else if(type==='cost') resContainers = ['res-cost-base'];
+    else if(type==='profit') resContainers = ['res-profit'];
+
+    resContainers.forEach(function(id){
+        var el = document.getElementById(id);
+        if(!el) return;
+        var cards = el.querySelectorAll('.cm-result-card');
+        cards.forEach(function(c){
+            var lb = c.querySelector('.label');
+            var vl = c.querySelector('.value');
+            if(lb && vl) resultCards += '<div class="print-result-card"><div class="rl">'+lb.textContent+'</div><div class="rv gold">'+vl.textContent+'</div></div>';
+        });
+    });
+
+    /* 해석 문구 */
+    var interpEl = document.getElementById('interp-'+type);
+    var interpText = interpEl ? interpEl.textContent : '';
+
+    /* 총사업비 항목별 테이블 */
+    var extraTable = '';
+    if(type==='cost'){
+        var autoIds = ['auto-con','auto-design','auto-super','auto-demo','auto-fin','auto-oper','auto-comp','auto-misc','auto-reserve','auto-total'];
+        var autoLabels = ['공사비','설계비','감리비','철거비','금융비용','조합운영비','보상비','부대비','예비비','총사업비 합계'];
+        extraTable = '<div class="print-section"><h3>항목별 산정 내역</h3><table>';
+        autoIds.forEach(function(id,i){
+            var el = document.getElementById(id);
+            var val = el ? el.textContent : '-';
+            var bold = i===autoIds.length-1 ? ' style="font-weight:800;background:#F3F3F3;"' : '';
+            extraTable += '<tr><td'+bold+'>'+autoLabels[i]+'</td><td class="val"'+bold+'>'+val+'</td></tr>';
+        });
+        extraTable += '</table></div>';
+    }
+
+    /* 리스크 민감도 */
+    var extraSens = '';
+    if(type==='risk'){
+        var sensEl = document.getElementById('res-risk-sensitivity');
+        if(sensEl){
+            var sensItems = sensEl.querySelectorAll('div > div:first-child');
+            extraSens = '<div class="print-section"><h3>항목별 분담금 변동 영향</h3><table>';
+            for(var i=0;i<sensItems.length;i+=1){
+                var row = sensItems[i].closest('div[style*="margin-bottom"]');
+                if(!row) continue;
+                var spans = row.querySelectorAll('span');
+                if(spans.length>=2) extraSens += '<tr><td>'+spans[0].textContent+'</td><td class="val">'+spans[1].textContent+'</td></tr>';
+            }
+            extraSens += '</table></div>';
+        }
+    }
+
+    /* HTML 조립 */
+    var html = '<div class="print-page">'+
+        '<div class="print-header">'+
+            '<div class="print-logo">(주)세울엔지니어링 — 도시정비 전문 엔지니어링</div>'+
+            '<h1>'+titles[type]+'</h1>'+
+            '<p>정비사업 사업성 검토 결과</p>'+
+        '</div>'+
+        '<div class="print-date">출력일: '+dateStr+'</div>'+
+        '<div class="print-section"><h3>입력 항목</h3><table>'+inputRows+'</table></div>'+
+        '<div class="print-section"><h3>계산 결과</h3><div class="print-result">'+resultCards+'</div></div>'+
+        extraTable+extraSens+
+        (interpText ? '<div class="print-section"><h3>분석 의견</h3><div class="print-interpret">'+interpText+'</div></div>' : '')+
+        '<div class="print-footer">'+
+            '본 자료는 (주)세울엔지니어링 사업성 검토 시스템에서 자동 생성된 참고용 추정치입니다.<br>'+
+            '실제 사업성 판단은 전문 검토를 통해 확인하시기 바랍니다.<br><br>'+
+            '(주)세울엔지니어링 | TEL 010-2230-9210 | E-mail dodo6666@naver.com | seul21.com'+
+        '</div></div>';
+
+    var area = document.getElementById('print-area');
+    area.innerHTML = html;
+    area.style.display = 'block';
+
+    setTimeout(function(){
+        window.print();
+        setTimeout(function(){ area.style.display='none'; }, 500);
+    }, 100);
 };
 
-function latLngToPercent(lat, lng) {
-    const x = ((lng - SEOUL_BOUNDS.lngMin) / (SEOUL_BOUNDS.lngMax - SEOUL_BOUNDS.lngMin)) * 100;
-    const y = (1 - (lat - SEOUL_BOUNDS.latMin) / (SEOUL_BOUNDS.latMax - SEOUL_BOUNDS.latMin)) * 100;
-    return {
-        x: Math.max(4, Math.min(96, x)),
-        y: Math.max(4, Math.min(96, y))
-    };
-}
+/* ── 초기 계산 실행 (예시 데이터) ── */
+['ratio','burden','risk','cost','profit'].forEach(runCalc);
 
-function initMap() {
-    const mapContainer = document.getElementById('kakao-map');
-    try {
-        if (typeof kakao !== 'undefined' && kakao.maps) {
-            kakaoMap = new kakao.maps.Map(mapContainer, {
-                center: new kakao.maps.LatLng(37.5665, 126.9780),
-                level: 9
-            });
-            usingKakao = true;
-            renderMapMarkers();
-            return;
-        }
-    } catch(e) { /* fallback */ }
-
-    /* CSS Fallback map */
-    usingKakao = false;
-    renderFallbackMap();
-}
-
-function renderFallbackMap() {
-    const mapContainer = document.getElementById('kakao-map');
-    let html = '<div class="fallback-map" id="fallback-map">';
-    html += '<div class="fallback-map-title"><i class="fa-solid fa-map-location-dot"></i> 서울시 정비사업 위치</div>';
-
-    /* SVG Seoul outline */
-    html += '<svg viewBox="0 0 400 300" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.10;" preserveAspectRatio="xMidYMid meet">' +
-        '<path d="M80,60 Q60,80 50,120 Q45,160 60,190 Q80,220 120,240 Q160,260 200,260 Q240,258 280,240 Q320,220 340,190 Q355,160 350,120 Q345,90 320,70 Q290,50 250,45 Q210,40 170,42 Q130,45 100,55 Z" fill="#142644" stroke="#0A0F1C" stroke-width="1.5"/>' +
-        '</svg>';
-
-    /* Place markers */
-    filteredProjects.forEach(p => {
-        const pos = latLngToPercent(p.lat, p.lng);
-        const cls = getTypeClass(p.type);
-        const isActive = activeProject && activeProject.id === p.id ? ' active' : '';
-        html += '<div class="map-marker type-' + cls + isActive + '" data-id="' + p.id + '" style="left:' + pos.x + '%;top:' + pos.y + '%;">' +
-            '<div class="map-marker-tooltip">' + p.name + '</div>' +
-            '</div>';
-    });
-
-    /* Legend */
-    html += '<div class="map-legend">' +
-        '<div class="map-legend-item"><span class="map-legend-dot" style="background:#2563EB;"></span> 재건축</div>' +
-        '<div class="map-legend-item"><span class="map-legend-dot" style="background:#DC2626;"></span> 재개발</div>' +
-        '<div class="map-legend-item"><span class="map-legend-dot" style="background:#D97706;"></span> 가로주택</div>' +
-        '<div class="map-legend-item"><span class="map-legend-dot" style="background:#059669;"></span> 소규모</div>' +
-        '</div>';
-
-    html += '</div>';
-    mapContainer.innerHTML = html;
-}
-
-function renderMapMarkers() {
-    if (usingKakao && kakaoMap) {
-        renderKakaoMarkers();
-    } else {
-        renderFallbackMap();
-    }
-}
-
-function renderKakaoMarkers() {
-    /* Clear existing markers */
-    kakaoMarkers.forEach(m => m.setMap(null));
-    kakaoMarkers = [];
-
-    const bounds = new kakao.maps.LatLngBounds();
-
-    filteredProjects.forEach(p => {
-        const position = new kakao.maps.LatLng(p.lat, p.lng);
-        bounds.extend(position);
-
-        const colorMap = { 'rebuild': '#2563EB', 'redevelop': '#DC2626', 'garo': '#D97706', 'small': '#059669' };
-        const cls = getTypeClass(p.type);
-        const color = colorMap[cls] || '#2563EB';
-
-        const markerContent = document.createElement('div');
-        markerContent.style.cssText = 'width:14px;height:14px;border-radius:50%;background:' + color + ';border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3);cursor:pointer;position:relative;';
-
-        const customOverlay = new kakao.maps.CustomOverlay({
-            position: position,
-            content: markerContent,
-            yAnchor: 0.5,
-            xAnchor: 0.5,
-            zIndex: 3
-        });
-        customOverlay.setMap(kakaoMap);
-        customOverlay.projectId = p.id;
-
-        /* Tooltip on hover */
-        const tooltip = document.createElement('div');
-        tooltip.style.cssText = 'position:absolute;bottom:22px;left:50%;transform:translateX(-50%);background:#0A0F1C;color:#fff;font-size:11px;padding:5px 10px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.15s;z-index:20;font-family:var(--font);';
-        tooltip.textContent = p.name;
-        markerContent.appendChild(tooltip);
-
-        markerContent.addEventListener('mouseenter', () => { tooltip.style.opacity = '1'; });
-        markerContent.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
-        markerContent.addEventListener('click', () => { openDetail(p.id); });
-
-        kakaoMarkers.push(customOverlay);
-    });
-
-    if (filteredProjects.length > 0) {
-        kakaoMap.setBounds(bounds);
-    }
-}
-
-function highlightKakaoMarker(projectId) {
-    kakaoMarkers.forEach(m => {
-        const el = m.a || m.Hd || m.getContent();
-        if (el && el.style) {
-            if (m.projectId === projectId) {
-                el.style.width = '20px';
-                el.style.height = '20px';
-                el.style.boxShadow = '0 0 0 4px rgba(195,165,105,0.5), 0 2px 8px rgba(0,0,0,0.3)';
-                el.style.zIndex = '10';
-            } else {
-                el.style.width = '14px';
-                el.style.height = '14px';
-                el.style.boxShadow = '0 1px 4px rgba(0,0,0,0.3)';
-                el.style.zIndex = '3';
-            }
-        }
-    });
-}
-
-/* ══════════════════════════════
-   DETAIL PANEL
-   ══════════════════════════════ */
-function openDetail(id) {
-    const p = PROJECTS.find(proj => proj.id === id);
-    if (!p) return;
-    activeProject = p;
-
-    const cls = getTypeClass(p.type);
-    detailBadges.innerHTML =
-        '<span class="badge badge-' + cls + '">' + p.type + '</span>' +
-        '<span class="badge badge-stage">' + p.stage + '</span>';
-    detailName.textContent = p.name;
-    detailLocation.querySelector('span').textContent = p.gu + ' · ' + p.jibun;
-
-    detailInfoTable.innerHTML =
-        '<tr><th>사업구분</th><td>' + p.type + '</td></tr>' +
-        '<tr><th>시행방식</th><td>' + p.method + '</td></tr>' +
-        '<tr><th>운영단계</th><td>' + p.operation + '</td></tr>' +
-        '<tr><th>진행단계</th><td>' + p.stage + '</td></tr>' +
-        '<tr><th>자치구</th><td>' + p.gu + '</td></tr>' +
-        '<tr><th>소재지</th><td>' + p.address + '</td></tr>' +
-        '<tr><th>지번</th><td>' + p.jibun + '</td></tr>' +
-        '<tr><th>정비구역 면적</th><td>' + formatArea(p.area) + '</td></tr>' +
-        '<tr><th>건설 세대수</th><td>' + formatHouseholds(p.households) + '</td></tr>' +
-        '<tr><th>좌표</th><td>' + p.lat + ', ' + p.lng + '</td></tr>';
-
-    detailDescription.textContent = p.description;
-
-    detailPanel.classList.add('open');
-    detailOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-
-    /* Highlight card */
-    document.querySelectorAll('.result-card').forEach(card => {
-        card.classList.toggle('active', parseInt(card.dataset.id) === id);
-    });
-
-    /* Highlight map marker */
-    if (usingKakao) {
-        highlightKakaoMarker(id);
-        kakaoMap.panTo(new kakao.maps.LatLng(p.lat, p.lng));
-    } else {
-        document.querySelectorAll('.map-marker').forEach(m => {
-            m.classList.toggle('active', parseInt(m.dataset.id) === id);
-        });
-    }
-}
-
-function closeDetail() {
-    detailPanel.classList.remove('open');
-    detailOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-    activeProject = null;
-    document.querySelectorAll('.result-card').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.map-marker').forEach(m => m.classList.remove('active'));
-    if (usingKakao) highlightKakaoMarker(null);
-}
-
-/* ══════════════════════════════
-   EVENT LISTENERS
-   ══════════════════════════════ */
-
-/* Filters on change */
-[filterGu, filterType, filterStage, filterMethod].forEach(el => {
-    el.addEventListener('change', applyFilters);
-});
-
-/* Keyword enter */
-filterKeyword.addEventListener('keydown', e => {
-    if (e.key === 'Enter') applyFilters();
-});
-
-/* Search button */
-btnSearch.addEventListener('click', applyFilters);
-
-/* Reset */
-btnReset.addEventListener('click', () => {
-    filterGu.value = '';
-    filterType.value = '';
-    filterStage.value = '';
-    filterMethod.value = '';
-    filterKeyword.value = '';
-    activeProject = null;
-    applyFilters();
-});
-
-/* Sort */
-sortSelect.addEventListener('change', () => {
-    applySorting();
-    renderList();
-});
-
-/* Remove filter tag */
-filterTagsContainer.addEventListener('click', e => {
-    const btn = e.target.closest('.remove-tag');
-    if (!btn) return;
-    const key = btn.dataset.key;
-    if (key === 'gu') filterGu.value = '';
-    else if (key === 'type') filterType.value = '';
-    else if (key === 'stage') filterStage.value = '';
-    else if (key === 'method') filterMethod.value = '';
-    else if (key === 'keyword') filterKeyword.value = '';
-    applyFilters();
-});
-
-/* Click result card */
-resultList.addEventListener('click', e => {
-    const card = e.target.closest('.result-card');
-    if (!card) return;
-    openDetail(parseInt(card.dataset.id));
-});
-
-/* Click fallback map marker */
-document.getElementById('map-panel').addEventListener('click', e => {
-    const marker = e.target.closest('.map-marker');
-    if (!marker) return;
-    openDetail(parseInt(marker.dataset.id));
-});
-
-/* Detail close */
-detailClose.addEventListener('click', closeDetail);
-detailOverlay.addEventListener('click', closeDetail);
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeDetail();
-});
-
-/* View toggle (mobile) */
-btnViewList.addEventListener('click', () => {
-    searchLayout.classList.remove('view-map');
-    btnViewList.classList.add('active');
-    btnViewMap.classList.remove('active');
-});
-btnViewMap.addEventListener('click', () => {
-    searchLayout.classList.add('view-map');
-    btnViewMap.classList.add('active');
-    btnViewList.classList.remove('active');
-    /* Re-render map on show */
-    setTimeout(() => { renderMapMarkers(); }, 100);
-});
-
-/* ══════════════════════════════
-   INIT
-   ══════════════════════════════ */
-applyFilters();
-
-/* Defer map init to after page load */
-window.addEventListener('load', () => {
-    setTimeout(initMap, 200);
-});
+})();
 </script>
 </body>
 </html>

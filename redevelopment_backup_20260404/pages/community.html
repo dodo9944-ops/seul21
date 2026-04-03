@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커뮤니티 — (주)세울엔지니어링</title>
+    <meta name="description" content="재개발·재건축 커뮤니티에서 질문, 정보, 후기, 분석을 공유하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .community-toolbar {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 0; flex-wrap: wrap; gap: 12px;
+        }
+        .community-toolbar .tabs { flex-wrap: wrap; }
+        .tbl .title-cell {
+            display: flex; align-items: center; gap: 8px;
+            cursor: pointer;
+        }
+        .tbl .title-cell .post-title {
+            font-weight: 600; color: var(--gray-900);
+            transition: color var(--transition);
+        }
+        .tbl .title-cell:hover .post-title { color: var(--accent); }
+        .tbl .title-cell .comment-count {
+            font-size: 12px; color: var(--accent); font-weight: 700;
+        }
+        .tbl .category-cell {
+            font-size: 12px;
+        }
+        .like-cell { color: var(--gray-500); }
+        .like-cell i { color: var(--red); margin-right: 3px; font-size: 11px; }
+        .result-info { font-size: 13px; color: var(--gray-500); margin-bottom: 16px; }
+        .result-info strong { color: var(--accent); font-weight: 700; }
+
+        .mobile-post {
+            display: none; padding: 16px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .mobile-post .mp-top {
+            display: flex; align-items: center; gap: 8px;
+            margin-bottom: 6px;
+        }
+        .mobile-post .mp-title {
+            font-size: 15px; font-weight: 600; color: var(--gray-900);
+            margin-bottom: 8px; cursor: pointer; line-height: 1.45;
+        }
+        .mobile-post .mp-title:hover { color: var(--accent); }
+        .mobile-post .mp-meta {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 12px; color: var(--gray-400);
+        }
+        .mobile-post .mp-meta i { margin-right: 2px; }
+        .mobile-list { display: none; }
+
+        @media (max-width: 768px) {
+            .tbl-wrap { display: none; }
+            .mobile-list { display: block; }
+        }
+
+        .category-badge {
+            display: inline-flex; align-items: center;
+            padding: 3px 8px; border-radius: 4px;
+            font-size: 11px; font-weight: 600;
+        }
+        .cat-질문 { background: #FFF4E5; color: var(--orange); }
+        .cat-정보 { background: var(--accent-light); color: var(--accent); }
+        .cat-후기 { background: #E6F9F0; color: var(--green); }
+        .cat-분석 { background: #F3E8FF; color: #7C3AED; }
+        .cat-칼럼 { background: var(--gray-100); color: var(--gray-600); }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a> <i class="fa-solid fa-chevron-right"></i>
+            <span>커뮤니티</span>
+        </div>
+        <h1>커뮤니티</h1>
+        <p>재개발·재건축에 관한 다양한 의견과 정보를 자유롭게 나눠보세요.</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="community-toolbar">
+            <div class="tabs" id="categoryTabs">
+                <button class="on" data-cat="전체">전체</button>
+                <button data-cat="질문">질문</button>
+                <button data-cat="정보">정보</button>
+                <button data-cat="후기">후기</button>
+                <button data-cat="분석">분석</button>
+                <button data-cat="칼럼">칼럼</button>
+            </div>
+            <button class="btn btn-accent btn-sm" id="writeBtn">
+                <i class="fa-solid fa-pen"></i> 글쓰기
+            </button>
+        </div>
+
+        <div class="result-info" id="resultInfo"></div>
+
+        <!-- Desktop Table -->
+        <div class="tbl-wrap">
+            <table class="tbl">
+                <thead>
+                    <tr>
+                        <th style="width:70px">분류</th>
+                        <th>제목</th>
+                        <th style="width:100px">작성자</th>
+                        <th style="width:100px">날짜</th>
+                        <th style="width:60px">조회</th>
+                        <th style="width:60px">좋아요</th>
+                    </tr>
+                </thead>
+                <tbody id="postTable"></tbody>
+            </table>
+        </div>
+
+        <!-- Mobile List -->
+        <div class="mobile-list" id="mobileList"></div>
+
+        <div class="pagination" id="pagination"></div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    let currentPage = 1;
+    let selectedCategory = '전체';
+    const pageSize = 10;
+
+    function goDetail(id) { location.href = 'community-detail.html?id=' + id; }
+
+    function load() {
+        const filter = {};
+        if (selectedCategory !== '전체') filter.category = selectedCategory;
+
+        const result = DataService.query('community', {
+            filter,
+            sort: 'date:desc',
+            page: currentPage,
+            pageSize
+        });
+
+        document.getElementById('resultInfo').innerHTML = `총 <strong>${result.total}</strong>건의 게시글`;
+
+        // Desktop table
+        const tbody = document.getElementById('postTable');
+        if (result.data.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:60px 20px;color:var(--gray-400)">게시글이 없습니다.</td></tr>`;
+            document.getElementById('mobileList').innerHTML = `<div class="empty-state"><i class="fa-solid fa-comments"></i><h3>게시글이 없습니다</h3></div>`;
+        } else {
+            tbody.innerHTML = result.data.map(p => `
+                <tr>
+                    <td><span class="category-badge cat-${p.category}">${p.category}</span></td>
+                    <td>
+                        <div class="title-cell" onclick="location.href='community-detail.html?id=${p.id}'">
+                            <span class="post-title">${p.title}</span>
+                            ${p.comments > 0 ? `<span class="comment-count">[${p.comments}]</span>` : ''}
+                        </div>
+                    </td>
+                    <td style="font-size:13px;color:var(--gray-600)">${p.author}</td>
+                    <td style="font-size:12px;color:var(--gray-400)">${App.timeAgo(p.date)}</td>
+                    <td style="font-size:12px;color:var(--gray-400)">${App.comma(p.views)}</td>
+                    <td class="like-cell"><i class="fa-solid fa-heart"></i> ${p.likes || 0}</td>
+                </tr>
+            `).join('');
+
+            // Mobile list
+            document.getElementById('mobileList').innerHTML = result.data.map(p => `
+                <div class="mobile-post">
+                    <div class="mp-top">
+                        <span class="category-badge cat-${p.category}">${p.category}</span>
+                    </div>
+                    <div class="mp-title" onclick="location.href='community-detail.html?id=${p.id}'">${p.title} ${p.comments > 0 ? `<span style="color:var(--accent);font-size:13px">[${p.comments}]</span>` : ''}</div>
+                    <div class="mp-meta">
+                        <span>${p.author}</span>
+                        <span><i class="fa-regular fa-clock"></i> ${App.timeAgo(p.date)}</span>
+                        <span><i class="fa-regular fa-eye"></i> ${App.comma(p.views)}</span>
+                        <span><i class="fa-solid fa-heart" style="color:var(--red)"></i> ${p.likes || 0}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        App.renderPagination('pagination', result.totalPages, result.page, pg => {
+            currentPage = pg;
+            load();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // 탭
+        document.getElementById('categoryTabs').querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.getElementById('categoryTabs').querySelectorAll('button').forEach(b => b.classList.remove('on'));
+                this.classList.add('on');
+                selectedCategory = this.dataset.cat;
+                currentPage = 1;
+                load();
+            });
+        });
+
+        // 글쓰기 버튼
+        document.getElementById('writeBtn').addEventListener('click', function() {
+            if (!DataService.isUserLoggedIn()) {
+                App.toast('로그인이 필요합니다.', 'info');
+                setTimeout(() => { location.href = 'login.html'; }, 1000);
+                return;
+            }
+            location.href = 'community-write.html';
+        });
+
+        load();
+    });
+})();
+</script>
+</body>
+</html>

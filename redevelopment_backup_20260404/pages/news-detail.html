@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뉴스 상세 — (주)세울엔지니어링</title>
+    <meta name="description" content="재개발·재건축 뉴스 상세 내용을 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .detail-wrap { max-width: 800px; margin: 0 auto; }
+        .detail-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--gray-200); }
+        .detail-header .badge { margin-bottom: 12px; }
+        .detail-header h1 {
+            font-size: 28px; font-weight: 800; color: var(--gray-900);
+            line-height: 1.4; margin-bottom: 16px; letter-spacing: -0.3px;
+        }
+        .detail-meta {
+            display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+            font-size: 13px; color: var(--gray-500);
+        }
+        .detail-meta i { font-size: 12px; margin-right: 4px; color: var(--gray-400); }
+        .detail-body { margin-bottom: 40px; }
+        .detail-body p {
+            font-size: 15px; line-height: 1.85; color: var(--gray-800);
+            margin-bottom: 20px;
+        }
+        .detail-body p:last-child { margin-bottom: 0; }
+
+        .share-bar {
+            display: flex; align-items: center; gap: 10px;
+            padding: 20px 0; border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+            margin-bottom: 48px;
+        }
+        .share-bar span { font-size: 13px; font-weight: 600; color: var(--gray-600); margin-right: 4px; }
+        .share-btn {
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--gray-200); background: var(--white);
+            color: var(--gray-600); font-size: 16px; cursor: pointer;
+            transition: all var(--transition);
+        }
+        .share-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+        .related-section h2 {
+            font-size: 20px; font-weight: 800; margin-bottom: 20px;
+            color: var(--gray-900);
+        }
+        .related-list { display: flex; flex-direction: column; gap: 0; }
+        .related-item {
+            display: flex; align-items: center; gap: 16px;
+            padding: 16px 0; border-bottom: 1px solid var(--gray-100);
+            cursor: pointer; transition: background var(--transition);
+        }
+        .related-item:hover { background: var(--gray-50); margin: 0 -12px; padding-left: 12px; padding-right: 12px; border-radius: var(--radius-sm); }
+        .related-item .badge { flex-shrink: 0; }
+        .related-item h4 {
+            flex: 1; font-size: 14px; font-weight: 600; color: var(--gray-800);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .related-item .date { font-size: 12px; color: var(--gray-400); flex-shrink: 0; }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 32px; font-size: 14px; font-weight: 600;
+            color: var(--accent);
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .detail-header h1 { font-size: 22px; }
+            .detail-meta { gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="detail-wrap" id="detailWrap">
+            <div class="loading-spinner"><div class="spinner"></div></div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    function badgeClass(cat) {
+        const map = { '정책': 'badge-info', '시장분석': 'badge-outline', '개발호재': 'badge-success', '분석': 'badge-gray' };
+        return map[cat] || 'badge-gray';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const id = App.getParam('id');
+        if (!id) { location.href = 'news.html'; return; }
+
+        const news = DataService.getById('news', id);
+        if (!news) {
+            document.getElementById('detailWrap').innerHTML = `<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>뉴스를 찾을 수 없습니다</h3><p>삭제되었거나 존재하지 않는 뉴스입니다.</p><a href="news.html" class="btn btn-outline btn-sm">목록으로 돌아가기</a></div>`;
+            return;
+        }
+
+        // 조회수 증가
+        DataService.update('news', id, { views: (news.views || 0) + 1 });
+
+        App.headTags(news.title, news.summary);
+
+        // 본문 렌더링
+        const paragraphs = news.content.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+
+        // 관련 뉴스 (같은 카테고리)
+        const allNews = DataService.getAll('news').filter(n => n.category === news.category && n.id !== news.id).slice(0, 3);
+
+        const relatedHTML = allNews.length > 0 ? `
+            <div class="related-section">
+                <h2>관련 뉴스</h2>
+                <div class="related-list">
+                    ${allNews.map(n => `
+                        <div class="related-item" onclick="location.href='news-detail.html?id=${n.id}'">
+                            <span class="badge ${badgeClass(n.category)}">${n.category}</span>
+                            <h4>${n.title}</h4>
+                            <span class="date">${n.date}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>` : '';
+
+        document.getElementById('detailWrap').innerHTML = `
+            <div class="breadcrumb">
+                <a href="../index.html">홈</a> <i class="fa-solid fa-chevron-right"></i>
+                <a href="news.html">뉴스</a> <i class="fa-solid fa-chevron-right"></i>
+                <span>${news.title}</span>
+            </div>
+            <div class="detail-header">
+                <span class="badge ${badgeClass(news.category)}">${news.category}</span>
+                <h1>${news.title}</h1>
+                <div class="detail-meta">
+                    <span><i class="fa-regular fa-user"></i>${news.author}</span>
+                    <span><i class="fa-regular fa-calendar"></i>${news.date}</span>
+                    <span><i class="fa-regular fa-eye"></i>${App.comma(news.views + 1)}</span>
+                </div>
+            </div>
+            <div class="detail-body">${paragraphs}</div>
+            <div class="share-bar">
+                <span>공유하기</span>
+                <button class="share-btn" title="링크 복사" id="copyLink"><i class="fa-solid fa-link"></i></button>
+                <button class="share-btn" title="카카오톡" id="shareKakao"><i class="fa-solid fa-comment"></i></button>
+                <button class="share-btn" title="페이스북" id="shareFb"><i class="fa-brands fa-facebook-f"></i></button>
+            </div>
+            ${relatedHTML}
+            <a href="news.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> 뉴스 목록으로</a>
+        `;
+
+        // 공유 버튼 이벤트
+        document.getElementById('copyLink').addEventListener('click', function() {
+            navigator.clipboard.writeText(location.href).then(() => App.toast('링크가 복사되었습니다.', 'success'));
+        });
+        document.getElementById('shareKakao').addEventListener('click', function() {
+            App.toast('카카오톡 공유 기능은 준비 중입니다.', 'info');
+        });
+        document.getElementById('shareFb').addEventListener('click', function() {
+            App.toast('페이스북 공유 기능은 준비 중입니다.', 'info');
+        });
+    });
+})();
+</script>
+</body>
+</html>

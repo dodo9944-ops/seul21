@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인허가·총회·계약 실무 전반 지원 — (주)세울엔지니어링</title>
+    <meta name="description" content="정비사업 인허가 대응, 총회 운영, 시공사 선정, 계약 체결 등 실무 전 과정을 체계적으로 지원합니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .ps-section { margin-bottom:56px; }
+    .ps-section:last-child { margin-bottom:0; }
+    .ps-section .section-title { margin-bottom:28px; }
+
+    .ps-intro {
+        background:linear-gradient(135deg,rgba(195,165,105,0.04),transparent 60%);
+        border-left:4px solid var(--gold); border-radius:0 var(--radius) var(--radius) 0;
+        padding:36px 40px 36px 36px;
+    }
+    .ps-intro p { font-size:16px; line-height:2; color:var(--gray-800); }
+    .ps-intro p strong { color:var(--brand-navy); }
+    @media(max-width:768px){ .ps-intro{padding:24px 20px 24px 24px;} .ps-intro p{font-size:14px;} }
+
+    .ps-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+    .ps-stat { background:var(--brand-dark); border-radius:var(--radius); padding:28px 24px; text-align:center; color:#fff; }
+    .ps-stat .num { font-size:28px; font-weight:800; color:var(--gold); margin-bottom:6px; }
+    .ps-stat .num i { font-size:22px; }
+    .ps-stat .desc { font-size:13px; color:rgba(255,255,255,0.6); }
+    @media(max-width:768px){ .ps-stats{grid-template-columns:repeat(2,1fr);} }
+
+    .ps-service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+    .ps-service-card {
+        background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius);
+        padding:32px 28px; transition:all 0.2s;
+    }
+    .ps-service-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); }
+    .ps-service-card .ps-icon {
+        width:48px; height:48px; border-radius:12px; background:var(--brand-dark);
+        display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+    }
+    .ps-service-card .ps-icon i { font-size:20px; color:var(--gold); }
+    .ps-service-card h4 { font-size:17px; font-weight:700; color:var(--gray-900); margin-bottom:10px; }
+    .ps-service-card p { font-size:14px; color:var(--gray-600); line-height:1.8; }
+    .ps-service-card ul { margin-top:12px; padding-left:18px; }
+    .ps-service-card li { font-size:13px; color:var(--gray-600); line-height:1.8; list-style:disc; }
+    @media(max-width:768px){ .ps-service-grid{grid-template-columns:1fr;} }
+
+    .ps-timeline { display:flex; gap:0; align-items:flex-start; counter-reset:pstep; }
+    .ps-step { flex:1; text-align:center; position:relative; padding:0 10px; }
+    .ps-step::before {
+        counter-increment:pstep; content:counter(pstep);
+        display:flex; align-items:center; justify-content:center;
+        width:44px; height:44px; border-radius:50%; margin:0 auto 14px;
+        background:var(--brand-dark); color:var(--gold);
+        font-size:16px; font-weight:800; position:relative; z-index:2;
+    }
+    .ps-step::after {
+        content:''; position:absolute; top:22px; left:calc(50% + 22px); right:calc(-50% + 22px);
+        height:2px; background:var(--gray-200); z-index:1;
+    }
+    .ps-step:last-child::after { display:none; }
+    .ps-step h5 { font-size:13px; font-weight:700; color:var(--gray-900); margin-bottom:6px; }
+    .ps-step p { font-size:11px; color:var(--gray-500); line-height:1.5; }
+    @media(max-width:768px){
+        .ps-timeline{flex-direction:column;gap:20px;}
+        .ps-step{text-align:left;display:flex;gap:14px;padding:0;}
+        .ps-step::before{flex-shrink:0;margin:0;}
+        .ps-step::after{display:none;}
+    }
+
+    .ps-checklist { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .ps-check-item {
+        background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius-sm);
+        padding:20px; display:flex; align-items:flex-start; gap:12px;
+    }
+    .ps-check-item i { color:var(--gold); font-size:16px; margin-top:2px; flex-shrink:0; }
+    .ps-check-item div h5 { font-size:14px; font-weight:700; color:var(--gray-900); margin-bottom:4px; }
+    .ps-check-item div p { font-size:12px; color:var(--gray-500); line-height:1.6; }
+    @media(max-width:768px){ .ps-checklist{grid-template-columns:1fr;} }
+
+    .ps-cta {
+        background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:var(--radius);
+        padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px;
+        position:relative; overflow:hidden;
+    }
+    .ps-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(195,165,105,0.08) 0%,transparent 70%); border-radius:50%; }
+    .ps-cta h3 { font-size:22px; font-weight:800; color:#fff; margin-bottom:8px; }
+    .ps-cta p { font-size:15px; color:rgba(255,255,255,0.55); }
+    .ps-cta-btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:var(--gold); color:#0A0F1C; border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap; }
+    .ps-cta-btn:hover { background:var(--gold-hover); }
+    @media(max-width:640px){ .ps-cta{flex-direction:column;padding:32px 24px;text-align:center;} }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="services.html">사업분야</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>인허가·총회·계약 실무 지원</span>
+        </div>
+        <h1>인허가·총회·계약 실무 전반 지원</h1>
+        <p>정비사업의 행정 인허가, 총회 운영, 시공사 선정 및 계약 체결까지 실무 전 과정을 수행합니다</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <div class="ps-section">
+            <div class="ps-intro">
+                <p>정비사업은 <strong>정비구역 지정부터 준공까지 수십 건의 인허가</strong>를 거쳐야 합니다. 총회 의결, 시공사 입찰, 관리처분계획 수립, 각종 계약 체결까지 — 하나의 절차라도 법적 요건을 놓치면 사업이 수개월 이상 지연됩니다. 세울엔지니어링은 <strong>행정기관 협의, 총회 기획, 계약 검토</strong>를 통해 사업이 적법하고 원활하게 진행되도록 실무 전반을 지원합니다.</p>
+            </div>
+        </div>
+
+        <div class="ps-section">
+            <h2 class="section-title">핵심 지원 분야</h2>
+            <div class="ps-stats">
+                <div class="ps-stat"><div class="num"><i class="fa-solid fa-stamp"></i></div><div class="desc">인허가 행정 대응</div></div>
+                <div class="ps-stat"><div class="num"><i class="fa-solid fa-users-rectangle"></i></div><div class="desc">총회 기획·운영</div></div>
+                <div class="ps-stat"><div class="num"><i class="fa-solid fa-helmet-safety"></i></div><div class="desc">시공사 선정 지원</div></div>
+                <div class="ps-stat"><div class="num"><i class="fa-solid fa-file-contract"></i></div><div class="desc">계약 검토·체결</div></div>
+            </div>
+        </div>
+
+        <div class="ps-section">
+            <h2 class="section-title">서비스 상세</h2>
+            <div class="ps-service-grid">
+                <div class="ps-service-card">
+                    <div class="ps-icon"><i class="fa-solid fa-stamp"></i></div>
+                    <h4>인허가 행정 대응</h4>
+                    <p>정비구역 지정, 사업시행인가, 관리처분인가 등 각 단계별 인허가 서류 작성과 행정기관 협의를 수행합니다.</p>
+                    <ul>
+                        <li>정비구역 지정·변경 신청 서류 작성</li>
+                        <li>사업시행계획서 수립 및 인가 신청</li>
+                        <li>관리처분계획 수립 및 인가 대응</li>
+                        <li>도시계획위원회·건축위원회 심의 대응</li>
+                        <li>환경영향평가·교통영향평가 협의</li>
+                    </ul>
+                </div>
+                <div class="ps-service-card">
+                    <div class="ps-icon"><i class="fa-solid fa-users-rectangle"></i></div>
+                    <h4>총회 기획 및 운영</h4>
+                    <p>조합 총회가 법적 요건을 충족하며 원활하게 진행되도록 기획부터 의결까지 전 과정을 지원합니다.</p>
+                    <ul>
+                        <li>총회 안건 작성 및 법률 검토</li>
+                        <li>소집 공고·통지 절차 이행</li>
+                        <li>의장 선출, 의사 진행, 투표 관리</li>
+                        <li>의사록 작성 및 공증 절차</li>
+                        <li>서면결의·전자투표 운영 지원</li>
+                    </ul>
+                </div>
+                <div class="ps-service-card">
+                    <div class="ps-icon"><i class="fa-solid fa-helmet-safety"></i></div>
+                    <h4>시공사 선정 지원</h4>
+                    <p>공정하고 투명한 시공사 선정을 위한 입찰 기획, 평가, 계약까지 체계적으로 지원합니다.</p>
+                    <ul>
+                        <li>입찰 공고 및 참가자격 기준 수립</li>
+                        <li>제안서 평가 기준 설계</li>
+                        <li>시공사 PT 및 현장설명회 운영</li>
+                        <li>낙찰자 결정 및 계약 협상 지원</li>
+                        <li>시공 보증·하자 보증 조건 검토</li>
+                    </ul>
+                </div>
+                <div class="ps-service-card">
+                    <div class="ps-icon"><i class="fa-solid fa-file-contract"></i></div>
+                    <h4>계약 검토 및 체결</h4>
+                    <p>정비사업 관련 각종 계약의 법적 적정성을 검토하고 조합에 유리한 조건을 협상합니다.</p>
+                    <ul>
+                        <li>시공 계약서 조항 검토 및 협상</li>
+                        <li>정비사업전문관리업 위탁 계약</li>
+                        <li>설계·감리·감정평가 용역 계약</li>
+                        <li>이주비 대여·보상 관련 협약</li>
+                        <li>분양 관련 계약 및 대행 계약</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="ps-section">
+            <h2 class="section-title">인허가 단계별 지원 흐름</h2>
+            <div class="ps-timeline">
+                <div class="ps-step"><div><h5>정비구역 지정</h5><p>기본계획·정비계획 수립, 도시계획위 심의</p></div></div>
+                <div class="ps-step"><div><h5>조합설립 인가</h5><p>동의서 징구, 창립총회, 인가 신청</p></div></div>
+                <div class="ps-step"><div><h5>사업시행 인가</h5><p>설계, 시공사 선정, 사업시행계획서</p></div></div>
+                <div class="ps-step"><div><h5>관리처분 인가</h5><p>감정평가, 분양설계, 관리처분계획</p></div></div>
+                <div class="ps-step"><div><h5>착공·분양</h5><p>이주, 철거, 착공, 일반분양</p></div></div>
+                <div class="ps-step"><div><h5>준공·입주</h5><p>준공검사, 소유권이전, 조합해산</p></div></div>
+            </div>
+        </div>
+
+        <div class="ps-section">
+            <h2 class="section-title">실무 체크리스트</h2>
+            <div class="ps-checklist">
+                <div class="ps-check-item"><i class="fa-solid fa-circle-check"></i><div><h5>법정 기한 관리</h5><p>인가 신청·공람·공고 등 법정 기한 준수 여부 점검</p></div></div>
+                <div class="ps-check-item"><i class="fa-solid fa-circle-check"></i><div><h5>서류 완결성</h5><p>인가 신청 서류 누락·오류 사전 점검 및 보완</p></div></div>
+                <div class="ps-check-item"><i class="fa-solid fa-circle-check"></i><div><h5>의결 정족수</h5><p>총회 안건별 의결 정족수 충족 여부 확인</p></div></div>
+                <div class="ps-check-item"><i class="fa-solid fa-circle-check"></i><div><h5>계약 리스크</h5><p>시공 계약 불리 조항, 위약금, 보증 조건 검토</p></div></div>
+                <div class="ps-check-item"><i class="fa-solid fa-circle-check"></i><div><h5>행정 협의</h5><p>관할 구청·서울시 관련 부서 사전 협의 이행</p></div></div>
+                <div class="ps-check-item"><i class="fa-solid fa-circle-check"></i><div><h5>법률 자문</h5><p>주요 의사결정 시 법률 검토 및 자문 연계</p></div></div>
+            </div>
+        </div>
+
+        <div class="ps-section">
+            <div class="ps-cta">
+                <div style="position:relative;z-index:1;">
+                    <h3>인허가·총회·계약 실무가 필요하신가요?</h3>
+                    <p>세울엔지니어링이 정비사업의 행정·법률 실무를 체계적으로 지원합니다</p>
+                </div>
+                <a href="contact.html" class="ps-cta-btn"><i class="fa-solid fa-paper-plane"></i> 실무 문의하기</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+</body>
+</html>

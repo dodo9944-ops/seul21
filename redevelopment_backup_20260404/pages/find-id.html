@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기 — (주)세울엔지니어링</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .auth-container { max-width: 440px; margin: 0 auto; padding: 60px 20px 80px; }
+    .auth-logo { text-align: center; margin-bottom: 8px; }
+    .auth-logo a { font-size: 28px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; }
+    .auth-subtitle { text-align: center; font-size: 14px; color: var(--gray-500); margin-bottom: 36px; }
+    .auth-box { border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 40px 32px; }
+    .auth-box h2 { font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 12px; }
+    .auth-box .desc { font-size: 14px; color: var(--gray-500); text-align: center; margin-bottom: 32px; line-height: 1.6; }
+    .result-box {
+        display: none; padding: 28px 24px; background: var(--gray-50);
+        border-radius: var(--radius-sm); text-align: center; margin-top: 24px;
+    }
+    .result-box.found { background: #E6F9F0; }
+    .result-box.not-found { background: #FDECEA; }
+    .result-box .result-icon { font-size: 40px; margin-bottom: 12px; }
+    .result-box.found .result-icon { color: var(--green); }
+    .result-box.not-found .result-icon { color: var(--red); }
+    .result-box h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .result-box .email-display {
+        font-size: 20px; font-weight: 800; color: var(--accent);
+        padding: 12px 0; letter-spacing: 1px;
+    }
+    .result-box p { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
+    .result-actions { display: flex; gap: 8px; margin-top: 20px; justify-content: center; }
+    .auth-links { display: flex; justify-content: center; gap: 16px; margin-top: 20px; font-size: 13px; }
+    .auth-links a { color: var(--gray-500); transition: color var(--transition); }
+    .auth-links a:hover { color: var(--gray-900); }
+    .auth-links .sep { color: var(--gray-300); }
+    @media (max-width: 540px) {
+        .auth-box { padding: 32px 20px; }
+    }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="auth-container">
+    <div class="auth-logo"><a href="../index.html">세울</a></div>
+    <p class="auth-subtitle">등록된 이메일 주소를 찾아보세요</p>
+
+    <div class="auth-box">
+        <h2>아이디(이메일) 찾기</h2>
+        <p class="desc">회원가입 시 등록한 이름과 전화번호를 입력하면<br>가입된 이메일 주소를 확인할 수 있습니다.</p>
+
+        <form id="findIdForm" autocomplete="off">
+            <div class="form-group">
+                <label class="form-label" for="name">이름</label>
+                <input type="text" class="form-input" id="name" placeholder="이름을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="phone">전화번호</label>
+                <input type="tel" class="form-input" id="phone" placeholder="010-0000-0000" maxlength="13">
+            </div>
+
+            <button type="submit" class="btn btn-accent btn-lg" style="width:100%;">
+                <i class="fa-solid fa-magnifying-glass"></i> 이메일 찾기
+            </button>
+        </form>
+
+        <div class="result-box" id="resultBox">
+            <div class="result-icon" id="resultIcon"></div>
+            <h3 id="resultTitle"></h3>
+            <div class="email-display" id="resultEmail"></div>
+            <p id="resultDesc"></p>
+            <div class="result-actions" id="resultActions"></div>
+        </div>
+
+        <div class="auth-links">
+            <a href="login.html">로그인</a>
+            <span class="sep">|</span>
+            <a href="reset-password.html">비밀번호 재설정</a>
+            <span class="sep">|</span>
+            <a href="register.html">회원가입</a>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    // 전화번호 자동 포맷
+    document.getElementById('phone').addEventListener('input', function() {
+        var val = this.value.replace(/[^0-9]/g, '');
+        if (val.length > 3 && val.length <= 7) {
+            val = val.slice(0, 3) + '-' + val.slice(3);
+        } else if (val.length > 7) {
+            val = val.slice(0, 3) + '-' + val.slice(3, 7) + '-' + val.slice(7, 11);
+        }
+        this.value = val;
+    });
+
+    function maskEmail(email) {
+        var parts = email.split('@');
+        var local = parts[0];
+        var domain = parts[1];
+        if (local.length <= 2) return local[0] + '***@' + domain;
+        return local[0] + '***@' + domain;
+    }
+
+    var form = document.getElementById('findIdForm');
+    var resultBox = document.getElementById('resultBox');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var name = document.getElementById('name').value.trim();
+        var phone = document.getElementById('phone').value.trim();
+
+        if (!name || !phone) {
+            App.toast('이름과 전화번호를 모두 입력해주세요.', 'error');
+            return;
+        }
+
+        var members = DataService.getAll('members');
+        var found = members.find(function(m) {
+            return m.name === name && m.phone === phone;
+        });
+
+        resultBox.style.display = 'block';
+
+        if (found) {
+            resultBox.className = 'result-box found';
+            document.getElementById('resultIcon').innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            document.getElementById('resultTitle').textContent = '이메일을 찾았습니다';
+            document.getElementById('resultEmail').textContent = maskEmail(found.email);
+            document.getElementById('resultDesc').textContent = '가입일: ' + found.joinDate;
+            document.getElementById('resultActions').innerHTML =
+                '<a href="login.html" class="btn btn-accent btn-md">로그인하기</a>' +
+                '<a href="reset-password.html" class="btn btn-outline btn-md">비밀번호 재설정</a>';
+        } else {
+            resultBox.className = 'result-box not-found';
+            document.getElementById('resultIcon').innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+            document.getElementById('resultTitle').textContent = '일치하는 계정을 찾을 수 없습니다';
+            document.getElementById('resultEmail').textContent = '';
+            document.getElementById('resultDesc').textContent = '입력하신 정보와 일치하는 회원 정보가 없습니다.\n이름과 전화번호를 다시 확인해주세요.';
+            document.getElementById('resultActions').innerHTML =
+                '<a href="register.html" class="btn btn-accent btn-md">회원가입하기</a>';
+        }
+
+        // 스크롤 이동
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</body>
+</html>

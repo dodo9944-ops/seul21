@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재건축 구역 정보 — (주)세울엔지니어링</title>
+    <meta name="description" content="전국 재건축 정비구역의 사업 현황, 프리미엄 시세, 안전진단 정보를 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .area-card { cursor: pointer; }
+    .area-card .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .area-card .card-top .district { font-size: 12px; color: var(--gray-500); }
+    .area-card .area-name { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--gray-900); }
+    .area-card .area-district { font-size: 13px; color: var(--gray-500); margin-bottom: 14px; }
+    .area-card .premium-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+    .area-card .premium-val { font-size: 22px; font-weight: 800; color: var(--gray-900); }
+    .area-card .premium-unit { font-size: 13px; color: var(--gray-500); }
+    .area-card .change { font-size: 13px; font-weight: 600; }
+    .area-card .info-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--gray-600); margin-bottom: 4px; }
+    .area-card .info-row span:last-child { font-weight: 600; color: var(--gray-900); }
+    .area-card .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .area-card .card-tags span { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--gray-100); color: var(--gray-600); }
+    .result-count { font-size: 14px; color: var(--gray-500); padding: 8px 0; }
+    .result-count strong { color: var(--gray-900); }
+    .search-wrap { position: relative; }
+    .search-wrap .form-input { padding-left: 36px; }
+    .search-wrap i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gray-400); font-size: 14px; }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>재건축</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>재건축 구역 정보</h1>
+        <p>전국 재건축 정비구역의 사업 현황과 프리미엄 시세를 확인하세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="filter-bar">
+            <select class="form-select" id="filterDistrict">
+                <option value="전체">지역 전체</option>
+                <option value="서울">서울</option>
+                <option value="경기">경기</option>
+                <option value="인천">인천</option>
+                <option value="부산">부산</option>
+            </select>
+            <select class="form-select" id="filterStage">
+                <option value="전체">사업단계 전체</option>
+                <option value="정비구역지정">정비구역지정</option>
+                <option value="조합설립인가">조합설립인가</option>
+                <option value="사업시행인가">사업시행인가</option>
+                <option value="관리처분인가">관리처분인가</option>
+                <option value="착공">착공</option>
+                <option value="입주예정">입주예정</option>
+            </select>
+            <select class="form-select" id="filterSort">
+                <option value="premium:desc">프리미엄순</option>
+                <option value="change:desc">변동순</option>
+                <option value="createdAt:desc">최신순</option>
+            </select>
+            <div class="search-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="form-input" id="searchInput" placeholder="구역명 검색">
+            </div>
+        </div>
+        <div class="result-count" id="resultCount"></div>
+        <div class="card-grid" id="areaGrid"></div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    const PAGE_SIZE = 8;
+    let currentPage = 1;
+
+    function getFilters() {
+        const district = document.getElementById('filterDistrict').value;
+        const stage = document.getElementById('filterStage').value;
+        const sort = document.getElementById('filterSort').value;
+        const search = document.getElementById('searchInput').value.trim();
+        return { district, stage, sort, search };
+    }
+
+    function render() {
+        const { district, stage, sort, search } = getFilters();
+        const filter = { type: '재건축' };
+        if (district !== '전체') filter.district = district;
+        if (stage !== '전체') filter.stage = stage;
+
+        const result = DataService.query('areas', {
+            filter,
+            sort,
+            page: currentPage,
+            pageSize: PAGE_SIZE,
+            search: search || undefined,
+            searchFields: ['name', 'district', 'dong']
+        });
+
+        document.getElementById('resultCount').innerHTML =
+            '총 <strong>' + result.total + '</strong>개 구역';
+
+        const favs = DataService.getFavorites('areas');
+        const grid = document.getElementById('areaGrid');
+
+        if (result.data.length === 0) {
+            grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fa-solid fa-search"></i><h3>검색 결과가 없습니다</h3><p>다른 조건으로 검색해보세요</p></div>';
+            document.getElementById('pagination').innerHTML = '';
+            return;
+        }
+
+        grid.innerHTML = result.data.map(a => {
+            const isFav = favs.includes(a.id);
+            const changeClass = a.changeDir === 'up' ? 'val-up' : a.changeDir === 'down' ? 'val-down' : 'val-flat';
+            const changeIcon = a.changeDir === 'up' ? '▲' : a.changeDir === 'down' ? '▼' : '-';
+            const stageStyle = 'background:var(' + App.stageColor(a.stage) + ');color:#fff;';
+            return `
+            <div class="card area-card" data-id="${a.id}">
+                <div class="card-top">
+                    <span class="district">${a.district} ${a.dong}</span>
+                    <button class="fav-btn ${isFav ? 'active' : ''}" data-fav="${a.id}" title="즐겨찾기">
+                        <i class="fa-${isFav ? 'solid' : 'regular'} fa-star"></i>
+                    </button>
+                </div>
+                <div class="area-name">${a.name}</div>
+                <span class="badge" style="${stageStyle}">${a.stage}</span>
+                <div class="premium-row" style="margin-top:14px">
+                    <span class="premium-val">${App.comma(a.premium)}</span>
+                    <span class="premium-unit">만원/3.3㎡</span>
+                    <span class="change ${changeClass}">${changeIcon} ${App.comma(Math.abs(a.change))}</span>
+                </div>
+                <div class="info-row"><span>비례율</span><span>${a.ratio ? a.ratio + '%' : '미정'}</span></div>
+                <div class="info-row"><span>총세대수</span><span>${App.comma(a.totalHouseholds)}세대</span></div>
+                <div class="card-tags">
+                    ${(a.tags || []).map(t => '<span>' + t + '</span>').join('')}
+                </div>
+            </div>`;
+        }).join('');
+
+        grid.querySelectorAll('.area-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('.fav-btn')) return;
+                location.href = 'reconstruction-detail.html?id=' + this.dataset.id;
+            });
+        });
+
+        grid.querySelectorAll('.fav-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                DataService.toggleFavorite('areas', this.dataset.fav);
+                render();
+                App.toast('즐겨찾기가 업데이트되었습니다', 'success');
+            });
+        });
+
+        App.renderPagination('pagination', result.totalPages, currentPage, pg => {
+            currentPage = pg;
+            render();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    document.getElementById('filterDistrict').addEventListener('change', () => { currentPage = 1; render(); });
+    document.getElementById('filterStage').addEventListener('change', () => { currentPage = 1; render(); });
+    document.getElementById('filterSort').addEventListener('change', () => { currentPage = 1; render(); });
+
+    let searchTimer;
+    document.getElementById('searchInput').addEventListener('input', () => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => { currentPage = 1; render(); }, 300);
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>

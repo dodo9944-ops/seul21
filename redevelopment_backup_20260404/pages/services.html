@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사업분야 — (주)세울엔지니어링</title>
+    <meta name="description" content="(주)세울엔지니어링의 정비사업 관리 업무 영역 — 조합설립, 인허가, 사업성 검토, 총회 운영, 관리처분, PM 등 전 과정을 체계적으로 지원합니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    /* ── 사업분야 개요 ── */
+    .services-intro {
+        font-size: 15.5px; line-height: 1.9; color: var(--gray-700);
+        max-width: 780px;
+    }
+
+    /* ── 핵심 업무 영역 ── */
+    .service-list {
+        display: flex; flex-direction: column; gap: 20px;
+    }
+    .service-card {
+        display: flex; align-items: flex-start; gap: 24px;
+        background: var(--white); border: 1px solid var(--gray-200);
+        border-radius: var(--radius); padding: 28px 28px;
+        transition: all var(--transition);
+    }
+    .service-card:hover {
+        border-color: var(--gold);
+        box-shadow: var(--shadow-hover);
+    }
+    .service-icon {
+        flex-shrink: 0; width: 56px; height: 56px; border-radius: 14px;
+        background: var(--brand-navy);
+        display: flex; align-items: center; justify-content: center;
+    }
+    .service-icon i {
+        font-size: 24px; color: var(--gold);
+    }
+    .service-body {
+        flex: 1; min-width: 0;
+    }
+    .service-body h4 {
+        font-size: 16.5px; font-weight: 700; color: var(--gray-900);
+        margin-bottom: 8px;
+    }
+    .service-body p {
+        font-size: 14px; color: var(--gray-600); line-height: 1.75;
+    }
+    @media (max-width: 768px) {
+        .service-card {
+            flex-direction: column; gap: 16px; padding: 24px 20px;
+        }
+    }
+
+    /* ── 안내 문구 ── */
+    .services-disclaimer {
+        background: var(--gray-50, #F8F9FA);
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        padding: 24px 28px;
+        font-size: 13px; line-height: 1.8; color: var(--gray-500);
+    }
+
+    /* ── 섹션 간격 ── */
+    .services-section { margin-bottom: 56px; }
+    .services-section:last-child { margin-bottom: 0; }
+    .services-section .section-title { margin-bottom: 28px; }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>사업분야</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>사업분야</h1>
+        <p>정비사업의 시작부터 완료까지, 조합과 함께하는 체계적 실무 지원</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <!-- 사업분야 개요 -->
+        <div class="services-section">
+            <h2 class="section-title">사업분야 개요</h2>
+            <p class="services-intro">세울엔지니어링은 정비사업의 시작부터 완료까지, 조합과 토지등소유자가 마주하는 모든 실무 과정을 체계적으로 지원합니다. 각 사업장의 특성과 단계에 맞는 맞춤형 서비스를 제공합니다.</p>
+        </div>
+
+        <!-- 핵심 업무 영역 -->
+        <div class="services-section">
+            <h2 class="section-title">핵심 업무 영역</h2>
+            <div class="service-list">
+
+                <!-- 1. 조합설립 및 추진지원 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-people-group"></i>
+                    </div>
+                    <div class="service-body">
+                        <h4>조합설립 및 추진지원</h4>
+                        <p>조합 설립을 위한 동의서 징구 전략 수립, 창립총회 준비, 조합설립인가 신청 서류 작성 및 행정기관 대응까지 초기 추진 단계의 전 실무를 지원합니다.</p>
+                    </div>
+                </div>
+
+                <!-- 2. 동의서 징구 및 이해관계 조율 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <div class="service-body">
+                        <h4>동의서 징구 및 이해관계 조율</h4>
+                        <p>토지등소유자의 사업 참여 동의를 확보하기 위한 설명회 운영, 개별 면담, 민원 대응, 이해관계 조율 업무를 체계적으로 수행합니다.</p>
+                    </div>
+                </div>
+
+                <!-- 3. 사업성 검토 및 추진전략 수립 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <div class="service-body">
+                        <h4>사업성 검토 및 추진전략 수립</h4>
+                        <p>토지·건물 현황 분석, 개발 규모 산정, 사업비 추정, 비례율 시뮬레이션 등을 통해 사업의 타당성을 종합적으로 검토하고 최적의 추진 방향을 제안합니다. 구체적 사안은 별도 검토가 필요합니다.</p>
+                    </div>
+                </div>
+
+                <!-- 4. 인허가 대응 및 행정지원 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-stamp"></i>
+                    </div>
+                    <div class="service-body">
+                        <h4>인허가 대응 및 행정지원</h4>
+                        <p>정비구역 지정, 사업시행인가, 관리처분인가 등 각 단계별 인허가 절차에 필요한 서류 준비, 관할 행정기관 협의, 보완 요청 대응을 수행합니다.</p>
+                    </div>
+                </div>
+
+                <!-- 5. 총회·이사회·대의원회 운영지원 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-users-rectangle"></i>
+                    </div>
+                    <div class="service-body">
+                        <h4>총회·이사회·대의원회 운영지원</h4>
+                        <p>안건 검토, 소집 통지, 위임장 관리, 현장 진행, 의결 처리, 의사록 작성 등 조합 의사결정 기구의 원활한 운영을 전문적으로 지원합니다.</p>
+                    </div>
+                </div>
+
+                <!-- 6. 계약·문서·정보공개·대외협의 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <div class="service-body">
+                        <h4>계약·문서·정보공개·대외협의</h4>
+                        <p>시공사 계약 검토 지원, 조합 운영 문서 관리, 정보공개 대응, 행정기관·시공사·설계사 등 사업 관계자 간 협의를 조율합니다.</p>
+                    </div>
+                </div>
+
+                <!-- 7. 관리처분·이주·입주 실무지원 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-truck-moving"></i>
+                    </div>
+                    <div class="service-body">
+                        <h4>관리처분·이주·입주 실무지원</h4>
+                        <p>관리처분계획 수립 지원, 감정평가 검토, 이주 일정 관리, 입주 절차 안내, 잔여 업무 정리 등 사업 후반부의 실무를 체계적으로 관리합니다.</p>
+                    </div>
+                </div>
+
+                <!-- 8. 법률 검토 지원 및 전문가 협업 연계 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <div class="service-body">
+                        <h4>법률 검토 지원 및 전문가 협업 연계</h4>
+                        <p>정비사업 과정에서 발생하는 법률적 쟁점에 대해 외부 법률 전문가와의 협업을 연계하고, 실무적 관점에서 검토를 지원합니다. 본 서비스는 법률 자문이 아닌 실무 지원의 성격입니다.</p>
+                    </div>
+                </div>
+
+                <!-- 9. 사업장 맞춤형 PM/코디네이션 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <div class="service-body">
+                        <h4>사업장 맞춤형 PM/코디네이션</h4>
+                        <p>사업 전반의 일정, 품질, 원가를 통합 관리하는 프로젝트 매니지먼트와 이해관계자 간 코디네이션 서비스를 제공합니다.</p>
+                    </div>
+                </div>
+
+                <!-- 10. 신속통합기획 지원 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-forward-fast"></i>
+                    </div>
+                    <div class="service-body">
+                        <h4>신속통합기획 지원</h4>
+                        <p>서울시 신속통합기획 제도를 활용하여 정비사업 절차를 단축하고, 통합심의 대응 및 기획안 수립을 지원합니다.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 안내 문구 -->
+        <div class="services-section">
+            <div class="services-disclaimer">
+                본 페이지에 기재된 업무 내용은 일반적인 정비사업 관리 업무의 범위를 안내하는 것이며, 구체적인 서비스 범위는 개별 사업장의 상황과 계약 내용에 따라 달라질 수 있습니다. 법률·세무·감정평가 등 전문 영역은 해당 분야 전문가와의 협업을 통해 지원됩니다.
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+</body>
+</html>

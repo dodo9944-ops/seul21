@@ -4,220 +4,340 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>사업분야 — (주)세울엔지니어링</title>
-    <meta name="description" content="(주)세울엔지니어링의 정비사업 관리 업무 영역 — 조합설립, 인허가, 사업성 검토, 총회 운영, 관리처분, PM 등 전 과정을 체계적으로 지원합니다.">
+    <meta name="description" content="주택재개발, 주택재건축, 도시계획, 도시정비 PM/CM — 조합설립부터 준공까지 정비사업 전 과정을 실행 중심으로 관리합니다. (주)세울엔지니어링">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
-    /* ── 사업분야 개요 ── */
-    .services-intro {
-        font-size: 15.5px; line-height: 1.9; color: var(--gray-700);
-        max-width: 780px;
+    .sv-section { margin-bottom:56px; }
+    .sv-section:last-child { margin-bottom:0; }
+    .sv-section .section-title { margin-bottom:28px; }
+
+    /* 개요 */
+    .sv-intro {
+        font-size:16px; line-height:2; color:var(--gray-700); max-width:820px;
+    }
+    .sv-intro strong { color:var(--brand-navy); font-weight:700; }
+
+    /* 핵심 수치 바 */
+    .sv-highlight {
+        display:flex; gap:0; border-radius:var(--radius); overflow:hidden;
+        border:1px solid var(--gray-200); margin-bottom:56px;
+    }
+    .sv-highlight-item {
+        flex:1; padding:24px 20px; text-align:center;
+        border-right:1px solid var(--gray-200);
+    }
+    .sv-highlight-item:last-child { border-right:none; }
+    .sv-highlight-item .hl-num { font-size:22px; font-weight:800; color:var(--brand-dark); margin-bottom:4px; }
+    .sv-highlight-item .hl-num span { color:var(--gold); }
+    .sv-highlight-item .hl-desc { font-size:12px; color:var(--gray-500); }
+    @media(max-width:768px){
+        .sv-highlight{flex-wrap:wrap;}
+        .sv-highlight-item{flex:1 1 50%;border-bottom:1px solid var(--gray-200);}
+        .sv-highlight-item:nth-child(2){border-right:none;}
+        .sv-highlight-item:nth-child(3),.sv-highlight-item:nth-child(4){border-bottom:none;}
     }
 
-    /* ── 핵심 업무 영역 ── */
-    .service-list {
-        display: flex; flex-direction: column; gap: 20px;
+    /* 4대 사업영역 카드 */
+    .sv-card-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
+    @media(max-width:860px){ .sv-card-grid{grid-template-columns:1fr;} }
+
+    .sv-card {
+        background:#fff; border:1px solid var(--gray-200); border-radius:16px;
+        padding:0; overflow:hidden; transition:all 0.25s;
+        display:flex; flex-direction:column;
     }
-    .service-card {
-        display: flex; align-items: flex-start; gap: 24px;
-        background: var(--white); border: 1px solid var(--gray-200);
-        border-radius: var(--radius); padding: 28px 28px;
-        transition: all var(--transition);
+    .sv-card:hover { border-color:var(--gold); box-shadow:0 12px 36px rgba(0,0,0,0.07); transform:translateY(-3px); }
+
+    .sv-card-header {
+        background:linear-gradient(135deg,#0A0F1C,#142644);
+        padding:28px 32px; display:flex; align-items:center; gap:18px;
+        position:relative;
     }
-    .service-card:hover {
-        border-color: var(--gold);
-        box-shadow: var(--shadow-hover);
+    .sv-card-header::after {
+        content:''; position:absolute; right:-30px; top:-30px; width:120px; height:120px;
+        background:radial-gradient(circle,rgba(195,165,105,0.06) 0%,transparent 70%); border-radius:50%;
     }
-    .service-icon {
-        flex-shrink: 0; width: 56px; height: 56px; border-radius: 14px;
-        background: var(--brand-navy);
-        display: flex; align-items: center; justify-content: center;
+    .sv-card-num {
+        width:40px; height:40px; border-radius:10px;
+        background:rgba(195,165,105,0.15); display:flex; align-items:center; justify-content:center;
+        font-size:16px; font-weight:800; color:var(--gold); flex-shrink:0;
     }
-    .service-icon i {
-        font-size: 24px; color: var(--gold);
-    }
-    .service-body {
-        flex: 1; min-width: 0;
-    }
-    .service-body h4 {
-        font-size: 16.5px; font-weight: 700; color: var(--gray-900);
-        margin-bottom: 8px;
-    }
-    .service-body p {
-        font-size: 14px; color: var(--gray-600); line-height: 1.75;
-    }
-    @media (max-width: 768px) {
-        .service-card {
-            flex-direction: column; gap: 16px; padding: 24px 20px;
-        }
+    .sv-card-header h3 { font-size:19px; font-weight:800; color:#fff; letter-spacing:-0.3px; }
+    .sv-card-header .sv-sub { font-size:12px; color:rgba(255,255,255,0.45); margin-top:3px; }
+
+    .sv-card-body { padding:28px 32px; flex:1; }
+    .sv-card-body .sv-desc {
+        font-size:14.5px; line-height:1.85; color:var(--gray-700); margin-bottom:20px;
     }
 
-    /* ── 안내 문구 ── */
-    .services-disclaimer {
-        background: var(--gray-50, #F8F9FA);
-        border: 1px solid var(--gray-200);
-        border-radius: var(--radius);
-        padding: 24px 28px;
-        font-size: 13px; line-height: 1.8; color: var(--gray-500);
+    .sv-strengths { list-style:none; margin-bottom:20px; }
+    .sv-strengths li {
+        display:flex; align-items:flex-start; gap:10px;
+        font-size:13.5px; color:var(--gray-700); line-height:1.7; margin-bottom:10px;
+    }
+    .sv-strengths li:last-child { margin-bottom:0; }
+    .sv-strengths li i { color:var(--gold); font-size:12px; margin-top:5px; flex-shrink:0; }
+
+    .sv-tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .sv-tag {
+        display:inline-block; padding:5px 14px; border-radius:20px;
+        font-size:12px; font-weight:600; color:var(--brand-navy);
+        background:rgba(20,38,68,0.05); border:1px solid rgba(20,38,68,0.08);
     }
 
-    /* ── 섹션 간격 ── */
-    .services-section { margin-bottom: 56px; }
-    .services-section:last-child { margin-bottom: 0; }
-    .services-section .section-title { margin-bottom: 28px; }
+    /* CTA */
+    .sv-cta {
+        background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:var(--radius);
+        padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px;
+        position:relative; overflow:hidden;
+    }
+    .sv-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(195,165,105,0.08) 0%,transparent 70%); border-radius:50%; }
+    .sv-cta h3 { font-size:22px; font-weight:800; color:#fff; margin-bottom:8px; }
+    .sv-cta p { font-size:15px; color:rgba(255,255,255,0.55); }
+    .sv-cta-btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:var(--gold); color:#0A0F1C; border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap; }
+    .sv-cta-btn:hover { background:var(--gold-hover); }
+    @media(max-width:640px){ .sv-cta{flex-direction:column;padding:32px 24px;text-align:center;} }
+
+    /* 안내문 */
+    .sv-disclaimer {
+        background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius);
+        padding:20px 28px; font-size:13px; line-height:1.8; color:var(--gray-500);
+    }
     </style>
 </head>
 <body>
 <div id="site-header"></div>
 
-<div class="inner">
-    <div class="breadcrumb">
-        <a href="../index.html">홈</a>
-        <i class="fa-solid fa-chevron-right"></i>
-        <span>사업분야</span>
-    </div>
-</div>
-
 <div class="page-hero">
     <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>사업분야</span>
+        </div>
         <h1>사업분야</h1>
-        <p>정비사업의 시작부터 완료까지, 조합과 함께하는 체계적 실무 지원</p>
+        <p>조합설립부터 준공까지, 정비사업이 실제로 움직이도록 관리하고 조율합니다</p>
     </div>
 </div>
 
 <div class="page-body">
     <div class="inner">
 
-        <!-- 사업분야 개요 -->
-        <div class="services-section">
+        <!-- 개요 -->
+        <div class="sv-section">
             <h2 class="section-title">사업분야 개요</h2>
-            <p class="services-intro">세울엔지니어링은 정비사업의 시작부터 완료까지, 조합과 토지등소유자가 마주하는 모든 실무 과정을 체계적으로 지원합니다. 각 사업장의 특성과 단계에 맞는 맞춤형 서비스를 제공합니다.</p>
+            <p class="sv-intro">
+                세울엔지니어링은 단순 자문이 아닌 <strong>사업이 실제로 굴러가도록 관리하고 조율하는 회사</strong>입니다.<br>
+                조합설립부터 준공까지 행정·기술·사업관리를 통합 대응하며, 각 사업장의 특성과 단계에 맞는 실행 중심의 서비스를 제공합니다.
+            </p>
         </div>
 
-        <!-- 핵심 업무 영역 -->
-        <div class="services-section">
-            <h2 class="section-title">핵심 업무 영역</h2>
-            <div class="service-list">
+        <!-- 핵심 수치 -->
+        <div class="sv-highlight">
+            <div class="sv-highlight-item"><div class="hl-num">20<span>년+</span></div><div class="hl-desc">현장 실무 경험</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">전 <span>과정</span></div><div class="hl-desc">조합설립~준공 일괄</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">통합 <span>대응</span></div><div class="hl-desc">행정·기술·사업관리</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">실행 <span>중심</span></div><div class="hl-desc">이해관계자 조율</div></div>
+        </div>
 
-                <!-- 1. 조합설립 및 추진지원 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fa-solid fa-people-group"></i>
-                    </div>
-                    <div class="service-body">
-                        <h4>조합설립 및 추진지원</h4>
-                        <p>조합 설립을 위한 동의서 징구 전략 수립, 창립총회 준비, 조합설립인가 신청 서류 작성 및 행정기관 대응까지 초기 추진 단계의 전 실무를 지원합니다.</p>
-                    </div>
-                </div>
+        <!-- 정비사업 -->
+        <div class="sv-section">
+            <h2 class="section-title">정비사업</h2>
+            <div class="sv-card-grid">
 
-                <!-- 2. 동의서 징구 및 이해관계 조율 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fa-solid fa-handshake"></i>
+                <!-- 1. 주택재개발 -->
+                <a href="redevelopment-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">01</div>
+                        <div>
+                            <h3>주택재개발 정비사업</h3>
+                            <div class="sv-sub">Urban Redevelopment — 상세보기 →</div>
+                        </div>
                     </div>
-                    <div class="service-body">
-                        <h4>동의서 징구 및 이해관계 조율</h4>
-                        <p>토지등소유자의 사업 참여 동의를 확보하기 위한 설명회 운영, 개별 면담, 민원 대응, 이해관계 조율 업무를 체계적으로 수행합니다.</p>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            노후·불량 주거지역의 정비구역 지정부터 추진위원회·조합 설립, 사업시행인가, 관리처분, 이주·철거·준공까지 재개발 사업의 전 과정을 현장에서 직접 관리합니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>복잡한 권리관계와 다수 이해관계자 간 조율 경험</li>
+                            <li><i class="fa-solid fa-check"></i>주민설명회, 동의서 징구, 조합 행정 및 문서관리 실무 역량</li>
+                            <li><i class="fa-solid fa-check"></i>인허가와 사업추진 절차를 끊김 없이 연결하는 실행력</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">정비구역 지정</span>
+                            <span class="sv-tag">조합설립</span>
+                            <span class="sv-tag">동의서 징구</span>
+                            <span class="sv-tag">관리처분</span>
+                            <span class="sv-tag">이주·철거</span>
+                        </div>
                     </div>
-                </div>
+                </a>
 
-                <!-- 3. 사업성 검토 및 추진전략 수립 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fa-solid fa-chart-pie"></i>
+                <!-- 2. 주택재건축 -->
+                <a href="reconstruction-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">02</div>
+                        <div>
+                            <h3>주택재건축 정비사업</h3>
+                            <div class="sv-sub">Housing Reconstruction — 상세보기 →</div>
+                        </div>
                     </div>
-                    <div class="service-body">
-                        <h4>사업성 검토 및 추진전략 수립</h4>
-                        <p>토지·건물 현황 분석, 개발 규모 산정, 사업비 추정, 비례율 시뮬레이션 등을 통해 사업의 타당성을 종합적으로 검토하고 최적의 추진 방향을 제안합니다. 구체적 사안은 별도 검토가 필요합니다.</p>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            노후 공동주택의 사업성 검토부터 조합 운영, 시공사·협력업체 대응, 관리처분 및 입주 단계까지 재건축 사업 전 과정을 체계적으로 지원합니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>사업성 분석과 분담금·비례율 검토를 통한 사업 타당성 확보</li>
+                            <li><i class="fa-solid fa-check"></i>총회·이사회·대의원회 운영 및 안건 문서화 역량</li>
+                            <li><i class="fa-solid fa-check"></i>조합원 민원 대응과 사업 지연 리스크 최소화 경험</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">사업성 검토</span>
+                            <span class="sv-tag">비례율·분담금</span>
+                            <span class="sv-tag">총회 운영</span>
+                            <span class="sv-tag">시공사 선정</span>
+                            <span class="sv-tag">입주 관리</span>
+                        </div>
                     </div>
-                </div>
+                </a>
 
-                <!-- 4. 인허가 대응 및 행정지원 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fa-solid fa-stamp"></i>
+                <!-- 3. 소규모재건축 -->
+                <a href="small-reconstruction-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">03</div>
+                        <div>
+                            <h3>소규모재건축 정비사업</h3>
+                            <div class="sv-sub">Small-scale Reconstruction — 상세보기 →</div>
+                        </div>
                     </div>
-                    <div class="service-body">
-                        <h4>인허가 대응 및 행정지원</h4>
-                        <p>정비구역 지정, 사업시행인가, 관리처분인가 등 각 단계별 인허가 절차에 필요한 서류 준비, 관할 행정기관 협의, 보완 요청 대응을 수행합니다.</p>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            300세대 미만의 소규모 노후 공동주택을 대상으로 하는 재건축 사업입니다. 일반 재건축보다 간소화된 절차로 빠르게 추진할 수 있습니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>소규모 사업장 특성에 맞는 맞춤형 추진 전략</li>
+                            <li><i class="fa-solid fa-check"></i>간소화된 인허가 절차 활용으로 사업 기간 단축</li>
+                            <li><i class="fa-solid fa-check"></i>소수 조합원 간 합의 도출과 신속한 의사결정 지원</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">300세대 미만</span>
+                            <span class="sv-tag">동의율 70%</span>
+                            <span class="sv-tag">간소화 절차</span>
+                            <span class="sv-tag">신속 추진</span>
+                        </div>
                     </div>
-                </div>
+                </a>
 
-                <!-- 5. 총회·이사회·대의원회 운영지원 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fa-solid fa-users-rectangle"></i>
+                <!-- 4. 가로주택 -->
+                <a href="garoju-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">04</div>
+                        <div>
+                            <h3>가로주택 정비사업</h3>
+                            <div class="sv-sub">Street Housing Improvement — 상세보기 →</div>
+                        </div>
                     </div>
-                    <div class="service-body">
-                        <h4>총회·이사회·대의원회 운영지원</h4>
-                        <p>안건 검토, 소집 통지, 위임장 관리, 현장 진행, 의결 처리, 의사록 작성 등 조합 의사결정 기구의 원활한 운영을 전문적으로 지원합니다.</p>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            가로구역 내 노후·불량 건축물을 정비하여 소규모 주거단지를 조성하는 사업입니다. 정비구역 지정 없이 추진 가능하여 사업 속도가 빠릅니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>정비구역 지정 불필요 — 신속한 사업 착수 가능</li>
+                            <li><i class="fa-solid fa-check"></i>소규모 사업의 인허가·총회·계약 실무 전담 역량</li>
+                            <li><i class="fa-solid fa-check"></i>주민 합의부터 준공까지 밀착 관리</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">가로구역</span>
+                            <span class="sv-tag">동의율 75%</span>
+                            <span class="sv-tag">정비구역 면제</span>
+                            <span class="sv-tag">소규모 단지</span>
+                        </div>
                     </div>
-                </div>
-
-                <!-- 6. 계약·문서·정보공개·대외협의 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fa-solid fa-file-contract"></i>
-                    </div>
-                    <div class="service-body">
-                        <h4>계약·문서·정보공개·대외협의</h4>
-                        <p>시공사 계약 검토 지원, 조합 운영 문서 관리, 정보공개 대응, 행정기관·시공사·설계사 등 사업 관계자 간 협의를 조율합니다.</p>
-                    </div>
-                </div>
-
-                <!-- 7. 관리처분·이주·입주 실무지원 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fa-solid fa-truck-moving"></i>
-                    </div>
-                    <div class="service-body">
-                        <h4>관리처분·이주·입주 실무지원</h4>
-                        <p>관리처분계획 수립 지원, 감정평가 검토, 이주 일정 관리, 입주 절차 안내, 잔여 업무 정리 등 사업 후반부의 실무를 체계적으로 관리합니다.</p>
-                    </div>
-                </div>
-
-                <!-- 8. 법률 검토 지원 및 전문가 협업 연계 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fa-solid fa-scale-balanced"></i>
-                    </div>
-                    <div class="service-body">
-                        <h4>법률 검토 지원 및 전문가 협업 연계</h4>
-                        <p>정비사업 과정에서 발생하는 법률적 쟁점에 대해 외부 법률 전문가와의 협업을 연계하고, 실무적 관점에서 검토를 지원합니다. 본 서비스는 법률 자문이 아닌 실무 지원의 성격입니다.</p>
-                    </div>
-                </div>
-
-                <!-- 9. 사업장 맞춤형 PM/코디네이션 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fa-solid fa-diagram-project"></i>
-                    </div>
-                    <div class="service-body">
-                        <h4>사업장 맞춤형 PM/코디네이션</h4>
-                        <p>사업 전반의 일정, 품질, 원가를 통합 관리하는 프로젝트 매니지먼트와 이해관계자 간 코디네이션 서비스를 제공합니다.</p>
-                    </div>
-                </div>
-
-                <!-- 10. 신속통합기획 지원 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fa-solid fa-forward-fast"></i>
-                    </div>
-                    <div class="service-body">
-                        <h4>신속통합기획 지원</h4>
-                        <p>서울시 신속통합기획 제도를 활용하여 정비사업 절차를 단축하고, 통합심의 대응 및 기획안 수립을 지원합니다.</p>
-                    </div>
-                </div>
+                </a>
 
             </div>
         </div>
 
-        <!-- 안내 문구 -->
-        <div class="services-section">
-            <div class="services-disclaimer">
+        <!-- 특화사업 -->
+        <div class="sv-section">
+            <h2 class="section-title">엔지니어링사업</h2>
+            <div class="sv-card-grid">
+
+                <a href="urbanplanning-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">05</div>
+                        <div>
+                            <h3>도시계획(엔지니어링)</h3>
+                            <div class="sv-sub">Urban Planning & Engineering — 상세보기 →</div>
+                        </div>
+                    </div>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            도시관리계획, 지구단위계획, 정비계획, 각종 인허가 협의자료 작성, 서울시 신속통합기획 대응 등 도시공간 재편을 위한 계획·기술 업무를 수행합니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>행정기관 협의에 필요한 실무형 자료 작성 능력</li>
+                            <li><i class="fa-solid fa-check"></i>계획 수립과 정비사업 추진을 연결하는 통합적 시각</li>
+                            <li><i class="fa-solid fa-check"></i>서울시 신속통합기획 절차와 통합심의 대응 실무 역량</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">정비계획</span>
+                            <span class="sv-tag">지구단위계획</span>
+                            <span class="sv-tag">신속통합기획</span>
+                            <span class="sv-tag">인허가 전략</span>
+                            <span class="sv-tag">협의자료</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pmcm-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">06</div>
+                        <div>
+                            <h3>도시정비 PM/CM</h3>
+                            <div class="sv-sub">Project & Construction Management — 상세보기 →</div>
+                        </div>
+                    </div>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            정비사업 전 과정의 일정, 원가, 품질, 리스크, 의사결정 자료를 통합 관리합니다. 조합·시공사·설계·감리·행정기관 사이의 실무를 조정하는 전문 관리 서비스입니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>조합·시공사·설계·감리·행정기관 간 실무 조정 능력</li>
+                            <li><i class="fa-solid fa-check"></i>핵심 일정과 예산 흐름을 놓치지 않는 체계적 관리</li>
+                            <li><i class="fa-solid fa-check"></i>문서·보고·회의·의사결정 지원까지 포함한 실행형 PM/CM</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">일정 관리</span>
+                            <span class="sv-tag">원가 관리</span>
+                            <span class="sv-tag">리스크 관리</span>
+                            <span class="sv-tag">이해관계 조율</span>
+                            <span class="sv-tag">의사결정 지원</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="sv-section">
+            <div class="sv-cta">
+                <div style="position:relative;z-index:1;">
+                    <h3>사업분야별 상세 상담이 필요하신가요?</h3>
+                    <p>세울엔지니어링이 사업장 현황에 맞는 최적의 솔루션을 제안합니다</p>
+                </div>
+                <a href="contact.html" class="sv-cta-btn"><i class="fa-solid fa-paper-plane"></i> 사업문의</a>
+            </div>
+        </div>
+
+        <!-- 안내 -->
+        <div class="sv-section">
+            <div class="sv-disclaimer">
                 본 페이지에 기재된 업무 내용은 일반적인 정비사업 관리 업무의 범위를 안내하는 것이며, 구체적인 서비스 범위는 개별 사업장의 상황과 계약 내용에 따라 달라질 수 있습니다. 법률·세무·감정평가 등 전문 영역은 해당 분야 전문가와의 협업을 통해 지원됩니다.
             </div>
         </div>

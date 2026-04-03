@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매물 정보 — (주)세울엔지니어링</title>
+    <meta name="description" content="재개발·재건축 입주권, 분양권, 토지, 매매 매물을 검색하고 비교하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .result-count { font-size: 14px; color: var(--gray-500); padding: 8px 0; }
+    .result-count strong { color: var(--gray-900); }
+    .search-wrap { position: relative; }
+    .search-wrap .form-input { padding-left: 36px; }
+    .search-wrap i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--gray-400); font-size: 14px; }
+    .listing-card { cursor: pointer; }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="inner">
+    <div class="breadcrumb">
+        <a href="../index.html">홈</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>매물정보</span>
+    </div>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <h1>매물 정보</h1>
+        <p>재개발·재건축 입주권, 분양권, 토지 매물을 한눈에 검색하세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="filter-bar">
+            <select class="form-select" id="filterType">
+                <option value="전체">매물유형 전체</option>
+                <option value="입주권">입주권</option>
+                <option value="분양권">분양권</option>
+                <option value="토지">토지</option>
+                <option value="매매">매매</option>
+            </select>
+            <select class="form-select" id="filterDistrict">
+                <option value="전체">지역 전체</option>
+                <option value="용산구">용산구</option>
+                <option value="동작구">동작구</option>
+                <option value="영등포구">영등포구</option>
+                <option value="동대문구">동대문구</option>
+                <option value="성북구">성북구</option>
+                <option value="강동구">강동구</option>
+                <option value="강남구">강남구</option>
+            </select>
+            <select class="form-select" id="filterPrice">
+                <option value="전체">가격대 전체</option>
+                <option value="low">5억 이하</option>
+                <option value="mid">5억~10억</option>
+                <option value="high">10억~20억</option>
+                <option value="ultra">20억 이상</option>
+            </select>
+            <select class="form-select" id="filterSort">
+                <option value="createdAt:desc">최신순</option>
+                <option value="price:asc">가격 낮은순</option>
+                <option value="price:desc">가격 높은순</option>
+            </select>
+            <div class="search-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="form-input" id="searchInput" placeholder="구역명, 매물 검색">
+            </div>
+        </div>
+        <div class="result-count" id="resultCount"></div>
+        <div class="listing-grid" id="listingGrid"></div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    const PAGE_SIZE = 6;
+    let currentPage = 1;
+
+    function getFilters() {
+        return {
+            type: document.getElementById('filterType').value,
+            district: document.getElementById('filterDistrict').value,
+            price: document.getElementById('filterPrice').value,
+            sort: document.getElementById('filterSort').value,
+            search: document.getElementById('searchInput').value.trim()
+        };
+    }
+
+    function render() {
+        const { type, district, price, sort, search } = getFilters();
+        const filter = {};
+        if (type !== '전체') filter.type = type;
+        if (district !== '전체') filter.district = district;
+
+        let result = DataService.query('listings', {
+            filter,
+            sort,
+            page: 1,
+            pageSize: 100,
+            search: search || undefined,
+            searchFields: ['areaName', 'district', 'description', 'type']
+        });
+
+        // 가격대 필터
+        let data = result.data;
+        if (price !== '전체') {
+            data = data.filter(l => {
+                const p = l.price;
+                if (price === 'low') return p <= 50000;
+                if (price === 'mid') return p > 50000 && p <= 100000;
+                if (price === 'high') return p > 100000 && p <= 200000;
+                if (price === 'ultra') return p > 200000;
+                return true;
+            });
+        }
+
+        const total = data.length;
+        const totalPages = Math.ceil(total / PAGE_SIZE);
+        const paged = data.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+        document.getElementById('resultCount').innerHTML =
+            '총 <strong>' + total + '</strong>개 매물';
+
+        const grid = document.getElementById('listingGrid');
+
+        if (paged.length === 0) {
+            grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fa-solid fa-search"></i><h3>검색 결과가 없습니다</h3><p>다른 조건으로 검색해보세요</p></div>';
+            document.getElementById('pagination').innerHTML = '';
+            return;
+        }
+
+        const typeColors = {
+            '입주권': 'var(--accent)',
+            '분양권': 'var(--green)',
+            '토지': 'var(--orange)',
+            '매매': 'var(--gray-700)'
+        };
+
+        grid.innerHTML = paged.map(l => `
+        <div class="listing-card" data-id="${l.id}" style="cursor:pointer">
+            <div class="listing-thumb">
+                <i class="fa-solid fa-building"></i>
+                <span class="lt-badge" style="background:${typeColors[l.type] || 'var(--accent)'}">${l.type}</span>
+            </div>
+            <div class="listing-body">
+                <div class="area">${l.areaName} · ${l.district}</div>
+                <h4>${l.sizeType}</h4>
+                <div class="price">${l.priceText}</div>
+                <div class="desc">${l.description.length > 50 ? l.description.slice(0, 50) + '...' : l.description}</div>
+                <div class="tags">
+                    ${(l.tags || []).map(t => '<span>' + t + '</span>').join('')}
+                </div>
+            </div>
+        </div>`).join('');
+
+        grid.querySelectorAll('.listing-card').forEach(card => {
+            card.addEventListener('click', function() {
+                location.href = 'listing-detail.html?id=' + this.dataset.id;
+            });
+        });
+
+        App.renderPagination('pagination', totalPages, currentPage, pg => {
+            currentPage = pg;
+            render();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    ['filterType', 'filterDistrict', 'filterPrice', 'filterSort'].forEach(id => {
+        document.getElementById(id).addEventListener('change', () => { currentPage = 1; render(); });
+    });
+
+    let searchTimer;
+    document.getElementById('searchInput').addEventListener('input', () => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => { currentPage = 1; render(); }, 300);
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>

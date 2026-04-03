@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재개발 뉴스 — (주)세울엔지니어링</title>
+    <meta name="description" content="재개발·재건축 관련 최신 뉴스, 정책, 시장분석, 개발호재 소식을 전해드립니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .news-list { display: flex; flex-direction: column; gap: 0; }
+        .news-item {
+            display: flex; gap: 24px; padding: 28px 0;
+            border-bottom: 1px solid var(--gray-100);
+            cursor: pointer; transition: background var(--transition);
+        }
+        .news-item:first-child { padding-top: 0; }
+        .news-item:hover { background: var(--gray-50); margin: 0 -20px; padding-left: 20px; padding-right: 20px; border-radius: var(--radius-sm); }
+        .news-thumb {
+            width: 120px; height: 90px; flex-shrink: 0;
+            background: var(--gray-50); border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--gray-200);
+        }
+        .news-thumb i { font-size: 28px; color: var(--gray-300); }
+        .news-content { flex: 1; min-width: 0; }
+        .news-content .news-meta {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 8px; font-size: 12px; color: var(--gray-500);
+        }
+        .news-content h3 {
+            font-size: 17px; font-weight: 700; color: var(--gray-900);
+            margin-bottom: 6px; line-height: 1.45;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .news-content .news-summary {
+            font-size: 13px; color: var(--gray-500); line-height: 1.6;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .news-content .news-bottom {
+            display: flex; align-items: center; gap: 12px;
+            margin-top: 10px; font-size: 12px; color: var(--gray-400);
+        }
+        .news-content .news-bottom i { font-size: 11px; }
+        .result-info { font-size: 13px; color: var(--gray-500); padding: 12px 0; }
+        .result-info strong { color: var(--accent); font-weight: 700; }
+        @media (max-width: 540px) {
+            .news-thumb { width: 80px; height: 64px; }
+            .news-thumb i { font-size: 22px; }
+            .news-content h3 { font-size: 15px; }
+            .news-item { gap: 14px; padding: 20px 0; }
+        }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a> <i class="fa-solid fa-chevron-right"></i>
+            <span>재개발 뉴스</span>
+        </div>
+        <h1>재개발 뉴스</h1>
+        <p>재개발·재건축 관련 최신 정책, 시장분석, 개발호재 소식을 전해드립니다.</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="filter-bar">
+            <select class="form-select" id="filterCategory">
+                <option value="전체">전체</option>
+                <option value="정책">정책</option>
+                <option value="시장분석">시장분석</option>
+                <option value="개발호재">개발호재</option>
+                <option value="분석">분석</option>
+            </select>
+            <select class="form-select" id="filterSort">
+                <option value="date:desc">최신순</option>
+                <option value="views:desc">조회순</option>
+            </select>
+        </div>
+        <div class="result-info" id="resultInfo"></div>
+        <div class="news-list" id="newsList"></div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    let currentPage = 1;
+    const pageSize = 6;
+    const categoryIcons = {
+        '정책': 'fa-landmark',
+        '시장분석': 'fa-chart-bar',
+        '개발호재': 'fa-road',
+        '분석': 'fa-magnifying-glass-chart'
+    };
+
+    function badgeClass(cat) {
+        const map = { '정책': 'badge-info', '시장분석': 'badge-outline', '개발호재': 'badge-success', '분석': 'badge-gray' };
+        return map[cat] || 'badge-gray';
+    }
+
+    function load() {
+        const category = document.getElementById('filterCategory').value;
+        const sort = document.getElementById('filterSort').value;
+        const filter = {};
+        if (category !== '전체') filter.category = category;
+
+        const result = DataService.query('news', { filter, sort, page: currentPage, pageSize });
+        const list = document.getElementById('newsList');
+
+        document.getElementById('resultInfo').innerHTML = `총 <strong>${result.total}</strong>건의 뉴스`;
+
+        if (result.data.length === 0) {
+            list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-newspaper"></i><h3>뉴스가 없습니다</h3><p>해당 카테고리의 뉴스가 없습니다.</p></div>`;
+            return;
+        }
+
+        list.innerHTML = result.data.map(n => `
+            <div class="news-item" onclick="location.href='news-detail.html?id=${n.id}'">
+                <div class="news-thumb">
+                    <i class="fa-solid ${categoryIcons[n.category] || 'fa-newspaper'}"></i>
+                </div>
+                <div class="news-content">
+                    <div class="news-meta">
+                        <span class="badge ${badgeClass(n.category)}">${n.category}</span>
+                    </div>
+                    <h3>${n.title}</h3>
+                    <p class="news-summary">${n.summary}</p>
+                    <div class="news-bottom">
+                        <span><i class="fa-regular fa-calendar"></i> ${n.date}</span>
+                        <span><i class="fa-regular fa-eye"></i> ${App.comma(n.views)}</span>
+                        <span><i class="fa-regular fa-user"></i> ${n.author}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        App.renderPagination('pagination', result.totalPages, result.page, pg => {
+            currentPage = pg;
+            load();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    document.getElementById('filterCategory').addEventListener('change', () => { currentPage = 1; load(); });
+    document.getElementById('filterSort').addEventListener('change', () => { currentPage = 1; load(); });
+
+    document.addEventListener('DOMContentLoaded', load);
+})();
+</script>
+</body>
+</html>

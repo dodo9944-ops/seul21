@@ -11,18 +11,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
-    /* ── 섹션 간격 ── */
-    .vision-section { margin-bottom: 64px; }
-    .vision-section:last-child { margin-bottom: 0; }
     .vision-section .section-title { margin-bottom: 28px; }
 
     /* ── Section 1: Opening Statement ── */
     .opening-statement {
         border-left: 4px solid var(--gold);
         padding: 40px 40px 40px 36px;
-        background: linear-gradient(135deg, rgba(195,165,105,0.04) 0%, transparent 60%);
+        background: linear-gradient(135deg, rgba(195,165,105,0.04) 0%, rgba(195,165,105,0.02) 100%);
         border-radius: 0 var(--radius) var(--radius) 0;
         position: relative;
+        border: 1px solid rgba(0,0,0,0.05);
+        border-left: 4px solid var(--gold);
     }
     .opening-statement::before {
         content: '\201C';
@@ -82,6 +81,12 @@
         font-size: 22px;
         font-weight: 800;
         color: var(--gray-900);
+    }
+    .why-body {
+        background: var(--white);
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        padding: 32px 36px;
     }
     .why-body p {
         font-size: 15px;
@@ -267,18 +272,15 @@
 <body>
 <div id="site-header"></div>
 
-<div class="inner">
-    <div class="breadcrumb">
-        <a href="../index.html">홈</a>
-        <i class="fa-solid fa-chevron-right"></i>
-        <a href="about.html">회사소개</a>
-        <i class="fa-solid fa-chevron-right"></i>
-        <span>세울의 길</span>
-    </div>
-</div>
-
 <div class="page-hero">
     <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="about.html">회사소개</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>세울의 길</span>
+        </div>
         <h1>세울의 길</h1>
         <p>도시정비의 기준을 만들어가는 세울엔지니어링의 철학과 방향</p>
     </div>

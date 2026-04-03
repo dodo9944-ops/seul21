@@ -27,7 +27,7 @@ const App = (() => {
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
       { href: `${B}/pages/community.html`, label: '커뮤니티', icon: 'fa-solid fa-comments' },
-      { href: `${B}/pages/search.html`, label: '사업장 검색', icon: 'fa-solid fa-magnifying-glass-location' },
+      { href: `${B}/pages/search.html`, label: '사업성 검토', icon: 'fa-solid fa-chart-line' },
       { href: `${B}/pages/contact.html`, label: '사업문의', icon: 'fa-solid fa-envelope' },
       { href: `${B}/intranet/index.html`, label: '인트라넷', icon: 'fa-solid fa-lock' },
     ];
@@ -141,7 +141,7 @@ const App = (() => {
         </div>
         <div class="footer-col">
           <h5>문의·지원</h5>
-          <a href="${B}/pages/search.html">사업장 검색</a>
+          <a href="${B}/pages/search.html">사업성 검토</a>
           <a href="${B}/pages/contact.html">사업문의</a>
           <a href="${B}/intranet/index.html">인트라넷</a>
         </div>
@@ -178,20 +178,30 @@ const App = (() => {
     bindEvents();
   }
 
+  function lockScroll() {
+    var scrollbarW = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = scrollbarW + 'px';
+  }
+  function unlockScroll() {
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+
   function bindEvents() {
     // Drawer
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('drawerOverlay');
     const openBtn = document.getElementById('openDrawer');
     const closeBtn = document.getElementById('drawerClose');
-    if (openBtn) openBtn.addEventListener('click', () => { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; });
+    if (openBtn) openBtn.addEventListener('click', () => { drawer.classList.add('open'); overlay.classList.add('open'); lockScroll(); });
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
     if (overlay) overlay.addEventListener('click', closeDrawer);
 
     function closeDrawer() {
       drawer.classList.remove('open');
       overlay.classList.remove('open');
-      document.body.style.overflow = '';
+      unlockScroll();
     }
 
     // Search
@@ -201,12 +211,12 @@ const App = (() => {
     const closeSearch = document.getElementById('searchClose');
     if (openSearch) openSearch.addEventListener('click', () => {
       searchOverlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      lockScroll();
       setTimeout(() => searchField.focus(), 200);
     });
     if (closeSearch) closeSearch.addEventListener('click', () => {
       searchOverlay.classList.remove('open');
-      document.body.style.overflow = '';
+      unlockScroll();
       searchField.value = '';
     });
 
@@ -224,7 +234,7 @@ const App = (() => {
       if (e.key === 'Enter' && searchField.value.trim()) {
         const q = searchField.value.trim();
         searchOverlay.classList.remove('open');
-        document.body.style.overflow = '';
+        unlockScroll();
         location.href = `${B}/pages/library.html?search=${encodeURIComponent(q)}`;
       }
     });
@@ -233,7 +243,7 @@ const App = (() => {
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
         closeDrawer();
-        if (searchOverlay) { searchOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+        if (searchOverlay) { searchOverlay.classList.remove('open'); unlockScroll(); }
       }
     });
 
@@ -243,13 +253,10 @@ const App = (() => {
       scrollBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
     }
 
-    // Header scroll behavior
-    const headerWrap = document.getElementById('headerWrap');
-    if (headerWrap || scrollBtn) {
+    // Scroll: 스크롤 탑 버튼만 (헤더 크기 변경 없음)
+    if (scrollBtn) {
       window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        if (headerWrap) headerWrap.classList.toggle('scrolled', y > 10);
-        if (scrollBtn) scrollBtn.classList.toggle('visible', y > 400);
+        scrollBtn.classList.toggle('visible', window.scrollY > 400);
       }, { passive: true });
     }
 
@@ -362,7 +369,6 @@ const App = (() => {
 /* DOM Ready */
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
-  // AI 챗봇 자동 로드 (admin 페이지 제외)
   if (!location.pathname.includes('/admin/') && !location.pathname.includes('/intranet/')) {
     const b = App.basePath();
     const s = document.createElement('script');

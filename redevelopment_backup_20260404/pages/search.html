@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사업장 검색 — (주)세울엔지니어링</title>
+    <meta name="description" content="서울시 재개발·재건축 등 정비사업장의 현황을 검색하고 확인할 수 있습니다. (주)세울엔지니어링">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <!--
+      ▼ 카카오맵 API 키 설정 ▼
+      1. https://developers.kakao.com 에서 앱 등록 후 JavaScript 키 발급
+      2. 아래 YOUR_APP_KEY를 발급받은 키로 교체
+      3. 키가 없으면 CSS 폴백 지도가 자동 표시됨 (50개 마커 정상 작동)
+      4. 키를 넣으면 실제 카카오맵으로 즉시 전환됨
+    -->
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY&libraries=clusterer"></script>
+    <style>
+    /* ══════════════════════════════════════════════
+       사업장 검색 페이지 — 전체 스타일
+       ══════════════════════════════════════════════ */
+
+    /* ── FILTER SECTION ── */
+    .filter-section {
+        background: var(--white);
+        border-bottom: 1px solid var(--gray-200);
+        padding: 24px 0 20px;
+        position: relative;
+        z-index: 20;
+    }
+    .filter-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+    .filter-grid select {
+        width: 100%;
+        height: 42px;
+        padding: 0 36px 0 14px;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+        color: var(--gray-700);
+        background: var(--white);
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        cursor: pointer;
+        transition: border-color var(--transition);
+    }
+    .filter-grid select:focus {
+        outline: none;
+        border-color: var(--brand-navy);
+        box-shadow: 0 0 0 3px rgba(20,38,68,0.08);
+    }
+    .filter-keyword-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    .filter-keyword-row input {
+        flex: 1;
+        height: 42px;
+        padding: 0 14px;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+        color: var(--gray-700);
+        transition: border-color var(--transition);
+    }
+    .filter-keyword-row input:focus {
+        outline: none;
+        border-color: var(--brand-navy);
+        box-shadow: 0 0 0 3px rgba(20,38,68,0.08);
+    }
+    .filter-keyword-row input::placeholder { color: var(--gray-400); }
+    .btn-search {
+        height: 42px;
+        padding: 0 24px;
+        background: var(--brand-navy);
+        color: var(--white);
+        border: none;
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background var(--transition);
+        white-space: nowrap;
+    }
+    .btn-search:hover { background: var(--brand-dark); }
+    .btn-reset {
+        height: 42px;
+        padding: 0 18px;
+        background: var(--white);
+        color: var(--gray-600);
+        border: 1px solid var(--gray-300);
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all var(--transition);
+        white-space: nowrap;
+    }
+    .btn-reset:hover { border-color: var(--gray-500); color: var(--gray-800); }
+
+    /* ── ACTIVE FILTER TAGS ── */
+    .filter-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+        min-height: 0;
+    }
+    .filter-tags:empty { display: none; }
+    .filter-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 30px;
+        padding: 0 10px 0 12px;
+        background: rgba(20,38,68,0.06);
+        border: 1px solid rgba(20,38,68,0.12);
+        border-radius: 20px;
+        font-size: 12px;
+        color: var(--brand-navy);
+        font-weight: 500;
+    }
+    .filter-tag .remove-tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: rgba(20,38,68,0.1);
+        color: var(--brand-navy);
+        font-size: 9px;
+        cursor: pointer;
+        transition: background var(--transition);
+        border: none;
+        padding: 0;
+        line-height: 1;
+    }
+    .filter-tag .remove-tag:hover { background: rgba(20,38,68,0.2); }
+
+    /* ── RESULT HEADER ── */
+    .result-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--gray-200);
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .result-count {
+        font-size: 14px;
+        color: var(--gray-700);
+        font-weight: 500;
+    }
+    .result-count strong {
+        color: var(--brand-navy);
+        font-weight: 700;
+    }
+    .result-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .sort-select {
+        height: 34px;
+        padding: 0 30px 0 10px;
+        border: 1px solid var(--gray-200);
+        border-radius: 6px;
+        font-size: 12.5px;
+        color: var(--gray-600);
+        background: var(--white);
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        cursor: pointer;
+    }
+    .view-toggle {
+        display: none;
+        gap: 4px;
+    }
+    .view-toggle button {
+        width: 34px;
+        height: 34px;
+        border: 1px solid var(--gray-200);
+        background: var(--white);
+        color: var(--gray-400);
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition);
+    }
+    .view-toggle button.active {
+        background: var(--brand-navy);
+        color: var(--white);
+        border-color: var(--brand-navy);
+    }
+
+    /* ── MAIN TWO-PANEL LAYOUT ── */
+    .search-layout {
+        display: flex;
+        height: calc(100vh - 320px);
+        min-height: 520px;
+    }
+    .search-list-panel {
+        width: 420px;
+        flex-shrink: 0;
+        overflow-y: auto;
+        border-right: 1px solid var(--gray-200);
+    }
+    .search-map-panel {
+        flex: 1;
+        position: relative;
+        background: #E8ECF0;
+        min-width: 0;
+    }
+
+    /* ── LIST SCROLLBAR ── */
+    .search-list-panel::-webkit-scrollbar { width: 6px; }
+    .search-list-panel::-webkit-scrollbar-track { background: transparent; }
+    .search-list-panel::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
+
+    /* ── RESULT CARD ── */
+    .result-card {
+        display: flex;
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--gray-100);
+        cursor: pointer;
+        transition: background var(--transition);
+        position: relative;
+    }
+    .result-card:hover { background: var(--gray-50); }
+    .result-card.active { background: rgba(20,38,68,0.04); }
+    .result-card.active::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+        width: 3px;
+        background: var(--gold);
+    }
+    .card-type-bar {
+        width: 3px;
+        flex-shrink: 0;
+        border-radius: 2px;
+        margin-right: 14px;
+        align-self: stretch;
+    }
+    .card-type-bar.type-rebuild { background: #2563EB; }
+    .card-type-bar.type-redevelop { background: #DC2626; }
+    .card-type-bar.type-small { background: #059669; }
+    .card-type-bar.type-garo { background: #D97706; }
+    .card-body { flex: 1; min-width: 0; }
+    .card-badges {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 6px;
+        flex-wrap: wrap;
+    }
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        height: 22px;
+        padding: 0 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: -0.2px;
+        white-space: nowrap;
+    }
+    .badge-rebuild { background: rgba(37,99,235,0.1); color: #2563EB; }
+    .badge-redevelop { background: rgba(220,38,38,0.1); color: #DC2626; }
+    .badge-small { background: rgba(5,150,105,0.1); color: #059669; }
+    .badge-garo { background: rgba(217,119,6,0.1); color: #D97706; }
+    .badge-stage {
+        background: var(--gray-100);
+        color: var(--gray-600);
+    }
+    .card-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .card-info {
+        font-size: 12.5px;
+        color: var(--gray-500);
+        line-height: 1.7;
+    }
+    .card-info span + span::before {
+        content: ' · ';
+        color: var(--gray-300);
+    }
+    .card-meta {
+        display: flex;
+        gap: 12px;
+        margin-top: 6px;
+        font-size: 12px;
+        color: var(--gray-400);
+    }
+    .card-meta i { margin-right: 3px; font-size: 11px; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px;
+        text-align: center;
+    }
+    .empty-state i {
+        font-size: 48px;
+        color: var(--gray-300);
+        margin-bottom: 16px;
+    }
+    .empty-state h4 {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--gray-600);
+        margin-bottom: 8px;
+    }
+    .empty-state p {
+        font-size: 13px;
+        color: var(--gray-400);
+    }
+
+    /* ── KAKAO MAP & FALLBACK ── */
+    #kakao-map {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* ── CSS FALLBACK MAP ── */
+    .fallback-map {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: linear-gradient(145deg, #E8ECF0, #D5DCE3);
+        overflow: hidden;
+    }
+    .fallback-map-title {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--brand-navy);
+        z-index: 5;
+        background: rgba(255,255,255,0.9);
+        padding: 8px 14px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .fallback-map-title i { color: var(--gold); margin-right: 4px; }
+    .map-marker {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        z-index: 3;
+        border: 2px solid var(--white);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+        transform: translate(-50%, -50%);
+    }
+    .map-marker.type-rebuild { background: #2563EB; }
+    .map-marker.type-redevelop { background: #DC2626; }
+    .map-marker.type-small { background: #059669; }
+    .map-marker.type-garo { background: #D97706; }
+    .map-marker:hover {
+        width: 16px;
+        height: 16px;
+        z-index: 10;
+    }
+    .map-marker.active {
+        width: 18px;
+        height: 18px;
+        z-index: 10;
+        box-shadow: 0 0 0 4px rgba(195,165,105,0.5), 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .map-marker-tooltip {
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--brand-dark);
+        color: var(--white);
+        font-size: 11px;
+        font-weight: 500;
+        padding: 5px 10px;
+        border-radius: 6px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.15s ease;
+        z-index: 20;
+    }
+    .map-marker-tooltip::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 5px solid transparent;
+        border-top-color: var(--brand-dark);
+    }
+    .map-marker:hover .map-marker-tooltip,
+    .map-marker.active .map-marker-tooltip {
+        opacity: 1;
+    }
+    .map-legend {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        background: rgba(255,255,255,0.95);
+        padding: 12px 16px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        z-index: 5;
+        display: flex;
+        gap: 14px;
+        font-size: 11px;
+        color: var(--gray-600);
+    }
+    .map-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .map-legend-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+
+    /* ── DETAIL PANEL ── */
+    .detail-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.35);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    .detail-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .detail-panel {
+        position: fixed;
+        top: 0;
+        right: -500px;
+        width: 480px;
+        max-width: 100vw;
+        height: 100vh;
+        background: var(--white);
+        z-index: 1000;
+        box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+        transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .detail-panel.open { right: 0; }
+    .detail-header {
+        background: linear-gradient(135deg, var(--brand-dark), var(--brand-navy));
+        padding: 28px 28px 24px;
+        flex-shrink: 0;
+    }
+    .detail-header-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+    .detail-close {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,0.2);
+        background: rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.7);
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition);
+        flex-shrink: 0;
+    }
+    .detail-close:hover {
+        background: rgba(255,255,255,0.15);
+        color: var(--white);
+    }
+    .detail-badges {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+    .detail-badges .badge {
+        font-size: 11.5px;
+        height: 24px;
+        padding: 0 10px;
+    }
+    .detail-name {
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--white);
+        margin-bottom: 6px;
+        letter-spacing: -0.3px;
+        line-height: 1.3;
+    }
+    .detail-location {
+        font-size: 13px;
+        color: rgba(255,255,255,0.5);
+    }
+    .detail-location i { margin-right: 4px; }
+    .detail-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 28px;
+    }
+    .detail-body::-webkit-scrollbar { width: 5px; }
+    .detail-body::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
+    .detail-section {
+        margin-bottom: 28px;
+    }
+    .detail-section:last-child { margin-bottom: 0; }
+    .detail-section-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 14px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--gray-200);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .detail-section-title i {
+        color: var(--gold);
+        font-size: 13px;
+    }
+    .detail-info-table {
+        width: 100%;
+    }
+    .detail-info-table tr {
+        border-bottom: 1px solid var(--gray-100);
+    }
+    .detail-info-table tr:last-child { border-bottom: none; }
+    .detail-info-table th {
+        width: 100px;
+        padding: 10px 0;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--gray-500);
+        text-align: left;
+        vertical-align: top;
+    }
+    .detail-info-table td {
+        padding: 10px 0;
+        font-size: 13px;
+        color: var(--gray-800);
+        line-height: 1.6;
+    }
+    .detail-description {
+        font-size: 13.5px;
+        color: var(--gray-700);
+        line-height: 1.8;
+        background: var(--gray-50);
+        padding: 16px 18px;
+        border-radius: var(--radius-sm);
+        border-left: 3px solid var(--gold);
+    }
+    .detail-cta-box {
+        background: linear-gradient(135deg, rgba(20,38,68,0.04), rgba(195,165,105,0.06));
+        border: 1px solid rgba(195,165,105,0.2);
+        border-radius: var(--radius);
+        padding: 20px;
+        text-align: center;
+    }
+    .detail-cta-box p {
+        font-size: 13px;
+        color: var(--gray-600);
+        line-height: 1.7;
+        margin-bottom: 14px;
+    }
+    .detail-cta-box .btn-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 40px;
+        padding: 0 24px;
+        background: var(--brand-navy);
+        color: var(--white);
+        border: none;
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background var(--transition);
+        text-decoration: none;
+    }
+    .detail-cta-box .btn-cta:hover { background: var(--brand-dark); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+        .view-toggle { display: flex; }
+        .search-layout { height: auto; min-height: 0; flex-direction: column; }
+        .search-list-panel {
+            width: 100%;
+            border-right: none;
+            max-height: none;
+            overflow: visible;
+        }
+        .search-map-panel {
+            width: 100%;
+            height: 450px;
+            display: none;
+        }
+        .search-layout.view-map .search-list-panel { display: none; }
+        .search-layout.view-map .search-map-panel { display: block; }
+    }
+    @media (max-width: 768px) {
+        .filter-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+        .filter-keyword-row {
+            flex-wrap: wrap;
+        }
+        .filter-keyword-row input { min-width: 0; }
+        .result-header { padding: 12px 0; }
+        .result-card { padding: 14px 16px; }
+        .card-name { font-size: 14px; }
+        .detail-panel { width: 100vw; }
+        .detail-header { padding: 24px 20px 20px; }
+        .detail-body { padding: 20px; }
+        .detail-name { font-size: 19px; }
+        .search-map-panel { height: 360px; }
+    }
+    @media (max-width: 480px) {
+        .filter-grid {
+            grid-template-columns: 1fr;
+        }
+        .map-legend {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+    }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>사업장 검색</span>
+        </div>
+        <h1>서울시 정비사업장 검색</h1>
+        <p>서울특별시 재개발·재건축 등 정비사업장의 현황을 검색하고 위치를 확인합니다</p>
+    </div>
+</div>
+
+<!-- ── FILTER SECTION ── -->
+<div class="filter-section">
+    <div class="inner">
+        <div class="filter-grid">
+            <select id="filter-gu">
+                <option value="">자치구 전체</option>
+            </select>
+            <select id="filter-type">
+                <option value="">사업구분 전체</option>
+                <option value="재건축">재건축</option>
+                <option value="재개발(주택정비형)">재개발(주택정비형)</option>
+                <option value="가로주택정비">가로주택정비</option>
+                <option value="소규모재건축">소규모재건축</option>
+            </select>
+            <select id="filter-stage">
+                <option value="">진행단계 전체</option>
+                <option value="정비계획수립">정비계획수립</option>
+                <option value="추진위원회승인">추진위원회승인</option>
+                <option value="조합설립인가">조합설립인가</option>
+                <option value="사업시행인가">사업시행인가</option>
+                <option value="관리처분인가">관리처분인가</option>
+                <option value="착공">착공</option>
+                <option value="준공인가">준공인가</option>
+                <option value="이주·철거">이주·철거</option>
+            </select>
+            <select id="filter-method">
+                <option value="">시행방식 전체</option>
+                <option value="조합방식">조합방식</option>
+                <option value="신탁시행자방식">신탁시행자방식</option>
+                <option value="공공">공공</option>
+            </select>
+        </div>
+        <div class="filter-keyword-row">
+            <input type="text" id="filter-keyword" placeholder="사업장명, 주소, 지번으로 검색하세요">
+            <button class="btn-search" id="btn-search"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
+            <button class="btn-reset" id="btn-reset"><i class="fa-solid fa-rotate-left"></i> 초기화</button>
+        </div>
+        <div class="filter-tags" id="filter-tags"></div>
+    </div>
+</div>
+
+<!-- ── RESULT HEADER ── -->
+<div class="inner">
+    <div class="result-header">
+        <div class="result-count">검색결과 <strong id="result-count">0</strong>건</div>
+        <div class="result-controls">
+            <select class="sort-select" id="sort-select">
+                <option value="name">사업장명순</option>
+                <option value="gu">자치구순</option>
+                <option value="stage">진행단계순</option>
+            </select>
+            <div class="view-toggle">
+                <button class="active" id="btn-view-list" title="리스트 보기"><i class="fa-solid fa-list"></i></button>
+                <button id="btn-view-map" title="지도 보기"><i class="fa-solid fa-map"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── MAIN LAYOUT ── -->
+<div class="inner" style="padding-bottom:0;">
+    <div class="search-layout" id="search-layout">
+        <!-- Left: Result cards -->
+        <div class="search-list-panel" id="list-panel">
+            <div id="result-list"></div>
+            <div class="empty-state" id="empty-state">
+                <i class="fa-solid fa-building-circle-xmark"></i>
+                <h4>검색 조건에 맞는 사업장이 없습니다</h4>
+                <p>필터 조건을 변경하거나 키워드를 확인해 주세요</p>
+            </div>
+        </div>
+        <!-- Right: Map -->
+        <div class="search-map-panel" id="map-panel">
+            <div id="kakao-map"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ── DETAIL PANEL ── -->
+<div class="detail-overlay" id="detail-overlay"></div>
+<div class="detail-panel" id="detail-panel">
+    <div class="detail-header">
+        <div class="detail-header-top">
+            <div class="detail-badges" id="detail-badges"></div>
+            <button class="detail-close" id="detail-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="detail-name" id="detail-name"></div>
+        <div class="detail-location" id="detail-location"><i class="fa-solid fa-location-dot"></i> <span></span></div>
+    </div>
+    <div class="detail-body">
+        <div class="detail-section">
+            <div class="detail-section-title"><i class="fa-solid fa-clipboard-list"></i> 사업 정보</div>
+            <table class="detail-info-table" id="detail-info-table">
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="detail-section">
+            <div class="detail-section-title"><i class="fa-solid fa-file-lines"></i> 사업 개요</div>
+            <div class="detail-description" id="detail-description"></div>
+        </div>
+        <div class="detail-section">
+            <div class="detail-section-title"><i class="fa-solid fa-building"></i> 세울엔지니어링 안내</div>
+            <div class="detail-cta-box">
+                <p>본 정비사업 관련 실무 지원이 필요하시면<br>(주)세울엔지니어링에 문의하세요.</p>
+                <a href="contact.html" class="btn-cta"><i class="fa-solid fa-paper-plane"></i> 사업문의</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+
+<script>
+/* ══════════════════════════════════════════════
+   사업장 검색 — 데이터 및 전체 기능
+   ══════════════════════════════════════════════ */
+
+const PROJECTS = [
+    // ── 강남구 ──
+    { id:1, name:'개포주공1단지 재건축', gu:'강남구', address:'서울특별시 강남구 개포동 12', jibun:'개포동 12', type:'재건축', method:'조합방식', operation:'조합', stage:'관리처분인가', area:496000, households:5040, description:'개포동 일대 주공아파트 1단지를 재건축하여 최고 35층, 5,040세대 규모의 대단지 주거 복합단지를 조성하는 사업이다.', lat:37.4813, lng:127.0653 },
+    { id:2, name:'개포주공4단지 재건축', gu:'강남구', address:'서울특별시 강남구 개포동 170', jibun:'개포동 170', type:'재건축', method:'조합방식', operation:'조합', stage:'착공', area:198000, households:3375, description:'개포주공4단지를 철거하고 35층 규모 3,375세대 아파트를 건설하는 재건축 사업으로, 착공 단계에 있다.', lat:37.4780, lng:127.0586 },
+    { id:3, name:'대치쌍용1차 재건축', gu:'강남구', address:'서울특별시 강남구 대치동 955', jibun:'대치동 955', type:'재건축', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:34600, households:510, description:'대치동 쌍용1차 아파트를 재건축하여 510세대 규모의 신축 단지를 조성하는 사업으로 추진위원회가 구성되었다.', lat:37.4988, lng:127.0614 },
+
+    // ── 서초구 ──
+    { id:4, name:'반포주공1단지 재건축', gu:'서초구', address:'서울특별시 서초구 반포동 18-1', jibun:'반포동 18-1', type:'재건축', method:'조합방식', operation:'조합', stage:'관리처분인가', area:567000, households:5610, description:'반포주공1단지 1·2·4주구를 통합 재건축하여 최고 35층 5,610세대의 대규모 단지를 조성한다.', lat:37.5065, lng:127.0073 },
+    { id:5, name:'잠원동 신반포15차 재건축', gu:'서초구', address:'서울특별시 서초구 잠원동 69-9', jibun:'잠원동 69-9', type:'재건축', method:'조합방식', operation:'조합', stage:'사업시행인가', area:52300, households:1165, description:'신반포15차 아파트를 재건축하여 1,165세대 규모의 주거단지를 조성하는 사업이다.', lat:37.5107, lng:127.0123 },
+
+    // ── 송파구 ──
+    { id:6, name:'잠실주공5단지 재건축', gu:'송파구', address:'서울특별시 송파구 잠실동 40', jibun:'잠실동 40', type:'재건축', method:'조합방식', operation:'조합', stage:'사업시행인가', area:332000, households:6491, description:'잠실주공5단지를 재건축하여 최고 50층 6,491세대의 초대형 랜드마크 단지를 조성하는 서울 최대 규모 재건축 사업이다.', lat:37.5140, lng:127.0820 },
+    { id:7, name:'가락시영 재건축', gu:'송파구', address:'서울특별시 송파구 가락동 100', jibun:'가락동 100', type:'재건축', method:'조합방식', operation:'조합', stage:'착공', area:218000, households:4246, description:'가락시영아파트를 재건축하여 4,246세대 규모의 주거단지를 건설하는 사업으로 현재 착공 중이다.', lat:37.4967, lng:127.1185 },
+
+    // ── 강동구 ──
+    { id:8, name:'둔촌주공 재건축', gu:'강동구', address:'서울특별시 강동구 둔촌동 170', jibun:'둔촌동 170', type:'재건축', method:'조합방식', operation:'조합', stage:'준공인가', area:473000, households:12032, description:'둔촌주공 1~4단지를 통합 재건축한 12,032세대 규모의 올림픽파크포레온으로, 2024년 준공 인가를 받았다.', lat:37.5240, lng:127.1440 },
+    { id:9, name:'고덕주공 재건축', gu:'강동구', address:'서울특별시 강동구 고덕동 330', jibun:'고덕동 330', type:'재건축', method:'조합방식', operation:'조합', stage:'준공인가', area:165000, households:4066, description:'고덕주공 2·3단지를 재건축하여 그라시움으로 준공된 4,066세대 규모의 대단지 아파트이다.', lat:37.5550, lng:127.1570 },
+
+    // ── 용산구 ──
+    { id:10, name:'한남3구역 재개발', gu:'용산구', address:'서울특별시 용산구 한남동 710', jibun:'한남동 710', type:'재개발(주택정비형)', method:'신탁시행자방식', operation:'조합', stage:'사업시행인가', area:289000, households:5816, description:'한남동 일대 대규모 재개발 사업으로 최고 22층, 5,816세대를 건설하며 한남뉴타운의 핵심 사업이다.', lat:37.5340, lng:126.9980 },
+    { id:11, name:'한남2구역 재개발', gu:'용산구', address:'서울특별시 용산구 한남동 684', jibun:'한남동 684', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'관리처분인가', area:120000, households:2390, description:'한남2구역 재개발로 2,390세대 규모의 주거단지를 조성하며, 관리처분 인가를 받은 상태이다.', lat:37.5322, lng:126.9965 },
+    { id:12, name:'보광동 재개발', gu:'용산구', address:'서울특별시 용산구 보광동 310', jibun:'보광동 310', type:'재개발(주택정비형)', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:78000, households:1520, description:'보광동 일대 노후 주거지를 재개발하여 1,520세대 규모의 신규 주거단지를 조성하는 사업이다.', lat:37.5285, lng:126.9926 },
+
+    // ── 동작구 ──
+    { id:13, name:'흑석9구역 재개발', gu:'동작구', address:'서울특별시 동작구 흑석동 210', jibun:'흑석동 210', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'착공', area:103000, households:3090, description:'흑석뉴타운 9구역으로 3,090세대 규모의 주거단지를 건설 중이며, 현재 착공 단계이다.', lat:37.5070, lng:126.9630 },
+    { id:14, name:'흑석3구역 재개발', gu:'동작구', address:'서울특별시 동작구 흑석동 175', jibun:'흑석동 175', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'준공인가', area:87000, households:2189, description:'흑석뉴타운 3구역은 2,189세대 규모로 준공된 아크로리버하임 단지이다.', lat:37.5055, lng:126.9602 },
+    { id:15, name:'노량진1구역 재개발', gu:'동작구', address:'서울특별시 동작구 노량진동 100', jibun:'노량진동 100', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'조합설립인가', area:96000, households:2540, description:'노량진1구역은 노량진 일대 노후 주택가를 재개발하여 2,540세대를 건설하는 사업이다.', lat:37.5130, lng:126.9425 },
+
+    // ── 영등포구 ──
+    { id:16, name:'신길1구역 재개발', gu:'영등포구', address:'서울특별시 영등포구 신길동 405', jibun:'신길동 405', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'착공', area:124000, households:3620, description:'신길뉴타운 1구역으로 3,620세대 규모의 대단지를 조성하는 사업이며 현재 시공 중이다.', lat:37.5040, lng:126.9140 },
+    { id:17, name:'신길7구역 재개발', gu:'영등포구', address:'서울특별시 영등포구 신길동 290', jibun:'신길동 290', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'관리처분인가', area:55000, households:1470, description:'신길뉴타운 7구역은 1,470세대 규모의 재개발 사업으로, 관리처분인가를 완료하였다.', lat:37.5020, lng:126.9170 },
+
+    // ── 동대문구 ──
+    { id:18, name:'이문1구역 재개발', gu:'동대문구', address:'서울특별시 동대문구 이문동 292', jibun:'이문동 292', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'착공', area:299000, households:6790, description:'이문·휘경 뉴타운 내 최대 구역으로 6,790세대 규모의 대단지를 조성하는 사업이며, 착공 중이다.', lat:37.5960, lng:127.0580 },
+    { id:19, name:'전농3구역 재개발', gu:'동대문구', address:'서울특별시 동대문구 전농동 590', jibun:'전농동 590', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'사업시행인가', area:73000, households:1800, description:'전농·답십리 뉴타운 3구역으로 1,800세대 규모의 주거단지를 조성하는 사업이다.', lat:37.5810, lng:127.0460 },
+
+    // ── 성북구 ──
+    { id:20, name:'장위4구역 재개발', gu:'성북구', address:'서울특별시 성북구 장위동 235', jibun:'장위동 235', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'이주·철거', area:157000, households:3230, description:'장위뉴타운 4구역으로 3,230세대 규모의 주거단지 조성을 위한 이주 및 철거가 진행 중이다.', lat:37.6100, lng:127.0520 },
+    { id:21, name:'장위5구역 재개발', gu:'성북구', address:'서울특별시 성북구 장위동 198', jibun:'장위동 198', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'조합설립인가', area:120000, households:2680, description:'장위뉴타운 5구역은 2,680세대 규모의 재개발 사업으로 조합설립 인가를 받은 상태이다.', lat:37.6080, lng:127.0490 },
+    { id:22, name:'정릉4구역 재개발', gu:'성북구', address:'서울특별시 성북구 정릉동 1010', jibun:'정릉동 1010', type:'재개발(주택정비형)', method:'공공', operation:'추진위원회', stage:'정비계획수립', area:68000, households:1340, description:'정릉동 일대 노후 주거지를 공공재개발로 정비하여 1,340세대를 건설하는 정비계획이 수립 중이다.', lat:37.6050, lng:127.0100 },
+
+    // ── 은평구 ──
+    { id:23, name:'수색13구역 재개발', gu:'은평구', address:'서울특별시 은평구 수색동 225', jibun:'수색동 225', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'사업시행인가', area:88000, households:2150, description:'수색·증산 뉴타운 13구역은 2,150세대 규모의 재개발 사업으로, 사업시행인가를 받은 단계이다.', lat:37.5840, lng:126.9070 },
+    { id:24, name:'수색14구역 재개발', gu:'은평구', address:'서울특별시 은평구 수색동 210', jibun:'수색동 210', type:'재개발(주택정비형)', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:42000, households:980, description:'수색·증산 뉴타운 14구역으로 980세대 규모의 재개발을 추진 중이며, 추진위원회가 승인되었다.', lat:37.5820, lng:126.9050 },
+
+    // ── 마포구 ──
+    { id:25, name:'아현1구역 재개발', gu:'마포구', address:'서울특별시 마포구 아현동 618', jibun:'아현동 618', type:'재개발(주택정비형)', method:'조합방식', operation:'조합청산', stage:'준공인가', area:96000, households:3210, description:'아현뉴타운 1구역은 마포래미안푸르지오로 3,210세대 규모로 준공되어 조합청산 단계에 있다.', lat:37.5558, lng:126.9564 },
+    { id:26, name:'공덕1구역 재개발', gu:'마포구', address:'서울특별시 마포구 공덕동 370', jibun:'공덕동 370', type:'재개발(주택정비형)', method:'조합방식', operation:'조합청산', stage:'준공인가', area:50000, households:1690, description:'공덕1구역은 1,690세대 규모의 래미안공덕3차로 준공되어 입주가 완료된 사업이다.', lat:37.5442, lng:126.9501 },
+
+    // ── 성동구 ──
+    { id:27, name:'성수동 가로주택정비', gu:'성동구', address:'서울특별시 성동구 성수동2가 315', jibun:'성수동2가 315', type:'가로주택정비', method:'조합방식', operation:'조합', stage:'조합설립인가', area:8500, households:120, description:'성수동 일대 소규모 노후 주택을 가로주택정비사업으로 정비하여 120세대를 건설하는 사업이다.', lat:37.5470, lng:127.0560 },
+    { id:28, name:'왕십리뉴타운 재개발', gu:'성동구', address:'서울특별시 성동구 하왕십리동 968', jibun:'하왕십리동 968', type:'재개발(주택정비형)', method:'조합방식', operation:'조합청산', stage:'준공인가', area:220000, households:5420, description:'왕십리뉴타운은 텐즈힐 등 5,420세대 규모로 준공된 대규모 재개발 사업이다.', lat:37.5612, lng:127.0378 },
+
+    // ── 관악구 ──
+    { id:29, name:'봉천13구역 재개발', gu:'관악구', address:'서울특별시 관악구 봉천동 1620', jibun:'봉천동 1620', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'관리처분인가', area:76000, households:2210, description:'봉천동 일대 노후 주거지를 재개발하여 2,210세대를 건설하는 사업으로, 관리처분인가를 받았다.', lat:37.4780, lng:126.9550 },
+    { id:30, name:'신림1구역 재개발', gu:'관악구', address:'서울특별시 관악구 신림동 1645', jibun:'신림동 1645', type:'재개발(주택정비형)', method:'공공', operation:'추진위원회', stage:'정비계획수립', area:62000, households:1580, description:'신림동 일대를 공공재개발 방식으로 정비하여 1,580세대를 건설하는 사업이 정비계획 수립 중이다.', lat:37.4840, lng:126.9290 },
+
+    // ── 종로구 ──
+    { id:31, name:'돈의문뉴타운 재개발', gu:'종로구', address:'서울특별시 종로구 교남동 1', jibun:'교남동 1', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'이주·철거', area:145000, households:3580, description:'돈의문(교남) 뉴타운 재개발 사업으로, 3,580세대 규모의 주거단지 조성을 위해 이주가 진행 중이다.', lat:37.5705, lng:126.9670 },
+    { id:32, name:'창신·숭인 재개발', gu:'종로구', address:'서울특별시 종로구 창신동 300', jibun:'창신동 300', type:'재개발(주택정비형)', method:'공공', operation:'추진위원회', stage:'정비계획수립', area:185000, households:3200, description:'창신·숭인 일대를 도시재생과 연계한 공공재개발 방식으로 정비하는 사업이다.', lat:37.5750, lng:127.0110 },
+
+    // ── 중구 ──
+    { id:33, name:'회현제2구역 재개발', gu:'중구', address:'서울특별시 중구 회현동2가 55', jibun:'회현동2가 55', type:'재개발(주택정비형)', method:'신탁시행자방식', operation:'조합', stage:'사업시행인가', area:35000, households:890, description:'회현동 일대를 신탁시행자 방식으로 재개발하여 890세대 규모의 도심 주거단지를 조성하는 사업이다.', lat:37.5580, lng:126.9810 },
+
+    // ── 강북구 ──
+    { id:34, name:'미아3구역 재개발', gu:'강북구', address:'서울특별시 강북구 미아동 814', jibun:'미아동 814', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'착공', area:115000, households:2980, description:'미아뉴타운 3구역은 2,980세대 규모의 재개발 사업으로 현재 착공 중이다.', lat:37.6150, lng:127.0260 },
+    { id:35, name:'번1동 재개발', gu:'강북구', address:'서울특별시 강북구 번동 415', jibun:'번동 415', type:'재개발(주택정비형)', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:54000, households:1260, description:'번동 일대 노후 주거지를 재개발하여 1,260세대를 건설하는 사업으로 추진위원회 단계이다.', lat:37.6310, lng:127.0220 },
+
+    // ── 도봉구 ──
+    { id:36, name:'창동주공 재건축', gu:'도봉구', address:'서울특별시 도봉구 창동 720', jibun:'창동 720', type:'재건축', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:130000, households:2800, description:'창동주공아파트를 재건축하여 2,800세대 규모의 신규 주거단지를 조성하는 사업이다.', lat:37.6540, lng:127.0440 },
+
+    // ── 노원구 ──
+    { id:37, name:'상계주공5단지 재건축', gu:'노원구', address:'서울특별시 노원구 상계동 745', jibun:'상계동 745', type:'재건축', method:'조합방식', operation:'추진위원회', stage:'정비계획수립', area:210000, households:4200, description:'상계주공5단지를 재건축하여 4,200세대 규모의 대단지를 조성하는 사업으로 정비계획 수립 단계이다.', lat:37.6680, lng:127.0700 },
+
+    // ── 양천구 ──
+    { id:38, name:'신정뉴타운 재개발', gu:'양천구', address:'서울특별시 양천구 신정동 320', jibun:'신정동 320', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'조합설립인가', area:173000, households:4100, description:'신정뉴타운 일대를 재개발하여 4,100세대 규모의 주거단지를 조성하는 사업이다.', lat:37.5180, lng:126.8560 },
+
+    // ── 구로구 ──
+    { id:39, name:'가리봉동 재개발', gu:'구로구', address:'서울특별시 구로구 가리봉동 98', jibun:'가리봉동 98', type:'재개발(주택정비형)', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:89000, households:2350, description:'가리봉동 일대 노후 주거 밀집 지역을 재개발하여 2,350세대를 건설하는 사업이다.', lat:37.4840, lng:126.8870 },
+
+    // ── 금천구 ──
+    { id:40, name:'시흥5동 재개발', gu:'금천구', address:'서울특별시 금천구 시흥동 1000', jibun:'시흥동 1000', type:'재개발(주택정비형)', method:'공공', operation:'추진위원회', stage:'정비계획수립', area:47000, households:1120, description:'시흥동 일대를 공공재개발 방식으로 정비하여 1,120세대를 건설하는 정비계획이 수립 중이다.', lat:37.4570, lng:126.8970 },
+
+    // ── 서대문구 ──
+    { id:41, name:'북아현3구역 재개발', gu:'서대문구', address:'서울특별시 서대문구 북아현동 1-113', jibun:'북아현동 1-113', type:'재개발(주택정비형)', method:'조합방식', operation:'조합청산', stage:'준공인가', area:91000, households:3380, description:'북아현3구역은 e편한세상신촌으로 3,380세대 규모로 준공되어 입주가 완료되었다.', lat:37.5615, lng:126.9540 },
+    { id:42, name:'가재울뉴타운 재개발', gu:'서대문구', address:'서울특별시 서대문구 남가좌동 355', jibun:'남가좌동 355', type:'재개발(주택정비형)', method:'조합방식', operation:'조합청산', stage:'준공인가', area:250000, households:6200, description:'가재울뉴타운은 DMC파크뷰자이 등 6,200세대 규모로 준공된 대규모 뉴타운 사업이다.', lat:37.5720, lng:126.9180 },
+
+    // ── 광진구 ──
+    { id:43, name:'구의3구역 재개발', gu:'광진구', address:'서울특별시 광진구 구의동 600', jibun:'구의동 600', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'조합설립인가', area:67000, households:1650, description:'구의동 일대 노후 주거지를 재개발하여 1,650세대를 건설하는 사업으로 조합설립 인가를 받았다.', lat:37.5430, lng:127.0870 },
+
+    // ── 추가 프로젝트 (50개 달성) ──
+    { id:44, name:'신길5구역 재개발', gu:'영등포구', address:'서울특별시 영등포구 신길동 350', jibun:'신길동 350', type:'재개발(주택정비형)', method:'신탁시행자방식', operation:'조합', stage:'관리처분인가', area:72000, households:1890, description:'신길뉴타운 5구역으로 1,890세대 규모의 재개발 사업이며, 관리처분인가를 완료하였다.', lat:37.5030, lng:126.9155 },
+    { id:45, name:'장위8구역 재개발', gu:'성북구', address:'서울특별시 성북구 장위동 280', jibun:'장위동 280', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'사업시행인가', area:95000, households:2100, description:'장위뉴타운 8구역은 2,100세대 규모의 재개발 사업으로 사업시행인가를 받았다.', lat:37.6090, lng:127.0505 },
+    { id:46, name:'이문3구역 재개발', gu:'동대문구', address:'서울특별시 동대문구 이문동 310', jibun:'이문동 310', type:'재개발(주택정비형)', method:'조합방식', operation:'조합', stage:'관리처분인가', area:132000, households:3400, description:'이문·휘경 뉴타운 3구역으로 3,400세대를 건설하는 사업이며, 관리처분인가를 받았다.', lat:37.5945, lng:127.0560 },
+    { id:47, name:'둔촌동 소규모재건축', gu:'강동구', address:'서울특별시 강동구 둔촌동 55', jibun:'둔촌동 55', type:'소규모재건축', method:'조합방식', operation:'조합', stage:'조합설립인가', area:6800, households:85, description:'둔촌동 소규모 노후 공동주택을 소규모재건축으로 정비하여 85세대를 건설하는 사업이다.', lat:37.5255, lng:127.1460 },
+    { id:48, name:'성수동 소규모재건축', gu:'성동구', address:'서울특별시 성동구 성수동1가 680', jibun:'성수동1가 680', type:'소규모재건축', method:'조합방식', operation:'추진위원회', stage:'추진위원회승인', area:5200, households:72, description:'성수동 소규모 공동주택을 재건축하여 72세대 규모의 신축 단지를 조성하는 사업이다.', lat:37.5485, lng:127.0545 },
+    { id:49, name:'봉천5구역 가로주택', gu:'관악구', address:'서울특별시 관악구 봉천동 890', jibun:'봉천동 890', type:'가로주택정비', method:'조합방식', operation:'조합', stage:'사업시행인가', area:7200, households:95, description:'봉천동 일대 소규모 노후 주택을 가로주택정비사업으로 정비하여 95세대를 건설한다.', lat:37.4795, lng:126.9540 },
+    { id:50, name:'미아동 가로주택', gu:'강북구', address:'서울특별시 강북구 미아동 720', jibun:'미아동 720', type:'가로주택정비', method:'조합방식', operation:'추진위원회', stage:'정비계획수립', area:4500, households:58, description:'미아동 소규모 노후 주택을 가로주택정비 방식으로 정비하여 58세대를 건설하는 사업이다.', lat:37.6165, lng:127.0280 }
+];
+
+/* ── 진행단계 순서 (정렬용) ── */
+const STAGE_ORDER = {
+    '정비계획수립': 1,
+    '추진위원회승인': 2,
+    '조합설립인가': 3,
+    '사업시행인가': 4,
+    '관리처분인가': 5,
+    '이주·철거': 6,
+    '착공': 7,
+    '준공인가': 8
+};
+
+/* ── 유틸 ── */
+function getTypeClass(type) {
+    if (type === '재건축') return 'rebuild';
+    if (type.includes('재개발')) return 'redevelop';
+    if (type === '가로주택정비') return 'garo';
+    if (type === '소규모재건축') return 'small';
+    return 'rebuild';
+}
+function formatArea(n) {
+    if (!n) return '-';
+    return n.toLocaleString() + ' m²';
+}
+function formatHouseholds(n) {
+    if (!n) return '-';
+    return n.toLocaleString() + ' 세대';
+}
+
+/* ── DOM REFS ── */
+const filterGu = document.getElementById('filter-gu');
+const filterType = document.getElementById('filter-type');
+const filterStage = document.getElementById('filter-stage');
+const filterMethod = document.getElementById('filter-method');
+const filterKeyword = document.getElementById('filter-keyword');
+const btnSearch = document.getElementById('btn-search');
+const btnReset = document.getElementById('btn-reset');
+const filterTagsContainer = document.getElementById('filter-tags');
+const resultCountEl = document.getElementById('result-count');
+const sortSelect = document.getElementById('sort-select');
+const resultList = document.getElementById('result-list');
+const emptyState = document.getElementById('empty-state');
+const searchLayout = document.getElementById('search-layout');
+const btnViewList = document.getElementById('btn-view-list');
+const btnViewMap = document.getElementById('btn-view-map');
+
+const detailPanel = document.getElementById('detail-panel');
+const detailOverlay = document.getElementById('detail-overlay');
+const detailClose = document.getElementById('detail-close');
+const detailBadges = document.getElementById('detail-badges');
+const detailName = document.getElementById('detail-name');
+const detailLocation = document.getElementById('detail-location');
+const detailInfoTable = document.getElementById('detail-info-table').querySelector('tbody');
+const detailDescription = document.getElementById('detail-description');
+
+/* ── 자치구 옵션 자동 생성 ── */
+const guSet = [...new Set(PROJECTS.map(p => p.gu))].sort();
+guSet.forEach(g => {
+    const opt = document.createElement('option');
+    opt.value = g;
+    opt.textContent = g;
+    filterGu.appendChild(opt);
+});
+
+/* ── 상태 ── */
+let filteredProjects = [...PROJECTS];
+let activeProject = null;
+let kakaoMap = null;
+let kakaoMarkers = [];
+let usingKakao = false;
+
+/* ══════════════════════════════
+   필터 & 렌더
+   ══════════════════════════════ */
+function applyFilters() {
+    const gu = filterGu.value;
+    const type = filterType.value;
+    const stage = filterStage.value;
+    const method = filterMethod.value;
+    const keyword = filterKeyword.value.trim().toLowerCase();
+
+    filteredProjects = PROJECTS.filter(p => {
+        if (gu && p.gu !== gu) return false;
+        if (type && p.type !== type) return false;
+        if (stage && p.stage !== stage) return false;
+        if (method && p.method !== method) return false;
+        if (keyword) {
+            const hay = (p.name + p.address + p.jibun + p.gu).toLowerCase();
+            if (!hay.includes(keyword)) return false;
+        }
+        return true;
+    });
+
+    applySorting();
+    renderTags();
+    renderList();
+    renderMapMarkers();
+}
+
+function applySorting() {
+    const sort = sortSelect.value;
+    filteredProjects.sort((a, b) => {
+        if (sort === 'name') return a.name.localeCompare(b.name, 'ko');
+        if (sort === 'gu') return a.gu.localeCompare(b.gu, 'ko') || a.name.localeCompare(b.name, 'ko');
+        if (sort === 'stage') return (STAGE_ORDER[a.stage]||99) - (STAGE_ORDER[b.stage]||99);
+        return 0;
+    });
+}
+
+function renderTags() {
+    filterTagsContainer.innerHTML = '';
+    const filters = [
+        { key: 'gu', label: filterGu.value, el: filterGu },
+        { key: 'type', label: filterType.value, el: filterType },
+        { key: 'stage', label: filterStage.value, el: filterStage },
+        { key: 'method', label: filterMethod.value, el: filterMethod },
+    ];
+    const keyword = filterKeyword.value.trim();
+    if (keyword) {
+        filters.push({ key: 'keyword', label: '"' + keyword + '"', el: filterKeyword });
+    }
+    filters.forEach(f => {
+        if (!f.label) return;
+        const tag = document.createElement('span');
+        tag.className = 'filter-tag';
+        tag.innerHTML = f.label + '<button class="remove-tag" data-key="' + f.key + '"><i class="fa-solid fa-xmark"></i></button>';
+        filterTagsContainer.appendChild(tag);
+    });
+}
+
+function renderList() {
+    resultCountEl.textContent = filteredProjects.length;
+
+    if (filteredProjects.length === 0) {
+        resultList.innerHTML = '';
+        emptyState.style.display = 'flex';
+        return;
+    }
+    emptyState.style.display = 'none';
+
+    let html = '';
+    filteredProjects.forEach(p => {
+        const cls = getTypeClass(p.type);
+        const isActive = activeProject && activeProject.id === p.id ? ' active' : '';
+        html += '<div class="result-card' + isActive + '" data-id="' + p.id + '">' +
+            '<div class="card-type-bar type-' + cls + '"></div>' +
+            '<div class="card-body">' +
+            '<div class="card-badges">' +
+            '<span class="badge badge-' + cls + '">' + p.type + '</span>' +
+            '<span class="badge badge-stage">' + p.stage + '</span>' +
+            '</div>' +
+            '<div class="card-name">' + p.name + '</div>' +
+            '<div class="card-info"><span>' + p.gu + '</span><span>' + p.jibun + '</span></div>' +
+            '<div class="card-info"><span>' + p.method + '</span><span>' + p.operation + '</span></div>' +
+            '<div class="card-meta">' +
+            '<span><i class="fa-solid fa-ruler-combined"></i>' + formatArea(p.area) + '</span>' +
+            '<span><i class="fa-solid fa-building"></i>' + formatHouseholds(p.households) + '</span>' +
+            '</div>' +
+            '</div></div>';
+    });
+    resultList.innerHTML = html;
+}
+
+/* ══════════════════════════════
+   MAP — Kakao + CSS Fallback
+   ══════════════════════════════ */
+
+/* Seoul bounding box for coordinate mapping */
+const SEOUL_BOUNDS = {
+    latMin: 37.42, latMax: 37.70,
+    lngMin: 126.76, lngMax: 127.18
+};
+
+function latLngToPercent(lat, lng) {
+    const x = ((lng - SEOUL_BOUNDS.lngMin) / (SEOUL_BOUNDS.lngMax - SEOUL_BOUNDS.lngMin)) * 100;
+    const y = (1 - (lat - SEOUL_BOUNDS.latMin) / (SEOUL_BOUNDS.latMax - SEOUL_BOUNDS.latMin)) * 100;
+    return {
+        x: Math.max(4, Math.min(96, x)),
+        y: Math.max(4, Math.min(96, y))
+    };
+}
+
+function initMap() {
+    const mapContainer = document.getElementById('kakao-map');
+    try {
+        if (typeof kakao !== 'undefined' && kakao.maps) {
+            kakaoMap = new kakao.maps.Map(mapContainer, {
+                center: new kakao.maps.LatLng(37.5665, 126.9780),
+                level: 9
+            });
+            usingKakao = true;
+            renderMapMarkers();
+            return;
+        }
+    } catch(e) { /* fallback */ }
+
+    /* CSS Fallback map */
+    usingKakao = false;
+    renderFallbackMap();
+}
+
+function renderFallbackMap() {
+    const mapContainer = document.getElementById('kakao-map');
+    let html = '<div class="fallback-map" id="fallback-map">';
+    html += '<div class="fallback-map-title"><i class="fa-solid fa-map-location-dot"></i> 서울시 정비사업 위치</div>';
+
+    /* SVG Seoul outline */
+    html += '<svg viewBox="0 0 400 300" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.10;" preserveAspectRatio="xMidYMid meet">' +
+        '<path d="M80,60 Q60,80 50,120 Q45,160 60,190 Q80,220 120,240 Q160,260 200,260 Q240,258 280,240 Q320,220 340,190 Q355,160 350,120 Q345,90 320,70 Q290,50 250,45 Q210,40 170,42 Q130,45 100,55 Z" fill="#142644" stroke="#0A0F1C" stroke-width="1.5"/>' +
+        '</svg>';
+
+    /* Place markers */
+    filteredProjects.forEach(p => {
+        const pos = latLngToPercent(p.lat, p.lng);
+        const cls = getTypeClass(p.type);
+        const isActive = activeProject && activeProject.id === p.id ? ' active' : '';
+        html += '<div class="map-marker type-' + cls + isActive + '" data-id="' + p.id + '" style="left:' + pos.x + '%;top:' + pos.y + '%;">' +
+            '<div class="map-marker-tooltip">' + p.name + '</div>' +
+            '</div>';
+    });
+
+    /* Legend */
+    html += '<div class="map-legend">' +
+        '<div class="map-legend-item"><span class="map-legend-dot" style="background:#2563EB;"></span> 재건축</div>' +
+        '<div class="map-legend-item"><span class="map-legend-dot" style="background:#DC2626;"></span> 재개발</div>' +
+        '<div class="map-legend-item"><span class="map-legend-dot" style="background:#D97706;"></span> 가로주택</div>' +
+        '<div class="map-legend-item"><span class="map-legend-dot" style="background:#059669;"></span> 소규모</div>' +
+        '</div>';
+
+    html += '</div>';
+    mapContainer.innerHTML = html;
+}
+
+function renderMapMarkers() {
+    if (usingKakao && kakaoMap) {
+        renderKakaoMarkers();
+    } else {
+        renderFallbackMap();
+    }
+}
+
+function renderKakaoMarkers() {
+    /* Clear existing markers */
+    kakaoMarkers.forEach(m => m.setMap(null));
+    kakaoMarkers = [];
+
+    const bounds = new kakao.maps.LatLngBounds();
+
+    filteredProjects.forEach(p => {
+        const position = new kakao.maps.LatLng(p.lat, p.lng);
+        bounds.extend(position);
+
+        const colorMap = { 'rebuild': '#2563EB', 'redevelop': '#DC2626', 'garo': '#D97706', 'small': '#059669' };
+        const cls = getTypeClass(p.type);
+        const color = colorMap[cls] || '#2563EB';
+
+        const markerContent = document.createElement('div');
+        markerContent.style.cssText = 'width:14px;height:14px;border-radius:50%;background:' + color + ';border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3);cursor:pointer;position:relative;';
+
+        const customOverlay = new kakao.maps.CustomOverlay({
+            position: position,
+            content: markerContent,
+            yAnchor: 0.5,
+            xAnchor: 0.5,
+            zIndex: 3
+        });
+        customOverlay.setMap(kakaoMap);
+        customOverlay.projectId = p.id;
+
+        /* Tooltip on hover */
+        const tooltip = document.createElement('div');
+        tooltip.style.cssText = 'position:absolute;bottom:22px;left:50%;transform:translateX(-50%);background:#0A0F1C;color:#fff;font-size:11px;padding:5px 10px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.15s;z-index:20;font-family:var(--font);';
+        tooltip.textContent = p.name;
+        markerContent.appendChild(tooltip);
+
+        markerContent.addEventListener('mouseenter', () => { tooltip.style.opacity = '1'; });
+        markerContent.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
+        markerContent.addEventListener('click', () => { openDetail(p.id); });
+
+        kakaoMarkers.push(customOverlay);
+    });
+
+    if (filteredProjects.length > 0) {
+        kakaoMap.setBounds(bounds);
+    }
+}
+
+function highlightKakaoMarker(projectId) {
+    kakaoMarkers.forEach(m => {
+        const el = m.a || m.Hd || m.getContent();
+        if (el && el.style) {
+            if (m.projectId === projectId) {
+                el.style.width = '20px';
+                el.style.height = '20px';
+                el.style.boxShadow = '0 0 0 4px rgba(195,165,105,0.5), 0 2px 8px rgba(0,0,0,0.3)';
+                el.style.zIndex = '10';
+            } else {
+                el.style.width = '14px';
+                el.style.height = '14px';
+                el.style.boxShadow = '0 1px 4px rgba(0,0,0,0.3)';
+                el.style.zIndex = '3';
+            }
+        }
+    });
+}
+
+/* ══════════════════════════════
+   DETAIL PANEL
+   ══════════════════════════════ */
+function openDetail(id) {
+    const p = PROJECTS.find(proj => proj.id === id);
+    if (!p) return;
+    activeProject = p;
+
+    const cls = getTypeClass(p.type);
+    detailBadges.innerHTML =
+        '<span class="badge badge-' + cls + '">' + p.type + '</span>' +
+        '<span class="badge badge-stage">' + p.stage + '</span>';
+    detailName.textContent = p.name;
+    detailLocation.querySelector('span').textContent = p.gu + ' · ' + p.jibun;
+
+    detailInfoTable.innerHTML =
+        '<tr><th>사업구분</th><td>' + p.type + '</td></tr>' +
+        '<tr><th>시행방식</th><td>' + p.method + '</td></tr>' +
+        '<tr><th>운영단계</th><td>' + p.operation + '</td></tr>' +
+        '<tr><th>진행단계</th><td>' + p.stage + '</td></tr>' +
+        '<tr><th>자치구</th><td>' + p.gu + '</td></tr>' +
+        '<tr><th>소재지</th><td>' + p.address + '</td></tr>' +
+        '<tr><th>지번</th><td>' + p.jibun + '</td></tr>' +
+        '<tr><th>정비구역 면적</th><td>' + formatArea(p.area) + '</td></tr>' +
+        '<tr><th>건설 세대수</th><td>' + formatHouseholds(p.households) + '</td></tr>' +
+        '<tr><th>좌표</th><td>' + p.lat + ', ' + p.lng + '</td></tr>';
+
+    detailDescription.textContent = p.description;
+
+    detailPanel.classList.add('open');
+    detailOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    /* Highlight card */
+    document.querySelectorAll('.result-card').forEach(card => {
+        card.classList.toggle('active', parseInt(card.dataset.id) === id);
+    });
+
+    /* Highlight map marker */
+    if (usingKakao) {
+        highlightKakaoMarker(id);
+        kakaoMap.panTo(new kakao.maps.LatLng(p.lat, p.lng));
+    } else {
+        document.querySelectorAll('.map-marker').forEach(m => {
+            m.classList.toggle('active', parseInt(m.dataset.id) === id);
+        });
+    }
+}
+
+function closeDetail() {
+    detailPanel.classList.remove('open');
+    detailOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    activeProject = null;
+    document.querySelectorAll('.result-card').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.map-marker').forEach(m => m.classList.remove('active'));
+    if (usingKakao) highlightKakaoMarker(null);
+}
+
+/* ══════════════════════════════
+   EVENT LISTENERS
+   ══════════════════════════════ */
+
+/* Filters on change */
+[filterGu, filterType, filterStage, filterMethod].forEach(el => {
+    el.addEventListener('change', applyFilters);
+});
+
+/* Keyword enter */
+filterKeyword.addEventListener('keydown', e => {
+    if (e.key === 'Enter') applyFilters();
+});
+
+/* Search button */
+btnSearch.addEventListener('click', applyFilters);
+
+/* Reset */
+btnReset.addEventListener('click', () => {
+    filterGu.value = '';
+    filterType.value = '';
+    filterStage.value = '';
+    filterMethod.value = '';
+    filterKeyword.value = '';
+    activeProject = null;
+    applyFilters();
+});
+
+/* Sort */
+sortSelect.addEventListener('change', () => {
+    applySorting();
+    renderList();
+});
+
+/* Remove filter tag */
+filterTagsContainer.addEventListener('click', e => {
+    const btn = e.target.closest('.remove-tag');
+    if (!btn) return;
+    const key = btn.dataset.key;
+    if (key === 'gu') filterGu.value = '';
+    else if (key === 'type') filterType.value = '';
+    else if (key === 'stage') filterStage.value = '';
+    else if (key === 'method') filterMethod.value = '';
+    else if (key === 'keyword') filterKeyword.value = '';
+    applyFilters();
+});
+
+/* Click result card */
+resultList.addEventListener('click', e => {
+    const card = e.target.closest('.result-card');
+    if (!card) return;
+    openDetail(parseInt(card.dataset.id));
+});
+
+/* Click fallback map marker */
+document.getElementById('map-panel').addEventListener('click', e => {
+    const marker = e.target.closest('.map-marker');
+    if (!marker) return;
+    openDetail(parseInt(marker.dataset.id));
+});
+
+/* Detail close */
+detailClose.addEventListener('click', closeDetail);
+detailOverlay.addEventListener('click', closeDetail);
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDetail();
+});
+
+/* View toggle (mobile) */
+btnViewList.addEventListener('click', () => {
+    searchLayout.classList.remove('view-map');
+    btnViewList.classList.add('active');
+    btnViewMap.classList.remove('active');
+});
+btnViewMap.addEventListener('click', () => {
+    searchLayout.classList.add('view-map');
+    btnViewMap.classList.add('active');
+    btnViewList.classList.remove('active');
+    /* Re-render map on show */
+    setTimeout(() => { renderMapMarkers(); }, 100);
+});
+
+/* ══════════════════════════════
+   INIT
+   ══════════════════════════════ */
+applyFilters();
+
+/* Defer map init to after page load */
+window.addEventListener('load', () => {
+    setTimeout(initMap, 200);
+});
+</script>
+</body>
+</html>

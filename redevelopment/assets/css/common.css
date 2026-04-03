@@ -44,7 +44,7 @@
 
 /* ── RESET & BASE ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 body {
   font-family: var(--font);
   background: var(--white);
@@ -111,15 +111,12 @@ button, input, select, textarea { font-family: inherit; }
 /* ── HEADER WRAP (sticky container) ── */
 .header-wrap {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  transition: all 0.35s ease;
 }
 
 /* ── UTILITY BAR ── */
 .util-bar {
   background: var(--brand-dark);
   font-size: 11px; color: rgba(255,255,255,0.45); height: 32px;
-  transition: height 0.35s ease, opacity 0.35s ease;
-  overflow: hidden;
 }
 .util-bar .inner { display: flex; align-items: center; justify-content: flex-end; height: 100%; gap: 20px; }
 .util-bar a { color: rgba(255,255,255,0.45); transition: color var(--transition); }
@@ -127,47 +124,32 @@ button, input, select, textarea { font-family: inherit; }
 .util-bar .util-left { flex:1; color: rgba(255,255,255,0.3); font-size:10px; letter-spacing:0.5px; }
 @media (max-width: 768px) { .util-bar { display: none; } }
 
-/* 스크롤 시 util-bar 숨김 */
-.header-wrap.scrolled .util-bar { height: 0; opacity: 0; }
-
 /* ── HEADER ── */
 .header {
   background: rgba(255,255,255,0.98);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--gray-200);
-  transition: all 0.35s ease;
 }
 .header .inner {
   display: flex; align-items: center; height: 72px; gap: 48px;
-  transition: height 0.35s ease;
 }
-
-/* 스크롤 시 헤더 축소 */
-.header-wrap.scrolled .header {
-  border-bottom-color: var(--gray-100);
-  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
-}
-.header-wrap.scrolled .header .inner { height: 58px; }
-.header-wrap.scrolled .logo-mark { width: 28px; height: 28px; }
-.header-wrap.scrolled .logo-company { font-size: 14px; }
 
 /* ── 헤더 아래 본문 여백 ── */
-body { padding-top: 104px; } /* 32(util) + 72(header) */
+body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 @media (max-width: 768px) { body { padding-top: 72px; } }
-.header-wrap.scrolled ~ * { /* padding-top은 JS로 동적 처리 */ }
 
 /* ── LOGO ── */
 .logo {
   display: inline-flex; align-items: center; gap: 12px;
   flex-shrink: 0; text-decoration: none;
 }
-.logo-mark { flex-shrink: 0; width: 34px; height: 34px; transition: all 0.35s ease; }
+.logo-mark { flex-shrink: 0; width: 34px; height: 34px; }
 .logo-mark svg { width: 100%; height: 100%; }
 .logo-text { display: flex; flex-direction: column; line-height: 1.15; }
 .logo-company {
   font-size: 15px; font-weight: 800; letter-spacing: -0.4px;
-  color: var(--gray-900); transition: font-size 0.35s ease;
+  color: var(--gray-900);
 }
 .logo-sub {
   font-size: 8px; font-weight: 500; letter-spacing: 2px;
@@ -195,7 +177,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) */
 }
 .gnb a:hover { color: var(--gray-900); }
 .gnb a:hover::after { width: 20px; }
-.gnb a.active { color: var(--gray-900); font-weight: 700; }
+.gnb a.active { color: var(--gray-900); }
 .gnb a.active::after { width: 20px; }
 .gnb a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px; }
 
@@ -378,13 +360,23 @@ body { padding-top: 104px; } /* 32(util) + 72(header) */
   .page-hero h1 { font-size: 24px; }
 }
 
-.page-body { padding: 48px 0 80px; }
+.page-body { padding: 48px 0 80px; min-height: 60vh; }
 @media (max-width: 768px) { .page-body { padding: 32px 0 60px; } }
+
+/* ── 페이지 공통 섹션 간격 ── */
+.about-section,
+.vision-section,
+.services-section,
+.featured-section { margin-bottom: 56px; }
+.about-section:last-child,
+.vision-section:last-child,
+.services-section:last-child,
+.featured-section:last-child { margin-bottom: 0; }
 
 /* ── BREADCRUMB ── */
 .breadcrumb {
   display: flex; align-items: center; gap: 6px;
-  font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px;
+  font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 16px;
   flex-wrap: wrap;
 }
 .breadcrumb a { color: rgba(255,255,255,0.5); transition: color var(--transition); }
