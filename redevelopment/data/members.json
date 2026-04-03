@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": "mnj1lvaq",
+    "name": "이창우",
+    "phone": "010-2230-9210",
+    "email": "dodo6666@naver.com",
+    "password": "813700hb@@",
+    "zipcode": "13006",
+    "address": "경기 하남시 감일백제로 70 204동 1104호",
+    "area": "가락현대5차",
+    "grade": "일반",
+    "status": "활성",
+    "date": "2026-04-03",
+    "memo": ""
+  }
+]
