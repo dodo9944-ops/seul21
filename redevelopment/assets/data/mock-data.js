@@ -367,7 +367,13 @@ const MOCK = {
     { id:'lib7', category:'가이드', title:'정비사업 단계별 업무 체크리스트', description:'기본계획 수립부터 준공까지 단계별 필수 업무 체크리스트', fileType:'xlsx', fileSize:'156KB', date:'2026-03-20', downloads:278, tags:['체크리스트','단계별'] },
     { id:'lib8', category:'가이드', title:'조합원 분담금 산정 가이드', description:'비례율, 권리가액, 분담금 산정 방법과 실제 계산 사례', fileType:'pdf', fileSize:'2.1MB', date:'2026-02-15', downloads:345, tags:['분담금','비례율'] },
     { id:'lib9', category:'가이드', title:'시공사 선정 평가 기준 해설', description:'정비사업 시공사 선정 시 평가 항목별 해설과 사례 분석', fileType:'pdf', fileSize:'1.5MB', date:'2026-01-28', downloads:167, tags:['시공사','선정'] },
-    { id:'lib10', category:'가이드', title:'정비사업 감정평가 이해하기', description:'토지·건물 감정평가의 기준과 절차, 이의신청 방법 안내', fileType:'pdf', fileSize:'980KB', date:'2025-12-10', downloads:203, tags:['감정평가','가이드'] }
+    { id:'lib10', category:'가이드', title:'정비사업 감정평가 이해하기', description:'토지·건물 감정평가의 기준과 절차, 이의신청 방법 안내', fileType:'pdf', fileSize:'980KB', date:'2025-12-10', downloads:203, tags:['감정평가','가이드'] },
+    { id:'lib11', category:'지침', title:'정비사업 조합운영 업무지침', description:'조합 임원의 역할과 책임, 총회·이사회 운영 기준 지침서', fileType:'pdf', fileSize:'1.8MB', date:'2026-03-18', downloads:124, tags:['조합운영','지침'] },
+    { id:'lib12', category:'지침', title:'정비구역 안전진단 실시 지침', description:'안전진단 대상 선정 기준, 평가 절차, 등급 판정 기준 안내', fileType:'pdf', fileSize:'2.3MB', date:'2026-02-22', downloads:98, tags:['안전진단','지침'] },
+    { id:'lib13', category:'지침', title:'정비사업 회계처리 지침', description:'조합 회계 기준, 자금 집행 절차, 감사 대응 매뉴얼', fileType:'pdf', fileSize:'1.1MB', date:'2026-01-15', downloads:87, tags:['회계','지침'] },
+    { id:'lib14', category:'보도자료', title:'2026년 재개발·재건축 규제 완화 발표', description:'국토교통부 정비사업 활성화 방안 보도자료 (2026.3.5)', fileType:'pdf', fileSize:'560KB', date:'2026-03-05', downloads:412, tags:['규제완화','보도자료'] },
+    { id:'lib15', category:'보도자료', title:'서울시 신속통합기획 2단계 대상지 선정', description:'서울시 신속통합기획 2단계 25개 구역 선정 결과 발표', fileType:'pdf', fileSize:'780KB', date:'2026-02-18', downloads:356, tags:['신속통합기획','보도자료'] },
+    { id:'lib16', category:'보도자료', title:'소규모정비사업 특례법 개정안 국회 통과', description:'소규모정비사업 범위 확대 및 절차 간소화 내용 포함', fileType:'pdf', fileSize:'320KB', date:'2026-01-25', downloads:289, tags:['소규모정비','보도자료'] }
   ],
 
   /* ──────────────────────────── 관리자 계정 ──────────────────────────── */

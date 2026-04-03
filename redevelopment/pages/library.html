@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자료실 — (주)세울엔지니어링</title>
-    <meta name="description" content="재개발·재건축 관련 서식, 법령, 가이드 자료를 다운로드하세요.">
+    <meta name="description" content="재개발·재건축 관련 서식, 법령, 지침, 보도자료, 가이드 자료를 다운로드하세요.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -179,6 +179,8 @@
     }
     .lib-cat-서식 { background: var(--accent-light); color: var(--accent); }
     .lib-cat-법령 { background: #FDECEA; color: var(--red); }
+    .lib-cat-지침 { background: #FFF7E6; color: var(--orange); }
+    .lib-cat-보도자료 { background: #F0E6FF; color: #7C3AED; }
     .lib-cat-가이드 { background: #E6F9F0; color: var(--green); }
 
     /* Responsive */
@@ -215,7 +217,7 @@
             <span>자료실</span>
         </div>
         <h1>자료실</h1>
-        <p>재개발·재건축 관련 서식, 법령, 가이드 자료를 다운로드하세요</p>
+        <p>재개발·재건축 관련 서식, 법령, 지침, 보도자료, 가이드 자료를 다운로드하세요</p>
     </div>
 </div>
 
@@ -226,6 +228,8 @@
             <button class="on" data-cat="전체">전체</button>
             <button data-cat="서식">서식</button>
             <button data-cat="법령">법령</button>
+            <button data-cat="지침">지침</button>
+            <button data-cat="보도자료">보도자료</button>
             <button data-cat="가이드">가이드</button>
         </div>
 
@@ -274,6 +278,8 @@
     const catBadgeMap = {
         '서식': 'lib-cat-서식',
         '법령': 'lib-cat-법령',
+        '지침': 'lib-cat-지침',
+        '보도자료': 'lib-cat-보도자료',
         '가이드': 'lib-cat-가이드'
     };
 
