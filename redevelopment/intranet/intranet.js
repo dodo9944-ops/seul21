@@ -10,6 +10,9 @@ const Intra = (() => {
     { id:'user1', pw:'user1234', name:'김정현', role:'staff', dept:'정비사업본부' },
     { id:'user2', pw:'user1234', name:'박세영', role:'staff', dept:'기술본부' },
     { id:'user3', pw:'user1234', name:'최수진', role:'viewer', dept:'경영지원본부' },
+    { id:'user4', pw:'user1234', name:'한상민', role:'staff', dept:'정비사업본부' },
+    { id:'user5', pw:'user1234', name:'오지영', role:'staff', dept:'기술본부' },
+    { id:'user6', pw:'user1234', name:'송태현', role:'viewer', dept:'도시계획팀' },
   ];
 
   /* ── 권한 레벨 ── */
