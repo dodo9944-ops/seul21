@@ -145,37 +145,40 @@
         const password = document.getElementById('password').value.trim();
 
         if (!email) {
-            errorEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> 이메일을 입력해주세요.';
+            errorEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> 연락처 또는 이메일을 입력해주세요.';
             errorEl.style.display = 'block';
             document.getElementById('email').focus();
             return;
         }
 
-        // 데모 모드: 이메일이 있으면 해당 회원으로 로그인 시도
-        const user = DataService.userLogin(email, password);
+        var submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 로그인 중...';
 
-        if (user) {
-            App.toast('환영합니다, ' + user.name + '님!', 'success');
-            setTimeout(function() { location.href = '../index.html'; }, 500);
-        } else {
-            // 데모: 존재하지 않는 이메일이면 자동 생성 후 로그인
-            const newMember = DataService.create('members', {
-                name: email.split('@')[0],
-                email: email,
-                phone: '',
-                role: 'user',
-                joinDate: new Date().toISOString().slice(0, 10),
-                status: '활성'
-            });
-            const loggedIn = DataService.userLogin(email, password);
-            if (loggedIn) {
-                App.toast('데모 계정으로 로그인되었습니다!', 'success');
-                setTimeout(function() { location.href = '../index.html'; }, 500);
+        fetch('../api/members', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'login', phone: email, password: password })
+        })
+        .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+        .then(function(res) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> 로그인';
+            if (res.ok) {
+                sessionStorage.setItem('seul_user', JSON.stringify(res.data.user));
+                App.toast('환영합니다, ' + res.data.user.name + '님!', 'success');
+                setTimeout(function() { location.href = '../index.html'; }, 800);
             } else {
-                errorEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> 로그인에 실패했습니다. 다시 시도해주세요.';
+                errorEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> ' + (res.data.error || '로그인에 실패했습니다.');
                 errorEl.style.display = 'block';
             }
-        }
+        })
+        .catch(function() {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> 로그인';
+            errorEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> 서버 연결에 실패했습니다.';
+            errorEl.style.display = 'block';
+        });
     });
 })();
 </script>
