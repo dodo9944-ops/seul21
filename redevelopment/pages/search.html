@@ -45,13 +45,15 @@
        계산 모달 공통
        ══════════════════════════════ */
     .cm-overlay {
-        position:fixed; top:104px; left:0; right:0; bottom:0; z-index:90;
+        position:fixed; top:0; left:0; right:0; bottom:0; z-index:9000;
         background:rgba(10,15,28,0.6); backdrop-filter:blur(4px);
         display:flex; align-items:flex-start; justify-content:center;
-        padding-top:24px;
+        padding-top:120px;
         opacity:0; visibility:hidden; transition:all 0.3s ease;
     }
     .cm-overlay.open { opacity:1; visibility:visible; }
+    .cm-overlay.open ~ #site-header .header-wrap,
+    .header-wrap { z-index:10000 !important; }
     .cm-modal {
         background:#fff; border-radius:16px; width:640px; max-width:92vw;
         max-height:calc(100vh - 140px); overflow-y:auto; position:relative;
@@ -60,7 +62,7 @@
     }
     .cm-overlay.open .cm-modal { transform:translateY(0) scale(1); }
     @media(max-width:768px) {
-        .cm-overlay { top:72px; padding-top:12px; }
+        .cm-overlay { padding-top:84px; }
         .cm-modal { max-height:calc(100vh - 96px); }
     }
 
