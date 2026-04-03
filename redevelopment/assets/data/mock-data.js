@@ -371,9 +371,13 @@ const MOCK = {
     { id:'lib11', category:'지침', title:'정비사업 조합운영 업무지침', description:'조합 임원의 역할과 책임, 총회·이사회 운영 기준 지침서', fileType:'pdf', fileSize:'1.8MB', date:'2026-03-18', downloads:124, tags:['조합운영','지침'] },
     { id:'lib12', category:'지침', title:'정비구역 안전진단 실시 지침', description:'안전진단 대상 선정 기준, 평가 절차, 등급 판정 기준 안내', fileType:'pdf', fileSize:'2.3MB', date:'2026-02-22', downloads:98, tags:['안전진단','지침'] },
     { id:'lib13', category:'지침', title:'정비사업 회계처리 지침', description:'조합 회계 기준, 자금 집행 절차, 감사 대응 매뉴얼', fileType:'pdf', fileSize:'1.1MB', date:'2026-01-15', downloads:87, tags:['회계','지침'] },
+    { id:'lib17', category:'지침', title:'정비사업 시공자 선정 업무 지침', description:'시공사 입찰 공고, 평가 기준, 선정 절차 및 계약 체결 지침', fileType:'pdf', fileSize:'1.5MB', date:'2026-03-25', downloads:76, tags:['시공자선정','지침'] },
+    { id:'lib18', category:'지침', title:'정비구역 주민이주 및 보상 지침', description:'이주 일정 수립, 이주비 산정, 세입자 보상 절차 매뉴얼', fileType:'pdf', fileSize:'2.0MB', date:'2026-02-10', downloads:112, tags:['이주보상','지침'] },
     { id:'lib14', category:'보도자료', title:'2026년 재개발·재건축 규제 완화 발표', description:'국토교통부 정비사업 활성화 방안 보도자료 (2026.3.5)', fileType:'pdf', fileSize:'560KB', date:'2026-03-05', downloads:412, tags:['규제완화','보도자료'] },
     { id:'lib15', category:'보도자료', title:'서울시 신속통합기획 2단계 대상지 선정', description:'서울시 신속통합기획 2단계 25개 구역 선정 결과 발표', fileType:'pdf', fileSize:'780KB', date:'2026-02-18', downloads:356, tags:['신속통합기획','보도자료'] },
-    { id:'lib16', category:'보도자료', title:'소규모정비사업 특례법 개정안 국회 통과', description:'소규모정비사업 범위 확대 및 절차 간소화 내용 포함', fileType:'pdf', fileSize:'320KB', date:'2026-01-25', downloads:289, tags:['소규모정비','보도자료'] }
+    { id:'lib16', category:'보도자료', title:'소규모정비사업 특례법 개정안 국회 통과', description:'소규모정비사업 범위 확대 및 절차 간소화 내용 포함', fileType:'pdf', fileSize:'320KB', date:'2026-01-25', downloads:289, tags:['소규모정비','보도자료'] },
+    { id:'lib19', category:'보도자료', title:'1기 신도시 정비사업 특별법 시행', description:'분당·일산·평촌·중동·산본 1기 신도시 재건축 특별법 시행 안내', fileType:'pdf', fileSize:'450KB', date:'2026-03-28', downloads:523, tags:['1기신도시','보도자료'] },
+    { id:'lib20', category:'보도자료', title:'공공재개발 2차 후보지 10곳 추가 선정', description:'국토부 공공재개발 사업 2차 후보지 선정 결과 및 향후 일정 안내', fileType:'pdf', fileSize:'680KB', date:'2026-03-12', downloads:378, tags:['공공재개발','보도자료'] }
   ],
 
   /* ──────────────────────────── 관리자 계정 ──────────────────────────── */
