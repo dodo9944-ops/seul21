@@ -109,16 +109,19 @@
         <div class="auth-divider">간편 로그인</div>
 
         <div class="social-buttons">
-            <button type="button" class="social-btn kakao" onclick="alert('카카오 로그인은 데모에서 지원하지 않습니다.')">
+            <button type="button" class="social-btn kakao" id="btnKakao">
                 <i class="fa-solid fa-comment"></i> 카카오
             </button>
-            <button type="button" class="social-btn naver" onclick="alert('네이버 로그인은 데모에서 지원하지 않습니다.')">
+            <button type="button" class="social-btn naver" id="btnNaver">
                 <strong>N</strong> 네이버
             </button>
-            <button type="button" class="social-btn google" onclick="alert('구글 로그인은 데모에서 지원하지 않습니다.')">
+            <button type="button" class="social-btn google" id="btnGoogle">
                 <i class="fa-brands fa-google"></i> 구글
             </button>
         </div>
+        <p id="socialNote" style="text-align:center;font-size:11px;color:var(--gray-400);margin-top:8px;display:none;">
+            소셜 로그인 시 자동으로 회원가입됩니다.
+        </p>
     </div>
 </div>
 
@@ -155,7 +158,7 @@
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 로그인 중...';
 
-        fetch('../api/members', {
+        fetch('/api/members', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action: 'login', phone: email, password: password })
@@ -180,6 +183,94 @@
             errorEl.style.display = 'block';
         });
     });
+
+    // ── 소셜 로그인 설정 ──
+    var SOCIAL_CONFIG = {
+      naver: {
+        clientId: (window.__NAVER_CLIENT_ID || ''),
+        authUrl: 'https://nid.naver.com/oauth2.0/authorize',
+        redirectUri: location.origin + '/pages/login.html'
+      },
+      kakao: {
+        clientId: (window.__KAKAO_CLIENT_ID || ''),
+        authUrl: 'https://kauth.kakao.com/oauth/authorize',
+        redirectUri: location.origin + '/pages/login.html'
+      },
+      google: {
+        clientId: (window.__GOOGLE_CLIENT_ID || ''),
+        authUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
+        redirectUri: location.origin + '/pages/login.html'
+      }
+    };
+
+    function socialLogin(provider) {
+      var cfg = SOCIAL_CONFIG[provider];
+      if (!cfg || !cfg.clientId) {
+        alert('소셜 로그인 준비 중입니다. 일반 로그인을 이용해주세요.');
+        return;
+      }
+      var state = Math.random().toString(36).substring(2);
+      sessionStorage.setItem('social_state', state);
+      sessionStorage.setItem('social_provider', provider);
+
+      var params = { response_type: 'code', client_id: cfg.clientId, redirect_uri: cfg.redirectUri, state: state };
+      if (provider === 'google') params.scope = 'openid email profile';
+      if (provider === 'naver') params.scope = 'name email mobile';
+
+      var url = cfg.authUrl + '?' + new URLSearchParams(params).toString();
+      location.href = url;
+    }
+
+    document.getElementById('btnNaver').addEventListener('click', function() { socialLogin('naver'); });
+    document.getElementById('btnKakao').addEventListener('click', function() { socialLogin('kakao'); });
+    document.getElementById('btnGoogle').addEventListener('click', function() { socialLogin('google'); });
+
+    // ── OAuth 콜백 처리 ──
+    var urlParams = new URLSearchParams(location.search);
+    var authCode = urlParams.get('code');
+    var authState = urlParams.get('state');
+    if (authCode) {
+      var provider = sessionStorage.getItem('social_provider');
+      var savedState = sessionStorage.getItem('social_state');
+      if (provider && savedState === authState) {
+        errorEl.style.display = 'none';
+        var statusEl = document.createElement('div');
+        statusEl.style.cssText = 'text-align:center;padding:16px;color:var(--accent);font-weight:600;';
+        statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 소셜 로그인 처리 중...';
+        form.parentNode.insertBefore(statusEl, form);
+        form.style.display = 'none';
+
+        fetch('/api/social-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ provider: provider, code: authCode, state: authState })
+        })
+        .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+        .then(function(res) {
+          if (res.ok) {
+            sessionStorage.setItem('seul_user', JSON.stringify(res.data.user));
+            sessionStorage.removeItem('social_state');
+            sessionStorage.removeItem('social_provider');
+            App.toast('환영합니다, ' + res.data.user.name + '님!', 'success');
+            setTimeout(function() { location.href = '../index.html'; }, 800);
+          } else {
+            statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:var(--red)"></i> ' + (res.data.error || '소셜 로그인에 실패했습니다.');
+            form.style.display = '';
+          }
+        })
+        .catch(function() {
+          statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:var(--red)"></i> 서버 연결에 실패했습니다.';
+          form.style.display = '';
+        });
+      }
+      // URL에서 code 파라미터 제거
+      history.replaceState({}, '', location.pathname);
+    }
+
+    // 소셜 로그인 설정 여부 표시
+    if (SOCIAL_CONFIG.naver.clientId || SOCIAL_CONFIG.kakao.clientId || SOCIAL_CONFIG.google.clientId) {
+      document.getElementById('socialNote').style.display = 'block';
+    }
 })();
 </script>
 </body>

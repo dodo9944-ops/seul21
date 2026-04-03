@@ -272,12 +272,9 @@ function searchAddress() {
             showError('emailError', '이메일을 입력해주세요.'); hasError = true;
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             showError('emailError', '올바른 이메일 형식이 아닙니다.'); hasError = true;
-        } else {
-            // 이메일 중복 검사
-            var existing = DataService.getAll('members').find(function(m) { return m.email === email; });
-            if (existing) {
-                showError('emailError', '이미 사용 중인 이메일입니다.'); hasError = true;
-            }
+        }
+        if (!phone || phone.replace(/[^0-9]/g,'').length < 10) {
+            showError('phoneError', '전화번호를 정확히 입력해주세요.'); hasError = true;
         }
         if (!password) {
             showError('passwordError', '비밀번호를 입력해주세요.'); hasError = true;
@@ -304,7 +301,7 @@ function searchAddress() {
         var area = document.getElementById('area').value.trim();
         var fullAddress = address ? (address + (addressDetail ? ' ' + addressDetail : '')) : '';
 
-        fetch('../api/members', {
+        fetch('/api/members', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
