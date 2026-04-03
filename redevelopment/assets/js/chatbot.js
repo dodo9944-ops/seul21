@@ -17,7 +17,7 @@
             </svg>
           </div>
           <div id="chat-header-text">
-            <span id="chat-title">세울 스마트 상담</span>
+            <span id="chat-title">세울의 길</span>
             <span id="chat-subtitle">정비사업 전문 24시 상담</span>
           </div>
         </div>
