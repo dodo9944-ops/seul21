@@ -26,5 +26,21 @@
     "status": "활성",
     "date": "2026-04-03",
     "memo": ""
+  },
+  {
+    "id": "mnj26eqb",
+    "name": "이창우",
+    "phone": "010-2230-9210",
+    "email": "cmpm@hanmail.net",
+    "password": "",
+    "zipcode": "",
+    "address": "",
+    "area": "",
+    "grade": "일반",
+    "status": "활성",
+    "date": "2026-04-03",
+    "memo": "naver 소셜 로그인",
+    "provider": "naver",
+    "providerId": "TcgxJ0aYMK0_EMFgxq_IYrfZjjcjhWgUAONnuGhOxFw"
   }
 ]
