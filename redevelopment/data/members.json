@@ -12,5 +12,19 @@
     "status": "활성",
     "date": "2026-04-03",
     "memo": ""
+  },
+  {
+    "id": "mnj1w787",
+    "name": "홍길동",
+    "phone": "010-1111-2222",
+    "email": "hong@test.com",
+    "password": "test1234",
+    "zipcode": "04524",
+    "address": "서울시 중구 세종대로 110",
+    "area": "한남3구역",
+    "grade": "일반",
+    "status": "활성",
+    "date": "2026-04-03",
+    "memo": ""
   }
 ]
