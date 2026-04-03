@@ -189,9 +189,30 @@
                 likes: 0
             };
 
-            DataService.create('community', newPost);
-            App.toast('게시글이 등록되었습니다.', 'success');
-            setTimeout(function() { location.href = 'community.html'; }, 800);
+            var submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 등록 중...';
+
+            fetch('../api/community', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newPost)
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(res) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 등록';
+                App.toast('게시글이 등록되었습니다.', 'success');
+                setTimeout(function() { location.href = 'community.html'; }, 800);
+            })
+            .catch(function() {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 등록';
+                // 오프라인 폴백
+                DataService.create('community', newPost);
+                App.toast('게시글이 등록되었습니다.', 'success');
+                setTimeout(function() { location.href = 'community.html'; }, 800);
+            });
         });
 
         // 입력 시 에러 제거
