@@ -92,9 +92,25 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="phone">전화번호</label>
+                <label class="form-label" for="phone">전화번호 <span style="color:var(--red)">*</span></label>
                 <input type="tel" class="form-input" id="phone" placeholder="010-0000-0000" maxlength="13">
-                <div class="form-hint">선택 사항입니다.</div>
+                <div class="field-error" id="phoneError"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="address">주소</label>
+                <div style="display:flex;gap:8px;margin-bottom:8px;">
+                    <input type="text" class="form-input" id="zipcode" placeholder="우편번호" maxlength="6" style="width:120px;" readonly>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="searchAddress()" style="white-space:nowrap;">주소 검색</button>
+                </div>
+                <input type="text" class="form-input" id="address" placeholder="주소 검색 버튼을 눌러주세요" readonly style="margin-bottom:8px;">
+                <input type="text" class="form-input" id="addressDetail" placeholder="상세주소 (동/호수 등)" maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="area">관심 구역/단지</label>
+                <input type="text" class="form-input" id="area" placeholder="예: 한남3구역, 흑석9구역" maxlength="50">
+                <div class="form-hint">정비사업 관련 관심 구역을 입력하세요.</div>
             </div>
 
             <div class="agreement-group">
@@ -138,6 +154,18 @@
 </div>
 
 <div id="site-footer"></div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+function searchAddress() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            document.getElementById('zipcode').value = data.zonecode;
+            document.getElementById('address').value = data.roadAddress || data.jibunAddress;
+            document.getElementById('addressDetail').focus();
+        }
+    }).open();
+}
+</script>
 <script src="../assets/data/mock-data.js"></script>
 <script src="../assets/js/data-service.js"></script>
 <script src="../assets/js/common.js"></script>
@@ -270,6 +298,12 @@
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 처리 중...';
 
+        var zipcode = document.getElementById('zipcode').value.trim();
+        var address = document.getElementById('address').value.trim();
+        var addressDetail = document.getElementById('addressDetail').value.trim();
+        var area = document.getElementById('area').value.trim();
+        var fullAddress = address ? (address + (addressDetail ? ' ' + addressDetail : '')) : '';
+
         fetch('../api/members', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -279,7 +313,9 @@
                 phone: phone,
                 email: email,
                 password: password,
-                area: ''
+                zipcode: zipcode,
+                address: fullAddress,
+                area: area
             })
         })
         .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })

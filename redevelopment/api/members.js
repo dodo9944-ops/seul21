@@ -55,7 +55,7 @@ module.exports = async function handler(req, res) {
       const { action } = req.body;
 
       if (action === 'register') {
-        const { name, phone, email, password, area } = req.body;
+        const { name, phone, email, password, zipcode, address, area } = req.body;
         if (!name || !phone || !password) {
           return res.status(400).json({ error: '이름, 연락처, 비밀번호는 필수입니다.' });
         }
@@ -66,7 +66,8 @@ module.exports = async function handler(req, res) {
         const newMember = {
           id: Date.now().toString(36),
           name, phone, email: email || '',
-          password, area: area || '',
+          password, zipcode: zipcode || '',
+          address: address || '', area: area || '',
           grade: '일반', status: '활성',
           date: new Date().toISOString().slice(0, 10),
           memo: ''
