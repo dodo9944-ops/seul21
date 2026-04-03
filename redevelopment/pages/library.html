@@ -265,6 +265,14 @@
 <script src="../assets/js/common.js"></script>
 <script>
 (function() {
+    // MOCK 데이터가 업데이트되었으면 localStorage 갱신
+    if (typeof MOCK !== 'undefined' && MOCK.library) {
+        var stored = JSON.parse(localStorage.getItem('rdc_library') || '[]');
+        if (stored.length !== MOCK.library.length) {
+            localStorage.setItem('rdc_library', JSON.stringify(MOCK.library));
+        }
+    }
+
     let currentCat = '전체';
     let searchQuery = '';
     const allItems = DataService.getAll('library');
