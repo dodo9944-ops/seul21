@@ -303,6 +303,8 @@
         if (!item.date) return false;
         var d = new Date(item.date);
         return d >= sevenDaysAgo;
+    }).sort(function(a, b) {
+        return (b.date || '').localeCompare(a.date || '');
     });
 
     let currentCat = '전체';
