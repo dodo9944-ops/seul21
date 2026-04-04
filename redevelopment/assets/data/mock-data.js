@@ -375,7 +375,11 @@ const MOCK = {
     { id:'lib18', category:'지침', title:'정비구역 주민이주 및 보상 지침', description:'이주 일정 수립, 이주비 산정, 세입자 보상 절차 매뉴얼', fileType:'pdf', fileSize:'2.0MB', date:'2026-02-10', downloads:112, tags:['이주보상','지침'] },
     { id:'lib21', category:'서식', title:'조합설립추진위원회 운영규정', description:'[국토교통부 행정규칙] 추진위 구성·운영·해산 운영규정 전문 (법제처 원문 링크)', fileType:'pdf', fileSize:'75KB', date:'2026-04-04', downloads:0, tags:['추진위원회','운영규정','행정규칙'] },
     { id:'lib22', category:'지침', title:'서울시 정비사업 의사진행 표준운영규정', description:'[서울시 공식] 총회·이사회 의사진행 절차, 의결, 발언권 등 표준운영규정 전문', fileType:'pdf', fileSize:'333KB', date:'2026-04-04', downloads:0, tags:['서울시','총회','의사진행','표준운영규정'] },
-    { id:'lib23', category:'가이드', title:'서울시 정비사업 실무 매뉴얼', description:'[서울시 공식] 정비사업 전 과정 실무 매뉴얼 (42MB, 상세)', fileType:'pdf', fileSize:'42MB', date:'2026-04-04', downloads:0, tags:['서울시','실무매뉴얼','전과정'] }
+    { id:'lib23', category:'가이드', title:'서울시 정비사업 실무 매뉴얼', description:'[서울시 공식] 정비사업 전 과정 실무 매뉴얼 (42MB, 상세)', fileType:'pdf', fileSize:'42MB', date:'2026-04-04', downloads:0, tags:['서울시','실무매뉴얼','전과정'] },
+    { id:'lib30', category:'관련판례', title:'도시정비법 질의회신 사례집', description:'[국토부] 도시 및 주거환경정비법 주요 질의회신 사례 모음', fileType:'pdf', fileSize:'1.7MB', date:'2026-04-04', downloads:0, tags:['질의회신','판례','도정법'] },
+    { id:'lib31', category:'관련판례', title:'서울시 도시정비법령 질의회신 사례집 (2024)', description:'[서울시] 정비사업 관련 법령 질의회신 최신 사례집 (35MB, 상세)', fileType:'pdf', fileSize:'35MB', date:'2026-04-04', downloads:0, tags:['서울시','질의회신','2024'] },
+    { id:'lib33', category:'관련판례', title:'경기도 정비사업 질의회신 및 실태점검 매뉴얼', description:'[경기도] 정비사업 질의회신 & 실태점검 매뉴얼 (2020)', fileType:'pdf', fileSize:'6.9MB', date:'2026-04-04', downloads:0, tags:['경기도','질의회신','실태점검'] },
+    { id:'lib34', category:'법령', title:'서울특별시 도시 및 주거환경정비 조례', description:'[서울시 공식] 서울시 도시정비 조례 전문 (2018 개정)', fileType:'pdf', fileSize:'122KB', date:'2026-04-04', downloads:0, tags:['서울시','조례','도시정비'] }
   ],
 
   /* ──────────────────────────── 관리자 계정 ──────────────────────────── */
