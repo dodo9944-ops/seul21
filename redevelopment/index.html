@@ -124,169 +124,178 @@
         .hero-section { padding: 0; }
 
         .hero-banner {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0A0F1C 0%, #111B2E 50%, #142644 100%);
-            padding: 40px 0 36px;
+            position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #080C18 0%, #0E1628 30%, #142644 70%, #1a3055 100%);
+            padding: 52px 0 48px;
         }
 
-        /* 배경 그리드 */
+        /* 배경 레이어드 텍스처 — 건축 그리드 + 깊이감 */
         .hero-bg-grid {
             position: absolute; inset: 0;
             background-image:
-                linear-gradient(rgba(195,165,105,.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(195,165,105,.03) 1px, transparent 1px);
-            background-size: 60px 60px;
+                linear-gradient(rgba(195,165,105,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(195,165,105,.025) 1px, transparent 1px);
+            background-size: 80px 80px;
         }
-
-        /* 빌딩 실루엣 */
         .hero-skyline {
-            position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
-            opacity: .08;
+            position: absolute; bottom: 0; left: 0; right: 0; height: 60%;
+            opacity: .06;
             background:
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 8% bottom / 40px 55%,
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 12% bottom / 28px 38%,
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 30% bottom / 36px 65%,
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 35% bottom / 50px 80%,
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 40% bottom / 32px 50%,
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 44% bottom / 44px 70%,
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 62% bottom / 38px 48%,
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 68% bottom / 52px 72%,
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 74% bottom / 30px 42%,
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 80% bottom / 46px 58%,
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 88% bottom / 34px 46%,
-                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 92% bottom / 42px 64%;
+                linear-gradient(to top, rgba(195,165,105,.5) 0%, transparent 100%) no-repeat 6% bottom / 44px 60%,
+                linear-gradient(to top, rgba(195,165,105,.5) 0%, transparent 100%) no-repeat 15% bottom / 32px 42%,
+                linear-gradient(to top, rgba(195,165,105,.5) 0%, transparent 100%) no-repeat 28% bottom / 38px 70%,
+                linear-gradient(to top, rgba(195,165,105,.5) 0%, transparent 100%) no-repeat 34% bottom / 54px 85%,
+                linear-gradient(to top, rgba(195,165,105,.5) 0%, transparent 100%) no-repeat 42% bottom / 36px 55%,
+                linear-gradient(to top, rgba(195,165,105,.5) 0%, transparent 100%) no-repeat 65% bottom / 42px 52%,
+                linear-gradient(to top, rgba(195,165,105,.5) 0%, transparent 100%) no-repeat 72% bottom / 56px 78%,
+                linear-gradient(to top, rgba(195,165,105,.5) 0%, transparent 100%) no-repeat 82% bottom / 38px 48%,
+                linear-gradient(to top, rgba(195,165,105,.5) 0%, transparent 100%) no-repeat 90% bottom / 48px 62%;
         }
-
-        /* 글로우 */
+        /* 깊이감 글로우 */
         .hero-glow {
-            position: absolute; width: 500px; height: 500px;
-            top: -40%; right: -10%; border-radius: 50%;
-            background: radial-gradient(circle, rgba(18,89,170,.1) 0%, transparent 70%);
+            position: absolute; width: 600px; height: 600px;
+            top: -30%; right: -8%; border-radius: 50%;
+            background: radial-gradient(circle, rgba(195,165,105,.04) 0%, transparent 70%);
         }
-
+        .hero-glow-left {
+            position: absolute; width: 400px; height: 400px;
+            bottom: -20%; left: -5%; border-radius: 50%;
+            background: radial-gradient(circle, rgba(20,38,68,.3) 0%, transparent 70%);
+        }
         /* 골드 수평선 */
         .hero-hline {
             position: absolute; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(195,165,105,.12) 30%, rgba(195,165,105,.12) 70%, transparent);
+            background: linear-gradient(90deg, transparent, rgba(195,165,105,.15) 30%, rgba(195,165,105,.15) 70%, transparent);
         }
         .hero-hline-top { top: 0; }
         .hero-hline-bottom { bottom: 0; }
 
-        /* ── 히어로 콘텐츠 센터 정렬 ── */
+        /* ── 히어로 — 좌우 분할 레이아웃 ── */
         .hero-banner .inner {
             position: relative; z-index: 2;
-            text-align: center;
-            display: flex; flex-direction: column; align-items: center;
-            max-width: 1440px;
-            padding: 0 60px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+            max-width: 1200px; padding: 0 48px;
         }
-        @media (max-width: 768px) {
-            .hero-banner .inner { padding: 0 24px; }
-        }
+        .hero-left { text-align: left; }
+        .hero-right { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
         /* 라벨 */
         .hero-label {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 8px 20px; font-size: 11px; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 16px; font-size: 10px; font-weight: 600;
             letter-spacing: 2.5px; text-transform: uppercase;
-            color: #C3A569; border: 1px solid rgba(195,165,105,.2);
-            border-radius: 2px; margin-bottom: 18px;
+            color: rgba(195,165,105,.7); border: 1px solid rgba(195,165,105,.15);
+            border-radius: 2px; margin-bottom: 20px;
         }
-        .hero-label i { font-size: 10px; color: #C3A569; }
+        .hero-label::before { content: ''; width: 24px; height: 1px; background: rgba(195,165,105,.3); }
 
         /* 헤드라인 */
         .hero-section h1 {
-            font-size: 36px; font-weight: 900; letter-spacing: -1.2px;
-            color: #fff; line-height: 1.35; margin-bottom: 14px;
+            font-size: 38px; font-weight: 900; letter-spacing: -1.5px;
+            color: #fff; line-height: 1.32; margin-bottom: 16px;
         }
         .hero-section h1 em {
-            font-style: normal; color: #C3A569;
-            -webkit-text-fill-color: #C3A569; background: none;
+            font-style: normal; color: #C9AD6A;
+            -webkit-text-fill-color: #C9AD6A; background: none;
         }
 
         /* 서브카피 */
         .hero-subtitle {
-            font-size: 14px; font-weight: 400; color: rgba(255,255,255,.45);
-            line-height: 1.75; margin-bottom: 24px; max-width: 540px;
+            font-size: 14.5px; font-weight: 400; color: rgba(255,255,255,.5);
+            line-height: 1.75; margin-bottom: 28px; max-width: 420px;
             word-break: keep-all;
         }
 
-        /* 핵심역량 — 가로 한 줄 */
-        .hero-capabilities {
-            display: flex; gap: 14px; margin-bottom: 24px;
-            max-width: 860px; width: 100%;
-        }
-        .hero-cap-item {
-            flex: 1; padding: 16px 18px;
-            background: rgba(255,255,255,.03);
-            border: 1px solid rgba(195,165,105,.1);
-            border-radius: 6px; text-align: left;
-            transition: all .35s ease; position: relative; overflow: hidden;
-        }
-        .hero-cap-item::before {
-            content: ''; position: absolute; top: 0; left: 0;
-            width: 3px; height: 100%;
-            background: linear-gradient(to bottom, #C3A569, rgba(195,165,105,.1));
-            opacity: 0; transition: opacity .35s ease;
-        }
-        .hero-cap-item:hover {
-            background: rgba(255,255,255,.05);
-            border-color: rgba(195,165,105,.22);
-            transform: translateY(-2px);
-        }
-        .hero-cap-item:hover::before { opacity: 1; }
-        .hero-cap-num {
-            font-size: 10px; font-weight: 700; color: rgba(195,165,105,.35);
-            letter-spacing: 2px; margin-bottom: 8px;
-        }
-        .hero-cap-title {
-            font-size: 14px; font-weight: 700; color: rgba(255,255,255,.85);
-            line-height: 1.5;
-        }
-
         /* CTA 버튼 */
-        .hero-actions { display: flex; gap: 14px; }
+        .hero-actions { display: flex; gap: 12px; }
         .hero-actions .btn-hero-primary {
             display: inline-flex; align-items: center; gap: 10px;
-            height: 50px; padding: 0 32px;
+            height: 48px; padding: 0 28px;
             background: linear-gradient(135deg, #C3A569, #D4B87A);
-            color: #0A0F1C; font-size: 14px; font-weight: 700;
-            border: none; border-radius: 4px; cursor: pointer;
-            transition: all .35s ease;
+            color: #0A0F1C; font-size: 13.5px; font-weight: 700;
+            border: none; border-radius: 6px; cursor: pointer;
+            transition: all .3s ease;
         }
         .hero-actions .btn-hero-primary:hover {
             background: linear-gradient(135deg, #D4B87A, #E0C990);
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(195,165,105,.2);
+            box-shadow: 0 6px 24px rgba(195,165,105,.25);
         }
         .hero-actions .btn-hero-outline {
             display: inline-flex; align-items: center; gap: 10px;
-            height: 50px; padding: 0 32px;
-            background: transparent; color: rgba(255,255,255,.65);
-            font-size: 14px; font-weight: 600;
+            height: 48px; padding: 0 28px;
+            background: transparent; color: rgba(255,255,255,.6);
+            font-size: 13.5px; font-weight: 600;
             border: 1px solid rgba(255,255,255,.12);
-            border-radius: 4px; cursor: pointer;
-            transition: all .35s ease;
+            border-radius: 6px; cursor: pointer;
+            transition: all .3s ease;
         }
         .hero-actions .btn-hero-outline:hover {
-            color: #fff; border-color: rgba(255,255,255,.3);
+            color: #fff; border-color: rgba(255,255,255,.25);
             background: rgba(255,255,255,.04);
         }
 
+        /* 우측 4카드 — 글래스 패널 */
+        .hero-cap-item {
+            padding: 20px 18px;
+            background: rgba(255,255,255,.03);
+            border: 1px solid rgba(195,165,105,.08);
+            border-radius: 10px; text-align: left;
+            transition: all .35s ease; position: relative; overflow: hidden;
+            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+        }
+        .hero-cap-item::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: linear-gradient(to bottom, #C3A569, rgba(195,165,105,.05));
+            opacity: 0; transition: opacity .35s ease;
+        }
+        .hero-cap-item:hover {
+            background: rgba(255,255,255,.06);
+            border-color: rgba(195,165,105,.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,.15);
+        }
+        .hero-cap-item:hover::before { opacity: 1; }
+        .hero-cap-icon {
+            width: 36px; height: 36px; border-radius: 9px;
+            background: rgba(195,165,105,.1); border: 1px solid rgba(195,165,105,.12);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; color: #C3A569; margin-bottom: 12px;
+        }
+        .hero-cap-num {
+            font-size: 9px; font-weight: 700; color: rgba(195,165,105,.3);
+            letter-spacing: 2px; margin-bottom: 6px;
+        }
+        .hero-cap-title {
+            font-size: 14px; font-weight: 700; color: rgba(255,255,255,.85);
+            line-height: 1.45;
+        }
+        .hero-cap-desc {
+            font-size: 11.5px; color: rgba(255,255,255,.35); margin-top: 6px; line-height: 1.5;
+        }
+
+        /* 핵심역량 숨김 (좌우 분할에서는 사용 안 함) */
+        .hero-capabilities { display: none; }
+
         /* ── 반응형 ── */
         @media (max-width: 1024px) {
-            .hero-capabilities { gap: 12px; }
-            .hero-cap-item { padding: 16px 18px; }
+            .hero-banner .inner { grid-template-columns: 1fr; gap: 32px; padding: 0 32px; }
+            .hero-left { text-align: center; }
+            .hero-left .hero-subtitle { margin: 0 auto 24px; }
+            .hero-left .hero-actions { justify-content: center; }
+            .hero-right { max-width: 500px; margin: 0 auto; }
         }
         @media (max-width: 768px) {
-            .hero-banner { padding: 32px 0 28px; }
-            .hero-section h1 { font-size: 24px; letter-spacing: -.6px; }
-            .hero-subtitle { font-size: 12px; margin-bottom: 20px; }
+            .hero-banner { padding: 36px 0 32px; }
+            .hero-banner .inner { padding: 0 20px; gap: 24px; }
+            .hero-section h1 { font-size: 26px; letter-spacing: -.8px; }
+            .hero-subtitle { font-size: 13px; margin-bottom: 20px; }
             .hero-label { font-size: 9px; letter-spacing: 1.5px; padding: 5px 12px; margin-bottom: 14px; }
-            .hero-capabilities { flex-direction: column; gap: 8px; margin-bottom: 20px; }
-            .hero-cap-item { padding: 16px 18px; }
+            .hero-right { grid-template-columns: 1fr; gap: 8px; }
+            .hero-cap-item { padding: 14px 16px; }
             .hero-cap-title { font-size: 13px; }
+            .hero-cap-desc { display: none; }
             .hero-actions { flex-direction: column; gap: 10px; width: 100%; }
             .hero-actions .btn-hero-primary,
             .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 46px; font-size: 13px; }
@@ -614,33 +623,48 @@
         <div class="hero-bg-grid"></div>
         <div class="hero-skyline"></div>
         <div class="hero-glow"></div>
+        <div class="hero-glow-left"></div>
         <div class="hero-hline hero-hline-top"></div>
         <div class="hero-hline hero-hline-bottom"></div>
 
         <div class="inner">
-            <div class="hero-label"><i class="fa-solid fa-shield-halved"></i> 정비사업 전문 엔지니어링</div>
-            <h1>도시의 미래를 <em>다시 세우는</em><br>정비사업 파트너</h1>
-            <p class="hero-subtitle">재개발·재건축·소규모정비사업 전 과정에서 사업성 검토, 인허가 대응,<br>조합 운영지원, 이해관계 조율까지 체계적으로 수행합니다.</p>
-
-            <div class="hero-capabilities">
-                <a href="pages/services.html" class="hero-cap-item" style="text-decoration:none;color:inherit;">
-                    <div class="hero-cap-num">01</div>
-                    <div class="hero-cap-title">사업성 분석 및<br>추진전략 수립</div>
-                </a>
-                <a href="pages/consultation.html" class="hero-cap-item" style="text-decoration:none;color:inherit;">
-                    <div class="hero-cap-num">02</div>
-                    <div class="hero-cap-title">조합·토지등소유자<br>협의 및 갈등관리</div>
-                </a>
-                <a href="pages/permit-support.html" class="hero-cap-item" style="text-decoration:none;color:inherit;">
-                    <div class="hero-cap-num">03</div>
-                    <div class="hero-cap-title">인허가·총회·계약<br>실무 전반 지원</div>
-                </a>
+            <!-- 좌측: 카피 + CTA -->
+            <div class="hero-left">
+                <div class="hero-label">SEUL ENGINEERING</div>
+                <h1>도시정비의 <em>기준</em>을 세우고,<br>사업의 <em>완성</em>까지 함께합니다</h1>
+                <p class="hero-subtitle">재개발·재건축·소규모정비사업의 실무를 책임지는 도시정비 전문 엔지니어링 파트너</p>
+                <div class="hero-actions">
+                    <a href="pages/contact.html" class="btn-hero-primary"><i class="fa-solid fa-paper-plane"></i> 상담 문의</a>
+                    <a href="pages/services.html" class="btn-hero-outline"><i class="fa-solid fa-building"></i> 사업분야 보기</a>
+                </div>
             </div>
 
-            <div class="hero-actions">
-                <a href="pages/contact.html" class="btn-hero-primary"><i class="fa-solid fa-paper-plane"></i> 상담 문의</a>
-                <a href="pages/library.html?cat=주요뉴스" class="btn-hero-outline"><i class="fa-solid fa-newspaper"></i> 주요뉴스 보기</a>
-                <a href="pages/services.html" class="btn-hero-outline"><i class="fa-solid fa-building"></i> 사업분야 보기</a>
+            <!-- 우측: 4개 핵심 서비스 카드 -->
+            <div class="hero-right">
+                <a href="pages/services.html" class="hero-cap-item" style="text-decoration:none;color:inherit;">
+                    <div class="hero-cap-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="hero-cap-num">01</div>
+                    <div class="hero-cap-title">사업성 분석</div>
+                    <div class="hero-cap-desc">사업 초기 검토 및 추진전략 수립</div>
+                </a>
+                <a href="pages/consultation.html" class="hero-cap-item" style="text-decoration:none;color:inherit;">
+                    <div class="hero-cap-icon"><i class="fa-solid fa-handshake"></i></div>
+                    <div class="hero-cap-num">02</div>
+                    <div class="hero-cap-title">이해관계 조율</div>
+                    <div class="hero-cap-desc">조합·행정·시공사 간 협의 자문</div>
+                </a>
+                <a href="pages/permit-support.html" class="hero-cap-item" style="text-decoration:none;color:inherit;">
+                    <div class="hero-cap-icon"><i class="fa-solid fa-stamp"></i></div>
+                    <div class="hero-cap-num">03</div>
+                    <div class="hero-cap-title">인허가 자문</div>
+                    <div class="hero-cap-desc">인가 절차 및 행정 대응 지원</div>
+                </a>
+                <a href="pages/pmcm-service.html" class="hero-cap-item" style="text-decoration:none;color:inherit;">
+                    <div class="hero-cap-icon"><i class="fa-solid fa-helmet-safety"></i></div>
+                    <div class="hero-cap-num">04</div>
+                    <div class="hero-cap-title">CM / PM 관리</div>
+                    <div class="hero-cap-desc">설계·시공·준공 품질 관리</div>
+                </a>
             </div>
         </div>
     </div>
