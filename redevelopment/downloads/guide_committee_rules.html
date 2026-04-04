@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조합설립추진위원회 운영규정 | (주)세울엔지니어링</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A0F1C;
+    --navy-light: #141B2D;
+    --navy-mid: #1E2A42;
+    --gold: #C3A569;
+    --gold-light: #D4BC8A;
+    --gold-pale: #F5EDD8;
+    --text: #2C2C2C;
+    --text-light: #555;
+    --bg: #FAFAF8;
+    --white: #FFFFFF;
+    --border: #E0DDD5;
+    --success: #2E7D4F;
+    --warning: #B85C1F;
+    --info: #1A5FA0;
+  }
+  @page {
+    size: A4;
+    margin: 18mm 15mm 20mm 15mm;
+  }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.8;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Print Utilities ── */
+  .page-break { page-break-after: always; }
+  .no-break { page-break-inside: avoid; }
+  @media print {
+    body { background: white; font-size: 9.5pt; }
+    .container { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    .title-page { min-height: auto; padding: 60px 40px; }
+    section { page-break-inside: avoid; }
+    .article-block { page-break-inside: avoid; }
+    .toc-section { page-break-after: always; }
+  }
+
+  /* ═══════════════════════════════════════
+     TITLE PAGE
+     ═══════════════════════════════════════ */
+  .title-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .title-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(195, 165, 105, 0.08);
+    border-radius: 50%;
+  }
+  .title-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -80px;
+    width: 500px;
+    height: 500px;
+    border: 1px solid rgba(195, 165, 105, 0.05);
+    border-radius: 50%;
+  }
+  .title-brand {
+    font-size: 12pt;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .title-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 24px auto;
+  }
+  .title-main {
+    font-size: 28pt;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .title-main em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .title-sub {
+    font-size: 14pt;
+    font-weight: 300;
+    color: var(--gold-light);
+    margin-top: 8px;
+    letter-spacing: 2px;
+  }
+  .title-meta {
+    margin-top: 60px;
+    font-size: 9.5pt;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.9;
+  }
+  .title-meta strong {
+    color: rgba(255,255,255,0.7);
+  }
+  .title-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 6px 24px;
+    border-radius: 3px;
+    font-size: 9pt;
+    letter-spacing: 3px;
+    margin-top: 40px;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     TABLE OF CONTENTS
+     ═══════════════════════════════════════ */
+  .toc-section {
+    padding: 50px 0;
+  }
+  .toc-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .toc-header h2 {
+    font-size: 22pt;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .toc-header-bar {
+    width: 60px;
+    height: 3px;
+    background: var(--gold);
+    margin: 16px auto 0;
+  }
+  .toc-list {
+    list-style: none;
+    padding: 0;
+  }
+  .toc-chapter {
+    margin-bottom: 24px;
+  }
+  .toc-chapter-title {
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--navy);
+    padding: 10px 16px;
+    background: #F4F5F8;
+    border-left: 4px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 8px;
+  }
+  .toc-chapter-title a {
+    color: var(--navy);
+    text-decoration: none;
+  }
+  .toc-articles {
+    list-style: none;
+    padding: 0 0 0 20px;
+  }
+  .toc-articles li {
+    padding: 5px 16px;
+    border-bottom: 1px dotted var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .toc-articles li a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 10pt;
+    transition: color 0.2s;
+  }
+  .toc-articles li a:hover {
+    color: var(--gold);
+  }
+  .toc-articles li .toc-dots {
+    flex: 1;
+    border-bottom: 1px dotted #CCC;
+    margin: 0 10px;
+    min-width: 30px;
+  }
+  .toc-articles li .toc-page {
+    font-size: 9pt;
+    color: var(--text-light);
+    white-space: nowrap;
+  }
+
+  /* ═══════════════════════════════════════
+     CONTENT AREA
+     ═══════════════════════════════════════ */
+  .content-area {
+    padding: 50px 0;
+  }
+  .chapter-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: var(--white);
+    padding: 28px 32px;
+    border-radius: 6px;
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(195,165,105,0.08));
+  }
+  .chapter-number {
+    font-size: 9pt;
+    color: var(--gold);
+    letter-spacing: 3px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .chapter-title {
+    font-size: 20pt;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+  .chapter-range {
+    font-size: 9.5pt;
+    color: rgba(255,255,255,0.5);
+    margin-top: 6px;
+  }
+
+  /* ── Article Block ── */
+  .article-block {
+    margin-bottom: 32px;
+    padding: 24px 28px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .article-title {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .article-num {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 8.5pt;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+  .article-content {
+    font-size: 10.5pt;
+    line-height: 1.9;
+    color: var(--text);
+  }
+  .article-content p {
+    margin-bottom: 8px;
+    text-align: justify;
+    text-indent: 0;
+  }
+  .clause {
+    padding-left: 24px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .clause-num {
+    position: absolute;
+    left: 0;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .sub-clause {
+    padding-left: 44px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .sub-clause .clause-num {
+    left: 24px;
+    font-weight: 400;
+    color: var(--text-light);
+  }
+
+  /* ── Supplementary Provisions ── */
+  .supplementary {
+    border-left: 4px solid var(--gold);
+    background: var(--gold-pale);
+  }
+
+  /* ── Info Box ── */
+  .info-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+  .info-box.navy {
+    border-left-color: var(--navy);
+    background: #F4F5F8;
+  }
+  .info-box.warning {
+    border-left-color: var(--warning);
+    background: #FFF9F0;
+  }
+  .info-box-title {
+    font-size: 10pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* ── Print Button ── */
+  .print-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--navy);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    z-index: 1000;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.2);
+  }
+  .btn-print {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 10px 32px;
+    font-size: 10.5pt;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .btn-print:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+  .btn-back {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px 24px;
+    font-size: 10.5pt;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s;
+  }
+  .btn-back:hover {
+    background: rgba(195,165,105,0.1);
+  }
+
+  /* ── Footer ── */
+  .doc-footer {
+    text-align: center;
+    padding: 40px 20px 100px;
+    border-top: 2px solid var(--border);
+    margin-top: 60px;
+  }
+  .doc-footer .company-name {
+    font-size: 14pt;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .doc-footer .company-info {
+    font-size: 9pt;
+    color: var(--text-light);
+    line-height: 1.9;
+  }
+  .doc-footer .gold-bar {
+    width: 50px;
+    height: 3px;
+    background: var(--gold);
+    margin: 16px auto;
+  }
+  .doc-footer .disclaimer {
+    font-size: 8.5pt;
+    color: #999;
+    margin-top: 20px;
+    line-height: 1.7;
+  }
+
+  /* ── Spacing for fixed bottom bar ── */
+  body { padding-bottom: 70px; }
+
+  /* ── Scroll smooth ── */
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     TITLE PAGE
+     ═══════════════════════════════════════ -->
+<div class="title-page">
+  <div class="title-brand">(주)세울엔지니어링</div>
+  <div class="title-divider"></div>
+  <h1 class="title-main">조합설립추진위원회<br><em>운영규정</em></h1>
+  <p class="title-sub">Operating Regulations for the Promotion Committee</p>
+  <div class="title-divider"></div>
+  <div class="title-meta">
+    <strong>도시 및 주거환경정비법</strong> 기반 표준 운영규정<br>
+    전문 6장 25조 및 부칙으로 구성<br>
+    <strong>작성기준일</strong>&nbsp; 2026년 4월
+  </div>
+  <div class="title-badge">Standard Operating Rules</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════
+     TABLE OF CONTENTS
+     ═══════════════════════════════════════ -->
+<div class="container toc-section">
+  <div class="toc-header">
+    <h2>목 차</h2>
+    <div class="toc-header-bar"></div>
+  </div>
+
+  <ul class="toc-list">
+    <!-- 제1장 -->
+    <li class="toc-chapter">
+      <div class="toc-chapter-title"><a href="#ch1">제1장 &nbsp;총칙</a></div>
+      <ul class="toc-articles">
+        <li><a href="#a1">제1조 (목적)</a><span class="toc-dots"></span></li>
+        <li><a href="#a2">제2조 (정의)</a><span class="toc-dots"></span></li>
+        <li><a href="#a3">제3조 (적용범위)</a><span class="toc-dots"></span></li>
+        <li><a href="#a4">제4조 (구성원칙)</a><span class="toc-dots"></span></li>
+      </ul>
+    </li>
+    <!-- 제2장 -->
+    <li class="toc-chapter">
+      <div class="toc-chapter-title"><a href="#ch2">제2장 &nbsp;추진위원회의 구성</a></div>
+      <ul class="toc-articles">
+        <li><a href="#a5">제5조 (구성요건)</a><span class="toc-dots"></span></li>
+        <li><a href="#a6">제6조 (위원장·부위원장·감사의 선임)</a><span class="toc-dots"></span></li>
+        <li><a href="#a7">제7조 (임기)</a><span class="toc-dots"></span></li>
+        <li><a href="#a8">제8조 (결격사유)</a><span class="toc-dots"></span></li>
+        <li><a href="#a9">제9조 (해임)</a><span class="toc-dots"></span></li>
+      </ul>
+    </li>
+    <!-- 제3장 -->
+    <li class="toc-chapter">
+      <div class="toc-chapter-title"><a href="#ch3">제3장 &nbsp;업무 및 권한</a></div>
+      <ul class="toc-articles">
+        <li><a href="#a10">제10조 (업무범위)</a><span class="toc-dots"></span></li>
+        <li><a href="#a11">제11조 (권한의 한계)</a><span class="toc-dots"></span></li>
+        <li><a href="#a12">제12조 (정비업체 선정 기준)</a><span class="toc-dots"></span></li>
+        <li><a href="#a13">제13조 (업무위탁)</a><span class="toc-dots"></span></li>
+      </ul>
+    </li>
+    <!-- 제4장 -->
+    <li class="toc-chapter">
+      <div class="toc-chapter-title"><a href="#ch4">제4장 &nbsp;회의</a></div>
+      <ul class="toc-articles">
+        <li><a href="#a14">제14조 (회의의 소집)</a><span class="toc-dots"></span></li>
+        <li><a href="#a15">제15조 (의결정족수)</a><span class="toc-dots"></span></li>
+        <li><a href="#a16">제16조 (의사록)</a><span class="toc-dots"></span></li>
+        <li><a href="#a17">제17조 (서면결의)</a><span class="toc-dots"></span></li>
+        <li><a href="#a18">제18조 (회의 공개)</a><span class="toc-dots"></span></li>
+      </ul>
+    </li>
+    <!-- 제5장 -->
+    <li class="toc-chapter">
+      <div class="toc-chapter-title"><a href="#ch5">제5장 &nbsp;재정</a></div>
+      <ul class="toc-articles">
+        <li><a href="#a19">제19조 (운영비의 조달)</a><span class="toc-dots"></span></li>
+        <li><a href="#a20">제20조 (지출 기준)</a><span class="toc-dots"></span></li>
+        <li><a href="#a21">제21조 (회계 관리)</a><span class="toc-dots"></span></li>
+        <li><a href="#a22">제22조 (감사)</a><span class="toc-dots"></span></li>
+      </ul>
+    </li>
+    <!-- 제6장 -->
+    <li class="toc-chapter">
+      <div class="toc-chapter-title"><a href="#ch6">제6장 &nbsp;해산 및 인계</a></div>
+      <ul class="toc-articles">
+        <li><a href="#a23">제23조 (해산)</a><span class="toc-dots"></span></li>
+        <li><a href="#a24">제24조 (업무·재산의 인계)</a><span class="toc-dots"></span></li>
+        <li><a href="#a25">제25조 (잔여재산의 처리)</a><span class="toc-dots"></span></li>
+      </ul>
+    </li>
+    <!-- 부칙 -->
+    <li class="toc-chapter">
+      <div class="toc-chapter-title"><a href="#addendum">부칙</a></div>
+      <ul class="toc-articles">
+        <li><a href="#add1">제1조 (시행일)</a><span class="toc-dots"></span></li>
+        <li><a href="#add2">제2조 (경과규정)</a><span class="toc-dots"></span></li>
+        <li><a href="#add3">제3조 (다른 규정과의 관계)</a><span class="toc-dots"></span></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════
+     제1장 총칙
+     ═══════════════════════════════════════ -->
+<div class="container content-area">
+
+  <div id="ch1" class="chapter-header">
+    <div class="chapter-number">CHAPTER 01</div>
+    <div class="chapter-title">제1장 &nbsp;총칙</div>
+    <div class="chapter-range">제1조 ~ 제4조</div>
+  </div>
+
+  <!-- 제1조 -->
+  <div id="a1" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제1조</span> 목적
+    </div>
+    <div class="article-content">
+      <p>이 규정은 「도시 및 주거환경정비법」(이하 "법"이라 한다) 제31조 및 같은 법 시행령 제28조에 따라 설립된 조합설립추진위원회(이하 "추진위원회"라 한다)의 조직·운영 및 업무 수행에 관한 사항을 규정함으로써 정비사업의 투명하고 효율적인 추진에 이바지함을 목적으로 한다.</p>
+    </div>
+  </div>
+
+  <!-- 제2조 -->
+  <div id="a2" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제2조</span> 정의
+    </div>
+    <div class="article-content">
+      <p>이 규정에서 사용하는 용어의 뜻은 다음 각 호와 같다.</p>
+      <div class="clause"><span class="clause-num">1.</span> "토지등소유자"란 법 제2조제9호에 따른 정비구역 안의 토지 또는 건축물의 소유자 또는 그 지상권자를 말한다.</div>
+      <div class="clause"><span class="clause-num">2.</span> "추진위원"이란 토지등소유자의 동의를 받아 추진위원회의 위원으로 선임된 자를 말한다.</div>
+      <div class="clause"><span class="clause-num">3.</span> "정비업체"란 법 제102조에 따라 등록한 정비사업전문관리업자를 말한다.</div>
+      <div class="clause"><span class="clause-num">4.</span> "운영비"란 추진위원회의 업무 수행을 위하여 필요한 제반 경비를 말한다.</div>
+      <div class="clause"><span class="clause-num">5.</span> "동의서"란 조합설립을 위하여 토지등소유자로부터 징구하는 조합설립동의서를 말한다.</div>
+    </div>
+  </div>
+
+  <!-- 제3조 -->
+  <div id="a3" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제3조</span> 적용범위
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 이 규정은 추진위원회의 구성·운영 및 업무 전반에 대하여 적용한다.</div>
+      <div class="clause"><span class="clause-num">②</span> 이 규정에서 정하지 아니한 사항은 법, 같은 법 시행령·시행규칙, 해당 지방자치단체의 조례 및 관련 지침에 따른다.</div>
+      <div class="clause"><span class="clause-num">③</span> 이 규정은 추진위원회가 승인받은 날부터 조합설립인가를 받아 추진위원회가 해산하는 날까지 적용된다.</div>
+    </div>
+  </div>
+
+  <!-- 제4조 -->
+  <div id="a4" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제4조</span> 구성원칙
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회는 토지등소유자의 이익을 대변하여 공정하고 투명하게 운영되어야 한다.</div>
+      <div class="clause"><span class="clause-num">②</span> 추진위원회는 정비사업의 원활한 추진을 위하여 전문성, 도덕성, 공정성을 갖춘 자로 구성하여야 한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 추진위원회의 운영은 민주적 절차에 따라야 하며, 토지등소유자의 의견을 최대한 반영하여야 한다.</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════════════════════════════════
+       제2장 추진위원회의 구성
+       ═══════════════════════════════════════ -->
+  <div id="ch2" class="chapter-header">
+    <div class="chapter-number">CHAPTER 02</div>
+    <div class="chapter-title">제2장 &nbsp;추진위원회의 구성</div>
+    <div class="chapter-range">제5조 ~ 제9조</div>
+  </div>
+
+  <!-- 제5조 -->
+  <div id="a5" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제5조</span> 구성요건
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회는 법 제31조제1항에 따라 정비구역 안 토지등소유자의 과반수의 동의를 받아 구성하고, 시장·군수등의 승인을 받아야 한다.</div>
+      <div class="clause"><span class="clause-num">②</span> 추진위원회는 위원장 1명, 부위원장 2명 이내, 감사 1명 이상 2명 이내 및 위원 5명 이상 25명 이내로 구성한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 추진위원은 토지등소유자 중에서 선임한다. 다만, 법인이 토지등소유자인 경우에는 그 대표자 또는 대표자가 지정하는 자를 위원으로 선임할 수 있다.</div>
+      <div class="clause"><span class="clause-num">④</span> 추진위원회의 승인을 신청할 때에는 다음 각 호의 서류를 시장·군수등에게 제출하여야 한다.</div>
+      <div class="sub-clause"><span class="clause-num">1.</span> 추진위원회 승인신청서</div>
+      <div class="sub-clause"><span class="clause-num">2.</span> 토지등소유자의 동의서(인감증명서 첨부)</div>
+      <div class="sub-clause"><span class="clause-num">3.</span> 운영규정</div>
+      <div class="sub-clause"><span class="clause-num">4.</span> 토지등소유자 명부</div>
+      <div class="sub-clause"><span class="clause-num">5.</span> 위원 선임 관련 증빙서류</div>
+    </div>
+  </div>
+
+  <!-- 제6조 -->
+  <div id="a6" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제6조</span> 위원장·부위원장·감사의 선임
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 위원장은 추진위원 중에서 토지등소유자 과반수의 동의를 받아 선임한다.</div>
+      <div class="clause"><span class="clause-num">②</span> 부위원장은 추진위원 중에서 위원 과반수의 출석과 출석위원 과반수의 찬성으로 선임한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 감사는 추진위원이 아닌 토지등소유자 중에서 위원 과반수의 출석과 출석위원 과반수의 찬성으로 선임한다.</div>
+      <div class="clause"><span class="clause-num">④</span> 위원장은 추진위원회를 대표하고, 추진위원회의 업무를 총괄한다.</div>
+      <div class="clause"><span class="clause-num">⑤</span> 부위원장은 위원장을 보좌하며, 위원장이 부득이한 사유로 직무를 수행할 수 없는 때에는 위원장이 미리 지정한 부위원장이 그 직무를 대행한다.</div>
+      <div class="clause"><span class="clause-num">⑥</span> 감사는 추진위원회의 업무 및 회계를 감사하고, 그 결과를 토지등소유자에게 보고하여야 한다.</div>
+    </div>
+  </div>
+
+  <!-- 제7조 -->
+  <div id="a7" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제7조</span> 임기
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 위원장·부위원장·감사 및 위원의 임기는 추진위원회 승인일부터 조합설립인가일까지로 한다.</div>
+      <div class="clause"><span class="clause-num">②</span> 제1항에도 불구하고 추진위원회 승인일부터 2년 이내에 조합설립인가를 신청하지 아니한 경우에는 토지등소유자 과반수의 동의를 받아 1회에 한하여 1년의 범위에서 임기를 연장할 수 있다.</div>
+      <div class="clause"><span class="clause-num">③</span> 보궐 선임된 위원의 임기는 전임자의 잔여 임기로 한다.</div>
+    </div>
+  </div>
+
+  <!-- 제8조 -->
+  <div id="a8" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제8조</span> 결격사유
+    </div>
+    <div class="article-content">
+      <p>다음 각 호의 어느 하나에 해당하는 자는 추진위원이 될 수 없으며, 추진위원이 된 후 해당 사유가 발생한 때에는 당연 퇴임한다.</p>
+      <div class="clause"><span class="clause-num">1.</span> 미성년자·피성년후견인 또는 피한정후견인</div>
+      <div class="clause"><span class="clause-num">2.</span> 파산선고를 받은 자로서 복권되지 아니한 자</div>
+      <div class="clause"><span class="clause-num">3.</span> 금고 이상의 실형을 선고받고 그 집행이 종료(집행이 종료된 것으로 보는 경우를 포함한다)되거나 집행이 면제된 날부터 2년이 지나지 아니한 자</div>
+      <div class="clause"><span class="clause-num">4.</span> 금고 이상의 형의 집행유예를 선고받고 그 유예기간 중에 있는 자</div>
+      <div class="clause"><span class="clause-num">5.</span> 법 또는 「주택법」을 위반하여 벌금 100만원 이상의 형을 선고받고 5년이 지나지 아니한 자</div>
+      <div class="clause"><span class="clause-num">6.</span> 정비업체의 임직원 또는 정비업체와 이해관계가 있는 자</div>
+      <div class="clause"><span class="clause-num">7.</span> 해당 정비구역의 토지등소유자가 아닌 자(감사 제외)</div>
+    </div>
+  </div>
+
+  <!-- 제9조 -->
+  <div id="a9" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제9조</span> 해임
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원(위원장·부위원장·감사를 포함한다)이 다음 각 호의 어느 하나에 해당하는 경우에는 해임할 수 있다.</div>
+      <div class="sub-clause"><span class="clause-num">1.</span> 직무상 의무를 위반하거나 직무를 게을리한 경우</div>
+      <div class="sub-clause"><span class="clause-num">2.</span> 고의 또는 중대한 과실로 추진위원회에 손해를 끼친 경우</div>
+      <div class="sub-clause"><span class="clause-num">3.</span> 제8조 각 호의 결격사유에 해당하게 된 경우</div>
+      <div class="sub-clause"><span class="clause-num">4.</span> 추진위원회의 명의로 사적 이익을 취한 경우</div>
+      <div class="clause"><span class="clause-num">②</span> 위원장의 해임은 토지등소유자 10분의 1 이상의 요구에 의하여 토지등소유자 과반수의 동의로 한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 위원장을 제외한 추진위원의 해임은 재적위원 3분의 2 이상의 찬성으로 의결한다.</div>
+      <div class="clause"><span class="clause-num">④</span> 해임 대상자에게는 의결 전에 충분한 소명의 기회를 부여하여야 한다.</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════════════════════════════════
+       제3장 업무 및 권한
+       ═══════════════════════════════════════ -->
+  <div id="ch3" class="chapter-header">
+    <div class="chapter-number">CHAPTER 03</div>
+    <div class="chapter-title">제3장 &nbsp;업무 및 권한</div>
+    <div class="chapter-range">제10조 ~ 제13조</div>
+  </div>
+
+  <!-- 제10조 -->
+  <div id="a10" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제10조</span> 업무범위
+    </div>
+    <div class="article-content">
+      <p>추진위원회는 법 제31조제5항에 따라 다음 각 호의 업무를 수행한다.</p>
+      <div class="clause"><span class="clause-num">1.</span> 정비사업전문관리업자의 선정 및 변경</div>
+      <div class="clause"><span class="clause-num">2.</span> 설계자의 선정 및 변경</div>
+      <div class="clause"><span class="clause-num">3.</span> 개략적인 정비사업 시행계획서의 작성</div>
+      <div class="clause"><span class="clause-num">4.</span> 조합의 설립인가를 받기 위한 준비업무</div>
+      <div class="sub-clause"><span class="clause-num">가.</span> 토지등소유자의 동의서 징구</div>
+      <div class="sub-clause"><span class="clause-num">나.</span> 정관(안) 작성</div>
+      <div class="sub-clause"><span class="clause-num">다.</span> 조합임원 후보자 모집·추천</div>
+      <div class="sub-clause"><span class="clause-num">라.</span> 창립총회 개최 준비</div>
+      <div class="clause"><span class="clause-num">5.</span> 그 밖에 조합설립의 추진을 위하여 필요한 업무로서 토지등소유자의 과반수 동의를 받은 사항</div>
+
+      <div class="info-box navy" style="margin-top:18px;">
+        <div class="info-box-title">참고 | 법정 업무 외 금지행위</div>
+        <p>추진위원회는 위 업무범위를 초과하는 사항(시공자 선정, 건축설계 발주, 분양 관련 업무 등)을 수행할 수 없으며, 이를 위반한 경우 시장·군수등은 시정명령 또는 승인취소를 할 수 있다(법 제31조제7항).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 제11조 -->
+  <div id="a11" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제11조</span> 권한의 한계
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회는 법인격이 없으며, 조합설립인가 전까지의 준비기구로서의 지위를 가진다.</div>
+      <div class="clause"><span class="clause-num">②</span> 추진위원회의 명의로 부동산 매매, 금전차입 등 재산상의 법률행위를 할 수 없다.</div>
+      <div class="clause"><span class="clause-num">③</span> 추진위원회가 행한 업무 및 관련 비용은 조합설립인가 후 조합에 인계되며, 추진위원회가 사용한 비용은 법 제31조제8항에 따라 조합이 부담한다.</div>
+      <div class="clause"><span class="clause-num">④</span> 추진위원장은 추진위원회의 승인 없이 1건당 500만원(또는 운영규정으로 정한 금액)을 초과하는 지출행위를 할 수 없다.</div>
+    </div>
+  </div>
+
+  <!-- 제12조 -->
+  <div id="a12" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제12조</span> 정비업체 선정 기준
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회는 정비업체를 선정함에 있어 법 제102조 및 같은 법 시행령 제87조에 따라 등록된 정비사업전문관리업자 중에서 경쟁입찰의 방법으로 선정하여야 한다.</div>
+      <div class="clause"><span class="clause-num">②</span> 정비업체 선정 시 다음 각 호의 사항을 종합적으로 평가하여야 한다.</div>
+      <div class="sub-clause"><span class="clause-num">1.</span> 정비사업 수행 실적 및 경험</div>
+      <div class="sub-clause"><span class="clause-num">2.</span> 기술인력의 보유 현황</div>
+      <div class="sub-clause"><span class="clause-num">3.</span> 용역비의 적정성</div>
+      <div class="sub-clause"><span class="clause-num">4.</span> 재무건전성 및 신용도</div>
+      <div class="sub-clause"><span class="clause-num">5.</span> 업무수행계획의 적정성</div>
+      <div class="clause"><span class="clause-num">③</span> 추진위원회는 정비업체 선정결과를 지체 없이 시장·군수등에게 통보하고, 토지등소유자에게 공개하여야 한다.</div>
+      <div class="clause"><span class="clause-num">④</span> 정비업체와의 계약은 표준계약서에 따르되, 위원회의 의결을 거쳐야 한다.</div>
+    </div>
+  </div>
+
+  <!-- 제13조 -->
+  <div id="a13" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제13조</span> 업무위탁
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회는 전문적인 업무 수행을 위하여 필요한 경우 다음 각 호의 업무를 정비업체 또는 전문가에게 위탁할 수 있다.</div>
+      <div class="sub-clause"><span class="clause-num">1.</span> 동의서 징구 업무</div>
+      <div class="sub-clause"><span class="clause-num">2.</span> 회계·세무 업무</div>
+      <div class="sub-clause"><span class="clause-num">3.</span> 법률 자문</div>
+      <div class="sub-clause"><span class="clause-num">4.</span> 그 밖에 전문성이 요구되는 업무</div>
+      <div class="clause"><span class="clause-num">②</span> 업무위탁 계약 시에는 위탁범위, 기간, 보수, 책임사항 등을 명확히 하여야 하며, 위원회의 의결을 거쳐야 한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 위탁받은 자는 위탁받은 업무를 다시 제3자에게 재위탁할 수 없다.</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════════════════════════════════
+       제4장 회의
+       ═══════════════════════════════════════ -->
+  <div id="ch4" class="chapter-header">
+    <div class="chapter-number">CHAPTER 04</div>
+    <div class="chapter-title">제4장 &nbsp;회의</div>
+    <div class="chapter-range">제14조 ~ 제18조</div>
+  </div>
+
+  <!-- 제14조 -->
+  <div id="a14" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제14조</span> 회의의 소집
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회의 회의는 위원장이 소집하며, 위원장이 의장이 된다.</div>
+      <div class="clause"><span class="clause-num">②</span> 위원장은 필요하다고 인정하는 때 또는 재적위원 3분의 1 이상의 요구가 있는 때에 회의를 소집하여야 한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 회의소집 통지는 회의 개최일 7일 전까지 회의 일시, 장소 및 안건을 기재한 서면(전자문서를 포함한다)으로 각 위원에게 발송하여야 한다. 다만, 긴급한 사유가 있는 경우에는 회의 개최일 3일 전까지 통지할 수 있다.</div>
+      <div class="clause"><span class="clause-num">④</span> 정기회의는 분기별 1회 이상 개최하여야 한다.</div>
+    </div>
+  </div>
+
+  <!-- 제15조 -->
+  <div id="a15" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제15조</span> 의결정족수
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회의 회의는 재적위원 과반수의 출석으로 개의하고, 출석위원 과반수의 찬성으로 의결한다.</div>
+      <div class="clause"><span class="clause-num">②</span> 제1항에도 불구하고 다음 각 호의 사항은 재적위원 3분의 2 이상의 찬성으로 의결한다.</div>
+      <div class="sub-clause"><span class="clause-num">1.</span> 정비업체의 선정 및 변경</div>
+      <div class="sub-clause"><span class="clause-num">2.</span> 설계자의 선정 및 변경</div>
+      <div class="sub-clause"><span class="clause-num">3.</span> 운영규정의 변경</div>
+      <div class="sub-clause"><span class="clause-num">4.</span> 1건당 1천만원을 초과하는 지출의 승인</div>
+      <div class="clause"><span class="clause-num">③</span> 위원장은 의결에 있어 찬반 동수인 경우 결정권을 가진다.</div>
+      <div class="clause"><span class="clause-num">④</span> 이해관계가 있는 위원은 해당 안건의 의결에 참여할 수 없다.</div>
+    </div>
+  </div>
+
+  <!-- 제16조 -->
+  <div id="a16" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제16조</span> 의사록
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회는 회의 시 다음 각 호의 사항을 기재한 의사록을 작성하여야 한다.</div>
+      <div class="sub-clause"><span class="clause-num">1.</span> 회의 일시 및 장소</div>
+      <div class="sub-clause"><span class="clause-num">2.</span> 출석위원의 성명</div>
+      <div class="sub-clause"><span class="clause-num">3.</span> 안건 및 심의·의결 내용</div>
+      <div class="sub-clause"><span class="clause-num">4.</span> 찬성 및 반대 현황</div>
+      <div class="sub-clause"><span class="clause-num">5.</span> 그 밖에 주요 발언 요지</div>
+      <div class="clause"><span class="clause-num">②</span> 의사록에는 의장과 출석위원 중 2인 이상이 기명날인 또는 서명하여야 한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 의사록은 토지등소유자의 열람 청구가 있는 경우 이를 공개하여야 한다.</div>
+      <div class="clause"><span class="clause-num">④</span> 의사록은 회의 종료 후 14일 이내에 작성을 완료하여야 한다.</div>
+    </div>
+  </div>
+
+  <!-- 제17조 -->
+  <div id="a17" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제17조</span> 서면결의
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 위원장은 긴급한 사항으로서 회의를 소집할 시간적 여유가 없는 경우에는 서면으로 결의할 수 있다. 다만, 다음 각 호의 사항은 서면결의로 할 수 없다.</div>
+      <div class="sub-clause"><span class="clause-num">1.</span> 정비업체 또는 설계자의 선정·변경</div>
+      <div class="sub-clause"><span class="clause-num">2.</span> 운영규정의 변경</div>
+      <div class="sub-clause"><span class="clause-num">3.</span> 1건당 1천만원을 초과하는 지출의 승인</div>
+      <div class="clause"><span class="clause-num">②</span> 서면결의는 재적위원 과반수의 서면동의로 의결한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 서면결의 사항은 차기 회의에서 보고하여야 한다.</div>
+    </div>
+  </div>
+
+  <!-- 제18조 -->
+  <div id="a18" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제18조</span> 회의 공개
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회의 회의는 공개를 원칙으로 한다. 다만, 개인정보 보호 등 부득이한 사유가 있는 경우에는 위원 과반수의 의결로 비공개로 할 수 있다.</div>
+      <div class="clause"><span class="clause-num">②</span> 토지등소유자는 회의에 참관할 수 있으며, 위원장의 허가를 받아 발언할 수 있다.</div>
+      <div class="clause"><span class="clause-num">③</span> 추진위원회는 회의 결과를 회의 종료 후 30일 이내에 토지등소유자에게 서면 또는 인터넷 홈페이지 등을 통하여 통지하거나 공개하여야 한다.</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════════════════════════════════
+       제5장 재정
+       ═══════════════════════════════════════ -->
+  <div id="ch5" class="chapter-header">
+    <div class="chapter-number">CHAPTER 05</div>
+    <div class="chapter-title">제5장 &nbsp;재정</div>
+    <div class="chapter-range">제19조 ~ 제22조</div>
+  </div>
+
+  <!-- 제19조 -->
+  <div id="a19" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제19조</span> 운영비의 조달
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회의 운영에 필요한 경비는 토지등소유자의 동의를 얻어 토지등소유자로부터 징수하는 운영비로 충당한다.</div>
+      <div class="clause"><span class="clause-num">②</span> 운영비의 규모는 토지등소유자 과반수의 동의를 받아 정한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 추진위원회는 운영비 이외의 명목으로 토지등소유자에게 금전을 징수할 수 없다.</div>
+      <div class="clause"><span class="clause-num">④</span> 추진위원회의 운영비는 법 제31조제8항에 따라 조합설립 후 조합의 비용으로 전환된다.</div>
+    </div>
+  </div>
+
+  <!-- 제20조 -->
+  <div id="a20" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제20조</span> 지출 기준
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회의 운영비는 다음 각 호의 용도에 한하여 지출할 수 있다.</div>
+      <div class="sub-clause"><span class="clause-num">1.</span> 사무실 임차료 및 관리비</div>
+      <div class="sub-clause"><span class="clause-num">2.</span> 정비업체 용역비</div>
+      <div class="sub-clause"><span class="clause-num">3.</span> 설계비</div>
+      <div class="sub-clause"><span class="clause-num">4.</span> 법률·세무·감정평가 등 전문가 자문 비용</div>
+      <div class="sub-clause"><span class="clause-num">5.</span> 통신비·인쇄비·우편요금 등 사무 운영비</div>
+      <div class="sub-clause"><span class="clause-num">6.</span> 회의비(실비 범위 내)</div>
+      <div class="sub-clause"><span class="clause-num">7.</span> 그 밖에 위원회가 의결한 사업 추진에 필요한 비용</div>
+      <div class="clause"><span class="clause-num">②</span> 위원장은 1건당 500만원을 초과하는 지출에 대하여는 사전에 위원회의 의결을 받아야 한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 추진위원에 대한 보수는 지급하지 아니한다. 다만, 회의 참석 수당 및 업무 수행에 따른 실비는 위원회가 정하는 바에 따라 지급할 수 있다.</div>
+      <div class="clause"><span class="clause-num">④</span> 모든 지출은 적격증빙(세금계산서, 신용카드 매출전표 등)을 구비하여야 한다.</div>
+    </div>
+  </div>
+
+  <!-- 제21조 -->
+  <div id="a21" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제21조</span> 회계 관리
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회는 추진위원회 명의의 금융기관 예금계좌를 개설하여 모든 금전 거래를 관리하여야 한다.</div>
+      <div class="clause"><span class="clause-num">②</span> 예금계좌의 인감 및 통장은 위원장과 감사가 각각 분리하여 관리한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 추진위원회는 수입·지출에 관한 장부를 비치하고, 증빙서류를 체계적으로 보관하여야 한다.</div>
+      <div class="clause"><span class="clause-num">④</span> 위원장은 분기별 1회 이상 수입·지출 현황을 위원회에 보고하고, 연 1회 이상 토지등소유자에게 공개하여야 한다.</div>
+      <div class="clause"><span class="clause-num">⑤</span> 회계연도는 매년 1월 1일부터 12월 31일까지로 한다. 다만, 최초 회계연도는 추진위원회 승인일부터 해당 연도 12월 31일까지로 한다.</div>
+    </div>
+  </div>
+
+  <!-- 제22조 -->
+  <div id="a22" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제22조</span> 감사
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 감사는 반기별 1회 이상 추진위원회의 업무 및 회계에 대하여 감사를 실시하고, 감사보고서를 작성하여야 한다.</div>
+      <div class="clause"><span class="clause-num">②</span> 감사보고서에는 다음 각 호의 사항을 포함하여야 한다.</div>
+      <div class="sub-clause"><span class="clause-num">1.</span> 수입·지출의 적정성</div>
+      <div class="sub-clause"><span class="clause-num">2.</span> 예산 집행의 적법성</div>
+      <div class="sub-clause"><span class="clause-num">3.</span> 재산관리 현황</div>
+      <div class="sub-clause"><span class="clause-num">4.</span> 업무 수행의 적정성</div>
+      <div class="sub-clause"><span class="clause-num">5.</span> 시정 또는 개선 필요 사항</div>
+      <div class="clause"><span class="clause-num">③</span> 감사는 감사결과를 위원회에 보고하고, 토지등소유자가 열람할 수 있도록 하여야 한다.</div>
+      <div class="clause"><span class="clause-num">④</span> 토지등소유자 10분의 1 이상의 연서에 의한 감사 청구가 있는 경우 감사는 지체 없이 감사를 실시하여야 한다.</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════════════════════════════════
+       제6장 해산 및 인계
+       ═══════════════════════════════════════ -->
+  <div id="ch6" class="chapter-header">
+    <div class="chapter-number">CHAPTER 06</div>
+    <div class="chapter-title">제6장 &nbsp;해산 및 인계</div>
+    <div class="chapter-range">제23조 ~ 제25조</div>
+  </div>
+
+  <!-- 제23조 -->
+  <div id="a23" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제23조</span> 해산
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 추진위원회는 다음 각 호의 어느 하나에 해당하는 경우 해산한다.</div>
+      <div class="sub-clause"><span class="clause-num">1.</span> 조합설립인가를 받은 때</div>
+      <div class="sub-clause"><span class="clause-num">2.</span> 시장·군수등이 추진위원회의 승인을 취소한 때</div>
+      <div class="sub-clause"><span class="clause-num">3.</span> 토지등소유자 과반수의 동의로 해산을 의결한 때</div>
+      <div class="clause"><span class="clause-num">②</span> 추진위원회가 해산한 경우 위원장은 지체 없이 이를 시장·군수등에게 신고하여야 한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 법 제31조제6항에 따라 추진위원회 승인일부터 3년 이내에 조합설립인가를 신청하지 아니하는 경우 추진위원회의 승인은 효력을 상실한다. 다만, 제7조제2항에 따라 임기를 연장한 경우에는 그 연장기간까지로 한다.</div>
+    </div>
+  </div>
+
+  <!-- 제24조 -->
+  <div id="a24" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제24조</span> 업무·재산의 인계
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 조합설립인가로 추진위원회가 해산하는 경우, 위원장은 해산일로부터 30일 이내에 다음 각 호의 서류 및 재산을 조합에 인계하여야 한다.</div>
+      <div class="sub-clause"><span class="clause-num">1.</span> 토지등소유자 명부 및 동의서 원본</div>
+      <div class="sub-clause"><span class="clause-num">2.</span> 회의록(의사록) 일체</div>
+      <div class="sub-clause"><span class="clause-num">3.</span> 회계장부 및 증빙서류 일체</div>
+      <div class="sub-clause"><span class="clause-num">4.</span> 정비업체·설계자 등과의 계약서 원본</div>
+      <div class="sub-clause"><span class="clause-num">5.</span> 예금통장, 인감 및 잔여 금전</div>
+      <div class="sub-clause"><span class="clause-num">6.</span> 그 밖에 추진위원회의 업무와 관련된 모든 서류 및 자료</div>
+      <div class="clause"><span class="clause-num">②</span> 인계 시에는 인계·인수서를 작성하고 인계자(위원장)와 인수자(조합장)가 각각 기명날인하여야 한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 감사는 인계·인수 과정에 입회하여 그 적정성을 확인하고 확인서를 작성하여야 한다.</div>
+    </div>
+  </div>
+
+  <!-- 제25조 -->
+  <div id="a25" class="article-block no-break">
+    <div class="article-title">
+      <span class="article-num">제25조</span> 잔여재산의 처리
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 조합설립인가로 해산하는 경우 추진위원회의 잔여재산은 조합에 귀속된다.</div>
+      <div class="clause"><span class="clause-num">②</span> 추진위원회의 승인취소 또는 토지등소유자의 의결에 의하여 해산하는 경우 잔여재산은 채무를 변제한 후 토지등소유자에게 그 지분비율에 따라 배분한다.</div>
+      <div class="clause"><span class="clause-num">③</span> 제2항의 경우 정산이 완료될 때까지 위원장은 잔무 처리의 책임을 진다.</div>
+
+      <div class="info-box warning" style="margin-top:18px;">
+        <div class="info-box-title">유의사항 | 비용 부담 관련</div>
+        <p>법 제31조제8항에 따라 추진위원회가 사용한 비용은 조합이 부담하되, 비용의 사용내역은 조합 창립총회에서 보고하여야 합니다. 추진위원회의 운영비 중 부당하게 지출된 비용에 대하여는 관련 위원에게 구상권을 행사할 수 있습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════════════════════════════════
+       부칙
+       ═══════════════════════════════════════ -->
+  <div id="addendum" class="chapter-header" style="background: linear-gradient(135deg, #2C2417 0%, #3D3426 50%, #4A3F2F 100%);">
+    <div class="chapter-number" style="color: var(--gold-light);">ADDENDUM</div>
+    <div class="chapter-title">부 칙</div>
+    <div class="chapter-range">시행일 · 경과규정 · 다른 규정과의 관계</div>
+  </div>
+
+  <!-- 부칙 제1조 -->
+  <div id="add1" class="article-block supplementary no-break">
+    <div class="article-title">
+      <span class="article-num">부칙 제1조</span> 시행일
+    </div>
+    <div class="article-content">
+      <p>이 규정은 시장·군수등의 추진위원회 승인일부터 시행한다.</p>
+    </div>
+  </div>
+
+  <!-- 부칙 제2조 -->
+  <div id="add2" class="article-block supplementary no-break">
+    <div class="article-title">
+      <span class="article-num">부칙 제2조</span> 경과규정
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 이 규정 시행 전에 종전의 규정에 따라 행한 행위는 이 규정에 따라 행한 것으로 본다.</div>
+      <div class="clause"><span class="clause-num">②</span> 이 규정 시행 당시 종전의 규정에 따라 진행 중인 절차는 이 규정에 적합한 범위에서 유효한 것으로 본다.</div>
+      <div class="clause"><span class="clause-num">③</span> 이 규정의 개정 시 개정 전에 선임된 위원의 임기 및 자격에 대하여는 종전의 규정에 따른다.</div>
+    </div>
+  </div>
+
+  <!-- 부칙 제3조 -->
+  <div id="add3" class="article-block supplementary no-break">
+    <div class="article-title">
+      <span class="article-num">부칙 제3조</span> 다른 규정과의 관계
+    </div>
+    <div class="article-content">
+      <div class="clause"><span class="clause-num">①</span> 이 규정에서 정하지 아니한 사항은 「도시 및 주거환경정비법」, 같은 법 시행령·시행규칙 및 해당 지방자치단체의 조례에 따른다.</div>
+      <div class="clause"><span class="clause-num">②</span> 이 규정이 관련 법령의 개정으로 상충되는 경우에는 관련 법령이 우선한다.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════ -->
+  <div class="doc-footer">
+    <div class="company-name">(주)세울엔지니어링</div>
+    <div class="gold-bar"></div>
+    <div class="company-info">
+      정비사업 전문관리 · 도시정비 컨설팅<br>
+      서울특별시 &nbsp;|&nbsp; TEL 02-XXX-XXXX &nbsp;|&nbsp; FAX 02-XXX-XXXX<br>
+      www.seul-eng.co.kr
+    </div>
+    <p class="disclaimer">
+      본 문서는 「도시 및 주거환경정비법」에 근거한 표준 운영규정 참고자료로서,<br>
+      실제 적용 시 해당 지방자치단체의 조례 및 지침, 관할 행정기관의 유권해석에 따라<br>
+      일부 내용이 달라질 수 있습니다. 법적 효력이 있는 최종 규정은 별도 검토가 필요합니다.<br><br>
+      &copy; 2026 (주)세울엔지니어링. All rights reserved.
+    </p>
+  </div>
+
+</div><!-- /.container .content-area -->
+
+<!-- ═══════════════════════════════════════
+     PRINT BAR
+     ═══════════════════════════════════════ -->
+<div class="print-bar no-print">
+  <a href="../index.html" class="btn-back">&#8592; &nbsp;목록으로</a>
+  <button class="btn-print" onclick="window.print()">인쇄하기</button>
+</div>
+
+</body>
+</html>
