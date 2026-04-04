@@ -184,7 +184,7 @@
         background: var(--white);
         border: 1.5px solid var(--gray-200);
         border-radius: 14px;
-        padding: 32px 28px 28px;
+        padding: 0;
         transition: all 0.3s ease;
         display: flex;
         flex-direction: column;
@@ -192,14 +192,14 @@
         position: relative;
         overflow: hidden;
     }
+    .featured-card .feat-body {
+        padding: 24px 28px 28px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
     .featured-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(90deg, var(--gold), rgba(195,165,105,0.4));
+        display: none;
     }
     .featured-card:hover {
         border-color: var(--gold);
@@ -362,12 +362,18 @@
         background: var(--white);
         border: 1.5px solid var(--gray-200);
         border-radius: 14px;
-        padding: 28px 24px 24px;
+        padding: 0;
         transition: all 0.25s ease;
         display: flex;
         flex-direction: column;
         cursor: pointer;
         position: relative;
+    }
+    .pf-card .pf-body {
+        padding: 20px 24px 24px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
     }
     .pf-card:hover {
         border-color: var(--gold);
@@ -441,6 +447,42 @@
         color: var(--gold);
         border-color: var(--brand-dark);
     }
+
+    /* ── Card Image ── */
+    .card-thumb {
+        width: 100%; height: 180px; overflow: hidden; position: relative;
+        border-radius: 14px 14px 0 0;
+    }
+    .card-thumb-inner {
+        width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+        transition: transform 0.4s ease;
+    }
+    .card-thumb-inner i {
+        font-size: 48px; color: rgba(255,255,255,0.15);
+    }
+    .pf-card:hover .card-thumb-inner,
+    .featured-card:hover .card-thumb-inner {
+        transform: scale(1.05);
+    }
+    .card-thumb .thumb-badges {
+        position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; z-index: 2;
+    }
+    /* Featured card larger thumb */
+    .featured-card .card-thumb { height: 200px; }
+
+    /* Type-based gradients */
+    .thumb-재개발 { background: linear-gradient(135deg, #0A0F1C 0%, #1a3055 50%, #2a4a75 100%); }
+    .thumb-재건축 { background: linear-gradient(135deg, #142644 0%, #1e3a5f 50%, #0A0F1C 100%); }
+    .thumb-소규모정비 { background: linear-gradient(135deg, #1a2a40 0%, #C3A569 120%); }
+
+    /* Modal image */
+    .detail-image {
+        width: 100%; height: 240px; overflow: hidden; border-radius: 12px; margin-bottom: 24px;
+    }
+    .detail-image-inner {
+        width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    }
+    .detail-image-inner i { font-size: 64px; color: rgba(255,255,255,0.12); }
 
     /* ── Badge Variants ── */
     .badge-type {
@@ -772,25 +814,37 @@
 <script>
 (function() {
 
+    /* ── 유형별 아이콘 ── */
+    function getTypeIcon(type) {
+        var icons = {'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney'};
+        return icons[type] || 'fa-building-columns';
+    }
+
     /* ── 주요 수행실적 렌더 ── */
     function renderFeatured() {
         var items = MOCK.portfolio.filter(function(p) { return p.featured === true; });
         var grid = document.getElementById('featuredGrid');
 
         grid.innerHTML = items.map(function(p) {
+            var typeIcon = getTypeIcon(p.type);
             return '<div class="featured-card" onclick="portfolioApp.openDetail(\'' + p.id + '\')">' +
-                '<div class="fc-badges">' +
-                    '<span class="badge badge-type">' + p.type + '</span>' +
-                    '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
+                '<div class="card-thumb thumb-' + p.type + '">' +
+                    '<div class="card-thumb-inner"><i class="fa-solid ' + typeIcon + '"></i></div>' +
+                    '<div class="thumb-badges">' +
+                        '<span class="badge badge-type">' + p.type + '</span>' +
+                        '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
+                    '</div>' +
                 '</div>' +
-                '<div class="fc-name">' + p.name + '</div>' +
-                '<div class="fc-info-list">' +
-                    '<div class="fc-info"><i class="fa-solid fa-location-dot"></i> <strong>' + p.district + '</strong></div>' +
-                    '<div class="fc-info"><i class="fa-solid fa-building"></i> ' + p.scale + '</div>' +
-                    '<div class="fc-info"><i class="fa-solid fa-user-tie"></i> ' + p.role + '</div>' +
+                '<div class="feat-body">' +
+                    '<div class="fc-name">' + p.name + '</div>' +
+                    '<div class="fc-info-list">' +
+                        '<div class="fc-info"><i class="fa-solid fa-location-dot"></i> <strong>' + p.district + '</strong></div>' +
+                        '<div class="fc-info"><i class="fa-solid fa-building"></i> ' + p.scale + '</div>' +
+                        '<div class="fc-info"><i class="fa-solid fa-user-tie"></i> ' + p.role + '</div>' +
+                    '</div>' +
+                    '<div class="fc-desc">' + p.description + '</div>' +
+                    '<button class="fc-detail-btn" onclick="event.stopPropagation(); portfolioApp.openDetail(\'' + p.id + '\')">상세보기 <i class="fa-solid fa-arrow-right"></i></button>' +
                 '</div>' +
-                '<div class="fc-desc">' + p.description + '</div>' +
-                '<button class="fc-detail-btn" onclick="event.stopPropagation(); portfolioApp.openDetail(\'' + p.id + '\')">상세보기 <i class="fa-solid fa-arrow-right"></i></button>' +
             '</div>';
         }).join('');
     }
@@ -827,25 +881,31 @@
         }
 
         grid.innerHTML = items.map(function(p) {
+            var typeIcon = getTypeIcon(p.type);
             return '<div class="pf-card" onclick="portfolioApp.openDetail(\'' + p.id + '\')">' +
-                '<div class="pf-name">' + p.name + '</div>' +
-                '<div class="pf-badges">' +
-                    '<span class="badge badge-type">' + p.type + '</span>' +
-                    '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
+                '<div class="card-thumb thumb-' + p.type + '">' +
+                    '<div class="card-thumb-inner"><i class="fa-solid ' + typeIcon + '"></i></div>' +
+                    '<div class="thumb-badges">' +
+                        '<span class="badge badge-type">' + p.type + '</span>' +
+                        '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
+                    '</div>' +
                 '</div>' +
-                '<div class="pf-info-row">' +
-                    '<span class="pf-label"><i class="fa-solid fa-location-dot"></i> 위치</span>' +
-                    '<span class="pf-value">' + p.district + '</span>' +
+                '<div class="pf-body">' +
+                    '<div class="pf-name">' + p.name + '</div>' +
+                    '<div class="pf-info-row">' +
+                        '<span class="pf-label"><i class="fa-solid fa-location-dot"></i> 위치</span>' +
+                        '<span class="pf-value">' + p.district + '</span>' +
+                    '</div>' +
+                    '<div class="pf-info-row">' +
+                        '<span class="pf-label"><i class="fa-solid fa-building"></i> 규모</span>' +
+                        '<span class="pf-value">' + p.scale + '</span>' +
+                    '</div>' +
+                    '<div class="pf-info-row">' +
+                        '<span class="pf-label"><i class="fa-solid fa-user-tie"></i> 역할</span>' +
+                        '<span class="pf-value">' + p.role + '</span>' +
+                    '</div>' +
+                    '<button class="pf-detail-btn" onclick="event.stopPropagation(); portfolioApp.openDetail(\'' + p.id + '\')"><i class="fa-solid fa-eye"></i> 상세보기</button>' +
                 '</div>' +
-                '<div class="pf-info-row">' +
-                    '<span class="pf-label"><i class="fa-solid fa-building"></i> 규모</span>' +
-                    '<span class="pf-value">' + p.scale + '</span>' +
-                '</div>' +
-                '<div class="pf-info-row">' +
-                    '<span class="pf-label"><i class="fa-solid fa-user-tie"></i> 역할</span>' +
-                    '<span class="pf-value">' + p.role + '</span>' +
-                '</div>' +
-                '<button class="pf-detail-btn" onclick="event.stopPropagation(); portfolioApp.openDetail(\'' + p.id + '\')"><i class="fa-solid fa-eye"></i> 상세보기</button>' +
             '</div>';
         }).join('');
     }
@@ -867,7 +927,18 @@
 
         document.getElementById('detailName').textContent = item.name;
 
-        document.getElementById('detailInfoGrid').innerHTML =
+        var typeIcon = getTypeIcon(item.type);
+        var imageHtml = '<div class="detail-image thumb-' + item.type + '">' +
+            '<div class="detail-image-inner"><i class="fa-solid ' + typeIcon + '"></i></div>' +
+        '</div>';
+
+        var infoGridEl = document.getElementById('detailInfoGrid');
+        // Insert image before the info grid
+        var existingImage = infoGridEl.parentNode.querySelector('.detail-image');
+        if (existingImage) existingImage.remove();
+        infoGridEl.insertAdjacentHTML('beforebegin', imageHtml);
+
+        infoGridEl.innerHTML =
             '<div class="detail-info-item">' +
                 '<span class="info-label">사업유형</span>' +
                 '<span class="info-value">' + item.type + '</span>' +
