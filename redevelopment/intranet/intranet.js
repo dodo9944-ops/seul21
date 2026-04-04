@@ -6,7 +6,7 @@ const Intra = (() => {
 
   /* ── 샘플 계정 ── */
   const ACCOUNTS = [
-    { id:'admin', pw:'admin1234', name:'이창우', role:'admin', dept:'대표이사' },
+    { id:'admin', pw:'admin1234', name:'Charles Lee', role:'admin', dept:'대표이사' },
     { id:'user1', pw:'user1234', name:'김정현', role:'staff', dept:'정비사업본부' },
     { id:'user2', pw:'user1234', name:'박세영', role:'staff', dept:'기술본부' },
     { id:'user3', pw:'user1234', name:'최수진', role:'viewer', dept:'경영지원본부' },

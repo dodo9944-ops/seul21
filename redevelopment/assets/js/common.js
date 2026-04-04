@@ -152,7 +152,7 @@ const App = (() => {
       </div>
       <div class="footer-bottom">
         <div class="footer-copy">&copy; 2026 (주)세울엔지니어링. All rights reserved. &nbsp;|&nbsp; <a href="${B}/pages/privacy.html" style="color:rgba(255,255,255,.4);text-decoration:underline">개인정보 처리방침</a></div>
-        <div class="footer-info">경기도 하남시 감일백제로 70, 204동 1104호 | 대표 이창우</div>
+        <div class="footer-info">경기도 하남시 감일백제로 70, 204동 1104호 | 대표 Charles Lee</div>
         <div class="footer-social">
           <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
           <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>

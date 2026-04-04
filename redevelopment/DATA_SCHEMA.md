@@ -241,7 +241,7 @@
 | `contactEmail` | string | 대표 이메일 | `"dodo6666@naver.com"` |
 | `address` | string | 회사 주소 | `"경기도 하남시 감일백제로 70, 204동 1104호"` |
 | `businessNumber` | string | 사업자등록번호 | `"474-81-02756"` |
-| `ceo` | string | 대표자 | `"이창우"` |
+| `ceo` | string | 대표자 | `"Charles Lee"` |
 | `workingHours` | string | 영업시간 | `"평일 09:00 – 18:00 / 토요일 09:00 – 13:00"` |
 | `maintenanceMode` | boolean | 점검 모드 | `false` |
 | `popupEnabled` | boolean | 팝업 활성화 | `false` |
