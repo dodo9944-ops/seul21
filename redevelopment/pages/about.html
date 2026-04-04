@@ -202,21 +202,11 @@
     }
     .org-ceo-card .org-role { font-size: 12px; color: var(--gold); margin-bottom: 4px; letter-spacing: 2px; }
     .org-ceo-card .org-name { font-size: 20px; font-weight: 800; }
-    .org-connector { width: 2px; height: 20px; background: var(--gold); opacity: 0.4; }
-    .org-branch { position: relative; width: 100%; }
-    .org-branch::before {
-        content: ''; position: absolute; top: 0;
-        left: calc(25% / 2); right: calc(25% / 2);
-        height: 2px; background: var(--gold); opacity: 0.35;
-    }
-    .org-branch::after {
-        content: ''; position: absolute; top: 0; left: 50%;
-        transform: translateX(-50%); width: 2px; height: 0;
-        background: var(--gold); opacity: 0.35;
-    }
+    .org-line-v { width: 2px; height: 30px; background: var(--gold); opacity: 0.35; }
+    .org-line-h { height: 2px; background: var(--gold); opacity: 0.35; margin: 0 12.5%; }
     .org-departments {
         display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; width: 100%;
-        padding-top: 28px;
+        padding-top: 30px; position: relative;
     }
     .org-dept-card {
         background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius);
@@ -224,8 +214,8 @@
     }
     .org-dept-card:hover { border-color: var(--gold); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
     .org-dept-card::before {
-        content: ''; position: absolute; top: -28px; left: 50%;
-        transform: translateX(-50%); width: 2px; height: 28px; background: var(--gold); opacity: 0.35;
+        content: ''; position: absolute; top: -30px; left: 50%;
+        transform: translateX(-50%); width: 2px; height: 30px; background: var(--gold); opacity: 0.35;
     }
     .org-dept-card h4 {
         font-size: 14px; font-weight: 800; color: var(--white); margin-bottom: 14px;
@@ -359,8 +349,8 @@
                     <div class="org-role">CEO</div>
                     <div class="org-name">대표이사</div>
                 </div>
-                <div style="width:2px;height:28px;background:var(--gold);opacity:0.35;"></div>
-                <div class="org-branch">
+                <div class="org-line-v"></div>
+                <div class="org-line-h"></div>
                 <div class="org-departments">
                     <div class="org-dept-card">
                         <h4>경영·법무실</h4>
@@ -393,7 +383,6 @@
                             <li>PM사업관리팀</li>
                         </ul>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
