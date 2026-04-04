@@ -38,11 +38,18 @@ const Intra = (() => {
   function isLoggedIn() { return !!getUser(); }
 
   function requireAuth(minRole) {
-    if (!isLoggedIn()) { location.replace('login.html'); return false; }
-    if (minRole && ROLES[getUser().role] < ROLES[minRole]) {
-      document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#888"><div style="text-align:center"><h2 style="margin-bottom:8px;color:#1A1A1A">접근 권한이 없습니다</h2><p>관리자에게 문의하세요.</p><a href="index.html" style="color:#C3A569;margin-top:16px;display:inline-block">대시보드로 돌아가기</a></div></div>';
+    /* 인증 전 콘텐츠 완전 차단 — HTML 소스 노출 방지 */
+    if (!isLoggedIn()) {
+      document.documentElement.innerHTML = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>인트라넷</title></head><body></body></html>';
+      location.replace('login.html');
       return false;
     }
+    if (minRole && ROLES[getUser().role] < ROLES[minRole]) {
+      document.documentElement.innerHTML = '<html><body style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#888"><div style="text-align:center"><h2 style="margin-bottom:8px;color:#1A1A1A">접근 권한이 없습니다</h2><p>관리자에게 문의하세요.</p><a href="index.html" style="color:#C3A569;margin-top:16px;display:inline-block">대시보드로 돌아가기</a></div></div></body></html>';
+      return false;
+    }
+    /* 인증 성공 시에만 콘텐츠 표시 */
+    document.body.style.visibility = 'visible';
     return true;
   }
 
