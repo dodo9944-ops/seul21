@@ -121,7 +121,7 @@ const App = (() => {
               <span class="logo-sub">SEUL ENGINEERING</span>
             </span>
           </div>
-          <p>재개발·재건축·소규모정비사업<br>정비사업전문관리업 등록 종합 엔지니어링 전문기업</p>
+          <p>재개발·재건축·소규모정비사업<br>도시정비 종합 엔지니어링 전문기업</p>
         </div>
         <div class="footer-col">
           <h5>회사</h5>
