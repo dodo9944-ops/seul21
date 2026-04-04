@@ -25,7 +25,7 @@
            SPLASH SCREEN (풀스크린 인트로)
            ══════════════════════════════════════ */
         .splash {
-            position: fixed; inset: 0; z-index: 9999;
+            position: fixed; inset: 0; z-index: 99999;
             background: #080E1A;
             display: flex; align-items: center; justify-content: center;
             flex-direction: column;
@@ -92,16 +92,17 @@
         }
         .splash-loader {
             position: absolute; bottom: 80px;
-            width: 160px; height: 1px; background: rgba(255,255,255,.06);
-            border-radius: 1px; overflow: hidden;
-            opacity: 0; animation: splFadeUp .4s ease .42s forwards;
+            width: 200px; height: 2px; background: rgba(195,165,105,.08);
+            border-radius: 2px; overflow: hidden;
+            opacity: 0; animation: splFadeUp .6s ease .5s forwards;
         }
         .splash-loader-bar {
             width: 0; height: 100%;
-            background: linear-gradient(90deg, #C3A569, #D4B87A);
-            animation: loaderFill 2.33s ease-in-out .5s forwards;
+            background: linear-gradient(90deg, transparent, #C3A569 30%, #D4B87A 70%, transparent);
+            border-radius: 2px;
+            animation: loaderFill 2.4s cubic-bezier(.4,0,.2,1) .6s forwards;
         }
-        @keyframes loaderFill { 0%{width:0} 60%{width:70%} 100%{width:100%} }
+        @keyframes loaderFill { 0%{width:0;opacity:.3} 40%{opacity:1} 80%{width:90%;opacity:1} 100%{width:100%;opacity:0} }
         @keyframes splFadeUp {
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
