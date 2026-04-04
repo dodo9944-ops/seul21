@@ -507,6 +507,15 @@
         letter-spacing: 1px;
         text-transform: uppercase;
     }
+    .card-thumb-inner.has-photo {
+        padding: 0;
+    }
+    .card-thumb-inner.has-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
     .pf-card:hover .card-thumb-inner,
     .featured-card:hover .card-thumb-inner {
         transform: scale(1.05);
@@ -589,6 +598,15 @@
         font-weight: 600;
         color: rgba(255,255,255,0.4);
         letter-spacing: 1px;
+    }
+    .detail-image-inner.has-photo {
+        padding: 0;
+    }
+    .detail-image-inner.has-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
 
     /* ── Badge Variants ── */
@@ -936,11 +954,19 @@
     function buildThumb(p) {
         var icon = getTypeIcon(p.type);
         var dt = getDataType(p.type);
-        return '<div class="card-thumb" data-type="' + dt + '">' +
-            '<div class="card-thumb-inner">' +
+        var innerHtml;
+        if (p.image) {
+            innerHtml = '<div class="card-thumb-inner has-photo">' +
+                '<img src="' + p.image + '" alt="' + p.name + '" loading="lazy">' +
+            '</div>';
+        } else {
+            innerHtml = '<div class="card-thumb-inner">' +
                 '<div class="thumb-icon"><i class="fa-solid ' + icon + '"></i></div>' +
                 '<span class="thumb-label">' + p.type + '</span>' +
-            '</div>' +
+            '</div>';
+        }
+        return '<div class="card-thumb" data-type="' + dt + '">' +
+            innerHtml +
             '<div class="thumb-badges">' +
                 '<span class="badge badge-type">' + p.type + '</span>' +
                 '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
@@ -1043,11 +1069,19 @@
 
         var typeIcon = getTypeIcon(item.type);
         var dt = getDataType(item.type);
-        var imageHtml = '<div class="detail-image" data-type="' + dt + '">' +
-            '<div class="detail-image-inner">' +
+        var detailInner;
+        if (item.image) {
+            detailInner = '<div class="detail-image-inner has-photo">' +
+                '<img src="' + item.image + '" alt="' + item.name + '">' +
+            '</div>';
+        } else {
+            detailInner = '<div class="detail-image-inner">' +
                 '<div class="thumb-icon"><i class="fa-solid ' + typeIcon + '"></i></div>' +
                 '<span class="thumb-label">' + item.type + '</span>' +
-            '</div>' +
+            '</div>';
+        }
+        var imageHtml = '<div class="detail-image" data-type="' + dt + '">' +
+            detailInner +
         '</div>';
 
         var infoGridEl = document.getElementById('detailInfoGrid');

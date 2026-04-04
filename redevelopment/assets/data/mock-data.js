@@ -344,7 +344,7 @@ const MOCK = {
 
   /* ──────────────────────────── 업무실적 ──────────────────────────── */
   portfolio: [
-    { id:'pf1', name:'한남3구역 주택재개발 정비사업', type:'재개발', district:'용산구', status:'진행중', year:'2026', scale:'5,200세대', role:'정비사업전문관리', description:'한남뉴타운 최대 규모 정비구역의 사업시행부터 관리처분까지 전 과정 관리', featured:true },
+    { id:'pf1', name:'한남3구역 주택재개발 정비사업', type:'재개발', district:'용산구', status:'진행중', year:'2026', scale:'5,200세대', role:'정비사업전문관리', description:'한남뉴타운 최대 규모 정비구역의 사업시행부터 관리처분까지 전 과정 관리', featured:true, image:'../assets/images/portfolio/hannam3.jpg' },
     { id:'pf2', name:'흑석9구역 주택재개발 정비사업', type:'재개발', district:'동작구', status:'진행중', year:'2025', scale:'3,800세대', role:'정비사업전문관리', description:'한강 조망 프리미엄 구역의 조합 운영 지원 및 시공사 선정 자문', featured:true },
     { id:'pf3', name:'이문1구역 주택재개발 정비사업', type:'재개발', district:'동대문구', status:'진행중', year:'2025', scale:'4,100세대', role:'사업성분석·인허가', description:'관리처분인가 단계 핵심 실무 및 분양설계 검토', featured:false },
     { id:'pf4', name:'둔촌주공 재건축 정비사업', type:'재건축', district:'강동구', status:'완료', year:'2024', scale:'12,032세대', role:'사업관리 자문', description:'국내 최대 규모 재건축 사업의 준공 단계 사업관리 자문', featured:true },
