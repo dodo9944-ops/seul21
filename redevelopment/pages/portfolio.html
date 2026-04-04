@@ -448,41 +448,148 @@
         border-color: var(--brand-dark);
     }
 
-    /* ── Card Image ── */
+    /* ── Card Thumbnail Image ── */
     .card-thumb {
-        width: 100%; height: 180px; overflow: hidden; position: relative;
+        width: 100%;
+        min-height: 180px;
+        height: 180px;
+        overflow: hidden;
+        position: relative;
         border-radius: 14px 14px 0 0;
+        background: linear-gradient(135deg, #0A0F1C 0%, #1a3055 50%, #2a4a75 100%);
+        flex-shrink: 0;
+    }
+    .card-thumb[data-type="recon"] {
+        background: linear-gradient(135deg, #142644 0%, #1e3a5f 50%, #0A0F1C 100%);
+    }
+    .card-thumb[data-type="small"] {
+        background: linear-gradient(135deg, #1a2a40 0%, #243a55 50%, #C3A569 130%);
+    }
+    .card-thumb::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(circle at 20% 80%, rgba(195,165,105,0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 40%);
+        pointer-events: none;
     }
     .card-thumb-inner {
-        width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
         transition: transform 0.4s ease;
+        position: relative;
+        z-index: 1;
     }
-    .card-thumb-inner i {
-        font-size: 48px; color: rgba(255,255,255,0.15);
+    .card-thumb-inner .thumb-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .card-thumb-inner .thumb-icon i {
+        font-size: 28px;
+        color: rgba(195,165,105,0.7);
+    }
+    .card-thumb-inner .thumb-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.4);
+        letter-spacing: 1px;
+        text-transform: uppercase;
     }
     .pf-card:hover .card-thumb-inner,
     .featured-card:hover .card-thumb-inner {
         transform: scale(1.05);
     }
     .card-thumb .thumb-badges {
-        position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; z-index: 2;
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        gap: 6px;
+        z-index: 3;
     }
     /* Featured card larger thumb */
-    .featured-card .card-thumb { height: 200px; }
+    .featured-card .card-thumb {
+        min-height: 210px;
+        height: 210px;
+    }
+    .featured-card .card-thumb-inner .thumb-icon {
+        width: 72px;
+        height: 72px;
+    }
+    .featured-card .card-thumb-inner .thumb-icon i {
+        font-size: 32px;
+    }
 
-    /* Type-based gradients */
-    .thumb-재개발 { background: linear-gradient(135deg, #0A0F1C 0%, #1a3055 50%, #2a4a75 100%); }
-    .thumb-재건축 { background: linear-gradient(135deg, #142644 0%, #1e3a5f 50%, #0A0F1C 100%); }
-    .thumb-소규모정비 { background: linear-gradient(135deg, #1a2a40 0%, #C3A569 120%); }
-
-    /* Modal image */
+    /* ── Detail Modal Image ── */
     .detail-image {
-        width: 100%; height: 240px; overflow: hidden; border-radius: 12px; margin-bottom: 24px;
+        width: 100%;
+        min-height: 200px;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        background: linear-gradient(135deg, #0A0F1C 0%, #1a3055 50%, #2a4a75 100%);
+        position: relative;
+        flex-shrink: 0;
+    }
+    .detail-image[data-type="recon"] {
+        background: linear-gradient(135deg, #142644 0%, #1e3a5f 50%, #0A0F1C 100%);
+    }
+    .detail-image[data-type="small"] {
+        background: linear-gradient(135deg, #1a2a40 0%, #243a55 50%, #C3A569 130%);
+    }
+    .detail-image::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(circle at 20% 80%, rgba(195,165,105,0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 40%);
+        pointer-events: none;
     }
     .detail-image-inner {
-        width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        position: relative;
+        z-index: 1;
     }
-    .detail-image-inner i { font-size: 64px; color: rgba(255,255,255,0.12); }
+    .detail-image-inner .thumb-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .detail-image-inner .thumb-icon i {
+        font-size: 36px;
+        color: rgba(195,165,105,0.7);
+    }
+    .detail-image-inner .thumb-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.4);
+        letter-spacing: 1px;
+    }
 
     /* ── Badge Variants ── */
     .badge-type {
@@ -814,10 +921,31 @@
 <script>
 (function() {
 
-    /* ── 유형별 아이콘 ── */
+    /* ── 유형별 아이콘·data-type 매핑 ── */
     function getTypeIcon(type) {
         var icons = {'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney'};
         return icons[type] || 'fa-building-columns';
+    }
+    function getDataType(type) {
+        if (type === '재건축') return 'recon';
+        if (type === '소규모정비') return 'small';
+        return 'redev';
+    }
+
+    /* ── 썸네일 HTML 생성 ── */
+    function buildThumb(p) {
+        var icon = getTypeIcon(p.type);
+        var dt = getDataType(p.type);
+        return '<div class="card-thumb" data-type="' + dt + '">' +
+            '<div class="card-thumb-inner">' +
+                '<div class="thumb-icon"><i class="fa-solid ' + icon + '"></i></div>' +
+                '<span class="thumb-label">' + p.type + '</span>' +
+            '</div>' +
+            '<div class="thumb-badges">' +
+                '<span class="badge badge-type">' + p.type + '</span>' +
+                '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
+            '</div>' +
+        '</div>';
     }
 
     /* ── 주요 수행실적 렌더 ── */
@@ -826,15 +954,8 @@
         var grid = document.getElementById('featuredGrid');
 
         grid.innerHTML = items.map(function(p) {
-            var typeIcon = getTypeIcon(p.type);
             return '<div class="featured-card" onclick="portfolioApp.openDetail(\'' + p.id + '\')">' +
-                '<div class="card-thumb thumb-' + p.type + '">' +
-                    '<div class="card-thumb-inner"><i class="fa-solid ' + typeIcon + '"></i></div>' +
-                    '<div class="thumb-badges">' +
-                        '<span class="badge badge-type">' + p.type + '</span>' +
-                        '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
-                    '</div>' +
-                '</div>' +
+                buildThumb(p) +
                 '<div class="feat-body">' +
                     '<div class="fc-name">' + p.name + '</div>' +
                     '<div class="fc-info-list">' +
@@ -881,15 +1002,8 @@
         }
 
         grid.innerHTML = items.map(function(p) {
-            var typeIcon = getTypeIcon(p.type);
             return '<div class="pf-card" onclick="portfolioApp.openDetail(\'' + p.id + '\')">' +
-                '<div class="card-thumb thumb-' + p.type + '">' +
-                    '<div class="card-thumb-inner"><i class="fa-solid ' + typeIcon + '"></i></div>' +
-                    '<div class="thumb-badges">' +
-                        '<span class="badge badge-type">' + p.type + '</span>' +
-                        '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
-                    '</div>' +
-                '</div>' +
+                buildThumb(p) +
                 '<div class="pf-body">' +
                     '<div class="pf-name">' + p.name + '</div>' +
                     '<div class="pf-info-row">' +
@@ -928,8 +1042,12 @@
         document.getElementById('detailName').textContent = item.name;
 
         var typeIcon = getTypeIcon(item.type);
-        var imageHtml = '<div class="detail-image thumb-' + item.type + '">' +
-            '<div class="detail-image-inner"><i class="fa-solid ' + typeIcon + '"></i></div>' +
+        var dt = getDataType(item.type);
+        var imageHtml = '<div class="detail-image" data-type="' + dt + '">' +
+            '<div class="detail-image-inner">' +
+                '<div class="thumb-icon"><i class="fa-solid ' + typeIcon + '"></i></div>' +
+                '<span class="thumb-label">' + item.type + '</span>' +
+            '</div>' +
         '</div>';
 
         var infoGridEl = document.getElementById('detailInfoGrid');
