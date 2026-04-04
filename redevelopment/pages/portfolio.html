@@ -20,15 +20,20 @@
     .pf-hero .hero-sub{font-size:14px;color:rgba(255,255,255,.5)}
     @media(max-width:768px){.pf-hero{padding:40px 0 32px}.pf-hero h1{font-size:26px}}
 
-    /* === KPI === */
-    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:56px}
-    @media(max-width:1024px){.kpi-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
-    .kpi-card{background:var(--brand-dark);border-radius:14px;padding:28px 24px;text-align:center;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+    /* === KPI (차등 강조) === */
+    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:48px}
+    @media(max-width:1024px){.kpi-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
+    .kpi-card{background:var(--brand-dark);border-radius:14px;padding:24px 20px;text-align:center;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;border:1px solid rgba(195,165,105,.08)}
     .kpi-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
-    .kpi-card::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:40px;height:3px;background:var(--gold);border-radius:2px}
-    .kpi-card .kv{font-size:30px;font-weight:800;color:var(--gold);margin:14px 0 6px}
-    .kpi-card .kl{font-size:13px;font-weight:500;color:rgba(255,255,255,.55)}
-    .kpi-card .ki{font-size:22px;color:var(--gold)}
+    .kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3}
+    .kpi-card .kv{font-size:28px;font-weight:800;color:var(--gold);margin:10px 0 4px}
+    .kpi-card .kl{font-size:12px;font-weight:500;color:rgba(255,255,255,.5)}
+    .kpi-card .ki{font-size:20px;color:var(--gold);opacity:.7}
+    /* 마지막 카드(총 관리세대) 강조 */
+    .kpi-card.kpi-highlight{background:linear-gradient(135deg,var(--brand-dark),var(--brand-navy));border-color:rgba(195,165,105,.2)}
+    .kpi-card.kpi-highlight::after{opacity:.6}
+    .kpi-card.kpi-highlight .kv{font-size:26px}
+    .kpi-card.kpi-highlight .ki{opacity:1}
 
     /* === Section === */
     .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
@@ -60,15 +65,22 @@
     .fc-fb .fbi i{font-size:28px;color:rgba(195,165,105,.6)}
     .fc-fb .fbl{font-size:13px;font-weight:600;color:rgba(255,255,255,.35)}
     .fc-fb .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
-    .fc-body{padding:24px 26px 28px;display:flex;flex-direction:column;flex:1}
-    .fc-body .fn{font-size:19px;font-weight:800;color:var(--gray-900);margin-bottom:16px;line-height:1.4}
-    .fc-body .fspecs{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-bottom:14px;padding:12px;background:var(--gray-50);border-radius:10px}
-    .fc-body .fsp{display:flex;align-items:center;font-size:12.5px;color:var(--gray-600)}
-    .fc-body .fsp i{width:16px;color:var(--gold);margin-right:6px;font-size:11px;text-align:center}
+    .fc-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+    .fc-body .fn{font-size:18px;font-weight:800;color:var(--gray-900);margin-bottom:12px;line-height:1.4}
+    .fc-body .fspecs{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;margin-bottom:12px;padding:10px 12px;background:var(--gray-50);border-radius:9px}
+    .fc-body .fsp{display:flex;align-items:center;font-size:12px;color:var(--gray-600)}
+    .fc-body .fsp i{width:14px;color:var(--gold);margin-right:5px;font-size:10px;text-align:center}
     .fc-body .fsp strong{font-weight:600;color:var(--gray-800)}
-    .fc-body .fdesc{font-size:13.5px;color:var(--gray-500);line-height:1.65;margin-top:auto;padding-top:14px;border-top:1px solid var(--gray-100);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .fc-body .fbtn{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:8px 16px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:8px;font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s;align-self:flex-start}
-    .fc-body .fbtn:hover{background:var(--brand-navy);transform:translateX(2px)}
+    /* 핵심 3개만 강조, 나머지 보조 */
+    .fc-body .fsp.secondary{color:var(--gray-400);font-size:11.5px}
+    .fc-body .fdesc{font-size:13px;color:var(--gray-500);line-height:1.6;margin-top:auto;padding-top:12px;border-top:1px solid var(--gray-100);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .fc-body .fbtn{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:10px 20px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:9px;font-size:13.5px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .25s;align-self:flex-start}
+    .fc-body .fbtn:hover{background:var(--brand-navy);box-shadow:0 4px 12px rgba(10,15,28,.15);transform:translateX(3px)}
+    .fc-body .fbtn i{font-size:12px;transition:transform .2s}
+    .fc-body .fbtn:hover i{transform:translateX(2px)}
+    /* 첫 카드 대표 프로젝트 강조 */
+    .fc.fc-primary{border-color:rgba(195,165,105,.2);box-shadow:0 6px 20px rgba(195,165,105,.08)}
+    .fc.fc-primary .fc-img::after{content:'대표 실적';position:absolute;bottom:14px;right:14px;padding:4px 12px;background:rgba(195,165,105,.9);color:#0A0F1C;font-size:10px;font-weight:700;border-radius:5px;z-index:3;letter-spacing:.3px}
 
     /* === Filter Bar === */
     .filter-bar{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding:16px 20px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100);flex-wrap:wrap}
@@ -277,25 +289,26 @@ function dn(p){return mask(p.name)}
 document.getElementById('kpiGrid').innerHTML=
 '<div class="kpi-card"><div class="ki"><i class="fa-solid fa-building"></i></div><div class="kv">'+t+'건</div><div class="kl">총 수행실적</div></div>'+
 '<div class="kpi-card"><div class="ki"><i class="fa-solid fa-spinner"></i></div><div class="kv">'+i+'건</div><div class="kl">진행중 사업</div></div>'+
-'<div class="kpi-card"><div class="ki"><i class="fa-solid fa-circle-check"></i></div><div class="kv">'+d+'건</div><div class="kl">완료 사업</div></div>'+
-'<div class="kpi-card"><div class="ki"><i class="fa-solid fa-house-chimney"></i></div><div class="kv">약 '+u.toLocaleString()+'세대</div><div class="kl">총 관리세대</div></div>'}();
+'<div class="kpi-card kpi-highlight"><div class="ki"><i class="fa-solid fa-circle-check"></i></div><div class="kv">'+d+'건</div><div class="kl">완료 사업</div></div>'+
+'<div class="kpi-card kpi-highlight"><div class="ki"><i class="fa-solid fa-house-chimney"></i></div><div class="kv">약 '+u.toLocaleString()+'세대</div><div class="kl">총 관리세대</div></div>'}();
 
 /* Featured */
 function renderFeat(){
 var items=D.filter(function(p){return p.featured});
-document.getElementById('featGrid').innerHTML=items.map(function(p){
+document.getElementById('featGrid').innerHTML=items.map(function(p,idx){
 var img=p.featuredImage?
 '<div class="fc-img"><img src="'+p.featuredImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+bg(p)+'</div></div>':
 '<div class="fc-fb" data-t="'+dt(p.type)+'"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+bg(p)+'</div></div>';
-return'<div class="fc" onclick="PF.open(\''+p.id+'\')">'+img+
+var primary=idx===0?' fc-primary':'';
+return'<div class="fc'+primary+'" onclick="PF.open(\''+p.id+'\')">'+img+
 '<div class="fc-body"><div class="fn">'+dn(p)+'</div>'+
 '<div class="fspecs">'+
 '<div class="fsp"><i class="fa-solid fa-location-dot"></i> <strong>'+p.district+'</strong></div>'+
 '<div class="fsp"><i class="fa-solid fa-building"></i> '+p.scale+'</div>'+
-'<div class="fsp"><i class="fa-solid fa-users"></i> '+safe(p.members)+'</div>'+
-'<div class="fsp"><i class="fa-solid fa-layer-group"></i> '+safe(p.floorInfo)+'</div>'+
 '<div class="fsp"><i class="fa-solid fa-user-tie"></i> '+p.role+'</div>'+
-'<div class="fsp"><i class="fa-solid fa-chart-pie"></i> '+safe(p.floorAreaRatio)+'</div>'+
+'<div class="fsp secondary"><i class="fa-solid fa-users"></i> '+safe(p.members)+'</div>'+
+'<div class="fsp secondary"><i class="fa-solid fa-layer-group"></i> '+safe(p.floorInfo)+'</div>'+
+'<div class="fsp secondary"><i class="fa-solid fa-chart-pie"></i> '+safe(p.floorAreaRatio)+'</div>'+
 '</div>'+
 '<div class="fdesc">'+mask(p.description)+'</div>'+
 '<button class="fbtn" onclick="event.stopPropagation();PF.open(\''+p.id+'\')">상세보기 <i class="fa-solid fa-arrow-right"></i></button>'+
