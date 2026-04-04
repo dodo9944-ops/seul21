@@ -538,7 +538,7 @@
     const info = MOCK.companyInfo;
 
     /* ── CEO 인사말 ── */
-    document.getElementById('ceoGreeting').textContent = info.ceoGreeting;
+    document.getElementById('ceoGreeting').innerHTML = info.ceoGreeting.replace(/\n/g, '<br>');
 
     /* ── 회사연혁 ── */
     document.getElementById('timeline').innerHTML = info.history.map(h => `
