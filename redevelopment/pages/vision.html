@@ -167,8 +167,8 @@
 
     /* ── 세울의 방식 (Process) ── */
     .vs-process {
-        background: linear-gradient(135deg, #0A0F1C, #142644);
-        border-radius: 16px; padding: 56px 48px; position: relative; overflow: hidden;
+        background: linear-gradient(135deg, #0A0F1C, #101B30 50%, #142644);
+        border-radius: 18px; padding: 56px 48px; position: relative; overflow: hidden;
     }
     .vs-process::after {
         content: ''; position: absolute; top: -60px; right: -60px;
@@ -180,26 +180,101 @@
         position: relative; z-index: 1;
     }
     .vs-process-sub {
-        font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 36px;
+        font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 40px;
         position: relative; z-index: 1;
     }
-    .vs-steps {
+
+    /* Row with flow arrows */
+    .vs-steps-row {
         display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-        position: relative; z-index: 1;
+        position: relative; z-index: 1; margin-bottom: 16px;
     }
+    .vs-steps-row:last-child { margin-bottom: 0; }
+    /* Arrow between rows */
+    .vs-row-arrow {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        position: relative; z-index: 1; margin: 8px 0;
+    }
+    .vs-row-arrow::before, .vs-row-arrow::after {
+        content: ''; flex: 1; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(195,165,105,0.15), transparent);
+    }
+    .vs-row-arrow i {
+        color: rgba(195,165,105,0.3); font-size: 12px;
+    }
+
+    /* Step card */
     .vs-step {
-        background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.12);
-        border-radius: 12px; padding: 24px 20px; transition: all 0.2s;
+        background: rgba(255,255,255,0.03); border: 1px solid rgba(195,165,105,0.1);
+        border-radius: 14px; padding: 28px 24px; transition: all 0.3s;
+        position: relative; overflow: hidden;
     }
-    .vs-step:hover { background: rgba(255,255,255,0.07); border-color: rgba(195,165,105,0.25); }
+    .vs-step::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+        background: linear-gradient(90deg, var(--gold), rgba(195,165,105,0.2));
+        opacity: 0; transition: opacity 0.3s;
+    }
+    .vs-step:hover {
+        background: rgba(255,255,255,0.06); border-color: rgba(195,165,105,0.3);
+        transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    }
+    .vs-step:hover::before { opacity: 1; }
+
+    /* First step accent */
+    .vs-step.step-first { border-color: rgba(195,165,105,0.2); }
+    .vs-step.step-first::before { opacity: 0.5; }
+    /* Last step accent */
+    .vs-step.step-last { border-color: rgba(195,165,105,0.2); }
+    .vs-step.step-last::after {
+        content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+        background: linear-gradient(90deg, rgba(195,165,105,0.2), var(--gold));
+    }
+
+    /* Number */
     .vs-step-num {
-        font-size: 28px; font-weight: 900; color: var(--gold); opacity: 0.3;
-        margin-bottom: 8px;
+        font-size: 42px; font-weight: 900; color: var(--gold); opacity: 0.12;
+        position: absolute; top: 14px; right: 18px; line-height: 1;
+        transition: opacity 0.3s;
     }
-    .vs-step h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .vs-step p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.65; }
-    @media(max-width:860px) { .vs-steps { grid-template-columns: repeat(2,1fr); } .vs-process { padding: 40px 28px; } }
-    @media(max-width:480px) { .vs-steps { grid-template-columns: 1fr; } }
+    .vs-step:hover .vs-step-num { opacity: 0.2; }
+
+    /* Number badge (inline) */
+    .vs-step-badge {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 30px; height: 30px; border-radius: 8px;
+        background: rgba(195,165,105,0.12); border: 1px solid rgba(195,165,105,0.2);
+        font-size: 12px; font-weight: 800; color: var(--gold);
+        margin-bottom: 12px;
+    }
+    /* Icon */
+    .vs-step-icon {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 30px; height: 30px; border-radius: 8px;
+        background: rgba(195,165,105,0.08);
+        font-size: 13px; color: rgba(195,165,105,0.5);
+        margin-left: 8px; margin-bottom: 12px;
+    }
+
+    .vs-step h4 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; position: relative; }
+    .vs-step p { font-size: 12.5px; color: rgba(255,255,255,0.5); line-height: 1.7; position: relative; }
+
+    /* Flow arrows between cards */
+    .vs-steps-row .vs-step { position: relative; }
+    .vs-steps-row .vs-step:not(:last-child)::after {
+        content: '\f054'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+        position: absolute; right: -12px; top: 50%; transform: translateY(-50%);
+        font-size: 10px; color: rgba(195,165,105,0.2); z-index: 3;
+    }
+
+    @media(max-width:860px) {
+        .vs-steps-row { grid-template-columns: repeat(2,1fr); }
+        .vs-process { padding: 40px 28px; }
+        .vs-steps-row .vs-step:not(:last-child)::after { display: none; }
+    }
+    @media(max-width:480px) {
+        .vs-steps-row { grid-template-columns: 1fr; }
+        .vs-step-num { font-size: 36px; }
+    }
 
     /* ── 브랜드 비주얼 스트립 ── */
     .vs-visual {
@@ -453,34 +528,46 @@
             <div class="vs-process">
                 <h2>세울의 방식</h2>
                 <div class="vs-process-sub">HOW WE WORK — 정비사업의 처음부터 끝까지</div>
-                <div class="vs-steps">
-                    <div class="vs-step">
+                <!-- Row 1: 진단 → 검토 → 조율 -->
+                <div class="vs-steps-row">
+                    <div class="vs-step step-first">
                         <div class="vs-step-num">01</div>
+                        <div><span class="vs-step-badge">01</span><span class="vs-step-icon"><i class="fa-solid fa-stethoscope"></i></span></div>
                         <h4>기초 진단</h4>
                         <p>사업 대상지의 법적·물리적 현황을 분석하고 추진 가능성을 진단합니다</p>
                     </div>
                     <div class="vs-step">
                         <div class="vs-step-num">02</div>
+                        <div><span class="vs-step-badge">02</span><span class="vs-step-icon"><i class="fa-solid fa-chart-line"></i></span></div>
                         <h4>사업성 검토</h4>
                         <p>비례율·분담금·총사업비를 분석하여 사업의 경제적 타당성을 검증합니다</p>
                     </div>
                     <div class="vs-step">
                         <div class="vs-step-num">03</div>
+                        <div><span class="vs-step-badge">03</span><span class="vs-step-icon"><i class="fa-solid fa-handshake"></i></span></div>
                         <h4>이해관계 조율</h4>
                         <p>조합원·행정기관·시공사 간 이해관계를 조정하고 합의를 이끌어냅니다</p>
                     </div>
+                </div>
+                <!-- Row arrow -->
+                <div class="vs-row-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                <!-- Row 2: 행정 → 인허가 → 완성 -->
+                <div class="vs-steps-row">
                     <div class="vs-step">
                         <div class="vs-step-num">04</div>
+                        <div><span class="vs-step-badge">04</span><span class="vs-step-icon"><i class="fa-solid fa-file-signature"></i></span></div>
                         <h4>행정·문서 체계화</h4>
                         <p>인허가 서류, 총회 자료, 공문을 법적 기준에 맞게 체계적으로 관리합니다</p>
                     </div>
                     <div class="vs-step">
                         <div class="vs-step-num">05</div>
+                        <div><span class="vs-step-badge">05</span><span class="vs-step-icon"><i class="fa-solid fa-stamp"></i></span></div>
                         <h4>인허가 및 추진 지원</h4>
                         <p>사업시행인가, 관리처분인가 등 핵심 인허가를 실행력 있게 추진합니다</p>
                     </div>
-                    <div class="vs-step">
+                    <div class="vs-step step-last">
                         <div class="vs-step-num">06</div>
+                        <div><span class="vs-step-badge">06</span><span class="vs-step-icon"><i class="fa-solid fa-flag-checkered"></i></span></div>
                         <h4>사업 완성 및 안정화</h4>
                         <p>착공부터 준공·입주·청산까지 사업의 마지막 단계를 책임지고 완결합니다</p>
                     </div>
