@@ -116,7 +116,7 @@
 
     /* ── SECTION SPACING ── */
     .about-section {
-        margin-bottom: 0;
+        margin-bottom: 80px;
         padding: 80px 0;
     }
     .about-section:last-child { padding-bottom: 0; }
@@ -153,13 +153,13 @@
     .trust-card {
         background: var(--white);
         border: 1px solid var(--gray-200);
-        border-radius: 12px;
-        padding: 32px 24px; text-align: center;
+        border-radius: 14px;
+        padding: 28px 24px; text-align: center;
         transition: all 0.25s;
     }
     .trust-card:hover {
         border-color: var(--gold);
-        box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
         transform: translateY(-2px);
     }
     .trust-card-value {
@@ -171,7 +171,7 @@
         margin-bottom: 8px;
     }
     .trust-card p {
-        font-size: 12px; color: var(--gray-500); line-height: 1.5;
+        font-size: 13px; color: var(--gray-600); line-height: 1.5; font-weight: 500;
     }
     @media (max-width: 1024px) { .trust-cards { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) { .trust-cards { grid-template-columns: 1fr; } }
@@ -281,7 +281,7 @@
     }
     .tl-item {
         display: flex; align-items: flex-start;
-        position: relative; margin-bottom: 40px;
+        position: relative; margin-bottom: 28px;
     }
     .tl-item:last-child { margin-bottom: 0; }
     .tl-left {
@@ -305,12 +305,13 @@
         box-shadow: 0 0 0 3px #C3A569, 0 0 12px rgba(195,165,105,0.3);
     }
     .tl-year {
-        font-size: 22px; font-weight: 900; color: #C3A569;
+        font-size: 26px; font-weight: 900; color: #C3A569;
         margin-bottom: 8px;
     }
     .tl-item.tl-recent .tl-year {
         font-size: 26px;
     }
+    .tl-item:nth-child(-n+3) .tl-year { font-weight: 900; }
     .tl-events { list-style: none; }
     .tl-events li {
         font-size: 14px; color: var(--gray-600); line-height: 1.9;
@@ -360,12 +361,12 @@
     .org-dept-card {
         background: var(--white);
         border: 1px solid var(--gray-200);
-        border-radius: 12px; padding: 0;
+        border-radius: 14px; padding: 0;
         transition: all 0.25s; overflow: hidden;
     }
     .org-dept-card:hover {
         border-color: var(--gold);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     }
     .org-dept-header {
         background: linear-gradient(135deg, #0A0F1C, #142644);
@@ -375,8 +376,8 @@
         font-size: 14px; font-weight: 800; margin-bottom: 4px;
     }
     .org-dept-header .dept-desc {
-        font-size: 11px; color: rgba(255,255,255,0.45);
-        font-weight: 400;
+        font-size: 13px; color: rgba(255,255,255,0.65);
+        font-weight: 500;
     }
     .org-dept-body { padding: 16px 20px; }
     .org-dept-body ul { list-style: none; }
@@ -396,14 +397,14 @@
     .pro-card {
         background: var(--white);
         border: 1px solid var(--gray-200);
-        border-radius: 12px;
-        padding: 32px 24px;
+        border-radius: 14px;
+        padding: 28px 24px;
         transition: all 0.25s;
         display: flex; flex-direction: column;
     }
     .pro-card:hover {
         border-color: var(--gold);
-        box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
         transform: translateY(-2px);
     }
     .pro-card-icon {
@@ -495,11 +496,11 @@
         margin-bottom: 28px;
     }
     .color-card {
-        border-radius: 12px; overflow: hidden;
+        border-radius: 14px; overflow: hidden;
         border: 1px solid var(--gray-200);
         transition: all 0.2s;
     }
-    .color-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .color-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
     .color-swatch { height: 80px; }
     .color-info { padding: 14px 16px; }
     .color-name { font-size: 13px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
@@ -588,7 +589,7 @@
             </div>
             <div class="hero-label">SEUL Engineering</div>
             <h1>도시정비의 <em>기준</em>을 세우고,<br>사업의 <em>완성</em>까지 함께합니다</h1>
-            <p class="hero-sub">재개발 · 재건축 · 소규모정비사업의 전 과정을 책임지는<br>도시정비 전문 엔지니어링 파트너, (주)세울엔지니어링</p>
+            <p class="hero-sub">재개발·재건축·소규모정비사업의 실무를 책임지는 도시정비 전문 파트너</p>
         </div>
         <div class="hero-cards">
             <div class="hero-card">
@@ -669,6 +670,11 @@
                         <div class="sig-name" id="ceoNameDisplay">Charles Lee</div>
                         <div class="sig-title">CEO, Seul Engineering</div>
                     </div>
+                    <div style="display:flex;gap:10px;margin-top:20px;">
+                        <span style="padding:6px 14px;border-radius:6px;background:rgba(10,15,28,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">책임경영</span>
+                        <span style="padding:6px 14px;border-radius:6px;background:rgba(10,15,28,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">도시정비 실무전문성</span>
+                        <span style="padding:6px 14px;border-radius:6px;background:rgba(10,15,28,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">이해관계 조율</span>
+                    </div>
                 </div>
                 <div class="ceo-photo-area">
                     <img src="../jpg/대표사진1.png" alt="이창우 대표이사">
@@ -704,7 +710,7 @@
                     <div class="org-dept-card">
                         <div class="org-dept-header">
                             <h4>경영 · 법무실</h4>
-                            <div class="dept-desc">경영관리 및 법률 자문</div>
+                            <div class="dept-desc">인사·총무, 재무·회계, 대외협력 및 행정 지원</div>
                         </div>
                         <div class="org-dept-body">
                             <ul>
@@ -717,7 +723,7 @@
                     <div class="org-dept-card">
                         <div class="org-dept-header">
                             <h4>정비사업본부</h4>
-                            <div class="dept-desc">재개발 · 재건축 사업 관리</div>
+                            <div class="dept-desc">재개발·재건축·소규모정비사업 추진 지원</div>
                         </div>
                         <div class="org-dept-body">
                             <ul>
@@ -730,7 +736,7 @@
                     <div class="org-dept-card">
                         <div class="org-dept-header">
                             <h4>도시계획본부</h4>
-                            <div class="dept-desc">도시계획 수립 및 인허가 지원</div>
+                            <div class="dept-desc">사업성 분석, 도시계획 검토, 인허가 지원</div>
                         </div>
                         <div class="org-dept-body">
                             <ul>
@@ -743,7 +749,7 @@
                     <div class="org-dept-card">
                         <div class="org-dept-header">
                             <h4>CM · PM본부</h4>
-                            <div class="dept-desc">건설 · 사업 통합 관리</div>
+                            <div class="dept-desc">사업관리, 일정·리스크 관리, 추진체계 지원</div>
                         </div>
                         <div class="org-dept-body">
                             <ul>
