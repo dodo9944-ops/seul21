@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도시계획(엔지니어링) — (주)세울엔지니어링</title>
+    <meta name="description" content="도시관리계획, 지구단위계획, 정비계획 수립부터 신속통합기획까지 도시공간 재편의 기술적 기반을 제공합니다. 계획과 사업성을 연결하는 통합적 시각.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .rd-section { margin-bottom:56px; }
+    .rd-section:last-child { margin-bottom:0; }
+    .rd-section .section-title { margin-bottom:28px; }
+
+    /* 비주얼 히어로 */
+    .rd-visual {
+        background:linear-gradient(135deg,#0A0F1C 0%,#142644 100%);
+        border-radius:16px; padding:48px 52px; position:relative; overflow:hidden;
+        display:flex; align-items:center; gap:40px;
+    }
+    .rd-visual::before {
+        content:''; position:absolute; right:-80px; top:-80px; width:300px; height:300px;
+        background:radial-gradient(circle,rgba(195,165,105,0.06) 0%,transparent 70%); border-radius:50%;
+    }
+    .rd-visual::after {
+        content:''; position:absolute; left:-40px; bottom:-40px; width:200px; height:200px;
+        background:radial-gradient(circle,rgba(195,165,105,0.04) 0%,transparent 70%); border-radius:50%;
+    }
+    .rd-visual-text { position:relative; z-index:1; flex:1; }
+    .rd-visual-badge {
+        display:inline-flex; align-items:center; gap:8px;
+        font-size:11px; font-weight:700; color:var(--gold); letter-spacing:1.5px;
+        margin-bottom:16px; text-transform:uppercase;
+    }
+    .rd-visual-badge i { font-size:14px; }
+    .rd-visual h2 { font-size:28px; font-weight:800; color:#fff; line-height:1.45; margin-bottom:14px; letter-spacing:-0.5px; }
+    .rd-visual p { font-size:15px; color:rgba(255,255,255,0.55); line-height:1.8; }
+    .rd-visual-stats {
+        position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:16px; flex-shrink:0;
+    }
+    .rd-vstat {
+        background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06);
+        border-radius:12px; padding:20px 24px; text-align:center; min-width:130px;
+    }
+    .rd-vstat .vn { font-size:24px; font-weight:800; color:var(--gold); margin-bottom:4px; }
+    .rd-vstat .vd { font-size:11px; color:rgba(255,255,255,0.5); }
+    @media(max-width:860px){
+        .rd-visual{flex-direction:column;padding:36px 28px;}
+        .rd-visual h2{font-size:22px;}
+        .rd-visual-stats{grid-template-columns:repeat(4,1fr);width:100%;}
+    }
+    @media(max-width:540px){
+        .rd-visual-stats{grid-template-columns:repeat(2,1fr);}
+    }
+
+    /* 업무 영역 카드 그리드 */
+    .rd-why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    .rd-why-card {
+        background:#fff; border:1px solid var(--gray-200); border-radius:12px;
+        padding:32px 28px; text-align:center; transition:all 0.2s;
+    }
+    .rd-why-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); transform:translateY(-2px); }
+    .rd-why-icon {
+        width:56px; height:56px; border-radius:14px; background:var(--brand-dark);
+        display:flex; align-items:center; justify-content:center; margin:0 auto 18px;
+    }
+    .rd-why-icon i { font-size:22px; color:var(--gold); }
+    .rd-why-card h4 { font-size:16px; font-weight:700; color:var(--gray-900); margin-bottom:10px; }
+    .rd-why-card p { font-size:13px; color:var(--gray-600); line-height:1.75; }
+    .rd-why-card .seul-point {
+        margin-top:14px; padding:10px 14px; border-radius:8px;
+        background:rgba(20,38,68,0.03); border-left:3px solid var(--brand-navy);
+        font-size:12px; color:var(--gray-700); line-height:1.7; text-align:left;
+    }
+    .rd-why-card .seul-point strong { color:var(--brand-navy); }
+    @media(max-width:768px){ .rd-why-grid{grid-template-columns:1fr;} }
+
+    /* FAQ */
+    .rd-faq-item { border-bottom:1px solid var(--gray-200); }
+    .rd-faq-q {
+        display:flex; align-items:center; justify-content:space-between; gap:16px;
+        padding:20px 0; cursor:pointer; font-size:15px; font-weight:600; color:var(--gray-900);
+    }
+    .rd-faq-q i { color:var(--gold); transition:transform 0.2s; font-size:14px; flex-shrink:0; }
+    .rd-faq-q.open i { transform:rotate(180deg); }
+    .rd-faq-a {
+        max-height:0; overflow:hidden; transition:max-height 0.3s ease;
+        font-size:14px; color:var(--gray-600); line-height:1.8; padding:0 0 0 4px;
+    }
+    .rd-faq-a.open { max-height:500px; padding-bottom:20px; }
+
+    /* CTA */
+    .rd-cta {
+        background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:16px;
+        padding:56px 52px; text-align:center; position:relative; overflow:hidden;
+    }
+    .rd-cta::before { content:''; position:absolute; right:-60px; top:-60px; width:250px; height:250px; background:radial-gradient(circle,rgba(195,165,105,0.06) 0%,transparent 70%); border-radius:50%; }
+    .rd-cta::after { content:''; position:absolute; left:-40px; bottom:-40px; width:180px; height:180px; background:radial-gradient(circle,rgba(195,165,105,0.04) 0%,transparent 70%); border-radius:50%; }
+    .rd-cta-inner { position:relative; z-index:1; }
+    .rd-cta h3 { font-size:26px; font-weight:800; color:#fff; margin-bottom:12px; letter-spacing:-0.3px; }
+    .rd-cta p { font-size:15px; color:rgba(255,255,255,0.5); line-height:1.8; margin-bottom:28px; max-width:560px; margin-left:auto; margin-right:auto; }
+    .rd-cta-btns { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+    .rd-cta-btn {
+        display:inline-flex; align-items:center; gap:8px; padding:15px 32px;
+        border-radius:8px; font-size:15px; font-weight:700; text-decoration:none;
+    }
+    .rd-cta-btn.primary { background:var(--gold); color:#0A0F1C; }
+    .rd-cta-btn.primary:hover { background:var(--gold-hover); }
+    .rd-cta-btn.outline { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.2); }
+    .rd-cta-btn.outline:hover { border-color:var(--gold); color:var(--gold); }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="services.html">사업분야</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>도시계획(엔지니어링)</span>
+        </div>
+        <h1>도시계획(엔지니어링)</h1>
+        <p>도시관리계획, 지구단위계획, 정비계획 수립부터 신속통합기획까지 도시공간 재편의 기술적 기반을 제공합니다</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <!-- 비주얼 히어로 -->
+        <div class="rd-section">
+            <div class="rd-visual">
+                <div class="rd-visual-text">
+                    <div class="rd-visual-badge"><i class="fa-solid fa-city"></i> URBAN PLANNING & ENGINEERING</div>
+                    <h2>계획이 정확해야<br>사업이 흔들리지 않습니다</h2>
+                    <p>정비사업의 성패는 초기 계획 단계에서 결정됩니다. 용적률 1%의 차이, 정비구역 경계선 하나가 사업성을 좌우합니다. 세울엔지니어링은 도시계획 전문 역량으로 사업의 기초를 단단하게 세웁니다.</p>
+                </div>
+                <div class="rd-visual-stats">
+                    <div class="rd-vstat"><div class="vn">계획+실행</div><div class="vd">통합 지원</div></div>
+                    <div class="rd-vstat"><div class="vn">심의 대응</div><div class="vd">전문 역량</div></div>
+                    <div class="rd-vstat"><div class="vn">행정 협의</div><div class="vd">전문</div></div>
+                    <div class="rd-vstat"><div class="vn">사업성</div><div class="vd">연계 분석</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 업무 영역 -->
+        <div class="rd-section">
+            <h2 class="section-title">업무 영역</h2>
+            <p style="font-size:14px;color:var(--gray-500);margin-bottom:28px;">도시계획의 모든 단계를 전문적으로 수행합니다</p>
+
+            <div class="rd-why-grid">
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <h4>정비계획 수립<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(195,165,105,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></h4>
+                    <p>정비구역 지정을 위한 정비계획 수립. 토지이용계획, 건축계획, 기반시설 계획 등을 종합적으로 설계합니다. 2025년 개정으로 <strong>정비계획 입안 동의율이 50%로 완화</strong>되어 사업 추진이 더욱 용이해졌습니다.</p>
+                    <div class="seul-point"><strong>세울 강점:</strong> 실무에서 심의를 통과시킨 경험 기반의 계획 수립. 완화된 동의율 기준에 맞춘 전략적 동의서 확보 컨설팅</div>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-drafting-compass"></i></div>
+                    <h4>지구단위계획</h4>
+                    <p>정비구역 내 건축물의 용도, 규모, 배치, 동선을 구체적으로 규정하는 계획.</p>
+                    <div class="seul-point"><strong>세울 강점:</strong> 사업성과 도시 미관을 동시에 만족시키는 설계 방향 제시</div>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-arrows-turn-to-dots"></i></div>
+                    <h4>도시관리계획 변경<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(195,165,105,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">최신</span></h4>
+                    <p>용도지역 변경, 도시계획시설 결정·변경 등 상위 계획 차원의 도시관리계획 업무. <strong>2030 도시·주거환경정비기본계획</strong> 변경사항과 토지거래허가구역 신규 지정 동향을 반영한 맞춤형 계획을 수립합니다.</p>
+                    <div class="seul-point"><strong>세울 강점:</strong> 행정기관과의 사전 협의를 통한 실현 가능한 계획 수립. 일률적 규제가 아닌 지역 특성을 반영한 맞춤형 도시계획 방향 제시</div>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-forward-fast"></i></div>
+                    <h4>신속통합기획 대응<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(195,165,105,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></h4>
+                    <p>서울시 신속통합기획 제도에 따른 통합심의 대응, 기획안 수립, 관계기관 협의. 2025년 <strong>높이규제가 100m에서 155m로 완화</strong>되었으며, 2026년 기준 공모 후보지가 6곳 추가 지정되어 대상 구역이 확대되고 있습니다.</p>
+                    <div class="seul-point"><strong>세울 강점:</strong> 신속통합기획 절차에 대한 실무 이해와 심의 대응 역량. 완화된 높이규제를 활용한 최적 사업성 설계</div>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-file-signature"></i></div>
+                    <h4>인허가 협의자료 작성</h4>
+                    <p>도시계획위원회, 건축위원회, 환경영향평가 등 각종 심의·협의에 필요한 기술 자료 작성.</p>
+                    <div class="seul-point"><strong>세울 강점:</strong> 보완 요청 없이 한 번에 통과시키는 문서 작성 능력</div>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h4>사업성 연계 분석</h4>
+                    <p>도시계획 변수(용적률, 건폐율, 층수)가 사업성에 미치는 영향을 정량적으로 분석.</p>
+                    <div class="seul-point"><strong>세울 강점:</strong> 계획과 사업성을 연결하는 통합적 시각</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 왜 세울인가 -->
+        <div class="rd-section">
+            <div class="rd-visual">
+                <div class="rd-visual-text">
+                    <div class="rd-visual-badge"><i class="fa-solid fa-building-columns"></i> WHY SEUL ENGINEERING</div>
+                    <h2>계획만 세우는 회사가 아닙니다</h2>
+                    <p>세울엔지니어링은 도시계획 수립과 정비사업 추진을 하나의 흐름으로 연결합니다. 계획이 현실에서 실행될 수 있도록 인허가 전략, 사업성 분석, 행정 협의까지 통합적으로 지원합니다.</p>
+                </div>
+                <div class="rd-visual-stats">
+                    <div class="rd-vstat"><div class="vn">계획+실행</div><div class="vd">통합</div></div>
+                    <div class="rd-vstat"><div class="vn">심의 대응</div><div class="vd">역량</div></div>
+                    <div class="rd-vstat"><div class="vn">행정 협의</div><div class="vd">전문</div></div>
+                    <div class="rd-vstat"><div class="vn">사업성</div><div class="vd">연계 분석</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 자주 묻는 질문 -->
+        <div class="rd-section">
+            <h2 class="section-title">도시계획 Q&A</h2>
+            <div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>정비계획과 지구단위계획은 어떤 관계인가요?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">정비계획은 정비구역 전체의 방향을 설정하는 계획이고, 지구단위계획은 구역 내 건축물의 구체적인 규제를 정하는 계획입니다. 두 계획 모두 도시계획위원회의 심의를 거쳐야 합니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>신속통합기획이 일반 절차보다 빠른 이유는?<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(195,165,105,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">정비계획, 건축심의, 환경평가를 통합심의로 한 번에 처리하기 때문입니다. 단, 기획안의 품질이 높아야 심의를 통과할 수 있으므로 철저한 사전 준비가 필요합니다. 2025년부터 <strong>높이규제가 기존 100m에서 155m로 대폭 완화</strong>되어 고층 설계의 자유도가 높아졌으며, 2026년 기준 공모 후보지가 6곳 추가 지정되어 신속통합기획 적용 대상이 확대되고 있습니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>정비계획 입안 동의율이 완화되었다는데?<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(195,165,105,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">2025년 개정으로 정비계획 입안을 위한 토지등소유자 동의율이 <strong>기존보다 50%로 완화</strong>되었습니다. 이에 따라 정비사업 추진 초기 단계의 진입 장벽이 낮아져, 보다 많은 구역이 사업 추진을 시작할 수 있게 되었습니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>토지거래허가구역 신규 지정이 사업에 미치는 영향은?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">토지거래허가구역으로 지정되면 일정 면적 이상의 토지 거래 시 구청장의 허가를 받아야 합니다. 이는 투기를 방지하고 실수요자 중심의 시장을 형성하려는 조치입니다. 정비사업 구역 내에서는 조합원 자격 확보 및 매수 전략에 영향을 줄 수 있으므로 사전 검토가 필수입니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>2030 도시·주거환경정비기본계획 변경의 핵심은?<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(195,165,105,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">최신</span></span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">2030 도시·주거환경정비기본계획 변경은 기존의 일률적 규제에서 벗어나 <strong>지역 특성을 반영한 맞춤형 도시계획</strong> 방향을 제시합니다. 각 구역의 입지, 주변 환경, 인프라 여건에 따라 차별화된 정비 방향을 수립하며, 이를 통해 보다 현실적이고 실현 가능한 사업 추진이 가능해졌습니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>도시계획 변경이 사업성에 미치는 영향은?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">용적률 10% 증가만으로도 수백억 원의 사업성 차이가 발생할 수 있습니다. 세울엔지니어링은 도시계획 변수가 사업성에 미치는 영향을 정량적으로 분석하여 최적의 계획 방향을 제시합니다.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="rd-section">
+            <div class="rd-cta">
+                <div class="rd-cta-inner">
+                    <h3>도시계획, 사업의 첫 단추를 정확하게</h3>
+                    <p>정비계획부터 사업성 분석까지, 세울엔지니어링이 사업의 기초를 단단하게 세워드립니다.<br>초기 상담은 무료로 진행됩니다.</p>
+                    <div class="rd-cta-btns">
+                        <a href="contact.html" class="rd-cta-btn primary"><i class="fa-solid fa-paper-plane"></i> 무료 상담 신청</a>
+                        <a href="search.html" class="rd-cta-btn outline"><i class="fa-solid fa-calculator"></i> 사업성 검토 도구</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+</body>
+</html>
