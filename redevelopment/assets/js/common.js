@@ -52,7 +52,7 @@ const App = (() => {
     </div></div>
     <header class="header"><div class="inner">
       <a href="${B}/index.html" class="logo">
-        <span class="logo-mark"><svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="8" width="104" height="104" rx="4" stroke="#1A1A1A" stroke-width="2" opacity="0.15"/><rect x="28" y="24" width="52" height="6" rx="1" fill="#1A1A1A"/><rect x="28" y="24" width="6" height="28" rx="1" fill="#1A1A1A"/><rect x="40" y="52" width="52" height="6" rx="1" fill="#1A1A1A" opacity="0.5"/><rect x="86" y="58" width="6" height="28" rx="1" fill="#1A1A1A"/><rect x="40" y="86" width="52" height="6" rx="1" fill="#1A1A1A"/><path d="M86 24 L92 18 L98 24" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/></svg></span>
+        <span class="logo-mark"><svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="108" height="108" rx="12" stroke="#C3A569" stroke-width="1.5" opacity="0.3"/><rect x="24" y="40" width="16" height="50" rx="2" fill="#0A0F1C"/><rect x="44" y="28" width="16" height="62" rx="2" fill="#142644"/><rect x="64" y="48" width="16" height="42" rx="2" fill="#0A0F1C" opacity="0.7"/><rect x="84" y="36" width="16" height="54" rx="2" fill="#142644" opacity="0.5"/><path d="M30 36 L52 16 L74 36" stroke="#C3A569" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="52" cy="16" r="3" fill="#C3A569"/><rect x="24" y="90" width="76" height="3" rx="1.5" fill="#C3A569" opacity="0.4"/></svg></span>
         <span class="logo-text">
           <span class="logo-company">(주)세울엔지니어링</span>
           <span class="logo-sub">SEUL ENGINEERING</span>
