@@ -14,92 +14,90 @@
     /* ── CEO 인사말 ── */
     .ceo-section {
         display: flex; align-items: stretch;
-        background: #fff;
+        background: #FAFBFC;
         border-radius: 16px;
         overflow: hidden;
-        box-shadow: 0 4px 32px rgba(0,0,0,0.06);
-        border: 1px solid rgba(0,0,0,0.04);
-        min-height: 520px;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.06);
     }
 
-    /* 좌: 사진 */
-    .ceo-photo-area {
-        flex-shrink: 0; width: 400px;
-        position: relative; overflow: hidden;
-    }
-    .ceo-photo-area img {
-        width: 100%; height: 100%;
-        object-fit: cover;
-        object-position: center top;
-        display: block;
-    }
-    /* 4면 모두 흐림 처리 */
-    .ceo-photo-area .ceo-fade {
-        position: absolute; inset: 0; z-index: 2; pointer-events: none;
-        background:
-            linear-gradient(to right, transparent 70%, #fff 100%),
-            linear-gradient(to left, transparent 92%, #fff 100%),
-            linear-gradient(to bottom, transparent 85%, #fff 100%),
-            linear-gradient(to top, transparent 92%, #fff 100%);
-    }
-
-    /* 우: 텍스트 */
+    /* 좌: 텍스트 */
     .ceo-text-area {
         flex: 1; min-width: 0;
-        padding: 48px 52px 44px 40px;
+        padding: 48px 52px 44px;
         display: flex; flex-direction: column; justify-content: center;
     }
     .ceo-quote {
-        font-size: 48px; color: var(--gold); opacity: 0.12;
+        font-size: 52px; color: var(--gold); opacity: 0.15;
         font-family: Georgia, serif; line-height: 0.8;
-        margin-bottom: 8px; user-select: none;
+        margin-bottom: 6px; user-select: none;
     }
     .ceo-headline {
-        font-size: 22px; font-weight: 800; color: var(--brand-dark);
-        line-height: 1.55; margin-bottom: 20px; letter-spacing: -0.5px;
+        font-size: 21px; font-weight: 800; color: var(--brand-dark);
+        line-height: 1.55; margin-bottom: 22px; letter-spacing: -0.5px;
     }
     .ceo-accent-line {
-        width: 36px; height: 2px;
-        background: linear-gradient(90deg, var(--gold), rgba(195,165,105,0.1));
-        border-radius: 1px; margin-bottom: 24px;
+        width: 32px; height: 2px;
+        background: linear-gradient(90deg, var(--gold), rgba(195,165,105,0.15));
+        border-radius: 1px; margin-bottom: 22px;
     }
     .ceo-greeting {
-        font-size: 14px; line-height: 1.9; color: var(--gray-600);
-        word-break: keep-all;
+        font-size: 14.5px; line-height: 2; color: var(--gray-600);
+        white-space: pre-line; word-break: keep-all;
     }
-    .ceo-sign {
-        margin-top: 32px; padding-top: 20px;
-        border-top: 1px solid var(--gray-100);
-        text-align: right;
+
+    /* 우: 사진 */
+    .ceo-photo-area {
+        flex-shrink: 0; width: 380px;
+        position: relative;
+        display: flex; align-items: center; justify-content: center;
+        background: linear-gradient(160deg, #f0f1f3 0%, #e8e9ec 100%);
+        padding: 0;
+        margin: -20px 0;
     }
-    .ceo-sign-name {
-        font-size: 18px; font-weight: 800; color: var(--gray-900); letter-spacing: 0.5px;
+    .ceo-photo-area img {
+        width: 100%; height: calc(100% + 40px);
+        object-fit: contain;
+        object-position: center 58%;
+        display: block;
     }
-    .ceo-sign-title {
-        font-size: 12px; font-weight: 500; color: var(--gold); margin-top: 4px; letter-spacing: 1.5px;
+    /* 좌측 스무스 */
+    .ceo-photo-area::before {
+        content: ''; position: absolute; inset: 0; z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(to right, #FAFBFC 0%, rgba(250,251,252,0.5) 6%, rgba(250,251,252,0.15) 14%, transparent 24%);
+    }
+    /* 하단 스무스 */
+    .ceo-photo-area::after {
+        content: ''; position: absolute; inset: 0; z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(to top, #FAFBFC 0%, rgba(250,251,252,0.5) 6%, rgba(250,251,252,0.15) 14%, transparent 24%);
     }
 
     /* 반응형 */
     @media (max-width: 1024px) {
-        .ceo-photo-area { width: 340px; }
+        .ceo-photo-area { width: 320px; }
     }
     @media (max-width: 860px) {
-        .ceo-section { flex-direction: column; min-height: auto; }
+        .ceo-section { flex-direction: column; }
         .ceo-text-area { padding: 36px 28px 32px; }
-        .ceo-photo-area { width: 100%; height: 400px; }
-        .ceo-photo-area .ceo-fade {
+        .ceo-photo-area {
+            width: 100%; order: -1;
+            margin: 0; max-height: 420px;
+        }
+        .ceo-photo-area::before {
             background:
-                linear-gradient(to bottom, transparent 75%, #fff 100%),
-                linear-gradient(to top, transparent 90%, #fff 100%);
+                linear-gradient(to bottom, transparent 85%, rgba(250,251,252,0.5) 94%, #FAFBFC 100%),
+                linear-gradient(to top, transparent 85%, rgba(250,251,252,0.3) 94%, #FAFBFC 100%);
         }
         .ceo-headline { font-size: 19px; }
     }
     @media (max-width: 480px) {
         .ceo-text-area { padding: 28px 22px 24px; }
         .ceo-headline { font-size: 17px; }
-        .ceo-greeting { font-size: 13px; line-height: 1.85; }
-        .ceo-quote { font-size: 36px; }
-        .ceo-photo-area { height: 340px; }
+        .ceo-greeting { font-size: 13.5px; line-height: 1.85; }
+        .ceo-quote { font-size: 38px; }
+        .ceo-photo-area { max-height: 360px; }
     }
 
     /* ── 회사연혁 ── */
@@ -288,19 +286,18 @@
         <div class="about-section">
             <h2 class="section-title">CEO 인사말</h2>
             <div class="ceo-section">
-                <div class="ceo-photo-area">
-                    <img src="../jpg/대표사진1.png" alt="이창우 대표이사">
-                    <div class="ceo-fade"></div>
-                </div>
                 <div class="ceo-text-area">
                     <div class="ceo-quote">&ldquo;</div>
                     <div class="ceo-headline">도시의 가치를 높이고,<br>주민의 삶을 바꾸는 정비사업을 만들겠습니다.</div>
                     <div class="ceo-accent-line"></div>
                     <div class="ceo-greeting" id="ceoGreeting"></div>
-                    <div class="ceo-sign">
-                        <div class="ceo-sign-name">Charles Lee</div>
-                        <div class="ceo-sign-title">CEO, Seul Engineering</div>
+                    <div style="margin-top:28px;text-align:left;">
+                        <div style="font-size:18px;font-weight:800;color:var(--gray-900);letter-spacing:0.5px;">Charles Lee</div>
+                        <div style="font-size:13px;font-weight:500;color:var(--gold);margin-top:4px;letter-spacing:1px;">CEO, Seul Engineering</div>
                     </div>
+                </div>
+                <div class="ceo-photo-area">
+                    <img src="../jpg/대표사진1.png" alt="이창우 대표이사">
                 </div>
             </div>
         </div>
