@@ -289,7 +289,7 @@ const MOCK = {
     siteKeywords: '재개발,재건축,도시정비,입주권,분양권,비례율,분담금,프리미엄',
     contactPhone: '010-2230-9210',
     contactEmail: 'dodo6666@naver.com',
-    address: '서울특별시 영등포구 국회대로76길 18',
+    address: '경기도 하남시 감일백제로 70, 204동 1104호',
     businessNumber: '474-81-02756',
     ceo: '이창우',
     workingHours: '평일 09:00 – 18:00 (토·일·공휴일 휴무)',

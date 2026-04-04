@@ -239,7 +239,7 @@
 | `siteKeywords` | string | 검색 키워드 (쉼표 구분) | `"재개발,재건축,도시정비..."` |
 | `contactPhone` | string | 대표 전화 | `"010-2230-9210"` |
 | `contactEmail` | string | 대표 이메일 | `"dodo6666@naver.com"` |
-| `address` | string | 회사 주소 | `"서울특별시 영등포구 국회대로76길 18"` |
+| `address` | string | 회사 주소 | `"경기도 하남시 감일백제로 70, 204동 1104호"` |
 | `businessNumber` | string | 사업자등록번호 | `"474-81-02756"` |
 | `ceo` | string | 대표자 | `"이창우"` |
 | `workingHours` | string | 영업시간 | `"평일 09:00 – 18:00 / 토요일 09:00 – 13:00"` |
