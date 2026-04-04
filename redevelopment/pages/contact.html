@@ -46,36 +46,40 @@
     .ct-err{font-size:11.5px;color:#EF4444;margin-top:4px;display:none}
     .ct-err.show{display:block}
 
-    /* Custom Select */
+    /* Custom Select (강조형) */
     .ct-select-wrap{position:relative}
-    .ct-select-btn{width:100%;height:44px;padding:0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:#fff;font-family:var(--font);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
-    .ct-select-btn.placeholder{color:var(--gray-400)}
-    .ct-select-btn:focus,.ct-select-btn.open{border-color:var(--gold);box-shadow:0 0 0 3px rgba(195,165,105,.1)}
+    .ct-select-btn{width:100%;height:44px;padding:0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:var(--gray-50);font-family:var(--font);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
+    .ct-select-btn.placeholder{color:var(--gray-400);font-weight:400}
+    .ct-select-btn:focus,.ct-select-btn.open{border-color:var(--gold);box-shadow:0 0 0 3px rgba(195,165,105,.12);background:#fff}
+    .ct-select-btn.has-value{border-color:rgba(195,165,105,.35);background:#fff;font-weight:600;color:var(--brand-dark)}
     .ct-select-btn.err{border-color:#EF4444}
     .ct-select-btn i{font-size:11px;color:var(--gray-400);transition:transform .2s}
-    .ct-select-btn.open i{transform:rotate(180deg)}
-    .ct-select-list{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1.5px solid var(--gray-200);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.1);z-index:200;max-height:260px;overflow-y:auto;display:none;padding:4px}
+    .ct-select-btn.open i{transform:rotate(180deg);color:var(--gold)}
+    .ct-select-list{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.12);z-index:200;max-height:280px;overflow-y:auto;display:none;padding:6px}
     .ct-select-list.open{display:block}
-    .ct-select-opt{padding:10px 14px;font-size:13.5px;font-weight:500;color:var(--gray-700);cursor:pointer;border-radius:7px;transition:all .15s}
+    .ct-select-opt{padding:10px 14px;font-size:13px;font-weight:500;color:var(--gray-600);cursor:pointer;border-radius:8px;transition:all .15s;display:flex;align-items:center;gap:8px}
     .ct-select-opt:hover{background:var(--gray-50);color:var(--brand-dark)}
-    .ct-select-opt.selected{background:rgba(195,165,105,.08);color:var(--brand-dark);font-weight:600}
+    .ct-select-opt.selected{background:rgba(195,165,105,.06);color:var(--brand-dark);font-weight:700;border-left:2px solid var(--gold)}
 
-    /* File Upload */
-    .ct-upload{border:2px dashed var(--gray-200);border-radius:12px;padding:24px;text-align:center;transition:all .2s;cursor:pointer;position:relative}
-    .ct-upload:hover{border-color:var(--gold);background:rgba(195,165,105,.02)}
-    .ct-upload.dragover{border-color:var(--gold);background:rgba(195,165,105,.04)}
-    .ct-upload .up-icon{font-size:28px;color:var(--gray-300);margin-bottom:10px}
-    .ct-upload .up-text{font-size:13px;color:var(--gray-500);margin-bottom:4px}
-    .ct-upload .up-hint{font-size:11px;color:var(--gray-400)}
+    /* File Upload (강화형) */
+    .ct-upload{border:2px dashed var(--gray-200);border-radius:14px;padding:28px 24px;text-align:center;transition:all .25s;cursor:pointer;position:relative;background:var(--gray-50)}
+    .ct-upload:hover{border-color:var(--gold);background:rgba(195,165,105,.03)}
+    .ct-upload.dragover{border-color:var(--gold);background:rgba(195,165,105,.05);box-shadow:0 0 0 4px rgba(195,165,105,.08)}
+    .ct-upload .up-icon{font-size:36px;color:var(--gold);opacity:.4;margin-bottom:12px}
+    .ct-upload .up-text{font-size:14px;font-weight:600;color:var(--gray-700);margin-bottom:6px}
+    .ct-upload .up-formats{font-size:11px;color:var(--gray-400);margin-bottom:2px}
+    .ct-upload .up-limit{font-size:10.5px;color:var(--gray-300)}
     .ct-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
     .ct-files{margin-top:10px;display:flex;flex-direction:column;gap:6px}
-    .ct-file{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:8px;font-size:12.5px;color:var(--gray-700)}
-    .ct-file i{color:var(--gold);font-size:12px}
-    .ct-file .cf-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .ct-file{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:1.5px solid var(--gray-200);border-radius:10px;font-size:12.5px;color:var(--gray-700)}
+    .ct-file .cf-icon{width:28px;height:28px;border-radius:7px;background:rgba(195,165,105,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ct-file .cf-icon i{color:var(--gold);font-size:12px}
+    .ct-file .cf-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
     .ct-file .cf-size{color:var(--gray-400);font-size:11px;flex-shrink:0}
-    .ct-file .cf-del{width:22px;height:22px;border-radius:6px;border:none;background:var(--gray-100);color:var(--gray-400);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all .2s}
+    .ct-file .cf-status{font-size:10px;color:#059669;font-weight:600;flex-shrink:0}
+    .ct-file .cf-del{width:24px;height:24px;border-radius:6px;border:none;background:var(--gray-50);color:var(--gray-400);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all .2s}
     .ct-file .cf-del:hover{background:#FEE2E2;color:#EF4444}
-    .ct-upload-note{font-size:11.5px;color:var(--gray-400);margin-top:8px;line-height:1.5}
+    .ct-upload-note{font-size:11px;color:var(--gray-400);margin-top:6px;line-height:1.4}
 
     /* Submit Button */
     .ct-submit{width:100%;height:50px;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .25s;margin-top:8px}
@@ -83,23 +87,23 @@
     .ct-submit:disabled{opacity:.5;cursor:default}
     .ct-submit i{font-size:14px}
 
-    /* === Info Cards === */
-    .ct-info{display:flex;flex-direction:column;gap:16px}
-    .ct-info-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;padding:24px;transition:all .2s}
-    .ct-info-card:hover{border-color:var(--gold);box-shadow:0 4px 16px rgba(195,165,105,.08)}
-    .ct-info-card .ic-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-    .ct-info-card .ic-icon{width:42px;height:42px;border-radius:11px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--gold);flex-shrink:0}
-    .ct-info-card h3{font-size:15px;font-weight:700;color:var(--gray-900)}
-    .ct-info-card .ic-sub{font-size:11.5px;color:var(--gray-400);font-weight:500}
-    .ct-info-card .ic-highlight{font-size:24px;font-weight:800;color:var(--brand-dark);margin-bottom:6px;letter-spacing:-.5px}
-    .ct-info-card p{font-size:13px;color:var(--gray-500);line-height:1.7}
-    .ct-info-card .ic-tag{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:rgba(195,165,105,.08);border-radius:6px;font-size:11px;font-weight:600;color:var(--gold);margin-top:10px}
+    /* === Info Cards (compact) === */
+    .ct-info{display:flex;flex-direction:column;gap:12px}
+    .ct-info-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:18px 20px;transition:all .2s}
+    .ct-info-card:hover{border-color:var(--gold);box-shadow:0 4px 12px rgba(195,165,105,.08)}
+    .ct-info-card .ic-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .ct-info-card .ic-icon{width:36px;height:36px;border-radius:9px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--gold);flex-shrink:0}
+    .ct-info-card h3{font-size:14px;font-weight:700;color:var(--gray-900)}
+    .ct-info-card .ic-sub{font-size:10.5px;color:var(--gray-400);font-weight:500}
+    .ct-info-card .ic-highlight{font-size:22px;font-weight:800;color:var(--brand-dark);margin-bottom:2px;letter-spacing:-.5px}
+    .ct-info-card p{font-size:12.5px;color:var(--gray-500);line-height:1.55}
+    .ct-info-card .ic-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;background:rgba(195,165,105,.08);border-radius:5px;font-size:10.5px;font-weight:600;color:var(--gold);margin-top:6px}
 
-    /* Process */
-    .ct-process{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:14px;padding:22px;margin-top:16px}
-    .ct-process h4{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:14px;display:flex;align-items:center;gap:6px}
-    .ct-process h4 i{color:var(--gold);font-size:13px}
-    .ct-steps{display:flex;flex-direction:column;gap:10px}
+    /* Process (compact) */
+    .ct-process{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:12px;padding:16px 18px;margin-top:12px}
+    .ct-process h4{font-size:13px;font-weight:700;color:var(--gray-900);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    .ct-process h4 i{color:var(--gold);font-size:12px}
+    .ct-steps{display:flex;flex-direction:column;gap:7px}
     .ct-step{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--gray-600);line-height:1.5}
     .ct-step .sn{width:24px;height:24px;border-radius:50%;background:var(--brand-dark);color:var(--gold);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     </style>
@@ -191,12 +195,13 @@
                     <label class="ct-label">첨부파일</label>
                     <div class="ct-upload" id="uploadArea">
                         <div class="up-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                        <div class="up-text">파일을 드래그하거나 클릭하여 선택하세요</div>
-                        <div class="up-hint">PDF, HWP, DOC, XLS, JPG, PNG, ZIP (파일당 최대 10MB)</div>
+                        <div class="up-text">파일을 드래그하거나 클릭하여 첨부하세요</div>
+                        <div class="up-formats">PDF · HWP · DOC · XLS · JPG · PNG · ZIP</div>
+                        <div class="up-limit">파일당 최대 10MB · 최대 5개</div>
                         <input type="file" id="fileInput" multiple accept=".pdf,.hwp,.hwpx,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.zip">
                     </div>
                     <div class="ct-files" id="fileList"></div>
-                    <div class="ct-upload-note">사업 관련 자료, 도면, 공문, 안내문, 검토자료 등을 첨부할 수 있습니다. 개인정보가 포함된 민감자료는 필요한 범위 내에서만 제출해 주세요.</div>
+                    <div class="ct-upload-note">사업 관련 자료·도면·공문 등을 첨부할 수 있습니다. 민감자료는 필요 범위 내에서만 제출해 주세요.</div>
                 </div>
                 <button type="submit" class="ct-submit" id="submitBtn">
                     <i class="fa-solid fa-paper-plane"></i> 상담 문의 접수
@@ -262,7 +267,7 @@ selList.addEventListener('click',function(e){
     var opt=e.target.closest('.ct-select-opt');if(!opt)return;
     selInput.value=opt.dataset.val;
     selBtn.innerHTML='<span>'+opt.textContent+'</span><i class="fa-solid fa-chevron-down"></i>';
-    selBtn.classList.remove('placeholder','err');
+    selBtn.classList.remove('placeholder','err');selBtn.classList.add('has-value');
     selList.querySelectorAll('.ct-select-opt').forEach(function(o){o.classList.remove('selected')});
     opt.classList.add('selected');
     selList.classList.remove('open');selBtn.classList.remove('open');
@@ -287,7 +292,7 @@ function handleFiles(files){
 function renderFiles(){
     fileListEl.innerHTML=uploadedFiles.map(function(f,i){
         var sz=f.size<1024*1024?(f.size/1024).toFixed(0)+'KB':(f.size/1024/1024).toFixed(1)+'MB';
-        return'<div class="ct-file"><i class="fa-solid fa-file"></i><span class="cf-name">'+f.name+'</span><span class="cf-size">'+sz+'</span><button type="button" class="cf-del" onclick="CT.removeFile('+i+')"><i class="fa-solid fa-xmark"></i></button></div>';
+        return'<div class="ct-file"><div class="cf-icon"><i class="fa-solid fa-file"></i></div><span class="cf-name">'+f.name+'</span><span class="cf-size">'+sz+'</span><span class="cf-status">첨부완료</span><button type="button" class="cf-del" onclick="CT.removeFile('+i+')"><i class="fa-solid fa-xmark"></i></button></div>';
     }).join('');
 }
 
@@ -326,7 +331,7 @@ form.addEventListener('submit',function(e){
             btn.innerHTML='<i class="fa-solid fa-circle-check"></i> 접수 완료';
             btn.style.background='#059669';
             App.toast('상담 문의가 접수되었습니다. 빠른 시일 내 답변드리겠습니다.','success');
-            setTimeout(function(){btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';btn.style.background='';form.reset();uploadedFiles=[];renderFiles();selBtn.innerHTML='<span>문의유형을 선택해주세요</span><i class="fa-solid fa-chevron-down"></i>';selBtn.classList.add('placeholder');selInput.value=''},3000);
+            setTimeout(function(){btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';btn.style.background='';form.reset();uploadedFiles=[];renderFiles();selBtn.innerHTML='<span>문의유형을 선택해주세요</span><i class="fa-solid fa-chevron-down"></i>';selBtn.classList.add('placeholder');selBtn.classList.remove('has-value');selInput.value=''},3000);
         }else{
             btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';
             App.toast(res.data.error||'접수에 실패했습니다.','error');
