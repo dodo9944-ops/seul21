@@ -45,28 +45,27 @@
     .fs-h .hi{width:30px;height:30px;border-radius:8px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--gold)}
     .fs-h h2{font-size:19px;font-weight:800;color:var(--gray-900)}
 
-    /* Modal Overlay — 중앙 정렬, 오버레이 자체는 스크롤 안 함 */
-    .calc-overlay{position:fixed;inset:0;background:rgba(10,15,28,.6);backdrop-filter:blur(4px);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+    /* Modal Overlay */
+    .calc-overlay{position:fixed;inset:0;background:rgba(10,15,28,.55);backdrop-filter:blur(3px);z-index:600;display:flex;align-items:flex-start;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s;overflow:hidden}
     .calc-overlay.open{opacity:1;pointer-events:auto}
 
-    /* Modal — flex column + max-height로 내부 스크롤 구조 */
-    .calc-modal{background:#fff;border-radius:18px;width:100%;max-width:800px;max-height:90vh;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s;display:flex;flex-direction:column;overflow:hidden}
+    /* Modal — flex column, 화면 거의 가득 채움 */
+    .calc-modal{background:#fff;border-radius:16px;width:100%;max-width:860px;height:calc(100vh - 48px);position:relative;box-shadow:0 24px 64px rgba(0,0,0,.25);transform:translateY(20px) scale(.97);transition:transform .3s;display:flex;flex-direction:column;overflow:hidden}
     .calc-overlay.open .calc-modal{transform:translateY(0) scale(1)}
 
     /* 닫기 버튼 */
-    .calc-close{position:absolute;top:16px;right:16px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.08);border:none;border-radius:50%;cursor:pointer;font-size:14px;color:var(--gray-600);transition:all .2s}
-    .calc-close:hover{background:rgba(10,15,28,.15);color:var(--gray-900)}
+    .calc-close{position:absolute;top:18px;right:18px;z-index:20;width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;cursor:pointer;font-size:14px;color:var(--gray-600);transition:all .2s}
+    .calc-close:hover{background:var(--gray-100);color:var(--gray-900)}
 
-    /* Modal Header — sticky, 제목+설명+액션버튼 전부 포함 */
-    .cm-head{padding:24px 28px 0;flex-shrink:0;position:relative;z-index:10;background:#fff;border-radius:18px 18px 0 0}
-    .cm-head h2{font-size:19px;font-weight:800;color:var(--gray-900);margin-bottom:4px;padding-right:40px}
-    .cm-head p{font-size:12.5px;color:var(--gray-500);margin-bottom:12px}
-    /* 액션 버튼도 헤더 안에 고정 */
-    .cm-head .cm-actions{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--gray-100);margin-bottom:0}
+    /* Header — 고정, 제목+설명+액션버튼 */
+    .cm-head{padding:22px 24px 0;flex-shrink:0;position:relative;z-index:10;background:#fff;border-radius:16px 16px 0 0}
+    .cm-head h2{font-size:18px;font-weight:800;color:var(--gray-900);margin-bottom:4px;padding-right:48px}
+    .cm-head p{font-size:12.5px;color:var(--gray-500);margin-bottom:10px}
+    .cm-head .cm-actions{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--gray-100)}
 
-    /* Modal Body — 내부만 스크롤 */
-    .cm-body{padding:20px 28px 28px;overflow-y:auto;flex:1;min-height:0}
-    @media(max-width:540px){.cm-body{padding:16px}.cm-head{padding:18px 16px 0}.cm-head h2{font-size:17px}}
+    /* Body — 내부 스크롤 */
+    .cm-body{padding:18px 24px 24px;overflow-y:auto;flex:1;min-height:0}
+    @media(max-width:768px){.calc-modal{height:calc(100vh - 32px);max-width:100%;border-radius:12px}.cm-body{padding:14px 16px}.cm-head{padding:16px 16px 0}.cm-head h2{font-size:16px}}
 
     /* Form groups */
     .fg{margin-bottom:14px}
