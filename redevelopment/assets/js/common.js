@@ -146,12 +146,12 @@ const App = (() => {
         <div class="footer-col footer-contact">
           <h5>고객센터</h5>
           <span class="phone">010-2230-9210</span>
-          <p>FAX 0504-340-9210<br>평일 09:00 – 18:00 (주말·공휴일 휴무)</p>
+          <p>E-mail dodo6666@naver.com<br>FAX 0504-340-9210<br>평일 09:00 – 18:00 (토·일·공휴일 휴무)</p>
         </div>
       </div>
       <div class="footer-bottom">
         <div class="footer-copy">&copy; 2026 (주)세울엔지니어링. All rights reserved.</div>
-        <div class="footer-info">서울특별시 강남구 테헤란로 123 세울빌딩 8층 | 사업자등록번호 123-45-67890</div>
+        <div class="footer-info">서울특별시 영등포구 국회대로76길 18 | 대표 이창우</div>
         <div class="footer-social">
           <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
           <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>

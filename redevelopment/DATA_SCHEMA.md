@@ -237,8 +237,8 @@
 | `siteName` | string | 사이트 이름 | `"세울"` |
 | `siteDescription` | string | 사이트 설명 | `"대한민국 No.1 재개발·재건축 종합정보 플랫폼"` |
 | `siteKeywords` | string | 검색 키워드 (쉼표 구분) | `"재개발,재건축,도시정비..."` |
-| `contactPhone` | string | 대표 전화 | `"1588-0000"` |
-| `contactEmail` | string | 대표 이메일 | `"info@jaegaebal.com"` |
+| `contactPhone` | string | 대표 전화 | `"010-2230-9210"` |
+| `contactEmail` | string | 대표 이메일 | `"dodo6666@naver.com"` |
 | `address` | string | 회사 주소 | `"서울특별시 강남구 테헤란로 123..."` |
 | `businessNumber` | string | 사업자등록번호 | `"000-00-00000"` |
 | `ceo` | string | 대표자 | `"홍길동"` |
@@ -392,7 +392,7 @@ const result = DataService.query('areas', {
 
 ```javascript
 const settings = DataService.getSettings();
-// => { siteName: '세울', contactPhone: '1588-0000', ... }
+// => { siteName: '세울', contactPhone: '010-2230-9210', ... }
 ```
 
 #### `updateSettings(changes)`
