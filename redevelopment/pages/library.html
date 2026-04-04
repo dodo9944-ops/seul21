@@ -29,7 +29,9 @@
     @media(max-width:768px){.lib-hero{padding:44px 0 36px}.lib-hero h1{font-size:26px}.lib-hero .hero-stats{gap:24px;flex-wrap:wrap}}
 
     /* === Category Tabs === */
-    .cat-wrap{margin-bottom:28px;position:relative}
+    .cat-wrap{margin-bottom:28px;position:sticky;top:104px;z-index:100;background:var(--white);padding-top:16px;padding-bottom:4px;margin-top:-16px;transition:box-shadow .2s}
+    .cat-wrap.stuck{box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    @media(max-width:768px){.cat-wrap{top:72px}}
     .cat-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:4px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100)}
     .cat-tab{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:10px;font-size:13.5px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--gray-500);transition:all .25s;font-family:var(--font);position:relative}
     .cat-tab i{font-size:13px;opacity:.45;transition:opacity .25s}
@@ -389,7 +391,13 @@ var item=allItems.find(function(i){return i.id===id});if(item){item.downloads=(i
 
 window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.querySelector('.ctrl-bar').offsetTop-80,behavior:'smooth'})}};
 
-renderTabs();renderPop();render()})();
+renderTabs();renderPop();render();
+
+/* sticky shadow toggle */
+var catWrap=document.querySelector('.cat-wrap');
+if(catWrap){var stickyTop=parseInt(getComputedStyle(catWrap).top)||104;
+window.addEventListener('scroll',function(){catWrap.classList.toggle('stuck',catWrap.getBoundingClientRect().top<=stickyTop+1)},{passive:true})}
+})();
 </script>
 </body>
 </html>
