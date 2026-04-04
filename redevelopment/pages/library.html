@@ -103,6 +103,11 @@
         color: var(--gray-900);
         margin-bottom: 4px;
         line-height: 1.4;
+        transition: color 0.2s;
+    }
+    .lib-title:hover {
+        color: var(--gold);
+        text-decoration: underline;
     }
     .lib-desc {
         font-size: 13px;
@@ -362,7 +367,7 @@
                     '<i class="fa-solid ' + fi.icon + '"></i>' +
                 '</div>' +
                 '<div class="lib-content">' +
-                    '<div class="lib-title">' + item.title + '</div>' +
+                    '<div class="lib-title" data-id="' + item.id + '" style="cursor:pointer;">' + item.title + '</div>' +
                     '<div class="lib-desc">' + item.description + '</div>' +
                     '<div class="lib-tags">' + tagsHtml + '</div>' +
                 '</div>' +
@@ -471,9 +476,9 @@
         x.send();
     }
 
-    // 다운로드 클릭 처리 (3단계 우선순위)
+    // 다운로드 클릭 처리 (제목 클릭 또는 다운로드 버튼)
     document.getElementById('libList').addEventListener('click', function(e) {
-        var btn = e.target.closest('.btn-download');
+        var btn = e.target.closest('.btn-download') || e.target.closest('.lib-title');
         if (!btn) return;
         var id = btn.dataset.id;
         var m = fileMap[id];
