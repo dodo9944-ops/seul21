@@ -350,6 +350,170 @@
             </div>
         </div>
 
+        <!-- CI (Corporate Identity) -->
+        <div class="about-section">
+            <h2 class="section-title">Corporate Identity</h2>
+
+            <style>
+                .ci-wrap { display:flex; flex-direction:column; gap:40px; }
+                .ci-hero { display:flex; align-items:center; gap:48px; padding:48px; background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:var(--radius); position:relative; overflow:hidden; }
+                .ci-hero::after { content:''; position:absolute; top:-50%; right:-20%; width:400px; height:400px; background:radial-gradient(circle,rgba(195,165,105,0.06),transparent 70%); }
+                .ci-hero-img { width:280px; flex-shrink:0; position:relative; z-index:1; }
+                .ci-hero-img img { width:100%; border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,0.3); }
+                .ci-hero-text { position:relative; z-index:1; }
+                .ci-hero-text h3 { font-size:24px; font-weight:800; color:#fff; margin-bottom:12px; letter-spacing:-0.5px; }
+                .ci-hero-text p { font-size:14px; color:rgba(255,255,255,0.6); line-height:1.8; }
+                .ci-hero-text .ci-accent { color:var(--gold); font-weight:700; }
+
+                .ci-section { padding:36px; background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius); }
+                .ci-section h4 { font-size:17px; font-weight:800; color:var(--gray-900); margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+                .ci-section h4 .ci-badge { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:6px; background:var(--brand-dark); color:var(--gold); font-size:12px; font-weight:800; }
+
+                .ci-symbol { display:flex; gap:32px; align-items:flex-start; }
+                .ci-symbol-mark { width:160px; height:160px; background:var(--gray-50); border-radius:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid var(--gray-200); }
+                .ci-symbol-mark svg { width:100px; height:100px; }
+                .ci-symbol-desc { flex:1; }
+                .ci-symbol-desc p { font-size:13.5px; color:var(--gray-600); line-height:1.8; margin-bottom:12px; }
+                .ci-symbol-desc .ci-meaning { padding:16px 20px; background:rgba(195,165,105,0.06); border-left:3px solid var(--gold); border-radius:0 8px 8px 0; font-size:13px; color:var(--gray-700); line-height:1.7; }
+
+                .ci-colors { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+                .ci-color-card { border-radius:12px; overflow:hidden; border:1px solid var(--gray-200); }
+                .ci-color-swatch { height:80px; }
+                .ci-color-info { padding:14px 16px; }
+                .ci-color-name { font-size:13px; font-weight:700; color:var(--gray-900); margin-bottom:6px; }
+                .ci-color-code { font-size:11px; color:var(--gray-500); line-height:1.6; }
+
+                .ci-usage { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+                .ci-usage-item { padding:20px; background:var(--gray-50); border-radius:10px; border:1px solid var(--gray-100); }
+                .ci-usage-item.ci-do { border-left:3px solid #22c55e; }
+                .ci-usage-item.ci-dont { border-left:3px solid #ef4444; }
+                .ci-usage-label { font-size:12px; font-weight:700; margin-bottom:8px; }
+                .ci-usage-item.ci-do .ci-usage-label { color:#22c55e; }
+                .ci-usage-item.ci-dont .ci-usage-label { color:#ef4444; }
+                .ci-usage-item p { font-size:12.5px; color:var(--gray-600); line-height:1.6; }
+
+                .ci-download { display:flex; gap:12px; margin-top:20px; }
+                .ci-download a { display:inline-flex; align-items:center; gap:6px; padding:10px 20px; border-radius:8px; font-size:13px; font-weight:700; text-decoration:none; transition:all 0.2s; }
+                .ci-dl-primary { background:var(--brand-dark); color:var(--gold); }
+                .ci-dl-primary:hover { background:var(--brand-navy); }
+                .ci-dl-outline { background:#fff; color:var(--gray-700); border:1px solid var(--gray-300); }
+                .ci-dl-outline:hover { border-color:var(--gold); color:var(--brand-dark); }
+
+                @media(max-width:768px) {
+                    .ci-hero { flex-direction:column; padding:32px 24px; }
+                    .ci-hero-img { width:100%; max-width:320px; }
+                    .ci-symbol { flex-direction:column; }
+                    .ci-colors { grid-template-columns:repeat(2,1fr); }
+                    .ci-usage { grid-template-columns:1fr; }
+                }
+            </style>
+
+            <div class="ci-wrap">
+
+                <!-- CI 메인 비주얼 -->
+                <div class="ci-hero">
+                    <div class="ci-hero-img">
+                        <img src="../jpg/ci_main.png" alt="세울엔지니어링 CI">
+                    </div>
+                    <div class="ci-hero-text">
+                        <h3>세울엔지니어링의<br>브랜드 아이덴티티</h3>
+                        <p>
+                            세울엔지니어링의 CI는 <span class="ci-accent">'세우다'</span>의 의미를 담은 기하학적 심볼로,<br>
+                            도시를 다시 세우고, 주거환경을 새롭게 만드는<br>
+                            정비사업 전문 엔지니어링의 정체성을 표현합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 심볼마크 -->
+                <div class="ci-section">
+                    <h4><span class="ci-badge">01</span> 심볼마크</h4>
+                    <div class="ci-symbol">
+                        <div class="ci-symbol-mark">
+                            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="8" width="104" height="104" rx="8" stroke="#C3A569" stroke-width="1.5" opacity="0.3"/>
+                                <rect x="28" y="24" width="52" height="7" rx="1.5" fill="#C3A569"/>
+                                <rect x="28" y="24" width="7" height="30" rx="1.5" fill="#C3A569"/>
+                                <rect x="40" y="52" width="52" height="7" rx="1.5" fill="#C3A569" opacity="0.6"/>
+                                <rect x="86" y="58" width="7" height="30" rx="1.5" fill="#C3A569"/>
+                                <rect x="40" y="86" width="52" height="7" rx="1.5" fill="#C3A569"/>
+                                <path d="M86 24 L93 17 L100 24" stroke="#C3A569" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                            </svg>
+                        </div>
+                        <div class="ci-symbol-desc">
+                            <p>세울엔지니어링의 심볼마크는 한글 <strong>'세울'</strong>의 자음 <strong>'ㅅ'</strong>과 건물의 기둥·보 구조를 결합한 기하학적 형태입니다. 상승하는 화살표는 도시의 가치를 높이겠다는 의지를 상징합니다.</p>
+                            <div class="ci-meaning">
+                                <strong>디자인 의미</strong><br>
+                                · 수직·수평선의 교차 — 건축 구조의 견고함과 정밀한 엔지니어링<br>
+                                · 상단 화살표 — 도시의 미래를 향한 상승, 발전, 혁신<br>
+                                · 열린 구조 — 투명한 사업 운영과 열린 소통
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 브랜드 컬러 -->
+                <div class="ci-section">
+                    <h4><span class="ci-badge">02</span> 브랜드 컬러</h4>
+                    <div class="ci-colors">
+                        <div class="ci-color-card">
+                            <div class="ci-color-swatch" style="background:#0A0F1C;"></div>
+                            <div class="ci-color-info">
+                                <div class="ci-color-name">SEUL Navy</div>
+                                <div class="ci-color-code">Primary Color<br>#0A0F1C<br>RGB 10, 15, 28</div>
+                            </div>
+                        </div>
+                        <div class="ci-color-card">
+                            <div class="ci-color-swatch" style="background:#C3A569;"></div>
+                            <div class="ci-color-info">
+                                <div class="ci-color-name">SEUL Gold</div>
+                                <div class="ci-color-code">Accent Color<br>#C3A569<br>RGB 195, 165, 105</div>
+                            </div>
+                        </div>
+                        <div class="ci-color-card">
+                            <div class="ci-color-swatch" style="background:#142644;"></div>
+                            <div class="ci-color-info">
+                                <div class="ci-color-name">SEUL Deep Navy</div>
+                                <div class="ci-color-code">Secondary<br>#142644<br>RGB 20, 38, 68</div>
+                            </div>
+                        </div>
+                        <div class="ci-color-card">
+                            <div class="ci-color-swatch" style="background:#D4B87A;"></div>
+                            <div class="ci-color-info">
+                                <div class="ci-color-name">SEUL Light Gold</div>
+                                <div class="ci-color-code">Sub Accent<br>#D4B87A<br>RGB 212, 184, 122</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 사용 규정 -->
+                <div class="ci-section">
+                    <h4><span class="ci-badge">03</span> 사용 규정</h4>
+                    <div class="ci-usage">
+                        <div class="ci-usage-item ci-do">
+                            <div class="ci-usage-label">O 올바른 사용</div>
+                            <p>· 지정된 색상(SEUL Navy, SEUL Gold)만 사용<br>· 심볼마크 주변에 충분한 여백 확보<br>· 어두운 배경에는 골드 심볼 사용<br>· 밝은 배경에는 네이비 심볼 사용</p>
+                        </div>
+                        <div class="ci-usage-item ci-dont">
+                            <div class="ci-usage-label">X 금지 사항</div>
+                            <p>· 심볼마크의 비율 변경 금지<br>· 지정 색상 외 임의 색상 사용 금지<br>· 심볼마크 위에 텍스트·이미지 중첩 금지<br>· 심볼마크 일부만 잘라서 사용 금지</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CI 다운로드 -->
+                <div class="ci-section">
+                    <h4><span class="ci-badge">04</span> CI 다운로드</h4>
+                    <p style="font-size:13px;color:var(--gray-600);margin-bottom:16px;">세울엔지니어링의 CI 자료를 다운로드할 수 있습니다. 사용 시 위 규정을 준수해 주세요.</p>
+                    <div class="ci-download">
+                        <a href="../jpg/ci_main.png" download class="ci-dl-primary"><i class="fa-solid fa-download"></i> CI 이미지 (PNG)</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <!-- 사업분야 -->
         <div class="about-section">
             <h2 class="section-title">사업분야</h2>
