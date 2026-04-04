@@ -159,7 +159,7 @@ npx serve .
 
 ### 퍼블릭 사용자 로그인 (데모)
 1. `/pages/login.html` 이동
-2. 이메일: `admin@jaegaebal.com` (아무 이메일로 로그인 가능)
+2. 이메일: `dodo6666@naver.com` (아무 이메일로 로그인 가능)
 
 ## 업로드 방법
 

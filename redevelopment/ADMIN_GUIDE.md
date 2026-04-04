@@ -431,9 +431,9 @@
 | `siteKeywords` | 검색 키워드 | 재개발,재건축,도시정비... |
 | `contactPhone` | 대표 전화 | 010-2230-9210 |
 | `contactEmail` | 대표 이메일 | dodo6666@naver.com |
-| `address` | 회사 주소 | 서울특별시 강남구 테헤란로 123 재개발빌딩 5층 |
-| `businessNumber` | 사업자등록번호 | 000-00-00000 |
-| `ceo` | 대표자 | 홍길동 |
+| `address` | 회사 주소 | 서울특별시 영등포구 국회대로76길 18 |
+| `businessNumber` | 사업자등록번호 | 761-86-02796 |
+| `ceo` | 대표자 | 이창우 |
 | `workingHours` | 영업시간 | 평일 09:00 - 18:00 / 토요일 09:00 - 13:00 |
 | `maintenanceMode` | 점검 모드 | false |
 | `popupEnabled` | 팝업 활성화 | false |

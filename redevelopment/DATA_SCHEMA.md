@@ -220,7 +220,7 @@
 |------|------|------|------|
 | `id` | string | 고유 식별자 | `"m1"` |
 | `name` | string | 회원 이름 | `"홍길동"` |
-| `email` | string | 이메일 | `"admin@jaegaebal.com"` |
+| `email` | string | 이메일 | `"dodo6666@naver.com"` |
 | `phone` | string | 연락처 | `"010-0000-0000"` |
 | `role` | string | 역할 | `"admin"` / `"user"` |
 | `joinDate` | string | 가입일 | `"2026-01-01"` |
@@ -239,9 +239,9 @@
 | `siteKeywords` | string | 검색 키워드 (쉼표 구분) | `"재개발,재건축,도시정비..."` |
 | `contactPhone` | string | 대표 전화 | `"010-2230-9210"` |
 | `contactEmail` | string | 대표 이메일 | `"dodo6666@naver.com"` |
-| `address` | string | 회사 주소 | `"서울특별시 강남구 테헤란로 123..."` |
-| `businessNumber` | string | 사업자등록번호 | `"000-00-00000"` |
-| `ceo` | string | 대표자 | `"홍길동"` |
+| `address` | string | 회사 주소 | `"서울특별시 영등포구 국회대로76길 18"` |
+| `businessNumber` | string | 사업자등록번호 | `"761-86-02796"` |
+| `ceo` | string | 대표자 | `"이창우"` |
 | `workingHours` | string | 영업시간 | `"평일 09:00 – 18:00 / 토요일 09:00 – 13:00"` |
 | `maintenanceMode` | boolean | 점검 모드 | `false` |
 | `popupEnabled` | boolean | 팝업 활성화 | `false` |

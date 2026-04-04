@@ -275,7 +275,7 @@ const MOCK = {
 
   /* ──────────────────────────── 회원 ──────────────────────────── */
   members: [
-    { id:'m1', name:'홍길동', email:'admin@jaegaebal.com', phone:'010-0000-0000', role:'admin', joinDate:'2026-01-01', status:'활성' },
+    { id:'m1', name:'관리자', email:'dodo6666@naver.com', phone:'010-2230-9210', role:'admin', joinDate:'2026-01-01', status:'활성' },
     { id:'m2', name:'김민수', email:'kim@test.com', phone:'010-1234-5678', role:'user', joinDate:'2026-02-15', status:'활성' },
     { id:'m3', name:'박영희', email:'park2@test.com', phone:'010-2345-6789', role:'user', joinDate:'2026-03-01', status:'활성' },
     { id:'m4', name:'이준혁', email:'lee2@test.com', phone:'010-3456-7890', role:'user', joinDate:'2026-03-10', status:'활성' },
@@ -290,7 +290,7 @@ const MOCK = {
     contactPhone: '010-2230-9210',
     contactEmail: 'dodo6666@naver.com',
     address: '서울특별시 영등포구 국회대로76길 18',
-    businessNumber: '000-00-00000',
+    businessNumber: '761-86-02796',
     ceo: '이창우',
     workingHours: '평일 09:00 – 18:00 (토·일·공휴일 휴무)',
     maintenanceMode: false,
