@@ -218,22 +218,42 @@
             <span>자료실</span>
         </div>
         <h1>자료실</h1>
-        <p>재개발·재건축 관련 서식, 법령, 지침, 가이드 자료를 다운로드하세요</p>
+        <p>정비사업 실무에 필요한 법령·서식·지침·판례·가이드를 한곳에서 다운로드하세요</p>
     </div>
 </div>
 
 <div class="page-body">
     <div class="inner">
         <!-- Category Tabs -->
-        <div class="tabs" id="categoryTabs" style="margin-bottom:20px;">
-            <button class="on" data-cat="전체">전체</button>
-            <button data-cat="주요뉴스">주요뉴스</button>
-            <button data-cat="서식">서식</button>
-            <button data-cat="법령">법령</button>
-            <button data-cat="관련판례">관련판례</button>
-            <button data-cat="지침">지침</button>
-            <button data-cat="가이드">가이드</button>
+        <div id="categoryTabs" style="margin-bottom:24px; display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="on" data-cat="전체" style="padding:10px 20px; border-radius:8px; border:1.5px solid var(--gray-200); background:var(--brand-dark); color:#fff; font-size:13px; font-weight:700; cursor:pointer;">
+                전체
+            </button>
+            <button data-cat="법령" style="padding:10px 20px; border-radius:8px; border:1.5px solid #FDECEA; background:#fff; color:var(--red); font-size:13px; font-weight:700; cursor:pointer;">
+                <i class="fa-solid fa-scale-balanced" style="margin-right:5px;"></i>법령·조례
+            </button>
+            <button data-cat="관련판례" style="padding:10px 20px; border-radius:8px; border:1.5px solid #F0E6FF; background:#fff; color:#7C3AED; font-size:13px; font-weight:700; cursor:pointer;">
+                <i class="fa-solid fa-gavel" style="margin-right:5px;"></i>판례·질의회신
+            </button>
+            <button data-cat="지침" style="padding:10px 20px; border-radius:8px; border:1.5px solid #FFF7E6; background:#fff; color:var(--orange); font-size:13px; font-weight:700; cursor:pointer;">
+                <i class="fa-solid fa-clipboard-list" style="margin-right:5px;"></i>지침·규정
+            </button>
+            <button data-cat="서식" style="padding:10px 20px; border-radius:8px; border:1.5px solid var(--accent-light); background:#fff; color:var(--accent); font-size:13px; font-weight:700; cursor:pointer;">
+                <i class="fa-solid fa-file-pen" style="margin-right:5px;"></i>서식·양식
+            </button>
+            <button data-cat="가이드" style="padding:10px 20px; border-radius:8px; border:1.5px solid #E6F9F0; background:#fff; color:var(--green); font-size:13px; font-weight:700; cursor:pointer;">
+                <i class="fa-solid fa-book-open" style="margin-right:5px;"></i>가이드·매뉴얼
+            </button>
+            <button data-cat="주요뉴스" style="padding:10px 20px; border-radius:8px; border:1.5px solid #EEF2FF; background:#fff; color:#4338CA; font-size:13px; font-weight:700; cursor:pointer;">
+                <i class="fa-solid fa-newspaper" style="margin-right:5px;"></i>주요뉴스
+            </button>
         </div>
+
+        <style>
+            #categoryTabs button.on { background:var(--brand-dark) !important; color:#fff !important; border-color:var(--brand-dark) !important; }
+            #categoryTabs button:not(.on):hover { background:var(--gray-50); transform:translateY(-1px); }
+            #categoryTabs button { transition: all 0.2s ease; }
+        </style>
 
         <!-- Search Bar -->
         <div class="lib-search">
