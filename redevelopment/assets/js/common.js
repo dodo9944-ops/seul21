@@ -28,7 +28,7 @@ const App = (() => {
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
       { href: `${B}/pages/community.html`, label: '커뮤니티', icon: 'fa-solid fa-comments' },
       { href: `${B}/pages/search.html`, label: '사업성 검토', icon: 'fa-solid fa-chart-line' },
-      { href: `${B}/pages/contact.html`, label: '사업문의', icon: 'fa-solid fa-envelope' },
+      { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
       { href: `${B}/intranet/index.html`, label: '인트라넷', icon: 'fa-solid fa-lock' },
     ];
     const moreLinks = [
@@ -140,7 +140,7 @@ const App = (() => {
         <div class="footer-col">
           <h5>문의·지원</h5>
           <a href="${B}/pages/search.html">사업성 검토</a>
-          <a href="${B}/pages/contact.html">사업문의</a>
+          <a href="${B}/pages/contact.html">고객센터</a>
           <a href="${B}/intranet/index.html">인트라넷</a>
         </div>
         <div class="footer-col footer-contact">

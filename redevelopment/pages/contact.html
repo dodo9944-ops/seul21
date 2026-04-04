@@ -4,200 +4,347 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>고객센터 — (주)세울엔지니어링</title>
-    <meta name="description" content="세울 고객센터에 1:1 문의를 남겨주세요.">
+    <meta name="description" content="정비사업 전문 상담을 접수하세요. 재개발·재건축·소규모정비 문의를 빠르게 답변드립니다.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
-    .contact-layout { display: grid; grid-template-columns: 1fr 380px; gap: 40px; }
-    @media (max-width: 1024px) { .contact-layout { grid-template-columns: 1fr; } }
-    .contact-form-box { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 32px; }
-    .contact-form-box h2 { font-size: 20px; font-weight: 700; margin-bottom: 24px; }
-    .contact-info { display: flex; flex-direction: column; gap: 20px; }
-    .info-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px; }
-    .info-card .info-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
-    .info-card .info-icon i { font-size: 20px; color: var(--accent); }
-    .info-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-    .info-card p { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
-    .info-card .phone-num { font-size: 28px; font-weight: 800; color: var(--gray-900); margin-bottom: 4px; }
-    .form-error-msg { display: none; font-size: 12px; color: var(--red); margin-top: 4px; }
-    .form-error-msg.show { display: block; }
+    /* === Hero === */
+    .ct-hero{padding:56px 0 48px;background:linear-gradient(135deg,#070B15 0%,var(--brand-dark) 40%,var(--brand-navy) 100%);position:relative;overflow:hidden}
+    .ct-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(195,165,105,.3),transparent)}
+    .ct-hero h1{font-size:32px;font-weight:900;color:#fff;margin-bottom:10px;padding-left:18px;border-left:3px solid var(--gold)}
+    .ct-hero .hero-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.7}
+    .ct-hero .hero-badges{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .ct-hero .hb{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:8px;font-size:12px;font-weight:600;color:rgba(255,255,255,.55)}
+    .ct-hero .hb i{color:var(--gold);font-size:11px}
+    @media(max-width:768px){.ct-hero{padding:40px 0 32px}.ct-hero h1{font-size:26px}}
+
+    /* === Layout === */
+    .ct-layout{display:grid;grid-template-columns:1fr 340px;gap:36px}
+    @media(max-width:1024px){.ct-layout{grid-template-columns:1fr}}
+
+    /* === Form Card === */
+    .ct-form-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:16px;padding:36px 32px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+    .ct-form-card .cf-head{display:flex;align-items:center;gap:10px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--gray-100)}
+    .ct-form-card .cf-head .cf-icon{width:36px;height:36px;border-radius:10px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--gold)}
+    .ct-form-card .cf-head h2{font-size:18px;font-weight:800;color:var(--gray-900)}
+    .ct-form-card .cf-notice{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;margin-bottom:24px;font-size:12.5px;color:var(--gray-500);line-height:1.65}
+    .ct-form-card .cf-notice i{color:var(--gold);margin-top:2px;flex-shrink:0}
+
+    /* Form fields */
+    .ct-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+    @media(max-width:540px){.ct-row{grid-template-columns:1fr}}
+    .ct-group{margin-bottom:16px}
+    .ct-label{display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px}
+    .ct-label .req{color:#EF4444;margin-left:2px}
+    .ct-input,.ct-textarea{width:100%;height:44px;padding:0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:#fff;font-family:var(--font);transition:all .2s}
+    .ct-input:focus,.ct-textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(195,165,105,.1)}
+    .ct-input.err,.ct-textarea.err{border-color:#EF4444}
+    .ct-textarea{height:auto;padding:12px 14px;resize:vertical;min-height:120px;line-height:1.6}
+    .ct-err{font-size:11.5px;color:#EF4444;margin-top:4px;display:none}
+    .ct-err.show{display:block}
+
+    /* Custom Select */
+    .ct-select-wrap{position:relative}
+    .ct-select-btn{width:100%;height:44px;padding:0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:#fff;font-family:var(--font);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
+    .ct-select-btn.placeholder{color:var(--gray-400)}
+    .ct-select-btn:focus,.ct-select-btn.open{border-color:var(--gold);box-shadow:0 0 0 3px rgba(195,165,105,.1)}
+    .ct-select-btn.err{border-color:#EF4444}
+    .ct-select-btn i{font-size:11px;color:var(--gray-400);transition:transform .2s}
+    .ct-select-btn.open i{transform:rotate(180deg)}
+    .ct-select-list{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1.5px solid var(--gray-200);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.1);z-index:200;max-height:260px;overflow-y:auto;display:none;padding:4px}
+    .ct-select-list.open{display:block}
+    .ct-select-opt{padding:10px 14px;font-size:13.5px;font-weight:500;color:var(--gray-700);cursor:pointer;border-radius:7px;transition:all .15s}
+    .ct-select-opt:hover{background:var(--gray-50);color:var(--brand-dark)}
+    .ct-select-opt.selected{background:rgba(195,165,105,.08);color:var(--brand-dark);font-weight:600}
+
+    /* File Upload */
+    .ct-upload{border:2px dashed var(--gray-200);border-radius:12px;padding:24px;text-align:center;transition:all .2s;cursor:pointer;position:relative}
+    .ct-upload:hover{border-color:var(--gold);background:rgba(195,165,105,.02)}
+    .ct-upload.dragover{border-color:var(--gold);background:rgba(195,165,105,.04)}
+    .ct-upload .up-icon{font-size:28px;color:var(--gray-300);margin-bottom:10px}
+    .ct-upload .up-text{font-size:13px;color:var(--gray-500);margin-bottom:4px}
+    .ct-upload .up-hint{font-size:11px;color:var(--gray-400)}
+    .ct-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+    .ct-files{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+    .ct-file{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:8px;font-size:12.5px;color:var(--gray-700)}
+    .ct-file i{color:var(--gold);font-size:12px}
+    .ct-file .cf-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .ct-file .cf-size{color:var(--gray-400);font-size:11px;flex-shrink:0}
+    .ct-file .cf-del{width:22px;height:22px;border-radius:6px;border:none;background:var(--gray-100);color:var(--gray-400);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all .2s}
+    .ct-file .cf-del:hover{background:#FEE2E2;color:#EF4444}
+    .ct-upload-note{font-size:11.5px;color:var(--gray-400);margin-top:8px;line-height:1.5}
+
+    /* Submit Button */
+    .ct-submit{width:100%;height:50px;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .25s;margin-top:8px}
+    .ct-submit:hover{background:var(--brand-navy);box-shadow:0 6px 20px rgba(10,15,28,.15)}
+    .ct-submit:disabled{opacity:.5;cursor:default}
+    .ct-submit i{font-size:14px}
+
+    /* === Info Cards === */
+    .ct-info{display:flex;flex-direction:column;gap:16px}
+    .ct-info-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;padding:24px;transition:all .2s}
+    .ct-info-card:hover{border-color:var(--gold);box-shadow:0 4px 16px rgba(195,165,105,.08)}
+    .ct-info-card .ic-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .ct-info-card .ic-icon{width:42px;height:42px;border-radius:11px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--gold);flex-shrink:0}
+    .ct-info-card h3{font-size:15px;font-weight:700;color:var(--gray-900)}
+    .ct-info-card .ic-sub{font-size:11.5px;color:var(--gray-400);font-weight:500}
+    .ct-info-card .ic-highlight{font-size:24px;font-weight:800;color:var(--brand-dark);margin-bottom:6px;letter-spacing:-.5px}
+    .ct-info-card p{font-size:13px;color:var(--gray-500);line-height:1.7}
+    .ct-info-card .ic-tag{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:rgba(195,165,105,.08);border-radius:6px;font-size:11px;font-weight:600;color:var(--gold);margin-top:10px}
+
+    /* Process */
+    .ct-process{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:14px;padding:22px;margin-top:16px}
+    .ct-process h4{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+    .ct-process h4 i{color:var(--gold);font-size:13px}
+    .ct-steps{display:flex;flex-direction:column;gap:10px}
+    .ct-step{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--gray-600);line-height:1.5}
+    .ct-step .sn{width:24px;height:24px;border-radius:50%;background:var(--brand-dark);color:var(--gold);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     </style>
 </head>
 <body>
 <div id="site-header"></div>
 
-<div class="inner">
-    <div class="breadcrumb">
-        <a href="../index.html">홈</a>
-        <i class="fa-solid fa-chevron-right"></i>
-        <span>고객센터</span>
-    </div>
-</div>
-
-<div class="page-hero">
+<div class="ct-hero">
     <div class="inner">
+        <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>고객센터</span></div>
         <h1>고객센터</h1>
-        <p>궁금한 점이 있으시면 1:1 문의를 남겨주세요. 빠르게 답변 드리겠습니다.</p>
-    </div>
-</div>
-
-<div class="page-body">
-    <div class="inner">
-        <div class="contact-layout">
-            <!-- 문의 폼 -->
-            <div class="contact-form-box">
-                <h2><i class="fa-solid fa-pen-to-square" style="color:var(--accent);margin-right:8px;"></i>1:1 문의</h2>
-                <form id="contactForm" novalidate>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">이름 <span style="color:var(--red);">*</span></label>
-                            <input type="text" class="form-input" id="cName" placeholder="홍길동" required>
-                            <div class="form-error-msg" id="errName">이름을 입력해주세요.</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">이메일 <span style="color:var(--red);">*</span></label>
-                            <input type="email" class="form-input" id="cEmail" placeholder="example@email.com" required>
-                            <div class="form-error-msg" id="errEmail">올바른 이메일을 입력해주세요.</div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">연락처</label>
-                            <input type="tel" class="form-input" id="cPhone" placeholder="010-0000-0000">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">문의유형 <span style="color:var(--red);">*</span></label>
-                            <select class="form-select" id="cType" required>
-                                <option value="">선택해주세요</option>
-                                <option value="시세문의">시세문의</option>
-                                <option value="투자상담">투자상담</option>
-                                <option value="법률검토지원">법률 검토 지원 문의</option>
-                                <option value="매물문의">매물문의</option>
-                                <option value="서비스문의">서비스문의</option>
-                                <option value="기타">기타</option>
-                            </select>
-                            <div class="form-error-msg" id="errType">문의유형을 선택해주세요.</div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">제목 <span style="color:var(--red);">*</span></label>
-                        <input type="text" class="form-input" id="cTitle" placeholder="문의 제목을 입력해주세요" required>
-                        <div class="form-error-msg" id="errTitle">제목을 입력해주세요.</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">내용 <span style="color:var(--red);">*</span></label>
-                        <textarea class="form-textarea" id="cContent" placeholder="문의 내용을 상세히 작성해주세요" rows="6" required></textarea>
-                        <div class="form-error-msg" id="errContent">내용을 입력해주세요.</div>
-                    </div>
-                    <button type="submit" class="btn btn-accent btn-lg" style="width:100%;">
-                        <i class="fa-solid fa-paper-plane"></i> 문의 전송
-                    </button>
-                </form>
-            </div>
-
-            <!-- 고객센터 안내 -->
-            <div class="contact-info">
-                <div class="info-card">
-                    <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
-                    <h3>전화 문의</h3>
-                    <div class="phone-num">1588-0000</div>
-                    <p>평일 09:00 ~ 18:00<br>토요일 09:00 ~ 13:00<br>(공휴일 휴무)</p>
-                </div>
-                <div class="info-card">
-                    <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
-                    <h3>운영시간</h3>
-                    <p>평일: 오전 9시 ~ 오후 6시<br>토요일: 오전 9시 ~ 오후 1시<br>일요일·공휴일: 휴무</p>
-                </div>
-                <div class="info-card">
-                    <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
-                    <h3>이메일 문의</h3>
-                    <p style="font-size:16px;font-weight:600;color:var(--gray-900);margin-bottom:4px;">info@jaegaebal.com</p>
-                    <p>이메일 접수 후 1~2영업일 내 회신 드립니다.</p>
-                </div>
-            </div>
+        <p class="hero-sub">정비사업 관련 문의를 접수해 주세요. 전문 담당자가 빠르게 검토하고 답변드립니다.</p>
+        <div class="hero-badges">
+            <span class="hb"><i class="fa-solid fa-clock"></i> 접수 후 1~2영업일 내 회신</span>
+            <span class="hb"><i class="fa-solid fa-shield-check"></i> 개인정보 보호 처리</span>
+            <span class="hb"><i class="fa-solid fa-file-arrow-up"></i> 자료 첨부 가능</span>
         </div>
     </div>
 </div>
 
+<div class="page-body"><div class="inner">
+    <div class="ct-layout">
+
+        <!-- 문의 폼 -->
+        <div class="ct-form-card">
+            <div class="cf-head">
+                <div class="cf-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+                <h2>상담 문의 접수</h2>
+            </div>
+            <div class="cf-notice">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>문의유형을 선택하시면 담당 전문가가 더 빠르게 검토할 수 있습니다. 사업 관련 자료가 있으시면 첨부해 주세요.</span>
+            </div>
+
+            <form id="ctForm" novalidate>
+                <div class="ct-row">
+                    <div>
+                        <label class="ct-label">이름 <span class="req">*</span></label>
+                        <input type="text" class="ct-input" id="cName" placeholder="홍길동" required>
+                        <div class="ct-err" id="errName">이름을 입력해주세요.</div>
+                    </div>
+                    <div>
+                        <label class="ct-label">이메일 <span class="req">*</span></label>
+                        <input type="email" class="ct-input" id="cEmail" placeholder="example@email.com" required>
+                        <div class="ct-err" id="errEmail">올바른 이메일을 입력해주세요.</div>
+                    </div>
+                </div>
+                <div class="ct-row">
+                    <div>
+                        <label class="ct-label">연락처</label>
+                        <input type="tel" class="ct-input" id="cPhone" placeholder="010-0000-0000">
+                    </div>
+                    <div>
+                        <label class="ct-label">문의유형 <span class="req">*</span></label>
+                        <div class="ct-select-wrap" id="selWrap">
+                            <button type="button" class="ct-select-btn placeholder" id="selBtn">
+                                <span>문의유형을 선택해주세요</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="ct-select-list" id="selList">
+                                <div class="ct-select-opt" data-val="재개발사업">재개발 사업 문의</div>
+                                <div class="ct-select-opt" data-val="재건축사업">재건축 사업 문의</div>
+                                <div class="ct-select-opt" data-val="소규모재건축">소규모재건축 문의</div>
+                                <div class="ct-select-opt" data-val="사업성검토">사업성 검토 문의</div>
+                                <div class="ct-select-opt" data-val="조합설립">조합설립 / 추진위 문의</div>
+                                <div class="ct-select-opt" data-val="관리처분">관리처분 / 분담금 문의</div>
+                                <div class="ct-select-opt" data-val="상가협의">상가협의 / 권리관계 문의</div>
+                                <div class="ct-select-opt" data-val="법률행정">법률 / 행정 절차 문의</div>
+                                <div class="ct-select-opt" data-val="용역협업">용역 / 협업 문의</div>
+                                <div class="ct-select-opt" data-val="홈페이지">홈페이지 / 자료실 문의</div>
+                                <div class="ct-select-opt" data-val="기타">기타 문의</div>
+                            </div>
+                            <input type="hidden" id="cType" value="">
+                        </div>
+                        <div class="ct-err" id="errType">문의유형을 선택해주세요.</div>
+                    </div>
+                </div>
+                <div class="ct-group">
+                    <label class="ct-label">제목 <span class="req">*</span></label>
+                    <input type="text" class="ct-input" id="cTitle" placeholder="문의 제목을 입력해주세요" required>
+                    <div class="ct-err" id="errTitle">제목을 입력해주세요.</div>
+                </div>
+                <div class="ct-group">
+                    <label class="ct-label">내용 <span class="req">*</span></label>
+                    <textarea class="ct-textarea" id="cContent" placeholder="문의 내용을 상세히 작성해주세요. 사업 구역명, 현재 단계, 궁금한 점 등을 포함하면 더 정확한 답변이 가능합니다." rows="6" required></textarea>
+                    <div class="ct-err" id="errContent">내용을 입력해주세요.</div>
+                </div>
+                <div class="ct-group">
+                    <label class="ct-label">첨부파일</label>
+                    <div class="ct-upload" id="uploadArea">
+                        <div class="up-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                        <div class="up-text">파일을 드래그하거나 클릭하여 선택하세요</div>
+                        <div class="up-hint">PDF, HWP, DOC, XLS, JPG, PNG, ZIP (파일당 최대 10MB)</div>
+                        <input type="file" id="fileInput" multiple accept=".pdf,.hwp,.hwpx,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.zip">
+                    </div>
+                    <div class="ct-files" id="fileList"></div>
+                    <div class="ct-upload-note">사업 관련 자료, 도면, 공문, 안내문, 검토자료 등을 첨부할 수 있습니다. 개인정보가 포함된 민감자료는 필요한 범위 내에서만 제출해 주세요.</div>
+                </div>
+                <button type="submit" class="ct-submit" id="submitBtn">
+                    <i class="fa-solid fa-paper-plane"></i> 상담 문의 접수
+                </button>
+            </form>
+        </div>
+
+        <!-- 안내 정보 -->
+        <div class="ct-info">
+            <div class="ct-info-card">
+                <div class="ic-head">
+                    <div class="ic-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div><h3>전화 상담</h3><span class="ic-sub">빠른 상담이 필요할 때</span></div>
+                </div>
+                <div class="ic-highlight">02-000-0000</div>
+                <p>평일 09:00 ~ 18:00<br>토요일 09:00 ~ 13:00 (공휴일 휴무)</p>
+                <div class="ic-tag"><i class="fa-solid fa-bolt"></i> 즉시 상담 가능</div>
+            </div>
+            <div class="ct-info-card">
+                <div class="ic-head">
+                    <div class="ic-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div><h3>이메일 문의</h3><span class="ic-sub">자료 첨부 및 상세 문의</span></div>
+                </div>
+                <div class="ic-highlight" style="font-size:18px">info@seul21.com</div>
+                <p>대용량 파일, 도면, 사업 관련 서류를 함께 보내실 때 이메일을 이용해 주세요.</p>
+                <div class="ic-tag"><i class="fa-solid fa-clock"></i> 1~2영업일 내 회신</div>
+            </div>
+            <div class="ct-info-card">
+                <div class="ic-head">
+                    <div class="ic-icon"><i class="fa-solid fa-building"></i></div>
+                    <div><h3>방문 상담</h3><span class="ic-sub">대면 상담 예약</span></div>
+                </div>
+                <p>서울특별시 영등포구 국회대로76길 18<br>세울엔지니어링 본사</p>
+                <div class="ic-tag"><i class="fa-solid fa-calendar-check"></i> 사전 예약 권장</div>
+            </div>
+
+            <!-- 접수 흐름 -->
+            <div class="ct-process">
+                <h4><i class="fa-solid fa-route"></i> 문의 접수 흐름</h4>
+                <div class="ct-steps">
+                    <div class="ct-step"><div class="sn">1</div><span>문의유형 선택 및 내용 작성</span></div>
+                    <div class="ct-step"><div class="sn">2</div><span>관련 자료 첨부 (선택)</span></div>
+                    <div class="ct-step"><div class="sn">3</div><span>담당 전문가 배정 및 검토</span></div>
+                    <div class="ct-step"><div class="sn">4</div><span>이메일 또는 전화로 회신</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div></div>
+
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js"></script>
-<script src="../assets/js/data-service.js"></script>
-<script src="../assets/js/common.js"></script>
+<script src="../assets/data/mock-data.js?v=20260405"></script>
+<script src="../assets/js/data-service.js?v=20260405"></script>
+<script src="../assets/js/common.js?v=20260405"></script>
 <script>
-(function() {
-    const form = document.getElementById('contactForm');
+(function(){
+/* Custom Select */
+var selBtn=document.getElementById('selBtn'),selList=document.getElementById('selList'),selInput=document.getElementById('cType');
+selBtn.addEventListener('click',function(){selList.classList.toggle('open');selBtn.classList.toggle('open')});
+document.addEventListener('click',function(e){if(!e.target.closest('#selWrap')){selList.classList.remove('open');selBtn.classList.remove('open')}});
+selList.addEventListener('click',function(e){
+    var opt=e.target.closest('.ct-select-opt');if(!opt)return;
+    selInput.value=opt.dataset.val;
+    selBtn.innerHTML='<span>'+opt.textContent+'</span><i class="fa-solid fa-chevron-down"></i>';
+    selBtn.classList.remove('placeholder','err');
+    selList.querySelectorAll('.ct-select-opt').forEach(function(o){o.classList.remove('selected')});
+    opt.classList.add('selected');
+    selList.classList.remove('open');selBtn.classList.remove('open');
+    document.getElementById('errType').classList.remove('show');
+});
 
-    function showError(id, show) {
-        const el = document.getElementById(id);
-        if (show) el.classList.add('show');
-        else el.classList.remove('show');
-    }
+/* File Upload */
+var uploadArea=document.getElementById('uploadArea'),fileInput=document.getElementById('fileInput'),fileListEl=document.getElementById('fileList');
+var uploadedFiles=[];
+uploadArea.addEventListener('dragover',function(e){e.preventDefault();uploadArea.classList.add('dragover')});
+uploadArea.addEventListener('dragleave',function(){uploadArea.classList.remove('dragover')});
+uploadArea.addEventListener('drop',function(e){e.preventDefault();uploadArea.classList.remove('dragover');handleFiles(e.dataTransfer.files)});
+fileInput.addEventListener('change',function(){handleFiles(this.files);this.value=''});
+function handleFiles(files){
+    Array.from(files).forEach(function(f){
+        if(f.size>10*1024*1024){App.toast(f.name+': 10MB 초과','error');return}
+        if(uploadedFiles.length>=5){App.toast('최대 5개까지 첨부 가능합니다','error');return}
+        uploadedFiles.push(f);
+    });
+    renderFiles();
+}
+function renderFiles(){
+    fileListEl.innerHTML=uploadedFiles.map(function(f,i){
+        var sz=f.size<1024*1024?(f.size/1024).toFixed(0)+'KB':(f.size/1024/1024).toFixed(1)+'MB';
+        return'<div class="ct-file"><i class="fa-solid fa-file"></i><span class="cf-name">'+f.name+'</span><span class="cf-size">'+sz+'</span><button type="button" class="cf-del" onclick="CT.removeFile('+i+')"><i class="fa-solid fa-xmark"></i></button></div>';
+    }).join('');
+}
 
-    function validateEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
+/* Validation + Submit */
+var form=document.getElementById('ctForm');
+function showErr(id,show){var el=document.getElementById(id);if(show)el.classList.add('show');else el.classList.remove('show')}
+function validEmail(e){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
 
-    form.addEventListener('submit', e => {
-        e.preventDefault();
+form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=document.getElementById('cName').value.trim();
+    var email=document.getElementById('cEmail').value.trim();
+    var type=selInput.value;
+    var title=document.getElementById('cTitle').value.trim();
+    var content=document.getElementById('cContent').value.trim();
+    var ok=true;
 
-        const name = document.getElementById('cName').value.trim();
-        const email = document.getElementById('cEmail').value.trim();
-        const phone = document.getElementById('cPhone').value.trim();
-        const type = document.getElementById('cType').value;
-        const title = document.getElementById('cTitle').value.trim();
-        const content = document.getElementById('cContent').value.trim();
+    showErr('errName',!name);if(!name){document.getElementById('cName').classList.add('err');ok=false}
+    showErr('errEmail',!email||!validEmail(email));if(!email||!validEmail(email)){document.getElementById('cEmail').classList.add('err');ok=false}
+    showErr('errType',!type);if(!type){selBtn.classList.add('err');ok=false}
+    showErr('errTitle',!title);if(!title){document.getElementById('cTitle').classList.add('err');ok=false}
+    showErr('errContent',!content);if(!content){document.getElementById('cContent').classList.add('err');ok=false}
 
-        let valid = true;
+    if(!ok){App.toast('필수 입력 항목을 확인해주세요.','error');return}
 
-        showError('errName', !name); if (!name) valid = false;
-        showError('errEmail', !email || !validateEmail(email)); if (!email || !validateEmail(email)) valid = false;
-        showError('errType', !type); if (!type) valid = false;
-        showError('errTitle', !title); if (!title) valid = false;
-        showError('errContent', !content); if (!content) valid = false;
+    var btn=document.getElementById('submitBtn');
+    btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> 접수 중...';
 
-        if (!valid) {
-            App.toast('필수 입력 항목을 확인해주세요.', 'error');
-            return;
+    var phone=document.getElementById('cPhone').value.trim();
+    fetch('/api/inquiries',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name:name,email:email,phone:phone,type:type,title:title,content:content})
+    }).then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d}})})
+    .then(function(res){
+        btn.disabled=false;
+        if(res.ok){
+            btn.innerHTML='<i class="fa-solid fa-circle-check"></i> 접수 완료';
+            btn.style.background='#059669';
+            App.toast('상담 문의가 접수되었습니다. 빠른 시일 내 답변드리겠습니다.','success');
+            setTimeout(function(){btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';btn.style.background='';form.reset();uploadedFiles=[];renderFiles();selBtn.innerHTML='<span>문의유형을 선택해주세요</span><i class="fa-solid fa-chevron-down"></i>';selBtn.classList.add('placeholder');selInput.value=''},3000);
+        }else{
+            btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';
+            App.toast(res.data.error||'접수에 실패했습니다.','error');
         }
+    }).catch(function(){btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';App.toast('서버 연결에 실패했습니다.','error')});
+});
 
-        var submitBtn = form.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 전송 중...';
-
-        fetch('/api/inquiries', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, phone, type, title, content })
-        })
-        .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
-        .then(function(res) {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> 문의 전송';
-            if (res.ok) {
-                App.toast('문의가 성공적으로 접수되었습니다. 빠른 시일 내 답변 드리겠습니다.', 'success');
-                form.reset();
-                ['errName','errEmail','errType','errTitle','errContent'].forEach(id => showError(id, false));
-            } else {
-                App.toast(res.data.error || '문의 접수에 실패했습니다.', 'error');
-            }
-        })
-        .catch(function() {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> 문의 전송';
-            App.toast('서버 연결에 실패했습니다.', 'error');
-        });
+/* Clear errors on input */
+['cName','cEmail','cTitle','cContent'].forEach(function(id){
+    document.getElementById(id).addEventListener('input',function(){
+        this.classList.remove('err');
+        var errId='err'+id.charAt(1).toUpperCase()+id.slice(2);
+        showErr(errId,false);
     });
+});
 
-    // 입력 시 에러 해제
-    ['cName','cEmail','cType','cTitle','cContent'].forEach(id => {
-        document.getElementById(id).addEventListener('input', () => {
-            const errId = 'err' + id.charAt(1).toUpperCase() + id.slice(2);
-            showError(errId, false);
-        });
-    });
+/* Global */
+window.CT={removeFile:function(i){uploadedFiles.splice(i,1);renderFiles()}};
 })();
 </script>
 </body>
