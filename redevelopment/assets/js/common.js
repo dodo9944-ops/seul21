@@ -27,6 +27,7 @@ const App = (() => {
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
       { href: `${B}/pages/community.html`, label: '커뮤니티', icon: 'fa-solid fa-comments' },
+      { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-calculator' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
       { href: `${B}/intranet/index.html`, label: '인트라넷', icon: 'fa-solid fa-lock' },
     ];
@@ -138,6 +139,7 @@ const App = (() => {
         </div>
         <div class="footer-col">
           <h5>문의·지원</h5>
+          <a href="${B}/pages/feasibility.html">사업성 검토</a>
           <a href="${B}/pages/contact.html">고객센터</a>
           <a href="${B}/intranet/index.html">인트라넷</a>
         </div>
