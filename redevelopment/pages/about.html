@@ -116,7 +116,7 @@
 
     /* ── SECTION SPACING ── */
     .about-section {
-        margin-bottom: 80px;
+        margin-bottom: 64px;
         padding: 80px 0;
     }
     .about-section:last-child { padding-bottom: 0; }
@@ -318,7 +318,10 @@
         position: relative;
     }
     .tl-item.tl-recent .tl-events li {
-        font-weight: 600; color: var(--gray-800);
+        font-weight: 700; color: var(--gray-900);
+    }
+    .tl-item.tl-recent .tl-events li::before {
+        background: var(--gold);
     }
     /* alternate layout: even items content on left, odd on right */
     .tl-item:nth-child(odd) { justify-content: flex-start; }
@@ -419,7 +422,7 @@
         margin-bottom: 8px;
     }
     .pro-card p {
-        font-size: 13px; color: var(--gray-500); line-height: 1.7;
+        font-size: 13.5px; color: var(--gray-600); line-height: 1.7; font-weight: 500;
         flex: 1;
     }
     @media (max-width: 1024px) { .pro-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -905,6 +908,7 @@
         <div class="cta-buttons">
             <a href="contact.html" class="cta-btn-primary"><i class="fa-solid fa-envelope"></i> 사업문의</a>
             <a href="services.html" class="cta-btn-outline"><i class="fa-solid fa-diagram-project"></i> 업무분야 보기</a>
+            <a href="vision.html" class="cta-btn-outline"><i class="fa-solid fa-road"></i> 세울의 길</a>
         </div>
     </div>
 </div>
