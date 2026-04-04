@@ -691,36 +691,45 @@
             <h2 class="section-title">사업분야</h2>
             <a href="pages/services.html" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
         </div>
-        <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
-            <a href="pages/redevelopment-service.html" class="card" style="text-align:center;padding:28px 18px;">
-                <div class="card-visual" style="height:72px;margin-bottom:14px;border-radius:12px;"><i class="fa-solid fa-building" style="font-size:26px;"></i></div>
-                <div class="card-name" style="font-size:14px;margin-bottom:6px;">주택재개발<br>정비사업</div>
-                <div style="font-size:11px;color:var(--gray-500);line-height:1.6;">노후 주거지역 전 과정 관리</div>
+        <style>
+            .sv-main{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+            @media(max-width:768px){.sv-main{grid-template-columns:1fr;}}
+            .sv-main .sv-item{text-decoration:none;color:inherit;border-radius:var(--radius);overflow:hidden;border:1px solid var(--gray-200);transition:all 0.2s;}
+            .sv-main .sv-item:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(0,0,0,0.06);transform:translateY(-2px);}
+            .sv-main .sv-hd{background:linear-gradient(135deg,#0A0F1C,#142644);padding:18px 22px;display:flex;align-items:center;gap:14px;}
+            .sv-main .sv-ic{width:38px;height:38px;border-radius:10px;background:rgba(195,165,105,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+            .sv-main .sv-ic i{color:var(--gold);font-size:17px;}
+            .sv-main .sv-nm{font-size:15px;font-weight:800;color:#fff;}
+            .sv-main .sv-en{font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;}
+            .sv-main .sv-bd{padding:16px 22px;background:#fff;}
+            .sv-main .sv-bd p{font-size:12.5px;color:var(--gray-600);line-height:1.7;margin-bottom:10px;}
+            .sv-main .sv-tg{display:flex;flex-wrap:wrap;gap:4px;}
+            .sv-main .sv-tg span{font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(10,15,28,0.04);color:var(--gray-500);}
+        </style>
+        <div class="sv-main">
+            <a href="pages/redevelopment-service.html" class="sv-item">
+                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-building"></i></div><div><div class="sv-nm">주택재개발 정비사업</div><div class="sv-en">Urban Redevelopment →</div></div></div>
+                <div class="sv-bd"><p>노후 주거지역의 정비구역 지정부터 조합 설립, 사업시행인가, 관리처분, 이주·철거·준공까지 전 과정 관리</p><div class="sv-tg"><span>정비구역 지정</span><span>조합설립</span><span>관리처분</span><span>이주·철거</span></div></div>
             </a>
-            <a href="pages/reconstruction-service.html" class="card" style="text-align:center;padding:28px 18px;">
-                <div class="card-visual" style="height:72px;margin-bottom:14px;border-radius:12px;"><i class="fa-solid fa-city" style="font-size:26px;"></i></div>
-                <div class="card-name" style="font-size:14px;margin-bottom:6px;">주택재건축<br>정비사업</div>
-                <div style="font-size:11px;color:var(--gray-500);line-height:1.6;">노후 공동주택 재건축 관리</div>
+            <a href="pages/reconstruction-service.html" class="sv-item">
+                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-city"></i></div><div><div class="sv-nm">주택재건축 정비사업</div><div class="sv-en">Housing Reconstruction →</div></div></div>
+                <div class="sv-bd"><p>노후 공동주택의 사업성 검토부터 조합 운영, 시공사 대응, 관리처분 및 입주까지 체계적 지원</p><div class="sv-tg"><span>사업성 검토</span><span>비례율·분담금</span><span>시공사 선정</span><span>총회 운영</span></div></div>
             </a>
-            <a href="pages/small-reconstruction-service.html" class="card" style="text-align:center;padding:28px 18px;">
-                <div class="card-visual" style="height:72px;margin-bottom:14px;border-radius:12px;"><i class="fa-solid fa-house-chimney" style="font-size:26px;"></i></div>
-                <div class="card-name" style="font-size:14px;margin-bottom:6px;">소규모재건축<br>정비사업</div>
-                <div style="font-size:11px;color:var(--gray-500);line-height:1.6;">200세대 미만 간소화 절차</div>
+            <a href="pages/small-reconstruction-service.html" class="sv-item">
+                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-house-chimney"></i></div><div><div class="sv-nm">소규모재건축 정비사업</div><div class="sv-en">Small-scale Reconstruction →</div></div></div>
+                <div class="sv-bd"><p>200세대 미만 노후 공동주택 대상, 소규모주택정비법에 따른 간소화 절차로 신속 추진</p><div class="sv-tg"><span>200세대 미만</span><span>소규모주택정비법</span><span>간소화 절차</span></div></div>
             </a>
-            <a href="pages/garoju-service.html" class="card" style="text-align:center;padding:28px 18px;">
-                <div class="card-visual" style="height:72px;margin-bottom:14px;border-radius:12px;"><i class="fa-solid fa-road" style="font-size:26px;"></i></div>
-                <div class="card-name" style="font-size:14px;margin-bottom:6px;">가로주택<br>정비사업</div>
-                <div style="font-size:11px;color:var(--gray-500);line-height:1.6;">가로구역 소규모 단지 조성</div>
+            <a href="pages/garoju-service.html" class="sv-item">
+                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-road"></i></div><div><div class="sv-nm">가로주택 정비사업</div><div class="sv-en">Street Housing Improvement →</div></div></div>
+                <div class="sv-bd"><p>가로구역 내 노후 건축물 정비, 정비구역 지정 없이 신속한 소규모 주거단지 조성</p><div class="sv-tg"><span>가로구역</span><span>정비구역 면제</span><span>소규모 단지</span></div></div>
             </a>
-            <a href="pages/urbanplanning-service.html" class="card" style="text-align:center;padding:28px 18px;">
-                <div class="card-visual" style="height:72px;margin-bottom:14px;border-radius:12px;"><i class="fa-solid fa-drafting-compass" style="font-size:26px;"></i></div>
-                <div class="card-name" style="font-size:14px;margin-bottom:6px;">도시계획<br>(엔지니어링)</div>
-                <div style="font-size:11px;color:var(--gray-500);line-height:1.6;">정비계획·신속통합기획</div>
+            <a href="pages/urbanplanning-service.html" class="sv-item">
+                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-drafting-compass"></i></div><div><div class="sv-nm">도시계획 (엔지니어링)</div><div class="sv-en">Urban Planning & Engineering →</div></div></div>
+                <div class="sv-bd"><p>정비계획, 지구단위계획, 인허가 협의자료 작성, 서울시 신속통합기획 대응</p><div class="sv-tg"><span>정비계획</span><span>신속통합기획</span><span>인허가 전략</span></div></div>
             </a>
-            <a href="pages/pmcm-service.html" class="card" style="text-align:center;padding:28px 18px;">
-                <div class="card-visual" style="height:72px;margin-bottom:14px;border-radius:12px;"><i class="fa-solid fa-diagram-project" style="font-size:26px;"></i></div>
-                <div class="card-name" style="font-size:14px;margin-bottom:6px;">도시정비<br>PM/CM</div>
-                <div style="font-size:11px;color:var(--gray-500);line-height:1.6;">일정·원가·품질 통합 관리</div>
+            <a href="pages/pmcm-service.html" class="sv-item">
+                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-diagram-project"></i></div><div><div class="sv-nm">도시정비 PM/CM</div><div class="sv-en">Project & Construction Management →</div></div></div>
+                <div class="sv-bd"><p>일정·원가·품질·리스크 통합 관리, 조합·시공사·설계·감리·행정기관 간 실무 조정</p><div class="sv-tg"><span>일정 관리</span><span>원가 관리</span><span>리스크 관리</span><span>이해관계 조율</span></div></div>
             </a>
         </div>
     </div>
