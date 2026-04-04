@@ -111,28 +111,29 @@
        FEATURED CARDS — 주요 수행실적 (Photo-first)
        ════════════════════════════════════════════════════════════ */
     .featured-grid {
-        display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
     }
-    @media (max-width: 1024px) { .featured-grid { grid-template-columns: 1fr; gap: 18px; } }
+    @media (max-width: 1024px) { .featured-grid { grid-template-columns: 1fr; gap: 20px; } }
 
     .feat-card {
         background: var(--white);
         border: 1.5px solid var(--gray-200);
-        border-radius: 16px;
+        border-radius: 18px;
         overflow: hidden;
         display: flex; flex-direction: column;
         cursor: pointer;
         transition: all 0.3s ease;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
     }
     .feat-card:hover {
         border-color: var(--gold);
-        box-shadow: 0 16px 40px rgba(195,165,105,0.15);
-        transform: translateY(-6px);
+        box-shadow: 0 20px 48px rgba(195,165,105,0.18);
+        transform: translateY(-8px);
     }
 
-    /* Featured Image */
+    /* Featured Image — larger for prominence */
     .feat-img {
-        width: 100%; height: 220px;
+        width: 100%; height: 240px;
         position: relative; overflow: hidden;
         flex-shrink: 0;
     }
@@ -154,7 +155,7 @@
 
     /* Featured Fallback (no image) */
     .feat-img-fallback {
-        width: 100%; height: 220px;
+        width: 100%; height: 240px;
         position: relative; overflow: hidden; flex-shrink: 0;
         display: flex; align-items: center; justify-content: center;
         flex-direction: column; gap: 10px;
@@ -174,21 +175,26 @@
         display: flex; gap: 6px; z-index: 2;
     }
 
-    /* Featured Body */
-    .feat-body { padding: 22px 24px 26px; display: flex; flex-direction: column; flex: 1; }
+    /* Featured Body — more prominent */
+    .feat-body { padding: 24px 26px 28px; display: flex; flex-direction: column; flex: 1; }
     .feat-body .feat-name {
-        font-size: 18px; font-weight: 800; color: var(--gray-900);
-        margin-bottom: 14px; line-height: 1.4; letter-spacing: -0.3px;
+        font-size: 19px; font-weight: 800; color: var(--gray-900);
+        margin-bottom: 16px; line-height: 1.4; letter-spacing: -0.4px;
     }
-    .feat-body .feat-info {
+    .feat-body .feat-specs {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 6px 12px; margin-bottom: 14px;
+        padding: 12px; background: var(--gray-50); border-radius: 10px;
+    }
+    .feat-body .feat-spec {
         display: flex; align-items: center;
-        font-size: 13.5px; color: var(--gray-600); margin-bottom: 6px;
+        font-size: 12.5px; color: var(--gray-600);
     }
-    .feat-body .feat-info i { width: 18px; color: var(--gold); margin-right: 8px; font-size: 12px; text-align: center; }
-    .feat-body .feat-info strong { font-weight: 600; color: var(--gray-800); }
+    .feat-body .feat-spec i { width: 16px; color: var(--gold); margin-right: 6px; font-size: 11px; text-align: center; }
+    .feat-body .feat-spec strong { font-weight: 600; color: var(--gray-800); }
     .feat-body .feat-desc {
         font-size: 14px; color: var(--gray-500); line-height: 1.65;
-        margin-top: 14px; padding-top: 14px;
+        margin-top: auto; padding-top: 14px;
         border-top: 1px solid var(--gray-100);
     }
     .feat-body .feat-btn {
@@ -254,9 +260,9 @@
         transform: translateY(-4px);
     }
 
-    /* Card Thumbnail */
+    /* Card Thumbnail — compact for balance */
     .pf-thumb {
-        width: 100%; height: 180px;
+        width: 100%; height: 140px;
         position: relative; overflow: hidden; flex-shrink: 0;
     }
     .pf-thumb img {
@@ -277,7 +283,7 @@
 
     /* Card Thumbnail Fallback */
     .pf-thumb-fallback {
-        width: 100%; height: 180px;
+        width: 100%; height: 140px;
         position: relative; overflow: hidden; flex-shrink: 0;
         display: flex; align-items: center; justify-content: center;
         flex-direction: column; gap: 8px;
@@ -630,10 +636,14 @@
                 imgArea +
                 '<div class="feat-body">' +
                     '<div class="feat-name">' + p.name + '</div>' +
-                    '<div class="feat-info"><i class="fa-solid fa-location-dot"></i> <strong>' + p.district + '</strong></div>' +
-                    '<div class="feat-info"><i class="fa-solid fa-building"></i> ' + p.scale + '</div>' +
-                    '<div class="feat-info"><i class="fa-solid fa-layer-group"></i> ' + (p.floorInfo || '') + '</div>' +
-                    '<div class="feat-info"><i class="fa-solid fa-user-tie"></i> ' + p.role + '</div>' +
+                    '<div class="feat-specs">' +
+                        '<div class="feat-spec"><i class="fa-solid fa-location-dot"></i> <strong>' + p.district + '</strong></div>' +
+                        '<div class="feat-spec"><i class="fa-solid fa-building"></i> ' + p.scale + '</div>' +
+                        '<div class="feat-spec"><i class="fa-solid fa-layer-group"></i> ' + (p.floorInfo || '') + '</div>' +
+                        '<div class="feat-spec"><i class="fa-solid fa-chart-pie"></i> ' + (p.floorAreaRatio || '') + '</div>' +
+                        '<div class="feat-spec"><i class="fa-solid fa-user-tie"></i> ' + p.role + '</div>' +
+                        '<div class="feat-spec"><i class="fa-solid fa-ruler-combined"></i> ' + (p.grossFloorArea || '') + '</div>' +
+                    '</div>' +
                     '<div class="feat-desc">' + p.description + '</div>' +
                     '<button class="feat-btn" onclick="event.stopPropagation(); portfolioApp.openDetail(\'' + p.id + '\')">상세보기 <i class="fa-solid fa-arrow-right"></i></button>' +
                 '</div>' +
@@ -685,6 +695,14 @@
                 '</div>';
             }
 
+            var extraRows = '';
+            if (p.floorInfo) {
+                extraRows += '<div class="pf-row"><span class="pf-label"><i class="fa-solid fa-layer-group"></i> 층수</span><span class="pf-val">' + p.floorInfo + '</span></div>';
+            }
+            if (p.floorAreaRatio) {
+                extraRows += '<div class="pf-row"><span class="pf-label"><i class="fa-solid fa-chart-pie"></i> 용적률</span><span class="pf-val">' + p.floorAreaRatio + '</span></div>';
+            }
+
             return '<div class="pf-card" onclick="portfolioApp.openDetail(\'' + p.id + '\')">' +
                 thumbArea +
                 '<div class="pf-body">' +
@@ -692,7 +710,7 @@
                     '<div class="pf-row"><span class="pf-label"><i class="fa-solid fa-location-dot"></i> 위치</span><span class="pf-val">' + p.district + '</span></div>' +
                     '<div class="pf-row"><span class="pf-label"><i class="fa-solid fa-building"></i> 규모</span><span class="pf-val">' + p.scale + '</span></div>' +
                     '<div class="pf-row"><span class="pf-label"><i class="fa-solid fa-user-tie"></i> 역할</span><span class="pf-val">' + p.role + '</span></div>' +
-                    '<div class="pf-row"><span class="pf-label"><i class="fa-solid fa-calendar"></i> 연도</span><span class="pf-val">' + p.year + '년</span></div>' +
+                    extraRows +
                     '<button class="pf-detail-btn" onclick="event.stopPropagation(); portfolioApp.openDetail(\'' + p.id + '\')"><i class="fa-solid fa-eye"></i> 상세보기</button>' +
                 '</div>' +
             '</div>';
