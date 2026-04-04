@@ -11,516 +11,415 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
-    /* ── Search Bar ── */
-    .lib-search {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 20px;
-    }
-    .lib-search .form-input {
-        max-width: 360px;
-        height: 42px;
-        padding-left: 40px;
-        background-image: none;
-    }
-    .lib-search-wrap {
-        position: relative;
-        flex: 1;
-        max-width: 360px;
-    }
-    .lib-search-wrap i {
-        position: absolute;
-        left: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--gray-400);
-        font-size: 14px;
-        pointer-events: none;
-    }
-    .lib-search-wrap .form-input {
-        max-width: 100%;
-    }
+    /* === Hero === */
+    .lib-hero{padding:64px 0 56px;background:linear-gradient(135deg,#070B15 0%,var(--brand-dark) 40%,var(--brand-navy) 100%);position:relative;overflow:hidden}
+    .lib-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(195,165,105,.3),transparent)}
+    .lib-hero h1{font-size:36px;font-weight:900;color:#fff;margin-bottom:14px;padding-left:18px;border-left:3px solid var(--gold)}
+    .lib-hero .hero-tag{font-size:17px;font-weight:600;color:var(--gold);margin-bottom:8px}
+    .lib-hero .hero-sub{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6}
+    .lib-hero .hero-stats{display:flex;gap:32px;margin-top:20px}
+    .lib-hero .hs{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.45)}
+    .lib-hero .hs strong{font-size:18px;font-weight:800;color:var(--gold)}
+    @media(max-width:768px){.lib-hero{padding:40px 0 32px}.lib-hero h1{font-size:26px}.lib-hero .hero-stats{gap:20px;flex-wrap:wrap}}
 
-    /* ── Result Count ── */
-    .lib-result-count {
-        font-size: 14px;
-        color: var(--gray-500);
-        margin-bottom: 16px;
-        font-weight: 500;
-    }
-    .lib-result-count strong {
-        color: var(--gray-900);
-        font-weight: 700;
-    }
+    /* === Category Tabs === */
+    .cat-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+    .cat-tab{display:inline-flex;align-items:center;gap:6px;padding:11px 20px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--gray-200);background:var(--gray-50);color:var(--gray-500);transition:all .2s;font-family:var(--font)}
+    .cat-tab i{font-size:12px;opacity:.5;transition:opacity .2s}
+    .cat-tab .cnt{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:10px;font-size:11px;font-weight:700;background:var(--gray-200);color:var(--gray-500);margin-left:2px;transition:all .2s}
+    .cat-tab.on{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark);font-weight:700}
+    .cat-tab.on i{opacity:1}
+    .cat-tab.on .cnt{background:rgba(195,165,105,.25);color:var(--gold)}
+    .cat-tab:not(.on):hover{background:#fff;border-color:rgba(20,38,68,.3);color:var(--gray-700)}
+    .cat-tab:not(.on):hover i{opacity:.7}
 
-    /* ── Library List ── */
-    .lib-list {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-    .lib-item {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        padding: 20px 24px;
-        background: var(--white);
-        border: 1px solid var(--gray-200);
-        border-radius: var(--radius);
-        transition: all var(--transition);
-    }
-    .lib-item:hover {
-        border-color: var(--gray-300);
-        box-shadow: var(--shadow-hover);
-    }
+    /* === Control Bar (Search + Sort) === */
+    .ctrl-bar{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding:14px 20px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100);flex-wrap:wrap}
+    .ctrl-search{position:relative;flex:1;min-width:200px;max-width:480px}
+    .ctrl-search i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:14px;pointer-events:none}
+    .ctrl-search input{width:100%;height:42px;padding:0 14px 0 40px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13.5px;font-weight:500;color:var(--gray-800);background:#fff;font-family:var(--font);transition:border-color .2s}
+    .ctrl-search input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(195,165,105,.1)}
+    .ctrl-sort{display:flex;align-items:center;gap:6px;margin-left:auto}
+    .ctrl-sort label{font-size:12px;font-weight:600;color:var(--gray-400);white-space:nowrap}
+    .ctrl-sort select{height:36px;padding:0 28px 0 10px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:12.5px;font-weight:500;color:var(--gray-700);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font)}
+    .ctrl-count{font-size:13px;color:var(--gray-500);font-weight:500;white-space:nowrap}
+    .ctrl-count strong{color:var(--brand-dark);font-weight:700}
+    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:10px}.ctrl-search{max-width:100%}.ctrl-sort{margin-left:0;justify-content:flex-end}}
+
+    /* === Quick Sections (추천/최신/인기) === */
+    .quick-sec{margin-bottom:32px;padding:20px 24px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100)}
+    .quick-sec .qs-title{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .quick-sec .qs-title i{color:var(--gold);font-size:13px}
+    .quick-chips{display:flex;gap:8px;flex-wrap:wrap}
+    .quick-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#fff;border:1px solid var(--gray-200);border-radius:8px;font-size:13px;font-weight:500;color:var(--gray-700);cursor:pointer;transition:all .2s}
+    .quick-chip:hover{border-color:var(--gold);color:var(--brand-dark);background:rgba(195,165,105,.04)}
+    .quick-chip .qc-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;flex-shrink:0}
+    .quick-chip .qc-icon.pdf{background:#D6423A}
+    .quick-chip .qc-icon.hwp{background:#2A7DE1}
+    .quick-chip .qc-meta{font-size:11px;color:var(--gray-400);margin-left:auto}
+
+    /* === Document List === */
+    .lib-list{display:flex;flex-direction:column;gap:10px}
+    .lib-item{display:flex;align-items:center;gap:18px;padding:18px 22px;background:#fff;border:1px solid var(--gray-200);border-radius:12px;transition:all .2s}
+    .lib-item:hover{border-color:var(--gray-300);box-shadow:0 4px 16px rgba(0,0,0,.05)}
+    .lib-item.pinned{border-left:3px solid var(--gold);background:rgba(195,165,105,.02)}
 
     /* File icon */
-    .lib-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        font-size: 20px;
-        color: var(--white);
-        background: var(--brand-dark);
-    }
-    .lib-icon.hwp  { background: #2A7DE1; }
-    .lib-icon.pdf  { background: #D6423A; }
-    .lib-icon.xlsx { background: #1E8C5E; }
+    .lib-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;color:#fff}
+    .lib-icon.hwp{background:#2A7DE1}
+    .lib-icon.pdf{background:#D6423A}
+    .lib-icon.xlsx{background:#1E8C5E}
+    .lib-icon.web{background:var(--brand-dark)}
 
-    /* Middle content */
-    .lib-content {
-        flex: 1;
-        min-width: 0;
-    }
-    .lib-title {
-        font-size: 15px;
-        font-weight: 700;
-        color: var(--gray-900);
-        margin-bottom: 4px;
-        line-height: 1.4;
-        transition: color 0.2s;
-    }
-    .lib-title:hover {
-        color: var(--gold);
-        text-decoration: underline;
-    }
-    .lib-desc {
-        font-size: 13px;
-        color: var(--gray-500);
-        line-height: 1.5;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-bottom: 8px;
-    }
-    .lib-tags {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-    }
+    /* Content */
+    .lib-content{flex:1;min-width:0}
+    .lib-title{font-size:14.5px;font-weight:700;color:var(--gray-900);margin-bottom:3px;line-height:1.4;cursor:pointer;transition:color .2s}
+    .lib-title:hover{color:var(--gold)}
+    .lib-desc{font-size:12.5px;color:var(--gray-500);line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:6px}
+    .lib-badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+    .lib-badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:10.5px;font-weight:600;line-height:1.4}
+    .lib-badge-cat{background:rgba(10,15,28,.06);color:var(--brand-dark)}
+    .lib-badge-src{background:rgba(195,165,105,.1);color:#8B7340}
+    .lib-badge-new{background:#E8F5E9;color:#2E7D32;font-weight:700}
+    .lib-badge-hot{background:rgba(195,165,105,.12);color:#8B7340}
+    .lib-date{font-size:11px;color:var(--gray-400)}
 
     /* Right meta */
-    .lib-meta {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 8px;
-        flex-shrink: 0;
-        min-width: 120px;
-    }
-    .lib-meta-top {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .lib-date {
-        font-size: 12px;
-        color: var(--gray-400);
-        white-space: nowrap;
-    }
-    .lib-downloads {
-        font-size: 12px;
-        color: var(--gray-400);
-        white-space: nowrap;
-    }
-    .lib-downloads i {
-        margin-right: 3px;
-    }
-    .btn-download {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        height: 34px;
-        padding: 0 14px;
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--gold);
-        background: transparent;
-        border: 1.5px solid var(--gold);
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all var(--transition);
-        font-family: var(--font);
-        white-space: nowrap;
-    }
-    .btn-download:hover {
-        background: var(--gold);
-        color: var(--white);
-    }
+    .lib-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;min-width:110px}
+    .lib-meta-info{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--gray-400)}
+    .lib-meta-info i{font-size:10px}
+    .btn-dl{display:inline-flex;align-items:center;gap:5px;height:32px;padding:0 14px;font-size:11.5px;font-weight:600;color:var(--gold);background:transparent;border:1.5px solid var(--gold);border-radius:7px;cursor:pointer;transition:all .2s;font-family:var(--font);white-space:nowrap}
+    .btn-dl:hover{background:var(--gold);color:#fff}
+    .btn-dl .ftype{font-weight:700;text-transform:uppercase}
 
-    .lib-cat-badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 3px 8px;
-        border-radius: 4px;
-        font-size: 11px;
-        font-weight: 600;
-        line-height: 1;
-    }
-    .lib-cat-주요뉴스 { background: rgba(20,38,68,0.08); color: var(--brand-navy); }
-    .lib-cat-서식 { background: rgba(195,165,105,0.1); color: #8B7340; }
-    .lib-cat-법령 { background: rgba(10,15,28,0.06); color: var(--brand-dark); font-weight:700; }
-    .lib-cat-관련판례 { background: rgba(20,38,68,0.1); color: var(--brand-navy); }
-    .lib-cat-지침 { background: rgba(195,165,105,0.12); color: #9A8250; }
-    .lib-cat-가이드 { background: rgba(20,38,68,0.06); color: #3D5A80; }
+    /* Empty */
+    .lib-empty{text-align:center;padding:56px 20px}
+    .lib-empty i{font-size:48px;color:var(--gray-300);margin-bottom:16px}
+    .lib-empty h3{font-size:18px;font-weight:700;color:var(--gray-600);margin-bottom:8px}
+    .lib-empty p{font-size:14px;color:var(--gray-400)}
+
+    /* Pagination */
+    .pager{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:32px}
+    .pager button{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--gray-200);border-radius:8px;background:#fff;color:var(--gray-600);font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
+    .pager button:hover{border-color:var(--gold);color:var(--brand-dark)}
+    .pager button.active{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark)}
+    .pager button:disabled{opacity:.3;cursor:default;pointer-events:none}
 
     /* Responsive */
-    @media (max-width: 768px) {
-        .lib-item {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 16px;
-        }
-        .lib-meta {
-            flex-direction: row;
-            align-items: center;
-            width: 100%;
-            min-width: 0;
-        }
-        .lib-meta-top {
-            flex: 1;
-        }
-        .lib-search-wrap {
-            max-width: 100%;
-        }
+    @media(max-width:768px){
+        .lib-item{flex-direction:column;align-items:flex-start;gap:12px;padding:16px}
+        .lib-meta{flex-direction:row;align-items:center;width:100%;min-width:0;justify-content:space-between}
     }
     </style>
 </head>
 <body>
 <div id="site-header"></div>
 
-<div class="page-hero">
+<div class="lib-hero">
     <div class="inner">
-        <div class="breadcrumb">
-            <a href="../index.html">홈</a>
-            <i class="fa-solid fa-chevron-right"></i>
-            <span>자료실</span>
-        </div>
+        <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>자료실</span></div>
         <h1>자료실</h1>
-        <p>정비사업 실무에 필요한 법령·서식·지침·판례·가이드를 한곳에서 다운로드하세요</p>
+        <p class="hero-tag">정비사업 실무 전문 아카이브</p>
+        <p class="hero-sub">법령·판례·지침·서식·가이드 — 정비사업 실무에 필요한 자료를 한곳에서 검색하고 다운로드하세요</p>
+        <div class="hero-stats" id="heroStats"></div>
     </div>
 </div>
 
-<div class="page-body">
-    <div class="inner">
-        <!-- Category Tabs -->
-        <style>
-            #categoryTabs { margin-bottom:24px; display:flex; gap:8px; flex-wrap:wrap; }
-            #categoryTabs button {
-                padding:10px 20px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer;
-                border:1.5px solid var(--gray-200); background:var(--gray-50); color:var(--gray-500);
-                transition: all 0.2s ease;
-            }
-            #categoryTabs button i { margin-right:5px; opacity:0.5; }
-            #categoryTabs button.on {
-                background:var(--brand-dark) !important; color:var(--gold) !important;
-                border-color:var(--brand-dark) !important; font-weight:700;
-            }
-            #categoryTabs button.on i { opacity:1; }
-            #categoryTabs button:not(.on):hover {
-                background:#fff; border-color:rgba(20,38,68,0.3);
-                color:var(--gray-700);
-            }
-            #categoryTabs button:not(.on):hover i { opacity:0.7; }
-        </style>
-        <div id="categoryTabs">
-            <button class="on" data-cat="전체">전체</button>
-            <button data-cat="법령"><i class="fa-solid fa-scale-balanced"></i>법령·조례</button>
-            <button data-cat="관련판례"><i class="fa-solid fa-gavel"></i>판례·질의회신</button>
-            <button data-cat="지침"><i class="fa-solid fa-clipboard-list"></i>지침·규정</button>
-            <button data-cat="서식"><i class="fa-solid fa-file-pen"></i>서식·양식</button>
-            <button data-cat="가이드"><i class="fa-solid fa-book-open"></i>가이드·매뉴얼</button>
-            <button data-cat="주요뉴스"><i class="fa-solid fa-newspaper"></i>주요뉴스</button>
+<div class="page-body"><div class="inner">
+
+    <!-- Category Tabs -->
+    <div class="cat-tabs" id="catTabs"></div>
+
+    <!-- Control Bar -->
+    <div class="ctrl-bar">
+        <div class="ctrl-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="자료명, 키워드, 법령명, 판례번호로 검색하세요">
         </div>
-
-        <!-- Search Bar -->
-        <div class="lib-search">
-            <div class="lib-search-wrap">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" class="form-input" id="searchInput" placeholder="자료명을 검색하세요">
-            </div>
+        <div class="ctrl-sort">
+            <label>정렬</label>
+            <select id="sortSelect">
+                <option value="date">최신순</option>
+                <option value="downloads">다운로드순</option>
+                <option value="title">이름순</option>
+            </select>
         </div>
-
-        <!-- Result Count -->
-        <div class="lib-result-count" id="resultCount">총 <strong>0</strong>건</div>
-
-        <!-- Library List -->
-        <div class="lib-list" id="libList"></div>
-
-        <!-- Empty State -->
-        <div class="empty-state" id="emptyState" style="display:none;">
-            <i class="fa-solid fa-folder-open"></i>
-            <h3>검색 결과가 없습니다</h3>
-            <p>다른 검색어 또는 카테고리를 선택해주세요</p>
-        </div>
-
-        <!-- Pagination -->
-        <div class="pagination" id="pagination"></div>
+        <div class="ctrl-count" id="resultCount"></div>
     </div>
-</div>
+
+    <!-- Quick Section: 실무 추천자료 -->
+    <div class="quick-sec" id="quickSec"></div>
+
+    <!-- Library List -->
+    <div class="lib-list" id="libList"></div>
+
+    <!-- Empty State -->
+    <div class="lib-empty" id="emptyState" style="display:none">
+        <i class="fa-solid fa-folder-open"></i>
+        <h3>검색 결과가 없습니다</h3>
+        <p>다른 검색어 또는 카테고리를 선택해주세요</p>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pager" id="pager"></div>
+
+</div></div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js"></script>
-<script src="../assets/js/data-service.js"></script>
-<script src="../assets/js/common.js"></script>
+<script src="../assets/data/mock-data.js?v=20260405"></script>
+<script src="../assets/js/data-service.js?v=20260405"></script>
+<script src="../assets/js/common.js?v=20260405"></script>
 <script>
-(function() {
-    // MOCK 데이터가 업데이트되었으면 localStorage 갱신
-    if (typeof MOCK !== 'undefined' && MOCK.library) {
-        var stored = JSON.parse(localStorage.getItem('rdc_library') || '[]');
-        if (stored.length !== MOCK.library.length) {
-            localStorage.setItem('rdc_library', JSON.stringify(MOCK.library));
-        }
-    }
+(function(){
+/* Data init */
+if(typeof MOCK!=='undefined'&&MOCK.library){
+    var s=JSON.parse(localStorage.getItem('rdc_library')||'[]');
+    if(s.length!==MOCK.library.length)localStorage.setItem('rdc_library',JSON.stringify(MOCK.library));
+}
+var now=new Date(),sevenAgo=new Date(now.getTime()-7*864e5);
+var allItems=DataService.getAll('library').filter(function(i){
+    if(i.category!=='주요뉴스')return true;
+    return i.date&&new Date(i.date)>=sevenAgo;
+});
 
-    // 주요뉴스 7일 롤링: 7일 초과 뉴스 자동 제거
-    var now = new Date();
-    var sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-    var rawItems = DataService.getAll('library');
-    var allItems = rawItems.filter(function(item) {
-        if (item.category !== '주요뉴스') return true;
-        if (!item.date) return false;
-        var d = new Date(item.date);
-        return d >= sevenDaysAgo;
-    }).sort(function(a, b) {
-        return (b.date || '').localeCompare(a.date || '');
+var PER=10,curPage=1,curCat='전체',curSort='date',searchQ='';
+
+/* Helpers */
+var iconMap={hwp:{icon:'fa-file-lines',cls:'hwp'},pdf:{icon:'fa-file-pdf',cls:'pdf'},xlsx:{icon:'fa-file-excel',cls:'xlsx'}};
+function getIcon(ft){return iconMap[ft]||{icon:'fa-file',cls:'web'}}
+function isNew(d){if(!d)return false;var diff=now-new Date(d);return diff<7*864e5}
+function isHot(dl){return dl>=200}
+
+/* Source badge */
+function srcBadge(item){
+    var t=item.title||'',d=item.description||'';
+    if(d.indexOf('[서울시')>=0||t.indexOf('서울시')>=0)return'서울시';
+    if(d.indexOf('[국토부')>=0||d.indexOf('[국토교통부')>=0)return'국토교통부';
+    if(d.indexOf('[대법원')>=0)return'대법원';
+    if(d.indexOf('[LH')>=0)return'LH';
+    if(d.indexOf('[경기도')>=0)return'경기도';
+    if(d.indexOf('[제주도')>=0)return'제주도';
+    if(d.indexOf('[건축규제')>=0)return'건축규제혁신센터';
+    if(d.indexOf('[마포구')>=0)return'마포구';
+    if(d.indexOf('[한국공인')>=0)return'한국공인회계사회';
+    return null;
+}
+
+/* Category counts */
+var catDefs=[
+    {key:'전체',icon:'',label:'전체'},
+    {key:'법령',icon:'fa-scale-balanced',label:'법령·조례'},
+    {key:'관련판례',icon:'fa-gavel',label:'판례·질의회신'},
+    {key:'지침',icon:'fa-clipboard-list',label:'지침·규정'},
+    {key:'서식',icon:'fa-file-pen',label:'서식·양식'},
+    {key:'가이드',icon:'fa-book-open',label:'가이드·매뉴얼'},
+    {key:'주요뉴스',icon:'fa-newspaper',label:'주요뉴스'}
+];
+function getCatCounts(){
+    var c={};catDefs.forEach(function(d){c[d.key]=0});
+    allItems.forEach(function(i){c[i.category]=(c[i.category]||0)+1;c['전체']++});
+    return c;
+}
+
+/* Hero stats */
+!function(){
+    var cc=getCatCounts();
+    document.getElementById('heroStats').innerHTML=
+        '<div class="hs"><strong>'+cc['전체']+'</strong>건 전체자료</div>'+
+        '<div class="hs"><strong>'+cc['법령']+'</strong>건 법령·조례</div>'+
+        '<div class="hs"><strong>'+cc['서식']+'</strong>건 서식·양식</div>'+
+        '<div class="hs"><strong>'+cc['가이드']+'</strong>건 가이드</div>';
+}();
+
+/* Category tabs */
+function renderTabs(){
+    var cc=getCatCounts();
+    document.getElementById('catTabs').innerHTML=catDefs.map(function(d){
+        var iconHtml=d.icon?'<i class="fa-solid '+d.icon+'"></i> ':'';
+        return'<button class="cat-tab'+(curCat===d.key?' on':'')+'" data-cat="'+d.key+'">'+iconHtml+d.label+'<span class="cnt">'+cc[d.key]+'</span></button>';
+    }).join('');
+}
+
+/* Quick section: 추천 + 인기 자료 */
+function renderQuick(){
+    var popular=allItems.filter(function(i){return i.downloads>=100}).sort(function(a,b){return b.downloads-a.downloads}).slice(0,6);
+    if(!popular.length){document.getElementById('quickSec').style.display='none';return}
+    document.getElementById('quickSec').style.display='';
+    var html='<div class="qs-title"><i class="fa-solid fa-fire"></i> 많이 다운로드한 자료</div><div class="quick-chips">';
+    popular.forEach(function(i){
+        var fi=getIcon(i.fileType);
+        html+='<div class="quick-chip" data-id="'+i.id+'"><div class="qc-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div>'+i.title+'<span class="qc-meta">'+i.downloads+'회</span></div>';
     });
+    html+='</div>';
+    document.getElementById('quickSec').innerHTML=html;
+}
 
-    let currentCat = '전체';
-    let searchQuery = '';
-
-    const iconMap = {
-        hwp:  { icon: 'fa-file-lines', cls: 'hwp' },
-        pdf:  { icon: 'fa-file-pdf',   cls: 'pdf' },
-        xlsx: { icon: 'fa-file-excel', cls: 'xlsx' }
-    };
-
-    const catBadgeMap = {
-        '주요뉴스': 'lib-cat-주요뉴스',
-        '서식': 'lib-cat-서식',
-        '법령': 'lib-cat-법령',
-        '관련판례': 'lib-cat-관련판례',
-        '지침': 'lib-cat-지침',
-        '가이드': 'lib-cat-가이드'
-    };
-
-    function getFiltered() {
-        let items = allItems;
-        if (currentCat !== '전체') {
-            items = items.filter(i => i.category === currentCat);
-        }
-        if (searchQuery) {
-            const q = searchQuery.toLowerCase();
-            items = items.filter(i => i.title.toLowerCase().includes(q));
-        }
-        return items;
-    }
-
-    function render() {
-        const filtered = getFiltered();
-        const list = document.getElementById('libList');
-        const empty = document.getElementById('emptyState');
-        const count = document.getElementById('resultCount');
-
-        count.innerHTML = '총 <strong>' + filtered.length + '</strong>건';
-
-        if (!filtered.length) {
-            list.innerHTML = '';
-            empty.style.display = 'flex';
-            return;
-        }
-        empty.style.display = 'none';
-
-        list.innerHTML = filtered.map(item => {
-            const fi = iconMap[item.fileType] || iconMap.pdf;
-            const catCls = catBadgeMap[item.category] || '';
-            const tagsHtml = (item.tags || []).map(t => '<span class="tag">' + t + '</span>').join('');
-
-            return '<div class="lib-item">' +
-                '<div class="lib-icon ' + fi.cls + '">' +
-                    '<i class="fa-solid ' + fi.icon + '"></i>' +
-                '</div>' +
-                '<div class="lib-content">' +
-                    '<div class="lib-title" data-id="' + item.id + '" style="cursor:pointer;">' + item.title + '</div>' +
-                    '<div class="lib-desc">' + item.description + '</div>' +
-                    '<div class="lib-tags">' + tagsHtml + '</div>' +
-                '</div>' +
-                '<div class="lib-meta">' +
-                    '<div class="lib-meta-top">' +
-                        '<span class="lib-cat-badge ' + catCls + '">' + item.category + '</span>' +
-                        '<span class="lib-date">' + item.date + '</span>' +
-                        '<span class="lib-downloads"><i class="fa-solid fa-download"></i>' + item.downloads + '</span>' +
-                    '</div>' +
-                    '<button class="btn-download" data-id="' + item.id + '">' +
-                        '<i class="fa-solid fa-arrow-down"></i>' +
-                        item.fileSize + ' 다운로드' +
-                    '</button>' +
-                '</div>' +
-            '</div>';
-        }).join('');
-    }
-
-    /* Tab click */
-    document.getElementById('categoryTabs').addEventListener('click', function(e) {
-        var btn = e.target.closest('button');
-        if (!btn) return;
-        document.querySelectorAll('#categoryTabs button').forEach(function(b) { b.classList.remove('on'); });
-        btn.classList.add('on');
-        currentCat = btn.dataset.cat;
-        render();
+/* Get filtered + sorted items */
+function getFiltered(){
+    var items=allItems;
+    if(curCat!=='전체')items=items.filter(function(i){return i.category===curCat});
+    if(searchQ){var q=searchQ.toLowerCase();items=items.filter(function(i){
+        return(i.title||'').toLowerCase().indexOf(q)>=0||(i.description||'').toLowerCase().indexOf(q)>=0||
+        (i.tags||[]).some(function(t){return t.toLowerCase().indexOf(q)>=0})});}
+    items.sort(function(a,b){
+        if(curSort==='downloads')return(b.downloads||0)-(a.downloads||0);
+        if(curSort==='title')return(a.title||'').localeCompare(b.title||'');
+        return(b.date||'').localeCompare(a.date||'');
     });
+    return items;
+}
 
-    /* Search input */
-    document.getElementById('searchInput').addEventListener('keyup', function(e) {
-        searchQuery = e.target.value.trim();
-        render();
-    });
+/* Render list */
+function render(){
+    var items=getFiltered();
+    var total=items.length,pages=Math.ceil(total/PER);
+    if(curPage>pages)curPage=1;
+    var start=(curPage-1)*PER,slice=items.slice(start,start+PER);
 
-    /* URL 파라미터로 카테고리 자동 선택 + 최신 뉴스 자동 열기 */
-    var urlCat = new URLSearchParams(location.search).get('cat');
-    if (urlCat) {
-        currentCat = urlCat;
-        document.querySelectorAll('#categoryTabs button').forEach(function(b) {
-            b.classList.remove('on');
-            if (b.dataset.cat === urlCat) b.classList.add('on');
+    document.getElementById('resultCount').innerHTML='총 <strong>'+total+'</strong>건';
+    var list=document.getElementById('libList'),empty=document.getElementById('emptyState');
+
+    if(!slice.length){list.innerHTML='';empty.style.display='flex';document.getElementById('pager').innerHTML='';return}
+    empty.style.display='none';
+
+    list.innerHTML=slice.map(function(item){
+        var fi=getIcon(item.fileType);
+        var src=srcBadge(item);
+        var badges='<span class="lib-badge lib-badge-cat">'+item.category+'</span>';
+        if(src)badges+='<span class="lib-badge lib-badge-src">'+src+'</span>';
+        if(isNew(item.date))badges+='<span class="lib-badge lib-badge-new">NEW</span>';
+        if(isHot(item.downloads))badges+='<span class="lib-badge lib-badge-hot"><i class="fa-solid fa-fire" style="font-size:9px;margin-right:2px"></i>인기</span>';
+
+        var pinCls=isHot(item.downloads)?' pinned':'';
+
+        return'<div class="lib-item'+pinCls+'">'+
+            '<div class="lib-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div>'+
+            '<div class="lib-content">'+
+                '<div class="lib-title" data-id="'+item.id+'">'+item.title+'</div>'+
+                '<div class="lib-desc">'+item.description+'</div>'+
+                '<div class="lib-badges">'+badges+'<span class="lib-date">'+item.date+'</span></div>'+
+            '</div>'+
+            '<div class="lib-meta">'+
+                '<div class="lib-meta-info">'+
+                    '<span><i class="fa-solid fa-download"></i> '+(item.downloads||0)+'</span>'+
+                    '<span><i class="fa-solid fa-file"></i> '+item.fileSize+'</span>'+
+                '</div>'+
+                '<button class="btn-dl" data-id="'+item.id+'">'+
+                    '<span class="ftype">'+item.fileType+'</span> · '+item.fileSize+' <i class="fa-solid fa-arrow-down"></i>'+
+                '</button>'+
+            '</div>'+
+        '</div>';
+    }).join('');
+
+    /* Pager */
+    var pg=document.getElementById('pager');
+    if(pages<=1){pg.innerHTML='';return}
+    var h='<button '+(curPage===1?'disabled':'')+' onclick="LIB.page('+(curPage-1)+')"><i class="fa-solid fa-chevron-left"></i></button>';
+    for(var i=1;i<=pages;i++)h+='<button'+(i===curPage?' class="active"':'')+' onclick="LIB.page('+i+')">'+i+'</button>';
+    h+='<button '+(curPage===pages?'disabled':'')+' onclick="LIB.page('+(curPage+1)+')"><i class="fa-solid fa-chevron-right"></i></button>';
+    pg.innerHTML=h;
+}
+
+/* Events */
+document.getElementById('catTabs').addEventListener('click',function(e){
+    var btn=e.target.closest('.cat-tab');if(!btn)return;
+    curCat=btn.dataset.cat;curPage=1;renderTabs();render();
+});
+document.getElementById('searchInput').addEventListener('input',function(){
+    searchQ=this.value.trim();curPage=1;render();
+});
+document.getElementById('sortSelect').addEventListener('change',function(){
+    curSort=this.value;curPage=1;render();
+});
+document.getElementById('quickSec').addEventListener('click',function(e){
+    var chip=e.target.closest('.quick-chip');if(!chip)return;
+    handleDownload(chip.dataset.id);
+});
+document.getElementById('libList').addEventListener('click',function(e){
+    var btn=e.target.closest('.btn-dl')||e.target.closest('.lib-title');
+    if(btn)handleDownload(btn.dataset.id);
+});
+
+/* URL param */
+var urlCat=new URLSearchParams(location.search).get('cat');
+if(urlCat){curCat=urlCat}
+
+/* Download handler */
+var fileMap={
+    'lib1':{ext:'../downloads/files/lib1_조합설립인가_신청서.pdf',web:'../downloads/form_association.html'},
+    'lib2':{ext:'../downloads/files/lib2_관리처분_변경인가_신청서.pdf',web:'../downloads/form_management.html'},
+    'lib3':{ext:'../downloads/files/lib3_총회_위임장.pdf',web:'../downloads/form_proxy.html'},
+    'lib4':{ext:'../downloads/files/lib4_도시정비법_개정요약.pdf',gov:'https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=259069',web:'../downloads/law_summary_2026.html',label:'법제처 원문'},
+    'lib5':{ext:'../downloads/files/lib5_서울시_가이드라인.pdf',gov:'https://news.seoul.go.kr/citybuild/archives/507738',web:'../downloads/guide_seoul_guidelines.html',label:'서울시 원문'},
+    'lib6':{ext:'../downloads/files/lib6_소규모주택정비법.pdf',gov:'https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=243625',web:'../downloads/guide_small_housing.html',label:'법제처 원문'},
+    'lib7':{ext:'../downloads/files/lib7_업무체크리스트.pdf',web:'../downloads/checklist_steps.html'},
+    'lib8':{ext:'../downloads/files/lib8_분담금_산정_가이드.pdf',web:'../downloads/guide_burden.html'},
+    'lib9':{ext:'../downloads/files/lib9_시공사_선정_해설.pdf',web:'../downloads/guide_contractor.html'},
+    'lib10':{ext:'../downloads/files/lib10_감정평가_가이드.pdf',web:'../downloads/guide_appraisal.html'},
+    'lib11':{ext:'../downloads/files/lib11_조합설립_완전가이드.pdf',web:'../downloads/guide_association.html'},
+    'lib12':{ext:'../downloads/files/lib12_안전진단_지침.pdf',web:'../downloads/guide_safety_inspection.html'},
+    'lib13':{ext:'../downloads/files/lib13_회계처리_지침.pdf',web:'../downloads/guide_accounting.html'},
+    'lib17':{ext:'../downloads/files/lib17_시공자선정_지침.pdf',web:'../downloads/guide_contractor_selection.html'},
+    'lib18':{ext:'../downloads/files/lib18_이주보상_지침.pdf',web:'../downloads/guide_relocation.html'},
+    'lib21':{ext:'../downloads/files/lib21_추진위원회_운영규정.pdf',gov:'https://law.go.kr',web:'../downloads/guide_committee_rules.html',label:'법제처 원문'},
+    'lib22':{ext:'../downloads/files/lib22_서울시_의사진행_표준운영규정.pdf',gov:'https://cleanup.seoul.go.kr',label:'정비사업몽땅'},
+    'lib23':{ext:'../downloads/files/lib23_서울시_정비사업_실무매뉴얼.pdf',gov:'https://news.seoul.go.kr/citybuild/',label:'서울시 도시재생'},
+    'lib30':{ext:'../downloads/files/lib30_도시정비법_질의회신_사례집.pdf'},
+    'lib31':{ext:'../downloads/files/lib31_서울시_도시정비법령_질의회신_2024.pdf'},
+    'lib33':{ext:'../downloads/files/lib33_경기도_정비사업_질의회신_매뉴얼.pdf'},
+    'lib34':{ext:'../downloads/files/lib34_서울시_도시정비_조례.pdf',gov:'https://cleanup.seoul.go.kr',label:'정비사업몽땅'},
+    'lib40':{ext:'../downloads/files/lib40_서울시_도시정비조례_2024개정.pdf'},
+    'lib41':{ext:'../downloads/files/lib41_도시정비법_질의회신_판례집.pdf'},
+    'lib42':{ext:'../downloads/files/lib42_제주도_재건축재개발_업무편람_2025.pdf'},
+    'lib43':{ext:'../downloads/files/lib43_해석례로읽는_건축법_2024.pdf'},
+    'lib44':{ext:'../downloads/files/lib44_해석례로읽는_건축법_2023.pdf'},
+    'lib45':{ext:'../downloads/files/lib45_서울시_공공지원_정비사업_표준정관_2024.pdf'},
+    'lib46':{ext:'../downloads/files/lib46_건설공사_표준시장단가_2025상반기.pdf'},
+    'lib48':{ext:'../downloads/files/lib48_서울시_정비사업_사업성개선_기본계획재정비_2024.pdf'},
+    'lib49':{ext:'../downloads/files/lib49_서울시_공공건축물_공사비_가이드라인_2024.pdf'},
+    'lib50':{ext:'../downloads/files/lib50_LH_2025_업무보고.pdf'},
+    'lib53':{ext:'../downloads/files/lib53_서울시_공사비_가이드라인_2022.pdf'},
+    'lib54':{ext:'../downloads/files/lib54_마포구_공사비_가이드라인.pdf'},
+    'lib55':{ext:'../downloads/files/lib55_재건축재개발_조세제도_연구보고서.pdf'},
+    'lib56':{ext:'../downloads/files/lib56_대법원판례_2025상반기_민사.pdf'},
+    'news0329':{web:'../downloads/news_20260329.html'},
+    'news0330':{web:'../downloads/news_20260330.html'},
+    'news0331':{web:'../downloads/news_20260331.html'},
+    'news0401':{web:'../downloads/news_20260401.html'},
+    'news0402':{web:'../downloads/news_20260402.html'},
+    'news0403':{web:'../downloads/news_20260403.html'},
+    'news0404':{web:'../downloads/news_20260404.html'}
+};
+var fileCache={};
+function checkFile(url,cb){
+    if(fileCache[url]!==undefined)return cb(fileCache[url]);
+    var x=new XMLHttpRequest();x.open('HEAD',url,true);
+    x.onload=function(){fileCache[url]=x.status===200;cb(fileCache[url])};
+    x.onerror=function(){fileCache[url]=false;cb(false)};x.send();
+}
+function handleDownload(id){
+    var m=fileMap[id];
+    if(!m){App.toast('파일 준비 중입니다.','info');return}
+    if(m.ext){
+        checkFile(m.ext,function(ok){
+            if(ok){var a=document.createElement('a');a.href=m.ext;a.download='';document.body.appendChild(a);a.click();document.body.removeChild(a);App.toast('파일 다운로드 시작','success')}
+            else if(m.gov){window.open(m.gov,'_blank');App.toast((m.label||'공식 사이트')+'로 이동합니다','info')}
+            else if(m.web){window.open(m.web,'_blank');App.toast('웹 문서로 열립니다','info')}
         });
-        render();
-        // 최신 뉴스 자동 열기
-        setTimeout(function() {
-            var firstBtn = document.querySelector('.btn-download');
-            if (firstBtn) firstBtn.click();
-        }, 500);
-    }
-
-    // 다운로드 소스 매핑 (3단계: 외부공식링크 → 첨부파일 → 웹문서)
-    var fileMap = {
-        'lib1':  { ext:'../downloads/files/lib1_조합설립인가_신청서.pdf', web:'../downloads/form_association.html' },
-        'lib2':  { ext:'../downloads/files/lib2_관리처분_변경인가_신청서.pdf', web:'../downloads/form_management.html' },
-        'lib3':  { ext:'../downloads/files/lib3_총회_위임장.pdf', web:'../downloads/form_proxy.html' },
-        'lib4':  { ext:'../downloads/files/lib4_도시정비법_개정요약.pdf', gov:'https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=259069', web:'../downloads/law_summary_2026.html', label:'법제처 원문' },
-        'lib5':  { ext:'../downloads/files/lib5_서울시_가이드라인.pdf', gov:'https://news.seoul.go.kr/citybuild/archives/507738', web:'../downloads/guide_seoul_guidelines.html', label:'서울시 원문' },
-        'lib6':  { ext:'../downloads/files/lib6_소규모주택정비법.pdf', gov:'https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=243625', web:'../downloads/guide_small_housing.html', label:'법제처 원문' },
-        'lib7':  { ext:'../downloads/files/lib7_업무체크리스트.pdf', web:'../downloads/checklist_steps.html' },
-        'lib8':  { ext:'../downloads/files/lib8_분담금_산정_가이드.pdf', web:'../downloads/guide_burden.html' },
-        'lib9':  { ext:'../downloads/files/lib9_시공사_선정_해설.pdf', web:'../downloads/guide_contractor.html' },
-        'lib10': { ext:'../downloads/files/lib10_감정평가_가이드.pdf', web:'../downloads/guide_appraisal.html' },
-        'lib11': { ext:'../downloads/files/lib11_조합설립_완전가이드.pdf', web:'../downloads/guide_association.html' },
-        'lib12': { ext:'../downloads/files/lib12_안전진단_지침.pdf', web:'../downloads/guide_safety_inspection.html' },
-        'lib13': { ext:'../downloads/files/lib13_회계처리_지침.pdf', web:'../downloads/guide_accounting.html' },
-        'lib17': { ext:'../downloads/files/lib17_시공자선정_지침.pdf', web:'../downloads/guide_contractor_selection.html' },
-        'lib18': { ext:'../downloads/files/lib18_이주보상_지침.pdf', web:'../downloads/guide_relocation.html' },
-        'lib21': { ext:'../downloads/files/lib21_추진위원회_운영규정.pdf', gov:'https://law.go.kr/%ED%96%89%EC%A0%95%EA%B7%9C%EC%B9%99/%EC%A0%95%EB%B9%84%EC%82%AC%EC%97%85%20%EC%A1%B0%ED%95%A9%EC%84%A4%EB%A6%BD%EC%B6%94%EC%A7%84%EC%9C%84%EC%9B%90%ED%9A%8C%20%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95', web:'../downloads/guide_committee_rules.html', label:'법제처 원문' },
-        'lib22': { ext:'../downloads/files/lib22_서울시_의사진행_표준운영규정.pdf', gov:'https://cleanup.seoul.go.kr', label:'정비사업몽땅' },
-        'lib23': { ext:'../downloads/files/lib23_서울시_정비사업_실무매뉴얼.pdf', gov:'https://news.seoul.go.kr/citybuild/', label:'서울시 도시재생' },
-        'lib30': { ext:'../downloads/files/lib30_도시정비법_질의회신_사례집.pdf' },
-        'lib31': { ext:'../downloads/files/lib31_서울시_도시정비법령_질의회신_2024.pdf' },
-        'lib33': { ext:'../downloads/files/lib33_경기도_정비사업_질의회신_매뉴얼.pdf' },
-        'lib34': { ext:'../downloads/files/lib34_서울시_도시정비_조례.pdf', gov:'https://cleanup.seoul.go.kr', label:'정비사업몽땅' },
-        'lib40': { ext:'../downloads/files/lib40_서울시_도시정비조례_2024개정.pdf' },
-        'lib41': { ext:'../downloads/files/lib41_도시정비법_질의회신_판례집.pdf' },
-        'lib42': { ext:'../downloads/files/lib42_제주도_재건축재개발_업무편람_2025.pdf' },
-        'lib43': { ext:'../downloads/files/lib43_해석례로읽는_건축법_2024.pdf' },
-        'lib44': { ext:'../downloads/files/lib44_해석례로읽는_건축법_2023.pdf' },
-        'lib45': { ext:'../downloads/files/lib45_서울시_공공지원_정비사업_표준정관_2024.pdf' },
-        'lib46': { ext:'../downloads/files/lib46_건설공사_표준시장단가_2025상반기.pdf' },
-        'lib48': { ext:'../downloads/files/lib48_서울시_정비사업_사업성개선_기본계획재정비_2024.pdf' },
-        'lib49': { ext:'../downloads/files/lib49_서울시_공공건축물_공사비_가이드라인_2024.pdf' },
-        'lib50': { ext:'../downloads/files/lib50_LH_2025_업무보고.pdf' },
-        'lib53': { ext:'../downloads/files/lib53_서울시_공사비_가이드라인_2022.pdf' },
-        'lib54': { ext:'../downloads/files/lib54_마포구_공사비_가이드라인.pdf' },
-        'lib55': { ext:'../downloads/files/lib55_재건축재개발_조세제도_연구보고서.pdf' },
-        'lib56': { ext:'../downloads/files/lib56_대법원판례_2025상반기_민사.pdf' },
-        'news0329': { web:'../downloads/news_20260329.html' },
-        'news0330': { web:'../downloads/news_20260330.html' },
-        'news0331': { web:'../downloads/news_20260331.html' },
-        'news0401': { web:'../downloads/news_20260401.html' },
-        'news0402': { web:'../downloads/news_20260402.html' },
-        'news0403': { web:'../downloads/news_20260403.html' },
-        'news0404': { web:'../downloads/news_20260404.html' },
-    };
-
-    // 첨부파일 존재 확인
-    var fileCache = {};
-    function checkFile(url, cb) {
-        if (fileCache[url] !== undefined) return cb(fileCache[url]);
-        var x = new XMLHttpRequest();
-        x.open('HEAD', url, true);
-        x.onload = function() { fileCache[url] = x.status === 200; cb(fileCache[url]); };
-        x.onerror = function() { fileCache[url] = false; cb(false); };
-        x.send();
-    }
-
-    // 다운로드 클릭 처리 (제목 클릭 또는 다운로드 버튼)
-    document.getElementById('libList').addEventListener('click', function(e) {
-        var btn = e.target.closest('.btn-download') || e.target.closest('.lib-title');
-        if (!btn) return;
-        var id = btn.dataset.id;
-        var m = fileMap[id];
-        if (!m) { App.toast('파일 준비 중입니다.', 'info'); return; }
-
-        // 1순위: 첨부파일 직접 다운로드
-        if (m.ext) {
-            checkFile(m.ext, function(ok) {
-                if (ok) {
-                    var a = document.createElement('a'); a.href = m.ext; a.download = '';
-                    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-                    App.toast('파일 다운로드 시작', 'success');
-                } else if (m.gov) {
-                    window.open(m.gov, '_blank');
-                    App.toast((m.label || '공식 사이트') + '로 이동합니다', 'info');
-                } else {
-                    window.open(m.web, '_blank');
-                    App.toast('웹 문서로 열립니다 (Ctrl+P로 PDF 저장 가능)', 'info');
-                }
-            });
-        }
-        // 2순위: 공식 외부 링크
-        else if (m.gov) {
-            window.open(m.web, '_blank');
-            setTimeout(function() {
-                if (confirm((m.label || '공식 사이트') + '에서 원문을 확인하시겠습니까?')) {
-                    window.open(m.gov, '_blank');
-                }
-            }, 500);
-        }
-        // 3순위: 웹 문서
-        else {
-            window.open(m.web, '_blank');
-            App.toast('웹 문서로 열립니다 (Ctrl+P로 PDF 저장 가능)', 'info');
-        }
-
-        var item = allItems.find(function(i) { return i.id === id; });
-        if (item) { item.downloads = (item.downloads || 0) + 1; }
-        render();
-    });
-
+    }else if(m.gov){
+        if(m.web)window.open(m.web,'_blank');
+        setTimeout(function(){if(confirm((m.label||'공식 사이트')+'에서 원문을 확인하시겠습니까?'))window.open(m.gov,'_blank')},500);
+    }else if(m.web){window.open(m.web,'_blank');App.toast('웹 문서로 열립니다','info')}
+    var item=allItems.find(function(i){return i.id===id});
+    if(item){item.downloads=(item.downloads||0)+1}
     render();
+}
+
+/* Global */
+window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.querySelector('.ctrl-bar').offsetTop-80,behavior:'smooth'})}};
+
+/* Init */
+renderTabs();renderQuick();render();
 })();
 </script>
 </body>
