@@ -876,78 +876,22 @@
     <div class="inner">
         <div class="two-col-grid">
 
-            <!-- 최신 자료 -->
+            <!-- 최신 자료 (동적) -->
             <div class="panel">
                 <div class="panel-head">
                     <h3 class="panel-title">최신 자료</h3>
                     <a href="pages/library.html" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
                 </div>
-                <a href="pages/library.html" class="news-item">
-                    <div class="news-thumb"><i class="fa-solid fa-file-pdf"></i></div>
-                    <div class="news-body">
-                        <h4>정비사업 단계별 업무 체크리스트</h4>
-                        <div class="news-date">가이드 · 2026.03.20</div>
-                    </div>
-                </a>
-                <a href="pages/library.html" class="news-item">
-                    <div class="news-thumb"><i class="fa-solid fa-file-lines"></i></div>
-                    <div class="news-body">
-                        <h4>조합설립인가 신청서 서식</h4>
-                        <div class="news-date">서식 · 2026.03.15</div>
-                    </div>
-                </a>
-                <a href="pages/library.html" class="news-item">
-                    <div class="news-thumb"><i class="fa-solid fa-scale-balanced"></i></div>
-                    <div class="news-body">
-                        <h4>도시 및 주거환경정비법 전문</h4>
-                        <div class="news-date">법령 · 2026.01.05</div>
-                    </div>
-                </a>
-                <a href="pages/library.html" class="news-item">
-                    <div class="news-thumb"><i class="fa-solid fa-chart-pie"></i></div>
-                    <div class="news-body">
-                        <h4>조합원 분담금 산정 가이드</h4>
-                        <div class="news-date">가이드 · 2026.02.15</div>
-                    </div>
-                </a>
+                <div id="mainLibrary"></div>
             </div>
 
-            <!-- 커뮤니티 -->
+            <!-- 커뮤니티 (동적) -->
             <div class="panel">
                 <div class="panel-head">
                     <h3 class="panel-title">커뮤니티</h3>
                     <a href="pages/community.html" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
                 </div>
-                <div class="comm-item">
-                    <span class="comm-cat">질문</span>
-                    <a href="pages/community.html" class="comm-title">조합설립 동의율 기준이 어떻게 되나요?</a>
-                    <span class="comm-cnt">[15]</span>
-                    <span class="comm-time">2시간 전</span>
-                </div>
-                <div class="comm-item">
-                    <span class="comm-cat">정보</span>
-                    <a href="pages/community.html" class="comm-title">2026년 정비사업 관련 법령 개정 요약</a>
-                    <span class="comm-cnt">[32]</span>
-                    <span class="comm-time">4시간 전</span>
-                </div>
-                <div class="comm-item">
-                    <span class="comm-cat">후기</span>
-                    <a href="pages/community.html" class="comm-title">총회 대행 서비스 이용 후기</a>
-                    <span class="comm-cnt">[8]</span>
-                    <span class="comm-time">6시간 전</span>
-                </div>
-                <div class="comm-item">
-                    <span class="comm-cat">질문</span>
-                    <a href="pages/community.html" class="comm-title">관리처분인가 후 절차가 궁금합니다</a>
-                    <span class="comm-cnt">[21]</span>
-                    <span class="comm-time">8시간 전</span>
-                </div>
-                <div class="comm-item">
-                    <span class="comm-cat">정보</span>
-                    <a href="pages/community.html" class="comm-title">정비사업 전문관리업 등록 요건 정리</a>
-                    <span class="comm-cnt">[27]</span>
-                    <span class="comm-time">어제</span>
-                </div>
+                <div id="mainCommunity"></div>
             </div>
         </div>
     </div>
@@ -1113,6 +1057,42 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             document.body.style.overflow = '';
         }
     });
+})();
+</script>
+<script>
+/* 메인페이지 자료실·커뮤니티 동적 로드 — mock-data 실제 데이터 사용 */
+(function(){
+    if(typeof MOCK==='undefined') return;
+    var iconMap={hwp:'fa-file-lines',pdf:'fa-file-pdf',xlsx:'fa-file-excel'};
+
+    /* 자료실: 최신 4건 (주요뉴스 제외) */
+    var libEl=document.getElementById('mainLibrary');
+    if(libEl && MOCK.library){
+        var libs=MOCK.library.filter(function(i){return i.category!=='주요뉴스'})
+            .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,4);
+        libEl.innerHTML=libs.map(function(i){
+            var ic=iconMap[i.fileType]||'fa-file';
+            return'<a href="pages/library.html" class="news-item">'+
+                '<div class="news-thumb"><i class="fa-solid '+ic+'"></i></div>'+
+                '<div class="news-body"><h4>'+i.title+'</h4>'+
+                '<div class="news-date">'+i.category+' · '+i.date+'</div></div></a>';
+        }).join('');
+    }
+
+    /* 커뮤니티: 최신 5건 */
+    var cmEl=document.getElementById('mainCommunity');
+    if(cmEl && MOCK.community){
+        var posts=MOCK.community.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,5);
+        cmEl.innerHTML=posts.map(function(p){
+            var ago='';
+            if(p.date){var diff=Date.now()-new Date(p.date).getTime();var h=Math.floor(diff/36e5);ago=h<1?'방금':h<24?h+'시간 전':Math.floor(h/24)+'일 전'}
+            return'<div class="comm-item">'+
+                '<span class="comm-cat">'+p.category+'</span>'+
+                '<a href="pages/community-detail.html?id='+p.id+'" class="comm-title">'+p.title+'</a>'+
+                (p.comments>0?'<span class="comm-cnt">['+p.comments+']</span>':'')+
+                '<span class="comm-time">'+ago+'</span></div>';
+        }).join('');
+    }
 })();
 </script>
 </body>
