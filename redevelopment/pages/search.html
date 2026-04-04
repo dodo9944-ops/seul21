@@ -540,6 +540,15 @@ document.addEventListener('keydown', function(e){
 });
 function closeModal(ov){ ov.classList.remove('open'); document.body.style.overflow=''; }
 
+/* ── URL 파라미터로 자동 모달 열기 ── */
+(function(){
+    var tool = new URLSearchParams(location.search).get('tool');
+    if(tool){
+        var ov = document.getElementById('modal-' + tool);
+        if(ov){ setTimeout(function(){ ov.classList.add('open'); document.body.style.overflow='hidden'; runCalc(tool); }, 300); }
+    }
+})();
+
 /* ── 입력 변경 시 자동 재계산 ── */
 document.querySelectorAll('.cm-field input[data-calc]').forEach(function(inp){
     inp.addEventListener('input', function(){ runCalc(this.dataset.calc); });
