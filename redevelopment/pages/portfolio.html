@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
     /* ============================================================
-       Portfolio Page — Premium Styles
+       Portfolio Page — Photo-First Premium Design
        ============================================================ */
 
-    /* ── Hero Enhancement ── */
+    /* ── Hero ── */
     .portfolio-hero {
         padding: 64px 0 56px;
         background: linear-gradient(135deg, #070B15 0%, var(--brand-dark) 40%, var(--brand-navy) 100%);
@@ -26,120 +26,58 @@
     .portfolio-hero::before {
         content: '';
         position: absolute;
-        top: -50%;
-        right: -20%;
-        width: 600px;
-        height: 600px;
+        top: -50%; right: -20%;
+        width: 600px; height: 600px;
         background: radial-gradient(circle, rgba(195,165,105,0.06) 0%, transparent 70%);
         pointer-events: none;
     }
     .portfolio-hero::after {
         content: '';
         position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        bottom: 0; left: 0; right: 0;
         height: 1px;
         background: linear-gradient(90deg, transparent, rgba(195,165,105,0.3), transparent);
     }
-    .portfolio-hero .breadcrumb {
-        margin-bottom: 20px;
-    }
+    .portfolio-hero .breadcrumb { margin-bottom: 20px; }
     .portfolio-hero h1 {
-        font-size: 36px;
-        font-weight: 900;
-        letter-spacing: -0.5px;
-        color: var(--white);
-        margin-bottom: 14px;
-        padding-left: 18px;
-        border-left: 3px solid var(--gold);
+        font-size: 36px; font-weight: 900; letter-spacing: -0.5px;
+        color: var(--white); margin-bottom: 14px;
+        padding-left: 18px; border-left: 3px solid var(--gold);
     }
     .portfolio-hero .hero-tagline {
-        font-size: 17px;
-        font-weight: 600;
-        color: var(--gold);
-        margin-bottom: 8px;
-        letter-spacing: -0.2px;
+        font-size: 17px; font-weight: 600; color: var(--gold);
+        margin-bottom: 8px; letter-spacing: -0.2px;
     }
     .portfolio-hero .hero-subtitle {
-        font-size: 14px;
-        color: rgba(255,255,255,0.5);
-        line-height: 1.6;
+        font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6;
     }
     @media (max-width: 768px) {
         .portfolio-hero { padding: 40px 0 32px; }
         .portfolio-hero h1 { font-size: 26px; }
-        .portfolio-hero .hero-tagline { font-size: 15px; }
     }
 
-    /* ── KPI Stats Cards ── */
+    /* ── KPI Stats ── */
     .kpi-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-bottom: 56px;
+        gap: 20px; margin-bottom: 56px;
     }
-    @media (max-width: 1024px) {
-        .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    }
-    @media (max-width: 540px) {
-        .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    }
+    @media (max-width: 1024px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+    @media (max-width: 540px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
     .kpi-card {
-        background: var(--brand-dark);
-        border-radius: 14px;
-        padding: 28px 24px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
+        background: var(--brand-dark); border-radius: 14px; padding: 28px 24px;
+        text-align: center; position: relative; overflow: hidden;
         transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .kpi-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    }
-    .kpi-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        opacity: 0;
-        transition: opacity 0.25s ease;
-    }
-    .kpi-card:hover::before {
-        opacity: 1;
-    }
+    .kpi-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
     .kpi-card::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 40px;
-        height: 3px;
-        background: var(--gold);
-        border-radius: 2px;
+        content: ''; position: absolute; bottom: 0; left: 50%;
+        transform: translateX(-50%); width: 40px; height: 3px;
+        background: var(--gold); border-radius: 2px;
     }
-    .kpi-card .kpi-icon {
-        font-size: 22px;
-        color: var(--gold);
-        margin-bottom: 14px;
-    }
-    .kpi-card .kpi-value {
-        font-size: 30px;
-        font-weight: 800;
-        color: var(--gold);
-        line-height: 1.2;
-        margin-bottom: 6px;
-    }
-    .kpi-card .kpi-label {
-        font-size: 13px;
-        font-weight: 500;
-        color: rgba(255,255,255,0.55);
-    }
+    .kpi-card .kpi-icon { font-size: 22px; color: var(--gold); margin-bottom: 14px; }
+    .kpi-card .kpi-value { font-size: 30px; font-weight: 800; color: var(--gold); line-height: 1.2; margin-bottom: 6px; }
+    .kpi-card .kpi-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.55); }
     @media (max-width: 540px) {
         .kpi-card { padding: 22px 16px; }
         .kpi-card .kpi-value { font-size: 24px; }
@@ -147,682 +85,390 @@
 
     /* ── Section Title ── */
     .portfolio-section-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 32px;
+        display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px;
     }
     .portfolio-section-title {
-        font-size: 24px;
-        font-weight: 800;
-        color: var(--gray-900);
-        letter-spacing: -0.5px;
-        position: relative;
-        padding-left: 16px;
+        font-size: 24px; font-weight: 800; color: var(--gray-900);
+        letter-spacing: -0.5px; position: relative; padding-left: 16px;
     }
     .portfolio-section-title::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 4px;
-        width: 3px;
-        height: 22px;
-        border-radius: 2px;
+        content: ''; position: absolute; left: 0; top: 4px;
+        width: 3px; height: 22px; border-radius: 2px;
         background: linear-gradient(to bottom, var(--gold), rgba(195,165,105,0.3));
     }
 
-    /* ── Featured Cards (주요 수행실적) ── */
+    /* ── Badges ── */
+    .pf-badge {
+        display: inline-flex; align-items: center;
+        padding: 5px 12px; border-radius: 6px;
+        font-size: 11px; font-weight: 700; line-height: 1;
+    }
+    .pf-badge-type { background: rgba(10,15,28,0.85); color: #fff; }
+    .pf-badge-ing { background: rgba(195,165,105,0.9); color: #0A0F1C; }
+    .pf-badge-done { background: rgba(255,255,255,0.9); color: #0A0F1C; }
+
+    /* ════════════════════════════════════════════════════════════
+       FEATURED CARDS — 주요 수행실적 (Photo-first)
+       ════════════════════════════════════════════════════════════ */
     .featured-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
     }
-    @media (max-width: 1024px) {
-        .featured-grid { grid-template-columns: 1fr; gap: 18px; }
-    }
-    .featured-card {
+    @media (max-width: 1024px) { .featured-grid { grid-template-columns: 1fr; gap: 18px; } }
+
+    .feat-card {
         background: var(--white);
         border: 1.5px solid var(--gray-200);
-        border-radius: 14px;
-        padding: 0;
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-        position: relative;
+        border-radius: 16px;
         overflow: hidden;
+        display: flex; flex-direction: column;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
-    .featured-card .feat-body {
-        padding: 24px 28px 28px;
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-    }
-    .featured-card::before {
-        display: none;
-    }
-    .featured-card:hover {
+    .feat-card:hover {
         border-color: var(--gold);
-        box-shadow: 0 12px 32px rgba(195,165,105,0.15);
+        box-shadow: 0 16px 40px rgba(195,165,105,0.15);
         transform: translateY(-6px);
     }
-    .featured-card .fc-badges {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 16px;
+
+    /* Featured Image */
+    .feat-img {
+        width: 100%; height: 220px;
+        position: relative; overflow: hidden;
+        flex-shrink: 0;
     }
-    .featured-card .fc-name {
-        font-size: 19px;
-        font-weight: 800;
-        color: var(--gray-900);
-        margin-bottom: 16px;
-        line-height: 1.4;
-        letter-spacing: -0.3px;
+    .feat-img img {
+        width: 100%; height: 100%;
+        object-fit: cover; display: block;
+        transition: transform 0.5s ease;
     }
-    .featured-card .fc-info-list {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 16px;
+    .feat-card:hover .feat-img img { transform: scale(1.06); }
+    .feat-img .img-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(to top, rgba(10,15,28,0.5) 0%, transparent 50%);
+        pointer-events: none;
     }
-    .featured-card .fc-info {
-        display: flex;
-        align-items: center;
-        font-size: 13.5px;
-        color: var(--gray-600);
+    .feat-img .img-badges {
+        position: absolute; top: 14px; left: 14px;
+        display: flex; gap: 6px; z-index: 2;
     }
-    .featured-card .fc-info i {
-        width: 18px;
-        color: var(--gold);
-        margin-right: 8px;
-        font-size: 12px;
-        text-align: center;
+
+    /* Featured Fallback (no image) */
+    .feat-img-fallback {
+        width: 100%; height: 220px;
+        position: relative; overflow: hidden; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        flex-direction: column; gap: 10px;
     }
-    .featured-card .fc-info strong {
-        font-weight: 600;
-        color: var(--gray-800);
+    .feat-img-fallback[data-type="redev"] { background: linear-gradient(135deg, #0A0F1C, #1a3055, #2a4a75); }
+    .feat-img-fallback[data-type="recon"] { background: linear-gradient(135deg, #142644, #1e3a5f, #0A0F1C); }
+    .feat-img-fallback[data-type="small"] { background: linear-gradient(135deg, #1a2a40, #243a55, #C3A569); }
+    .feat-img-fallback .fb-icon {
+        width: 64px; height: 64px; border-radius: 50%;
+        background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+        display: flex; align-items: center; justify-content: center;
     }
-    .featured-card .fc-desc {
-        font-size: 14px;
-        color: var(--gray-500);
-        line-height: 1.65;
-        margin-top: auto;
-        padding-top: 16px;
+    .feat-img-fallback .fb-icon i { font-size: 28px; color: rgba(195,165,105,0.6); }
+    .feat-img-fallback .fb-label { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 1px; }
+    .feat-img-fallback .img-badges {
+        position: absolute; top: 14px; left: 14px;
+        display: flex; gap: 6px; z-index: 2;
+    }
+
+    /* Featured Body */
+    .feat-body { padding: 22px 24px 26px; display: flex; flex-direction: column; flex: 1; }
+    .feat-body .feat-name {
+        font-size: 18px; font-weight: 800; color: var(--gray-900);
+        margin-bottom: 14px; line-height: 1.4; letter-spacing: -0.3px;
+    }
+    .feat-body .feat-info {
+        display: flex; align-items: center;
+        font-size: 13.5px; color: var(--gray-600); margin-bottom: 6px;
+    }
+    .feat-body .feat-info i { width: 18px; color: var(--gold); margin-right: 8px; font-size: 12px; text-align: center; }
+    .feat-body .feat-info strong { font-weight: 600; color: var(--gray-800); }
+    .feat-body .feat-desc {
+        font-size: 14px; color: var(--gray-500); line-height: 1.65;
+        margin-top: 14px; padding-top: 14px;
         border-top: 1px solid var(--gray-100);
     }
-    .featured-card .fc-detail-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        margin-top: 16px;
-        padding: 8px 16px;
-        background: var(--brand-dark);
-        color: var(--gold);
-        border: none;
-        border-radius: 8px;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        align-self: flex-start;
+    .feat-body .feat-btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        margin-top: 16px; padding: 8px 16px;
+        background: var(--brand-dark); color: var(--gold);
+        border: none; border-radius: 8px;
+        font-size: 13px; font-weight: 600; font-family: var(--font);
+        cursor: pointer; transition: all 0.2s ease; align-self: flex-start;
     }
-    .featured-card .fc-detail-btn:hover {
-        background: var(--brand-navy);
-        transform: translateX(2px);
-    }
-    .featured-card .fc-detail-btn i {
-        font-size: 11px;
-        transition: transform 0.2s ease;
-    }
-    .featured-card .fc-detail-btn:hover i {
-        transform: translateX(3px);
-    }
+    .feat-body .feat-btn:hover { background: var(--brand-navy); transform: translateX(2px); }
+    .feat-body .feat-btn i { font-size: 11px; transition: transform 0.2s ease; }
+    .feat-body .feat-btn:hover i { transform: translateX(3px); }
 
-    /* ── Section Divider ── */
-    .section-divider {
-        margin: 56px 0;
-        border: none;
-        border-top: 1px solid var(--gray-200);
-    }
+    /* ════════════════════════════════════════════════════════════
+       ALL CARDS — 전체 수행실적 (Thumbnail grid)
+       ════════════════════════════════════════════════════════════ */
+    .section-divider { margin: 56px 0; border: none; border-top: 1px solid var(--gray-200); }
 
-    /* ── Filter Control Bar ── */
     .filter-control-bar {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 24px;
-        padding: 16px 20px;
-        background: var(--gray-50);
-        border-radius: 14px;
-        border: 1px solid var(--gray-100);
-        flex-wrap: wrap;
+        display: flex; align-items: center; gap: 14px;
+        margin-bottom: 24px; padding: 16px 20px;
+        background: var(--gray-50); border-radius: 14px;
+        border: 1px solid var(--gray-100); flex-wrap: wrap;
     }
     .filter-control-bar .filter-select {
-        height: 40px;
-        padding: 0 32px 0 14px;
-        border: 1.5px solid var(--gray-200);
-        border-radius: 10px;
-        font-size: 13.5px;
-        font-weight: 500;
-        color: var(--gray-800);
-        background: var(--white);
-        cursor: pointer;
-        appearance: auto;
-        font-family: var(--font);
-        transition: border-color 0.2s ease;
-        min-width: 130px;
+        height: 40px; padding: 0 32px 0 14px;
+        border: 1.5px solid var(--gray-200); border-radius: 10px;
+        font-size: 13.5px; font-weight: 500; color: var(--gray-800);
+        background: var(--white); cursor: pointer; appearance: auto;
+        font-family: var(--font); transition: border-color 0.2s ease; min-width: 130px;
     }
     .filter-control-bar .filter-select:focus {
-        outline: none;
-        border-color: var(--gold);
+        outline: none; border-color: var(--gold);
         box-shadow: 0 0 0 3px rgba(195,165,105,0.1);
     }
-    .filter-control-bar .result-count {
-        margin-left: auto;
-        font-size: 14px;
-        color: var(--gray-500);
-        font-weight: 500;
-    }
-    .filter-control-bar .result-count strong {
-        color: var(--brand-dark);
-        font-weight: 700;
-    }
+    .filter-control-bar .result-count { margin-left: auto; font-size: 14px; color: var(--gray-500); font-weight: 500; }
+    .filter-control-bar .result-count strong { color: var(--brand-dark); font-weight: 700; }
     @media (max-width: 540px) {
-        .filter-control-bar {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 10px;
-        }
-        .filter-control-bar .filter-select {
-            width: 100%;
-            min-width: unset;
-        }
-        .filter-control-bar .result-count {
-            margin-left: 0;
-            text-align: center;
-        }
+        .filter-control-bar { flex-direction: column; align-items: stretch; gap: 10px; }
+        .filter-control-bar .filter-select { width: 100%; min-width: unset; }
+        .filter-control-bar .result-count { margin-left: 0; text-align: center; }
     }
 
-    /* ── All Portfolio Cards Grid ── */
     .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
     }
-    @media (max-width: 1024px) {
-        .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    }
-    @media (max-width: 540px) {
-        .portfolio-grid { grid-template-columns: 1fr; gap: 14px; }
-    }
+    @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+    @media (max-width: 540px) { .portfolio-grid { grid-template-columns: 1fr; gap: 14px; } }
 
-    /* ── Portfolio Card (list view) ── */
     .pf-card {
         background: var(--white);
         border: 1.5px solid var(--gray-200);
         border-radius: 14px;
-        padding: 0;
-        transition: all 0.25s ease;
-        display: flex;
-        flex-direction: column;
+        overflow: hidden;
+        display: flex; flex-direction: column;
         cursor: pointer;
-        position: relative;
-    }
-    .pf-card .pf-body {
-        padding: 20px 24px 24px;
-        display: flex;
-        flex-direction: column;
-        flex: 1;
+        transition: all 0.25s ease;
     }
     .pf-card:hover {
         border-color: var(--gold);
         box-shadow: 0 8px 24px rgba(195,165,105,0.12);
         transform: translateY(-4px);
     }
-    .pf-card .pf-name {
-        font-size: 16px;
-        font-weight: 700;
-        color: var(--gray-900);
-        margin-bottom: 12px;
-        line-height: 1.4;
-        letter-spacing: -0.2px;
-    }
-    .pf-card .pf-badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 16px;
-    }
-    .pf-card .pf-info-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 13px;
-        color: var(--gray-600);
-        padding: 6px 0;
-    }
-    .pf-card .pf-info-row + .pf-info-row {
-        border-top: 1px solid var(--gray-50);
-    }
-    .pf-card .pf-info-row .pf-label {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-weight: 500;
-        color: var(--gray-500);
-    }
-    .pf-card .pf-info-row .pf-label i {
-        font-size: 11px;
-        color: var(--gold);
-        width: 14px;
-        text-align: center;
-    }
-    .pf-card .pf-info-row .pf-value {
-        font-weight: 600;
-        color: var(--gray-800);
-    }
-    .pf-card .pf-detail-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        margin-top: auto;
-        padding-top: 16px;
-        width: 100%;
-        height: 40px;
-        background: transparent;
-        color: var(--brand-dark);
-        border: 1.5px solid var(--gray-200);
-        border-radius: 10px;
-        font-size: 13px;
-        font-weight: 600;
-        font-family: var(--font);
-        cursor: pointer;
-        transition: all 0.2s ease;
-        margin-top: 18px;
-    }
-    .pf-card .pf-detail-btn:hover {
-        background: var(--brand-dark);
-        color: var(--gold);
-        border-color: var(--brand-dark);
-    }
 
-    /* ── Card Thumbnail Image ── */
-    .card-thumb {
-        width: 100%;
-        min-height: 180px;
-        height: 180px;
-        overflow: hidden;
-        position: relative;
-        border-radius: 14px 14px 0 0;
-        background: linear-gradient(135deg, #0A0F1C 0%, #1a3055 50%, #2a4a75 100%);
-        flex-shrink: 0;
+    /* Card Thumbnail */
+    .pf-thumb {
+        width: 100%; height: 180px;
+        position: relative; overflow: hidden; flex-shrink: 0;
     }
-    .card-thumb[data-type="recon"] {
-        background: linear-gradient(135deg, #142644 0%, #1e3a5f 50%, #0A0F1C 100%);
-    }
-    .card-thumb[data-type="small"] {
-        background: linear-gradient(135deg, #1a2a40 0%, #243a55 50%, #C3A569 130%);
-    }
-    .card-thumb::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background:
-            radial-gradient(circle at 20% 80%, rgba(195,165,105,0.08) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 40%);
-        pointer-events: none;
-    }
-    .card-thumb-inner {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
+    .pf-thumb img {
+        width: 100%; height: 100%;
+        object-fit: cover; display: block;
         transition: transform 0.4s ease;
-        position: relative;
-        z-index: 1;
     }
-    .card-thumb-inner .thumb-icon {
-        width: 64px;
-        height: 64px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .card-thumb-inner .thumb-icon i {
-        font-size: 28px;
-        color: rgba(195,165,105,0.7);
-    }
-    .card-thumb-inner .thumb-label {
-        font-size: 13px;
-        font-weight: 600;
-        color: rgba(255,255,255,0.4);
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-    .card-thumb-inner.has-photo {
-        padding: 0;
-    }
-    .card-thumb-inner.has-photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-    .pf-card:hover .card-thumb-inner,
-    .featured-card:hover .card-thumb-inner {
-        transform: scale(1.05);
-    }
-    .card-thumb .thumb-badges {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        display: flex;
-        gap: 6px;
-        z-index: 3;
-    }
-    /* Featured card larger thumb */
-    .featured-card .card-thumb {
-        min-height: 210px;
-        height: 210px;
-    }
-    .featured-card .card-thumb-inner .thumb-icon {
-        width: 72px;
-        height: 72px;
-    }
-    .featured-card .card-thumb-inner .thumb-icon i {
-        font-size: 32px;
-    }
-
-    /* ── Detail Modal Image ── */
-    .detail-image {
-        width: 100%;
-        min-height: 200px;
-        height: 200px;
-        overflow: hidden;
-        border-radius: 12px;
-        margin-bottom: 24px;
-        background: linear-gradient(135deg, #0A0F1C 0%, #1a3055 50%, #2a4a75 100%);
-        position: relative;
-        flex-shrink: 0;
-    }
-    .detail-image[data-type="recon"] {
-        background: linear-gradient(135deg, #142644 0%, #1e3a5f 50%, #0A0F1C 100%);
-    }
-    .detail-image[data-type="small"] {
-        background: linear-gradient(135deg, #1a2a40 0%, #243a55 50%, #C3A569 130%);
-    }
-    .detail-image::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background:
-            radial-gradient(circle at 20% 80%, rgba(195,165,105,0.08) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 40%);
+    .pf-card:hover .pf-thumb img { transform: scale(1.05); }
+    .pf-thumb .img-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(to top, rgba(10,15,28,0.4) 0%, transparent 50%);
         pointer-events: none;
     }
-    .detail-image-inner {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        position: relative;
-        z-index: 1;
-    }
-    .detail-image-inner .thumb-icon {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .detail-image-inner .thumb-icon i {
-        font-size: 36px;
-        color: rgba(195,165,105,0.7);
-    }
-    .detail-image-inner .thumb-label {
-        font-size: 14px;
-        font-weight: 600;
-        color: rgba(255,255,255,0.4);
-        letter-spacing: 1px;
-    }
-    .detail-image-inner.has-photo {
-        padding: 0;
-    }
-    .detail-image-inner.has-photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
+    .pf-thumb .img-badges {
+        position: absolute; top: 10px; left: 10px;
+        display: flex; gap: 5px; z-index: 2;
     }
 
-    /* ── Badge Variants ── */
-    .badge-type {
-        background: var(--brand-dark);
-        color: var(--white);
-        font-size: 11px;
-        font-weight: 700;
-        padding: 5px 12px;
-        border-radius: 6px;
+    /* Card Thumbnail Fallback */
+    .pf-thumb-fallback {
+        width: 100%; height: 180px;
+        position: relative; overflow: hidden; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        flex-direction: column; gap: 8px;
     }
-    .badge-status-진행중 {
-        background: rgba(195,165,105,0.15);
-        color: var(--gold);
-        font-size: 11px;
-        font-weight: 700;
-        padding: 5px 12px;
-        border-radius: 6px;
+    .pf-thumb-fallback[data-type="redev"] { background: linear-gradient(135deg, #0A0F1C, #1a3055, #2a4a75); }
+    .pf-thumb-fallback[data-type="recon"] { background: linear-gradient(135deg, #142644, #1e3a5f, #0A0F1C); }
+    .pf-thumb-fallback[data-type="small"] { background: linear-gradient(135deg, #1a2a40, #243a55, #C3A569); }
+    .pf-thumb-fallback .fb-icon {
+        width: 52px; height: 52px; border-radius: 50%;
+        background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+        display: flex; align-items: center; justify-content: center;
     }
-    .badge-status-완료 {
-        background: var(--brand-dark);
-        color: var(--white);
-        font-size: 11px;
-        font-weight: 700;
-        padding: 5px 12px;
-        border-radius: 6px;
+    .pf-thumb-fallback .fb-icon i { font-size: 22px; color: rgba(195,165,105,0.6); }
+    .pf-thumb-fallback .fb-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.3); letter-spacing: 0.5px; }
+    .pf-thumb-fallback .img-badges {
+        position: absolute; top: 10px; left: 10px;
+        display: flex; gap: 5px; z-index: 2;
+    }
+
+    /* Card Body */
+    .pf-body { padding: 18px 20px 22px; display: flex; flex-direction: column; flex: 1; }
+    .pf-body .pf-name {
+        font-size: 15px; font-weight: 700; color: var(--gray-900);
+        margin-bottom: 12px; line-height: 1.4; letter-spacing: -0.2px;
+    }
+    .pf-body .pf-row {
+        display: flex; justify-content: space-between; align-items: center;
+        font-size: 13px; color: var(--gray-600); padding: 5px 0;
+    }
+    .pf-body .pf-row + .pf-row { border-top: 1px solid var(--gray-50); }
+    .pf-body .pf-row .pf-label {
+        display: flex; align-items: center; gap: 5px;
+        font-weight: 500; color: var(--gray-500);
+    }
+    .pf-body .pf-row .pf-label i { font-size: 11px; color: var(--gold); width: 14px; text-align: center; }
+    .pf-body .pf-row .pf-val { font-weight: 600; color: var(--gray-800); }
+    .pf-body .pf-detail-btn {
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+        margin-top: 16px; width: 100%; height: 38px;
+        background: transparent; color: var(--brand-dark);
+        border: 1.5px solid var(--gray-200); border-radius: 10px;
+        font-size: 13px; font-weight: 600; font-family: var(--font);
+        cursor: pointer; transition: all 0.2s ease;
+    }
+    .pf-body .pf-detail-btn:hover {
+        background: var(--brand-dark); color: var(--gold); border-color: var(--brand-dark);
     }
 
     /* ── Empty State ── */
     .portfolio-empty {
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: 56px 20px;
+        grid-column: 1 / -1; text-align: center; padding: 56px 20px;
     }
-    .portfolio-empty i {
-        font-size: 48px;
-        color: var(--gray-300);
-        margin-bottom: 16px;
-    }
-    .portfolio-empty h3 {
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--gray-600);
-        margin-bottom: 8px;
-    }
-    .portfolio-empty p {
-        font-size: 14px;
-        color: var(--gray-400);
-    }
+    .portfolio-empty i { font-size: 48px; color: var(--gray-300); margin-bottom: 16px; }
+    .portfolio-empty h3 { font-size: 18px; font-weight: 700; color: var(--gray-600); margin-bottom: 8px; }
+    .portfolio-empty p { font-size: 14px; color: var(--gray-400); }
 
-    /* ── Detail Modal ── */
+    /* ════════════════════════════════════════════════════════════
+       DETAIL MODAL — 상세보기
+       ════════════════════════════════════════════════════════════ */
     .detail-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(10, 15, 28, 0.65);
+        position: fixed; inset: 0;
+        background: rgba(10,15,28,0.65);
         backdrop-filter: blur(4px);
         z-index: 500;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: flex; align-items: center; justify-content: center;
         padding: 20px;
-        opacity: 0;
-        pointer-events: none;
+        opacity: 0; pointer-events: none;
         transition: opacity 0.25s ease;
     }
-    .detail-overlay.open {
-        opacity: 1;
-        pointer-events: auto;
-    }
+    .detail-overlay.open { opacity: 1; pointer-events: auto; }
     .detail-modal {
-        background: var(--white);
-        border-radius: 16px;
-        width: 100%;
-        max-width: 600px;
-        max-height: 90vh;
+        background: var(--white); border-radius: 16px;
+        width: 100%; max-width: 640px; max-height: 90vh;
         overflow: hidden;
-        display: flex;
-        flex-direction: column;
+        display: flex; flex-direction: column;
         box-shadow: 0 24px 64px rgba(0,0,0,0.3);
         transform: translateY(20px) scale(0.97);
         transition: transform 0.3s ease;
     }
-    .detail-overlay.open .detail-modal {
-        transform: translateY(0) scale(1);
+    .detail-overlay.open .detail-modal { transform: translateY(0) scale(1); }
+
+    /* Detail Image */
+    .detail-hero-img {
+        width: 100%; height: 260px;
+        position: relative; overflow: hidden; flex-shrink: 0;
     }
-    .detail-modal-header {
-        background: linear-gradient(135deg, var(--brand-dark), var(--brand-navy));
-        padding: 28px 28px 24px;
-        position: relative;
-        flex-shrink: 0;
+    .detail-hero-img img {
+        width: 100%; height: 100%; object-fit: cover; display: block;
     }
-    .detail-modal-header::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, var(--gold), rgba(195,165,105,0.2));
+    .detail-hero-img .img-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(to top, rgba(10,15,28,0.7) 0%, rgba(10,15,28,0.1) 50%, transparent 100%);
+        pointer-events: none;
     }
-    .detail-modal-header .detail-badges {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 12px;
+    .detail-hero-img .detail-hero-title {
+        position: absolute; bottom: 0; left: 0; right: 0;
+        padding: 20px 28px;
+        z-index: 2;
     }
-    .detail-modal-header .detail-name {
-        font-size: 22px;
-        font-weight: 800;
-        color: var(--white);
-        line-height: 1.35;
-        letter-spacing: -0.3px;
+    .detail-hero-img .detail-hero-title .detail-badges {
+        display: flex; gap: 6px; margin-bottom: 10px;
     }
+    .detail-hero-img .detail-hero-title .detail-name {
+        font-size: 20px; font-weight: 800; color: #fff;
+        line-height: 1.35; letter-spacing: -0.3px;
+    }
+
+    /* Detail Fallback Image */
+    .detail-hero-fallback {
+        width: 100%; height: 200px;
+        position: relative; overflow: hidden; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        flex-direction: column; gap: 10px;
+    }
+    .detail-hero-fallback[data-type="redev"] { background: linear-gradient(135deg, #0A0F1C, #1a3055, #2a4a75); }
+    .detail-hero-fallback[data-type="recon"] { background: linear-gradient(135deg, #142644, #1e3a5f, #0A0F1C); }
+    .detail-hero-fallback[data-type="small"] { background: linear-gradient(135deg, #1a2a40, #243a55, #C3A569); }
+    .detail-hero-fallback .fb-icon {
+        width: 72px; height: 72px; border-radius: 50%;
+        background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+        display: flex; align-items: center; justify-content: center;
+    }
+    .detail-hero-fallback .fb-icon i { font-size: 32px; color: rgba(195,165,105,0.6); }
+    .detail-hero-fallback .fb-label { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 1px; }
+    .detail-hero-fallback .detail-hero-title {
+        position: absolute; bottom: 0; left: 0; right: 0;
+        padding: 20px 28px; z-index: 2;
+        background: linear-gradient(to top, rgba(10,15,28,0.6), transparent);
+    }
+    .detail-hero-fallback .detail-hero-title .detail-badges { display: flex; gap: 6px; margin-bottom: 10px; }
+    .detail-hero-fallback .detail-hero-title .detail-name {
+        font-size: 20px; font-weight: 800; color: #fff; line-height: 1.35;
+    }
+
     .detail-modal-close {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        width: 36px;
-        height: 36px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(255,255,255,0.1);
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 16px;
-        color: rgba(255,255,255,0.7);
+        position: absolute; top: 16px; right: 16px; z-index: 10;
+        width: 36px; height: 36px;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(0,0,0,0.4); border: none; border-radius: 50%;
+        cursor: pointer; font-size: 16px; color: rgba(255,255,255,0.8);
         transition: all 0.2s ease;
     }
-    .detail-modal-close:hover {
-        background: rgba(255,255,255,0.2);
-        color: var(--white);
-    }
-    .detail-modal-body {
-        padding: 28px;
-        overflow-y: auto;
-        flex: 1;
-    }
+    .detail-modal-close:hover { background: rgba(0,0,0,0.7); color: #fff; }
+
+    /* Detail Body */
+    .detail-modal-body { padding: 28px; overflow-y: auto; flex: 1; }
     .detail-info-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+        border: 1px solid var(--gray-100); border-radius: 12px; overflow: hidden;
     }
     .detail-info-item {
-        display: flex;
-        flex-direction: column;
+        display: flex; flex-direction: column;
         padding: 14px 16px;
         border-bottom: 1px solid var(--gray-100);
     }
-    .detail-info-item:nth-child(odd) {
-        border-right: 1px solid var(--gray-100);
-    }
-    .detail-info-item:nth-last-child(-n+2) {
-        border-bottom: none;
-    }
+    .detail-info-item:nth-child(odd) { border-right: 1px solid var(--gray-100); }
+    .detail-info-item:nth-last-child(-n+2) { border-bottom: none; }
     .detail-info-item .info-label {
-        font-size: 11.5px;
-        font-weight: 600;
-        color: var(--gray-400);
-        text-transform: uppercase;
-        letter-spacing: 0.3px;
-        margin-bottom: 6px;
+        font-size: 11.5px; font-weight: 600; color: var(--gray-400);
+        text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 6px;
     }
-    .detail-info-item .info-value {
-        font-size: 15px;
-        font-weight: 600;
-        color: var(--gray-900);
-    }
+    .detail-info-item .info-value { font-size: 15px; font-weight: 600; color: var(--gray-900); }
+
     .detail-desc {
-        margin-top: 24px;
-        padding: 20px;
-        background: var(--gray-50);
-        border-radius: 12px;
+        margin-top: 24px; padding: 20px;
+        background: var(--gray-50); border-radius: 12px;
         border: 1px solid var(--gray-100);
     }
     .detail-desc-label {
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--gold);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 10px;
+        font-size: 12px; font-weight: 700; color: var(--gold);
+        text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;
     }
-    .detail-desc p {
-        font-size: 14.5px;
-        color: var(--gray-700);
-        line-height: 1.7;
-    }
+    .detail-desc p { font-size: 14.5px; color: var(--gray-700); line-height: 1.7; }
+
     .detail-modal-footer {
-        padding: 16px 28px;
-        border-top: 1px solid var(--gray-100);
-        display: flex;
-        justify-content: flex-end;
-        flex-shrink: 0;
+        padding: 16px 28px; border-top: 1px solid var(--gray-100);
+        display: flex; justify-content: flex-end; flex-shrink: 0;
     }
     .detail-close-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 10px 24px;
-        background: var(--brand-dark);
-        color: var(--white);
-        border: none;
-        border-radius: 10px;
-        font-size: 14px;
-        font-weight: 600;
-        font-family: var(--font);
-        cursor: pointer;
-        transition: all 0.2s ease;
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 10px 24px; background: var(--brand-dark); color: var(--white);
+        border: none; border-radius: 10px;
+        font-size: 14px; font-weight: 600; font-family: var(--font);
+        cursor: pointer; transition: all 0.2s ease;
     }
-    .detail-close-btn:hover {
-        background: var(--brand-navy);
-    }
+    .detail-close-btn:hover { background: var(--brand-navy); }
+
     @media (max-width: 540px) {
-        .detail-modal-header { padding: 22px 20px 20px; }
-        .detail-modal-header .detail-name { font-size: 18px; }
+        .detail-hero-img, .detail-hero-fallback { height: 180px; }
+        .detail-hero-img .detail-hero-title .detail-name,
+        .detail-hero-fallback .detail-hero-title .detail-name { font-size: 17px; }
         .detail-modal-body { padding: 20px; }
         .detail-info-grid { grid-template-columns: 1fr; }
         .detail-info-item:nth-child(odd) { border-right: none; }
@@ -853,28 +499,7 @@
     <div class="inner">
 
         <!-- ── KPI Stats ── -->
-        <div class="kpi-grid">
-            <div class="kpi-card">
-                <div class="kpi-icon"><i class="fa-solid fa-building"></i></div>
-                <div class="kpi-value">10건</div>
-                <div class="kpi-label">총 수행실적</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon"><i class="fa-solid fa-spinner"></i></div>
-                <div class="kpi-value">7건</div>
-                <div class="kpi-label">진행중 사업</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon"><i class="fa-solid fa-circle-check"></i></div>
-                <div class="kpi-value">3건</div>
-                <div class="kpi-label">완료 사업</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon"><i class="fa-solid fa-house-chimney"></i></div>
-                <div class="kpi-value">약 40,000세대</div>
-                <div class="kpi-label">총 관리세대</div>
-            </div>
-        </div>
+        <div class="kpi-grid" id="kpiGrid"></div>
 
         <!-- ── 주요 수행실적 ── -->
         <div class="featured-section">
@@ -891,7 +516,6 @@
             <h2 class="portfolio-section-title">전체 수행실적</h2>
         </div>
 
-        <!-- Filter Control Bar -->
         <div class="filter-control-bar">
             <select class="filter-select" id="filterType">
                 <option value="전체">유형 전체</option>
@@ -914,11 +538,8 @@
 <!-- ── Detail Modal ── -->
 <div class="detail-overlay" id="detailOverlay">
     <div class="detail-modal">
-        <div class="detail-modal-header">
-            <button class="detail-modal-close" id="detailCloseTop" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
-            <div class="detail-badges" id="detailBadges"></div>
-            <div class="detail-name" id="detailName"></div>
-        </div>
+        <div id="detailHeroArea"></div>
+        <button class="detail-modal-close" id="detailCloseTop" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
         <div class="detail-modal-body">
             <div class="detail-info-grid" id="detailInfoGrid"></div>
             <div class="detail-desc">
@@ -939,64 +560,88 @@
 <script>
 (function() {
 
-    /* ── 유형별 아이콘·data-type 매핑 ── */
-    function getTypeIcon(type) {
-        var icons = {'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney'};
-        return icons[type] || 'fa-building-columns';
+    var data = MOCK.portfolio;
+
+    /* ── Helpers ── */
+    function typeIcon(t) {
+        return {'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney'}[t] || 'fa-building-columns';
     }
-    function getDataType(type) {
-        if (type === '재건축') return 'recon';
-        if (type === '소규모정비') return 'small';
+    function dataType(t) {
+        if (t === '재건축') return 'recon';
+        if (t === '소규모정비') return 'small';
         return 'redev';
     }
-
-    /* ── 썸네일 HTML 생성 ── */
-    function buildThumb(p) {
-        var icon = getTypeIcon(p.type);
-        var dt = getDataType(p.type);
-        var innerHtml;
-        if (p.image) {
-            innerHtml = '<div class="card-thumb-inner has-photo">' +
-                '<img src="' + p.image + '" alt="' + p.name + '" loading="lazy">' +
-            '</div>';
-        } else {
-            innerHtml = '<div class="card-thumb-inner">' +
-                '<div class="thumb-icon"><i class="fa-solid ' + icon + '"></i></div>' +
-                '<span class="thumb-label">' + p.type + '</span>' +
-            '</div>';
-        }
-        return '<div class="card-thumb" data-type="' + dt + '">' +
-            innerHtml +
-            '<div class="thumb-badges">' +
-                '<span class="badge badge-type">' + p.type + '</span>' +
-                '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
-            '</div>' +
-        '</div>';
+    function statusBadge(s) {
+        return s === '완료' ? 'pf-badge-done' : 'pf-badge-ing';
+    }
+    function badges(p) {
+        return '<span class="pf-badge pf-badge-type">' + p.type + '</span>' +
+               '<span class="pf-badge ' + statusBadge(p.status) + '">' + p.status + '</span>';
+    }
+    function imgError(img) {
+        var fb = img.parentElement.querySelector('.img-fb-ready');
+        if (fb) { fb.style.display = 'flex'; }
+        img.style.display = 'none';
     }
 
-    /* ── 주요 수행실적 렌더 ── */
+    /* ── KPI ── */
+    (function renderKPI() {
+        var total = data.length;
+        var ing = data.filter(function(p){return p.status==='진행중';}).length;
+        var done = data.filter(function(p){return p.status==='완료';}).length;
+        var units = 0;
+        data.forEach(function(p) {
+            var n = p.scale.replace(/[^0-9]/g, '');
+            units += parseInt(n) || 0;
+        });
+        document.getElementById('kpiGrid').innerHTML =
+            '<div class="kpi-card"><div class="kpi-icon"><i class="fa-solid fa-building"></i></div><div class="kpi-value">' + total + '건</div><div class="kpi-label">총 수행실적</div></div>' +
+            '<div class="kpi-card"><div class="kpi-icon"><i class="fa-solid fa-spinner"></i></div><div class="kpi-value">' + ing + '건</div><div class="kpi-label">진행중 사업</div></div>' +
+            '<div class="kpi-card"><div class="kpi-icon"><i class="fa-solid fa-circle-check"></i></div><div class="kpi-value">' + done + '건</div><div class="kpi-label">완료 사업</div></div>' +
+            '<div class="kpi-card"><div class="kpi-icon"><i class="fa-solid fa-house-chimney"></i></div><div class="kpi-value">약 ' + units.toLocaleString() + '세대</div><div class="kpi-label">총 관리세대</div></div>';
+    })();
+
+    /* ── Featured Cards ── */
     function renderFeatured() {
-        var items = MOCK.portfolio.filter(function(p) { return p.featured === true; });
+        var items = data.filter(function(p) { return p.featured === true; });
         var grid = document.getElementById('featuredGrid');
 
         grid.innerHTML = items.map(function(p) {
-            return '<div class="featured-card" onclick="portfolioApp.openDetail(\'' + p.id + '\')">' +
-                buildThumb(p) +
-                '<div class="feat-body">' +
-                    '<div class="fc-name">' + p.name + '</div>' +
-                    '<div class="fc-info-list">' +
-                        '<div class="fc-info"><i class="fa-solid fa-location-dot"></i> <strong>' + p.district + '</strong></div>' +
-                        '<div class="fc-info"><i class="fa-solid fa-building"></i> ' + p.scale + '</div>' +
-                        '<div class="fc-info"><i class="fa-solid fa-user-tie"></i> ' + p.role + '</div>' +
+            var imgArea;
+            if (p.featuredImage) {
+                imgArea = '<div class="feat-img">' +
+                    '<img src="' + p.featuredImage + '" alt="' + (p.imageAlt||p.name) + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
+                    '<div class="feat-img-fallback" data-type="' + dataType(p.type) + '" style="display:none;position:absolute;inset:0">' +
+                        '<div class="fb-icon"><i class="fa-solid ' + typeIcon(p.type) + '"></i></div>' +
+                        '<span class="fb-label">' + p.type + '</span>' +
                     '</div>' +
-                    '<div class="fc-desc">' + p.description + '</div>' +
-                    '<button class="fc-detail-btn" onclick="event.stopPropagation(); portfolioApp.openDetail(\'' + p.id + '\')">상세보기 <i class="fa-solid fa-arrow-right"></i></button>' +
+                    '<div class="img-overlay"></div>' +
+                    '<div class="img-badges">' + badges(p) + '</div>' +
+                '</div>';
+            } else {
+                imgArea = '<div class="feat-img-fallback" data-type="' + dataType(p.type) + '">' +
+                    '<div class="fb-icon"><i class="fa-solid ' + typeIcon(p.type) + '"></i></div>' +
+                    '<span class="fb-label">' + p.type + '</span>' +
+                    '<div class="img-badges">' + badges(p) + '</div>' +
+                '</div>';
+            }
+
+            return '<div class="feat-card" onclick="portfolioApp.openDetail(\'' + p.id + '\')">' +
+                imgArea +
+                '<div class="feat-body">' +
+                    '<div class="feat-name">' + p.name + '</div>' +
+                    '<div class="feat-info"><i class="fa-solid fa-location-dot"></i> <strong>' + p.district + '</strong></div>' +
+                    '<div class="feat-info"><i class="fa-solid fa-building"></i> ' + p.scale + '</div>' +
+                    '<div class="feat-info"><i class="fa-solid fa-layer-group"></i> ' + (p.floorInfo || '') + '</div>' +
+                    '<div class="feat-info"><i class="fa-solid fa-user-tie"></i> ' + p.role + '</div>' +
+                    '<div class="feat-desc">' + p.description + '</div>' +
+                    '<button class="feat-btn" onclick="event.stopPropagation(); portfolioApp.openDetail(\'' + p.id + '\')">상세보기 <i class="fa-solid fa-arrow-right"></i></button>' +
                 '</div>' +
             '</div>';
         }).join('');
     }
 
-    /* ── 필터 값 ── */
+    /* ── All Cards ── */
     function getFilters() {
         return {
             type: document.getElementById('filterType').value,
@@ -1004,157 +649,143 @@
         };
     }
 
-    /* ── 전체 실적 렌더 ── */
     function renderAll() {
-        var filters = getFilters();
-        var items = MOCK.portfolio.filter(function(p) {
-            if (filters.type !== '전체' && p.type !== filters.type) return false;
-            if (filters.status !== '전체' && p.status !== filters.status) return false;
+        var f = getFilters();
+        var items = data.filter(function(p) {
+            if (f.type !== '전체' && p.type !== f.type) return false;
+            if (f.status !== '전체' && p.status !== f.status) return false;
             return true;
         });
 
-        document.getElementById('resultCount').innerHTML =
-            '총 <strong>' + items.length + '</strong>건';
-
+        document.getElementById('resultCount').innerHTML = '총 <strong>' + items.length + '</strong>건';
         var grid = document.getElementById('portfolioGrid');
 
         if (items.length === 0) {
-            grid.innerHTML = '<div class="portfolio-empty">' +
-                '<i class="fa-solid fa-search"></i>' +
-                '<h3>해당 조건의 실적이 없습니다</h3>' +
-                '<p>다른 조건으로 검색해보세요</p>' +
-            '</div>';
+            grid.innerHTML = '<div class="portfolio-empty"><i class="fa-solid fa-search"></i><h3>해당 조건의 실적이 없습니다</h3><p>다른 조건으로 검색해보세요</p></div>';
             return;
         }
 
         grid.innerHTML = items.map(function(p) {
+            var thumbArea;
+            if (p.thumbnail) {
+                thumbArea = '<div class="pf-thumb">' +
+                    '<img src="' + p.thumbnail + '" alt="' + (p.imageAlt||p.name) + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
+                    '<div class="pf-thumb-fallback" data-type="' + dataType(p.type) + '" style="display:none;position:absolute;inset:0">' +
+                        '<div class="fb-icon"><i class="fa-solid ' + typeIcon(p.type) + '"></i></div>' +
+                        '<span class="fb-label">' + p.type + '</span>' +
+                    '</div>' +
+                    '<div class="img-overlay"></div>' +
+                    '<div class="img-badges">' + badges(p) + '</div>' +
+                '</div>';
+            } else {
+                thumbArea = '<div class="pf-thumb-fallback" data-type="' + dataType(p.type) + '">' +
+                    '<div class="fb-icon"><i class="fa-solid ' + typeIcon(p.type) + '"></i></div>' +
+                    '<span class="fb-label">' + p.type + '</span>' +
+                    '<div class="img-badges">' + badges(p) + '</div>' +
+                '</div>';
+            }
+
             return '<div class="pf-card" onclick="portfolioApp.openDetail(\'' + p.id + '\')">' +
-                buildThumb(p) +
+                thumbArea +
                 '<div class="pf-body">' +
                     '<div class="pf-name">' + p.name + '</div>' +
-                    '<div class="pf-info-row">' +
-                        '<span class="pf-label"><i class="fa-solid fa-location-dot"></i> 위치</span>' +
-                        '<span class="pf-value">' + p.district + '</span>' +
-                    '</div>' +
-                    '<div class="pf-info-row">' +
-                        '<span class="pf-label"><i class="fa-solid fa-building"></i> 규모</span>' +
-                        '<span class="pf-value">' + p.scale + '</span>' +
-                    '</div>' +
-                    '<div class="pf-info-row">' +
-                        '<span class="pf-label"><i class="fa-solid fa-user-tie"></i> 역할</span>' +
-                        '<span class="pf-value">' + p.role + '</span>' +
-                    '</div>' +
+                    '<div class="pf-row"><span class="pf-label"><i class="fa-solid fa-location-dot"></i> 위치</span><span class="pf-val">' + p.district + '</span></div>' +
+                    '<div class="pf-row"><span class="pf-label"><i class="fa-solid fa-building"></i> 규모</span><span class="pf-val">' + p.scale + '</span></div>' +
+                    '<div class="pf-row"><span class="pf-label"><i class="fa-solid fa-user-tie"></i> 역할</span><span class="pf-val">' + p.role + '</span></div>' +
+                    '<div class="pf-row"><span class="pf-label"><i class="fa-solid fa-calendar"></i> 연도</span><span class="pf-val">' + p.year + '년</span></div>' +
                     '<button class="pf-detail-btn" onclick="event.stopPropagation(); portfolioApp.openDetail(\'' + p.id + '\')"><i class="fa-solid fa-eye"></i> 상세보기</button>' +
                 '</div>' +
             '</div>';
         }).join('');
     }
 
-    /* ── 상세 모달 열기 ── */
+    /* ── Detail Modal ── */
     function openDetail(id) {
         var item = null;
-        for (var i = 0; i < MOCK.portfolio.length; i++) {
-            if (MOCK.portfolio[i].id === id) {
-                item = MOCK.portfolio[i];
-                break;
-            }
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].id === id) { item = data[i]; break; }
         }
         if (!item) return;
 
-        document.getElementById('detailBadges').innerHTML =
-            '<span class="badge badge-type">' + item.type + '</span>' +
-            '<span class="badge badge-status-' + item.status + '">' + item.status + '</span>';
-
-        document.getElementById('detailName').textContent = item.name;
-
-        var typeIcon = getTypeIcon(item.type);
-        var dt = getDataType(item.type);
-        var detailInner;
-        if (item.image) {
-            detailInner = '<div class="detail-image-inner has-photo">' +
-                '<img src="' + item.image + '" alt="' + item.name + '">' +
-            '</div>';
-        } else {
-            detailInner = '<div class="detail-image-inner">' +
-                '<div class="thumb-icon"><i class="fa-solid ' + typeIcon + '"></i></div>' +
-                '<span class="thumb-label">' + item.type + '</span>' +
-            '</div>';
-        }
-        var imageHtml = '<div class="detail-image" data-type="' + dt + '">' +
-            detailInner +
+        /* Hero image area */
+        var heroArea = document.getElementById('detailHeroArea');
+        var dt = dataType(item.type);
+        var titleBlock = '<div class="detail-hero-title">' +
+            '<div class="detail-badges">' + badges(item) + '</div>' +
+            '<div class="detail-name">' + item.name + '</div>' +
         '</div>';
 
-        var infoGridEl = document.getElementById('detailInfoGrid');
-        // Insert image before the info grid
-        var existingImage = infoGridEl.parentNode.querySelector('.detail-image');
-        if (existingImage) existingImage.remove();
-        infoGridEl.insertAdjacentHTML('beforebegin', imageHtml);
-
-        infoGridEl.innerHTML =
-            '<div class="detail-info-item">' +
-                '<span class="info-label">사업유형</span>' +
-                '<span class="info-value">' + item.type + '</span>' +
-            '</div>' +
-            '<div class="detail-info-item">' +
-                '<span class="info-label">진행상태</span>' +
-                '<span class="info-value">' + item.status + '</span>' +
-            '</div>' +
-            '<div class="detail-info-item">' +
-                '<span class="info-label">위치</span>' +
-                '<span class="info-value">' + item.district + '</span>' +
-            '</div>' +
-            '<div class="detail-info-item">' +
-                '<span class="info-label">규모</span>' +
-                '<span class="info-value">' + item.scale + '</span>' +
-            '</div>' +
-            '<div class="detail-info-item">' +
-                '<span class="info-label">역할</span>' +
-                '<span class="info-value">' + item.role + '</span>' +
-            '</div>' +
-            '<div class="detail-info-item">' +
-                '<span class="info-label">연도</span>' +
-                '<span class="info-value">' + item.year + '년</span>' +
+        if (item.detailImage) {
+            heroArea.innerHTML = '<div class="detail-hero-img">' +
+                '<img src="' + item.detailImage + '" alt="' + (item.imageAlt||item.name) + '" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#0A0F1C,#1a3055)\';this.style.display=\'none\'">' +
+                '<div class="img-overlay"></div>' +
+                titleBlock +
             '</div>';
+        } else {
+            heroArea.innerHTML = '<div class="detail-hero-fallback" data-type="' + dt + '">' +
+                '<div class="fb-icon"><i class="fa-solid ' + typeIcon(item.type) + '"></i></div>' +
+                '<span class="fb-label">' + item.type + '</span>' +
+                titleBlock +
+            '</div>';
+        }
 
+        /* Info grid with extended specs */
+        var infoItems =
+            '<div class="detail-info-item"><span class="info-label">사업유형</span><span class="info-value">' + item.type + '</span></div>' +
+            '<div class="detail-info-item"><span class="info-label">진행상태</span><span class="info-value">' + item.status + '</span></div>' +
+            '<div class="detail-info-item"><span class="info-label">위치</span><span class="info-value">' + item.district + '</span></div>' +
+            '<div class="detail-info-item"><span class="info-label">규모</span><span class="info-value">' + item.scale + '</span></div>' +
+            '<div class="detail-info-item"><span class="info-label">역할</span><span class="info-value">' + item.role + '</span></div>' +
+            '<div class="detail-info-item"><span class="info-label">연도</span><span class="info-value">' + item.year + '년</span></div>';
+
+        if (item.floorInfo) {
+            infoItems += '<div class="detail-info-item"><span class="info-label">층수</span><span class="info-value">' + item.floorInfo + '</span></div>';
+        }
+        if (item.floorAreaRatio) {
+            infoItems += '<div class="detail-info-item"><span class="info-label">용적률</span><span class="info-value">' + item.floorAreaRatio + '</span></div>';
+        }
+        if (item.grossFloorArea) {
+            infoItems += '<div class="detail-info-item"><span class="info-label">건축연면적</span><span class="info-value">' + item.grossFloorArea + '</span></div>';
+        }
+
+        /* Ensure even number of items for grid alignment */
+        var tempDiv = document.createElement('div');
+        tempDiv.innerHTML = infoItems;
+        if (tempDiv.children.length % 2 !== 0) {
+            infoItems += '<div class="detail-info-item"><span class="info-label">&nbsp;</span><span class="info-value">&nbsp;</span></div>';
+        }
+
+        document.getElementById('detailInfoGrid').innerHTML = infoItems;
         document.getElementById('detailDesc').textContent = item.description;
 
         var overlay = document.getElementById('detailOverlay');
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
-        var scrollbarW = window.innerWidth - document.documentElement.clientWidth;
-        document.body.style.paddingRight = scrollbarW + 'px';
+        document.body.style.paddingRight = (window.innerWidth - document.documentElement.clientWidth) + 'px';
     }
 
-    /* ── 상세 모달 닫기 ── */
     function closeDetail() {
-        var overlay = document.getElementById('detailOverlay');
-        overlay.classList.remove('open');
+        document.getElementById('detailOverlay').classList.remove('open');
         document.body.style.overflow = '';
         document.body.style.paddingRight = '';
     }
 
-    /* ── 이벤트 바인딩 ── */
+    /* ── Event Bindings ── */
     document.getElementById('filterType').addEventListener('change', renderAll);
     document.getElementById('filterStatus').addEventListener('change', renderAll);
-
     document.getElementById('detailCloseTop').addEventListener('click', closeDetail);
     document.getElementById('detailCloseBottom').addEventListener('click', closeDetail);
-
     document.getElementById('detailOverlay').addEventListener('click', function(e) {
         if (e.target === this) closeDetail();
     });
-
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') closeDetail();
     });
 
-    /* ── 전역 접근 (onclick 용) ── */
-    window.portfolioApp = {
-        openDetail: openDetail,
-        closeDetail: closeDetail
-    };
+    /* ── Global access ── */
+    window.portfolioApp = { openDetail: openDetail, closeDetail: closeDetail };
 
-    /* ── 초기 렌더 ── */
+    /* ── Init ── */
     renderFeatured();
     renderAll();
 
