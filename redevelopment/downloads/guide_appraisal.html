@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정비사업 감정평가 이해하기 | (주)세울엔지니어링</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A0F1C;
+    --navy-light: #141B2D;
+    --navy-mid: #1E2A42;
+    --gold: #C3A569;
+    --gold-light: #D4BC8A;
+    --gold-pale: #F5EDD8;
+    --text: #2C2C2C;
+    --text-light: #555;
+    --bg: #FAFAF8;
+    --white: #FFFFFF;
+    --border: #E0DDD5;
+    --success: #2E7D4F;
+    --warning: #B85C1F;
+    --info: #1A5FA0;
+  }
+  @page {
+    size: A4;
+    margin: 18mm 15mm 20mm 15mm;
+  }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Print Utilities ── */
+  .page-break { page-break-after: always; }
+  .no-break { page-break-inside: avoid; }
+  @media print {
+    body { background: white; font-size: 9.5pt; }
+    .container { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* ═══════════════════════════════════════
+     TITLE PAGE
+     ═══════════════════════════════════════ */
+  .title-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .title-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(195, 165, 105, 0.08);
+    border-radius: 50%;
+  }
+  .title-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -80px;
+    width: 500px;
+    height: 500px;
+    border: 1px solid rgba(195, 165, 105, 0.05);
+    border-radius: 50%;
+  }
+  .title-brand {
+    font-size: 12pt;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .title-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 24px auto;
+  }
+  .title-main {
+    font-size: 30pt;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .title-main em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .title-sub {
+    font-size: 14pt;
+    font-weight: 300;
+    color: var(--gold-light);
+    margin-top: 8px;
+    letter-spacing: 2px;
+  }
+  .title-meta {
+    margin-top: 60px;
+    font-size: 9.5pt;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.9;
+  }
+  .title-meta strong {
+    color: rgba(255,255,255,0.7);
+  }
+  .title-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 6px 24px;
+    border-radius: 3px;
+    font-size: 9pt;
+    letter-spacing: 3px;
+    margin-top: 40px;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION STYLES
+     ═══════════════════════════════════════ */
+  .content-area {
+    padding: 50px 0;
+  }
+  section {
+    margin-bottom: 56px;
+  }
+  .section-number {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 3px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 20pt;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .section-subtitle {
+    font-size: 10.5pt;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--gold);
+  }
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 28px 0 12px;
+  }
+  h4 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--navy-mid);
+    margin: 20px 0 8px;
+  }
+  p {
+    margin-bottom: 14px;
+    text-align: justify;
+  }
+
+  /* ── Info Box ── */
+  .info-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin: 20px 0;
+  }
+  .info-box.navy {
+    border-left-color: var(--navy);
+    background: #F4F5F8;
+  }
+  .info-box.warning {
+    border-left-color: var(--warning);
+    background: #FFF9F0;
+  }
+  .info-box.success {
+    border-left-color: var(--success);
+    background: #F0F8F3;
+  }
+  .info-box-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* ── Table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 10pt;
+  }
+  table thead th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 9.5pt;
+    letter-spacing: 0.5px;
+  }
+  table thead th:first-child { border-radius: 4px 0 0 0; }
+  table thead th:last-child { border-radius: 0 4px 0 0; }
+  table tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table tbody tr:nth-child(even) { background: #F8F8F6; }
+  table tbody tr:hover { background: var(--gold-pale); }
+  .highlight-cell {
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* ── List ── */
+  ul, ol {
+    margin: 12px 0 16px 20px;
+  }
+  ul li, ol li {
+    margin-bottom: 6px;
+    line-height: 1.7;
+  }
+
+  /* ── FAQ ── */
+  .faq-item {
+    margin: 24px 0;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .faq-question {
+    background: var(--navy);
+    color: var(--white);
+    padding: 14px 22px;
+    font-weight: 700;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  .faq-question span {
+    color: var(--gold);
+    margin-right: 10px;
+    font-size: 12pt;
+  }
+  .faq-answer {
+    padding: 18px 22px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .faq-answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ── Step Flow ── */
+  .step-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0;
+    align-items: center;
+  }
+  .step-item {
+    background: var(--navy);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 9.5pt;
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+  }
+  .step-arrow {
+    color: var(--gold);
+    font-size: 16pt;
+    font-weight: 700;
+  }
+
+  /* ── Footer ── */
+  .doc-footer {
+    margin-top: 60px;
+    padding: 30px 0;
+    border-top: 2px solid var(--navy);
+    text-align: center;
+    font-size: 9pt;
+    color: var(--text-light);
+  }
+  .doc-footer strong {
+    color: var(--navy);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ TITLE PAGE ═══════════ -->
+<div class="title-page">
+  <div class="title-brand">(주)세울엔지니어링</div>
+  <div class="title-divider"></div>
+  <h1 class="title-main">정비사업<br><em>감정평가</em><br>이해하기</h1>
+  <p class="title-sub">Understanding Appraisal in Urban Renewal</p>
+  <div class="title-meta">
+    <strong>발행</strong> (주)세울엔지니어링 정비사업팀<br>
+    <strong>기준</strong> 2026년 4월 현행 법령<br>
+    <strong>용도</strong> 조합원 교육 및 참고용
+  </div>
+  <div class="title-badge">Professional Guide</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<div class="container content-area">
+
+  <!-- ═══════════ 감정평가란 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 01</div>
+    <h2 class="section-title">감정평가란 무엇인가</h2>
+    <div class="section-subtitle">정비사업에서 감정평가의 의미, 법적 근거, 그리고 조합원에게 미치는 영향을 설명합니다.</div>
+
+    <h3>1. 감정평가의 정의</h3>
+    <p>감정평가란 「감정평가 및 감정평가사에 관한 법률」에 따라, 토지·건물 등 부동산의 경제적 가치를 판정하여 그 결과를 가액(금액)으로 표시하는 행위를 말합니다. 정비사업에서의 감정평가는 조합원이 보유한 종전 부동산과 새로 분양받을 종후 부동산의 가치를 결정하는 핵심 절차입니다.</p>
+
+    <h3>2. 정비사업에서 감정평가가 중요한 이유</h3>
+    <div class="info-box">
+      <div class="info-box-title">감정평가와 분담금의 관계</div>
+      <p>정비사업에서 조합원의 분담금은 다음과 같이 산출됩니다:</p>
+      <p><strong>분담금 = 종후자산 감정평가액(분양가) - 종전자산 감정평가액 + 기타부담금</strong></p>
+      <p>따라서 종전자산 감정평가액이 높을수록, 종후자산 감정평가액(분양가)이 낮을수록 조합원의 분담금이 줄어듭니다. 감정평가의 결과가 조합원 개개인의 경제적 이해에 직접적으로 영향을 미치는 이유입니다.</p>
+    </div>
+
+    <h3>3. 법적 근거</h3>
+    <table>
+      <thead>
+        <tr><th>관련 법령</th><th>주요 내용</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">도시정비법 제74조</td><td>관리처분계획의 수립 기준 및 감정평가 근거</td></tr>
+        <tr><td class="highlight-cell">도시정비법 제74조의2</td><td>감정평가업자 선정 방법 및 기준</td></tr>
+        <tr><td class="highlight-cell">감정평가법</td><td>감정평가의 원칙, 방법, 감정평가사의 의무</td></tr>
+        <tr><td class="highlight-cell">감정평가 실무기준</td><td>구체적인 평가 방법론 및 절차</td></tr>
+        <tr><td class="highlight-cell">서울시 가이드라인</td><td>정비사업 감정평가 관련 서울시 자체 기준</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 평가 시점 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 02</div>
+    <h2 class="section-title">감정평가 시점</h2>
+    <div class="section-subtitle">정비사업의 어느 단계에서, 어떤 목적으로 감정평가가 이루어지는지 정리합니다.</div>
+
+    <h3>정비사업 단계별 감정평가</h3>
+    <table>
+      <thead>
+        <tr><th>평가 시점</th><th>평가 대상</th><th>목적</th><th>기준 시점</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="highlight-cell">사업시행인가 단계</td>
+          <td>정비구역 내 토지·건물</td>
+          <td>사업시행계획 수립을 위한 기초 자료</td>
+          <td>사업시행인가 고시일</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">관리처분계획 수립</td>
+          <td>종전자산 (토지·건물·영업권 등)</td>
+          <td>조합원별 권리가액 산정</td>
+          <td>사업시행인가 고시일 기준</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">관리처분계획 변경</td>
+          <td>종전자산 (변경 사유 발생 시)</td>
+          <td>변경된 조건 반영</td>
+          <td>변경인가 신청일 기준</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">분양신청 시</td>
+          <td>종후자산 (신축 아파트 등)</td>
+          <td>분양가 결정 및 분담금 확정</td>
+          <td>분양시점 기준</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">청산 시</td>
+          <td>청산금 산정 대상 자산</td>
+          <td>입주 후 청산금 정산</td>
+          <td>준공인가 후 확정 시점</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box warning">
+      <div class="info-box-title">감정평가 기준시점의 중요성</div>
+      <p>감정평가의 기준시점은 부동산 가격에 결정적 영향을 미칩니다. 부동산 시장이 상승기인 경우 기준시점이 빠를수록 종전자산 평가액이 낮아져 조합원에게 불리할 수 있고, 반대로 하락기에는 기준시점이 빠를수록 유리합니다. 기준시점은 법령에 정해져 있으므로 임의 변경이 불가합니다.</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 평가 방법 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 03</div>
+    <h2 class="section-title">감정평가 방법</h2>
+    <div class="section-subtitle">감정평가에 적용되는 3가지 접근법과 정비사업에서의 구체적 적용 방법을 설명합니다.</div>
+
+    <h3>1. 감정평가 3대 접근법</h3>
+    <table>
+      <thead>
+        <tr><th>접근법</th><th>방법</th><th>적용 대상</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="highlight-cell">비교접근법<br>(거래사례비교법)</td>
+          <td>유사 부동산의 실제 거래 사례를 비교하여 평가</td>
+          <td>토지, 단독주택, 아파트 등 거래사례가 풍부한 경우</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">비용접근법<br>(원가법)</td>
+          <td>해당 부동산을 새로 취득하는 데 필요한 비용으로 평가</td>
+          <td>건물, 구축물 등 재조달원가 산정이 가능한 경우</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">수익접근법<br>(수익환원법)</td>
+          <td>해당 부동산에서 발생하는 수익을 기반으로 평가</td>
+          <td>상가, 오피스, 수익형 부동산 등</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2. 정비사업 종전자산 평가 방법</h3>
+    <h4>가. 토지 평가</h4>
+    <p>토지는 주로 <strong>거래사례비교법</strong>을 적용합니다. 인근 유사 토지의 실제 거래사례를 수집하고, 시점보정, 지역요인 비교, 개별요인 비교 등을 통해 평가 대상 토지의 가액을 산출합니다. 공시지가를 기준으로 하되, 실거래가 수준을 반영합니다.</p>
+
+    <h4>나. 건물 평가</h4>
+    <p>건물은 주로 <strong>원가법</strong>을 적용합니다. 동일한 건물을 신축하는 데 소요되는 재조달원가를 산출한 후, 경과연수에 따른 감가수정을 적용하여 현재 가치를 산출합니다.</p>
+
+    <div class="info-box navy">
+      <div class="info-box-title">건물 감가수정 방법</div>
+      <p><strong>건물 평가액 = 재조달원가 - 감가수정액</strong><br>
+      재조달원가: 현시점에서 동일 건물을 신축하는 비용<br>
+      감가수정: 물리적 감가(노후화) + 기능적 감가(구조 낙후) + 경제적 감가(환경 변화)</p>
+    </div>
+
+    <h4>다. 영업권·권리금 평가</h4>
+    <p>정비구역 내 상가의 영업권이나 권리금은 별도의 보상 대상이 될 수 있습니다. 수익환원법 또는 거래사례비교법을 적용하며, 영업 이익, 업종, 위치 등을 종합적으로 고려합니다.</p>
+
+    <h3>3. 감정평가업자 선정</h3>
+    <div class="info-box">
+      <div class="info-box-title">감정평가업자 선정 기준</div>
+      <p>정비사업의 감정평가는 2개 이상의 감정평가법인이 수행하며, 각 평가액의 산술평균으로 최종 가액을 결정합니다. 감정평가업자 1개는 조합이, 나머지 1개는 자치구청장이 선정합니다. 「도시정비법」 제74조의2에 따라 선정 절차를 준수해야 합니다.</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 종전/종후 차이 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 04</div>
+    <h2 class="section-title">종전자산 vs 종후자산 평가</h2>
+    <div class="section-subtitle">정비사업 감정평가의 핵심인 종전자산과 종후자산 평가의 차이와 관계를 상세히 설명합니다.</div>
+
+    <h3>1. 종전자산 평가</h3>
+    <p>종전자산이란 정비사업 시행 전 조합원이 보유하고 있는 토지·건물 등의 부동산을 말합니다. 관리처분계획 수립 시 종전자산의 감정평가를 통해 각 조합원의 권리가액을 산정합니다.</p>
+    <table>
+      <thead>
+        <tr><th>평가 대상</th><th>평가 방법</th><th>고려 사항</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">토지</td><td>거래사례비교법</td><td>위치, 면적, 형상, 용도지역, 접면도로</td></tr>
+        <tr><td class="highlight-cell">건물</td><td>원가법</td><td>구조, 면적, 경과연수, 관리상태</td></tr>
+        <tr><td class="highlight-cell">무허가건물</td><td>원가법 (일부)</td><td>무허가 건축물은 보상 범위 제한적</td></tr>
+        <tr><td class="highlight-cell">상가 권리금</td><td>수익환원법</td><td>영업이익, 입지, 업종 특성</td></tr>
+        <tr><td class="highlight-cell">지상권 등</td><td>거래사례비교법</td><td>잔여기간, 이용 현황</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2. 종후자산 평가</h3>
+    <p>종후자산이란 정비사업 완료 후 조합원이 분양받는 신축 아파트·상가 등의 부동산을 말합니다. 종후자산의 가치는 분양가를 기준으로 하며, 추정분양가와 확정분양가로 구분됩니다.</p>
+    <table>
+      <thead>
+        <tr><th>평가 대상</th><th>평가 방법</th><th>고려 사항</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">아파트</td><td>분양가 기준</td><td>전용면적, 층수, 향, 조망, 타입</td></tr>
+        <tr><td class="highlight-cell">상가</td><td>수익환원법/거래사례비교법</td><td>위치, 면적, 층수, 접면 조건</td></tr>
+        <tr><td class="highlight-cell">부대시설</td><td>원가법</td><td>주차장, 커뮤니티 등 공용시설</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3. 종전·종후 평가의 관계</h3>
+    <div class="info-box">
+      <div class="info-box-title">분담금 산출 공식</div>
+      <p><strong>분담금 = (종후자산 평가액 × 권리비율) - 종전자산 평가액</strong></p>
+      <p>여기서 권리비율은 전체 종전자산 대비 해당 조합원의 종전자산 비율입니다. 종전자산 평가액이 높을수록 권리비율이 커져 분담금이 줄고, 종후자산(분양가)이 높을수록 분담금이 늘어납니다.</p>
+    </div>
+
+    <div class="info-box warning">
+      <div class="info-box-title">주의: 추정분담금과 확정분담금의 차이</div>
+      <p>사업 초기에 제시되는 추정분담금은 가정치에 기반한 것으로, 관리처분계획 인가 시점의 확정분담금과 상당한 차이가 발생할 수 있습니다. 공사비 변동, 일반분양 시세 변화, 금리 변동 등에 따라 분담금이 크게 달라질 수 있으므로, 추정분담금에 과도한 기대를 갖지 않도록 해야 합니다.</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 이의신청 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 05</div>
+    <h2 class="section-title">이의신청 절차</h2>
+    <div class="section-subtitle">감정평가 결과에 이의가 있는 경우의 이의신청 절차와 방법을 상세히 안내합니다.</div>
+
+    <h3>이의신청 절차</h3>
+    <div class="step-flow">
+      <div class="step-item">감정평가<br>결과 열람</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">이의사유<br>확인·정리</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">이의신청서<br>작성·제출</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">조합<br>검토·회신</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">재감정평가<br>또는 조정</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">행정소송<br>(불복 시)</div>
+    </div>
+
+    <h3>1. 이의신청 사유</h3>
+    <ul>
+      <li><strong>평가기준 오류:</strong> 감정평가 기준시점, 평가 방법 등이 법령에 맞지 않는 경우</li>
+      <li><strong>물건 착오:</strong> 평가 대상 부동산의 면적, 구조, 용도 등이 실제와 다른 경우</li>
+      <li><strong>비교사례 부적정:</strong> 비교 대상으로 사용된 거래사례가 적절하지 않은 경우</li>
+      <li><strong>요인 비교 오류:</strong> 지역요인·개별요인 비교 과정에서 오류가 있는 경우</li>
+      <li><strong>감가수정 부적정:</strong> 건물의 감가수정이 과도하거나 불충분한 경우</li>
+    </ul>
+
+    <h3>2. 이의신청 방법</h3>
+    <div class="info-box navy">
+      <div class="info-box-title">이의신청서 기재 사항</div>
+      <ul>
+        <li>신청인 인적사항 (성명, 주소, 연락처)</li>
+        <li>평가 대상 부동산의 표시 (소재지, 지번, 면적)</li>
+        <li>감정평가 결과 (평가액, 평가일)</li>
+        <li>이의 사유 (구체적이고 명확하게 기술)</li>
+        <li>희망 평가액 및 근거 자료 (인근 거래사례, 공시가격 등)</li>
+        <li>증빙 서류 (등기부등본, 건축물대장, 참고자료 등)</li>
+      </ul>
+    </div>
+
+    <h3>3. 이의신청 기한</h3>
+    <table>
+      <thead>
+        <tr><th>절차</th><th>기한</th><th>비고</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">관리처분계획 열람</td><td>공람 공고일로부터 30일간</td><td>조합 사무실 및 인터넷 열람</td></tr>
+        <tr><td class="highlight-cell">이의신청</td><td>공람기간 내</td><td>서면으로 조합에 제출</td></tr>
+        <tr><td class="highlight-cell">조합 검토·회신</td><td>이의신청 접수일로부터 30일 이내</td><td>서면 회신 원칙</td></tr>
+        <tr><td class="highlight-cell">행정소송</td><td>관리처분계획 인가 고시일로부터 90일 이내</td><td>행정법원에 제소</td></tr>
+      </tbody>
+    </table>
+
+    <h3>4. 재감정평가</h3>
+    <div class="info-box success">
+      <div class="info-box-title">재감정평가가 인정되는 경우</div>
+      <p>이의신청의 사유가 타당한 경우, 조합은 재감정평가를 실시할 수 있습니다. 재감정평가는 기존 감정평가업자가 아닌 별도의 감정평가법인이 수행하며, 재감정 비용은 원칙적으로 조합이 부담합니다. 단, 감정평가 오류가 명백한 경우 기존 감정평가업자에게 비용을 구상할 수 있습니다.</p>
+    </div>
+
+    <div class="info-box warning">
+      <div class="info-box-title">행정소송 전 고려사항</div>
+      <p>감정평가 결과에 대한 행정소송은 시간과 비용이 많이 소요됩니다. 소송 기간 중에도 사업은 진행되므로, 이의신청 단계에서 충분한 근거 자료를 확보하여 조합과 협의하는 것이 바람직합니다. 소송 전 감정평가사 또는 부동산 전문 변호사와 상담하는 것을 권장합니다.</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ FAQ ═══════════ -->
+  <section>
+    <div class="section-number">FAQ</div>
+    <h2 class="section-title">자주 묻는 질문</h2>
+    <div class="section-subtitle">정비사업 감정평가에 관해 조합원들이 가장 자주 문의하는 질문과 답변입니다.</div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span>Q1.</span> 감정평가 결과는 언제 확인할 수 있나요?</div>
+      <div class="faq-answer">
+        <p>감정평가 결과는 관리처분계획 수립 후 공람(열람) 기간에 확인할 수 있습니다. 공람 기간은 30일이며, 조합 사무실을 방문하거나 클린업시스템을 통해 온라인으로 열람할 수 있습니다. 조합은 각 조합원에게 개별 통지서를 발송하여 본인의 종전자산 평가액과 예상 분담금을 안내합니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span>Q2.</span> 같은 면적인데 왜 감정평가액이 다른가요?</div>
+      <div class="faq-answer">
+        <p>토지와 건물의 감정평가는 면적만으로 결정되지 않습니다. 토지의 경우 <strong>위치(접면도로 유무, 도로 폭), 형상(정형/부정형), 이용 현황, 고저 차이</strong> 등 개별요인에 따라 가격이 달라집니다. 건물의 경우 <strong>구조(철근콘크리트/목조 등), 경과연수, 관리상태, 불법증축 여부</strong> 등에 따라 감가율이 다르게 적용됩니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span>Q3.</span> 무허가 건물도 감정평가를 받을 수 있나요?</div>
+      <div class="faq-answer">
+        <p>무허가 건물은 원칙적으로 감정평가 대상에서 제외됩니다. 그러나 「특정건축물 정리에 관한 특별조치법」에 따라 양성화된 건물이나, 정비구역 지정 이전부터 존재한 것이 확인되는 무허가 건물의 경우 일부 보상이 이루어질 수 있습니다. 다만 토지 가치에는 반영되므로, 토지 소유자라면 토지 감정평가를 통해 권리를 인정받을 수 있습니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span>Q4.</span> 감정평가액에 불만이 있으면 어떻게 하나요?</div>
+      <div class="faq-answer">
+        <p>관리처분계획 공람기간(30일) 내에 서면으로 이의신청을 하면 됩니다. 이의신청 시에는 구체적인 불만 사유와 함께 근거 자료(인근 거래사례, 공시가격 비교자료 등)를 첨부하는 것이 효과적입니다. 조합은 30일 이내에 검토 결과를 회신해야 하며, 결과에 불복하면 관리처분계획 인가 고시 후 90일 이내에 행정소송을 제기할 수 있습니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span>Q5.</span> 감정평가업자는 누가 선정하나요?</div>
+      <div class="faq-answer">
+        <p>정비사업의 감정평가는 2개 이상의 감정평가법인이 수행합니다. 하나는 조합 총회에서 선정하고, 나머지 하나는 관할 구청장이 선정합니다. 이렇게 2개 법인이 각각 독립적으로 평가한 후, 두 평가액의 산술평균으로 최종 감정가액을 결정합니다. 이는 평가의 공정성과 객관성을 확보하기 위한 제도적 장치입니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span>Q6.</span> 감정평가 비용은 누가 부담하나요?</div>
+      <div class="faq-answer">
+        <p>감정평가 비용은 사업비에 포함되며, 조합이 부담합니다. 다만 이 비용은 궁극적으로 사업비 총액에 반영되어 조합원 분담금에 영향을 미칩니다. 감정평가 수수료는 한국감정평가사협회의 보수 기준에 따라 산정되며, 평가 대상 부동산의 수와 규모에 따라 달라집니다.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span>Q7.</span> 감정평가 후 부동산 시세가 크게 변동하면 어떻게 되나요?</div>
+      <div class="faq-answer">
+        <p>감정평가 기준시점은 사업시행인가 고시일이므로, 이후의 시세 변동은 원칙적으로 반영되지 않습니다. 다만 관리처분계획 변경이 이루어지는 경우에는 변경 시점 기준으로 재감정평가가 실시될 수 있습니다. 사업 기간이 장기화되면서 시세가 크게 변동한 경우, 조합원 간 형평성 문제가 제기될 수 있으므로 전문가 자문을 받는 것이 좋습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <div class="doc-footer">
+    <strong>(주)세울엔지니어링</strong><br>
+    정비사업 감정평가 이해하기 | 2026년 4월 기준<br>
+    본 자료는 교육 및 참고 목적으로 작성되었으며, 구체적 사안에 대해서는 전문가 상담을 권장합니다.
+  </div>
+
+</div>
+
+</body>
+</html>

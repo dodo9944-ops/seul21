@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정비사업 회계처리 지침 | (주)세울엔지니어링</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A0F1C; --navy-light: #141B2D; --navy-mid: #1E2A42;
+    --gold: #C3A569; --gold-light: #D4BC8A; --gold-pale: #F5EDD8;
+    --text: #2C2C2C; --text-light: #555; --bg: #FAFAF8; --white: #FFFFFF;
+    --border: #E0DDD5; --success: #2E7D4F; --warning: #B85C1F; --info: #1A5FA0;
+  }
+  @page { size: A4; margin: 18mm 15mm 20mm 15mm; }
+  body {
+    font-family: 'Pretendard','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size: 10.5pt; line-height: 1.75; color: var(--text); background: var(--bg);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .page-break { page-break-after: always; }
+  .no-break { page-break-inside: avoid; }
+  @media print {
+    body { background: white; font-size: 9.5pt; }
+    .container { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    section { page-break-inside: avoid; }
+  }
+  .title-page {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    align-items: center; background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
+    color: var(--white); text-align: center; padding: 60px 40px; position: relative; overflow: hidden;
+  }
+  .title-page::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px; border: 1px solid rgba(195,165,105,0.08); border-radius: 50%;
+  }
+  .title-brand { font-size: 12pt; letter-spacing: 6px; color: var(--gold); margin-bottom: 12px; font-weight: 500; }
+  .title-divider { width: 80px; height: 2px; background: var(--gold); margin: 24px auto; }
+  .title-main { font-size: 30pt; font-weight: 800; line-height: 1.3; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .title-main em { font-style: normal; color: var(--gold); }
+  .title-sub { font-size: 14pt; font-weight: 300; color: var(--gold-light); margin-top: 8px; letter-spacing: 2px; }
+  .title-meta { margin-top: 60px; font-size: 9.5pt; color: rgba(255,255,255,0.5); line-height: 1.9; }
+  .title-meta strong { color: rgba(255,255,255,0.7); }
+  .title-badge {
+    display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+    padding: 6px 24px; border-radius: 3px; font-size: 9pt; letter-spacing: 3px; margin-top: 40px;
+  }
+  .content-area { padding: 50px 0; }
+  section { margin-bottom: 56px; }
+  .section-number {
+    display: inline-block; background: var(--navy); color: var(--gold);
+    font-size: 9pt; font-weight: 700; padding: 3px 14px; border-radius: 3px;
+    letter-spacing: 2px; margin-bottom: 12px;
+  }
+  .section-title { font-size: 20pt; font-weight: 800; color: var(--navy); margin-bottom: 8px; line-height: 1.35; }
+  .section-subtitle {
+    font-size: 10.5pt; color: var(--text-light); margin-bottom: 28px;
+    padding-bottom: 20px; border-bottom: 2px solid var(--gold);
+  }
+  h3 { font-size: 13pt; font-weight: 700; color: var(--navy); margin: 28px 0 12px; }
+  p { margin-bottom: 14px; text-align: justify; }
+  .info-box {
+    background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold);
+    border-radius: 4px; padding: 22px 26px; margin: 20px 0;
+  }
+  .info-box.navy { border-left-color: var(--navy); background: #F4F5F8; }
+  .info-box.warning { border-left-color: var(--warning); background: #FFF9F0; }
+  .info-box.success { border-left-color: var(--success); background: #F0F8F3; }
+  .info-box-title { font-size: 11pt; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .info-box p:last-child { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 10pt; }
+  table thead th {
+    background: var(--navy); color: var(--white); padding: 12px 16px; text-align: left;
+    font-weight: 600; font-size: 9.5pt;
+  }
+  table tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table tbody tr:nth-child(even) { background: #F8F7F4; }
+  table tbody tr:hover { background: var(--gold-pale); }
+  ul, ol { margin: 12px 0 12px 20px; }
+  li { margin-bottom: 6px; }
+  .checklist { list-style: none; margin-left: 0; }
+  .checklist li { padding-left: 24px; position: relative; margin-bottom: 10px; }
+  .checklist li::before {
+    content: ''; position: absolute; left: 0; top: 6px; width: 14px; height: 14px;
+    border: 2px solid var(--navy); border-radius: 3px;
+  }
+  .footer {
+    margin-top: 60px; padding: 30px 0; border-top: 2px solid var(--navy);
+    text-align: center; font-size: 9pt; color: var(--text-light);
+  }
+  .footer strong { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="title-brand">SEUL ENGINEERING</div>
+  <div class="title-divider"></div>
+  <h1 class="title-main">정비사업<br><em>회계처리</em> 지침</h1>
+  <p class="title-sub">Accounting Guidelines</p>
+  <div class="title-meta">
+    <strong>발행</strong> (주)세울엔지니어링<br>
+    <strong>문서번호</strong> SE-GD-ACCT-2026-001<br>
+    <strong>작성일</strong> 2026년 4월
+  </div>
+  <div class="title-badge">PROFESSIONAL GUIDE</div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="container content-area">
+
+  <!-- Section 1: 조합 회계 원칙 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 01</div>
+    <h2 class="section-title">조합 회계 원칙</h2>
+    <p class="section-subtitle">정비사업 조합의 투명한 회계 운영을 위한 기본 원칙</p>
+
+    <h3>1. 회계 기본 원칙</h3>
+    <p>정비사업조합은 「도시 및 주거환경정비법」 제86조에 따라 발생주의·복식부기 원칙에 의한 회계처리를 하여야 합니다. 조합의 모든 재정 활동은 객관적이고 검증 가능한 방식으로 기록되어야 합니다.</p>
+
+    <table>
+      <thead>
+        <tr><th>원칙</th><th>내용</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>발생주의</strong></td><td>현금 수수 시점이 아닌 거래 발생 시점에 수익·비용을 인식</td></tr>
+        <tr><td><strong>복식부기</strong></td><td>차변·대변 이중 기장으로 자기검증 체계 유지</td></tr>
+        <tr><td><strong>계속기업 전제</strong></td><td>사업 완료 시까지 조합이 계속 운영됨을 전제로 회계 처리</td></tr>
+        <tr><td><strong>기간별 보고</strong></td><td>회계연도(1.1~12.31) 기준 연 1회 이상 결산 및 보고</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2. 계정과목 체계</h3>
+    <p>정비사업 조합의 주요 계정과목은 다음과 같이 분류됩니다.</p>
+    <ul>
+      <li><strong>자산:</strong> 현금및예금, 분담금미수금, 토지, 건설중인자산</li>
+      <li><strong>부채:</strong> 사업비차입금, 미지급금, 예수보증금</li>
+      <li><strong>수익:</strong> 일반분양수입, 분담금수입, 이자수입</li>
+      <li><strong>비용:</strong> 공사비, 설계비, 감리비, 보상비, 이주비, 일반관리비</li>
+    </ul>
+  </section>
+
+  <!-- Section 2: 자금 집행 절차 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 02</div>
+    <h2 class="section-title">자금 집행 절차</h2>
+    <p class="section-subtitle">예산 편성부터 집행·정산까지의 표준 절차</p>
+
+    <h3>1. 예산 편성 및 승인</h3>
+    <ol>
+      <li>조합 임원이 사업계획에 따른 연간 예산안을 편성합니다.</li>
+      <li>대의원회 또는 총회에서 예산안을 심의·의결합니다.</li>
+      <li>의결된 예산은 조합원에게 서면 통지합니다.</li>
+    </ol>
+
+    <h3>2. 자금 집행 절차</h3>
+    <table>
+      <thead>
+        <tr><th>단계</th><th>담당</th><th>내용</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>지출요청</td><td>담당부서</td><td>세부 내역 및 증빙서류 첨부하여 지출 요청</td></tr>
+        <tr><td>검토·승인</td><td>조합장</td><td>예산 범위 확인, 관련 규정 검토 후 승인</td></tr>
+        <tr><td>자금 집행</td><td>회계담당</td><td>승인된 건에 한해 이체 실행 (2인 이상 공동인증)</td></tr>
+        <tr><td>증빙 보관</td><td>회계담당</td><td>세금계산서, 계약서, 이체내역 등 증빙서류 5년 보관</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box warning">
+      <div class="info-box-title">필수 준수사항</div>
+      <p>1건당 1,000만원 이상의 지출은 반드시 대의원회 사전 의결을 거쳐야 하며, 총사업비의 10% 이상 변경 시에는 총회 의결이 필요합니다. 이를 위반한 집행은 조합임원의 개인 책임이 될 수 있습니다.</p>
+    </div>
+  </section>
+
+  <!-- Section 3: 외부감사 기준 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 03</div>
+    <h2 class="section-title">외부감사 기준</h2>
+    <p class="section-subtitle">정비사업 조합 외부감사의 법적 기준과 요건</p>
+
+    <h3>1. 외부감사 의무 대상</h3>
+    <p>도정법 제112조에 따라 조합은 매 회계연도 종료 후 3개월 이내에 외부감사를 받아야 합니다. 감사인은 「주식회사 등의 외부감사에 관한 법률」에 따른 공인회계사 또는 감사반을 선임합니다.</p>
+
+    <table>
+      <thead>
+        <tr><th>구분</th><th>기준</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>감사 시기</td><td>회계연도 종료 후 3개월 이내</td></tr>
+        <tr><td>감사인 자격</td><td>공인회계사 또는 회계법인</td></tr>
+        <tr><td>감사보고서 공개</td><td>조합원 열람 제공, 시·군·구청 제출</td></tr>
+        <tr><td>비용 부담</td><td>조합 사업비에서 집행</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2. 감사 범위</h3>
+    <ul>
+      <li>재무제표(재무상태표, 운영성과표, 현금흐름표)의 적정성</li>
+      <li>사업비 집행의 적법성 및 예산 준수 여부</li>
+      <li>관련 계약의 적정성 및 이해충돌 여부</li>
+      <li>분담금 부과·징수의 적정성</li>
+    </ul>
+  </section>
+
+  <!-- Section 4: 감사 대응 체크리스트 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 04</div>
+    <h2 class="section-title">감사 대응 체크리스트</h2>
+    <p class="section-subtitle">외부감사 및 행정감사에 효과적으로 대비하기 위한 점검 목록</p>
+
+    <h3>사전 준비 체크리스트</h3>
+    <ul class="checklist">
+      <li>회계장부 및 전표가 빠짐없이 기장되어 있는가</li>
+      <li>모든 지출에 대한 증빙서류(세금계산서, 계약서 등)가 구비되어 있는가</li>
+      <li>통장 잔고와 장부 잔액이 일치하는가</li>
+      <li>총회·대의원회 의사록이 정비되어 있는가</li>
+      <li>예산 대비 집행 현황을 비교분석하였는가</li>
+      <li>관련 용역계약서 원본이 보관되어 있는가</li>
+      <li>분담금 부과·납부 내역이 정확하게 관리되고 있는가</li>
+      <li>이해관계자 거래 내역이 별도 관리되고 있는가</li>
+    </ul>
+
+    <div class="info-box success">
+      <div class="info-box-title">감사 대응 핵심</div>
+      <p>감사 시 가장 빈번하게 지적되는 사항은 증빙서류 미비, 총회 의결 없는 예산 초과 집행, 이해관계자 거래 미공개입니다. 사전에 이 세 가지를 중점적으로 점검하면 대부분의 감사 지적을 예방할 수 있습니다.</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    <strong>(주)세울엔지니어링</strong><br>
+    본 자료는 정비사업 실무 참고용으로 작성되었으며, 법적 효력을 갖지 않습니다.<br>
+    최신 법령 및 지자체 조례를 반드시 확인하시기 바랍니다.
+  </div>
+</div>
+
+</body>
+</html>
