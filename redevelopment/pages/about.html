@@ -202,14 +202,16 @@
     }
     .org-ceo-card .org-role { font-size: 12px; color: var(--gold); margin-bottom: 4px; letter-spacing: 2px; }
     .org-ceo-card .org-name { font-size: 20px; font-weight: 800; }
-    .org-connector { width: 2px; height: 24px; background: var(--gold); opacity: 0.4; }
-    .org-branch { position: relative; width: 100%; padding-top: 24px; }
+    .org-connector { width: 2px; height: 20px; background: var(--gold); opacity: 0.4; }
+    .org-branch { position: relative; width: 100%; }
     .org-branch::before {
-        content: ''; position: absolute; top: 0; left: calc(12.5% + 8px); right: calc(12.5% + 8px);
-        height: 2px; background: var(--gold); opacity: 0.3;
+        content: ''; position: absolute; top: 0;
+        left: 12.5%; right: 12.5%;
+        height: 2px; background: var(--gold); opacity: 0.35;
     }
     .org-departments {
         display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; width: 100%;
+        padding-top: 20px;
     }
     .org-dept-card {
         background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius);
@@ -217,8 +219,8 @@
     }
     .org-dept-card:hover { border-color: var(--gold); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
     .org-dept-card::before {
-        content: ''; position: absolute; top: -24px; left: 50%;
-        transform: translateX(-50%); width: 2px; height: 24px; background: var(--gold); opacity: 0.3;
+        content: ''; position: absolute; top: -20px; left: 50%;
+        transform: translateX(-50%); width: 2px; height: 20px; background: var(--gold); opacity: 0.35;
     }
     .org-dept-card h4 {
         font-size: 14px; font-weight: 800; color: var(--white); margin-bottom: 14px;
