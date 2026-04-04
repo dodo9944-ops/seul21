@@ -206,8 +206,13 @@
     .org-branch { position: relative; width: 100%; }
     .org-branch::before {
         content: ''; position: absolute; top: 0;
-        left: 12.5%; right: 12.5%;
+        left: calc(12.5% - 0px); right: calc(12.5% - 0px);
         height: 2px; background: var(--gold); opacity: 0.35;
+    }
+    .org-branch::after {
+        content: ''; position: absolute; top: -20px; left: 50%;
+        transform: translateX(-50%); width: 2px; height: 20px;
+        background: var(--gold); opacity: 0.35;
     }
     .org-departments {
         display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; width: 100%;
@@ -354,7 +359,7 @@
                     <div class="org-role">CEO</div>
                     <div class="org-name">대표이사</div>
                 </div>
-                <div class="org-connector"></div>
+                <div style="height:20px;"></div>
                 <div class="org-branch">
                 <div class="org-departments">
                     <div class="org-dept-card">
