@@ -380,6 +380,16 @@ const MOCK = {
     { id:'lib31', category:'관련판례', title:'서울시 도시정비법령 질의회신 사례집 (2024)', description:'[서울시] 정비사업 관련 법령 질의회신 최신 사례집 (35MB, 상세)', fileType:'pdf', fileSize:'35MB', date:'2026-04-04', downloads:0, tags:['서울시','질의회신','2024'] },
     { id:'lib33', category:'관련판례', title:'경기도 정비사업 질의회신 및 실태점검 매뉴얼', description:'[경기도] 정비사업 질의회신 & 실태점검 매뉴얼 (2020)', fileType:'pdf', fileSize:'6.9MB', date:'2026-04-04', downloads:0, tags:['경기도','질의회신','실태점검'] },
     { id:'lib34', category:'법령', title:'서울특별시 도시 및 주거환경정비 조례', description:'[서울시 공식] 서울시 도시정비 조례 전문 (2018 개정)', fileType:'pdf', fileSize:'122KB', date:'2026-04-04', downloads:0, tags:['서울시','조례','도시정비'] },
+    { id:'lib40', category:'법령', title:'서울시 도시정비조례 2024 개정 전문', description:'[서울시] 도시 및 주거환경정비 조례 2024.3 개정 전문 (정비계획 입안요청 신설)', fileType:'pdf', fileSize:'155KB', date:'2024-03-15', downloads:0, tags:['서울시','조례','2024','개정'] },
+    { id:'lib41', category:'관련판례', title:'도시정비법 질의회신 사례 및 판례집', description:'[경기도] 도시 및 주거환경정비법 주요 질의회신 사례 및 관련 판례 종합 (22MB)', fileType:'pdf', fileSize:'22MB', date:'2024-06-01', downloads:0, tags:['질의회신','판례','도시정비법','종합'] },
+    { id:'lib42', category:'가이드', title:'제주도 재건축·재개발 업무편람 2025', description:'[제주도] 재건축·재개발 실무 업무편람 — 토지수용, 매도청구, 감정평가 등 포함', fileType:'pdf', fileSize:'2.9MB', date:'2025-01-01', downloads:0, tags:['제주도','업무편람','재건축','재개발'] },
+    { id:'lib43', category:'관련판례', title:'해석례로 읽는 건축법 2024', description:'[건축규제혁신센터] 2024년 건축법 해석례 종합 — 정비사업 건축심의·인허가 참고 (10MB)', fileType:'pdf', fileSize:'10MB', date:'2024-12-01', downloads:0, tags:['건축법','해석례','2024','인허가'] },
+    { id:'lib44', category:'관련판례', title:'해석례로 읽는 건축법 2023', description:'[건축규제혁신센터] 2023년 건축법 해석례 종합 (6.5MB)', fileType:'pdf', fileSize:'6.5MB', date:'2023-12-01', downloads:0, tags:['건축법','해석례','2023'] },
+    { id:'lib45', category:'지침', title:'서울시 공공지원 정비사업 조합 표준정관 2024', description:'[서울시 고시 제2024-539호] 공공지원 정비사업 조합 표준정관 전문', fileType:'pdf', fileSize:'1MB', date:'2024-11-08', downloads:0, tags:['서울시','표준정관','공공지원','조합'] },
+    { id:'lib46', category:'지침', title:'건설공사 표준시장단가 2025 상반기', description:'[국토부/한국건설기술연구원] 2025년 상반기 적용 건설공사 표준시장단가 (공사비 산정 기준)', fileType:'pdf', fileSize:'3.3MB', date:'2025-01-01', downloads:0, tags:['표준시장단가','공사비','2025','국토부'] },
+    { id:'lib48', category:'주요뉴스', title:'서울시 정비사업 사업성 개선 및 기본계획 재정비 (2024.8)', description:'[서울시 보도자료] 정비사업 사업성 개선해 신속 추진, 기본계획 재정비 발표', fileType:'pdf', fileSize:'1.4MB', date:'2024-08-22', downloads:0, tags:['서울시','사업성','기본계획','2024'] },
+    { id:'lib49', category:'가이드', title:'서울시 공공건축물 건립 공사비 책정 가이드라인 2024', description:'[서울시 기술심사담당관] 공공건축물 건립 공사비 책정 기준 (정비사업 공사비 참고)', fileType:'pdf', fileSize:'803KB', date:'2024-12-01', downloads:0, tags:['서울시','공사비','가이드라인','2024'] },
+    { id:'lib50', category:'가이드', title:'LH 2025 업무보고', description:'[LH] 2025년 한국토지주택공사 주요 업무계획 보고 (정비사업 지원 포함)', fileType:'pdf', fileSize:'672KB', date:'2025-01-01', downloads:0, tags:['LH','업무계획','2025','공공'] },
     { id:'news0404', category:'주요뉴스', title:'[일일 주요뉴스] 2026.04.04 재개발·재건축·정비사업 브리핑', description:'압여목성 토허구역 1년 연장 / 소규모정비 동의율 완화 시행 / 마포구 정비사업 아카데미 / 정비사업 신탁사 책임 강화', fileType:'pdf', fileSize:'웹문서', date:'2026-04-04', downloads:0, tags:['일일브리핑','토허구역','소규모정비','2026-04-04'] }
   ],
 
