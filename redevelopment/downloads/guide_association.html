@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조합설립인가 신청 완전 가이드 | (주)세울엔지니어링</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A0F1C;
+    --navy-light: #141B2D;
+    --navy-mid: #1E2A42;
+    --gold: #C3A569;
+    --gold-light: #D4BC8A;
+    --gold-pale: #F5EDD8;
+    --text: #2C2C2C;
+    --text-light: #555;
+    --bg: #FAFAF8;
+    --white: #FFFFFF;
+    --border: #E0DDD5;
+    --success: #2E7D4F;
+    --warning: #B85C1F;
+    --info: #1A5FA0;
+  }
+  @page {
+    size: A4;
+    margin: 18mm 15mm 20mm 15mm;
+  }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Print Utilities ── */
+  .page-break { page-break-after: always; }
+  .no-break { page-break-inside: avoid; }
+  @media print {
+    body { background: white; font-size: 9.5pt; }
+    .container { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* ═══════════════════════════════════════
+     TITLE PAGE
+     ═══════════════════════════════════════ */
+  .title-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .title-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(195, 165, 105, 0.08);
+    border-radius: 50%;
+  }
+  .title-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -80px;
+    width: 500px;
+    height: 500px;
+    border: 1px solid rgba(195, 165, 105, 0.05);
+    border-radius: 50%;
+  }
+  .title-brand {
+    font-size: 12pt;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .title-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 24px auto;
+  }
+  .title-main {
+    font-size: 30pt;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .title-main em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .title-sub {
+    font-size: 14pt;
+    font-weight: 300;
+    color: var(--gold-light);
+    margin-top: 8px;
+    letter-spacing: 2px;
+  }
+  .title-meta {
+    margin-top: 60px;
+    font-size: 9.5pt;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.9;
+  }
+  .title-meta strong {
+    color: rgba(255,255,255,0.7);
+  }
+  .title-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 6px 24px;
+    border-radius: 3px;
+    font-size: 9pt;
+    letter-spacing: 3px;
+    margin-top: 40px;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION STYLES
+     ═══════════════════════════════════════ */
+  .content-area {
+    padding: 50px 0;
+  }
+  section {
+    margin-bottom: 56px;
+  }
+  .section-number {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 3px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 20pt;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .section-subtitle {
+    font-size: 10.5pt;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--gold);
+  }
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 28px 0 12px;
+  }
+  p {
+    margin-bottom: 14px;
+    text-align: justify;
+  }
+
+  /* ── Info Box ── */
+  .info-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin: 20px 0;
+  }
+  .info-box.navy {
+    border-left-color: var(--navy);
+    background: #F4F5F8;
+  }
+  .info-box.warning {
+    border-left-color: var(--warning);
+    background: #FFF9F0;
+  }
+  .info-box.success {
+    border-left-color: var(--success);
+    background: #F0F8F3;
+  }
+  .info-box-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* ── Table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 10pt;
+  }
+  table thead th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 9.5pt;
+    letter-spacing: 0.5px;
+  }
+  table thead th:first-child { border-radius: 4px 0 0 0; }
+  table thead th:last-child { border-radius: 0 4px 0 0; }
+  table tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table tbody tr:nth-child(even) { background: #F8F8F6; }
+  table tbody tr:hover { background: var(--gold-pale); }
+  .highlight-cell {
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* ── Checklist ── */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 16px;
+    border-bottom: 1px solid #EEE;
+    gap: 12px;
+    line-height: 1.6;
+  }
+  .checklist li:nth-child(odd) { background: #FAFAF8; }
+  .checklist li:nth-child(even) { background: var(--white); }
+  .check-box {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--navy-mid);
+    border-radius: 3px;
+    margin-top: 3px;
+  }
+  .check-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--navy);
+    color: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8.5pt;
+    font-weight: 700;
+  }
+  .check-text {
+    flex: 1;
+  }
+  .check-text strong {
+    color: var(--navy);
+  }
+  .check-text .note {
+    display: block;
+    font-size: 9pt;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+
+  /* ── Flowchart ── */
+  .flowchart {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin: 32px 0;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #F8F9FC 0%, #F2F0EB 100%);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .flow-step {
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .flow-box {
+    background: var(--navy);
+    color: var(--white);
+    padding: 14px 18px;
+    border-radius: 6px;
+    font-size: 10pt;
+    font-weight: 600;
+    min-width: 100px;
+    position: relative;
+  }
+  .flow-box.gold {
+    background: var(--gold);
+    color: var(--navy);
+  }
+  .flow-box.outline {
+    background: var(--white);
+    color: var(--navy);
+    border: 2px solid var(--navy);
+  }
+  .flow-label {
+    font-size: 8pt;
+    color: var(--text-light);
+    margin-top: 6px;
+  }
+  .flow-arrow {
+    font-size: 18pt;
+    color: var(--gold);
+    padding: 0 6px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .flow-arrow-down {
+    width: 100%;
+    text-align: center;
+    font-size: 18pt;
+    color: var(--gold);
+    padding: 6px 0;
+    font-weight: 700;
+  }
+
+  /* ── Numbered Cards ── */
+  .caution-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 24px 0;
+  }
+  @media (max-width: 600px) {
+    .caution-list { grid-template-columns: 1fr; }
+  }
+  .caution-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+  .caution-card:hover {
+    box-shadow: 0 2px 12px rgba(10,15,28,0.08);
+  }
+  .caution-num {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--navy);
+    color: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11pt;
+    font-weight: 800;
+  }
+  .caution-content {
+    flex: 1;
+  }
+  .caution-content strong {
+    display: block;
+    font-size: 10.5pt;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .caution-content p {
+    font-size: 9.5pt;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    position: relative;
+    padding-left: 36px;
+    margin: 28px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--gold);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+    padding: 18px 22px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -29px;
+    top: 22px;
+    width: 12px;
+    height: 12px;
+    background: var(--gold);
+    border: 3px solid var(--navy);
+    border-radius: 50%;
+  }
+  .timeline-item h4 {
+    font-size: 11pt;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .timeline-item .duration {
+    display: inline-block;
+    background: var(--gold-pale);
+    color: var(--navy);
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 8.5pt;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .timeline-item p {
+    font-size: 9.5pt;
+    color: var(--text-light);
+    margin: 0;
+  }
+
+  /* ── Cost Table ── */
+  .cost-summary {
+    background: var(--navy);
+    color: var(--white);
+    padding: 24px 30px;
+    border-radius: 6px;
+    margin: 24px 0;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .cost-item .cost-label {
+    font-size: 9pt;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+  .cost-item .cost-value {
+    font-size: 18pt;
+    font-weight: 800;
+    color: var(--gold);
+  }
+  .cost-item .cost-note {
+    font-size: 8pt;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    padding: 40px 0;
+    margin-top: 60px;
+    font-size: 9pt;
+    line-height: 2;
+  }
+  .footer-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  .footer-brand {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .footer-legal {
+    font-size: 8pt;
+    color: rgba(255,255,255,0.35);
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+  }
+  .footer a {
+    color: var(--gold-light);
+    text-decoration: none;
+  }
+
+  /* ── Utilities ── */
+  .text-gold { color: var(--gold); }
+  .text-navy { color: var(--navy); }
+  .fw-700 { font-weight: 700; }
+  .mt-12 { margin-top: 12px; }
+  .mt-20 { margin-top: 20px; }
+  .mb-8 { margin-bottom: 8px; }
+  .small { font-size: 9pt; color: var(--text-light); }
+
+  /* ── Print adjustments ── */
+  @media print {
+    .title-page {
+      min-height: auto;
+      padding: 120px 40px;
+      page-break-after: always;
+    }
+    .flowchart { flex-wrap: wrap; }
+    .caution-list { grid-template-columns: 1fr; }
+    .cost-summary { flex-direction: column; }
+    .footer { page-break-inside: avoid; }
+    section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     TITLE PAGE
+     ═══════════════════════════════════════════════ -->
+<div class="title-page">
+  <div class="title-brand">(주)세울엔지니어링</div>
+  <div class="title-divider"></div>
+  <h1 class="title-main">조합설립인가 신청<br><em>완전 가이드</em></h1>
+  <p class="title-sub">ASSOCIATION ESTABLISHMENT GUIDE</p>
+  <div class="title-divider"></div>
+  <div class="title-meta">
+    <strong>도시정비사업 조합설립 실무 안내서</strong><br>
+    재개발 &middot; 재건축 추진위원회를 위한 단계별 가이드<br>
+    <br>
+    발행일: 2026년 4월 &nbsp;|&nbsp; 개정: 제3판
+  </div>
+  <div class="title-badge">Professional Reference</div>
+</div>
+
+<div class="content-area">
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 1: 조합설립이란
+     ═══════════════════════════════════════════════ -->
+<section id="sec1">
+  <div class="section-number">SECTION 01</div>
+  <h2 class="section-title">조합설립이란</h2>
+  <p class="section-subtitle">도시정비사업의 시행 주체가 되는 조합의 법적 설립 절차를 이해합니다.</p>
+
+  <p>
+    <strong>조합설립인가</strong>란 「도시 및 주거환경정비법」(이하 '도정법')에 따라 정비구역 내
+    토지등소유자가 정비사업을 시행하기 위해 <strong>법인격을 갖춘 조합</strong>을 설립하고,
+    관할 행정청(시장 &middot; 군수 &middot; 구청장)으로부터 인가를 받는 행정행위입니다.
+  </p>
+
+  <div class="info-box">
+    <div class="info-box-title">왜 조합설립이 중요한가?</div>
+    <p>
+      조합설립인가는 정비사업의 <strong>법적 시행 주체</strong>를 확정짓는 핵심 단계입니다.
+      인가 이전에는 추진위원회 단계로서 법적 권한이 제한적이나, 조합설립인가 이후에는
+      사업시행인가 신청, 관리처분계획 수립 등 본격적인 사업 추진이 가능합니다.
+    </p>
+  </div>
+
+  <h3>조합의 법적 성격</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">구분</th>
+        <th>내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="highlight-cell">법인 유형</td>
+        <td>도정법상 특수법인 (비영리법인의 성격)</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">설립 근거</td>
+        <td>도시 및 주거환경정비법 제35조</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">구성원</td>
+        <td>정비구역 내 토지등소유자 (조합원)</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">주요 기관</td>
+        <td>총회, 대의원회, 이사회 (조합장 &middot; 이사 &middot; 감사)</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">존속 기간</td>
+        <td>설립인가일 ~ 청산종결 등기 완료 시</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box navy">
+    <div class="info-box-title">추진위원회 vs 조합</div>
+    <p>
+      <strong>추진위원회</strong>는 조합설립을 준비하는 임시기구로 법인격이 없습니다.
+      반면 <strong>조합</strong>은 설립인가 후 법인등기를 마치면 독립된 법인격을 취득하여
+      계약 체결, 소송 수행, 재산 보유 등 법률행위의 주체가 됩니다.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 2: 법적 근거
+     ═══════════════════════════════════════════════ -->
+<section id="sec2">
+  <div class="section-number">SECTION 02</div>
+  <h2 class="section-title">법적 근거</h2>
+  <p class="section-subtitle">도시 및 주거환경정비법 제35조를 중심으로 관련 법령을 정리합니다.</p>
+
+  <div class="info-box">
+    <div class="info-box-title">도정법 제35조 (조합설립인가 등)</div>
+    <p>
+      정비구역에서 조합을 설립하려는 경우에는 토지등소유자의 동의를 받아
+      <strong>시장 &middot; 군수등의 인가</strong>를 받아야 한다. 인가받은 사항을 변경하고자
+      하는 때에도 또한 같다.
+    </p>
+  </div>
+
+  <h3>주요 관련 조문</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:25%">조문</th>
+        <th style="width:35%">제목</th>
+        <th>핵심 내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="highlight-cell">제2조</td>
+        <td>정의</td>
+        <td>정비사업, 토지등소유자 등 주요 용어 정의</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">제31조</td>
+        <td>추진위원회의 구성</td>
+        <td>조합설립추진위원회 승인 절차 및 기능</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">제34조</td>
+        <td>추진위원회의 조합설립인가 신청</td>
+        <td>추진위원회의 조합설립 관련 업무 범위</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">제35조</td>
+        <td>조합설립인가 등</td>
+        <td>동의율 기준, 인가 요건, 변경인가 사항</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">제36조</td>
+        <td>조합설립인가의 특례</td>
+        <td>공공재개발 등 특례 조항</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">제38조</td>
+        <td>조합의 법인격</td>
+        <td>설립등기 의무, 법인격 취득 시점</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">제39조</td>
+        <td>조합 임원</td>
+        <td>조합장, 이사, 감사의 선임 및 자격</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">시행령 제30조</td>
+        <td>인가 신청 서류</td>
+        <td>첨부서류 목록 및 제출 방법</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box warning">
+    <div class="info-box-title">실무 유의</div>
+    <p>
+      도정법은 수시 개정되므로 반드시 <strong>최신 법령</strong>을 확인해야 합니다.
+      특히 동의율 산정 방법, 전자동의 허용 여부, 공공참여 관련 조항은
+      최근 개정에서 변경이 빈번하니 국가법령정보센터(law.go.kr)에서 현행 조문을 확인하시기 바랍니다.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 3: 동의율 기준
+     ═══════════════════════════════════════════════ -->
+<section id="sec3">
+  <div class="section-number">SECTION 03</div>
+  <h2 class="section-title">동의율 기준</h2>
+  <p class="section-subtitle">사업 유형별 조합설립에 필요한 법정 동의율을 정리합니다.</p>
+
+  <h3>재개발사업 (주거환경개선사업 포함)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">동의 요건</th>
+        <th style="width:25%">기준</th>
+        <th>비고</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="highlight-cell">토지등소유자 수</td>
+        <td><strong style="color:#C3A569; font-size:13pt;">3/4 이상</strong></td>
+        <td>정비구역 내 전체 토지등소유자 기준</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">토지면적</td>
+        <td><strong style="color:#C3A569; font-size:13pt;">1/2 이상</strong></td>
+        <td>정비구역 내 전체 토지면적 기준</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box success">
+    <div class="info-box-title">재개발 동의율 핵심</div>
+    <p>
+      재개발사업은 <strong>인(人) 기준 75%</strong>와 <strong>면적 기준 50%</strong>를
+      모두 충족해야 합니다. 하나라도 미달하면 인가 신청이 불가합니다.
+    </p>
+  </div>
+
+  <h3>재건축사업</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">동의 요건</th>
+        <th style="width:25%">기준</th>
+        <th>비고</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="highlight-cell">구분소유자 수</td>
+        <td><strong style="color:#C3A569; font-size:13pt;">3/4 이상</strong></td>
+        <td>각 동별 과반수 + 전체 3/4 이상</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">토지면적</td>
+        <td><strong style="color:#C3A569; font-size:13pt;">3/4 이상</strong></td>
+        <td>정비구역 내 전체 토지면적 기준</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box success">
+    <div class="info-box-title">재건축 동의율 핵심</div>
+    <p>
+      재건축사업은 <strong>각 동(棟)별 구분소유자의 과반수 동의</strong>와 함께,
+      전체 구분소유자의 3/4 이상 및 토지면적의 3/4 이상 동의를 모두 충족해야 합니다.
+      재개발보다 <strong>면적 기준이 더 엄격</strong>(1/2 → 3/4)한 점에 유의하십시오.
+    </p>
+  </div>
+
+  <h3>동의율 비교표</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>사업 유형</th>
+        <th>소유자 수 동의</th>
+        <th>토지면적 동의</th>
+        <th>추가 요건</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="highlight-cell">재개발</td>
+        <td>3/4 이상 (75%)</td>
+        <td>1/2 이상 (50%)</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">재건축</td>
+        <td>3/4 이상 (75%)</td>
+        <td>3/4 이상 (75%)</td>
+        <td>각 동별 과반수</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box warning">
+    <div class="info-box-title">동의율 산정 시 주의사항</div>
+    <p>
+      &bull; 1인이 다수 필지를 소유한 경우 <strong>인 기준 1인</strong>으로 산정<br>
+      &bull; 수인 공유 토지는 공유자 수를 <strong>1인</strong>으로 산정 (대표 동의)<br>
+      &bull; 국 &middot; 공유지의 소유자(국가 &middot; 지자체)도 토지등소유자에 포함<br>
+      &bull; 동의서에는 <strong>인감증명서</strong>를 반드시 첨부 (전자동의 시 본인확인 서류)<br>
+      &bull; 동의 철회는 조합설립인가 <strong>신청 전</strong>까지만 가능
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 4: 필요 서류 체크리스트
+     ═══════════════════════════════════════════════ -->
+<section id="sec4">
+  <div class="section-number">SECTION 04</div>
+  <h2 class="section-title">필요 서류 체크리스트</h2>
+  <p class="section-subtitle">조합설립인가 신청 시 준비해야 할 서류를 빠짐없이 확인합니다.</p>
+
+  <div class="info-box navy">
+    <div class="info-box-title">활용 안내</div>
+    <p>
+      아래 체크리스트를 인쇄하여 서류 준비 상황을 관리하십시오.
+      관할 지자체별로 추가 서류를 요구할 수 있으므로 사전에 담당 부서에 확인이 필요합니다.
+    </p>
+  </div>
+
+  <h3>기본 신청 서류</h3>
+  <ul class="checklist">
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">1</div>
+      <div class="check-text">
+        <strong>조합설립인가 신청서</strong>
+        <span class="note">관할 지자체 소정 양식 사용, 조합장 직인 날인</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">2</div>
+      <div class="check-text">
+        <strong>정관</strong>
+        <span class="note">도정법 제40조에 따른 필수 기재사항 포함, 창립총회 의결본</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">3</div>
+      <div class="check-text">
+        <strong>조합원 명부</strong>
+        <span class="note">성명, 주소, 소유 부동산 내역, 연락처 기재</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">4</div>
+      <div class="check-text">
+        <strong>토지등소유자의 조합설립 동의서</strong>
+        <span class="note">법정 동의율 충족 확인, 인감증명서 첨부 필수</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">5</div>
+      <div class="check-text">
+        <strong>창립총회 의사록</strong>
+        <span class="note">공증 필수, 정관 승인 &middot; 임원 선출 &middot; 사업계획 의결 내용 포함</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">6</div>
+      <div class="check-text">
+        <strong>토지 &middot; 건물 등기사항증명서</strong>
+        <span class="note">정비구역 내 모든 필지 및 건물, 발행일 3개월 이내</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">7</div>
+      <div class="check-text">
+        <strong>토지대장 &middot; 건축물대장</strong>
+        <span class="note">정비구역 내 전체 필지, 건축물대장은 총괄표제부 포함</span>
+      </div>
+    </li>
+  </ul>
+
+  <h3>사업 관련 서류</h3>
+  <ul class="checklist">
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">8</div>
+      <div class="check-text">
+        <strong>정비사업비 개략적 추산서</strong>
+        <span class="note">공사비, 설계비, 보상비, 제세공과금 등 항목별 추산</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">9</div>
+      <div class="check-text">
+        <strong>조합설립동의서에 사용된 인감증명서</strong>
+        <span class="note">동의서 작성일 기준 3개월 이내 발급본, 원본 제출</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">10</div>
+      <div class="check-text">
+        <strong>동의율 산정 총괄표</strong>
+        <span class="note">인 기준 &middot; 면적 기준 동의율 산정 근거 자료</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">11</div>
+      <div class="check-text">
+        <strong>정비구역 위치도 및 구역도</strong>
+        <span class="note">축척 1/1,000 이상, 정비구역 경계 표시</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">12</div>
+      <div class="check-text">
+        <strong>조합 임원 선출 관련 서류</strong>
+        <span class="note">임원 후보 자격 증빙, 취임승낙서, 인감증명서</span>
+      </div>
+    </li>
+  </ul>
+
+  <h3>추가 확인 서류</h3>
+  <ul class="checklist">
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">13</div>
+      <div class="check-text">
+        <strong>추진위원회 운영 경비 정산서</strong>
+        <span class="note">추진위원회 운영 기간 수입 &middot; 지출 내역 정리</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">14</div>
+      <div class="check-text">
+        <strong>안전진단 결과보고서 (재건축의 경우)</strong>
+        <span class="note">적정성 검토 완료 통보서 포함</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">15</div>
+      <div class="check-text">
+        <strong>건축계획 개요서</strong>
+        <span class="note">건축 규모, 동수, 세대수, 용적률, 건폐율 등 기재</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">16</div>
+      <div class="check-text">
+        <strong>총회 참석자 명부 및 위임장</strong>
+        <span class="note">창립총회 참석자 서명부, 대리 참석 위임장 원본</span>
+      </div>
+    </li>
+    <li>
+      <div class="check-box"></div>
+      <div class="check-num">17</div>
+      <div class="check-text">
+        <strong>기타 관할 지자체 요구 서류</strong>
+        <span class="note">사전 협의를 통해 추가 요청 서류 확인 필요</span>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 5: 절차 흐름도
+     ═══════════════════════════════════════════════ -->
+<section id="sec5">
+  <div class="section-number">SECTION 05</div>
+  <h2 class="section-title">절차 흐름도</h2>
+  <p class="section-subtitle">조합설립인가의 전체 진행 과정을 단계별로 이해합니다.</p>
+
+  <div class="flowchart">
+    <!-- Row 1 -->
+    <div class="flow-step">
+      <div class="flow-box outline">동의서 징구</div>
+      <div class="flow-label">법정 동의율 확보</div>
+    </div>
+    <div class="flow-arrow">&#9654;</div>
+    <div class="flow-step">
+      <div class="flow-box">창립총회 개최</div>
+      <div class="flow-label">정관의결 &middot; 임원선출</div>
+    </div>
+    <div class="flow-arrow">&#9654;</div>
+    <div class="flow-step">
+      <div class="flow-box">인가 신청</div>
+      <div class="flow-label">서류 접수</div>
+    </div>
+    <div class="flow-arrow">&#9654;</div>
+    <div class="flow-step">
+      <div class="flow-box outline">서류 보완</div>
+      <div class="flow-label">행정청 검토</div>
+    </div>
+    <div class="flow-arrow">&#9654;</div>
+    <div class="flow-step">
+      <div class="flow-box gold">설립 인가</div>
+      <div class="flow-label">인가 고시</div>
+    </div>
+    <div class="flow-arrow">&#9654;</div>
+    <div class="flow-step">
+      <div class="flow-box">법인 등기</div>
+      <div class="flow-label">법인격 취득</div>
+    </div>
+  </div>
+
+  <h3>각 단계별 상세</h3>
+
+  <div class="info-box">
+    <div class="info-box-title">STEP 1. 동의서 징구</div>
+    <p>
+      추진위원회 주관으로 토지등소유자를 대상으로 조합설립 동의서를 징구합니다.
+      동의서에는 정관 초안, 사업 개요, 조합비 부담 등의 내용이 포함되어야 하며,
+      동의자의 <strong>인감도장 날인 + 인감증명서 첨부</strong>가 필수입니다.
+    </p>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">STEP 2. 창립총회 개최</div>
+    <p>
+      법정 동의율을 확보한 후, 추진위원회는 창립총회를 소집합니다.
+      창립총회에서는 ① 정관 승인, ② 조합 임원(조합장 &middot; 이사 &middot; 감사) 선출,
+      ③ 대의원 선출, ④ 사업 시행 계획 의결 등을 진행합니다.
+      의사록은 <strong>공증</strong>을 받아야 합니다.
+    </p>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">STEP 3. 인가 신청</div>
+    <p>
+      창립총회 후, SECTION 04의 체크리스트에 따라 필요 서류를 구비하여
+      관할 시장 &middot; 군수 &middot; 구청장에게 조합설립인가를 신청합니다.
+    </p>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">STEP 4. 서류 보완</div>
+    <p>
+      행정청은 접수된 서류를 검토하여 미비한 사항이 있을 경우 <strong>보완 요구</strong>를 합니다.
+      통상 1~3회의 보완 과정을 거치며, 보완 기간은 사업 소요기간에 포함됩니다.
+      신속한 보완이 전체 일정 단축의 핵심입니다.
+    </p>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">STEP 5. 설립 인가</div>
+    <p>
+      서류 검토가 완료되면 행정청은 조합설립인가 처분을 하고, 이를 <strong>관보 또는 공보에 고시</strong>합니다.
+      인가서가 교부되면 조합은 법적 효력을 갖추게 됩니다.
+    </p>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">STEP 6. 법인 등기</div>
+    <p>
+      설립인가일로부터 <strong>30일 이내</strong>에 관할 등기소에 법인설립등기를 완료해야 합니다.
+      등기 사항: 명칭, 사무소 소재지, 설립목적, 임원 성명 &middot; 주소, 설립인가 연월일 등.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 6: 주의사항 10가지
+     ═══════════════════════════════════════════════ -->
+<section id="sec6">
+  <div class="section-number">SECTION 06</div>
+  <h2 class="section-title">주의사항 10가지</h2>
+  <p class="section-subtitle">조합설립 과정에서 반드시 유의해야 할 실무 포인트입니다.</p>
+
+  <div class="caution-list">
+    <div class="caution-card">
+      <div class="caution-num">1</div>
+      <div class="caution-content">
+        <strong>동의율 산정 오류 방지</strong>
+        <p>국 &middot; 공유지 소유자, 공유 토지의 인 기준 산정, 상속 미등기 물건 등을 정확히 파악하여 동의율 산정에 오류가 없도록 합니다.</p>
+      </div>
+    </div>
+    <div class="caution-card">
+      <div class="caution-num">2</div>
+      <div class="caution-content">
+        <strong>동의서 형식 요건 준수</strong>
+        <p>동의서에 법정 기재사항(사업개요, 정관, 비용부담 등)이 누락되면 동의서 자체가 무효 처리될 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="caution-card">
+      <div class="caution-num">3</div>
+      <div class="caution-content">
+        <strong>인감증명서 유효기간 확인</strong>
+        <p>동의서에 첨부하는 인감증명서의 유효기간(통상 3개월)을 반드시 확인하고, 기한 도과 시 재발급을 받아야 합니다.</p>
+      </div>
+    </div>
+    <div class="caution-card">
+      <div class="caution-num">4</div>
+      <div class="caution-content">
+        <strong>창립총회 절차 적법성</strong>
+        <p>총회 소집 통지(14일 전), 의결정족수, 의사록 공증 등 절차적 하자가 있으면 인가 취소 사유가 됩니다.</p>
+      </div>
+    </div>
+    <div class="caution-card">
+      <div class="caution-num">5</div>
+      <div class="caution-content">
+        <strong>임원 자격 요건 검증</strong>
+        <p>조합장 및 이사 &middot; 감사의 결격사유(도정법 제41조)를 사전에 면밀히 검증해야 합니다. 결격사유 발견 시 인가가 반려됩니다.</p>
+      </div>
+    </div>
+    <div class="caution-card">
+      <div class="caution-num">6</div>
+      <div class="caution-content">
+        <strong>정관 필수 기재사항 누락 금지</strong>
+        <p>도정법 제40조에서 정하는 정관 필수 기재사항을 빠짐없이 포함해야 하며, 표준정관을 기초로 작성하는 것을 권장합니다.</p>
+      </div>
+    </div>
+    <div class="caution-card">
+      <div class="caution-num">7</div>
+      <div class="caution-content">
+        <strong>동의 철회서 관리</strong>
+        <p>인가 신청 전 동의 철회가 발생할 수 있으므로 여유 동의율을 확보하고, 철회서 접수 현황을 실시간으로 관리해야 합니다.</p>
+      </div>
+    </div>
+    <div class="caution-card">
+      <div class="caution-num">8</div>
+      <div class="caution-content">
+        <strong>추진위 경비 정산 투명성</strong>
+        <p>추진위원회 운영비 정산이 부실하면 인가 과정에서 문제가 됩니다. 수입 &middot; 지출 근거서류를 철저히 보관하십시오.</p>
+      </div>
+    </div>
+    <div class="caution-card">
+      <div class="caution-num">9</div>
+      <div class="caution-content">
+        <strong>소유권 변동 모니터링</strong>
+        <p>동의서 징구 후 인가 신청까지 사이에 소유권 이전, 상속 등 변동이 발생하면 동의율에 영향을 미치므로 등기부를 수시 확인합니다.</p>
+      </div>
+    </div>
+    <div class="caution-card">
+      <div class="caution-num">10</div>
+      <div class="caution-content">
+        <strong>법인등기 기한 엄수</strong>
+        <p>설립인가 후 30일 이내 법인등기를 완료하지 않으면 과태료가 부과되며, 조합의 법률행위에 제한이 생깁니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box warning">
+    <div class="info-box-title">전문가 조력의 중요성</div>
+    <p>
+      조합설립인가는 법률적 &middot; 행정적으로 복잡한 절차입니다.
+      동의율 산정 오류, 창립총회 절차 하자, 서류 미비 등은 인가 반려 또는 이후
+      취소소송의 원인이 됩니다. 반드시 <strong>정비사업 전문 컨설턴트 및 법률 전문가</strong>의
+      자문을 받아 진행하시기 바랍니다.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 7: 소요 기간 및 비용 안내
+     ═══════════════════════════════════════════════ -->
+<section id="sec7">
+  <div class="section-number">SECTION 07</div>
+  <h2 class="section-title">소요 기간 및 비용 안내</h2>
+  <p class="section-subtitle">조합설립인가까지의 예상 소요 기간과 주요 비용 항목을 안내합니다.</p>
+
+  <div class="cost-summary">
+    <div class="cost-item">
+      <div class="cost-label">총 소요 기간 (예상)</div>
+      <div class="cost-value">6~18개월</div>
+      <div class="cost-note">동의서 징구 ~ 법인등기 완료</div>
+    </div>
+    <div class="cost-item">
+      <div class="cost-label">추진위 운영비</div>
+      <div class="cost-value">1~3억원</div>
+      <div class="cost-note">구역 규모에 따라 상이</div>
+    </div>
+    <div class="cost-item">
+      <div class="cost-label">전문가 자문 비용</div>
+      <div class="cost-value">5천만~2억원</div>
+      <div class="cost-note">법률 &middot; 감정 &middot; 설계 등</div>
+    </div>
+  </div>
+
+  <h3>단계별 소요 기간</h3>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <h4>동의서 징구</h4>
+      <span class="duration">3~8개월</span>
+      <p>
+        법정 동의율을 확보하기까지의 기간입니다. 구역 규모, 소유자 분포,
+        사업 찬성 분위기 등에 따라 크게 달라집니다.
+        여유 동의율(+5~10%p)을 확보하는 것이 안전합니다.
+      </p>
+    </div>
+    <div class="timeline-item">
+      <h4>창립총회 준비 및 개최</h4>
+      <span class="duration">1~2개월</span>
+      <p>
+        총회 소집 통지(14일 전), 의안 준비, 장소 섭외, 선거관리위원회 구성 등
+        사전 준비에 약 3~4주, 총회 개최 및 의사록 공증에 약 2주 소요됩니다.
+      </p>
+    </div>
+    <div class="timeline-item">
+      <h4>인가 신청 서류 준비</h4>
+      <span class="duration">2~4주</span>
+      <p>
+        체크리스트에 따른 서류 구비, 등기사항증명서 발급, 동의율 총괄표 작성,
+        신청서 최종 점검 등을 수행합니다.
+      </p>
+    </div>
+    <div class="timeline-item">
+      <h4>행정청 검토 및 보완</h4>
+      <span class="duration">2~6개월</span>
+      <p>
+        행정청의 서류 검토 및 보완 요구 기간입니다. 보완 횟수에 따라 기간이 변동되며,
+        서류의 완성도가 높을수록 기간이 단축됩니다.
+        관할청 담당자와의 사전 소통이 중요합니다.
+      </p>
+    </div>
+    <div class="timeline-item">
+      <h4>인가 처분 및 고시</h4>
+      <span class="duration">1~2주</span>
+      <p>
+        검토 완료 후 인가서 교부 및 관보/공보 고시가 이루어집니다.
+      </p>
+    </div>
+    <div class="timeline-item">
+      <h4>법인설립등기</h4>
+      <span class="duration">2~3주 (인가 후 30일 이내)</span>
+      <p>
+        관할 등기소에 법인설립등기를 신청합니다. 등기 완료 후 사업자등록,
+        조합 명의 계좌 개설 등 후속 절차를 진행합니다.
+      </p>
+    </div>
+  </div>
+
+  <h3>주요 비용 항목</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">비용 항목</th>
+        <th style="width:25%">예상 금액</th>
+        <th>비고</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="highlight-cell">정비업체 용역비</td>
+        <td>5,000만 ~ 1.5억원</td>
+        <td>동의서 징구 대행, 서류 작성, 인가 지원</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">법률 자문비</td>
+        <td>2,000만 ~ 5,000만원</td>
+        <td>정관 검토, 총회 자문, 인허가 법률 검토</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">감정평가 비용</td>
+        <td>2,000만 ~ 5,000만원</td>
+        <td>사업성 분석을 위한 개략 감정 (2개 업체)</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">설계 용역비 (개략)</td>
+        <td>3,000만 ~ 8,000만원</td>
+        <td>건축계획 개요서 작성을 위한 개략 설계</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">공증 비용</td>
+        <td>100만 ~ 300만원</td>
+        <td>창립총회 의사록 공증</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">법인등기 비용</td>
+        <td>50만 ~ 150만원</td>
+        <td>등록면허세, 법무사 수수료 포함</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">사무실 운영비</td>
+        <td>월 200만 ~ 500만원</td>
+        <td>임차료, 인건비, 통신비, 우편발송비 등</td>
+      </tr>
+      <tr>
+        <td class="highlight-cell">기타 행정 비용</td>
+        <td>300만 ~ 800만원</td>
+        <td>등기사항증명서, 인감증명서 발급 등 제비용</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box warning">
+    <div class="info-box-title">비용 관련 유의사항</div>
+    <p>
+      &bull; 상기 금액은 <strong>일반적인 중규모 정비구역(200~500세대)</strong> 기준 추산치입니다.<br>
+      &bull; 구역 규모, 소유자 수, 사업 복잡도에 따라 크게 달라질 수 있습니다.<br>
+      &bull; 추진위 단계 비용은 향후 조합 사업비에 포함되어 조합원에게 분담됩니다.<br>
+      &bull; 모든 지출은 <strong>투명한 정산과 증빙 관리</strong>가 필수적입니다.
+    </p>
+  </div>
+
+  <div class="info-box success">
+    <div class="info-box-title">비용 절감 팁</div>
+    <p>
+      &bull; 서류를 완벽히 준비하여 보완 횟수를 최소화하면 기간과 비용을 절감할 수 있습니다.<br>
+      &bull; (주)세울엔지니어링과 같은 정비사업 전문관리업체를 활용하면 체계적 관리가 가능합니다.<br>
+      &bull; 전자동의 시스템 활용 시 동의서 징구 비용을 절감할 수 있습니다.
+    </p>
+  </div>
+</section>
+
+</div><!-- /.container -->
+</div><!-- /.content-area -->
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">(주)세울엔지니어링</div>
+      <div>
+        도시정비사업 전문관리<br>
+        조합설립 &middot; 사업시행 &middot; 관리처분 토탈 컨설팅<br>
+        <a href="https://seul21.com">www.seul21.com</a>
+      </div>
+    </div>
+    <div style="text-align:right;">
+      <div>
+        <strong style="color:rgba(255,255,255,0.8);">문의 안내</strong><br>
+        정비사업 상담 및 컨설팅 문의<br>
+        이메일: seul21@seul21.com
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-legal">
+      &copy; 2026 (주)세울엔지니어링. All rights reserved.<br>
+      본 자료는 일반적인 안내 목적으로 작성되었으며, 법률자문을 대체하지 않습니다.
+      구체적 사안에 대해서는 반드시 관련 전문가의 자문을 받으시기 바랍니다.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

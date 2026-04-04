@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조합원 분담금 산정 가이드 - (주)세울엔지니어링</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 18mm 25mm 18mm;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.7;
+    color: #222;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── Header ────────────────────────────────── */
+  .doc-header {
+    background: linear-gradient(135deg, #0A0F1C 0%, #151D33 100%);
+    color: #fff;
+    padding: 32px 36px 28px;
+    margin: -2px -2px 0 -2px;
+    border-radius: 2px 2px 0 0;
+    position: relative;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+
+  .doc-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #C3A569, #E8D5A8, #C3A569);
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #C3A569, #E8D5A8);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: #0A0F1C;
+    letter-spacing: -1px;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-text .company {
+    font-size: 15pt;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #C3A569;
+  }
+
+  .logo-text .company-en {
+    font-size: 8pt;
+    color: #8899bb;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .header-meta {
+    text-align: right;
+    font-size: 8.5pt;
+    color: #8899bb;
+    line-height: 1.6;
+  }
+
+  .header-meta strong {
+    color: #C3A569;
+  }
+
+  .doc-title {
+    font-size: 20pt;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+
+  .doc-subtitle {
+    font-size: 10pt;
+    color: #8899bb;
+    font-weight: 400;
+  }
+
+  /* ── Table of Contents ─────────────────────── */
+  .toc {
+    background: #F7F5F0;
+    border: 1px solid #E4DFD3;
+    border-radius: 6px;
+    padding: 20px 28px;
+    margin: 24px 0;
+    page-break-inside: avoid;
+  }
+
+  .toc-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #0A0F1C;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #C3A569;
+    display: inline-block;
+  }
+
+  .toc-list {
+    list-style: none;
+    column-count: 2;
+    column-gap: 32px;
+  }
+
+  .toc-list li {
+    padding: 3px 0;
+    font-size: 9.5pt;
+    color: #444;
+    break-inside: avoid;
+  }
+
+  .toc-list li .toc-num {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #0A0F1C;
+    color: #C3A569;
+    border-radius: 4px;
+    font-size: 8pt;
+    font-weight: 700;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  /* ── Sections ──────────────────────────────── */
+  .section {
+    margin: 28px 0;
+    page-break-inside: avoid;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #E4DFD3;
+  }
+
+  .section-num {
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    background: #0A0F1C;
+    color: #C3A569;
+    border-radius: 6px;
+    font-size: 14pt;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 14pt;
+    font-weight: 700;
+    color: #0A0F1C;
+  }
+
+  .section p {
+    margin-bottom: 10px;
+    text-align: justify;
+  }
+
+  /* ── Formula Box ───────────────────────────── */
+  .formula-box {
+    background: linear-gradient(135deg, #0A0F1C 0%, #1A2340 100%);
+    color: #fff;
+    padding: 22px 28px;
+    border-radius: 8px;
+    margin: 16px 0;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+
+  .formula-box .formula-label {
+    font-size: 9pt;
+    color: #C3A569;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .formula-box .formula {
+    font-size: 14pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+  }
+
+  .formula-box .formula .highlight {
+    color: #C3A569;
+    font-weight: 800;
+  }
+
+  /* ── Example Box ───────────────────────────── */
+  .example-box {
+    background: #FDFCF8;
+    border: 1px solid #E4DFD3;
+    border-left: 4px solid #C3A569;
+    border-radius: 0 6px 6px 0;
+    padding: 18px 24px;
+    margin: 16px 0;
+    page-break-inside: avoid;
+  }
+
+  .example-box .example-title {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #0A0F1C;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .example-box .example-title::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #C3A569;
+    border-radius: 2px;
+  }
+
+  .calc-step {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 10pt;
+  }
+
+  .calc-step .step-label {
+    color: #666;
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+
+  .calc-step .step-value {
+    font-weight: 700;
+    color: #0A0F1C;
+  }
+
+  .calc-result {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #C3A569;
+    font-size: 11pt;
+    font-weight: 700;
+    color: #0A0F1C;
+  }
+
+  .calc-result .result-amount {
+    color: #B8342E;
+    font-size: 13pt;
+  }
+
+  /* ── Info Cards ─────────────────────────────── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+  }
+
+  .info-card {
+    background: #F7F5F0;
+    border: 1px solid #E4DFD3;
+    border-radius: 6px;
+    padding: 16px 18px;
+    page-break-inside: avoid;
+  }
+
+  .info-card .card-num {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    background: #C3A569;
+    color: #0A0F1C;
+    border-radius: 50%;
+    font-size: 8pt;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .info-card .card-title {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #0A0F1C;
+    margin-bottom: 6px;
+  }
+
+  .info-card .card-desc {
+    font-size: 9pt;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .info-card .card-impact {
+    margin-top: 8px;
+    font-size: 8.5pt;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    font-weight: 600;
+  }
+
+  .impact-up {
+    background: #FFF0F0;
+    color: #C0392B;
+    border: 1px solid #F5C6CB;
+  }
+
+  .impact-down {
+    background: #F0FFF4;
+    color: #27AE60;
+    border: 1px solid #C3E6CB;
+  }
+
+  .impact-both {
+    background: #FFF8E1;
+    color: #E67E22;
+    border: 1px solid #FFE0B2;
+  }
+
+  /* ── Case Study Table ──────────────────────── */
+  .case-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 9.5pt;
+  }
+
+  .case-table thead th {
+    background: #0A0F1C;
+    color: #C3A569;
+    padding: 10px 14px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 9pt;
+  }
+
+  .case-table thead th:first-child {
+    border-radius: 6px 0 0 0;
+    text-align: left;
+  }
+
+  .case-table thead th:last-child {
+    border-radius: 0 6px 0 0;
+  }
+
+  .case-table tbody td {
+    padding: 10px 14px;
+    text-align: right;
+    border-bottom: 1px solid #E4DFD3;
+  }
+
+  .case-table tbody td:first-child {
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .case-table tbody tr:nth-child(even) {
+    background: #FAFAF7;
+  }
+
+  .case-table tbody tr.table-highlight {
+    background: #FFF8E1;
+    font-weight: 700;
+  }
+
+  .case-table tbody tr.table-result {
+    background: #F0F4FF;
+    font-weight: 700;
+    border-top: 2px solid #0A0F1C;
+  }
+
+  .case-table tbody tr.table-result td {
+    color: #0A0F1C;
+    font-size: 10pt;
+  }
+
+  /* ── FAQ ────────────────────────────────────── */
+  .faq-item {
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+
+  .faq-q {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .faq-q .q-badge {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    background: #0A0F1C;
+    color: #C3A569;
+    border-radius: 50%;
+    font-size: 9pt;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .faq-q .q-text {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #0A0F1C;
+    padding-top: 2px;
+  }
+
+  .faq-a {
+    margin-left: 36px;
+    font-size: 9.5pt;
+    color: #444;
+    line-height: 1.7;
+    padding: 10px 16px;
+    background: #F7F5F0;
+    border-radius: 6px;
+  }
+
+  /* ── Tip / Note boxes ──────────────────────── */
+  .tip-box {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 9.5pt;
+    color: #1E3A5F;
+    page-break-inside: avoid;
+  }
+
+  .tip-box .tip-title {
+    font-weight: 700;
+    color: #0A0F1C;
+    margin-bottom: 4px;
+    font-size: 9.5pt;
+  }
+
+  .warn-box {
+    background: #FFF8E1;
+    border: 1px solid #FFE0B2;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 9.5pt;
+    color: #6D4C00;
+    page-break-inside: avoid;
+  }
+
+  .warn-box .warn-title {
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  /* ── Footer ────────────────────────────────── */
+  .doc-footer {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 3px solid #0A0F1C;
+    page-break-inside: avoid;
+  }
+
+  .disclaimer {
+    background: #F7F5F0;
+    border: 1px solid #E4DFD3;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    font-size: 8.5pt;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .disclaimer .disc-title {
+    font-weight: 700;
+    color: #B8342E;
+    margin-bottom: 4px;
+    font-size: 9pt;
+  }
+
+  .footer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 14px 0;
+  }
+
+  .footer-left {
+    font-size: 9pt;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  .footer-left .footer-company {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #0A0F1C;
+    margin-bottom: 4px;
+  }
+
+  .footer-right {
+    text-align: right;
+    font-size: 8pt;
+    color: #999;
+  }
+
+  .footer-right .copyright {
+    margin-top: 4px;
+  }
+
+  .gold-line {
+    height: 3px;
+    background: linear-gradient(90deg, #C3A569, #E8D5A8, #C3A569);
+    border: none;
+    margin-top: 12px;
+    border-radius: 2px;
+  }
+
+  /* ── Print styles ──────────────────────────── */
+  @media print {
+    body {
+      font-size: 10pt;
+    }
+
+    .doc-header {
+      margin: 0;
+    }
+
+    .section {
+      page-break-inside: avoid;
+    }
+
+    .doc-footer {
+      page-break-inside: avoid;
+    }
+
+    .info-grid {
+      page-break-inside: avoid;
+    }
+  }
+
+  /* ── Screen container ──────────────────────── */
+  @media screen {
+    body {
+      background: #E8E4DE;
+      padding: 40px 0;
+    }
+
+    .page-container {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      padding: 0 36px 36px;
+      border-radius: 4px;
+    }
+
+    .doc-header {
+      margin: 0 -36px;
+      border-radius: 4px 4px 0 0;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page-container">
+
+  <!-- ============================================ -->
+  <!--  HEADER                                      -->
+  <!-- ============================================ -->
+  <div class="doc-header">
+    <div class="header-top">
+      <div class="logo-area">
+        <div class="logo-icon">SE</div>
+        <div class="logo-text">
+          <span class="company">(주)세울엔지니어링</span>
+          <span class="company-en">Seul Engineering Co., Ltd.</span>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div>문서번호 : <strong>SE-RD-2026-004</strong></div>
+        <div>버전 : <strong>v1.0</strong></div>
+        <div>발행일 : <strong>2026년 4월 3일</strong></div>
+        <div>분류 : 조합원 교육자료</div>
+      </div>
+    </div>
+    <div class="doc-title">조합원 분담금 산정 가이드</div>
+    <div class="doc-subtitle">재개발·재건축 정비사업 조합원을 위한 분담금 산출 원리와 실무 해설</div>
+  </div>
+
+  <!-- ============================================ -->
+  <!--  TABLE OF CONTENTS                           -->
+  <!-- ============================================ -->
+  <div class="toc">
+    <div class="toc-title">목 차</div>
+    <ul class="toc-list">
+      <li><span class="toc-num">1</span> 비례율이란?</li>
+      <li><span class="toc-num">2</span> 권리가액 산정</li>
+      <li><span class="toc-num">3</span> 분담금 산정</li>
+      <li><span class="toc-num">4</span> 분담금에 영향을 미치는 요소</li>
+      <li><span class="toc-num">5</span> 실제 사례 분석</li>
+      <li><span class="toc-num">6</span> 자주 묻는 질문 (FAQ)</li>
+    </ul>
+  </div>
+
+  <!-- ============================================ -->
+  <!--  SECTION 1 : 비례율이란?                      -->
+  <!-- ============================================ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">비례율이란?</div>
+    </div>
+
+    <p>
+      <strong>비례율(比例率)</strong>은 정비사업의 수익성을 나타내는 핵심 지표로, 사업 완료 후 조합원이
+      종전 자산 대비 얼마만큼의 가치를 인정받을 수 있는지를 백분율로 표현한 것입니다.
+      비례율이 높을수록 조합원의 권리가액이 커져 분담금이 줄어들고, 비례율이 낮으면 그만큼
+      분담금 부담이 증가합니다.
+    </p>
+
+    <p>
+      비례율은 정비사업의 <strong>총수입</strong>(분양수입)에서 <strong>총사업비</strong>(공사비, 설계비, 보상비 등)를
+      차감한 순이익을 조합원 전체의 <strong>종전자산 평가 총액</strong>으로 나누어 산출합니다.
+    </p>
+
+    <div class="formula-box">
+      <div class="formula-label">비례율 산정 공식</div>
+      <div class="formula">
+        <span class="highlight">비례율</span> = (총수입 - 총사업비) &divide; 종전자산평가총액 &times; 100
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-title">계산 예시</div>
+      <div class="calc-step">
+        <span class="step-label">총수입 (분양수입)</span>
+        <span class="step-value">8,500억 원</span>
+      </div>
+      <div class="calc-step">
+        <span class="step-label">총사업비</span>
+        <span class="step-value">5,200억 원</span>
+      </div>
+      <div class="calc-step">
+        <span class="step-label">종전자산평가총액</span>
+        <span class="step-value">2,800억 원</span>
+      </div>
+      <div class="calc-result">
+        비례율 = (8,500억 - 5,200억) &divide; 2,800억 &times; 100 = <span class="result-amount">117.86%</span>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-title">참고</div>
+      비례율이 100%를 초과하면 종전자산 가치 이상의 권리를 인정받는 것이고, 100% 미만이면
+      종전자산보다 낮은 가치를 인정받게 됩니다. 서울시 재개발 사업의 비례율은 통상 100~130% 범위에서 형성됩니다.
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!--  SECTION 2 : 권리가액 산정                    -->
+  <!-- ============================================ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">권리가액 산정</div>
+    </div>
+
+    <p>
+      <strong>권리가액(權利價額)</strong>은 조합원이 정비사업을 통해 인정받는 재산 가치입니다.
+      조합원 개인의 종전자산 감정평가액에 비례율을 곱하여 산출하며, 이 금액이 새 아파트를
+      분양받을 때 차감되는 기본 자산이 됩니다.
+    </p>
+
+    <div class="formula-box">
+      <div class="formula-label">권리가액 산정 공식</div>
+      <div class="formula">
+        <span class="highlight">권리가액</span> = 종전자산 감정평가액 &times; 비례율
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-title">계산 예시 (비례율 117.86% 적용)</div>
+      <div class="calc-step">
+        <span class="step-label">종전자산 감정평가액</span>
+        <span class="step-value">3억 5,000만 원</span>
+      </div>
+      <div class="calc-step">
+        <span class="step-label">적용 비례율</span>
+        <span class="step-value">117.86%</span>
+      </div>
+      <div class="calc-result">
+        권리가액 = 3억 5,000만 &times; 1.1786 = <span class="result-amount">약 4억 1,251만 원</span>
+      </div>
+    </div>
+
+    <p>
+      즉, 종전에 3억 5,000만 원으로 평가된 부동산을 보유한 조합원은 약 4억 1,251만 원의
+      권리를 인정받아, 이 금액만큼 새 아파트 분양가에서 차감받을 수 있습니다.
+    </p>
+  </div>
+
+  <!-- ============================================ -->
+  <!--  SECTION 3 : 분담금 산정                      -->
+  <!-- ============================================ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">분담금 산정</div>
+    </div>
+
+    <p>
+      <strong>분담금(分擔金)</strong>은 조합원이 새로 분양받는 아파트의 가격(분양가액)에서
+      자신의 권리가액을 뺀 나머지 금액입니다. 분양가액이 권리가액보다 크면 추가 분담금을
+      납부해야 하고, 반대의 경우에는 환급금(청산금)을 돌려받습니다.
+    </p>
+
+    <div class="formula-box">
+      <div class="formula-label">분담금 산정 공식</div>
+      <div class="formula">
+        <span class="highlight">분담금</span> = 분양가액 - 권리가액
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-title">84㎡(전용) 아파트 분담금 계산 예시</div>
+      <div class="calc-step">
+        <span class="step-label">84㎡ 분양가액</span>
+        <span class="step-value">9억 2,000만 원</span>
+      </div>
+      <div class="calc-step">
+        <span class="step-label">조합원 권리가액</span>
+        <span class="step-value">4억 1,251만 원</span>
+      </div>
+      <div class="calc-result">
+        분담금 = 9억 2,000만 - 4억 1,251만 = <span class="result-amount">약 5억 749만 원</span>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <div class="warn-title">유의사항</div>
+      위 분담금은 추정치이며, 실제 분담금은 관리처분계획 인가 시점의 감정평가, 분양가,
+      사업비 변동 등에 따라 달라질 수 있습니다. 이주비 대출이자, 추가분담금 이자 등은
+      별도 산정됩니다.
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!--  SECTION 4 : 분담금에 영향을 미치는 요소       -->
+  <!-- ============================================ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">분담금에 영향을 미치는 요소</div>
+    </div>
+
+    <p>
+      분담금은 여러 변수에 의해 변동될 수 있습니다. 아래 4가지 핵심 요소를 이해하면
+      향후 분담금 변동의 방향성을 가늠할 수 있습니다.
+    </p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="card-num">1</div>
+        <div class="card-title">종전자산 감정평가액</div>
+        <div class="card-desc">
+          2인의 감정평가법인이 종전 부동산(토지+건물)의 가치를 평가합니다.
+          평가액이 높을수록 권리가액이 커져 분담금이 줄어듭니다.
+          다만, 전체 평가총액이 높아지면 비례율이 낮아지는 효과도 있어
+          단순히 내 평가액만 높다고 유리한 것은 아닙니다.
+        </div>
+        <span class="card-impact impact-both">영향: 양방향</span>
+      </div>
+
+      <div class="info-card">
+        <div class="card-num">2</div>
+        <div class="card-title">일반분양 수입</div>
+        <div class="card-desc">
+          일반분양 세대의 분양가가 높을수록, 또는 일반분양 물량이 많을수록
+          총수입이 증가하여 비례율이 올라갑니다. 부동산 시장 호황기에
+          일반분양을 실시하면 조합원에게 유리합니다.
+        </div>
+        <span class="card-impact impact-down">영향: 분담금 감소</span>
+      </div>
+
+      <div class="info-card">
+        <div class="card-num">3</div>
+        <div class="card-title">총사업비 변동</div>
+        <div class="card-desc">
+          공사비, 설계·감리비, 이주비, 보상비, 각종 부담금 등이 총사업비를
+          구성합니다. 자재값 상승, 공기 지연, 추가 보상 등으로 사업비가
+          증가하면 비례율이 하락하여 분담금이 늘어납니다.
+        </div>
+        <span class="card-impact impact-up">영향: 분담금 증가</span>
+      </div>
+
+      <div class="info-card">
+        <div class="card-num">4</div>
+        <div class="card-title">용적률 / 건폐율</div>
+        <div class="card-desc">
+          용적률이 높으면 더 많은 세대를 건설할 수 있어 일반분양 물량이
+          증가하고 총수입이 커집니다. 다만, 용적률 완화에 따른 기부채납
+          비용도 함께 고려해야 합니다.
+        </div>
+        <span class="card-impact impact-down">영향: 분담금 감소</span>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-title">핵심 요약</div>
+      <strong>분담금 = 분양가액 - (종전자산평가액 &times; 비례율)</strong>이므로,
+      비례율을 높이는 방향(총수입 증가, 총사업비 절감)과 적절한 평형 선택이
+      분담금 절감의 핵심입니다.
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!--  SECTION 5 : 실제 사례 분석                    -->
+  <!-- ============================================ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">실제 사례 분석</div>
+    </div>
+
+    <p>
+      아래는 서울시 소재 A구역 재개발 정비사업의 추정 사례입니다.
+      실제 데이터를 기반으로 조합원 유형별 분담금을 비교 분석하였습니다.
+    </p>
+
+    <p style="font-weight:700; color:#0A0F1C; margin-top:14px; margin-bottom:8px;">
+      사업 개요 (A구역 재개발 정비사업)
+    </p>
+
+    <table class="case-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>금액 / 수치</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>사업구역 면적</td>
+          <td>68,500㎡</td>
+          <td>약 20,720평</td>
+        </tr>
+        <tr>
+          <td>총 세대수</td>
+          <td>2,850세대</td>
+          <td>조합원 1,120 + 일반분양 1,580 + 임대 150</td>
+        </tr>
+        <tr>
+          <td>종전자산평가총액</td>
+          <td>4,200억 원</td>
+          <td>조합원 1,120명 합산</td>
+        </tr>
+        <tr>
+          <td>총수입 (분양수입)</td>
+          <td>1조 2,800억 원</td>
+          <td>조합원 + 일반분양 + 상가 등</td>
+        </tr>
+        <tr>
+          <td>총사업비</td>
+          <td>7,950억 원</td>
+          <td>공사비 5,600억 + 기타 2,350억</td>
+        </tr>
+        <tr class="table-highlight">
+          <td>비례율</td>
+          <td>115.48%</td>
+          <td>(12,800 - 7,950) &divide; 4,200 &times; 100</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-weight:700; color:#0A0F1C; margin-top:20px; margin-bottom:8px;">
+      조합원 유형별 분담금 비교
+    </p>
+
+    <table class="case-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>A조합원</th>
+          <th>B조합원</th>
+          <th>C조합원</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>종전자산 유형</td>
+          <td>다세대 전용 42㎡</td>
+          <td>단독주택 대지 85㎡</td>
+          <td>다세대 전용 59㎡</td>
+        </tr>
+        <tr>
+          <td>종전자산 감정평가액</td>
+          <td>2억 8,000만</td>
+          <td>5억 2,000만</td>
+          <td>3억 8,000만</td>
+        </tr>
+        <tr>
+          <td>권리가액 (×115.48%)</td>
+          <td>3억 2,334만</td>
+          <td>6억 0,050만</td>
+          <td>4억 3,882만</td>
+        </tr>
+        <tr>
+          <td>희망 분양 평형</td>
+          <td>59㎡</td>
+          <td>84㎡</td>
+          <td>84㎡</td>
+        </tr>
+        <tr>
+          <td>조합원 분양가</td>
+          <td>6억 8,000만</td>
+          <td>9억 4,000만</td>
+          <td>9억 4,000만</td>
+        </tr>
+        <tr class="table-result">
+          <td>추정 분담금</td>
+          <td>3억 5,666만</td>
+          <td>3억 3,950만</td>
+          <td>5억 0,118만</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <div class="tip-title">사례 분석 포인트</div>
+      <ul style="margin: 6px 0 0 16px; line-height: 1.9;">
+        <li><strong>A조합원</strong> : 종전자산이 적어 59㎡ 소형 평형을 선택했으나, 분담금이 약 3.6억 원으로 상당합니다.</li>
+        <li><strong>B조합원</strong> : 종전자산 가치가 높아 84㎡를 선택해도 분담금이 약 3.4억 원으로 상대적으로 적습니다.</li>
+        <li><strong>C조합원</strong> : 중간 수준의 종전자산으로 84㎡를 선택하면 약 5.0억 원의 분담금이 발생하여 부담이 큽니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!--  SECTION 6 : 자주 묻는 질문                    -->
+  <!-- ============================================ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">자주 묻는 질문 (FAQ)</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="q-badge">Q1</span>
+        <span class="q-text">비례율이 100% 미만이면 어떻게 되나요?</span>
+      </div>
+      <div class="faq-a">
+        비례율이 100% 미만이면 총사업비가 총수입보다 커서 사업 수익이 종전자산 가치를 온전히
+        보전해주지 못한다는 의미입니다. 예를 들어 비례율이 90%라면, 종전자산 감정평가액 3억 원인
+        조합원의 권리가액은 2억 7,000만 원으로 줄어들어 분담금이 더 커집니다.
+        통상 비례율이 90% 이하로 떨어지면 사업 추진 자체를 재검토하게 됩니다.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="q-badge">Q2</span>
+        <span class="q-text">분담금은 한꺼번에 내야 하나요?</span>
+      </div>
+      <div class="faq-a">
+        일반적으로 분담금은 계약금(10~20%), 중도금(40~60%), 잔금(20~30%)으로 나누어
+        납부합니다. 조합에 따라 중도금 무이자 또는 저리 대출을 알선하기도 하며,
+        입주 시 잔금을 정산하는 것이 통상적입니다. 정확한 납부 일정은 관리처분계획 인가 후
+        조합에서 별도 안내합니다.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="q-badge">Q3</span>
+        <span class="q-text">종전자산 감정평가에 불만이 있으면 어떻게 하나요?</span>
+      </div>
+      <div class="faq-a">
+        도시정비법에 따라 감정평가 결과에 이의가 있는 경우, 조합 총회에서 의결을 거쳐
+        재감정을 요청할 수 있습니다. 또한 개별 조합원은 관리처분계획 인가 처분에 대해
+        행정심판 또는 행정소송을 제기할 수 있습니다. 다만, 재감정 시 전체 비례율이
+        변동될 수 있어 신중한 판단이 필요합니다.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="q-badge">Q4</span>
+        <span class="q-text">분양받지 않고 현금청산을 선택할 수 있나요?</span>
+      </div>
+      <div class="faq-a">
+        조합에 가입하지 않거나 분양 신청을 하지 않은 토지등소유자는 현금청산 대상이 됩니다.
+        현금청산 금액은 별도의 감정평가를 통해 산정되며, 협의가 되지 않을 경우 수용재결
+        절차를 거치게 됩니다. 현금청산 금액은 종전자산 감정평가액과 다를 수 있으므로
+        전문가 상담을 권장합니다.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="q-badge">Q5</span>
+        <span class="q-text">추후 분담금이 변동될 수 있나요?</span>
+      </div>
+      <div class="faq-a">
+        네, 분담금은 사업 진행 과정에서 변동될 수 있습니다. 관리처분계획 수립 시의 추정치와
+        실제 준공 후 정산액은 차이가 날 수 있으며, 주요 변동 원인으로는 공사비 증감, 일반분양가
+        변동, 추가 사업비 발생, 금융비용 변동 등이 있습니다. 최종 정산은 준공 인가 후
+        이전고시 시점에 이루어집니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!--  FOOTER                                      -->
+  <!-- ============================================ -->
+  <div class="doc-footer">
+    <div class="disclaimer">
+      <div class="disc-title">면책 조항 (Disclaimer)</div>
+      본 자료는 재개발·재건축 정비사업의 분담금 산정 원리를 이해하기 위한 <strong>교육 목적의
+      참고자료</strong>이며, 특정 사업구역의 실제 분담금을 보증하거나 확정하는 것이 아닙니다.
+      실제 분담금은 관리처분계획 인가 시점의 감정평가 결과, 분양가, 사업비 등에 따라
+      달라질 수 있으므로, 정확한 사항은 해당 조합 및 전문가에게 확인하시기 바랍니다.
+      본 자료의 내용을 근거로 한 투자 판단에 대하여 (주)세울엔지니어링은 어떠한 법적 책임도
+      부담하지 않습니다.
+    </div>
+
+    <div class="footer-info">
+      <div class="footer-left">
+        <div class="footer-company">(주)세울엔지니어링</div>
+        <div>서울특별시 서초구 서초대로 396, 강남빌딩 12층</div>
+        <div>대표전화 : 02-1234-5678 &nbsp;|&nbsp; FAX : 02-1234-5679</div>
+        <div>이메일 : info@seul21.com &nbsp;|&nbsp; 홈페이지 : www.seul21.com</div>
+      </div>
+      <div class="footer-right">
+        <div>본 문서는 (주)세울엔지니어링의</div>
+        <div>저작물로 무단 복제 및 배포를 금합니다.</div>
+        <div class="copyright">&copy; 2026 Seul Engineering Co., Ltd.</div>
+      </div>
+    </div>
+
+    <hr class="gold-line">
+  </div>
+
+</div>
+</body>
+</html>
