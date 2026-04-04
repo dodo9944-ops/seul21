@@ -177,8 +177,10 @@
         font-weight: 600;
         line-height: 1;
     }
+    .lib-cat-주요뉴스 { background: #EEF2FF; color: #4338CA; }
     .lib-cat-서식 { background: var(--accent-light); color: var(--accent); }
     .lib-cat-법령 { background: #FDECEA; color: var(--red); }
+    .lib-cat-관련판례 { background: #F0E6FF; color: #7C3AED; }
     .lib-cat-지침 { background: #FFF7E6; color: var(--orange); }
     .lib-cat-가이드 { background: #E6F9F0; color: var(--green); }
 
@@ -225,8 +227,10 @@
         <!-- Category Tabs -->
         <div class="tabs" id="categoryTabs" style="margin-bottom:20px;">
             <button class="on" data-cat="전체">전체</button>
+            <button data-cat="주요뉴스">주요뉴스</button>
             <button data-cat="서식">서식</button>
             <button data-cat="법령">법령</button>
+            <button data-cat="관련판례">관련판례</button>
             <button data-cat="지침">지침</button>
             <button data-cat="가이드">가이드</button>
         </div>
@@ -282,8 +286,10 @@
     };
 
     const catBadgeMap = {
+        '주요뉴스': 'lib-cat-주요뉴스',
         '서식': 'lib-cat-서식',
         '법령': 'lib-cat-법령',
+        '관련판례': 'lib-cat-관련판례',
         '지침': 'lib-cat-지침',
         '가이드': 'lib-cat-가이드'
     };
