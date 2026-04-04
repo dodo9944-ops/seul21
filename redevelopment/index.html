@@ -747,30 +747,36 @@
             </div>
             <div class="p-line p-line-done"></div>
             <div class="p-step p-done" data-step="2">
+                <div class="p-dot"><i class="fa-solid fa-bullhorn"></i></div>
+                <div class="p-label">추진위원회<br>구성</div>
+                <div class="p-step-hint">클릭하여 상세보기</div>
+            </div>
+            <div class="p-line p-line-done"></div>
+            <div class="p-step p-done" data-step="3">
                 <div class="p-dot"><i class="fa-solid fa-people-group"></i></div>
                 <div class="p-label">조합설립<br>인가</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-done"></div>
-            <div class="p-step p-now" data-step="3">
+            <div class="p-step p-now" data-step="4">
                 <div class="p-dot"><i class="fa-solid fa-stamp"></i></div>
                 <div class="p-label">사업시행<br>인가</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-wait"></div>
-            <div class="p-step p-wait" data-step="4">
+            <div class="p-step p-wait" data-step="5">
                 <div class="p-dot"><i class="fa-solid fa-list-check"></i></div>
                 <div class="p-label">관리처분<br>인가</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-wait"></div>
-            <div class="p-step p-wait" data-step="5">
+            <div class="p-step p-wait" data-step="6">
                 <div class="p-dot"><i class="fa-solid fa-helmet-safety"></i></div>
                 <div class="p-label">이주·철거<br>착공</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-wait"></div>
-            <div class="p-step p-wait" data-step="6">
+            <div class="p-step p-wait" data-step="7">
                 <div class="p-dot"><i class="fa-solid fa-key"></i></div>
                 <div class="p-label">준공·입주</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
@@ -960,6 +966,12 @@ const STEPS = [
     important:'정비구역의 범위와 용적률·건폐율 등의 건축 기준이 이 단계에서 결정되므로, 향후 사업성에 직접적인 영향을 미칩니다.',
     issues:'인접 구역과의 경계 조정, 문화재·군사시설 보호구역 저촉 여부, 환경영향평가 대상 여부 등이 주요 검토 사항입니다.',
     seul:'세울엔지니어링은 정비계획 수립 과정에서 행정기관과의 협의, 도시계획위원회 심의 대응, 주민 설명회 운영을 체계적으로 지원합니다.' },
+  { title:'추진위원회 구성', summary:'정비구역 지정 후 조합설립을 준비하기 위한 추진위원회를 구성·승인받는 단계',
+    meaning:'조합설립추진위원회는 정비구역이 지정된 후 본격적인 조합설립을 준비하는 임시 조직입니다. 토지등소유자 과반수의 동의를 받아 구성하며, 관할 구청장의 승인을 받아야 합니다. 추진위원회는 조합설립에 필요한 동의서 징구, 정비업체 선정, 창립총회 준비 등의 업무를 수행합니다.',
+    tasks:['토지등소유자 과반수 동의서 징구','추진위원회 위원장 및 위원 선정','추진위원회 운영규정 수립','관할 구청에 추진위원회 승인 신청','정비업체(설계사, 정비사업전문관리업체 등) 선정','조합설립 동의서 징구 활동 개시'],
+    important:'추진위원회는 법적으로 조합이 아닌 임시 조직이므로, 업무 범위와 권한에 한계가 있습니다. 추진위 단계에서 발생한 비용은 향후 조합설립 시 정산되므로 투명한 회계 관리가 필수입니다.',
+    issues:'추진위원장 선임을 둘러싼 내부 갈등, 정비업체 선정 과정의 공정성 시비, 추진위 운영비 집행의 투명성 문제, 동의서 징구 과정에서의 허위·부실 동의 등이 빈번하게 발생합니다.',
+    seul:'세울엔지니어링은 추진위원회 구성 단계부터 참여하여 승인 서류 작성, 동의서 징구 전략 수립, 정비업체 선정 자문, 운영규정 검토 등을 지원합니다.' },
   { title:'조합설립 인가', summary:'토지등소유자가 정비사업을 추진하기 위한 조합을 설립하고 인가를 받는 단계',
     meaning:'조합설립은 토지등소유자의 일정 비율 이상 동의를 받아 사업 주체인 조합을 구성하는 절차입니다. 창립총회를 개최하고 조합 정관, 임원 선출 등을 확정한 후 관할 구청에 인가를 신청합니다.',
     tasks:['토지등소유자 확인 및 동의서 징구 (재개발: 토지등소유자 70% 이상 + 토지면적 1/2 이상, 재건축: 구분소유자 70% 이상 + 토지면적 3/4 이상)','조합 정관 작성 및 검토','창립총회 개최 (의장 선출, 임원 선임, 정관 승인)','조합설립인가 신청 서류 작성 및 제출','인가 후 법인 등기 및 사업자등록'],
