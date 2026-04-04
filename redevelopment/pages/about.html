@@ -51,7 +51,7 @@
         flex-shrink: 0; width: 380px;
         position: relative;
         display: flex; align-items: center; justify-content: center;
-        background: #fff;
+        background: linear-gradient(160deg, #f0f1f3 0%, #e8e9ec 100%);
         padding: 0;
         margin: -20px 0;
     }
@@ -61,8 +61,18 @@
         object-position: center 58%;
         display: block;
     }
-    .ceo-photo-area::before { display: none; }
-    .ceo-photo-area::after { display: none; }
+    /* 좌측 스무스 */
+    .ceo-photo-area::before {
+        content: ''; position: absolute; inset: 0; z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(to right, #FAFBFC 0%, rgba(250,251,252,0.5) 6%, rgba(250,251,252,0.15) 14%, transparent 24%);
+    }
+    /* 하단 스무스 */
+    .ceo-photo-area::after {
+        content: ''; position: absolute; inset: 0; z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(to top, #FAFBFC 0%, rgba(250,251,252,0.5) 6%, rgba(250,251,252,0.15) 14%, transparent 24%);
+    }
 
     /* 반응형 */
     @media (max-width: 1024px) {
