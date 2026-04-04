@@ -378,7 +378,9 @@ const MOCK = {
     { id:'lib16', category:'보도자료', title:'소규모정비사업 특례법 개정안 국회 통과', description:'소규모정비사업 범위 확대 및 절차 간소화 내용 포함', fileType:'pdf', fileSize:'320KB', date:'2026-01-25', downloads:289, tags:['소규모정비','보도자료'] },
     { id:'lib19', category:'보도자료', title:'1기 신도시 정비사업 특별법 시행', description:'분당·일산·평촌·중동·산본 1기 신도시 재건축 특별법 시행 안내', fileType:'pdf', fileSize:'450KB', date:'2026-03-28', downloads:523, tags:['1기신도시','보도자료'] },
     { id:'lib20', category:'보도자료', title:'공공재개발 2차 후보지 10곳 추가 선정', description:'국토부 공공재개발 사업 2차 후보지 선정 결과 및 향후 일정 안내', fileType:'pdf', fileSize:'680KB', date:'2026-03-12', downloads:378, tags:['공공재개발','보도자료'] },
-    { id:'lib21', category:'서식', title:'조합설립추진위원회 운영규정', description:'[국토교통부 행정규칙] 추진위 구성·운영·해산 운영규정 전문 (법제처 원문 링크)', fileType:'pdf', fileSize:'75KB', date:'2026-04-04', downloads:0, tags:['추진위원회','운영규정','행정규칙'] }
+    { id:'lib21', category:'서식', title:'조합설립추진위원회 운영규정', description:'[국토교통부 행정규칙] 추진위 구성·운영·해산 운영규정 전문 (법제처 원문 링크)', fileType:'pdf', fileSize:'75KB', date:'2026-04-04', downloads:0, tags:['추진위원회','운영규정','행정규칙'] },
+    { id:'lib22', category:'지침', title:'서울시 정비사업 의사진행 표준운영규정', description:'[서울시 공식] 총회·이사회 의사진행 절차, 의결, 발언권 등 표준운영규정 전문', fileType:'pdf', fileSize:'333KB', date:'2026-04-04', downloads:0, tags:['서울시','총회','의사진행','표준운영규정'] },
+    { id:'lib23', category:'가이드', title:'서울시 정비사업 실무 매뉴얼', description:'[서울시 공식] 정비사업 전 과정 실무 매뉴얼 (42MB, 상세)', fileType:'pdf', fileSize:'42MB', date:'2026-04-04', downloads:0, tags:['서울시','실무매뉴얼','전과정'] }
   ],
 
   /* ──────────────────────────── 관리자 계정 ──────────────────────────── */
