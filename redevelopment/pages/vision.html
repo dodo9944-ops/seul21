@@ -4,365 +4,508 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>세울의 길 — (주)세울엔지니어링</title>
-    <meta name="description" content="(주)세울엔지니어링의 브랜드 철학과 성장 방향 — 도시정비의 기준을 만들어가는 회사">
+    <meta name="description" content="도시정비의 기준을 만들고, 절차의 신뢰를 세우며, 사업의 가치를 끝까지 완성하는 길 — (주)세울엔지니어링">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
-    .vision-section .section-title { margin-bottom: 28px; }
+    /* ══════════════════════════════════════
+       세울의 길 — 프리미엄 브랜드 스토리
+       ══════════════════════════════════════ */
+    :root {
+        --vs-gap: 80px;
+    }
+    .vs { margin-bottom: var(--vs-gap); }
+    .vs:last-child { margin-bottom: 0; }
 
-    /* ── Section 1: Opening Statement ── */
-    .opening-statement {
-        border-left: 4px solid var(--gold);
-        padding: 40px 40px 40px 36px;
-        background: linear-gradient(135deg, rgba(195,165,105,0.04) 0%, rgba(195,165,105,0.02) 100%);
-        border-radius: 0 var(--radius) var(--radius) 0;
-        position: relative;
-        border: 1px solid rgba(0,0,0,0.05);
-        border-left: 4px solid var(--gold);
+    /* ── HERO ── */
+    .vs-hero {
+        position: relative; overflow: hidden;
+        background: linear-gradient(135deg, #060A14 0%, #0A0F1C 40%, #142644 100%);
+        padding: 0; margin-top: -1px;
     }
-    .opening-statement::before {
-        content: '\201C';
-        position: absolute;
-        top: 20px; left: 24px;
-        font-size: 64px;
-        font-weight: 900;
-        color: var(--gold);
-        opacity: 0.15;
-        line-height: 1;
-        font-family: Georgia, serif;
+    .vs-hero-img {
+        position: absolute; inset: 0; z-index: 0;
+        background: url('../jpg/사옥 2청사1.png') center/cover no-repeat;
+        opacity: 0.18;
     }
-    .opening-statement p {
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 2;
-        color: var(--gray-800);
-        white-space: pre-line;
-        position: relative;
-        z-index: 1;
+    .vs-hero-inner {
+        position: relative; z-index: 1;
+        max-width: var(--maxw); margin: 0 auto;
+        padding: 80px 40px 72px;
+        display: flex; align-items: center; justify-content: space-between; gap: 48px;
     }
-    .opening-statement p strong {
-        color: var(--brand-navy);
-        font-weight: 700;
+    .vs-hero-text { max-width: 580px; }
+    .vs-hero-label {
+        display: inline-block; font-size: 11px; font-weight: 600;
+        letter-spacing: 3px; color: var(--gold); text-transform: uppercase;
+        margin-bottom: 16px; opacity: 0.8;
     }
-    @media (max-width: 768px) {
-        .opening-statement {
-            padding: 28px 20px 28px 24px;
-        }
-        .opening-statement::before {
-            top: 12px; left: 14px; font-size: 48px;
-        }
-        .opening-statement p {
-            font-size: 15px;
-            line-height: 1.9;
-        }
+    .vs-hero-text h1 {
+        font-size: 38px; font-weight: 900; color: #fff;
+        line-height: 1.35; margin-bottom: 20px; letter-spacing: -1px;
+    }
+    .vs-hero-text h1 em { font-style: normal; color: var(--gold); }
+    .vs-hero-sub {
+        font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.55);
+        max-width: 480px;
+    }
+    .vs-hero-keywords {
+        display: flex; flex-direction: column; gap: 12px; flex-shrink: 0;
+    }
+    .vs-hero-kw {
+        padding: 14px 28px; border-radius: 10px;
+        background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.15);
+        font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7);
+        letter-spacing: 0.3px;
+    }
+    .vs-hero-kw span { color: var(--gold); margin-right: 8px; }
+    .vs-hero-scroll {
+        position: absolute; bottom: 24px; left: 50%;
+        transform: translateX(-50%); z-index: 2;
+        font-size: 11px; color: rgba(255,255,255,0.25);
+        display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .vs-hero-scroll i { animation: scrollBounce 2s infinite; }
+    @keyframes scrollBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+
+    @media(max-width:860px) {
+        .vs-hero-inner { flex-direction: column; padding: 56px 24px 48px; }
+        .vs-hero-text h1 { font-size: 28px; }
+        .vs-hero-keywords { flex-direction: row; flex-wrap: wrap; }
     }
 
-    /* ── Section 2: 왜 도시정비인가 ── */
-    .why-section-header {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 24px;
+    /* ── 브랜드 철학 ── */
+    .vs-philosophy {
+        display: flex; gap: 48px; align-items: center;
     }
-    .why-section-header .why-icon {
-        width: 52px; height: 52px;
-        border-radius: 14px;
-        background: var(--brand-navy);
-        display: flex; align-items: center; justify-content: center;
-        flex-shrink: 0;
+    .vs-phil-quote {
+        flex-shrink: 0; width: 80px; text-align: center;
     }
-    .why-section-header .why-icon i {
-        font-size: 22px; color: var(--gold);
+    .vs-phil-quote span {
+        font-size: 120px; font-family: Georgia, serif; color: var(--gold);
+        opacity: 0.12; line-height: 0.8; display: block;
     }
-    .why-section-header h2 {
-        font-size: 22px;
-        font-weight: 800;
-        color: var(--gray-900);
+    .vs-phil-body { flex: 1; }
+    .vs-phil-body p {
+        font-size: 18px; line-height: 2.1; color: var(--gray-700);
+        word-break: keep-all; font-weight: 400;
     }
-    .why-body {
-        background: var(--white);
-        border: 1px solid var(--gray-200);
-        border-radius: var(--radius);
-        padding: 32px 36px;
+    .vs-phil-body p strong { color: var(--brand-dark); font-weight: 700; }
+    .vs-phil-line {
+        width: 40px; height: 2px; margin: 24px 0;
+        background: linear-gradient(90deg, var(--gold), transparent);
     }
-    .why-body p {
-        font-size: 15px;
-        line-height: 1.9;
-        color: var(--gray-700);
-        margin-bottom: 20px;
+    .vs-phil-sig {
+        font-size: 13px; color: var(--gray-500); letter-spacing: 1px;
     }
-    .why-body p:last-child { margin-bottom: 0; }
+    @media(max-width:768px) {
+        .vs-philosophy { flex-direction: column; gap: 16px; }
+        .vs-phil-quote { width: auto; }
+        .vs-phil-quote span { font-size: 72px; }
+        .vs-phil-body p { font-size: 15px; line-height: 1.9; }
+    }
 
-    /* ── Section 3: 원칙 카드 ── */
-    .principle-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+    /* ── 왜 도시정비인가 ── */
+    .vs-why { display: flex; gap: 40px; }
+    .vs-why-text { flex: 1; }
+    .vs-why-text h2 {
+        font-size: 24px; font-weight: 800; color: var(--brand-dark);
+        margin-bottom: 24px; line-height: 1.4;
     }
-    .principle-grid .principle-card:nth-child(4),
-    .principle-grid .principle-card:nth-child(5) {
-        /* 4, 5번 카드는 2열 중앙 배치 */
+    .vs-why-text p {
+        font-size: 14.5px; line-height: 2; color: var(--gray-600);
+        margin-bottom: 16px; word-break: keep-all; text-align: justify;
     }
-    .principle-card {
-        background: var(--white);
-        border: 1px solid var(--gray-200);
-        border-radius: var(--radius);
-        padding: 28px 24px;
-        transition: all var(--transition);
+    .vs-why-cards {
+        flex-shrink: 0; width: 300px;
+        display: flex; flex-direction: column; gap: 12px;
     }
-    .principle-card:hover {
-        border-color: var(--gold);
-        box-shadow: var(--shadow-hover);
-        transform: translateY(-2px);
+    .vs-why-card {
+        padding: 20px; border-radius: 12px;
+        background: var(--gray-50); border: 1px solid var(--gray-100);
     }
-    .principle-card .p-icon {
-        width: 48px; height: 48px;
-        border-radius: 12px;
-        background: var(--brand-navy);
+    .vs-why-card h4 {
+        font-size: 14px; font-weight: 800; color: var(--brand-dark);
+        margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
+    }
+    .vs-why-card h4 i { color: var(--gold); font-size: 14px; }
+    .vs-why-card p { font-size: 12.5px; color: var(--gray-500); line-height: 1.6; }
+    @media(max-width:860px) {
+        .vs-why { flex-direction: column; }
+        .vs-why-cards { width: 100%; flex-direction: row; flex-wrap: wrap; }
+        .vs-why-card { flex: 1; min-width: 200px; }
+    }
+    @media(max-width:480px) { .vs-why-card { min-width: 100%; } }
+
+    /* ── 원칙 ── */
+    .vs-principles {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .vs-prin-card {
+        background: #fff; border: 1px solid var(--gray-200); border-radius: 14px;
+        padding: 32px 24px; transition: all 0.25s; min-height: 200px;
+        display: flex; flex-direction: column;
+    }
+    .vs-prin-card:hover {
+        border-color: var(--gold); box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+        transform: translateY(-3px);
+    }
+    .vs-prin-icon {
+        width: 44px; height: 44px; border-radius: 11px;
+        background: linear-gradient(135deg, var(--brand-dark), var(--brand-navy));
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 18px;
     }
-    .principle-card .p-icon i {
-        font-size: 20px;
-        color: var(--gold);
+    .vs-prin-icon i { color: var(--gold); font-size: 18px; }
+    .vs-prin-card h4 { font-size: 16px; font-weight: 800; color: var(--gray-900); margin-bottom: 10px; }
+    .vs-prin-card p { font-size: 13px; color: var(--gray-500); line-height: 1.75; flex: 1; }
+    @media(max-width:860px) { .vs-principles { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:480px) { .vs-principles { grid-template-columns: 1fr; } }
+
+    /* ── 세울의 방식 (Process) ── */
+    .vs-process {
+        background: linear-gradient(135deg, #0A0F1C, #142644);
+        border-radius: 16px; padding: 56px 48px; position: relative; overflow: hidden;
     }
-    .principle-card h4 {
-        font-size: 16px;
-        font-weight: 700;
-        color: var(--gray-900);
+    .vs-process::after {
+        content: ''; position: absolute; top: -60px; right: -60px;
+        width: 300px; height: 300px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(195,165,105,0.06), transparent 70%);
+    }
+    .vs-process h2 {
+        font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px;
+        position: relative; z-index: 1;
+    }
+    .vs-process-sub {
+        font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 36px;
+        position: relative; z-index: 1;
+    }
+    .vs-steps {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+        position: relative; z-index: 1;
+    }
+    .vs-step {
+        background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.12);
+        border-radius: 12px; padding: 24px 20px; transition: all 0.2s;
+    }
+    .vs-step:hover { background: rgba(255,255,255,0.07); border-color: rgba(195,165,105,0.25); }
+    .vs-step-num {
+        font-size: 28px; font-weight: 900; color: var(--gold); opacity: 0.3;
         margin-bottom: 8px;
     }
-    .principle-card p {
-        font-size: 13px;
-        color: var(--gray-500);
-        line-height: 1.7;
+    .vs-step h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .vs-step p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.65; }
+    @media(max-width:860px) { .vs-steps { grid-template-columns: repeat(2,1fr); } .vs-process { padding: 40px 28px; } }
+    @media(max-width:480px) { .vs-steps { grid-template-columns: 1fr; } }
+
+    /* ── 브랜드 비주얼 스트립 ── */
+    .vs-visual {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+        border-radius: 16px; overflow: hidden;
     }
-    /* 하단 2개 카드 중앙 정렬 */
-    .principle-bottom-row {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-        margin-top: 24px;
-        max-width: 66.666%;
-        margin-left: auto;
-        margin-right: auto;
+    .vs-visual img {
+        width: 100%; height: 280px; object-fit: cover; border-radius: 12px;
     }
-    @media (max-width: 1024px) {
-        .principle-grid { grid-template-columns: repeat(2, 1fr); }
-        .principle-bottom-row {
-            grid-template-columns: 1fr;
-            max-width: 50%;
-        }
-    }
-    @media (max-width: 768px) {
-        .principle-grid { grid-template-columns: 1fr; }
-        .principle-bottom-row {
-            grid-template-columns: 1fr;
-            max-width: 100%;
-            margin-top: 0;
-            gap: 0;
-        }
-        .principle-bottom-row .principle-card {
-            margin-top: 24px;
-        }
+    @media(max-width:768px) {
+        .vs-visual { grid-template-columns: 1fr; }
+        .vs-visual img { height: 220px; }
     }
 
-    /* ── Section 4: 성장 스토리 (타임라인) ── */
-    .timeline { position: relative; padding-left: 28px; }
-    .timeline::before {
-        content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px;
-        width: 2px; background: var(--gray-200);
+    /* ── 성장 스토리 (중앙 타임라인) ── */
+    .vs-timeline { position: relative; max-width: 700px; margin: 0 auto; }
+    .vs-timeline::before {
+        content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+        width: 2px; background: var(--gray-200); transform: translateX(-50%);
     }
-    .timeline-item { position: relative; margin-bottom: 32px; }
-    .timeline-item:last-child { margin-bottom: 0; }
-    .timeline-item::before {
-        content: ''; position: absolute; left: -24px; top: 7px;
-        width: 10px; height: 10px; border-radius: 50%;
-        background: var(--gold); border: 2px solid var(--white);
+    .vs-tl-item {
+        display: flex; align-items: flex-start; margin-bottom: 32px;
+        position: relative;
+    }
+    .vs-tl-item:last-child { margin-bottom: 0; }
+    .vs-tl-year {
+        width: 50%; text-align: right; padding-right: 32px;
+        font-size: 22px; font-weight: 900; color: var(--gold);
+    }
+    .vs-tl-dot {
+        position: absolute; left: 50%; top: 6px;
+        transform: translateX(-50%);
+        width: 12px; height: 12px; border-radius: 50%;
+        background: var(--gold); border: 3px solid #fff;
         box-shadow: 0 0 0 2px var(--gold);
+        z-index: 1;
     }
-    .timeline-year {
-        font-size: 20px; font-weight: 800; color: var(--gold); margin-bottom: 8px;
+    .vs-tl-content {
+        width: 50%; padding-left: 32px;
     }
-    .timeline-events { list-style: none; }
-    .timeline-events li {
-        position: relative; padding-left: 16px; font-size: 14px;
-        color: var(--gray-700); line-height: 1.8;
+    .vs-tl-content li {
+        font-size: 14px; color: var(--gray-600); line-height: 1.8;
+        list-style: none; position: relative; padding-left: 14px;
     }
-    .timeline-events li::before {
+    .vs-tl-content li::before {
         content: ''; position: absolute; left: 0; top: 10px;
         width: 5px; height: 5px; border-radius: 50%; background: var(--gray-400);
     }
+    @media(max-width:768px) {
+        .vs-timeline::before { left: 16px; }
+        .vs-tl-item { flex-direction: column; padding-left: 36px; }
+        .vs-tl-year { width: auto; text-align: left; padding: 0 0 4px; font-size: 18px; }
+        .vs-tl-dot { left: 16px; top: 4px; }
+        .vs-tl-content { width: auto; padding: 0; }
+    }
 
-    /* ── Section 5: 앞으로의 방향 (Full-width Banner) ── */
-    .direction-banner {
-        background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-navy) 100%);
-        padding: 72px 40px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        border-radius: var(--radius);
+    /* ── 앞으로의 방향 ── */
+    .vs-future {
+        background: linear-gradient(135deg, #060A14, #0A0F1C 50%, #142644);
+        border-radius: 16px; padding: 72px 48px; text-align: center;
+        position: relative; overflow: hidden;
     }
-    .direction-banner::before {
-        content: '';
-        position: absolute;
-        top: -80px; right: -80px;
-        width: 300px; height: 300px;
-        background: radial-gradient(circle, rgba(195,165,105,0.06) 0%, transparent 70%);
-        border-radius: 50%;
+    .vs-future::before {
+        content: ''; position: absolute; inset: 0;
+        background: url('../jpg/사옥 2청사1.png') center/cover no-repeat;
+        opacity: 0.06;
     }
-    .direction-banner::after {
-        content: '';
-        position: absolute;
-        bottom: -60px; left: -60px;
-        width: 240px; height: 240px;
-        background: radial-gradient(circle, rgba(195,165,105,0.04) 0%, transparent 70%);
-        border-radius: 50%;
-    }
-    .direction-banner .dir-content {
-        position: relative;
-        z-index: 1;
-        max-width: 640px;
-        margin: 0 auto;
-    }
-    .direction-banner .dir-label {
+    .vs-future * { position: relative; z-index: 1; }
+    .vs-future-label {
+        font-size: 11px; font-weight: 600; letter-spacing: 3px;
+        color: var(--gold); text-transform: uppercase; margin-bottom: 16px;
         display: inline-block;
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 3px;
-        color: var(--gold);
-        text-transform: uppercase;
-        margin-bottom: 16px;
     }
-    .direction-banner h3 {
-        font-size: 26px;
-        font-weight: 800;
-        color: var(--white);
-        margin-bottom: 24px;
-        line-height: 1.4;
+    .vs-future h2 {
+        font-size: 28px; font-weight: 900; color: #fff;
+        margin-bottom: 20px; line-height: 1.4;
     }
-    .direction-banner p {
-        font-size: 15px;
-        line-height: 2;
-        color: rgba(255,255,255,0.6);
-        white-space: pre-line;
+    .vs-future-line { width: 48px; height: 2px; background: var(--gold); opacity: 0.4; margin: 0 auto 24px; }
+    .vs-future p {
+        font-size: 15px; line-height: 2.1; color: rgba(255,255,255,0.55);
+        max-width: 620px; margin: 0 auto;
     }
-    .direction-banner .dir-divider {
-        width: 48px;
-        height: 2px;
-        background: var(--gold);
-        margin: 0 auto 24px;
-        opacity: 0.5;
+    .vs-future .vs-declaration {
+        margin-top: 32px; font-size: 17px; font-weight: 700;
+        color: var(--gold); letter-spacing: 0.5px;
     }
-    @media (max-width: 768px) {
-        .direction-banner {
-            padding: 48px 24px;
-            border-radius: 0;
-            margin-left: -20px;
-            margin-right: -20px;
-        }
-        .direction-banner h3 { font-size: 20px; }
-        .direction-banner p { font-size: 14px; line-height: 1.9; }
+    @media(max-width:768px) {
+        .vs-future { padding: 48px 24px; }
+        .vs-future h2 { font-size: 22px; }
+    }
+
+    /* ── CTA ── */
+    .vs-cta {
+        display: flex; align-items: center; justify-content: center;
+        gap: 16px; padding: 48px 0;
+    }
+    .vs-cta-text {
+        font-size: 16px; font-weight: 700; color: var(--gray-700);
+    }
+    .vs-cta a {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 14px 28px; border-radius: 10px; font-size: 14px; font-weight: 700;
+        text-decoration: none; transition: all 0.2s;
+    }
+    .vs-cta-primary {
+        background: var(--brand-dark); color: var(--gold);
+    }
+    .vs-cta-primary:hover { background: var(--brand-navy); }
+    .vs-cta-outline {
+        background: #fff; color: var(--gray-700); border: 1.5px solid var(--gray-200);
+    }
+    .vs-cta-outline:hover { border-color: var(--gold); color: var(--brand-dark); }
+    @media(max-width:768px) {
+        .vs-cta { flex-direction: column; gap: 12px; }
+    }
+
+    /* ── 공통 섹션 타이틀 ── */
+    .vs-title {
+        font-size: 24px; font-weight: 800; color: var(--brand-dark);
+        margin-bottom: 28px; position: relative; padding-bottom: 12px;
+    }
+    .vs-title::after {
+        content: ''; position: absolute; bottom: 0; left: 0;
+        width: 36px; height: 2px; background: var(--gold);
     }
     </style>
 </head>
 <body>
 <div id="site-header"></div>
 
-<div class="page-hero">
-    <div class="inner">
-        <div class="breadcrumb">
-            <a href="../index.html">홈</a>
-            <i class="fa-solid fa-chevron-right"></i>
-            <a href="about.html">회사소개</a>
-            <i class="fa-solid fa-chevron-right"></i>
-            <span>세울의 길</span>
+<!-- ══════ HERO ══════ -->
+<div class="vs-hero">
+    <div class="vs-hero-img"></div>
+    <div class="vs-hero-inner">
+        <div class="vs-hero-text">
+            <div class="vs-hero-label">The Path of SEUL</div>
+            <h1>도시정비의 기준을 만들고,<br>사업의 가치를 <em>끝까지 완성</em>하는 길</h1>
+            <p class="vs-hero-sub">세울엔지니어링은 절차의 신뢰, 실행의 책임, 이해관계의 균형 위에서<br>정비사업의 처음과 끝을 함께합니다.</p>
         </div>
-        <h1>세울의 길</h1>
-        <p>도시정비의 기준을 만들어가는 세울엔지니어링의 철학과 방향</p>
+        <div class="vs-hero-keywords">
+            <div class="vs-hero-kw"><span>01</span> 절차의 정합성</div>
+            <div class="vs-hero-kw"><span>02</span> 실행 중심의 사업관리</div>
+            <div class="vs-hero-kw"><span>03</span> 이해관계 조율</div>
+            <div class="vs-hero-kw"><span>04</span> 끝까지 책임지는 완결</div>
+        </div>
     </div>
+    <div class="vs-hero-scroll"><span>SCROLL</span><i class="fa-solid fa-chevron-down"></i></div>
 </div>
 
 <div class="page-body">
     <div class="inner">
 
-        <!-- Section 1: Opening Statement -->
-        <div class="vision-section">
-            <div class="opening-statement">
-                <p>세울(SEUL)은 '바로 세우다'에서 출발합니다.
-무너진 도시의 질서를 다시 세우고,
-흐트러진 절차를 바로 세우고,
-사업의 가치를 올곧게 세우는 것.
-그것이 세울엔지니어링이 걸어가는 길입니다.</p>
-            </div>
-        </div>
-
-        <!-- Section 2: 왜 도시정비인가 -->
-        <div class="vision-section">
-            <div class="why-section-header">
-                <div class="why-icon">
-                    <i class="fa-solid fa-city"></i>
+        <!-- ══════ 브랜드 철학 ══════ -->
+        <div class="vs">
+            <div class="vs-philosophy">
+                <div class="vs-phil-quote"><span>&ldquo;</span></div>
+                <div class="vs-phil-body">
+                    <p><strong>세울(SEUL)</strong>은 '바로 세우다'에서 출발합니다.<br>
+                    무너진 도시의 질서를 다시 세우고, 흐트러진 절차를 바로 세우고,<br>
+                    사업의 가치를 올곧게 세우는 것.<br>
+                    그것이 세울엔지니어링이 걸어가는 길입니다.</p>
+                    <div class="vs-phil-line"></div>
+                    <div class="vs-phil-sig">SEUL ENGINEERING — Brand Philosophy</div>
                 </div>
-                <h2>왜 도시정비에 집중하는가</h2>
-            </div>
-            <div class="why-body">
-                <p>도시정비사업은 단순한 건설 행위가 아닙니다. 수십 년간 삶의 터전이었던 공간을 허물고, 그 위에 새로운 공동체를 세우는 일입니다. 그 과정에서 수백, 수천 명의 재산권이 걸려 있고, 행정기관의 인허가와 법률적 판단이 매 단계마다 뒤따릅니다. 하나의 절차가 어긋나면 수년간의 노력이 무너질 수 있는, 가장 엄밀함을 요구하는 분야입니다.</p>
-                <p>세울엔지니어링은 바로 그 지점에 주목했습니다. 도시정비는 건축·토목 기술만으로 완성되지 않습니다. 「도시 및 주거환경정비법」을 비롯한 관련 법령에 대한 깊은 이해, 조합 운영과 총회 의결에 관한 행정적 역량, 그리고 서로 다른 이해관계를 가진 조합원·시행사·시공사·행정기관 사이에서 균형을 잡아내는 조율 능력까지 — 이 모든 것이 하나로 결합되어야 비로소 사업이 앞으로 나아갑니다.</p>
-                <p>우리가 도시정비에 집중하는 이유는 명확합니다. 이 분야야말로 전문가의 양심과 역량이 가장 절실하게 필요한 영역이기 때문입니다. 쉬운 길이 아니라 옳은 길을 택했고, 그 선택이 세울의 정체성이 되었습니다.</p>
             </div>
         </div>
 
-        <!-- Section 3: 우리가 지키는 원칙 -->
-        <div class="vision-section">
-            <h2 class="section-title">우리가 지키는 원칙</h2>
-            <div class="principle-grid">
-                <div class="principle-card">
-                    <div class="p-icon"><i class="fa-solid fa-gavel"></i></div>
+        <!-- ══════ 왜 도시정비인가 ══════ -->
+        <div class="vs">
+            <div class="vs-why">
+                <div class="vs-why-text">
+                    <h2>왜 도시정비에<br>집중하는가</h2>
+                    <p>도시정비사업은 단순한 건설 행위가 아닙니다. 수십 년간 삶의 터전이었던 공간을 허물고, 그 위에 새로운 공동체를 세우는 일입니다.</p>
+                    <p>수백, 수천 명의 재산권이 걸려 있고, 행정기관의 인허가와 법률적 판단이 매 단계마다 뒤따릅니다. 하나의 절차가 어긋나면 수년간의 노력이 무너질 수 있는, 가장 엄밀함을 요구하는 분야입니다.</p>
+                    <p>우리가 도시정비에 집중하는 이유는 명확합니다. 이 분야야말로 전문가의 양심과 역량이 가장 절실하게 필요한 영역이기 때문입니다.</p>
+                </div>
+                <div class="vs-why-cards">
+                    <div class="vs-why-card">
+                        <h4><i class="fa-solid fa-arrows-left-right"></i> 복잡한 이해관계 조율</h4>
+                        <p>조합원·시행사·시공사·행정기관 사이의 균형점을 찾아냅니다</p>
+                    </div>
+                    <div class="vs-why-card">
+                        <h4><i class="fa-solid fa-scale-balanced"></i> 법적 정합성 확보</h4>
+                        <p>도시정비법을 비롯한 관련 법령에 기반한 정확한 절차 이행</p>
+                    </div>
+                    <div class="vs-why-card">
+                        <h4><i class="fa-solid fa-chart-line"></i> 사업성과 공공성의 균형</h4>
+                        <p>경제적 타당성과 공익적 가치를 동시에 실현하는 설계</p>
+                    </div>
+                    <div class="vs-why-card">
+                        <h4><i class="fa-solid fa-helmet-safety"></i> 현장 중심 실행력</h4>
+                        <p>보고서 위의 전략이 아닌, 현장에서 결과를 만들어내는 역량</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ 우리가 지키는 원칙 ══════ -->
+        <div class="vs">
+            <h2 class="vs-title">우리가 지키는 원칙</h2>
+            <div class="vs-principles">
+                <div class="vs-prin-card">
+                    <div class="vs-prin-icon"><i class="fa-solid fa-gavel"></i></div>
                     <h4>절차의 정합성</h4>
-                    <p>법령과 지침에 근거한 정확한 절차를 준수합니다. 모든 의사결정은 법적 기반 위에서 이루어지며, 절차적 하자가 발생하지 않도록 사전에 검증합니다.</p>
+                    <p>법령과 지침에 근거한 정확한 절차를 준수합니다. 모든 의사결정은 법적 기반 위에서 이루어집니다.</p>
                 </div>
-                <div class="principle-card">
-                    <div class="p-icon"><i class="fa-solid fa-file-shield"></i></div>
+                <div class="vs-prin-card">
+                    <div class="vs-prin-icon"><i class="fa-solid fa-file-shield"></i></div>
                     <h4>문서의 정확성</h4>
-                    <p>모든 공문서·보고서·의사록을 엄밀하게 작성합니다. 기록의 정확성이 곧 사업의 신뢰이며, 향후 발생할 수 있는 분쟁에 대한 가장 확실한 방어입니다.</p>
+                    <p>모든 공문서·보고서·의사록을 엄밀하게 작성합니다. 기록의 정확성이 곧 사업의 신뢰입니다.</p>
                 </div>
-                <div class="principle-card">
-                    <div class="p-icon"><i class="fa-solid fa-handshake"></i></div>
+                <div class="vs-prin-card">
+                    <div class="vs-prin-icon"><i class="fa-solid fa-handshake"></i></div>
                     <h4>이해관계 조율</h4>
-                    <p>조합원·시행사·행정기관 사이에서 균형 있는 소통을 이끕니다. 어느 한쪽에 치우치지 않는 중립적 관점으로 최선의 합의점을 도출합니다.</p>
+                    <p>어느 한쪽에 치우치지 않는 중립적 관점으로 최선의 합의점을 도출합니다.</p>
                 </div>
-            </div>
-            <div class="principle-bottom-row">
-                <div class="principle-card">
-                    <div class="p-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div class="vs-prin-card">
+                    <div class="vs-prin-icon"><i class="fa-solid fa-bolt"></i></div>
                     <h4>실행력</h4>
-                    <p>계획에서 그치지 않고 현장에서 결과를 만들어냅니다. 보고서 위의 전략이 아닌 실제 인허가 취득과 사업 진행으로 증명합니다.</p>
+                    <p>계획에서 그치지 않고 현장에서 결과를 만들어냅니다. 실제 인허가 취득과 사업 진행으로 증명합니다.</p>
                 </div>
-                <div class="principle-card">
-                    <div class="p-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="vs-prin-card">
+                    <div class="vs-prin-icon"><i class="fa-solid fa-shield-halved"></i></div>
                     <h4>책임감</h4>
-                    <p>맡은 사업장에 대해 끝까지 책임지는 자세로 임합니다. 사업 완료까지 현장을 떠나지 않으며, 어떤 난관에서도 해법을 찾아냅니다.</p>
+                    <p>맡은 사업장에 대해 끝까지 책임집니다. 어떤 난관에서도 해법을 찾아냅니다.</p>
+                </div>
+                <div class="vs-prin-card">
+                    <div class="vs-prin-icon"><i class="fa-solid fa-eye"></i></div>
+                    <h4>투명한 운영</h4>
+                    <p>조합 운영의 모든 과정을 투명하게 공개하고, 신뢰를 기반으로 소통합니다.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Section 5: 앞으로의 방향 -->
-        <div class="vision-section">
-            <div class="direction-banner">
-                <div class="dir-content">
-                    <span class="dir-label">Our Future</span>
-                    <h3>앞으로의 방향</h3>
-                    <div class="dir-divider"></div>
-                    <p>세울엔지니어링은 단순한 사업 대행을 넘어,
-도시정비의 기준을 만들어가는 회사가 되겠습니다.
-절차의 투명성, 사업의 실현 가능성, 조합원의 이익 보호 —
-이 세 가지를 한 번도 타협하지 않는 회사.
-그것이 세울이 그리는 미래입니다.</p>
+        <!-- ══════ 세울의 방식 ══════ -->
+        <div class="vs">
+            <div class="vs-process">
+                <h2>세울의 방식</h2>
+                <div class="vs-process-sub">HOW WE WORK — 정비사업의 처음부터 끝까지</div>
+                <div class="vs-steps">
+                    <div class="vs-step">
+                        <div class="vs-step-num">01</div>
+                        <h4>기초 진단</h4>
+                        <p>사업 대상지의 법적·물리적 현황을 분석하고 추진 가능성을 진단합니다</p>
+                    </div>
+                    <div class="vs-step">
+                        <div class="vs-step-num">02</div>
+                        <h4>사업성 검토</h4>
+                        <p>비례율·분담금·총사업비를 분석하여 사업의 경제적 타당성을 검증합니다</p>
+                    </div>
+                    <div class="vs-step">
+                        <div class="vs-step-num">03</div>
+                        <h4>이해관계 조율</h4>
+                        <p>조합원·행정기관·시공사 간 이해관계를 조정하고 합의를 이끌어냅니다</p>
+                    </div>
+                    <div class="vs-step">
+                        <div class="vs-step-num">04</div>
+                        <h4>행정·문서 체계화</h4>
+                        <p>인허가 서류, 총회 자료, 공문을 법적 기준에 맞게 체계적으로 관리합니다</p>
+                    </div>
+                    <div class="vs-step">
+                        <div class="vs-step-num">05</div>
+                        <h4>인허가 및 추진 지원</h4>
+                        <p>사업시행인가, 관리처분인가 등 핵심 인허가를 실행력 있게 추진합니다</p>
+                    </div>
+                    <div class="vs-step">
+                        <div class="vs-step-num">06</div>
+                        <h4>사업 완성 및 안정화</h4>
+                        <p>착공부터 준공·입주·청산까지 사업의 마지막 단계를 책임지고 완결합니다</p>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- ══════ 브랜드 비주얼 ══════ -->
+        <div class="vs">
+            <div class="vs-visual">
+                <img src="../jpg/입간판1_입간판.png" alt="세울엔지니어링 브랜드 아이덴티티">
+                <img src="../jpg/사옥 2청사1.png" alt="세울엔지니어링 사옥">
+            </div>
+        </div>
+
+        <!-- ══════ 성장 스토리 ══════ -->
+        <div class="vs">
+            <h2 class="vs-title">성장 스토리</h2>
+            <div class="vs-timeline" id="vsTimeline"></div>
+        </div>
+
+        <!-- ══════ 앞으로의 방향 ══════ -->
+        <div class="vs">
+            <div class="vs-future">
+                <div class="vs-future-label">Our Future</div>
+                <h2>앞으로의 방향</h2>
+                <div class="vs-future-line"></div>
+                <p>세울엔지니어링은 단순한 사업 대행을 넘어,<br>
+                도시정비의 기준을 만들어가는 회사가 되겠습니다.<br><br>
+                절차의 투명성, 사업의 실현 가능성, 조합원의 이익 보호 —<br>
+                이 세 가지를 한 번도 타협하지 않는 회사.</p>
+                <div class="vs-declaration">그것이 세울이 그리는 미래입니다.</div>
+            </div>
+        </div>
+
+        <!-- ══════ CTA ══════ -->
+        <div class="vs-cta">
+            <a href="contact.html" class="vs-cta-primary"><i class="fa-solid fa-paper-plane"></i> 사업문의</a>
+            <a href="portfolio.html" class="vs-cta-outline"><i class="fa-solid fa-briefcase"></i> 업무실적 보기</a>
         </div>
 
     </div>
@@ -375,16 +518,18 @@
 <script>
 (function() {
     const info = MOCK.companyInfo;
-
-    /* ── 성장 스토리 타임라인 ── */
-    document.getElementById('timeline').innerHTML = info.history.map(h => `
-        <div class="timeline-item">
-            <div class="timeline-year">${h.year}</div>
-            <ul class="timeline-events">
-                ${h.items.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-        </div>
-    `).join('');
+    const tl = document.getElementById('vsTimeline');
+    if (tl && info.history) {
+        tl.innerHTML = info.history.map(h => `
+            <div class="vs-tl-item">
+                <div class="vs-tl-year">${h.year}</div>
+                <div class="vs-tl-dot"></div>
+                <div class="vs-tl-content">
+                    <ul>${h.items.map(i => '<li>' + i + '</li>').join('')}</ul>
+                </div>
+            </div>
+        `).join('');
+    }
 })();
 </script>
 </body>
