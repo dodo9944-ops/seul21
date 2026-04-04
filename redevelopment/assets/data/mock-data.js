@@ -394,6 +394,12 @@ const MOCK = {
     { id:'lib54', category:'가이드', title:'마포구 공사비 책정 가이드라인', description:'[마포구] 공사비 책정 가이드라인 — 지자체 공사비 기준 참고', fileType:'pdf', fileSize:'761KB', date:'2023-01-01', downloads:0, tags:['마포구','공사비','가이드라인'] },
     { id:'lib55', category:'가이드', title:'재건축·재개발 관련 조세제도 연구보고서', description:'[한국공인회계사회] 재건축·재개발사업 관련 조세제도 연구 (취득세/양도세/종부세 등)', fileType:'pdf', fileSize:'1.2MB', date:'2022-01-01', downloads:0, tags:['조세','세금','재건축','재개발','연구'] },
     { id:'lib56', category:'관련판례', title:'대법원 판례 2025 상반기 민사 (정비사업 관련)', description:'[대법원] 2025년 상반기 주요 민사 판결 — 정비사업 관련 판례 포함', fileType:'pdf', fileSize:'608KB', date:'2025-06-15', downloads:0, tags:['대법원','판례','2025','민사'] },
+    { id:'news0329', category:'주요뉴스', title:'[주요정비사업뉴스] 2026.03.29', description:'북아현3구역 임시총회 / 성남시 정비사업 주민설명회', fileType:'pdf', fileSize:'웹문서', date:'2026-03-29', downloads:0, tags:['일일뉴스','북아현','성남시','2026-03-29'] },
+    { id:'news0330', category:'주요뉴스', title:'[주요정비사업뉴스] 2026.03.30', description:'재건축 용적률 최대 50% 상향 정책 / 광운대역세권 재개발 해제', fileType:'pdf', fileSize:'웹문서', date:'2026-03-30', downloads:0, tags:['일일뉴스','용적률','광운대','2026-03-30'] },
+    { id:'news0331', category:'주요뉴스', title:'[주요정비사업뉴스] 2026.03.31', description:'노량진1구역 공람공고 / 충무로 도시정비형 수정가결 / 57곳 보정계수', fileType:'pdf', fileSize:'웹문서', date:'2026-03-31', downloads:0, tags:['일일뉴스','노량진','충무로','보정계수','2026-03-31'] },
+    { id:'news0401', category:'주요뉴스', title:'[주요정비사업뉴스] 2026.04.01', description:'4월 입주물량 1.6만세대(34.8%↑) / 소규모정비 동의율 완화 1개월 점검', fileType:'pdf', fileSize:'웹문서', date:'2026-04-01', downloads:0, tags:['일일뉴스','입주물량','소규모정비','2026-04-01'] },
+    { id:'news0402', category:'주요뉴스', title:'[주요정비사업뉴스] 2026.04.02', description:'[최우선] 압여목성 토허구역 1년 연장 / 목동7단지 주민총회', fileType:'pdf', fileSize:'웹문서', date:'2026-04-02', downloads:0, tags:['일일뉴스','토허구역','압여목성','2026-04-02'] },
+    { id:'news0403', category:'주요뉴스', title:'[주요정비사업뉴스] 2026.04.03', description:'국토부 신탁사 책임 강화 / 마포구 정비사업 아카데미 감정평가', fileType:'pdf', fileSize:'웹문서', date:'2026-04-03', downloads:0, tags:['일일뉴스','신탁사','마포구','2026-04-03'] },
     { id:'news0404', category:'주요뉴스', title:'[일일 주요뉴스] 2026.04.04 재개발·재건축·정비사업 브리핑', description:'압여목성 토허구역 1년 연장 / 소규모정비 동의율 완화 시행 / 마포구 정비사업 아카데미 / 정비사업 신탁사 책임 강화', fileType:'pdf', fileSize:'웹문서', date:'2026-04-04', downloads:0, tags:['일일브리핑','토허구역','소규모정비','2026-04-04'] }
   ],
 
