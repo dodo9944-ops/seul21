@@ -17,12 +17,34 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
-    /* Hero */
-    .fh{padding:48px 0 40px;background:linear-gradient(135deg,#070B15,var(--brand-dark) 40%,var(--brand-navy));position:relative;overflow:hidden}
-    .fh::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(195,165,105,.3),transparent)}
-    .fh h1{font-size:34px;font-weight:900;color:#fff;margin-bottom:10px;padding-left:18px;border-left:3px solid var(--gold)}
-    .fh .fh-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;max-width:650px}
-    @media(max-width:768px){.fh{padding:36px 0 28px}.fh h1{font-size:26px}}
+    /* Hero — 서비스 선택 포함 */
+    .fh{padding:48px 0 0;background:linear-gradient(135deg,#070B15,var(--brand-dark) 40%,var(--brand-navy));position:relative;overflow:visible}
+    .fh h1{font-size:34px;font-weight:900;color:#fff;margin-bottom:8px;padding-left:18px;border-left:3px solid var(--gold)}
+    .fh .fh-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;max-width:650px;margin-bottom:32px}
+    @media(max-width:768px){.fh{padding:36px 0 0}.fh h1{font-size:26px}.fh .fh-sub{margin-bottom:24px}}
+
+    /* 히어로 안 서비스 선택 카드 */
+    .hero-selector{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding-bottom:36px}
+    @media(max-width:640px){.hero-selector{grid-template-columns:1fr;gap:12px;padding-bottom:28px}}
+    .hero-opt{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:14px;padding:24px 22px;cursor:pointer;transition:all .3s;position:relative}
+    .hero-opt:hover{background:rgba(255,255,255,.1);border-color:rgba(195,165,105,.3);transform:translateY(-2px)}
+    .hero-opt.active{background:rgba(195,165,105,.08);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+    .hero-opt.active::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);border-radius:14px 14px 0 0}
+    .hero-opt .ho-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .hero-opt .ho-icon{width:44px;height:44px;border-radius:12px;background:rgba(195,165,105,.12);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--gold);flex-shrink:0}
+    .hero-opt.active .ho-icon{background:var(--gold);color:var(--brand-dark)}
+    .hero-opt .ho-title{font-size:17px;font-weight:800;color:#fff}
+    .hero-opt .ho-badge{display:inline-block;padding:3px 9px;border-radius:5px;font-size:10px;font-weight:700;margin-left:8px;vertical-align:middle}
+    .ho-badge.quick{background:rgba(255,255,255,.12);color:rgba(255,255,255,.6)}
+    .ho-badge.pro{background:var(--gold);color:var(--brand-dark)}
+    .hero-opt .ho-desc{font-size:12.5px;color:rgba(255,255,255,.45);line-height:1.55;margin-bottom:12px}
+    .hero-opt .ho-tags{display:flex;flex-wrap:wrap;gap:5px}
+    .hero-opt .ho-tag{padding:3px 9px;border-radius:5px;font-size:10.5px;font-weight:500;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08)}
+    .hero-opt.active .ho-tag{background:rgba(195,165,105,.1);color:var(--gold);border-color:rgba(195,165,105,.2)}
+    .hero-opt .ho-arrow{display:flex;align-items:center;gap:5px;margin-top:12px;font-size:12px;font-weight:700;color:var(--gold);opacity:0;transition:opacity .2s}
+    .hero-opt.active .ho-arrow,.hero-opt:hover .ho-arrow{opacity:1}
+    .hero-opt .ho-arrow i{font-size:10px;transition:transform .2s}
+    .hero-opt:hover .ho-arrow i{transform:translateX(3px)}
 
     /* Cards Grid */
     .sv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:48px}
@@ -208,41 +230,36 @@
         <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><a href="services.html">사업분야</a><i class="fa-solid fa-chevron-right"></i><span>사업성 검토</span></div>
         <h1>사업성 검토</h1>
         <p class="fh-sub">기초자료를 바탕으로 비례율, 예상 분담금, 총사업비, 일반분양 수입 및 주요 리스크를 체계적으로 검토합니다.</p>
+
+        <!-- 히어로 안 서비스 선택 -->
+        <div class="hero-selector">
+            <div class="hero-opt active" onclick="switchTab('individual')">
+                <div class="ho-top">
+                    <div class="ho-icon"><i class="fa-solid fa-calculator"></i></div>
+                    <div><span class="ho-title">개별 검토</span><span class="ho-badge quick">간편</span></div>
+                </div>
+                <p class="ho-desc">특정 항목만 빠르게 계산합니다. 비례율, 분담금, 시뮬레이션 등 단일 기능 실행.</p>
+                <div class="ho-tags">
+                    <span class="ho-tag">비례율</span><span class="ho-tag">분담금</span><span class="ho-tag">시뮬레이션</span><span class="ho-tag">총사업비</span><span class="ho-tag">수익성</span>
+                </div>
+                <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 개별 계산 시작</div>
+            </div>
+            <div class="hero-opt" onclick="switchTab('comprehensive')">
+                <div class="ho-top">
+                    <div class="ho-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <div><span class="ho-title">종합 분석</span><span class="ho-badge pro">전문가용</span></div>
+                </div>
+                <p class="ho-desc">기초데이터부터 사업비까지 단계별 입력. 비례율·분담금·시나리오 종합 분석.</p>
+                <div class="ho-tags">
+                    <span class="ho-tag">6단계 분석</span><span class="ho-tag">유형별 분담금</span><span class="ho-tag">시나리오 비교</span><span class="ho-tag">자동 해석</span>
+                </div>
+                <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 종합 분석 시작</div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="page-body"><div class="inner">
-
-    <!-- 서비스 선택 — 2카드 -->
-    <div class="svc-selector">
-        <div class="svc-option active" onclick="switchTab('individual')">
-            <span class="svc-badge quick">간편 계산</span>
-            <div class="svc-icon"><i class="fa-solid fa-calculator"></i></div>
-            <h3>개별 검토 서비스</h3>
-            <p class="svc-desc">특정 항목만 빠르게 계산합니다. 비례율, 분담금, 시뮬레이션 등 단일 기능을 개별로 실행할 수 있습니다.</p>
-            <div class="svc-features">
-                <span class="svc-feat">비례율</span>
-                <span class="svc-feat">분담금</span>
-                <span class="svc-feat">시뮬레이션</span>
-                <span class="svc-feat">총사업비</span>
-                <span class="svc-feat">수익성</span>
-            </div>
-            <div class="svc-arrow"><i class="fa-solid fa-arrow-right"></i> 개별 계산 시작</div>
-        </div>
-        <div class="svc-option" onclick="switchTab('comprehensive')">
-            <span class="svc-badge pro">전문가용</span>
-            <div class="svc-icon"><i class="fa-solid fa-chart-pie"></i></div>
-            <h3>종합 분석 서비스</h3>
-            <p class="svc-desc">기초데이터부터 사업비까지 단계별로 입력하고, 비례율·분담금·시나리오를 종합적으로 분석합니다.</p>
-            <div class="svc-features">
-                <span class="svc-feat">6단계 분석</span>
-                <span class="svc-feat">유형별 분담금</span>
-                <span class="svc-feat">시나리오 비교</span>
-                <span class="svc-feat">자동 해석</span>
-            </div>
-            <div class="svc-arrow"><i class="fa-solid fa-arrow-right"></i> 종합 분석 시작</div>
-        </div>
-    </div>
 
     <!-- 개별 검토 서비스 -->
     <div id="tabIndividual">
@@ -794,9 +811,10 @@ window.CA = {
 function switchTab(tab){
   document.getElementById('tabIndividual').style.display = tab==='individual'?'':'none';
   document.getElementById('tabComprehensive').style.display = tab==='comprehensive'?'':'none';
-  var cards = document.querySelectorAll('.svc-option');
-  if(cards.length>=2){cards[0].classList.toggle('active',tab==='individual');cards[1].classList.toggle('active',tab==='comprehensive')}
+  var opts = document.querySelectorAll('.hero-opt');
+  if(opts.length>=2){opts[0].classList.toggle('active',tab==='individual');opts[1].classList.toggle('active',tab==='comprehensive')}
   if(tab==='comprehensive' && window.CA) setTimeout(function(){CA.render()},50);
+  document.querySelector('.page-body').scrollIntoView({behavior:'smooth'});
 }
 /* URL 파라미터 */
 if(new URLSearchParams(location.search).get('tab')==='comprehensive') setTimeout(function(){switchTab('comprehensive')},300);
