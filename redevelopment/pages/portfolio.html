@@ -11,39 +11,125 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
-    /* ── KPI 요약 ── */
+    /* ============================================================
+       Portfolio Page — Premium Styles
+       ============================================================ */
+
+    /* ── Hero Enhancement ── */
+    .portfolio-hero {
+        padding: 64px 0 56px;
+        background: linear-gradient(135deg, #070B15 0%, var(--brand-dark) 40%, var(--brand-navy) 100%);
+        border-bottom: none;
+        position: relative;
+        overflow: hidden;
+    }
+    .portfolio-hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(195,165,105,0.06) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .portfolio-hero::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(195,165,105,0.3), transparent);
+    }
+    .portfolio-hero .breadcrumb {
+        margin-bottom: 20px;
+    }
+    .portfolio-hero h1 {
+        font-size: 36px;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        color: var(--white);
+        margin-bottom: 14px;
+        padding-left: 18px;
+        border-left: 3px solid var(--gold);
+    }
+    .portfolio-hero .hero-tagline {
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--gold);
+        margin-bottom: 8px;
+        letter-spacing: -0.2px;
+    }
+    .portfolio-hero .hero-subtitle {
+        font-size: 14px;
+        color: rgba(255,255,255,0.5);
+        line-height: 1.6;
+    }
+    @media (max-width: 768px) {
+        .portfolio-hero { padding: 40px 0 32px; }
+        .portfolio-hero h1 { font-size: 26px; }
+        .portfolio-hero .hero-tagline { font-size: 15px; }
+    }
+
+    /* ── KPI Stats Cards ── */
     .kpi-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
-        margin-bottom: 48px;
+        margin-bottom: 56px;
     }
-    @media (max-width: 1024px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
-    @media (max-width: 540px) { .kpi-grid { grid-template-columns: 1fr; gap: 12px; } }
+    @media (max-width: 1024px) {
+        .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    }
+    @media (max-width: 540px) {
+        .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
     .kpi-card {
         background: var(--brand-dark);
-        border-radius: var(--radius);
+        border-radius: 14px;
         padding: 28px 24px;
         text-align: center;
         position: relative;
         overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .kpi-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .kpi-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        opacity: 0;
+        transition: opacity 0.25s ease;
+    }
+    .kpi-card:hover::before {
+        opacity: 1;
     }
     .kpi-card::after {
         content: '';
         position: absolute;
-        bottom: 0; left: 50%;
+        bottom: 0;
+        left: 50%;
         transform: translateX(-50%);
-        width: 40px; height: 3px;
+        width: 40px;
+        height: 3px;
         background: var(--gold);
         border-radius: 2px;
     }
     .kpi-card .kpi-icon {
-        font-size: 20px;
+        font-size: 22px;
         color: var(--gold);
-        margin-bottom: 12px;
+        margin-bottom: 14px;
     }
     .kpi-card .kpi-value {
-        font-size: 32px;
+        font-size: 30px;
         font-weight: 800;
         color: var(--gold);
         line-height: 1.2;
@@ -52,135 +138,538 @@
     .kpi-card .kpi-label {
         font-size: 13px;
         font-weight: 500;
-        color: rgba(255,255,255,0.6);
+        color: rgba(255,255,255,0.55);
+    }
+    @media (max-width: 540px) {
+        .kpi-card { padding: 22px 16px; }
+        .kpi-card .kpi-value { font-size: 24px; }
     }
 
-    /* ── 대표 수행실적 (Featured) ── */
+    /* ── Section Title ── */
+    .portfolio-section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 32px;
+    }
+    .portfolio-section-title {
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--gray-900);
+        letter-spacing: -0.5px;
+        position: relative;
+        padding-left: 16px;
+    }
+    .portfolio-section-title::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 4px;
+        width: 3px;
+        height: 22px;
+        border-radius: 2px;
+        background: linear-gradient(to bottom, var(--gold), rgba(195,165,105,0.3));
+    }
+
+    /* ── Featured Cards (주요 수행실적) ── */
     .featured-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 24px;
     }
-    @media (max-width: 1024px) { .featured-grid { grid-template-columns: 1fr; gap: 16px; } }
+    @media (max-width: 1024px) {
+        .featured-grid { grid-template-columns: 1fr; gap: 18px; }
+    }
     .featured-card {
         background: var(--white);
-        border: 1px solid var(--gray-200);
-        border-left: 4px solid var(--gold);
-        border-radius: var(--radius);
-        padding: 28px 24px 24px;
-        transition: all 0.25s ease;
+        border: 1.5px solid var(--gray-200);
+        border-radius: 14px;
+        padding: 32px 28px 28px;
+        transition: all 0.3s ease;
         display: flex;
         flex-direction: column;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .featured-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--gold), rgba(195,165,105,0.4));
     }
     .featured-card:hover {
         border-color: var(--gold);
-        box-shadow: var(--shadow-hover);
-        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(195,165,105,0.15);
+        transform: translateY(-6px);
     }
-    .featured-card .fc-header {
+    .featured-card .fc-badges {
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin-bottom: 14px;
+        gap: 8px;
+        margin-bottom: 16px;
     }
     .featured-card .fc-name {
-        font-size: 18px;
+        font-size: 19px;
         font-weight: 800;
         color: var(--gray-900);
-        margin-bottom: 12px;
+        margin-bottom: 16px;
         line-height: 1.4;
+        letter-spacing: -0.3px;
     }
-    .featured-card .fc-meta {
+    .featured-card .fc-info-list {
         display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 14px;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 16px;
     }
     .featured-card .fc-info {
-        font-size: 13px;
+        display: flex;
+        align-items: center;
+        font-size: 13.5px;
         color: var(--gray-600);
-        margin-bottom: 6px;
     }
-    .featured-card .fc-info span {
+    .featured-card .fc-info i {
+        width: 18px;
+        color: var(--gold);
+        margin-right: 8px;
+        font-size: 12px;
+        text-align: center;
+    }
+    .featured-card .fc-info strong {
         font-weight: 600;
-        color: var(--gray-900);
+        color: var(--gray-800);
     }
     .featured-card .fc-desc {
         font-size: 14px;
         color: var(--gray-500);
         line-height: 1.65;
         margin-top: auto;
-        padding-top: 14px;
+        padding-top: 16px;
         border-top: 1px solid var(--gray-100);
     }
+    .featured-card .fc-detail-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 16px;
+        padding: 8px 16px;
+        background: var(--brand-dark);
+        color: var(--gold);
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        align-self: flex-start;
+    }
+    .featured-card .fc-detail-btn:hover {
+        background: var(--brand-navy);
+        transform: translateX(2px);
+    }
+    .featured-card .fc-detail-btn i {
+        font-size: 11px;
+        transition: transform 0.2s ease;
+    }
+    .featured-card .fc-detail-btn:hover i {
+        transform: translateX(3px);
+    }
 
-    /* ── 전체 수행실적 카드 ── */
+    /* ── Section Divider ── */
+    .section-divider {
+        margin: 56px 0;
+        border: none;
+        border-top: 1px solid var(--gray-200);
+    }
+
+    /* ── Filter Control Bar ── */
+    .filter-control-bar {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 24px;
+        padding: 16px 20px;
+        background: var(--gray-50);
+        border-radius: 14px;
+        border: 1px solid var(--gray-100);
+        flex-wrap: wrap;
+    }
+    .filter-control-bar .filter-select {
+        height: 40px;
+        padding: 0 32px 0 14px;
+        border: 1.5px solid var(--gray-200);
+        border-radius: 10px;
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--gray-800);
+        background: var(--white);
+        cursor: pointer;
+        appearance: auto;
+        font-family: var(--font);
+        transition: border-color 0.2s ease;
+        min-width: 130px;
+    }
+    .filter-control-bar .filter-select:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(195,165,105,0.1);
+    }
+    .filter-control-bar .result-count {
+        margin-left: auto;
+        font-size: 14px;
+        color: var(--gray-500);
+        font-weight: 500;
+    }
+    .filter-control-bar .result-count strong {
+        color: var(--brand-dark);
+        font-weight: 700;
+    }
+    @media (max-width: 540px) {
+        .filter-control-bar {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+        }
+        .filter-control-bar .filter-select {
+            width: 100%;
+            min-width: unset;
+        }
+        .filter-control-bar .result-count {
+            margin-left: 0;
+            text-align: center;
+        }
+    }
+
+    /* ── All Portfolio Cards Grid ── */
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+    @media (max-width: 1024px) {
+        .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    }
+    @media (max-width: 540px) {
+        .portfolio-grid { grid-template-columns: 1fr; gap: 14px; }
+    }
+
+    /* ── Portfolio Card (list view) ── */
     .pf-card {
-        cursor: default;
+        background: var(--white);
+        border: 1.5px solid var(--gray-200);
+        border-radius: 14px;
+        padding: 28px 24px 24px;
+        transition: all 0.25s ease;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        position: relative;
+    }
+    .pf-card:hover {
+        border-color: var(--gold);
+        box-shadow: 0 8px 24px rgba(195,165,105,0.12);
+        transform: translateY(-4px);
     }
     .pf-card .pf-name {
         font-size: 16px;
         font-weight: 700;
         color: var(--gray-900);
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         line-height: 1.4;
+        letter-spacing: -0.2px;
     }
     .pf-card .pf-badges {
         display: flex;
         flex-wrap: wrap;
         gap: 6px;
-        margin-bottom: 14px;
+        margin-bottom: 16px;
     }
-    .pf-card .pf-info {
+    .pf-card .pf-info-row {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         font-size: 13px;
         color: var(--gray-600);
-        margin-bottom: 4px;
+        padding: 6px 0;
     }
-    .pf-card .pf-info span:last-child {
+    .pf-card .pf-info-row + .pf-info-row {
+        border-top: 1px solid var(--gray-50);
+    }
+    .pf-card .pf-info-row .pf-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+        color: var(--gray-500);
+    }
+    .pf-card .pf-info-row .pf-label i {
+        font-size: 11px;
+        color: var(--gold);
+        width: 14px;
+        text-align: center;
+    }
+    .pf-card .pf-info-row .pf-value {
         font-weight: 600;
-        color: var(--gray-900);
+        color: var(--gray-800);
+    }
+    .pf-card .pf-detail-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin-top: auto;
+        padding-top: 16px;
+        width: 100%;
+        height: 40px;
+        background: transparent;
+        color: var(--brand-dark);
+        border: 1.5px solid var(--gray-200);
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        font-family: var(--font);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-top: 18px;
+    }
+    .pf-card .pf-detail-btn:hover {
+        background: var(--brand-dark);
+        color: var(--gold);
+        border-color: var(--brand-dark);
     }
 
     /* ── Badge Variants ── */
     .badge-type {
         background: var(--brand-dark);
         color: var(--white);
-    }
-    .badge-role {
-        background: var(--gray-100);
-        color: var(--gray-700);
-        font-weight: 600;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 6px;
     }
     .badge-status-진행중 {
         background: rgba(195,165,105,0.15);
         color: var(--gold);
+        font-size: 11px;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 6px;
     }
     .badge-status-완료 {
         background: var(--brand-dark);
         color: var(--white);
+        font-size: 11px;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 6px;
     }
 
-    /* ── Section Divider ── */
-    .section-divider {
-        margin: 48px 0;
-        border: none;
-        border-top: 1px solid var(--gray-200);
+    /* ── Empty State ── */
+    .portfolio-empty {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 56px 20px;
     }
-
-    .result-count {
+    .portfolio-empty i {
+        font-size: 48px;
+        color: var(--gray-300);
+        margin-bottom: 16px;
+    }
+    .portfolio-empty h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--gray-600);
+        margin-bottom: 8px;
+    }
+    .portfolio-empty p {
         font-size: 14px;
-        color: var(--gray-500);
-        padding: 8px 0;
+        color: var(--gray-400);
     }
-    .result-count strong { color: var(--gray-900); }
+
+    /* ── Detail Modal ── */
+    .detail-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 15, 28, 0.65);
+        backdrop-filter: blur(4px);
+        z-index: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+    }
+    .detail-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .detail-modal {
+        background: var(--white);
+        border-radius: 16px;
+        width: 100%;
+        max-width: 600px;
+        max-height: 90vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+        transform: translateY(20px) scale(0.97);
+        transition: transform 0.3s ease;
+    }
+    .detail-overlay.open .detail-modal {
+        transform: translateY(0) scale(1);
+    }
+    .detail-modal-header {
+        background: linear-gradient(135deg, var(--brand-dark), var(--brand-navy));
+        padding: 28px 28px 24px;
+        position: relative;
+        flex-shrink: 0;
+    }
+    .detail-modal-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold), rgba(195,165,105,0.2));
+    }
+    .detail-modal-header .detail-badges {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+    .detail-modal-header .detail-name {
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--white);
+        line-height: 1.35;
+        letter-spacing: -0.3px;
+    }
+    .detail-modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.1);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        color: rgba(255,255,255,0.7);
+        transition: all 0.2s ease;
+    }
+    .detail-modal-close:hover {
+        background: rgba(255,255,255,0.2);
+        color: var(--white);
+    }
+    .detail-modal-body {
+        padding: 28px;
+        overflow-y: auto;
+        flex: 1;
+    }
+    .detail-info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+    }
+    .detail-info-item {
+        display: flex;
+        flex-direction: column;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--gray-100);
+    }
+    .detail-info-item:nth-child(odd) {
+        border-right: 1px solid var(--gray-100);
+    }
+    .detail-info-item:nth-last-child(-n+2) {
+        border-bottom: none;
+    }
+    .detail-info-item .info-label {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--gray-400);
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        margin-bottom: 6px;
+    }
+    .detail-info-item .info-value {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--gray-900);
+    }
+    .detail-desc {
+        margin-top: 24px;
+        padding: 20px;
+        background: var(--gray-50);
+        border-radius: 12px;
+        border: 1px solid var(--gray-100);
+    }
+    .detail-desc-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+    }
+    .detail-desc p {
+        font-size: 14.5px;
+        color: var(--gray-700);
+        line-height: 1.7;
+    }
+    .detail-modal-footer {
+        padding: 16px 28px;
+        border-top: 1px solid var(--gray-100);
+        display: flex;
+        justify-content: flex-end;
+        flex-shrink: 0;
+    }
+    .detail-close-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 24px;
+        background: var(--brand-dark);
+        color: var(--white);
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: var(--font);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .detail-close-btn:hover {
+        background: var(--brand-navy);
+    }
+    @media (max-width: 540px) {
+        .detail-modal-header { padding: 22px 20px 20px; }
+        .detail-modal-header .detail-name { font-size: 18px; }
+        .detail-modal-body { padding: 20px; }
+        .detail-info-grid { grid-template-columns: 1fr; }
+        .detail-info-item:nth-child(odd) { border-right: none; }
+        .detail-info-item { border-bottom: 1px solid var(--gray-100); }
+        .detail-info-item:last-child { border-bottom: none; }
+        .detail-modal-footer { padding: 14px 20px; }
+    }
     </style>
 </head>
 <body>
 <div id="site-header"></div>
 
-<div class="page-hero">
+<!-- ── Hero Banner ── -->
+<div class="portfolio-hero">
     <div class="inner">
         <div class="breadcrumb">
             <a href="../index.html">홈</a>
@@ -188,14 +677,15 @@
             <span>업무실적</span>
         </div>
         <h1>업무실적</h1>
-        <p>세울엔지니어링의 재개발·재건축·소규모정비 수행실적을 한눈에 확인하세요</p>
+        <p class="hero-tagline">재개발·재건축·소규모정비사업의 축적된 수행 경험</p>
+        <p class="hero-subtitle">사업성 분석부터 인허가, 시공관리, 준공까지 프로젝트별 실적을 확인하세요</p>
     </div>
 </div>
 
 <div class="page-body">
     <div class="inner">
 
-        <!-- KPI 요약 -->
+        <!-- ── KPI Stats ── -->
         <div class="kpi-grid">
             <div class="kpi-card">
                 <div class="kpi-icon"><i class="fa-solid fa-building"></i></div>
@@ -219,37 +709,59 @@
             </div>
         </div>
 
-        <!-- 대표 수행실적 -->
+        <!-- ── 주요 수행실적 ── -->
         <div class="featured-section">
-            <div class="section-head">
-                <h2 class="section-title">대표 수행실적</h2>
+            <div class="portfolio-section-head">
+                <h2 class="portfolio-section-title">주요 수행실적</h2>
             </div>
             <div class="featured-grid" id="featuredGrid"></div>
         </div>
 
         <hr class="section-divider">
 
-        <!-- 전체 수행실적 -->
-        <div class="section-head">
-            <h2 class="section-title">전체 수행실적</h2>
+        <!-- ── 전체 수행실적 ── -->
+        <div class="portfolio-section-head">
+            <h2 class="portfolio-section-title">전체 수행실적</h2>
         </div>
 
-        <div class="filter-bar">
-            <select class="form-select" id="filterType">
+        <!-- Filter Control Bar -->
+        <div class="filter-control-bar">
+            <select class="filter-select" id="filterType">
                 <option value="전체">유형 전체</option>
                 <option value="재개발">재개발</option>
                 <option value="재건축">재건축</option>
                 <option value="소규모정비">소규모정비</option>
             </select>
-            <select class="form-select" id="filterStatus">
+            <select class="filter-select" id="filterStatus">
                 <option value="전체">상태 전체</option>
                 <option value="진행중">진행중</option>
                 <option value="완료">완료</option>
             </select>
+            <div class="result-count" id="resultCount"></div>
         </div>
 
-        <div class="result-count" id="resultCount"></div>
-        <div class="card-grid-3" id="portfolioGrid"></div>
+        <div class="portfolio-grid" id="portfolioGrid"></div>
+    </div>
+</div>
+
+<!-- ── Detail Modal ── -->
+<div class="detail-overlay" id="detailOverlay">
+    <div class="detail-modal">
+        <div class="detail-modal-header">
+            <button class="detail-modal-close" id="detailCloseTop" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+            <div class="detail-badges" id="detailBadges"></div>
+            <div class="detail-name" id="detailName"></div>
+        </div>
+        <div class="detail-modal-body">
+            <div class="detail-info-grid" id="detailInfoGrid"></div>
+            <div class="detail-desc">
+                <div class="detail-desc-label">프로젝트 설명</div>
+                <p id="detailDesc"></p>
+            </div>
+        </div>
+        <div class="detail-modal-footer">
+            <button class="detail-close-btn" id="detailCloseBottom"><i class="fa-solid fa-xmark"></i> 닫기</button>
+        </div>
     </div>
 </div>
 
@@ -260,22 +772,25 @@
 <script>
 (function() {
 
-    /* ── 대표 수행실적 렌더 ── */
+    /* ── 주요 수행실적 렌더 ── */
     function renderFeatured() {
-        const items = MOCK.portfolio.filter(function(p) { return p.featured === true; });
+        var items = MOCK.portfolio.filter(function(p) { return p.featured === true; });
         var grid = document.getElementById('featuredGrid');
 
         grid.innerHTML = items.map(function(p) {
-            return '<div class="featured-card">' +
-                '<div class="fc-header">' +
+            return '<div class="featured-card" onclick="portfolioApp.openDetail(\'' + p.id + '\')">' +
+                '<div class="fc-badges">' +
                     '<span class="badge badge-type">' + p.type + '</span>' +
                     '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
                 '</div>' +
                 '<div class="fc-name">' + p.name + '</div>' +
-                '<div class="fc-info"><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:4px"></i> ' + p.district + ' &middot; ' + p.year + '년</div>' +
-                '<div class="fc-info">규모: <span>' + p.scale + '</span></div>' +
-                '<div class="fc-info">역할: <span>' + p.role + '</span></div>' +
+                '<div class="fc-info-list">' +
+                    '<div class="fc-info"><i class="fa-solid fa-location-dot"></i> <strong>' + p.district + '</strong></div>' +
+                    '<div class="fc-info"><i class="fa-solid fa-building"></i> ' + p.scale + '</div>' +
+                    '<div class="fc-info"><i class="fa-solid fa-user-tie"></i> ' + p.role + '</div>' +
+                '</div>' +
                 '<div class="fc-desc">' + p.description + '</div>' +
+                '<button class="fc-detail-btn" onclick="event.stopPropagation(); portfolioApp.openDetail(\'' + p.id + '\')">상세보기 <i class="fa-solid fa-arrow-right"></i></button>' +
             '</div>';
         }).join('');
     }
@@ -303,7 +818,7 @@
         var grid = document.getElementById('portfolioGrid');
 
         if (items.length === 0) {
-            grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">' +
+            grid.innerHTML = '<div class="portfolio-empty">' +
                 '<i class="fa-solid fa-search"></i>' +
                 '<h3>해당 조건의 실적이 없습니다</h3>' +
                 '<p>다른 조건으로 검색해보세요</p>' +
@@ -312,22 +827,109 @@
         }
 
         grid.innerHTML = items.map(function(p) {
-            return '<div class="card pf-card">' +
+            return '<div class="pf-card" onclick="portfolioApp.openDetail(\'' + p.id + '\')">' +
                 '<div class="pf-name">' + p.name + '</div>' +
                 '<div class="pf-badges">' +
                     '<span class="badge badge-type">' + p.type + '</span>' +
                     '<span class="badge badge-status-' + p.status + '">' + p.status + '</span>' +
                 '</div>' +
-                '<div class="pf-info"><span>지역</span><span>' + p.district + ' &middot; ' + p.year + '년</span></div>' +
-                '<div class="pf-info"><span>규모</span><span>' + p.scale + '</span></div>' +
-                '<div class="pf-info"><span>역할</span><span>' + p.role + '</span></div>' +
+                '<div class="pf-info-row">' +
+                    '<span class="pf-label"><i class="fa-solid fa-location-dot"></i> 위치</span>' +
+                    '<span class="pf-value">' + p.district + '</span>' +
+                '</div>' +
+                '<div class="pf-info-row">' +
+                    '<span class="pf-label"><i class="fa-solid fa-building"></i> 규모</span>' +
+                    '<span class="pf-value">' + p.scale + '</span>' +
+                '</div>' +
+                '<div class="pf-info-row">' +
+                    '<span class="pf-label"><i class="fa-solid fa-user-tie"></i> 역할</span>' +
+                    '<span class="pf-value">' + p.role + '</span>' +
+                '</div>' +
+                '<button class="pf-detail-btn" onclick="event.stopPropagation(); portfolioApp.openDetail(\'' + p.id + '\')"><i class="fa-solid fa-eye"></i> 상세보기</button>' +
             '</div>';
         }).join('');
     }
 
-    /* ── 이벤트 ── */
+    /* ── 상세 모달 열기 ── */
+    function openDetail(id) {
+        var item = null;
+        for (var i = 0; i < MOCK.portfolio.length; i++) {
+            if (MOCK.portfolio[i].id === id) {
+                item = MOCK.portfolio[i];
+                break;
+            }
+        }
+        if (!item) return;
+
+        document.getElementById('detailBadges').innerHTML =
+            '<span class="badge badge-type">' + item.type + '</span>' +
+            '<span class="badge badge-status-' + item.status + '">' + item.status + '</span>';
+
+        document.getElementById('detailName').textContent = item.name;
+
+        document.getElementById('detailInfoGrid').innerHTML =
+            '<div class="detail-info-item">' +
+                '<span class="info-label">사업유형</span>' +
+                '<span class="info-value">' + item.type + '</span>' +
+            '</div>' +
+            '<div class="detail-info-item">' +
+                '<span class="info-label">진행상태</span>' +
+                '<span class="info-value">' + item.status + '</span>' +
+            '</div>' +
+            '<div class="detail-info-item">' +
+                '<span class="info-label">위치</span>' +
+                '<span class="info-value">' + item.district + '</span>' +
+            '</div>' +
+            '<div class="detail-info-item">' +
+                '<span class="info-label">규모</span>' +
+                '<span class="info-value">' + item.scale + '</span>' +
+            '</div>' +
+            '<div class="detail-info-item">' +
+                '<span class="info-label">역할</span>' +
+                '<span class="info-value">' + item.role + '</span>' +
+            '</div>' +
+            '<div class="detail-info-item">' +
+                '<span class="info-label">연도</span>' +
+                '<span class="info-value">' + item.year + '년</span>' +
+            '</div>';
+
+        document.getElementById('detailDesc').textContent = item.description;
+
+        var overlay = document.getElementById('detailOverlay');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        var scrollbarW = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.paddingRight = scrollbarW + 'px';
+    }
+
+    /* ── 상세 모달 닫기 ── */
+    function closeDetail() {
+        var overlay = document.getElementById('detailOverlay');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+    }
+
+    /* ── 이벤트 바인딩 ── */
     document.getElementById('filterType').addEventListener('change', renderAll);
     document.getElementById('filterStatus').addEventListener('change', renderAll);
+
+    document.getElementById('detailCloseTop').addEventListener('click', closeDetail);
+    document.getElementById('detailCloseBottom').addEventListener('click', closeDetail);
+
+    document.getElementById('detailOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeDetail();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeDetail();
+    });
+
+    /* ── 전역 접근 (onclick 용) ── */
+    window.portfolioApp = {
+        openDetail: openDetail,
+        closeDetail: closeDetail
+    };
 
     /* ── 초기 렌더 ── */
     renderFeatured();
