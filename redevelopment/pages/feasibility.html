@@ -45,22 +45,28 @@
     .fs-h .hi{width:30px;height:30px;border-radius:8px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--gold)}
     .fs-h h2{font-size:19px;font-weight:800;color:var(--gray-900)}
 
-    /* Modal Overlay */
-    .calc-overlay{position:fixed;inset:0;background:rgba(10,15,28,.6);backdrop-filter:blur(4px);z-index:600;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
+    /* Modal Overlay — 중앙 정렬, 오버레이 자체는 스크롤 안 함 */
+    .calc-overlay{position:fixed;inset:0;background:rgba(10,15,28,.6);backdrop-filter:blur(4px);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
     .calc-overlay.open{opacity:1;pointer-events:auto}
-    .calc-modal{background:#fff;border-radius:18px;width:100%;max-width:800px;margin:40px auto;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
+
+    /* Modal — flex column + max-height로 내부 스크롤 구조 */
+    .calc-modal{background:#fff;border-radius:18px;width:100%;max-width:800px;max-height:90vh;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s;display:flex;flex-direction:column;overflow:hidden}
     .calc-overlay.open .calc-modal{transform:translateY(0) scale(1)}
-    .calc-close{position:absolute;top:20px;right:20px;z-index:10;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);border:none;border-radius:50%;cursor:pointer;font-size:16px;color:#fff;transition:all .2s}
-    .calc-close:hover{background:rgba(0,0,0,.7)}
 
-    /* Modal Header */
-    .cm-head{padding:28px 32px 20px;border-bottom:1px solid var(--gray-100)}
-    .cm-head h2{font-size:20px;font-weight:800;color:var(--gray-900);margin-bottom:4px}
-    .cm-head p{font-size:13px;color:var(--gray-500)}
+    /* 닫기 버튼 */
+    .calc-close{position:absolute;top:16px;right:16px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.08);border:none;border-radius:50%;cursor:pointer;font-size:14px;color:var(--gray-600);transition:all .2s}
+    .calc-close:hover{background:rgba(10,15,28,.15);color:var(--gray-900)}
 
-    /* Modal Body */
-    .cm-body{padding:28px 32px}
-    @media(max-width:540px){.cm-body{padding:20px 16px}.cm-head{padding:20px 16px 14px}}
+    /* Modal Header — sticky, 제목+설명+액션버튼 전부 포함 */
+    .cm-head{padding:24px 28px 0;flex-shrink:0;position:relative;z-index:10;background:#fff;border-radius:18px 18px 0 0}
+    .cm-head h2{font-size:19px;font-weight:800;color:var(--gray-900);margin-bottom:4px;padding-right:40px}
+    .cm-head p{font-size:12.5px;color:var(--gray-500);margin-bottom:12px}
+    /* 액션 버튼도 헤더 안에 고정 */
+    .cm-head .cm-actions{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--gray-100);margin-bottom:0}
+
+    /* Modal Body — 내부만 스크롤 */
+    .cm-body{padding:20px 28px 28px;overflow-y:auto;flex:1;min-height:0}
+    @media(max-width:540px){.cm-body{padding:16px}.cm-head{padding:18px 16px 0}.cm-head h2{font-size:17px}}
 
     /* Form groups */
     .fg{margin-bottom:14px}
@@ -286,12 +292,26 @@ function rowFields(fields){
 function buildModal(id,title,subtitle,bodyHTML){
   var ov = el('div','calc-overlay');
   ov.id = 'ov-'+id;
-  ov.innerHTML = '<div class="calc-modal"><button class="calc-close" onclick="FC.close(\''+id+'\')"><i class="fa-solid fa-xmark"></i></button><div class="cm-head"><h2>'+title+'</h2><p>'+subtitle+'</p></div><div class="cm-body">'+
-    '<div class="cm-actions"><button class="cm-btn" onclick="FC.example(\''+id+'\')"><i class="fa-solid fa-lightbulb"></i> 예시값</button><button class="cm-btn" onclick="FC.reset(\''+id+'\')"><i class="fa-solid fa-rotate-left"></i> 초기화</button><button class="cm-btn" onclick="FC.copy(\''+id+'\')"><i class="fa-solid fa-copy"></i> 결과 복사</button></div>'+
-    bodyHTML+
-    '<div id="result-'+id+'" class="cm-result" style="display:none"></div>'+
-    '<div class="cm-notice"><i class="fa-solid fa-circle-info"></i> 본 계산 결과는 입력값 기준의 참고용 추정치입니다. 실제 사업성 판단은 감정평가, 설계, 인허가, 금융조건, 분양가, 정비계획 변경 등에 따라 달라질 수 있습니다.</div>'+
-  '</div></div>';
+  ov.innerHTML =
+    '<div class="calc-modal">' +
+      '<button class="calc-close" onclick="FC.close(\''+id+'\')"><i class="fa-solid fa-xmark"></i></button>' +
+      /* ── Sticky Header: 제목+설명+액션버튼 ── */
+      '<div class="cm-head">' +
+        '<h2>'+title+'</h2>' +
+        '<p>'+subtitle+'</p>' +
+        '<div class="cm-actions">' +
+          '<button class="cm-btn" onclick="FC.example(\''+id+'\')"><i class="fa-solid fa-lightbulb"></i> 예시값</button>' +
+          '<button class="cm-btn" onclick="FC.reset(\''+id+'\')"><i class="fa-solid fa-rotate-left"></i> 초기화</button>' +
+          '<button class="cm-btn" onclick="FC.copy(\''+id+'\')"><i class="fa-solid fa-copy"></i> 결과 복사</button>' +
+        '</div>' +
+      '</div>' +
+      /* ── Scrollable Body: 입력폼+결과만 스크롤 ── */
+      '<div class="cm-body">' +
+        bodyHTML +
+        '<div id="result-'+id+'" class="cm-result" style="display:none"></div>' +
+        '<div class="cm-notice"><i class="fa-solid fa-circle-info"></i> 본 계산 결과는 입력값 기준의 참고용 추정치입니다. 실제 사업성 판단은 감정평가, 설계, 인허가, 금융조건, 분양가, 정비계획 변경 등에 따라 달라질 수 있습니다.</div>' +
+      '</div>' +
+    '</div>';
   ov.addEventListener('click',function(e){if(e.target===ov)FC.close(id)});
   return ov;
 }
@@ -496,8 +516,10 @@ function runCalc(id){
 function openCalc(id){
   var ov = $('ov-'+id);
   if(!ov)return;
-  ov.scrollTop = 0;
   ov.classList.add('open');
+  // body 영역 스크롤 맨 위로
+  var body = ov.querySelector('.cm-body');
+  if(body) body.scrollTop = 0;
   document.body.style.overflow='hidden';
   // 카드 active
   document.querySelectorAll('.sv-card').forEach(function(c){c.classList.toggle('active',c.dataset.calc===id)});
