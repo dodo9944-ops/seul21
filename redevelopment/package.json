@@ -1,0 +1,13 @@
+{
+  "name": "seul21",
+  "version": "1.0.0",
+  "description": "세울엔지니어링 - 도시정비 전문 엔지니어링",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static HTML site - no build required'",
+    "test": "echo 'No tests configured'"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.0"
+  }
+}
