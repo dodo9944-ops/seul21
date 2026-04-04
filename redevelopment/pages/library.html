@@ -294,9 +294,19 @@
         }
     }
 
+    // 주요뉴스 7일 롤링: 7일 초과 뉴스 자동 제거
+    var now = new Date();
+    var sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    var rawItems = DataService.getAll('library');
+    var allItems = rawItems.filter(function(item) {
+        if (item.category !== '주요뉴스') return true;
+        if (!item.date) return false;
+        var d = new Date(item.date);
+        return d >= sevenDaysAgo;
+    });
+
     let currentCat = '전체';
     let searchQuery = '';
-    const allItems = DataService.getAll('library');
 
     const iconMap = {
         hwp:  { icon: 'fa-file-lines', cls: 'hwp' },
