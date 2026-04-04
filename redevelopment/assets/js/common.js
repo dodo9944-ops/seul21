@@ -32,7 +32,6 @@ const App = (() => {
       { href: `${B}/intranet/index.html`, label: '인트라넷', icon: 'fa-solid fa-lock' },
     ];
     const moreLinks = [
-      { href: `${B}/pages/map.html`, label: '정비구역 지도', icon: 'fa-solid fa-map-location-dot' },
       { href: `${B}/pages/notice.html`, label: '공지사항', icon: 'fa-solid fa-bullhorn' },
       { href: `${B}/pages/faq.html`, label: '자주 묻는 질문', icon: 'fa-solid fa-circle-question' },
     ];
