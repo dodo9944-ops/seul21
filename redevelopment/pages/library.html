@@ -397,6 +397,22 @@
         render();
     });
 
+    /* URL 파라미터로 카테고리 자동 선택 + 최신 뉴스 자동 열기 */
+    var urlCat = new URLSearchParams(location.search).get('cat');
+    if (urlCat) {
+        currentCat = urlCat;
+        document.querySelectorAll('#categoryTabs button').forEach(function(b) {
+            b.classList.remove('on');
+            if (b.dataset.cat === urlCat) b.classList.add('on');
+        });
+        render();
+        // 최신 뉴스 자동 열기
+        setTimeout(function() {
+            var firstBtn = document.querySelector('.btn-download');
+            if (firstBtn) firstBtn.click();
+        }, 500);
+    }
+
     // 다운로드 소스 매핑 (3단계: 외부공식링크 → 첨부파일 → 웹문서)
     var fileMap = {
         'lib1':  { ext:'../downloads/files/lib1_조합설립인가_신청서.pdf', web:'../downloads/form_association.html' },
