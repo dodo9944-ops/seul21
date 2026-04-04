@@ -203,6 +203,36 @@
                     <div class="ct-files" id="fileList"></div>
                     <div class="ct-upload-note">사업 관련 자료·도면·공문 등을 첨부할 수 있습니다. 민감자료는 필요 범위 내에서만 제출해 주세요.</div>
                 </div>
+                <!-- 개인정보 수집·이용 동의 -->
+                <div class="ct-group" style="margin-top:4px">
+                    <div style="padding:16px 18px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;font-size:12px;color:var(--gray-600);line-height:1.7">
+                        <div style="font-weight:700;color:var(--gray-800);margin-bottom:8px;font-size:12.5px"><i class="fa-solid fa-shield-halved" style="color:var(--gold);margin-right:4px"></i> 개인정보 수집·이용 동의</div>
+                        <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin-bottom:10px">
+                            <tr style="border-bottom:1px solid var(--gray-200)">
+                                <th style="text-align:left;padding:6px 8px;background:rgba(10,15,28,.03);font-weight:600;color:var(--gray-700);width:25%">구분</th>
+                                <th style="text-align:left;padding:6px 8px;background:rgba(10,15,28,.03);font-weight:600;color:var(--gray-700)">수집항목</th>
+                                <th style="text-align:left;padding:6px 8px;background:rgba(10,15,28,.03);font-weight:600;color:var(--gray-700);width:28%">목적</th>
+                            </tr>
+                            <tr style="border-bottom:1px solid var(--gray-100)">
+                                <td style="padding:6px 8px;font-weight:600;color:var(--brand-dark)">필수</td>
+                                <td style="padding:6px 8px">이름, 이메일, 문의유형, 제목, 내용</td>
+                                <td style="padding:6px 8px">문의 접수 및 회신</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px 8px;color:var(--gray-500)">선택</td>
+                                <td style="padding:6px 8px">연락처, 첨부파일</td>
+                                <td style="padding:6px 8px">상세 상담 및 자료 검토</td>
+                            </tr>
+                        </table>
+                        <div style="font-size:11px;color:var(--gray-400);margin-bottom:10px">보유기간: 문의 처리 완료 후 <strong style="color:var(--gray-600)">3년</strong> (전자상거래법) | 동의를 거부할 수 있으나, 필수항목 미동의 시 문의 접수가 불가합니다.</div>
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12.5px;font-weight:600;color:var(--gray-800)">
+                            <input type="checkbox" id="cPrivacy" style="width:16px;height:16px;accent-color:var(--gold)">
+                            개인정보 수집·이용에 동의합니다 <span class="req">*</span>
+                        </label>
+                        <div class="ct-err" id="errPrivacy" style="margin-top:4px">개인정보 수집·이용에 동의해주세요.</div>
+                        <a href="privacy.html" target="_blank" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:11px;color:var(--gold);font-weight:500"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:9px"></i> 개인정보 처리방침 전문 보기</a>
+                    </div>
+                </div>
                 <button type="submit" class="ct-submit" id="submitBtn">
                     <i class="fa-solid fa-paper-plane"></i> 상담 문의 접수
                 </button>
@@ -315,6 +345,8 @@ form.addEventListener('submit',function(e){
     showErr('errType',!type);if(!type){selBtn.classList.add('err');ok=false}
     showErr('errTitle',!title);if(!title){document.getElementById('cTitle').classList.add('err');ok=false}
     showErr('errContent',!content);if(!content){document.getElementById('cContent').classList.add('err');ok=false}
+    var privacy=document.getElementById('cPrivacy').checked;
+    showErr('errPrivacy',!privacy);if(!privacy)ok=false
 
     if(!ok){App.toast('필수 입력 항목을 확인해주세요.','error');return}
 

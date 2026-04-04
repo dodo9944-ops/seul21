@@ -151,7 +151,7 @@ const App = (() => {
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copy">&copy; 2026 (주)세울엔지니어링. All rights reserved.</div>
+        <div class="footer-copy">&copy; 2026 (주)세울엔지니어링. All rights reserved. &nbsp;|&nbsp; <a href="${B}/pages/privacy.html" style="color:rgba(255,255,255,.4);text-decoration:underline">개인정보 처리방침</a></div>
         <div class="footer-info">서울특별시 영등포구 국회대로76길 18 | 대표 이창우</div>
         <div class="footer-social">
           <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
