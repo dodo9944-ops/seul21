@@ -54,7 +54,7 @@ module.exports = async function handler(req, res) {
 
     // POST: 문의 접수 (사이트 방문자)
     if (req.method === 'POST') {
-      const { name, email, phone, type, title, content } = req.body;
+      const { name, email, phone, type, title, content, files } = req.body;
       if (!name || !title || !content) {
         return res.status(400).json({ error: '이름, 제목, 내용은 필수입니다.' });
       }
@@ -63,6 +63,7 @@ module.exports = async function handler(req, res) {
         id: Date.now().toString(36),
         name, email: email || '', phone: phone || '',
         type: type || '기타', title, content,
+        files: files || [],
         status: '접수',
         answer: '',
         date: new Date().toISOString().slice(0, 10),
