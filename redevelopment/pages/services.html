@@ -33,7 +33,7 @@
     .sv-highlight-item:last-child { border-right:none; }
     .sv-highlight-item .hl-num { font-size:22px; font-weight:800; color:var(--brand-dark); margin-bottom:4px; }
     .sv-highlight-item .hl-num span { color:var(--gold); }
-    .sv-highlight-item .hl-desc { font-size:12px; color:var(--gray-500); }
+    .sv-highlight-item .hl-desc { font-size:13px; color:var(--gray-600); }
     @media(max-width:768px){
         .sv-highlight{flex-wrap:wrap;}
         .sv-highlight-item{flex:1 1 50%;border-bottom:1px solid var(--gray-200);}
@@ -71,13 +71,13 @@
 
     .sv-card-body { padding:28px 32px; flex:1; }
     .sv-card-body .sv-desc {
-        font-size:14.5px; line-height:1.85; color:var(--gray-700); margin-bottom:20px;
+        font-size:14px; line-height:1.85; color:var(--gray-700); margin-bottom:20px;
     }
 
     .sv-strengths { list-style:none; margin-bottom:20px; }
     .sv-strengths li {
         display:flex; align-items:flex-start; gap:10px;
-        font-size:13.5px; color:var(--gray-700); line-height:1.7; margin-bottom:10px;
+        font-size:13px; color:var(--gray-700); line-height:1.7; margin-bottom:10px;
     }
     .sv-strengths li:last-child { margin-bottom:0; }
     .sv-strengths li i { color:var(--gold); font-size:12px; margin-top:5px; flex-shrink:0; }
@@ -87,6 +87,19 @@
         display:inline-block; padding:5px 14px; border-radius:20px;
         font-size:12px; font-weight:600; color:var(--brand-navy);
         background:rgba(20,38,68,0.05); border:1px solid rgba(20,38,68,0.08);
+    }
+
+    /* Hero keyword badges */
+    .hero-badges { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; justify-content:center; }
+    .hero-badge {
+        display:inline-block; padding:5px 16px; border-radius:20px;
+        font-size:12px; font-weight:600; color:rgba(255,255,255,0.85);
+        background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15);
+    }
+
+    /* Hero tagline */
+    .hero-tagline {
+        font-size:18px; font-weight:700; color:#fff; margin-bottom:8px; letter-spacing:-0.3px;
     }
 
     /* CTA */
@@ -120,7 +133,13 @@
             <span>사업분야</span>
         </div>
         <h1>사업분야</h1>
-        <p>조합설립부터 준공까지, 정비사업이 실제로 움직이도록 관리하고 조율합니다</p>
+        <div class="hero-tagline">재개발·재건축·소규모정비사업의 전 과정을 실무 중심으로 지원합니다</div>
+        <p>사업성 검토부터 인허가, 추진관리, 이해관계 조율까지 통합 대응</p>
+        <div class="hero-badges">
+            <span class="hero-badge">정비사업 전 과정</span>
+            <span class="hero-badge">사업성·인허가 통합</span>
+            <span class="hero-badge">현장 중심 실행</span>
+        </div>
     </div>
 </div>
 
@@ -131,17 +150,16 @@
         <div class="sv-section">
             <h2 class="section-title">사업분야 개요</h2>
             <p class="sv-intro">
-                세울엔지니어링은 단순 자문이 아닌 <strong>사업이 실제로 굴러가도록 관리하고 조율하는 회사</strong>입니다.<br>
-                조합설립부터 준공까지 행정·기술·사업관리를 통합 대응하며, 각 사업장의 특성과 단계에 맞는 실행 중심의 서비스를 제공합니다.
+                세울엔지니어링은 재개발·재건축·소규모정비사업을 중심으로, 도시정비사업의 실제 추진을 지원하는 전문조직입니다. 사업성 검토, 인허가 대응, 문서체계화, 이해관계 조율, 추진관리까지 분리하지 않고 하나의 흐름으로 통합 지원합니다.
             </p>
         </div>
 
         <!-- 핵심 수치 -->
         <div class="sv-highlight">
-            <div class="sv-highlight-item"><div class="hl-num">20<span>년+</span></div><div class="hl-desc">현장 실무 경험</div></div>
-            <div class="sv-highlight-item"><div class="hl-num">전 <span>과정</span></div><div class="hl-desc">조합설립~준공 일괄</div></div>
-            <div class="sv-highlight-item"><div class="hl-num">통합 <span>대응</span></div><div class="hl-desc">행정·기술·사업관리</div></div>
-            <div class="sv-highlight-item"><div class="hl-num">실행 <span>중심</span></div><div class="hl-desc">이해관계자 조율</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">20<span>년+</span></div><div class="hl-desc">정비사업 실무경험 기반</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">전 <span>과정</span></div><div class="hl-desc">기획부터 인허가·추진까지</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">통합 <span>대응</span></div><div class="hl-desc">행정·사업성·문서 통합</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">실행 <span>중심</span></div><div class="hl-desc">현장 중심 사업관리</div></div>
         </div>
 
         <!-- 정비사업 -->
@@ -160,17 +178,16 @@
                     </div>
                     <div class="sv-card-body">
                         <p class="sv-desc">
-                            노후·불량 주거지역의 정비구역 지정부터 추진위원회·조합 설립, 사업시행인가, 관리처분, 이주·철거·준공까지 재개발 사업의 전 과정을 현장에서 직접 관리합니다.
+                            노후 주거지를 정비하고 새로운 주거환경을 조성하는 재개발사업을 지원합니다. 복잡한 권리관계와 이해관계 구조를 고려하여 전 과정을 실무 중심으로 관리합니다.
                         </p>
                         <ul class="sv-strengths">
-                            <li><i class="fa-solid fa-check"></i>복잡한 권리관계와 다수 이해관계자 간 조율 경험</li>
-                            <li><i class="fa-solid fa-check"></i>주민설명회, 동의서 징구, 조합 행정 및 문서관리 실무 역량</li>
-                            <li><i class="fa-solid fa-check"></i>인허가와 사업추진 절차를 끊김 없이 연결하는 실행력</li>
+                            <li><i class="fa-solid fa-check"></i>권리관계 및 이해관계 조율</li>
+                            <li><i class="fa-solid fa-check"></i>조합설립·동의징구·관리처분 대응</li>
+                            <li><i class="fa-solid fa-check"></i>이주·철거 및 추진절차 관리</li>
                         </ul>
                         <div class="sv-tags">
-                            <span class="sv-tag">정비구역 지정</span>
                             <span class="sv-tag">조합설립</span>
-                            <span class="sv-tag">동의서 징구</span>
+                            <span class="sv-tag">동의징구</span>
                             <span class="sv-tag">관리처분</span>
                             <span class="sv-tag">이주·철거</span>
                         </div>
@@ -188,19 +205,18 @@
                     </div>
                     <div class="sv-card-body">
                         <p class="sv-desc">
-                            노후 공동주택의 사업성 검토부터 조합 운영, 시공사·협력업체 대응, 관리처분 및 입주 단계까지 재건축 사업 전 과정을 체계적으로 지원합니다.
+                            기존 공동주택 단지의 재구성과 주거환경 개선을 목표로 하는 재건축사업을 지원합니다. 단지 특성과 사업 여건을 분석하여 체계적으로 대응합니다.
                         </p>
                         <ul class="sv-strengths">
-                            <li><i class="fa-solid fa-check"></i>사업성 분석과 분담금·비례율 검토를 통한 사업 타당성 확보</li>
-                            <li><i class="fa-solid fa-check"></i>총회·이사회·대의원회 운영 및 안건 문서화 역량</li>
-                            <li><i class="fa-solid fa-check"></i>조합원 민원 대응과 사업 지연 리스크 최소화 경험</li>
+                            <li><i class="fa-solid fa-check"></i>단지 특성 및 사업여건 분석</li>
+                            <li><i class="fa-solid fa-check"></i>추진절차 및 사업시행 대응</li>
+                            <li><i class="fa-solid fa-check"></i>분양구조 및 이해관계 검토</li>
                         </ul>
                         <div class="sv-tags">
-                            <span class="sv-tag">사업성 검토</span>
-                            <span class="sv-tag">비례율·분담금</span>
-                            <span class="sv-tag">총회 운영</span>
-                            <span class="sv-tag">시공사 선정</span>
-                            <span class="sv-tag">입주 관리</span>
+                            <span class="sv-tag">안전진단</span>
+                            <span class="sv-tag">사업시행</span>
+                            <span class="sv-tag">분양구조</span>
+                            <span class="sv-tag">단지분석</span>
                         </div>
                     </div>
                 </a>
@@ -213,21 +229,22 @@
                             <h3>소규모재건축 정비사업</h3>
                             <div class="sv-sub">Small-scale Reconstruction — 상세보기 →</div>
                         </div>
+                        <span style="position:absolute;top:12px;right:16px;background:var(--gold);color:#0A0F1C;font-size:10px;font-weight:800;padding:4px 10px;border-radius:4px;z-index:1;">SEUL 특화분야</span>
                     </div>
                     <div class="sv-card-body">
                         <p class="sv-desc">
-                            200세대 미만의 노후 공동주택 (소규모주택정비법)을 대상으로 하는 재건축 사업입니다. 일반 재건축보다 간소화된 절차로 빠르게 추진할 수 있습니다.
+                            소규모 정비사업의 특성과 주민합의형 추진구조를 고려하여 기획부터 인허가, 사업관리까지 밀착 지원합니다. 세울엔지니어링의 실무 특화 역량이 가장 잘 드러나는 분야입니다.
                         </p>
                         <ul class="sv-strengths">
-                            <li><i class="fa-solid fa-check"></i>소규모 사업장 특성에 맞는 맞춤형 추진 전략</li>
-                            <li><i class="fa-solid fa-check"></i>간소화된 인허가 절차 활용으로 사업 기간 단축</li>
-                            <li><i class="fa-solid fa-check"></i>소수 조합원 간 합의 도출과 신속한 의사결정 지원</li>
+                            <li><i class="fa-solid fa-check"></i>주민합의형 추진 대응</li>
+                            <li><i class="fa-solid fa-check"></i>기획부터 인허가까지 밀착 지원</li>
+                            <li><i class="fa-solid fa-check"></i>소규모 사업 특성에 맞는 절차관리</li>
                         </ul>
                         <div class="sv-tags">
-                            <span class="sv-tag">200세대 미만</span>
-                            <span class="sv-tag">소규모주택정비법 적용</span>
-                            <span class="sv-tag">간소화 절차</span>
-                            <span class="sv-tag">신속 추진</span>
+                            <span class="sv-tag">소규모정비</span>
+                            <span class="sv-tag">주민합의</span>
+                            <span class="sv-tag">인허가지원</span>
+                            <span class="sv-tag">특화실무</span>
                         </div>
                     </div>
                 </a>
@@ -243,18 +260,18 @@
                     </div>
                     <div class="sv-card-body">
                         <p class="sv-desc">
-                            가로구역 내 노후·불량 건축물을 정비하여 소규모 주거단지를 조성하는 사업입니다. 정비구역 지정 없이 추진 가능하여 사업 속도가 빠릅니다.
+                            가로구역 단위의 소규모 주거지 정비를 통해 주거환경 개선을 도모하는 사업입니다. 대상지 요건을 검토하고 소규모 블록 정비에 맞는 절차를 지원합니다.
                         </p>
                         <ul class="sv-strengths">
-                            <li><i class="fa-solid fa-check"></i>정비구역 지정 불필요 — 신속한 사업 착수 가능</li>
-                            <li><i class="fa-solid fa-check"></i>소규모 사업의 인허가·총회·계약 실무 전담 역량</li>
-                            <li><i class="fa-solid fa-check"></i>주민 합의부터 준공까지 밀착 관리</li>
+                            <li><i class="fa-solid fa-check"></i>블록 단위 정비사업 검토</li>
+                            <li><i class="fa-solid fa-check"></i>대상지 요건 및 사업구조 검토</li>
+                            <li><i class="fa-solid fa-check"></i>소규모 절차 및 인허가 대응</li>
                         </ul>
                         <div class="sv-tags">
-                            <span class="sv-tag">가로구역</span>
-                            <span class="sv-tag">동의율 75%</span>
-                            <span class="sv-tag">정비구역 면제</span>
-                            <span class="sv-tag">소규모 단지</span>
+                            <span class="sv-tag">가로주택</span>
+                            <span class="sv-tag">대상지검토</span>
+                            <span class="sv-tag">소규모정비</span>
+                            <span class="sv-tag">인허가</span>
                         </div>
                     </div>
                 </a>
@@ -277,19 +294,18 @@
                     </div>
                     <div class="sv-card-body">
                         <p class="sv-desc">
-                            도시관리계획, 지구단위계획, 정비계획, 각종 인허가 협의자료 작성, 서울시 신속통합기획 대응 등 도시공간 재편을 위한 계획·기술 업무를 수행합니다.
+                            사업구조와 계획기준을 검토하고, 정비사업과 연결되는 실행 가능한 계획 수립을 지원합니다.
                         </p>
                         <ul class="sv-strengths">
-                            <li><i class="fa-solid fa-check"></i>행정기관 협의에 필요한 실무형 자료 작성 능력</li>
-                            <li><i class="fa-solid fa-check"></i>계획 수립과 정비사업 추진을 연결하는 통합적 시각</li>
-                            <li><i class="fa-solid fa-check"></i>서울시 신속통합기획 절차와 통합심의 대응 실무 역량</li>
+                            <li><i class="fa-solid fa-check"></i>사업구조 및 사업성 검토</li>
+                            <li><i class="fa-solid fa-check"></i>계획기준 및 정비계획 연계</li>
+                            <li><i class="fa-solid fa-check"></i>실행 가능한 계획 수립 지원</li>
                         </ul>
                         <div class="sv-tags">
+                            <span class="sv-tag">도시계획</span>
+                            <span class="sv-tag">사업성검토</span>
                             <span class="sv-tag">정비계획</span>
-                            <span class="sv-tag">지구단위계획</span>
-                            <span class="sv-tag">신속통합기획</span>
-                            <span class="sv-tag">인허가 전략</span>
-                            <span class="sv-tag">협의자료</span>
+                            <span class="sv-tag">실행전략</span>
                         </div>
                     </div>
                 </a>
@@ -304,19 +320,18 @@
                     </div>
                     <div class="sv-card-body">
                         <p class="sv-desc">
-                            정비사업 전 과정의 일정, 원가, 품질, 리스크, 의사결정 자료를 통합 관리합니다. 조합·시공사·설계·감리·행정기관 사이의 실무를 조정하는 전문 관리 서비스입니다.
+                            일정, 리스크, 협력사, 문서체계를 통합 관리하여 사업의 추진력을 높입니다. 단순 자문을 넘어 실제 사업관리 관점에서 추진체계를 정비합니다.
                         </p>
                         <ul class="sv-strengths">
-                            <li><i class="fa-solid fa-check"></i>조합·시공사·설계·감리·행정기관 간 실무 조정 능력</li>
-                            <li><i class="fa-solid fa-check"></i>핵심 일정과 예산 흐름을 놓치지 않는 체계적 관리</li>
-                            <li><i class="fa-solid fa-check"></i>문서·보고·회의·의사결정 지원까지 포함한 실행형 PM/CM</li>
+                            <li><i class="fa-solid fa-check"></i>일정 및 단계별 실행관리</li>
+                            <li><i class="fa-solid fa-check"></i>리스크 및 협력사 관리</li>
+                            <li><i class="fa-solid fa-check"></i>문서체계 및 추진체계 정비</li>
                         </ul>
                         <div class="sv-tags">
-                            <span class="sv-tag">일정 관리</span>
-                            <span class="sv-tag">원가 관리</span>
-                            <span class="sv-tag">리스크 관리</span>
-                            <span class="sv-tag">이해관계 조율</span>
-                            <span class="sv-tag">의사결정 지원</span>
+                            <span class="sv-tag">PM</span>
+                            <span class="sv-tag">CM</span>
+                            <span class="sv-tag">일정관리</span>
+                            <span class="sv-tag">추진체계</span>
                         </div>
                     </div>
                 </a>
@@ -328,17 +343,17 @@
         <div class="sv-section">
             <div class="sv-cta">
                 <div style="position:relative;z-index:1;">
-                    <h3>사업분야별 상세 상담이 필요하신가요?</h3>
-                    <p>세울엔지니어링이 사업장 현황에 맞는 최적의 솔루션을 제안합니다</p>
+                    <h3>내 사업에 맞는 추진방식을 상담받으세요</h3>
+                    <p>재개발·재건축·소규모정비사업별 맞춤 검토와 추진 방향을 안내합니다</p>
                 </div>
-                <a href="contact.html" class="sv-cta-btn"><i class="fa-solid fa-paper-plane"></i> 사업문의</a>
+                <a href="contact.html" class="sv-cta-btn"><i class="fa-solid fa-paper-plane"></i> 맞춤 상담 요청</a>
             </div>
         </div>
 
         <!-- 안내 -->
         <div class="sv-section">
             <div class="sv-disclaimer">
-                본 페이지에 기재된 업무 내용은 일반적인 정비사업 관리 업무의 범위를 안내하는 것이며, 구체적인 서비스 범위는 개별 사업장의 상황과 계약 내용에 따라 달라질 수 있습니다. 법률·세무·감정평가 등 전문 영역은 해당 분야 전문가와의 협업을 통해 지원됩니다.
+                각 사업분야의 적용 가능 여부와 추진 방식은 대상지 요건, 권리구조, 사업여건에 따라 달라질 수 있습니다. 세울엔지니어링은 사업유형별 검토와 실무 방향 설정을 함께 지원합니다.
             </div>
         </div>
 
