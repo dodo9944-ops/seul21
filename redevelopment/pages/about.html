@@ -34,13 +34,10 @@
         display: block;
         margin: auto;
         border-radius: 12px;
+        -webkit-mask-image: radial-gradient(ellipse at center, #000 35%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0.2) 75%, transparent 100%);
+        mask-image: radial-gradient(ellipse at center, #000 35%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0.2) 75%, transparent 100%);
     }
-    /* 4면 모두 흐림 처리 */
-    .ceo-photo-area .ceo-fade {
-        position: absolute; inset: 0; z-index: 2; pointer-events: none;
-        background:
-            radial-gradient(ellipse at center, transparent 40%, rgba(255,255,255,0.3) 65%, rgba(255,255,255,0.7) 80%, #fff 100%);
-    }
+    .ceo-photo-area .ceo-fade { display: none; }
 
     /* 우: 텍스트 */
     .ceo-text-area {
