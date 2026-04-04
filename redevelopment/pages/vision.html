@@ -29,7 +29,7 @@
     .vs-hero-img {
         position: absolute; inset: 0; z-index: 0;
         background: url('../jpg/사옥 2청사1.png') center/cover no-repeat;
-        opacity: 0.18;
+        opacity: 0.28;
     }
     .vs-hero-inner {
         position: relative; z-index: 1;
@@ -120,7 +120,7 @@
         margin-bottom: 16px; word-break: keep-all; text-align: justify;
     }
     .vs-why-cards {
-        flex-shrink: 0; width: 300px;
+        flex-shrink: 0; width: 280px;
         display: flex; flex-direction: column; gap: 12px;
     }
     .vs-why-card {
@@ -218,7 +218,8 @@
     .vs-timeline { position: relative; max-width: 700px; margin: 0 auto; }
     .vs-timeline::before {
         content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
-        width: 2px; background: var(--gray-200); transform: translateX(-50%);
+        width: 3px; background: linear-gradient(to bottom, var(--gold), var(--gray-200) 30%, var(--gray-200) 70%, var(--gold));
+        transform: translateX(-50%);
     }
     .vs-tl-item {
         display: flex; align-items: flex-start; margin-bottom: 32px;
@@ -227,14 +228,19 @@
     .vs-tl-item:last-child { margin-bottom: 0; }
     .vs-tl-year {
         width: 50%; text-align: right; padding-right: 32px;
-        font-size: 22px; font-weight: 900; color: var(--gold);
+        font-size: 28px; font-weight: 900; color: var(--gold);
+    }
+    .vs-tl-item:first-child .vs-tl-year {
+        background: var(--brand-dark); color: var(--gold);
+        display: inline-block; padding: 4px 16px; border-radius: 8px;
+        margin-right: 16px; font-size: 24px;
     }
     .vs-tl-dot {
         position: absolute; left: 50%; top: 6px;
         transform: translateX(-50%);
-        width: 12px; height: 12px; border-radius: 50%;
+        width: 14px; height: 14px; border-radius: 50%;
         background: var(--gold); border: 3px solid #fff;
-        box-shadow: 0 0 0 2px var(--gold);
+        box-shadow: 0 0 0 3px var(--gold), 0 0 12px rgba(195,165,105,0.2);
         z-index: 1;
     }
     .vs-tl-content {
@@ -372,6 +378,7 @@
             <div class="vs-why">
                 <div class="vs-why-text">
                     <h2>왜 도시정비에<br>집중하는가</h2>
+                    <p style="font-size:17px;font-weight:700;color:var(--brand-dark);line-height:1.7;margin-bottom:20px;">쉬운 길이 아니라 옳은 길을 택했고, 그 선택이 세울의 정체성이 되었습니다.</p>
                     <p>도시정비사업은 단순한 건설 행위가 아닙니다. 수십 년간 삶의 터전이었던 공간을 허물고, 그 위에 새로운 공동체를 세우는 일입니다.</p>
                     <p>수백, 수천 명의 재산권이 걸려 있고, 행정기관의 인허가와 법률적 판단이 매 단계마다 뒤따릅니다. 하나의 절차가 어긋나면 수년간의 노력이 무너질 수 있는, 가장 엄밀함을 요구하는 분야입니다.</p>
                     <p>우리가 도시정비에 집중하는 이유는 명확합니다. 이 분야야말로 전문가의 양심과 역량이 가장 절실하게 필요한 영역이기 때문입니다.</p>
@@ -476,6 +483,7 @@
 
         <!-- ══════ 브랜드 비주얼 ══════ -->
         <div class="vs">
+            <h2 class="vs-title">공간으로 증명하는 신뢰</h2>
             <div class="vs-visual">
                 <img src="../jpg/입간판1_입간판.png" alt="세울엔지니어링 브랜드 아이덴티티">
                 <img src="../jpg/사옥 2청사1.png" alt="세울엔지니어링 사옥">
