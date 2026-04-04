@@ -370,7 +370,9 @@ p.issues.forEach(function(is){html+='<li>'+is+'</li>'});
 html+='</ul></div>'}
 
 document.getElementById('dBody').innerHTML=html;
-document.getElementById('dOverlay').classList.add('open');
+var ov=document.getElementById('dOverlay');
+ov.scrollTop=0;
+ov.classList.add('open');
 document.body.style.overflow='hidden';
 document.body.style.paddingRight=(window.innerWidth-document.documentElement.clientWidth)+'px'}
 
