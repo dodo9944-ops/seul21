@@ -379,7 +379,8 @@ const MOCK = {
     { id:'lib30', category:'관련판례', title:'도시정비법 질의회신 사례집', description:'[국토부] 도시 및 주거환경정비법 주요 질의회신 사례 모음', fileType:'pdf', fileSize:'1.7MB', date:'2026-04-04', downloads:0, tags:['질의회신','판례','도정법'] },
     { id:'lib31', category:'관련판례', title:'서울시 도시정비법령 질의회신 사례집 (2024)', description:'[서울시] 정비사업 관련 법령 질의회신 최신 사례집 (35MB, 상세)', fileType:'pdf', fileSize:'35MB', date:'2026-04-04', downloads:0, tags:['서울시','질의회신','2024'] },
     { id:'lib33', category:'관련판례', title:'경기도 정비사업 질의회신 및 실태점검 매뉴얼', description:'[경기도] 정비사업 질의회신 & 실태점검 매뉴얼 (2020)', fileType:'pdf', fileSize:'6.9MB', date:'2026-04-04', downloads:0, tags:['경기도','질의회신','실태점검'] },
-    { id:'lib34', category:'법령', title:'서울특별시 도시 및 주거환경정비 조례', description:'[서울시 공식] 서울시 도시정비 조례 전문 (2018 개정)', fileType:'pdf', fileSize:'122KB', date:'2026-04-04', downloads:0, tags:['서울시','조례','도시정비'] }
+    { id:'lib34', category:'법령', title:'서울특별시 도시 및 주거환경정비 조례', description:'[서울시 공식] 서울시 도시정비 조례 전문 (2018 개정)', fileType:'pdf', fileSize:'122KB', date:'2026-04-04', downloads:0, tags:['서울시','조례','도시정비'] },
+    { id:'news0404', category:'주요뉴스', title:'[일일 주요뉴스] 2026.04.04 재개발·재건축·정비사업 브리핑', description:'압여목성 토허구역 1년 연장 / 소규모정비 동의율 완화 시행 / 마포구 정비사업 아카데미 / 정비사업 신탁사 책임 강화', fileType:'pdf', fileSize:'웹문서', date:'2026-04-04', downloads:0, tags:['일일브리핑','토허구역','소규모정비','2026-04-04'] }
   ],
 
   /* ──────────────────────────── 관리자 계정 ──────────────────────────── */
