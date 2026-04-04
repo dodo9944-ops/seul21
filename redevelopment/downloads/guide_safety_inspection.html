@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정비구역 안전진단 실시 지침 | (주)세울엔지니어링</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A0F1C; --navy-light: #141B2D; --navy-mid: #1E2A42;
+    --gold: #C3A569; --gold-light: #D4BC8A; --gold-pale: #F5EDD8;
+    --text: #2C2C2C; --text-light: #555; --bg: #FAFAF8; --white: #FFFFFF;
+    --border: #E0DDD5; --success: #2E7D4F; --warning: #B85C1F; --info: #1A5FA0;
+  }
+  @page { size: A4; margin: 18mm 15mm 20mm 15mm; }
+  body {
+    font-family: 'Pretendard','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size: 10.5pt; line-height: 1.75; color: var(--text); background: var(--bg);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .page-break { page-break-after: always; }
+  .no-break { page-break-inside: avoid; }
+  @media print {
+    body { background: white; font-size: 9.5pt; }
+    .container { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* Title Page */
+  .title-page {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    align-items: center; background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
+    color: var(--white); text-align: center; padding: 60px 40px; position: relative; overflow: hidden;
+  }
+  .title-page::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px; border: 1px solid rgba(195,165,105,0.08); border-radius: 50%;
+  }
+  .title-brand { font-size: 12pt; letter-spacing: 6px; color: var(--gold); margin-bottom: 12px; font-weight: 500; }
+  .title-divider { width: 80px; height: 2px; background: var(--gold); margin: 24px auto; }
+  .title-main { font-size: 30pt; font-weight: 800; line-height: 1.3; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .title-main em { font-style: normal; color: var(--gold); }
+  .title-sub { font-size: 14pt; font-weight: 300; color: var(--gold-light); margin-top: 8px; letter-spacing: 2px; }
+  .title-meta { margin-top: 60px; font-size: 9.5pt; color: rgba(255,255,255,0.5); line-height: 1.9; }
+  .title-meta strong { color: rgba(255,255,255,0.7); }
+  .title-badge {
+    display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+    padding: 6px 24px; border-radius: 3px; font-size: 9pt; letter-spacing: 3px; margin-top: 40px;
+  }
+
+  /* Sections */
+  .content-area { padding: 50px 0; }
+  section { margin-bottom: 56px; }
+  .section-number {
+    display: inline-block; background: var(--navy); color: var(--gold);
+    font-size: 9pt; font-weight: 700; padding: 3px 14px; border-radius: 3px;
+    letter-spacing: 2px; margin-bottom: 12px;
+  }
+  .section-title { font-size: 20pt; font-weight: 800; color: var(--navy); margin-bottom: 8px; line-height: 1.35; }
+  .section-subtitle {
+    font-size: 10.5pt; color: var(--text-light); margin-bottom: 28px;
+    padding-bottom: 20px; border-bottom: 2px solid var(--gold);
+  }
+  h3 { font-size: 13pt; font-weight: 700; color: var(--navy); margin: 28px 0 12px; }
+  p { margin-bottom: 14px; text-align: justify; }
+
+  .info-box {
+    background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold);
+    border-radius: 4px; padding: 22px 26px; margin: 20px 0;
+  }
+  .info-box.navy { border-left-color: var(--navy); background: #F4F5F8; }
+  .info-box.warning { border-left-color: var(--warning); background: #FFF9F0; }
+  .info-box.success { border-left-color: var(--success); background: #F0F8F3; }
+  .info-box-title { font-size: 11pt; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .info-box p:last-child { margin-bottom: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 10pt; }
+  table thead th {
+    background: var(--navy); color: var(--white); padding: 12px 16px; text-align: left;
+    font-weight: 600; font-size: 9.5pt;
+  }
+  table tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table tbody tr:nth-child(even) { background: #F8F7F4; }
+  table tbody tr:hover { background: var(--gold-pale); }
+
+  ul, ol { margin: 12px 0 12px 20px; }
+  li { margin-bottom: 6px; }
+
+  .step-flow { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
+  .step-item {
+    flex: 1 1 140px; background: var(--white); border: 1px solid var(--border);
+    border-radius: 6px; padding: 16px; text-align: center; position: relative;
+  }
+  .step-num {
+    display: inline-block; background: var(--navy); color: var(--gold);
+    width: 28px; height: 28px; line-height: 28px; border-radius: 50%;
+    font-size: 9pt; font-weight: 700; margin-bottom: 8px;
+  }
+  .step-label { font-size: 9.5pt; font-weight: 600; color: var(--navy); }
+
+  .footer {
+    margin-top: 60px; padding: 30px 0; border-top: 2px solid var(--navy);
+    text-align: center; font-size: 9pt; color: var(--text-light);
+  }
+  .footer strong { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<!-- Title Page -->
+<div class="title-page">
+  <div class="title-brand">SEUL ENGINEERING</div>
+  <div class="title-divider"></div>
+  <h1 class="title-main">정비구역<br><em>안전진단</em> 실시 지침</h1>
+  <p class="title-sub">Safety Inspection Guide</p>
+  <div class="title-meta">
+    <strong>발행</strong> (주)세울엔지니어링<br>
+    <strong>문서번호</strong> SE-GD-SAFETY-2026-001<br>
+    <strong>작성일</strong> 2026년 4월
+  </div>
+  <div class="title-badge">PROFESSIONAL GUIDE</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- Content -->
+<div class="container content-area">
+
+  <!-- Section 1 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 01</div>
+    <h2 class="section-title">안전진단 대상</h2>
+    <p class="section-subtitle">안전진단이 필요한 정비구역 대상 건축물의 기준과 범위</p>
+
+    <h3>1. 법적 근거</h3>
+    <p>「도시 및 주거환경정비법」 제12조 및 동법 시행령 제21조에 따라, 정비예정구역 내 노후·불량 건축물의 비율이 일정 기준을 충족하는 경우 안전진단을 실시하여야 합니다.</p>
+
+    <h3>2. 대상 건축물 기준</h3>
+    <table>
+      <thead>
+        <tr><th>구분</th><th>기준</th><th>비고</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>준공 후 경과연수</td><td>30년 이상</td><td>재건축의 경우</td></tr>
+        <tr><td>노후·불량 비율</td><td>2/3 이상</td><td>정비구역 전체 기준</td></tr>
+        <tr><td>세대수</td><td>300세대 이상 또는 1만㎡ 이상</td><td>공동주택</td></tr>
+        <tr><td>기존 안전등급</td><td>C등급 이하</td><td>정밀안전진단 대상</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box navy">
+      <div class="info-box-title">참고사항</div>
+      <p>재개발사업의 경우 별도의 안전진단 없이 정비계획 수립이 가능하나, 시·도 조례에 따라 안전진단을 요구하는 경우가 있으므로 해당 지자체 확인이 필요합니다.</p>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 02</div>
+    <h2 class="section-title">평가 기준</h2>
+    <p class="section-subtitle">구조안전성, 설비노후도, 주거환경, 비용편익 4대 평가 항목</p>
+
+    <table>
+      <thead>
+        <tr><th>평가 항목</th><th>배점</th><th>주요 평가 내용</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>구조안전성</strong></td>
+          <td>30점</td>
+          <td>내력벽 균열, 철근 부식, 콘크리트 강도, 기울기, 침하</td>
+        </tr>
+        <tr>
+          <td><strong>건축마감 및 설비노후도</strong></td>
+          <td>25점</td>
+          <td>지붕·외벽 누수, 급배수관 노후, 전기·가스 설비 상태</td>
+        </tr>
+        <tr>
+          <td><strong>주거환경</strong></td>
+          <td>25점</td>
+          <td>일조권, 소음, 주차장 확보율, 도로 접근성, 녹지율</td>
+        </tr>
+        <tr>
+          <td><strong>비용편익</strong></td>
+          <td>20점</td>
+          <td>보수보강 비용 대비 재건축 비용, 잔존 내용연수, 경제적 타당성</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box warning">
+      <div class="info-box-title">핵심 유의사항</div>
+      <p>2025년 개정 기준에 따라 구조안전성 비중이 기존 50%에서 30%로 하향되고, 주거환경 및 비용편익 항목이 강화되었습니다. 이에 따라 구조적으로 양호하더라도 주거환경이 불량한 경우 재건축 추진이 가능해졌습니다.</p>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 03</div>
+    <h2 class="section-title">등급 판정 (A~E)</h2>
+    <p class="section-subtitle">안전진단 결과에 따른 5단계 등급 체계</p>
+
+    <table>
+      <thead>
+        <tr><th>등급</th><th>점수 범위</th><th>상태</th><th>조치사항</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>A</strong></td><td>90점 이상</td><td>양호</td><td>유지관리 (재건축 불가)</td></tr>
+        <tr><td><strong>B</strong></td><td>75~89점</td><td>보통</td><td>경미한 보수 (재건축 불가)</td></tr>
+        <tr><td><strong>C</strong></td><td>55~74점</td><td>미흡</td><td>대수선 또는 조건부 재건축</td></tr>
+        <tr><td><strong>D</strong></td><td>40~54점</td><td>불량</td><td>재건축 가능</td></tr>
+        <tr><td><strong>E</strong></td><td>39점 이하</td><td>심각</td><td>즉시 재건축 추진</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box success">
+      <div class="info-box-title">실무 팁</div>
+      <p>D등급 이하 판정 시 정비계획 수립 및 조합설립 절차로 진행 가능합니다. C등급의 경우 시·도지사의 별도 판단에 따라 조건부 재건축이 허용될 수 있으므로 사전 협의가 중요합니다.</p>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 04</div>
+    <h2 class="section-title">안전진단 절차</h2>
+    <p class="section-subtitle">신청부터 결과 통보까지의 전체 업무 흐름</p>
+
+    <div class="step-flow">
+      <div class="step-item"><div class="step-num">1</div><div class="step-label">안전진단<br>신청</div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-label">진단기관<br>선정</div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-label">현장조사<br>실시</div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-label">결과보고서<br>작성</div></div>
+      <div class="step-item"><div class="step-num">5</div><div class="step-label">적정성<br>검토</div></div>
+      <div class="step-item"><div class="step-num">6</div><div class="step-label">결과<br>통보</div></div>
+    </div>
+
+    <h3>단계별 세부 내용</h3>
+    <ol>
+      <li><strong>안전진단 신청:</strong> 구청장에게 안전진단 실시를 요청합니다. 정비예정구역 지정 후 추진위원회 또는 토지등소유자 1/10 이상 동의로 신청 가능합니다.</li>
+      <li><strong>진단기관 선정:</strong> 한국시설안전공단 또는 등록된 안전진단전문기관 중에서 선정합니다. 공정성 확보를 위해 입찰 또는 추첨 방식을 권장합니다.</li>
+      <li><strong>현장조사 실시:</strong> 구조안전성, 설비, 주거환경 등에 대한 현장 실태조사를 진행합니다. 통상 2~4개월 소요됩니다.</li>
+      <li><strong>결과보고서 작성:</strong> 4대 평가항목별 점수를 산출하고 종합 등급을 부여합니다.</li>
+      <li><strong>적정성 검토:</strong> 시·도지사가 한국시설안전공단에 적정성 검토를 의뢰합니다. 약 30일 이내에 완료됩니다.</li>
+      <li><strong>결과 통보:</strong> 최종 등급 판정 결과를 신청인에게 통보합니다.</li>
+    </ol>
+
+    <div class="info-box">
+      <div class="info-box-title">소요 기간 안내</div>
+      <p>안전진단 신청부터 최종 결과 통보까지 통상 6~9개월이 소요됩니다. 적정성 검토 과정에서 보완 요청이 있는 경우 추가 시간이 필요할 수 있습니다.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer">
+    <strong>(주)세울엔지니어링</strong><br>
+    본 자료는 정비사업 실무 참고용으로 작성되었으며, 법적 효력을 갖지 않습니다.<br>
+    최신 법령 및 지자체 조례를 반드시 확인하시기 바랍니다.
+  </div>
+</div>
+
+</body>
+</html>
