@@ -390,6 +390,10 @@ const MOCK = {
     { id:'lib48', category:'주요뉴스', title:'서울시 정비사업 사업성 개선 및 기본계획 재정비 (2024.8)', description:'[서울시 보도자료] 정비사업 사업성 개선해 신속 추진, 기본계획 재정비 발표', fileType:'pdf', fileSize:'1.4MB', date:'2024-08-22', downloads:0, tags:['서울시','사업성','기본계획','2024'] },
     { id:'lib49', category:'가이드', title:'서울시 공공건축물 건립 공사비 책정 가이드라인 2024', description:'[서울시 기술심사담당관] 공공건축물 건립 공사비 책정 기준 (정비사업 공사비 참고)', fileType:'pdf', fileSize:'803KB', date:'2024-12-01', downloads:0, tags:['서울시','공사비','가이드라인','2024'] },
     { id:'lib50', category:'가이드', title:'LH 2025 업무보고', description:'[LH] 2025년 한국토지주택공사 주요 업무계획 보고 (정비사업 지원 포함)', fileType:'pdf', fileSize:'672KB', date:'2025-01-01', downloads:0, tags:['LH','업무계획','2025','공공'] },
+    { id:'lib53', category:'가이드', title:'서울시 공공건축물 공사비 가이드라인 2022', description:'[서울시] 2022년 공공건축물 건립 공사비 책정 가이드라인 (공사비 산정 기준 참고)', fileType:'pdf', fileSize:'755KB', date:'2022-12-01', downloads:0, tags:['서울시','공사비','가이드라인','2022'] },
+    { id:'lib54', category:'가이드', title:'마포구 공사비 책정 가이드라인', description:'[마포구] 공사비 책정 가이드라인 — 지자체 공사비 기준 참고', fileType:'pdf', fileSize:'761KB', date:'2023-01-01', downloads:0, tags:['마포구','공사비','가이드라인'] },
+    { id:'lib55', category:'가이드', title:'재건축·재개발 관련 조세제도 연구보고서', description:'[한국공인회계사회] 재건축·재개발사업 관련 조세제도 연구 (취득세/양도세/종부세 등)', fileType:'pdf', fileSize:'1.2MB', date:'2022-01-01', downloads:0, tags:['조세','세금','재건축','재개발','연구'] },
+    { id:'lib56', category:'관련판례', title:'대법원 판례 2025 상반기 민사 (정비사업 관련)', description:'[대법원] 2025년 상반기 주요 민사 판결 — 정비사업 관련 판례 포함', fileType:'pdf', fileSize:'608KB', date:'2025-06-15', downloads:0, tags:['대법원','판례','2025','민사'] },
     { id:'news0404', category:'주요뉴스', title:'[일일 주요뉴스] 2026.04.04 재개발·재건축·정비사업 브리핑', description:'압여목성 토허구역 1년 연장 / 소규모정비 동의율 완화 시행 / 마포구 정비사업 아카데미 / 정비사업 신탁사 책임 강화', fileType:'pdf', fileSize:'웹문서', date:'2026-04-04', downloads:0, tags:['일일브리핑','토허구역','소규모정비','2026-04-04'] }
   ],
 
