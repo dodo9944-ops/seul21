@@ -3,272 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사업성 분석 및 추진전략 수립 — (주)세울엔지니어링</title>
-    <meta name="description" content="정비사업의 사업성 분석과 추진전략 수립 서비스. 비례율·분담금·총사업비 분석부터 단계별 추진 로드맵까지 체계적으로 수행합니다.">
+    <title>사업성 검토 — (주)세울엔지니어링</title>
+    <meta name="description" content="정비사업 비례율·분담금·총사업비·수익성을 체계적으로 분석합니다.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
-    .fs-section { margin-bottom:56px; }
-    .fs-section:last-child { margin-bottom:0; }
-    .fs-section .section-title { margin-bottom:28px; }
+    /* === Hero (compact, action-oriented) === */
+    .fh{padding:56px 0 48px;background:linear-gradient(135deg,#070B15 0%,var(--brand-dark) 40%,var(--brand-navy) 100%);position:relative;overflow:hidden}
+    .fh::before{content:'';position:absolute;top:-30%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(195,165,105,.06) 0%,transparent 70%);pointer-events:none}
+    .fh::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(195,165,105,.3),transparent)}
+    .fh h1{font-size:32px;font-weight:900;color:#fff;margin-bottom:10px;padding-left:18px;border-left:3px solid var(--gold)}
+    .fh .fh-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.6;max-width:600px}
+    @media(max-width:768px){.fh{padding:40px 0 32px}.fh h1{font-size:26px}}
 
-    /* 인트로 배너 */
-    .fs-intro {
-        background:linear-gradient(135deg,rgba(195,165,105,0.04),transparent 60%);
-        border-left:4px solid var(--gold); border-radius:0 var(--radius) var(--radius) 0;
-        padding:36px 40px 36px 36px; position:relative;
-    }
-    .fs-intro p { font-size:16px; line-height:2; color:var(--gray-800); }
-    .fs-intro p strong { color:var(--brand-navy); }
-    @media(max-width:768px){ .fs-intro{padding:24px 20px 24px 24px;} .fs-intro p{font-size:14px;} }
+    /* === Quick Stats (below hero) === */
+    .qs{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin:-32px 0 40px;position:relative;z-index:2}
+    .qs-card{background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:24px 20px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.05);transition:all .25s}
+    .qs-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 24px rgba(195,165,105,.12)}
+    .qs-card .qs-icon{width:44px;height:44px;border-radius:12px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:18px;color:var(--gold)}
+    .qs-card .qs-val{font-size:22px;font-weight:800;color:var(--brand-dark);margin-bottom:4px}
+    .qs-card .qs-label{font-size:12px;color:var(--gray-500);font-weight:500}
+    @media(max-width:1024px){.qs{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:540px){.qs{grid-template-columns:repeat(2,1fr);margin:-20px 0 32px}.qs-card{padding:18px 14px}.qs-card .qs-val{font-size:18px}}
 
-    /* 핵심 수치 카드 */
-    .fs-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-    .fs-stat {
-        background:var(--brand-dark); border-radius:var(--radius); padding:28px 24px; text-align:center;
-        color:#fff;
-    }
-    .fs-stat .num { font-size:28px; font-weight:800; color:var(--gold); margin-bottom:6px; }
-    .fs-stat .desc { font-size:13px; color:rgba(255,255,255,0.6); }
-    @media(max-width:768px){ .fs-stats{grid-template-columns:repeat(2,1fr);} }
+    /* === Section common === */
+    .fs-sec{margin-bottom:56px}
+    .fs-sec-head{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+    .fs-sec-head .sh-icon{width:32px;height:32px;border-radius:8px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold)}
+    .fs-sec-head h2{font-size:20px;font-weight:800;color:var(--gray-900);letter-spacing:-.3px}
+    .fs-sec-head .sh-sub{font-size:13px;color:var(--gray-400);margin-left:8px;font-weight:500}
 
-    /* 서비스 상세 카드 */
-    .fs-service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
-    .fs-service-card {
-        background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius);
-        padding:32px 28px; transition:all 0.2s;
-    }
-    .fs-service-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); }
-    .fs-service-card .fs-icon {
-        width:48px; height:48px; border-radius:12px; background:var(--brand-dark);
-        display:flex; align-items:center; justify-content:center; margin-bottom:18px;
-    }
-    .fs-service-card .fs-icon i { font-size:20px; color:var(--gold); }
-    .fs-service-card h4 { font-size:17px; font-weight:700; color:var(--gray-900); margin-bottom:10px; }
-    .fs-service-card p { font-size:14px; color:var(--gray-600); line-height:1.8; }
-    .fs-service-card ul { margin-top:12px; padding-left:18px; }
-    .fs-service-card li { font-size:13px; color:var(--gray-600); line-height:1.8; list-style:disc; }
-    @media(max-width:768px){ .fs-service-grid{grid-template-columns:1fr;} }
+    /* === Primary Tools (3-col, larger) === */
+    .pt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    @media(max-width:900px){.pt-grid{grid-template-columns:1fr}}
+    .pt-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:16px;padding:28px 26px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+    .pt-card:hover{border-color:var(--gold);box-shadow:0 12px 32px rgba(195,165,105,.12);transform:translateY(-4px)}
+    .pt-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);opacity:0;transition:opacity .3s}
+    .pt-card:hover::after{opacity:1}
+    .pt-card .pt-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-navy));display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:22px;color:var(--gold)}
+    .pt-card h3{font-size:18px;font-weight:800;color:var(--gray-900);margin-bottom:8px}
+    .pt-card .pt-desc{font-size:13.5px;color:var(--gray-500);line-height:1.65;margin-bottom:16px}
+    .pt-card .pt-spec{display:flex;flex-direction:column;gap:6px;padding:14px;background:var(--gray-50);border-radius:10px;margin-bottom:16px}
+    .pt-card .pt-spec-row{display:flex;justify-content:space-between;font-size:12.5px}
+    .pt-card .pt-spec-row .sl{color:var(--gray-400);font-weight:500}
+    .pt-card .pt-spec-row .sv{color:var(--gray-800);font-weight:600}
+    .pt-card .pt-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:40px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .2s}
+    .pt-card .pt-btn:hover{background:var(--brand-navy)}
+    .pt-card .pt-btn i{font-size:12px}
 
-    /* 프로세스 흐름 */
-    .fs-process { display:flex; gap:0; align-items:flex-start; counter-reset:step; }
-    .fs-step {
-        flex:1; text-align:center; position:relative; padding:0 12px;
-    }
-    .fs-step::before {
-        counter-increment:step; content:counter(step);
-        display:flex; align-items:center; justify-content:center;
-        width:44px; height:44px; border-radius:50%; margin:0 auto 14px;
-        background:var(--brand-dark); color:var(--gold);
-        font-size:16px; font-weight:800; position:relative; z-index:2;
-    }
-    .fs-step::after {
-        content:''; position:absolute; top:22px; left:calc(50% + 22px); right:calc(-50% + 22px);
-        height:2px; background:var(--gray-200); z-index:1;
-    }
-    .fs-step:last-child::after { display:none; }
-    .fs-step h5 { font-size:14px; font-weight:700; color:var(--gray-900); margin-bottom:6px; }
-    .fs-step p { font-size:12px; color:var(--gray-500); line-height:1.6; }
-    @media(max-width:768px){
-        .fs-process{flex-direction:column;gap:20px;}
-        .fs-step{text-align:left;display:flex;gap:14px;padding:0;}
-        .fs-step::before{flex-shrink:0;margin:0;}
-        .fs-step::after{display:none;}
-    }
+    /* === Secondary Tools (2-col, compact) === */
+    .st-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    @media(max-width:640px){.st-grid{grid-template-columns:1fr}}
+    .st-card{display:flex;align-items:flex-start;gap:18px;background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;padding:24px;transition:all .25s;cursor:pointer}
+    .st-card:hover{border-color:var(--gold);box-shadow:0 6px 20px rgba(195,165,105,.08);transform:translateY(-2px)}
+    .st-card .st-icon{width:44px;height:44px;border-radius:12px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;color:var(--gold)}
+    .st-card .st-body{flex:1}
+    .st-card h4{font-size:15px;font-weight:700;color:var(--gray-900);margin-bottom:6px}
+    .st-card p{font-size:13px;color:var(--gray-500);line-height:1.6}
+    .st-card .st-items{margin-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+    .st-card .st-item{font-size:11px;padding:3px 9px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:5px;color:var(--gray-600);font-weight:500}
 
-    /* CTA */
-    .fs-cta {
-        background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:var(--radius);
-        padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px;
-        position:relative; overflow:hidden;
-    }
-    .fs-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(195,165,105,0.08) 0%,transparent 70%); border-radius:50%; }
-    .fs-cta h3 { font-size:22px; font-weight:800; color:#fff; margin-bottom:8px; }
-    .fs-cta p { font-size:15px; color:rgba(255,255,255,0.55); }
-    .fs-cta-btn {
-        display:inline-flex; align-items:center; gap:8px; padding:14px 28px;
-        background:var(--gold); color:#0A0F1C; border-radius:8px; font-size:14px; font-weight:700;
-        text-decoration:none; white-space:nowrap;
-    }
-    .fs-cta-btn:hover { background:var(--gold-hover); }
-    @media(max-width:640px){ .fs-cta{flex-direction:column;padding:32px 24px;text-align:center;} }
+    /* === Workflow === */
+    .wf{display:flex;gap:0;align-items:flex-start;counter-reset:wf-step;margin-top:8px}
+    .wf-s{flex:1;text-align:center;position:relative;padding:0 10px}
+    .wf-s .wf-num{width:48px;height:48px;border-radius:50%;background:var(--brand-dark);color:var(--gold);font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;position:relative;z-index:2;box-shadow:0 2px 8px rgba(10,15,28,.12)}
+    .wf-s .wf-line{position:absolute;top:24px;left:calc(50% + 24px);right:calc(-50% + 24px);height:2px;background:linear-gradient(90deg,var(--gold),var(--gray-200));z-index:1}
+    .wf-s:last-child .wf-line{display:none}
+    .wf-s h5{font-size:13.5px;font-weight:700;color:var(--gray-900);margin-bottom:4px}
+    .wf-s p{font-size:11.5px;color:var(--gray-500);line-height:1.5}
+    @media(max-width:768px){.wf{flex-direction:column;gap:16px}.wf-s{text-align:left;display:flex;gap:14px;padding:0}.wf-s .wf-num{flex-shrink:0;margin:0}.wf-s .wf-line{display:none}}
+
+    /* === Metrics === */
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+    @media(max-width:640px){.metrics{grid-template-columns:repeat(2,1fr)}}
+    .metric{display:flex;align-items:center;gap:12px;padding:16px 18px;background:#fff;border:1px solid var(--gray-200);border-radius:12px}
+    .metric .m-icon{width:36px;height:36px;border-radius:9px;background:rgba(195,165,105,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:var(--gold)}
+    .metric .m-label{font-size:13px;font-weight:600;color:var(--gray-700)}
+    .metric .m-sub{font-size:11px;color:var(--gray-400);margin-top:1px}
+
+    /* === CTA === */
+    .fs-cta{background:linear-gradient(135deg,#0A0F1C,#142644);border-radius:18px;padding:48px;display:flex;align-items:center;justify-content:space-between;gap:32px;position:relative;overflow:hidden;margin-top:56px}
+    .fs-cta::before{content:'';position:absolute;right:-50px;top:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(195,165,105,.08) 0%,transparent 70%);border-radius:50%}
+    .fs-cta .cta-body{position:relative;z-index:1}
+    .fs-cta h3{font-size:22px;font-weight:800;color:#fff;margin-bottom:8px}
+    .fs-cta p{font-size:14px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:16px}
+    .fs-cta .cta-chips{display:flex;gap:8px;flex-wrap:wrap}
+    .fs-cta .cta-chip{font-size:12px;padding:5px 12px;background:rgba(195,165,105,.1);color:var(--gold);border-radius:6px;font-weight:600}
+    .fs-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;background:var(--gold);color:#0A0F1C;border-radius:10px;font-size:15px;font-weight:800;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0}
+    .fs-cta-btn:hover{background:#d4b56a;box-shadow:0 8px 24px rgba(195,165,105,.3)}
+    @media(max-width:640px){.fs-cta{flex-direction:column;padding:32px 24px;text-align:center}.fs-cta .cta-chips{justify-content:center}}
     </style>
 </head>
 <body>
 <div id="site-header"></div>
 
-<div class="page-hero">
+<!-- Hero -->
+<div class="fh">
     <div class="inner">
-        <div class="breadcrumb">
-            <a href="../index.html">홈</a>
-            <i class="fa-solid fa-chevron-right"></i>
-            <a href="services.html">사업분야</a>
-            <i class="fa-solid fa-chevron-right"></i>
-            <span>사업성 분석 및 추진전략 수립</span>
-        </div>
-        <h1>사업성 분석 및 추진전략 수립</h1>
-        <p>정비사업의 경제적 타당성을 분석하고, 성공적 추진을 위한 단계별 전략을 수립합니다</p>
+        <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><a href="services.html">사업분야</a><i class="fa-solid fa-chevron-right"></i><span>사업성 검토</span></div>
+        <h1>사업성 검토</h1>
+        <p class="fh-sub">비례율·분담금·총사업비·수익성 — 기초자료만 있으면 1차 검토가 가능합니다</p>
     </div>
 </div>
 
-<div class="page-body">
-    <div class="inner">
+<div class="page-body"><div class="inner">
 
-        <!-- 인트로 -->
-        <div class="fs-section">
-            <div class="fs-intro">
-                <p>정비사업은 <strong>수십억~수천억 원 규모의 사업</strong>입니다. 사업 초기에 비례율, 분담금, 총사업비, 수익 구조를 정확하게 분석하지 않으면 사업 중반 이후 예상치 못한 추가 부담이 발생할 수 있습니다. 세울엔지니어링은 사업 착수 전 <strong>객관적이고 체계적인 사업성 분석</strong>을 통해 조합과 토지등소유자가 올바른 의사결정을 내릴 수 있도록 지원합니다.</p>
+    <!-- Quick Stats -->
+    <div class="qs">
+        <div class="qs-card">
+            <div class="qs-icon"><i class="fa-solid fa-percent"></i></div>
+            <div class="qs-val">비례율</div>
+            <div class="qs-label">사업성 핵심 지표</div>
+        </div>
+        <div class="qs-card">
+            <div class="qs-icon"><i class="fa-solid fa-calculator"></i></div>
+            <div class="qs-val">분담금</div>
+            <div class="qs-label">조합원 부담액 추정</div>
+        </div>
+        <div class="qs-card">
+            <div class="qs-icon"><i class="fa-solid fa-coins"></i></div>
+            <div class="qs-val">총사업비</div>
+            <div class="qs-label">항목별 산정·검증</div>
+        </div>
+        <div class="qs-card">
+            <div class="qs-icon"><i class="fa-solid fa-chart-pie"></i></div>
+            <div class="qs-val">수익성</div>
+            <div class="qs-label">일반분양 수입 분석</div>
+        </div>
+        <div class="qs-card">
+            <div class="qs-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="qs-val">리스크</div>
+            <div class="qs-label">위험요인 사전 분석</div>
+        </div>
+    </div>
+
+    <!-- Primary Tools -->
+    <div class="fs-sec">
+        <div class="fs-sec-head">
+            <div class="sh-icon"><i class="fa-solid fa-rocket"></i></div>
+            <h2>핵심 검토 도구</h2>
+            <span class="sh-sub">가장 많이 사용하는 3가지 분석</span>
+        </div>
+        <div class="pt-grid">
+            <div class="pt-card" onclick="location.href='search.html?tool=ratio'">
+                <div class="pt-icon"><i class="fa-solid fa-percent"></i></div>
+                <h3>추정 비례율 산정</h3>
+                <p class="pt-desc">종전·종후 자산가치를 비교하여 사업성 핵심 지표인 비례율을 산정합니다.</p>
+                <div class="pt-spec">
+                    <div class="pt-spec-row"><span class="sl">입력값</span><span class="sv">종전자산 / 총수입 / 총사업비</span></div>
+                    <div class="pt-spec-row"><span class="sl">결과값</span><span class="sv">추정 비례율 / 사업성 판단</span></div>
+                </div>
+                <button class="pt-btn"><i class="fa-solid fa-play"></i> 비례율 계산 시작</button>
+            </div>
+            <div class="pt-card" onclick="location.href='search.html?tool=burden'">
+                <div class="pt-icon"><i class="fa-solid fa-calculator"></i></div>
+                <h3>추정 분담금 산정</h3>
+                <p class="pt-desc">권리가액과 분양가를 기반으로 조합원 예상 분담금을 산정합니다.</p>
+                <div class="pt-spec">
+                    <div class="pt-spec-row"><span class="sl">입력값</span><span class="sv">권리가액 / 분양가 / 추가부담</span></div>
+                    <div class="pt-spec-row"><span class="sl">결과값</span><span class="sv">예상 분담금 / 부담 수준</span></div>
+                </div>
+                <button class="pt-btn"><i class="fa-solid fa-play"></i> 분담금 계산 시작</button>
+            </div>
+            <div class="pt-card" onclick="location.href='search.html?tool=simulation'">
+                <div class="pt-icon"><i class="fa-solid fa-sliders"></i></div>
+                <h3>분담금 변동 시뮬레이션</h3>
+                <p class="pt-desc">공사비·분양가·금융비용 변동에 따른 분담금 변동폭을 시뮬레이션합니다.</p>
+                <div class="pt-spec">
+                    <div class="pt-spec-row"><span class="sl">입력값</span><span class="sv">공사비 상승률 / 분양가 변동</span></div>
+                    <div class="pt-spec-row"><span class="sl">결과값</span><span class="sv">분담금 변동폭 / 민감도</span></div>
+                </div>
+                <button class="pt-btn"><i class="fa-solid fa-play"></i> 시뮬레이션 시작</button>
             </div>
         </div>
+    </div>
 
-        <!-- 핵심 지표 -->
-        <div class="fs-section">
-            <h2 class="section-title">핵심 분석 지표</h2>
-            <div class="fs-stats">
-                <div class="fs-stat">
-                    <div class="num"><i class="fa-solid fa-percent" style="font-size:22px;"></i></div>
-                    <div class="desc">추정 비례율 산정</div>
-                </div>
-                <div class="fs-stat">
-                    <div class="num"><i class="fa-solid fa-calculator" style="font-size:22px;"></i></div>
-                    <div class="desc">조합원 분담금 추정</div>
-                </div>
-                <div class="fs-stat">
-                    <div class="num"><i class="fa-solid fa-coins" style="font-size:22px;"></i></div>
-                    <div class="desc">총사업비 검증</div>
-                </div>
-                <div class="fs-stat">
-                    <div class="num"><i class="fa-solid fa-shield-halved" style="font-size:22px;"></i></div>
-                    <div class="desc">리스크 사전 분석</div>
-                </div>
-            </div>
+    <!-- Secondary Tools -->
+    <div class="fs-sec">
+        <div class="fs-sec-head">
+            <div class="sh-icon"><i class="fa-solid fa-wrench"></i></div>
+            <h2>심화 분석 도구</h2>
         </div>
-
-        <!-- 서비스 상세 -->
-        <div class="fs-section">
-            <h2 class="section-title">서비스 상세</h2>
-            <div class="fs-service-grid">
-                <div class="fs-service-card">
-                    <div class="fs-icon"><i class="fa-solid fa-chart-line"></i></div>
-                    <h4>사업성 기초 분석</h4>
-                    <p>사업 착수 전 핵심 경제 지표를 분석하여 사업 추진 여부를 판단합니다.</p>
-                    <ul>
-                        <li>종전·종후 자산가치 비교 분석</li>
-                        <li>추정 비례율 및 분담금 산정</li>
-                        <li>감정평가 기초자료 검토</li>
-                        <li>사업성 유무 판단 보고서 작성</li>
-                    </ul>
-                </div>
-                <div class="fs-service-card">
-                    <div class="fs-icon"><i class="fa-solid fa-coins"></i></div>
+        <div class="st-grid">
+            <div class="st-card" onclick="location.href='search.html?tool=cost'">
+                <div class="st-icon"><i class="fa-solid fa-coins"></i></div>
+                <div class="st-body">
                     <h4>총사업비 검증</h4>
-                    <p>공사비, 금융비용, 보상비 등 전체 사업비를 항목별로 산정하고 적정성을 검증합니다.</p>
-                    <ul>
-                        <li>서울시 예산회계규정 기준 산정</li>
-                        <li>공사비 단가 적정성 비교 분석</li>
-                        <li>금융비용·이주비·보상비 추정</li>
-                        <li>사업비 증감 시나리오 분석</li>
-                    </ul>
-                </div>
-                <div class="fs-service-card">
-                    <div class="fs-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                    <h4>리스크 분석 및 대응</h4>
-                    <p>사업 추진 과정에서 발생할 수 있는 위험 요인을 사전에 파악하고 대응 방안을 수립합니다.</p>
-                    <ul>
-                        <li>공사비 상승·분양가 하락 시뮬레이션</li>
-                        <li>사업 지연 시 금융비용 증가 분석</li>
-                        <li>조합원 분담금 변동 시나리오</li>
-                        <li>리스크 완화 전략 수립</li>
-                    </ul>
-                </div>
-                <div class="fs-service-card">
-                    <div class="fs-icon"><i class="fa-solid fa-route"></i></div>
-                    <h4>추진전략 및 로드맵</h4>
-                    <p>사업 단계별 최적의 추진 전략과 일정을 수립하여 사업 완료까지의 로드맵을 제시합니다.</p>
-                    <ul>
-                        <li>정비구역 지정 ~ 준공 단계별 전략</li>
-                        <li>시공사 선정 시기·방식 자문</li>
-                        <li>동의율 확보 전략 및 일정 관리</li>
-                        <li>행정기관 협의·인허가 대응 전략</li>
-                    </ul>
+                    <p>공사비·금융비용·보상비 등 전체 사업비를 항목별로 산정하고 적정성을 검증합니다.</p>
+                    <div class="st-items">
+                        <span class="st-item">공사비 단가</span>
+                        <span class="st-item">금융비용</span>
+                        <span class="st-item">이주비</span>
+                        <span class="st-item">보상비</span>
+                        <span class="st-item">사업비 시나리오</span>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- 추진 프로세스 -->
-        <div class="fs-section">
-            <h2 class="section-title">분석 프로세스</h2>
-            <div class="fs-process">
-                <div class="fs-step">
-                    <div>
-                        <h5>기초자료 수집</h5>
-                        <p>구역 현황, 토지대장, 건축물대장, 감정평가 자료 수집</p>
-                    </div>
-                </div>
-                <div class="fs-step">
-                    <div>
-                        <h5>사업성 분석</h5>
-                        <p>비례율·분담금·총사업비·수익률 산정 및 시나리오 비교</p>
-                    </div>
-                </div>
-                <div class="fs-step">
-                    <div>
-                        <h5>리스크 검토</h5>
-                        <p>공사비 변동, 분양가 리스크, 금융비용 등 위험 요인 분석</p>
-                    </div>
-                </div>
-                <div class="fs-step">
-                    <div>
-                        <h5>전략 수립</h5>
-                        <p>단계별 추진 로드맵, 시공사 선정 전략, 동의율 확보 방안</p>
-                    </div>
-                </div>
-                <div class="fs-step">
-                    <div>
-                        <h5>보고서 제출</h5>
-                        <p>사업성 분석 보고서 및 추진전략 보고서 납품</p>
+            <div class="st-card" onclick="location.href='search.html?tool=profit'">
+                <div class="st-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <div class="st-body">
+                    <h4>수익성 분석</h4>
+                    <p>일반분양수입·보류지·상가 수입 등 전체 수익구조를 분석하고 수익성을 판단합니다.</p>
+                    <div class="st-items">
+                        <span class="st-item">일반분양수입</span>
+                        <span class="st-item">보류지 수입</span>
+                        <span class="st-item">상가 수입</span>
+                        <span class="st-item">수익률</span>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- 온라인 검토 도구 안내 -->
-        <div class="fs-section">
-            <h2 class="section-title">온라인 사업성 검토 도구</h2>
-            <div style="background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius); padding:32px; display:flex; align-items:center; gap:28px;">
-                <div style="width:56px; height:56px; border-radius:14px; background:var(--brand-dark); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                    <i class="fa-solid fa-chart-line" style="font-size:24px; color:var(--gold);"></i>
-                </div>
-                <div style="flex:1;">
-                    <h4 style="font-size:16px; font-weight:700; margin-bottom:6px;">간편 사업성 검토 계산기</h4>
-                    <p style="font-size:14px; color:var(--gray-600); line-height:1.7;">비례율, 분담금, 총사업비, 리스크, 수익성을 온라인에서 직접 계산해볼 수 있습니다.</p>
-                </div>
-                <a href="search.html" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; background:var(--brand-dark); color:var(--gold); border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap;">
-                    <i class="fa-solid fa-calculator"></i> 검토 도구 바로가기
-                </a>
-            </div>
-        </div>
-
-        <!-- CTA -->
-        <div class="fs-section">
-            <div class="fs-cta">
-                <div style="position:relative;z-index:1;">
-                    <h3>사업성 분석이 필요하신가요?</h3>
-                    <p>세울엔지니어링이 정비사업의 경제적 타당성을 체계적으로 분석해드립니다</p>
-                </div>
-                <a href="contact.html" class="fs-cta-btn"><i class="fa-solid fa-paper-plane"></i> 분석 문의하기</a>
-            </div>
-        </div>
-
     </div>
-</div>
+
+    <!-- Workflow -->
+    <div class="fs-sec">
+        <div class="fs-sec-head">
+            <div class="sh-icon"><i class="fa-solid fa-route"></i></div>
+            <h2>검토 프로세스</h2>
+        </div>
+        <div class="wf">
+            <div class="wf-s"><div class="wf-num">1</div><div class="wf-line"></div><div><h5>기초자료 입력</h5><p>구역현황, 토지대장, 감정평가 자료</p></div></div>
+            <div class="wf-s"><div class="wf-num">2</div><div class="wf-line"></div><div><h5>비례율·분담금</h5><p>핵심 지표 산출 및 사업성 판단</p></div></div>
+            <div class="wf-s"><div class="wf-num">3</div><div class="wf-line"></div><div><h5>총사업비·수익성</h5><p>항목별 사업비와 수익구조 검증</p></div></div>
+            <div class="wf-s"><div class="wf-num">4</div><div class="wf-line"></div><div><h5>리스크 분석</h5><p>변동 시나리오 및 위험요인 분석</p></div></div>
+            <div class="wf-s"><div class="wf-num">5</div><div><h5>보고서·자문</h5><p>분석 보고서 및 맞춤 전략 제시</p></div></div>
+        </div>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="fs-sec">
+        <div class="fs-sec-head">
+            <div class="sh-icon"><i class="fa-solid fa-list-check"></i></div>
+            <h2>주요 검토 항목</h2>
+            <span class="sh-sub">사업성 분석 시 반드시 확인하는 12대 항목</span>
+        </div>
+        <div class="metrics">
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-percent"></i></div><div><div class="m-label">비례율</div><div class="m-sub">종전·종후 자산 비율</div></div></div>
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-calculator"></i></div><div><div class="m-label">분담금</div><div class="m-sub">조합원 추가 부담액</div></div></div>
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-building"></i></div><div><div class="m-label">공사비</div><div class="m-sub">3.3㎡당 단가 적정성</div></div></div>
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div><div><div class="m-label">총사업비</div><div class="m-sub">전체 사업비 구성</div></div></div>
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-house-chimney"></i></div><div><div class="m-label">일반분양수입</div><div class="m-sub">분양가 × 세대수 추정</div></div></div>
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-store"></i></div><div><div class="m-label">보류지·상가</div><div class="m-sub">부대수입 구조 분석</div></div></div>
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-landmark"></i></div><div><div class="m-label">금융비용</div><div class="m-sub">이주비 대출·사업비 금리</div></div></div>
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-scale-balanced"></i></div><div><div class="m-label">감정평가</div><div class="m-sub">종전자산 평가 기준</div></div></div>
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-chart-pie"></i></div><div><div class="m-label">수익성</div><div class="m-sub">사업 수익구조 종합</div></div></div>
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-triangle-exclamation"></i></div><div><div class="m-label">리스크</div><div class="m-sub">변동 시나리오 대응</div></div></div>
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-truck-moving"></i></div><div><div class="m-label">이주·보상</div><div class="m-sub">이주비·영업손실 보상</div></div></div>
+            <div class="metric"><div class="m-icon"><i class="fa-solid fa-file-contract"></i></div><div><div class="m-label">인허가</div><div class="m-sub">행정절차 소요기간</div></div></div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="fs-cta">
+        <div class="cta-body">
+            <h3>맞춤형 사업성 검토가 필요하신가요?</h3>
+            <p>기초자료만 있으면 1차 검토가 가능합니다. 조합·추진위·토지등소유자 누구나 요청할 수 있습니다.</p>
+            <div class="cta-chips">
+                <span class="cta-chip">비례율 산정</span>
+                <span class="cta-chip">분담금 추정</span>
+                <span class="cta-chip">총사업비 검증</span>
+                <span class="cta-chip">리스크 분석</span>
+                <span class="cta-chip">맞춤 시뮬레이션</span>
+            </div>
+        </div>
+        <a href="contact.html" class="fs-cta-btn"><i class="fa-solid fa-paper-plane"></i> 검토 문의하기</a>
+    </div>
+
+</div></div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js"></script>
-<script src="../assets/js/data-service.js"></script>
-<script src="../assets/js/common.js"></script>
+<script src="../assets/data/mock-data.js?v=20260405"></script>
+<script src="../assets/js/data-service.js?v=20260405"></script>
+<script src="../assets/js/common.js?v=20260405"></script>
 </body>
 </html>
