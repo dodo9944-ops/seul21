@@ -48,7 +48,6 @@ const App = (() => {
     <div class="util-bar"><div class="inner">
       <span class="util-left">(주)세울엔지니어링 · 도시정비 전문 엔지니어링</span>
       <a href="${B}/pages/notice.html">공지사항</a>
-      <a href="${B}/pages/contact.html">사업문의</a>
       ${utilRight}
     </div></div>
     <header class="header"><div class="inner">
