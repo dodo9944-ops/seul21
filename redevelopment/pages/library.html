@@ -363,67 +363,83 @@
         render();
     });
 
-    // 다운로드 파일 매핑 (첨부파일 우선, 없으면 웹문서)
+    // 다운로드 소스 매핑 (3단계: 외부공식링크 → 첨부파일 → 웹문서)
     var fileMap = {
-        'lib1':  { file:'../downloads/files/lib1_조합설립인가_신청서.pdf', web:'../downloads/form_association.html' },
-        'lib2':  { file:'../downloads/files/lib2_관리처분_변경인가_신청서.hwpx', web:'../downloads/form_management.html' },
-        'lib3':  { file:'../downloads/files/lib3_총회_위임장.pdf', web:'../downloads/form_proxy.html' },
-        'lib4':  { file:'../downloads/files/lib4_도시정비법_개정요약.pdf', web:'../downloads/law_summary_2026.html' },
-        'lib5':  { file:'../downloads/files/lib5_서울시_가이드라인.pdf', web:'../downloads/guide_seoul_guidelines.html' },
-        'lib6':  { file:'../downloads/files/lib6_소규모주택정비법.pdf', web:'../downloads/guide_small_housing.html' },
-        'lib7':  { file:'../downloads/files/lib7_업무체크리스트.xlsx', web:'../downloads/checklist_steps.html' },
-        'lib8':  { file:'../downloads/files/lib8_분담금_산정_가이드.pdf', web:'../downloads/guide_burden.html' },
-        'lib9':  { file:'../downloads/files/lib9_시공사_선정_해설.pdf', web:'../downloads/guide_contractor.html' },
-        'lib10': { file:'../downloads/files/lib10_감정평가_가이드.pdf', web:'../downloads/guide_appraisal.html' },
-        'lib11': { file:'../downloads/files/lib11_조합설립_완전가이드.pdf', web:'../downloads/guide_association.html' },
-        'lib12': { file:'../downloads/files/lib12_안전진단_지침.pdf', web:'../downloads/guide_safety_inspection.html' },
-        'lib13': { file:'../downloads/files/lib13_회계처리_지침.pdf', web:'../downloads/guide_accounting.html' },
-        'lib14': { file:'../downloads/files/lib14_정책동향_2026Q1.pdf', web:'../downloads/policy_news_2026q1.html' },
-        'lib15': { file:'../downloads/files/lib15_신속통합기획.pdf', web:'../downloads/news_rapid_planning.html' },
-        'lib16': { file:'../downloads/files/lib16_소규모정비법_개정.pdf', web:'../downloads/news_small_housing_act.html' },
-        'lib17': { file:'../downloads/files/lib17_시공자선정_지침.pdf', web:'../downloads/guide_contractor_selection.html' },
-        'lib18': { file:'../downloads/files/lib18_이주보상_지침.pdf', web:'../downloads/guide_relocation.html' },
-        'lib19': { file:'../downloads/files/lib19_1기신도시_특별법.pdf', web:'../downloads/news_new_town.html' },
-        'lib20': { file:'../downloads/files/lib20_공공재개발_후보지.pdf', web:'../downloads/news_public_redevelopment.html' },
+        'lib1':  { ext:'../downloads/files/lib1_조합설립인가_신청서.pdf', web:'../downloads/form_association.html' },
+        'lib2':  { ext:'../downloads/files/lib2_관리처분_변경인가_신청서.pdf', web:'../downloads/form_management.html' },
+        'lib3':  { ext:'../downloads/files/lib3_총회_위임장.pdf', web:'../downloads/form_proxy.html' },
+        'lib4':  { gov:'https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=259069', web:'../downloads/law_summary_2026.html', label:'법제처 원문' },
+        'lib5':  { gov:'https://news.seoul.go.kr/citybuild/archives/507738', web:'../downloads/guide_seoul_guidelines.html', label:'서울시 원문' },
+        'lib6':  { gov:'https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=243625', web:'../downloads/guide_small_housing.html', label:'법제처 원문' },
+        'lib7':  { ext:'../downloads/files/lib7_업무체크리스트.xlsx', web:'../downloads/checklist_steps.html' },
+        'lib8':  { web:'../downloads/guide_burden.html' },
+        'lib9':  { web:'../downloads/guide_contractor.html' },
+        'lib10': { web:'../downloads/guide_appraisal.html' },
+        'lib11': { web:'../downloads/guide_association.html' },
+        'lib12': { web:'../downloads/guide_safety_inspection.html' },
+        'lib13': { web:'../downloads/guide_accounting.html' },
+        'lib14': { gov:'https://www.molit.go.kr/USR/NEWS/m_71/lst.jsp', web:'../downloads/policy_news_2026q1.html', label:'국토부 보도자료' },
+        'lib15': { gov:'https://news.seoul.go.kr/citybuild/', web:'../downloads/news_rapid_planning.html', label:'서울시 원문' },
+        'lib16': { gov:'https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=243625', web:'../downloads/news_small_housing_act.html', label:'법제처 원문' },
+        'lib17': { web:'../downloads/guide_contractor_selection.html' },
+        'lib18': { web:'../downloads/guide_relocation.html' },
+        'lib19': { gov:'https://www.molit.go.kr/USR/NEWS/m_71/lst.jsp', web:'../downloads/news_new_town.html', label:'국토부 보도자료' },
+        'lib20': { gov:'https://www.molit.go.kr/USR/NEWS/m_71/lst.jsp', web:'../downloads/news_public_redevelopment.html', label:'국토부 보도자료' },
     };
 
-    // 첨부파일 존재 여부 캐시
-    var fileExistsCache = {};
-    function checkFileExists(url, callback) {
-        if (fileExistsCache[url] !== undefined) return callback(fileExistsCache[url]);
-        var xhr = new XMLHttpRequest();
-        xhr.open('HEAD', url, true);
-        xhr.onload = function() { fileExistsCache[url] = xhr.status === 200; callback(fileExistsCache[url]); };
-        xhr.onerror = function() { fileExistsCache[url] = false; callback(false); };
-        xhr.send();
+    // 첨부파일 존재 확인
+    var fileCache = {};
+    function checkFile(url, cb) {
+        if (fileCache[url] !== undefined) return cb(fileCache[url]);
+        var x = new XMLHttpRequest();
+        x.open('HEAD', url, true);
+        x.onload = function() { fileCache[url] = x.status === 200; cb(fileCache[url]); };
+        x.onerror = function() { fileCache[url] = false; cb(false); };
+        x.send();
     }
 
-    // 다운로드 클릭 처리
+    // 다운로드 클릭 처리 (3단계 우선순위)
     document.getElementById('libList').addEventListener('click', function(e) {
         var btn = e.target.closest('.btn-download');
         if (!btn) return;
         var id = btn.dataset.id;
-        var map = fileMap[id];
-        if (!map) { App.toast('파일 준비 중입니다.', 'info'); return; }
+        var m = fileMap[id];
+        if (!m) { App.toast('파일 준비 중입니다.', 'info'); return; }
 
-        // 첨부파일 우선 시도, 없으면 웹문서
-        checkFileExists(map.file, function(exists) {
-            if (exists) {
-                var a = document.createElement('a');
-                a.href = map.file;
-                a.download = '';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                App.toast('파일을 다운로드합니다.', 'success');
-            } else {
-                window.open(map.web, '_blank');
-                App.toast('웹 문서로 열립니다. (인쇄하여 PDF 저장 가능)', 'info');
-            }
-            var item = allItems.find(function(i) { return i.id === id; });
-            if (item) { item.downloads = (item.downloads || 0) + 1; }
-            render();
-        });
+        // 1순위: 첨부파일 직접 다운로드
+        if (m.ext) {
+            checkFile(m.ext, function(ok) {
+                if (ok) {
+                    var a = document.createElement('a'); a.href = m.ext; a.download = '';
+                    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                    App.toast('파일 다운로드 시작', 'success');
+                } else if (m.gov) {
+                    window.open(m.gov, '_blank');
+                    App.toast((m.label || '공식 사이트') + '로 이동합니다', 'info');
+                } else {
+                    window.open(m.web, '_blank');
+                    App.toast('웹 문서로 열립니다 (Ctrl+P로 PDF 저장 가능)', 'info');
+                }
+            });
+        }
+        // 2순위: 공식 외부 링크
+        else if (m.gov) {
+            window.open(m.web, '_blank');
+            setTimeout(function() {
+                if (confirm((m.label || '공식 사이트') + '에서 원문을 확인하시겠습니까?')) {
+                    window.open(m.gov, '_blank');
+                }
+            }, 500);
+        }
+        // 3순위: 웹 문서
+        else {
+            window.open(m.web, '_blank');
+            App.toast('웹 문서로 열립니다 (Ctrl+P로 PDF 저장 가능)', 'info');
+        }
+
+        var item = allItems.find(function(i) { return i.id === id; });
+        if (item) { item.downloads = (item.downloads || 0) + 1; }
+        render();
     });
 
     render();
