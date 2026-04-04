@@ -121,7 +121,7 @@ const App = (() => {
               <span class="logo-sub">SEUL ENGINEERING</span>
             </span>
           </div>
-          <p style="margin-top:10px">재개발·재건축·소규모정비사업<br>종합 엔지니어링 전문기업</p>
+          <p>재개발·재건축·소규모정비사업<br>정비사업전문관리업 등록 종합 엔지니어링 전문기업</p>
         </div>
         <div class="footer-col">
           <h5>회사</h5>
@@ -146,7 +146,8 @@ const App = (() => {
         <div class="footer-col footer-contact">
           <h5>고객센터</h5>
           <span class="phone">010-2230-9210</span>
-          <p>E-mail dodo6666@naver.com<br>FAX 0504-340-9210<br>평일 09:00 – 18:00 (토·일·공휴일 휴무)</p>
+          <a href="mailto:dodo6666@naver.com" class="email-link"><i class="fa-solid fa-envelope" style="font-size:11px"></i> dodo6666@naver.com</a>
+          <p>FAX 0504-340-9210<br>평일 09:00 – 18:00 (토·일·공휴일 휴무)</p>
         </div>
       </div>
       <div class="footer-bottom">

@@ -296,7 +296,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 }
 .footer-grid {
   display: grid; grid-template-columns: 2fr repeat(3, 1fr) 1.5fr;
-  gap: 40px; margin-bottom: 40px;
+  gap: 32px; margin-bottom: 36px;
 }
 .footer-brand .logo { margin-bottom: 12px; }
 .footer .logo-mark svg rect,
@@ -304,30 +304,32 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 .footer .logo-mark svg rect[fill] { fill: #fff; }
 .footer .logo-company { font-size: 16px; color: var(--white); }
 .footer .logo-sub { color: rgba(255,255,255,0.4); }
-.footer-brand p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; }
-.footer-col h5 { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
-.footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 10px; transition: color var(--transition); }
+.footer-brand p { font-size: 12.5px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-top: 10px; }
+.footer-col h5 { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); margin-bottom: 14px; letter-spacing: -.2px; }
+.footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 9px; transition: color var(--transition); }
 .footer-col a:hover { color: var(--white); }
-.footer-contact .phone { font-size: 24px; font-weight: 800; color: var(--white); display: block; margin-bottom: 8px; }
-.footer-contact p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.8; }
+.footer-contact .phone { font-size: 22px; font-weight: 800; color: var(--white); display: block; margin-bottom: 6px; }
+.footer-contact .email-link { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 500; color: var(--gold); margin-bottom: 8px; transition: opacity .2s; }
+.footer-contact .email-link:hover { opacity: .8; }
+.footer-contact p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.7; }
 .footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
-  display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;
+  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
 }
 .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
-.footer-info { font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 8px; }
-.footer-social { display: flex; gap: 8px; }
+.footer-info { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 4px; }
+.footer-social { display: flex; gap: 6px; }
 .footer-social a {
-  width: 36px; height: 36px;
+  width: 34px; height: 34px;
   display: flex; align-items: center; justify-content: center;
   border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.4); font-size: 14px; transition: all var(--transition);
+  color: rgba(255,255,255,0.35); font-size: 13px; transition: all 0.25s;
 }
-.footer-social a:hover { border-color: var(--white); color: var(--white); }
-@media (max-width: 1024px) { .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
+.footer-social a:hover { border-color: var(--gold); color: var(--gold); background: rgba(195,165,105,0.08); }
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; } }
 @media (max-width: 540px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-  .footer-bottom { flex-direction: column; gap: 16px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; gap: 14px; align-items: flex-start; }
 }
 
 /* ── SCROLL TO TOP ── */
