@@ -821,38 +821,7 @@
             <h2 class="section-title">주요 수행실적</h2>
             <a href="pages/portfolio.html" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
         </div>
-        <div class="expert-grid">
-            <div class="expert-card">
-                <img src="assets/images/portfolio/garak5.jpg" alt="가락현대5차 더샵 송파 루미스타 조감도" style="width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:16px">
-                <h4>가락현대5차 소규모재건축</h4>
-                <p>송파구 가락동 161-3 일대 — 기존 145세대를 지하3층·지상26층 179세대(더샵 송파 루미스타)로 재건축, 사전점검 및 준공 자문</p>
-                <div class="expert-meta">
-                    <span class="author">송파구 · 179세대 · 포스코이앤씨</span>
-                    <span>·</span>
-                    <span style="color:#C3A569;font-weight:600;">준공예정</span>
-                </div>
-            </div>
-            <div class="expert-card">
-                <img src="assets/images/portfolio/heukseok2.jpg" alt="흑석2구역 래미안 팰리튼 서울 조감도" style="width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:16px">
-                <h4>흑석2구역 주택재개발</h4>
-                <p>동작구 흑석동 99-3 일대 — 공공재개발 시범사업, 최고 49층 1,012세대(래미안 팰리튼 서울), 사업성 분석 및 자문</p>
-                <div class="expert-meta">
-                    <span class="author">동작구 · 1,012세대 · 삼성물산</span>
-                    <span>·</span>
-                    <span style="color:#C3A569;font-weight:600;">진행중</span>
-                </div>
-            </div>
-            <div class="expert-card">
-                <img src="assets/images/portfolio/gongdeok.jpg" alt="공덕현대 포레나 마포공덕 조감도" style="width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:16px">
-                <h4>공덕현대 소규모재건축</h4>
-                <p>마포구 공덕동 — 공덕역 초역세권, 한화 포레나 브랜드 적용, 소규모재건축 사업성 검토 및 자문</p>
-                <div class="expert-meta">
-                    <span class="author">마포구 · 소규모정비 · 한화건설</span>
-                    <span>·</span>
-                    <span style="color:#C3A569;font-weight:600;">진행중</span>
-                </div>
-            </div>
-        </div>
+        <div class="expert-grid" id="mainPortfolio"></div>
     </div>
 </section>
 
@@ -1063,6 +1032,25 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
 /* 메인페이지 자료실·커뮤니티 동적 로드 — mock-data 실제 데이터 사용 */
 (function(){
     if(typeof MOCK==='undefined') return;
+    /* 주요수행실적: featured 프로젝트 (mock-data 연동) */
+    var pfEl=document.getElementById('mainPortfolio');
+    if(pfEl && MOCK.portfolio){
+        var featured=MOCK.portfolio.filter(function(p){return p.featured}).slice(-3);
+        pfEl.innerHTML=featured.map(function(p){
+            var imgSrc=p.featuredImage||p.thumbnail;
+            var imgHtml=imgSrc?'<img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" style="width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:16px" onerror="this.style.display=\'none\'">':'';
+            var statusColor=p.status==='완료'?'':'color:#C3A569;font-weight:600;';
+            return'<div class="expert-card">'+imgHtml+
+                '<h4>'+p.name+'</h4>'+
+                '<p>'+p.description.substring(0,80)+'…</p>'+
+                '<div class="expert-meta">'+
+                    '<span class="author">'+p.district+' · '+p.scale+(p.constructor&&p.constructor!=='미정'?' · '+p.constructor:'')+'</span>'+
+                    '<span>·</span>'+
+                    '<span style="'+statusColor+'">'+(p.phase||p.status)+'</span>'+
+                '</div></div>';
+        }).join('');
+    }
+
     var iconMap={hwp:'fa-file-lines',pdf:'fa-file-pdf',xlsx:'fa-file-excel'};
 
     /* 자료실: 최신 4건 (주요뉴스 제외) */
