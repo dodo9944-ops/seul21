@@ -22,10 +22,10 @@
     @media(max-width:768px){.cm-hero{padding:40px 0 32px}.cm-hero h1{font-size:26px}.cm-hero .hero-stats{gap:18px;flex-wrap:wrap}}
 
     /* === Tabs + Write === */
-    .cm-toolbar{position:sticky;top:104px;z-index:100;background:#fff;padding:14px 0 12px;margin-bottom:0;border-bottom:1px solid var(--gray-100);transition:box-shadow .2s}
+    .cm-toolbar{position:sticky;top:104px;z-index:100;background:#fff;padding:10px 0;margin-bottom:0;border-bottom:1px solid var(--gray-100);transition:box-shadow .2s}
     .cm-toolbar.stuck{box-shadow:0 2px 12px rgba(0,0,0,.05)}
     @media(max-width:768px){.cm-toolbar{top:72px}}
-    .cm-toolbar .inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .cm-toolbar .inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:2px;padding-bottom:2px}
     .cm-tabs{display:flex;gap:4px;flex-wrap:wrap;padding:3px;background:var(--gray-50);border-radius:10px;border:1px solid var(--gray-100)}
     .cm-tab{display:inline-flex;align-items:center;gap:5px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--gray-500);transition:all .2s;font-family:var(--font)}
     .cm-tab i{font-size:12px;opacity:.4}
@@ -38,30 +38,32 @@
     .cm-write-btn:hover{background:var(--brand-navy);box-shadow:0 4px 12px rgba(10,15,28,.15)}
     .cm-write-btn i{font-size:12px}
 
-    /* === Featured Posts === */
-    .cm-featured{margin:28px 0 32px}
+    /* === Featured Posts (강화) === */
+    .cm-featured{margin:24px 0 28px}
     .cm-featured .cf-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
     .cm-featured .cf-head .cf-icon{width:28px;height:28px;border-radius:7px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gold)}
     .cm-featured .cf-head h3{font-size:15px;font-weight:800;color:var(--gray-900)}
     .cf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
     @media(max-width:900px){.cf-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:540px){.cf-grid{grid-template-columns:1fr}}
-    .cf-card{display:flex;flex-direction:column;padding:18px 20px;background:#fff;border:1px solid var(--gray-200);border-radius:12px;cursor:pointer;transition:all .25s;position:relative}
-    .cf-card:hover{border-color:var(--gold);box-shadow:0 6px 20px rgba(195,165,105,.08);transform:translateY(-2px)}
+    .cf-card{display:flex;flex-direction:column;padding:18px 20px;background:#fff;border:1.5px solid var(--gray-200);border-radius:13px;cursor:pointer;transition:all .3s;position:relative;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+    .cf-card:hover{border-color:var(--gold);box-shadow:0 10px 28px rgba(195,165,105,.12);transform:translateY(-4px)}
+    .cf-card:hover .cf-title{color:var(--gold)}
     .cf-card .cf-cat{margin-bottom:8px}
-    .cf-card .cf-title{font-size:14px;font-weight:700;color:var(--gray-900);line-height:1.45;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
-    .cf-card .cf-meta{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--gray-400)}
-    .cf-card .cf-meta i{font-size:10px}
-    .cf-card .cf-hot{position:absolute;top:12px;right:12px;width:24px;height:24px;border-radius:6px;background:rgba(195,165,105,.1);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold)}
+    .cf-card .cf-title{font-size:14.5px;font-weight:800;color:var(--gray-900);line-height:1.45;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1;transition:color .2s}
+    .cf-card .cf-meta{display:flex;align-items:center;gap:12px;font-size:11.5px;color:var(--gray-500);font-weight:500}
+    .cf-card .cf-meta i{font-size:10px;color:var(--gold);opacity:.7}
+    .cf-card .cf-hot{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:7px;background:rgba(195,165,105,.12);border:1px solid rgba(195,165,105,.15);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gold)}
 
     /* === Post List === */
     .cm-list-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
     .cm-list-head .count{font-size:13px;color:var(--gray-500)}
     .cm-list-head .count strong{color:var(--brand-dark);font-weight:700}
 
-    .cm-list{display:flex;flex-direction:column;gap:8px}
-    .cm-post{display:flex;align-items:center;gap:16px;padding:18px 22px;background:#fff;border:1.5px solid var(--gray-150,#eaedf0);border-radius:12px;cursor:pointer;transition:all .25s}
+    .cm-list{display:flex;flex-direction:column;gap:6px}
+    .cm-post{display:flex;align-items:center;gap:14px;padding:14px 20px;background:#fff;border:1.5px solid var(--gray-150,#eaedf0);border-radius:11px;cursor:pointer;transition:all .25s}
     .cm-post:hover{border-color:rgba(195,165,105,.3);box-shadow:0 4px 16px rgba(0,0,0,.04);transform:translateY(-1px)}
+    .cm-post.is-hot{border-left:3px solid var(--gold);background:linear-gradient(90deg,rgba(195,165,105,.015),#fff 40%)}
 
     /* Category badge */
     .cb{display:inline-flex;align-items:center;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;flex-shrink:0}
@@ -73,18 +75,19 @@
 
     /* Post content */
     .cm-post-body{flex:1;min-width:0}
-    .cm-post-title{font-size:15px;font-weight:700;color:var(--gray-900);line-height:1.45;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .2s}
+    .cm-post-title{font-size:14.5px;font-weight:700;color:var(--gray-900);line-height:1.4;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .2s}
     .cm-post:hover .cm-post-title{color:var(--gold)}
-    .cm-post-title .cmt-cnt{font-size:12px;font-weight:700;color:var(--gold);margin-left:6px}
-    .cm-post-title .new-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#EF4444;margin-left:6px;vertical-align:middle}
-    .cm-post-preview{font-size:12.5px;color:var(--gray-400);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .cm-post-title .cmt-cnt{font-size:11.5px;font-weight:700;color:var(--gold);margin-left:5px}
+    .cm-post-title .new-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#EF4444;margin-left:5px;vertical-align:middle}
+    .cm-post-title .hot-tag{display:inline-flex;align-items:center;gap:2px;margin-left:6px;padding:1px 6px;border-radius:4px;background:rgba(195,165,105,.1);font-size:9px;font-weight:700;color:var(--gold);vertical-align:middle}
+    .cm-post-preview{font-size:12px;color:var(--gray-400);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-    /* Post meta */
-    .cm-post-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;min-width:110px}
-    .cm-post-meta .pm-author{font-size:12.5px;font-weight:600;color:var(--gray-700)}
-    .cm-post-meta .pm-stats{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--gray-400)}
-    .cm-post-meta .pm-stats i{font-size:10px}
-    .cm-post-meta .pm-stats .likes{color:var(--gold)}
+    /* Post meta (강화) */
+    .cm-post-meta{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;min-width:120px}
+    .cm-post-meta .pm-author{font-size:12.5px;font-weight:700;color:var(--gray-800)}
+    .cm-post-meta .pm-stats{display:flex;align-items:center;gap:12px;font-size:11.5px;color:var(--gray-500);font-weight:500}
+    .cm-post-meta .pm-stats i{font-size:10px;margin-right:1px}
+    .cm-post-meta .pm-stats .likes{color:var(--gold);font-weight:600}
     .cm-post-meta .pm-stats .likes i{color:var(--gold)}
 
     /* Mobile post */
@@ -212,11 +215,12 @@ function render(){
         var isHot=(p.likes||0)>=50;
         var preview=(p.content||'').replace(/\n/g,' ').substring(0,80);
 
-        return'<div class="cm-post" onclick="location.href=\'community-detail.html?id='+p.id+'\'">'+
+        return'<div class="cm-post'+(isHot?' is-hot':'')+'" onclick="location.href=\'community-detail.html?id='+p.id+'\'">'+
             '<span class="cb cb-'+p.category+'">'+p.category+'</span>'+
             '<div class="cm-post-body">'+
                 '<div class="cm-post-title">'+p.title+
                     (p.comments>0?'<span class="cmt-cnt">['+p.comments+']</span>':'')+
+                    (isHot?'<span class="hot-tag"><i class="fa-solid fa-fire"></i>HOT</span>':'')+
                     (isNew?'<span class="new-dot"></span>':'')+
                 '</div>'+
                 '<div class="cm-post-preview">'+preview+'</div>'+
