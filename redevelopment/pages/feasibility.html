@@ -17,11 +17,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
-    /* Hero — 서비스 선택 포함 */
-    .fh{padding:36px 0 0;background:linear-gradient(135deg,#070B15,var(--brand-dark) 40%,var(--brand-navy));position:relative;overflow:visible}
-    .fh h1{font-size:32px;font-weight:900;color:#fff;margin-bottom:6px;padding-left:18px;border-left:3px solid var(--gold)}
-    .fh .fh-sub{font-size:14px;color:rgba(255,255,255,.55);line-height:1.65;max-width:100%;margin-bottom:24px}
-    @media(max-width:768px){.fh{padding:28px 0 0}.fh h1{font-size:24px}.fh .fh-sub{margin-bottom:18px}}
+    /* Hero — 회사소개 기반 통일 + 서비스 선택 포함 */
+    .fh{padding:48px 0 0;background:linear-gradient(160deg,#0A0F1C 0%,#142644 50%,#0A0F1C 100%);position:relative;overflow:visible}
+    .fh::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(195,165,105,.04) 0%,transparent 50%),radial-gradient(circle at 80% 30%,rgba(195,165,105,.03) 0%,transparent 40%);pointer-events:none}
+    .fh::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(195,165,105,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(195,165,105,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+    .fh .inner{position:relative;z-index:1}
+    .fh .hero-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+    .fh .hero-label::before{content:'';width:20px;height:1px;background:var(--gold)}
+    .fh h1{font-size:34px;font-weight:900;color:#fff;margin-bottom:8px;letter-spacing:-1px;line-height:1.35;padding-left:0;border-left:none}
+    .fh h1 em{font-style:normal;color:var(--gold)}
+    .fh .fh-sub{font-size:14.5px;color:rgba(255,255,255,.5);line-height:1.7;max-width:100%;margin-bottom:24px}
+    @media(max-width:768px){.fh{padding:36px 0 0}.fh h1{font-size:26px}.fh .fh-sub{margin-bottom:18px}}
 
     /* 히어로 안 서비스 선택 카드 */
     .hero-selector{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding-bottom:36px}
@@ -227,9 +233,10 @@
 
 <div class="fh">
     <div class="inner">
-        <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><a href="services.html">사업분야</a><i class="fa-solid fa-chevron-right"></i><span>사업성 검토</span></div>
-        <h1>사업성 검토</h1>
-        <p class="fh-sub" style="max-width:100%">정비사업의 비례율·분담금·총사업비·수익성을 검토할 수 있습니다. <strong style="color:var(--gold)">개별 검토</strong>는 비례율·분담금 등 특정 항목을 빠르게 계산하는 간편 도구이고, <strong style="color:var(--gold)">종합 분석</strong>은 기초데이터부터 사업비까지 단계별로 입력하여 비례율·평균분담금·시나리오를 종합 분석하는 전문가용 도구입니다.</p>
+        <div class="breadcrumb" style="margin-bottom:16px"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span style="color:var(--gold)">사업성 검토</span></div>
+        <div class="hero-label">FEASIBILITY ANALYSIS</div>
+        <h1>사업성을 <em>체계적으로</em> 검토합니다</h1>
+        <p class="fh-sub">비례율·분담금·총사업비·수익성을 검토할 수 있습니다. <strong style="color:var(--gold)">개별 검토</strong>는 간편 계산 도구, <strong style="color:var(--gold)">종합 분석</strong>은 단계별 전문가용 분석 도구입니다.</p>
 
         <!-- 히어로 안 서비스 선택 -->
         <div class="hero-selector">
