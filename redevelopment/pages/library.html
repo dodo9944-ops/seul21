@@ -289,8 +289,8 @@ var catDefs=[
 function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){c[i.category]=(c[i.category]||0)+1;c['전체']++});return c}
 
 /* Hero stats */
-!function(){var cc=getCatCounts();
-document.getElementById('heroStats').innerHTML=
+!function(){var el=document.getElementById('heroStats');if(!el)return;var cc=getCatCounts();
+el.innerHTML=
 '<div class="hs"><strong>'+cc['전체']+'</strong><span>전체 자료</span></div>'+
 '<div class="hs"><strong>'+cc['법령']+'</strong><span>법령·조례</span></div>'+
 '<div class="hs"><strong>'+cc['관련판례']+'</strong><span>판례·질의회신</span></div>'+
