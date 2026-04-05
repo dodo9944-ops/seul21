@@ -22,7 +22,17 @@
        ================================================================ */
 
     /* === Hero === */
-    /* lib-hero 삭제됨 — 공통 page-hero 사용 */
+    .lib-hero{padding:68px 0 60px;background:linear-gradient(135deg,#070B15 0%,var(--brand-dark) 40%,var(--brand-navy) 100%);position:relative;overflow:hidden}
+    .lib-hero::before{content:'';position:absolute;top:-40%;right:-15%;width:500px;height:500px;background:radial-gradient(circle,rgba(195,165,105,.06) 0%,transparent 70%);pointer-events:none}
+    .lib-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(195,165,105,.3),transparent)}
+    .lib-hero h1{font-size:36px;font-weight:900;color:#fff;margin-bottom:14px;padding-left:18px;border-left:3px solid var(--gold)}
+    .lib-hero .hero-tag{font-size:17px;font-weight:600;color:var(--gold);margin-bottom:8px;letter-spacing:-.2px}
+    .lib-hero .hero-sub{font-size:14px;color:rgba(255,255,255,.5);line-height:1.7}
+    .lib-hero .hero-stats{display:flex;gap:36px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06)}
+    .lib-hero .hs{display:flex;flex-direction:column;gap:2px}
+    .lib-hero .hs strong{font-size:22px;font-weight:800;color:var(--gold);line-height:1}
+    .lib-hero .hs span{font-size:12px;color:rgba(255,255,255,.4);font-weight:500}
+    @media(max-width:768px){.lib-hero{padding:44px 0 36px}.lib-hero h1{font-size:26px}.lib-hero .hero-stats{gap:24px;flex-wrap:wrap}}
 
     /* === Category Tabs === */
     .cat-wrap{margin-bottom:28px;position:sticky;top:104px;z-index:100;background:var(--white);padding-top:16px;padding-bottom:4px;margin-top:-16px;transition:box-shadow .2s}
@@ -141,15 +151,13 @@
 <body>
 <div id="site-header"></div>
 
-<div class="page-hero">
+<div class="lib-hero">
     <div class="inner">
-        <div class="hero-text">
-            <div class="breadcrumb" style="margin-bottom:16px"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span style="color:var(--gold)">정비사업</span></div>
-            <div class="hero-label">PROFESSIONAL ARCHIVE</div>
-            <h1>정비사업 <em>실무 자료</em>를<br>한곳에서 검색하세요</h1>
-            <p class="hero-sub">법령·판례·지침·서식·가이드 — 정비사업에 필요한 공식 자료를 체계적으로 제공합니다</p>
-        </div>
-        <div class="hero-cards"><div class="hero-card"><div class="hero-card-icon"><i class="fa-solid fa-scale-balanced"></i></div><h4>법령·조례</h4><p>도시정비법 및 관련 법령</p></div><div class="hero-card"><div class="hero-card-icon"><i class="fa-solid fa-gavel"></i></div><h4>판례·질의회신</h4><p>주요 판례 및 유권해석</p></div><div class="hero-card"><div class="hero-card-icon"><i class="fa-solid fa-file-pen"></i></div><h4>서식·양식</h4><p>실무 서식 및 신청양식</p></div><div class="hero-card"><div class="hero-card-icon"><i class="fa-solid fa-book-open"></i></div><h4>가이드</h4><p>실무 매뉴얼 및 해설</p></div></div>
+        <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>자료실</span></div>
+        <h1>자료실</h1>
+        <p class="hero-tag">정비사업 실무 전문 아카이브</p>
+        <p class="hero-sub">법령·판례·지침·서식·가이드 — 정비사업 실무에 필요한 공식 자료를 한곳에서 검색하고 다운로드하세요</p>
+        <div class="hero-stats" id="heroStats"></div>
     </div>
 </div>
 
