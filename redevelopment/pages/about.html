@@ -47,9 +47,23 @@
     }
     .about-hero .inner {
         position: relative; z-index: 1;
-        display: flex; align-items: center; gap: 60px;
+        display: flex; align-items: center; gap: 48px;
     }
     .hero-text { flex: 1; min-width: 0; }
+    .hero-visual {
+        flex-shrink: 0; width: 420px;
+        display: flex; flex-direction: column; gap: 8px;
+        margin-left: -12px;
+        transform: translateY(6px);
+    }
+    .hero-photo {
+        width: 100%;
+        border-radius: 14px; overflow: hidden;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+    }
+    .hero-photo img {
+        width: 100%; display: block;
+    }
     .hero-breadcrumb {
         display: flex; align-items: center; gap: 6px;
         font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 24px;
@@ -82,7 +96,7 @@
     }
     .hero-cards {
         display: grid; grid-template-columns: repeat(2, 1fr);
-        gap: 16px; flex-shrink: 0; width: 400px;
+        gap: 14px;
     }
     .hero-card {
         background: rgba(255,255,255,0.04);
@@ -110,14 +124,14 @@
         line-height: 1.5;
     }
     @media (max-width: 1024px) {
-        .about-hero .inner { flex-direction: column; gap: 40px; }
-        .hero-cards { width: 100%; max-width: 420px; }
+        .about-hero .inner { flex-direction: column; gap: 36px; }
+        .hero-visual { width: 100%; max-width: 420px; }
     }
     @media (max-width: 600px) {
         .about-hero { padding: 56px 0 48px; }
         .hero-text h1 { font-size: 28px; }
         .hero-sub { font-size: 14px; }
-        .hero-cards { grid-template-columns: 1fr; width: 100%; }
+        .hero-cards { grid-template-columns: 1fr; }
     }
 
     /* ── SECTION SPACING ── */
@@ -226,42 +240,34 @@
         margin-top: 4px; letter-spacing: 1px;
     }
     .ceo-photo-area {
-        flex-shrink: 0; width: 380px;
+        flex-shrink: 0; width: 320px;
         position: relative;
-        display: flex; align-items: center; justify-content: center;
-        background: linear-gradient(160deg, #f0f1f3 0%, #e8e9ec 100%);
-        padding: 0; margin: -20px 0;
-    }
-    .ceo-photo-area img {
-        width: 100%; height: calc(100% + 40px);
-        object-fit: contain;
-        object-position: center 58%;
-        display: block;
+        overflow: hidden;
+        background: linear-gradient(180deg, #f5f5f5 0%, #eaeaea 100%);
     }
     .ceo-photo-area::before {
-        content: ''; position: absolute; inset: 0; z-index: 2;
-        pointer-events: none;
-        background: linear-gradient(to right, #FAFBFC 0%, rgba(250,251,252,0.5) 6%, rgba(250,251,252,0.15) 14%, transparent 24%);
+        content: ''; position: absolute; top: 0; bottom: 0; left: 0;
+        width: 36px; z-index: 1; pointer-events: none;
+        background: linear-gradient(to right, rgba(250,251,252,0.3), transparent);
     }
-    .ceo-photo-area::after {
-        content: ''; position: absolute; inset: 0; z-index: 2;
-        pointer-events: none;
-        background: linear-gradient(to top, #FAFBFC 0%, rgba(250,251,252,0.5) 6%, rgba(250,251,252,0.15) 14%, transparent 24%);
+    .ceo-photo-area img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: center 5%;
+        display: block;
     }
     @media (max-width: 1024px) {
-        .ceo-photo-area { width: 320px; }
+        .ceo-photo-area { width: 260px; }
     }
     @media (max-width: 860px) {
         .ceo-section { flex-direction: column; }
         .ceo-text-area { padding: 36px 28px 32px; }
         .ceo-photo-area {
             width: 100%; order: -1;
-            margin: 0; max-height: 420px;
+            height: 400px;
         }
-        .ceo-photo-area::before {
-            background:
-                linear-gradient(to bottom, transparent 85%, rgba(250,251,252,0.5) 94%, #FAFBFC 100%),
-                linear-gradient(to top, transparent 85%, rgba(250,251,252,0.3) 94%, #FAFBFC 100%);
+        .ceo-photo-area img {
+            object-position: center 0%;
         }
         .ceo-headline { font-size: 19px; }
     }
@@ -270,7 +276,7 @@
         .ceo-headline { font-size: 17px; }
         .ceo-greeting { font-size: 13.5px; line-height: 1.85; }
         .ceo-quote { font-size: 40px; }
-        .ceo-photo-area { max-height: 360px; }
+        .ceo-photo-area { height: 340px; }
     }
 
     /* ── 4. COMPANY HISTORY ── */
@@ -600,7 +606,9 @@
             <h1>도시정비의 <em>기준</em>을 세우고,<br>사업의 <em>완성</em>까지 함께합니다</h1>
             <p class="hero-sub">재개발·재건축·소규모정비사업의 실무를 책임지는 도시정비 전문 파트너</p>
         </div>
-        <div class="hero-cards">
+        <div class="hero-visual">
+            <div class="hero-photo"><img src="../jpg/hero_about.png" alt="세울엔지니어링 사옥"></div>
+            <div class="hero-cards">
             <div class="hero-card">
                 <div class="hero-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
                 <h4>정비사업전문관리</h4>
@@ -620,6 +628,7 @@
                 <div class="hero-card-icon"><i class="fa-solid fa-diagram-project"></i></div>
                 <h4>CM / PM 관리</h4>
                 <p>품질 · 공정 · 원가 통합 관리</p>
+            </div>
             </div>
         </div>
     </div>
@@ -686,7 +695,7 @@
                     </div>
                 </div>
                 <div class="ceo-photo-area">
-                    <img src="../jpg/대표사진1.png" alt="Charles Lee 대표이사">
+                    <img src="../jpg/ceo_portrait.png" alt="Charles Lee 대표이사">
                 </div>
             </div>
         </div>

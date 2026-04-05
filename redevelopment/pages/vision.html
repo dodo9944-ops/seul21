@@ -449,15 +449,19 @@
     .uni-hero .uh-label::before { content: ''; width: 24px; height: 1px; background: #C3A569; }
     .uni-hero .uh-text h1 { font-size: 36px; font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -1px; margin-bottom: 14px; }
     .uni-hero .uh-text h1 em { font-style: normal; color: #C3A569; }
-    .uni-hero .uh-sub { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 460px; }
-    .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; flex-shrink: 0; width: 380px; }
+    .uni-hero .uh-sub { font-size: 15px; color: rgba(255,255,255,0.68); line-height: 1.7; max-width: 460px; }
+    .uni-hero .uh-visual { flex-shrink: 0; width: 480px; position: relative; transform: translateY(4px); }
+    .uni-hero .uh-photo { width: 100%; border-radius: 10px; overflow: hidden; margin-bottom: 10px; position: relative; }
+    .uni-hero .uh-photo img { width: 100%; display: block; }
+    .uni-hero .uh-photo::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: linear-gradient(to top, rgba(10,15,28,0.25), transparent); pointer-events: none; }
+    .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .uni-hero .uh-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.1); border-radius: 10px; padding: 20px 18px; transition: all 0.3s; }
     .uni-hero .uh-card:hover { background: rgba(195,165,105,0.06); border-color: rgba(195,165,105,0.22); }
     .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
     .uni-hero .uh-ci i { font-size: 14px; color: #C3A569; }
     .uni-hero .uh-card h4 { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 3px; }
     .uni-hero .uh-card p { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
-    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-cards { width: 100%; max-width: 400px; } }
+    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-visual { width: 100%; max-width: 520px; } }
     @media (max-width: 600px) { .uni-hero { padding: 52px 0 44px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } }
 
     </style>
@@ -474,7 +478,10 @@
             <h1>절차의 <em>정합성</em>, 실행의 <em>책임</em></h1>
             <p class="uh-sub">정비사업의 기준을 바로 세우고, 사업의 가치를 끝까지 완성하는 세울엔지니어링의 길</p>
         </div>
-        <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>절차의 정합성</h4><p>법과 원칙에 기반한 실무</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-handshake"></i></div><h4>이해관계 조율</h4><p>조합·행정·시공 균형 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-route"></i></div><h4>단계별 추진</h4><p>기획부터 준공까지 로드맵</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-shield-halved"></i></div><h4>책임지는 완결</h4><p>사업 완료까지 동행</p></div></div>
+        <div class="uh-visual">
+            <div class="uh-photo"><img src="../jpg/hero_vision.png" alt="세울엔지니어링 도시모형 검토"></div>
+            <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>절차의 정합성</h4><p>법과 원칙에 기반한 실무</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-handshake"></i></div><h4>이해관계 조율</h4><p>조합·행정·시공 균형 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-route"></i></div><h4>단계별 추진</h4><p>기획부터 준공까지 로드맵</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-shield-halved"></i></div><h4>책임지는 완결</h4><p>사업 완료까지 동행</p></div></div>
+        </div>
     </div>
 </div>
 

@@ -28,10 +28,10 @@
     @media(max-width:768px){.cm-hero{padding:40px 0 32px}.cm-hero h1{font-size:26px}.cm-hero .hero-stats{gap:18px;flex-wrap:wrap}}
 
     /* === Tabs + Write === */
-    .cm-toolbar{position:sticky;top:104px;z-index:100;background:#fff;padding:10px 0;margin-bottom:0;border-bottom:1px solid var(--gray-100);transition:box-shadow .2s}
+    .cm-toolbar{position:sticky;top:104px;z-index:100;background:#fff;padding:8px 0;margin-bottom:-8px;border-bottom:1px solid var(--gray-100);transition:box-shadow .2s}
     .cm-toolbar.stuck{box-shadow:0 2px 12px rgba(0,0,0,.05)}
     @media(max-width:768px){.cm-toolbar{top:72px}}
-    .cm-toolbar .inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:2px;padding-bottom:2px}
+    .cm-toolbar .inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
     .cm-tabs{display:flex;gap:4px;flex-wrap:wrap;padding:3px;background:var(--gray-50);border-radius:10px;border:1px solid var(--gray-100)}
     .cm-tab{display:inline-flex;align-items:center;gap:5px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--gray-500);transition:all .2s;font-family:var(--font)}
     .cm-tab i{font-size:12px;opacity:.4}
@@ -40,12 +40,12 @@
     .cm-tab.on i{opacity:1}
     .cm-tab.on .cnt{background:rgba(195,165,105,.2);color:var(--gold)}
     .cm-tab:not(.on):hover{background:#fff;color:var(--gray-800)}
-    .cm-write-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;font-family:var(--font);white-space:nowrap}
+    .cm-write-btn{display:inline-flex;align-items:center;gap:7px;padding:11px 26px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;font-family:var(--font);white-space:nowrap}
     .cm-write-btn:hover{background:var(--brand-navy);box-shadow:0 4px 12px rgba(10,15,28,.15)}
     .cm-write-btn i{font-size:12px}
 
     /* === Featured Posts (강화) === */
-    .cm-featured{margin:24px 0 28px}
+    .cm-featured{margin:8px 0 20px}
     .cm-featured .cf-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
     .cm-featured .cf-head .cf-icon{width:28px;height:28px;border-radius:7px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gold)}
     .cm-featured .cf-head h3{font-size:15px;font-weight:800;color:var(--gray-900)}
@@ -117,7 +117,7 @@
     /* === Unified Hero (about-hero 기준) === */
     .uni-hero {
         background: linear-gradient(160deg, #0A0F1C 0%, #142644 50%, #0A0F1C 100%);
-        position: relative; overflow: hidden; padding: 72px 0 64px;
+        position: relative; overflow: hidden; padding: 44px 0 36px;
     }
     .uni-hero::before {
         content: ''; position: absolute; inset: 0;
@@ -144,15 +144,23 @@
     .uni-hero .uh-label::before { content: ''; width: 24px; height: 1px; background: #C3A569; }
     .uni-hero .uh-text h1 { font-size: 36px; font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -1px; margin-bottom: 14px; }
     .uni-hero .uh-text h1 em { font-style: normal; color: #C3A569; }
-    .uni-hero .uh-sub { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 460px; }
-    .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; flex-shrink: 0; width: 380px; }
+    .uni-hero .uh-sub { font-size: 15px; color: rgba(255,255,255,0.68); line-height: 1.7; max-width: 460px; margin-bottom: 18px; }
+    .uni-hero .uh-stats { display: flex; gap: 24px; }
+    .uni-hero .uh-stat { display: flex; align-items: center; gap: 5px; font-size: 12px; color: rgba(255,255,255,0.4); }
+    .uni-hero .uh-stat strong { font-size: 17px; font-weight: 800; color: #C3A569; }
+    .uni-hero .uh-visual { flex-shrink: 0; width: 440px; position: relative; transform: translateY(4px); }
+    .uni-hero .uh-photo { width: 100%; max-width: 100%; border-radius: 10px; overflow: hidden; margin-bottom: 10px; position: relative; box-sizing: border-box; }
+    .uni-hero .uh-photo img { width: 100%; display: block; filter: brightness(0.92) saturate(0.9); }
+    .uni-hero .uh-photo::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(135deg, rgba(10,15,28,0.35) 0%, transparent 60%); border-radius: 10px; }
+    .uni-hero .uh-photo::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50px; z-index: 1; background: linear-gradient(to top, rgba(10,15,28,0.3), transparent); pointer-events: none; }
+    .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .uni-hero .uh-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.1); border-radius: 10px; padding: 20px 18px; transition: all 0.3s; }
-    .uni-hero .uh-card:hover { background: rgba(195,165,105,0.06); border-color: rgba(195,165,105,0.22); }
-    .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
-    .uni-hero .uh-ci i { font-size: 14px; color: #C3A569; }
-    .uni-hero .uh-card h4 { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 3px; }
-    .uni-hero .uh-card p { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
-    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-cards { width: 100%; max-width: 400px; } }
+    .uni-hero .uh-card:hover { background: rgba(195,165,105,0.08); border-color: rgba(195,165,105,0.3); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .uni-hero .uh-ci i { font-size: 15px; color: #C3A569; }
+    .uni-hero .uh-card h4 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 3px; }
+    .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,0.6); font-weight: 500; line-height: 1.5; }
+    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-visual { width: 100%; max-width: 460px; } }
     @media (max-width: 600px) { .uni-hero { padding: 52px 0 44px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } }
 
     </style>
@@ -166,9 +174,13 @@
             <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>커뮤니티</span></div>
             <div class="uh-label">COMMUNITY</div>
             <h1>정비사업 <em>전문 커뮤니티</em></h1>
-            <p class="uh-sub">재개발·재건축·소규모정비 분야 전문가와 조합원이 함께하는 정보 공유 공간</p>
+            <p class="uh-sub">재개발·재건축·소규모정비사업 관련<br>실무 질의, 정책 정보, 현장 경험, 전문가 칼럼을 공유하는 공간</p>
+            <div class="uh-stats" id="cmHeroStats"></div>
         </div>
-        <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-circle-question"></i></div><h4>질문·답변</h4><p>실무 질의 및 전문가 답변</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-circle-info"></i></div><h4>정보 공유</h4><p>최신 정책 및 실무 정보</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-comment-dots"></i></div><h4>후기·경험</h4><p>현장 경험 및 사례 공유</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>분석·칼럼</h4><p>전문가 분석 및 칼럼</p></div></div>
+        <div class="uh-visual">
+            <div class="uh-photo"><img src="../jpg/hero_community.png" alt="세울엔지니어링 커뮤니티"></div>
+            <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-circle-question"></i></div><h4>질문·답변</h4><p>실무 질의 및 전문가 답변</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-circle-info"></i></div><h4>정보 공유</h4><p>최신 정책 및 실무 정보</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-comment-dots"></i></div><h4>후기·경험</h4><p>현장 경험 및 사례 공유</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>분석·칼럼</h4><p>전문가 분석 및 칼럼</p></div></div>
+        </div>
     </div>
 </div>
 
@@ -216,6 +228,20 @@ var allPosts=getAllPosts();
         '<div class="hs"><strong>'+App.comma(totalViews)+'</strong>조회</div>'+
         '<div class="hs"><strong>'+App.comma(totalComments)+'</strong>댓글</div>'+
         '<div class="hs"><strong>'+App.comma(totalLikes)+'</strong>좋아요</div>';
+}();
+
+/* Hero inline stats */
+!function(){
+    var el=document.getElementById('cmHeroStats');
+    if(!el)return;
+    var total=allPosts.length;
+    var totalComments=0;
+    allPosts.forEach(function(p){totalComments+=p.comments||0});
+    var hotCount=allPosts.filter(function(p){return(p.likes||0)>=50}).length;
+    el.innerHTML=
+        '<div class="uh-stat"><strong>'+total+'</strong>게시글</div>'+
+        '<div class="uh-stat"><strong>'+totalComments+'</strong>답변</div>'+
+        '<div class="uh-stat"><strong>'+hotCount+'</strong>인기글</div>';
 }();
 
 /* Tabs with count */

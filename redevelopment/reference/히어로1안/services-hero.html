@@ -1,0 +1,72 @@
+<!-- 사업분야 (services.html) — Hero Section Reference -->
+<style>
+/* === Hero keyword badges === */
+.hero-badges { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; justify-content:center; }
+.hero-badge {
+    display:inline-block; padding:8px 20px; border-radius:20px;
+    font-size:13px; font-weight:700; color:#fff;
+    background:rgba(195,165,105,0.12); border:1px solid rgba(195,165,105,0.25);
+    transition:all 0.2s;
+}
+.hero-badge:hover {
+    background:rgba(195,165,105,0.25); border-color:rgba(195,165,105,0.5);
+}
+
+/* === Hero tagline === */
+.hero-tagline {
+    font-size:18px; font-weight:700; color:#fff; margin-bottom:8px; letter-spacing:-0.3px;
+}
+
+/* === Unified Hero (about-hero 기준) === */
+.uni-hero {
+    background: linear-gradient(160deg, #0A0F1C 0%, #142644 50%, #0A0F1C 100%);
+    position: relative; overflow: hidden; padding: 72px 0 64px;
+}
+.uni-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
+    pointer-events: none;
+}
+.uni-hero::after {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+}
+.uni-hero .inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 56px; }
+.uni-hero .uh-text { flex: 1; min-width: 0; }
+.uni-hero .uh-bc { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+.uni-hero .uh-bc a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
+.uni-hero .uh-bc a:hover { color: #C3A569; }
+.uni-hero .uh-bc span { color: #C3A569; font-weight: 600; }
+.uni-hero .uh-bc i { font-size: 10px; }
+.uni-hero .uh-label { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; color: #C3A569; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+.uni-hero .uh-label::before { content: ''; width: 24px; height: 1px; background: #C3A569; }
+.uni-hero .uh-text h1 { font-size: 36px; font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -1px; margin-bottom: 14px; }
+.uni-hero .uh-text h1 em { font-style: normal; color: #C3A569; }
+.uni-hero .uh-sub { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 460px; }
+.uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; flex-shrink: 0; width: 380px; }
+.uni-hero .uh-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.1); border-radius: 10px; padding: 20px 18px; transition: all 0.3s; }
+.uni-hero .uh-card:hover { background: rgba(195,165,105,0.06); border-color: rgba(195,165,105,0.22); }
+.uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+.uni-hero .uh-ci i { font-size: 14px; color: #C3A569; }
+.uni-hero .uh-card h4 { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.uni-hero .uh-card p { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+@media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-cards { width: 100%; max-width: 400px; } }
+@media (max-width: 600px) { .uni-hero { padding: 52px 0 44px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } }
+</style>
+
+<div class="uni-hero">
+    <div class="inner">
+        <div class="uh-text">
+            <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>사업분야</span></div>
+            <div class="uh-label">BUSINESS AREAS</div>
+            <h1>정비사업의 <em>전 영역</em>을 다룹니다</h1>
+            <p class="uh-sub">재개발·재건축·소규모정비·도시계획·CM/PM — 사업 초기부터 준공까지 체계적으로 자문합니다</p>
+        </div>
+        <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>사업성 분석</h4><p>추진전략 및 수지분석 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-handshake"></i></div><h4>이해관계 조율</h4><p>조합·행정·시공사 간 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-stamp"></i></div><h4>인허가 자문</h4><p>인가 절차 및 행정 대응</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-helmet-safety"></i></div><h4>CM / PM</h4><p>설계·시공·준공 품질 관리</p></div></div>
+    </div>
+</div>
