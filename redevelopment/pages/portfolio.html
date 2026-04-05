@@ -213,17 +213,62 @@
     .d-footer{padding:16px 32px;border-top:1px solid var(--gray-100);display:flex;justify-content:flex-end}
     .d-footer button{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;background:var(--brand-dark);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
     .d-footer button:hover{background:var(--brand-navy)}
+    
+    /* === Unified Hero (about-hero 기준) === */
+    .uni-hero {
+        background: linear-gradient(160deg, #0A0F1C 0%, #142644 50%, #0A0F1C 100%);
+        position: relative; overflow: hidden; padding: 72px 0 64px;
+    }
+    .uni-hero::before {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
+        pointer-events: none;
+    }
+    .uni-hero::after {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
+        background-size: 60px 60px; pointer-events: none;
+    }
+    .uni-hero .inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 56px; }
+    .uni-hero .uh-text { flex: 1; min-width: 0; }
+    .uni-hero .uh-bc { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+    .uni-hero .uh-bc a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
+    .uni-hero .uh-bc a:hover { color: #C3A569; }
+    .uni-hero .uh-bc span { color: #C3A569; font-weight: 600; }
+    .uni-hero .uh-bc i { font-size: 10px; }
+    .uni-hero .uh-label { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; color: #C3A569; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+    .uni-hero .uh-label::before { content: ''; width: 24px; height: 1px; background: #C3A569; }
+    .uni-hero .uh-text h1 { font-size: 36px; font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -1px; margin-bottom: 14px; }
+    .uni-hero .uh-text h1 em { font-style: normal; color: #C3A569; }
+    .uni-hero .uh-sub { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 460px; }
+    .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; flex-shrink: 0; width: 380px; }
+    .uni-hero .uh-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.1); border-radius: 10px; padding: 20px 18px; transition: all 0.3s; }
+    .uni-hero .uh-card:hover { background: rgba(195,165,105,0.06); border-color: rgba(195,165,105,0.22); }
+    .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .uni-hero .uh-ci i { font-size: 14px; color: #C3A569; }
+    .uni-hero .uh-card h4 { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .uni-hero .uh-card p { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-cards { width: 100%; max-width: 400px; } }
+    @media (max-width: 600px) { .uni-hero { padding: 52px 0 44px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } }
+
     </style>
 </head>
 <body>
 <div id="site-header"></div>
 
-<div class="pf-hero">
+<div class="uni-hero">
     <div class="inner">
-        <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>업무실적</span></div>
-        <h1>업무실적</h1>
-        <p class="hero-tag">재개발·재건축·소규모정비사업의 축적된 수행 경험</p>
-        <p class="hero-sub">사업성 분석부터 인허가, 시공관리, 준공까지 프로젝트별 실적을 확인하세요</p>
+        <div class="uh-text">
+            <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>업무실적</span></div>
+            <div class="uh-label">PORTFOLIO</div>
+            <h1>축적된 <em>수행 경험</em>이 신뢰의 기준입니다</h1>
+            <p class="uh-sub">재개발·재건축·소규모정비사업의 다양한 현장에서 쌓은 실전 경험과 자문 실적</p>
+        </div>
+        <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-building"></i></div><h4>재개발</h4><p>주택재개발 정비사업 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-city"></i></div><h4>재건축</h4><p>주택재건축 정비사업 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-house-chimney"></i></div><h4>소규모정비</h4><p>소규모재건축·가로주택</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-chart-pie"></i></div><h4>사업성 검토</h4><p>비례율·분담금 분석 자문</p></div></div>
     </div>
 </div>
 

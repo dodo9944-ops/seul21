@@ -146,18 +146,62 @@
         .lib-action{flex-direction:row;align-items:center;width:100%;min-width:0;justify-content:space-between}
         .pager-wrap{flex-direction:column;gap:12px}
     }
+    
+    /* === Unified Hero (about-hero 기준) === */
+    .uni-hero {
+        background: linear-gradient(160deg, #0A0F1C 0%, #142644 50%, #0A0F1C 100%);
+        position: relative; overflow: hidden; padding: 72px 0 64px;
+    }
+    .uni-hero::before {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
+        pointer-events: none;
+    }
+    .uni-hero::after {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
+        background-size: 60px 60px; pointer-events: none;
+    }
+    .uni-hero .inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 56px; }
+    .uni-hero .uh-text { flex: 1; min-width: 0; }
+    .uni-hero .uh-bc { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+    .uni-hero .uh-bc a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
+    .uni-hero .uh-bc a:hover { color: #C3A569; }
+    .uni-hero .uh-bc span { color: #C3A569; font-weight: 600; }
+    .uni-hero .uh-bc i { font-size: 10px; }
+    .uni-hero .uh-label { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; color: #C3A569; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+    .uni-hero .uh-label::before { content: ''; width: 24px; height: 1px; background: #C3A569; }
+    .uni-hero .uh-text h1 { font-size: 36px; font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -1px; margin-bottom: 14px; }
+    .uni-hero .uh-text h1 em { font-style: normal; color: #C3A569; }
+    .uni-hero .uh-sub { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 460px; }
+    .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; flex-shrink: 0; width: 380px; }
+    .uni-hero .uh-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.1); border-radius: 10px; padding: 20px 18px; transition: all 0.3s; }
+    .uni-hero .uh-card:hover { background: rgba(195,165,105,0.06); border-color: rgba(195,165,105,0.22); }
+    .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .uni-hero .uh-ci i { font-size: 14px; color: #C3A569; }
+    .uni-hero .uh-card h4 { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .uni-hero .uh-card p { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-cards { width: 100%; max-width: 400px; } }
+    @media (max-width: 600px) { .uni-hero { padding: 52px 0 44px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } }
+
     </style>
 </head>
 <body>
 <div id="site-header"></div>
 
-<div class="lib-hero">
+<div class="uni-hero">
     <div class="inner">
-        <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>자료실</span></div>
-        <h1>자료실</h1>
-        <p class="hero-tag">정비사업 실무 전문 아카이브</p>
-        <p class="hero-sub">법령·판례·지침·서식·가이드 — 정비사업 실무에 필요한 공식 자료를 한곳에서 검색하고 다운로드하세요</p>
-        <div class="hero-stats" id="heroStats"></div>
+        <div class="uh-text">
+            <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>자료실</span></div>
+            <div class="uh-label">PROFESSIONAL ARCHIVE</div>
+            <h1>정비사업 <em>실무 자료</em>를 한곳에서</h1>
+            <p class="uh-sub">법령·판례·지침·서식·가이드 — 정비사업에 필요한 공식 자료를 체계적으로 제공합니다</p>
+        </div>
+        <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>법령·조례</h4><p>도시정비법 및 관련 법령</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-gavel"></i></div><h4>판례·질의회신</h4><p>주요 판례 및 유권해석</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·양식</h4><p>실무 서식 및 신청양식</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-book-open"></i></div><h4>가이드</h4><p>실무 매뉴얼 및 해설</p></div></div>
     </div>
 </div>
 
