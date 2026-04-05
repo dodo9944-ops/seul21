@@ -193,6 +193,7 @@
 <script src="../assets/js/common.js?v=20260407"></script>
 <script>
 (function(){
+if(typeof MOCK!=='undefined'&&MOCK.community){var s=JSON.parse(localStorage.getItem('rdc_community')||'[]');if(s.length!==MOCK.community.length)localStorage.setItem('rdc_community',JSON.stringify(MOCK.community))}
 var PER=10,curPage=1,curCat='전체';
 var catIcons={'질문':'fa-circle-question','정보':'fa-circle-info','후기':'fa-comment-dots','분석':'fa-chart-line','칼럼':'fa-feather'};
 var catDefs=[{key:'전체',label:'전체'},{key:'질문',label:'질문'},{key:'정보',label:'정보'},{key:'후기',label:'후기'},{key:'분석',label:'분석'},{key:'칼럼',label:'칼럼'}];
