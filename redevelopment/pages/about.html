@@ -23,10 +23,56 @@
 
     /* ── 1. HERO SECTION ── */
     .about-hero {
-        background: linear-gradient(160deg, #0A0F1C 0%, #142644 50%, #0A0F1C 100%);
+        background: linear-gradient(135deg, #0F1D35 0%, #142644 40%, #0A0F1C 100%);
         position: relative;
         overflow: hidden;
-        padding: 80px 0 72px;
+        padding: 56px 0 52px;
+        min-height: 400px;
+    }
+    .hero-bg-photo {
+        position: absolute;
+        top: 0; right: 0;
+        width: 58%;
+        height: 100%;
+        z-index: 0;
+    }
+    .hero-bg-photo img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+        display: block;
+        filter: brightness(0.82) contrast(1.08);
+    }
+    .hero-bg-photo::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(90deg,
+            #0A0F1C 0%,
+            rgba(10,15,28,0.94) 6%,
+            rgba(14,24,42,0.65) 24%,
+            rgba(18,32,56,0.4) 48%,
+            rgba(20,38,68,0.28) 72%,
+            rgba(20,38,68,0.22) 100%
+        );
+        z-index: 1;
+    }
+    /* Center blend — ultra-wide depth transition */
+    .hero-bg-photo::before {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0;
+        left: 22%; width: 56%;
+        pointer-events: none;
+        background: linear-gradient(90deg,
+            rgba(15,26,46,0) 0%,
+            rgba(15,26,46,0.06) 25%,
+            rgba(14,22,40,0.16) 52%,
+            rgba(14,22,40,0.18) 62%,
+            rgba(15,26,46,0.08) 80%,
+            rgba(15,26,46,0) 100%
+        );
+        filter: blur(24px);
+        z-index: 2;
     }
     .about-hero::before {
         content: '';
@@ -34,7 +80,7 @@
         background-image:
             radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
             radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
-        pointer-events: none;
+        pointer-events: none; z-index: 1;
     }
     .about-hero::after {
         content: '';
@@ -43,26 +89,18 @@
             linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
             linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
         background-size: 60px 60px;
-        pointer-events: none;
+        pointer-events: none; z-index: 1;
     }
     .about-hero .inner {
-        position: relative; z-index: 1;
+        position: relative; z-index: 2;
         display: flex; align-items: center; gap: 48px;
     }
-    .hero-text { flex: 1; min-width: 0; }
-    .hero-visual {
-        flex-shrink: 0; width: 420px;
-        display: flex; flex-direction: column; gap: 8px;
-        margin-left: -12px;
-        transform: translateY(6px);
-    }
-    .hero-photo {
-        width: 100%;
-        border-radius: 14px; overflow: hidden;
-        box-shadow: 0 6px 24px rgba(0,0,0,0.2);
-    }
-    .hero-photo img {
-        width: 100%; display: block;
+    .hero-text { flex: 1; min-width: 0; position: relative; z-index: 2; }
+    .hero-cards-float {
+        flex-shrink: 0; width: 360px;
+        display: grid; grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        position: relative; z-index: 2;
     }
     .hero-breadcrumb {
         display: flex; align-items: center; gap: 6px;
@@ -91,26 +129,26 @@
         font-style: normal; color: #C3A569;
     }
     .hero-sub {
-        font-size: 16px; color: rgba(255,255,255,0.5);
+        font-size: 16px; color: rgba(255,255,255,0.55);
         line-height: 1.7; max-width: 480px;
     }
-    .hero-cards {
-        display: grid; grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-    }
     .hero-card {
-        background: rgba(255,255,255,0.04);
+        background: rgba(255,255,255,0.09);
         border: 1px solid rgba(195,165,105,0.12);
-        border-radius: 12px; padding: 24px 20px;
+        border-radius: 12px; padding: 22px 18px;
         transition: all 0.3s;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
     }
     .hero-card:hover {
-        background: rgba(195,165,105,0.06);
-        border-color: rgba(195,165,105,0.25);
+        background: rgba(195,165,105,0.1);
+        border-color: rgba(195,165,105,0.35);
+        transform: translateY(-2px);
     }
     .hero-card-icon {
         width: 36px; height: 36px; border-radius: 8px;
-        background: rgba(195,165,105,0.1);
+        background: rgba(195,165,105,0.14);
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 12px;
     }
@@ -120,18 +158,26 @@
         margin-bottom: 4px;
     }
     .hero-card p {
-        font-size: 11.5px; color: rgba(255,255,255,0.4);
+        font-size: 11.5px; color: rgba(255,255,255,0.52);
         line-height: 1.5;
     }
     @media (max-width: 1024px) {
-        .about-hero .inner { flex-direction: column; gap: 36px; }
-        .hero-visual { width: 100%; max-width: 420px; }
+        .about-hero .inner { flex-direction: column; gap: 32px; }
+        .hero-cards-float { width: 100%; max-width: 420px; }
+        .hero-bg-photo { width: 100%; opacity: 0.25; }
+        .hero-bg-photo::after {
+            background: linear-gradient(180deg,
+                rgba(10,15,28,0.5) 0%,
+                rgba(20,38,68,0.7) 100%
+            );
+        }
     }
     @media (max-width: 600px) {
-        .about-hero { padding: 56px 0 48px; }
+        .about-hero { padding: 48px 0 40px; min-height: auto; }
         .hero-text h1 { font-size: 28px; }
         .hero-sub { font-size: 14px; }
-        .hero-cards { grid-template-columns: 1fr; }
+        .hero-cards-float { grid-template-columns: 1fr; gap: 10px; }
+        .hero-bg-photo { opacity: 0.15; }
     }
 
     /* ── SECTION SPACING ── */
@@ -595,6 +641,9 @@
      1. HERO — Brand Positioning
      ============================================================ -->
 <div class="about-hero">
+    <div class="hero-bg-photo">
+        <img src="../jpg/hero_about.png" alt="세울엔지니어링 사옥">
+    </div>
     <div class="inner">
         <div class="hero-text">
             <div class="hero-breadcrumb">
@@ -606,9 +655,7 @@
             <h1>도시정비의 <em>기준</em>을 세우고,<br>사업의 <em>완성</em>까지 함께합니다</h1>
             <p class="hero-sub">재개발·재건축·소규모정비사업의 실무를 책임지는 도시정비 전문 파트너</p>
         </div>
-        <div class="hero-visual">
-            <div class="hero-photo"><img src="../jpg/hero_about.png" alt="세울엔지니어링 사옥"></div>
-            <div class="hero-cards">
+        <div class="hero-cards-float">
             <div class="hero-card">
                 <div class="hero-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
                 <h4>정비사업전문관리</h4>
@@ -628,7 +675,6 @@
                 <div class="hero-card-icon"><i class="fa-solid fa-diagram-project"></i></div>
                 <h4>CM / PM 관리</h4>
                 <p>품질 · 공정 · 원가 통합 관리</p>
-            </div>
             </div>
         </div>
     </div>
@@ -787,7 +833,7 @@
     <div class="about-section">
         <div class="inner">
             <div class="section-label">Professional Areas</div>
-            <h2 class="section-title">전문 업무분야</h2>
+            <h2 class="section-title">사업분야</h2>
             <div class="pro-grid" id="proGrid">
                 <div class="pro-card">
                     <div class="pro-card-icon"><i class="fa-solid fa-building"></i></div>
