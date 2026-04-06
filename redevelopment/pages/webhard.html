@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>웹하드 — (주)세울엔지니어링</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F5F6F8;--white:#fff;--dark:#0A0F1C;--navy:#142644;--gold:#C3A569;--gray-100:#F3F3F3;--gray-200:#E5E5E5;--gray-300:#D1D1D1;--gray-400:#AAA;--gray-500:#888;--gray-600:#666;--gray-700:#444;--gray-900:#1A1A1A;--font:'Noto Sans KR',sans-serif;--radius:12px;--shadow:0 1px 4px rgba(0,0,0,0.06)}
+body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-size:14px;line-height:1.6;min-height:100vh}
+
+/* AUTH SCREEN */
+.auth-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--dark)}
+.auth-box{background:var(--white);border-radius:var(--radius);padding:40px;width:360px;text-align:center}
+.auth-box h2{font-size:20px;font-weight:900;margin-bottom:6px}
+.auth-box p{font-size:13px;color:var(--gray-500);margin-bottom:24px}
+.auth-box input{width:100%;padding:12px 16px;border:1px solid var(--gray-200);border-radius:8px;font-size:14px;font-family:var(--font);margin-bottom:12px}
+.auth-box button{width:100%;padding:12px;background:var(--dark);color:var(--gold);border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font)}
+.auth-box button:hover{background:var(--navy)}
+.auth-error{color:#D6423A;font-size:12px;margin-bottom:12px;display:none}
+
+/* HEADER */
+.wh-header{background:var(--dark);padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.wh-logo{color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;gap:10px}
+.wh-logo i{color:var(--gold)}
+.wh-actions{display:flex;gap:10px}
+.wh-btn{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;border:none;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+.wh-btn.primary{background:var(--gold);color:var(--dark)}
+.wh-btn.primary:hover{background:#D4B87A}
+.wh-btn.outline{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15)}
+.wh-btn.outline:hover{color:#fff;border-color:rgba(255,255,255,.3)}
+
+/* TOOLBAR */
+.wh-toolbar{background:var(--white);border-bottom:1px solid var(--gray-200);padding:12px 32px;display:flex;align-items:center;gap:12px}
+.wh-path{font-size:13px;color:var(--gray-600);display:flex;align-items:center;gap:6px;flex:1}
+.wh-path span{color:var(--gold);font-weight:600}
+.wh-search{padding:8px 14px;border:1px solid var(--gray-200);border-radius:8px;font-size:13px;width:220px;font-family:var(--font)}
+.wh-info{font-size:12px;color:var(--gray-400)}
+
+/* CONTENT */
+.wh-content{max-width:1200px;margin:24px auto;padding:0 32px}
+
+/* DROPZONE */
+.wh-dropzone{border:2px dashed var(--gray-300);border-radius:var(--radius);padding:40px;text-align:center;margin-bottom:24px;transition:all .2s;cursor:pointer}
+.wh-dropzone:hover,.wh-dropzone.dragover{border-color:var(--gold);background:rgba(195,165,105,.04)}
+.wh-dropzone i{font-size:32px;color:var(--gray-300);margin-bottom:12px}
+.wh-dropzone.dragover i{color:var(--gold)}
+.wh-dropzone p{font-size:13px;color:var(--gray-500)}
+.wh-dropzone small{font-size:11px;color:var(--gray-400)}
+
+/* FILE LIST */
+.wh-table{width:100%;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);overflow:hidden}
+.wh-thead{display:flex;padding:12px 20px;background:var(--gray-100);font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.5px}
+.wh-row{display:flex;align-items:center;padding:12px 20px;border-bottom:1px solid var(--gray-100);transition:background .15s}
+.wh-row:last-child{border-bottom:none}
+.wh-row:hover{background:var(--gray-100)}
+.wh-col-check{width:40px;flex-shrink:0}
+.wh-col-icon{width:36px;flex-shrink:0}
+.wh-col-icon i{font-size:18px}
+.wh-col-name{flex:1;font-size:13px;font-weight:600;padding:0 12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wh-col-size{width:80px;font-size:12px;color:var(--gray-500);flex-shrink:0}
+.wh-col-date{width:120px;font-size:12px;color:var(--gray-500);flex-shrink:0}
+.wh-col-cat{width:100px;flex-shrink:0}
+.wh-col-act{width:80px;flex-shrink:0;text-align:right}
+.wh-cat{font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;display:inline-block}
+.wh-cat.doc{background:rgba(18,89,170,.08);color:#1259AA}
+.wh-cat.img{background:rgba(30,140,94,.08);color:#1E8C5E}
+.wh-cat.etc{background:var(--gray-100);color:var(--gray-500)}
+.wh-act-btn{background:none;border:none;color:var(--gray-400);cursor:pointer;font-size:14px;padding:4px 6px;transition:color .15s}
+.wh-act-btn:hover{color:var(--gold)}
+.wh-act-btn.del:hover{color:#D6423A}
+
+/* EMPTY */
+.wh-empty{text-align:center;padding:60px 20px;color:var(--gray-400)}
+.wh-empty i{font-size:40px;margin-bottom:16px;color:var(--gray-300)}
+.wh-empty p{font-size:14px}
+
+/* STATS */
+.wh-stats{display:flex;gap:16px;margin-bottom:24px}
+.wh-stat{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);padding:16px 20px;flex:1;text-align:center}
+.wh-stat-val{font-size:22px;font-weight:900;color:var(--dark)}
+.wh-stat-label{font-size:11px;color:var(--gray-500);margin-top:2px}
+
+/* FOLDER SIDEBAR */
+.wh-body{display:flex;flex:1}
+.wh-sidebar{width:240px;background:var(--white);border-right:1px solid var(--gray-200);overflow-y:auto;flex-shrink:0}
+.wh-sidebar-head{padding:14px 16px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between}
+.wh-sidebar-title{font-size:12px;font-weight:700;color:var(--gray-500);letter-spacing:.5px}
+.wh-sidebar-add{background:none;border:none;color:var(--gold);font-size:14px;cursor:pointer;padding:2px 6px}
+.wh-sidebar-add:hover{color:var(--dark)}
+.wh-main{flex:1;min-width:0;display:flex;flex-direction:column}
+.folder-tree{padding:8px 0}
+.ft-item{display:flex;align-items:center;gap:8px;padding:7px 16px;font-size:12px;font-weight:500;color:var(--gray-700);cursor:pointer;transition:all .15s;border-left:3px solid transparent}
+.ft-item:hover{background:var(--gray-100);color:var(--gray-900)}
+.ft-item.active{background:rgba(195,165,105,.06);color:var(--dark);font-weight:700;border-left-color:var(--gold)}
+.ft-item i{font-size:13px;width:16px;text-align:center}
+.ft-item i.fa-folder{color:#F5C542}
+.ft-item i.fa-folder-open{color:var(--gold)}
+.ft-item i.fa-house{color:var(--gray-400)}
+.ft-item .ft-count{margin-left:auto;font-size:10px;color:var(--gray-400);font-weight:400}
+.ft-sub .ft-item{padding-left:32px;font-size:11px}
+.ft-item .ft-del{display:none;margin-left:4px;background:none;border:none;color:var(--gray-300);font-size:10px;cursor:pointer;padding:0 3px}
+.ft-item:hover .ft-del{display:inline}
+.ft-item .ft-del:hover{color:#D6423A}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.wh-sidebar{width:200px}}
+@media(max-width:768px){.wh-sidebar{display:none}.wh-content{padding:0 16px}.wh-toolbar{padding:12px 16px}.wh-header{padding:16px}.wh-col-date,.wh-col-cat{display:none}.wh-stats{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="authScreen" class="auth-screen">
+    <div class="auth-box">
+        <h2><i class="fa-solid fa-hard-drive" style="color:var(--gold)"></i> 웹하드</h2>
+        <p>(주)세울엔지니어링 개인 파일 관리</p>
+        <div class="auth-error" id="authError">비밀번호가 올바르지 않습니다.</div>
+        <input type="password" id="authPw" placeholder="비밀번호 입력" autofocus>
+        <button onclick="authLogin()">접속</button>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div id="mainScreen" style="display:none">
+    <div class="wh-header">
+        <div class="wh-logo"><i class="fa-solid fa-hard-drive"></i> 세울 웹하드</div>
+        <div class="wh-actions">
+            <button class="wh-btn outline" onclick="location.href='../index.html'"><i class="fa-solid fa-house"></i> 홈</button>
+            <button class="wh-btn outline" onclick="whLogout()"><i class="fa-solid fa-right-from-bracket"></i> 나가기</button>
+        </div>
+    </div>
+    <div class="wh-body">
+    <!-- LEFT: FOLDER TREE -->
+    <div class="wh-sidebar">
+        <div class="wh-sidebar-head">
+            <span class="wh-sidebar-title">폴더</span>
+            <button class="wh-sidebar-add" onclick="createFolder()" title="새 폴더"><i class="fa-solid fa-folder-plus"></i></button>
+        </div>
+        <div class="folder-tree" id="folderTree"></div>
+    </div>
+
+    <!-- RIGHT: FILES -->
+    <div class="wh-main">
+    <div class="wh-toolbar">
+        <div class="wh-path" id="whPath"><i class="fa-solid fa-folder-open"></i> <span>내 파일</span></div>
+        <button class="wh-btn primary" style="padding:6px 14px;font-size:11px" onclick="createFolder()"><i class="fa-solid fa-folder-plus"></i> 새 폴더</button>
+        <input type="text" class="wh-search" placeholder="파일 검색..." oninput="renderAll(this.value)">
+        <div class="wh-info" id="whInfo"></div>
+    </div>
+
+    <div class="wh-content">
+        <!-- STATS -->
+        <div class="wh-stats">
+            <div class="wh-stat" style="cursor:pointer" onclick="showAllFiles()"><div class="wh-stat-val" id="statTotal">0</div><div class="wh-stat-label">전체 파일 ▼</div></div>
+            <div class="wh-stat" style="cursor:pointer" onclick="showByType('doc')"><div class="wh-stat-val" id="statDoc">0</div><div class="wh-stat-label">문서 ▼</div></div>
+            <div class="wh-stat" style="cursor:pointer" onclick="showByType('img')"><div class="wh-stat-val" id="statImg">0</div><div class="wh-stat-label">이미지 ▼</div></div>
+            <div class="wh-stat"><div class="wh-stat-val" id="statSize">0 MB</div><div class="wh-stat-label">총 용량</div></div>
+        </div>
+
+        <!-- GOOGLE DRIVE (관리자 전용) -->
+        <div id="gdriveSection" style="display:none;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);padding:24px;margin-bottom:24px;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:16px">
+                <div style="width:48px;height:48px;border-radius:12px;background:rgba(66,133,244,0.08);display:flex;align-items:center;justify-content:center"><i class="fa-brands fa-google-drive" style="font-size:22px;color:#4285F4"></i></div>
+                <div>
+                    <div style="font-size:15px;font-weight:800">Google Drive 연동 <span style="font-size:10px;color:var(--gold);font-weight:700;margin-left:6px">관리자 전용</span></div>
+                    <div style="font-size:12px;color:var(--gray-500)">15GB 무료 · 영구 보관 · 내 드라이브/00.공유/웹하드</div>
+                </div>
+            </div>
+            <div style="display:flex;gap:8px">
+                <button class="wh-btn primary" onclick="window.open('https://drive.google.com/drive/my-drive','_blank')"><i class="fa-solid fa-folder-open"></i> 드라이브 열기</button>
+                <button class="wh-btn outline" style="background:var(--white);color:var(--gray-700);border-color:var(--gray-200)" onclick="window.open('https://drive.google.com/drive/my-drive','_blank')"><i class="fa-solid fa-upload"></i> 업로드</button>
+            </div>
+        </div>
+
+        <!-- LOCAL DROPZONE -->
+        <div style="font-size:12px;font-weight:700;color:var(--gray-400);margin-bottom:10px;letter-spacing:.5px">임시 파일 (브라우저 저장, 최대 10MB)</div>
+        <div class="wh-dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <p>파일을 드래그하거나 클릭하여 임시 업로드</p>
+            <small>PDF, HWP, DOCX, XLSX, JPG, PNG, ZIP 지원 · 영구 보관은 Google Drive 사용</small>
+        </div>
+        <input type="file" id="fileInput" multiple style="display:none" onchange="handleFiles(this.files)">
+
+        <!-- FILE TABLE -->
+        <div class="wh-table">
+            <div class="wh-thead">
+                <div class="wh-col-check"></div>
+                <div class="wh-col-icon"></div>
+                <div class="wh-col-name">파일명</div>
+                <div class="wh-col-size">크기</div>
+                <div class="wh-col-date">업로드일</div>
+                <div class="wh-col-cat">분류</div>
+                <div class="wh-col-act">관리</div>
+            </div>
+            <div id="fileList"></div>
+        </div>
+    </div>
+    </div><!-- wh-main -->
+    </div><!-- wh-body -->
+</div>
+
+<script>
+const WH_KEY = 'seul_webhard';
+const WH_FOLDER_KEY = 'seul_webhard_folders';
+const WH_PW = '1234';
+const WH_ADMIN_PW = '813700hb';
+let currentFolder = '/';
+let isAdmin = false;
+
+// 기본 폴더 자동 생성
+(function initFolders(){
+    const defaults = [
+        '/공덕현대',
+        '/공덕현대/01_기초자료',
+        '/공덕현대/02_조합설립',
+        '/공덕현대/03_조합운영',
+        '/공덕현대/04_회의자료',
+        '/공덕현대/05_인허가',
+        '/공덕현대/06_사업시행_관리처분',
+        '/공덕현대/07_분양_이주_철거',
+        '/공덕현대/08_계약_공사비_자금',
+        '/공덕현대/09_법률_민원',
+        '/공덕현대/10_홍보_현장',
+        '/공덕현대/99_보관',
+        '/삼성청구',
+        '/삼성청구/01_기초자료',
+        '/삼성청구/02_조합설립',
+        '/삼성청구/03_조합운영',
+        '/삼성청구/04_회의자료',
+        '/삼성청구/05_인허가',
+        '/삼성청구/06_사업시행_관리처분',
+        '/삼성청구/07_분양_이주_철거',
+        '/삼성청구/08_계약_공사비_자금',
+        '/삼성청구/09_법률_민원',
+        '/삼성청구/10_홍보_현장',
+        '/삼성청구/99_보관',
+        '/가락현대5차',
+        '/가락현대5차/01_기초자료',
+        '/가락현대5차/02_조합설립',
+        '/가락현대5차/03_조합운영',
+        '/가락현대5차/04_회의자료',
+        '/가락현대5차/05_인허가',
+        '/가락현대5차/06_사업시행_관리처분',
+        '/가락현대5차/07_분양_이주_철거',
+        '/가락현대5차/08_계약_공사비_자금',
+        '/가락현대5차/09_법률_민원',
+        '/가락현대5차/10_홍보_현장',
+        '/가락현대5차/99_보관'
+    ];
+    let folders;
+    try{ folders = JSON.parse(localStorage.getItem(WH_FOLDER_KEY)||'["/"]'); }catch(e){ folders=["/"];}
+    let changed = false;
+    defaults.forEach(d=>{ if(!folders.includes(d)){ folders.push(d); changed=true; }});
+    if(changed) localStorage.setItem(WH_FOLDER_KEY, JSON.stringify(folders));
+})();
+
+function authLogin(){
+    const pw = document.getElementById('authPw').value;
+    if(pw === WH_PW || pw === WH_ADMIN_PW){
+        sessionStorage.setItem('wh_auth','1');
+        if(pw === WH_ADMIN_PW){ isAdmin=true; sessionStorage.setItem('wh_admin','1'); }
+        document.getElementById('authScreen').style.display='none';
+        document.getElementById('mainScreen').style.display='';
+        if(isAdmin) document.getElementById('gdriveSection').style.display='flex';
+        renderAll();
+    } else {
+        document.getElementById('authError').style.display='block';
+    }
+}
+document.getElementById('authPw').addEventListener('keydown',e=>{if(e.key==='Enter')authLogin()});
+if(sessionStorage.getItem('wh_auth')==='1'){
+    if(sessionStorage.getItem('wh_admin')==='1') isAdmin=true;
+    document.getElementById('authScreen').style.display='none';
+    document.getElementById('mainScreen').style.display='';
+    if(isAdmin) document.getElementById('gdriveSection').style.display='flex';
+    setTimeout(()=>renderAll(),100);
+}
+function whLogout(){ sessionStorage.removeItem('wh_auth'); location.reload(); }
+
+// DATA
+function getFiles(){ try{return JSON.parse(localStorage.getItem(WH_KEY)||'[]')}catch(e){return[]} }
+function saveFiles(f){ localStorage.setItem(WH_KEY,JSON.stringify(f)); }
+function getFolders(){ try{return JSON.parse(localStorage.getItem(WH_FOLDER_KEY)||'["/"]')}catch(e){return["/"]} }
+function saveFolders(f){ localStorage.setItem(WH_FOLDER_KEY,JSON.stringify(f)); }
+
+// FOLDER
+function createFolder(){
+    const name = prompt('새 폴더 이름:');
+    if(!name || !name.trim()) return;
+    const folders = getFolders();
+    const path = currentFolder === '/' ? '/'+name.trim() : currentFolder+'/'+name.trim();
+    if(folders.includes(path)){ alert('이미 존재하는 폴더입니다.'); return; }
+    folders.push(path);
+    saveFolders(folders);
+    renderAll();
+}
+function checkAdmin(){
+    const pw = prompt('삭제 권한 비밀번호:');
+    return pw === WH_ADMIN_PW;
+}
+function deleteFolder(path){
+    if(!checkAdmin()){ alert('삭제 권한이 없습니다.'); return; }
+    if(!confirm('"'+path.split('/').pop()+'" 폴더를 삭제하시겠습니까?\n(폴더 내 파일도 함께 삭제됩니다)')) return;
+    let folders = getFolders().filter(f => f !== path && !f.startsWith(path+'/'));
+    saveFolders(folders);
+    let files = getFiles().filter(f => f.folder !== path && !(f.folder||'').startsWith(path+'/'));
+    saveFiles(files);
+    renderAll();
+}
+function openFolder(path){
+    currentFolder = path;
+    showAll = false;
+    renderAll();
+}
+let showAll = false;
+let filterType = null;
+function showAllFiles(){
+    showAll = !showAll;
+    filterType = null;
+    renderAll();
+}
+function showByType(type){
+    if(filterType === type){ filterType = null; showAll = false; }
+    else { filterType = type; showAll = true; }
+    renderAll();
+}
+
+// BREADCRUMB
+function renderPath(){
+    const el = document.getElementById('whPath');
+    if(currentFolder === '/'){
+        el.innerHTML = '<i class="fa-solid fa-folder-open"></i> <span>내 파일</span>';
+    } else {
+        const parts = currentFolder.split('/').filter(Boolean);
+        let html = '<i class="fa-solid fa-folder-open"></i> <a href="#" onclick="openFolder(\'/\');return false" style="color:var(--gold);cursor:pointer">내 파일</a>';
+        let acc = '';
+        parts.forEach((p,i) => {
+            acc += '/'+p;
+            const isLast = i === parts.length-1;
+            html += ' <i class="fa-solid fa-chevron-right" style="font-size:8px;color:var(--gray-300);margin:0 4px"></i> ';
+            html += isLast ? '<span>'+p+'</span>' : '<a href="#" onclick="openFolder(\''+acc+'\');return false" style="color:var(--gold);cursor:pointer">'+p+'</a>';
+        });
+        el.innerHTML = html;
+    }
+}
+
+// UTILS
+function getFileIcon(name){
+    const ext=(name.split('.').pop()||'').toLowerCase();
+    const map={pdf:'fa-file-pdf',hwp:'fa-file-lines',doc:'fa-file-word',docx:'fa-file-word',xls:'fa-file-excel',xlsx:'fa-file-excel',ppt:'fa-file-powerpoint',pptx:'fa-file-powerpoint',jpg:'fa-file-image',jpeg:'fa-file-image',png:'fa-file-image',gif:'fa-file-image',zip:'fa-file-zipper',rar:'fa-file-zipper','7z':'fa-file-zipper',txt:'fa-file-lines',csv:'fa-file-csv'};
+    return map[ext]||'fa-file';
+}
+function getFileCat(name){
+    const ext=(name.split('.').pop()||'').toLowerCase();
+    if(['pdf','hwp','doc','docx','xls','xlsx','ppt','pptx','txt','csv'].includes(ext)) return{label:'문서',cls:'doc'};
+    if(['jpg','jpeg','png','gif','bmp','svg','webp'].includes(ext)) return{label:'이미지',cls:'img'};
+    return{label:'기타',cls:'etc'};
+}
+function formatSize(bytes){
+    if(bytes<1024) return bytes+' B';
+    if(bytes<1048576) return (bytes/1024).toFixed(1)+' KB';
+    return (bytes/1048576).toFixed(1)+' MB';
+}
+function formatDate(ts){
+    const d=new Date(ts);
+    return d.getFullYear()+'-'+(d.getMonth()+1+'').padStart(2,'0')+'-'+(d.getDate()+'').padStart(2,'0');
+}
+
+// FILE OPS
+function handleFiles(fileList){
+    const files=getFiles();
+    Array.from(fileList).forEach(f=>{
+        const reader=new FileReader();
+        reader.onload=function(e){
+            files.push({id:Date.now()+'_'+Math.random().toString(36).substr(2,6),name:f.name,size:f.size,date:Date.now(),folder:currentFolder,data:e.target.result});
+            saveFiles(files);
+            renderAll();
+        };
+        reader.readAsDataURL(f);
+    });
+}
+function deleteFile(id){
+    if(!checkAdmin()){ alert('삭제 권한이 없습니다.'); return; }
+    if(!confirm('삭제하시겠습니까?')) return;
+    saveFiles(getFiles().filter(f=>f.id!==id));
+    renderAll();
+}
+function downloadFile(id){
+    const file=getFiles().find(f=>f.id===id);
+    if(!file) return;
+    const a=document.createElement('a');
+    a.href=file.data; a.download=file.name; a.click();
+}
+
+// FOLDER TREE
+function renderTree(){
+    const allFolders = getFolders().sort();
+    const allFiles = getFiles();
+    const tree = document.getElementById('folderTree');
+    let html = '';
+    // 루트
+    const rootCount = allFiles.filter(f=>(f.folder||'/')==='/').length;
+    html += `<div class="ft-item${currentFolder==='/'?' active':''}" onclick="openFolder('/')">
+        <i class="fa-solid fa-house"></i> 내 파일 <span class="ft-count">${rootCount}</span></div>`;
+    // 1단계 폴더
+    const level1 = allFolders.filter(f=>f!=='/' && f.split('/').filter(Boolean).length===1);
+    level1.forEach(f=>{
+        const name = f.split('/').pop();
+        const isOpen = currentFolder===f || currentFolder.startsWith(f+'/');
+        const icon = isOpen ? 'fa-folder-open' : 'fa-folder';
+        const count = allFiles.filter(file=>(file.folder||'/')===f).length;
+        html += `<div class="ft-item${currentFolder===f?' active':''}" onclick="openFolder('${f}')">
+            <i class="fa-solid ${icon}"></i> ${name} <span class="ft-count">${count}</span>
+            <button class="ft-del" onclick="event.stopPropagation();deleteFolder('${f}')" title="삭제"><i class="fa-solid fa-xmark"></i></button></div>`;
+        // 2단계 하위 폴더
+        if(isOpen){
+            const level2 = allFolders.filter(sf=>sf.startsWith(f+'/') && sf.split('/').filter(Boolean).length===2);
+            if(level2.length){
+                html += '<div class="ft-sub">';
+                level2.forEach(sf=>{
+                    const sname = sf.split('/').pop();
+                    const sicon = currentFolder===sf ? 'fa-folder-open' : 'fa-folder';
+                    const scount = allFiles.filter(file=>(file.folder||'/')===sf).length;
+                    html += `<div class="ft-item${currentFolder===sf?' active':''}" onclick="openFolder('${sf}')">
+                        <i class="fa-solid ${sicon}"></i> ${sname} <span class="ft-count">${scount}</span>
+                        <button class="ft-del" onclick="event.stopPropagation();deleteFolder('${sf}')" title="삭제"><i class="fa-solid fa-xmark"></i></button></div>`;
+                });
+                html += '</div>';
+            }
+        }
+    });
+    tree.innerHTML = html;
+}
+
+// RENDER
+function renderAll(search){
+    renderTree();
+    renderPath();
+    const allFiles = getFiles();
+    const allFolders = getFolders();
+
+    // 현재 폴더의 하위 폴더
+    const subFolders = allFolders.filter(f => {
+        if(f === '/') return false;
+        const parent = f.substring(0, f.lastIndexOf('/')) || '/';
+        return parent === currentFolder;
+    });
+
+    // 현재 폴더의 파일 (showAll이면 전체, filterType이면 유형별)
+    let files = showAll ? [...allFiles] : allFiles.filter(f => (f.folder||'/') === currentFolder);
+    if(filterType){
+        files = files.filter(f => getFileCat(f.name).cls === filterType);
+    }
+    if(search){
+        const q = search.toLowerCase();
+        files = files.filter(f => f.name.toLowerCase().includes(q));
+    }
+    files.sort((a,b) => b.date - a.date);
+
+    // 통계
+    const totalSize = allFiles.reduce((s,f)=>s+f.size,0);
+    const docs = allFiles.filter(f=>getFileCat(f.name).cls==='doc').length;
+    const imgs = allFiles.filter(f=>getFileCat(f.name).cls==='img').length;
+    document.getElementById('statTotal').textContent = allFiles.length;
+    document.getElementById('statDoc').textContent = docs;
+    document.getElementById('statImg').textContent = imgs;
+    document.getElementById('statSize').textContent = formatSize(totalSize);
+    document.getElementById('whInfo').textContent = subFolders.length+'개 폴더, '+files.length+'개 파일';
+
+    const list = document.getElementById('fileList');
+    let html = '';
+
+    // 상위 폴더 이동
+    if(currentFolder !== '/'){
+        const parent = currentFolder.substring(0, currentFolder.lastIndexOf('/')) || '/';
+        html += `<div class="wh-row" style="cursor:pointer" ondblclick="openFolder('${parent}')">
+            <div class="wh-col-check"></div>
+            <div class="wh-col-icon"><i class="fa-solid fa-arrow-up" style="color:var(--gray-400)"></i></div>
+            <div class="wh-col-name" style="color:var(--gray-500)">.. 상위 폴더</div>
+            <div class="wh-col-size"></div><div class="wh-col-date"></div><div class="wh-col-cat"></div><div class="wh-col-act"></div>
+        </div>`;
+    }
+
+    // 폴더
+    subFolders.sort().forEach(f => {
+        const name = f.split('/').pop();
+        const fileCount = allFiles.filter(file => (file.folder||'/') === f).length;
+        html += `<div class="wh-row" style="cursor:pointer" ondblclick="openFolder('${f}')">
+            <div class="wh-col-check"><input type="checkbox"></div>
+            <div class="wh-col-icon"><i class="fa-solid fa-folder" style="color:#F5C542;font-size:20px"></i></div>
+            <div class="wh-col-name" style="font-weight:700">${name}</div>
+            <div class="wh-col-size" style="font-size:11px;color:var(--gray-400)">${fileCount}개 파일</div>
+            <div class="wh-col-date"></div>
+            <div class="wh-col-cat"><span class="wh-cat etc">폴더</span></div>
+            <div class="wh-col-act">
+                <button class="wh-act-btn" onclick="openFolder('${f}')" title="열기"><i class="fa-solid fa-folder-open"></i></button>
+                <button class="wh-act-btn del" onclick="event.stopPropagation();deleteFolder('${f}')" title="삭제"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        </div>`;
+    });
+
+    // 파일
+    files.forEach(f => {
+        const cat = getFileCat(f.name);
+        html += `<div class="wh-row">
+            <div class="wh-col-check"><input type="checkbox"></div>
+            <div class="wh-col-icon"><i class="fa-solid ${getFileIcon(f.name)}" style="color:var(--gold)"></i></div>
+            <div class="wh-col-name">${f.name}${showAll && f.folder && f.folder!=='/' ? '<span style="font-size:10px;color:var(--gray-400);font-weight:400;margin-left:6px">'+f.folder+'</span>':''}</div>
+            <div class="wh-col-size">${formatSize(f.size)}</div>
+            <div class="wh-col-date">${formatDate(f.date)}</div>
+            <div class="wh-col-cat"><span class="wh-cat ${cat.cls}">${cat.label}</span></div>
+            <div class="wh-col-act">
+                <button class="wh-act-btn" onclick="downloadFile('${f.id}')" title="다운로드"><i class="fa-solid fa-download"></i></button>
+                <button class="wh-act-btn del" onclick="deleteFile('${f.id}')" title="삭제"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        </div>`;
+    });
+
+    if(!subFolders.length && !files.length){
+        html = '<div class="wh-empty"><i class="fa-solid fa-folder-open"></i><p>폴더가 비어 있습니다</p></div>';
+    }
+    list.innerHTML = html;
+}
+
+// Drag & Drop
+const dz=document.getElementById('dropzone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('dragover')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('dragover'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('dragover');handleFiles(e.dataTransfer.files)});
+</script>
+</body>
+</html>

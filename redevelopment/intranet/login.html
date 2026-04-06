@@ -142,15 +142,6 @@ body{font-family:var(--font);background:var(--gray-50);min-height:100vh;-webkit-
                 <button type="submit" class="login-btn"><i class="fa-solid fa-right-to-bracket"></i> 로그인</button>
             </form>
 
-            <div class="demo-toggle">
-                <button type="button" id="demoToggleBtn">테스트 계정 보기</button>
-            </div>
-            <div class="demo-box" id="demoBox" style="display:none">
-                <strong>테스트 계정 안내</strong><br>
-                관리자: <strong>admin</strong> / admin1234<br>
-                실무자: <strong>user1</strong> / user1234<br>
-                열람자: <strong>user3</strong> / user1234
-            </div>
         </div>
 
         <div class="login-footer">
@@ -180,16 +171,6 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
     }
 });
 
-document.getElementById('demoToggleBtn').addEventListener('click', function(){
-    var box = document.getElementById('demoBox');
-    if(box.style.display === 'none'){
-        box.style.display = '';
-        this.textContent = '테스트 계정 숨기기';
-    } else {
-        box.style.display = 'none';
-        this.textContent = '테스트 계정 보기';
-    }
-});
 </script>
 </body>
 </html>

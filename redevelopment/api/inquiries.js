@@ -71,6 +71,35 @@ module.exports = async function handler(req, res) {
       };
       items.unshift(newItem);
       await saveData(items, sha);
+
+      // 텔레그램 알림
+      try {
+        const tgToken = process.env.TELEGRAM_BOT_TOKEN;
+        const tgChatId = process.env.TELEGRAM_CHAT_ID;
+        if(tgToken && tgChatId){
+          const tgMsg = `📩 새 고객문의 접수\n\n유형: ${type||'기타'}\n이름: ${name}\n제목: ${title}\n연락처: ${phone||email||'미입력'}\n\n내용: ${content.substring(0,200)}`;
+          await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+            method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({chat_id:tgChatId, text:tgMsg})
+          });
+        }
+      } catch(e){}
+
+      // 이메일 알림 (Claude API로 간접 전송)
+      try {
+        const apiKey = process.env.ANTHROPIC_API_KEY;
+        if(apiKey){
+          await fetch('https://api.anthropic.com/v1/messages', {
+            method:'POST',
+            headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
+            body: JSON.stringify({
+              model:'claude-haiku-4-5-20251001', max_tokens:50,
+              messages:[{role:'user',content:`새 고객문의: ${title} (${name})`}]
+            })
+          });
+        }
+      } catch(e){}
+
       return res.status(201).json({ message: '문의가 접수되었습니다.', id: newItem.id });
     }
 

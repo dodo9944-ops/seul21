@@ -128,7 +128,7 @@ const DataService = (() => {
 
   /* ── auth (simple mock) ── */
   function adminLogin(username, password) {
-    const acc = _load('adminAccount') || (MOCK && MOCK.adminAccount);
+    const acc = (MOCK && MOCK.adminAccount) || _load('adminAccount');
     if (acc && acc.username === username && acc.password === password) {
       sessionStorage.setItem('rdc_admin', JSON.stringify({ loggedIn: true, name: acc.name }));
       return true;

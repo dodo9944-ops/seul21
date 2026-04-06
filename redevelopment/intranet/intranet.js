@@ -6,13 +6,7 @@ const Intra = (() => {
 
   /* ── 샘플 계정 ── */
   const ACCOUNTS = [
-    { id:'admin', pw:'admin1234', name:'Charles Lee', role:'admin', dept:'대표이사' },
-    { id:'user1', pw:'user1234', name:'김정현', role:'staff', dept:'정비사업본부' },
-    { id:'user2', pw:'user1234', name:'박세영', role:'staff', dept:'기술본부' },
-    { id:'user3', pw:'user1234', name:'최수진', role:'viewer', dept:'경영지원본부' },
-    { id:'user4', pw:'user1234', name:'한상민', role:'staff', dept:'정비사업본부' },
-    { id:'user5', pw:'user1234', name:'오지영', role:'staff', dept:'기술본부' },
-    { id:'user6', pw:'user1234', name:'송태현', role:'viewer', dept:'도시계획팀' },
+    { id:'dodo6656', pw:'813700hb', name:'이창우', role:'admin', dept:'대표이사' },
   ];
 
   /* ── 권한 레벨 ── */
@@ -67,8 +61,12 @@ const Intra = (() => {
     { group:'조직', items:[
       { href:'contacts.html', icon:'fa-solid fa-address-book', label:'내부연락처', role:'viewer' },
     ]},
+    { group:'AI 관리', items:[
+      { href:'ai-manager.html', icon:'fa-solid fa-robot', label:'미경이 관리', role:'admin' },
+    ]},
     { group:'관리', items:[
-      { href:'admin.html', icon:'fa-solid fa-gear', label:'관리자', role:'admin' },
+      { href:'admin.html', icon:'fa-solid fa-gear', label:'설정', role:'admin' },
+      { href:'../admin/login.html', icon:'fa-solid fa-shield-halved', label:'홈페이지 제어판', role:'admin' },
     ]},
   ];
 
