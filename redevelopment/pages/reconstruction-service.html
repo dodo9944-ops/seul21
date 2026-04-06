@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#0A0F1C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주택재건축 정비사업 — (주)세울엔지니어링</title>
-    <meta name="description" content="노후 공동주택 재건축 사업의 재건축진단부터 준공까지 전 과정을 관리합니다. 2025 개정 도시정비법 반영.">
+    <meta name="description" content="현행 도시정비법에 따른 재건축 추진절차를 일반절차와 서울시 신속통합기획으로 구분하여 안내합니다. 안전진단부터 준공까지 전 과정 전문 관리.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -145,6 +145,14 @@
     .rd-cta-btn.primary:hover { background:var(--gold-hover); }
     .rd-cta-btn.outline { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.2); }
     .rd-cta-btn.outline:hover { border-color:var(--gold); color:var(--gold); }
+
+    /* 탭 전환 */
+    .rd-tab-wrap { display:flex; gap:0; margin-bottom:32px; border-bottom:2px solid var(--gray-200); }
+    .rd-tab { padding:14px 28px; font-size:15px; font-weight:700; color:var(--gray-500); cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.2s; }
+    .rd-tab:hover { color:var(--gray-700); }
+    .rd-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+    .rd-tab-panel { display:none; }
+    .rd-tab-panel.active { display:block; }
     </style>
 </head>
 <body>
@@ -160,7 +168,7 @@
             <span>주택재건축 정비사업</span>
         </div>
         <h1>주택재건축 정비사업</h1>
-        <p>노후 공동주택의 재건축진단부터 조합 운영, 관리처분, 입주까지 재건축 사업 전 과정을 체계적으로 관리합니다</p>
+        <p>현행 도시정비법에 따른 재건축 사업의 전 과정을 현장에서 직접 관리합니다</p>
     </div>
 </div>
 
@@ -184,101 +192,281 @@
             </div>
         </div>
 
-        <!-- 추진 절차 -->
+        <!-- 추진 절차 (탭 방식) -->
         <div class="rd-section">
             <h2 class="section-title">재건축 사업 추진 절차</h2>
             <p style="font-size:14px;color:var(--gray-500);margin-bottom:28px;">각 단계마다 세울엔지니어링이 어떤 역할을 하는지 확인하세요</p>
 
-            <div class="rd-timeline">
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">1</div>
-                    <div class="rd-tl-content">
-                        <h4>정비구역 지정 및 조합설립 <span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(195,165,105,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></h4>
-                        <p>준공 후 30년 이상 경과한 공동주택은 <strong>재건축진단 없이도 정비구역 입안과 조합설립을 동시에 추진</strong>할 수 있습니다. 조합설립 동의율도 기존 75%에서 <strong>70%로 완화</strong>되었습니다 (구분소유자 70% 이상 + 토지면적 3/4 이상, 각 동 과반수). 정비계획 수립, 도시계획위 심의, 창립총회까지 병행 추진이 가능해져 사업 기간이 대폭 단축됩니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">30년 이상 진단 면제</span>
-                            <span class="rd-tl-tag">동의율 70%</span>
-                            <span class="rd-tl-tag">정비구역+조합설립 동시</span>
-                            <span class="rd-tl-tag">전자투표 도입</span>
-                        </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 동시 추진 전략 수립, 동의율 확보(70% 기준), 전자투표·온라인 의결 운영 지원, 정비계획 자문 및 도시계획위 심의 대응</div>
-                    </div>
+            <div class="rd-tab-wrap">
+                <div class="rd-tab active" data-target="tab-general">일반절차 (조합방식)</div>
+                <div class="rd-tab" data-target="tab-fast">서울시 신속통합기획</div>
+            </div>
+
+            <!-- TAB 1: 일반절차 (조합방식 재건축) -->
+            <div id="tab-general" class="rd-tab-panel active">
+
+                <div style="background:rgba(195,165,105,0.06);border:1px solid rgba(195,165,105,0.15);border-radius:10px;padding:20px 24px;margin-bottom:28px;font-size:13.5px;color:var(--gray-700);line-height:1.85;">
+                    <strong style="color:var(--brand-navy);">법적 근거</strong> — 현행 「도시 및 주거환경정비법」 상 조합방식 재건축의 표준 절차입니다. 재개발과의 핵심 차이는 안전진단(재건축진단) 단계가 추가된다는 점입니다.<br>
+                    <strong style="color:var(--brand-navy);">참고</strong> — 법 제31조제7항에 따라 제118조의 공공지원을 받는 경우, 추진위원회를 구성하지 않을 수 있으며, 이 경우 토지등소유자 대표자가 창립총회를 소집합니다.
                 </div>
 
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">2</div>
-                    <div class="rd-tl-content">
-                        <h4>재건축진단 <span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(195,165,105,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">명칭·기준 변경</span></h4>
-                        <p>기존 '안전진단'이 <strong>'재건축진단'</strong>으로 명칭이 변경되었습니다. <strong>사업시행인가 전까지만 통과</strong>하면 되므로 사업 초기에 반드시 선행할 필요가 없습니다. 평가 비중도 구조안전성 50%→<strong>30%</strong>, 주거환경 15%→<strong>30%</strong>, 설비노후도 25%→<strong>30%</strong>로 조정되어 통과 가능성이 높아졌습니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">안전진단→재건축진단</span>
-                            <span class="rd-tl-tag">구조안전성 30%</span>
-                            <span class="rd-tl-tag">주거환경 30%</span>
-                            <span class="rd-tl-tag">설비노후도 30%</span>
+                <div class="rd-timeline">
+                    <!-- Step 1 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">1</div>
+                        <div class="rd-tl-content">
+                            <h4>기본계획 수립</h4>
+                            <p>지자체의 도시·주거환경정비 기본계획에 따라 정비예정구역을 확인하고 정비계획을 수립합니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">기초조사</span>
+                                <span class="rd-tl-tag">정비계획</span>
+                                <span class="rd-tl-tag">도시계획위 심의</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 기초조사 분석, 정비계획 수립 자문, 도시계획위 심의 대응</div>
                         </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 재건축진단 용역 선정 지원, 변경된 평가 비중에 맞춘 사전 준비, 결과 분석 및 대응 전략, 최적 추진 시점 자문</div>
                     </div>
+
+                    <!-- Step 2 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">2</div>
+                        <div class="rd-tl-content">
+                            <h4>안전진단 (재건축진단)</h4>
+                            <p>「도시정비법」에 따라 건축물의 구조안전성, 주거환경, 설비노후도 등을 종합 평가합니다. 2025년 개정으로 명칭이 '안전진단'에서 '재건축진단'으로 변경되었으며, 평가 비중이 조정되었습니다 (구조안전성 50%→30%, 주거환경 15%→30%, 설비노후도 25%→30%). 준공 후 30년 이상 경과 시 정비구역 지정·조합설립과 병행 추진이 가능하며, 사업시행인가 전까지 완료하면 됩니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">재건축진단</span>
+                                <span class="rd-tl-tag">구조안전성 30%</span>
+                                <span class="rd-tl-tag">주거환경 30%</span>
+                                <span class="rd-tl-tag">설비노후도 30%</span>
+                                <span class="rd-tl-tag">30년 이상 병행 가능</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 재건축진단 용역 선정 지원, 변경된 평가 비중 대응 전략, 결과 분석, 최적 추진 시점 자문</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">3</div>
+                        <div class="rd-tl-content">
+                            <h4>정비구역 지정</h4>
+                            <p>정비계획을 바탕으로 도시계획위원회 심의를 거쳐 정비구역이 지정·고시됩니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">정비구역 지정·고시</span>
+                                <span class="rd-tl-tag">도시계획위 심의</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 정비구역 지정 행정 지원, 도시계획위 대응</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">4</div>
+                        <div class="rd-tl-content">
+                            <h4>조합설립추진위원회 구성·승인</h4>
+                            <p>법 제31조에 따라 토지등소유자 과반수의 동의를 받아 추진위원회를 구성하고, 시장·군수등의 승인을 받습니다. 추진위원은 위원장을 포함하여 5인 이상이어야 합니다.</p>
+                            <p>법 제32조에 따라 추진위원회는 정비사업전문관리업자 선정, 설계자 선정, 개략적인 사업시행계획서 작성, 조합설립인가를 위한 준비업무 등을 수행합니다. 추진위원회는 단순한 형식 단계가 아니라 조합설립 전 핵심 준비 주체입니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">법 제31조</span>
+                                <span class="rd-tl-tag">토지등소유자 과반수</span>
+                                <span class="rd-tl-tag">추진위원장 포함 5인 이상</span>
+                                <span class="rd-tl-tag">시장·군수 승인</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 추진위 구성 자문, 동의서 징구 전략, 정비사업전문관리업자 선정 지원, 개략적 사업시행계획 수립</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">5</div>
+                        <div class="rd-tl-content">
+                            <h4>창립총회 및 조합설립인가</h4>
+                            <p>법 제35조제3항에 따라, 재건축사업의 추진위원회가 조합을 설립하려면 각 동별 구분소유자 과반수, 전체 구분소유자의 3/4 이상, 토지면적의 3/4 이상 토지소유자의 동의를 받아 정비구역 지정·고시 후 조합설립인가를 신청합니다. 창립총회를 개최하여 정관 확정, 임원 선출 등을 의결합니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">법 제35조제3항</span>
+                                <span class="rd-tl-tag">각 동 과반수</span>
+                                <span class="rd-tl-tag">구분소유자 3/4</span>
+                                <span class="rd-tl-tag">토지면적 3/4</span>
+                                <span class="rd-tl-tag">창립총회</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 동별 동의율 확보 전략, 동의서 법적 유효성 검증, 창립총회 운영, 정관 작성 자문</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">6</div>
+                        <div class="rd-tl-content">
+                            <h4>사업시행계획인가</h4>
+                            <p>건축 설계, 사업비 추정, 분양 계획을 포함한 사업시행계획서를 수립하고 시장·군수등의 인가를 받습니다. 시공사 선정도 이 단계에서 이루어집니다. 재건축진단은 이 단계 전까지 반드시 완료되어야 합니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">사업시행계획</span>
+                                <span class="rd-tl-tag">시공사 선정</span>
+                                <span class="rd-tl-tag">재건축진단 완료 시한</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 사업시행계획 수립 자문, 시공사 입찰 평가 지원, 인허가 서류 작성</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 7 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">7</div>
+                        <div class="rd-tl-content">
+                            <h4>관리처분계획인가</h4>
+                            <p>조합원 각각의 종전 자산을 감정평가하고, 새 주택의 분양 대상과 조건을 확정합니다. 비례율과 분담금이 이 단계에서 결정됩니다. 재건축초과이익환수제에 따른 부담금도 이 시점에서 산정됩니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">감정평가</span>
+                                <span class="rd-tl-tag">비례율 산정</span>
+                                <span class="rd-tl-tag">분양설계</span>
+                                <span class="rd-tl-tag">재건축초과이익부담금</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 감정평가 검토, 비례율 시뮬레이션, 분양설계 분석, 초과이익부담금 사전 검토</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 8 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">8</div>
+                        <div class="rd-tl-content">
+                            <h4>이주·철거·착공 ~ 준공·입주·조합 해산</h4>
+                            <p>조합원 이주, 기존 건물 철거, 신축 착공, 일반분양, 준공인가, 입주, 소유권 이전 등기, 하자관리, 조합 해산·청산까지 사업의 마무리입니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">이주·철거</span>
+                                <span class="rd-tl-tag">착공·분양</span>
+                                <span class="rd-tl-tag">준공·입주</span>
+                                <span class="rd-tl-tag">조합 해산</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 이주 일정 관리, 시공 품질 관리, 준공 후 입주 지원, 조합 해산·청산 절차 지원</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: 서울시 신속통합기획 -->
+            <div id="tab-fast" class="rd-tab-panel">
+
+                <div style="background:rgba(30,100,200,0.05);border:1px solid rgba(30,100,200,0.15);border-radius:10px;padding:20px 24px;margin-bottom:28px;font-size:13.5px;color:var(--gray-700);line-height:1.85;">
+                    <strong style="color:#1E64C8;">서울시 신속통합기획이란?</strong> — 서울시가 2021년부터 시행 중인 공공지원 방식으로, 정비계획 수립 단계에서 서울시가 직접 기획하고, 정비계획·건축계획·정비기반시설을 통합 수립합니다. 재건축도 신속통합기획 대상에 포함됩니다.<br>
+                    <strong style="color:#1E64C8;">핵심 특징</strong> — ① 서울시 총괄계획가(MP) 주도 통합 설계 ② 정비계획 수립 기간 단축 (기존 3~5년 → 1~2년) ③ 추진위원회 생략 가능 (공공지원 방식) ④ 재건축진단은 사업시행인가 전까지 완료 필요 (일반절차와 동일)
                 </div>
 
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">3</div>
-                    <div class="rd-tl-content">
-                        <h4>시공사 선정 및 사업시행인가</h4>
-                        <p>경쟁입찰로 시공사를 선정하고 사업시행계획을 수립합니다. 건축 설계, 사업비 추정, 분양 계획을 포함한 사업시행계획서를 작성하여 행정기관의 인가를 받습니다. <strong>재건축진단은 이 단계 전까지 완료</strong>해야 합니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">시공사 입찰</span>
-                            <span class="rd-tl-tag">사업시행계획</span>
-                            <span class="rd-tl-tag">사업시행인가</span>
-                            <span class="rd-tl-tag">재건축진단 완료 시점</span>
+                <div class="rd-timeline">
+                    <!-- Step 1 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">1</div>
+                        <div class="rd-tl-content">
+                            <h4>후보지 선정 및 주민 동의</h4>
+                            <p>서울시가 노후 공동주택 단지를 대상으로 후보지를 공모·선정합니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">후보지 공모</span>
+                                <span class="rd-tl-tag">주민 동의</span>
+                                <span class="rd-tl-tag">서울시 선정</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 후보지 선정 요건 분석, 주민 설명회 지원</div>
                         </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 입찰 평가기준 설계, 시공사 PT 운영, 사업시행계획서 작성, 재건축진단 완료 일정 관리</div>
                     </div>
-                </div>
 
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">4</div>
-                    <div class="rd-tl-content">
-                        <h4>관리처분인가</h4>
-                        <p>감정평가, 비례율 산정, 분양설계를 통해 조합원별 분담금을 확정합니다. 비례율과 분담금이 이 단계에서 결정되므로 조합원에게 가장 중요한 절차입니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">감정평가</span>
-                            <span class="rd-tl-tag">비례율 산정</span>
-                            <span class="rd-tl-tag">분양설계</span>
-                            <span class="rd-tl-tag">관리처분계획</span>
+                    <!-- Step 2 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">2</div>
+                        <div class="rd-tl-content">
+                            <h4>통합 정비계획 수립 (서울시 주도) + 재건축진단</h4>
+                            <p>서울시 총괄계획가(MP)가 주도하여 정비계획·건축계획을 통합 수립합니다. 이와 병행하여 재건축진단을 실시합니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">총괄계획가(MP)</span>
+                                <span class="rd-tl-tag">통합 설계</span>
+                                <span class="rd-tl-tag">재건축진단 병행</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> MP 협의 지원, 재건축진단 관리, 사업성 분석</div>
                         </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 감정평가 검토, 비례율 시뮬레이션, 분양설계 분석, 조합원 설명회 운영</div>
                     </div>
-                </div>
 
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">5</div>
-                    <div class="rd-tl-content">
-                        <h4>이주·철거·착공·분양</h4>
-                        <p>조합원 이주를 완료하고 기존 건물을 철거한 후 신축 공사를 시작합니다. 일반분양도 이 시기에 진행됩니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">이주 관리</span>
-                            <span class="rd-tl-tag">철거</span>
-                            <span class="rd-tl-tag">착공</span>
-                            <span class="rd-tl-tag">일반분양</span>
+                    <!-- Step 3 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">3</div>
+                        <div class="rd-tl-content">
+                            <h4>정비구역 지정 및 조합설립</h4>
+                            <p>통합 정비계획을 바탕으로 정비구역이 지정되며, 조합설립인가를 진행합니다. 공공지원 방식이므로 법 제31조제7항에 따라 추진위원회를 구성하지 않고 바로 조합설립으로 넘어갈 수 있습니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">정비구역 지정</span>
+                                <span class="rd-tl-tag">조합설립인가</span>
+                                <span class="rd-tl-tag">추진위 생략 가능</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 조합설립인가 서류 작성, 창립총회 운영</div>
                         </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 이주 일정 관리, 보상 절차 지원, 시공 품질 관리</div>
                     </div>
-                </div>
 
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">6</div>
-                    <div class="rd-tl-content">
-                        <h4>준공·입주·조합 해산</h4>
-                        <p>공사 완료 후 준공인가를 받고, 조합원과 일반분양자가 입주합니다. 소유권 이전 등기, 하자관리, 조합 해산·청산까지 사업의 최종 마무리 단계입니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">준공인가</span>
-                            <span class="rd-tl-tag">소유권 이전</span>
-                            <span class="rd-tl-tag">하자관리</span>
-                            <span class="rd-tl-tag">조합 청산</span>
+                    <!-- Step 4 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">4</div>
+                        <div class="rd-tl-content">
+                            <h4>사업시행인가 ~ 관리처분인가</h4>
+                            <p>이미 통합 계획이 수립되어 있으므로 신속하게 진행됩니다. 재건축진단 완료 확인, 시공사 선정, 감정평가, 분양설계.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">사업시행계획</span>
+                                <span class="rd-tl-tag">관리처분계획</span>
+                                <span class="rd-tl-tag">시공사 선정</span>
+                                <span class="rd-tl-tag">재건축초과이익부담금</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 사업시행계획 자문, 감정평가 검토, 관리처분계획 수립 자문</div>
                         </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 입주 지원, 하자관리 체계 구축, 조합 해산 절차 지원</div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">5</div>
+                        <div class="rd-tl-content">
+                            <h4>이주·착공·준공·입주</h4>
+                            <p>이주, 철거, 착공, 일반분양, 준공, 입주, 조합 해산.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">이주·철거</span>
+                                <span class="rd-tl-tag">착공·분양</span>
+                                <span class="rd-tl-tag">준공·입주</span>
+                                <span class="rd-tl-tag">조합 해산</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 이주 관리, 시공 품질 관리, 준공·입주 지원, 조합 해산·청산</div>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- 비교표 -->
+            <div style="margin-top:36px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:12px; padding:28px 32px;">
+                <h4 style="font-size:16px; font-weight:700; margin-bottom:16px; color:var(--gray-900);">일반절차 vs 신속통합기획 비교</h4>
+                <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+                    <thead>
+                        <tr style="border-bottom:2px solid var(--gray-300);">
+                            <th style="padding:10px 12px; text-align:left; color:var(--gray-600);">구분</th>
+                            <th style="padding:10px 12px; text-align:center; color:var(--gray-600);">일반절차</th>
+                            <th style="padding:10px 12px; text-align:center; color:var(--gold);">신속통합기획</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid var(--gray-200);">
+                            <td style="padding:10px 12px; font-weight:600;">정비계획 수립</td>
+                            <td style="padding:10px 12px; text-align:center;">3~5년 (자치구)</td>
+                            <td style="padding:10px 12px; text-align:center;">1~2년 (서울시 MP)</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--gray-200);">
+                            <td style="padding:10px 12px; font-weight:600;">안전진단</td>
+                            <td style="padding:10px 12px; text-align:center;">정비구역 지정 전후</td>
+                            <td style="padding:10px 12px; text-align:center;">통합계획과 병행</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--gray-200);">
+                            <td style="padding:10px 12px; font-weight:600;">추진위원회</td>
+                            <td style="padding:10px 12px; text-align:center;">필수 (법 제31조)</td>
+                            <td style="padding:10px 12px; text-align:center;">생략 가능 (법 제31조제7항)</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--gray-200);">
+                            <td style="padding:10px 12px; font-weight:600;">전체 사업기간</td>
+                            <td style="padding:10px 12px; text-align:center;">10~15년</td>
+                            <td style="padding:10px 12px; text-align:center;">5~7년 (목표)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px 12px; font-weight:600;">적용 지역</td>
+                            <td style="padding:10px 12px; text-align:center;">전국</td>
+                            <td style="padding:10px 12px; text-align:center;">서울시</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -325,31 +513,45 @@
             <div>
                 <div class="rd-faq-item">
                     <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
-                        <span>재건축진단 없이도 사업을 시작할 수 있나요?</span>
+                        <span>재건축 일반절차와 신속통합기획의 가장 큰 차이는?</span>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
-                    <div class="rd-faq-a">2025년 개정 도시정비법에 따라, 준공 후 30년 이상 경과한 공동주택은 재건축진단 없이 정비구역 입안과 조합설립을 동시에 추진할 수 있습니다. 다만 사업시행인가 전까지는 반드시 재건축진단을 통과해야 합니다. 세울엔지니어링은 최적의 재건축진단 시점을 자문하고, 변경된 평가 비중(구조안전성 30%, 주거환경 30%, 설비노후도 30%)에 맞춘 사전 준비를 지원합니다.</div>
+                    <div class="rd-faq-a">정비계획 수립 주체·기간과 추진위원회 구성 여부입니다. 일반절차는 자치구가 3~5년에 걸쳐 수립하고 추진위원회가 필수지만, 신속통합기획은 서울시 MP가 1~2년 내에 통합 수립하며 추진위원회를 생략할 수 있습니다. 재건축진단은 두 방식 모두 사업시행인가 전까지 완료해야 합니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>추진위원회는 반드시 구성해야 하나요?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">조합방식이면 원칙적으로 법 제31조에 따라 추진위원회를 구성해야 합니다. 다만 법 제31조제7항에 따라 공공지원(제118조)을 받는 경우에는 추진위원회를 구성하지 않을 수 있으며, 토지등소유자 대표자가 창립총회를 소집합니다. 이 예외는 재개발·재건축 공통입니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>재건축 조합설립 동의율은?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">법 제35조제3항에 따라, 재건축사업의 조합설립인가를 위해서는 각 동별 구분소유자 과반수, 전체 구분소유자 3/4 이상, 토지면적 3/4 이상 토지소유자의 동의가 필요합니다.</div>
                 </div>
                 <div class="rd-faq-item">
                     <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
                         <span>재개발과 재건축의 가장 큰 차이는?</span>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
-                    <div class="rd-faq-a">재개발은 토지와 건물이 함께 노후된 지역 전체를 정비하는 사업이고, 재건축은 기존 공동주택(아파트) 중심으로 진행되는 사업입니다. 핵심 차이는 재건축진단 필수 여부입니다. 재건축은 사업시행인가 전까지 재건축진단을 통과해야 하며, 2025년 개정으로 조합설립 동의율이 70%로 완화되고 정비구역 지정과 조합설립을 동시 추진할 수 있게 되었습니다.</div>
+                    <div class="rd-faq-a">조합방식이면 둘 다 '추진위원회 → 조합설립인가' 구조는 동일합니다. 핵심 차이는 재건축은 그 앞에 안전진단(재건축진단)이 들어간다는 점입니다. 또한 재건축은 재건축초과이익환수제 적용 대상입니다. 동의율도 다릅니다 — 재개발은 토지등소유자 3/4 + 토지면적 1/2, 재건축은 각 동 과반수 + 구분소유자 3/4 + 토지면적 3/4입니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>재건축진단 없이도 사업을 시작할 수 있나요?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">2025년 개정으로 준공 후 30년 이상 경과한 공동주택은 재건축진단 없이 정비구역 입안·조합설립을 추진할 수 있습니다. 다만 사업시행인가 전까지는 반드시 재건축진단을 통과해야 합니다.</div>
                 </div>
                 <div class="rd-faq-item">
                     <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
                         <span>비례율이 높으면 무조건 좋은 건가요?</span>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
-                    <div class="rd-faq-a">비례율이 높을수록 조합원에게 유리한 것은 맞지만, 사업비를 과소 추정하여 비례율을 인위적으로 높이면 추후 추가 분담금이 발생할 위험이 있습니다. 세울엔지니어링은 낙관적 시나리오뿐 아니라 보수적 시나리오까지 함께 검토하여 현실적인 사업성을 분석합니다.</div>
-                </div>
-                <div class="rd-faq-item">
-                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
-                        <span>시공사는 언제 선정하는 것이 유리한가요?</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="rd-faq-a">사업시행인가 전후가 일반적인 시공사 선정 시기입니다. 너무 이른 시점에 선정하면 조합의 교섭력이 약화되고, 너무 늦으면 사업이 지연될 수 있습니다. 세울엔지니어링은 사업 진행 상황과 시장 여건을 고려하여 최적의 선정 시기를 자문합니다.</div>
+                    <div class="rd-faq-a">비례율이 높을수록 유리하지만, 사업비를 과소 추정하여 인위적으로 높이면 추가 분담금 위험이 있습니다. 세울엔지니어링은 보수적 시나리오까지 함께 검토합니다.</div>
                 </div>
             </div>
         </div>
@@ -375,5 +577,15 @@
 <script src="../assets/data/mock-data.js"></script>
 <script src="../assets/js/data-service.js"></script>
 <script src="../assets/js/common.js"></script>
+<script>
+document.querySelectorAll('.rd-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+        document.querySelectorAll('.rd-tab').forEach(function(t){t.classList.remove('active')});
+        document.querySelectorAll('.rd-tab-panel').forEach(function(p){p.classList.remove('active')});
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.target).classList.add('active');
+    });
+});
+</script>
 </body>
 </html>
