@@ -14,7 +14,7 @@ var CFG = {
   COST_RESERVE_WARN: 0.10, COST_FINANCE_WARN: 0.15, COST_OPER_WARN: 0.08,
   SQM_PER_PYEONG: 3.3058,
   STORAGE_KEY: 'seul_comp_analysis',
-  PROJECT_TYPES: ['재건축','재개발','소규모재건축','가로주택정비','기타'],
+  PROJECT_TYPES: ['재건축','재개발','소규모 정비사업','리모델링','기타'],
   PHASES: ['추진위 구성','조합설립인가','사업시행인가','관리처분 준비','관리처분인가','착공','시공중','준공'],
   SCENARIOS: ['기준안','보수안','낙관안']
 };
