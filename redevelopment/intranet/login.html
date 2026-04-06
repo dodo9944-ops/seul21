@@ -158,11 +158,11 @@ body{font-family:var(--font);background:var(--gray-50);min-height:100vh;-webkit-
 <script>
 if(Intra.isLoggedIn()) location.replace('index.html');
 
-document.getElementById('loginForm').addEventListener('submit', function(e){
+document.getElementById('loginForm').addEventListener('submit', async function(e){
     e.preventDefault();
     var id = document.getElementById('loginId').value.trim();
     var pw = document.getElementById('loginPw').value;
-    if(Intra.login(id, pw)){
+    if(await Intra.login(id, pw)){
         location.href = 'index.html';
     } else {
         document.getElementById('loginError').classList.add('show');

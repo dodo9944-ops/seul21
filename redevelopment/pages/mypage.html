@@ -187,24 +187,18 @@
                     </div>
                 </div>
 
-                <!-- 관심구역 -->
+                <!-- 관심구역 (준비 중) -->
                 <div class="my-section" id="sec-areas">
                     <h2 class="my-section-title">관심구역</h2>
                     <p class="my-section-desc">즐겨찾기한 재개발·재건축 구역 목록입니다.</p>
                     <div id="favAreasContent"></div>
-                    <div style="margin-top:20px;">
-                        <a href="favorites.html" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-right"></i> 전체 관심 목록 보기</a>
-                    </div>
                 </div>
 
-                <!-- 관심매물 -->
+                <!-- 관심매물 (준비 중) -->
                 <div class="my-section" id="sec-listings">
                     <h2 class="my-section-title">관심매물</h2>
                     <p class="my-section-desc">즐겨찾기한 매물 목록입니다.</p>
                     <div id="favListingsContent"></div>
-                    <div style="margin-top:20px;">
-                        <a href="favorites.html" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-right"></i> 전체 관심 목록 보기</a>
-                    </div>
                 </div>
 
                 <!-- 내 글 -->
@@ -300,14 +294,14 @@
         var container = document.getElementById('favAreasContent');
         var ids = DataService.getFavorites('areas');
         if (ids.length === 0) {
-            container.innerHTML = '<div class="empty-state"><i class="fa-regular fa-star"></i><h3>관심구역이 없습니다</h3><p>구역 목록에서 관심구역을 추가해보세요.</p><a href="areas.html" class="btn btn-accent btn-sm">구역 둘러보기</a></div>';
+            container.innerHTML = '<div class="empty-state"><i class="fa-regular fa-star"></i><h3>관심구역이 없습니다</h3><p>구역 목록에서 관심구역을 추가해보세요.</p><span class="btn btn-accent btn-sm" style="opacity:0.6;cursor:default;">준비 중</span></div>';
             return;
         }
         var html = '';
         ids.forEach(function(id) {
             var area = DataService.getById('areas', id);
             if (!area) return;
-            html += '<div class="my-list-item"><div><div class="my-list-title"><a href="area-detail.html?id=' + area.id + '">' + area.name + '</a></div><div class="my-list-meta">' + area.district + ' · ' + area.stage + ' · 프리미엄 ' + App.comma(area.premium) + '만원</div></div><button class="fav-btn active" data-type="areas" data-id="' + area.id + '" title="즐겨찾기 해제"><i class="fa-solid fa-star"></i></button></div>';
+            html += '<div class="my-list-item"><div><div class="my-list-title">' + area.name + ' <span style="font-size:11px;color:var(--gray-400);">(상세페이지 준비 중)</span></div><div class="my-list-meta">' + area.district + ' · ' + area.stage + ' · 프리미엄 ' + App.comma(area.premium) + '만원</div></div><button class="fav-btn active" data-type="areas" data-id="' + area.id + '" title="즐겨찾기 해제"><i class="fa-solid fa-star"></i></button></div>';
         });
         container.innerHTML = html;
         bindFavButtons(container);
@@ -318,14 +312,14 @@
         var container = document.getElementById('favListingsContent');
         var ids = DataService.getFavorites('listings');
         if (ids.length === 0) {
-            container.innerHTML = '<div class="empty-state"><i class="fa-regular fa-heart"></i><h3>관심매물이 없습니다</h3><p>매물 목록에서 관심매물을 추가해보세요.</p><a href="listings.html" class="btn btn-accent btn-sm">매물 둘러보기</a></div>';
+            container.innerHTML = '<div class="empty-state"><i class="fa-regular fa-heart"></i><h3>관심매물이 없습니다</h3><p>매물 목록에서 관심매물을 추가해보세요.</p><span class="btn btn-accent btn-sm" style="opacity:0.6;cursor:default;">준비 중</span></div>';
             return;
         }
         var html = '';
         ids.forEach(function(id) {
             var listing = DataService.getById('listings', id);
             if (!listing) return;
-            html += '<div class="my-list-item"><div><div class="my-list-title"><a href="listing-detail.html?id=' + listing.id + '">' + listing.title + '</a></div><div class="my-list-meta">' + (listing.areaName || '') + ' · ' + App.comma(listing.price) + '만원</div></div><button class="fav-btn active" data-type="listings" data-id="' + listing.id + '" title="즐겨찾기 해제"><i class="fa-solid fa-star"></i></button></div>';
+            html += '<div class="my-list-item"><div><div class="my-list-title">' + listing.title + ' <span style="font-size:11px;color:var(--gray-400);">(상세페이지 준비 중)</span></div><div class="my-list-meta">' + (listing.areaName || '') + ' · ' + App.comma(listing.price) + '만원</div></div><button class="fav-btn active" data-type="listings" data-id="' + listing.id + '" title="즐겨찾기 해제"><i class="fa-solid fa-star"></i></button></div>';
         });
         container.innerHTML = html;
         bindFavButtons(container);

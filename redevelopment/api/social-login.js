@@ -78,7 +78,7 @@ module.exports = async function handler(req, res) {
           grant_type: 'authorization_code',
           client_id: process.env.KAKAO_CLIENT_ID,
           client_secret: process.env.KAKAO_CLIENT_SECRET,
-          redirect_uri: 'https://seul21.com/pages/login.html',
+          redirect_uri: (req.headers.origin || (req.headers.referer ? req.headers.referer.split('/pages/')[0] : null) || 'https://seul21.com') + '/pages/login.html',
           code
         })
       });
@@ -108,7 +108,7 @@ module.exports = async function handler(req, res) {
           grant_type: 'authorization_code',
           client_id: process.env.GOOGLE_CLIENT_ID,
           client_secret: process.env.GOOGLE_CLIENT_SECRET,
-          redirect_uri: 'https://seul21.com/pages/login.html',
+          redirect_uri: (req.headers.origin || (req.headers.referer ? req.headers.referer.split('/pages/')[0] : null) || 'https://seul21.com') + '/pages/login.html',
           code
         })
       });

@@ -4,17 +4,25 @@
  */
 const Intra = (() => {
 
-  /* ── 샘플 계정 ── */
+  /* ── 계정 (비밀번호는 SHA-256 해시로 저장) ── */
   const ACCOUNTS = [
-    { id:'dodo6656', pw:'813700hb', name:'이창우', role:'admin', dept:'대표이사' },
+    { id:'dodo6656', pwHash:'134d6e711ea0e26626b0eb6430b843822eb7d8ab03cca5a749d58ab7acf648b3', name:'이창우', role:'admin', dept:'대표이사' },
   ];
 
   /* ── 권한 레벨 ── */
   const ROLES = { admin:3, staff:2, viewer:1 };
 
+  /* ── SHA-256 해시 함수 ── */
+  async function hashPw(pw) {
+    const enc = new TextEncoder().encode(pw);
+    const buf = await crypto.subtle.digest('SHA-256', enc);
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+
   /* ── 인증 ── */
-  function login(id, pw) {
-    const u = ACCOUNTS.find(a => a.id === id && a.pw === pw);
+  async function login(id, pw) {
+    const inputHash = await hashPw(pw);
+    const u = ACCOUNTS.find(a => a.id === id && a.pwHash === inputHash);
     if (!u) return false;
     sessionStorage.setItem('intra_user', JSON.stringify({ id:u.id, name:u.name, role:u.role, dept:u.dept }));
     return true;

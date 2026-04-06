@@ -359,7 +359,7 @@ const App = (() => {
     document.title = title + ' — 세울';
     let meta = document.querySelector('meta[name="description"]');
     if (!meta) { meta = document.createElement('meta'); meta.name = 'description'; document.head.appendChild(meta); }
-    meta.content = desc || '대한민국 No.1 재개발·재건축 종합정보 플랫폼';
+    meta.content = desc || '(주)세울엔지니어링 — 재개발·재건축·도시정비 전문 엔지니어링';
   }
 
   return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, basePath: () => B };

@@ -218,20 +218,6 @@ function getAllPosts(){
 }
 var allPosts=getAllPosts();
 
-/* Hero stats */
-!function(){
-    var el=document.getElementById('heroStats');
-    if(!el)return;
-    var total=allPosts.length;
-    var totalViews=0,totalLikes=0,totalComments=0;
-    allPosts.forEach(function(p){totalViews+=p.views||0;totalLikes+=p.likes||0;totalComments+=p.comments||0});
-    el.innerHTML=
-        '<div class="hs"><strong>'+total+'</strong>게시글</div>'+
-        '<div class="hs"><strong>'+App.comma(totalViews)+'</strong>조회</div>'+
-        '<div class="hs"><strong>'+App.comma(totalComments)+'</strong>댓글</div>'+
-        '<div class="hs"><strong>'+App.comma(totalLikes)+'</strong>좋아요</div>';
-}();
-
 /* Hero inline stats */
 !function(){
     var el=document.getElementById('cmHeroStats');
