@@ -18,7 +18,12 @@
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
     /* Hero — 서비스 선택 포함 */
-    .fh{padding:48px 0 0;background:linear-gradient(160deg,#0A0F1C 0%,#142644 50%,#0A0F1C 100%);position:relative;overflow:visible}
+    .fh{padding:48px 0 0;background:linear-gradient(135deg,#0F1D35 0%,#142644 40%,#0A0F1C 100%);position:relative;overflow:visible}
+    .fh .hero-bg-photo{position:absolute;top:0;right:0;width:58%;height:100%;z-index:0}
+    .fh .hero-bg-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;filter:brightness(0.72) contrast(1.05) saturate(0.85)}
+    .fh .hero-bg-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0A0F1C 0%,rgba(10,15,28,0.94) 6%,rgba(14,24,42,0.65) 24%,rgba(18,32,56,0.4) 48%,rgba(20,38,68,0.28) 72%,rgba(20,38,68,0.22) 100%);z-index:1}
+    .fh .hero-bg-photo::before{content:'';position:absolute;top:0;bottom:0;left:22%;width:56%;pointer-events:none;background:linear-gradient(90deg,rgba(15,26,46,0) 0%,rgba(15,26,46,0.06) 25%,rgba(14,22,40,0.16) 52%,rgba(14,22,40,0.18) 62%,rgba(15,26,46,0.08) 80%,rgba(15,26,46,0) 100%);filter:blur(24px);z-index:2}
+    .fh .inner{position:relative;z-index:2}
     .fh h1{font-size:34px;font-weight:900;color:#fff;margin-bottom:8px;padding-left:18px;border-left:3px solid var(--gold)}
     .fh .fh-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;max-width:650px;margin-bottom:32px}
     @media(max-width:768px){.fh{padding:36px 0 0}.fh h1{font-size:26px}.fh .fh-sub{margin-bottom:24px}}
@@ -26,10 +31,12 @@
     /* 히어로 안 서비스 선택 카드 */
     .hero-selector{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding-bottom:36px}
     @media(max-width:640px){.hero-selector{grid-template-columns:1fr;gap:12px;padding-bottom:28px}}
-    .hero-opt{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:14px;padding:24px 22px;cursor:pointer;transition:all .3s;position:relative}
-    .hero-opt:hover{background:rgba(255,255,255,.1);border-color:rgba(195,165,105,.3);transform:translateY(-2px)}
-    .hero-opt.active{background:rgba(195,165,105,.08);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
-    .hero-opt.active::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);border-radius:14px 14px 0 0}
+    .hero-opt{background:rgba(10,16,30,0.57);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:24px 22px;cursor:pointer;transition:all .3s;position:relative;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+    .hero-opt:hover{background:rgba(14,22,40,0.70);border-color:rgba(195,165,105,.3);transform:translateY(-2px)}
+    .hero-opt.active{background:rgba(10,16,30,0.62);border-color:rgba(195,165,105,0.35);box-shadow:none}
+    .hero-opt:last-child{background:rgba(10,16,30,0.64)}
+    .hero-opt:last-child:hover{background:rgba(14,22,40,0.74)}
+    .hero-opt.active::before{display:none}
     .hero-opt .ho-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
     .hero-opt .ho-icon{width:44px;height:44px;border-radius:12px;background:rgba(195,165,105,.12);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--gold);flex-shrink:0}
     .hero-opt.active .ho-icon{background:var(--gold);color:var(--brand-dark)}
@@ -42,7 +49,7 @@
     .hero-opt .ho-tag{padding:3px 9px;border-radius:5px;font-size:10.5px;font-weight:500;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08)}
     .hero-opt.active .ho-tag{background:rgba(195,165,105,.1);color:var(--gold);border-color:rgba(195,165,105,.2)}
     .hero-opt .ho-arrow{display:flex;align-items:center;gap:5px;margin-top:12px;font-size:12px;font-weight:700;color:var(--gold);opacity:0;transition:opacity .2s}
-    .hero-opt.active .ho-arrow,.hero-opt:hover .ho-arrow{opacity:1}
+    .hero-opt:hover .ho-arrow{opacity:1}
     .hero-opt .ho-arrow i{font-size:10px;transition:transform .2s}
     .hero-opt:hover .ho-arrow i{transform:translateX(3px)}
 
@@ -226,6 +233,7 @@
 <div id="site-header"></div>
 
 <div class="fh">
+    <div class="hero-bg-photo"><img src="../jpg/hero_feasibility.png" alt="사업성 검토"></div>
     <div class="inner">
         <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>사업성 검토</span></div>
         <h1>사업성 검토</h1>

@@ -114,26 +114,30 @@
     .cm-pager button.active{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark)}
     .cm-pager button:disabled{opacity:.25;pointer-events:none}
     
-    /* === Unified Hero (about-hero 기준) === */
+    /* === Unified Hero (3안 패밀리) === */
     .uni-hero {
-        background: linear-gradient(160deg, #0A0F1C 0%, #142644 50%, #0A0F1C 100%);
+        background: linear-gradient(135deg, #0F1D35 0%, #142644 40%, #0A0F1C 100%);
         position: relative; overflow: hidden; padding: 44px 0 36px;
     }
+    .uni-hero .hero-bg-photo { position: absolute; top: 0; right: 0; width: 58%; height: 100%; z-index: 0; }
+    .uni-hero .hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; filter: brightness(0.82) contrast(1.08); }
+    .uni-hero .hero-bg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #0A0F1C 0%, rgba(10,15,28,0.94) 6%, rgba(14,24,42,0.65) 24%, rgba(18,32,56,0.4) 48%, rgba(20,38,68,0.28) 72%, rgba(20,38,68,0.22) 100%); z-index: 1; }
+    .uni-hero .hero-bg-photo::before { content: ''; position: absolute; top: 0; bottom: 0; left: 22%; width: 56%; pointer-events: none; background: linear-gradient(90deg, rgba(15,26,46,0) 0%, rgba(15,26,46,0.06) 25%, rgba(14,22,40,0.16) 52%, rgba(14,22,40,0.18) 62%, rgba(15,26,46,0.08) 80%, rgba(15,26,46,0) 100%); filter: blur(24px); z-index: 2; }
     .uni-hero::before {
         content: ''; position: absolute; inset: 0;
         background-image:
             radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
             radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
-        pointer-events: none;
+        pointer-events: none; z-index: 1;
     }
     .uni-hero::after {
         content: ''; position: absolute; inset: 0;
         background-image:
             linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
             linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
-        background-size: 60px 60px; pointer-events: none;
+        background-size: 60px 60px; pointer-events: none; z-index: 1;
     }
-    .uni-hero .inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 56px; }
+    .uni-hero .inner { position: relative; z-index: 2; display: flex; align-items: center; gap: 56px; }
     .uni-hero .uh-text { flex: 1; min-width: 0; }
     .uni-hero .uh-bc { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
     .uni-hero .uh-bc a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
@@ -148,20 +152,17 @@
     .uni-hero .uh-stats { display: flex; gap: 24px; }
     .uni-hero .uh-stat { display: flex; align-items: center; gap: 5px; font-size: 12px; color: rgba(255,255,255,0.4); }
     .uni-hero .uh-stat strong { font-size: 17px; font-weight: 800; color: #C3A569; }
-    .uni-hero .uh-visual { flex-shrink: 0; width: 440px; position: relative; transform: translateY(4px); }
-    .uni-hero .uh-photo { width: 100%; max-width: 100%; border-radius: 10px; overflow: hidden; margin-bottom: 10px; position: relative; box-sizing: border-box; }
-    .uni-hero .uh-photo img { width: 100%; display: block; filter: brightness(0.92) saturate(0.9); }
-    .uni-hero .uh-photo::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(135deg, rgba(10,15,28,0.35) 0%, transparent 60%); border-radius: 10px; }
-    .uni-hero .uh-photo::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50px; z-index: 1; background: linear-gradient(to top, rgba(10,15,28,0.3), transparent); pointer-events: none; }
+    .uni-hero .uh-visual { flex-shrink: 0; width: 360px; position: relative; z-index: 2; }
+    .uni-hero .uh-photo { display: none; }
     .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .uni-hero .uh-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.1); border-radius: 10px; padding: 20px 18px; transition: all 0.3s; }
-    .uni-hero .uh-card:hover { background: rgba(195,165,105,0.08); border-color: rgba(195,165,105,0.3); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-    .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .uni-hero .uh-card { background: rgba(10,16,30,0.57); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; padding: 20px 18px; transition: all 0.3s; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .uni-hero .uh-card:hover { background: rgba(14,22,40,0.70); border-color: rgba(195,165,105,0.3); transform: translateY(-2px); }
+    .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.16); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
     .uni-hero .uh-ci i { font-size: 15px; color: #C3A569; }
     .uni-hero .uh-card h4 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 3px; }
-    .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,0.6); font-weight: 500; line-height: 1.5; }
-    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-visual { width: 100%; max-width: 460px; } }
-    @media (max-width: 600px) { .uni-hero { padding: 52px 0 44px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } }
+    .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,0.75); font-weight: 500; line-height: 1.5; }
+    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(10,15,28,0.5) 0%, rgba(20,38,68,0.7) 100%); } }
+    @media (max-width: 600px) { .uni-hero { padding: 36px 0 28px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     </style>
 </head>
@@ -169,6 +170,7 @@
 <div id="site-header"></div>
 
 <div class="uni-hero">
+    <div class="hero-bg-photo"><img src="../jpg/hero_community.png" alt="세울엔지니어링 커뮤니티"></div>
     <div class="inner">
         <div class="uh-text">
             <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>커뮤니티</span></div>

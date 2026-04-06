@@ -419,50 +419,124 @@
         width: 36px; height: 2px; background: var(--gold);
     }
     
-    /* === Unified Hero (about-hero 기준) === */
-    .uni-hero {
-        background: linear-gradient(160deg, #0A0F1C 0%, #142644 50%, #0A0F1C 100%);
-        position: relative; overflow: hidden; padding: 72px 0 64px;
+    /* === Vision Hero (about-hero 3안 패밀리) === */
+    .vision-hero {
+        background: linear-gradient(135deg, #0F1D35 0%, #142644 40%, #0A0F1C 100%);
+        position: relative; overflow: hidden;
+        padding: 56px 0 52px; min-height: 400px;
     }
-    .uni-hero::before {
+    .vision-hero .hero-bg-photo {
+        position: absolute; top: 0; right: 0;
+        width: 58%; height: 100%; z-index: 0;
+    }
+    .vision-hero .hero-bg-photo img {
+        width: 100%; height: 100%;
+        object-fit: cover; object-position: center 30%;
+        display: block; filter: brightness(0.82) contrast(1.08);
+    }
+    .vision-hero .hero-bg-photo::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(90deg,
+            #0A0F1C 0%, rgba(10,15,28,0.94) 6%,
+            rgba(14,24,42,0.65) 24%, rgba(18,32,56,0.4) 48%,
+            rgba(20,38,68,0.28) 72%, rgba(20,38,68,0.22) 100%
+        ); z-index: 1;
+    }
+    .vision-hero .hero-bg-photo::before {
+        content: ''; position: absolute;
+        top: 0; bottom: 0; left: 22%; width: 56%;
+        pointer-events: none;
+        background: linear-gradient(90deg,
+            rgba(15,26,46,0) 0%, rgba(15,26,46,0.06) 25%,
+            rgba(14,22,40,0.16) 52%, rgba(14,22,40,0.18) 62%,
+            rgba(15,26,46,0.08) 80%, rgba(15,26,46,0) 100%
+        ); filter: blur(24px); z-index: 2;
+    }
+    .vision-hero::before {
         content: ''; position: absolute; inset: 0;
         background-image:
             radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
             radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
-        pointer-events: none;
+        pointer-events: none; z-index: 1;
     }
-    .uni-hero::after {
+    .vision-hero::after {
         content: ''; position: absolute; inset: 0;
         background-image:
             linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
             linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
-        background-size: 60px 60px; pointer-events: none;
+        background-size: 60px 60px; pointer-events: none; z-index: 1;
     }
-    .uni-hero .inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 56px; }
-    .uni-hero .uh-text { flex: 1; min-width: 0; }
-    .uni-hero .uh-bc { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
-    .uni-hero .uh-bc a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
-    .uni-hero .uh-bc a:hover { color: #C3A569; }
-    .uni-hero .uh-bc span { color: #C3A569; font-weight: 600; }
-    .uni-hero .uh-bc i { font-size: 10px; }
-    .uni-hero .uh-label { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; color: #C3A569; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
-    .uni-hero .uh-label::before { content: ''; width: 24px; height: 1px; background: #C3A569; }
-    .uni-hero .uh-text h1 { font-size: 36px; font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -1px; margin-bottom: 14px; }
-    .uni-hero .uh-text h1 em { font-style: normal; color: #C3A569; }
-    .uni-hero .uh-sub { font-size: 15px; color: rgba(255,255,255,0.68); line-height: 1.7; max-width: 460px; }
-    .uni-hero .uh-visual { flex-shrink: 0; width: 480px; position: relative; transform: translateY(4px); }
-    .uni-hero .uh-photo { width: 100%; border-radius: 10px; overflow: hidden; margin-bottom: 10px; position: relative; }
-    .uni-hero .uh-photo img { width: 100%; display: block; }
-    .uni-hero .uh-photo::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: linear-gradient(to top, rgba(10,15,28,0.25), transparent); pointer-events: none; }
-    .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .uni-hero .uh-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.1); border-radius: 10px; padding: 20px 18px; transition: all 0.3s; }
-    .uni-hero .uh-card:hover { background: rgba(195,165,105,0.06); border-color: rgba(195,165,105,0.22); }
-    .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
-    .uni-hero .uh-ci i { font-size: 14px; color: #C3A569; }
-    .uni-hero .uh-card h4 { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 3px; }
-    .uni-hero .uh-card p { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
-    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-visual { width: 100%; max-width: 520px; } }
-    @media (max-width: 600px) { .uni-hero { padding: 52px 0 44px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } }
+    .vision-hero .inner {
+        position: relative; z-index: 2;
+        display: flex; align-items: center; gap: 48px;
+    }
+    .vision-hero .hero-text { flex: 1; min-width: 0; position: relative; z-index: 2; }
+    .vision-hero .hero-cards-float {
+        flex-shrink: 0; width: 360px;
+        display: grid; grid-template-columns: repeat(2, 1fr);
+        gap: 12px; position: relative; z-index: 2;
+        margin-right: -14px;
+    }
+    .vision-hero .hero-breadcrumb {
+        display: flex; align-items: center; gap: 6px;
+        font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 24px;
+    }
+    .vision-hero .hero-breadcrumb a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
+    .vision-hero .hero-breadcrumb a:hover { color: #C3A569; }
+    .vision-hero .hero-breadcrumb span { color: #C3A569; font-weight: 600; }
+    .vision-hero .hero-breadcrumb i { font-size: 10px; }
+    .vision-hero .hero-label {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 12px; font-weight: 700; color: #C3A569;
+        letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .vision-hero .hero-label::before { content: ''; display: block; width: 24px; height: 1px; background: #C3A569; }
+    .vision-hero .hero-text h1 {
+        font-size: 38px; font-weight: 900; color: #fff;
+        line-height: 1.35; letter-spacing: -1px; margin-bottom: 16px;
+    }
+    .vision-hero .hero-text h1 em { font-style: normal; color: #C3A569; }
+    .vision-hero .hero-sub {
+        font-size: 16px; color: rgba(255,255,255,0.55);
+        line-height: 1.7; max-width: 480px;
+    }
+    .vision-hero .hero-card {
+        background: rgba(10,16,30,0.57);
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 12px; padding: 22px 18px;
+        transition: all 0.3s;
+        backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .vision-hero .hero-card:hover {
+        background: rgba(14,22,40,0.70);
+        border-color: rgba(195,165,105,0.3);
+        transform: translateY(-2px);
+    }
+    .vision-hero .hero-card-icon {
+        width: 36px; height: 36px; border-radius: 8px;
+        background: rgba(195,165,105,0.16);
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 12px;
+    }
+    .vision-hero .hero-card-icon i { font-size: 15px; color: #C3A569; }
+    .vision-hero .hero-card h4 { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .vision-hero .hero-card p { font-size: 11.5px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    @media (max-width: 1024px) {
+        .vision-hero .inner { flex-direction: column; gap: 32px; }
+        .vision-hero .hero-cards-float { width: 100%; max-width: 420px; }
+        .vision-hero .hero-bg-photo { width: 100%; opacity: 0.25; }
+        .vision-hero .hero-bg-photo::after {
+            background: linear-gradient(180deg, rgba(10,15,28,0.5) 0%, rgba(20,38,68,0.7) 100%);
+        }
+    }
+    @media (max-width: 600px) {
+        .vision-hero { padding: 48px 0 40px; min-height: auto; }
+        .vision-hero .hero-text h1 { font-size: 28px; }
+        .vision-hero .hero-sub { font-size: 14px; }
+        .vision-hero .hero-cards-float { grid-template-columns: 1fr; gap: 10px; }
+        .vision-hero .hero-bg-photo { opacity: 0.15; }
+    }
 
     </style>
 </head>
@@ -470,17 +544,42 @@
 <div id="site-header"></div>
 
 <!-- ══════ HERO ══════ -->
-<div class="uni-hero">
+<div class="vision-hero">
+    <div class="hero-bg-photo">
+        <img src="../jpg/hero_vision.png" alt="세울엔지니어링 도시모형 검토">
+    </div>
     <div class="inner">
-        <div class="uh-text">
-            <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>세울의 길</span></div>
-            <div class="uh-label">THE PATH OF SEUL</div>
-            <h1>절차의 <em>정합성</em>, 실행의 <em>책임</em></h1>
-            <p class="uh-sub">정비사업의 기준을 바로 세우고, 사업의 가치를 끝까지 완성하는 세울엔지니어링의 길</p>
+        <div class="hero-text">
+            <div class="hero-breadcrumb">
+                <a href="../index.html">홈</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span>세울의 길</span>
+            </div>
+            <div class="hero-label">The Path of SEUL</div>
+            <h1>절차의 <em>정합성</em>,<br>실행의 <em>책임</em></h1>
+            <p class="hero-sub">정비사업의 기준을 바로 세우고, 사업의 가치를 끝까지 완성하는 세울엔지니어링의 길</p>
         </div>
-        <div class="uh-visual">
-            <div class="uh-photo"><img src="../jpg/hero_vision.png" alt="세울엔지니어링 도시모형 검토"></div>
-            <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>절차의 정합성</h4><p>법과 원칙에 기반한 실무</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-handshake"></i></div><h4>이해관계 조율</h4><p>조합·행정·시공 균형 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-route"></i></div><h4>단계별 추진</h4><p>기획부터 준공까지 로드맵</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-shield-halved"></i></div><h4>책임지는 완결</h4><p>사업 완료까지 동행</p></div></div>
+        <div class="hero-cards-float">
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                <h4>절차의 정합성</h4>
+                <p>법과 원칙에 기반한 실무</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-handshake"></i></div>
+                <h4>이해관계 조율</h4>
+                <p>조합·행정·시공 균형 자문</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-route"></i></div>
+                <h4>단계별 추진</h4>
+                <p>기획부터 준공까지 로드맵</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4>책임지는 완결</h4>
+                <p>사업 완료까지 동행</p>
+            </div>
         </div>
     </div>
 </div>
