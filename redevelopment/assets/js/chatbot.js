@@ -37,7 +37,7 @@
         </button>
         <button class="chat-tab" data-mode="expert">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          AI 전문가
+          전문가
         </button>
       </div>
       <div id="chat-messages"></div>
@@ -372,7 +372,7 @@
       <div class="chat-avatar expert-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
       <div class="chat-content">
         <div class="chat-name expert-name">세울 전문가<span class="expert-badge">Gemma4</span></div>
-        <div class="chat-bubble">안녕하세요, <strong>세울 AI 전문가</strong>입니다.<br>정비사업 법규·절차·사업성 분석 등<br><strong>전문가 수준의 심층 상담</strong>을 제공합니다.<br>어떤 사안이 궁금하신가요?</div>
+        <div class="chat-bubble">안녕하세요, <strong>세울 전문가</strong>입니다.<br>정비사업 법규·절차·사업성 분석 등<br><strong>전문가 수준의 심층 상담</strong>을 제공합니다.<br>어떤 사안이 궁금하신가요?</div>
       </div>
     </div>`
   };
@@ -397,7 +397,7 @@
 
   const offlineGreeting = `<div class="expert-offline-notice">
     <div class="offline-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
-    <h4>AI 전문가 오프라인</h4>
+    <h4>전문가 오프라인</h4>
     <p>전문가 AI 서버가 현재 꺼져 있습니다.<br>서버가 가동되면 자동으로 활성화됩니다.</p>
     <button class="switch-btn" onclick="document.querySelector('.chat-tab[data-mode=general]').click()">AI 상담으로 전환</button>
   </div>`;
@@ -458,7 +458,7 @@
 
     // 헤더 변경
     if (mode === 'expert') {
-      headerTitle.textContent = '세울 AI 전문가';
+      headerTitle.textContent = '세울 전문가';
       headerSub.textContent = expertOnline ? 'Gemma4 기반 전문가 분석' : '서버 오프라인';
       input.classList.add('expert-focus');
       sendBtn.classList.add('expert-send');
@@ -634,7 +634,7 @@
       bubble.innerHTML = formatText(fullText || '응답을 받지 못했습니다.');
     } catch (e) {
       typing.remove();
-      addMessage('AI 전문가 서버에 연결할 수 없습니다.<br>서버 상태를 확인해주세요.', 'bot');
+      addMessage('전문가 서버에 연결할 수 없습니다.<br>서버 상태를 확인해주세요.', 'bot');
     }
   }
 
