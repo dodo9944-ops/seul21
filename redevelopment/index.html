@@ -680,7 +680,7 @@
 </section>
 
 <!-- ===== 03. 정비사업 추진절차 ===== -->
-<section style="background: linear-gradient(135deg, #0A0F1C, #142644); color: white; padding: 32px 0 20px;">
+<section class="section" style="background: linear-gradient(135deg, #0A0F1C, #142644); color: white; padding-top: 36px; padding-bottom: 28px;">
     <div class="inner">
         <h2 class="section-title" style="margin-bottom:6px;color:white">정비사업 추진 절차</h2>
         <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-bottom:0">세울엔지니어링이 각 단계에서 함께합니다</p>
@@ -785,7 +785,35 @@
     </div>
 </section>
 
-<!-- ===== 04. 사업성검토 ===== -->
+<!-- ===== 04. 주요사업지 경력 ===== -->
+<section class="section">
+    <div class="inner">
+        <div class="section-head">
+            <h2 class="section-title">주요사업지 경력</h2>
+            <a href="pages/portfolio.html" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+        </div>
+        <style>
+            .pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+            @media(max-width:768px){.pf-grid{grid-template-columns:repeat(2,1fr);gap:10px;}}
+            .pf-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:18px 16px;transition:all .2s;text-decoration:none;color:inherit;}
+            .pf-card:hover{border-color:var(--gold);box-shadow:0 6px 20px rgba(0,0,0,0.06);transform:translateY(-2px);}
+            .pf-type{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;background:rgba(10,15,28,0.06);color:var(--gray-500);margin-bottom:8px;}
+            .pf-name{font-size:14px;font-weight:700;color:var(--gray-900);line-height:1.35;margin-bottom:6px;}
+            .pf-meta{font-size:11px;color:var(--gray-400);line-height:1.5;}
+            .pf-meta span{display:inline-block;}
+            .pf-meta span+span::before{content:'·';margin:0 4px;color:var(--gray-300);}
+            @media(max-width:768px){
+                .pf-card{padding:14px 12px;}
+                .pf-name{font-size:13px;}
+                .pf-meta{font-size:10px;}
+                .pf-type{font-size:9px;padding:2px 5px;}
+            }
+        </style>
+        <div class="pf-grid" id="mainPortfolio"></div>
+    </div>
+</section>
+
+<!-- ===== 05. 사업성검토 ===== -->
 <section class="section">
     <div class="inner">
         <div class="cta-banner">
@@ -798,8 +826,8 @@
     </div>
 </section>
 
-<!-- ===== 05. 사업문의 ===== -->
-<section class="section" style="padding-top:0;">
+<!-- ===== 06. 사업문의 ===== -->
+<section class="section">
     <div class="inner">
         <div class="cta-banner" style="background:linear-gradient(135deg,#142644,#1A3158);">
             <div class="cta-text">
@@ -1001,22 +1029,16 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
 /* 메인페이지 자료실·커뮤니티 동적 로드 — mock-data 실제 데이터 사용 */
 (function(){
     if(typeof MOCK==='undefined') return;
-    /* 주요수행실적: featured 프로젝트 (mock-data 연동) */
+    /* 주요사업지 경력: 최신 6건 */
     var pfEl=document.getElementById('mainPortfolio');
     if(pfEl && MOCK.portfolio){
-        var featured=MOCK.portfolio.filter(function(p){return p.featured}).slice(-3);
-        pfEl.innerHTML=featured.map(function(p){
-            var imgSrc=p.featuredImage||p.thumbnail;
-            var imgHtml=imgSrc?'<img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" style="width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:16px" onerror="this.style.display=\'none\'">':'';
-            var statusColor=p.status==='완료'?'':'color:#C3A569;font-weight:600;';
-            return'<div class="expert-card">'+imgHtml+
-                '<h4>'+p.name+'</h4>'+
-                '<p>'+p.description.substring(0,80)+'…</p>'+
-                '<div class="expert-meta">'+
-                    '<span class="author">'+p.district+' · '+p.scale+(p.constructor&&p.constructor!=='미정'?' · '+p.constructor:'')+'</span>'+
-                    '<span>·</span>'+
-                    '<span style="'+statusColor+'">'+(p.phase||p.status)+'</span>'+
-                '</div></div>';
+        var items=MOCK.portfolio.slice(0,6);
+        pfEl.innerHTML=items.map(function(p){
+            return'<a href="pages/portfolio.html" class="pf-card">'+
+                '<div class="pf-type">'+p.type+'</div>'+
+                '<div class="pf-name">'+p.name+'</div>'+
+                '<div class="pf-meta"><span>'+p.district+'</span><span>'+p.scale+'</span><span>'+p.status+'</span></div>'+
+            '</a>';
         }).join('');
     }
 
