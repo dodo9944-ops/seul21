@@ -286,21 +286,18 @@ function row(){return'<div class="ca-row">'+Array.from(arguments).join('')+'</di
 function sec(icon,title){return'<div class="ca-sec"><i class="fa-solid '+icon+'"></i> '+title+'</div>'}
 
 function buildStep(idx){
-  var h='<div class="ca-step-head"><h3>'+STEPS[idx].title+'</h3>';
-  if(idx<STEPS.length-1)h+='<button class="cm-btn primary" onclick="CA.goStep('+(idx+1)+')">다음 단계 <i class="fa-solid fa-arrow-right"></i></button>';
-  h+='</div>';
-
+  var h='<div class="ca-step-head"><h3>'+STEPS[idx].title+'</h3><div style="display:flex;gap:8px;align-items:center">';
   if(idx===0){
-    // 파일 입력
-    h+='<div class="ca-file-upload" style="margin-bottom:16px;padding:16px 20px;border:1.5px dashed rgba(195,165,105,0.3);border-radius:10px;background:rgba(195,165,105,0.03);text-align:center">';
-    h+='<i class="fa-solid fa-file-arrow-up" style="font-size:20px;color:#C3A569;margin-bottom:8px;display:block"></i>';
-    h+='<p style="font-size:13px;color:var(--gray-600);margin-bottom:10px">엑셀/CSV 파일로 기초데이터를 한 번에 입력할 수 있습니다</p>';
-    h+='<label style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:6px;background:#0A0F1C;color:#fff;font-size:12px;font-weight:700;cursor:pointer">';
-    h+='<i class="fa-solid fa-upload"></i> 파일 선택 (xlsx, csv)';
+    h+='<label style="display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:6px;border:1.5px dashed rgba(195,165,105,0.35);background:rgba(195,165,105,0.04);color:var(--gray-600);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">';
+    h+='<i class="fa-solid fa-file-arrow-up" style="color:#C3A569"></i> 파일 가져오기';
     h+='<input type="file" accept=".xlsx,.xls,.csv" onchange="CA.importFile(this)" style="display:none">';
     h+='</label>';
-    h+='<button class="cm-btn" onclick="CA.downloadTemplate()" style="margin-left:8px;font-size:11px"><i class="fa-solid fa-download"></i> 입력양식 다운로드</button>';
-    h+='</div>';
+    h+='<button class="cm-btn" onclick="CA.downloadTemplate()" style="font-size:11px;white-space:nowrap"><i class="fa-solid fa-download"></i> 양식</button>';
+  }
+  if(idx<STEPS.length-1)h+='<button class="cm-btn primary" onclick="CA.goStep('+(idx+1)+')">다음 단계 <i class="fa-solid fa-arrow-right"></i></button>';
+  h+='</div></div>';
+
+  if(idx===0){
     // 기초 데이터
     h+=sec('fa-tag','사업 기본정보');
     h+='<div class="ca-fg"><label>사업유형</label><select data-field="projectType">'+CFG.PROJECT_TYPES.map(function(t){return'<option'+(D.projectType===t?' selected':'')+'>'+t+'</option>'}).join('')+'</select></div>';
