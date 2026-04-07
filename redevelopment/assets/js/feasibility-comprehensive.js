@@ -607,16 +607,19 @@ function importFile(input){
 }
 
 /* ════════════════════════════════════════
-   EXCEL EXPORT — 모든 연산 세부 표기
+   EXCEL EXPORT — 시트간 수식 연동 완전판
    ════════════════════════════════════════ */
 function exportExcel(){
   if(typeof XLSX==='undefined'){if(typeof App!=='undefined')App.toast('엑셀 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.','info');return}
   var wb=XLSX.utils.book_new();
   var N='#,##0',P='0.00%',W='#,##0"원"';
-  function hdr(ws,r,cols){cols.forEach(function(c,i){var ref=XLSX.utils.encode_cell({r:r,c:i});if(ws[ref]){ws[ref].s={font:{bold:true,color:{rgb:'FFFFFF'}},fill:{fgColor:{rgb:'0A0F1C'}},alignment:{horizontal:'center'}}}});return ws}
   function colW(ws,widths){ws['!cols']=widths.map(function(w){return{wch:w}});return ws}
+  function fmtCells(ws,refs,z){refs.forEach(function(ref){if(ws[ref])ws[ref].z=z})}
+  function numFmt(ws,col,startRow,count,z){for(var i=0;i<count;i++){var ref=XLSX.utils.encode_cell({r:startRow+i,c:col});if(ws[ref]&&typeof ws[ref].v==='number')ws[ref].z=z;if(ws[ref]&&ws[ref].f)ws[ref].z=z}}
 
-  /* ── Sheet 1: 기본데이터 ── */
+  /* ═══════════════════════════════════════════
+     Sheet 1: 기본데이터 (입력값만, 수식 없음)
+     ═══════════════════════════════════════════ */
   var s1=[
     ['(주)세울엔지니어링 — 종합 사업성 분석'],
     ['생성일시',new Date().toLocaleString('ko-KR')],
@@ -649,7 +652,16 @@ function exportExcel(){
   colW(ws1,[24,20,8]);
   XLSX.utils.book_append_sheet(wb,ws1,'기본데이터');
 
-  /* ── Sheet 2: 종전자산 ── */
+  /* ═══════════════════════════════════════════
+     Sheet 2: 종전자산 — 유형별 B*C 수식, SUM 합계
+     Row layout (1-indexed):
+       1: 제목
+       3: 산정방식
+       5: 헤더 (유형/세대수/평균평가액/소계/산출식)
+       6~: 유형별 데이터 행 (가변)
+       빈행
+       합계행 → prevSumRow
+     ═══════════════════════════════════════════ */
   var prev=Engine.prevAssetTotal();
   var s2=[
     ['종전자산 평가'],
@@ -657,50 +669,93 @@ function exportExcel(){
     ['산정방식',D.prevAssetMode==='simple'?'총액 직접입력':'유형별 상세입력'],
     []
   ];
+  /* 종전자산 합계가 위치할 행 번호 (1-indexed, 시트간 참조용) */
+  var prevSumRow;
+  var prevDataFirstRow; /* 데이터 시작 행 (1-indexed) */
+  var prevDataLastRow;  /* 데이터 마지막 행 (1-indexed) */
+
   if(D.prevAssetMode==='detail'){
     s2.push(['유형','세대수','평균 평가액(원)','소계(원)','산출식']);
-    var pRow=5;
-    D.prevTypes.forEach(function(t,i){
-      if(t.count>0){
-        s2.push([t.name,t.count,t.avgValue,{f:'B'+(pRow+i+1)+'*C'+(pRow+i+1)},'세대수 × 평균평가액']);
-        pRow++;
-      }
+    /* 헤더가 s2[4] = 0-indexed row 4 = 1-indexed row 5 */
+    var prevValidTypes=[];
+    D.prevTypes.forEach(function(t){if(t.count>0)prevValidTypes.push(t)});
+    prevDataFirstRow=6; /* 첫 데이터 = 1-indexed row 6 */
+    prevValidTypes.forEach(function(t,i){
+      var r1=prevDataFirstRow+i; /* 1-indexed 행 번호 */
+      s2.push([t.name,t.count,t.avgValue,{t:'n',f:'B'+r1+'*C'+r1},'세대수 x 평균평가액']);
     });
+    prevDataLastRow=prevDataFirstRow+prevValidTypes.length-1;
     s2.push([]);
-    s2.push(['종전자산 합계','','',prev]);
+    prevSumRow=prevDataLastRow+2; /* 빈행 건너뛴 합계 행 */
+    s2.push(['종전자산 합계','','',{t:'n',f:'SUM(D'+prevDataFirstRow+':D'+prevDataLastRow+')'}]);
   } else {
     s2.push(['종전자산 총액',prev,'원']);
+    prevSumRow=5; /* simple 모드: B5에 총액 */
+    prevDataFirstRow=5;
+    prevDataLastRow=5;
   }
   var ws2=XLSX.utils.aoa_to_sheet(s2);
   colW(ws2,[16,12,20,20,20]);
+  /* 금액 컬럼 천단위 포맷 */
+  if(D.prevAssetMode==='detail'){
+    numFmt(ws2,2,prevDataFirstRow-1,prevDataLastRow-prevDataFirstRow+1,N);
+    numFmt(ws2,3,prevDataFirstRow-1,prevDataLastRow-prevDataFirstRow+1,N);
+    fmtCells(ws2,[XLSX.utils.encode_cell({r:prevSumRow-1,c:3})],N);
+  }
   XLSX.utils.book_append_sheet(wb,ws2,'종전자산');
 
-  /* ── Sheet 3: 종후자산 ── */
-  var genRev=D.generalUnits*D.generalAvgPrice;
-  var memRev=D.postMemberValue||(D.memberCount*D.memberAvgPrice);
+  /* ═══════════════════════════════════════════
+     Sheet 3: 종후자산 — B*C 수식, SUM 합계
+     Row layout (1-indexed):
+       1: 제목
+       3: 헤더
+       4: 일반분양  → B4*C4
+       5: 조합원분양 → B5*C5
+       6: 상가      → 직접입력 (C6에 값)
+       7: 보류지    → B7*C7
+       8: 기타      → 직접입력 (D8에 값)
+       9: 빈행
+      10: 총수입 합계 → SUM(D4:D8)
+      11: 빈행
+      12: 참고문구
+     ═══════════════════════════════════════════ */
   var comRev=D.postCommercialValue||D.commercialPrice;
-  var resRev=(D.reserveUnits*D.reserveAvgPrice)+(D.reserveCommercialArea*D.reserveCommercialPrice);
   var etcRev=D.postEtcValue||0;
-  var tr=Engine.totalRevenue();
   var s3=[
     ['종후자산 · 분양수입 산출'],
     [],
     ['항목','세대수/수량','단가(원)','금액(원)','산출식'],
-    ['일반분양 수입',D.generalUnits,D.generalAvgPrice,{f:'B4*C4'},'세대수 × 일반분양 평균가'],
-    ['조합원분양 수입',D.memberCount,D.memberAvgPrice,{f:'B5*C5'},'조합원수 × 조합원분양 평균가'],
+    ['일반분양 수입',D.generalUnits,D.generalAvgPrice,{t:'n',f:'B4*C4'},'세대수 x 일반분양 평균가'],
+    ['조합원분양 수입',D.memberCount,D.memberAvgPrice,{t:'n',f:'B5*C5'},'조합원수 x 조합원분양 평균가'],
     ['상가 분양수입','',comRev,comRev,'직접입력'],
-    ['보류지 수입',D.reserveUnits,D.reserveAvgPrice,{f:'B7*C7'},'보류지 세대 × 평균가'],
+    ['보류지 수입',D.reserveUnits,D.reserveAvgPrice,{t:'n',f:'B7*C7'},'보류지 세대 x 평균가'],
     ['기타 수입','','',etcRev,'직접입력'],
     [],
-    ['총수입 합계','','',{f:'D4+D5+D6+D7+D8'},'= 일반분양+조합원+상가+보류지+기타'],
+    ['총수입 합계','','',{t:'n',f:'SUM(D4:D8)'},'= SUM(일반분양~기타)'],
     [],
     ['※ 종후자산 = 총수입 - 총사업비 (사업비 시트 참조)']
   ];
+  /* 종후자산 총수입 합계 = 항상 D10 (1-indexed row 10) */
+  var revSumRow=10;
   var ws3=XLSX.utils.aoa_to_sheet(s3);
-  colW(ws3,[18,14,18,20,28]);
+  colW(ws3,[18,14,18,22,28]);
+  /* 금액 포맷 */
+  numFmt(ws3,2,3,5,N); /* C4~C8 단가 */
+  numFmt(ws3,3,3,5,N); /* D4~D8 금액 */
+  fmtCells(ws3,[XLSX.utils.encode_cell({r:9,c:3})],N); /* D10 합계 */
   XLSX.utils.book_append_sheet(wb,ws3,'종후자산');
 
-  /* ── Sheet 4: 사업비 ── */
+  /* ═══════════════════════════════════════════
+     Sheet 4: 사업비 — 비율모드 시 공사비 참조 수식
+     Row layout (1-indexed):
+       1: 제목
+       3: 산정방식
+       5: 헤더
+       6: 공사비 (직접입력 기준값)
+       7~: 나머지 항목 (가변)  → ratio: B6*비율/100
+       빈행
+       합계행 → costSumRow
+     ═══════════════════════════════════════════ */
   var bd=Engine.costBreakdown();
   var tc=Engine.totalCost();
   var s4=[
@@ -710,74 +765,182 @@ function exportExcel(){
     [],
     ['항목','금액(원)','비중(%)','산출근거']
   ];
-  var costStartRow=6;
+  var costStartRow=6; /* 1-indexed row 6 = 0-indexed row 5 */
+  var costConstructionRow=costStartRow; /* 공사비 행 = B6 */
+  var ratioMap={'설계비':'costRatioDesign','감리비':'costRatioSupervision','철거비':'costRatioDemolition',
+                '금융비용':'costRatioFinance','운영비':'costRatioOperation','기타':'costRatioEtc','예비비':'costRatioReserve'};
+
   bd.forEach(function(b,i){
-    var pct=tc>0?b.value/tc:0;
-    var basis='';
+    var r1=costStartRow+i; /* 현재 행 (1-indexed) */
+    var row;
     if(D.costMode==='ratio'&&b.name!=='공사비'){
-      var rk={'설계비':'costRatioDesign','감리비':'costRatioSupervision','철거비':'costRatioDemolition','금융비용':'costRatioFinance','운영비':'costRatioOperation','기타':'costRatioEtc','예비비':'costRatioReserve'}[b.name];
-      if(rk) basis='공사비 × '+(D[rk]||0)+'%';
+      var rk=ratioMap[b.name];
+      var ratio=rk?D[rk]||0:0;
+      /* 금액: =B6*비율/100 (공사비 셀 참조), 비중: =B행/B합계행 */
+      row=[b.name,
+           {t:'n',f:'B'+costConstructionRow+'*'+ratio+'/100'},
+           null, /* 비중은 나중에 수식 삽입 */
+           '공사비 x '+ratio+'%'];
+    } else {
+      /* 공사비 또는 detail 모드: 값 직접입력 */
+      row=[b.name,b.value,null,b.name==='공사비'?'기준입력':'직접입력'];
     }
-    s4.push([b.name,b.value,pct,basis||'직접입력']);
+    s4.push(row);
   });
   s4.push([]);
-  var sumRow=costStartRow+bd.length;
-  var sumFormula='SUM(B'+costStartRow+':B'+sumRow+')';
-  s4.push(['총사업비 합계',{f:sumFormula},1,'']);
+  var costDataLastRow=costStartRow+bd.length-1;
+  var costSumRow=costDataLastRow+2; /* 빈행 건너뛴 합계 행 */
+  s4.push(['총사업비 합계',
+           {t:'n',f:'SUM(B'+costStartRow+':B'+costDataLastRow+')'},
+           1,
+           '']);
+
   var ws4=XLSX.utils.aoa_to_sheet(s4);
-  colW(ws4,[16,20,12,28]);
-  /* 비중 컬럼 % 포맷 */
-  for(var ci=0;ci<bd.length;ci++){
-    var ref=XLSX.utils.encode_cell({r:costStartRow-1+ci,c:2});
-    if(ws4[ref])ws4[ref].z=P;
-  }
+  colW(ws4,[16,22,12,28]);
+
+  /* 비중(C열) 수식 삽입: =B행/B합계행 */
+  bd.forEach(function(b,i){
+    var r1=costStartRow+i;
+    var cRef=XLSX.utils.encode_cell({r:r1-1,c:2}); /* C열 (0-indexed col 2) */
+    ws4[cRef]={t:'n',f:'IF(B$'+costSumRow+'=0,0,B'+r1+'/B$'+costSumRow+')',z:P};
+  });
+  /* 합계행 비중 = 100% */
+  var costSumPctRef=XLSX.utils.encode_cell({r:costSumRow-1,c:2});
+  if(ws4[costSumPctRef])ws4[costSumPctRef].z=P;
+  /* B열 금액 천단위 포맷 */
+  numFmt(ws4,1,costStartRow-1,bd.length,N);
+  fmtCells(ws4,[XLSX.utils.encode_cell({r:costSumRow-1,c:1})],N);
   XLSX.utils.book_append_sheet(wb,ws4,'사업비');
 
-  /* ── Sheet 5: 분석결과 ── */
-  var pa=Engine.postAssetTotal();
-  var r=Engine.ratio();
-  var ab=Engine.avgBurden();
-  var avgRights=prev>0&&D.memberCount>0?pa/D.memberCount:0;
+  /* ═══════════════════════════════════════════
+     Sheet 5: 분석결과 — 시트간 참조 수식 사용
+     Row layout (1-indexed):
+       1: 제목
+       3: 헤더
+       4: 총수입(A)       → =종후자산!D{revSumRow}
+       5: 총사업비(B)     → =사업비!B{costSumRow}
+       6: 종후자산(C=A-B) → =B4-B5
+       7: 종전자산(D)     → =종전자산!D{prevSumRow} 또는 B{prevSumRow}
+       8: 빈행
+       9: 비례율(C/D)     → =IF(B7=0,0,B6/B7)
+      10: 빈행
+      11: 분담금 헤더
+      12: 1인당 평균 권리가액 → =IF(조합원수=0,0,B6/조합원수)
+      13: 조합원 분양 평균가  → 입력값
+      14: 평균 추정 분담금    → =B13-B12
+      15: 빈행
+      16: 유형별 제목
+      17: 유형별 헤더
+      18~: 유형별 데이터   → 권리가액=C행*B$9, 분담금=조합원분양가-D행
+     ═══════════════════════════════════════════ */
   var bt=Engine.burdenByType();
+  /* 종전자산 참조: detail=D열, simple=B열 */
+  var prevRef=D.prevAssetMode==='detail'
+    ?("'종전자산'!D"+prevSumRow)
+    :("'종전자산'!B"+prevSumRow);
+  var memberCount=D.memberCount||0;
+
   var s5=[
     ['분석 결과 — 비례율 · 분담금 산출'],
     [],
     ['핵심 지표','값','산출식'],
-    ['총수입(A)',tr,'= 종후자산!D10'],
-    ['총사업비(B)',tc,'= 사업비!총사업비합계'],
-    ['종후자산(C=A-B)',pa,'= 총수입 - 총사업비'],
-    ['종전자산(D)',prev,'= 종전자산!합계'],
+    ['총수입(A)',        {t:'n',f:"'종후자산'!D"+revSumRow},            '= 종후자산!D'+revSumRow],
+    ['총사업비(B)',      {t:'n',f:"'사업비'!B"+costSumRow},             '= 사업비!B'+costSumRow],
+    ['종후자산(C=A-B)',  {t:'n',f:'B4-B5'},                             '= B4 - B5'],
+    ['종전자산(D)',      {t:'n',f:prevRef},                             '= '+prevRef],
     [],
-    ['비례율 (C÷D)',r,'= 종후자산 ÷ 종전자산'],
+    ['비례율 (C÷D)',    {t:'n',f:'IF(B7=0,0,B6/B7)'},                  '= B6 / B7'],
     [],
     ['분담금 산출','값','산출식'],
-    ['1인당 평균 권리가액',avgRights,'= 종후자산 ÷ 조합원수 ('+D.memberCount+'명)'],
-    ['조합원 분양 평균가',D.memberAvgPrice,'입력값'],
-    ['평균 추정 분담금',ab,'= 분양가 - 권리가액'],
+    ['1인당 평균 권리가액',{t:'n',f:'IF('+memberCount+'=0,0,B6/'+memberCount+')'},'= 종후자산 / 조합원수('+memberCount+'명)'],
+    ['조합원 분양 평균가',D.memberAvgPrice,                             '입력값'],
+    ['평균 추정 분담금',  {t:'n',f:'B13-B12'},                          '= B13 - B12'],
     [],
     ['유형별 분담금 추정'],
     ['유형','세대수','종전 평가액(원)','권리가액(원)','추정 분담금(원)','환급/납부']
   ];
-  bt.forEach(function(t){
-    s5.push([t.name,t.count,t.avgPrev,t.rights,t.burden,t.isRefund?'환급':'납부']);
+  /* 유형별 데이터: 1-indexed row 18부터 */
+  var btStartRow=18;
+  bt.forEach(function(t,i){
+    var r1=btStartRow+i;
+    s5.push([
+      t.name,
+      t.count,
+      t.avgPrev,
+      {t:'n',f:'C'+r1+'*B$9'},              /* 권리가액 = 종전평가액 * 비례율 */
+      {t:'n',f:'B$13-D'+r1},                /* 분담금 = 조합원분양가 - 권리가액 */
+      {t:'s',f:'IF(E'+r1+'<0,"환급","납부")'}  /* 음수면 환급 */
+    ]);
   });
   var ws5=XLSX.utils.aoa_to_sheet(s5);
   colW(ws5,[22,16,18,18,18,10]);
-  /* 비례율 % 포맷 */
-  var ratioRef=XLSX.utils.encode_cell({r:8,c:1});
-  if(ws5[ratioRef])ws5[ratioRef].z=P;
+  /* 비례율 % 포맷 (B9) */
+  fmtCells(ws5,[XLSX.utils.encode_cell({r:8,c:1})],P);
+  /* 금액 천단위 포맷 */
+  fmtCells(ws5,[
+    XLSX.utils.encode_cell({r:3,c:1}),  /* B4 총수입 */
+    XLSX.utils.encode_cell({r:4,c:1}),  /* B5 총사업비 */
+    XLSX.utils.encode_cell({r:5,c:1}),  /* B6 종후자산 */
+    XLSX.utils.encode_cell({r:6,c:1}),  /* B7 종전자산 */
+    XLSX.utils.encode_cell({r:11,c:1}), /* B12 평균권리가액 */
+    XLSX.utils.encode_cell({r:12,c:1}), /* B13 조합원분양가 */
+    XLSX.utils.encode_cell({r:13,c:1})  /* B14 평균분담금 */
+  ],N);
+  /* 유형별 금액 포맷 */
+  bt.forEach(function(t,i){
+    numFmt(ws5,2,btStartRow-1+i,1,N); /* C열 종전평가액 */
+    numFmt(ws5,3,btStartRow-1+i,1,N); /* D열 권리가액 */
+    numFmt(ws5,4,btStartRow-1+i,1,N); /* E열 분담금 */
+  });
   XLSX.utils.book_append_sheet(wb,ws5,'분석결과');
 
-  /* ── Sheet 6: 최종결과 ── */
+  /* ═══════════════════════════════════════════
+     Sheet 6: 최종결과 — 분석결과 참조 + 시나리오 수식
+     Row layout (1-indexed):
+       1: 제목
+       3: 헤더
+       4: 기준안  → 분석결과 직접 참조
+       5: 보수안  → 기준안 * 변동률 수식
+       6: 낙관안  → 기준안 * 변동률 수식
+       7: 빈행
+       8: 종합 의견
+       9~: 의견 내용
+     ═══════════════════════════════════════════ */
   var sc=D.scenarios.map(function(s){return Engine.scenarioCalc(s)});
   var ins=Engine.insights();
   var warns=Engine.costWarnings();
   var s6=[
-    ['최종 종합 결과 — 시나리오 비교 · 의견'],
+    ['최종 종합 결과 — 시나리오 비교'],
     [],
     ['시나리오','총수입(원)','총사업비(원)','종후자산(원)','비례율','평균분담금(원)']
   ];
-  sc.forEach(function(s){s6.push([s.name,s.totalRev,s.totalCost,s.postAsset,s.ratio,s.avgBurden])});
+  /* Row 4 (기준안): 분석결과 시트 직접 참조 */
+  s6.push([
+    '기준안',
+    {t:'n',f:"'분석결과'!B4"},   /* 총수입 */
+    {t:'n',f:"'분석결과'!B5"},   /* 총사업비 */
+    {t:'n',f:"'분석결과'!B6"},   /* 종후자산 */
+    {t:'n',f:"'분석결과'!B9"},   /* 비례율 */
+    {t:'n',f:"'분석결과'!B14"}   /* 평균분담금 */
+  ]);
+  /* Row 5~6 (보수안, 낙관안): 기준안 기반 변동 수식 */
+  D.scenarios.forEach(function(s,i){
+    if(i===0)return; /* 기준안은 이미 삽입 */
+    var r1=4+i; /* 1-indexed: 보수안=5, 낙관안=6 */
+    var costPct=s.costChange||0;
+    var pricePct=s.priceChange||0;
+    /* 이름에 변동률 표시 */
+    var label=s.name;
+    if(costPct||pricePct) label+='(사업비'+(costPct>=0?'+':'')+costPct+'%,분양가'+(pricePct>=0?'+':'')+pricePct+'%)';
+    s6.push([
+      label,
+      {t:'n',f:'B4*(1+'+pricePct+'/100)'},              /* 총수입 변동 */
+      {t:'n',f:'C4*(1+'+costPct+'/100)'},                /* 총사업비 변동 */
+      {t:'n',f:'B'+r1+'-C'+r1},                          /* 종후자산 = 총수입-총사업비 */
+      {t:'n',f:"IF('분석결과'!B7=0,0,D"+r1+"/'분석결과'!B7)"}, /* 비례율 = 종후자산/종전자산 */
+      {t:'n',f:"'분석결과'!B13-(IF('분석결과'!B7=0,0,D"+r1+"/"+memberCount+"))"} /* 분담금 = 분양가-권리가액 */
+    ]);
+  });
   s6.push([]);
   s6.push(['종합 의견']);
   ins.forEach(function(m){s6.push(['',m])});
@@ -789,11 +952,17 @@ function exportExcel(){
   s6.push(['※ 본 분석은 입력 데이터 기준의 추정치이며, 실제 사업 여건에 따라 달라질 수 있습니다.']);
   s6.push(['※ (주)세울엔지니어링 | seul21.com | '+new Date().toLocaleDateString('ko-KR')]);
   var ws6=XLSX.utils.aoa_to_sheet(s6);
-  colW(ws6,[14,18,18,18,12,18]);
-  /* 비례율 컬럼 % 포맷 */
-  for(var si=0;si<sc.length;si++){
-    var sRef=XLSX.utils.encode_cell({r:3+si,c:4});
-    if(ws6[sRef])ws6[sRef].z=P;
+  colW(ws6,[30,18,18,18,12,18]);
+  /* 비례율 컬럼(E) % 포맷 — row 4,5,6 */
+  var scCount=D.scenarios.length;
+  for(var si=0;si<scCount;si++){
+    fmtCells(ws6,[XLSX.utils.encode_cell({r:3+si,c:4})],P);
+  }
+  /* 금액 컬럼 천단위 포맷 (B,C,D,F — row 4~6) */
+  for(var si2=0;si2<scCount;si2++){
+    [1,2,3,5].forEach(function(col){
+      fmtCells(ws6,[XLSX.utils.encode_cell({r:3+si2,c:col})],N);
+    });
   }
   XLSX.utils.book_append_sheet(wb,ws6,'최종결과');
 
