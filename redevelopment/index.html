@@ -146,24 +146,30 @@
             top: 6%; right: 2%; width: 76%; height: 84%; z-index: 3;
         }
         .hero-img-main img {
-            filter: brightness(0.45) contrast(1.08) saturate(0.7);
+            filter: brightness(0.38) contrast(1.05) saturate(0.55);
             object-position: center 40%;
         }
-        /* 2. 실무 전문성 보조 — 더 어둡고 더 뒤로 */
+        /* 메인 이미지 위 네이비 오버레이 — 스톡감 억제 */
+        .hero-img-main::before {
+            content: ''; position: absolute; inset: 0; z-index: 1;
+            background: rgba(10,15,28,0.18);
+            pointer-events: none;
+        }
+        /* 2. 실무 전문성 보조 — 거의 안 보이게 */
         .hero-img-sub1 {
             top: 56%; right: 60%; width: 28%; height: 34%; z-index: 2;
-            border: 1px solid rgba(195,165,105,0.08);
+            border: 1px solid rgba(195,165,105,0.04); opacity: 0.35;
         }
         .hero-img-sub1 img {
-            filter: brightness(0.3) contrast(0.95) saturate(0.5);
+            filter: brightness(0.2) contrast(0.9) saturate(0.3);
         }
-        /* 3. 협의·조율 보조 — 더 흐리고 더 뒤로 */
+        /* 3. 협의·조율 보조 — 거의 안 보이게 */
         .hero-img-sub2 {
             top: 6%; right: 66%; width: 24%; height: 30%; z-index: 1;
-            border: 1px solid rgba(195,165,105,0.06);
+            border: 1px solid rgba(195,165,105,0.03); opacity: 0.25;
         }
         .hero-img-sub2 img {
-            filter: brightness(0.25) contrast(0.9) saturate(0.4);
+            filter: brightness(0.15) contrast(0.85) saturate(0.2);
         }
         /* 이미지 위 오버레이 — 텍스트 가독성 강화 */
         .hero-images::after {
@@ -280,9 +286,9 @@
             max-width: 860px; width: 100%;
         }
         .hero-cap-item {
-            flex: 1; padding: 18px 20px;
-            background: rgba(10,15,28,0.75);
-            border: 1px solid rgba(195,165,105,0.15);
+            flex: 1; padding: 14px 18px;
+            background: rgba(10,15,28,0.6);
+            border: 1px solid rgba(195,165,105,0.12);
             border-radius: 6px; text-align: left;
             transition: all .35s ease; position: relative; overflow: hidden;
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -294,8 +300,8 @@
             opacity: 0; transition: opacity .35s ease;
         }
         .hero-cap-item:hover {
-            background: rgba(10,15,28,0.85);
-            border-color: rgba(195,165,105,.3);
+            background: rgba(10,15,28,0.72);
+            border-color: rgba(195,165,105,.25);
             transform: translateY(-2px);
         }
         .hero-cap-item:hover::before { opacity: 1; }
