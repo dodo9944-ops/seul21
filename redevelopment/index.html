@@ -208,6 +208,7 @@
             font-size: 46px; font-weight: 900; letter-spacing: -1.2px;
             color: #fff; line-height: 1.35; margin-bottom: 20px;
             text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+            max-width: 560px;
         }
         .hero-section h1 em {
             font-style: normal; color: #C3A569;
@@ -217,47 +218,13 @@
         /* 서브카피 */
         .hero-subtitle {
             font-size: 17px; font-weight: 400; color: rgba(255,255,255,.7);
-            line-height: 1.8; margin-bottom: 36px; max-width: 500px;
+            line-height: 1.8; margin-bottom: 32px; max-width: 480px;
             text-shadow: 0 1px 10px rgba(0,0,0,0.3);
             word-break: keep-all;
         }
 
-        /* 핵심역량 — 가볍고 작게 */
-        .hero-capabilities {
-            display: flex; gap: 12px; margin-bottom: 28px;
-            max-width: 680px; width: 100%;
-        }
-        .hero-cap-item {
-            flex: 1; padding: 12px 14px;
-            background: rgba(10,15,28,0.4);
-            border: 1px solid rgba(195,165,105,0.08);
-            border-radius: 6px; text-align: left;
-            transition: all .3s ease; position: relative; overflow: hidden;
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-        }
-        .hero-cap-item::before {
-            content: ''; position: absolute; top: 0; left: 0;
-            width: 2px; height: 100%;
-            background: linear-gradient(to bottom, #C3A569, rgba(195,165,105,.05));
-            opacity: 0; transition: opacity .3s ease;
-        }
-        .hero-cap-item:hover {
-            background: rgba(10,15,28,0.55);
-            border-color: rgba(195,165,105,.15);
-            transform: translateY(-1px);
-        }
-        .hero-cap-item:hover::before { opacity: 1; }
-        .hero-cap-num {
-            font-size: 9px; font-weight: 700; color: rgba(195,165,105,.4);
-            letter-spacing: 2px; margin-bottom: 5px;
-        }
-        .hero-cap-title {
-            font-size: 13px; font-weight: 700; color: rgba(255,255,255,.85);
-            line-height: 1.45;
-        }
-
         /* CTA 버튼 */
-        .hero-actions { display: flex; gap: 14px; }
+        .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
         .hero-actions .btn-hero-primary {
             display: inline-flex; align-items: center; gap: 10px;
             height: 52px; padding: 0 34px;
@@ -286,17 +253,10 @@
         }
 
         /* ── 반응형 ── */
-        @media (max-width: 1024px) {
-            .hero-capabilities { gap: 10px; }
-            .hero-cap-item { padding: 12px 14px; }
-        }
         @media (max-width: 768px) {
-            .hero-section h1 { font-size: 28px; letter-spacing: -.7px; }
+            .hero-section h1 { font-size: 28px; letter-spacing: -.7px; max-width: 100%; }
             .hero-subtitle { font-size: 14px; margin-bottom: 24px; }
             .hero-label { font-size: 9px; letter-spacing: 1.5px; padding: 5px 12px; margin-bottom: 16px; }
-            .hero-capabilities { flex-direction: column; gap: 8px; margin-bottom: 20px; max-width: 100%; }
-            .hero-cap-item { padding: 12px 14px; }
-            .hero-cap-title { font-size: 12px; }
             .hero-actions { flex-direction: column; gap: 10px; width: 100%; }
             .hero-actions .btn-hero-primary,
             .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 48px; font-size: 14px; }
@@ -631,27 +591,13 @@
         <div class="inner">
             <div class="hero-label"><i class="fa-solid fa-shield-halved"></i> 정비사업 전문 엔지니어링</div>
             <h1>도시의 미래를 <em>다시 세우는</em><br>정비사업 파트너</h1>
-            <p class="hero-subtitle">재개발·재건축·소규모정비사업 전 과정에서 사업성 검토, 인허가 대응,<br>조합 운영지원, 이해관계 조율까지 체계적으로 수행합니다.</p>
-
-            <div class="hero-capabilities">
-                <a href="pages/services.html" class="hero-cap-item" style="text-decoration:none;color:inherit;">
-                    <div class="hero-cap-num">01</div>
-                    <div class="hero-cap-title">사업성 분석 및<br>추진전략 수립</div>
-                </a>
-                <a href="pages/consultation.html" class="hero-cap-item" style="text-decoration:none;color:inherit;">
-                    <div class="hero-cap-num">02</div>
-                    <div class="hero-cap-title">조합·토지등소유자<br>협의 및 갈등관리</div>
-                </a>
-                <a href="pages/permit-support.html" class="hero-cap-item" style="text-decoration:none;color:inherit;">
-                    <div class="hero-cap-num">03</div>
-                    <div class="hero-cap-title">인허가·총회·계약<br>실무 전반 지원</div>
-                </a>
-            </div>
+            <p class="hero-subtitle">재개발·재건축·소규모정비사업 전 과정에서<br>사업성 검토, 인허가 대응, 조합 운영지원,<br>이해관계 조율까지 체계적으로 수행합니다.</p>
 
             <div class="hero-actions">
                 <a href="pages/contact.html" class="btn-hero-primary"><i class="fa-solid fa-paper-plane"></i> 상담 문의</a>
-                <a href="pages/library.html?cat=주요뉴스" class="btn-hero-outline"><i class="fa-solid fa-newspaper"></i> 주요뉴스 보기</a>
-                <a href="pages/services.html" class="btn-hero-outline"><i class="fa-solid fa-building"></i> 사업분야 보기</a>
+                <a href="pages/library.html?cat=주요뉴스" class="btn-hero-outline"><i class="fa-solid fa-newspaper"></i> 주요뉴스</a>
+                <a href="pages/services.html" class="btn-hero-outline"><i class="fa-solid fa-building"></i> 사업분야</a>
+                <a href="pages/feasibility.html" class="btn-hero-outline"><i class="fa-solid fa-chart-line"></i> 사업성검토</a>
             </div>
         </div>
     </div>
