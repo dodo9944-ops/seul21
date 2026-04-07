@@ -1092,7 +1092,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
-            var href=newsFileMap[i.id]||'pages/library.html?cat=주요뉴스';
+            var href=newsFileMap[i.id]||'pages/news.html';
             return'<a href="'+href+'" class="news-item" style="gap:10px;padding:12px 20px;">'+
                 '<span style="color:#C3A569;font-size:11px;flex-shrink:0;">●</span>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
