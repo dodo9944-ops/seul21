@@ -119,68 +119,110 @@
         }
 
         /* ══════════════════════════════════════
-           HERO — 메인 전용 프리미엄 (대표 1장 풀배경)
+           HERO — 컴팩트 상단 배너
            ══════════════════════════════════════ */
         .hero-section { padding: 0; }
 
         .hero-banner {
             position: relative;
             overflow: hidden;
-            background: #0A0F1C;
-            padding: 80px 0 0;
-            min-height: 520px;
+            background: linear-gradient(135deg, #0F1D35 0%, #142644 40%, #0A0F1C 100%);
+            padding: 40px 0 36px;
         }
-
-        /* 대표 이미지 1장 — 풀배경 */
-        .hero-bg-photo {
-            position: absolute; inset: 0; z-index: 0;
+        /* Hero slideshow */
+        .hero-slideshow {
+            position: absolute; top: 0; right: 0;
+            width: 58%; height: 100%; z-index: 0;
         }
-        .hero-bg-photo img {
-            width: 100%; height: 100%; object-fit: cover;
-            object-position: center 30%;
-            filter: brightness(0.38) contrast(1.08) saturate(0.55);
+        .hero-slideshow img {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: center 30%;
+            display: block;
+            filter: brightness(0.55) contrast(1.0) saturate(0.8);
+            opacity: 0;
+            transition: opacity 1.8s ease-in-out;
+            will-change: opacity;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
-        /* 좌측 텍스트 보호 그라디언트 */
-        .hero-bg-photo::after {
+        .hero-slideshow img.active { opacity: 1; }
+        .hero-slideshow::after {
             content: ''; position: absolute; inset: 0;
             background: linear-gradient(90deg,
-                rgba(10,15,28,.92) 0%, rgba(10,15,28,.85) 30%,
-                rgba(14,24,42,.55) 55%, rgba(20,38,68,.3) 75%,
-                rgba(20,38,68,.2) 100%
+                #0A0F1C 0%, rgba(10,15,28,0.94) 6%,
+                rgba(14,24,42,0.65) 24%, rgba(18,32,56,0.4) 48%,
+                rgba(20,38,68,0.28) 72%, rgba(20,38,68,0.22) 100%
             ); z-index: 1;
         }
-        /* 하단 페이드 */
-        .hero-bg-photo::before {
-            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-            height: 120px; z-index: 2;
-            background: linear-gradient(to top, #0A0F1C, transparent);
+        .hero-slideshow::before {
+            content: ''; position: absolute;
+            top: 0; bottom: 0; left: 22%; width: 56%;
+            pointer-events: none;
+            background: linear-gradient(90deg,
+                rgba(15,26,46,0) 0%, rgba(15,26,46,0.06) 25%,
+                rgba(14,22,40,0.16) 52%, rgba(14,22,40,0.18) 62%,
+                rgba(15,26,46,0.08) 80%, rgba(15,26,46,0) 100%
+            ); filter: blur(24px); z-index: 2;
+        }
+        @media (max-width: 1024px) {
+            .hero-slideshow { width: 100%; opacity: 0.25; }
+            .hero-slideshow::after { background: linear-gradient(180deg, rgba(10,15,28,0.5) 0%, rgba(20,38,68,0.7) 100%); }
+        }
+        @media (max-width: 600px) {
+            .hero-slideshow { opacity: 0.15; }
         }
 
-        /* 배경 그리드 텍스처 */
+        /* 배경 그리드 */
         .hero-bg-grid {
-            position: absolute; inset: 0; z-index: 1;
+            position: absolute; inset: 0;
             background-image:
-                linear-gradient(rgba(195,165,105,.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(195,165,105,.02) 1px, transparent 1px);
-            background-size: 56px 56px;
-            pointer-events: none;
+                linear-gradient(rgba(195,165,105,.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(195,165,105,.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* 빌딩 실루엣 */
+        .hero-skyline {
+            position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
+            opacity: .08;
+            background:
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 8% bottom / 40px 55%,
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 12% bottom / 28px 38%,
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 30% bottom / 36px 65%,
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 35% bottom / 50px 80%,
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 40% bottom / 32px 50%,
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 44% bottom / 44px 70%,
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 62% bottom / 38px 48%,
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 68% bottom / 52px 72%,
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 74% bottom / 30px 42%,
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 80% bottom / 46px 58%,
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 88% bottom / 34px 46%,
+                linear-gradient(to top, rgba(195,165,105,.6) 0%, transparent 100%) no-repeat 92% bottom / 42px 64%;
+        }
+
+        /* 글로우 */
+        .hero-glow {
+            position: absolute; width: 500px; height: 500px;
+            top: -40%; right: -10%; border-radius: 50%;
+            background: radial-gradient(circle, rgba(18,89,170,.1) 0%, transparent 70%);
         }
 
         /* 골드 수평선 */
         .hero-hline {
-            position: absolute; left: 0; right: 0; height: 1px; z-index: 3;
-            background: linear-gradient(90deg, transparent, rgba(195,165,105,.1) 30%, rgba(195,165,105,.1) 70%, transparent);
+            position: absolute; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(195,165,105,.12) 30%, rgba(195,165,105,.12) 70%, transparent);
         }
         .hero-hline-top { top: 0; }
         .hero-hline-bottom { bottom: 0; }
 
         /* ── 히어로 콘텐츠 좌측 정렬 ── */
         .hero-banner .inner {
-            position: relative; z-index: 4;
+            position: relative; z-index: 2;
             text-align: left;
             display: flex; flex-direction: column; align-items: flex-start;
             max-width: 1440px;
-            padding: 0 64px;
+            padding: 0 60px;
         }
         @media (max-width: 768px) {
             .hero-banner .inner { padding: 0 24px; }
@@ -189,18 +231,18 @@
         /* 라벨 */
         .hero-label {
             display: inline-flex; align-items: center; gap: 10px;
-            padding: 8px 20px; font-size: 12px; font-weight: 700;
+            padding: 8px 20px; font-size: 11px; font-weight: 700;
             letter-spacing: 2.5px; text-transform: uppercase;
-            color: #C3A569; border: 1px solid rgba(195,165,105,.22);
-            border-radius: 3px; margin-bottom: 22px;
+            color: #C3A569; border: 1px solid rgba(195,165,105,.25);
+            border-radius: 2px; margin-bottom: 18px;
         }
-        .hero-label i { font-size: 11px; color: #C3A569; }
+        .hero-label i { font-size: 10px; color: #C3A569; }
 
         /* 헤드라인 */
         .hero-section h1 {
-            font-size: 48px; font-weight: 900; letter-spacing: -1.2px;
-            color: #fff; line-height: 1.35; margin-bottom: 20px;
-            text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+            font-size: 38px; font-weight: 900; letter-spacing: -0.8px;
+            color: #fff; line-height: 1.4; margin-bottom: 16px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
         }
         .hero-section h1 em {
             font-style: normal; color: #C3A569;
@@ -209,24 +251,24 @@
 
         /* 서브카피 */
         .hero-subtitle {
-            font-size: 17px; font-weight: 400; color: rgba(255,255,255,.72);
-            line-height: 1.8; margin-bottom: 32px; max-width: 520px;
-            text-shadow: 0 1px 10px rgba(0,0,0,0.3);
+            font-size: 15px; font-weight: 500; color: rgba(255,255,255,.76);
+            line-height: 1.8; margin-bottom: 24px; max-width: 540px;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.2);
             word-break: keep-all;
         }
 
         /* 핵심역량 — 가로 한 줄 */
         .hero-capabilities {
-            display: flex; gap: 16px; margin-bottom: 32px;
+            display: flex; gap: 14px; margin-bottom: 24px;
             max-width: 860px; width: 100%;
         }
         .hero-cap-item {
-            flex: 1; padding: 18px 20px;
-            background: rgba(10,15,28,0.55);
-            border: 1px solid rgba(195,165,105,0.1);
-            border-radius: 8px; text-align: left;
+            flex: 1; padding: 16px 18px;
+            background: rgba(14,22,38,0.28);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 6px; text-align: left;
             transition: all .35s ease; position: relative; overflow: hidden;
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
         }
         .hero-cap-item::before {
             content: ''; position: absolute; top: 0; left: 0;
@@ -235,67 +277,65 @@
             opacity: 0; transition: opacity .35s ease;
         }
         .hero-cap-item:hover {
-            background: rgba(10,15,28,0.7);
-            border-color: rgba(195,165,105,.2);
+            background: rgba(14,22,40,0.40);
+            border-color: rgba(195,165,105,.18);
             transform: translateY(-2px);
         }
         .hero-cap-item:hover::before { opacity: 1; }
         .hero-cap-num {
-            font-size: 11px; font-weight: 700; color: rgba(195,165,105,.55);
+            font-size: 10px; font-weight: 700; color: rgba(195,165,105,.5);
             letter-spacing: 2px; margin-bottom: 8px;
         }
         .hero-cap-title {
-            font-size: 15px; font-weight: 800; color: #fff;
+            font-size: 14px; font-weight: 800; color: #fff;
             line-height: 1.5;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
         }
 
         /* CTA 버튼 */
         .hero-actions { display: flex; gap: 14px; }
         .hero-actions .btn-hero-primary {
             display: inline-flex; align-items: center; gap: 10px;
-            height: 54px; padding: 0 36px;
+            height: 50px; padding: 0 32px;
             background: linear-gradient(135deg, #C3A569, #D4B87A);
-            color: #0A0F1C; font-size: 16px; font-weight: 700;
-            border: none; border-radius: 5px; cursor: pointer;
-            transition: all .35s ease; text-decoration: none;
+            color: #0A0F1C; font-size: 14px; font-weight: 700;
+            border: none; border-radius: 4px; cursor: pointer;
+            transition: all .35s ease;
         }
         .hero-actions .btn-hero-primary:hover {
             background: linear-gradient(135deg, #D4B87A, #E0C990);
             transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(195,165,105,.2);
+            box-shadow: 0 6px 24px rgba(195,165,105,.2);
         }
         .hero-actions .btn-hero-outline {
             display: inline-flex; align-items: center; gap: 10px;
-            height: 54px; padding: 0 36px;
-            background: rgba(255,255,255,.04); color: rgba(255,255,255,.7);
-            font-size: 16px; font-weight: 600;
-            border: 1px solid rgba(255,255,255,.15);
-            border-radius: 5px; cursor: pointer;
-            transition: all .35s ease; text-decoration: none;
+            height: 50px; padding: 0 32px;
+            background: transparent; color: rgba(255,255,255,.75);
+            font-size: 14px; font-weight: 600;
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 4px; cursor: pointer;
+            transition: all .35s ease;
         }
         .hero-actions .btn-hero-outline:hover {
-            color: #fff; border-color: rgba(195,165,105,.3);
-            background: rgba(195,165,105,.06);
+            color: #fff; border-color: rgba(255,255,255,.3);
+            background: rgba(255,255,255,.04);
         }
 
         /* ── 반응형 ── */
         @media (max-width: 1024px) {
-            .hero-banner { min-height: auto; }
             .hero-capabilities { gap: 12px; }
             .hero-cap-item { padding: 16px 18px; }
         }
         @media (max-width: 768px) {
-            .hero-banner { padding: 44px 0 0; }
-            .hero-section h1 { font-size: 28px; letter-spacing: -.6px; }
-            .hero-subtitle { font-size: 14px; margin-bottom: 22px; }
-            .hero-label { font-size: 10px; letter-spacing: 1.5px; padding: 6px 14px; margin-bottom: 16px; }
-            .hero-capabilities { flex-direction: column; gap: 8px; margin-bottom: 22px; }
+            .hero-banner { padding: 32px 0 28px; }
+            .hero-section h1 { font-size: 24px; letter-spacing: -.6px; }
+            .hero-subtitle { font-size: 12px; margin-bottom: 20px; }
+            .hero-label { font-size: 9px; letter-spacing: 1.5px; padding: 5px 12px; margin-bottom: 14px; }
+            .hero-capabilities { flex-direction: column; gap: 8px; margin-bottom: 20px; }
             .hero-cap-item { padding: 16px 18px; }
-            .hero-cap-title { font-size: 14px; }
+            .hero-cap-title { font-size: 13px; }
             .hero-actions { flex-direction: column; gap: 10px; width: 100%; }
             .hero-actions .btn-hero-primary,
-            .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 50px; font-size: 14px; }
+            .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 46px; font-size: 13px; }
         }
 
         /* ── CATEGORY NAV BELOW HERO ── */
@@ -617,10 +657,19 @@
 <!-- ===== HERO (컴팩트 상단 배너) ===== -->
 <section class="hero-section">
     <div class="hero-banner">
-        <div class="hero-bg-photo">
-            <img src="jpg/hero_about.png" alt="도시정비 — 세울엔지니어링">
+        <div class="hero-slideshow" id="heroSlideshow">
+            <img src="jpg/hero_about.png" alt="회사소개" class="active">
+            <img src="jpg/hero_vision.png" alt="세울의 길">
+            <img src="jpg/hero_services.png" alt="사업분야">
+            <img src="jpg/hero_portfolio.png" alt="업무실적">
+            <img src="jpg/hero_library.png" alt="자료실">
+            <img src="jpg/hero_community.png" alt="커뮤니티">
+            <img src="jpg/hero_feasibility.png" alt="사업성검토">
+            <img src="jpg/hero_contact.png" alt="고객센터">
         </div>
         <div class="hero-bg-grid"></div>
+        <div class="hero-skyline"></div>
+        <div class="hero-glow"></div>
         <div class="hero-hline hero-hline-top"></div>
         <div class="hero-hline hero-hline-bottom"></div>
 
@@ -1149,6 +1198,17 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     }
 })();
 </script>
-<!-- hero: 대표 1장 풀배경 (슬라이드쇼 제거) -->
+<script>
+(function(){
+    const imgs = document.querySelectorAll('#heroSlideshow img');
+    if(!imgs.length) return;
+    let cur = 0;
+    setInterval(()=>{
+        imgs[cur].classList.remove('active');
+        cur = (cur + 1) % imgs.length;
+        imgs[cur].classList.add('active');
+    }, 5000);
+})();
+</script>
 </body>
 </html>
