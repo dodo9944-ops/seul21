@@ -372,7 +372,7 @@
       <div class="chat-avatar expert-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
       <div class="chat-content">
         <div class="chat-name expert-name">세울 전문가</div>
-        <div class="chat-bubble">안녕하세요, <strong>세울 전문가</strong>입니다.<br>정비사업 법규·절차·사업성 분석 등<br><strong>전문가 수준의 심층 상담</strong>을 제공합니다.<br>어떤 사안이 궁금하신가요?</div>
+        <div class="chat-bubble">안녕하세요, <strong>세울엔지니어링 전문가</strong>입니다.<br>정비사업 관련 <strong>전문 상담</strong>을 직접 도와드립니다.<br>궁금한 사항을 남겨주시면 빠르게 답변드리겠습니다.</div>
       </div>
     </div>`
   };
@@ -384,53 +384,21 @@
       { text: '상담 문의', q: '상담 문의하기' }
     ],
     expert: [
-      { text: '조합설립 요건', q: '재개발 조합설립 동의율과 절차를 상세히 알려주세요' },
-      { text: '비례율 분석', q: '비례율 산정 방식과 사업성 판단 기준을 전문적으로 분석해주세요' },
-      { text: '관리처분 쟁점', q: '관리처분인가 단계의 주요 법적 쟁점과 대응방안을 알려주세요' },
-      { text: '최신 정책 동향', q: '신속통합기획과 공공재개발 등 최신 정비사업 정책을 분석해주세요' }
+      { text: '사업성 상담', q: '우리 구역 사업성 검토를 받고 싶습니다' },
+      { text: '조합 운영 문의', q: '조합 운영 관련 전문가 상담 요청합니다' },
+      { text: '인허가 절차', q: '인허가 절차에 대해 전문가 상담을 받고 싶습니다' }
     ]
   };
 
-  // 전문가 온라인 상태
-  let expertOnline = false;
-  const expertTab = document.querySelector('.chat-tab[data-mode="expert"]');
-
-  const offlineGreeting = `<div class="expert-offline-notice">
-    <div class="offline-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
-    <h4>전문가 오프라인</h4>
-    <p>전문가 AI 서버가 현재 꺼져 있습니다.<br>서버가 가동되면 자동으로 활성화됩니다.</p>
-    <button class="switch-btn" onclick="document.querySelector('.chat-tab[data-mode=general]').click()">AI 상담으로 전환</button>
-  </div>`;
-
-  async function checkExpertStatus() {
-    try {
-      const res = await fetch(B + '/api/chat-expert-status', { signal: AbortSignal.timeout(6000) });
-      const data = await res.json();
-      expertOnline = data.online;
-    } catch (e) {
-      expertOnline = false;
-    }
-    expertTab.classList.toggle('online', expertOnline);
-    expertTab.classList.toggle('offline', !expertOnline);
-    // 현재 전문가 탭이고 상태가 바뀌었으면 메시지 업데이트
-    if (currentMode === 'expert' && !expertOnline) {
-      messageHistory.expert = offlineGreeting;
-      messages.innerHTML = offlineGreeting;
-    }
-    if (currentMode === 'expert' && expertOnline && messages.querySelector('.expert-offline-notice')) {
-      messageHistory.expert = greetings.expert;
-      messages.innerHTML = greetings.expert;
-    }
-  }
+  // 전문가 세션 관리
+  let expertSessionId = null;
+  let pollTimer = null;
+  let lastMsgCount = 0;
 
   // 초기 메시지 세팅
   messageHistory.general = greetings.general;
   messageHistory.expert = greetings.expert;
   messages.innerHTML = messageHistory.general;
-
-  // 상태 체크: 즉시 1회 + 30초마다
-  checkExpertStatus();
-  setInterval(checkExpertStatus, 30000);
 
   // 탭 전환
   function switchMode(mode) {
@@ -439,45 +407,42 @@
     // 현재 대화 저장
     messageHistory[currentMode] = messages.innerHTML;
 
+    // 전문가 탭 떠나면 폴링 중지
+    if (currentMode === 'expert' && pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+
     currentMode = mode;
 
     // 탭 활성화
     tabs.forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
 
-    // 전문가 오프라인이면 오프라인 화면
-    if (mode === 'expert' && !expertOnline) {
-      messages.innerHTML = offlineGreeting;
-      input.disabled = true;
-      sendBtn.disabled = true;
-    } else {
-      messages.innerHTML = messageHistory[mode];
-      input.disabled = false;
-      sendBtn.disabled = false;
-    }
+    messages.innerHTML = messageHistory[mode];
     messages.scrollTop = messages.scrollHeight;
 
     // 헤더 변경
     if (mode === 'expert') {
       headerTitle.textContent = '세울 전문가';
-      headerSub.textContent = expertOnline ? '전문가 분석 모드' : '서버 오프라인';
+      headerSub.textContent = '전문가 직접 상담';
       input.classList.add('expert-focus');
       sendBtn.classList.add('expert-send');
       input.placeholder = '전문 상담 내용을 입력하세요...';
+      // 세션 있으면 폴링 재개
+      if (expertSessionId) startPolling();
     } else {
       headerTitle.textContent = '세울 실시간 상담';
       headerSub.textContent = '정비사업 전문 실시간 상담';
       input.classList.remove('expert-focus');
       sendBtn.classList.remove('expert-send');
       input.placeholder = '궁금한 점을 입력하세요...';
-      input.disabled = false;
-      sendBtn.disabled = false;
     }
 
     // 빠른질문 교체
     updateQuickButtons(mode);
-    if (quickArea) quickArea.style.display = (mode === 'expert' && !expertOnline) ? 'none' : 'flex';
+    if (quickArea) quickArea.style.display = 'flex';
 
-    if (!input.disabled) input.focus();
+    input.focus();
   }
 
   function updateQuickButtons(mode) {
@@ -527,21 +492,6 @@
     return div;
   }
 
-  // 스트리밍용 빈 메시지 생성
-  function addStreamingMessage() {
-    const div = document.createElement('div');
-    div.className = 'chat-msg bot expert';
-    div.innerHTML = `
-      <div class="chat-avatar expert-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-      <div class="chat-content">
-        <div class="chat-name expert-name">세울 전문가</div>
-        <div class="chat-bubble streaming-cursor"></div>
-      </div>`;
-    messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
-    return div.querySelector('.chat-bubble');
-  }
-
   function addTyping() {
     const div = document.createElement('div');
     const isExpert = currentMode === 'expert';
@@ -576,81 +526,45 @@
     }
   }
 
-  // 전문가 상담 (Gemma4 스트리밍)
+  // 전문가 상담 (텔레그램 → 대장님 직접 답변)
   async function sendExpertMessage(text) {
-    const typing = addTyping();
     try {
       const res = await fetch(B + '/api/chat-expert', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text })
+        body: JSON.stringify({ message: text, sessionId: expertSessionId })
       });
+      const data = await res.json();
 
-      // 비스트리밍 에러 응답 처리
-      const contentType = res.headers.get('content-type') || '';
-      if (contentType.includes('application/json')) {
-        const data = await res.json();
-        typing.remove();
-        addMessage(data.error || '전문가 서버에 연결할 수 없습니다.', 'bot');
-        return;
+      if (data.sessionId) {
+        expertSessionId = data.sessionId;
+        lastMsgCount = 1; // 방문자 메시지 1개
+        addMessage('전문가에게 전달되었습니다.<br>잠시만 기다려주시면 답변드리겠습니다.', 'bot');
+        startPolling();
+      } else {
+        addMessage(data.error || '전송에 실패했습니다. 다시 시도해주세요.', 'bot');
       }
-
-      // 스트리밍 시작 — 타이핑 제거, 스트리밍 버블 생성
-      typing.remove();
-      const bubble = addStreamingMessage();
-      let fullText = '';
-
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        const chunk = decoder.decode(value, { stream: true });
-        const lines = chunk.split('\n');
-
-        for (const line of lines) {
-          if (!line.startsWith('data: ')) continue;
-          const data = line.slice(6).trim();
-          if (data === '[DONE]') continue;
-          try {
-            const json = JSON.parse(data);
-            if (json.text) {
-              fullText += json.text;
-              bubble.innerHTML = formatText(fullText);
-              messages.scrollTop = messages.scrollHeight;
-            }
-            if (json.error) {
-              fullText += '\n\n[오류: ' + json.error + ']';
-              bubble.innerHTML = formatText(fullText);
-            }
-          } catch (e) { /* skip */ }
-        }
-      }
-
-      // 스트리밍 완료 — 커서 제거
-      bubble.classList.remove('streaming-cursor');
-      bubble.innerHTML = formatText(fullText || '응답을 받지 못했습니다.');
     } catch (e) {
-      typing.remove();
-      addMessage('전문가 서버에 연결할 수 없습니다.<br>서버 상태를 확인해주세요.', 'bot');
+      addMessage('네트워크 오류가 발생했습니다.<br>잠시 후 다시 시도해주세요.', 'bot');
     }
   }
 
-  // 텍스트 포맷팅 (마크다운 간이 변환)
-  function formatText(text) {
-    return text
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em>$1</em>')
-      .replace(/^### (.+)$/gm, '<strong style="font-size:14px;display:block;margin:8px 0 4px">$1</strong>')
-      .replace(/^## (.+)$/gm, '<strong style="font-size:15px;display:block;margin:10px 0 4px;color:#0A0F1C">$1</strong>')
-      .replace(/^- (.+)$/gm, '<span style="display:block;padding-left:12px">· $1</span>')
-      .replace(/^\d+\. (.+)$/gm, function(match, p1, offset, str) {
-        const num = match.match(/^(\d+)/)[1];
-        return '<span style="display:block;padding-left:12px">' + num + '. ' + p1 + '</span>';
-      })
-      .replace(/\n/g, '<br>');
+  // 전문가 답변 폴링
+  function startPolling() {
+    if (pollTimer) clearInterval(pollTimer);
+    pollTimer = setInterval(async () => {
+      if (!expertSessionId || currentMode !== 'expert') return;
+      try {
+        const res = await fetch(B + '/api/chat-expert-poll?sid=' + expertSessionId + '&after=' + lastMsgCount);
+        const data = await res.json();
+        if (data.messages && data.messages.length > 0) {
+          data.messages.forEach(m => {
+            addMessage(m.text.replace(/\n/g, '<br>'), 'bot');
+          });
+          lastMsgCount = data.total;
+        }
+      } catch (e) { /* skip */ }
+    }, 4000);
   }
 
   // 메시지 전송 통합
