@@ -1,7 +1,8 @@
 {
   "rewrites": [
     { "source": "/api/chat", "destination": "/api/chat" },
-    { "source": "/api/chat-expert", "destination": "/api/chat-expert" }
+    { "source": "/api/chat-expert", "destination": "/api/chat-expert" },
+    { "source": "/api/chat-expert-status", "destination": "/api/chat-expert-status" }
   ],
   "headers": [
     {

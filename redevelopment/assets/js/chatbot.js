@@ -164,6 +164,43 @@
       color:#10B981; border-color:rgba(16,185,129,0.5);
       box-shadow: 0 2px 8px rgba(16,185,129,0.15);
     }
+    .chat-tab[data-mode="expert"].offline {
+      opacity:0.5; position:relative;
+    }
+    .chat-tab[data-mode="expert"].offline::after {
+      content:''; width:6px; height:6px; border-radius:50%;
+      background:#ef4444; position:absolute; top:6px; right:6px;
+    }
+    .chat-tab[data-mode="expert"].online::after {
+      content:''; width:6px; height:6px; border-radius:50%;
+      background:#10B981; position:absolute; top:6px; right:6px;
+      box-shadow:0 0 6px rgba(16,185,129,0.5);
+    }
+
+    /* == 오프라인 안내 == */
+    .expert-offline-notice {
+      text-align:center; padding:30px 20px;
+    }
+    .expert-offline-notice .offline-icon {
+      width:56px; height:56px; margin:0 auto 16px; border-radius:50%;
+      background:linear-gradient(135deg, #f3f4f6, #e5e7eb);
+      display:flex; align-items:center; justify-content:center;
+      color:#9ca3af; font-size:24px;
+    }
+    .expert-offline-notice h4 {
+      margin:0 0 8px; font-size:14px; color:#374151; font-weight:700;
+    }
+    .expert-offline-notice p {
+      margin:0 0 16px; font-size:12.5px; color:#6b7280; line-height:1.6;
+    }
+    .expert-offline-notice .switch-btn {
+      display:inline-block; padding:8px 20px; border-radius:20px;
+      background:linear-gradient(135deg, #0A0F1C, #1a3055);
+      color:#C3A569; font-size:12px; font-weight:600; border:none;
+      cursor:pointer; font-family:'Noto Sans KR',sans-serif;
+      transition:all .2s;
+    }
+    .expert-offline-notice .switch-btn:hover { transform:translateY(-1px); opacity:0.9; }
 
     /* == 메시지 영역 == */
     #chat-messages {
@@ -354,10 +391,46 @@
     ]
   };
 
+  // 전문가 온라인 상태
+  let expertOnline = false;
+  const expertTab = document.querySelector('.chat-tab[data-mode="expert"]');
+
+  const offlineGreeting = `<div class="expert-offline-notice">
+    <div class="offline-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
+    <h4>AI 전문가 오프라인</h4>
+    <p>전문가 AI 서버가 현재 꺼져 있습니다.<br>서버가 가동되면 자동으로 활성화됩니다.</p>
+    <button class="switch-btn" onclick="document.querySelector('.chat-tab[data-mode=general]').click()">AI 상담으로 전환</button>
+  </div>`;
+
+  async function checkExpertStatus() {
+    try {
+      const res = await fetch(B + '/api/chat-expert-status', { signal: AbortSignal.timeout(6000) });
+      const data = await res.json();
+      expertOnline = data.online;
+    } catch (e) {
+      expertOnline = false;
+    }
+    expertTab.classList.toggle('online', expertOnline);
+    expertTab.classList.toggle('offline', !expertOnline);
+    // 현재 전문가 탭이고 상태가 바뀌었으면 메시지 업데이트
+    if (currentMode === 'expert' && !expertOnline) {
+      messageHistory.expert = offlineGreeting;
+      messages.innerHTML = offlineGreeting;
+    }
+    if (currentMode === 'expert' && expertOnline && messages.querySelector('.expert-offline-notice')) {
+      messageHistory.expert = greetings.expert;
+      messages.innerHTML = greetings.expert;
+    }
+  }
+
   // 초기 메시지 세팅
   messageHistory.general = greetings.general;
   messageHistory.expert = greetings.expert;
   messages.innerHTML = messageHistory.general;
+
+  // 상태 체크: 즉시 1회 + 30초마다
+  checkExpertStatus();
+  setInterval(checkExpertStatus, 30000);
 
   // 탭 전환
   function switchMode(mode) {
@@ -371,14 +444,22 @@
     // 탭 활성화
     tabs.forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
 
-    // 메시지 복원
-    messages.innerHTML = messageHistory[mode];
+    // 전문가 오프라인이면 오프라인 화면
+    if (mode === 'expert' && !expertOnline) {
+      messages.innerHTML = offlineGreeting;
+      input.disabled = true;
+      sendBtn.disabled = true;
+    } else {
+      messages.innerHTML = messageHistory[mode];
+      input.disabled = false;
+      sendBtn.disabled = false;
+    }
     messages.scrollTop = messages.scrollHeight;
 
     // 헤더 변경
     if (mode === 'expert') {
       headerTitle.textContent = '세울 AI 전문가';
-      headerSub.textContent = 'Gemma4 기반 전문가 분석';
+      headerSub.textContent = expertOnline ? 'Gemma4 기반 전문가 분석' : '서버 오프라인';
       input.classList.add('expert-focus');
       sendBtn.classList.add('expert-send');
       input.placeholder = '전문 상담 내용을 입력하세요...';
@@ -388,13 +469,15 @@
       input.classList.remove('expert-focus');
       sendBtn.classList.remove('expert-send');
       input.placeholder = '궁금한 점을 입력하세요...';
+      input.disabled = false;
+      sendBtn.disabled = false;
     }
 
     // 빠른질문 교체
     updateQuickButtons(mode);
-    if (quickArea) quickArea.style.display = 'flex';
+    if (quickArea) quickArea.style.display = (mode === 'expert' && !expertOnline) ? 'none' : 'flex';
 
-    input.focus();
+    if (!input.disabled) input.focus();
   }
 
   function updateQuickButtons(mode) {
