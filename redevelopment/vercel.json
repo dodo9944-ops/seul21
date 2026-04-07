@@ -5,7 +5,8 @@
     { "source": "/api/chat-expert-status", "destination": "/api/chat-expert-status" },
     { "source": "/api/chat-expert-webhook", "destination": "/api/chat-expert-webhook" },
     { "source": "/api/chat-expert-poll", "destination": "/api/chat-expert-poll" },
-    { "source": "/api/chat-law", "destination": "/api/chat-law" }
+    { "source": "/api/chat-law", "destination": "/api/chat-law" },
+    { "source": "/api/setup-webhook", "destination": "/api/setup-webhook" }
   ],
   "headers": [
     {
