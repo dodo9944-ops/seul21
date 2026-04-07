@@ -469,14 +469,14 @@ function checkFile(url,cb){if(fileCache[url]!==undefined)return cb(fileCache[url
 function handleDownload(id){
 var m=fileMap[id];
 if(!m){var item=allItems.find(function(i){return i.id===id});
-if(item&&item.category==='주요뉴스'){var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');var tryUrl='../downloads/news_'+dateStr+(suffix.match(/[ab]$/)?suffix.slice(-1):'')+'.html';window.open(tryUrl,'_blank');App.toast('웹 문서로 열립니다','info');return}
+if(item&&item.category==='주요뉴스'){var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');var tryUrl='../downloads/news_'+dateStr+(suffix.match(/[ab]$/)?suffix.slice(-1):'')+'.html';location.href=tryUrl;return}
 App.toast('파일 준비 중입니다.','info');return}
 if(m.ext){checkFile(m.ext,function(ok){
 if(ok){var a=document.createElement('a');a.href=m.ext;a.download='';document.body.appendChild(a);a.click();document.body.removeChild(a);App.toast('파일 다운로드 시작','success')}
 else if(m.gov){window.open(m.gov,'_blank');App.toast((m.label||'공식 사이트')+'로 이동합니다','info')}
-else if(m.web){window.open(m.web,'_blank');App.toast('웹 문서로 열립니다','info')}})}
-else if(m.gov){if(m.web)window.open(m.web,'_blank');setTimeout(function(){if(confirm((m.label||'공식 사이트')+'에서 원문을 확인하시겠습니까?'))window.open(m.gov,'_blank')},500)}
-else if(m.web){window.open(m.web,'_blank');App.toast('웹 문서로 열립니다','info')}
+else if(m.web){location.href=m.web;return}})}
+else if(m.gov){if(m.web){location.href=m.web}setTimeout(function(){if(confirm((m.label||'공식 사이트')+'에서 원문을 확인하시겠습니까?'))window.open(m.gov,'_blank')},500)}
+else if(m.web){location.href=m.web;return}
 var item=allItems.find(function(i){return i.id===id});if(item){item.downloads=(item.downloads||0)+1}render()}
 
 window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.querySelector('.ctrl-bar').offsetTop-80,behavior:'smooth'})}};
