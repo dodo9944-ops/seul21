@@ -254,12 +254,15 @@
 
         /* ── 반응형 ── */
         @media (max-width: 768px) {
-            .hero-section h1 { font-size: 28px; letter-spacing: -.7px; max-width: 100%; }
-            .hero-subtitle { font-size: 14px; margin-bottom: 24px; }
-            .hero-label { font-size: 9px; letter-spacing: 1.5px; padding: 5px 12px; margin-bottom: 16px; }
-            .hero-actions { flex-direction: column; gap: 10px; width: 100%; }
+            .hero-banner .inner { padding: 0 24px 28px; }
+            .hero-banner { padding: 36px 0 0; }
+            .hero-bg-photo::before { height: 50px; }
+            .hero-label { font-size: 9px; letter-spacing: 1.5px; padding: 5px 12px; margin-bottom: 14px; }
+            .hero-section h1 { font-size: 26px; letter-spacing: -.6px; line-height: 1.32; max-width: 100%; margin-bottom: 12px; word-break: keep-all; }
+            .hero-subtitle { font-size: 13px; line-height: 1.65; margin-bottom: 18px; max-width: 92%; }
+            .hero-actions { flex-direction: column; gap: 8px; width: 100%; }
             .hero-actions .btn-hero-primary,
-            .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 48px; font-size: 14px; }
+            .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 46px; font-size: 14px; }
         }
 
         /* ── CATEGORY NAV BELOW HERO ── */
@@ -277,10 +280,11 @@
 
         /* ── SECTION (메인 고유) ── */
         .section {
-            padding: 64px 0;
+            padding: 48px 0;
         }
         @media (max-width: 768px) {
-            .section { padding: 40px 0; }
+            .section { padding: 32px 0; }
+            .hero-section + .section { padding-top: 24px; }
         }
 
         /* ── CARD VISUAL (메인 전용) ── */
@@ -311,34 +315,34 @@
         /* ── NEWS ITEMS ── */
         .news-item {
             display: flex;
-            gap: 16px;
-            padding: 18px 24px;
+            gap: 14px;
+            padding: 14px 20px;
             border-bottom: 1px solid var(--gray-100);
             transition: background var(--transition);
         }
         .news-item:last-child { border-bottom: none; }
         .news-item:hover { background: var(--gray-50); }
-        .news-thumb { width: 72px; height: 52px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; color: rgba(195,165,105,0.5); background: #0A0F1C; }
+        .news-thumb { width: 64px; height: 46px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; color: rgba(195,165,105,0.5); background: #0A0F1C; }
         .news-body { min-width: 0; }
         .news-body h4 {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 600;
-            line-height: 1.45;
-            margin-bottom: 4px;
+            line-height: 1.4;
+            margin-bottom: 3px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
         .news-body h4:hover { color: #C3A569; }
-        .news-date { font-size: 12px; color: var(--gray-400); }
+        .news-date { font-size: 11.5px; color: var(--gray-400); }
 
         /* ── COMMUNITY ITEMS (메인 전용 인라인) ── */
         .comm-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 14px 24px;
+            padding: 12px 20px;
             border-bottom: 1px solid var(--gray-100);
             transition: background var(--transition);
         }
@@ -356,28 +360,28 @@
         /* ── PROCESS STEPS ── */
         .process-bar {
             display: flex; align-items: flex-start; gap: 0;
-            padding: 40px 0; overflow-x: auto;
+            padding: 24px 0 16px; overflow-x: auto;
         }
         .process-bar::-webkit-scrollbar { display: none; }
         .p-step {
             display: flex; flex-direction: column; align-items: center;
-            min-width: 96px; text-align: center; cursor: pointer;
+            min-width: 88px; text-align: center; cursor: pointer;
             transition: transform 0.2s ease;
         }
-        .p-step:hover { transform: translateY(-3px); }
-        .p-step:hover .p-dot { box-shadow: 0 0 0 6px rgba(195,165,105,0.2); }
-        .p-dot { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 10px; position: relative; z-index: 2; transition: box-shadow 0.2s ease; }
-        .p-done .p-dot { background: #C3A569; color: #0A0F1C; }
-        .p-now .p-dot { background: var(--white); color: #0A0F1C; box-shadow: 0 0 0 4px rgba(255,255,255,0.15); }
-        .p-wait .p-dot { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); }
-        .p-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.4); line-height: 1.4; }
-        .p-done .p-label { color: #C3A569; }
-        .p-now .p-label { color: var(--white); font-weight: 700; }
-        .p-line { flex: 1; height: 2px; min-width: 24px; margin-top: 22px; }
-        .p-line-done { background: #C3A569; }
-        .p-line-wait { background: rgba(255,255,255,0.08); }
-        .p-step-hint { font-size: 9px; color: rgba(195,165,105,0.5); margin-top: 6px; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.2s; }
-        .p-step:hover .p-step-hint { opacity: 1; }
+        .p-step:hover { transform: translateY(-2px); }
+        .p-dot { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-bottom: 8px; position: relative; z-index: 2; transition: all 0.25s ease; border: 1px solid rgba(255,255,255,0.06); }
+        .p-done .p-dot { background: rgba(195,165,105,0.12); color: #C3A569; border-color: rgba(195,165,105,0.2); }
+        .p-now .p-dot { background: #C3A569; color: #0A0F1C; border-color: #C3A569; }
+        .p-wait .p-dot { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.25); }
+        .p-step:hover .p-dot { background: rgba(195,165,105,0.15); color: #C3A569; border-color: rgba(195,165,105,0.3); box-shadow: 0 0 0 4px rgba(195,165,105,0.08); }
+        .p-label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.35); line-height: 1.3; transition: color 0.2s; }
+        .p-done .p-label { color: rgba(195,165,105,0.7); }
+        .p-now .p-label { color: #fff; font-weight: 700; }
+        .p-step:hover .p-label { color: rgba(255,255,255,0.85); }
+        .p-line { flex: 1; height: 1px; min-width: 16px; margin-top: 20px; }
+        .p-line-done { background: rgba(195,165,105,0.2); }
+        .p-line-wait { background: rgba(255,255,255,0.06); }
+        .p-step-hint { display: none; }
 
         /* ── PROCESS MODAL ── */
         .pm-overlay {
@@ -464,7 +468,7 @@
         }
 
         /* ── CTA BANNER ── */
-        .cta-banner { background: linear-gradient(135deg, #0A0F1C, #142644); border-radius: var(--radius); padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; position: relative; overflow: hidden; }
+        .cta-banner { background: linear-gradient(135deg, #0A0F1C, #142644); border-radius: var(--radius); padding: 36px 40px; display: flex; align-items: center; justify-content: space-between; gap: 28px; position: relative; overflow: hidden; }
         .cta-banner::before { content: ''; position: absolute; right: -50px; top: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(195,165,105,0.08) 0%, transparent 70%); border-radius: 50%; }
         .cta-text h3 {
             font-size: 24px;
@@ -496,16 +500,16 @@
         @media (max-width: 768px) {
             .expert-grid { grid-template-columns: 1fr; gap: 16px; }
         }
-        .expert-card { border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px 24px; transition: all 0.25s ease; }
-        .expert-card:hover { border-color: rgba(195,165,105,0.3); box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-4px); }
-        .expert-avatar { width: 44px; height: 44px; border-radius: 10px; background: #0A0F1C; display: flex; align-items: center; justify-content: center; font-size: 18px; color: rgba(195,165,105,0.5); margin-bottom: 16px; }
+        .expert-card { border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 22px 20px; transition: all 0.25s ease; }
+        .expert-card:hover { border-color: rgba(195,165,105,0.3); box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-3px); }
+        .expert-avatar { width: 40px; height: 40px; border-radius: 10px; background: #0A0F1C; display: flex; align-items: center; justify-content: center; font-size: 16px; color: rgba(195,165,105,0.5); margin-bottom: 12px; }
         .expert-card h4 {
-            font-size: 16px; font-weight: 700; line-height: 1.4;
-            margin-bottom: 8px; color: var(--gray-900);
+            font-size: 15px; font-weight: 700; line-height: 1.35;
+            margin-bottom: 6px; color: var(--gray-900);
         }
         .expert-card p {
-            font-size: 13px; color: var(--gray-500); line-height: 1.6;
-            margin-bottom: 12px;
+            font-size: 12.5px; color: var(--gray-500); line-height: 1.55;
+            margin-bottom: 10px;
             display: -webkit-box; -webkit-line-clamp: 2;
             -webkit-box-orient: vertical; overflow: hidden;
         }
@@ -601,51 +605,18 @@
     </div>
 </section>
 
-<!-- ===== 빠른 메뉴 ===== -->
-<section class="category-section">
+<!-- ===== 01. 주요뉴스 ===== -->
+<section class="section">
     <div class="inner">
-        <nav class="category-nav">
-            <a href="pages/about.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-building-columns"></i></div>
-                <span class="cat-label">회사소개</span>
-            </a>
-            <a href="pages/vision.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-road"></i></div>
-                <span class="cat-label">세울의 길</span>
-            </a>
-            <a href="pages/services.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-diagram-project"></i></div>
-                <span class="cat-label">사업분야</span>
-            </a>
-            <a href="pages/portfolio.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-briefcase"></i></div>
-                <span class="cat-label">업무실적</span>
-            </a>
-            <a href="pages/library.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-folder-open"></i></div>
-                <span class="cat-label">자료실</span>
-            </a>
-            <a href="pages/community.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-comments"></i></div>
-                <span class="cat-label">커뮤니티</span>
-            </a>
-            <a href="pages/feasibility.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <span class="cat-label">사업성 검토</span>
-            </a>
-            <a href="pages/contact.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-envelope"></i></div>
-                <span class="cat-label">고객센터</span>
-            </a>
-            <a href="intranet/index.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-lock"></i></div>
-                <span class="cat-label">인트라넷</span>
-            </a>
-        </nav>
+        <div class="section-head">
+            <h2 class="section-title">주요뉴스</h2>
+            <a href="pages/library.html" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+        </div>
+        <div id="mainNews"></div>
     </div>
 </section>
 
-<!-- ===== 핵심 역량 소개 ===== -->
+<!-- ===== 02. 사업분야 ===== -->
 <section class="section">
     <div class="inner">
         <div class="section-head">
@@ -657,13 +628,23 @@
             @media(max-width:768px){.sv-main{grid-template-columns:1fr;}}
             .sv-main .sv-item{text-decoration:none;color:inherit;border-radius:var(--radius);overflow:hidden;border:1px solid var(--gray-200);transition:all 0.2s;}
             .sv-main .sv-item:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(0,0,0,0.06);transform:translateY(-2px);}
-            .sv-main .sv-hd{background:linear-gradient(135deg,#0A0F1C,#142644);padding:18px 22px;display:flex;align-items:center;gap:14px;}
-            .sv-main .sv-ic{width:38px;height:38px;border-radius:10px;background:rgba(195,165,105,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-            .sv-main .sv-ic i{color:var(--gold);font-size:17px;}
-            .sv-main .sv-nm{font-size:15px;font-weight:800;color:#fff;}
-            .sv-main .sv-en{font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;}
-            .sv-main .sv-bd{padding:16px 22px;background:#fff;}
-            .sv-main .sv-bd p{font-size:12.5px;color:var(--gray-600);line-height:1.7;margin-bottom:10px;}
+            .sv-main .sv-hd{background:linear-gradient(135deg,#0A0F1C,#142644);padding:14px 20px;display:flex;align-items:center;gap:12px;}
+            .sv-main .sv-ic{width:34px;height:34px;border-radius:9px;background:rgba(195,165,105,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+            .sv-main .sv-ic i{color:var(--gold);font-size:15px;}
+            .sv-main .sv-nm{font-size:14.5px;font-weight:800;color:#fff;}
+            .sv-main .sv-en{font-size:10px;color:rgba(255,255,255,0.35);margin-top:1px;}
+            .sv-main .sv-bd{padding:14px 20px;background:#fff;}
+            .sv-main .sv-bd p{font-size:12.5px;color:var(--gray-600);line-height:1.65;margin-bottom:8px;}
+            @media(max-width:768px){
+                .sv-main .sv-hd{padding:10px 14px;gap:10px;}
+                .sv-main .sv-ic{width:30px;height:30px;border-radius:7px;}
+                .sv-main .sv-ic i{font-size:13px;}
+                .sv-main .sv-nm{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+                .sv-main .sv-en{font-size:9px;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+                .sv-main .sv-bd{padding:12px 14px;}
+                .sv-main .sv-bd p{font-size:12px;line-height:1.6;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+                .sv-main .sv-tg span{font-size:9px;padding:2px 6px;}
+            }
             .sv-main .sv-tg{display:flex;flex-wrap:wrap;gap:4px;}
             .sv-main .sv-tg span{font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(10,15,28,0.04);color:var(--gray-500);}
         </style>
@@ -696,13 +677,11 @@
     </div>
 </section>
 
-<hr class="divider">
-
-<!-- ===== 사업 진행단계 ===== -->
-<section class="section" style="background: linear-gradient(135deg, #0A0F1C, #142644); color: white;">
+<!-- ===== 03. 정비사업 추진절차 ===== -->
+<section style="background: linear-gradient(135deg, #0A0F1C, #142644); color: white; padding: 32px 0 20px;">
     <div class="inner">
-        <h2 class="section-title" style="margin-bottom:8px;color:white">정비사업 추진 절차</h2>
-        <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:16px">세울엔지니어링이 각 단계에서 함께합니다</p>
+        <h2 class="section-title" style="margin-bottom:6px;color:white">정비사업 추진 절차</h2>
+        <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-bottom:0">세울엔지니어링이 각 단계에서 함께합니다</p>
 
         <div class="process-bar" id="processBar">
             <div class="p-step p-done" data-step="0">
@@ -804,54 +783,28 @@
     </div>
 </section>
 
-<!-- ===== 업무실적 하이라이트 ===== -->
-<section class="section">
-    <div class="inner">
-        <div class="section-head">
-            <h2 class="section-title">주요 수행실적</h2>
-            <a href="pages/portfolio.html" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
-        </div>
-        <div class="expert-grid" id="mainPortfolio"></div>
-    </div>
-</section>
-
-<hr class="divider">
-
-<!-- ===== CTA BANNER ===== -->
+<!-- ===== 04. 사업성검토 ===== -->
 <section class="section">
     <div class="inner">
         <div class="cta-banner">
             <div class="cta-text">
-                <h3>정비사업, 어디서부터 시작해야 할지 막막하신가요?</h3>
-                <p>세울엔지니어링이 사업 초기 검토부터 함께합니다. 부담 없이 문의하세요.</p>
+                <h3>우리 구역의 사업성, 지금 바로 검토해 보세요</h3>
+                <p>구역 현황과 사업 조건을 입력하면 추정 분담금·수익성을 즉시 확인할 수 있습니다.</p>
             </div>
-            <a href="pages/contact.html" class="btn btn-lg">상담 문의하기 <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="pages/feasibility.html" class="btn btn-lg">사업성 검토 시작 <i class="fa-solid fa-chart-line"></i></a>
         </div>
     </div>
 </section>
 
-<!-- ===== 자료실 + 커뮤니티 ===== -->
-<section class="section">
+<!-- ===== 05. 사업문의 ===== -->
+<section class="section" style="padding-top:0;">
     <div class="inner">
-        <div class="two-col-grid">
-
-            <!-- 최신 자료 (동적) -->
-            <div class="panel">
-                <div class="panel-head">
-                    <h3 class="panel-title">최신 자료</h3>
-                    <a href="pages/library.html" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
-                </div>
-                <div id="mainLibrary"></div>
+        <div class="cta-banner" style="background:linear-gradient(135deg,#142644,#1A3158);">
+            <div class="cta-text">
+                <h3 style="color:#fff;">정비사업, 어디서부터 시작해야 할지 막막하신가요?</h3>
+                <p style="color:rgba(255,255,255,0.55);">세울엔지니어링이 사업 초기 검토부터 함께합니다. 부담 없이 문의하세요.</p>
             </div>
-
-            <!-- 커뮤니티 (동적) -->
-            <div class="panel">
-                <div class="panel-head">
-                    <h3 class="panel-title">커뮤니티</h3>
-                    <a href="pages/community.html" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
-                </div>
-                <div id="mainCommunity"></div>
-            </div>
+            <a href="pages/contact.html" class="btn btn-lg" style="background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C;border:none;">상담 문의하기 <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
@@ -1067,33 +1020,18 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
 
     var iconMap={hwp:'fa-file-lines',pdf:'fa-file-pdf',xlsx:'fa-file-excel'};
 
-    /* 자료실: 최신 4건 (주요뉴스 제외) */
-    var libEl=document.getElementById('mainLibrary');
-    if(libEl && MOCK.library){
-        var libs=MOCK.library.filter(function(i){return i.category!=='주요뉴스'})
-            .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,4);
-        libEl.innerHTML=libs.map(function(i){
+    /* 주요뉴스: 최신 3건 */
+    var newsEl=document.getElementById('mainNews');
+    if(newsEl && MOCK.library){
+        var news=MOCK.library.filter(function(i){return i.category==='주요뉴스'})
+            .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
+        newsEl.innerHTML=news.map(function(i){
             var ic=iconMap[i.fileType]||'fa-file';
             return'<a href="pages/library.html" class="news-item">'+
                 '<div class="news-thumb"><i class="fa-solid '+ic+'"></i></div>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
-                '<div class="news-date">'+i.category+' · '+i.date+'</div></div></a>';
-        }).join('');
-    }
-
-    /* 커뮤니티: 최신 5건 */
-    var cmEl=document.getElementById('mainCommunity');
-    if(cmEl && MOCK.community){
-        var posts=MOCK.community.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,5);
-        cmEl.innerHTML=posts.map(function(p){
-            var ago='';
-            if(p.date){var diff=Date.now()-new Date(p.date).getTime();var h=Math.floor(diff/36e5);ago=h<1?'방금':h<24?h+'시간 전':Math.floor(h/24)+'일 전'}
-            return'<div class="comm-item">'+
-                '<span class="comm-cat">'+p.category+'</span>'+
-                '<a href="pages/community-detail.html?id='+p.id+'" class="comm-title">'+p.title+'</a>'+
-                (p.comments>0?'<span class="comm-cnt">['+p.comments+']</span>':'')+
-                '<span class="comm-time">'+ago+'</span></div>';
-        }).join('');
+                '<div class="news-date">'+i.date+'</div></div></a>';
+        }).join('') || '<p style="padding:20px;color:var(--gray-400);font-size:13px;">등록된 주요뉴스가 없습니다.</p>';
     }
 })();
 </script>
