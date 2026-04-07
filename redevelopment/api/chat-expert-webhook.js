@@ -192,7 +192,8 @@ module.exports = async function handler(req, res) {
     const text = msg.text.trim();
 
     // ━━━ 1. 법률 질문 자동 감지 → MCP 법률 서버로 답변 ━━━
-    if (isLawQuestion(text)) {
+    // (답장 메시지는 전문가 상담 답변이므로 법률 감지 제외)
+    if (!msg.reply_to_message && isLawQuestion(text)) {
       // "검색 중" 안내 메시지
       await sendTelegram(chatId, '⚖️ 법령 검색 중입니다... 잠시만 기다려주세요.', messageId);
 
