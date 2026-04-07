@@ -178,7 +178,7 @@
             .hero-banner { min-height: auto; padding: 48px 0 0; }
         }
         @media (max-width: 768px) {
-            .hero-banner { padding: 36px 0 0; }
+            .hero-banner { padding: 24px 0 0; }
         }
 
         /* ── 히어로 콘텐츠 좌측 정렬 ── */
@@ -254,15 +254,15 @@
 
         /* ── 반응형 ── */
         @media (max-width: 768px) {
-            .hero-banner .inner { padding: 0 24px 28px; }
-            .hero-banner { padding: 36px 0 0; }
-            .hero-bg-photo::before { height: 50px; }
-            .hero-label { font-size: 9px; letter-spacing: 1.5px; padding: 5px 12px; margin-bottom: 14px; }
-            .hero-section h1 { font-size: 26px; letter-spacing: -.6px; line-height: 1.32; max-width: 100%; margin-bottom: 12px; word-break: keep-all; }
-            .hero-subtitle { font-size: 13px; line-height: 1.65; margin-bottom: 18px; max-width: 92%; }
-            .hero-actions { flex-direction: column; gap: 8px; width: 100%; }
-            .hero-actions .btn-hero-primary,
-            .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 46px; font-size: 14px; }
+            .hero-banner .inner { padding: 0 20px 24px; }
+            .hero-bg-photo::before { height: 40px; }
+            .hero-label { font-size: 8.5px; letter-spacing: 1.5px; padding: 4px 10px; margin-bottom: 12px; }
+            .hero-section h1 { font-size: 24px; letter-spacing: -.5px; line-height: 1.35; max-width: 100%; margin-bottom: 10px; word-break: keep-all; }
+            .hero-subtitle { font-size: 12.5px; line-height: 1.6; margin-bottom: 16px; max-width: 95%; color: rgba(255,255,255,0.6); }
+            .hero-actions { flex-direction: column; gap: 7px; width: 100%; }
+            .hero-actions .btn-hero-primary { width: 100%; justify-content: center; height: 44px; font-size: 13.5px; padding: 0 24px; }
+            .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 42px; font-size: 13px; padding: 0 24px; }
+            .category-section { display: none; }
         }
 
         /* ── CATEGORY NAV BELOW HERO ── */
@@ -283,8 +283,10 @@
             padding: 48px 0;
         }
         @media (max-width: 768px) {
-            .section { padding: 32px 0; }
-            .hero-section + .section { padding-top: 24px; }
+            .section { padding: 28px 0; }
+            .hero-section + .section,
+            .hero-section + .category-section + .section,
+            .category-section + .section { padding-top: 24px; }
         }
 
         /* ── CARD VISUAL (메인 전용) ── */
