@@ -610,138 +610,197 @@ function importFile(input){
    EXCEL EXPORT — 모든 연산 세부 표기
    ════════════════════════════════════════ */
 function exportExcel(){
-  var r=Engine.ratio(),ab=Engine.avgBurden(),tc=Engine.totalCost(),tr=Engine.totalRevenue();
-  var pa=Engine.postAssetTotal(),prev=Engine.prevAssetTotal();
-  var bd=Engine.costBreakdown(),bt=Engine.burdenByType();
-  var sc=D.scenarios.map(function(s){return Engine.scenarioCalc(s)});
-  var ins=Engine.insights(),warns=Engine.costWarnings();
+  if(typeof XLSX==='undefined'){if(typeof App!=='undefined')App.toast('엑셀 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.','info');return}
+  var wb=XLSX.utils.book_new();
+  var N='#,##0',P='0.00%',W='#,##0"원"';
+  function hdr(ws,r,cols){cols.forEach(function(c,i){var ref=XLSX.utils.encode_cell({r:r,c:i});if(ws[ref]){ws[ref].s={font:{bold:true,color:{rgb:'FFFFFF'}},fill:{fgColor:{rgb:'0A0F1C'}},alignment:{horizontal:'center'}}}});return ws}
+  function colW(ws,widths){ws['!cols']=widths.map(function(w){return{wch:w}});return ws}
 
-  var rows=[];
-  var h=function(t){rows.push([t]);rows.push([])};
-  var r2=function(a,b,c,d,e){rows.push([a||'',b||'',c||'',d||'',e||''])};
+  /* ── Sheet 1: 기본데이터 ── */
+  var s1=[
+    ['(주)세울엔지니어링 — 종합 사업성 분석'],
+    ['생성일시',new Date().toLocaleString('ko-KR')],
+    [],
+    ['항목','값','단위'],
+    ['사업유형',D.projectType,''],
+    ['사업명',D.projectName||'-',''],
+    ['소재지',D.location||'-',''],
+    ['진행단계',D.phase,''],
+    [],
+    ['구역·면적 정보'],
+    ['항목','값','단위'],
+    ['정비구역면적',D.zoneArea,'㎡'],
+    ['대지면적',D.siteArea,'㎡'],
+    ['연면적',D.grossFloorArea,'㎡'],
+    ['기존 용적률',D.farExisting,'%'],
+    ['계획 용적률',D.farPlanned,'%'],
+    ['건폐율',D.bcr,'%'],
+    [],
+    ['세대·조합원 정보'],
+    ['항목','값','단위'],
+    ['조합원 수',D.memberCount,'명'],
+    ['토지등소유자 수',D.ownerCount,'명'],
+    ['기존 세대수',D.existingUnits,'세대'],
+    ['계획 세대수',D.plannedUnits,'세대'],
+    ['일반분양 세대수',D.generalUnits,'세대'],
+    ['임대 세대수',D.rentalUnits,'세대']
+  ];
+  var ws1=XLSX.utils.aoa_to_sheet(s1);
+  colW(ws1,[24,20,8]);
+  XLSX.utils.book_append_sheet(wb,ws1,'기본데이터');
 
-  /* 표지 */
-  h('세울엔지니어링 — 종합 사업성 분석 보고서');
-  r2('생성일시',new Date().toLocaleString('ko-KR'));
-  r2('사업유형',D.projectType);r2('사업명',D.projectName);r2('소재지',D.location);r2('진행단계',D.phase);
-  rows.push([]);
-
-  /* 1. 기초 데이터 */
-  h('1. 기초 데이터');
-  r2('정비구역면적(㎡)',D.zoneArea);r2('대지면적(㎡)',D.siteArea);
-  r2('연면적(㎡)',D.grossFloorArea);r2('기존용적률(%)',D.farExisting);r2('계획용적률(%)',D.farPlanned);r2('건폐율(%)',D.bcr);
-  r2('조합원수(명)',D.memberCount);r2('토지등소유자수(명)',D.ownerCount);
-  r2('기존세대수',D.existingUnits);r2('계획세대수',D.plannedUnits);
-  r2('일반분양세대수',D.generalUnits);r2('임대세대수',D.rentalUnits);
-  rows.push([]);
-
-  /* 2. 종전자산 */
-  h('2. 종전자산 평가');
-  r2('산정방식',D.prevAssetMode==='simple'?'총액 직접입력':'유형별 상세입력');
-  r2('종전자산 합계(원)',prev);
+  /* ── Sheet 2: 종전자산 ── */
+  var prev=Engine.prevAssetTotal();
+  var s2=[
+    ['종전자산 평가'],
+    [],
+    ['산정방식',D.prevAssetMode==='simple'?'총액 직접입력':'유형별 상세입력'],
+    []
+  ];
   if(D.prevAssetMode==='detail'){
-    r2('유형','세대수','평균평가액(원)','소계(원)');
-    D.prevTypes.forEach(function(t){
-      if(t.count>0) r2(t.name,t.count,t.avgValue,t.count*t.avgValue);
+    s2.push(['유형','세대수','평균 평가액(원)','소계(원)','산출식']);
+    var pRow=5;
+    D.prevTypes.forEach(function(t,i){
+      if(t.count>0){
+        s2.push([t.name,t.count,t.avgValue,{f:'B'+(pRow+i+1)+'*C'+(pRow+i+1)},'세대수 × 평균평가액']);
+        pRow++;
+      }
     });
-    r2('','','합계',prev);
+    s2.push([]);
+    s2.push(['종전자산 합계','','',prev]);
+  } else {
+    s2.push(['종전자산 총액',prev,'원']);
   }
-  rows.push([]);
+  var ws2=XLSX.utils.aoa_to_sheet(s2);
+  colW(ws2,[16,12,20,20,20]);
+  XLSX.utils.book_append_sheet(wb,ws2,'종전자산');
 
-  /* 3. 종후자산·분양가 */
-  h('3. 종후자산 · 분양가');
-  r2('일반분양 평균가(원/세대)',D.generalAvgPrice);
-  r2('조합원분양 평균가(원/세대)',D.memberAvgPrice);
-  r2('상가 총가(원)',D.commercialPrice);
-  r2('보류지 세대수',D.reserveUnits);r2('보류지 평균가(원)',D.reserveAvgPrice);
-  r2('기타수입(원)',D.postEtcValue);
-  rows.push([]);
-  r2('[연산] 총수입 산출');
-  r2('일반분양 수입',D.generalUnits+'세대 × '+fmt(D.generalAvgPrice)+'원','=',D.generalUnits*D.generalAvgPrice);
+  /* ── Sheet 3: 종후자산 ── */
+  var genRev=D.generalUnits*D.generalAvgPrice;
   var memRev=D.postMemberValue||(D.memberCount*D.memberAvgPrice);
-  r2('조합원분양 수입',D.memberCount+'세대 × '+fmt(D.memberAvgPrice)+'원','=',memRev);
-  r2('상가 수입','','=',D.postCommercialValue||D.commercialPrice);
+  var comRev=D.postCommercialValue||D.commercialPrice;
   var resRev=(D.reserveUnits*D.reserveAvgPrice)+(D.reserveCommercialArea*D.reserveCommercialPrice);
-  r2('보류지 수입',D.reserveUnits+'세대 × '+fmt(D.reserveAvgPrice)+'원','=',resRev);
-  r2('기타수입','','=',D.postEtcValue||0);
-  r2('총수입 합계','','=',tr);
-  rows.push([]);
+  var etcRev=D.postEtcValue||0;
+  var tr=Engine.totalRevenue();
+  var s3=[
+    ['종후자산 · 분양수입 산출'],
+    [],
+    ['항목','세대수/수량','단가(원)','금액(원)','산출식'],
+    ['일반분양 수입',D.generalUnits,D.generalAvgPrice,{f:'B4*C4'},'세대수 × 일반분양 평균가'],
+    ['조합원분양 수입',D.memberCount,D.memberAvgPrice,{f:'B5*C5'},'조합원수 × 조합원분양 평균가'],
+    ['상가 분양수입','',comRev,comRev,'직접입력'],
+    ['보류지 수입',D.reserveUnits,D.reserveAvgPrice,{f:'B7*C7'},'보류지 세대 × 평균가'],
+    ['기타 수입','','',etcRev,'직접입력'],
+    [],
+    ['총수입 합계','','',{f:'D4+D5+D6+D7+D8'},'= 일반분양+조합원+상가+보류지+기타'],
+    [],
+    ['※ 종후자산 = 총수입 - 총사업비 (사업비 시트 참조)']
+  ];
+  var ws3=XLSX.utils.aoa_to_sheet(s3);
+  colW(ws3,[18,14,18,20,28]);
+  XLSX.utils.book_append_sheet(wb,ws3,'종후자산');
 
-  /* 4. 사업비 */
-  h('4. 사업비 내역');
-  r2('산정방식',D.costMode==='ratio'?'공사비 대비 비율':'항목별 직접입력');
-  r2('항목','금액(원)','비중(%)','산출근거');
-  bd.forEach(function(b){
-    var pct=tc>0?(b.value/tc*100).toFixed(1)+'%':'-';
+  /* ── Sheet 4: 사업비 ── */
+  var bd=Engine.costBreakdown();
+  var tc=Engine.totalCost();
+  var s4=[
+    ['사업비 내역'],
+    [],
+    ['산정방식',D.costMode==='ratio'?'공사비 대비 비율 산출':'항목별 직접입력'],
+    [],
+    ['항목','금액(원)','비중(%)','산출근거']
+  ];
+  var costStartRow=6;
+  bd.forEach(function(b,i){
+    var pct=tc>0?b.value/tc:0;
     var basis='';
     if(D.costMode==='ratio'&&b.name!=='공사비'){
-      var ratioKey={'설계비':'costRatioDesign','감리비':'costRatioSupervision','철거비':'costRatioDemolition','금융비용':'costRatioFinance','운영비':'costRatioOperation','기타':'costRatioEtc','예비비':'costRatioReserve'};
-      var rk=ratioKey[b.name];
-      if(rk) basis='공사비 '+fmt(D.costConstruction)+'원 × '+(D[rk]||0)+'%';
+      var rk={'설계비':'costRatioDesign','감리비':'costRatioSupervision','철거비':'costRatioDemolition','금융비용':'costRatioFinance','운영비':'costRatioOperation','기타':'costRatioEtc','예비비':'costRatioReserve'}[b.name];
+      if(rk) basis='공사비 × '+(D[rk]||0)+'%';
     }
-    r2(b.name,b.value,pct,basis);
+    s4.push([b.name,b.value,pct,basis||'직접입력']);
   });
-  r2('총사업비 합계',tc,'100%');
-  rows.push([]);
+  s4.push([]);
+  var sumRow=costStartRow+bd.length;
+  var sumFormula='SUM(B'+costStartRow+':B'+sumRow+')';
+  s4.push(['총사업비 합계',{f:sumFormula},1,'']);
+  var ws4=XLSX.utils.aoa_to_sheet(s4);
+  colW(ws4,[16,20,12,28]);
+  /* 비중 컬럼 % 포맷 */
+  for(var ci=0;ci<bd.length;ci++){
+    var ref=XLSX.utils.encode_cell({r:costStartRow-1+ci,c:2});
+    if(ws4[ref])ws4[ref].z=P;
+  }
+  XLSX.utils.book_append_sheet(wb,ws4,'사업비');
 
-  /* 5. 핵심 산출 결과 */
-  h('5. 핵심 분석 결과');
-  r2('[비례율 산출]');
-  r2('종후자산','총수입 - 총사업비','= '+fmt(tr)+' - '+fmt(tc),'=',pa);
-  r2('비례율','종후자산 ÷ 종전자산','= '+fmt(pa)+' ÷ '+fmt(prev),'=',(r*100).toFixed(2)+'%');
-  rows.push([]);
-  r2('[평균분담금 산출]');
+  /* ── Sheet 5: 분석결과 ── */
+  var pa=Engine.postAssetTotal();
+  var r=Engine.ratio();
+  var ab=Engine.avgBurden();
   var avgRights=prev>0&&D.memberCount>0?pa/D.memberCount:0;
-  r2('1인당 평균 권리가액','종후자산 ÷ 조합원수','= '+fmt(pa)+' ÷ '+D.memberCount,'=',avgRights);
-  r2('평균분담금','조합원분양가 - 평균권리가액','= '+fmt(D.memberAvgPrice)+' - '+fmt(avgRights),'=',ab);
-  rows.push([]);
-
-  /* 6. 유형별 분담금 */
-  if(bt.length>0){
-    h('6. 유형별 분담금 추정');
-    r2('유형','세대수','종전평가액','권리가액(비례율적용)','추정분담금');
-    bt.forEach(function(t){
-      r2(t.name,t.count,t.avgPrev,t.rights,t.burden);
-    });
-    rows.push([]);
-  }
-
-  /* 7. 시나리오 비교 */
-  h('7. 시나리오 비교');
-  r2('시나리오','총수입','총사업비','종후자산','비례율','평균분담금');
-  sc.forEach(function(s){
-    r2(s.name,s.totalRev,s.totalCost,s.postAsset,(s.ratio*100).toFixed(2)+'%',s.avgBurden);
+  var bt=Engine.burdenByType();
+  var s5=[
+    ['분석 결과 — 비례율 · 분담금 산출'],
+    [],
+    ['핵심 지표','값','산출식'],
+    ['총수입(A)',tr,'= 종후자산!D10'],
+    ['총사업비(B)',tc,'= 사업비!총사업비합계'],
+    ['종후자산(C=A-B)',pa,'= 총수입 - 총사업비'],
+    ['종전자산(D)',prev,'= 종전자산!합계'],
+    [],
+    ['비례율 (C÷D)',r,'= 종후자산 ÷ 종전자산'],
+    [],
+    ['분담금 산출','값','산출식'],
+    ['1인당 평균 권리가액',avgRights,'= 종후자산 ÷ 조합원수 ('+D.memberCount+'명)'],
+    ['조합원 분양 평균가',D.memberAvgPrice,'입력값'],
+    ['평균 추정 분담금',ab,'= 분양가 - 권리가액'],
+    [],
+    ['유형별 분담금 추정'],
+    ['유형','세대수','종전 평가액(원)','권리가액(원)','추정 분담금(원)','환급/납부']
+  ];
+  bt.forEach(function(t){
+    s5.push([t.name,t.count,t.avgPrev,t.rights,t.burden,t.isRefund?'환급':'납부']);
   });
-  rows.push([]);
+  var ws5=XLSX.utils.aoa_to_sheet(s5);
+  colW(ws5,[22,16,18,18,18,10]);
+  /* 비례율 % 포맷 */
+  var ratioRef=XLSX.utils.encode_cell({r:8,c:1});
+  if(ws5[ratioRef])ws5[ratioRef].z=P;
+  XLSX.utils.book_append_sheet(wb,ws5,'분석결과');
 
-  /* 8. 분석 의견 */
-  if(ins.length>0||warns.length>0){
-    h('8. 분석 의견 및 경고');
-    ins.forEach(function(m){r2('[의견]',m)});
-    warns.forEach(function(m){r2('[경고]',m)});
-    rows.push([]);
+  /* ── Sheet 6: 최종결과 ── */
+  var sc=D.scenarios.map(function(s){return Engine.scenarioCalc(s)});
+  var ins=Engine.insights();
+  var warns=Engine.costWarnings();
+  var s6=[
+    ['최종 종합 결과 — 시나리오 비교 · 의견'],
+    [],
+    ['시나리오','총수입(원)','총사업비(원)','종후자산(원)','비례율','평균분담금(원)']
+  ];
+  sc.forEach(function(s){s6.push([s.name,s.totalRev,s.totalCost,s.postAsset,s.ratio,s.avgBurden])});
+  s6.push([]);
+  s6.push(['종합 의견']);
+  ins.forEach(function(m){s6.push(['',m])});
+  if(warns.length>0){
+    s6.push([]);s6.push(['경고 사항']);
+    warns.forEach(function(m){s6.push(['',m])});
   }
+  s6.push([]);
+  s6.push(['※ 본 분석은 입력 데이터 기준의 추정치이며, 실제 사업 여건에 따라 달라질 수 있습니다.']);
+  s6.push(['※ (주)세울엔지니어링 | seul21.com | '+new Date().toLocaleDateString('ko-KR')]);
+  var ws6=XLSX.utils.aoa_to_sheet(s6);
+  colW(ws6,[14,18,18,18,12,18]);
+  /* 비례율 컬럼 % 포맷 */
+  for(var si=0;si<sc.length;si++){
+    var sRef=XLSX.utils.encode_cell({r:3+si,c:4});
+    if(ws6[sRef])ws6[sRef].z=P;
+  }
+  XLSX.utils.book_append_sheet(wb,ws6,'최종결과');
 
-  r2('※ 본 분석은 입력 데이터 기준의 추정치이며, 실제 사업 여건에 따라 달라질 수 있습니다.');
-  r2('※ (주)세울엔지니어링 | seul21.com');
-
-  /* CSV → Excel 변환 (UTF-8 BOM) */
-  var csv='\uFEFF';
-  rows.forEach(function(row){
-    csv+=row.map(function(cell){
-      var s=String(cell==null?'':cell);
-      if(s.indexOf(',')>=0||s.indexOf('"')>=0||s.indexOf('\n')>=0) s='"'+s.replace(/"/g,'""')+'"';
-      return s;
-    }).join(',')+'\r\n';
-  });
-  var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;
-  a.download='세울엔지니어링_사업성분석_'+(D.projectName||'종합분석')+'_'+new Date().toISOString().slice(0,10)+'.csv';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  if(typeof App!=='undefined')App.toast('엑셀 파일이 다운로드되었습니다.','success');
+  /* ── 파일 다운로드 ── */
+  var fname='세울엔지니어링_사업성분석_'+(D.projectName||'종합')+'_'+new Date().toISOString().slice(0,10)+'.xlsx';
+  XLSX.writeFile(wb,fname);
+  if(typeof App!=='undefined')App.toast('엑셀 파일(6개 시트)이 다운로드되었습니다.','success');
 }
 
 window.CA = {
