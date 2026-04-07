@@ -371,7 +371,7 @@
     expert: `<div class="chat-msg bot expert">
       <div class="chat-avatar expert-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
       <div class="chat-content">
-        <div class="chat-name expert-name">세울 전문가<span class="expert-badge">Gemma4</span></div>
+        <div class="chat-name expert-name">세울 전문가</div>
         <div class="chat-bubble">안녕하세요, <strong>세울 전문가</strong>입니다.<br>정비사업 법규·절차·사업성 분석 등<br><strong>전문가 수준의 심층 상담</strong>을 제공합니다.<br>어떤 사안이 궁금하신가요?</div>
       </div>
     </div>`
@@ -459,7 +459,7 @@
     // 헤더 변경
     if (mode === 'expert') {
       headerTitle.textContent = '세울 전문가';
-      headerSub.textContent = expertOnline ? 'Gemma4 기반 전문가 분석' : '서버 오프라인';
+      headerSub.textContent = expertOnline ? '전문가 분석 모드' : '서버 오프라인';
       input.classList.add('expert-focus');
       sendBtn.classList.add('expert-send');
       input.placeholder = '전문 상담 내용을 입력하세요...';
@@ -514,7 +514,7 @@
     if (sender === 'bot') {
       const avatarCls = isExpert ? 'chat-avatar expert-avatar' : 'chat-avatar';
       const nameCls = isExpert ? 'chat-name expert-name' : 'chat-name';
-      const botName = isExpert ? '세울 전문가<span class="expert-badge">Gemma4</span>' : '세울 상담사';
+      const botName = isExpert ? '세울 전문가' : '세울 상담사';
       const icon = isExpert
         ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'
         : '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>';
@@ -534,7 +534,7 @@
     div.innerHTML = `
       <div class="chat-avatar expert-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
       <div class="chat-content">
-        <div class="chat-name expert-name">세울 전문가<span class="expert-badge">Gemma4</span></div>
+        <div class="chat-name expert-name">세울 전문가</div>
         <div class="chat-bubble streaming-cursor"></div>
       </div>`;
     messages.appendChild(div);
