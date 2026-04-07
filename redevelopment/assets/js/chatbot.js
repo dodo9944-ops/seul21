@@ -1,5 +1,5 @@
 /* ============================================================
-   세울엔지니어링 24시 스마트 상담
+   세울엔지니어링 실시간 스마트 상담
    — 비서1 일반상담 (Claude) + 비서2 전문가 (Gemma4)
    — 다크네이비 + 골드 프리미엄 디자인
    — 전문가 모드 실시간 스트리밍 지원
@@ -24,8 +24,8 @@
             </svg>
           </div>
           <div id="chat-header-text">
-            <span id="chat-title">세울 24시 상담</span>
-            <span id="chat-subtitle">정비사업 전문 24시 상담</span>
+            <span id="chat-title">세울 실시간 상담</span>
+            <span id="chat-subtitle">정비사업 전문 실시간 상담</span>
           </div>
         </div>
         <button id="chat-close" aria-label="닫기">&times;</button>
@@ -52,7 +52,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
         </button>
       </div>
-      <div id="chat-footer">© (주)세울엔지니어링 · 24시 스마트 상담 시스템</div>
+      <div id="chat-footer">© (주)세울엔지니어링 · 실시간 스마트 상담 시스템</div>
     </div>
     <button id="chat-toggle" aria-label="상담하기">
       <div id="chat-toggle-inner">
@@ -63,7 +63,7 @@
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </div>
-      <span id="chat-toggle-label">24시 상담</span>
+      <span id="chat-toggle-label">실시간 상담</span>
     </button>
   </div>`;
 
@@ -464,8 +464,8 @@
       sendBtn.classList.add('expert-send');
       input.placeholder = '전문 상담 내용을 입력하세요...';
     } else {
-      headerTitle.textContent = '세울 24시 상담';
-      headerSub.textContent = '정비사업 전문 24시 상담';
+      headerTitle.textContent = '세울 실시간 상담';
+      headerSub.textContent = '정비사업 전문 실시간 상담';
       input.classList.remove('expert-focus');
       sendBtn.classList.remove('expert-send');
       input.placeholder = '궁금한 점을 입력하세요...';
