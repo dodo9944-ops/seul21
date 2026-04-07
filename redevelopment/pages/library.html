@@ -274,7 +274,7 @@
 <script src="../assets/js/common.js?v=20260407"></script>
 <script>
 (function(){
-if(typeof MOCK!=='undefined'&&MOCK.library){var s=JSON.parse(localStorage.getItem('rdc_library')||'[]');if(s.length!==MOCK.library.length)localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}
+if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}
 var now=new Date(),sevenAgo=new Date(now.getTime()-7*864e5);
 var allItems=DataService.getAll('library').filter(function(i){if(i.category!=='주요뉴스')return true;return i.date&&new Date(i.date)>=sevenAgo});
 
@@ -458,11 +458,19 @@ var fileMap={
 'news0401':{web:'../downloads/news_20260401.html'},
 'news0402':{web:'../downloads/news_20260402.html'},
 'news0403':{web:'../downloads/news_20260403.html'},
-'news0404':{web:'../downloads/news_20260404.html'}};
+'news0404':{web:'../downloads/news_20260404.html'},
+'news0405':{web:'../downloads/news_20260405.html'},
+'news0406a':{web:'../downloads/news_20260406a.html'},
+'news0406b':{web:'../downloads/news_20260406b.html'},
+'news0407a':{web:'../downloads/news_20260407a.html'},
+'news0407b':{web:'../downloads/news_20260407b.html'}};
 var fileCache={};
 function checkFile(url,cb){if(fileCache[url]!==undefined)return cb(fileCache[url]);var x=new XMLHttpRequest();x.open('HEAD',url,true);x.onload=function(){fileCache[url]=x.status===200;cb(fileCache[url])};x.onerror=function(){fileCache[url]=false;cb(false)};x.send()}
 function handleDownload(id){
-var m=fileMap[id];if(!m){App.toast('파일 준비 중입니다.','info');return}
+var m=fileMap[id];
+if(!m){var item=allItems.find(function(i){return i.id===id});
+if(item&&item.category==='주요뉴스'){var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');var tryUrl='../downloads/news_'+dateStr+(suffix.match(/[ab]$/)?suffix.slice(-1):'')+'.html';window.open(tryUrl,'_blank');App.toast('웹 문서로 열립니다','info');return}
+App.toast('파일 준비 중입니다.','info');return}
 if(m.ext){checkFile(m.ext,function(ok){
 if(ok){var a=document.createElement('a');a.href=m.ext;a.download='';document.body.appendChild(a);a.click();document.body.removeChild(a);App.toast('파일 다운로드 시작','success')}
 else if(m.gov){window.open(m.gov,'_blank');App.toast((m.label||'공식 사이트')+'로 이동합니다','info')}
