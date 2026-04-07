@@ -291,6 +291,16 @@ function buildStep(idx){
   h+='</div>';
 
   if(idx===0){
+    // 파일 입력
+    h+='<div class="ca-file-upload" style="margin-bottom:16px;padding:16px 20px;border:1.5px dashed rgba(195,165,105,0.3);border-radius:10px;background:rgba(195,165,105,0.03);text-align:center">';
+    h+='<i class="fa-solid fa-file-arrow-up" style="font-size:20px;color:#C3A569;margin-bottom:8px;display:block"></i>';
+    h+='<p style="font-size:13px;color:var(--gray-600);margin-bottom:10px">엑셀/CSV 파일로 기초데이터를 한 번에 입력할 수 있습니다</p>';
+    h+='<label style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:6px;background:#0A0F1C;color:#fff;font-size:12px;font-weight:700;cursor:pointer">';
+    h+='<i class="fa-solid fa-upload"></i> 파일 선택 (xlsx, csv)';
+    h+='<input type="file" accept=".xlsx,.xls,.csv" onchange="CA.importFile(this)" style="display:none">';
+    h+='</label>';
+    h+='<button class="cm-btn" onclick="CA.downloadTemplate()" style="margin-left:8px;font-size:11px"><i class="fa-solid fa-download"></i> 입력양식 다운로드</button>';
+    h+='</div>';
     // 기초 데이터
     h+=sec('fa-tag','사업 기본정보');
     h+='<div class="ca-fg"><label>사업유형</label><select data-field="projectType">'+CFG.PROJECT_TYPES.map(function(t){return'<option'+(D.projectType===t?' selected':'')+'>'+t+'</option>'}).join('')+'</select></div>';
@@ -496,6 +506,110 @@ function loadData(){
 loadData();
 
 /* ════════════════════════════════════════
+   FILE IMPORT — 엑셀/CSV 파일 입력
+   ════════════════════════════════════════ */
+function downloadTemplate(){
+  var hdr=['항목','값','단위','비고'];
+  var rows=[
+    hdr,
+    ['사업유형','재건축','','재건축/재개발/소규모 정비사업/리모델링/기타'],
+    ['사업명','','','예: ○○구역 재건축 정비사업'],
+    ['소재지','','','예: 서울시 ○○구 ○○동'],
+    ['진행단계','추진위 구성','','추진위 구성/조합설립인가/사업시행인가/관리처분 준비/관리처분인가/착공/시공중/준공'],
+    ['대지면적','0','㎡',''],
+    ['연면적','0','㎡',''],
+    ['계획용적률','0','%',''],
+    ['건폐율','0','%',''],
+    ['조합원수','0','명',''],
+    ['기존세대수','0','세대',''],
+    ['계획세대수','0','세대',''],
+    ['일반분양세대수','0','세대',''],
+    ['임대세대수','0','세대',''],
+    ['종전자산총액','0','원','간편입력 시 직접 입력'],
+    ['일반분양평균가','0','원/세대',''],
+    ['조합원분양평균가','0','원/세대',''],
+    ['상가분양총액','0','원',''],
+    ['보류지세대수','0','세대',''],
+    ['보류지평균가','0','원',''],
+    ['기타수입','0','원',''],
+    ['공사비','0','원',''],
+    ['설계비비율','3','%','공사비 대비'],
+    ['감리비비율','2','%','공사비 대비'],
+    ['철거비비율','5','%','공사비 대비'],
+    ['금융비용비율','8','%','공사비 대비'],
+    ['운영비비율','3','%','공사비 대비'],
+    ['기타비율','2','%','공사비 대비'],
+    ['예비비비율','5','%','공사비 대비']
+  ];
+  var csv='\uFEFF'+rows.map(function(r){return r.map(function(c){var s=String(c);if(s.indexOf(',')>=0)s='"'+s+'"';return s}).join(',')}).join('\r\n');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='세울엔지니어링_사업성분석_입력양식.csv';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  if(typeof App!=='undefined')App.toast('입력양식이 다운로드되었습니다.','success');
+}
+
+function importFile(input){
+  var file=input.files&&input.files[0];
+  if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var text=e.target.result;
+    var lines=text.split(/\r?\n/).filter(function(l){return l.trim()});
+    var map={};
+    lines.forEach(function(line,i){
+      if(i===0)return; // skip header
+      var cols=[];var inQ=false,cur='';
+      for(var c=0;c<line.length;c++){
+        if(line[c]==='"'){inQ=!inQ}
+        else if(line[c]===','&&!inQ){cols.push(cur.trim());cur=''}
+        else{cur+=line[c]}
+      }
+      cols.push(cur.trim());
+      if(cols[0])map[cols[0]]=cols[1]||'';
+    });
+    var g=function(k){return map[k]||''};
+    var n=function(k){return pn(g(k))};
+
+    // 매핑
+    if(g('사업유형'))D.projectType=g('사업유형');
+    if(g('사업명'))D.projectName=g('사업명');
+    if(g('소재지'))D.location=g('소재지');
+    if(g('진행단계'))D.phase=g('진행단계');
+    D.siteArea=n('대지면적');
+    D.grossFloorArea=n('연면적');
+    D.farPlanned=n('계획용적률');
+    D.bcr=n('건폐율');
+    D.memberCount=n('조합원수');
+    D.existingUnits=n('기존세대수');
+    D.plannedUnits=n('계획세대수');
+    D.generalUnits=n('일반분양세대수');
+    D.rentalUnits=n('임대세대수');
+    if(n('종전자산총액')>0){D.prevAssetMode='simple';D.prevAssetTotal=n('종전자산총액')}
+    D.generalAvgPrice=n('일반분양평균가');
+    D.memberAvgPrice=n('조합원분양평균가');
+    D.commercialPrice=n('상가분양총액');
+    D.reserveUnits=n('보류지세대수');
+    D.reserveAvgPrice=n('보류지평균가');
+    D.postEtcValue=n('기타수입');
+    D.costConstruction=n('공사비');
+    D.costMode='ratio';
+    if(n('설계비비율'))D.costRatioDesign=n('설계비비율');
+    if(n('감리비비율'))D.costRatioSupervision=n('감리비비율');
+    if(n('철거비비율'))D.costRatioDemolition=n('철거비비율');
+    if(n('금융비용비율'))D.costRatioFinance=n('금융비용비율');
+    if(n('운영비비율'))D.costRatioOperation=n('운영비비율');
+    if(n('기타비율'))D.costRatioEtc=n('기타비율');
+    if(n('예비비비율'))D.costRatioReserve=n('예비비비율');
+
+    renderComprehensive();
+    if(typeof App!=='undefined')App.toast('파일에서 '+Object.keys(map).length+'개 항목을 가져왔습니다.','success');
+  };
+  reader.readAsText(file,'UTF-8');
+  input.value='';
+}
+
+/* ════════════════════════════════════════
    EXCEL EXPORT — 모든 연산 세부 표기
    ════════════════════════════════════════ */
 function exportExcel(){
@@ -642,7 +756,9 @@ window.CA = {
   fillExample: fillExample,
   resetAll: resetAll,
   saveData: saveData,
-  exportExcel: exportExcel
+  exportExcel: exportExcel,
+  importFile: importFile,
+  downloadTemplate: downloadTemplate
 };
 
 })();
