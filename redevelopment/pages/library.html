@@ -466,7 +466,8 @@ var fileMap={
 'news0406a':{web:'../downloads/news_20260406a.html'},
 'news0406b':{web:'../downloads/news_20260406b.html'},
 'news0407a':{web:'../downloads/news_20260407a.html'},
-'news0407b':{web:'../downloads/news_20260407b.html'}};
+'news0407b':{web:'../downloads/news_20260407b.html'},
+'news0408':{web:'../downloads/news_20260408.html'}};
 var fileCache={};
 function checkFile(url,cb){if(fileCache[url]!==undefined)return cb(fileCache[url]);var x=new XMLHttpRequest();x.open('HEAD',url,true);x.onload=function(){fileCache[url]=x.status===200;cb(fileCache[url])};x.onerror=function(){fileCache[url]=false;cb(false)};x.send()}
 function handleDownload(id){
