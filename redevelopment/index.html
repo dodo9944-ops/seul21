@@ -138,7 +138,7 @@
         .hero-bg-photo img {
             width: 100%; height: 100%; object-fit: cover;
             object-position: center 25%;
-            filter: brightness(0.42) contrast(1.08) saturate(0.55);
+            filter: brightness(0.38) contrast(1.06) saturate(0.5);
         }
         /* 좌측 텍스트 보호 */
         .hero-bg-photo::after {
@@ -218,7 +218,7 @@
         /* 서브카피 */
         .hero-subtitle {
             font-size: 17px; font-weight: 400; color: rgba(255,255,255,.7);
-            line-height: 1.8; margin-bottom: 24px; max-width: 440px;
+            line-height: 1.8; margin-bottom: 16px; max-width: 420px;
             text-shadow: 0 1px 10px rgba(0,0,0,0.3);
             word-break: keep-all;
         }
@@ -264,9 +264,9 @@
 
         /* ── CATEGORY NAV BELOW HERO ── */
         .category-section { padding: 0; background: var(--white); border-bottom: 1px solid var(--gray-100); }
-        .category-nav { display: flex; align-items: center; gap: 4px; padding: 16px 0; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
+        .category-nav { display: flex; align-items: center; gap: 4px; padding: 12px 0; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
         .category-nav::-webkit-scrollbar { display: none; }
-        .cat-item { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 8px; cursor: pointer; transition: all var(--transition); white-space: nowrap; flex-shrink: 0; }
+        .cat-item { display: flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all var(--transition); white-space: nowrap; flex-shrink: 0; }
         .cat-item:hover { background: var(--gray-50); }
         .cat-item.active { background: #0A0F1C; }
         .cat-icon { font-size: 15px; color: var(--gray-500); transition: color var(--transition); }
