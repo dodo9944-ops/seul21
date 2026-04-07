@@ -180,6 +180,31 @@ async function saveData(items, sha) {
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') return res.status(200).end();
+
+  // GET 요청: 웹훅 설정/조회 (setup 용도)
+  if (req.method === 'GET') {
+    const token = process.env.TELEGRAM_BOT_TOKEN;
+    if (!token) return res.status(500).json({ error: 'No bot token' });
+    const action = req.query.action || 'info';
+    const TGAPI = `https://api.telegram.org/bot${token}`;
+    try {
+      if (action === 'set') {
+        const r = await fetch(`${TGAPI}/setWebhook`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: 'https://seul21.vercel.app/api/chat-expert-webhook' })
+        });
+        return res.status(200).json({ action: 'set', result: await r.json() });
+      }
+      if (action === 'delete') {
+        const r = await fetch(`${TGAPI}/deleteWebhook`);
+        return res.status(200).json({ action: 'delete', result: await r.json() });
+      }
+      const r = await fetch(`${TGAPI}/getWebhookInfo`);
+      return res.status(200).json({ action: 'info', result: await r.json() });
+    } catch (e) { return res.status(500).json({ error: e.message }); }
+  }
+
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
