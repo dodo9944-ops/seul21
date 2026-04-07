@@ -381,10 +381,13 @@ badges+='<span class="lb-date">'+item.date+'</span>';
 badges+='<span class="lb-dl"><i class="fa-solid fa-download"></i>'+(item.downloads||0)+'</span>';
 
 var pinCls=isHot(item.downloads)?' pinned':'';
+var isWeb=item.fileType==='web';
 var ftLabel=item.fileType==='pdf'?'PDF':item.fileType==='hwp'?'HWP':item.fileType==='xlsx'?'XLS':'WEB';
+var btnIcon=isWeb?'fa-newspaper':'fa-arrow-down';
+var btnText=isWeb?'뉴스보기':ftLabel+' 다운로드';
 
 return'<div class="lib-item'+pinCls+'">'+
-'<div class="lib-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i><span class="ft-label">'+ftLabel+'</span></div>'+
+'<div class="lib-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i><span class="ft-label">'+(isWeb?'NEWS':ftLabel)+'</span></div>'+
 '<div class="lib-content">'+
     '<div class="lib-title" data-id="'+item.id+'">'+item.title+'</div>'+
     '<div class="lib-desc">'+item.description+'</div>'+
@@ -392,7 +395,7 @@ return'<div class="lib-item'+pinCls+'">'+
 '</div>'+
 '<div class="lib-action">'+
     '<span class="lib-size">'+item.fileSize+'</span>'+
-    '<button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid fa-arrow-down"></i> '+ftLabel+' 다운로드</button>'+
+    '<button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid '+btnIcon+'"></i> '+btnText+'</button>'+
 '</div></div>'}).join('');
 
 /* Pager */
