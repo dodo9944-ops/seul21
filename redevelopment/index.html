@@ -141,43 +141,44 @@
         .hero-img img {
             width: 100%; height: 100%; object-fit: cover; display: block;
         }
-        /* 1. 메인 대표 — 도시 전경 (65% 존재감) */
+        /* 1. 메인 대표 — 도시/정비 현장 (70% 존재감) */
         .hero-img-main {
-            top: 8%; right: 4%; width: 72%; height: 78%; z-index: 3;
+            top: 6%; right: 2%; width: 76%; height: 84%; z-index: 3;
         }
         .hero-img-main img {
-            filter: brightness(0.6) contrast(1.05) saturate(0.85);
+            filter: brightness(0.45) contrast(1.08) saturate(0.7);
+            object-position: center 40%;
         }
-        /* 2. 실무 전문성 보조 — 도면/설계 */
+        /* 2. 실무 전문성 보조 — 더 어둡고 더 뒤로 */
         .hero-img-sub1 {
-            top: 52%; right: 56%; width: 34%; height: 40%; z-index: 4;
-            border: 2px solid rgba(195,165,105,0.15);
+            top: 56%; right: 60%; width: 28%; height: 34%; z-index: 2;
+            border: 1px solid rgba(195,165,105,0.08);
         }
         .hero-img-sub1 img {
-            filter: brightness(0.55) contrast(1.0) saturate(0.75);
+            filter: brightness(0.3) contrast(0.95) saturate(0.5);
         }
-        /* 3. 협의·조율 보조 */
+        /* 3. 협의·조율 보조 — 더 흐리고 더 뒤로 */
         .hero-img-sub2 {
-            top: 4%; right: 60%; width: 30%; height: 36%; z-index: 2;
-            border: 2px solid rgba(195,165,105,0.1);
+            top: 6%; right: 66%; width: 24%; height: 30%; z-index: 1;
+            border: 1px solid rgba(195,165,105,0.06);
         }
         .hero-img-sub2 img {
-            filter: brightness(0.5) contrast(1.0) saturate(0.7);
+            filter: brightness(0.25) contrast(0.9) saturate(0.4);
         }
-        /* 이미지 위 오버레이 — 텍스트 가독성 확보 */
+        /* 이미지 위 오버레이 — 텍스트 가독성 강화 */
         .hero-images::after {
             content: ''; position: absolute; inset: 0;
             background: linear-gradient(90deg,
-                #0A0F1C 0%, rgba(10,15,28,0.95) 5%,
-                rgba(14,24,42,0.55) 30%, rgba(18,32,56,0.2) 60%,
-                rgba(20,38,68,0.1) 100%
+                #0A0F1C 0%, rgba(10,15,28,0.97) 8%,
+                rgba(14,24,42,0.7) 28%, rgba(18,32,56,0.35) 55%,
+                rgba(20,38,68,0.2) 80%, rgba(20,38,68,0.15) 100%
             ); z-index: 5; pointer-events: none;
         }
         /* 미묘한 골드 라인 장식 */
         .hero-img-main::after {
             content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-            height: 3px; background: linear-gradient(90deg, var(--gold), transparent);
-            z-index: 1;
+            height: 2px; background: linear-gradient(90deg, var(--gold), transparent 70%);
+            z-index: 1; opacity: 0.6;
         }
         @media (max-width: 1024px) {
             .hero-images { width: 100%; opacity: 0.2; }
@@ -232,11 +233,11 @@
         .hero-hline-top { top: 0; }
         .hero-hline-bottom { bottom: 0; }
 
-        /* ── 히어로 콘텐츠 센터 정렬 ── */
+        /* ── 히어로 콘텐츠 좌측 정렬 (기업형) ── */
         .hero-banner .inner {
             position: relative; z-index: 2;
-            text-align: center;
-            display: flex; flex-direction: column; align-items: center;
+            text-align: left;
+            display: flex; flex-direction: column; align-items: flex-start;
             max-width: 1440px;
             padding: 0 60px;
         }
@@ -279,12 +280,12 @@
             max-width: 860px; width: 100%;
         }
         .hero-cap-item {
-            flex: 1; padding: 16px 18px;
-            background: rgba(14,22,38,0.28);
-            border: 1px solid rgba(255,255,255,0.12);
+            flex: 1; padding: 18px 20px;
+            background: rgba(10,15,28,0.75);
+            border: 1px solid rgba(195,165,105,0.15);
             border-radius: 6px; text-align: left;
             transition: all .35s ease; position: relative; overflow: hidden;
-            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
         }
         .hero-cap-item::before {
             content: ''; position: absolute; top: 0; left: 0;
@@ -293,18 +294,19 @@
             opacity: 0; transition: opacity .35s ease;
         }
         .hero-cap-item:hover {
-            background: rgba(14,22,40,0.40);
-            border-color: rgba(195,165,105,.18);
+            background: rgba(10,15,28,0.85);
+            border-color: rgba(195,165,105,.3);
             transform: translateY(-2px);
         }
         .hero-cap-item:hover::before { opacity: 1; }
         .hero-cap-num {
-            font-size: 10px; font-weight: 700; color: rgba(195,165,105,.5);
+            font-size: 10px; font-weight: 700; color: rgba(195,165,105,.7);
             letter-spacing: 2px; margin-bottom: 8px;
         }
         .hero-cap-title {
             font-size: 14px; font-weight: 800; color: #fff;
             line-height: 1.5;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
         }
 
         /* CTA 버튼 */
@@ -675,13 +677,13 @@
     <div class="hero-banner">
         <div class="hero-images">
             <div class="hero-img hero-img-main">
-                <img src="jpg/hero_about.png" alt="도시정비 전경 — 세울엔지니어링">
+                <img src="jpg/hero_vision.png" alt="도시정비 현장 — 재정비구역 전경">
             </div>
             <div class="hero-img hero-img-sub1">
-                <img src="jpg/hero_services.png" alt="정비사업 실무 — 도면 검토">
+                <img src="jpg/hero_feasibility.png" alt="사업성 검토 — 도면·데이터 분석">
             </div>
             <div class="hero-img hero-img-sub2">
-                <img src="jpg/hero_portfolio.png" alt="이해관계 협의 — 사업 조율">
+                <img src="jpg/hero_services.png" alt="정비사업 관리 — 실무 협의">
             </div>
         </div>
         <div class="hero-bg-grid"></div>
