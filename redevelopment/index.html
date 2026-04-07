@@ -1088,12 +1088,12 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var today=new Date(); today.setHours(0,0,0,0);
         var cutoff=new Date(today); cutoff.setDate(cutoff.getDate()-3);
         var cutStr=cutoff.toISOString().slice(0,10);
-        var newsFileMap={'news0329':'downloads/news_20260329.html','news0330':'downloads/news_20260330.html','news0331':'downloads/news_20260331.html','news0401':'downloads/news_20260401.html','news0402':'downloads/news_20260402.html','news0403':'downloads/news_20260403.html','news0404':'downloads/news_20260404.html','news0405':'downloads/news_20260405.html','news0406a':'downloads/news_20260406a.html','news0406b':'downloads/news_20260406b.html','news0407a':'downloads/news_20260407a.html','news0407b':'downloads/news_20260407b.html'};
+        var newsFileMap={'news0329':'downloads/news_20260329.html','news0330':'downloads/news_20260330.html','news0331':'downloads/news_20260331.html','news0401':'downloads/news_20260401.html','news0402':'downloads/news_20260402.html','news0403':'downloads/news_20260403.html','news0404':'downloads/news_20260404.html','news0405':'downloads/news_20260405.html','news0406a':'downloads/news_20260406a.html','news0406b':'downloads/news_20260406b.html','news0407a':'downloads/news_20260407a.html','news0407b':'downloads/news_20260407b.html','lib48':'downloads/news_20260405.html'};
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
-            var href=newsFileMap[i.id]?newsFileMap[i.id]:'pages/library.html?cat=주요뉴스';
-            return'<a href="'+href+'" class="news-item" target="'+(newsFileMap[i.id]?'_blank':'_self')+'" style="gap:10px;padding:12px 20px;">'+
+            var href=newsFileMap[i.id]||'pages/library.html?cat=주요뉴스';
+            return'<a href="'+href+'" class="news-item" style="gap:10px;padding:12px 20px;">'+
                 '<span style="color:#C3A569;font-size:11px;flex-shrink:0;">●</span>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
                 '<div class="news-date">'+i.date+'</div></div></a>';
