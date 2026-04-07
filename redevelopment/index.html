@@ -651,6 +651,17 @@
     </div>
 </section>
 
+<!-- ===== 주요뉴스 ===== -->
+<section class="section">
+    <div class="inner">
+        <div class="section-head">
+            <h2 class="section-title">주요뉴스</h2>
+            <a href="pages/library.html?cat=주요뉴스" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+        </div>
+        <div id="mainNews"></div>
+    </div>
+</section>
+
 <!-- ===== 핵심 역량 소개 ===== -->
 <section class="section">
     <div class="inner">
@@ -1072,6 +1083,25 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     }
 
     var iconMap={hwp:'fa-file-lines',pdf:'fa-file-pdf',xlsx:'fa-file-excel'};
+
+    /* 주요뉴스: 최근 3일치 */
+    var newsEl=document.getElementById('mainNews');
+    if(newsEl && MOCK.library){
+        var today=new Date(); today.setHours(0,0,0,0);
+        var cutoff=new Date(today); cutoff.setDate(cutoff.getDate()-3);
+        var cutStr=cutoff.toISOString().slice(0,10);
+        var newsFileMap={'news0329':'downloads/news_20260329.html','news0330':'downloads/news_20260330.html','news0331':'downloads/news_20260331.html','news0401':'downloads/news_20260401.html','news0402':'downloads/news_20260402.html','news0403':'downloads/news_20260403.html','news0404':'downloads/news_20260404.html','news0405_am':'downloads/news_20260405_am.html','news0405_pm':'downloads/news_20260405_pm.html','news0406_am':'downloads/news_20260406_am.html','news0406_pm':'downloads/news_20260406_pm.html','news0407_am':'downloads/news_20260407_am.html','news0407_pm':'downloads/news_20260407_pm.html'};
+        var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
+            .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});
+        newsEl.innerHTML=news.length?news.map(function(i){
+            var ic=iconMap[i.fileType]||'fa-newspaper';
+            var href=newsFileMap[i.id]?newsFileMap[i.id]:'pages/library.html?cat=주요뉴스';
+            return'<a href="'+href+'" class="news-item" target="'+(newsFileMap[i.id]?'_blank':'_self')+'">'+
+                '<div class="news-thumb"><i class="fa-solid '+ic+'"></i></div>'+
+                '<div class="news-body"><h4>'+i.title+'</h4>'+
+                '<div class="news-date">'+i.date+'</div></div></a>';
+        }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">최근 3일간 등록된 주요뉴스가 없습니다.</p>';
+    }
 
     /* 자료실: 최신 4건 (주요뉴스 제외) */
     var libEl=document.getElementById('mainLibrary');
