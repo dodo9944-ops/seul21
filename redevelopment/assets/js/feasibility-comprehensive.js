@@ -612,10 +612,25 @@ function importFile(input){
 function exportExcel(){
   if(typeof XLSX==='undefined'){if(typeof App!=='undefined')App.toast('엑셀 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.','info');return}
   var wb=XLSX.utils.book_new();
-  var N='#,##0',P='0.00%',W='#,##0"원"';
+  var N='#,##0',P='0.00%';
   function colW(ws,widths){ws['!cols']=widths.map(function(w){return{wch:w}});return ws}
-  function fmtCells(ws,refs,z){refs.forEach(function(ref){if(ws[ref])ws[ref].z=z})}
-  function numFmt(ws,col,startRow,count,z){for(var i=0;i<count;i++){var ref=XLSX.utils.encode_cell({r:startRow+i,c:col});if(ws[ref]&&typeof ws[ref].v==='number')ws[ref].z=z;if(ws[ref]&&ws[ref].f)ws[ref].z=z}}
+  function fmtCells(ws,refs,z){refs.forEach(function(ref){if(ws[ref]){if(!ws[ref].s)ws[ref].s={};ws[ref].z=z}})}
+  function numFmt(ws,col,startRow,count,z){for(var i=0;i<count;i++){var ref=XLSX.utils.encode_cell({r:startRow+i,c:col});if(ws[ref]){ws[ref].z=z}}}
+
+  /* ── 스타일 정의 ── */
+  var STL={
+    title:{font:{bold:true,sz:14,color:{rgb:'FFFFFF'}},fill:{fgColor:{rgb:'0A0F1C'}},alignment:{horizontal:'left',vertical:'center'}},
+    secTitle:{font:{bold:true,sz:11,color:{rgb:'0A0F1C'}},fill:{fgColor:{rgb:'F0EDE5'}},border:{bottom:{style:'thin',color:{rgb:'C3A569'}}}},
+    hdr:{font:{bold:true,sz:10,color:{rgb:'FFFFFF'}},fill:{fgColor:{rgb:'142644'}},alignment:{horizontal:'center'},border:{bottom:{style:'thin',color:{rgb:'C3A569'}}}},
+    label:{font:{sz:10,color:{rgb:'444444'}},fill:{fgColor:{rgb:'FAFBFC'}},border:{bottom:{style:'hair',color:{rgb:'E0E0E0'}}}},
+    val:{font:{sz:10,color:{rgb:'0A0F1C'}},alignment:{horizontal:'right'},border:{bottom:{style:'hair',color:{rgb:'E0E0E0'}}}},
+    sum:{font:{bold:true,sz:11,color:{rgb:'0A0F1C'}},fill:{fgColor:{rgb:'F5F0E6'}},border:{top:{style:'thin',color:{rgb:'C3A569'}},bottom:{style:'double',color:{rgb:'C3A569'}}}},
+    gold:{font:{bold:true,sz:11,color:{rgb:'0A0F1C'}},fill:{fgColor:{rgb:'C3A569'}},alignment:{horizontal:'center'}},
+    note:{font:{sz:9,italic:true,color:{rgb:'888888'}}}
+  };
+  function applyStyle(ws,ref,stl){if(ws[ref]){ws[ref].s=stl}else{ws[ref]={v:'',t:'s',s:stl}}}
+  function styleRow(ws,row,cols,stl){for(var c=0;c<cols;c++){var ref=XLSX.utils.encode_cell({r:row,c:c});applyStyle(ws,ref,stl)}}
+  function styleRange(ws,r1,r2,col,stl){for(var r=r1;r<=r2;r++){var ref=XLSX.utils.encode_cell({r:r,c:col});applyStyle(ws,ref,stl)}}
 
   /* ═══════════════════════════════════════════
      Sheet 1: 기본데이터 (입력값만, 수식 없음)
@@ -650,6 +665,14 @@ function exportExcel(){
   ];
   var ws1=XLSX.utils.aoa_to_sheet(s1);
   colW(ws1,[24,20,8]);
+  ws1['!merges']=[{s:{r:0,c:0},e:{r:0,c:2}}];
+  styleRow(ws1,0,3,STL.title);
+  styleRow(ws1,3,3,STL.hdr);styleRow(ws1,10,3,STL.hdr);styleRow(ws1,19,3,STL.hdr);
+  applyStyle(ws1,XLSX.utils.encode_cell({r:9,c:0}),STL.secTitle);
+  applyStyle(ws1,XLSX.utils.encode_cell({r:18,c:0}),STL.secTitle);
+  for(var i1=4;i1<=7;i1++){applyStyle(ws1,XLSX.utils.encode_cell({r:i1,c:0}),STL.label);applyStyle(ws1,XLSX.utils.encode_cell({r:i1,c:1}),STL.val)}
+  for(var i2=11;i2<=16;i2++){applyStyle(ws1,XLSX.utils.encode_cell({r:i2,c:0}),STL.label);applyStyle(ws1,XLSX.utils.encode_cell({r:i2,c:1}),STL.val)}
+  for(var i3=20;i3<=25;i3++){applyStyle(ws1,XLSX.utils.encode_cell({r:i3,c:0}),STL.label);applyStyle(ws1,XLSX.utils.encode_cell({r:i3,c:1}),STL.val)}
   XLSX.utils.book_append_sheet(wb,ws1,'기본데이터');
 
   /* ═══════════════════════════════════════════
@@ -696,10 +719,15 @@ function exportExcel(){
   }
   var ws2=XLSX.utils.aoa_to_sheet(s2);
   colW(ws2,[16,12,20,20,20]);
-  /* 금액 컬럼 천단위 포맷 */
+  ws2['!merges']=[{s:{r:0,c:0},e:{r:0,c:4}}];
+  styleRow(ws2,0,5,STL.title);
   if(D.prevAssetMode==='detail'){
-    numFmt(ws2,2,prevDataFirstRow-1,prevDataLastRow-prevDataFirstRow+1,N);
-    numFmt(ws2,3,prevDataFirstRow-1,prevDataLastRow-prevDataFirstRow+1,N);
+    styleRow(ws2,4,5,STL.hdr);
+    for(var p=prevDataFirstRow-1;p<=prevDataLastRow-1;p++){
+      applyStyle(ws2,XLSX.utils.encode_cell({r:p,c:0}),STL.label);
+      numFmt(ws2,2,p,1,N);numFmt(ws2,3,p,1,N);
+    }
+    styleRow(ws2,prevSumRow-1,5,STL.sum);
     fmtCells(ws2,[XLSX.utils.encode_cell({r:prevSumRow-1,c:3})],N);
   }
   XLSX.utils.book_append_sheet(wb,ws2,'종전자산');
@@ -739,10 +767,13 @@ function exportExcel(){
   var revSumRow=10;
   var ws3=XLSX.utils.aoa_to_sheet(s3);
   colW(ws3,[18,14,18,22,28]);
-  /* 금액 포맷 */
-  numFmt(ws3,2,3,5,N); /* C4~C8 단가 */
-  numFmt(ws3,3,3,5,N); /* D4~D8 금액 */
-  fmtCells(ws3,[XLSX.utils.encode_cell({r:9,c:3})],N); /* D10 합계 */
+  ws3['!merges']=[{s:{r:0,c:0},e:{r:0,c:4}}];
+  styleRow(ws3,0,5,STL.title);
+  styleRow(ws3,2,5,STL.hdr);
+  for(var r3=3;r3<=7;r3++){applyStyle(ws3,XLSX.utils.encode_cell({r:r3,c:0}),STL.label);numFmt(ws3,2,r3,1,N);numFmt(ws3,3,r3,1,N)}
+  styleRow(ws3,9,5,STL.sum);
+  fmtCells(ws3,[XLSX.utils.encode_cell({r:9,c:3})],N);
+  applyStyle(ws3,XLSX.utils.encode_cell({r:11,c:0}),STL.note);
   XLSX.utils.book_append_sheet(wb,ws3,'종후자산');
 
   /* ═══════════════════════════════════════════
@@ -797,6 +828,14 @@ function exportExcel(){
 
   var ws4=XLSX.utils.aoa_to_sheet(s4);
   colW(ws4,[16,22,12,28]);
+  ws4['!merges']=[{s:{r:0,c:0},e:{r:0,c:3}}];
+  styleRow(ws4,0,4,STL.title);
+  styleRow(ws4,4,4,STL.hdr);
+  for(var c4=0;c4<bd.length;c4++){
+    var cr=costStartRow-1+c4;
+    applyStyle(ws4,XLSX.utils.encode_cell({r:cr,c:0}),STL.label);
+  }
+  styleRow(ws4,costSumRow-1,4,STL.sum);
 
   /* 비중(C열) 수식 삽입: =B행/B합계행 */
   bd.forEach(function(b,i){
@@ -873,24 +912,29 @@ function exportExcel(){
     ]);
   });
   var ws5=XLSX.utils.aoa_to_sheet(s5);
-  colW(ws5,[22,16,18,18,18,10]);
-  /* 비례율 % 포맷 (B9) */
+  colW(ws5,[22,18,20,18,18,10]);
+  ws5['!merges']=[{s:{r:0,c:0},e:{r:0,c:5}}];
+  styleRow(ws5,0,6,STL.title);
+  styleRow(ws5,2,3,STL.hdr);
+  for(var r5=3;r5<=6;r5++){applyStyle(ws5,XLSX.utils.encode_cell({r:r5,c:0}),STL.label)}
+  applyStyle(ws5,XLSX.utils.encode_cell({r:8,c:0}),STL.gold);
+  applyStyle(ws5,XLSX.utils.encode_cell({r:8,c:1}),STL.gold);
   fmtCells(ws5,[XLSX.utils.encode_cell({r:8,c:1})],P);
-  /* 금액 천단위 포맷 */
+  styleRow(ws5,10,3,STL.hdr);
+  for(var r5b=11;r5b<=13;r5b++){applyStyle(ws5,XLSX.utils.encode_cell({r:r5b,c:0}),STL.label)}
+  applyStyle(ws5,XLSX.utils.encode_cell({r:13,c:0}),STL.sum);
+  applyStyle(ws5,XLSX.utils.encode_cell({r:13,c:1}),STL.sum);
   fmtCells(ws5,[
-    XLSX.utils.encode_cell({r:3,c:1}),  /* B4 총수입 */
-    XLSX.utils.encode_cell({r:4,c:1}),  /* B5 총사업비 */
-    XLSX.utils.encode_cell({r:5,c:1}),  /* B6 종후자산 */
-    XLSX.utils.encode_cell({r:6,c:1}),  /* B7 종전자산 */
-    XLSX.utils.encode_cell({r:11,c:1}), /* B12 평균권리가액 */
-    XLSX.utils.encode_cell({r:12,c:1}), /* B13 조합원분양가 */
-    XLSX.utils.encode_cell({r:13,c:1})  /* B14 평균분담금 */
+    XLSX.utils.encode_cell({r:3,c:1}),XLSX.utils.encode_cell({r:4,c:1}),
+    XLSX.utils.encode_cell({r:5,c:1}),XLSX.utils.encode_cell({r:6,c:1}),
+    XLSX.utils.encode_cell({r:11,c:1}),XLSX.utils.encode_cell({r:12,c:1}),
+    XLSX.utils.encode_cell({r:13,c:1})
   ],N);
-  /* 유형별 금액 포맷 */
+  styleRow(ws5,16,6,STL.hdr);
   bt.forEach(function(t,i){
-    numFmt(ws5,2,btStartRow-1+i,1,N); /* C열 종전평가액 */
-    numFmt(ws5,3,btStartRow-1+i,1,N); /* D열 권리가액 */
-    numFmt(ws5,4,btStartRow-1+i,1,N); /* E열 분담금 */
+    var br=btStartRow-1+i;
+    applyStyle(ws5,XLSX.utils.encode_cell({r:br,c:0}),STL.label);
+    numFmt(ws5,2,br,1,N);numFmt(ws5,3,br,1,N);numFmt(ws5,4,br,1,N);
   });
   XLSX.utils.book_append_sheet(wb,ws5,'분석결과');
 
@@ -953,17 +997,22 @@ function exportExcel(){
   s6.push(['※ (주)세울엔지니어링 | seul21.com | '+new Date().toLocaleDateString('ko-KR')]);
   var ws6=XLSX.utils.aoa_to_sheet(s6);
   colW(ws6,[30,18,18,18,12,18]);
-  /* 비례율 컬럼(E) % 포맷 — row 4,5,6 */
+  ws6['!merges']=[{s:{r:0,c:0},e:{r:0,c:5}}];
+  styleRow(ws6,0,6,STL.title);
+  styleRow(ws6,2,6,STL.hdr);
   var scCount=D.scenarios.length;
   for(var si=0;si<scCount;si++){
+    applyStyle(ws6,XLSX.utils.encode_cell({r:3+si,c:0}),si===0?STL.gold:STL.label);
     fmtCells(ws6,[XLSX.utils.encode_cell({r:3+si,c:4})],P);
+    [1,2,3,5].forEach(function(col){fmtCells(ws6,[XLSX.utils.encode_cell({r:3+si,c:col})],N)});
   }
-  /* 금액 컬럼 천단위 포맷 (B,C,D,F — row 4~6) */
-  for(var si2=0;si2<scCount;si2++){
-    [1,2,3,5].forEach(function(col){
-      fmtCells(ws6,[XLSX.utils.encode_cell({r:3+si2,c:col})],N);
-    });
-  }
+  /* 의견 제목 */
+  var noteStart=3+scCount+1;
+  applyStyle(ws6,XLSX.utils.encode_cell({r:noteStart,c:0}),STL.secTitle);
+  /* 면책 */
+  var lastR=s6.length-1;
+  applyStyle(ws6,XLSX.utils.encode_cell({r:lastR,c:0}),STL.note);
+  applyStyle(ws6,XLSX.utils.encode_cell({r:lastR-1,c:0}),STL.note);
   XLSX.utils.book_append_sheet(wb,ws6,'최종결과');
 
   /* ── 파일 다운로드 ── */
