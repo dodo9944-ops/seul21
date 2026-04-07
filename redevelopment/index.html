@@ -142,6 +142,9 @@
             filter: brightness(0.55) contrast(1.0) saturate(0.8);
             opacity: 0;
             transition: opacity 1.8s ease-in-out;
+            will-change: opacity;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
         .hero-slideshow img.active { opacity: 1; }
         .hero-slideshow::after {
@@ -655,14 +658,14 @@
 <section class="hero-section">
     <div class="hero-banner">
         <div class="hero-slideshow" id="heroSlideshow">
-            <img src="jpg/hero_about.png" alt="세울엔지니어링 회사소개" class="active">
-            <img src="jpg/hero_vision.png" alt="세울엔지니어링 비전">
-            <img src="jpg/hero_services.png" alt="도시정비 서비스">
-            <img src="jpg/hero_portfolio.png" alt="사업실적">
+            <img src="jpg/hero_about.png" alt="회사소개" class="active">
+            <img src="jpg/hero_vision.png" alt="세울의 길">
+            <img src="jpg/hero_services.png" alt="사업분야">
+            <img src="jpg/hero_portfolio.png" alt="업무실적">
             <img src="jpg/hero_library.png" alt="자료실">
             <img src="jpg/hero_community.png" alt="커뮤니티">
-            <img src="jpg/hero_contact.png" alt="상담문의">
-            <img src="jpg/hero_feasibility.png" alt="사업성분석">
+            <img src="jpg/hero_feasibility.png" alt="사업성검토">
+            <img src="jpg/hero_contact.png" alt="고객센터">
         </div>
         <div class="hero-bg-grid"></div>
         <div class="hero-skyline"></div>
@@ -768,7 +771,7 @@
         <div class="sv-main">
             <a href="pages/redevelopment-service.html" class="sv-item">
                 <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-building"></i></div><div><div class="sv-nm">주택재개발 정비사업</div><div class="sv-en">Urban Redevelopment →</div></div></div>
-                <div class="sv-bd"><p>일반절차(11단계)와 서울시 신속통합기획을 구분하여 기본계획 수립부터 준공·조합 해산까지 전 과정 관리. HUG 보증 업무 원스톱 지원</p><div class="sv-tg"><span>일반절차 11단계</span><span>신속통합기획</span><span>통합건축심의</span><span>관리처분</span><span>HUG 보증</span></div></div>
+                <div class="sv-bd"><p>일반절차(12단계)와 서울시 신속통합기획을 구분하여 기본계획 수립부터 준공·조합 해산까지 전 과정 관리. HUG 보증 업무 원스톱 지원</p><div class="sv-tg"><span>일반절차 12단계</span><span>신속통합기획</span><span>통합건축심의</span><span>관리처분</span><span>HUG 보증</span></div></div>
             </a>
             <a href="pages/reconstruction-service.html" class="sv-item">
                 <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-city"></i></div><div><div class="sv-nm">주택재건축 정비사업</div><div class="sv-en">Housing Reconstruction →</div></div></div>
@@ -809,61 +812,73 @@
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-done"></div>
-            <div class="p-step p-done" data-step="1">
+            <div class="p-step p-done" data-step="1" style="opacity:0.75;">
+                <div class="p-dot" style="border-style:dashed;"><i class="fa-solid fa-users-gear"></i></div>
+                <div class="p-label" style="font-size:10px;">준비위원회<br><span style="font-size:9px;color:var(--gold);">[실무]</span></div>
+                <div class="p-step-hint">클릭하여 상세보기</div>
+            </div>
+            <div class="p-line p-line-done"></div>
+            <div class="p-step p-done" data-step="2">
                 <div class="p-dot"><i class="fa-solid fa-map-pin"></i></div>
                 <div class="p-label">정비구역<br>지정</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-done"></div>
-            <div class="p-step p-done" data-step="2">
+            <div class="p-step p-done" data-step="3">
                 <div class="p-dot"><i class="fa-solid fa-bullhorn"></i></div>
                 <div class="p-label">추진위원회<br>구성</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-done"></div>
-            <div class="p-step p-done" data-step="3">
+            <div class="p-step p-done" data-step="4">
                 <div class="p-dot"><i class="fa-solid fa-people-group"></i></div>
                 <div class="p-label">조합설립<br>인가</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-done"></div>
-            <div class="p-step p-done" data-step="4">
+            <div class="p-step p-done" data-step="5">
                 <div class="p-dot"><i class="fa-solid fa-compass-drafting"></i></div>
                 <div class="p-label">통합건축<br>심의</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-done"></div>
-            <div class="p-step p-now" data-step="5">
+            <div class="p-step p-now" data-step="6">
                 <div class="p-dot"><i class="fa-solid fa-stamp"></i></div>
                 <div class="p-label">사업시행<br>인가</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-wait"></div>
-            <div class="p-step p-wait" data-step="6">
+            <div class="p-step p-wait" data-step="7">
                 <div class="p-dot"><i class="fa-solid fa-list-check"></i></div>
                 <div class="p-label">관리처분<br>인가</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-wait"></div>
-            <div class="p-step p-wait" data-step="7">
+            <div class="p-step p-wait" data-step="8">
                 <div class="p-dot"><i class="fa-solid fa-file-signature"></i></div>
                 <div class="p-label">조합원<br>분양신청</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-wait"></div>
-            <div class="p-step p-wait" data-step="8">
+            <div class="p-step p-wait" data-step="9">
                 <div class="p-dot"><i class="fa-solid fa-truck-moving"></i></div>
-                <div class="p-label">이주·철거<br>심의·철거</div>
+                <div class="p-label">이주·HUG<br>보증</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-wait"></div>
-            <div class="p-step p-wait" data-step="9">
+            <div class="p-step p-wait" data-step="10">
+                <div class="p-dot"><i class="fa-solid fa-building-circle-xmark"></i></div>
+                <div class="p-label">철거심의<br>·철거</div>
+                <div class="p-step-hint">클릭하여 상세보기</div>
+            </div>
+            <div class="p-line p-line-wait"></div>
+            <div class="p-step p-wait" data-step="11">
                 <div class="p-dot"><i class="fa-solid fa-helmet-safety"></i></div>
                 <div class="p-label">착공·분양</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
             </div>
             <div class="p-line p-line-wait"></div>
-            <div class="p-step p-wait" data-step="10">
+            <div class="p-step p-wait" data-step="12">
                 <div class="p-dot"><i class="fa-solid fa-key"></i></div>
                 <div class="p-label">준공·입주<br>조합해산</div>
                 <div class="p-step-hint">클릭하여 상세보기</div>
@@ -960,6 +975,12 @@ const STEPS = [
     important:'기본계획은 향후 정비구역 지정의 근거가 되므로, 해당 지역의 정비예정구역 포함 여부가 사업 추진 가능성을 좌우합니다.',
     issues:'기본계획 변경 시 주민 의견 청취 절차가 다시 필요할 수 있으며, 상위 계획(도시기본계획)과의 정합성 검토가 중요합니다.',
     seul:'세울엔지니어링은 기초조사 단계부터 참여하여 정비예정구역 설정에 필요한 현황 데이터 분석과 행정기관 협의를 지원합니다.' },
+  { title:'준비위원회 구성 [실무]', summary:'실무상 정비구역 지정 이전에 토지등소유자들이 자발적으로 사업 추진을 준비하는 단계',
+    meaning:'도정법상 공식 권한은 승인된 추진위원회에 부여되지만, 실무상 정비구역 지정 이전에 토지등소유자들이 준비위원회(준비모임)를 구성하여 사업의 골격을 짜고 동의를 모으는 준비 활동을 시작합니다. 준비위원회는 법적 지위가 아닌 실무적 준비 주체입니다.',
+    tasks:['사업대상 범위 및 토지등소유자 범위 정리','대략적인 사업방식·건축계획·자금조달 윤곽 수립(기본안 작성)','정비사업전문관리업자·설계자 선정 준비(정식 선정은 추진위 승인 후)','추정분담금 등 동의 징구용 기초정보 준비','창립총회 안건·정관안·임원선출안·예산안 준비'],
+    important:'준비위원회는 법적 권한이 없는 임의 모임이므로, 소유자에게 비용부담을 지우거나 권리·의무에 영향을 주는 계약을 확정하는 것은 매우 위험합니다.',
+    issues:'법원은 토지등소유자 동의 없이 체결된 비용부담 계약을 무효로 본 사례가 있으며, 운영규정상 업무범위를 초과한 계약은 조합에 승계되지 않습니다.',
+    seul:'세울엔지니어링은 사업대상 범위 분석, 기본안 작성 자문, 추정분담금 시뮬레이션, 전문관리업자 선정 절차 안내, 법적 리스크 사전 검토를 지원합니다.' },
   { title:'정비구역 지정', summary:'기본계획에 따라 구체적인 정비구역의 범위와 정비계획을 결정하는 단계',
     meaning:'정비구역 지정은 실제 사업이 시행될 지역의 경계를 확정하고, 구역별 정비계획(용도지역, 건축 규모, 정비기반시설 계획 등)을 수립하는 절차입니다. 도시계획위원회 심의를 거쳐 고시됩니다.',
     tasks:['정비계획 수립 용역 발주 및 관리','안전진단 실시 (재건축의 경우)','토지이용계획, 건축계획, 교통영향분석 등 수행','도시계획위원회 심의 대응','정비구역 지정 고시 및 주민 공람'],

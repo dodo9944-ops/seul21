@@ -96,6 +96,40 @@
     }
     .rd-tl-seul strong { color:var(--brand-navy); }
 
+    /* 실무기준 특별 단계 */
+    .rd-tl-item.practical .rd-tl-dot {
+        background:transparent; border:3px dashed var(--gold);
+        font-size:9px; font-weight:800; letter-spacing:0.5px;
+    }
+    .rd-tl-item.practical .rd-tl-content {
+        background:linear-gradient(135deg, rgba(195,165,105,0.04) 0%, rgba(195,165,105,0.01) 100%);
+        border:1.5px dashed rgba(195,165,105,0.3); border-radius:12px;
+    }
+    .rd-tl-item.practical .rd-tl-content:hover { border-color:var(--gold); }
+    .rd-tl-practical-badge {
+        display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:6px;
+        background:rgba(195,165,105,0.1); border:1px solid rgba(195,165,105,0.2);
+        font-size:11px; font-weight:700; color:var(--gold); margin-bottom:12px;
+    }
+    .rd-tl-practical-badge i { font-size:12px; }
+    .rd-tl-sub { margin-top:16px; }
+    .rd-tl-sub h5 {
+        font-size:14px; font-weight:700; color:var(--gray-800); margin-bottom:6px;
+        display:flex; align-items:center; gap:8px;
+    }
+    .rd-tl-sub h5 .num {
+        width:20px; height:20px; border-radius:50%; background:var(--gold); color:#0A0F1C;
+        display:inline-flex; align-items:center; justify-content:center;
+        font-size:10px; font-weight:800; flex-shrink:0;
+    }
+    .rd-tl-sub p { font-size:13px; color:var(--gray-600); line-height:1.75; margin-bottom:12px; padding-left:28px; }
+    .rd-tl-caution {
+        margin-top:16px; padding:16px 20px; border-radius:8px;
+        background:rgba(220,53,69,0.04); border:1px solid rgba(220,53,69,0.12);
+        font-size:13px; color:var(--gray-700); line-height:1.75;
+    }
+    .rd-tl-caution strong { color:#DC3545; }
+
     /* 왜 세울인가 */
     .rd-why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
     .rd-why-card {
@@ -243,6 +277,51 @@
                                 <span class="rd-tl-tag">5년 재검토</span>
                             </div>
                             <div class="rd-tl-seul"><strong>세울의 역할:</strong> 기본계획 수립 동향 분석, 정비예정구역 포함 여부 검토, 기본계획 반영 전략 자문, 행정기관 사전 협의</div>
+                        </div>
+                    </div>
+
+                    <!-- 실무 단계: 준비위원회 -->
+                    <div class="rd-tl-item practical">
+                        <div class="rd-tl-dot">실무</div>
+                        <div class="rd-tl-content">
+                            <div class="rd-tl-practical-badge"><i class="fa-solid fa-users-gear"></i> 실무기준 — 알권리 안내</div>
+                            <h4>준비위원회 구성</h4>
+                            <p>실무상 정비구역 지정 이전에 토지등소유자들이 자발적으로 준비위원회(준비모임)를 구성하여 사업 추진을 준비합니다. 다만 도정법상 공식 권한은 승인된 추진위원회에 부여되므로, 준비위원회는 법적 지위가 아닌 <strong>실무적 준비 주체</strong>로 이해해야 합니다.</p>
+
+                            <div class="rd-tl-sub">
+                                <h5><span class="num">1</span> 사업대상·소유자 범위 정리</h5>
+                                <p>토지등소유자가 누구인지, 사업구역이 어디까지인지, 동의 징구 대상이 누구인지 정리합니다. 정비구역 지정과 소유자 범위가 선행되지 않으면 추진위 구성 자체가 문제될 수 있습니다.</p>
+                            </div>
+                            <div class="rd-tl-sub">
+                                <h5><span class="num">2</span> 사업 기본안 작성</h5>
+                                <p>대략적인 사업방식, 건축계획 방향, 자금조달 윤곽, 일정, 예상 분담구조를 잡아야 이후 동의 징구가 가능합니다. 법에서 말하는 「개략적 시행계획서 작성」의 실무 준비 단계입니다.</p>
+                            </div>
+                            <div class="rd-tl-sub">
+                                <h5><span class="num">3</span> 협력전문가 선정 준비</h5>
+                                <p>정비사업전문관리업자와 설계자 선정을 준비합니다. 다만 정비사업전문관리업자의 정식 선정은 추진위원회 승인 후 가능하므로, 승인 전 임의 준비모임이 정식 선정하는 것은 법적으로 안전하지 않습니다.</p>
+                            </div>
+                            <div class="rd-tl-sub">
+                                <h5><span class="num">4</span> 조합설립 동의 징구 준비</h5>
+                                <p>도정법상 추진위원회는 조합설립 동의 전에 추정분담금 등 대통령령이 정한 정보를 토지등소유자에게 제공해야 합니다. 단순 홍보가 아니라 비용·권리변동의 기초정보를 제공하고 적법하게 동의를 받는 역할이 핵심입니다.</p>
+                            </div>
+                            <div class="rd-tl-sub">
+                                <h5><span class="num">5</span> 창립총회 준비</h5>
+                                <p>도정법상 추진위원회는 조합설립인가 신청 전에 창립총회를 개최해야 하므로, 총회 안건, 정관안, 임원선출안, 예산안 등을 준비합니다.</p>
+                            </div>
+
+                            <div class="rd-tl-caution">
+                                <strong><i class="fa-solid fa-triangle-exclamation"></i> 법적 유의사항</strong><br>
+                                "준비위원회"라는 이름만으로는 법적 권한이 생기지 않습니다. 도정법상 공식 권한은 승인된 추진위원회에 부여됩니다. 승인 전 임의모임은 주민 의견수렴이나 설명회 준비 정도는 가능하나, 소유자에게 비용부담을 지우거나 권리·의무에 영향을 주는 계약을 임의로 확정하는 것은 매우 위험합니다. 법원도 토지등소유자 동의 없이 체결된 비용부담 계약은 무효라고 본 사례가 있으며, 운영규정상 업무범위를 초과한 계약은 조합에 승계되지 않습니다.
+                            </div>
+
+                            <div class="rd-tl-tags" style="margin-top:16px;">
+                                <span class="rd-tl-tag">실무기준</span>
+                                <span class="rd-tl-tag">준비위원회</span>
+                                <span class="rd-tl-tag">소유자 범위 정리</span>
+                                <span class="rd-tl-tag">기본안 작성</span>
+                                <span class="rd-tl-tag">동의 징구 준비</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 사업대상 범위 분석, 기본안 작성 자문, 추정분담금 시뮬레이션, 전문관리업자 선정 절차 안내, 창립총회 준비 지원, 법적 리스크 사전 검토</div>
                         </div>
                     </div>
 
