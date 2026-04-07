@@ -368,7 +368,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
   .page-hero h1 { font-size: 24px; }
 }
 
-.page-body { padding: 48px 0 80px; min-height: 60vh; }
+.page-body { padding: 35px 0 60px; min-height: 60vh; }
 @media (max-width: 768px) { .page-body { padding: 32px 0 60px; } }
 
 /* ── 페이지 공통 섹션 간격 ── */
