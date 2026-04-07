@@ -931,11 +931,11 @@ renderBar('redev');
 
     var iconMap={hwp:'fa-file-lines',pdf:'fa-file-pdf',xlsx:'fa-file-excel'};
 
-    /* 자료실: 최신 4건 (주요뉴스 제외) */
+    /* 주요뉴스: 최신 5건 */
     var libEl=document.getElementById('mainLibrary');
     if(libEl && MOCK.library){
-        var libs=MOCK.library.filter(function(i){return i.category!=='주요뉴스'})
-            .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,4);
+        var libs=MOCK.library.filter(function(i){return i.category==='주요뉴스'})
+            .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,5);
         libEl.innerHTML=libs.map(function(i){
             var ic=iconMap[i.fileType]||'fa-file';
             return'<a href="pages/library.html" class="news-item">'+
