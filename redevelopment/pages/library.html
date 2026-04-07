@@ -40,14 +40,6 @@
     /* === Category Tabs === */
     .cat-wrap{margin-bottom:20px;position:sticky;top:104px;z-index:100;background:var(--white);padding-top:12px;padding-bottom:4px;margin-top:-8px;transition:box-shadow .2s}
     .cat-wrap.stuck{box-shadow:0 2px 12px rgba(0,0,0,.06)}
-    @media(max-width:768px){
-        .cat-wrap{top:72px}
-        .cat-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
-        .cat-tabs::-webkit-scrollbar{display:none}
-        .cat-tab{padding:8px 14px;font-size:12px;white-space:nowrap;flex-shrink:0}
-        .cat-tab .cnt{min-width:18px;height:17px;padding:0 5px;font-size:9.5px}
-        .cat-tab i{font-size:11px}
-    }
     .cat-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:4px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100)}
     .cat-tab{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:10px;font-size:13.5px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--gray-500);transition:all .25s;font-family:var(--font);position:relative}
     .cat-tab i{font-size:13px;opacity:.45;transition:opacity .25s}
@@ -57,6 +49,14 @@
     .cat-tab.on .cnt{background:rgba(195,165,105,.2);color:var(--gold)}
     .cat-tab:not(.on):hover{background:#fff;color:var(--gray-800);box-shadow:0 1px 4px rgba(0,0,0,.04)}
     .cat-tab:not(.on):hover i{opacity:.7}
+    @media(max-width:768px){
+        .cat-wrap{top:72px}
+        .cat-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;gap:4px;padding:3px;border-radius:10px}
+        .cat-tabs::-webkit-scrollbar{display:none}
+        .cat-tab{padding:6px 10px;font-size:11px;white-space:nowrap;flex-shrink:0;gap:4px;border-radius:7px}
+        .cat-tab i{font-size:10px}
+        .cat-tab .cnt{min-width:16px;height:16px;padding:0 4px;font-size:9px;border-radius:8px}
+    }
 
     /* === Control Bar === */
     .ctrl-bar{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap}
