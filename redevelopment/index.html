@@ -138,15 +138,15 @@
         .hero-bg-photo img {
             width: 100%; height: 100%; object-fit: cover;
             object-position: center 25%;
-            filter: brightness(0.35) contrast(1.05) saturate(0.48);
+            filter: brightness(0.25) contrast(1.05) saturate(0.4);
         }
         /* 좌측 텍스트 보호 */
         .hero-bg-photo::after {
             content: ''; position: absolute; inset: 0;
             background: linear-gradient(100deg,
-                rgba(10,15,28,.88) 0%, rgba(10,15,28,.78) 35%,
-                rgba(14,24,42,.4) 60%, rgba(20,38,68,.15) 85%,
-                rgba(20,38,68,.08) 100%
+                rgba(10,15,28,.93) 0%, rgba(10,15,28,.85) 35%,
+                rgba(14,24,42,.5) 60%, rgba(20,38,68,.2) 85%,
+                rgba(20,38,68,.12) 100%
             ); z-index: 1;
         }
         /* 하단 페이드 */
@@ -199,14 +199,14 @@
             padding: 7px 18px; font-size: 11px; font-weight: 700;
             letter-spacing: 2.5px; text-transform: uppercase;
             color: #C3A569; border: 1px solid rgba(195,165,105,.2);
-            border-radius: 3px; margin-bottom: 24px;
+            border-radius: 3px; margin-bottom: 20px;
         }
         .hero-label i { font-size: 10px; color: #C3A569; }
 
         /* 헤드라인 */
         .hero-section h1 {
             font-size: 46px; font-weight: 900; letter-spacing: -1.2px;
-            color: #fff; line-height: 1.35; margin-bottom: 20px;
+            color: #fff; line-height: 1.3; margin-bottom: 16px;
             text-shadow: 0 2px 16px rgba(0,0,0,0.4);
             max-width: 560px;
         }
@@ -218,7 +218,7 @@
         /* 서브카피 */
         .hero-subtitle {
             font-size: 17px; font-weight: 400; color: rgba(255,255,255,.7);
-            line-height: 1.75; margin-bottom: 10px; max-width: 400px;
+            line-height: 1.75; margin-bottom: 20px; max-width: 400px;
             text-shadow: 0 1px 10px rgba(0,0,0,0.3);
             word-break: keep-all;
         }
@@ -263,7 +263,7 @@
         }
 
         /* ── CATEGORY NAV BELOW HERO ── */
-        .category-section { padding: 0; background: var(--white); border-bottom: 1px solid var(--gray-100); }
+        .category-section { padding: 0; background: var(--gray-50); border-bottom: 1px solid var(--gray-100); border-top: 1px solid var(--gray-100); }
         .category-nav { display: flex; align-items: center; gap: 3px; padding: 9px 0; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
         .category-nav::-webkit-scrollbar { display: none; }
         .cat-item { display: flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 8px; cursor: pointer; transition: all var(--transition); white-space: nowrap; flex-shrink: 0; }
@@ -595,9 +595,7 @@
 
             <div class="hero-actions">
                 <a href="pages/contact.html" class="btn-hero-primary"><i class="fa-solid fa-paper-plane"></i> 상담 문의</a>
-                <a href="pages/library.html?cat=주요뉴스" class="btn-hero-outline"><i class="fa-solid fa-newspaper"></i> 주요뉴스</a>
-                <a href="pages/services.html" class="btn-hero-outline"><i class="fa-solid fa-building"></i> 사업분야</a>
-                <a href="pages/feasibility.html" class="btn-hero-outline"><i class="fa-solid fa-chart-line"></i> 사업성검토</a>
+                <a href="pages/services.html" class="btn-hero-outline"><i class="fa-solid fa-building"></i> 사업분야 보기</a>
             </div>
         </div>
     </div>
