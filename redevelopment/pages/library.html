@@ -40,7 +40,14 @@
     /* === Category Tabs === */
     .cat-wrap{margin-bottom:20px;position:sticky;top:104px;z-index:100;background:var(--white);padding-top:12px;padding-bottom:4px;margin-top:-8px;transition:box-shadow .2s}
     .cat-wrap.stuck{box-shadow:0 2px 12px rgba(0,0,0,.06)}
-    @media(max-width:768px){.cat-wrap{top:72px}}
+    @media(max-width:768px){
+        .cat-wrap{top:72px}
+        .cat-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+        .cat-tabs::-webkit-scrollbar{display:none}
+        .cat-tab{padding:8px 14px;font-size:12px;white-space:nowrap;flex-shrink:0}
+        .cat-tab .cnt{min-width:18px;height:17px;padding:0 5px;font-size:9.5px}
+        .cat-tab i{font-size:11px}
+    }
     .cat-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:4px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100)}
     .cat-tab{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:10px;font-size:13.5px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--gray-500);transition:all .25s;font-family:var(--font);position:relative}
     .cat-tab i{font-size:13px;opacity:.45;transition:opacity .25s}
