@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>종합 운영 설명서 — (주)세울엔지니어링</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+:root{--deep:#0F172A;--navy:#1E293B;--gold:#C9A86A;--warm:#F8F6F1;--text:#334155;--sub:#64748B;--border:#E2E8F0;--radius:10px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:var(--text);line-height:1.8;font-size:15px}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* 헤더 */
+.g-header{background:var(--deep);padding:28px 0;text-align:center;position:sticky;top:0;z-index:100}
+.g-header h1{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.g-header p{font-size:12px;color:var(--gold);margin-top:4px;letter-spacing:1px}
+
+/* 본문 */
+.g-wrap{max-width:960px;margin:0 auto;padding:48px 32px 80px}
+
+/* 목차 */
+.g-toc{background:var(--warm);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;margin-bottom:48px}
+.g-toc h2{font-size:16px;font-weight:700;color:var(--deep);margin-bottom:14px}
+.g-toc ol{padding-left:20px}
+.g-toc li{margin-bottom:6px;font-size:14px}
+.g-toc a{color:var(--deep);font-weight:600}
+
+/* 섹션 */
+.g-section{margin-bottom:56px;scroll-margin-top:80px}
+.g-section h2{font-size:24px;font-weight:800;color:var(--deep);margin-bottom:8px;padding-bottom:12px;border-bottom:2px solid var(--gold);letter-spacing:-.5px}
+.g-section h3{font-size:18px;font-weight:700;color:var(--navy);margin:28px 0 12px;padding-left:12px;border-left:3px solid var(--gold)}
+.g-section h4{font-size:15px;font-weight:700;color:var(--deep);margin:20px 0 8px}
+.g-section p{margin-bottom:12px}
+
+/* 테이블 */
+.g-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:14px}
+.g-table th{background:var(--deep);color:#fff;padding:10px 14px;text-align:left;font-weight:600;font-size:13px}
+.g-table td{padding:10px 14px;border-bottom:1px solid var(--border)}
+.g-table tr:hover td{background:rgba(201,168,106,.04)}
+.g-table .gold{color:var(--gold);font-weight:600}
+
+/* 코드 블록 */
+.g-code{background:#0F172A;color:#E2E8F0;border-radius:8px;padding:20px 24px;margin:16px 0 24px;font-family:'Consolas','Courier New',monospace;font-size:13px;line-height:1.7;overflow-x:auto;white-space:pre}
+
+/* 구조도 */
+.g-diagram{background:var(--deep);color:#CBD5E1;border-radius:var(--radius);padding:24px 28px;margin:16px 0 24px;font-family:'Consolas',monospace;font-size:13px;line-height:1.8;overflow-x:auto;white-space:pre}
+.g-diagram .hl{color:var(--gold)}
+
+/* 카드 그리드 */
+.g-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:16px 0 24px}
+.g-card{background:var(--warm);border:1px solid var(--border);border-radius:8px;padding:20px}
+.g-card-icon{width:40px;height:40px;border-radius:8px;background:var(--deep);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.g-card-icon i{color:var(--gold);font-size:16px}
+.g-card h4{font-size:14px;font-weight:700;color:var(--deep);margin-bottom:6px}
+.g-card p{font-size:13px;color:var(--sub);line-height:1.65;margin:0}
+@media(max-width:640px){.g-cards{grid-template-columns:1fr}}
+
+/* 리스트 */
+.g-list{padding-left:20px;margin:8px 0 16px}
+.g-list li{margin-bottom:6px;font-size:14px}
+
+/* 강조 박스 */
+.g-note{background:rgba(201,168,106,.06);border:1px solid rgba(201,168,106,.15);border-radius:8px;padding:16px 20px;margin:16px 0 24px;font-size:14px;color:var(--text)}
+.g-note strong{color:var(--deep)}
+
+/* 배지 */
+.g-badge{display:inline-block;padding:2px 10px;border-radius:4px;font-size:11px;font-weight:700}
+.g-badge-gold{background:rgba(201,168,106,.12);color:var(--gold)}
+.g-badge-navy{background:var(--deep);color:#fff}
+
+/* 푸터 */
+.g-footer{background:var(--deep);padding:24px 0;text-align:center}
+.g-footer p{font-size:12px;color:var(--sub)}
+.g-footer strong{color:var(--gold)}
+
+@media(max-width:768px){
+    .g-wrap{padding:28px 16px 48px}
+    .g-section h2{font-size:20px}
+    .g-table{font-size:12px}
+    .g-table th,.g-table td{padding:8px 10px}
+}
+</style>
+</head>
+<body>
+
+<div class="g-header">
+    <h1>(주)세울엔지니어링 종합 운영 설명서</h1>
+    <p>SEUL ENGINEERING — SYSTEM GUIDE</p>
+</div>
+
+<div class="g-wrap">
+
+<!-- 메타 정보 -->
+<div class="g-note">
+    <strong>작성일:</strong> 2026-04-07 &nbsp;|&nbsp; <strong>현재 버전:</strong> 홈페이지1 &nbsp;|&nbsp; <strong>도메인:</strong> <a href="https://seul21.com" target="_blank">seul21.com</a><br>
+    이 문서는 세울엔지니어링 홈페이지와 관련 시스템 전체를 초보자도 이해할 수 있도록 정리한 종합 설명서입니다.
+</div>
+
+<!-- 목차 -->
+<div class="g-toc" id="toc">
+    <h2><i class="fa-solid fa-list" style="color:var(--gold);margin-right:8px"></i> 목차</h2>
+    <ol>
+        <li><a href="#s1">전체 시스템 구성도</a></li>
+        <li><a href="#s2">작업 로드맵 (처음부터 지금까지)</a></li>
+        <li><a href="#s3">홈페이지 구조 상세</a></li>
+        <li><a href="#s4">관리자 페이지</a></li>
+        <li><a href="#s5">인트라넷</a></li>
+        <li><a href="#s6">AI 챗봇</a></li>
+        <li><a href="#s7">세울 제어판 (SeulManager)</a></li>
+        <li><a href="#s8">AI 관리자 미경이</a></li>
+        <li><a href="#s9">도메인과 배포</a></li>
+        <li><a href="#s10">데이터 관리</a></li>
+        <li><a href="#s11">백업과 원복</a></li>
+        <li><a href="#s12">계정 정보</a></li>
+        <li><a href="#s13">자주 묻는 질문</a></li>
+    </ol>
+</div>
+
+<!-- 1. 시스템 구성도 -->
+<div class="g-section" id="s1">
+    <h2>1. 전체 시스템 구성도</h2>
+<div class="g-diagram"><span class="hl">사용자(방문자)</span>
+    │
+    ▼
+┌─────────────────────────────────┐
+│     <span class="hl">seul21.com</span> (홈페이지)        │
+│  ┌───────────────────────────┐  │
+│  │ 공개 페이지 (26개)         │  │  ← 누구나 접근
+│  │ 회사소개, 사업분야, 자료실  │  │
+│  │ 커뮤니티, 사업성검토, 문의  │  │
+│  └───────────────────────────┘  │
+│  ┌───────────────────────────┐  │
+│  │ 관리자 페이지 (14개)       │  │  ← admin 로그인
+│  └───────────────────────────┘  │
+│  ┌───────────────────────────┐  │
+│  │ 인트라넷 (10개)            │  │  ← 직원 로그인
+│  └───────────────────────────┘  │
+│  ┌───────────────────────────┐  │
+│  │ API (7개 서버리스 함수)     │  │  ← 자동
+│  └───────────────────────────┘  │
+└─────────────────────────────────┘
+    │           │           │
+    ▼           ▼           ▼
+ <span class="hl">Vercel</span>      <span class="hl">GitHub</span>     <span class="hl">Claude AI</span>
+ (배포)      (코드저장)   (챗봇/보고서)
+
+┌─────────────────────────────────┐
+│  <span class="hl">세울 제어판</span> (바탕화면 앱)       │
+│  원클릭 배포 / AI 보고서 / 결재  │
+└─────────────────────────────────┘</div>
+</div>
+
+<!-- 2. 작업 로드맵 -->
+<div class="g-section" id="s2">
+    <h2>2. 작업 로드맵</h2>
+    <p>우리가 처음부터 지금까지 수행한 모든 작업을 단계별로 정리합니다.</p>
+
+    <h3>Phase 1: 홈페이지 기초 구축</h3>
+    <ul class="g-list">
+        <li>HTML5 정적 사이트 40+ 페이지 제작</li>
+        <li>네이비·골드 프리미엄 디자인 시스템 구축</li>
+        <li>반응형 레이아웃 (PC/태블릿/모바일)</li>
+        <li>공통 헤더/푸터/네비게이션 시스템</li>
+    </ul>
+
+    <h3>Phase 2: 콘텐츠 페이지 완성</h3>
+    <ul class="g-list">
+        <li><strong>회사소개</strong> — 조직도, 연혁, 대표 인사말, 사옥 사진</li>
+        <li><strong>사업분야</strong> — 6개 분야별 상세 페이지</li>
+        <li><strong>업무실적</strong> — 포트폴리오 카드 (마스킹 처리 중)</li>
+        <li><strong>자료실</strong> — 43개 PDF + 20+ HTML 가이드</li>
+        <li><strong>커뮤니티</strong> — 게시판 (질문/정보/후기/분석/칼럼)</li>
+        <li><strong>사업성 검토</strong> — 인터랙티브 분석 도구</li>
+    </ul>
+
+    <h3>Phase 3: 서비스 페이지 고도화 (2026-04-07)</h3>
+    <ul class="g-list">
+        <li><strong>재개발</strong> — 일반절차 12단계 + 서울시 신속통합기획 5단계, 현행 도시정비법 반영</li>
+        <li><strong>재건축</strong> — 일반절차 13단계 + 서울시 신속통합기획 5단계, 안전진단 포함</li>
+        <li><strong>소규모 정비사업</strong> — 소규모재건축 + 가로주택정비 통합</li>
+        <li><strong>리모델링사업</strong> — 신규 (수직/수평/별동증축, 대수선)</li>
+        <li><strong>HUG 보증</strong> — 이주비 보증·기표 업무 + 세울 특화 섹션</li>
+        <li><strong>준비위원회[실무]</strong> — 차별화 디자인, 법적 유의사항 포함</li>
+    </ul>
+
+    <h3>Phase 4: 백엔드 시스템</h3>
+    <ul class="g-list">
+        <li>API 서버 — Vercel Functions 7개 엔드포인트</li>
+        <li>AI 챗봇 — Claude Haiku 기반 실시간 상담</li>
+        <li>회원 시스템 — 소셜로그인 (네이버/카카오/구글)</li>
+        <li>문의 시스템 — 접수→처리→답변 워크플로우</li>
+    </ul>
+
+    <h3>Phase 5: 관리 시스템</h3>
+    <ul class="g-list">
+        <li>관리자 페이지 14개</li>
+        <li>인트라넷 10개</li>
+        <li>세울 제어판 — PySide6 데스크톱 앱</li>
+    </ul>
+
+    <h3>Phase 6: 전체 점검 (2026-04-07)</h3>
+    <ul class="g-list">
+        <li>기능 점검 87개 HTML 파일</li>
+        <li>도메인 오류 4건, 연락처 오류 6건 수정</li>
+        <li>보안 강화 — 비밀번호 해시화, OAuth 동적화</li>
+        <li>"종합정보 플랫폼" → "엔지니어링 회사" 정체성 통일</li>
+    </ul>
+</div>
+
+<!-- 3. 홈페이지 구조 -->
+<div class="g-section" id="s3">
+    <h2>3. 홈페이지 구조 상세</h2>
+
+    <h3>3-1. 메인 홈 구성</h3>
+    <table class="g-table">
+        <tr><th>#</th><th>섹션</th><th>내용</th></tr>
+        <tr><td>1</td><td>스플래시</td><td>로고 애니메이션 (첫 방문 시 2.8초)</td></tr>
+        <tr><td>2</td><td>히어로</td><td>8장 슬라이드쇼 + 카피 + 3개 서비스 박스 + CTA</td></tr>
+        <tr><td>3</td><td>빠른 메뉴</td><td>9개 아이콘 (회사소개~인트라넷)</td></tr>
+        <tr><td>4</td><td>사업분야</td><td>6카드 (재개발/재건축/소규모/리모델링/도시계획/PM·CM)</td></tr>
+        <tr><td>5</td><td>절차</td><td>13단계 프로세스바 + 클릭 모달</td></tr>
+        <tr><td>6</td><td>수행실적</td><td>대표 프로젝트 3개</td></tr>
+        <tr><td>7</td><td>CTA</td><td>"상담 문의하기"</td></tr>
+        <tr><td>8</td><td>자료+커뮤니티</td><td>최신 자료 + 커뮤니티 2단</td></tr>
+    </table>
+
+    <h3>3-2. 공개 페이지 (26개)</h3>
+    <table class="g-table">
+        <tr><th>페이지</th><th>경로</th><th>설명</th></tr>
+        <tr><td>회사소개</td><td>pages/about.html</td><td>조직도, 연혁, 팀 소개</td></tr>
+        <tr><td>세울의 길</td><td>pages/vision.html</td><td>비전, 핵심가치</td></tr>
+        <tr><td>사업분야</td><td>pages/services.html</td><td>6개 사업분야 카드</td></tr>
+        <tr><td class="gold">재개발</td><td>pages/redevelopment-service.html</td><td>12단계 + 신속통합 + HUG</td></tr>
+        <tr><td class="gold">재건축</td><td>pages/reconstruction-service.html</td><td>13단계 + 신속통합 + HUG</td></tr>
+        <tr><td class="gold">소규모정비</td><td>pages/small-reconstruction-service.html</td><td>소규모재건축+가로주택 통합</td></tr>
+        <tr><td class="gold">리모델링</td><td>pages/garoju-service.html</td><td>증축·대수선</td></tr>
+        <tr><td>도시계획</td><td>pages/urbanplanning-service.html</td><td>정비계획, 인허가</td></tr>
+        <tr><td>PM/CM</td><td>pages/pmcm-service.html</td><td>프로젝트 관리</td></tr>
+        <tr><td>업무실적</td><td>pages/portfolio.html</td><td>포트폴리오</td></tr>
+        <tr><td>자료실</td><td>pages/library.html</td><td>PDF/문서 다운로드</td></tr>
+        <tr><td>커뮤니티</td><td>pages/community.html</td><td>게시판</td></tr>
+        <tr><td>사업성검토</td><td>pages/feasibility.html</td><td>인터랙티브 분석</td></tr>
+        <tr><td>상담문의</td><td>pages/contact.html</td><td>문의 폼</td></tr>
+        <tr><td>로그인</td><td>pages/login.html</td><td>회원 로그인</td></tr>
+        <tr><td>회원가입</td><td>pages/register.html</td><td>가입</td></tr>
+        <tr><td>마이페이지</td><td>pages/mypage.html</td><td>내 정보</td></tr>
+    </table>
+</div>
+
+<!-- 4. 관리자 -->
+<div class="g-section" id="s4">
+    <h2>4. 관리자 페이지</h2>
+
+    <div class="g-note">
+        <strong>접속:</strong> <a href="https://seul21.com/admin/login.html" target="_blank">seul21.com/admin/login.html</a><br>
+        <strong>ID:</strong> admin &nbsp;/&nbsp; <strong>PW:</strong> admin1234
+    </div>
+
+    <table class="g-table">
+        <tr><th>메뉴</th><th>기능</th><th>사용 빈도</th></tr>
+        <tr><td class="gold">대시보드</td><td>전체 현황 (회원수, 문의수, 최근 활동)</td><td>매일</td></tr>
+        <tr><td>회원 관리</td><td>회원 목록, 상태 변경 (활성/휴면/정지)</td><td>필요시</td></tr>
+        <tr><td class="gold">문의 관리</td><td>고객 문의 확인, 답변 작성</td><td>매일</td></tr>
+        <tr><td>뉴스 관리</td><td>뉴스 작성/수정/삭제</td><td>주 1~2회</td></tr>
+        <tr><td>칼럼 관리</td><td>전문가 칼럼</td><td>월 1~2회</td></tr>
+        <tr><td>커뮤니티</td><td>게시글 모니터링, 삭제</td><td>필요시</td></tr>
+        <tr><td>배너 관리</td><td>히어로/사이드 배너</td><td>필요시</td></tr>
+        <tr><td>SEO 관리</td><td>검색엔진 최적화</td><td>월 1회</td></tr>
+        <tr><td>사이트 설정</td><td>회사 정보, 영업시간</td><td>필요시</td></tr>
+    </table>
+</div>
+
+<!-- 5. 인트라넷 -->
+<div class="g-section" id="s5">
+    <h2>5. 인트라넷</h2>
+
+    <div class="g-note">
+        <strong>접속:</strong> <a href="https://seul21.com/intranet/login.html" target="_blank">seul21.com/intranet/login.html</a><br>
+        직원 전용 — 별도 ID/PW 필요
+    </div>
+
+    <table class="g-table">
+        <tr><th>메뉴</th><th>설명</th><th>권한</th></tr>
+        <tr><td>홈</td><td>직원 대시보드, 프로젝트 현황</td><td>전체</td></tr>
+        <tr><td>공지사항</td><td>내부 공지, 전달사항</td><td>전체</td></tr>
+        <tr><td>문서 관리</td><td>내부 문서 열람/다운로드</td><td>전체</td></tr>
+        <tr><td>캘린더</td><td>팀 일정, 미팅, 마감일</td><td>전체</td></tr>
+        <tr><td>프로젝트</td><td>프로젝트별 진행 현황</td><td>staff+</td></tr>
+        <tr><td>연락처</td><td>직원 연락처</td><td>전체</td></tr>
+        <tr><td class="gold">AI 관리자</td><td>미경이 AI 운영 설정</td><td>admin만</td></tr>
+    </table>
+
+    <h4>권한 체계</h4>
+    <ul class="g-list">
+        <li><span class="g-badge g-badge-navy">admin (3)</span> — 모든 기능 + AI 관리 + 시스템 설정</li>
+        <li><span class="g-badge g-badge-gold">staff (2)</span> — 프로젝트 관리 + 기본 열람</li>
+        <li><span class="g-badge g-badge-gold">viewer (1)</span> — 기본 열람만</li>
+    </ul>
+</div>
+
+<!-- 6. 챗봇 -->
+<div class="g-section" id="s6">
+    <h2>6. AI 챗봇</h2>
+
+    <h3>작동 방식</h3>
+<div class="g-diagram">사용자가 질문 입력
+    │
+    ▼
+<span class="hl">chatbot.js</span> (프론트엔드)
+    │ POST /api/chat
+    ▼
+<span class="hl">chat.js</span> (Vercel 서버리스 함수)
+    │ API 호출
+    ▼
+<span class="hl">Claude Haiku AI</span> (Anthropic)
+    │ 답변 생성
+    ▼
+사용자에게 답변 표시</div>
+
+    <h3>특징</h3>
+    <ul class="g-list">
+        <li><strong>위치:</strong> 모든 페이지 우하단 말풍선 아이콘</li>
+        <li><strong>AI 모델:</strong> Claude Haiku (빠른 응답 특화)</li>
+        <li><strong>빠른 질문:</strong> "정비사업 절차", "사업성 검토", "상담 문의"</li>
+        <li><strong>답변 주제:</strong> 재개발·재건축 절차, 조합설립 요건, 동의율, 사업성 검토, 회사 서비스 안내</li>
+    </ul>
+</div>
+
+<!-- 7. 제어판 -->
+<div class="g-section" id="s7">
+    <h2>7. 세울 제어판 (SeulManager)</h2>
+
+    <div class="g-note">
+        <strong>실행:</strong> 바탕화면 "홈페이지 제어판 관리자" 더블클릭<br>
+        <strong>기술:</strong> PySide6 (Python Qt6) 데스크톱 앱
+    </div>
+
+    <h3>9개 탭 구성</h3>
+    <div class="g-cards">
+        <div class="g-card">
+            <div class="g-card-icon"><i class="fa-solid fa-gauge"></i></div>
+            <h4>대시보드</h4>
+            <p>사이트 열기, 작업폴더, GitHub, Vercel, 페이지 상태, 사이트 요약, 최근 커밋</p>
+        </div>
+        <div class="g-card">
+            <div class="g-card-icon"><i class="fa-solid fa-rocket"></i></div>
+            <h4>배포</h4>
+            <p>원클릭 배포 (GitHub→Vercel 자동), 커밋 메시지, 진행바, 로그</p>
+        </div>
+        <div class="g-card">
+            <div class="g-card-icon"><i class="fa-solid fa-robot"></i></div>
+            <h4>AI 관리자 (미경이)</h4>
+            <p>보고서 생성 (일일/주간/SEO/경쟁사 등), 결재함, 자동보고 7시/19시</p>
+        </div>
+        <div class="g-card">
+            <div class="g-card-icon"><i class="fa-solid fa-users"></i></div>
+            <h4>회원 관리</h4>
+            <p>회원 목록, 추가/수정/삭제, 상태 관리</p>
+        </div>
+        <div class="g-card">
+            <div class="g-card-icon"><i class="fa-solid fa-envelope"></i></div>
+            <h4>문의 관리</h4>
+            <p>고객 문의 확인, 답변, 상태 변경</p>
+        </div>
+        <div class="g-card">
+            <div class="g-card-icon"><i class="fa-solid fa-comments"></i></div>
+            <h4>커뮤니티</h4>
+            <p>게시글 모니터링, 부적절 글 관리</p>
+        </div>
+        <div class="g-card">
+            <div class="g-card-icon"><i class="fa-solid fa-folder-open"></i></div>
+            <h4>자료실</h4>
+            <p>파일 업로드, 44개 파일 동적 스캔</p>
+        </div>
+        <div class="g-card">
+            <div class="g-card-icon"><i class="fa-solid fa-lock"></i></div>
+            <h4>인트라넷</h4>
+            <p>인트라넷 콘텐츠 관리</p>
+        </div>
+    </div>
+
+    <h3>상단 상태 표시</h3>
+    <table class="g-table">
+        <tr><th>표시</th><th>의미</th></tr>
+        <tr><td class="gold">WEB</td><td>사이트 정상 작동 여부</td></tr>
+        <tr><td class="gold">SSL</td><td>SSL 인증서 상태</td></tr>
+        <tr><td class="gold">BOT</td><td>챗봇 작동 상태</td></tr>
+        <tr><td class="gold">DEP</td><td>마지막 배포 시각</td></tr>
+    </table>
+</div>
+
+<!-- 8. 미경이 -->
+<div class="g-section" id="s8">
+    <h2>8. AI 관리자 미경이</h2>
+    <p>홈페이지 자료실을 전담 관리하는 AI 관리자. 6개 카테고리의 자료를 자동으로 수집·분류·게시합니다.</p>
+
+    <table class="g-table">
+        <tr><th>카테고리</th><th>수집 주기</th><th>수집 내용</th></tr>
+        <tr><td class="gold">주요뉴스</td><td>매일 7시/18시</td><td>뉴스, 정책, 판례, 시장동향 (30+ 사이트)</td></tr>
+        <tr><td>법령·조례</td><td>매일 7시</td><td>법령, 조례, 지침 (14개 사이트)</td></tr>
+        <tr><td>판례·질의회신</td><td>매일 7시</td><td>판례, 질의회신, 유권해석</td></tr>
+        <tr><td>서식·양식</td><td>매주 일요일 7시</td><td>행정서식, 조합서식, 실무양식</td></tr>
+        <tr><td>가이드·매뉴얼</td><td>매주 일요일 7시</td><td>가이드, 매뉴얼, 업무편람</td></tr>
+        <tr><td>지침</td><td>수시</td><td>행정지침, 운영기준</td></tr>
+    </table>
+</div>
+
+<!-- 9. 도메인과 배포 -->
+<div class="g-section" id="s9">
+    <h2>9. 도메인과 배포</h2>
+
+    <h3>도메인 정보</h3>
+    <table class="g-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>도메인</td><td class="gold">seul21.com</td></tr>
+        <tr><td>등록기관</td><td>가비아 (Gabia)</td></tr>
+        <tr><td>DNS</td><td>A 레코드 → 76.76.21.21 (Vercel)</td></tr>
+        <tr><td>SSL</td><td>Vercel 자동 관리 (무료, 자동 갱신)</td></tr>
+    </table>
+
+    <h3>배포 구조</h3>
+<div class="g-diagram">코드 수정 (PC)
+    │ git push
+    ▼
+<span class="hl">GitHub</span> (dodo9944-ops/seul21)
+    │ 자동 감지
+    ▼
+<span class="hl">Vercel</span> (자동 빌드 & 배포, 1~2분)
+    │
+    ▼
+<span class="hl">seul21.com</span> 반영</div>
+
+    <h3>배포 방법 3가지</h3>
+    <table class="g-table">
+        <tr><th>방법</th><th>설명</th><th>난이도</th></tr>
+        <tr><td class="gold">제어판</td><td>배포 탭 → 커밋 메시지 → 배포 버튼</td><td>쉬움</td></tr>
+        <tr><td class="gold">미경이</td><td>"배포해" 라고 말하면 자동</td><td>쉬움</td></tr>
+        <tr><td>수동</td><td>터미널에서 git add → commit → push</td><td>중급</td></tr>
+    </table>
+</div>
+
+<!-- 10. 데이터 -->
+<div class="g-section" id="s10">
+    <h2>10. 데이터 관리</h2>
+
+    <table class="g-table">
+        <tr><th>데이터</th><th>저장 위치</th><th>설명</th></tr>
+        <tr><td>회원 정보</td><td>GitHub data/members.json</td><td>영구 저장</td></tr>
+        <tr><td>고객 문의</td><td>GitHub data/inquiries.json</td><td>영구 저장</td></tr>
+        <tr><td>커뮤니티 글</td><td>GitHub data/community.json</td><td>영구 저장</td></tr>
+        <tr><td>초기 데이터</td><td>assets/data/mock-data.js</td><td>사이트 기본 데이터</td></tr>
+        <tr><td>관리자 세션</td><td>브라우저 sessionStorage</td><td>브라우저 닫으면 삭제</td></tr>
+        <tr><td>제어판 결재</td><td>seul21-manager/approvals.json</td><td>PC 로컬</td></tr>
+    </table>
+
+    <h3>파일 구조</h3>
+<div class="g-code">seul21/redevelopment/
+├── index.html          ← 메인 홈
+├── pages/              ← 공개 페이지 26개
+├── admin/              ← 관리자 14개
+├── intranet/           ← 인트라넷 10개
+├── api/                ← API 7개
+├── assets/css/         ← 스타일시트
+├── assets/js/          ← 자바스크립트
+├── assets/data/        ← 초기 데이터
+├── data/               ← 영구 데이터 (JSON)
+├── downloads/          ← PDF 43개 + HTML 가이드
+├── jpg/                ← 히어로/로고/사진
+├── vercel.json         ← 배포 설정
+├── robots.txt          ← 검색엔진 설정
+└── sitemap.xml         ← 사이트맵</div>
+</div>
+
+<!-- 11. 백업 -->
+<div class="g-section" id="s11">
+    <h2>11. 백업과 원복</h2>
+
+    <table class="g-table">
+        <tr><th>백업명</th><th>위치</th><th>크기</th></tr>
+        <tr><td class="gold">홈페이지1 (ZIP)</td><td>바탕화면/백업/ + 미경 폴더</td><td>300MB</td></tr>
+        <tr><td class="gold">Git 태그</td><td>homepage-v1 (fec2fb9)</td><td>GitHub</td></tr>
+        <tr><td>전체백업 0406</td><td>바탕화면/백업/</td><td>265MB</td></tr>
+    </table>
+
+    <div class="g-note">
+        <strong>원복 방법:</strong> "홈페이지1로 원복" 이라고 미경이에게 말하면 즉시 전체 시스템을 복원합니다.
+    </div>
+</div>
+
+<!-- 12. 계정 -->
+<div class="g-section" id="s12">
+    <h2>12. 계정 정보</h2>
+
+    <h3>홈페이지 관리자</h3>
+    <table class="g-table">
+        <tr><th>항목</th><th>값</th></tr>
+        <tr><td>URL</td><td><a href="https://seul21.com/admin/login.html" target="_blank">seul21.com/admin/login.html</a></td></tr>
+        <tr><td>ID</td><td>admin</td></tr>
+        <tr><td>PW</td><td>admin1234</td></tr>
+    </table>
+
+    <h3>외부 서비스</h3>
+    <table class="g-table">
+        <tr><th>서비스</th><th>용도</th></tr>
+        <tr><td class="gold">GitHub</td><td>코드 저장/버전관리 (dodo9944-ops/seul21)</td></tr>
+        <tr><td class="gold">Vercel</td><td>호스팅/자동 배포</td></tr>
+        <tr><td>가비아</td><td>도메인 관리 (seul21.com)</td></tr>
+        <tr><td>Anthropic</td><td>AI (챗봇/보고서)</td></tr>
+    </table>
+
+    <h3>회사 연락처</h3>
+    <table class="g-table">
+        <tr><td>대표</td><td>이창우 (Charles Lee)</td></tr>
+        <tr><td>전화</td><td>010-2230-9210</td></tr>
+        <tr><td>FAX</td><td>0504-340-9210</td></tr>
+        <tr><td>이메일</td><td>dodo6666@naver.com</td></tr>
+        <tr><td>주소</td><td>경기도 하남시 감일백제로 70, 204동 1104호</td></tr>
+    </table>
+</div>
+
+<!-- 13. FAQ -->
+<div class="g-section" id="s13">
+    <h2>13. 자주 묻는 질문</h2>
+
+    <h4>Q: 홈페이지 수정은 어떻게 하나요?</h4>
+    <p>미경이에게 수정 내용을 말하면 됩니다. 코드 수정부터 배포까지 자동 처리합니다.</p>
+
+    <h4>Q: 배포가 안 되면?</h4>
+    <p>세울 제어판 → 배포 탭에서 로그를 확인하세요. 보통 1~2분 내 반영됩니다.</p>
+
+    <h4>Q: 홈페이지가 이상하면?</h4>
+    <p>"홈페이지1로 원복" 이라고 말하면 검증된 상태로 즉시 복원됩니다.</p>
+
+    <h4>Q: 자료실에 파일을 올리려면?</h4>
+    <p>제어판 → 자료실 탭에서 업로드하거나, 미경이에게 말하세요.</p>
+
+    <h4>Q: 네이버에 검색이 되나요?</h4>
+    <p>네이버 웹마스터 인증 + sitemap 등록 완료. 검색 노출까지 2~4주 소요될 수 있습니다.</p>
+
+    <h4>Q: SSL 인증서는 갱신해야 하나요?</h4>
+    <p>Vercel이 자동 관리하므로 별도 작업 불필요합니다.</p>
+</div>
+
+</div><!-- /.g-wrap -->
+
+<div class="g-footer">
+    <p><strong>(주)세울엔지니어링</strong> — 도시의 미래를 다시 세우는 정비사업 파트너</p>
+</div>
+
+</body>
+</html>
