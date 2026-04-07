@@ -11,7 +11,7 @@
   // 현재 모드: 'general' | 'expert'
   let currentMode = 'general';
   // 각 모드별 메시지 히스토리 HTML
-  const messageHistory = { general: '', expert: '' };
+  const messageHistory = { general: '', expert: '', law: '' };
 
   const chatHTML = `
   <div id="seul-chatbot">
@@ -34,6 +34,10 @@
         <button class="chat-tab active" data-mode="general">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           AI 상담
+        </button>
+        <button class="chat-tab" data-mode="law">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          법률상담
         </button>
         <button class="chat-tab" data-mode="expert">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -159,6 +163,11 @@
       color:#C3A569; border-color:rgba(195,165,105,0.5);
       box-shadow: 0 2px 8px rgba(195,165,105,0.15);
     }
+    .chat-tab[data-mode="law"].active {
+      background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(99,102,241,0.06));
+      color:#6366F1; border-color:rgba(99,102,241,0.5);
+      box-shadow: 0 2px 8px rgba(99,102,241,0.15);
+    }
     .chat-tab[data-mode="expert"].active {
       background:linear-gradient(135deg, rgba(16,185,129,0.15), rgba(16,185,129,0.06));
       color:#10B981; border-color:rgba(16,185,129,0.5);
@@ -225,10 +234,15 @@
       background:linear-gradient(135deg,#065F46,#10B981);
       color:#fff;
     }
+    .chat-avatar.law-avatar {
+      background:linear-gradient(135deg,#4338CA,#6366F1);
+      color:#fff;
+    }
     .chat-msg.user .chat-avatar { display:none; }
     .chat-content { display:flex; flex-direction:column; gap:3px; max-width:82%; }
     .chat-name { font-size:11px; color:#888; font-weight:500; padding-left:2px; }
     .chat-name.expert-name { color:#10B981; }
+    .chat-name.law-name { color:#6366F1; }
     .chat-msg.user .chat-content { align-items:flex-end; }
 
     .chat-bubble {
@@ -244,6 +258,10 @@
       border-color:rgba(16,185,129,0.2);
       background:linear-gradient(135deg, #f0fdf9, #fff);
     }
+    .chat-msg.bot.law .chat-bubble {
+      border-color:rgba(99,102,241,0.2);
+      background:linear-gradient(135deg, #eef2ff, #fff);
+    }
     .chat-msg.user .chat-bubble {
       background:linear-gradient(135deg, #0A0F1C, #1a3055);
       color:#f0f0f0; border-radius:16px 2px 16px 16px;
@@ -256,6 +274,7 @@
       animation:dotPulse .9s infinite ease-in-out;
     }
     .chat-typing.expert .dot-loader span { background:#10B981; }
+    .chat-typing.law .dot-loader span { background:#6366F1; }
     .chat-typing .dot-loader span:nth-child(2) { animation-delay:.2s; }
     .chat-typing .dot-loader span:nth-child(3) { animation-delay:.4s; }
     @keyframes dotPulse { 0%,80%,100%{opacity:.25;transform:scale(.7)} 40%{opacity:1;transform:scale(1.1)} }
@@ -297,6 +316,9 @@
     .chat-quick-btn.expert-quick:hover {
       border-color:#10B981; color:#065F46; background:#f0fdf9;
     }
+    .chat-quick-btn.law-quick:hover {
+      border-color:#6366F1; color:#4338CA; background:#eef2ff;
+    }
 
     /* == 입력 영역 == */
     #chat-input-area {
@@ -312,6 +334,7 @@
     }
     #chat-input:focus { border-color:#C3A569; background:#fff; box-shadow:0 0 0 3px rgba(195,165,105,0.1); }
     #chat-input.expert-focus:focus { border-color:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,0.1); }
+    #chat-input.law-focus:focus { border-color:#6366F1; box-shadow:0 0 0 3px rgba(99,102,241,0.1); }
     #chat-input::placeholder { color:#bbb; }
     #chat-send {
       width:42px; height:42px; border-radius:50%; border:none;
@@ -322,6 +345,10 @@
     }
     #chat-send.expert-send {
       background:linear-gradient(135deg,#065F46,#10B981);
+      color:#fff;
+    }
+    #chat-send.law-send {
+      background:linear-gradient(135deg,#4338CA,#6366F1);
       color:#fff;
     }
     #chat-send:hover { transform:scale(1.05); }
@@ -368,6 +395,13 @@
         <div class="chat-bubble">안녕하세요, <strong>(주)세울엔지니어링</strong>입니다.<br>재개발·재건축 관련 궁금한 점을 편하게 물어보세요.</div>
       </div>
     </div>`,
+    law: `<div class="chat-msg bot law">
+      <div class="chat-avatar law-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="chat-content">
+        <div class="chat-name law-name">법률 상담사</div>
+        <div class="chat-bubble">안녕하세요, <strong>세울 법률 상담사</strong>입니다.<br>정비사업 관련 <strong>법령·판례·해석례</strong>를 검색하여<br>정확한 법률 정보를 제공해드립니다.</div>
+      </div>
+    </div>`,
     expert: `<div class="chat-msg bot expert">
       <div class="chat-avatar expert-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
       <div class="chat-content">
@@ -383,6 +417,11 @@
       { text: '사업성 검토', q: '사업성 검토를 받고 싶어요' },
       { text: '상담 문의', q: '상담 문의하기' }
     ],
+    law: [
+      { text: '도시정비법', q: '도시 및 주거환경정비법 핵심 내용을 알려주세요' },
+      { text: '조합설립 요건', q: '재개발 조합설립 법적 요건과 관련 판례를 알려주세요' },
+      { text: '분담금 법률', q: '재개발 분담금 산정 관련 법률 규정을 알려주세요' }
+    ],
     expert: [
       { text: '사업성 상담', q: '우리 구역 사업성 검토를 받고 싶습니다' },
       { text: '조합 운영 문의', q: '조합 운영 관련 전문가 상담 요청합니다' },
@@ -397,6 +436,7 @@
 
   // 초기 메시지 세팅
   messageHistory.general = greetings.general;
+  messageHistory.law = greetings.law;
   messageHistory.expert = greetings.expert;
   messages.innerHTML = messageHistory.general;
 
@@ -421,20 +461,26 @@
     messages.innerHTML = messageHistory[mode];
     messages.scrollTop = messages.scrollHeight;
 
-    // 헤더 변경
+    // 헤더 변경 + 스타일 리셋
+    input.classList.remove('expert-focus', 'law-focus');
+    sendBtn.classList.remove('expert-send', 'law-send');
+
     if (mode === 'expert') {
       headerTitle.textContent = '세울 전문가';
       headerSub.textContent = '전문가 직접 상담';
       input.classList.add('expert-focus');
       sendBtn.classList.add('expert-send');
       input.placeholder = '전문 상담 내용을 입력하세요...';
-      // 세션 있으면 폴링 재개
       if (expertSessionId) startPolling();
+    } else if (mode === 'law') {
+      headerTitle.textContent = '법률 상담사';
+      headerSub.textContent = '법령·판례 기반 법률 상담';
+      input.classList.add('law-focus');
+      sendBtn.classList.add('law-send');
+      input.placeholder = '법률 관련 질문을 입력하세요...';
     } else {
       headerTitle.textContent = '세울 실시간 상담';
       headerSub.textContent = '정비사업 전문 실시간 상담';
-      input.classList.remove('expert-focus');
-      sendBtn.classList.remove('expert-send');
       input.placeholder = '궁금한 점을 입력하세요...';
     }
 
@@ -448,7 +494,7 @@
   function updateQuickButtons(mode) {
     const btns = quickButtons[mode];
     quickArea.innerHTML = btns.map(b =>
-      `<button class="chat-quick-btn ${mode === 'expert' ? 'expert-quick' : ''}" data-q="${b.q}">${b.text}</button>`
+      `<button class="chat-quick-btn ${mode === 'expert' ? 'expert-quick' : mode === 'law' ? 'law-quick' : ''}" data-q="${b.q}">${b.text}</button>`
     ).join('');
     quickArea.querySelectorAll('.chat-quick-btn').forEach(btn => {
       btn.addEventListener('click', () => sendMessage(btn.dataset.q));
@@ -474,14 +520,18 @@
   function addMessage(text, sender) {
     const div = document.createElement('div');
     const isExpert = currentMode === 'expert';
-    div.className = `chat-msg ${sender}${isExpert && sender === 'bot' ? ' expert' : ''}`;
+    const isLaw = currentMode === 'law';
+    const modeClass = isExpert ? ' expert' : isLaw ? ' law' : '';
+    div.className = `chat-msg ${sender}${sender === 'bot' ? modeClass : ''}`;
 
     if (sender === 'bot') {
-      const avatarCls = isExpert ? 'chat-avatar expert-avatar' : 'chat-avatar';
-      const nameCls = isExpert ? 'chat-name expert-name' : 'chat-name';
-      const botName = isExpert ? '세울 전문가' : '세울 상담사';
+      const avatarCls = isExpert ? 'chat-avatar expert-avatar' : isLaw ? 'chat-avatar law-avatar' : 'chat-avatar';
+      const nameCls = isExpert ? 'chat-name expert-name' : isLaw ? 'chat-name law-name' : 'chat-name';
+      const botName = isExpert ? '세울 전문가' : isLaw ? '법률 상담사' : '세울 상담사';
       const icon = isExpert
         ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'
+        : isLaw
+        ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
         : '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>';
       div.innerHTML = `<div class="${avatarCls}">${icon}</div><div class="chat-content"><div class="${nameCls}">${botName}</div><div class="chat-bubble">${text}</div></div>`;
     } else {
@@ -495,14 +545,19 @@
   function addTyping() {
     const div = document.createElement('div');
     const isExpert = currentMode === 'expert';
-    div.className = `chat-msg bot chat-typing${isExpert ? ' expert' : ''}`;
-    const avatarCls = isExpert ? 'chat-avatar expert-avatar' : 'chat-avatar';
-    const nameCls = isExpert ? 'chat-name expert-name' : 'chat-name';
-    const botName = isExpert ? '세울 전문가' : '세울 상담사';
+    const isLaw = currentMode === 'law';
+    const modeClass = isExpert ? ' expert' : isLaw ? ' law' : '';
+    div.className = `chat-msg bot chat-typing${modeClass}`;
+    const avatarCls = isExpert ? 'chat-avatar expert-avatar' : isLaw ? 'chat-avatar law-avatar' : 'chat-avatar';
+    const nameCls = isExpert ? 'chat-name expert-name' : isLaw ? 'chat-name law-name' : 'chat-name';
+    const botName = isExpert ? '세울 전문가' : isLaw ? '법률 상담사' : '세울 상담사';
+    const typingText = isLaw ? '법령 검색 중' : '답변 준비 중';
     const icon = isExpert
       ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'
+      : isLaw
+      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
       : '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>';
-    div.innerHTML = `<div class="${avatarCls}">${icon}</div><div class="chat-content"><div class="${nameCls}">${botName}</div><div class="chat-bubble">답변 준비 중 <span class="dot-loader"><span></span><span></span><span></span></span></div></div>`;
+    div.innerHTML = `<div class="${avatarCls}">${icon}</div><div class="chat-content"><div class="${nameCls}">${botName}</div><div class="chat-bubble">${typingText} <span class="dot-loader"><span></span><span></span><span></span></span></div></div>`;
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
     return div;
@@ -513,6 +568,24 @@
     const typing = addTyping();
     try {
       const res = await fetch(B + '/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text })
+      });
+      const data = await res.json();
+      typing.remove();
+      addMessage(data.reply ? data.reply.replace(/\n/g, '<br>') : '죄송합니다. 잠시 후 다시 시도해주세요.', 'bot');
+    } catch (e) {
+      typing.remove();
+      addMessage('네트워크 오류가 발생했습니다.<br>잠시 후 다시 시도해주세요.', 'bot');
+    }
+  }
+
+  // 법률 상담 (korean-law MCP 서버)
+  async function sendLawMessage(text) {
+    const typing = addTyping();
+    try {
+      const res = await fetch(B + '/api/chat-law', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text })
@@ -579,6 +652,8 @@
 
     if (currentMode === 'expert') {
       await sendExpertMessage(text);
+    } else if (currentMode === 'law') {
+      await sendLawMessage(text);
     } else {
       await sendGeneralMessage(text);
     }
