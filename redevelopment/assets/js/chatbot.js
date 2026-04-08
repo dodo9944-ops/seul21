@@ -364,7 +364,8 @@
     /* == 모바일 == */
     @media(max-width:480px) {
       #seul-chatbot { bottom:12px; right:12px; }
-      #chat-toggle { height:36px; padding:0 10px 0 9px; border-radius:18px; gap:5px; }
+      #chat-toggle { height:36px; padding:0 10px 0 9px; border-radius:18px; gap:5px; opacity:0.3; }
+      #chat-toggle:hover, #chat-toggle.active { opacity:1; }
       #chat-toggle.active { width:36px; height:36px; }
       #chat-toggle-label { font-size:10px; }
       #chat-toggle-inner svg { width:16px; height:16px; }
