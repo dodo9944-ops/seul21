@@ -439,8 +439,13 @@ var fileMap={
 'lib11':{ext:'../downloads/files/lib11_조합설립_완전가이드.pdf',web:'../downloads/guide_association.html'},
 'lib12':{ext:'../downloads/files/lib12_안전진단_지침.pdf',web:'../downloads/guide_safety_inspection.html'},
 'lib13':{ext:'../downloads/files/lib13_회계처리_지침.pdf',web:'../downloads/guide_accounting.html'},
+'lib14':{ext:'../downloads/files/lib14_정책동향_2026Q1.pdf',web:'../downloads/policy_news_2026q1.html'},
+'lib15':{ext:'../downloads/files/lib15_신속통합기획.pdf',web:'../downloads/news_rapid_planning.html'},
+'lib16':{ext:'../downloads/files/lib16_소규모정비법_개정.pdf',web:'../downloads/news_small_housing_act.html'},
 'lib17':{ext:'../downloads/files/lib17_시공자선정_지침.pdf',web:'../downloads/guide_contractor_selection.html'},
 'lib18':{ext:'../downloads/files/lib18_이주보상_지침.pdf',web:'../downloads/guide_relocation.html'},
+'lib19':{ext:'../downloads/files/lib19_1기신도시_특별법.pdf',web:'../downloads/news_new_town.html'},
+'lib20':{ext:'../downloads/files/lib20_공공재개발_후보지.pdf',web:'../downloads/news_public_redevelopment.html'},
 'lib21':{ext:'../downloads/files/lib21_추진위원회_운영규정.pdf',gov:'https://law.go.kr',web:'../downloads/guide_committee_rules.html',label:'법제처 원문'},
 'lib22':{ext:'../downloads/files/lib22_서울시_의사진행_표준운영규정.pdf',gov:'https://cleanup.seoul.go.kr',label:'정비사업몽땅'},
 'lib23':{ext:'../downloads/files/lib23_서울시_정비사업_실무매뉴얼.pdf',gov:'https://news.seoul.go.kr/citybuild/',label:'서울시 도시재생'},
@@ -455,6 +460,7 @@ var fileMap={
 'lib44':{ext:'../downloads/files/lib44_해석례로읽는_건축법_2023.pdf'},
 'lib45':{ext:'../downloads/files/lib45_서울시_공공지원_정비사업_표준정관_2024.pdf'},
 'lib46':{ext:'../downloads/files/lib46_건설공사_표준시장단가_2025상반기.pdf'},
+'lib47':{ext:'../downloads/files/lib47_도시정비법_질의회신_사례_국토부.pdf'},
 'lib48':{ext:'../downloads/files/lib48_서울시_정비사업_사업성개선_기본계획재정비_2024.pdf'},
 'lib49':{ext:'../downloads/files/lib49_서울시_공공건축물_공사비_가이드라인_2024.pdf'},
 'lib50':{ext:'../downloads/files/lib50_LH_2025_업무보고.pdf'},
@@ -474,7 +480,11 @@ var fileMap={
 'news0406b':{web:'../downloads/news_20260406b.html'},
 'news0407a':{web:'../downloads/news_20260407a.html'},
 'news0407b':{web:'../downloads/news_20260407b.html'},
-'news0408':{web:'../downloads/news_20260408.html'}};
+'news0407c':{web:'../downloads/news_20260407c.html'},
+'news0408':{web:'../downloads/news_20260408.html'},
+'lib_law240407':{web:'../downloads/law_20260407.html'},
+'lib_qa240407a':{web:'../downloads/qa_20260407a.html'},
+'lib_qa240407b':{web:'../downloads/qa_20260407b.html'}};
 var fileCache={};
 function checkFile(url,cb){if(fileCache[url]!==undefined)return cb(fileCache[url]);var x=new XMLHttpRequest();x.open('HEAD',url,true);x.onload=function(){fileCache[url]=x.status===200;cb(fileCache[url])};x.onerror=function(){fileCache[url]=false;cb(false)};x.send()}
 function handleDownload(id){

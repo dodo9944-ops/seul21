@@ -285,10 +285,13 @@
 
         /* ── SECTION (메인 고유) ── */
         .section {
-            padding: 32px 0;
+            padding: 56px 0;
+        }
+        @media (max-width: 1024px) {
+            .section { padding: 40px 0; }
         }
         @media (max-width: 768px) {
-            .section { padding: 24px 0; }
+            .section { padding: 32px 0; }
         }
 
         /* ── CARD VISUAL (메인 전용) ── */
@@ -307,7 +310,7 @@
         }
 
         .panel-more {
-            font-size: 13px;
+            font-size: 14px;
             color: #C3A569;
             display: flex;
             align-items: center;
@@ -320,7 +323,7 @@
         .news-item {
             display: flex;
             gap: 16px;
-            padding: 18px 24px;
+            padding: 20px 24px;
             border-bottom: 1px solid var(--gray-100);
             transition: background var(--transition);
         }
@@ -329,24 +332,24 @@
         .news-thumb { width: 72px; height: 52px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; color: rgba(195,165,105,0.5); background: #0A0F1C; }
         .news-body { min-width: 0; }
         .news-body h4 {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
-            line-height: 1.45;
-            margin-bottom: 4px;
+            line-height: 1.6;
+            margin-bottom: 5px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
         .news-body h4:hover { color: #C3A569; }
-        .news-date { font-size: 12px; color: var(--gray-400); }
+        .news-date { font-size: 13px; color: var(--gray-400); }
 
         /* ── COMMUNITY ITEMS (메인 전용 인라인) ── */
         .comm-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 14px 24px;
+            padding: 16px 24px;
             border-bottom: 1px solid var(--gray-100);
             transition: background var(--transition);
         }
@@ -354,12 +357,12 @@
         .comm-item:hover { background: var(--gray-50); }
         .comm-title {
             flex: 1;
-            font-size: 14px;
+            font-size: 15px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .comm-cat { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: rgba(195,165,105,0.1); color: #C3A569; flex-shrink: 0; }
+        .comm-cat { font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 4px; background: rgba(195,165,105,0.1); color: #C3A569; flex-shrink: 0; }
 
         /* ── PROCESS STEPS ── */
         .process-bar {
@@ -495,33 +498,41 @@
             .cta-text h3 { font-size: 20px; }
         }
 
-        /* ── EXPERT GRID ── */
-        .expert-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-        @media (max-width: 768px) {
-            .expert-grid { grid-template-columns: 1fr; gap: 16px; }
-        }
-        .expert-card { border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px 24px; transition: all 0.25s ease; }
-        .expert-card:hover { border-color: rgba(195,165,105,0.3); box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-4px); }
-        .expert-avatar { width: 44px; height: 44px; border-radius: 10px; background: #0A0F1C; display: flex; align-items: center; justify-content: center; font-size: 18px; color: rgba(195,165,105,0.5); margin-bottom: 16px; }
-        .expert-card h4 {
-            font-size: 16px; font-weight: 700; line-height: 1.4;
-            margin-bottom: 8px; color: var(--gray-900);
-        }
-        .expert-card p {
-            font-size: 13px; color: var(--gray-500); line-height: 1.6;
-            margin-bottom: 12px;
-            display: -webkit-box; -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical; overflow: hidden;
-        }
-        .expert-meta {
-            display: flex; align-items: center; gap: 8px;
-            font-size: 12px; color: var(--gray-400);
-        }
-        .expert-meta .author { color: var(--gray-600); font-weight: 600; }
+        /* ── PORTFOLIO FEAT GRID (서브메뉴 동일 스타일) ── */
+        .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+        @media(max-width:1024px){.feat-grid{grid-template-columns:1fr;gap:20px}}
+        .pb{display:inline-flex;align-items:center;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;line-height:1}
+        .pb-type{background:rgba(10,15,28,.85);color:#fff}
+        .pb-ing{background:rgba(195,165,105,.9);color:#0A0F1C}
+        .pb-done{background:rgba(255,255,255,.9);color:#0A0F1C}
+        .fc{background:#fff;border:1.5px solid var(--gray-200);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+        .fc:hover{border-color:var(--gold);box-shadow:0 20px 48px rgba(195,165,105,.18);transform:translateY(-8px)}
+        .fc-img{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0}
+        .fc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+        .fc:hover .fc-img img{transform:scale(1.06)}
+        .fc-img .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.5) 0%,transparent 50%);pointer-events:none}
+        .fc-img .badges,.fc-fb .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
+        .fc-fb{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+        .fc-fb[data-t=r]{background:linear-gradient(135deg,#0A0F1C,#1a3055,#2a4a75)}
+        .fc-fb[data-t=c]{background:linear-gradient(135deg,#142644,#1e3a5f,#0A0F1C)}
+        .fc-fb[data-t=s]{background:linear-gradient(135deg,#1a2a40,#243a55,#C3A569)}
+        .fc-fb .fbi{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
+        .fc-fb .fbi i{font-size:28px;color:rgba(195,165,105,.6)}
+        .fc-fb .fbl{font-size:13px;font-weight:600;color:rgba(255,255,255,.35)}
+        .fc-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+        .fc-body .fn{font-size:18px;font-weight:800;color:var(--gray-900);margin-bottom:12px;line-height:1.4}
+        .fc-body .fspecs{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;margin-bottom:12px;padding:10px 12px;background:var(--gray-50);border-radius:9px}
+        .fc-body .fsp{display:flex;align-items:center;font-size:12px;color:var(--gray-600)}
+        .fc-body .fsp i{width:14px;color:var(--gold);margin-right:5px;font-size:10px;text-align:center}
+        .fc-body .fsp strong{font-weight:600;color:var(--gray-800)}
+        .fc-body .fsp.secondary{color:var(--gray-400);font-size:11.5px}
+        .fc-body .fdesc{font-size:13px;color:var(--gray-500);line-height:1.6;margin-top:auto;padding-top:12px;border-top:1px solid var(--gray-100);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        .fc-body .fbtn{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:10px 20px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:9px;font-size:13.5px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .25s;align-self:flex-start}
+        .fc-body .fbtn:hover{background:var(--brand-navy);box-shadow:0 4px 12px rgba(10,15,28,.15);transform:translateX(3px)}
+        .fc-body .fbtn i{font-size:12px;transition:transform .2s}
+        .fc-body .fbtn:hover i{transform:translateX(2px)}
+        .fc.fc-primary{border-color:rgba(195,165,105,.2);box-shadow:0 6px 20px rgba(195,165,105,.08)}
+        .fc.fc-primary .fc-img::after{content:'대표 실적';position:absolute;bottom:14px;right:14px;padding:4px 12px;background:rgba(195,165,105,.9);color:#0A0F1C;font-size:10px;font-weight:700;border-radius:5px;z-index:3;letter-spacing:.3px}
 
 
 
@@ -700,8 +711,8 @@
                 <div class="sv-bd"><p>소규모재건축과 가로주택정비를 포괄, 정비구역 지정 없이 200세대 미만 노후 주거지를 신속 정비</p><div class="sv-tg"><span>소규모재건축</span><span>가로주택정비</span><span>주민합의</span></div></div>
             </a>
             <a href="pages/garoju-service.html" class="sv-item">
-                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-building"></i></div><div><div class="sv-nm">총회기획·대행</div><div class="sv-en">General Meeting Planning →</div></div></div>
-                <div class="sv-bd"><p>정기총회·임시총회·대의원회·설명회의 기획부터 현장 운영, 의사록·후속 행정까지 원스톱 지원</p><div class="sv-tg"><span>총회기획</span><span>설명회</span><span>대행</span></div></div>
+                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-city"></i></div><div><div class="sv-nm">도심복합개발</div><div class="sv-en">Urban Complex Development →</div></div></div>
+                <div class="sv-bd"><p>통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등 복합적 사업구조와 고밀 개발방식을 종합 검토</p><div class="sv-tg"><span>통합재건축</span><span>신속통합기획</span><span>역세권개발</span></div></div>
             </a>
             <a href="pages/urbanplanning-service.html" class="sv-item">
                 <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-drafting-compass"></i></div><div><div class="sv-nm">도시계획 (엔지니어링)</div><div class="sv-en">Urban Planning & Engineering →</div></div></div>
@@ -805,7 +816,7 @@
             <h2 class="section-title">주요 수행실적</h2>
             <a href="pages/portfolio.html" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
         </div>
-        <div class="expert-grid" id="mainPortfolio"></div>
+        <div class="feat-grid" id="mainPortfolio"></div>
     </div>
 </section>
 
@@ -855,9 +866,9 @@
 .mp-overlay.open{opacity:1;pointer-events:auto}
 .mp-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
 .mp-overlay.open .mp-modal{transform:translateY(0) scale(1)}
-.mp-close{position:absolute;top:16px;right:16px;z-index:20;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6);border:1.5px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.4)}
-.mp-close:hover{background:rgba(0,0,0,.9);transform:scale(1.1)}
-@media(max-width:540px){.mp-close{top:12px;right:12px;width:38px;height:38px;font-size:15px}}
+.mp-close{position:absolute;top:-20px;right:-20px;z-index:20;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.85);border:2px solid rgba(255,255,255,.3);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.mp-close:hover{background:#0A0F1C;transform:scale(1.1)}
+@media(max-width:540px){.mp-close{top:-16px;right:-16px;width:38px;height:38px;font-size:15px}}
 .mp-hero{width:100%;height:300px;position:relative;overflow:hidden;border-radius:18px 18px 0 0}
 .mp-hero img{width:100%;height:100%;object-fit:cover;display:block}
 .mp-hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.75) 0%,rgba(10,15,28,.15) 50%,transparent 100%);pointer-events:none}
@@ -1093,27 +1104,29 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     var pfEl=document.getElementById('mainPortfolio');
     if(pfEl && MOCK.portfolio){
         var featured=MOCK.portfolio.filter(function(p){return p.featured}).slice(-3);
-        pfEl.innerHTML=featured.map(function(p){
+        function _ti(t){return{'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney'}[t]||'fa-building-columns'}
+        function _dt(t){return t==='재건축'?'c':t==='소규모정비'?'s':'r'}
+        function _sb(s){return s==='완료'?'pb-done':'pb-ing'}
+        function _bg(p){return'<span class="pb pb-type">'+p.type+'</span><span class="pb '+_sb(p.status)+'">'+p.status+'</span>'}
+        function _safe(v){return v||'정보 확인중'}
+        pfEl.innerHTML=featured.map(function(p,idx){
             var imgSrc=p.featuredImage||p.thumbnail;
-            var imgHtml=imgSrc?'<img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" style="width:100%;height:180px;object-fit:cover;border-radius:10px 10px 0 0" onerror="this.style.display=\'none\'">':'<div style="height:180px;background:linear-gradient(135deg,#142644 0%,#0A0F1C 100%);border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:center"><i class=\'fa-solid fa-building\' style=\'font-size:40px;color:#C3A569;opacity:.4\'></i></div>';
-            var statusColor=p.status==='완료'?'color:#7ec8a0;':'color:#C3A569;';
-            var badge=p.type==='재건축'?'재건축':p.type==='재개발'?'재개발':'소규모정비';
-            var badgeColor=p.type==='재건축'?'#C3A569':p.type==='재개발'?'#6ba3d6':'#7ec8a0';
-            /* 세부항목 구성 */
-            var specRows='';
-            if(p.floorInfo&&p.floorInfo!=='-') specRows+='<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06)"><span style="color:#999;font-size:11px">건축규모</span><span style="color:#ddd;font-size:11px;font-weight:500">'+p.floorInfo+'</span></div>';
-            if(p.scale&&p.scale!=='-') specRows+='<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06)"><span style="color:#999;font-size:11px">세대수</span><span style="color:#ddd;font-size:11px;font-weight:500">'+p.scale+'</span></div>';
-            if(p.constructor&&p.constructor!=='-'&&p.constructor!=='미정') specRows+='<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06)"><span style="color:#999;font-size:11px">시공사</span><span style="color:#ddd;font-size:11px;font-weight:500">'+p.constructor+'</span></div>';
-            if(p.role) specRows+='<div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:#999;font-size:11px">수행업무</span><span style="color:#C3A569;font-size:11px;font-weight:500">'+p.role+'</span></div>';
-            return'<div class="expert-card" style="padding:0;overflow:hidden;cursor:pointer" onclick="MPF.open(\''+p.id+'\')">'+imgHtml+
-                '<div style="padding:16px 20px 20px">'+
-                '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">'+
-                    '<span style="background:'+badgeColor+';color:#0A0F1C;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:.5px">'+badge+'</span>'+
-                    '<span style="font-size:11px;'+statusColor+'font-weight:600">'+(p.phase||p.status)+'</span>'+
+            var img=imgSrc?
+                '<div class="fc-img"><img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+_dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+_bg(p)+'</div></div>':
+                '<div class="fc-fb" data-t="'+_dt(p.type)+'"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+_bg(p)+'</div></div>';
+            var primary=idx===0?' fc-primary':'';
+            return'<div class="fc'+primary+'" onclick="MPF.open(\''+p.id+'\')">'+img+
+                '<div class="fc-body"><div class="fn">'+p.name+'</div>'+
+                '<div class="fspecs">'+
+                '<div class="fsp"><i class="fa-solid fa-location-dot"></i> <strong>'+p.district+'</strong></div>'+
+                '<div class="fsp"><i class="fa-solid fa-building"></i> '+_safe(p.scale)+'</div>'+
+                '<div class="fsp"><i class="fa-solid fa-user-tie"></i> '+p.role+'</div>'+
+                '<div class="fsp secondary"><i class="fa-solid fa-users"></i> '+_safe(p.members)+'</div>'+
+                '<div class="fsp secondary"><i class="fa-solid fa-layer-group"></i> '+_safe(p.floorInfo)+'</div>'+
+                '<div class="fsp secondary"><i class="fa-solid fa-chart-pie"></i> '+_safe(p.floorAreaRatio)+'</div>'+
                 '</div>'+
-                '<h4 style="margin:0 0 6px;font-size:15px;line-height:1.4">'+p.name+'</h4>'+
-                '<p style="margin:0 0 12px;font-size:12px;color:#999;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+p.description.substring(0,100)+'…</p>'+
-                (specRows?'<div style="margin-top:8px">'+specRows+'</div>':'')+
+                '<div class="fdesc">'+p.description+'</div>'+
+                '<button class="fbtn" onclick="event.stopPropagation();MPF.open(\''+p.id+'\')">상세보기 <i class="fa-solid fa-arrow-right"></i></button>'+
                 '</div></div>';
         }).join('');
     }
@@ -1126,7 +1139,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var today=new Date(); today.setHours(0,0,0,0);
         var cutoff=new Date(today); cutoff.setDate(cutoff.getDate()-3);
         var cutStr=cutoff.toISOString().slice(0,10);
-        var newsFileMap={'news0329':'downloads/news_20260329.html','news0330':'downloads/news_20260330.html','news0331':'downloads/news_20260331.html','news0401':'downloads/news_20260401.html','news0402':'downloads/news_20260402.html','news0403':'downloads/news_20260403.html','news0404':'downloads/news_20260404.html','news0405':'downloads/news_20260405.html','news0406a':'downloads/news_20260406a.html','news0406b':'downloads/news_20260406b.html','news0407a':'downloads/news_20260407a.html','news0407b':'downloads/news_20260407b.html','news0408':'downloads/news_20260408.html','lib48':'downloads/news_20260405.html'};
+        var newsFileMap={'news0329':'downloads/news_20260329.html','news0330':'downloads/news_20260330.html','news0331':'downloads/news_20260331.html','news0401':'downloads/news_20260401.html','news0402':'downloads/news_20260402.html','news0403':'downloads/news_20260403.html','news0404':'downloads/news_20260404.html','news0405':'downloads/news_20260405.html','news0406a':'downloads/news_20260406a.html','news0406b':'downloads/news_20260406b.html','news0407a':'downloads/news_20260407a.html','news0407b':'downloads/news_20260407b.html','news0407c':'downloads/news_20260407c.html','news0408':'downloads/news_20260408.html'};
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
@@ -1143,12 +1156,75 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     if(libEl && MOCK.library){
         var libs=MOCK.library.filter(function(i){return i.category!=='주요뉴스'})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,4);
+        /* 파일 맵 (library.html과 동일) */
+        window._libFileMap={
+            'lib1':{ext:'downloads/files/lib1_조합설립인가_신청서.pdf',web:'downloads/form_association.html'},
+            'lib2':{ext:'downloads/files/lib2_관리처분_변경인가_신청서.pdf',web:'downloads/form_management.html'},
+            'lib3':{ext:'downloads/files/lib3_총회_위임장.pdf',web:'downloads/form_proxy.html'},
+            'lib4':{ext:'downloads/files/lib4_도시정비법_개정요약.pdf',gov:'https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=259069',web:'downloads/law_summary_2026.html'},
+            'lib5':{ext:'downloads/files/lib5_서울시_가이드라인.pdf',web:'downloads/guide_seoul_guidelines.html'},
+            'lib6':{ext:'downloads/files/lib6_소규모주택정비법.pdf',web:'downloads/guide_small_housing.html'},
+            'lib7':{ext:'downloads/files/lib7_업무체크리스트.pdf',web:'downloads/checklist_steps.html'},
+            'lib8':{ext:'downloads/files/lib8_분담금_산정_가이드.pdf',web:'downloads/guide_burden.html'},
+            'lib9':{ext:'downloads/files/lib9_시공사_선정_해설.pdf',web:'downloads/guide_contractor.html'},
+            'lib10':{ext:'downloads/files/lib10_감정평가_가이드.pdf',web:'downloads/guide_appraisal.html'},
+            'lib11':{ext:'downloads/files/lib11_조합설립_완전가이드.pdf',web:'downloads/guide_association.html'},
+            'lib12':{ext:'downloads/files/lib12_안전진단_지침.pdf',web:'downloads/guide_safety_inspection.html'},
+            'lib13':{ext:'downloads/files/lib13_회계처리_지침.pdf',web:'downloads/guide_accounting.html'},
+            'lib14':{ext:'downloads/files/lib14_정책동향_2026Q1.pdf',web:'downloads/policy_news_2026q1.html'},
+            'lib15':{ext:'downloads/files/lib15_신속통합기획.pdf',web:'downloads/news_rapid_planning.html'},
+            'lib16':{ext:'downloads/files/lib16_소규모정비법_개정.pdf',web:'downloads/news_small_housing_act.html'},
+            'lib17':{ext:'downloads/files/lib17_시공자선정_지침.pdf',web:'downloads/guide_contractor_selection.html'},
+            'lib18':{ext:'downloads/files/lib18_이주보상_지침.pdf',web:'downloads/guide_relocation.html'},
+            'lib19':{ext:'downloads/files/lib19_1기신도시_특별법.pdf',web:'downloads/news_new_town.html'},
+            'lib20':{ext:'downloads/files/lib20_공공재개발_후보지.pdf',web:'downloads/news_public_redevelopment.html'},
+            'lib21':{ext:'downloads/files/lib21_추진위원회_운영규정.pdf',web:'downloads/guide_committee_rules.html'},
+            'lib22':{ext:'downloads/files/lib22_서울시_의사진행_표준운영규정.pdf'},
+            'lib23':{ext:'downloads/files/lib23_서울시_정비사업_실무매뉴얼.pdf'},
+            'lib30':{ext:'downloads/files/lib30_도시정비법_질의회신_사례집.pdf'},
+            'lib31':{ext:'downloads/files/lib31_서울시_도시정비법령_질의회신_2024.pdf'},
+            'lib33':{ext:'downloads/files/lib33_경기도_정비사업_질의회신_매뉴얼.pdf'},
+            'lib34':{ext:'downloads/files/lib34_서울시_도시정비_조례.pdf'},
+            'lib40':{ext:'downloads/files/lib40_서울시_도시정비조례_2024개정.pdf'},
+            'lib41':{ext:'downloads/files/lib41_도시정비법_질의회신_판례집.pdf'},
+            'lib42':{ext:'downloads/files/lib42_제주도_재건축재개발_업무편람_2025.pdf'},
+            'lib43':{ext:'downloads/files/lib43_해석례로읽는_건축법_2024.pdf'},
+            'lib44':{ext:'downloads/files/lib44_해석례로읽는_건축법_2023.pdf'},
+            'lib45':{ext:'downloads/files/lib45_서울시_공공지원_정비사업_표준정관_2024.pdf'},
+            'lib46':{ext:'downloads/files/lib46_건설공사_표준시장단가_2025상반기.pdf'},
+            'lib47':{ext:'downloads/files/lib47_도시정비법_질의회신_사례_국토부.pdf'},
+            'lib48':{ext:'downloads/files/lib48_서울시_정비사업_사업성개선_기본계획재정비_2024.pdf'}
+        };
+        window.mainLibDownload=function(id,cat){
+            var m=window._libFileMap[id];
+            if(!m){
+                /* 파일맵에 없으면 자료실 해당 카테고리로 이동 */
+                location.href='pages/library.html'+(cat?'?cat='+encodeURIComponent(cat):'');
+                return;
+            }
+            if(m.ext){
+                var x=new XMLHttpRequest();x.open('HEAD',m.ext,true);
+                x.onload=function(){
+                    if(x.status===200){var a=document.createElement('a');a.href=m.ext;a.download='';document.body.appendChild(a);a.click();document.body.removeChild(a)}
+                    else if(m.web){location.href=m.web}
+                    else if(m.gov){window.open(m.gov,'_blank')}
+                    else{location.href='pages/library.html'+(cat?'?cat='+encodeURIComponent(cat):'')}
+                };
+                x.onerror=function(){
+                    if(m.web)location.href=m.web;
+                    else if(m.gov)window.open(m.gov,'_blank');
+                    else location.href='pages/library.html'+(cat?'?cat='+encodeURIComponent(cat):'');
+                };
+                x.send();
+            } else if(m.web){location.href=m.web}
+            else if(m.gov){window.open(m.gov,'_blank')}
+        };
         libEl.innerHTML=libs.map(function(i){
             var ic=iconMap[i.fileType]||'fa-file';
-            return'<a href="pages/library.html" class="news-item">'+
+            return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\',\''+i.category+'\')">'+
                 '<div class="news-thumb"><i class="fa-solid '+ic+'"></i></div>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
-                '<div class="news-date">'+i.category+' · '+i.date+'</div></div></a>';
+                '<div class="news-date">'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></div></div></div>';
         }).join('');
     }
 
