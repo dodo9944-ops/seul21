@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>알림톡 수신거부 — (주)세울엔지니어링</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .unsub-wrap{max-width:480px;margin:60px auto;padding:0 20px}
+        .unsub-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:16px;padding:36px 32px;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+        .unsub-icon{width:52px;height:52px;border-radius:14px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+        .unsub-icon i{font-size:22px;color:#C3A569}
+        .unsub-card h2{font-size:20px;font-weight:800;color:var(--gray-900);margin-bottom:8px}
+        .unsub-card>p{font-size:13.5px;color:var(--gray-500);line-height:1.55;margin-bottom:28px}
+        .unsub-field{margin-bottom:18px}
+        .unsub-field label{display:block;font-size:13px;font-weight:700;color:var(--gray-700);margin-bottom:6px}
+        .unsub-field input{width:100%;height:48px;padding:0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);font-family:var(--font);transition:border-color .2s}
+        .unsub-field input:focus{outline:none;border-color:#C3A569;box-shadow:0 0 0 3px rgba(195,165,105,.1)}
+        .unsub-btn{width:100%;height:48px;display:flex;align-items:center;justify-content:center;gap:8px;background:#D6423A;color:#fff;border:none;border-radius:12px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .2s}
+        .unsub-btn:hover{background:#B5332B;box-shadow:0 4px 16px rgba(214,66,58,.2)}
+        .unsub-btn:disabled{opacity:.5;cursor:not-allowed}
+        .unsub-back{display:block;text-align:center;margin-top:16px;font-size:13px;color:var(--gray-500)}
+        .unsub-back a{color:var(--brand-dark);font-weight:600;text-decoration:none}
+        .unsub-done{text-align:center;padding:20px 0}
+        .unsub-done i{font-size:48px;color:var(--gray-400);margin-bottom:16px}
+        .unsub-done h3{font-size:18px;font-weight:800;color:var(--gray-900);margin-bottom:8px}
+        .unsub-done p{font-size:14px;color:var(--gray-500);line-height:1.6}
+        @media(max-width:540px){.unsub-card{padding:28px 20px}.unsub-wrap{margin:40px auto}}
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a> <i class="fa-solid fa-chevron-right"></i>
+            <a href="news.html">주요뉴스</a> <i class="fa-solid fa-chevron-right"></i>
+            <span>수신거부</span>
+        </div>
+        <h1>알림톡 수신거부</h1>
+        <p>카카오 알림톡 수신을 해지합니다.</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="unsub-wrap">
+        <div class="unsub-card">
+            <div class="unsub-icon"><i class="fa-solid fa-bell-slash"></i></div>
+            <h2>알림톡 수신거부</h2>
+            <p>등록하신 휴대전화번호를 입력하시면 카카오 알림톡 수신이 즉시 해지됩니다.</p>
+            <form id="unsubForm">
+                <div class="unsub-field">
+                    <label>휴대전화번호</label>
+                    <input type="tel" id="unsubPhone" placeholder="01012345678" required>
+                </div>
+                <button type="submit" class="unsub-btn" id="unsubBtn">
+                    <i class="fa-solid fa-bell-slash"></i> 수신거부
+                </button>
+            </form>
+            <div class="unsub-done" id="unsubDone" style="display:none">
+                <i class="fa-solid fa-circle-check"></i>
+                <h3>수신거부가 완료되었습니다.</h3>
+                <p>더 이상 카카오 알림톡이 발송되지 않습니다.<br>다시 수신을 원하시면 주요뉴스 페이지에서 재신청할 수 있습니다.</p>
+            </div>
+            <p class="unsub-back"><a href="news.html">주요뉴스로 돌아가기</a></p>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/js/common.js"></script>
+<script>
+(function(){
+    var form=document.getElementById('unsubForm');
+    form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        var btn=document.getElementById('unsubBtn');
+        btn.disabled=true; btn.textContent='처리 중...';
+        var phone=document.getElementById('unsubPhone').value.trim();
+        try{
+            var res=await fetch('/api/alimtalk?action=unsubscribe',{
+                method:'POST',headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({phone:phone})
+            });
+            var data=await res.json();
+            if(res.ok){
+                form.style.display='none';
+                document.getElementById('unsubDone').style.display='block';
+            } else {
+                alert(data.error||'처리 중 오류가 발생했습니다.');
+                btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-bell-slash"></i> 수신거부';
+            }
+        }catch(err){
+            alert('네트워크 오류가 발생했습니다.');
+            btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-bell-slash"></i> 수신거부';
+        }
+    });
+})();
+</script>
+</body>
+</html>

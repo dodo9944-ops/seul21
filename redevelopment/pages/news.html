@@ -59,6 +59,47 @@
             .news-content h3 { font-size: 15px; }
             .news-item { gap: 14px; padding: 20px 0; }
         }
+
+        /* === 알림톡 신청 박스 === */
+        .alimtalk-box{margin-top:48px;padding:32px;background:#fff;border:1.5px solid var(--gray-200);border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+        .alimtalk-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px}
+        .alimtalk-icon{width:44px;height:44px;border-radius:12px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .alimtalk-icon i{font-size:20px;color:#C3A569}
+        .alimtalk-header h3{font-size:17px;font-weight:800;color:var(--gray-900);margin-bottom:4px;letter-spacing:-.3px}
+        .alimtalk-header p{font-size:13.5px;color:var(--gray-500);line-height:1.5}
+        .alimtalk-form{display:flex;flex-direction:column;gap:18px}
+        .alimtalk-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        .alimtalk-field label{display:block;font-size:13px;font-weight:700;color:var(--gray-700);margin-bottom:6px}
+        .alimtalk-field label .req{color:#D6423A;font-weight:700}
+        .alimtalk-field label .sub{font-size:11.5px;color:var(--gray-400);font-weight:500}
+        .alimtalk-field input[type="text"],.alimtalk-field input[type="tel"]{width:100%;height:46px;padding:0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);font-family:var(--font);transition:border-color .2s}
+        .alimtalk-field input:focus{outline:none;border-color:#C3A569;box-shadow:0 0 0 3px rgba(195,165,105,.1)}
+        .alimtalk-checks{display:flex;flex-wrap:wrap;gap:8px}
+        .interest-checks .ck{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1.5px solid var(--gray-200);border-radius:8px;cursor:pointer;transition:all .2s;font-size:13px;font-weight:600;color:var(--gray-600)}
+        .interest-checks .ck:has(input:checked){border-color:var(--brand-dark);background:rgba(10,15,28,.03);color:var(--brand-dark)}
+        .interest-checks .ck input{display:none}
+        .consent-checks{flex-direction:column;gap:10px}
+        .consent-checks .ck{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray-600);cursor:pointer}
+        .consent-checks .ck input[type="checkbox"]{width:18px;height:18px;accent-color:var(--brand-dark);flex-shrink:0}
+        .consent-checks .ck .req{color:#D6423A;font-size:11.5px}
+        .at-detail-btn{background:none;border:none;color:var(--gray-400);font-size:11.5px;cursor:pointer;padding:0;margin-left:4px;font-family:var(--font);text-decoration:underline}
+        .at-detail{display:none;padding:14px 16px;background:var(--gray-50);border-radius:8px;font-size:12px;color:var(--gray-500);line-height:1.7;margin-top:4px}
+        .at-detail.open{display:block}
+        .at-submit-btn{width:100%;height:50px;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--brand-dark);color:#C3A569;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .2s}
+        .at-submit-btn:hover{background:#0F1D35;box-shadow:0 4px 16px rgba(10,15,28,.2)}
+        .at-submit-btn:disabled{opacity:.5;cursor:not-allowed}
+        .at-unsub-note{text-align:center;font-size:12px;color:var(--gray-400);margin-top:8px}
+        .at-unsub-note a{color:var(--gray-500);text-decoration:underline}
+        .alimtalk-done{text-align:center;padding:40px 20px}
+        .at-done-icon i{font-size:48px;color:#2E7D32;margin-bottom:16px}
+        .alimtalk-done h3{font-size:18px;font-weight:800;color:var(--gray-900);margin-bottom:8px}
+        .alimtalk-done p{font-size:14px;color:var(--gray-500)}
+        @media(max-width:540px){
+            .alimtalk-box{padding:24px 18px;margin-top:36px}
+            .alimtalk-row{grid-template-columns:1fr}
+            .alimtalk-header{flex-direction:column;gap:10px}
+            .interest-checks .ck{padding:7px 11px;font-size:12px}
+        }
     </style>
 </head>
 <body>
@@ -93,6 +134,68 @@
         <div class="result-info" id="resultInfo"></div>
         <div class="news-list" id="newsList"></div>
         <div class="pagination" id="pagination"></div>
+
+        <!-- 카카오 알림톡 신청 -->
+        <div class="alimtalk-box" id="alimtalkBox">
+            <div class="alimtalk-header">
+                <div class="alimtalk-icon"><i class="fa-regular fa-comment-dots"></i></div>
+                <div>
+                    <h3>카카오 알림톡 업데이트 신청</h3>
+                    <p>주요뉴스, 법령 개정, 지침 및 부동산 정책 동향을 카카오 알림톡으로 받아보세요.</p>
+                </div>
+            </div>
+            <form id="alimtalkForm" class="alimtalk-form" autocomplete="off">
+                <div class="alimtalk-row">
+                    <div class="alimtalk-field">
+                        <label>이름 <span class="req">*</span></label>
+                        <input type="text" id="atName" placeholder="홍길동" required>
+                    </div>
+                    <div class="alimtalk-field">
+                        <label>휴대전화번호 <span class="req">*</span></label>
+                        <input type="tel" id="atPhone" placeholder="01012345678" required>
+                    </div>
+                </div>
+                <div class="alimtalk-field">
+                    <label>관심 분야 <span class="sub">(중복 선택 가능)</span></label>
+                    <div class="alimtalk-checks interest-checks">
+                        <label class="ck"><input type="checkbox" name="interest" value="정비사업 주요뉴스" checked><span>정비사업 주요뉴스</span></label>
+                        <label class="ck"><input type="checkbox" name="interest" value="법령 개정"><span>법령 개정</span></label>
+                        <label class="ck"><input type="checkbox" name="interest" value="행정지침 / 유권해석"><span>행정지침 / 유권해석</span></label>
+                        <label class="ck"><input type="checkbox" name="interest" value="부동산 정책"><span>부동산 정책</span></label>
+                    </div>
+                </div>
+                <div class="alimtalk-field">
+                    <div class="alimtalk-checks consent-checks">
+                        <label class="ck">
+                            <input type="checkbox" id="atPrivacy" required>
+                            <span>개인정보 수집·이용에 동의합니다. <span class="req">(필수)</span></span>
+                            <button type="button" class="at-detail-btn" onclick="document.getElementById('privacyDetail').classList.toggle('open')">[자세히]</button>
+                        </label>
+                        <div class="at-detail" id="privacyDetail">
+                            <strong>개인정보 수집·이용 안내</strong><br>
+                            · 수집 항목 : 이름, 휴대전화번호<br>
+                            · 수집 목적 : 카카오 알림톡 서비스 제공<br>
+                            · 보유 기간 : 수신 해지 시까지<br>
+                            · 동의를 거부할 수 있으며, 거부 시 알림톡 서비스 이용이 제한됩니다.
+                        </div>
+                        <label class="ck">
+                            <input type="checkbox" id="atConsent" required>
+                            <span>카카오 알림톡 수신에 동의합니다. <span class="req">(필수)</span></span>
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="at-submit-btn" id="atSubmitBtn">
+                    <i class="fa-regular fa-comment-dots"></i> 알림톡 신청하기
+                </button>
+                <p class="at-unsub-note">수신을 원하지 않으시면 <a href="alimtalk-unsub.html">여기에서 해지</a>할 수 있습니다.</p>
+            </form>
+            <!-- 신청 완료 -->
+            <div class="alimtalk-done" id="alimtalkDone" style="display:none">
+                <div class="at-done-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <h3>카카오 알림톡 신청이 완료되었습니다.</h3>
+                <p>등록하신 번호로 주요 소식을 알림톡으로 전달해드리겠습니다.</p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -163,6 +266,41 @@
     document.getElementById('filterSort').addEventListener('change', () => { currentPage = 1; load(); });
 
     document.addEventListener('DOMContentLoaded', load);
+})();
+
+/* 알림톡 신청 */
+(function(){
+    var form=document.getElementById('alimtalkForm');
+    if(!form) return;
+    form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        var btn=document.getElementById('atSubmitBtn');
+        btn.disabled=true; btn.textContent='신청 중...';
+        var name=document.getElementById('atName').value.trim();
+        var phone=document.getElementById('atPhone').value.trim();
+        var checks=document.querySelectorAll('input[name="interest"]:checked');
+        var interests=Array.from(checks).map(function(c){return c.value});
+        var privacyConsent=document.getElementById('atPrivacy').checked;
+        var alimtalkConsent=document.getElementById('atConsent').checked;
+        if(!privacyConsent||!alimtalkConsent){alert('필수 동의 항목을 확인해주세요.');btn.disabled=false;btn.innerHTML='<i class="fa-regular fa-comment-dots"></i> 알림톡 신청하기';return;}
+        try{
+            var res=await fetch('/api/alimtalk?action=subscribe',{
+                method:'POST',headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({name:name,phone:phone,interests:interests,privacyConsent:privacyConsent,alimtalkConsent:alimtalkConsent})
+            });
+            var data=await res.json();
+            if(res.ok){
+                form.style.display='none';
+                document.getElementById('alimtalkDone').style.display='block';
+            } else {
+                alert(data.error||'신청 중 오류가 발생했습니다.');
+                btn.disabled=false;btn.innerHTML='<i class="fa-regular fa-comment-dots"></i> 알림톡 신청하기';
+            }
+        }catch(err){
+            alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+            btn.disabled=false;btn.innerHTML='<i class="fa-regular fa-comment-dots"></i> 알림톡 신청하기';
+        }
+    });
 })();
 </script>
 </body>
