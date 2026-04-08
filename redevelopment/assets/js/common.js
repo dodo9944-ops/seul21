@@ -371,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!location.pathname.includes('/admin/') && !location.pathname.includes('/intranet/')) {
     const b = App.basePath();
     const s = document.createElement('script');
-    s.src = b + '/assets/js/chatbot.js?v=20260408c';
+    s.src = b + '/assets/js/chatbot.js?v=20260408d';
     document.body.appendChild(s);
   }
 });

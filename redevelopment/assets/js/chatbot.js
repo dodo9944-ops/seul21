@@ -82,11 +82,11 @@
 
     /* == 토글 버튼 == */
     #chat-toggle {
-      width:auto; height:52px; border-radius:26px; border:none;
+      width:auto; height:42px; border-radius:21px; border:none;
       background: linear-gradient(145deg, #0A0F1C, #1a3055);
-      color:#C3A569; cursor:pointer; padding:0 20px 0 16px;
+      color:#C3A569; cursor:pointer; padding:0 16px 0 13px;
       box-shadow: 0 4px 20px rgba(10,15,28,0.45), inset 0 1px 0 rgba(195,165,105,0.15);
-      display:flex; align-items:center; gap:8px;
+      display:flex; align-items:center; gap:6px;
       transition: all .3s ease;
     }
     #chat-toggle:hover {
@@ -95,10 +95,10 @@
     }
     #chat-toggle-inner { display:flex; align-items:center; }
     #chat-toggle-label {
-      font-size:13px; font-weight:700; letter-spacing:0.3px;
+      font-size:11.5px; font-weight:700; letter-spacing:0.3px;
       color:#C3A569;
     }
-    #chat-toggle.active { border-radius:50%; width:52px; padding:0; justify-content:center; }
+    #chat-toggle.active { border-radius:50%; width:42px; padding:0; justify-content:center; }
     #chat-toggle.active #chat-icon-open { display:none; }
     #chat-toggle.active #chat-icon-close { display:block; }
     #chat-toggle.active #chat-toggle-label { display:none; }
