@@ -363,7 +363,7 @@ const MOCK = {
   /* ──────────────────────────── 업무실적 ──────────────────────────── */
   portfolio: [
     /* ===== 주요실적 (Featured) ===== */
-    { id:'pf1', name:'가락현대5차아파트 소규모재건축정비사업', type:'소규모정비', district:'송파구', status:'진행중', year:'2026', scale:'179세대', role:'기본계획~준공 전과정 자문',
+    { id:'pf1', name:'가락현대5차아파트 소규모재건축정비사업', type:'소규모정비', district:'송파구', status:'진행중', year:'2026', scale:'179세대', role:'기본계획~준공 CM업무 총괄수행',
       description:'서울 송파구 가락동 161-3번지 일대의 기존 144세대(15층, 2개동) 노후 아파트를 지하3층~지상25층, 4개동 179세대 규모의 신축 단지(더샵 송파루미스타)로 재건축하는 소규모재건축정비사업. 포스코이앤씨가 시공하며, 2026년 5월 입주 예정이다. 당사는 기본계획 수립 단계부터 사업시행계획인가, 관리처분계획, 시공사 선정, 분양·입주까지 사업 전 과정에 걸쳐 자문을 수행하였다.',
       featured:true,
       thumbnail:'../assets/images/portfolio/garak5.jpg', featuredImage:'../assets/images/portfolio/garak5.jpg',
