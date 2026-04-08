@@ -506,17 +506,6 @@
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      if (tab.dataset.mode === 'expert' && !sessionStorage.getItem('seul_user')) {
-        const msgArea = document.getElementById('chat-messages');
-        messageHistory[currentMode] = msgArea.innerHTML;
-        msgArea.innerHTML = `<div style="text-align:center;padding:40px 20px;">
-          <div style="width:56px;height:56px;margin:0 auto 16px;border-radius:50%;background:linear-gradient(135deg,#f3f4f6,#e5e7eb);display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:24px;">🔒</div>
-          <h4 style="margin:0 0 8px;font-size:14px;color:#374151;font-weight:700;">회원 전용 서비스</h4>
-          <p style="margin:0 0 16px;font-size:12.5px;color:#6b7280;line-height:1.6;">전문가 상담은 <strong>회원만</strong> 이용 가능합니다.<br>로그인 후 다시 시도해주세요.</p>
-          <a href="${B}/pages/login.html" style="display:inline-block;padding:8px 20px;border-radius:20px;background:linear-gradient(135deg,#065F46,#10B981);color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:'Noto Sans KR',sans-serif;">로그인하기</a>
-        </div>`;
-        return;
-      }
       switchMode(tab.dataset.mode);
     });
   });
