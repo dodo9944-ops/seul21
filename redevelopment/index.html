@@ -251,6 +251,19 @@
             color: #fff; border-color: rgba(195,165,105,.25);
             background: rgba(195,165,105,.06);
         }
+        .hero-actions .btn-hero-kakao {
+            display: inline-flex; align-items: center; gap: 9px;
+            height: 50px; padding: 0 32px;
+            background: linear-gradient(135deg, #FEE500, #FFD43B);
+            color: #3C1E1E; font-size: 15px; font-weight: 700;
+            border: none; border-radius: 5px; cursor: pointer;
+            transition: all .35s ease; text-decoration: none;
+        }
+        .hero-actions .btn-hero-kakao:hover {
+            background: linear-gradient(135deg, #FFD43B, #FFE066);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(254,229,0,.25);
+        }
 
         /* ── 반응형 ── */
         @media (max-width: 768px) {
@@ -263,6 +276,7 @@
             .hero-actions { flex-direction: column; gap: 7px; width: 100%; }
             .hero-actions .btn-hero-primary { width: 100%; justify-content: center; height: 44px; font-size: 13.5px; }
             .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 42px; font-size: 13px; }
+            .hero-actions .btn-hero-kakao { width: 100%; justify-content: center; height: 42px; font-size: 13px; }
             .category-section { display: none; }
             .section { padding: 28px 0; }
             .process-bar { padding: 20px 0 8px; }
@@ -602,6 +616,7 @@
             <div class="hero-actions">
                 <a href="pages/contact.html" class="btn-hero-primary"><i class="fa-solid fa-paper-plane"></i> 상담 문의</a>
                 <a href="pages/feasibility.html" class="btn-hero-outline"><i class="fa-solid fa-chart-line"></i> 사업성 검토</a>
+                <a href="#kakao-channel" class="btn-hero-kakao" target="_blank"><i class="fa-solid fa-comment"></i> 카카오톡 알림받기</a>
             </div>
         </div>
     </div>
