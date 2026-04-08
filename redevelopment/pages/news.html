@@ -100,6 +100,22 @@
             .alimtalk-header{flex-direction:column;gap:10px}
             .interest-checks .ck{padding:7px 11px;font-size:12px}
         }
+
+        /* === 카톡 소식받기 배너 === */
+        .kakao-banner{background:var(--brand-dark);border-bottom:2px solid rgba(195,165,105,.2)}
+        .kakao-banner .inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+        .kakao-banner-left{display:flex;align-items:center;gap:12px}
+        .kakao-banner-icon{width:34px;height:34px;border-radius:9px;background:rgba(195,165,105,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .kakao-banner-icon i{font-size:15px;color:#C3A569}
+        .kakao-banner-text{font-size:13.5px;font-weight:600;color:rgba(255,255,255,.85);line-height:1.45}
+        .kakao-banner-text strong{color:#C3A569;font-weight:700}
+        .kakao-banner-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:rgba(195,165,105,.15);border:1.5px solid rgba(195,165,105,.3);border-radius:9px;color:#C3A569;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;text-decoration:none;transition:all .2s;font-family:var(--font)}
+        .kakao-banner-btn:hover{background:rgba(195,165,105,.25);border-color:rgba(195,165,105,.5)}
+        @media(max-width:540px){
+            .kakao-banner .inner{flex-direction:column;align-items:stretch;gap:10px;padding:12px 0}
+            .kakao-banner-text{font-size:12.5px}
+            .kakao-banner-btn{justify-content:center}
+        }
     </style>
 </head>
 <body>
@@ -113,6 +129,19 @@
         </div>
         <h1>주요뉴스</h1>
         <p>매일 2회, 정비사업 주요 뉴스와 최신 법령 개정·지침, 부동산 정책을 신속하게 안내해드립니다.</p>
+    </div>
+</div>
+
+<!-- 카톡 소식받기 배너 -->
+<div class="kakao-banner">
+    <div class="inner">
+        <div class="kakao-banner-left">
+            <div class="kakao-banner-icon"><i class="fa-regular fa-comment-dots"></i></div>
+            <div class="kakao-banner-text"><strong>카카오 알림톡</strong>으로 주요뉴스·법령 개정·부동산 정책 소식을 받아보세요.</div>
+        </div>
+        <a href="#alimtalkBox" class="kakao-banner-btn" onclick="document.getElementById('alimtalkBox').scrollIntoView({behavior:'smooth'});return false;">
+            <i class="fa-regular fa-comment-dots"></i> 소식받기 신청
+        </a>
     </div>
 </div>
 
