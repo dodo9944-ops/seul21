@@ -49,8 +49,8 @@ body {
   font-family: var(--font);
   background: var(--white);
   color: var(--gray-900);
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -252,6 +252,37 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
   display: flex; gap: 8px;
 }
 .drawer-footer .btn { flex: 1; }
+/* drawer accordion */
+.drawer-group { border-bottom: 1px solid var(--gray-100); }
+.drawer-group-btn {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; padding: 14px 24px; font-size: 15px; font-weight: 600; color: var(--gray-700);
+  background: none; border: none; cursor: pointer; text-align: left;
+  transition: all var(--transition);
+}
+.drawer-group-btn:hover { background: var(--gray-50); color: var(--gray-900); }
+.drawer-group-btn i.dg-icon { width: 20px; text-align: center; color: var(--gray-400); }
+.drawer-group-btn .dg-arrow {
+  margin-left: auto; font-size: 11px; color: var(--gray-400);
+  transition: transform 0.25s ease;
+}
+.drawer-group.open .dg-arrow { transform: rotate(180deg); }
+.drawer-group-btn.solo { font-weight: 500; }
+.drawer-sub {
+  display: none; background: var(--gray-50);
+}
+.drawer-group.open .drawer-sub { display: block; }
+.drawer-sub a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 24px 11px 52px; font-size: 14px; font-weight: 400; color: var(--gray-600);
+  transition: all var(--transition);
+}
+.drawer-sub a::before {
+  content: ''; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--gray-400); flex-shrink: 0;
+}
+.drawer-sub a:hover { background: var(--gray-100); color: var(--gold); }
+.drawer-sub a:hover::before { background: var(--gold); }
 
 /* ── SEARCH OVERLAY ── */
 .search-overlay {
@@ -395,10 +426,10 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 /* ── SECTION HEAD ── */
 .section-head {
   display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 28px;
+  margin-bottom: 36px;
 }
 .section-title {
-  font-size: 22px; font-weight: 800; color: var(--gray-900);
+  font-size: 24px; font-weight: 900; color: #111;
   letter-spacing: -0.5px; position: relative;
   padding-left: 14px;
 }

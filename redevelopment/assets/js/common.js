@@ -80,8 +80,55 @@ const App = (() => {
         </span>
         <button class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <nav class="drawer-nav">
-        ${links.concat(moreLinks).map(l => `<a href="${l.href}"><i class="${l.icon}"></i> ${l.label}</a>`).join('')}
+      <nav class="drawer-nav" id="drawerNav">
+        ${[
+          { href:`${B}/pages/about.html`, label:'회사소개', icon:'fa-solid fa-building-columns', sub:[
+            { href:`${B}/pages/about.html`, label:'회사소개' },
+            { href:`${B}/pages/vision.html`, label:'세울의 길' },
+          ]},
+          { href:`${B}/pages/services.html`, label:'사업분야', icon:'fa-solid fa-diagram-project', sub:[
+            { href:`${B}/pages/services.html`, label:'사업분야 전체' },
+            { href:`${B}/pages/redevelopment-service.html`, label:'주택재개발 정비사업' },
+            { href:`${B}/pages/reconstruction-service.html`, label:'주택재건축 정비사업' },
+            { href:`${B}/pages/small-reconstruction-service.html`, label:'소규모 정비사업' },
+            { href:`${B}/pages/garoju-service.html`, label:'도심복합개발' },
+            { href:`${B}/pages/urbanplanning-service.html`, label:'도시계획(엔지니어링)' },
+            { href:`${B}/pages/pmcm-service.html`, label:'도시정비 PM/CM' },
+          ]},
+          { href:`${B}/pages/portfolio.html`, label:'업무실적', icon:'fa-solid fa-briefcase', sub:null },
+          { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open', sub:null },
+          { href:`${B}/pages/community.html`, label:'커뮤니티', icon:'fa-solid fa-comments', sub:[
+            { href:`${B}/pages/community.html`, label:'커뮤니티' },
+            { href:`${B}/pages/notice.html`, label:'공지사항' },
+            { href:`${B}/pages/news.html`, label:'뉴스·자료' },
+            { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
+          ]},
+          { href:`${B}/pages/feasibility.html`, label:'사업성 검토', icon:'fa-solid fa-calculator', sub:null },
+          { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
+            { href:`${B}/pages/contact.html`, label:'문의하기' },
+            { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
+            { href:`${B}/pages/legal-guide.html`, label:'법령 안내' },
+            { href:`${B}/pages/permit-support.html`, label:'인허가 지원' },
+            { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
+          ]},
+          { href:`${B}/intranet/index.html`, label:'인트라넷', icon:'fa-solid fa-lock', sub:[
+            { href:`${B}/intranet/index.html`, label:'인트라넷 홈' },
+            { href:`${B}/intranet/projects.html`, label:'프로젝트 관리' },
+            { href:`${B}/intranet/documents.html`, label:'문서 관리' },
+            { href:`${B}/intranet/calendar.html`, label:'일정 관리' },
+            { href:`${B}/intranet/contacts.html`, label:'주소록' },
+          ]},
+        ].map(g => g.sub
+          ? `<div class="drawer-group">
+              <button class="drawer-group-btn" onclick="(function(btn){var g=btn.closest('.drawer-group');g.classList.toggle('open');})(this)">
+                <i class="${g.icon} dg-icon"></i>${g.label}<i class="fa-solid fa-chevron-down dg-arrow"></i>
+              </button>
+              <div class="drawer-sub">${g.sub.map(s=>`<a href="${s.href}">${s.label}</a>`).join('')}</div>
+            </div>`
+          : `<div class="drawer-group">
+              <a href="${g.href}" class="drawer-group-btn solo"><i class="${g.icon} dg-icon"></i>${g.label}</a>
+            </div>`
+        ).join('')}
       </nav>
       <div class="drawer-footer">
         ${isLoggedIn

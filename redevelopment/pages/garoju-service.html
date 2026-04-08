@@ -9,208 +9,125 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#0A0F1C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>총회기획·대행 — (주)세울엔지니어링</title>
-    <meta name="description" content="정비사업 총회기획·대행 전문. 정기총회·임시총회·대의원회·주민설명회의 기획부터 현장 운영, 후속 행정까지 원스톱 지원합니다.">
+    <title>도심복합개발 — (주)세울엔지니어링</title>
+    <meta name="description" content="통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등 복합적 사업구조와 고밀 개발방식을 종합적으로 검토하고 대상지에 맞는 현실적인 추진전략을 제시합니다.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
     <style>
-    .rd-section { margin-bottom:35px; }
-    .rd-section:last-child { margin-bottom:0; }
-    .rd-section .section-title { margin-bottom:28px; }
+    .rd-section { margin-bottom: 56px; }
+    .rd-section:last-child { margin-bottom: 0; }
+    .rd-section .section-title { margin-bottom: 32px; }
 
-    /* 비주얼 히어로 */
+    /* 히어로 비주얼 */
     .rd-visual {
-        background:linear-gradient(135deg,#0A0F1C 0%,#142644 100%);
-        border-radius:16px; padding:48px 52px; position:relative; overflow:hidden;
-        display:flex; align-items:center; gap:40px;
+        background: linear-gradient(135deg, #0A0F1C 0%, #142644 60%, #1a3055 100%);
+        border-radius: 18px; padding: 56px 60px; position: relative; overflow: hidden;
     }
     .rd-visual::before {
-        content:''; position:absolute; right:-80px; top:-80px; width:300px; height:300px;
-        background:radial-gradient(circle,rgba(195,165,105,0.06) 0%,transparent 70%); border-radius:50%;
+        content: ''; position: absolute; right: -100px; top: -100px; width: 400px; height: 400px;
+        background: radial-gradient(circle, rgba(195,165,105,0.07) 0%, transparent 65%); border-radius: 50%;
     }
     .rd-visual::after {
-        content:''; position:absolute; left:-40px; bottom:-40px; width:200px; height:200px;
-        background:radial-gradient(circle,rgba(195,165,105,0.04) 0%,transparent 70%); border-radius:50%;
+        content: ''; position: absolute; left: -60px; bottom: -60px; width: 280px; height: 280px;
+        background: radial-gradient(circle, rgba(195,165,105,0.04) 0%, transparent 65%); border-radius: 50%;
     }
-    .rd-visual-text { position:relative; z-index:1; flex:1; }
+    .rd-visual-inner { position: relative; z-index: 1; max-width: 780px; }
     .rd-visual-badge {
-        display:inline-flex; align-items:center; gap:8px;
-        font-size:11px; font-weight:700; color:var(--gold); letter-spacing:1.5px;
-        margin-bottom:16px; text-transform:uppercase;
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 2px;
+        margin-bottom: 20px; text-transform: uppercase;
     }
-    .rd-visual-badge i { font-size:14px; }
-    .rd-visual h2 { font-size:28px; font-weight:800; color:#fff; line-height:1.45; margin-bottom:14px; letter-spacing:-0.5px; }
-    .rd-visual p { font-size:15px; color:rgba(255,255,255,0.55); line-height:1.8; }
-    .rd-visual-stats {
-        position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:16px; flex-shrink:0;
+    .rd-visual-badge i { font-size: 13px; }
+    .rd-visual h2 { font-size: 32px; font-weight: 900; color: #fff; line-height: 1.4; margin-bottom: 18px; letter-spacing: -0.8px; }
+    .rd-visual p { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 28px; }
+    .rd-keywords {
+        display: flex; flex-wrap: wrap; gap: 10px;
     }
-    .rd-vstat {
-        background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06);
-        border-radius:12px; padding:20px 24px; text-align:center; min-width:130px;
+    .rd-kw {
+        padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+        background: rgba(195,165,105,0.12); color: var(--gold);
+        border: 1px solid rgba(195,165,105,0.2);
     }
-    .rd-vstat .vn { font-size:24px; font-weight:800; color:var(--gold); margin-bottom:4px; }
-    .rd-vstat .vd { font-size:11px; color:rgba(255,255,255,0.5); }
-    @media(max-width:860px){
-        .rd-visual{flex-direction:column;padding:36px 28px;}
-        .rd-visual h2{font-size:22px;}
-        .rd-visual-stats{grid-template-columns:repeat(4,1fr);width:100%;}
-    }
-    @media(max-width:540px){
-        .rd-visual-stats{grid-template-columns:repeat(2,1fr);}
+    @media(max-width: 768px) {
+        .rd-visual { padding: 40px 28px; }
+        .rd-visual h2 { font-size: 24px; }
+        .rd-visual p { font-size: 14px; }
     }
 
-    /* 총회기획·대행이란 정보 블록 */
-    .rd-info-block {
-        background:#fff; border:1px solid var(--gray-200); border-radius:12px;
-        padding:32px 36px; margin-bottom:24px;
+    /* 소개 블록 */
+    .rd-intro {
+        background: #fff; border: 1px solid var(--gray-200); border-radius: 14px;
+        padding: 40px 44px;
     }
-    .rd-info-block h4 { font-size:17px; font-weight:700; color:var(--gray-900); margin-bottom:14px; }
-    .rd-info-block p { font-size:14px; color:var(--gray-600); line-height:1.85; margin-bottom:12px; }
-    .rd-info-block p:last-child { margin-bottom:0; }
-    .rd-info-block ul { list-style:none; padding:0; margin:0; }
-    .rd-info-block ul li {
-        position:relative; padding:10px 0 10px 24px; font-size:14px; color:var(--gray-700);
-        line-height:1.75; border-bottom:1px solid var(--gray-100);
+    .rd-intro h4 { font-size: 18px; font-weight: 800; color: var(--gray-900); margin-bottom: 18px; }
+    .rd-intro p {
+        font-size: 15px; color: var(--gray-600); line-height: 1.9; margin-bottom: 14px;
     }
-    .rd-info-block ul li:last-child { border-bottom:none; }
-    .rd-info-block ul li::before {
-        content:''; position:absolute; left:0; top:16px; width:8px; height:8px;
-        border-radius:50%; background:var(--gold);
-    }
-    .rd-info-block ul li strong { color:var(--gray-900); }
+    .rd-intro p:last-child { margin-bottom: 0; }
+    @media(max-width: 768px) { .rd-intro { padding: 28px 24px; } }
 
-    .rd-type-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:16px; }
-    .rd-type-card {
-        background:rgba(20,38,68,0.03); border:1px solid var(--gray-200); border-radius:10px;
-        padding:20px 24px; transition:all 0.2s;
+    /* 업무내용 카드 그리드 */
+    .rd-work-grid {
+        display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
     }
-    .rd-type-card:hover { border-color:var(--gold); box-shadow:0 4px 16px rgba(0,0,0,0.04); }
-    .rd-type-card h5 {
-        font-size:15px; font-weight:700; color:var(--brand-navy); margin-bottom:8px;
-        display:flex; align-items:center; gap:8px;
-    }
-    .rd-type-card h5 i { color:var(--gold); font-size:14px; }
-    .rd-type-card p { font-size:13px; color:var(--gray-600); line-height:1.75; margin:0; }
-    @media(max-width:640px){ .rd-type-grid{grid-template-columns:1fr;} }
+    @media(max-width: 768px) { .rd-work-grid { grid-template-columns: 1fr; } }
 
-    .rd-advantage-list { display:flex; flex-direction:column; gap:10px; margin-top:16px; }
-    .rd-advantage-item {
-        display:flex; align-items:flex-start; gap:12px; padding:14px 18px;
-        background:rgba(195,165,105,0.04); border:1px solid rgba(195,165,105,0.1);
-        border-radius:8px; font-size:14px; color:var(--gray-700); line-height:1.7;
+    .rd-work-card {
+        background: #fff; border: 1.5px solid var(--gray-200); border-radius: 14px;
+        padding: 32px 32px 28px; transition: all 0.25s; display: flex; flex-direction: column;
     }
-    .rd-advantage-item i { color:var(--gold); font-size:16px; margin-top:2px; flex-shrink:0; }
+    .rd-work-card:hover { border-color: var(--gold); box-shadow: 0 12px 32px rgba(0,0,0,0.07); transform: translateY(-4px); }
 
-    /* 비교표 */
-    .rd-compare-table { width:100%; border-collapse:collapse; margin-top:16px; }
-    .rd-compare-table thead th {
-        background:var(--brand-dark); color:#fff; font-size:14px; font-weight:700;
-        padding:14px 18px; text-align:center;
+    .rd-work-icon {
+        width: 52px; height: 52px; border-radius: 13px; background: var(--brand-dark);
+        display: flex; align-items: center; justify-content: center; margin-bottom: 20px; flex-shrink: 0;
     }
-    .rd-compare-table thead th:first-child { border-radius:8px 0 0 0; text-align:left; }
-    .rd-compare-table thead th:last-child { border-radius:0 8px 0 0; }
-    .rd-compare-table tbody td {
-        padding:13px 18px; font-size:13.5px; color:var(--gray-700); line-height:1.6;
-        border-bottom:1px solid var(--gray-150, #eee); text-align:center;
-    }
-    .rd-compare-table tbody td:first-child {
-        font-weight:600; color:var(--gray-900); text-align:left; background:rgba(20,38,68,0.02);
-    }
-    .rd-compare-table tbody tr:last-child td { border-bottom:none; }
-    .rd-compare-table tbody td.highlight {
-        color:var(--gold); font-weight:700;
-    }
-    @media(max-width:540px){
-        .rd-compare-table { font-size:12px; }
-        .rd-compare-table thead th, .rd-compare-table tbody td { padding:10px 10px; }
-    }
+    .rd-work-icon i { font-size: 22px; color: var(--gold); }
 
-    /* 추진 절차 타임라인 */
-    .rd-timeline { position:relative; padding-left:36px; }
-    .rd-timeline::before {
-        content:''; position:absolute; left:15px; top:0; bottom:0; width:2px;
-        background:linear-gradient(to bottom, var(--gold), var(--gray-200));
-    }
-    .rd-tl-item { position:relative; margin-bottom:36px; }
-    .rd-tl-item:last-child { margin-bottom:0; }
-    .rd-tl-dot {
-        position:absolute; left:-36px; top:2px;
-        width:32px; height:32px; border-radius:50%;
-        background:var(--brand-dark); border:3px solid var(--gold);
-        display:flex; align-items:center; justify-content:center;
-        font-size:12px; font-weight:800; color:var(--gold); z-index:2;
-    }
-    .rd-tl-content {
-        background:#fff; border:1px solid var(--gray-200); border-radius:12px;
-        padding:24px 28px; transition:all 0.2s;
-    }
-    .rd-tl-content:hover { border-color:var(--gold); box-shadow:0 6px 20px rgba(0,0,0,0.05); }
-    .rd-tl-content h4 { font-size:17px; font-weight:700; color:var(--gray-900); margin-bottom:8px; }
-    .rd-tl-content p { font-size:14px; color:var(--gray-600); line-height:1.8; margin-bottom:12px; }
-    .rd-tl-tags { display:flex; flex-wrap:wrap; gap:6px; }
-    .rd-tl-tag {
-        padding:4px 12px; border-radius:16px; font-size:11px; font-weight:600;
-        background:rgba(195,165,105,0.08); color:var(--gold); border:1px solid rgba(195,165,105,0.12);
-    }
-    .rd-tl-seul {
-        margin-top:12px; padding:12px 16px; border-radius:8px;
-        background:rgba(20,38,68,0.03); border-left:3px solid var(--brand-navy);
-        font-size:13px; color:var(--gray-700); line-height:1.7;
-    }
-    .rd-tl-seul strong { color:var(--brand-navy); }
+    .rd-work-card h4 { font-size: 18px; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; letter-spacing: -0.3px; }
+    .rd-work-card .rd-work-desc { font-size: 14px; color: var(--gray-600); line-height: 1.85; margin-bottom: 20px; }
 
-    /* 왜 세울인가 */
-    .rd-why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-    .rd-why-card {
-        background:#fff; border:1px solid var(--gray-200); border-radius:12px;
-        padding:32px 28px; text-align:center; transition:all 0.2s;
+    .rd-work-support { margin-top: auto; }
+    .rd-work-support-title {
+        font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px;
+        margin-bottom: 10px; text-transform: uppercase;
     }
-    .rd-why-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); transform:translateY(-2px); }
-    .rd-why-icon {
-        width:56px; height:56px; border-radius:14px; background:var(--brand-dark);
-        display:flex; align-items:center; justify-content:center; margin:0 auto 18px;
+    .rd-work-support ul { padding: 0; margin: 0; }
+    .rd-work-support ul li {
+        display: flex; align-items: flex-start; gap: 10px;
+        font-size: 13.5px; color: var(--gray-700); line-height: 1.7;
+        padding: 8px 0; border-bottom: 1px solid var(--gray-100);
     }
-    .rd-why-icon i { font-size:22px; color:var(--gold); }
-    .rd-why-card h4 { font-size:16px; font-weight:700; color:var(--gray-900); margin-bottom:10px; }
-    .rd-why-card p { font-size:13px; color:var(--gray-600); line-height:1.75; }
-    @media(max-width:768px){ .rd-why-grid{grid-template-columns:1fr;} }
+    .rd-work-support ul li:last-child { border-bottom: none; padding-bottom: 0; }
+    .rd-work-support ul li i { color: var(--gold); font-size: 10px; margin-top: 5px; flex-shrink: 0; }
 
-    /* FAQ */
-    .rd-faq-item { border-bottom:1px solid var(--gray-200); }
-    .rd-faq-q {
-        display:flex; align-items:center; justify-content:space-between; gap:16px;
-        padding:20px 0; cursor:pointer; font-size:15px; font-weight:600; color:var(--gray-900);
+    /* 지원범위 섹션 */
+    .rd-scope {
+        background: linear-gradient(135deg, #0A0F1C, #142644);
+        border-radius: 16px; padding: 52px 56px; position: relative; overflow: hidden;
     }
-    .rd-faq-q i { color:var(--gold); transition:transform 0.2s; font-size:14px; flex-shrink:0; }
-    .rd-faq-q.open i { transform:rotate(180deg); }
-    .rd-faq-a {
-        max-height:0; overflow:hidden; transition:max-height 0.3s ease;
-        font-size:14px; color:var(--gray-600); line-height:1.8; padding:0 0 0 4px;
+    .rd-scope::before { content: ''; position: absolute; right: -60px; top: -60px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(195,165,105,0.06) 0%, transparent 70%); border-radius: 50%; }
+    .rd-scope-inner { position: relative; z-index: 1; }
+    .rd-scope h3 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 14px; letter-spacing: -0.3px; }
+    .rd-scope .rd-scope-desc { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.85; margin-bottom: 28px; }
+    .rd-scope-em {
+        background: rgba(195,165,105,0.08); border-left: 3px solid var(--gold);
+        border-radius: 0 8px 8px 0; padding: 18px 22px;
+        font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8;
     }
-    .rd-faq-a.open { max-height:300px; padding-bottom:20px; }
-
-    /* CTA */
-    .rd-cta {
-        background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:16px;
-        padding:56px 52px; text-align:center; position:relative; overflow:hidden;
+    .rd-scope-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+    .rd-scope-btn {
+        display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
+        border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; border: none; font-family: inherit;
     }
-    .rd-cta::before { content:''; position:absolute; right:-60px; top:-60px; width:250px; height:250px; background:radial-gradient(circle,rgba(195,165,105,0.06) 0%,transparent 70%); border-radius:50%; }
-    .rd-cta::after { content:''; position:absolute; left:-40px; bottom:-40px; width:180px; height:180px; background:radial-gradient(circle,rgba(195,165,105,0.04) 0%,transparent 70%); border-radius:50%; }
-    .rd-cta-inner { position:relative; z-index:1; }
-    .rd-cta h3 { font-size:26px; font-weight:800; color:#fff; margin-bottom:12px; letter-spacing:-0.3px; }
-    .rd-cta p { font-size:15px; color:rgba(255,255,255,0.5); line-height:1.8; margin-bottom:28px; max-width:560px; margin-left:auto; margin-right:auto; }
-    .rd-cta-btns { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
-    .rd-cta-btn {
-        display:inline-flex; align-items:center; gap:8px; padding:15px 32px;
-        border-radius:8px; font-size:15px; font-weight:700; text-decoration:none;
-    }
-    .rd-cta-btn.primary { background:var(--gold); color:#0A0F1C; }
-    .rd-cta-btn.primary:hover { background:var(--gold-hover); }
-    .rd-cta-btn.outline { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.2); }
-    .rd-cta-btn.outline:hover { border-color:var(--gold); color:var(--gold); }
+    .rd-scope-btn.primary { background: var(--gold); color: #0A0F1C; }
+    .rd-scope-btn.primary:hover { background: var(--gold-hover); }
+    .rd-scope-btn.outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.2); }
+    .rd-scope-btn.outline:hover { border-color: var(--gold); color: var(--gold); }
+    @media(max-width: 768px) { .rd-scope { padding: 36px 28px; } .rd-scope h3 { font-size: 18px; } }
     </style>
 </head>
 <body>
@@ -223,333 +140,127 @@
             <i class="fa-solid fa-chevron-right"></i>
             <a href="services.html">사업분야</a>
             <i class="fa-solid fa-chevron-right"></i>
-            <span>총회기획·대행</span>
+            <span>도심복합개발</span>
         </div>
-        <h1>총회기획·대행</h1>
-        <p>정비사업의 핵심 의사결정 기구인 총회를 전문적으로 기획하고 대행합니다. 정기총회·임시총회·대의원회·주민설명회의 기획부터 현장 운영, 후속 행정까지 원스톱으로 지원합니다.</p>
+        <h1>도심복합개발</h1>
+        <p>통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등<br>복합적 사업구조와 고밀 개발방식을 종합적으로 검토하고 대상지에 맞는 현실적인 추진전략을 제시합니다.</p>
     </div>
 </div>
 
 <div class="page-body">
     <div class="inner">
 
-        <!-- 비주얼 히어로 -->
+        <!-- 히어로 비주얼 -->
         <div class="rd-section">
             <div class="rd-visual">
-                <div class="rd-visual-text">
-                    <div class="rd-visual-badge"><i class="fa-solid fa-gavel"></i> GENERAL MEETING SERVICE</div>
-                    <h2>총회기획·대행</h2>
-                    <p>정비사업의 핵심 의사결정 기구인 총회를 전문적으로 기획하고 대행합니다. 안건 구성부터 현장 운영, 의사록 작성, 후속 행정까지 법적 하자 없는 완벽한 총회 운영을 지원합니다.</p>
-                </div>
-                <div class="rd-visual-stats">
-                    <div class="rd-vstat"><div class="vn">전 과정</div><div class="vd">기획~후속행정 원스톱</div></div>
-                    <div class="rd-vstat"><div class="vn">법적 완결</div><div class="vd">하자 없는 의결 관리</div></div>
-                    <div class="rd-vstat"><div class="vn">다양한 집회</div><div class="vd">총회·대의원회·설명회</div></div>
-                    <div class="rd-vstat"><div class="vn">전문 진행</div><div class="vd">현장 운영·동선 관리</div></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 총회기획·대행이란 -->
-        <div class="rd-section">
-            <h2 class="section-title">총회기획·대행이란</h2>
-
-            <div class="rd-info-block">
-                <h4>정의</h4>
-                <p>정비사업(재개발·재건축 등)에서 조합의 최고 의사결정 기구인 총회를 전문적으로 기획하고, 진행·운영을 대행하는 서비스입니다. 법적 요건에 맞는 절차 준수와 원활한 의사결정을 동시에 실현합니다.</p>
-            </div>
-
-            <div class="rd-info-block">
-                <h4>필요성</h4>
-                <p>총회는 정비사업의 <strong>핵심 의사결정 절차</strong>입니다. 절차적 하자가 발생하면 의결 자체가 무효화될 수 있어, 법령에 부합하는 전문적인 기획과 운영이 필수적입니다.</p>
-            </div>
-
-            <div class="rd-info-block">
-                <h4>총회기획·대행 서비스 유형</h4>
-                <div class="rd-type-grid">
-                    <div class="rd-type-card">
-                        <h5><i class="fa-solid fa-calendar-check"></i> 정기총회</h5>
-                        <p>연 1회 의무 개최되는 정기총회의 안건 구성, 공지, 현장 운영, 의사록 작성까지 전 과정을 지원합니다.</p>
-                    </div>
-                    <div class="rd-type-card">
-                        <h5><i class="fa-solid fa-bell"></i> 임시총회</h5>
-                        <p>긴급 안건 발생 시 신속하게 소집·운영하는 임시총회를 기획하고 법적 요건에 맞춰 진행합니다.</p>
-                    </div>
-                    <div class="rd-type-card">
-                        <h5><i class="fa-solid fa-users"></i> 대의원회</h5>
-                        <p>대의원회의 소집, 안건 정리, 진행 보조, 의결 관리 등 효율적인 회의 운영을 대행합니다.</p>
-                    </div>
-                    <div class="rd-type-card">
-                        <h5><i class="fa-solid fa-chalkboard-user"></i> 주민설명회</h5>
-                        <p>사업 진행 상황 보고, 주요 안건 설명, 질의응답 등 주민설명회를 체계적으로 기획·운영합니다.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="rd-info-block">
-                <h4>세울 총회기획·대행의 강점</h4>
-                <div class="rd-advantage-list">
-                    <div class="rd-advantage-item">
-                        <i class="fa-solid fa-scale-balanced"></i>
-                        <span>법적 하자 없는 의결 절차 — 도시정비법·정관 기준 완벽 준수</span>
-                    </div>
-                    <div class="rd-advantage-item">
-                        <i class="fa-solid fa-clipboard-check"></i>
-                        <span>안건 구성부터 결과보고까지 원스톱 지원</span>
-                    </div>
-                    <div class="rd-advantage-item">
-                        <i class="fa-solid fa-people-group"></i>
-                        <span>참석자 동선 설계 및 현장 운영 전문 인력 배치</span>
-                    </div>
-                    <div class="rd-advantage-item">
-                        <i class="fa-solid fa-file-lines"></i>
-                        <span>의사록·결과보고서 작성 및 후속 행정처리 대행</span>
-                    </div>
-                    <div class="rd-advantage-item">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <span>분쟁·이의 제기에 대비한 철저한 기록 관리</span>
+                <div class="rd-visual-inner">
+                    <div class="rd-visual-badge"><i class="fa-solid fa-city"></i> URBAN COMPLEX DEVELOPMENT</div>
+                    <h2>도심복합개발</h2>
+                    <p>통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등<br>복합적 사업구조와 고밀 개발방식을 종합적으로 검토하고<br>대상지에 맞는 현실적인 추진전략을 제시합니다.</p>
+                    <div class="rd-keywords">
+                        <span class="rd-kw">통합재건축</span>
+                        <span class="rd-kw">신속통합기획</span>
+                        <span class="rd-kw">민간도심복합개발</span>
+                        <span class="rd-kw">역세권 개발</span>
+                        <span class="rd-kw">사업구조 분석</span>
+                        <span class="rd-kw">인허가 대응</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 총회 운영 절차 -->
+        <!-- 도심복합개발이란 -->
         <div class="rd-section">
-            <h2 class="section-title">총회 운영 절차</h2>
-            <p style="font-size:14px;color:var(--gray-500);margin-bottom:28px;">총회기획·대행의 단계별 진행 과정을 확인하세요</p>
-
-            <div class="rd-timeline">
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">1</div>
-                    <div class="rd-tl-content">
-                        <h4>사전 협의 및 일정 기획</h4>
-                        <p>조합 임원진과 사전 미팅을 통해 총회 목적, 안건, 일정을 협의합니다. 법령·정관상 소집 요건을 점검하고, 장소·일시·규모에 맞는 최적의 운영 계획을 수립합니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">사전 미팅</span>
-                            <span class="rd-tl-tag">일정 확정</span>
-                            <span class="rd-tl-tag">소집 요건 점검</span>
-                        </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 총회 일정 기획, 법적 소집 요건 검토, 장소·규모 최적화 컨설팅</div>
-                    </div>
-                </div>
-
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">2</div>
-                    <div class="rd-tl-content">
-                        <h4>안건 구성 및 자료 작성</h4>
-                        <p>의결 안건과 보고 안건을 체계적으로 구성합니다. 조합원이 이해하기 쉽도록 사업 현황, 예산, 주요 쟁점 등을 정리한 총회 자료집을 작성합니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">안건 구성</span>
-                            <span class="rd-tl-tag">자료집 작성</span>
-                            <span class="rd-tl-tag">쟁점 정리</span>
-                            <span class="rd-tl-tag">발표자료 제작</span>
-                        </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 안건 초안 작성, 자료집·PPT 제작, 법률 검토 지원</div>
-                    </div>
-                </div>
-
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">3</div>
-                    <div class="rd-tl-content">
-                        <h4>소집 공지 및 참석 관리<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(195,165,105,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">법정 절차</span></h4>
-                        <p>도시정비법·정관에서 정한 기한 내에 소집 통지를 발송합니다. 우편·문자·게시 등 복수의 통지 수단을 활용하고, 위임장 접수 및 참석자 사전 등록을 관리합니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">소집 통지 발송</span>
-                            <span class="rd-tl-tag">위임장 접수</span>
-                            <span class="rd-tl-tag">참석자 사전 등록</span>
-                            <span class="rd-tl-tag">통지 증빙 확보</span>
-                        </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 법정 기한 관리, 소집 통지 대행, 위임장·참석 현황 관리</div>
-                    </div>
-                </div>
-
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">4</div>
-                    <div class="rd-tl-content">
-                        <h4>현장 운영 및 총회 진행</h4>
-                        <p>총회 당일 현장을 세팅하고, 참석자 접수·본인 확인·동선 안내를 수행합니다. 사회 진행을 보조하고, 안건별 의결 절차(찬반투표·전자투표)를 체계적으로 운영합니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">현장 세팅</span>
-                            <span class="rd-tl-tag">참석자 접수</span>
-                            <span class="rd-tl-tag">의결 진행</span>
-                            <span class="rd-tl-tag">동선 관리</span>
-                        </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 현장 운영 총괄, 접수·본인확인, 투표 관리, 진행 보조</div>
-                    </div>
-                </div>
-
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">5</div>
-                    <div class="rd-tl-content">
-                        <h4>의사록 작성 및 결과 보고</h4>
-                        <p>총회 종료 후 의사록을 정확하게 작성하고, 의결 결과를 정리하여 보고서를 작성합니다. 필요 시 공증 절차를 지원하고, 조합원 대상 결과 통지를 수행합니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">의사록 작성</span>
-                            <span class="rd-tl-tag">결과보고서</span>
-                            <span class="rd-tl-tag">공증 지원</span>
-                            <span class="rd-tl-tag">결과 통지</span>
-                        </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 의사록 작성·검토, 결과보고서 제작, 공증 절차 대행</div>
-                    </div>
-                </div>
-
-                <div class="rd-tl-item">
-                    <div class="rd-tl-dot">6</div>
-                    <div class="rd-tl-content">
-                        <h4>후속 행정 및 기록 관리</h4>
-                        <p>의결 사항에 따른 행정기관 신고·보고를 대행합니다. 총회 관련 서류 일체를 체계적으로 보관하여 향후 분쟁·감사에 대비한 완벽한 기록을 남깁니다.</p>
-                        <div class="rd-tl-tags">
-                            <span class="rd-tl-tag">행정기관 신고</span>
-                            <span class="rd-tl-tag">서류 보관</span>
-                            <span class="rd-tl-tag">후속 조치</span>
-                            <span class="rd-tl-tag">기록 관리</span>
-                        </div>
-                        <div class="rd-tl-seul"><strong>세울의 역할:</strong> 행정 신고 대행, 서류 아카이빙, 후속 행정처리 총괄</div>
-                    </div>
-                </div>
+            <h2 class="section-title">도심복합개발이란</h2>
+            <div class="rd-intro">
+                <h4>개념 및 범위</h4>
+                <p>도심복합개발은 일반적인 재개발·재건축의 범위를 넘어, 도시계획, 입지 특성, 복합용도 개발, 고밀화 전략, 주민합의 구조를 함께 검토하는 확장형 개발영역입니다.</p>
+                <p>대상지의 여건에 따라 통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등 서로 다른 방식이 적용될 수 있으며, 각 사업유형별 제도 이해와 사업성 분석, 행정 대응 전략이 함께 필요합니다.</p>
+                <p>세울은 도심복합개발 분야에 대해 초기 대상지 검토부터 사업구조 분석, 주민협의, 인허가 대응까지 실무 중심으로 종합 지원합니다.</p>
             </div>
         </div>
 
-        <!-- 자체 운영 vs 전문 대행 비교 -->
+        <!-- 업무내용 -->
         <div class="rd-section">
-            <h2 class="section-title">자체 운영 vs 전문 대행 비교</h2>
-            <p style="font-size:14px;color:var(--gray-500);margin-bottom:20px;">총회 운영 방식에 따른 핵심 차이를 한눈에 비교해보세요</p>
-            <div style="overflow-x:auto;">
-                <table class="rd-compare-table">
-                    <thead>
-                        <tr>
-                            <th>구분</th>
-                            <th>조합 자체 운영</th>
-                            <th>전문 대행 (세울)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>법적 검토</td>
-                            <td>자체 판단 (하자 위험)</td>
-                            <td class="highlight">전문가 검토 완비</td>
-                        </tr>
-                        <tr>
-                            <td>안건 구성</td>
-                            <td>임원 직접 작성</td>
-                            <td class="highlight">전문 자료집 제작</td>
-                        </tr>
-                        <tr>
-                            <td>소집 절차</td>
-                            <td>누락·지연 위험</td>
-                            <td class="highlight">법정 기한 철저 준수</td>
-                        </tr>
-                        <tr>
-                            <td>현장 운영</td>
-                            <td>경험 부족·혼란 가능</td>
-                            <td class="highlight">전문 인력 현장 배치</td>
-                        </tr>
-                        <tr>
-                            <td>의사록 품질</td>
-                            <td>형식 미비 가능</td>
-                            <td class="highlight">법적 요건 충족 작성</td>
-                        </tr>
-                        <tr>
-                            <td>후속 행정</td>
-                            <td>별도 처리 필요</td>
-                            <td class="highlight">신고·보고 일괄 대행</td>
-                        </tr>
-                        <tr>
-                            <td>분쟁 대비</td>
-                            <td>기록 관리 미흡</td>
-                            <td class="highlight">완벽한 증빙 아카이빙</td>
-                        </tr>
-                        <tr>
-                            <td>업무 부담</td>
-                            <td>임원 과중 부담</td>
-                            <td class="highlight">조합 부담 최소화</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h2 class="section-title">업무내용</h2>
+            <div class="rd-work-grid">
+
+                <!-- 통합재건축 -->
+                <div class="rd-work-card">
+                    <div class="rd-work-icon"><i class="fa-solid fa-building-circle-arrow-right"></i></div>
+                    <h4>통합재건축</h4>
+                    <p class="rd-work-desc">인접 또는 연계된 복수 단지를 하나의 사업구조로 통합하여 추진하는 방식으로, 단지별 사업조건과 이해관계를 종합적으로 조정하면서 통합 개발의 실익과 실행 가능성을 검토합니다.</p>
+                    <div class="rd-work-support">
+                        <div class="rd-work-support-title">지원 내용</div>
+                        <ul>
+                            <li><i class="fa-solid fa-chevron-right"></i>단지별 사업조건 비교 검토</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>통합 추진의 타당성 분석</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>주민합의 및 이해관계 조정 구조 검토</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 신속통합기획 -->
+                <div class="rd-work-card">
+                    <div class="rd-work-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+                    <h4>신속통합기획</h4>
+                    <p class="rd-work-desc">도시계획과 정비계획을 연계하여 사업기간을 단축하고 신속한 인허가 추진 기반을 마련하는 공공지원형 기획 방식입니다.</p>
+                    <div class="rd-work-support">
+                        <div class="rd-work-support-title">지원 내용</div>
+                        <ul>
+                            <li><i class="fa-solid fa-chevron-right"></i>대상지 여건 및 적용 가능성 검토</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>기획 방향 및 정비계획 연계 검토</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>행정 협의 및 추진전략 자문</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 민간도심복합개발 -->
+                <div class="rd-work-card">
+                    <div class="rd-work-icon"><i class="fa-solid fa-landmark"></i></div>
+                    <h4>민간도심복합개발</h4>
+                    <p class="rd-work-desc">역세권·준공업지역 등 도심 내 입지를 중심으로 신탁·리츠 등 민간 전문방식을 활용하여 고밀 복합개발을 추진하는 사업영역입니다.</p>
+                    <div class="rd-work-support">
+                        <div class="rd-work-support-title">지원 내용</div>
+                        <ul>
+                            <li><i class="fa-solid fa-chevron-right"></i>대상지 요건 및 입지 적정성 검토</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>사업방식 및 권리구조 분석</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>동의요건·매도청구·현금청산 등 리스크 검토</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 역세권 개발 -->
+                <div class="rd-work-card">
+                    <div class="rd-work-icon"><i class="fa-solid fa-train-subway"></i></div>
+                    <h4>역세권 개발</h4>
+                    <p class="rd-work-desc">철도역과 주변 입지를 기반으로 주거·상업·업무 기능을 복합화하여 고밀·고효율의 도시공간을 조성하는 개발영역입니다.</p>
+                    <div class="rd-work-support">
+                        <div class="rd-work-support-title">지원 내용</div>
+                        <ul>
+                            <li><i class="fa-solid fa-chevron-right"></i>역세권 범위 및 입지 분석</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>용도지역 상향 및 개발밀도 검토</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>사업성 및 인허가 방향 검토</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <!-- 왜 세울인가 -->
+        <!-- 세울의 지원 범위 -->
         <div class="rd-section">
-            <h2 class="section-title">왜 세울엔지니어링인가</h2>
-            <div class="rd-why-grid">
-                <div class="rd-why-card">
-                    <div class="rd-why-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-                    <h4>법적 하자 제로 운영</h4>
-                    <p>도시정비법·정관·판례를 기반으로 소집 통지부터 의결까지 법적 하자가 발생하지 않도록 모든 절차를 철저히 관리합니다.</p>
-                </div>
-                <div class="rd-why-card">
-                    <div class="rd-why-icon"><i class="fa-solid fa-clipboard-list"></i></div>
-                    <h4>안건·자료 전문 제작</h4>
-                    <p>조합원이 쉽게 이해할 수 있도록 안건을 구성하고, 사업 현황·예산·쟁점을 담은 전문 자료집과 발표자료를 제작합니다.</p>
-                </div>
-                <div class="rd-why-card">
-                    <div class="rd-why-icon"><i class="fa-solid fa-people-roof"></i></div>
-                    <h4>현장 운영 전문 인력</h4>
-                    <p>접수·본인확인·동선안내·투표관리 등 총회 현장을 전문 인력이 체계적으로 운영하여 혼란 없는 진행을 보장합니다.</p>
-                </div>
-                <div class="rd-why-card">
-                    <div class="rd-why-icon"><i class="fa-solid fa-file-signature"></i></div>
-                    <h4>의사록·보고서 완벽 작성</h4>
-                    <p>법적 요건을 충족하는 의사록을 정확히 작성하고, 의결 결과 보고서와 공증 절차까지 원스톱으로 지원합니다.</p>
-                </div>
-                <div class="rd-why-card">
-                    <div class="rd-why-icon"><i class="fa-solid fa-building-columns"></i></div>
-                    <h4>후속 행정 일괄 대행</h4>
-                    <p>의결 사항에 따른 행정기관 신고·보고를 빠짐없이 대행합니다. 조합 임원의 행정 부담을 최소화하여 본업에 집중할 수 있도록 합니다.</p>
-                </div>
-                <div class="rd-why-card">
-                    <div class="rd-why-icon"><i class="fa-solid fa-folder-open"></i></div>
-                    <h4>철저한 기록·증빙 관리</h4>
-                    <p>총회 관련 서류 일체를 체계적으로 아카이빙합니다. 향후 감사·소송·분쟁에 대비한 완벽한 증빙 자료를 확보해 드립니다.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 자주 묻는 질문 -->
-        <div class="rd-section">
-            <h2 class="section-title">총회기획·대행 Q&A</h2>
-            <div>
-                <div class="rd-faq-item">
-                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
-                        <span>총회 대행 서비스는 어떤 범위까지 포함되나요?</span>
-                        <i class="fa-solid fa-chevron-down"></i>
+            <div class="rd-scope">
+                <div class="rd-scope-inner">
+                    <h3>세울의 지원 범위</h3>
+                    <p class="rd-scope-desc">세울은 도심복합개발 분야에 대해 대상지 기초검토, 사업성 분석, 추진방식 검토, 주민협의, 인허가 대응까지 각 사업유형에 맞는 실무 중심의 지원을 제공합니다.</p>
+                    <div class="rd-scope-em">
+                        도심복합개발은 사업유형별 제도 차이와 권리구조를 정확히 이해하고,<br>
+                        대상지에 맞는 현실적인 추진방향을 설정하는 것이 핵심입니다.
                     </div>
-                    <div class="rd-faq-a">사전 기획 단계부터 안건 구성, 자료집 제작, 소집 통지, 현장 운영, 의사록 작성, 결과 보고, 후속 행정처리까지 총회 운영의 전 과정을 포함합니다. 조합의 상황에 맞춰 부분 대행도 가능합니다.</div>
-                </div>
-                <div class="rd-faq-item">
-                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
-                        <span>총회 절차에 하자가 있으면 어떤 문제가 생기나요?</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="rd-faq-a">소집 통지 기한 미준수, 정족수 미달, 안건 누락 등 절차적 하자가 있으면 총회 의결 자체가 무효화될 수 있습니다. 이로 인해 사업 지연, 소송, 행정처분 등 심각한 문제가 발생할 수 있으므로 전문가의 체계적 관리가 필수적입니다.</div>
-                </div>
-                <div class="rd-faq-item">
-                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
-                        <span>임시총회나 대의원회도 대행이 가능한가요?</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="rd-faq-a">정기총회뿐 아니라 임시총회, 대의원회, 주민설명회 등 정비사업에서 필요한 모든 유형의 집회를 기획·대행합니다. 각 집회의 법적 요건과 특성에 맞춰 최적화된 운영 방안을 제공합니다.</div>
-                </div>
-                <div class="rd-faq-item">
-                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
-                        <span>총회기획·대행 비용은 어느 정도인가요?</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="rd-faq-a">조합 규모, 총회 유형, 대행 범위에 따라 비용이 달라집니다. 초기 상담을 통해 조합의 상황을 파악한 후 합리적인 견적을 제안해 드립니다. 법적 하자로 인한 사업 지연 비용을 고려하면 전문 대행은 가장 효율적인 투자입니다.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CTA -->
-        <div class="rd-section">
-            <div class="rd-cta">
-                <div class="rd-cta-inner">
-                    <h3>총회 운영, 전문가에게 맡기세요</h3>
-                    <p>세울엔지니어링이 법적 하자 없는 완벽한 총회 운영을 지원합니다.<br>초기 상담은 무료로 진행됩니다.</p>
-                    <div class="rd-cta-btns">
-                        <a href="contact.html" class="rd-cta-btn primary"><i class="fa-solid fa-paper-plane"></i> 무료 상담 신청</a>
-                        <a href="contact.html" class="rd-cta-btn outline"><i class="fa-solid fa-envelope"></i> 상담 문의</a>
+                    <div class="rd-scope-btns">
+                        <a href="consultation.html" class="rd-scope-btn primary"><i class="fa-solid fa-comments"></i> 상담 문의</a>
+                        <a href="feasibility.html" class="rd-scope-btn outline"><i class="fa-solid fa-calculator"></i> 사업성 검토</a>
                     </div>
                 </div>
             </div>
@@ -559,8 +270,9 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js"></script>
-<script src="../assets/js/data-service.js"></script>
+<div id="chatbot-container"></div>
 <script src="../assets/js/common.js"></script>
+<script src="../assets/js/chatbot.js"></script>
+<script src="../assets/data/mock-data.js"></script>
 </body>
 </html>
