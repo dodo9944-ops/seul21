@@ -324,26 +324,7 @@ function dt(t){return t==='재건축'?'c':t==='소규모정비'?'s':'r'}
 function sb(s){return s==='완료'?'pb-done':'pb-ing'}
 function bg(p){return'<span class="pb pb-type">'+p.type+'</span><span class="pb '+sb(p.status)+'">'+p.status+'</span>'}
 function safe(v){return v||'정보 확인중'}
-/* 테스트 버전 — 사업장명 마스킹 */
-function mask(name){
-    if(!name)return name;
-    return name
-        .replace(/(\d+)구역/g,'00구역')
-        .replace(/(\d+)단지/g,'00단지')
-        .replace(/(\d+)차/g,'00차')
-        .replace(/(\d+)주구/g,'00주구')
-        .replace(/주공(\s*)/g,'00$1')
-        .replace(/아파트/g,'00')
-        .replace(/(성수동)\s*가로/,'성수00 가로')
-        .replace(/방배동/g,'방배00')
-        .replace(/장위동/g,'장위00')
-        .replace(/연남동/g,'연남00')
-        .replace(/성수동2가/g,'성수00')
-        .replace(/당산동/g,'당산00')
-        .replace(/전농동/g,'전농00')
-        .replace(/녹번동/g,'녹번00');
-}
-function dn(p){return mask(p.name)}
+function dn(p){return p.name}
 
 /* KPI */
 !function(){var t=D.length,i=0,d=0,u=0;D.forEach(function(p){if(p.status==='진행중')i++;else d++;u+=parseInt(p.scale.replace(/[^0-9]/g,''))||0});
@@ -371,7 +352,7 @@ return'<div class="fc'+primary+'" onclick="PF.open(\''+p.id+'\')">'+img+
 '<div class="fsp secondary"><i class="fa-solid fa-layer-group"></i> '+safe(p.floorInfo)+'</div>'+
 '<div class="fsp secondary"><i class="fa-solid fa-chart-pie"></i> '+safe(p.floorAreaRatio)+'</div>'+
 '</div>'+
-'<div class="fdesc">'+mask(p.description)+'</div>'+
+'<div class="fdesc">'+p.description+'</div>'+
 '<button class="fbtn" onclick="event.stopPropagation();PF.open(\''+p.id+'\')">상세보기 <i class="fa-solid fa-arrow-right"></i></button>'+
 '</div></div>'}).join('')}
 
@@ -421,7 +402,7 @@ function openDetail(id){
 var p=null;for(var i=0;i<D.length;i++)if(D[i].id===id){p=D[i];break}
 if(!p)return;
 var dh=document.getElementById('dHero'),t=dt(p.type);
-var mn=mask(p.name);
+var mn=p.name;
 var titleArea='<div class="d-title-area"><div class="badges">'+bg(p)+'</div><h2>'+mn+'</h2><div class="d-phase"><i class="fa-solid fa-flag"></i> '+(p.phase||p.status)+'</div></div>';
 if(p.detailImage){
 dh.innerHTML='<div class="d-hero"><img src="'+p.detailImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#0A0F1C,#1a3055)\';this.style.display=\'none\'"><div class="ov"></div>'+titleArea+'</div>'}
@@ -445,7 +426,7 @@ html+='<div class="d-sec"><div class="d-sec-title">건축·사업 스펙</div><d
 var specs=[
 ['용적률',safe(p.floorAreaRatio)],['건축연면적',safe(p.grossFloorArea)],['대지면적',safe(p.siteArea)],
 ['건축면적',safe(p.buildingArea)],['층수',safe(p.floorInfo)],['시공사',safe(p.constructor)],
-['발주처',mask(safe(p.client))],['총사업비',safe(p.totalCost)],['비례율',safe(p.proportionalRate)]];
+['발주처',safe(p.client)],['총사업비',safe(p.totalCost)],['비례율',safe(p.proportionalRate)]];
 specs.forEach(function(s){html+='<div class="d-spec-item"><span class="sl">'+s[0]+'</span><span class="sv">'+s[1]+'</span></div>'});
 html+='</div></div>';
 
@@ -456,7 +437,7 @@ p.tasks.forEach(function(t){html+='<div class="d-task"><i class="fa-solid fa-che
 html+='</div></div>'}
 
 /* Section 4: 프로젝트 개요 */
-html+='<div class="d-sec"><div class="d-sec-title">프로젝트 개요</div><div class="d-desc">'+mask(p.description)+'</div></div>';
+html+='<div class="d-sec"><div class="d-sec-title">프로젝트 개요</div><div class="d-desc">'+p.description+'</div></div>';
 
 /* Section 5: 주요 이슈 / 특이사항 */
 if(p.issues&&p.issues.length){
