@@ -143,14 +143,14 @@
        ======================================== */
     .d-overlay{position:fixed;inset:0;background:rgba(10,15,28,.65);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
     .d-overlay.open{opacity:1;pointer-events:auto}
-    .d-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:hidden;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
+    .d-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
     .d-overlay.open .d-modal{transform:translateY(0) scale(1)}
-    .d-close{position:absolute;top:24px;right:24px;z-index:10;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.55);border:none;border-radius:50%;cursor:pointer;font-size:17px;color:#fff;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-    .d-close:hover{background:rgba(0,0,0,.8);transform:scale(1.08)}
-    @media(max-width:540px){.d-close{top:16px;right:16px;width:36px;height:36px;font-size:15px}}
+    .d-close{position:absolute;top:16px;right:16px;z-index:20;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6);border:1.5px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+    .d-close:hover{background:rgba(0,0,0,.9);transform:scale(1.1)}
+    @media(max-width:540px){.d-close{top:12px;right:12px;width:38px;height:38px;font-size:15px}}
 
     /* Detail Hero Image */
-    .d-hero{width:100%;height:300px;position:relative;overflow:hidden;flex-shrink:0}
+    .d-hero{width:100%;height:300px;position:relative;overflow:hidden;flex-shrink:0;border-radius:18px 18px 0 0}
     .d-hero img{width:100%;height:100%;object-fit:cover;display:block}
     .d-hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.75) 0%,rgba(10,15,28,.15) 50%,transparent 100%);pointer-events:none}
     .d-hero .d-title-area{position:absolute;bottom:0;left:0;right:0;padding:24px 32px;z-index:2}
