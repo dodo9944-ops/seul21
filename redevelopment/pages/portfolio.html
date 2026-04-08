@@ -48,7 +48,7 @@
     .sec-divider{margin:56px 0;border:none;border-top:1px solid var(--gray-200)}
 
     /* === Badges === */
-    .pb{display:inline-flex;align-items:center;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;line-height:1}
+    .pb{display:inline-flex;align-items:center;padding:5px 13px;border-radius:6px;font-size:12px;font-weight:700;line-height:1}
     .pb-type{background:rgba(10,15,28,.85);color:#fff}
     .pb-ing{background:rgba(195,165,105,.9);color:#0A0F1C}
     .pb-done{background:rgba(255,255,255,.9);color:#0A0F1C}
@@ -71,16 +71,16 @@
     .fc-fb .fbi i{font-size:28px;color:rgba(195,165,105,.6)}
     .fc-fb .fbl{font-size:13px;font-weight:600;color:rgba(255,255,255,.35)}
     .fc-fb .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
-    .fc-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
-    .fc-body .fn{font-size:18px;font-weight:800;color:var(--gray-900);margin-bottom:12px;line-height:1.4}
-    .fc-body .fspecs{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;margin-bottom:12px;padding:10px 12px;background:var(--gray-50);border-radius:9px}
-    .fc-body .fsp{display:flex;align-items:center;font-size:12px;color:var(--gray-600)}
-    .fc-body .fsp i{width:14px;color:var(--gold);margin-right:5px;font-size:10px;text-align:center}
-    .fc-body .fsp strong{font-weight:600;color:var(--gray-800)}
+    .fc-body{padding:24px 28px 28px;display:flex;flex-direction:column;flex:1}
+    .fc-body .fn{font-size:19px;font-weight:800;color:var(--gray-900);margin-bottom:14px;line-height:1.45;letter-spacing:-0.3px}
+    .fc-body .fspecs{display:grid;grid-template-columns:1fr 1fr;gap:5px 12px;margin-bottom:14px;padding:12px 14px;background:var(--gray-50);border-radius:10px}
+    .fc-body .fsp{display:flex;align-items:center;font-size:13px;color:var(--gray-700)}
+    .fc-body .fsp i{width:15px;color:var(--gold);margin-right:6px;font-size:11px;text-align:center}
+    .fc-body .fsp strong{font-weight:700;color:var(--gray-900)}
     /* 핵심 3개만 강조, 나머지 보조 */
-    .fc-body .fsp.secondary{color:var(--gray-400);font-size:11.5px}
-    .fc-body .fdesc{font-size:13px;color:var(--gray-500);line-height:1.6;margin-top:auto;padding-top:12px;border-top:1px solid var(--gray-100);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .fc-body .fbtn{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:10px 20px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:9px;font-size:13.5px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .25s;align-self:flex-start}
+    .fc-body .fsp.secondary{color:var(--gray-500);font-size:12.5px}
+    .fc-body .fdesc{font-size:14px;color:var(--gray-700);line-height:1.75;margin-top:auto;padding-top:14px;border-top:1px solid var(--gray-100);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .fc-body .fbtn{display:inline-flex;align-items:center;gap:7px;margin-top:16px;padding:11px 22px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:10px;font-size:14px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .25s;align-self:flex-start}
     .fc-body .fbtn:hover{background:var(--brand-navy);box-shadow:0 4px 12px rgba(10,15,28,.15);transform:translateX(3px)}
     .fc-body .fbtn i{font-size:12px;transition:transform .2s}
     .fc-body .fbtn:hover i{transform:translateX(2px)}
@@ -114,14 +114,14 @@
     .pc-fb .fbi{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
     .pc-fb .fbi i{font-size:20px;color:rgba(195,165,105,.6)}
     .pc-fb .badges{position:absolute;top:10px;left:10px;display:flex;gap:5px;z-index:2}
-    .pc-body{padding:18px 20px 22px;display:flex;flex-direction:column;flex:1}
-    .pc-body .pn{font-size:15px;font-weight:700;color:var(--gray-900);margin-bottom:10px;line-height:1.4}
-    .pc-body .pr{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--gray-600);padding:4px 0}
+    .pc-body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1}
+    .pc-body .pn{font-size:16px;font-weight:800;color:var(--gray-900);margin-bottom:12px;line-height:1.45;letter-spacing:-0.2px}
+    .pc-body .pr{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--gray-700);padding:5px 0}
     .pc-body .pr+.pr{border-top:1px solid var(--gray-50)}
-    .pc-body .pr .pl{display:flex;align-items:center;gap:5px;font-weight:500;color:var(--gray-500)}
-    .pc-body .pr .pl i{font-size:10px;color:var(--gold);width:13px;text-align:center}
-    .pc-body .pr .pv{font-weight:600;color:var(--gray-800)}
-    .pc-body .pbtn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;width:100%;height:36px;background:transparent;color:var(--brand-dark);border:1.5px solid var(--gray-200);border-radius:10px;font-size:12.5px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
+    .pc-body .pr .pl{display:flex;align-items:center;gap:5px;font-weight:600;color:var(--gray-600)}
+    .pc-body .pr .pl i{font-size:11px;color:var(--gold);width:14px;text-align:center}
+    .pc-body .pr .pv{font-weight:700;color:var(--gray-900)}
+    .pc-body .pbtn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;width:100%;height:38px;background:transparent;color:var(--brand-dark);border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .2s}
     .pc-body .pbtn:hover{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark)}
 
     /* === Empty === */
@@ -174,7 +174,7 @@
     /* Section labels in detail */
     .d-sec{margin-bottom:28px}
     .d-sec:last-child{margin-bottom:0}
-    .d-sec-title{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .d-sec-title{font-size:14px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
     .d-sec-title::after{content:'';flex:1;height:1px;background:var(--gray-100)}
 
     /* Info Grid — 핵심 사업 정보 */
@@ -182,8 +182,8 @@
     .d-info-item{display:flex;flex-direction:column;padding:13px 16px;border-bottom:1px solid var(--gray-100)}
     .d-info-item:nth-child(odd){border-right:1px solid var(--gray-100)}
     .d-info-item:nth-last-child(-n+2){border-bottom:none}
-    .d-info-item .il{font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:.3px;margin-bottom:4px}
-    .d-info-item .iv{font-size:14.5px;font-weight:600;color:var(--gray-900)}
+    .d-info-item .il{font-size:12px;font-weight:600;color:var(--gray-500);letter-spacing:.3px;margin-bottom:5px}
+    .d-info-item .iv{font-size:15px;font-weight:700;color:var(--gray-900)}
     @media(max-width:540px){.d-info-grid{grid-template-columns:1fr}.d-info-item:nth-child(odd){border-right:none}.d-info-item{border-bottom:1px solid var(--gray-100)}.d-info-item:last-child{border-bottom:none}}
 
     /* Spec Grid — 건축·사업 스펙 (3열) */
@@ -191,21 +191,21 @@
     .d-spec-item{display:flex;flex-direction:column;padding:12px 14px;border-bottom:1px solid var(--gray-100);border-right:1px solid var(--gray-100)}
     .d-spec-item:nth-child(3n){border-right:none}
     .d-spec-item:nth-last-child(-n+3){border-bottom:none}
-    .d-spec-item .sl{font-size:10.5px;font-weight:600;color:var(--gray-400);letter-spacing:.2px;margin-bottom:3px}
-    .d-spec-item .sv{font-size:13.5px;font-weight:700;color:var(--gray-900)}
+    .d-spec-item .sl{font-size:11.5px;font-weight:600;color:var(--gray-500);letter-spacing:.2px;margin-bottom:4px}
+    .d-spec-item .sv{font-size:14px;font-weight:700;color:var(--gray-900)}
     @media(max-width:540px){.d-spec-grid{grid-template-columns:1fr 1fr}.d-spec-item:nth-child(3n){border-right:1px solid var(--gray-100)}.d-spec-item:nth-child(2n){border-right:none}}
 
     /* Tasks list */
     .d-tasks{display:flex;flex-wrap:wrap;gap:8px}
-    .d-task{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:8px;font-size:13px;font-weight:500;color:var(--gray-700)}
+    .d-task{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:8px;font-size:13.5px;font-weight:600;color:var(--gray-800)}
     .d-task i{font-size:10px;color:var(--gold)}
 
     /* Description */
-    .d-desc{font-size:14.5px;color:var(--gray-700);line-height:1.8;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:12px;padding:20px}
+    .d-desc{font-size:15px;color:var(--gray-700);line-height:1.85;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:12px;padding:22px}
 
     /* Issues */
     .d-issues{list-style:none;padding:0;margin:0}
-    .d-issues li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;font-size:13.5px;color:var(--gray-700);line-height:1.6;border-bottom:1px solid var(--gray-50)}
+    .d-issues li{display:flex;align-items:flex-start;gap:10px;padding:11px 0;font-size:14px;color:var(--gray-700);line-height:1.7;border-bottom:1px solid var(--gray-50)}
     .d-issues li:last-child{border-bottom:none}
     .d-issues li::before{content:'\f06a';font-family:'Font Awesome 6 Free';font-weight:900;font-size:11px;color:var(--gold);margin-top:4px;flex-shrink:0}
 
