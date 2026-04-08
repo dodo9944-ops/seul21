@@ -78,14 +78,15 @@ module.exports = async function handler(req, res) {
       }
       await saveFileData(FILE_PATH, items, sha, `알림톡 신청: ${name} (${new Date().toISOString().slice(0,10)})`);
 
+      const activeCount = items.filter(i => i.status === 'active').length;
       try {
         const tgToken = process.env.TELEGRAM_BOT_TOKEN;
         const tgChatId = process.env.TELEGRAM_CHAT_ID;
         if (tgToken && tgChatId) {
-          const msg = `🔔 카카오 알림톡 신청\n이름: ${name}\n번호: ${phoneClean}\n관심분야: ${(interests || []).join(', ')}`;
+          const msg = `🔔 카카오 알림톡 새 신청!\n\n👤 이름: ${name}\n📱 번호: ${phoneClean}\n📌 관심분야: ${(interests || []).join(', ') || '미선택'}\n📅 신청일: ${new Date().toISOString().slice(0,10)}\n\n📊 현재 총 수신자: ${activeCount}명`;
           await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: tgChatId, text: msg })
+            body: JSON.stringify({ chat_id: tgChatId, text: msg, parse_mode: 'HTML' })
           });
         }
       } catch (e) {}
@@ -105,6 +106,20 @@ module.exports = async function handler(req, res) {
       target.status = 'unsubscribed';
       target.unsubscribedAt = new Date().toISOString().slice(0, 10);
       await saveFileData(FILE_PATH, items, sha, `알림톡 해지: ${phoneClean} (${new Date().toISOString().slice(0,10)})`);
+
+      const remainActive = items.filter(i => i.status === 'active').length;
+      try {
+        const tgToken = process.env.TELEGRAM_BOT_TOKEN;
+        const tgChatId = process.env.TELEGRAM_CHAT_ID;
+        if (tgToken && tgChatId) {
+          const msg = `🔕 알림톡 수신거부\n\n👤 이름: ${target.name}\n📱 번호: ${phoneClean}\n📅 해지일: ${target.unsubscribedAt}\n\n📊 현재 총 수신자: ${remainActive}명`;
+          await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: tgChatId, text: msg })
+          });
+        }
+      } catch (e) {}
+
       return res.status(200).json({ message: '알림톡 수신이 해지되었습니다.' });
     }
 
