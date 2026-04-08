@@ -1069,15 +1069,25 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var featured=MOCK.portfolio.filter(function(p){return p.featured}).slice(-3);
         pfEl.innerHTML=featured.map(function(p){
             var imgSrc=p.featuredImage||p.thumbnail;
-            var imgHtml=imgSrc?'<img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" style="width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:16px" onerror="this.style.display=\'none\'">':'';
-            var statusColor=p.status==='완료'?'':'color:#C3A569;font-weight:600;';
-            return'<div class="expert-card">'+imgHtml+
-                '<h4>'+p.name+'</h4>'+
-                '<p>'+p.description.substring(0,80)+'…</p>'+
-                '<div class="expert-meta">'+
-                    '<span class="author">'+p.district+' · '+p.scale+(p.constructor&&p.constructor!=='미정'?' · '+p.constructor:'')+'</span>'+
-                    '<span>·</span>'+
-                    '<span style="'+statusColor+'">'+(p.phase||p.status)+'</span>'+
+            var imgHtml=imgSrc?'<img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" style="width:100%;height:180px;object-fit:cover;border-radius:10px 10px 0 0" onerror="this.style.display=\'none\'">':'<div style="height:180px;background:linear-gradient(135deg,#142644 0%,#0A0F1C 100%);border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:center"><i class=\'fa-solid fa-building\' style=\'font-size:40px;color:#C3A569;opacity:.4\'></i></div>';
+            var statusColor=p.status==='완료'?'color:#7ec8a0;':'color:#C3A569;';
+            var badge=p.type==='재건축'?'재건축':p.type==='재개발'?'재개발':'소규모정비';
+            var badgeColor=p.type==='재건축'?'#C3A569':p.type==='재개발'?'#6ba3d6':'#7ec8a0';
+            /* 세부항목 구성 */
+            var specRows='';
+            if(p.floorInfo&&p.floorInfo!=='-') specRows+='<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06)"><span style="color:#999;font-size:11px">건축규모</span><span style="color:#ddd;font-size:11px;font-weight:500">'+p.floorInfo+'</span></div>';
+            if(p.scale&&p.scale!=='-') specRows+='<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06)"><span style="color:#999;font-size:11px">세대수</span><span style="color:#ddd;font-size:11px;font-weight:500">'+p.scale+'</span></div>';
+            if(p.constructor&&p.constructor!=='-'&&p.constructor!=='미정') specRows+='<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06)"><span style="color:#999;font-size:11px">시공사</span><span style="color:#ddd;font-size:11px;font-weight:500">'+p.constructor+'</span></div>';
+            if(p.role) specRows+='<div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:#999;font-size:11px">수행업무</span><span style="color:#C3A569;font-size:11px;font-weight:500">'+p.role+'</span></div>';
+            return'<div class="expert-card" style="padding:0;overflow:hidden">'+imgHtml+
+                '<div style="padding:16px 20px 20px">'+
+                '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">'+
+                    '<span style="background:'+badgeColor+';color:#0A0F1C;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:.5px">'+badge+'</span>'+
+                    '<span style="font-size:11px;'+statusColor+'font-weight:600">'+(p.phase||p.status)+'</span>'+
+                '</div>'+
+                '<h4 style="margin:0 0 6px;font-size:15px;line-height:1.4">'+p.name+'</h4>'+
+                '<p style="margin:0 0 12px;font-size:12px;color:#999;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+p.description.substring(0,100)+'…</p>'+
+                (specRows?'<div style="margin-top:8px">'+specRows+'</div>':'')+
                 '</div></div>';
         }).join('');
     }
