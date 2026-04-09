@@ -307,8 +307,8 @@ function srcBadge(item){
 var catDefs=[
     {key:'전체',keys:null,icon:'',label:'전체'},
     {key:'입찰공고',keys:['입찰공고'],icon:'fa-bullhorn',label:'입찰공고'},
-    {key:'법령',keys:['법령'],icon:'fa-scale-balanced',label:'법령·제도'},
-    {key:'판례지침',keys:['관련판례','지침'],icon:'fa-gavel',label:'고시·공고'},
+    {key:'법령',keys:['법령','법령·조례'],icon:'fa-scale-balanced',label:'법령·제도'},
+    {key:'판례지침',keys:['관련판례','지침','판례·질의회신'],icon:'fa-gavel',label:'고시·공고'},
     {key:'서식가이드',keys:['서식','가이드'],icon:'fa-file-pen',label:'서식·매뉴얼'},
     {key:'주요뉴스',keys:['주요뉴스'],icon:'fa-newspaper',label:'주요뉴스'}];
 function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){c['전체']++;catDefs.forEach(function(d){if(d.keys&&d.keys.indexOf(i.category)>=0)c[d.key]++})});return c}
