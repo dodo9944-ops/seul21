@@ -106,12 +106,12 @@ const App = (() => {
             { href:`${B}/pages/library.html?cat=법령`, label:'입찰공고' },
             { href:`${B}/pages/library.html?cat=판례지침`, label:'고시·공고' },
             { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
-            { href:`${B}/pages/news.html`, label:'주요뉴스' },
+            { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
           ]},
           { href:`${B}/pages/community.html`, label:'커뮤니티', icon:'fa-solid fa-comments', sub:[
             { href:`${B}/pages/community.html`, label:'커뮤니티' },
             { href:`${B}/pages/notice.html`, label:'공지사항' },
-            { href:`${B}/pages/news.html`, label:'뉴스·자료' },
+            { href:`${B}/pages/library.html?cat=주요뉴스`, label:'뉴스·자료' },
             { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
           ]},
           { href:`${B}/pages/feasibility.html`, label:'사업성 검토', icon:'fa-solid fa-calculator', sub:[
