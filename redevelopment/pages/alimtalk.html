@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오 알림톡 신청 — (주)세울엔지니어링</title>
+    <meta name="description" content="주요뉴스, 법령 개정, 지침 및 부동산 정책 동향을 카카오 알림톡으로 받아보세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .at-wrap{max-width:640px;margin:48px auto;padding:0 20px}
+        .at-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:16px;padding:36px 32px;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+        .at-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:32px}
+        .at-icon{width:48px;height:48px;border-radius:14px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .at-icon i{font-size:22px;color:#C3A569}
+        .at-head h2{font-size:20px;font-weight:800;color:var(--gray-900);margin-bottom:5px;letter-spacing:-.3px}
+        .at-head p{font-size:14px;color:var(--gray-500);line-height:1.55}
+        .at-form{display:flex;flex-direction:column;gap:20px}
+        .at-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        .at-field label{display:block;font-size:13px;font-weight:700;color:var(--gray-700);margin-bottom:6px}
+        .at-field label .req{color:#D6423A;font-weight:700}
+        .at-field label .sub{font-size:11.5px;color:var(--gray-400);font-weight:500}
+        .at-field input[type="text"],.at-field input[type="tel"]{width:100%;height:48px;padding:0 16px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14.5px;font-weight:500;color:var(--gray-800);font-family:var(--font);transition:border-color .2s}
+        .at-field input:focus{outline:none;border-color:#C3A569;box-shadow:0 0 0 3px rgba(195,165,105,.1)}
+        .at-checks{display:flex;flex-wrap:wrap;gap:8px}
+        .at-checks .ck{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border:1.5px solid var(--gray-200);border-radius:8px;cursor:pointer;transition:all .2s;font-size:13.5px;font-weight:600;color:var(--gray-600)}
+        .at-checks .ck:has(input:checked){border-color:var(--brand-dark);background:rgba(10,15,28,.03);color:var(--brand-dark)}
+        .at-checks .ck input{display:none}
+        .at-consent{display:flex;flex-direction:column;gap:12px}
+        .at-consent .ck{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray-600);cursor:pointer}
+        .at-consent .ck input[type="checkbox"]{width:18px;height:18px;accent-color:var(--brand-dark);flex-shrink:0}
+        .at-consent .ck .req{color:#D6423A;font-size:11.5px}
+        .at-detail-btn{background:none;border:none;color:var(--gray-400);font-size:11.5px;cursor:pointer;padding:0;margin-left:4px;font-family:var(--font);text-decoration:underline}
+        .at-detail{display:none;padding:14px 16px;background:var(--gray-50);border-radius:8px;font-size:12px;color:var(--gray-500);line-height:1.7;margin-top:4px}
+        .at-detail.open{display:block}
+        .at-submit{width:100%;height:52px;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--brand-dark);color:#C3A569;border:none;border-radius:12px;font-size:15.5px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .2s}
+        .at-submit:hover{background:#0F1D35;box-shadow:0 4px 16px rgba(10,15,28,.2)}
+        .at-submit:disabled{opacity:.5;cursor:not-allowed}
+        .at-unsub{text-align:center;font-size:12px;color:var(--gray-400);margin-top:10px}
+        .at-unsub a{color:var(--gray-500);text-decoration:underline}
+        .at-done{text-align:center;padding:48px 20px}
+        .at-done i{font-size:52px;color:#2E7D32;margin-bottom:18px}
+        .at-done h3{font-size:20px;font-weight:800;color:var(--gray-900);margin-bottom:10px}
+        .at-done p{font-size:14px;color:var(--gray-500);line-height:1.6}
+        @media(max-width:540px){
+            .at-card{padding:28px 20px}
+            .at-row{grid-template-columns:1fr}
+            .at-head{flex-direction:column;gap:10px}
+            .at-checks .ck{padding:7px 12px;font-size:12.5px}
+            .at-wrap{margin:32px auto}
+        }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a> <i class="fa-solid fa-chevron-right"></i>
+            <a href="library.html">자료실</a> <i class="fa-solid fa-chevron-right"></i>
+            <span>알림톡 신청</span>
+        </div>
+        <h1>카카오 알림톡 신청</h1>
+        <p>주요뉴스, 법령 개정, 지침 및 부동산 정책 동향을 카카오 알림톡으로 받아보세요.</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="at-wrap">
+        <div class="at-card">
+            <div class="at-head">
+                <div class="at-icon"><i class="fa-regular fa-comment-dots"></i></div>
+                <div>
+                    <h2>카카오 알림톡 업데이트 신청</h2>
+                    <p>주요뉴스, 법령 개정, 지침 및 부동산 정책 동향을 카카오 알림톡으로 받아보세요.</p>
+                </div>
+            </div>
+            <form id="atForm" class="at-form" autocomplete="off">
+                <div class="at-row">
+                    <div class="at-field">
+                        <label>이름 <span class="req">*</span></label>
+                        <input type="text" id="atName" placeholder="홍길동" required>
+                    </div>
+                    <div class="at-field">
+                        <label>휴대전화번호 <span class="req">*</span></label>
+                        <input type="tel" id="atPhone" placeholder="01012345678" required>
+                    </div>
+                </div>
+                <div class="at-field">
+                    <label>관심 분야 <span class="sub">(중복 선택 가능)</span></label>
+                    <div class="at-checks">
+                        <label class="ck"><input type="checkbox" name="interest" value="정비사업 주요뉴스" checked><span>정비사업 주요뉴스</span></label>
+                        <label class="ck"><input type="checkbox" name="interest" value="법령 개정"><span>법령 개정</span></label>
+                        <label class="ck"><input type="checkbox" name="interest" value="행정지침 / 유권해석"><span>행정지침 / 유권해석</span></label>
+                        <label class="ck"><input type="checkbox" name="interest" value="부동산 정책"><span>부동산 정책</span></label>
+                    </div>
+                </div>
+                <div class="at-field">
+                    <div class="at-consent">
+                        <label class="ck">
+                            <input type="checkbox" id="atPrivacy" required>
+                            <span>개인정보 수집·이용에 동의합니다. <span class="req">(필수)</span></span>
+                            <button type="button" class="at-detail-btn" onclick="document.getElementById('privacyDetail').classList.toggle('open')">[자세히]</button>
+                        </label>
+                        <div class="at-detail" id="privacyDetail">
+                            <strong>개인정보 수집·이용 안내</strong><br>
+                            · 수집 항목 : 이름, 휴대전화번호<br>
+                            · 수집 목적 : 카카오 알림톡 서비스 제공<br>
+                            · 보유 기간 : 수신 해지 시까지<br>
+                            · 동의를 거부할 수 있으며, 거부 시 알림톡 서비스 이용이 제한됩니다.
+                        </div>
+                        <label class="ck">
+                            <input type="checkbox" id="atConsent" required>
+                            <span>카카오 알림톡 수신에 동의합니다. <span class="req">(필수)</span></span>
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="at-submit" id="atSubmitBtn">
+                    <i class="fa-regular fa-comment-dots"></i> 알림톡 신청하기
+                </button>
+                <p class="at-unsub">수신을 원하지 않으시면 <a href="alimtalk-unsub.html">여기에서 해지</a>할 수 있습니다.</p>
+            </form>
+            <div class="at-done" id="atDone" style="display:none">
+                <i class="fa-solid fa-circle-check"></i>
+                <h3>카카오 알림톡 신청이 완료되었습니다.</h3>
+                <p>등록하신 번호로 주요 소식을 알림톡으로 전달해드리겠습니다.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/js/common.js"></script>
+<script>
+(function(){
+    var form=document.getElementById('atForm');
+    if(!form) return;
+    form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        var btn=document.getElementById('atSubmitBtn');
+        btn.disabled=true; btn.textContent='신청 중...';
+        var name=document.getElementById('atName').value.trim();
+        var phone=document.getElementById('atPhone').value.trim();
+        var checks=document.querySelectorAll('input[name="interest"]:checked');
+        var interests=Array.from(checks).map(function(c){return c.value});
+        var privacyConsent=document.getElementById('atPrivacy').checked;
+        var alimtalkConsent=document.getElementById('atConsent').checked;
+        if(!privacyConsent||!alimtalkConsent){
+            alert('필수 동의 항목을 확인해주세요.');
+            btn.disabled=false;btn.innerHTML='<i class="fa-regular fa-comment-dots"></i> 알림톡 신청하기';
+            return;
+        }
+        try{
+            var res=await fetch('/api/alimtalk?action=subscribe',{
+                method:'POST',headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({name:name,phone:phone,interests:interests,privacyConsent:privacyConsent,alimtalkConsent:alimtalkConsent})
+            });
+            var data=await res.json();
+            if(res.ok){
+                form.style.display='none';
+                document.getElementById('atDone').style.display='block';
+            } else {
+                alert(data.error||'신청 중 오류가 발생했습니다.');
+                btn.disabled=false;btn.innerHTML='<i class="fa-regular fa-comment-dots"></i> 알림톡 신청하기';
+            }
+        }catch(err){
+            alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+            btn.disabled=false;btn.innerHTML='<i class="fa-regular fa-comment-dots"></i> 알림톡 신청하기';
+        }
+    });
+})();
+</script>
+</body>
+</html>

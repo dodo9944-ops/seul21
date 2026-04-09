@@ -37,6 +37,12 @@
     @media (max-width: 1024px) { .uni-hero.lib-compact .uh-cards { width: 100%; max-width: 320px; } }
     @media (max-width: 600px) { .uni-hero.lib-compact { padding: 36px 0 28px; } .uni-hero.lib-compact .uh-text h1 { font-size: 24px; } }
 
+    /* === 소식받기 버튼 === */
+    .lib-alimtalk-btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:11px 24px;background:rgba(195,165,105,.1);border:1.5px solid rgba(195,165,105,.35);border-radius:10px;color:#C3A569;font-size:13.5px;font-weight:700;text-decoration:none;transition:all .2s;font-family:var(--font)}
+    .lib-alimtalk-btn:hover{background:rgba(195,165,105,.2);border-color:rgba(195,165,105,.5)}
+    .lib-alimtalk-btn i{font-size:15px}
+    @media(max-width:600px){.lib-alimtalk-btn{font-size:12px;padding:9px 18px}}
+
     /* === Category Tabs === */
     .cat-wrap{margin-bottom:20px;position:sticky;top:104px;z-index:100;background:var(--white);padding-top:12px;padding-bottom:4px;margin-top:-8px;transition:box-shadow .2s}
     .cat-wrap.stuck{box-shadow:0 2px 12px rgba(0,0,0,.06)}
@@ -221,6 +227,7 @@
             <div class="uh-label">PROFESSIONAL ARCHIVE</div>
             <h1>정비사업 <em>실무 자료</em>를 한곳에서</h1>
             <p class="uh-sub">입찰공고 / 고시·공고 / 서식·매뉴얼 / 주요뉴스 — 정비사업에 필요한 공식 자료를 체계적으로 제공합니다</p>
+            <a href="alimtalk.html" class="lib-alimtalk-btn"><i class="fa-regular fa-comment-dots"></i> 소식받기 신청</a>
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_library.png" alt="세울엔지니어링 자료실"></div>
