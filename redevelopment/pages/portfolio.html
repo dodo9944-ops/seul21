@@ -27,14 +27,14 @@
     @media(max-width:768px){.pf-hero{padding:40px 0 32px}.pf-hero h1{font-size:26px}}
 
     /* === KPI (차등 강조) === */
-    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:48px}
+    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:64px}
     @media(max-width:1024px){.kpi-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
-    .kpi-card{background:var(--brand-dark);border-radius:14px;padding:24px 20px;text-align:center;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;border:1px solid rgba(195,165,105,.08)}
+    .kpi-card{background:var(--brand-dark);border-radius:14px;padding:14px 20px;text-align:center;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;border:1px solid rgba(195,165,105,.08)}
     .kpi-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
     .kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3}
-    .kpi-card .kv{font-size:28px;font-weight:800;color:var(--gold);margin:10px 0 4px}
+    .kpi-card .kv{font-size:26px;font-weight:800;color:var(--gold);margin:6px 0 3px}
     .kpi-card .kl{font-size:12px;font-weight:500;color:rgba(255,255,255,.5)}
-    .kpi-card .ki{font-size:20px;color:var(--gold);opacity:.7}
+    .kpi-card .ki{font-size:18px;color:var(--gold);opacity:.7}
     /* 마지막 카드(총 관리세대) 강조 */
     .kpi-card.kpi-highlight{background:linear-gradient(135deg,var(--brand-dark),var(--brand-navy));border-color:rgba(195,165,105,.2)}
     .kpi-card.kpi-highlight::after{opacity:.6}
@@ -45,7 +45,7 @@
     .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
     .sec-title{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;position:relative}
     .sec-title::before{content:'';position:absolute;left:0;top:4px;width:3px;height:22px;border-radius:2px;background:linear-gradient(to bottom,var(--gold),rgba(195,165,105,.3))}
-    .sec-divider{margin:56px 0;border:none;border-top:1px solid var(--gray-200)}
+    .sec-divider{margin:64px 0;border:none;border-top:1px solid var(--gray-200)}
 
     /* === Badges === */
     .pb{display:inline-flex;align-items:center;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;line-height:1}
@@ -56,7 +56,7 @@
     /* === Featured Cards === */
     .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
     @media(max-width:1024px){.feat-grid{grid-template-columns:1fr;gap:20px}}
-    .fc{background:#fff;border:1.5px solid var(--gray-200);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+    .fc{background:#fff;border:2px solid var(--gray-300);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.08)}
     .fc:hover{border-color:var(--gold);box-shadow:0 20px 48px rgba(195,165,105,.18);transform:translateY(-8px)}
     .fc-img{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0}
     .fc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
@@ -97,10 +97,10 @@
     @media(max-width:540px){.filter-bar{flex-direction:column;align-items:stretch;gap:10px}.filter-bar select{width:100%;min-width:unset}.filter-bar .rc{margin-left:0;text-align:center}}
 
     /* === All Cards Grid === */
-    .pg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .pg-grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:24px;row-gap:36px}
     @media(max-width:1024px){.pg-grid{grid-template-columns:repeat(2,1fr);gap:18px}}
     @media(max-width:540px){.pg-grid{grid-template-columns:1fr;gap:14px}}
-    .pc{background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .25s}
+    .pc{background:#fff;border:2px solid var(--gray-300);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .25s;box-shadow:0 2px 10px rgba(0,0,0,.07)}
     .pc:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(195,165,105,.12);transform:translateY(-4px)}
     .pc-img{width:100%;height:140px;position:relative;overflow:hidden;flex-shrink:0}
     .pc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
@@ -130,13 +130,16 @@
     .pg-empty h3{font-size:18px;font-weight:700;color:var(--gray-600);margin-bottom:8px}
 
     /* === Pagination === */
-    .pager{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:36px}
-    .pager button{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--gray-200);border-radius:8px;background:#fff;color:var(--gray-600);font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
-    .pager button:hover{border-color:var(--gold);color:var(--brand-dark)}
-    .pager button.active{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark)}
-    .pager button.arr{font-size:12px;color:var(--gray-400)}
-    .pager button.arr:hover{color:var(--gold)}
-    .pager button:disabled{opacity:.3;cursor:default;pointer-events:none}
+    .pager-wrap{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:40px;padding-top:24px;border-top:1px solid var(--gray-100)}
+    .pager{display:flex;align-items:center;gap:4px}
+    .pager button{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--gray-200);border-radius:10px;background:#fff;color:var(--gray-600);font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
+    .pager button:hover{border-color:var(--gold);color:var(--brand-dark);background:rgba(195,165,105,.04)}
+    .pager button.active{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark);box-shadow:0 2px 8px rgba(10,15,28,.12)}
+    .pager button.arr{color:var(--gray-400);font-size:13px}
+    .pager button:disabled{opacity:.25;cursor:default;pointer-events:none}
+    .pager-per{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-400)}
+    .pager-per select{height:32px;padding:0 24px 0 8px;border:1px solid var(--gray-200);border-radius:6px;font-size:12px;font-family:var(--font);color:var(--gray-600);cursor:pointer;appearance:auto}
+    @media(max-width:768px){.pager-wrap{flex-direction:column;gap:12px}}
 
     /* ========================================
        DETAIL MODAL — Full project portfolio
@@ -145,9 +148,9 @@
     .d-overlay.open{opacity:1;pointer-events:auto}
     .d-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
     .d-overlay.open .d-modal{transform:translateY(0) scale(1)}
-    .d-close{position:absolute;top:-20px;right:-20px;z-index:20;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.85);border:2px solid rgba(255,255,255,.3);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.5)}
-    .d-close:hover{background:#0A0F1C;transform:scale(1.1)}
-    @media(max-width:540px){.d-close{top:-16px;right:-16px;width:38px;height:38px;font-size:15px}}
+    .d-close{position:absolute;top:14px;right:14px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.6);border:1.5px solid rgba(255,255,255,.3);border-radius:50%;cursor:pointer;font-size:15px;color:#fff;transition:all .2s;backdrop-filter:blur(4px)}
+    .d-close:hover{background:rgba(10,15,28,.9);transform:scale(1.1)}
+    @media(max-width:540px){.d-close{top:10px;right:10px;width:32px;height:32px;font-size:13px}}
 
     /* Detail Hero Image */
     .d-hero{width:100%;height:300px;position:relative;overflow:hidden;flex-shrink:0;border-radius:18px 18px 0 0}
@@ -277,7 +280,7 @@
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_portfolio.png" alt="세울엔지니어링 업무실적"></div>
-            <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-building"></i></div><h4>재개발</h4><p>주택재개발 정비사업 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-city"></i></div><h4>재건축</h4><p>주택재건축 정비사업 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-house-chimney"></i></div><h4>소규모정비</h4><p>소규모재건축·가로주택</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-chart-pie"></i></div><h4>사업성 검토</h4><p>비례율·분담금 분석 자문</p></div></div>
+            <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-building"></i></div><h4>재개발</h4><p>주택재개발 정비사업 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-city"></i></div><h4>재건축</h4><p>주택재건축 정비사업 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-house-chimney"></i></div><h4>소규모정비</h4><p>소규모재건축·가로주택</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-city"></i></div><h4>도심복합개발</h4><p>복합개발·엔지니어링 통합 자문</p></div></div>
         </div>
     </div>
 </div>
@@ -297,7 +300,10 @@
         <div class="rc" id="rc"></div>
     </div>
     <div class="pg-grid" id="pgGrid"></div>
-    <div class="pager" id="pager"></div>
+    <div class="pager-wrap" id="pagerWrap">
+        <div class="pager" id="pager"></div>
+        <div class="pager-per"><span>페이지당</span><select id="pfPerSelect"><option value="6">6개</option><option value="9">9개</option><option value="12">12개</option></select></div>
+    </div>
 </div></div>
 
 <!-- Detail Modal -->
@@ -316,7 +322,7 @@
 <script src="../assets/js/common.js?v=20260407"></script>
 <script>
 (function(){
-var D=MOCK.portfolio, PER=10, curPage=1;
+var D=MOCK.portfolio, PER=6, curPage=1;
 
 /* helpers */
 function ti(t){return{'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney'}[t]||'fa-building-columns'}
@@ -356,13 +362,19 @@ return'<div class="fc'+primary+'" onclick="PF.open(\''+p.id+'\')">'+img+
 '<button class="fbtn" onclick="event.stopPropagation();PF.open(\''+p.id+'\')">상세보기 <i class="fa-solid fa-arrow-right"></i></button>'+
 '</div></div>'}).join('')}
 
-/* Filtered items */
+/* Filtered items — 진행중 최신순 → 완료 최신순 */
 function getFiltered(){
 var ft=document.getElementById('fType').value,fs=document.getElementById('fStatus').value;
-return D.filter(function(p){
+var items=D.filter(function(p){
 if(ft!=='전체'&&p.type!==ft)return false;
 if(fs!=='전체'&&p.status!==fs)return false;
-return true})}
+return true});
+items.sort(function(a,b){
+var sa=a.status==='완료'?1:0,sb=b.status==='완료'?1:0;
+if(sa!==sb)return sa-sb;
+return parseInt(b.year||0)-parseInt(a.year||0);
+});
+return items;}
 
 /* All cards + pagination */
 function renderAll(){
@@ -384,6 +396,7 @@ return'<div class="pc" onclick="PF.open(\''+p.id+'\')">'+img+
 '<div class="pr"><span class="pl"><i class="fa-solid fa-location-dot"></i> 위치</span><span class="pv">'+p.district+'</span></div>'+
 '<div class="pr"><span class="pl"><i class="fa-solid fa-building"></i> 규모</span><span class="pv">'+p.scale+'</span></div>'+
 '<div class="pr"><span class="pl"><i class="fa-solid fa-users"></i> 조합원</span><span class="pv">'+safe(p.members)+'</span></div>'+
+'<div class="pr"><span class="pl"><i class="fa-solid fa-hard-hat"></i> 사업자</span><span class="pv">'+safe(p.constructor||p.client)+'</span></div>'+
 '<div class="pr"><span class="pl"><i class="fa-solid fa-user-tie"></i> 역할</span><span class="pv">'+p.role+'</span></div>'+
 '<div class="pr"><span class="pl"><i class="fa-solid fa-calendar"></i> 연도</span><span class="pv">'+p.year+'년</span></div>'+
 '<button class="pbtn" onclick="event.stopPropagation();PF.open(\''+p.id+'\')"><i class="fa-solid fa-eye"></i> 상세보기</button>'+
@@ -395,7 +408,7 @@ if(pages<=1){pg.innerHTML='';return}
 var h='<button class="arr" '+(curPage===1?'disabled':'')+' onclick="PF.page('+(curPage-1)+')"><i class="fa-solid fa-chevron-left"></i></button>';
 for(var i=1;i<=pages;i++)h+='<button'+(i===curPage?' class="active"':'')+' onclick="PF.page('+i+')">'+i+'</button>';
 h+='<button class="arr" '+(curPage===pages?'disabled':'')+' onclick="PF.page('+(curPage+1)+')"><i class="fa-solid fa-chevron-right"></i></button>';
-pg.innerHTML=h}
+pg.innerHTML=h;}
 
 /* Detail */
 function openDetail(id){
@@ -403,10 +416,11 @@ var p=null;for(var i=0;i<D.length;i++)if(D[i].id===id){p=D[i];break}
 if(!p)return;
 var dh=document.getElementById('dHero'),t=dt(p.type);
 var mn=p.name;
+var closeBtn='<button onclick="PF.close()" style="position:absolute;top:14px;right:14px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.6);border:1.5px solid rgba(255,255,255,.35);border-radius:50%;cursor:pointer;font-size:15px;color:#fff;backdrop-filter:blur(4px)"><i class="fa-solid fa-xmark"></i></button>';
 var titleArea='<div class="d-title-area"><div class="badges">'+bg(p)+'</div><h2>'+mn+'</h2><div class="d-phase"><i class="fa-solid fa-flag"></i> '+(p.phase||p.status)+'</div></div>';
 if(p.detailImage){
-dh.innerHTML='<div class="d-hero"><img src="'+p.detailImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#0A0F1C,#1a3055)\';this.style.display=\'none\'"><div class="ov"></div>'+titleArea+'</div>'}
-else{dh.innerHTML='<div class="d-hero-fb" data-t="'+t+'"><div class="fbi" style="width:72px;height:72px"><i class="fa-solid '+ti(p.type)+'" style="font-size:32px;color:rgba(195,165,105,.6)"></i></div>'+titleArea+'</div>'}
+dh.innerHTML='<div class="d-hero"><img src="'+p.detailImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#0A0F1C,#1a3055)\';this.style.display=\'none\'"><div class="ov"></div>'+titleArea+closeBtn+'</div>'}
+else{dh.innerHTML='<div class="d-hero-fb" data-t="'+t+'"><div class="fbi" style="width:72px;height:72px"><i class="fa-solid '+ti(p.type)+'" style="font-size:32px;color:rgba(195,165,105,.6)"></i></div>'+titleArea+closeBtn+'</div>'}
 
 /* Body sections */
 var html='';
@@ -459,6 +473,7 @@ document.body.style.overflow='';document.body.style.paddingRight=''}
 /* Events */
 document.getElementById('fType').addEventListener('change',function(){curPage=1;renderAll()});
 document.getElementById('fStatus').addEventListener('change',function(){curPage=1;renderAll()});
+document.getElementById('pfPerSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;renderAll()});
 document.getElementById('dCloseTop').addEventListener('click',closeDetail);
 document.getElementById('dCloseBot').addEventListener('click',closeDetail);
 document.getElementById('dOverlay').addEventListener('click',function(e){if(e.target===this)closeDetail()});
@@ -468,6 +483,8 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDetail(
 window.PF={open:openDetail,close:closeDetail,page:function(n){curPage=n;renderAll();window.scrollTo({top:document.querySelector('.filter-bar').offsetTop-80,behavior:'smooth'})}};
 
 renderFeat();renderAll();
+// URL param ?type= 지원
+(function(){var p=new URLSearchParams(location.search).get('type');if(p){var s=document.getElementById('fType');if(s){s.value=p;renderAll();document.querySelector('.filter-bar').scrollIntoView({behavior:'smooth',block:'start'});}}})();
 })();
 </script>
 </body>

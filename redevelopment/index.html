@@ -266,7 +266,6 @@
             .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 42px; font-size: 13px; }
 
             .category-section { display: none; }
-            .section { padding: 28px 0; }
             .process-bar { padding: 20px 0 8px; }
         }
 
@@ -285,13 +284,13 @@
 
         /* ── SECTION (메인 고유) ── */
         .section {
-            padding: 56px 0;
+            padding: 32px 0;
         }
         @media (max-width: 1024px) {
-            .section { padding: 40px 0; }
+            .section { padding: 22px 0; }
         }
         @media (max-width: 768px) {
-            .section { padding: 32px 0; }
+            .section { padding: 16px 0; }
         }
 
         /* ── CARD VISUAL (메인 전용) ── */
@@ -475,7 +474,7 @@
         }
 
         /* ── CTA BANNER ── */
-        .cta-banner { background: linear-gradient(135deg, #0A0F1C, #142644); border-radius: var(--radius); padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; position: relative; overflow: hidden; }
+        .cta-banner { background: linear-gradient(135deg, #0A0F1C, #142644); border-radius: var(--radius); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; position: relative; overflow: hidden; }
         .cta-banner::before { content: ''; position: absolute; right: -50px; top: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(195,165,105,0.08) 0%, transparent 70%); border-radius: 50%; }
         .cta-text h3 {
             font-size: 24px;
@@ -505,7 +504,7 @@
         .pb-type{background:rgba(10,15,28,.85);color:#fff}
         .pb-ing{background:rgba(195,165,105,.9);color:#0A0F1C}
         .pb-done{background:rgba(255,255,255,.9);color:#0A0F1C}
-        .fc{background:#fff;border:1.5px solid var(--gray-200);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+        .fc{background:#fff;border:2px solid var(--gray-300);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.08)}
         .fc:hover{border-color:var(--gold);box-shadow:0 20px 48px rgba(195,165,105,.18);transform:translateY(-8px)}
         .fc-img{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0}
         .fc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
@@ -620,49 +619,6 @@
     </div>
 </section>
 
-<!-- ===== 빠른 메뉴 ===== -->
-<section class="category-section">
-    <div class="inner">
-        <nav class="category-nav">
-            <a href="pages/about.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-building-columns"></i></div>
-                <span class="cat-label">회사소개</span>
-            </a>
-            <a href="pages/vision.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-road"></i></div>
-                <span class="cat-label">세울의 길</span>
-            </a>
-            <a href="pages/services.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-diagram-project"></i></div>
-                <span class="cat-label">사업분야</span>
-            </a>
-            <a href="pages/portfolio.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-briefcase"></i></div>
-                <span class="cat-label">업무실적</span>
-            </a>
-            <a href="pages/library.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-folder-open"></i></div>
-                <span class="cat-label">자료실</span>
-            </a>
-            <a href="pages/community.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-comments"></i></div>
-                <span class="cat-label">커뮤니티</span>
-            </a>
-            <a href="pages/feasibility.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <span class="cat-label">사업성 검토</span>
-            </a>
-            <a href="pages/contact.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-envelope"></i></div>
-                <span class="cat-label">고객센터</span>
-            </a>
-            <a href="intranet/index.html" class="cat-item">
-                <div class="cat-icon"><i class="fa-solid fa-lock"></i></div>
-                <span class="cat-label">인트라넷</span>
-            </a>
-        </nav>
-    </div>
-</section>
 
 <!-- ===== 주요뉴스 ===== -->
 <section class="section">
@@ -728,7 +684,7 @@
 
 
 <!-- ===== 사업 진행단계 ===== -->
-<section class="section" style="background: linear-gradient(135deg, #0A0F1C, #142644); color: white; padding: 32px 0;">
+<section class="section" style="background: linear-gradient(135deg, #0A0F1C, #142644); color: white; padding: 22px 0 22px;">
     <div class="inner">
         <h2 class="section-title" style="margin-bottom:8px;color:white">정비사업 추진 절차</h2>
         <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:16px">세울엔지니어링이 각 단계에서 함께합니다</p>
@@ -1195,29 +1151,29 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             'lib47':{ext:'downloads/files/lib47_도시정비법_질의회신_사례_국토부.pdf'},
             'lib48':{ext:'downloads/files/lib48_서울시_정비사업_사업성개선_기본계획재정비_2024.pdf'}
         };
+        var _catKeyMap={'법령':'법령','관련판례':'판례지침','지침':'판례지침','서식':'서식가이드','가이드':'서식가이드','주요뉴스':'주요뉴스'};
         window.mainLibDownload=function(id,cat){
             var m=window._libFileMap[id];
             if(!m){
                 /* 파일맵에 없으면 자료실 해당 카테고리로 이동 */
-                location.href='pages/library.html'+(cat?'?cat='+encodeURIComponent(cat):'');
+                var mappedCat=cat?(_catKeyMap[cat]||cat):null;
+                location.href='pages/library.html'+(mappedCat?'?cat='+encodeURIComponent(mappedCat):'');
                 return;
             }
+            if(m.web){location.href=m.web;return;}
             if(m.ext){
                 var x=new XMLHttpRequest();x.open('HEAD',m.ext,true);
                 x.onload=function(){
                     if(x.status===200){var a=document.createElement('a');a.href=m.ext;a.download='';document.body.appendChild(a);a.click();document.body.removeChild(a)}
-                    else if(m.web){location.href=m.web}
                     else if(m.gov){window.open(m.gov,'_blank')}
                     else{location.href='pages/library.html'+(cat?'?cat='+encodeURIComponent(cat):'')}
                 };
                 x.onerror=function(){
-                    if(m.web)location.href=m.web;
-                    else if(m.gov)window.open(m.gov,'_blank');
+                    if(m.gov)window.open(m.gov,'_blank');
                     else location.href='pages/library.html'+(cat?'?cat='+encodeURIComponent(cat):'');
                 };
                 x.send();
-            } else if(m.web){location.href=m.web}
-            else if(m.gov){window.open(m.gov,'_blank')}
+            } else if(m.gov){window.open(m.gov,'_blank')}
         };
         libEl.innerHTML=libs.map(function(i){
             var ic=iconMap[i.fileType]||'fa-file';

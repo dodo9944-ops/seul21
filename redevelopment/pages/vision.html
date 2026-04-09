@@ -85,62 +85,76 @@
 
     /* ── 브랜드 철학 ── */
     .vs-philosophy {
-        display: flex; gap: 48px; align-items: center;
+        position: relative; max-width: 660px; padding-left: 8px;
     }
-    .vs-phil-quote {
-        flex-shrink: 0; width: 80px; text-align: center;
+    .vs-phil-mark {
+        font-size: 220px; font-family: Georgia, serif; color: var(--gold);
+        opacity: 0.055; line-height: 1;
+        position: absolute; top: -48px; left: -24px;
+        pointer-events: none; z-index: 0; user-select: none;
     }
-    .vs-phil-quote span {
-        font-size: 120px; font-family: Georgia, serif; color: var(--gold);
-        opacity: 0.12; line-height: 0.8; display: block;
+    .vs-phil-inner { position: relative; z-index: 1; }
+    .vs-phil-headline {
+        font-size: 27px; font-weight: 800; color: #0A0F1C;
+        line-height: 1.45; margin-bottom: 22px; letter-spacing: -0.5px;
+        word-break: keep-all;
     }
-    .vs-phil-body { flex: 1; }
+    .vs-phil-headline strong { color: var(--brand-dark); font-weight: 900; }
     .vs-phil-body p {
-        font-size: 18px; line-height: 2.1; color: var(--gray-700);
-        word-break: keep-all; font-weight: 400;
+        font-size: 16px; line-height: 2.05; color: var(--gray-600);
+        word-break: keep-all; font-weight: 400; max-width: 560px;
     }
-    .vs-phil-body p strong { color: var(--brand-dark); font-weight: 700; }
     .vs-phil-line {
-        width: 40px; height: 2px; margin: 24px 0;
-        background: linear-gradient(90deg, var(--gold), transparent);
+        width: 36px; height: 2px; margin: 28px 0 20px;
+        background: #C3A569;
     }
     .vs-phil-sig {
-        font-size: 13px; color: var(--gray-500); letter-spacing: 1px;
+        font-size: 11px; color: var(--gray-400);
+        letter-spacing: 2.5px; font-weight: 500; text-transform: uppercase;
     }
     @media(max-width:768px) {
-        .vs-philosophy { flex-direction: column; gap: 16px; }
-        .vs-phil-quote { width: auto; }
-        .vs-phil-quote span { font-size: 72px; }
-        .vs-phil-body p { font-size: 15px; line-height: 1.9; }
+        .vs-philosophy { padding-left: 0; }
+        .vs-phil-mark { font-size: 130px; top: -28px; left: -12px; }
+        .vs-phil-headline { font-size: 21px; margin-bottom: 18px; }
+        .vs-phil-body p { font-size: 15px; line-height: 1.95; }
     }
 
     /* ── 왜 도시정비인가 ── */
-    .vs-why { display: flex; gap: 40px; }
-    .vs-why-text { flex: 1; }
+    .vs-why { display: flex; gap: 80px; align-items: flex-start; }
+    .vs-why-text { flex: 1; max-width: 520px; }
     .vs-why-text h2 {
         font-size: 24px; font-weight: 800; color: var(--brand-dark);
         margin-bottom: 24px; line-height: 1.4;
     }
     .vs-why-text p {
         font-size: 14.5px; line-height: 2; color: var(--gray-600);
-        margin-bottom: 16px; word-break: keep-all; text-align: justify;
+        margin-bottom: 16px; word-break: keep-all;
     }
     .vs-why-cards {
-        flex-shrink: 0; width: 280px;
-        display: flex; flex-direction: column; gap: 12px;
+        flex-shrink: 0; width: 300px;
+        display: flex; flex-direction: column; gap: 10px;
     }
     .vs-why-card {
-        padding: 20px; border-radius: 12px;
-        background: var(--gray-50); border: 1px solid var(--gray-100);
+        padding: 18px 20px 18px 18px; border-radius: 12px;
+        background: #ffffff; border: 1px solid #e2e5ea;
+        border-left: 3px solid rgba(195,165,105,0.35);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .vs-why-card:hover {
+        border-color: #e2e5ea;
+        border-left-color: #C3A569;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     }
     .vs-why-card h4 {
-        font-size: 14px; font-weight: 800; color: var(--brand-dark);
+        font-size: 14px; font-weight: 800; color: #0A0F1C;
         margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
+        letter-spacing: -0.2px;
     }
-    .vs-why-card h4 i { color: var(--gold); font-size: 14px; }
-    .vs-why-card p { font-size: 12.5px; color: var(--gray-500); line-height: 1.6; }
+    .vs-why-card h4 i { color: #B8943F; font-size: 12px; flex-shrink: 0; }
+    .vs-why-card p { font-size: 12px; color: #5a6270; line-height: 1.65; }
     @media(max-width:860px) {
-        .vs-why { flex-direction: column; }
+        .vs-why { flex-direction: column; gap: 32px; }
         .vs-why-cards { width: 100%; flex-direction: row; flex-wrap: wrap; }
         .vs-why-card { flex: 1; min-width: 200px; }
     }
@@ -160,14 +174,15 @@
         transform: translateY(-3px);
     }
     .vs-prin-icon {
-        width: 44px; height: 44px; border-radius: 11px;
-        background: linear-gradient(135deg, var(--brand-dark), var(--brand-navy));
+        width: 46px; height: 46px; border-radius: 12px;
+        background: linear-gradient(135deg, #0A0F1C, #1a2d50);
         display: flex; align-items: center; justify-content: center;
-        margin-bottom: 18px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(10,15,28,0.18);
     }
-    .vs-prin-icon i { color: var(--gold); font-size: 18px; }
-    .vs-prin-card h4 { font-size: 16px; font-weight: 800; color: var(--gray-900); margin-bottom: 10px; }
-    .vs-prin-card p { font-size: 13px; color: var(--gray-500); line-height: 1.75; flex: 1; }
+    .vs-prin-icon i { color: #C3A569; font-size: 19px; }
+    .vs-prin-card h4 { font-size: 17px; font-weight: 800; color: #0d1420; margin-bottom: 10px; letter-spacing: -0.3px; }
+    .vs-prin-card p { font-size: 13px; color: var(--gray-500); line-height: 1.78; flex: 1; }
     @media(max-width:860px) { .vs-principles { grid-template-columns: repeat(2,1fr); } }
     @media(max-width:480px) { .vs-principles { grid-template-columns: 1fr; } }
 
@@ -211,7 +226,7 @@
 
     /* Step card */
     .vs-step {
-        background: rgba(255,255,255,0.03); border: 1px solid rgba(195,165,105,0.1);
+        background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.10);
         border-radius: 14px; padding: 28px 24px; transition: all 0.3s;
         position: relative; overflow: hidden;
     }
@@ -248,7 +263,8 @@
     .vs-step-badge {
         display: inline-flex; align-items: center; justify-content: center;
         width: 30px; height: 30px; border-radius: 8px;
-        background: rgba(195,165,105,0.12); border: 1px solid rgba(195,165,105,0.2);
+        background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+        backdrop-filter: blur(6px);
         font-size: 12px; font-weight: 800; color: var(--gold);
         margin-bottom: 12px;
     }
@@ -256,13 +272,14 @@
     .vs-step-icon {
         display: inline-flex; align-items: center; justify-content: center;
         width: 30px; height: 30px; border-radius: 8px;
-        background: rgba(195,165,105,0.08);
-        font-size: 13px; color: rgba(195,165,105,0.5);
+        background: rgba(195,165,105,0.12); border: 1px solid rgba(195,165,105,0.2);
+        backdrop-filter: blur(4px);
+        font-size: 13px; color: rgba(195,165,105,0.7);
         margin-left: 8px; margin-bottom: 12px;
     }
 
-    .vs-step h4 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; position: relative; }
-    .vs-step p { font-size: 12.5px; color: rgba(255,255,255,0.5); line-height: 1.7; position: relative; }
+    .vs-step h4 { font-size: 18px; font-weight: 700; color: #ffffff; margin-top: 14px; margin-bottom: 10px; position: relative; }
+    .vs-step p { font-size: 13px; color: rgba(255,255,255,0.62); line-height: 1.75; position: relative; }
 
     /* Flow arrows between cards */
     .vs-steps-row .vs-step { position: relative; }
@@ -351,37 +368,50 @@
 
     /* ── 앞으로의 방향 ── */
     .vs-future {
-        background: linear-gradient(135deg, #060A14, #0A0F1C 50%, #142644);
+        background: linear-gradient(135deg, #0D1B38, #142644 50%, #1C3560);
         border-radius: 16px; padding: 72px 48px; text-align: center;
         position: relative; overflow: hidden;
     }
     .vs-future::before {
         content: ''; position: absolute; inset: 0;
         background: url('../jpg/사옥 2청사1.png') center/cover no-repeat;
-        opacity: 0.06;
+        opacity: 0.08; filter: brightness(0.9);
+    }
+    .vs-future::after {
+        content: ''; position: absolute;
+        top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: min(580px, 88%); height: 78%;
+        background: rgba(10, 22, 50, 0.38);
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 14px;
+        backdrop-filter: blur(6px);
+        z-index: 0;
     }
     .vs-future * { position: relative; z-index: 1; }
     .vs-future-label {
         font-size: 11px; font-weight: 600; letter-spacing: 3px;
-        color: var(--gold); text-transform: uppercase; margin-bottom: 16px;
+        color: #D4AF5A; text-transform: uppercase; margin-bottom: 14px;
         display: inline-block;
     }
     .vs-future h2 {
-        font-size: 28px; font-weight: 900; color: #fff;
-        margin-bottom: 20px; line-height: 1.4;
+        font-size: 34px; font-weight: 900; color: #ffffff;
+        margin-bottom: 20px; line-height: 1.35;
+        text-shadow: 0 1px 12px rgba(0,0,0,0.3);
     }
-    .vs-future-line { width: 48px; height: 2px; background: var(--gold); opacity: 0.4; margin: 0 auto 24px; }
+    .vs-future-line { width: 48px; height: 2px; background: #D4AF5A; opacity: 0.55; margin: 0 auto 28px; }
     .vs-future p {
-        font-size: 15px; line-height: 2.1; color: rgba(255,255,255,0.55);
-        max-width: 620px; margin: 0 auto;
+        font-size: 15px; line-height: 2.2; color: rgba(255,255,255,0.82);
+        max-width: 500px; margin: 0 auto;
     }
     .vs-future .vs-declaration {
-        margin-top: 32px; font-size: 17px; font-weight: 700;
-        color: var(--gold); letter-spacing: 0.5px;
+        margin-top: 48px; font-size: 18px; font-weight: 700;
+        color: #D4AF5A; letter-spacing: 0.5px;
+        text-shadow: 0 0 24px rgba(212,175,90,0.35);
     }
     @media(max-width:768px) {
         .vs-future { padding: 48px 24px; }
-        .vs-future h2 { font-size: 22px; }
+        .vs-future h2 { font-size: 26px; }
+        .vs-future::after { width: 92%; height: 82%; }
     }
 
     /* ── CTA ── */
@@ -412,11 +442,13 @@
     /* ── 공통 섹션 타이틀 ── */
     .vs-title {
         font-size: 24px; font-weight: 800; color: var(--brand-dark);
-        margin-bottom: 28px; position: relative; padding-bottom: 12px;
+        margin-bottom: 28px; position: relative;
+        padding-left: 14px; padding-bottom: 0;
     }
-    .vs-title::after {
-        content: ''; position: absolute; bottom: 0; left: 0;
-        width: 36px; height: 2px; background: var(--gold);
+    .vs-title::before {
+        content: ''; position: absolute; left: 0; top: 4px;
+        width: 3px; height: 20px; border-radius: 2px;
+        background: linear-gradient(to bottom, var(--gold), rgba(195,165,105,0.3));
     }
     
     /* === Vision Hero (about-hero 3안 패밀리) === */
@@ -556,7 +588,7 @@
                 <span>세울의 길</span>
             </div>
             <div class="hero-label">The Path of SEUL</div>
-            <h1>절차의 <em>정합성</em>,<br>실행의 <em>책임</em></h1>
+            <h1>절차의 <em>정합성,</em><br>실행의 <em>책임</em></h1>
             <p class="hero-sub">정비사업의 기준을 바로 세우고, 사업의 가치를 끝까지 완성하는 세울엔지니어링의 길</p>
         </div>
         <div class="hero-cards-float">
@@ -588,14 +620,16 @@
     <div class="inner">
 
         <!-- ══════ 브랜드 철학 ══════ -->
-        <div class="vs">
+        <div class="vs" style="margin-bottom:52px">
             <div class="vs-philosophy">
-                <div class="vs-phil-quote"><span>&ldquo;</span></div>
-                <div class="vs-phil-body">
-                    <p><strong>세울(SEUL)</strong>은 '바로 세우다'에서 출발합니다.<br>
-                    무너진 도시의 질서를 다시 세우고, 흐트러진 절차를 바로 세우고,<br>
-                    사업의 가치를 올곧게 세우는 것.<br>
-                    그것이 세울엔지니어링이 걸어가는 길입니다.</p>
+                <div class="vs-phil-mark">&ldquo;</div>
+                <div class="vs-phil-inner">
+                    <div class="vs-phil-headline"><strong>세울(SEUL)</strong>은 '바로 세우다'에서 출발합니다.</div>
+                    <div class="vs-phil-body">
+                        <p>무너진 도시의 질서를 다시 세우고, 흐트러진 절차를 바로 세우고,<br>
+                        사업의 가치를 올곧게 세우는 것.<br>
+                        그것이 세울엔지니어링이 걸어가는 길입니다.</p>
+                    </div>
                     <div class="vs-phil-line"></div>
                     <div class="vs-phil-sig">SEUL ENGINEERING — Brand Philosophy</div>
                 </div>
@@ -603,7 +637,7 @@
         </div>
 
         <!-- ══════ 왜 도시정비인가 ══════ -->
-        <div class="vs">
+        <div class="vs" style="margin-bottom:52px">
             <div class="vs-why">
                 <div class="vs-why-text">
                     <h2>왜 도시정비에<br>집중하는가</h2>

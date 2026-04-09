@@ -95,15 +95,30 @@ const App = (() => {
             { href:`${B}/pages/urbanplanning-service.html`, label:'도시계획(엔지니어링)' },
             { href:`${B}/pages/pmcm-service.html`, label:'도시정비 PM/CM' },
           ]},
-          { href:`${B}/pages/portfolio.html`, label:'업무실적', icon:'fa-solid fa-briefcase', sub:null },
-          { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open', sub:null },
+          { href:`${B}/pages/portfolio.html`, label:'업무실적', icon:'fa-solid fa-briefcase', sub:[
+            { href:`${B}/pages/portfolio.html`, label:'수행실적 전체' },
+            { href:`${B}/pages/portfolio.html?type=재개발`, label:'재개발 실적' },
+            { href:`${B}/pages/portfolio.html?type=재건축`, label:'재건축 실적' },
+            { href:`${B}/pages/portfolio.html?type=소규모정비`, label:'소규모정비 실적' },
+          ]},
+          { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open', sub:[
+            { href:`${B}/pages/library.html`, label:'자료실 전체' },
+            { href:`${B}/pages/library.html?cat=법령`, label:'입찰공고' },
+            { href:`${B}/pages/library.html?cat=판례지침`, label:'고시·공고' },
+            { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
+            { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
+          ]},
           { href:`${B}/pages/community.html`, label:'커뮤니티', icon:'fa-solid fa-comments', sub:[
             { href:`${B}/pages/community.html`, label:'커뮤니티' },
             { href:`${B}/pages/notice.html`, label:'공지사항' },
             { href:`${B}/pages/news.html`, label:'뉴스·자료' },
             { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
           ]},
-          { href:`${B}/pages/feasibility.html`, label:'사업성 검토', icon:'fa-solid fa-calculator', sub:null },
+          { href:`${B}/pages/feasibility.html`, label:'사업성 검토', icon:'fa-solid fa-calculator', sub:[
+            { href:`${B}/pages/feasibility.html`, label:'사업성 분석 도구' },
+            { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
+            { href:`${B}/pages/contact.html`, label:'전문가 문의' },
+          ]},
           { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
             { href:`${B}/pages/contact.html`, label:'문의하기' },
             { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },

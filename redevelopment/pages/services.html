@@ -30,7 +30,7 @@
     /* 핵심 수치 바 */
     .sv-highlight {
         display:flex; gap:0; border-radius:var(--radius); overflow:hidden;
-        border:1px solid var(--gray-200); margin-bottom:35px;
+        border:1px solid var(--gray-200); margin-bottom:64px;
     }
     .sv-highlight-item {
         flex:1; padding:24px 20px; text-align:center;
@@ -60,7 +60,7 @@
 
     .sv-card-header {
         background:linear-gradient(135deg,#0A0F1C,#142644);
-        padding:12px 20px; display:flex; align-items:center; gap:12px;
+        padding:18px 24px; display:flex; align-items:center; gap:14px;
         position:relative;
     }
     .sv-card-header::after {
@@ -68,14 +68,16 @@
         background:radial-gradient(circle,rgba(195,165,105,0.06) 0%,transparent 70%); border-radius:50%;
     }
     .sv-card-num {
-        width:34px; height:34px; border-radius:9px;
+        width:38px; height:38px; border-radius:9px;
         background:rgba(195,165,105,0.15); display:flex; align-items:center; justify-content:center;
         font-size:15px; font-weight:800; color:var(--gold); flex-shrink:0;
     }
-    .sv-card-header h3 { font-size:15px; font-weight:800; color:#fff; letter-spacing:-0.3px; }
-    .sv-card-header .sv-sub { font-size:10px; color:rgba(255,255,255,0.35); margin-top:1px; }
+    .sv-card-header h3 { font-size:22px; font-weight:800; color:#fff; letter-spacing:-0.4px; line-height:1.25; }
+    .sv-card-header .sv-sub { font-size:10px; color:rgba(255,255,255,0.35); margin-top:5px; }
+    @media(max-width:860px){ .sv-card-header h3 { font-size:20px; } }
+    @media(max-width:480px){ .sv-card-header h3 { font-size:18px; } .sv-card-header { padding:14px 18px; } }
 
-    .sv-card-body { padding:28px 32px; flex:1; }
+    .sv-card-body { padding:32px 32px; flex:1; }
     .sv-card-body .sv-desc {
         font-size:14px; line-height:1.85; color:var(--gray-700); margin-bottom:20px;
     }
@@ -330,20 +332,18 @@
                     </div>
                     <div class="sv-card-body">
                         <p class="sv-desc">
-                            현행 도시정비법에 따른 일반절차(11단계)와 서울시 신속통합기획을 구분하여 기본계획 수립부터 준공·조합 해산까지 전 과정을 관리합니다. HUG 사업비·이주비 보증 업무까지 원스톱 지원합니다.
+                            현행 도시정비법에 따른 일반절차(11단계)와 서울시 신속통합기획을 구분하여 기본계획 수립부터 준공·조합 해산까지 전 과정을 관리합니다.
                         </p>
                         <ul class="sv-strengths">
                             <li><i class="fa-solid fa-check"></i>권리관계 및 이해관계 조율</li>
                             <li><i class="fa-solid fa-check"></i>조합설립·동의징구·관리처분·분양신청 대응</li>
                             <li><i class="fa-solid fa-check"></i>일반절차(11단계)·신속통합기획 이원 추진관리</li>
-                            <li><i class="fa-solid fa-check"></i>HUG 사업비·이주비 보증 업무 원스톱 대행</li>
                         </ul>
                         <div class="sv-tags">
                             <span class="sv-tag">일반절차 11단계</span>
                             <span class="sv-tag">신속통합기획</span>
                             <span class="sv-tag">통합건축심의</span>
                             <span class="sv-tag">관리처분</span>
-                            <span class="sv-tag">HUG 보증</span>
                         </div>
                     </div>
                 </a>
@@ -365,14 +365,12 @@
                             <li><i class="fa-solid fa-check"></i>일반절차(12단계)·신속통합기획 이원 추진관리</li>
                             <li><i class="fa-solid fa-check"></i>안전진단(재건축진단) 및 사업시행 대응</li>
                             <li><i class="fa-solid fa-check"></i>관리처분 및 이해관계 검토</li>
-                            <li><i class="fa-solid fa-check"></i>HUG 사업비·이주비 보증 업무 원스톱 대행</li>
                         </ul>
                         <div class="sv-tags">
                             <span class="sv-tag">일반절차 12단계</span>
                             <span class="sv-tag">신속통합기획</span>
                             <span class="sv-tag">재건축진단</span>
                             <span class="sv-tag">관리처분</span>
-                            <span class="sv-tag">HUG 보증</span>
                         </div>
                     </div>
                 </a>
@@ -436,7 +434,7 @@
         </div>
 
         <!-- 특화사업 -->
-        <div class="sv-section">
+        <div class="sv-section" style="margin-top:64px">
             <h2 class="section-title">엔지니어링사업</h2>
             <div class="sv-card-grid">
 

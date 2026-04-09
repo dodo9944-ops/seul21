@@ -22,8 +22,8 @@
        ================================================================ */
 
     /* === 자료실 히어로 보정 — 탐색형 컴팩트 === */
-    .uni-hero.lib-compact { padding: 48px 0 40px; }
-    .uni-hero.lib-compact .inner { gap: 40px; }
+    .uni-hero.lib-compact { padding: 32px 0 28px; }
+    .uni-hero.lib-compact .inner { gap: 24px; }
     .uni-hero.lib-compact .uh-text h1 { font-size: 32px; margin-bottom: 10px; }
     .uni-hero.lib-compact .uh-sub { font-size: 14px; max-width: 420px; }
     .uni-hero.lib-compact .uh-bc { margin-bottom: 14px; }
@@ -220,17 +220,11 @@
             <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>자료실</span></div>
             <div class="uh-label">PROFESSIONAL ARCHIVE</div>
             <h1>정비사업 <em>실무 자료</em>를 한곳에서</h1>
-            <p class="uh-sub">법령·판례·지침·서식·가이드 — 정비사업에 필요한 공식 자료를 체계적으로 제공합니다</p>
-            <div class="uh-stats">
-                <div class="uh-stat"><strong id="libTotal">0</strong><span>전체 자료</span></div>
-                <div class="uh-stat"><strong id="libLaw">0</strong><span>법령·조례</span></div>
-                <div class="uh-stat"><strong id="libCase">0</strong><span>판례·질의회신</span></div>
-                <div class="uh-stat"><strong id="libGuide">0</strong><span>가이드</span></div>
-            </div>
+            <p class="uh-sub">입찰공고 / 고시·공고 / 서식·매뉴얼 / 주요뉴스 — 정비사업에 필요한 공식 자료를 체계적으로 제공합니다</p>
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_library.png" alt="세울엔지니어링 자료실"></div>
-            <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>법령·조례</h4><p>도시정비법 및 관련 법령</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-gavel"></i></div><h4>판례·질의회신</h4><p>주요 판례 및 유권해석</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·양식</h4><p>실무 서식 및 신청양식</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-book-open"></i></div><h4>가이드</h4><p>실무 매뉴얼 및 해설</p></div></div>
+            <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>입찰공고</h4><p>도시정비법 및 관련 법령</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-gavel"></i></div><h4>고시·공고</h4><p>판례·질의회신 및 지침·규정</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></div></div>
         </div>
     </div>
 </div>
@@ -242,7 +236,7 @@
     <div class="ctrl-bar">
         <div class="ctrl-search">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="자료명, 키워드, 법령명, 판례번호로 검색하세요">
+            <input type="text" id="searchInput" placeholder="자료명으로 검색하세요">
         </div>
         <div class="ctrl-sort">
             <label>정렬</label>
@@ -254,8 +248,6 @@
         </div>
         <div class="ctrl-count" id="resultCount"></div>
     </div>
-
-    <div class="pop-sec" id="popSec"></div>
 
     <div class="lib-list" id="libList"></div>
 
@@ -306,31 +298,30 @@ function srcBadge(item){
     return null}
 
 var catDefs=[
-    {key:'전체',icon:'',label:'전체'},
-    {key:'법령',icon:'fa-scale-balanced',label:'법령·조례'},
-    {key:'관련판례',icon:'fa-gavel',label:'판례·질의회신'},
-    {key:'지침',icon:'fa-clipboard-list',label:'지침·규정'},
-    {key:'서식',icon:'fa-file-pen',label:'서식·양식'},
-    {key:'가이드',icon:'fa-book-open',label:'가이드·매뉴얼'},
-    {key:'주요뉴스',icon:'fa-newspaper',label:'주요뉴스'}];
-function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){c[i.category]=(c[i.category]||0)+1;c['전체']++});return c}
+    {key:'전체',keys:null,icon:'',label:'전체'},
+    {key:'법령',keys:['법령'],icon:'fa-scale-balanced',label:'입찰공고'},
+    {key:'판례지침',keys:['관련판례','지침'],icon:'fa-gavel',label:'고시·공고'},
+    {key:'서식가이드',keys:['서식','가이드'],icon:'fa-file-pen',label:'서식·매뉴얼'},
+    {key:'주요뉴스',keys:['주요뉴스'],icon:'fa-newspaper',label:'주요뉴스'}];
+function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){c['전체']++;catDefs.forEach(function(d){if(d.keys&&d.keys.indexOf(i.category)>=0)c[d.key]++})});return c}
 
 /* Hero stats */
 !function(){var el=document.getElementById('heroStats');if(!el)return;var cc=getCatCounts();
 el.innerHTML=
 '<div class="hs"><strong>'+cc['전체']+'</strong><span>전체 자료</span></div>'+
-'<div class="hs"><strong>'+cc['법령']+'</strong><span>법령·조례</span></div>'+
-'<div class="hs"><strong>'+cc['관련판례']+'</strong><span>판례·질의회신</span></div>'+
-'<div class="hs"><strong>'+cc['서식']+'</strong><span>서식·양식</span></div>'+
-'<div class="hs"><strong>'+cc['가이드']+'</strong><span>가이드</span></div>'}();
+'<div class="hs"><strong>'+cc['법령']+'</strong><span>입찰공고</span></div>'+
+'<div class="hs"><strong>'+cc['판례지침']+'</strong><span>고시·공고</span></div>'+
+'<div class="hs"><strong>'+cc['서식가이드']+'</strong><span>서식·매뉴얼</span></div>'+
+'<div class="hs"><strong>'+cc['주요뉴스']+'</strong><span>주요뉴스</span></div>'}();
 
 /* Hero inline stats */
 !function(){var cc=getCatCounts();
-var e1=document.getElementById('libTotal'),e2=document.getElementById('libLaw'),e3=document.getElementById('libCase'),e4=document.getElementById('libGuide');
+var e1=document.getElementById('libTotal'),e2=document.getElementById('libLaw'),e3=document.getElementById('libCase'),e4=document.getElementById('libGuide'),e5=document.getElementById('libNews');
 if(e1)e1.textContent=cc['전체']||0;
 if(e2)e2.textContent=cc['법령']||0;
-if(e3)e3.textContent=cc['관련판례']||0;
-if(e4)e4.textContent=cc['가이드']||0;
+if(e3)e3.textContent=cc['판례지침']||0;
+if(e4)e4.textContent=cc['서식가이드']||0;
+if(e5)e5.textContent=cc['주요뉴스']||0;
 }();
 
 /* Tabs */
@@ -340,25 +331,10 @@ var ic=d.icon?'<i class="fa-solid '+d.icon+'"></i> ':'';
 return'<button class="cat-tab'+(curCat===d.key?' on':'')+'" data-cat="'+d.key+'">'+ic+d.label+'<span class="cnt">'+cc[d.key]+'</span></button>'}).join('')}
 
 /* Popular section */
-function renderPop(){
-var popular=allItems.filter(function(i){return i.downloads>=80}).sort(function(a,b){return b.downloads-a.downloads}).slice(0,6);
-var el=document.getElementById('popSec');
-if(!popular.length){el.style.display='none';return}
-el.style.display='';
-var html='<div class="pop-head"><div class="ph-icon"><i class="fa-solid fa-fire"></i></div><h3>인기 자료</h3><span>다운로드가 많은 실무 추천 자료</span></div><div class="pop-grid">';
-popular.forEach(function(i,idx){
-var fi=getIcon(i.fileType);
-html+='<div class="pop-card" data-id="'+i.id+'"><div class="pop-rank">'+(idx+1)+'</div>'+
-'<div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div>'+
-'<div class="pop-body"><div class="pop-title">'+i.title+'</div>'+
-'<div class="pop-info"><i class="fa-solid fa-download"></i> '+(i.downloads||0)+'회'+
-'<span style="margin:0 6px;color:var(--gray-200)">·</span>'+i.fileSize+'</div></div></div>'});
-html+='</div>';el.innerHTML=html}
-
 /* Filter + Sort */
 function getFiltered(){
 var items=allItems;
-if(curCat!=='전체')items=items.filter(function(i){return i.category===curCat});
+if(curCat!=='전체'){var curDef=catDefs.find(function(d){return d.key===curCat});var curKeys=curDef&&curDef.keys?curDef.keys:[curCat];items=items.filter(function(i){return curKeys.indexOf(i.category)>=0});}
 if(searchQ){var q=searchQ.toLowerCase();items=items.filter(function(i){
 return(i.title||'').toLowerCase().indexOf(q)>=0||(i.description||'').toLowerCase().indexOf(q)>=0||
 (i.tags||[]).some(function(t){return t.toLowerCase().indexOf(q)>=0})})}
@@ -418,7 +394,6 @@ document.getElementById('catTabs').addEventListener('click',function(e){var btn=
 document.getElementById('searchInput').addEventListener('input',function(){searchQ=this.value.trim();curPage=1;render()});
 document.getElementById('sortSelect').addEventListener('change',function(){curSort=this.value;curPage=1;render()});
 document.getElementById('perSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;render()});
-document.getElementById('popSec').addEventListener('click',function(e){var c=e.target.closest('.pop-card');if(c)handleDownload(c.dataset.id)});
 document.getElementById('libList').addEventListener('click',function(e){var btn=e.target.closest('.btn-dl')||e.target.closest('.lib-title');if(btn)handleDownload(btn.dataset.id)});
 
 var urlCat=new URLSearchParams(location.search).get('cat');
@@ -502,7 +477,7 @@ var item=allItems.find(function(i){return i.id===id});if(item){item.downloads=(i
 
 window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.querySelector('.ctrl-bar').offsetTop-80,behavior:'smooth'})}};
 
-renderTabs();renderPop();render();
+renderTabs();render();
 
 /* sticky shadow toggle */
 var catWrap=document.querySelector('.cat-wrap');
