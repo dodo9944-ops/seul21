@@ -148,16 +148,9 @@
 <div class="page-body">
     <div class="inner">
         <div class="filter-bar">
-            <select class="form-select" id="filterCategory">
-                <option value="전체">전체</option>
-                <option value="정책">정책</option>
-                <option value="시장분석">시장분석</option>
-                <option value="개발호재">개발호재</option>
-                <option value="분석">분석</option>
-            </select>
             <select class="form-select" id="filterSort">
                 <option value="date:desc">최신순</option>
-                <option value="views:desc">조회순</option>
+                <option value="views:desc">다운로드순</option>
             </select>
         </div>
         <div class="result-info" id="resultInfo"></div>
@@ -236,65 +229,67 @@
 (function() {
     let currentPage = 1;
     const pageSize = 6;
-    const categoryIcons = {
-        '정책': 'fa-landmark',
-        '시장분석': 'fa-chart-bar',
-        '개발호재': 'fa-road',
-        '분석': 'fa-magnifying-glass-chart'
-    };
 
-    function badgeClass(cat) {
-        const map = { '정책': 'badge-info', '시장분석': 'badge-outline', '개발호재': 'badge-success', '분석': 'badge-gray' };
-        return map[cat] || 'badge-gray';
+    /* 메인화면과 동일한 newsFileMap */
+    const newsFileMap={'news0329':'../downloads/news_20260329.html','news0330':'../downloads/news_20260330.html','news0331':'../downloads/news_20260331.html','news0401':'../downloads/news_20260401.html','news0402':'../downloads/news_20260402.html','news0403':'../downloads/news_20260403.html','news0404':'../downloads/news_20260404.html','news0405':'../downloads/news_20260405.html','news0406a':'../downloads/news_20260406a.html','news0406b':'../downloads/news_20260406b.html','news0407a':'../downloads/news_20260407a.html','news0407b':'../downloads/news_20260407b.html','news0407c':'../downloads/news_20260407c.html','news0408':'../downloads/news_20260408.html','lib48':'../downloads/news_20260405.html'};
+
+    function getNewsData() {
+        if (!MOCK || !MOCK.library) return [];
+        return MOCK.library.filter(function(i){ return i.category === '주요뉴스'; });
     }
 
     function load() {
-        const category = document.getElementById('filterCategory').value;
         const sort = document.getElementById('filterSort').value;
-        const filter = {};
-        if (category !== '전체') filter.category = category;
+        let items = getNewsData();
 
-        const result = DataService.query('news', { filter, sort, page: currentPage, pageSize });
+        /* 정렬 */
+        if (sort === 'date:desc') {
+            items.sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+        } else if (sort === 'views:desc') {
+            items.sort(function(a,b){ return (b.downloads||0) - (a.downloads||0); });
+        }
+
+        const total = items.length;
+        const totalPages = Math.ceil(total / pageSize);
+        const start = (currentPage - 1) * pageSize;
+        const pageItems = items.slice(start, start + pageSize);
+
         const list = document.getElementById('newsList');
+        document.getElementById('resultInfo').innerHTML = '총 <strong>' + total + '</strong>건의 뉴스';
 
-        document.getElementById('resultInfo').innerHTML = `총 <strong>${result.total}</strong>건의 뉴스`;
-
-        if (result.data.length === 0) {
-            list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-newspaper"></i><h3>뉴스가 없습니다</h3><p>해당 카테고리의 뉴스가 없습니다.</p></div>`;
+        if (pageItems.length === 0) {
+            list.innerHTML = '<div class="empty-state"><i class="fa-solid fa-newspaper"></i><h3>뉴스가 없습니다</h3><p>등록된 주요뉴스가 없습니다.</p></div>';
+            document.getElementById('pagination').innerHTML = '';
             return;
         }
 
-        list.innerHTML = result.data.map(n => `
-            <div class="news-item" onclick="location.href='news-detail.html?id=${n.id}'">
-                <div class="news-thumb">
-                    <i class="fa-solid ${categoryIcons[n.category] || 'fa-newspaper'}"></i>
-                </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <span class="badge ${badgeClass(n.category)}">${n.category}</span>
-                    </div>
-                    <h3>${n.title}</h3>
-                    <p class="news-summary">${n.summary}</p>
-                    <div class="news-bottom">
-                        <span><i class="fa-regular fa-calendar"></i> ${n.date}</span>
-                        <span><i class="fa-regular fa-eye"></i> ${App.comma(n.views)}</span>
-                        <span><i class="fa-regular fa-user"></i> ${n.author}</span>
-                    </div>
-                </div>
-            </div>
-        `).join('');
+        list.innerHTML = pageItems.map(function(n) {
+            var href = newsFileMap[n.id] || '#';
+            return '<a href="' + href + '" class="news-item" style="text-decoration:none;color:inherit;">' +
+                '<div class="news-thumb"><i class="fa-solid fa-newspaper"></i></div>' +
+                '<div class="news-content">' +
+                    '<h3>' + n.title + '</h3>' +
+                    '<p class="news-summary">' + n.description + '</p>' +
+                    '<div class="news-bottom">' +
+                        '<span><i class="fa-regular fa-calendar"></i> ' + n.date + '</span>' +
+                        '<span><i class="fa-solid fa-download"></i> ' + (n.downloads||0) + '</span>' +
+                    '</div>' +
+                '</div></a>';
+        }).join('');
 
-        App.renderPagination('pagination', result.totalPages, result.page, pg => {
-            currentPage = pg;
-            load();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        if (typeof App !== 'undefined' && App.renderPagination) {
+            App.renderPagination('pagination', totalPages, currentPage, function(pg) {
+                currentPage = pg;
+                load();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
     }
 
-    document.getElementById('filterCategory').addEventListener('change', () => { currentPage = 1; load(); });
-    document.getElementById('filterSort').addEventListener('change', () => { currentPage = 1; load(); });
+    document.getElementById('filterSort').addEventListener('change', function() { currentPage = 1; load(); });
 
     document.addEventListener('DOMContentLoaded', load);
+})();
 })();
 
 /* 알림톡 신청 */
