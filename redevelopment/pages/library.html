@@ -390,13 +390,14 @@ h+='<button class="arr" '+(curPage===pages?'disabled':'')+' onclick="LIB.page('+
 pg.innerHTML=h}
 
 /* Events */
-document.getElementById('catTabs').addEventListener('click',function(e){var btn=e.target.closest('.cat-tab');if(!btn)return;curCat=btn.dataset.cat;curPage=1;renderTabs();render()});
+document.getElementById('catTabs').addEventListener('click',function(e){var btn=e.target.closest('.cat-tab');if(!btn)return;if(btn.dataset.cat==='주요뉴스'){location.href='news.html';return;}curCat=btn.dataset.cat;curPage=1;renderTabs();render()});
 document.getElementById('searchInput').addEventListener('input',function(){searchQ=this.value.trim();curPage=1;render()});
 document.getElementById('sortSelect').addEventListener('change',function(){curSort=this.value;curPage=1;render()});
 document.getElementById('perSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;render()});
 document.getElementById('libList').addEventListener('click',function(e){var btn=e.target.closest('.btn-dl')||e.target.closest('.lib-title');if(btn)handleDownload(btn.dataset.id)});
 
 var urlCat=new URLSearchParams(location.search).get('cat');
+if(urlCat==='주요뉴스'){location.href='news.html';return;}
 if(urlCat){curCat=urlCat}
 
 /* Download handler */
