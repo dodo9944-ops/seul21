@@ -1,5 +1,17 @@
 [
   {
+    "id": "mnr4wao9",
+    "name": "이창우",
+    "phone": "01087136323",
+    "interests": [
+      "정비사업 주요뉴스",
+      "부동산 정책"
+    ],
+    "status": "active",
+    "subscribedAt": "2026-04-09",
+    "unsubscribedAt": ""
+  },
+  {
     "id": "mnr1pi54",
     "name": "이창우",
     "phone": "01023309210",
