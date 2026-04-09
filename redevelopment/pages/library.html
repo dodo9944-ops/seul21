@@ -469,13 +469,24 @@ var fileMap={
 'news0408':{web:'../downloads/news_20260408.html'},
 'lib_law240407':{web:'../downloads/law_20260407.html'},
 'lib_qa240407a':{web:'../downloads/qa_20260407a.html'},
-'lib_qa240407b':{web:'../downloads/qa_20260407b.html'}};
+'lib_qa240407b':{web:'../downloads/qa_20260407b.html'},
+'news0408a':{web:'../downloads/news_20260408a.html'},
+'news0408b':{web:'../downloads/news_20260408b.html'},
+'news0408c':{web:'../downloads/news_20260408c.html'},
+'news0408d':{web:'../downloads/news_20260408d.html'},
+'news0409a':{web:'../downloads/news_20260409a.html'},
+'news0409b':{web:'../downloads/news_20260409b.html'},
+'news0409c':{web:'../downloads/news_20260409c.html'},
+'news0409d':{web:'../downloads/news_20260409d.html'},
+'law0409a':{gov:'https://www.housingherald.co.kr/news/articleView.html?idxno=50147',label:'하우징헤럴드 원문'},
+'law0409b':{gov:'https://www.moleg.go.kr/',label:'국가법령정보센터'},
+'case0409a':{gov:'https://www.scourt.go.kr/',label:'대법원 판례검색'}};
 var fileCache={};
 function checkFile(url,cb){if(fileCache[url]!==undefined)return cb(fileCache[url]);var x=new XMLHttpRequest();x.open('HEAD',url,true);x.onload=function(){fileCache[url]=x.status===200;cb(fileCache[url])};x.onerror=function(){fileCache[url]=false;cb(false)};x.send()}
 function handleDownload(id){
 var m=fileMap[id];
 if(!m){var item=allItems.find(function(i){return i.id===id});
-if(item&&item.category==='주요뉴스'){var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');var tryUrl='../downloads/news_'+dateStr+(suffix.match(/[ab]$/)?suffix.slice(-1):'')+'.html';location.href=tryUrl;return}
+if(item&&item.category==='주요뉴스'){var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');var tryUrl='../downloads/news_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html';location.href=tryUrl;return}
 App.toast('파일 준비 중입니다.','info');return}
 if(m.ext){checkFile(m.ext,function(ok){
 if(ok){var a=document.createElement('a');a.href=m.ext;a.download='';document.body.appendChild(a);a.click();document.body.removeChild(a);App.toast('파일 다운로드 시작','success')}
