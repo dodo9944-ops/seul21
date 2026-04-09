@@ -413,8 +413,11 @@ form.addEventListener('submit',function(e){
     btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> 접수 중...';
 
     var phone=document.getElementById('cPhone').value.trim();
-    fetch('/api/inquiries',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({name:name,email:email,phone:phone,type:type,title:title,content:content,files:uploadedFiles.map(function(f){return{name:f.name,size:f.size<1048576?(f.size/1024).toFixed(0)+'KB':(f.size/1048576).toFixed(1)+'MB'}})})
+    var fd=new FormData();
+    fd.append('name',name);fd.append('email',email);fd.append('phone',phone);
+    fd.append('type',type);fd.append('title',title);fd.append('content',content);
+    uploadedFiles.forEach(function(f){fd.append('files',f,f.name)});
+    fetch('/api/inquiries',{method:'POST',body:fd
     }).then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d}})})
     .then(function(res){
         btn.disabled=false;
