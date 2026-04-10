@@ -191,7 +191,7 @@
                     <h3>조합 운영에 어려움을 겪고 계신가요?</h3>
                     <p>세울엔지니어링이 이해관계 조율과 합의 도출을 체계적으로 지원합니다</p>
                 </div>
-                <a href="contact.html" class="cs-cta-btn"><i class="fa-solid fa-paper-plane"></i> 상담 문의하기</a>
+                <a href="contact.html" class="cs-cta-btn" onclick="if(typeof DataService!=='undefined'&&!DataService.isUserLoggedIn()){event.preventDefault();location.href='login.html';return false}"><i class="fa-solid fa-paper-plane"></i> 상담 문의하기</a>
             </div>
         </div>
 

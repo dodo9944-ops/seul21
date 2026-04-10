@@ -348,6 +348,31 @@
 <script src="../assets/js/common.js?v=20260407"></script>
 <script>
 (function(){
+/* 로그인 체크 — 비회원은 폼 숨기고 가입 안내 */
+if(!DataService.isUserLoggedIn()){
+    var formCard=document.querySelector('.ct-form-card');
+    if(formCard){
+        formCard.innerHTML='<div style="text-align:center;padding:60px 24px">'+
+            '<div style="width:72px;height:72px;border-radius:50%;background:rgba(195,165,105,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 20px"><i class="fa-solid fa-lock" style="font-size:28px;color:#C3A569"></i></div>'+
+            '<h2 style="font-size:20px;font-weight:800;color:#0A0F1C;margin-bottom:10px">회원 전용 서비스</h2>'+
+            '<p style="font-size:14px;color:#666;line-height:1.7;margin-bottom:28px">전문가 상담은 회원가입 후 이용하실 수 있습니다.<br>간편 가입 후 정비사업 전문 상담을 받아보세요.</p>'+
+            '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">'+
+                '<a href="login.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:#0A0F1C;color:#C3A569;font-size:14px;font-weight:700;border-radius:10px;text-decoration:none;transition:background 0.2s"><i class="fa-solid fa-right-to-bracket"></i> 로그인</a>'+
+                '<a href="register.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:#C3A569;color:#fff;font-size:14px;font-weight:700;border-radius:10px;text-decoration:none;transition:background 0.2s"><i class="fa-solid fa-user-plus"></i> 회원가입</a>'+
+            '</div>'+
+        '</div>';
+    }
+    return; /* 폼 스크립트 실행 중단 */
+}
+/* 로그인 상태: 이름·이메일 자동 채움 */
+var cu=DataService.getCurrentUser();
+if(cu){
+    var nameEl=document.getElementById('cName');
+    var emailEl=document.getElementById('cEmail');
+    if(nameEl&&cu.name){nameEl.value=cu.name;nameEl.readOnly=true;nameEl.style.background='var(--gray-50)'}
+    if(emailEl&&cu.email){emailEl.value=cu.email;emailEl.readOnly=true;emailEl.style.background='var(--gray-50)'}
+}
+
 /* Custom Select */
 var selBtn=document.getElementById('selBtn'),selList=document.getElementById('selList'),selInput=document.getElementById('cType');
 selBtn.addEventListener('click',function(){selList.classList.toggle('open');selBtn.classList.toggle('open')});
