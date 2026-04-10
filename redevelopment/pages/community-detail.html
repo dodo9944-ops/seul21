@@ -157,6 +157,7 @@
 
         // 본문
         const paragraphs = post.content.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+        const imagesHTML = (post.images && post.images.length) ? '<div class="post-images" style="display:flex;flex-wrap:wrap;gap:12px;margin:20px 0">' + post.images.map(u => '<a href="' + u + '" target="_blank" style="flex:0 0 auto"><img src="' + u + '" style="max-width:100%;max-height:400px;border-radius:10px;border:1px solid #e5e7eb;cursor:pointer" loading="lazy"></a>').join('') + '</div>' : '';
 
         document.getElementById('detailWrap').innerHTML = `
             <div class="breadcrumb">
@@ -175,7 +176,7 @@
                     <span><i class="fa-regular fa-eye"></i>${App.comma(viewCount)}</span>
                 </div>
             </div>
-            <div class="detail-body">${paragraphs}</div>
+            <div class="detail-body">${paragraphs}${imagesHTML}</div>
             <div class="like-section">
                 <button class="like-btn${liked ? ' liked' : ''}" id="likeBtn">
                     <i class="fa-${liked ? 'solid' : 'regular'} fa-heart"></i>

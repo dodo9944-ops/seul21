@@ -53,6 +53,37 @@
         }
         .validation-msg.show { display: block; }
 
+        /* 이미지 업로드 */
+        .img-upload-area {
+            border: 2px dashed var(--gray-300); border-radius: var(--radius-sm);
+            padding: 20px; text-align: center; cursor: pointer;
+            transition: all .2s; background: var(--gray-50);
+        }
+        .img-upload-area:hover, .img-upload-area.dragover {
+            border-color: var(--accent); background: rgba(195,165,105,.05);
+        }
+        .img-upload-area i { font-size: 24px; color: var(--gray-400); margin-bottom: 8px; }
+        .img-upload-area .up-text { font-size: 13px; color: var(--gray-500); }
+        .img-upload-area .up-hint { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+        .img-preview-list { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+        .img-preview-item {
+            position: relative; width: 120px; height: 120px;
+            border-radius: 8px; overflow: hidden; border: 1px solid var(--gray-200);
+        }
+        .img-preview-item img { width: 100%; height: 100%; object-fit: cover; }
+        .img-preview-item .img-del {
+            position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+            border-radius: 50%; background: rgba(0,0,0,.6); color: #fff; border: none;
+            font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+        }
+        .img-preview-item .img-status {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 3px; font-size: 10px; font-weight: 600; text-align: center;
+        }
+        .img-status.uploading { background: rgba(195,165,105,.9); color: #fff; }
+        .img-status.done { background: rgba(5,150,105,.9); color: #fff; }
+        .img-status.fail { background: rgba(239,68,68,.9); color: #fff; }
+
         @media (max-width: 540px) {
             .write-card { padding: 24px 20px; }
             .write-card h2 { font-size: 19px; }
@@ -89,6 +120,16 @@
                         <label class="form-label">제목 <span class="required">*</span></label>
                         <input type="text" class="form-input" id="postTitle" placeholder="제목을 입력해주세요" maxlength="100" required>
                         <div class="validation-msg" id="titleError">제목을 입력해주세요.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">이미지 첨부</label>
+                        <div class="img-upload-area" id="imgUploadArea">
+                            <i class="fa-solid fa-image"></i>
+                            <div class="up-text">이미지를 드래그하거나 클릭하여 첨부</div>
+                            <div class="up-hint">JPG · PNG · GIF · WEBP (최대 5MB, 5장)</div>
+                            <input type="file" id="imgInput" multiple accept="image/*" style="display:none">
+                        </div>
+                        <div class="img-preview-list" id="imgPreviewList"></div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">내용 <span class="required">*</span></label>
@@ -135,6 +176,65 @@
         document.getElementById('cancelBtn').addEventListener('click', function() {
             location.href = 'community.html';
         });
+
+        /* ── 이미지 업로드 ── */
+        var uploadedImages = []; // {file, url, status}
+        var imgArea = document.getElementById('imgUploadArea');
+        var imgInput = document.getElementById('imgInput');
+        var imgList = document.getElementById('imgPreviewList');
+
+        imgArea.addEventListener('click', function() { imgInput.click(); });
+        imgArea.addEventListener('dragover', function(e) { e.preventDefault(); imgArea.classList.add('dragover'); });
+        imgArea.addEventListener('dragleave', function() { imgArea.classList.remove('dragover'); });
+        imgArea.addEventListener('drop', function(e) { e.preventDefault(); imgArea.classList.remove('dragover'); handleImages(e.dataTransfer.files); });
+        imgInput.addEventListener('change', function() { handleImages(this.files); this.value = ''; });
+
+        function handleImages(files) {
+            Array.from(files).forEach(function(f) {
+                if (!f.type.startsWith('image/')) { App.toast(f.name + ': 이미지 파일만 가능', 'error'); return; }
+                if (f.size > 5 * 1024 * 1024) { App.toast(f.name + ': 5MB 초과', 'error'); return; }
+                if (uploadedImages.length >= 5) { App.toast('최대 5장까지 첨부 가능', 'error'); return; }
+                var img = { file: f, url: '', status: 'uploading' };
+                uploadedImages.push(img);
+                renderImages();
+                uploadImage(img, uploadedImages.length - 1);
+            });
+        }
+
+        function uploadImage(img, idx) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var base64 = reader.result.split(',')[1];
+                var ext = img.file.name.split('.').pop().toLowerCase();
+                var filename = 'community_' + Date.now() + '_' + idx + '.' + ext;
+                fetch('/api/upload-image', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ filename: filename, content: base64 })
+                })
+                .then(function(r) { return r.json(); })
+                .then(function(res) {
+                    if (res.url) { img.url = res.url; img.status = 'done'; }
+                    else { img.status = 'fail'; }
+                    renderImages();
+                })
+                .catch(function() { img.status = 'fail'; renderImages(); });
+            };
+            reader.readAsDataURL(img.file);
+        }
+
+        function renderImages() {
+            imgList.innerHTML = uploadedImages.map(function(img, i) {
+                var src = URL.createObjectURL(img.file);
+                var statusText = img.status === 'uploading' ? '업로드 중...' : img.status === 'done' ? '완료' : '실패';
+                return '<div class="img-preview-item">' +
+                    '<img src="' + src + '">' +
+                    '<button type="button" class="img-del" onclick="removeImg(' + i + ')"><i class="fa-solid fa-xmark"></i></button>' +
+                    '<div class="img-status ' + img.status + '">' + statusText + '</div>' +
+                '</div>';
+            }).join('');
+        }
+        window.removeImg = function(i) { uploadedImages.splice(i, 1); renderImages(); };
 
         // 유효성 검사
         function validate() {
@@ -184,10 +284,13 @@
                 String(now.getHours()).padStart(2, '0') + ':' +
                 String(now.getMinutes()).padStart(2, '0');
 
+            var images = uploadedImages.filter(function(img) { return img.status === 'done' && img.url; }).map(function(img) { return img.url; });
+
             const newPost = {
                 title: titleEl.value.trim(),
                 category: categoryEl.value,
                 content: contentEl.value.trim(),
+                images: images,
                 author: user.name,
                 date: dateStr,
                 views: 0,
