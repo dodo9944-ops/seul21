@@ -414,7 +414,7 @@ if(urlCat){curCat=urlCat}
 var investCard=document.getElementById('investCard');
 if(investCard){investCard.addEventListener('click',function(){
     if(DataService.isUserLoggedIn()){curCat='투자정보';curPage=1;renderTabs();render();window.scrollTo({top:document.querySelector('.page-body').offsetTop-80,behavior:'smooth'});}
-    else{location.href='register.html';}
+    else{location.href='login.html';}
 })}
 
 /* Download handler */

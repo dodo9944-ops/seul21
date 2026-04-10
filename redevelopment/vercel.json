@@ -10,7 +10,8 @@
     { "source": "/api/inquiries", "destination": "/api/inquiries" },
     { "source": "/api/members", "destination": "/api/members" },
     { "source": "/api/social-login", "destination": "/api/social-login" },
-    { "source": "/api/status", "destination": "/api/status" }
+    { "source": "/api/status", "destination": "/api/status" },
+    { "source": "/api/report", "destination": "/api/report" }
   ],
   "headers": [
     {
