@@ -62,11 +62,12 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 | 카테고리 | fileMap 형식 | 예시 |
 |---------|-------------|------|
 | 주요뉴스 (HTML 있음) | `{web:'../downloads/news_YYYYMMDD[x].html'}` | `'news0409a':{web:'../downloads/news_20260409a.html'}` |
-| 법령·조례 | `{gov:'원문URL', label:'출처명'}` | `'law0409a':{gov:'https://...', label:'하우징헤럴드 원문'}` |
-| 판례·질의회신 | `{gov:'원문URL', label:'출처명'}` | `'case0409a':{gov:'https://...', label:'대법원 판례검색'}` |
+| 법령·조례 | `{web:'../downloads/law_YYYYMMDD[x].html'}` | `'law0409a':{web:'../downloads/law_20260409a.html'}` |
+| 판례·질의회신 | `{web:'../downloads/case_YYYYMMDD[x].html'}` | `'case0409a':{web:'../downloads/case_20260409a.html'}` |
 | PDF 자료 | `{ext:'../downloads/files/파일.pdf'}` | — |
 
 **⚠ fileMap에 미등록 + 주요뉴스가 아닌 항목 → "파일 준비 중입니다" 토스트 오류 발생**
+**⚠ `gov` 링크(외부 사이트 연결) 사용 금지 — 반드시 자체 HTML 상세 페이지(`web`) 또는 PDF 직접 다운로드(`ext`) 방식만 사용**
 
 ### STEP 4. newsFileMap 등록 — index.html (주요뉴스만)
 
@@ -74,12 +75,13 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 - 예: `'news0409e':'downloads/news_20260409e.html'`
 - 다운로드 HTML이 없으면 등록 불필요 (자료실 주요뉴스 탭으로 자동 fallback)
 
-### STEP 5. 다운로드 HTML 페이지 (가능하면 생성)
+### STEP 5. 다운로드 HTML 페이지 (필수 생성)
 
-`redevelopment/downloads/` 에 상세 페이지를 생성하면 클릭 시 바로 열린다.
+`redevelopment/downloads/` 에 상세 페이지를 **반드시** 생성한다. 외부 사이트 연결(`gov`) 금지.
 - 뉴스: `news_YYYYMMDD[a-z].html`
 - 법령: `law_YYYYMMDD[a-z].html`
 - 판례: `case_YYYYMMDD[a-z].html`
+- PDF 자료: `ext` 경로로 직접 다운로드 (별도 HTML 불필요)
 
 ### STEP 6. 라이브 검수 (필수)
 
@@ -114,3 +116,17 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 | 2026-04-09 | 법령·판례 클릭 시 "파일 준비 중" 토스트만 표시 | `fileMap`에 law/case ID 미등록 | fileMap에 gov 링크 등록 |
 | 2026-04-09 | 뉴스 c/d/e/f 자동경로 생성 실패 | `handleDownload` regex가 `[ab]`만 처리 | `[a-z]`로 확장 |
 | 2026-04-09 | 라이브 링크 404 | 도메인을 `seul21.vercel.app`으로 잘못 안내 | `seul21.com` 사용 |
+| 2026-04-10 | 법령·판례 클릭 시 외부 사이트 confirm 대화상자 표시 | fileMap에 `gov` 링크만 등록, `handleDownload`에서 confirm+window.open 사용 | `gov` 제거 → 자체 HTML 상세 페이지(`web`) 생성으로 전환 |
+| 2026-04-10 | PDF 다운로드 시 외부 사이트로 fallback | `checkFile` HEAD 요청 실패 시 `gov` 사이트로 리디렉션 | `checkFile` 제거, `ext` 파일 즉시 직접 다운로드로 변경 |
+
+---
+
+## 다운로드 정책 (2026-04-10~)
+
+> **모든 첨부자료는 사이트 내 직접 다운로드/열람만 허용. 외부 사이트 연결 금지.**
+
+1. **PDF 자료** (`ext`) → `a.download`로 즉시 다운로드. `checkFile` HEAD 요청 없음
+2. **뉴스·법령·판례** (`web`) → 자체 HTML 상세 페이지로 이동. 외부 링크 금지
+3. **`gov` 링크 사용 금지** — confirm 대화상자, window.open 외부 사이트 연결 절대 불가
+4. 다운로드 우선순위: `ext`(직접 다운로드) > `web`(상세 페이지) > 없으면 토스트 안내
+5. `index.html`의 `mainLibDownload`도 동일 정책 적용
