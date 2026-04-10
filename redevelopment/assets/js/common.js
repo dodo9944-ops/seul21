@@ -27,6 +27,7 @@ const App = (() => {
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
       { href: `${B}/pages/community.html`, label: '커뮤니티', icon: 'fa-solid fa-comments' },
+      { href: `${B}/pages/location.html`, label: '내 위치', icon: 'fa-solid fa-location-crosshairs' },
       { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-calculator' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
       { href: `${B}/intranet/index.html`, label: '인트라넷', icon: 'fa-solid fa-lock' },
@@ -113,6 +114,10 @@ const App = (() => {
             { href:`${B}/pages/notice.html`, label:'공지사항' },
             { href:`${B}/pages/library.html?cat=주요뉴스`, label:'뉴스·자료' },
             { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
+          ]},
+          { href:`${B}/pages/location.html`, label:'내 위치 파악', icon:'fa-solid fa-location-crosshairs', sub:[
+            { href:`${B}/pages/location.html`, label:'내 위치 파악' },
+            { href:`${B}/pages/portfolio.html`, label:'사업구역 전체' },
           ]},
           { href:`${B}/pages/feasibility.html`, label:'사업성 검토', icon:'fa-solid fa-calculator', sub:[
             { href:`${B}/pages/feasibility.html`, label:'사업성 분석 도구' },
