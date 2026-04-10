@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>처리보고 발송 — 세울엔지니어링</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans KR',sans-serif;background:#f5f6f8;display:flex;align-items:center;justify-content:center;min-height:100vh}
+.card{background:#fff;border-radius:16px;padding:40px;max-width:600px;width:100%;box-shadow:0 4px 24px rgba(0,0,0,0.08)}
+h1{font-size:20px;font-weight:800;color:#0A0F1C;margin-bottom:8px}
+.sub{font-size:13px;color:#888;margin-bottom:24px}
+.report{background:#f8f9fa;border:1px solid #e5e7eb;border-radius:10px;padding:16px;font-size:12.5px;color:#444;line-height:1.8;max-height:400px;overflow-y:auto;margin-bottom:24px;white-space:pre-line}
+.btn{width:100%;padding:14px;background:#0A0F1C;color:#C3A569;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s}
+.btn:hover{background:#142644}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+.result{margin-top:16px;padding:12px;border-radius:8px;font-size:13px;font-weight:600;display:none}
+.result.ok{display:block;background:rgba(30,140,94,0.08);color:#1E8C5E}
+.result.err{display:block;background:rgba(214,66,58,0.08);color:#D6423A}
+</style>
+</head>
+<body>
+<div class="card">
+    <h1>텔레그램 처리보고 발송</h1>
+    <div class="sub">아래 내용이 텔레그램으로 전송됩니다.</div>
+    <div class="report" id="preview"></div>
+    <button class="btn" id="sendBtn" onclick="sendReport()">텔레그램 발송</button>
+    <div class="result" id="result"></div>
+</div>
+<script>
+var reportText = '\ud83d\udccb <b>[세울엔지니어링 \u2014 홈페이지 작업 처리보고]</b>\n' +
+'\ud83d\udcc5 2026년 4월 10일\n\n' +
+'\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n' +
+'<b>1. 내 위치 파악 페이지 신설</b>\n' +
+'\u2022 Leaflet.js + OpenStreetMap 인터랙티브 지도\n' +
+'\u2022 GPS 현재 위치 감지 + 10개 구역 마커 + 거리순 정렬\n' +
+'\u2022 요약 카드 (전체/가장가까운/5km이내/인기)\n' +
+'\ud83d\udd17 https://seul21.com/pages/location.html\n\n' +
+'<b>2. 자료실 투자정보 카테고리 신설</b>\n' +
+'\u2022 투자정보 탭 추가 (catDefs, _catKeyMap, fileMap 전체 등록)\n' +
+'\u2022 가락현대5차 네이버부동산 매물 상세페이지 생성\n' +
+'\u2022 매매 6건 / 전세 4건 / 실거래가 / 입지분석 / 투자포인트\n' +
+'\ud83d\udd17 https://seul21.com/pages/library.html?cat=\ud22c\uc790\uc815\ubcf4\n\n' +
+'<b>3. 투자정보 회원전용 처리</b>\n' +
+'\u2022 비로그인 클릭 \u2192 로그인 페이지 이동\n' +
+'\u2022 로그인 상태 \u2192 투자정보 탭 필터\n' +
+'\u2022 회원전용 잠금 아이콘 표시\n\n' +
+'<b>4. 사업분야 법령 연결 버튼 추가</b>\n' +
+'\u2022 6개 사업분야 카드에 관련법령 보기 버튼\n' +
+'\u2022 재개발/재건축/소규모/도심복합 \u2192 법령\u00b7제도\n' +
+'\u2022 도시계획 \u2192 고시\u00b7공고 / PM\u00b7CM \u2192 서식\u00b7매뉴얼\n\n' +
+'<b>5. 회사소개 사업분야 메뉴 통일</b>\n' +
+'\u2022 about.html 카드명+링크 메뉴 구조와 동일하게 변경\n' +
+'\u2022 각 카드 클릭 \u2192 해당 서비스 상세 페이지 이동\n\n' +
+'<b>6. 외부자산 수집금지 정책 반영</b>\n' +
+'\u2022 CLAUDE.md에 외부 URL 다운로드 금지 정책 추가\n\n' +
+'\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n' +
+'\u2705 검수 전항목 통과\n' +
+'\ud83d\udd27 버그수정 1건 (투자정보 클릭 경로)\n' +
+'\ud83d\ude80 master 배포 완료\n' +
+'\ud83c\udf10 https://seul21.com';
+
+document.getElementById('preview').textContent = reportText.replace(/<\/?b>/g,'').replace(/\u2022/g, '  •');
+
+function sendReport() {
+    var btn = document.getElementById('sendBtn');
+    var result = document.getElementById('result');
+    btn.disabled = true;
+    btn.textContent = '발송 중...';
+    result.className = 'result';
+
+    fetch('/api/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: reportText })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        if (data.ok) {
+            result.className = 'result ok';
+            result.textContent = '텔레그램 발송 완료!';
+        } else {
+            result.className = 'result err';
+            result.textContent = '발송 실패: ' + (data.error || JSON.stringify(data));
+        }
+        btn.textContent = '발송 완료';
+    })
+    .catch(function(e) {
+        result.className = 'result err';
+        result.textContent = '네트워크 오류: ' + e.message;
+        btn.disabled = false;
+        btn.textContent = '다시 시도';
+    });
+}
+</script>
+</body>
+</html>
