@@ -432,5 +432,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const s = document.createElement('script');
     s.src = b + '/assets/js/chatbot.js?v=20260408d';
     document.body.appendChild(s);
+
+    /* 텍스트 복사 금지 + 이미지 다운로드 금지 */
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('selectstart', e => { if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault(); });
+    document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+    document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+    document.querySelectorAll('img').forEach(i => { i.setAttribute('draggable', 'false'); i.style.pointerEvents = 'none'; });
+    new MutationObserver(muts => { muts.forEach(m => m.addedNodes.forEach(n => { if (n.querySelectorAll) n.querySelectorAll('img').forEach(i => { i.setAttribute('draggable', 'false'); i.style.pointerEvents = 'none'; }); })); }).observe(document.body, { childList: true, subtree: true });
   }
 });
