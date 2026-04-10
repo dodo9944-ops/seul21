@@ -31,6 +31,19 @@ async function saveData(items, sha) {
   });
 }
 
+async function sendTelegram(text) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) return;
+  try {
+    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' })
+    });
+  } catch (e) { /* 텔레그램 실패해도 글 등록은 유지 */ }
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -62,6 +75,18 @@ module.exports = async function handler(req, res) {
       };
       items.unshift(newPost);
       await saveData(items, sha);
+
+      // 텔레그램 알림
+      const preview = content.length > 200 ? content.substring(0, 200) + '...' : content;
+      const tgMsg = `📝 <b>[커뮤니티 새 글]</b>\n\n` +
+        `<b>카테고리:</b> ${newPost.category}\n` +
+        `<b>제목:</b> ${newPost.title}\n` +
+        `<b>작성자:</b> ${newPost.author}\n` +
+        `<b>작성일:</b> ${newPost.date}\n\n` +
+        `<b>내용:</b>\n${preview}\n\n` +
+        `🔗 https://seul21.com/pages/community-detail.html?id=${newPost.id}`;
+      sendTelegram(tgMsg);
+
       return res.status(201).json({ message: '게시글 등록 완료', id: newPost.id });
     }
 

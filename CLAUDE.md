@@ -106,6 +106,21 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 | 홈페이지 | `redevelopment/index.html` | `newsFileMap`, `_catKeyMap`, `_libFileMap` |
 | 다운로드 HTML | `redevelopment/downloads/` | 뉴스·법령·판례 상세페이지 |
 | 다운로드 PDF | `redevelopment/downloads/files/` | PDF 원본 파일 |
+| 커뮤니티 API | `redevelopment/api/community.js` | 글 CRUD + 텔레그램 알림 |
+| 커뮤니티 데이터 | `redevelopment/data/community.json` | GitHub 저장소 직접 저장 |
+
+---
+
+## 커뮤니티 운영 정책 (2026-04-10~)
+
+> **커뮤니티 글쓰기 시 텔레그램으로 즉시 알림 전달. 글은 API(GitHub)와 로컬 동시 저장.**
+
+1. **글 작성** → `POST /api/community` → GitHub `community.json` 저장 + 텔레그램 알림 + 로컬 localStorage 동시 저장
+2. **글 목록** → 로컬 데이터 + API 최신 데이터 병합 렌더링 (페이지 로드 시 자동)
+3. **글 상세** → 로컬에 없으면 API에서 조회 후 표시
+4. **텔레그램 알림 내용** → 카테고리, 제목, 작성자, 작성일, 내용 미리보기(200자), 상세 링크
+5. **텔레그램 실패 시** → 글 등록은 정상 유지 (알림만 실패)
+6. 환경변수: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` 필수
 
 ---
 
