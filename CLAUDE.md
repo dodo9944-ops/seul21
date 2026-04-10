@@ -131,3 +131,68 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 3. **`gov` 링크 사용 금지** — confirm 대화상자, window.open 외부 사이트 연결 절대 불가
 4. 다운로드 우선순위: `ext`(직접 다운로드) > `web`(상세 페이지) > 없으면 토스트 안내
 5. `index.html`의 `mainLibDownload`도 동일 정책 적용
+
+---
+
+## 지침 변경 이력 — 신구대비 (2026-04-10)
+
+### 1. 상단 운영 규칙 추가
+
+| 구분 | 내용 |
+|------|------|
+| **구** | _(해당 규칙 없음)_ |
+| **신** | **코드 변경 시 관련 지침(CLAUDE.md)도 반드시 동시에 업데이트한다. 코드만 바꾸고 지침을 빠뜨리면 안 된다.** |
+
+### 2. STEP 3. fileMap 등록 — 법령·판례 형식 변경
+
+| 구분 | 카테고리 | fileMap 형식 | 예시 |
+|------|---------|-------------|------|
+| **구** | 법령·조례 | `{gov:'원문URL', label:'출처명'}` | `'law0409a':{gov:'https://...', label:'하우징헤럴드 원문'}` |
+| **신** | 법령·조례 | `{web:'../downloads/law_YYYYMMDD[x].html'}` | `'law0409a':{web:'../downloads/law_20260409a.html'}` |
+| **구** | 판례·질의회신 | `{gov:'원문URL', label:'출처명'}` | `'case0409a':{gov:'https://...', label:'대법원 판례검색'}` |
+| **신** | 판례·질의회신 | `{web:'../downloads/case_YYYYMMDD[x].html'}` | `'case0409a':{web:'../downloads/case_20260409a.html'}` |
+
+### 3. STEP 3. fileMap 경고문 추가
+
+| 구분 | 내용 |
+|------|------|
+| **구** | ⚠ fileMap에 미등록 + 주요뉴스가 아닌 항목 → "파일 준비 중입니다" 토스트 오류 발생 |
+| **신** | ⚠ fileMap에 미등록 + 주요뉴스가 아닌 항목 → "파일 준비 중입니다" 토스트 오류 발생 |
+|        | ⚠ **`gov` 링크(외부 사이트 연결) 사용 금지 — 반드시 자체 HTML 상세 페이지(`web`) 또는 PDF 직접 다운로드(`ext`) 방식만 사용** |
+
+### 4. STEP 5. 다운로드 HTML 페이지 — 필수화
+
+| 구분 | 내용 |
+|------|------|
+| **구** | 다운로드 HTML 페이지 **(가능하면 생성)** — 상세 페이지를 생성하면 클릭 시 바로 열린다. |
+| **신** | 다운로드 HTML 페이지 **(필수 생성)** — 상세 페이지를 **반드시** 생성한다. 외부 사이트 연결(`gov`) 금지. |
+
+### 5. handleDownload 로직 변경 (library.html)
+
+| 구분 | 코드 |
+|------|------|
+| **구** | `if(m.ext){checkFile(m.ext,function(ok){if(ok){...다운로드...}else if(m.gov){window.open(m.gov)}else if(m.web){...}})}` |
+| **신** | `if(m.ext){var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();...a.click()...}` |
+| **구** | `else if(m.gov){...confirm((m.label)+'에서 원문을 확인하시겠습니까?')...window.open(m.gov)}` |
+| **신** | `else if(m.gov){window.open(m.gov);App.toast('...로 이동합니다')}` _(기존 항목 대비용. 신규 등록 시 gov 사용 금지)_ |
+
+### 6. mainLibDownload 로직 변경 (index.html)
+
+| 구분 | 코드 |
+|------|------|
+| **구** | `if(m.ext){var x=new XMLHttpRequest();x.open('HEAD',m.ext,true);x.onload=function(){if(x.status===200){...다운로드...}else if(m.gov){window.open(m.gov)}...};x.send()}` |
+| **신** | `if(m.ext){var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();...a.click()...}` |
+
+### 7. 삭제된 코드
+
+| 구분 | 내용 |
+|------|------|
+| **구** | `var fileCache={};` + `function checkFile(url,cb){...XMLHttpRequest HEAD...}` (library.html) |
+| **신** | _(삭제됨 — 사전 파일 존재 확인 불필요)_ |
+
+### 8. 다운로드 정책 섹션 신설
+
+| 구분 | 내용 |
+|------|------|
+| **구** | _(해당 섹션 없음)_ |
+| **신** | "다운로드 정책 (2026-04-10~)" 섹션 추가 — ext 직접 다운로드, web 자체 페이지, gov 금지 |
