@@ -83,8 +83,8 @@ module.exports = async function handler(req, res) {
       if (action === 'login') {
         const { phone, password } = req.body;
         const { members } = await getMembers();
-        const member = members.find(m => m.phone === phone && m.password === password);
-        if (!member) return res.status(401).json({ error: '연락처 또는 비밀번호가 일치하지 않습니다.' });
+        const member = members.find(m => (m.phone === phone || m.userid === phone || m.email === phone) && m.password === password);
+        if (!member) return res.status(401).json({ error: '아이디 또는 비밀번호가 일치하지 않습니다.' });
         if (member.status !== '활성') return res.status(403).json({ error: '비활성 계정입니다.' });
         return res.status(200).json({
           message: '로그인 성공',
