@@ -1161,19 +1161,8 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
                 return;
             }
             if(m.web){location.href=m.web;return;}
-            if(m.ext){
-                var x=new XMLHttpRequest();x.open('HEAD',m.ext,true);
-                x.onload=function(){
-                    if(x.status===200){var a=document.createElement('a');a.href=m.ext;a.download='';document.body.appendChild(a);a.click();document.body.removeChild(a)}
-                    else if(m.gov){window.open(m.gov,'_blank')}
-                    else{location.href='pages/library.html'+(cat?'?cat='+encodeURIComponent(cat):'')}
-                };
-                x.onerror=function(){
-                    if(m.gov)window.open(m.gov,'_blank');
-                    else location.href='pages/library.html'+(cat?'?cat='+encodeURIComponent(cat):'');
-                };
-                x.send();
-            } else if(m.gov){window.open(m.gov,'_blank')}
+            if(m.ext){var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();document.body.appendChild(a);a.click();document.body.removeChild(a)}
+            else if(m.gov){window.open(m.gov,'_blank')}
         };
         libEl.innerHTML=libs.map(function(i){
             var ic=iconMap[i.fileType]||'fa-file';
