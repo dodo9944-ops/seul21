@@ -208,13 +208,15 @@
             .then(function(res) {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 등록';
+                /* API 성공 시 로컬에도 저장하여 즉시 반영 */
+                newPost.id = res.id || Date.now().toString(36);
+                DataService.create('community', newPost);
                 App.toast('게시글이 등록되었습니다.', 'success');
                 setTimeout(function() { location.href = 'community.html'; }, 800);
             })
             .catch(function() {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 등록';
-                // 오프라인 폴백
                 DataService.create('community', newPost);
                 App.toast('게시글이 등록되었습니다.', 'success');
                 setTimeout(function() { location.href = 'community.html'; }, 800);

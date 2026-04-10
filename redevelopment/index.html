@@ -1175,9 +1175,10 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
 
     /* 커뮤니티: 최신 5건 */
     var cmEl=document.getElementById('mainCommunity');
-    if(cmEl && MOCK.community){
-        var posts=MOCK.community.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,5);
-        cmEl.innerHTML=posts.map(function(p){
+    function renderCommunity(posts){
+        if(!cmEl||!posts||!posts.length)return;
+        posts.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});
+        cmEl.innerHTML=posts.slice(0,5).map(function(p){
             var ago='';
             if(p.date){var diff=Date.now()-new Date(p.date).getTime();var h=Math.floor(diff/36e5);ago=h<1?'방금':h<24?h+'시간 전':Math.floor(h/24)+'일 전'}
             return'<div class="comm-item">'+
@@ -1187,6 +1188,9 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
                 '<span class="comm-time">'+ago+'</span></div>';
         }).join('');
     }
+    if(cmEl && MOCK.community) renderCommunity(MOCK.community);
+    /* API에서 최신 커뮤니티 글 가져오기 */
+    if(cmEl){fetch('/api/community').then(function(r){return r.json()}).then(function(res){if(res.posts&&res.posts.length)renderCommunity(res.posts)}).catch(function(){})}
 })();
 </script>
 <!-- 메인 포트폴리오 상세 모달 JS -->

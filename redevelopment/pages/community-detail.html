@@ -142,12 +142,9 @@
         const id = App.getParam('id');
         if (!id) { location.href = 'community.html'; return; }
 
-        const post = DataService.getById('community', id);
-        if (!post) {
-            document.getElementById('detailWrap').innerHTML = `<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>게시글을 찾을 수 없습니다</h3><p>삭제되었거나 존재하지 않는 게시글입니다.</p><a href="community.html" class="btn btn-outline btn-sm">목록으로 돌아가기</a></div>`;
-            return;
-        }
+        var post = DataService.getById('community', id);
 
+        function renderPost(post) {
         // 조회수 증가
         DataService.update('community', id, { views: (post.views || 0) + 1 });
 
@@ -258,6 +255,22 @@
             input.value = '';
             App.toast('댓글이 등록되었습니다.', 'success');
         });
+        } /* end renderPost */
+
+        if (post) {
+            renderPost(post);
+        } else {
+            /* 로컬에 없으면 API에서 조회 */
+            fetch('/api/community').then(function(r){return r.json()}).then(function(res){
+                if(res.posts){
+                    var found=res.posts.find(function(p){return p.id===id});
+                    if(found){DataService.create('community',found);renderPost(found);return}
+                }
+                document.getElementById('detailWrap').innerHTML='<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>게시글을 찾을 수 없습니다</h3><p>삭제되었거나 존재하지 않는 게시글입니다.</p><a href="community.html" class="btn btn-outline btn-sm">목록으로 돌아가기</a></div>';
+            }).catch(function(){
+                document.getElementById('detailWrap').innerHTML='<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>게시글을 찾을 수 없습니다</h3><p>삭제되었거나 존재하지 않는 게시글입니다.</p><a href="community.html" class="btn btn-outline btn-sm">목록으로 돌아가기</a></div>';
+            });
+        }
     });
 })();
 </script>

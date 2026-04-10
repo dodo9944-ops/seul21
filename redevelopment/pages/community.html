@@ -225,6 +225,20 @@ function getAllPosts(){
 }
 var allPosts=getAllPosts();
 
+/* API에서 최신 데이터 가져와 병합 후 재렌더링 */
+fetch('/api/community').then(function(r){return r.json()}).then(function(res){
+    if(res.posts&&res.posts.length){
+        var localIds={};allPosts.forEach(function(p){localIds[p.id]=true});
+        var merged=false;
+        res.posts.forEach(function(p){
+            if(!localIds[p.id]){allPosts.unshift(p);merged=true;
+                DataService.create('community',p);
+            }
+        });
+        if(merged){allPosts.sort(function(a,b){return new Date(b.date)-new Date(a.date)});renderTabs();renderFeatured();render()}
+    }
+}).catch(function(){});
+
 /* Tabs with count */
 function renderTabs(){
     var counts={'전체':allPosts.length};
