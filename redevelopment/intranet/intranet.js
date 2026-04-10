@@ -6,7 +6,7 @@ const Intra = (() => {
 
   /* ── 계정 (비밀번호는 SHA-256 해시로 저장) ── */
   const ACCOUNTS = [
-    { id:'dodo6656', pwHash:'134d6e711ea0e26626b0eb6430b843822eb7d8ab03cca5a749d58ab7acf648b3', name:'이창우', role:'admin', dept:'대표이사' },
+    { id:'dodo6656', pwHash:'9d9c699441902026a0981cdf285b5b32141885d21508d41029385d4a1caa8f93', name:'이창우', role:'admin', dept:'대표이사' },
   ];
 
   /* ── 권한 레벨 ── */
