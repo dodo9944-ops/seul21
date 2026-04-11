@@ -313,7 +313,7 @@
 
         /* ── Init ── */
         document.addEventListener('DOMContentLoaded', function() {
-            areas = DataService.getAll('areas') || [];
+            areas = (typeof MOCK!=='undefined'&&MOCK.areas) ? MOCK.areas : DataService.getAll('areas') || [];
             initMap();
             requestLocation();
         });

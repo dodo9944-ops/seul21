@@ -246,7 +246,7 @@
         const items = [];
 
         // 최근 구역
-        const areas = DataService.getAll('areas');
+        const areas = (typeof MOCK!=='undefined'&&MOCK.areas)?MOCK.areas:DataService.getAll('areas');
         areas.slice(0, 3).forEach(function(a) {
             items.push({
                 icon: 'fa-building',

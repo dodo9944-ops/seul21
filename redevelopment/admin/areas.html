@@ -227,7 +227,7 @@
     };
 
     function render(keyword='') {
-        const items = DataService.getAll('areas');
+        const items = (typeof MOCK!=='undefined'&&MOCK.areas)?MOCK.areas:DataService.getAll('areas');
         const filtered = keyword ? items.filter(a => a.name.includes(keyword)) : items;
         const tbody = document.getElementById('tableBody');
         tbody.innerHTML = filtered.map(a => `

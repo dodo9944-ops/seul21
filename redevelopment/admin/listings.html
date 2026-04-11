@@ -208,7 +208,7 @@
 
     // Populate area select
     function loadAreaOptions() {
-        const areas = DataService.getAll('areas');
+        const areas = (typeof MOCK!=='undefined'&&MOCK.areas)?MOCK.areas:DataService.getAll('areas');
         const sel = document.getElementById('fAreaId');
         sel.innerHTML = '<option value="">-- 구역 선택 --</option>' + areas.map(a => '<option value="' + a.id + '">' + a.name + '</option>').join('');
     }
