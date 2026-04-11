@@ -569,3 +569,6 @@ const MOCK = {
 
 /* 전역 사용 가능하도록 export */
 if (typeof window !== 'undefined') window.MOCK = MOCK;
+
+/* areas-data.js 병합 (스크립트 로드 순서에 따라 자동 실행) */
+function _mergeAreas(){ if(typeof AREAS_EXTRA!=='undefined'&&MOCK.areas.length<50){MOCK.areas=MOCK.areas.concat(AREAS_EXTRA)} }
