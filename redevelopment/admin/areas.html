@@ -190,7 +190,8 @@
 </div>
 
 <div class="toast-container" id="toastContainer"></div>
-<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/data/mock-data.js?v=20260411"></script>
+<script src="../assets/data/areas-data.js?v=20260411"></script>
 <script src="../assets/js/data-service.js"></script>
 <script>
 (function() {
@@ -226,7 +227,7 @@
     };
 
     function render(keyword='') {
-        const items = DataService.getAll('areas');
+        const items = (typeof MOCK!=='undefined'&&MOCK.areas)?MOCK.areas:DataService.getAll('areas');
         const filtered = keyword ? items.filter(a => a.name.includes(keyword)) : items;
         const tbody = document.getElementById('tableBody');
         tbody.innerHTML = filtered.map(a => `

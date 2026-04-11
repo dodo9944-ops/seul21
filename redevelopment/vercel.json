@@ -1,5 +1,7 @@
 {
   "rewrites": [
+    { "source": "/", "destination": "/home.html" },
+    { "source": "/index.html", "destination": "/home.html" },
     { "source": "/api/chat", "destination": "/api/chat" },
     { "source": "/api/chat-expert", "destination": "/api/chat-expert" },
     { "source": "/api/chat-expert-webhook", "destination": "/api/chat-expert-webhook" },
@@ -14,6 +16,12 @@
     { "source": "/api/report", "destination": "/api/report" }
   ],
   "headers": [
+    {
+      "source": "/",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0" }
+      ]
+    },
     {
       "source": "/(.*)\\.html",
       "headers": [

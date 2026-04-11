@@ -295,9 +295,10 @@
 
     <div id="site-footer"></div>
 
-    <script src="../assets/data/mock-data.js"></script>
-    <script src="../assets/js/data-service.js"></script>
-    <script src="../assets/js/common.js"></script>
+    <script src="../assets/data/mock-data.js?v=20260411c"></script>
+    <script src="../assets/data/areas-data.js?v=20260411c"></script>
+    <script src="../assets/js/data-service.js?v=20260411c"></script>
+    <script src="../assets/js/common.js?v=20260411c"></script>
     <script>
     (function() {
         'use strict';
@@ -312,7 +313,13 @@
 
         /* ── Init ── */
         document.addEventListener('DOMContentLoaded', function() {
-            areas = DataService.getAll('areas') || [];
+            /* MOCK.areas + AREAS_EXTRA 직접 병합 */
+            var base = (typeof MOCK!=='undefined'&&MOCK.areas) ? MOCK.areas.slice() : [];
+            if(typeof AREAS_EXTRA!=='undefined'){
+                var ids={};base.forEach(function(a){ids[a.id]=true});
+                AREAS_EXTRA.forEach(function(a){if(!ids[a.id])base.push(a)});
+            }
+            areas = base;
             initMap();
             requestLocation();
         });

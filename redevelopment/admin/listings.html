@@ -179,7 +179,8 @@
 </div>
 
 <div class="toast-container" id="toastContainer"></div>
-<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/data/mock-data.js?v=20260411"></script>
+<script src="../assets/data/areas-data.js?v=20260411"></script>
 <script src="../assets/js/data-service.js"></script>
 <script>
 (function() {
@@ -207,7 +208,7 @@
 
     // Populate area select
     function loadAreaOptions() {
-        const areas = DataService.getAll('areas');
+        const areas = (typeof MOCK!=='undefined'&&MOCK.areas)?MOCK.areas:DataService.getAll('areas');
         const sel = document.getElementById('fAreaId');
         sel.innerHTML = '<option value="">-- 구역 선택 --</option>' + areas.map(a => '<option value="' + a.id + '">' + a.name + '</option>').join('');
     }

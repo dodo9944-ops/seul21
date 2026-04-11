@@ -190,7 +190,8 @@
     </div>
 </div>
 
-<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/data/mock-data.js?v=20260411"></script>
+<script src="../assets/data/areas-data.js?v=20260411"></script>
 <script src="../assets/js/data-service.js"></script>
 <script>
 (function() {
@@ -245,7 +246,7 @@
         const items = [];
 
         // 최근 구역
-        const areas = DataService.getAll('areas');
+        const areas = (typeof MOCK!=='undefined'&&MOCK.areas)?MOCK.areas:DataService.getAll('areas');
         areas.slice(0, 3).forEach(function(a) {
             items.push({
                 icon: 'fa-building',

@@ -28,45 +28,47 @@ h1{font-size:20px;font-weight:800;color:#0A0F1C;margin-bottom:8px}
     <div class="result" id="result"></div>
 </div>
 <script>
-var reportText = '\ud83d\udccb <b>[세울엔지니어링 \u2014 홈페이지 작업 처리보고]</b>\n' +
-'\ud83d\udcc5 2026년 4월 10일\n\n' +
+var reportText = '\ud83d\udccb <b>[\uc138\uc6b8\uc5d4\uc9c0\ub2c8\uc5b4\ub9c1 \u2014 \ud648\ud398\uc774\uc9c0 \uad00\ub9ac\uc9c0\uce68 \uc774\ud589\ubcf4\uace0]</b>\n' +
+'\ud83d\udcc5 2026\ub144 4\uc6d4 11\uc77c\n\n' +
 '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n' +
-'<b>1. 내 위치 파악 페이지 신설</b>\n' +
-'\u2022 Leaflet.js + OpenStreetMap 인터랙티브 지도\n' +
-'\u2022 GPS 현재 위치 감지 + 10개 구역 마커 + 거리순 정렬\n' +
-'\u2022 요약 카드 (전체/가장가까운/5km이내/인기)\n' +
+'<b>\u2705 \uae08\uc77c \uc774\ud589 \uc0ac\ud56d</b>\n\n' +
+'<b>1. \ub0b4 \uc704\uce58 \ud30c\uc545 \ud398\uc774\uc9c0 \uc2e0\uc124</b>\n' +
+'\u2022 Leaflet.js + OpenStreetMap \uc778\ud130\ub799\ud2f0\ube0c \uc9c0\ub3c4\n' +
+'\u2022 GPS \ud604\uc7ac \uc704\uce58 \uac10\uc9c0 + 10\uac1c \uad6c\uc5ed \ub9c8\ucee4 + \uac70\ub9ac\uc21c \uc815\ub82c\n' +
+'\u2022 \uc694\uc57d \uce74\ub4dc (\uc804\uccb4/\uac00\uc7a5\uac00\uae4c\uc6b4/5km\uc774\ub0b4/\uc778\uae30)\n' +
 '\ud83d\udd17 https://seul21.com/pages/location.html\n\n' +
-'<b>2. 자료실 투자정보 카테고리 신설</b>\n' +
-'\u2022 투자정보 탭 추가 (catDefs, _catKeyMap, fileMap 전체 등록)\n' +
-'\u2022 가락현대5차 네이버부동산 매물 상세페이지 생성\n' +
-'\u2022 매매 6건 / 전세 4건 / 실거래가 / 입지분석 / 투자포인트\n' +
+'<b>2. \uc790\ub8cc\uc2e4 \ud22c\uc790\uc815\ubcf4 \uce74\ud14c\uace0\ub9ac \uc2e0\uc124</b>\n' +
+'\u2022 \ud22c\uc790\uc815\ubcf4 \ud0ed \ucd94\uac00 (catDefs, _catKeyMap, fileMap \uc804\uccb4 \ub4f1\ub85d)\n' +
+'\u2022 \uac00\ub77d\ud604\ub3005\ucc28 \ub124\uc774\ubc84\ubd80\ub3d9\uc0b0 \ub9e4\ubb3c \uc0c1\uc138\ud398\uc774\uc9c0 \uc0dd\uc131\n' +
+'\u2022 \ub9e4\ub9e4 6\uac74 / \uc804\uc138 4\uac74 / \uc2e4\uac70\ub798\uac00 / \uc785\uc9c0\ubd84\uc11d / \ud22c\uc790\ud3ec\uc778\ud2b8\n' +
 '\ud83d\udd17 https://seul21.com/pages/library.html?cat=\ud22c\uc790\uc815\ubcf4\n\n' +
-'<b>3. 투자정보 회원전용 처리</b>\n' +
-'\u2022 비로그인 클릭 \u2192 로그인 페이지 이동\n' +
-'\u2022 로그인 상태 \u2192 투자정보 탭 필터\n' +
-'\u2022 회원전용 잠금 아이콘 표시\n\n' +
-'<b>4. 사업분야 법령 연결 버튼 추가</b>\n' +
-'\u2022 6개 사업분야 카드에 관련법령 보기 버튼\n' +
-'\u2022 재개발/재건축/소규모/도심복합 \u2192 법령\u00b7제도\n' +
-'\u2022 도시계획 \u2192 고시\u00b7공고 / PM\u00b7CM \u2192 서식\u00b7매뉴얼\n\n' +
-'<b>5. 회사소개 사업분야 메뉴 통일</b>\n' +
-'\u2022 about.html 카드명+링크 메뉴 구조와 동일하게 변경\n' +
-'\u2022 각 카드 클릭 \u2192 해당 서비스 상세 페이지 이동\n\n' +
-'<b>6. 외부자산 수집금지 정책 반영</b>\n' +
-'\u2022 CLAUDE.md에 외부 URL 다운로드 금지 정책 추가\n\n' +
+'<b>3. \ud22c\uc790\uc815\ubcf4 \ud68c\uc6d0\uc804\uc6a9 \ucc98\ub9ac</b>\n' +
+'\u2022 \ube44\ub85c\uadf8\uc778 \ud074\ub9ad \u2192 \ub85c\uadf8\uc778 \ud398\uc774\uc9c0 \uc774\ub3d9\n' +
+'\u2022 \ub85c\uadf8\uc778 \uc0c1\ud0dc \u2192 \ud22c\uc790\uc815\ubcf4 \ud0ed \ud544\ud130\n' +
+'\u2022 \ud68c\uc6d0\uc804\uc6a9 \uc7a0\uae08 \uc544\uc774\ucf58 \ud45c\uc2dc\n\n' +
+'<b>4. \uc0ac\uc5c5\ubd84\uc57c \ubc95\ub839\ubc84\ud2bc \uc0ad\uc81c \uc791\uc5c5</b>\n' +
+'\u2022 index.html \uc0ac\uc5c5\ubd84\uc57c 6\uac1c \uce74\ub4dc \ubc95\ub839\ubc84\ud2bc \uc804\uccb4 \uc0ad\uc81c\n' +
+'\u2022 Vercel CDN \uce90\uc2dc \ubb38\uc81c \ubc1c\uacac \u2192 \ub8e8\ud2b8 \uacbd\ub85c(/) \uce90\uc2dc \ud5e4\ub354 \ub204\ub77d \uc218\uc815\n' +
+'\u2022 index.html 3\ubc88\uc0c1\ud0dc \uc6d0\ubcf8\uc73c\ub85c \uc644\uc804 \uad50\uccb4 \ubc30\ud3ec\n\n' +
+'<b>5. \ud648\ud398\uc774\uc9c0 \uad00\ub9ac\uc9c0\uce68 \uac15\ud654</b>\n' +
+'\u2022 CLAUDE.md \uc0ad\uc81c\u00b7\ubcc0\uacbd \uc791\uc5c5 1\ud68c \uc644\uacb0 \uc758\ubb34 \ud2b9\ubcc4\uaddc\uc815 \uc2e0\uc124\n' +
+'\u2022 \uc678\ubd80\uc790\uc0b0 \uc218\uc9d1\uae08\uc9c0 \uc815\ucc45 \ucd94\uac00\n' +
+'\u2022 \ub77c\uc774\ube0c \ud655\uc778 \uc5c6\uc774 \uc644\ub8cc\ubcf4\uace0 \uae08\uc9c0 \uaddc\uc815\n\n' +
+'<b>6. \ubc84\uadf8 \ubc1c\uacac \ubc0f \uc218\uc815</b>\n' +
+'\u2022 \ud22c\uc790\uc815\ubcf4 \ud074\ub9ad \uacbd\ub85c \uc624\ub958 (register \u2192 login)\n' +
+'\u2022 vercel.json \ub8e8\ud2b8 \uacbd\ub85c(/) \uce90\uc2dc \ud5e4\ub354 \ub204\ub77d \ubc1c\uacac \u2192 \uc218\uc815\n\n' +
 '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n' +
-'\u2705 검수 전항목 통과\n' +
-'\ud83d\udd27 버그수정 1건 (투자정보 클릭 경로)\n' +
-'\ud83d\ude80 master 배포 완료\n' +
+'\ud83d\udd27 \ubc84\uadf8\uc218\uc815 2\uac74\n' +
+'\ud83d\ude80 master \ubc30\ud3ec \uc644\ub8cc\n' +
 '\ud83c\udf10 https://seul21.com';
 
-document.getElementById('preview').textContent = reportText.replace(/<\/?b>/g,'').replace(/\u2022/g, '  •');
+document.getElementById('preview').textContent = reportText.replace(/<\/?b>/g,'').replace(/\u2022/g, '  \u2022');
 
 function sendReport() {
     var btn = document.getElementById('sendBtn');
     var result = document.getElementById('result');
     btn.disabled = true;
-    btn.textContent = '발송 중...';
+    btn.textContent = '\ubc1c\uc1a1 \uc911...';
     result.className = 'result';
 
     fetch('/api/report', {
@@ -78,18 +80,18 @@ function sendReport() {
     .then(function(data) {
         if (data.ok) {
             result.className = 'result ok';
-            result.textContent = '텔레그램 발송 완료!';
+            result.textContent = '\ud154\ub808\uadf8\ub7a8 \ubc1c\uc1a1 \uc644\ub8cc!';
         } else {
             result.className = 'result err';
-            result.textContent = '발송 실패: ' + (data.error || JSON.stringify(data));
+            result.textContent = '\ubc1c\uc1a1 \uc2e4\ud328: ' + (data.error || JSON.stringify(data));
         }
-        btn.textContent = '발송 완료';
+        btn.textContent = '\ubc1c\uc1a1 \uc644\ub8cc';
     })
     .catch(function(e) {
         result.className = 'result err';
-        result.textContent = '네트워크 오류: ' + e.message;
+        result.textContent = '\ub124\ud2b8\uc6cc\ud06c \uc624\ub958: ' + e.message;
         btn.disabled = false;
-        btn.textContent = '다시 시도';
+        btn.textContent = '\ub2e4\uc2dc \uc2dc\ub3c4';
     });
 }
 </script>
