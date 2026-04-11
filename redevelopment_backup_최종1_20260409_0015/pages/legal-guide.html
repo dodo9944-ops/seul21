@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법률·세금 가이드 — (주)세울엔지니어링</title>
+    <meta name="description" content="재개발·재건축 관련 양도소득세, 취득세, 종합부동산세 등 법률·세금 정보를 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .guide-card { cursor: pointer; }
+    .guide-card .guide-category { margin-bottom: 12px; }
+    .guide-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; line-height: 1.4; color: var(--gray-900); }
+    .guide-card .guide-preview { font-size: 13px; color: var(--gray-500); line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .guide-card:hover h3 { color: var(--accent); }
+    .modal .guide-content { font-size: 15px; line-height: 1.85; color: var(--gray-800); white-space: pre-line; }
+    .modal .guide-content strong,
+    .modal .guide-content b { color: var(--gray-900); }
+    .modal { max-width: 640px; }
+    .header-wrap { z-index: 10000 !important; }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div style="background:#FFF9E6;border-bottom:1px solid #F0E0A0;padding:10px 16px;text-align:center;">
+    <p style="margin:0;font-size:13px;color:#7A6A2A;line-height:1.6;">본 페이지는 정보 제공 목적이며, 법률·세무 자문이 아닙니다. 실제 법률·세금 문제는 변호사·세무사와 상담하세요.</p>
+</div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>법률·세금 가이드</span>
+        </div>
+        <h1>법률·세금 가이드</h1>
+        <p>재개발·재건축 관련 양도소득세, 취득세, 종부세 등 꼭 알아야 할 법률·세금 정보를 확인하세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="tabs" id="categoryTabs" style="margin-bottom:24px;">
+            <button class="on" data-cat="전체">전체</button>
+            <button data-cat="양도소득세">양도소득세</button>
+            <button data-cat="취득세">취득세</button>
+            <button data-cat="종합부동산세">종합부동산세</button>
+            <button data-cat="절차·서류">절차·서류</button>
+        </div>
+        <div class="card-grid-3" id="guideGrid"></div>
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <i class="fa-solid fa-book-open"></i>
+            <h3>해당 카테고리의 가이드가 없습니다</h3>
+            <p>다른 카테고리를 선택해주세요</p>
+        </div>
+    </div>
+</div>
+
+<!-- 상세 모달 -->
+<div class="modal-overlay" id="guideModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 id="modalTitle"></h3>
+            <button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+            <div style="margin-bottom:16px;" id="modalBadge"></div>
+            <div class="guide-content" id="modalContent"></div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    let currentCat = '전체';
+    const guides = DataService.getAll('legalGuides');
+
+    function categoryBadge(cat) {
+        const map = { '양도소득세':'badge-danger', '취득세':'badge-info', '종합부동산세':'badge-pending', '절차·서류':'badge-success' };
+        return `<span class="badge ${map[cat] || 'badge-gray'}">${cat}</span>`;
+    }
+
+    function render() {
+        const filtered = currentCat === '전체' ? guides : guides.filter(g => g.category === currentCat);
+        const grid = document.getElementById('guideGrid');
+        const empty = document.getElementById('emptyState');
+        if (!filtered.length) { grid.innerHTML = ''; empty.style.display = 'flex'; return; }
+        empty.style.display = 'none';
+        grid.innerHTML = filtered.map(g => {
+            const preview = g.content.replace(/\*\*/g, '').substring(0, 120) + '...';
+            return `<div class="card guide-card" data-id="${g.id}">
+                <div class="guide-category">${categoryBadge(g.category)}</div>
+                <h3>${g.title}</h3>
+                <div class="guide-preview">${preview}</div>
+            </div>`;
+        }).join('');
+
+        grid.querySelectorAll('.guide-card').forEach(card => {
+            card.addEventListener('click', () => openModal(card.dataset.id));
+        });
+    }
+
+    function openModal(id) {
+        const g = guides.find(x => x.id === id);
+        if (!g) return;
+        document.getElementById('modalTitle').textContent = g.title;
+        document.getElementById('modalBadge').innerHTML = categoryBadge(g.category);
+        // 간단 마크다운 bold 처리
+        const html = g.content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        document.getElementById('modalContent').innerHTML = html;
+        document.getElementById('guideModal').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('guideModal').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('guideModal').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeModal();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    document.getElementById('categoryTabs').addEventListener('click', e => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        document.querySelectorAll('#categoryTabs button').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        currentCat = btn.dataset.cat;
+        render();
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>

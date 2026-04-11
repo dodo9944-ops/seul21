@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정비사업 시공사 선정 평가 기준 해설 | (주)세울엔지니어링</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A0F1C;
+    --navy-light: #141B2D;
+    --navy-mid: #1E2A42;
+    --gold: #C3A569;
+    --gold-light: #D4BC8A;
+    --gold-pale: #F5EDD8;
+    --text: #2C2C2C;
+    --text-light: #555;
+    --bg: #FAFAF8;
+    --white: #FFFFFF;
+    --border: #E0DDD5;
+    --success: #2E7D4F;
+    --warning: #B85C1F;
+    --info: #1A5FA0;
+  }
+  @page {
+    size: A4;
+    margin: 18mm 15mm 20mm 15mm;
+  }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Print Utilities ── */
+  .page-break { page-break-after: always; }
+  .no-break { page-break-inside: avoid; }
+  @media print {
+    body { background: white; font-size: 9.5pt; }
+    .container { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* ═══════════════════════════════════════
+     TITLE PAGE
+     ═══════════════════════════════════════ */
+  .title-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .title-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(195, 165, 105, 0.08);
+    border-radius: 50%;
+  }
+  .title-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -80px;
+    width: 500px;
+    height: 500px;
+    border: 1px solid rgba(195, 165, 105, 0.05);
+    border-radius: 50%;
+  }
+  .title-brand {
+    font-size: 12pt;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .title-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 24px auto;
+  }
+  .title-main {
+    font-size: 28pt;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .title-main em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .title-sub {
+    font-size: 14pt;
+    font-weight: 300;
+    color: var(--gold-light);
+    margin-top: 8px;
+    letter-spacing: 2px;
+  }
+  .title-meta {
+    margin-top: 60px;
+    font-size: 9.5pt;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.9;
+  }
+  .title-meta strong {
+    color: rgba(255,255,255,0.7);
+  }
+  .title-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 6px 24px;
+    border-radius: 3px;
+    font-size: 9pt;
+    letter-spacing: 3px;
+    margin-top: 40px;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION STYLES
+     ═══════════════════════════════════════ */
+  .content-area {
+    padding: 50px 0;
+  }
+  section {
+    margin-bottom: 56px;
+  }
+  .section-number {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 3px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 20pt;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .section-subtitle {
+    font-size: 10.5pt;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--gold);
+  }
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 28px 0 12px;
+  }
+  h4 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--navy-mid);
+    margin: 20px 0 8px;
+  }
+  p {
+    margin-bottom: 14px;
+    text-align: justify;
+  }
+
+  /* ── Info Box ── */
+  .info-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin: 20px 0;
+  }
+  .info-box.navy {
+    border-left-color: var(--navy);
+    background: #F4F5F8;
+  }
+  .info-box.warning {
+    border-left-color: var(--warning);
+    background: #FFF9F0;
+  }
+  .info-box.success {
+    border-left-color: var(--success);
+    background: #F0F8F3;
+  }
+  .info-box-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* ── Table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 10pt;
+  }
+  table thead th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 9.5pt;
+    letter-spacing: 0.5px;
+  }
+  table thead th:first-child { border-radius: 4px 0 0 0; }
+  table thead th:last-child { border-radius: 0 4px 0 0; }
+  table tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table tbody tr:nth-child(even) { background: #F8F8F6; }
+  table tbody tr:hover { background: var(--gold-pale); }
+  .highlight-cell {
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* ── Score Table ── */
+  .score-table thead th {
+    text-align: center;
+  }
+  .score-table thead th:first-child,
+  .score-table thead th:nth-child(2) {
+    text-align: left;
+  }
+  .score-table tbody td {
+    text-align: center;
+  }
+  .score-table tbody td:first-child,
+  .score-table tbody td:nth-child(2) {
+    text-align: left;
+  }
+  .score-total {
+    background: var(--navy) !important;
+    color: var(--white) !important;
+    font-weight: 700;
+  }
+  .score-total td {
+    color: var(--white) !important;
+    text-align: center !important;
+    font-weight: 700;
+  }
+  .score-total td:first-child {
+    text-align: left !important;
+  }
+
+  /* ── List ── */
+  ul, ol {
+    margin: 12px 0 16px 20px;
+  }
+  ul li, ol li {
+    margin-bottom: 6px;
+    line-height: 1.7;
+  }
+
+  /* ── Step Flow ── */
+  .step-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0;
+    align-items: center;
+  }
+  .step-item {
+    background: var(--navy);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 9.5pt;
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+  }
+  .step-arrow {
+    color: var(--gold);
+    font-size: 16pt;
+    font-weight: 700;
+  }
+
+  /* ── Footer ── */
+  .doc-footer {
+    margin-top: 60px;
+    padding: 30px 0;
+    border-top: 2px solid var(--navy);
+    text-align: center;
+    font-size: 9pt;
+    color: var(--text-light);
+  }
+  .doc-footer strong {
+    color: var(--navy);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ TITLE PAGE ═══════════ -->
+<div class="title-page">
+  <div class="title-brand">(주)세울엔지니어링</div>
+  <div class="title-divider"></div>
+  <h1 class="title-main">정비사업 시공사 선정<br><em>평가 기준 해설</em></h1>
+  <p class="title-sub">Contractor Selection Evaluation Guide</p>
+  <div class="title-meta">
+    <strong>발행</strong> (주)세울엔지니어링 정비사업팀<br>
+    <strong>기준</strong> 2026년 4월 현행 법령 및 가이드라인<br>
+    <strong>용도</strong> 조합 임원 및 시공사 선정위원 교육용
+  </div>
+  <div class="title-badge">Professional Guide</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<div class="container content-area">
+
+  <!-- ── 개요 ── -->
+  <section>
+    <div class="section-number">OVERVIEW</div>
+    <h2 class="section-title">시공사 선정 개요</h2>
+    <div class="section-subtitle">정비사업에서 시공사 선정은 사업의 성패를 좌우하는 핵심 의사결정입니다.</div>
+
+    <p>정비사업 시공사 선정은 「도시 및 주거환경정비법」 제29조에 근거하며, 조합원 총회의 특별의결 사항입니다. 서울시는 시공사 선정의 공정성·투명성을 확보하기 위해 경쟁입찰 원칙, 표준 평가기준, 선거관리위원회 관리 등을 의무화하고 있습니다.</p>
+
+    <h3>시공사 선정 기본 절차</h3>
+    <div class="step-flow">
+      <div class="step-item">입찰공고<br>(45일 이상)</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">참가신청<br>접수</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">적격심사<br>(서류검토)</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">현장설명회<br>및 제안발표</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">평가위원회<br>심사</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">조합원<br>총회 의결</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">계약 체결</div>
+    </div>
+
+    <div class="info-box navy">
+      <div class="info-box-title">경쟁입찰 원칙</div>
+      <p>정비사업 시공사 선정은 원칙적으로 2개 이상의 업체가 참여하는 경쟁입찰 방식으로 진행되어야 합니다. 1개 업체만 참가신청한 경우 유찰 처리하고 재공고하는 것이 원칙이나, 2회 이상 유찰 시 수의계약이 가능합니다.</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 평가 항목 상세 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 01</div>
+    <h2 class="section-title">평가 항목 상세 해설</h2>
+    <div class="section-subtitle">시공사 선정 평가의 5대 항목과 세부 배점 기준을 상세히 해설합니다.</div>
+
+    <h3>1. 시공능력 평가 (30점)</h3>
+    <p>시공사의 기본 역량을 평가하는 가장 중요한 항목입니다. 객관적인 지표를 기반으로 평가하므로 업체 간 차별화가 명확합니다.</p>
+    <table>
+      <thead>
+        <tr><th>세부 항목</th><th>배점</th><th>평가 기준</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">시공능력 순위</td><td>10점</td><td>대한건설협회 발표 시공능력 평가 순위 (상위일수록 고득점)</td></tr>
+        <tr><td class="highlight-cell">정비사업 시공실적</td><td>8점</td><td>최근 10년간 정비사업(재개발·재건축) 시공 완료 실적</td></tr>
+        <tr><td class="highlight-cell">동일 규모 실적</td><td>5점</td><td>해당 사업과 유사 규모(세대수·공사비) 시공 실적</td></tr>
+        <tr><td class="highlight-cell">하자보수 이행률</td><td>4점</td><td>기존 시공 단지의 하자보수 이행률 및 입주민 만족도</td></tr>
+        <tr><td class="highlight-cell">안전관리 실적</td><td>3점</td><td>산업안전보건 관리 실적, 중대재해 발생 여부</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2. 사업수지 분석 (25점)</h3>
+    <p>조합원의 실질적 부담금에 직결되는 항목으로, 공사비·사업비·추정분담금의 적정성을 종합 평가합니다.</p>
+    <table>
+      <thead>
+        <tr><th>세부 항목</th><th>배점</th><th>평가 기준</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">공사비 제안</td><td>10점</td><td>3.3㎡당 공사비 제안 금액의 적정성 (최저가가 아닌 적정가 평가)</td></tr>
+        <tr><td class="highlight-cell">추정분담금</td><td>8점</td><td>조합원별 추정분담금 산출의 합리성 및 신뢰도</td></tr>
+        <tr><td class="highlight-cell">사업비 구성</td><td>4점</td><td>설계비·감리비·이주비 등 사업비 항목별 적정성</td></tr>
+        <tr><td class="highlight-cell">금융 조건</td><td>3점</td><td>이주비 대여 조건, 중도금 무이자 여부, PF 조건</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3. 설계 제안 (20점)</h3>
+    <p>입주 후 거주 품질에 직접 영향을 미치는 항목으로, 단지 배치, 평면 설계, 조경 등을 종합 평가합니다.</p>
+    <table>
+      <thead>
+        <tr><th>세부 항목</th><th>배점</th><th>평가 기준</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">단지 배치 계획</td><td>6점</td><td>동 배치, 동간 간격, 조망권, 일조권, 소음 차단</td></tr>
+        <tr><td class="highlight-cell">평면 설계</td><td>6점</td><td>세대 내부 평면의 실용성, 수납공간, 동선 효율성</td></tr>
+        <tr><td class="highlight-cell">조경 계획</td><td>4점</td><td>녹지율, 주민 편의시설, 산책로, 놀이터 등</td></tr>
+        <tr><td class="highlight-cell">커뮤니티 시설</td><td>4점</td><td>피트니스, 독서실, 게스트룸, 카페 등 부대시설</td></tr>
+      </tbody>
+    </table>
+
+    <h3>4. 재무건전성 (15점)</h3>
+    <p>시공사의 재무 안정성을 평가하여 사업 중 부도·워크아웃 등의 위험을 사전에 차단합니다.</p>
+    <table>
+      <thead>
+        <tr><th>세부 항목</th><th>배점</th><th>평가 기준</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">부채비율</td><td>5점</td><td>최근 3개년 평균 부채비율 (200% 미만 우수)</td></tr>
+        <tr><td class="highlight-cell">유동비율</td><td>4점</td><td>단기 채무 상환 능력 (150% 이상 우수)</td></tr>
+        <tr><td class="highlight-cell">신용등급</td><td>3점</td><td>기업 신용평가 등급 (A등급 이상 우수)</td></tr>
+        <tr><td class="highlight-cell">영업이익률</td><td>3점</td><td>최근 3개년 평균 영업이익률</td></tr>
+      </tbody>
+    </table>
+
+    <h3>5. 입주자 서비스 (10점)</h3>
+    <p>입주 후 AS 체계, 입주 지원 서비스 등 거주 만족도에 영향을 미치는 항목입니다.</p>
+    <table>
+      <thead>
+        <tr><th>세부 항목</th><th>배점</th><th>평가 기준</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">AS 체계</td><td>4점</td><td>하자보수 조직, 24시간 콜센터, 긴급출동 서비스</td></tr>
+        <tr><td class="highlight-cell">입주 지원</td><td>3점</td><td>이사비 지원, 입주 안내, 사전 점검 지원</td></tr>
+        <tr><td class="highlight-cell">스마트홈</td><td>3점</td><td>홈 IoT, 무인택배함, 전기차 충전 등 첨단 서비스</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 평가 배점 종합표 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 02</div>
+    <h2 class="section-title">평가 배점 종합표 (샘플)</h2>
+    <div class="section-subtitle">실제 평가에 활용할 수 있는 시공사 선정 평가 종합 배점표 샘플입니다.</div>
+
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th style="width:60px">번호</th>
+          <th>평가 항목</th>
+          <th style="width:70px">배점</th>
+          <th style="width:70px">A사</th>
+          <th style="width:70px">B사</th>
+          <th style="width:70px">C사</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1-1</td><td>시공능력 순위</td><td>10</td><td>9.2</td><td>8.5</td><td>7.8</td></tr>
+        <tr><td>1-2</td><td>정비사업 시공실적</td><td>8</td><td>7.5</td><td>6.8</td><td>7.2</td></tr>
+        <tr><td>1-3</td><td>동일 규모 실적</td><td>5</td><td>4.5</td><td>3.8</td><td>4.0</td></tr>
+        <tr><td>1-4</td><td>하자보수 이행률</td><td>4</td><td>3.6</td><td>3.2</td><td>3.5</td></tr>
+        <tr><td>1-5</td><td>안전관리 실적</td><td>3</td><td>2.8</td><td>2.5</td><td>2.7</td></tr>
+        <tr><td>2-1</td><td>공사비 제안</td><td>10</td><td>8.0</td><td>9.0</td><td>8.5</td></tr>
+        <tr><td>2-2</td><td>추정분담금</td><td>8</td><td>6.8</td><td>7.5</td><td>7.0</td></tr>
+        <tr><td>2-3</td><td>사업비 구성</td><td>4</td><td>3.5</td><td>3.2</td><td>3.0</td></tr>
+        <tr><td>2-4</td><td>금융 조건</td><td>3</td><td>2.5</td><td>2.8</td><td>2.2</td></tr>
+        <tr><td>3-1</td><td>단지 배치 계획</td><td>6</td><td>5.2</td><td>4.8</td><td>5.5</td></tr>
+        <tr><td>3-2</td><td>평면 설계</td><td>6</td><td>5.0</td><td>5.3</td><td>5.5</td></tr>
+        <tr><td>3-3</td><td>조경 계획</td><td>4</td><td>3.5</td><td>3.0</td><td>3.8</td></tr>
+        <tr><td>3-4</td><td>커뮤니티 시설</td><td>4</td><td>3.2</td><td>3.5</td><td>3.6</td></tr>
+        <tr><td>4-1</td><td>부채비율</td><td>5</td><td>4.5</td><td>3.8</td><td>4.0</td></tr>
+        <tr><td>4-2</td><td>유동비율</td><td>4</td><td>3.5</td><td>3.0</td><td>3.2</td></tr>
+        <tr><td>4-3</td><td>신용등급</td><td>3</td><td>2.8</td><td>2.5</td><td>2.3</td></tr>
+        <tr><td>4-4</td><td>영업이익률</td><td>3</td><td>2.5</td><td>2.0</td><td>2.2</td></tr>
+        <tr><td>5-1</td><td>AS 체계</td><td>4</td><td>3.5</td><td>3.2</td><td>3.0</td></tr>
+        <tr><td>5-2</td><td>입주 지원</td><td>3</td><td>2.5</td><td>2.8</td><td>2.2</td></tr>
+        <tr><td>5-3</td><td>스마트홈</td><td>3</td><td>2.5</td><td>2.0</td><td>2.8</td></tr>
+        <tr class="score-total"><td></td><td>합 계</td><td>100</td><td>86.6</td><td>81.2</td><td>82.0</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <div class="info-box-title">배점표 활용 안내</div>
+      <p>위 배점표는 참고용 샘플이며, 실제 평가 시에는 사업의 특성에 맞게 항목별 배점을 조정할 수 있습니다. 배점 기준은 조합원 총회에서 사전 의결해야 하며, 평가 후에는 변경이 불가합니다.</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 평가 절차 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 03</div>
+    <h2 class="section-title">평가 절차 상세</h2>
+    <div class="section-subtitle">시공사 선정 평가의 단계별 절차와 각 단계에서의 주의사항을 설명합니다.</div>
+
+    <h3>1단계: 입찰 공고 및 접수</h3>
+    <div class="info-box">
+      <div class="info-box-title">입찰 공고 필수 기재사항</div>
+      <ul>
+        <li>사업 개요 (위치, 면적, 세대수, 예상 공사비)</li>
+        <li>입찰 참가 자격 요건 (시공능력 순위, 재무 기준)</li>
+        <li>평가 항목 및 배점 기준</li>
+        <li>참가 신청 기간 및 방법</li>
+        <li>현장설명회 일시 및 장소</li>
+        <li>제출 서류 목록</li>
+      </ul>
+    </div>
+    <p>입찰 공고는 2개 이상의 일간신문에 게재하고, 조합 게시판 및 클린업시스템에 공개해야 합니다. 공고일로부터 최소 45일 이상의 접수 기간을 확보해야 합니다.</p>
+
+    <h3>2단계: 적격심사 (서류 검토)</h3>
+    <p>참가 신청 업체의 자격 요건 충족 여부를 서류 심사합니다. 시공능력 순위, 재무제표, 시공실적 증명서, 신용평가 등급 등을 확인합니다.</p>
+
+    <h3>3단계: 현장설명회 및 제안 발표</h3>
+    <p>적격심사를 통과한 업체를 대상으로 현장설명회를 개최하고, 각 업체가 조합원 앞에서 제안 내용을 발표합니다. 발표 시간은 업체당 60~90분이 일반적이며, 질의응답 시간도 포함됩니다.</p>
+
+    <h3>4단계: 평가위원회 심사</h3>
+    <div class="info-box navy">
+      <div class="info-box-title">평가위원회 구성 기준</div>
+      <p>평가위원회는 총 7~11명으로 구성하며, 외부 전문가가 과반수 이상이어야 합니다. 건축, 토목, 재무, 부동산 등 분야별 전문가를 골고루 포함해야 하며, 시공사와 이해관계가 있는 자는 위원에서 제외됩니다.</p>
+    </div>
+
+    <h3>5단계: 조합원 총회 의결</h3>
+    <p>평가위원회의 심사 결과를 토대로 조합원 총회에서 최종 의결합니다. 시공사 선정은 <strong>조합원 총수의 과반수 찬성</strong>이 필요한 특별의결 사항입니다.</p>
+
+    <h3>6단계: 계약 체결</h3>
+    <p>총회 의결 후 30일 이내에 시공사와 공사도급계약을 체결합니다. 계약서에는 공사비, 공사기간, 하자보증 조건, 지체상금 등을 명확히 기재해야 합니다.</p>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 주의사항 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 04</div>
+    <h2 class="section-title">시공사 선정 주의사항</h2>
+    <div class="section-subtitle">시공사 선정 과정에서 빈번히 발생하는 문제와 이를 예방하기 위한 핵심 주의사항입니다.</div>
+
+    <h3>1. 불법행위 금지</h3>
+    <div class="info-box warning">
+      <div class="info-box-title">형사처벌 대상 행위</div>
+      <ul>
+        <li><strong>금품 제공:</strong> 시공사가 조합원·임원에게 금품·향응을 제공하는 행위</li>
+        <li><strong>개별 접촉:</strong> 시공사가 개별 조합원을 방문·접촉하여 로비하는 행위</li>
+        <li><strong>허위 홍보:</strong> 시공사가 확정되지 않은 사항을 확정처럼 홍보하는 행위</li>
+        <li><strong>입찰 담합:</strong> 시공사 간 사전에 입찰 조건을 합의하는 행위</li>
+        <li><strong>조합 임원 특혜:</strong> 시공사가 조합 임원에게 별도 이익을 제공하는 행위</li>
+      </ul>
+    </div>
+
+    <h3>2. 공사비 검증</h3>
+    <div class="info-box">
+      <div class="info-box-title">공사비 적정성 검증 방법</div>
+      <p>시공사가 제안한 공사비가 과도하게 높거나 비현실적으로 낮은 경우 모두 문제가 될 수 있습니다. 3개 이상의 업체 견적을 비교하고, 유사 사업의 실제 공사비를 참고하여 적정 범위를 설정해야 합니다. 서울시 공사비 검증위원회의 사전 검증을 받는 것도 권장됩니다.</p>
+    </div>
+
+    <h3>3. 계약 조건 핵심 체크리스트</h3>
+    <table>
+      <thead>
+        <tr><th>체크 항목</th><th>확인 내용</th><th>중요도</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">총 공사비</td><td>3.3㎡당 공사비, 물가변동 조정 조건</td><td>최상</td></tr>
+        <tr><td class="highlight-cell">공사 기간</td><td>착공일, 준공예정일, 지체상금률</td><td>최상</td></tr>
+        <tr><td class="highlight-cell">하자보증</td><td>하자보증 기간(구조 10년, 마감 2~5년)</td><td>상</td></tr>
+        <tr><td class="highlight-cell">이주비 조건</td><td>이주비 대여 금액, 이율, 상환 조건</td><td>상</td></tr>
+        <tr><td class="highlight-cell">설계변경</td><td>설계변경 시 공사비 변동 기준</td><td>상</td></tr>
+        <tr><td class="highlight-cell">중도금 무이자</td><td>중도금 무이자 대출 적용 여부 및 기간</td><td>중</td></tr>
+        <tr><td class="highlight-cell">분쟁해결</td><td>분쟁 발생 시 해결 절차 (중재, 소송)</td><td>중</td></tr>
+      </tbody>
+    </table>
+
+    <h3>4. 시공사 변경 시 유의사항</h3>
+    <div class="info-box warning">
+      <div class="info-box-title">시공사 변경은 최후의 수단</div>
+      <p>시공사 변경은 사업 지연, 위약금 발생, 조합 내 갈등 심화 등 심각한 부작용을 초래할 수 있습니다. 변경 시에는 조합원 총수 과반수 동의가 필요하며, 기존 시공사와의 위약금 산정, 신규 시공사 재선정 절차 등 복잡한 과정을 거쳐야 합니다. 가급적 선정 단계에서 신중한 검토가 이루어져야 합니다.</p>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <div class="doc-footer">
+    <strong>(주)세울엔지니어링</strong><br>
+    정비사업 시공사 선정 평가 기준 해설 | 2026년 4월 기준<br>
+    본 자료는 교육 및 참고 목적으로 작성되었으며, 구체적 사안에 대해서는 전문가 상담을 권장합니다.
+  </div>
+
+</div>
+
+</body>
+</html>

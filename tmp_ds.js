@@ -1,0 +1,202 @@
+/**
+ * 세울 — Data Service Layer
+ * localStorage + mock-data 기반. 향후 실 API 전환 시 이 파일만 교체.
+ */
+const DataService = (() => {
+  const LS_PREFIX = 'rdc_';
+
+  /* ── helpers ── */
+  function _key(name) { return LS_PREFIX + name; }
+
+  function _load(name) {
+    const raw = localStorage.getItem(_key(name));
+    if (raw) return JSON.parse(raw);
+    if (typeof MOCK !== 'undefined' && MOCK[name]) {
+      _save(name, MOCK[name]);
+      return JSON.parse(JSON.stringify(MOCK[name]));
+    }
+    return null;
+  }
+
+  function _save(name, data) {
+    localStorage.setItem(_key(name), JSON.stringify(data));
+  }
+
+  function _genId(prefix) {
+    return prefix + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  }
+
+  /* ── generic CRUD ── */
+  function getAll(collection) { return _load(collection) || []; }
+
+  function getById(collection, id) {
+    return (getAll(collection)).find(item => item.id === id) || null;
+  }
+
+  function create(collection, item) {
+    const list = getAll(collection);
+    if (!item.id) item.id = _genId(collection[0]);
+    if (!item.createdAt) item.createdAt = new Date().toISOString().slice(0, 10);
+    list.unshift(item);
+    _save(collection, list);
+    return item;
+  }
+
+  function update(collection, id, changes) {
+    const list = getAll(collection);
+    const idx = list.findIndex(item => item.id === id);
+    if (idx === -1) return null;
+    Object.assign(list[idx], changes);
+    _save(collection, list);
+    return list[idx];
+  }
+
+  function remove(collection, id) {
+    let list = getAll(collection);
+    list = list.filter(item => item.id !== id);
+    _save(collection, list);
+  }
+
+  /* ── query helpers ── */
+  function query(collection, { filter, sort, page, pageSize, search, searchFields } = {}) {
+    let list = getAll(collection);
+
+    // search
+    if (search && searchFields) {
+      const q = search.toLowerCase();
+      list = list.filter(item =>
+        searchFields.some(f => (item[f] || '').toString().toLowerCase().includes(q))
+      );
+    }
+
+    // filter
+    if (filter) {
+      Object.entries(filter).forEach(([key, val]) => {
+        if (val === '' || val === null || val === undefined || val === '전체') return;
+        list = list.filter(item => {
+          if (Array.isArray(val)) return val.includes(item[key]);
+          return item[key] == val;
+        });
+      });
+    }
+
+    const total = list.length;
+
+    // sort
+    if (sort) {
+      const [field, dir] = sort.split(':');
+      list.sort((a, b) => {
+        let va = a[field], vb = b[field];
+        if (typeof va === 'number' && typeof vb === 'number') return dir === 'desc' ? vb - va : va - vb;
+        va = (va || '').toString(); vb = (vb || '').toString();
+        return dir === 'desc' ? vb.localeCompare(va) : va.localeCompare(vb);
+      });
+    }
+
+    // pagination
+    const ps = pageSize || 10;
+    const pg = page || 1;
+    const totalPages = Math.ceil(total / ps);
+    const paged = list.slice((pg - 1) * ps, pg * ps);
+
+    return { data: paged, total, page: pg, pageSize: ps, totalPages };
+  }
+
+  /* ── settings (single object) ── */
+  function getSettings() { return _load('settings') || {}; }
+  function updateSettings(changes) {
+    const s = getSettings();
+    Object.assign(s, changes);
+    _save('settings', s);
+    return s;
+  }
+
+  /* ── favorites ── */
+  function getFavorites(type) {
+    return JSON.parse(localStorage.getItem(_key('fav_' + type)) || '[]');
+  }
+  function toggleFavorite(type, id) {
+    let favs = getFavorites(type);
+    if (favs.includes(id)) favs = favs.filter(f => f !== id);
+    else favs.push(id);
+    localStorage.setItem(_key('fav_' + type), JSON.stringify(favs));
+    return favs;
+  }
+  function isFavorite(type, id) {
+    return getFavorites(type).includes(id);
+  }
+
+  /* ── auth (simple mock) ── */
+  function adminLogin(username, password) {
+    const acc = _load('adminAccount') || (MOCK && MOCK.adminAccount);
+    if (acc && acc.username === username && acc.password === password) {
+      sessionStorage.setItem('rdc_admin', JSON.stringify({ loggedIn: true, name: acc.name }));
+      return true;
+    }
+    return false;
+  }
+  function isAdminLoggedIn() {
+    const s = sessionStorage.getItem('rdc_admin');
+    return s ? JSON.parse(s).loggedIn : false;
+  }
+  function getAdminName() {
+    const s = sessionStorage.getItem('rdc_admin');
+    return s ? JSON.parse(s).name : '';
+  }
+  function adminLogout() { sessionStorage.removeItem('rdc_admin'); }
+
+  function userLogin(email, password) {
+    const members = getAll('members');
+    const user = members.find(m => m.email === email);
+    if (user) {
+      sessionStorage.setItem('seul_user', JSON.stringify({ loggedIn: true, id: user.id, name: user.name, email: user.email, grade: user.grade || '일반' }));
+      return user;
+    }
+    return null;
+  }
+  function isUserLoggedIn() {
+    const s = sessionStorage.getItem('seul_user');
+    if (!s) return false;
+    try { return !!JSON.parse(s).name; } catch(e) { return false; }
+  }
+  function getCurrentUser() {
+    const s = sessionStorage.getItem('seul_user');
+    if (!s) return null;
+    try {
+      const u = JSON.parse(s);
+      return { loggedIn: true, id: u.id, name: u.name, email: u.email || '', grade: u.grade || '일반' };
+    } catch(e) { return null; }
+  }
+  function userLogout() { sessionStorage.removeItem('seul_user'); }
+
+  /* ── reset ── */
+  function resetAll() {
+    Object.keys(localStorage).forEach(k => { if (k.startsWith(LS_PREFIX)) localStorage.removeItem(k); });
+    sessionStorage.clear();
+  }
+
+  /* ── stats for admin dashboard ── */
+  function getDashboardStats() {
+    return {
+      totalAreas: getAll('areas').length,
+      totalListings: getAll('listings').length,
+      totalMembers: getAll('members').length,
+      totalInquiries: getAll('inquiries').length,
+      pendingInquiries: getAll('inquiries').filter(q => q.status === '접수').length,
+      totalNews: getAll('news').length,
+      totalPosts: getAll('community').length,
+      totalColumns: getAll('columns').length
+    };
+  }
+
+  return {
+    getAll, getById, create, update, remove, query,
+    getSettings, updateSettings,
+    getFavorites, toggleFavorite, isFavorite,
+    adminLogin, isAdminLoggedIn, getAdminName, adminLogout,
+    userLogin, isUserLoggedIn, getCurrentUser, userLogout,
+    resetAll, getDashboardStats, _genId
+  };
+})();
+
+if (typeof window !== 'undefined') window.DataService = DataService;

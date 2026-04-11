@@ -1,0 +1,112 @@
+<!-- 인트라넷 (intranet/index.html) — Hero Section Reference -->
+<!-- 참고: 인트라넷은 별도의 히어로 섹션이 없습니다.
+     대신 sidebar + topbar + KPI 대시보드 구조를 사용합니다.
+     아래는 topbar(상단바)와 KPI(핵심 지표) 영역을 히어로 대체로 추출한 것입니다. -->
+<style>
+/* ══════════ SIDEBAR (헤더 역할) ══════════ */
+.sidebar{
+  width:260px; min-height:100vh; background:#0A0F1C; padding:0;
+  display:flex; flex-direction:column; flex-shrink:0; position:fixed; left:0; top:0; bottom:0; z-index:100;
+}
+.sidebar-logo{
+  padding:24px 24px 20px; display:flex; align-items:center; gap:12px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.sidebar-logo-company{font-size:14px;font-weight:800;color:#fff}
+.sidebar-logo-sub{font-size:8px;font-weight:500;color:rgba(255,255,255,0.35);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
+.sidebar-badge{
+  margin:16px 20px 12px; padding:6px 12px; border-radius:4px;
+  background:rgba(195,165,105,0.1); color:#C3A569;
+  font-size:10px; font-weight:700; letter-spacing:1px; text-align:center;
+}
+
+/* ══════════ TOPBAR ══════════ */
+.topbar{
+  height:60px; background:#fff; border-bottom:1px solid #E5E5E5;
+  display:flex; align-items:center; padding:0 32px; gap:16px; position:sticky; top:0; z-index:50;
+}
+.topbar-title{font-size:18px;font-weight:800;letter-spacing:-0.3px;flex:1}
+.topbar-search{
+  display:flex; align-items:center; gap:8px; padding:8px 16px;
+  background:#F9F9F9; border:1px solid #E5E5E5; border-radius:8px;
+  width:280px; transition:border-color 0.2s;
+}
+.topbar-search:focus-within{border-color:#C3A569}
+.topbar-search i{color:#AAA;font-size:13px}
+.topbar-search input{border:none;outline:none;background:none;font-size:13px;color:#1A1A1A;width:100%}
+.topbar-icon{
+  width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  background:none;border:none;color:#666;font-size:16px;cursor:pointer;position:relative;
+}
+.topbar-icon .dot{position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:#C3A569;border:2px solid #fff}
+
+/* ══════════ KPI (히어로 대체 영역) ══════════ */
+.content-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px;margin-bottom:28px}
+.kpi{
+  background:#fff;border-radius:12px;padding:22px 24px;
+  border:1px solid #E5E5E5;transition:all 0.2s;
+}
+.kpi:hover{border-color:rgba(195,165,105,0.25);box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+.kpi-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.kpi-icon{
+  width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.kpi-icon.navy{background:#0A0F1C;color:#C3A569}
+.kpi-icon.gold{background:rgba(195,165,105,0.1);color:#C3A569}
+.kpi-icon.green{background:rgba(30,140,94,0.08);color:#1E8C5E}
+.kpi-icon.blue{background:rgba(18,89,170,0.08);color:#1259AA}
+.kpi-change{font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px}
+.kpi-change.up{background:rgba(30,140,94,0.08);color:#1E8C5E}
+.kpi-value{font-size:28px;font-weight:900;letter-spacing:-0.5px;margin-bottom:2px}
+.kpi-label{font-size:12px;color:#888;font-weight:500}
+
+@media(max-width:1280px){.content-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.content-grid{grid-template-columns:1fr}}
+</style>
+
+<!-- Topbar -->
+<div class="topbar">
+    <div class="topbar-title">대시보드</div>
+    <div class="topbar-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="프로젝트, 문서, 일정 검색...">
+    </div>
+    <div class="topbar-actions" style="display:flex;align-items:center;gap:8px;">
+        <button class="topbar-icon"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <button class="topbar-icon"><i class="fa-solid fa-envelope"></i></button>
+    </div>
+</div>
+
+<!-- KPI (히어로 대체) -->
+<div class="content-grid" style="padding:28px 32px 0;">
+    <div class="kpi">
+        <div class="kpi-header">
+            <div class="kpi-icon navy"><i class="fa-solid fa-briefcase"></i></div>
+            <span class="kpi-change up"><i class="fa-solid fa-arrow-up"></i> 2건</span>
+        </div>
+        <div class="kpi-value">10</div>
+        <div class="kpi-label">수행 사업 (총)</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-header">
+            <div class="kpi-icon gold"><i class="fa-solid fa-spinner"></i></div>
+        </div>
+        <div class="kpi-value">7</div>
+        <div class="kpi-label">진행중 사업</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-header">
+            <div class="kpi-icon green"><i class="fa-solid fa-circle-check"></i></div>
+        </div>
+        <div class="kpi-value">3</div>
+        <div class="kpi-label">완료 사업</div>
+    </div>
+    <div class="kpi">
+        <div class="kpi-header">
+            <div class="kpi-icon blue"><i class="fa-solid fa-calendar-days"></i></div>
+            <span class="kpi-change up">이번 주 2건</span>
+        </div>
+        <div class="kpi-value">8</div>
+        <div class="kpi-label">이번 달 일정</div>
+    </div>
+</div>

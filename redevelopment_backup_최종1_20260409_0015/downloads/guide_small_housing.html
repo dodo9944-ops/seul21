@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>소규모주택정비법 시행령 핵심 요약 | (주)세울엔지니어링</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A0F1C;
+    --navy-light: #141B2D;
+    --navy-mid: #1E2A42;
+    --gold: #C3A569;
+    --gold-light: #D4BC8A;
+    --gold-pale: #F5EDD8;
+    --text: #2C2C2C;
+    --text-light: #555;
+    --bg: #FAFAF8;
+    --white: #FFFFFF;
+    --border: #E0DDD5;
+    --success: #2E7D4F;
+    --warning: #B85C1F;
+    --info: #1A5FA0;
+  }
+  @page {
+    size: A4;
+    margin: 18mm 15mm 20mm 15mm;
+  }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Print Utilities ── */
+  .page-break { page-break-after: always; }
+  .no-break { page-break-inside: avoid; }
+  @media print {
+    body { background: white; font-size: 9.5pt; }
+    .container { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* ═══════════════════════════════════════
+     TITLE PAGE
+     ═══════════════════════════════════════ */
+  .title-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .title-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(195, 165, 105, 0.08);
+    border-radius: 50%;
+  }
+  .title-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -80px;
+    width: 500px;
+    height: 500px;
+    border: 1px solid rgba(195, 165, 105, 0.05);
+    border-radius: 50%;
+  }
+  .title-brand {
+    font-size: 12pt;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .title-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 24px auto;
+  }
+  .title-main {
+    font-size: 30pt;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .title-main em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .title-sub {
+    font-size: 14pt;
+    font-weight: 300;
+    color: var(--gold-light);
+    margin-top: 8px;
+    letter-spacing: 2px;
+  }
+  .title-meta {
+    margin-top: 60px;
+    font-size: 9.5pt;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.9;
+  }
+  .title-meta strong {
+    color: rgba(255,255,255,0.7);
+  }
+  .title-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 6px 24px;
+    border-radius: 3px;
+    font-size: 9pt;
+    letter-spacing: 3px;
+    margin-top: 40px;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION STYLES
+     ═══════════════════════════════════════ */
+  .content-area {
+    padding: 50px 0;
+  }
+  section {
+    margin-bottom: 56px;
+  }
+  .section-number {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 3px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 20pt;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .section-subtitle {
+    font-size: 10.5pt;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--gold);
+  }
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 28px 0 12px;
+  }
+  h4 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--navy-mid);
+    margin: 20px 0 8px;
+  }
+  p {
+    margin-bottom: 14px;
+    text-align: justify;
+  }
+
+  /* ── Info Box ── */
+  .info-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin: 20px 0;
+  }
+  .info-box.navy {
+    border-left-color: var(--navy);
+    background: #F4F5F8;
+  }
+  .info-box.warning {
+    border-left-color: var(--warning);
+    background: #FFF9F0;
+  }
+  .info-box.success {
+    border-left-color: var(--success);
+    background: #F0F8F3;
+  }
+  .info-box-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* ── Table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 10pt;
+  }
+  table thead th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 9.5pt;
+    letter-spacing: 0.5px;
+  }
+  table thead th:first-child { border-radius: 4px 0 0 0; }
+  table thead th:last-child { border-radius: 0 4px 0 0; }
+  table tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table tbody tr:nth-child(even) { background: #F8F8F6; }
+  table tbody tr:hover { background: var(--gold-pale); }
+  .highlight-cell {
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* ── Comparison Table ── */
+  .comparison-table thead th {
+    text-align: center;
+  }
+  .comparison-table thead th:first-child {
+    text-align: left;
+  }
+  .comparison-table tbody td {
+    text-align: center;
+  }
+  .comparison-table tbody td:first-child {
+    text-align: left;
+  }
+
+  /* ── List ── */
+  ul, ol {
+    margin: 12px 0 16px 20px;
+  }
+  ul li, ol li {
+    margin-bottom: 6px;
+    line-height: 1.7;
+  }
+
+  /* ── Step ── */
+  .step-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0;
+    align-items: center;
+  }
+  .step-item {
+    background: var(--navy);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 9.5pt;
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+  }
+  .step-arrow {
+    color: var(--gold);
+    font-size: 16pt;
+    font-weight: 700;
+  }
+
+  /* ── Footer ── */
+  .doc-footer {
+    margin-top: 60px;
+    padding: 30px 0;
+    border-top: 2px solid var(--navy);
+    text-align: center;
+    font-size: 9pt;
+    color: var(--text-light);
+  }
+  .doc-footer strong {
+    color: var(--navy);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ TITLE PAGE ═══════════ -->
+<div class="title-page">
+  <div class="title-brand">(주)세울엔지니어링</div>
+  <div class="title-divider"></div>
+  <h1 class="title-main">소규모주택정비법<br>시행령<br><em>핵심 요약</em></h1>
+  <p class="title-sub">Small-Scale Housing Renewal Act Summary</p>
+  <div class="title-meta">
+    <strong>발행</strong> (주)세울엔지니어링 정비사업팀<br>
+    <strong>기준</strong> 2026년 4월 현행 시행령<br>
+    <strong>용도</strong> 소규모정비사업 참여자 교육용
+  </div>
+  <div class="title-badge">Professional Guide</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<div class="container content-area">
+
+  <!-- ── 개요 ── -->
+  <section>
+    <div class="section-number">OVERVIEW</div>
+    <h2 class="section-title">소규모주택정비사업 개요</h2>
+    <div class="section-subtitle">「빈집 및 소규모주택 정비에 관한 특례법」(소규모주택정비법)에 따른 3가지 사업 유형의 핵심 내용을 정리합니다.</div>
+
+    <p>소규모주택정비법은 대규모 정비사업의 사각지대에 놓인 소규모 노후주거지의 정비를 촉진하기 위해 제정된 특별법입니다. 기존 「도시 및 주거환경정비법」에 비해 사업 요건이 완화되고, 절차가 간소화되어 있어 소규모 주거지 정비에 효과적입니다.</p>
+
+    <div class="info-box">
+      <div class="info-box-title">3가지 소규모정비사업 유형</div>
+      <p><strong>자율주택정비사업:</strong> 단독주택·다세대주택 소유자가 스스로 주택을 개량·건설하는 사업<br>
+      <strong>가로주택정비사업:</strong> 가로구역(도로로 둘러싸인 블록) 내 노후주택을 정비하는 사업<br>
+      <strong>소규모재건축사업:</strong> 기존 공동주택(아파트·연립)을 철거하고 새로 건설하는 사업</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 비교표 ═══════════ -->
+  <section>
+    <div class="section-number">COMPARISON</div>
+    <h2 class="section-title">3개 사업유형 비교표</h2>
+    <div class="section-subtitle">자율주택정비사업, 가로주택정비사업, 소규모재건축사업의 요건·절차·특례를 한눈에 비교합니다.</div>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th style="width:160px">구분</th>
+          <th>자율주택정비사업</th>
+          <th>가로주택정비사업</th>
+          <th>소규모재건축사업</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="highlight-cell">대상 건축물</td>
+          <td>단독·다세대·연립주택</td>
+          <td>단독·다세대·연립·소규모 공동주택</td>
+          <td>공동주택(아파트·연립)</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">사업 면적</td>
+          <td>제한 없음 (소규모)</td>
+          <td>10,000㎡ 미만</td>
+          <td>10,000㎡ 미만</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">기존 세대수</td>
+          <td>단독 2필지 이상 또는 다세대 등 1동 이상</td>
+          <td>제한 없음</td>
+          <td>200세대 미만</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">노후도 기준</td>
+          <td>노후·불량 건축물 2/3 이상</td>
+          <td>노후·불량 건축물 2/3 이상</td>
+          <td>노후·불량 건축물 2/3 이상 + 안전진단</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">동의율</td>
+          <td>전원 동의 (합의체)</td>
+          <td>토지등소유자 80% 이상 + 토지면적 2/3 이상</td>
+          <td>구분소유자 및 의결권 각 3/4 이상</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">사업시행자</td>
+          <td>토지등소유자 (조합 불요)</td>
+          <td>조합 또는 토지등소유자</td>
+          <td>조합</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">건설 규모</td>
+          <td>36세대 미만 (단독 20호 미만)</td>
+          <td>제한 없음 (용적률 범위 내)</td>
+          <td>200세대 미만 (300세대까지 완화 가능)</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">용적률 특례</td>
+          <td>법적 상한의 120%</td>
+          <td>법적 상한의 120% (공공기여 시 140%)</td>
+          <td>법적 상한의 120%</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">층수 특례</td>
+          <td>해당 없음</td>
+          <td>기존 층수 범위 내 (완화 가능)</td>
+          <td>기존 층수 + 추가 층수 허용</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">건축규제 완화</td>
+          <td>건폐율·건축선 완화</td>
+          <td>건폐율·건축선·일조권 완화</td>
+          <td>건폐율·대지 내 공지 완화</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">통합심의</td>
+          <td>건축·도시 통합심의</td>
+          <td>건축·도시·경관 통합심의</td>
+          <td>건축·도시·경관 통합심의</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">임대주택 의무</td>
+          <td>면제</td>
+          <td>세대수의 일정 비율 (20% 이내)</td>
+          <td>세대수의 일정 비율</td>
+        </tr>
+        <tr>
+          <td class="highlight-cell">예상 사업기간</td>
+          <td>1~2년</td>
+          <td>2~4년</td>
+          <td>3~5년</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 자율주택정비사업 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 01</div>
+    <h2 class="section-title">자율주택정비사업</h2>
+    <div class="section-subtitle">토지등소유자가 자율적으로 주택을 개량·신축하는 가장 소규모의 정비사업입니다.</div>
+
+    <h3>1. 사업 요건</h3>
+    <ul>
+      <li><strong>대상:</strong> 단독주택 2필지 이상 또는 다세대·연립주택 1동 이상</li>
+      <li><strong>노후도:</strong> 노후·불량 건축물이 해당 구역 건축물 총수의 2/3 이상</li>
+      <li><strong>동의:</strong> 토지등소유자 <strong>전원 동의</strong> (주택법상 사업계획 승인 대상 아닌 경우)</li>
+      <li><strong>건설 규모:</strong> 단독주택 20호 미만, 공동주택 36세대 미만</li>
+      <li><strong>면적:</strong> 별도 면적 제한 없으나, 소규모 단위가 원칙</li>
+    </ul>
+
+    <h3>2. 사업 절차</h3>
+    <div class="step-flow">
+      <div class="step-item">사업계획서 작성</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">소유자 전원 동의</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">구청장 인가 신청</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">통합심의</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">사업시행 인가</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">착공·준공</div>
+    </div>
+
+    <h3>3. 특례 사항</h3>
+    <div class="info-box success">
+      <div class="info-box-title">자율주택정비사업의 장점</div>
+      <p>조합 설립이 불필요하여 절차가 매우 간소합니다. 건축위원회 심의와 도시계획위원회 심의를 통합하여 처리하므로 인허가 기간이 대폭 단축됩니다. 또한 주거지역 내 건폐율·용적률 완화, 건축선 후퇴 완화 등의 특례가 적용됩니다.</p>
+    </div>
+
+    <div class="info-box warning">
+      <div class="info-box-title">유의사항</div>
+      <p>전원 동의가 필요하므로 소유자 간 합의가 어려울 수 있습니다. 또한 건설 규모가 제한적이어서 사업성 확보가 쉽지 않을 수 있으며, LH·SH 등 공공기관의 지원사업과 연계하는 것이 유리합니다.</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 가로주택정비사업 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 02</div>
+    <h2 class="section-title">가로주택정비사업</h2>
+    <div class="section-subtitle">가로구역(도로로 둘러싸인 블록) 내 노후주택을 정비하는 중규모 소규모정비사업입니다.</div>
+
+    <h3>1. 사업 요건</h3>
+    <ul>
+      <li><strong>대상 구역:</strong> 가로구역(도로 또는 공공시설로 둘러싸인 블록) 내 위치</li>
+      <li><strong>면적:</strong> 사업시행구역 면적 10,000㎡ 미만</li>
+      <li><strong>노후도:</strong> 노후·불량 건축물이 해당 구역 건축물 총수의 2/3 이상</li>
+      <li><strong>도로 조건:</strong> 가로구역 경계 도로 중 하나 이상이 너비 6m 이상</li>
+      <li><strong>동의율:</strong> 토지등소유자의 80% 이상 + 토지면적의 2/3 이상 동의</li>
+    </ul>
+
+    <h3>2. 사업 절차</h3>
+    <div class="step-flow">
+      <div class="step-item">가로구역 확인</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">조합설립 인가</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">건축심의<br>(통합심의)</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">사업시행<br>계획 인가</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">관리처분<br>계획 인가</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">착공</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">준공·입주</div>
+    </div>
+
+    <h3>3. 특례 사항</h3>
+    <table>
+      <thead>
+        <tr><th>특례 항목</th><th>내용</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">용적률 완화</td><td>해당 용도지역 법적 상한의 120% (공공기여 시 최대 140%)</td></tr>
+        <tr><td class="highlight-cell">건폐율 완화</td><td>해당 용도지역 건폐율 상한의 완화 적용</td></tr>
+        <tr><td class="highlight-cell">높이제한 완화</td><td>가로구역 특성에 따라 높이제한 완화 가능</td></tr>
+        <tr><td class="highlight-cell">통합심의</td><td>건축·도시·경관 심의를 하나의 위원회에서 통합 처리</td></tr>
+        <tr><td class="highlight-cell">분양가상한제</td><td>비적용 (투기과열지구 내에서도 면제 가능)</td></tr>
+        <tr><td class="highlight-cell">재건축부담금</td><td>비적용</td></tr>
+        <tr><td class="highlight-cell">공공지원</td><td>설계비·감리비 등 사업비 일부 지원 가능</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box navy">
+      <div class="info-box-title">공공기여 연계 인센티브</div>
+      <p>임대주택을 일정 비율 건설하거나, 기반시설을 기부채납하는 경우 용적률을 법적 상한의 140%까지 완화받을 수 있습니다. 서울시는 공공임대 20% 이상 건설 시 추가 인센티브를 제공하고 있습니다.</p>
+    </div>
+
+    <div class="info-box warning">
+      <div class="info-box-title">유의사항</div>
+      <p>가로구역의 범위 확정이 사업 추진의 핵심입니다. 가로구역 경계가 불명확하거나 도로 조건이 미달하면 사업 대상에서 제외될 수 있습니다. 또한 10,000㎡ 미만 면적 제한으로 인해 대규모 단지 조성은 불가하며, 기존 가로 패턴을 유지하는 설계가 요구됩니다.</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 소규모재건축사업 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 03</div>
+    <h2 class="section-title">소규모재건축사업</h2>
+    <div class="section-subtitle">기존 공동주택(아파트·연립)을 철거하고 새로 건설하는 소규모 재건축사업입니다.</div>
+
+    <h3>1. 사업 요건</h3>
+    <ul>
+      <li><strong>대상:</strong> 기존 공동주택(아파트, 연립주택) 200세대 미만</li>
+      <li><strong>면적:</strong> 사업시행구역 면적 10,000㎡ 미만</li>
+      <li><strong>노후도:</strong> 노후·불량 건축물 2/3 이상 + 안전진단 결과 D등급 이하</li>
+      <li><strong>동의율:</strong> 구분소유자 및 의결권 각각 3/4(75%) 이상</li>
+      <li><strong>건설 규모:</strong> 200세대 미만 (공공기여 시 300세대까지 완화 가능)</li>
+    </ul>
+
+    <h3>2. 사업 절차</h3>
+    <div class="step-flow">
+      <div class="step-item">안전진단 신청</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">안전진단<br>D등급 이하</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">조합설립 인가</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">사업시행<br>계획 인가</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">관리처분<br>계획 인가</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">이주·철거</div>
+      <span class="step-arrow">&#9654;</span>
+      <div class="step-item">착공·준공</div>
+    </div>
+
+    <h3>3. 특례 사항</h3>
+    <table>
+      <thead>
+        <tr><th>특례 항목</th><th>내용</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">용적률 완화</td><td>법적 상한의 120% (공공기여 시 추가 완화)</td></tr>
+        <tr><td class="highlight-cell">안전진단 간소화</td><td>정밀안전진단 절차 간소화 (도정법 대비)</td></tr>
+        <tr><td class="highlight-cell">세대수 확대</td><td>공공임대 건설 시 300세대까지 완화</td></tr>
+        <tr><td class="highlight-cell">통합심의</td><td>건축·도시·경관 심의 통합 처리</td></tr>
+        <tr><td class="highlight-cell">재건축부담금</td><td>비적용 (일반 재건축 대비 큰 혜택)</td></tr>
+        <tr><td class="highlight-cell">관리처분 간소화</td><td>감정평가 절차 및 관리처분 기준 완화</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box success">
+      <div class="info-box-title">일반 재건축 대비 핵심 장점</div>
+      <p>소규모재건축은 일반 재건축과 달리 <strong>재건축 초과이익 환수 부담금이 면제</strong>됩니다. 이는 조합원 부담을 크게 줄여주는 핵심 혜택입니다. 또한 안전진단 절차가 간소화되어 사업 착수까지의 기간이 단축되며, 통합심의를 통해 인허가 기간도 줄어듭니다.</p>
+    </div>
+
+    <div class="info-box warning">
+      <div class="info-box-title">유의사항</div>
+      <p>200세대 미만의 소규모 단지에 한정되므로 대단지 재건축에는 적용할 수 없습니다. 또한 안전진단 결과 D등급 이하를 받아야 하므로, C등급 이상인 단지는 소규모재건축 대상에서 제외됩니다. 사업면적 10,000㎡ 미만 요건도 함께 충족해야 합니다.</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 공통 특례 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 04</div>
+    <h2 class="section-title">공통 적용 특례 및 지원제도</h2>
+    <div class="section-subtitle">3가지 소규모정비사업에 공통으로 적용되는 특례와 정부·지자체 지원제도를 정리합니다.</div>
+
+    <h3>1. 공통 건축규제 완화</h3>
+    <div class="info-box">
+      <div class="info-box-title">건축규제 완화 항목</div>
+      <ul>
+        <li><strong>건폐율:</strong> 해당 용도지역 기준 대비 완화 적용</li>
+        <li><strong>용적률:</strong> 법적 상한의 120% (최대 140%까지 공공기여 연계)</li>
+        <li><strong>건축선:</strong> 건축선 후퇴 완화 가능</li>
+        <li><strong>일조권:</strong> 인접 대지 경계선으로부터 이격거리 완화</li>
+        <li><strong>대지 내 공지:</strong> 건축물 간 최소 이격거리 완화</li>
+      </ul>
+    </div>
+
+    <h3>2. 행정·재정 지원</h3>
+    <table>
+      <thead>
+        <tr><th>지원 항목</th><th>내용</th><th>지원 주체</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">설계비 지원</td><td>건축설계 및 감리비 일부 보조</td><td>서울시·자치구</td></tr>
+        <tr><td class="highlight-cell">사업비 융자</td><td>저리 융자 (연 1.5~2.5%)</td><td>HUG, 주택도시기금</td></tr>
+        <tr><td class="highlight-cell">세제 혜택</td><td>취득세·등록세 감면, 양도소득세 특례</td><td>국세청·지자체</td></tr>
+        <tr><td class="highlight-cell">기술 지원</td><td>설계 컨설팅, 사업성 분석 지원</td><td>LH·SH</td></tr>
+        <tr><td class="highlight-cell">인허가 지원</td><td>통합심의 창구, 원스톱 처리</td><td>자치구</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3. 시행령 주요 개정사항 (2025~2026)</h3>
+    <div class="info-box navy">
+      <div class="info-box-title">최근 시행령 개정 핵심</div>
+      <ul>
+        <li>가로주택정비사업 면적 기준 완화 (10,000㎡ → 일부 지역 15,000㎡)</li>
+        <li>소규모재건축 세대수 상한 완화 (200세대 → 공공기여 시 300세대)</li>
+        <li>자율주택정비사업 건설 규모 확대 (36세대 → 일부 완화)</li>
+        <li>통합심의 절차 간소화 및 처리기간 단축 (90일 → 60일)</li>
+        <li>공공지원 확대 (설계비 보조율 상향, 융자 한도 증가)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <div class="doc-footer">
+    <strong>(주)세울엔지니어링</strong><br>
+    소규모주택정비법 시행령 핵심 요약 | 2026년 4월 기준<br>
+    본 자료는 교육 및 참고 목적으로 작성되었으며, 구체적 사안에 대해서는 전문가 상담을 권장합니다.
+  </div>
+
+</div>
+
+</body>
+</html>

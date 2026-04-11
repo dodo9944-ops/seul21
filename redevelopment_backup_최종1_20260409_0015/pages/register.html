@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 — (주)세울엔지니어링</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .auth-container { max-width: 480px; margin: 0 auto; padding: 60px 20px 80px; }
+    .auth-logo { text-align: center; margin-bottom: 8px; }
+    .auth-logo a { font-size: 28px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; }
+    .auth-subtitle { text-align: center; font-size: 14px; color: var(--gray-500); margin-bottom: 36px; }
+    .auth-box { border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 40px 32px; }
+    .auth-box h2 { font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 32px; }
+    .field-error { font-size: 12px; color: var(--red); margin-top: 4px; display: none; }
+    .field-success { font-size: 12px; color: var(--green); margin-top: 4px; display: none; }
+    .pw-strength { display: flex; gap: 4px; margin-top: 8px; }
+    .pw-strength .bar { flex: 1; height: 4px; border-radius: 2px; background: var(--gray-200); transition: background var(--transition); }
+    .pw-strength .bar.weak { background: var(--red); }
+    .pw-strength .bar.medium { background: var(--orange); }
+    .pw-strength .bar.strong { background: var(--green); }
+    .pw-strength-label { font-size: 11px; margin-top: 4px; color: var(--gray-500); }
+    .agreement-group { margin-bottom: 24px; }
+    .agreement-all {
+        display: flex; align-items: center; gap: 8px;
+        padding: 14px 16px; background: var(--gray-50); border-radius: var(--radius-sm);
+        margin-bottom: 12px; font-size: 15px; font-weight: 600; cursor: pointer;
+    }
+    .agreement-all input { width: 18px; height: 18px; accent-color: var(--accent); }
+    .agreement-item {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 8px 16px; font-size: 13px; color: var(--gray-600);
+    }
+    .agreement-item label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .agreement-item label input { width: 16px; height: 16px; accent-color: var(--accent); }
+    .agreement-item .required { color: var(--accent); font-weight: 600; }
+    .agreement-item a { color: var(--gray-400); font-size: 12px; text-decoration: underline; }
+    .agreement-item a:hover { color: var(--gray-700); }
+    .auth-links { display: flex; justify-content: center; gap: 16px; margin-top: 20px; font-size: 13px; }
+    .auth-links a { color: var(--gray-500); transition: color var(--transition); }
+    .auth-links a:hover { color: var(--gray-900); }
+    @media (max-width: 540px) {
+        .auth-box { padding: 32px 20px; }
+    }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="auth-container">
+    <div class="auth-logo"><a href="../index.html">세울</a></div>
+    <p class="auth-subtitle">무료 회원가입 후 모든 서비스를 이용하세요</p>
+
+    <div class="auth-box">
+        <h2>회원가입</h2>
+
+        <form id="registerForm" autocomplete="off">
+            <div class="form-group">
+                <label class="form-label" for="name">이름 <span style="color:var(--red)">*</span></label>
+                <input type="text" class="form-input" id="name" placeholder="이름을 입력하세요" maxlength="20">
+                <div class="field-error" id="nameError"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">이메일 <span style="color:var(--red)">*</span></label>
+                <input type="email" class="form-input" id="email" placeholder="이메일 주소를 입력하세요">
+                <div class="field-error" id="emailError"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">비밀번호 <span style="color:var(--red)">*</span></label>
+                <input type="password" class="form-input" id="password" placeholder="비밀번호 (8자 이상)" maxlength="50">
+                <div class="pw-strength" id="pwStrength">
+                    <div class="bar" id="bar1"></div>
+                    <div class="bar" id="bar2"></div>
+                    <div class="bar" id="bar3"></div>
+                    <div class="bar" id="bar4"></div>
+                </div>
+                <div class="pw-strength-label" id="pwLabel"></div>
+                <div class="field-error" id="passwordError"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="passwordConfirm">비밀번호 확인 <span style="color:var(--red)">*</span></label>
+                <input type="password" class="form-input" id="passwordConfirm" placeholder="비밀번호를 다시 입력하세요" maxlength="50">
+                <div class="field-error" id="passwordConfirmError"></div>
+                <div class="field-success" id="passwordConfirmSuccess"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="phone">전화번호 <span style="color:var(--red)">*</span></label>
+                <input type="tel" class="form-input" id="phone" placeholder="010-0000-0000" maxlength="13">
+                <div class="field-error" id="phoneError"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="address">주소</label>
+                <div style="display:flex;gap:8px;margin-bottom:8px;">
+                    <input type="text" class="form-input" id="zipcode" placeholder="우편번호" maxlength="6" style="width:120px;" readonly>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="searchAddress()" style="white-space:nowrap;">주소 검색</button>
+                </div>
+                <input type="text" class="form-input" id="address" placeholder="주소 검색 버튼을 눌러주세요" readonly style="margin-bottom:8px;">
+                <input type="text" class="form-input" id="addressDetail" placeholder="상세주소 (동/호수 등)" maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="area">관심 구역/단지</label>
+                <input type="text" class="form-input" id="area" placeholder="예: 한남3구역, 흑석9구역" maxlength="50">
+                <div class="form-hint">정비사업 관련 관심 구역을 입력하세요.</div>
+            </div>
+
+            <div class="agreement-group">
+                <label class="agreement-all">
+                    <input type="checkbox" id="agreeAll"> 전체 동의
+                </label>
+                <div class="agreement-item">
+                    <label>
+                        <input type="checkbox" id="agreeTerms" class="agree-check">
+                        <span class="required">[필수]</span> 이용약관 동의
+                    </label>
+                    <a href="javascript:void(0)" onclick="alert('이용약관 상세 페이지는 준비 중입니다.');">보기</a>
+                </div>
+                <div class="agreement-item">
+                    <label>
+                        <input type="checkbox" id="agreePrivacy" class="agree-check">
+                        <span class="required">[필수]</span> 개인정보 처리방침 동의
+                    </label>
+                    <a href="javascript:void(0)" onclick="alert('개인정보 처리방침 상세 페이지는 준비 중입니다.');">보기</a>
+                </div>
+                <div class="agreement-item">
+                    <label>
+                        <input type="checkbox" id="agreeMarketing" class="agree-check">
+                        <span style="color:var(--gray-400);">[선택]</span> 마케팅 정보 수신 동의
+                    </label>
+                    <a href="javascript:void(0)" onclick="alert('마케팅 수신 동의 상세 페이지는 준비 중입니다.');">보기</a>
+                </div>
+                <div class="field-error" id="agreeError" style="padding:0 16px;"></div>
+            </div>
+
+            <button type="submit" class="btn btn-accent btn-lg" style="width:100%;">
+                <i class="fa-solid fa-user-plus"></i> 회원가입
+            </button>
+        </form>
+
+        <div class="auth-links">
+            <span style="color:var(--gray-500);">이미 계정이 있으신가요?</span>
+            <a href="login.html" style="color:var(--accent);font-weight:600;">로그인</a>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+function searchAddress() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            document.getElementById('zipcode').value = data.zonecode;
+            document.getElementById('address').value = data.roadAddress || data.jibunAddress;
+            document.getElementById('addressDetail').focus();
+        }
+    }).open();
+}
+</script>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    const form = document.getElementById('registerForm');
+
+    // 전체 동의 체크박스
+    document.getElementById('agreeAll').addEventListener('change', function() {
+        document.querySelectorAll('.agree-check').forEach(function(cb) {
+            cb.checked = this.checked;
+        }.bind(this));
+    });
+
+    // 개별 체크 시 전체 동의 상태 업데이트
+    document.querySelectorAll('.agree-check').forEach(function(cb) {
+        cb.addEventListener('change', function() {
+            var allChecked = Array.from(document.querySelectorAll('.agree-check')).every(function(c) { return c.checked; });
+            document.getElementById('agreeAll').checked = allChecked;
+        });
+    });
+
+    // 비밀번호 강도 표시
+    document.getElementById('password').addEventListener('input', function() {
+        var pw = this.value;
+        var score = 0;
+        if (pw.length >= 8) score++;
+        if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++;
+        if (/[0-9]/.test(pw)) score++;
+        if (/[^a-zA-Z0-9]/.test(pw)) score++;
+
+        var bars = ['bar1', 'bar2', 'bar3', 'bar4'];
+        var labels = ['', '약함', '보통', '양호', '강함'];
+        var classes = ['', 'weak', 'medium', 'medium', 'strong'];
+
+        bars.forEach(function(id, i) {
+            var el = document.getElementById(id);
+            el.className = 'bar';
+            if (pw.length > 0 && i < score) el.classList.add(classes[score]);
+        });
+
+        var label = document.getElementById('pwLabel');
+        label.textContent = pw.length > 0 ? labels[score] : '';
+        label.style.color = score <= 1 ? 'var(--red)' : score <= 2 ? 'var(--orange)' : 'var(--green)';
+    });
+
+    // 비밀번호 확인 실시간 검증
+    document.getElementById('passwordConfirm').addEventListener('input', function() {
+        var pw = document.getElementById('password').value;
+        var confirm = this.value;
+        var errEl = document.getElementById('passwordConfirmError');
+        var succEl = document.getElementById('passwordConfirmSuccess');
+        errEl.style.display = 'none';
+        succEl.style.display = 'none';
+        if (confirm.length > 0) {
+            if (pw === confirm) {
+                succEl.textContent = '비밀번호가 일치합니다.';
+                succEl.style.display = 'block';
+            } else {
+                errEl.textContent = '비밀번호가 일치하지 않습니다.';
+                errEl.style.display = 'block';
+            }
+        }
+    });
+
+    // 전화번호 자동 포맷
+    document.getElementById('phone').addEventListener('input', function() {
+        var val = this.value.replace(/[^0-9]/g, '');
+        if (val.length > 3 && val.length <= 7) {
+            val = val.slice(0, 3) + '-' + val.slice(3);
+        } else if (val.length > 7) {
+            val = val.slice(0, 3) + '-' + val.slice(3, 7) + '-' + val.slice(7, 11);
+        }
+        this.value = val;
+    });
+
+    // 에러 표시 헬퍼
+    function showError(id, msg) {
+        var el = document.getElementById(id);
+        el.textContent = msg;
+        el.style.display = 'block';
+    }
+    function clearErrors() {
+        document.querySelectorAll('.field-error').forEach(function(el) { el.style.display = 'none'; });
+        document.querySelectorAll('.field-success').forEach(function(el) { el.style.display = 'none'; });
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        clearErrors();
+
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value;
+        var passwordConfirm = document.getElementById('passwordConfirm').value;
+        var phone = document.getElementById('phone').value.trim();
+        var agreeTerms = document.getElementById('agreeTerms').checked;
+        var agreePrivacy = document.getElementById('agreePrivacy').checked;
+
+        var hasError = false;
+
+        if (!name) { showError('nameError', '이름을 입력해주세요.'); hasError = true; }
+        if (!email) {
+            showError('emailError', '이메일을 입력해주세요.'); hasError = true;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showError('emailError', '올바른 이메일 형식이 아닙니다.'); hasError = true;
+        }
+        if (!phone || phone.replace(/[^0-9]/g,'').length < 10) {
+            showError('phoneError', '전화번호를 정확히 입력해주세요.'); hasError = true;
+        }
+        if (!password) {
+            showError('passwordError', '비밀번호를 입력해주세요.'); hasError = true;
+        } else if (password.length < 8) {
+            showError('passwordError', '비밀번호는 8자 이상이어야 합니다.'); hasError = true;
+        }
+        if (password !== passwordConfirm) {
+            showError('passwordConfirmError', '비밀번호가 일치하지 않습니다.'); hasError = true;
+        }
+        if (!agreeTerms || !agreePrivacy) {
+            showError('agreeError', '필수 약관에 동의해주세요.'); hasError = true;
+        }
+
+        if (hasError) return;
+
+        // 실제 API 회원가입
+        var submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 처리 중...';
+
+        var zipcode = document.getElementById('zipcode').value.trim();
+        var address = document.getElementById('address').value.trim();
+        var addressDetail = document.getElementById('addressDetail').value.trim();
+        var area = document.getElementById('area').value.trim();
+        var fullAddress = address ? (address + (addressDetail ? ' ' + addressDetail : '')) : '';
+
+        fetch('/api/members', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'register',
+                name: name,
+                phone: phone,
+                email: email,
+                password: password,
+                zipcode: zipcode,
+                address: fullAddress,
+                area: area
+            })
+        })
+        .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+        .then(function(res) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> 회원가입';
+            if (res.ok) {
+                App.toast('회원가입이 완료되었습니다!', 'success');
+                setTimeout(function() { location.href = 'login.html'; }, 1200);
+            } else {
+                App.toast(res.data.error || '회원가입에 실패했습니다.', 'error');
+            }
+        })
+        .catch(function() {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> 회원가입';
+            App.toast('서버 연결에 실패했습니다.', 'error');
+        });
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!-- 사업성검토 (feasibility.html) — Hero Section Reference -->
+<style>
+/* === Hero — 서비스 선택 포함 === */
+.fh{padding:48px 0 0;background:linear-gradient(160deg,#0A0F1C 0%,#142644 50%,#0A0F1C 100%);position:relative;overflow:visible}
+.fh h1{font-size:34px;font-weight:900;color:#fff;margin-bottom:8px;padding-left:18px;border-left:3px solid var(--gold)}
+.fh .fh-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;max-width:650px;margin-bottom:32px}
+@media(max-width:768px){.fh{padding:36px 0 0}.fh h1{font-size:26px}.fh .fh-sub{margin-bottom:24px}}
+
+/* === 히어로 안 서비스 선택 카드 === */
+.hero-selector{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding-bottom:36px}
+@media(max-width:640px){.hero-selector{grid-template-columns:1fr;gap:12px;padding-bottom:28px}}
+.hero-opt{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:14px;padding:24px 22px;cursor:pointer;transition:all .3s;position:relative}
+.hero-opt:hover{background:rgba(255,255,255,.1);border-color:rgba(195,165,105,.3);transform:translateY(-2px)}
+.hero-opt.active{background:rgba(195,165,105,.08);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.hero-opt.active::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);border-radius:14px 14px 0 0}
+.hero-opt .ho-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.hero-opt .ho-icon{width:44px;height:44px;border-radius:12px;background:rgba(195,165,105,.12);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--gold);flex-shrink:0}
+.hero-opt.active .ho-icon{background:var(--gold);color:var(--brand-dark)}
+.hero-opt .ho-title{font-size:17px;font-weight:800;color:#fff}
+.hero-opt .ho-badge{display:inline-block;padding:3px 9px;border-radius:5px;font-size:10px;font-weight:700;margin-left:8px;vertical-align:middle}
+.ho-badge.quick{background:rgba(255,255,255,.12);color:rgba(255,255,255,.6)}
+.ho-badge.pro{background:var(--gold);color:var(--brand-dark)}
+.hero-opt .ho-desc{font-size:12.5px;color:rgba(255,255,255,.45);line-height:1.55;margin-bottom:12px}
+.hero-opt .ho-tags{display:flex;flex-wrap:wrap;gap:5px}
+.hero-opt .ho-tag{padding:3px 9px;border-radius:5px;font-size:10.5px;font-weight:500;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08)}
+.hero-opt.active .ho-tag{background:rgba(195,165,105,.1);color:var(--gold);border-color:rgba(195,165,105,.2)}
+.hero-opt .ho-arrow{display:flex;align-items:center;gap:5px;margin-top:12px;font-size:12px;font-weight:700;color:var(--gold);opacity:0;transition:opacity .2s}
+.hero-opt.active .ho-arrow,.hero-opt:hover .ho-arrow{opacity:1}
+.hero-opt .ho-arrow i{font-size:10px;transition:transform .2s}
+.hero-opt:hover .ho-arrow i{transform:translateX(3px)}
+</style>
+
+<div class="fh">
+    <div class="inner">
+        <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>사업성 검토</span></div>
+        <h1>사업성 검토</h1>
+        <p class="fh-sub">정비사업의 비례율, 분담금, 총사업비, 수익성을 검토할 수 있습니다.<br><strong style="color:var(--gold)">개별 검토</strong>는 비례율·분담금 등 특정 항목을 빠르게 계산하는 간편 도구이고, <strong style="color:var(--gold)">종합 분석</strong>은 기초데이터부터 사업비까지 단계별로 입력하여 비례율·평균분담금·시나리오를 종합적으로 분석하는 전문가용 도구입니다.</p>
+
+        <!-- 히어로 안 서비스 선택 -->
+        <div class="hero-selector">
+            <div class="hero-opt active" onclick="switchTab('individual')">
+                <div class="ho-top">
+                    <div class="ho-icon"><i class="fa-solid fa-calculator"></i></div>
+                    <div><span class="ho-title">개별 검토</span><span class="ho-badge quick">간편</span></div>
+                </div>
+                <p class="ho-desc">특정 항목만 빠르게 계산합니다. 비례율, 분담금, 시뮬레이션 등 단일 기능 실행.</p>
+                <div class="ho-tags">
+                    <span class="ho-tag">비례율</span><span class="ho-tag">분담금</span><span class="ho-tag">시뮬레이션</span><span class="ho-tag">총사업비</span><span class="ho-tag">수익성</span>
+                </div>
+                <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 개별 계산 시작</div>
+            </div>
+            <div class="hero-opt" onclick="switchTab('comprehensive')">
+                <div class="ho-top">
+                    <div class="ho-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <div><span class="ho-title">종합 분석</span><span class="ho-badge pro">전문가용</span></div>
+                </div>
+                <p class="ho-desc">기초데이터부터 사업비까지 단계별 입력. 비례율·분담금·시나리오 종합 분석.</p>
+                <div class="ho-tags">
+                    <span class="ho-tag">6단계 분석</span><span class="ho-tag">유형별 분담금</span><span class="ho-tag">시나리오 비교</span><span class="ho-tag">자동 해석</span>
+                </div>
+                <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 종합 분석 시작</div>
+            </div>
+        </div>
+    </div>
+</div>

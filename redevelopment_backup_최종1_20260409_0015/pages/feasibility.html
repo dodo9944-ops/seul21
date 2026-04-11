@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사업성 검토 — (주)세울엔지니어링</title>
+    <meta name="description" content="정비사업 비례율·분담금·총사업비·수익성을 체계적으로 분석합니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    /* Hero — 서비스 선택 포함 */
+    .fh{padding:48px 0 0;background:linear-gradient(135deg,#0F1D35 0%,#142644 40%,#0A0F1C 100%);position:relative;overflow:visible}
+    .fh .hero-bg-photo{position:absolute;top:0;right:0;width:58%;height:100%;z-index:0}
+    .fh .hero-bg-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;filter:brightness(0.72) contrast(1.05) saturate(0.85)}
+    .fh .hero-bg-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0A0F1C 0%,rgba(10,15,28,0.94) 6%,rgba(14,24,42,0.65) 24%,rgba(18,32,56,0.4) 48%,rgba(20,38,68,0.28) 72%,rgba(20,38,68,0.22) 100%);z-index:1}
+    .fh .hero-bg-photo::before{content:'';position:absolute;top:0;bottom:0;left:22%;width:56%;pointer-events:none;background:linear-gradient(90deg,rgba(15,26,46,0) 0%,rgba(15,26,46,0.06) 25%,rgba(14,22,40,0.16) 52%,rgba(14,22,40,0.18) 62%,rgba(15,26,46,0.08) 80%,rgba(15,26,46,0) 100%);filter:blur(24px);z-index:2}
+    .fh .inner{position:relative;z-index:2}
+    .fh h1{font-size:34px;font-weight:900;color:#fff;margin-bottom:8px;padding-left:18px;border-left:3px solid var(--gold)}
+    .fh .fh-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;max-width:650px;margin-bottom:32px}
+    @media(max-width:768px){.fh{padding:36px 0 0}.fh h1{font-size:26px}.fh .fh-sub{margin-bottom:24px}}
+
+    /* 히어로 안 서비스 선택 카드 */
+    .hero-selector{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding-bottom:36px}
+    @media(max-width:640px){.hero-selector{grid-template-columns:1fr;gap:12px;padding-bottom:28px}}
+    .hero-opt{background:rgba(10,16,30,0.57);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:24px 22px;cursor:pointer;transition:all .3s;position:relative;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+    .hero-opt:hover{background:rgba(14,22,40,0.70);border-color:rgba(195,165,105,.3);transform:translateY(-2px)}
+    .hero-opt.active{background:rgba(10,16,30,0.62);border-color:rgba(195,165,105,0.35);box-shadow:none}
+    .hero-opt:last-child{background:rgba(10,16,30,0.64)}
+    .hero-opt:last-child:hover{background:rgba(14,22,40,0.74)}
+    .hero-opt.active::before{display:none}
+    .hero-opt .ho-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .hero-opt .ho-icon{width:44px;height:44px;border-radius:12px;background:rgba(195,165,105,.12);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--gold);flex-shrink:0}
+    .hero-opt.active .ho-icon{background:var(--gold);color:var(--brand-dark)}
+    .hero-opt .ho-title{font-size:17px;font-weight:800;color:#fff}
+    .hero-opt .ho-badge{display:inline-block;padding:3px 9px;border-radius:5px;font-size:10px;font-weight:700;margin-left:8px;vertical-align:middle}
+    .ho-badge.quick{background:rgba(255,255,255,.12);color:rgba(255,255,255,.6)}
+    .ho-badge.pro{background:var(--gold);color:var(--brand-dark)}
+    .hero-opt .ho-desc{font-size:12.5px;color:rgba(255,255,255,.45);line-height:1.55;margin-bottom:12px}
+    .hero-opt .ho-tags{display:flex;flex-wrap:wrap;gap:5px}
+    .hero-opt .ho-tag{padding:3px 9px;border-radius:5px;font-size:10.5px;font-weight:500;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08)}
+    .hero-opt.active .ho-tag{background:rgba(195,165,105,.1);color:var(--gold);border-color:rgba(195,165,105,.2)}
+    .hero-opt .ho-arrow{display:flex;align-items:center;gap:5px;margin-top:12px;font-size:12px;font-weight:700;color:var(--gold);opacity:0;transition:opacity .2s}
+    .hero-opt:hover .ho-arrow{opacity:1}
+    .hero-opt .ho-arrow i{font-size:10px;transition:transform .2s}
+    .hero-opt:hover .ho-arrow i{transform:translateX(3px)}
+
+    /* Cards Grid */
+    .sv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:48px}
+    @media(max-width:900px){.sv-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:540px){.sv-grid{grid-template-columns:1fr}}
+    .sv-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:16px;padding:26px 24px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+    .sv-card:hover{border-color:var(--gold);box-shadow:0 12px 32px rgba(195,165,105,.1);transform:translateY(-4px)}
+    .sv-card.active{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+    .sv-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);opacity:0;transition:opacity .3s}
+    .sv-card:hover::after,.sv-card.active::after{opacity:1}
+    .sv-card .si{width:48px;height:48px;border-radius:13px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-navy));display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:20px;color:var(--gold)}
+    .sv-card h3{font-size:17px;font-weight:800;color:var(--gray-900);margin-bottom:6px}
+    .sv-card .sd{font-size:13px;color:var(--gray-500);line-height:1.6;margin-bottom:14px}
+    .sv-card .sv-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:40px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .2s}
+    .sv-card .sv-btn:hover{background:var(--brand-navy)}
+
+    /* Section headers */
+    .fs{margin-bottom:44px}
+    .fs-h{display:flex;align-items:center;gap:14px;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--gray-100)}
+    .fs-h .hi{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0A0F1C,#1a2d50);display:flex;align-items:center;justify-content:center;font-size:18px;color:#C3A569;flex-shrink:0;box-shadow:0 2px 8px rgba(10,15,28,0.18)}
+    .fs-h h2{font-size:26px;font-weight:900;color:#0A0F1C;letter-spacing:-0.5px}
+
+    /* Modal Overlay */
+    .calc-overlay{position:fixed;inset:0;background:rgba(10,15,28,.55);backdrop-filter:blur(3px);z-index:600;display:flex;align-items:flex-start;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s;overflow:hidden}
+    .calc-overlay.open{opacity:1;pointer-events:auto}
+
+    /* Modal — 화면 80% 높이, 상단 고정 + 내부 스크롤 */
+    .calc-modal{background:#fff;border-radius:16px;width:100%;max-width:860px;max-height:80vh;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.25);transform:translateY(20px) scale(.97);transition:transform .3s;display:flex;flex-direction:column;overflow:hidden;margin-top:40px}
+    .calc-overlay.open .calc-modal{transform:translateY(0) scale(1)}
+
+    /* 닫기 버튼 */
+    .calc-close{position:absolute;top:18px;right:18px;z-index:20;width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;cursor:pointer;font-size:14px;color:var(--gray-600);transition:all .2s}
+    .calc-close:hover{background:var(--gray-100);color:var(--gray-900)}
+
+    /* Header — 고정, 제목+설명+액션버튼 */
+    .cm-head{padding:22px 24px 0;flex-shrink:0;position:relative;z-index:10;background:#fff;border-radius:16px 16px 0 0}
+    .cm-head h2{font-size:18px;font-weight:800;color:var(--gray-900);margin-bottom:4px;padding-right:48px}
+    .cm-head p{font-size:12.5px;color:var(--gray-500);margin-bottom:10px}
+    .cm-head .cm-actions{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--gray-100)}
+
+    /* Body — 내부 스크롤 */
+    .cm-body{padding:18px 24px 24px;overflow-y:auto;flex:1;min-height:0}
+    @media(max-width:768px){.calc-modal{height:calc(100vh - 32px);max-width:100%;border-radius:12px}.cm-body{padding:14px 16px}.cm-head{padding:16px 16px 0}.cm-head h2{font-size:16px}}
+
+    /* Form groups */
+    .fg{margin-bottom:14px}
+    .fg label{display:block;font-size:12px;font-weight:600;color:var(--gray-600);margin-bottom:4px}
+    .fg input{width:100%;height:42px;padding:0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:#fff;font-family:var(--font);transition:all .2s;text-align:right}
+    .fg input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(195,165,105,.1)}
+    .fg input.err{border-color:#EF4444}
+    .fg .helper{font-size:10.5px;color:var(--gray-400);margin-top:2px}
+    .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:540px){.fg-row{grid-template-columns:1fr}}
+
+    /* Section dividers in modal */
+    .cm-sec{font-size:13px;font-weight:700;color:var(--brand-dark);margin:20px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;gap:6px}
+    .cm-sec i{color:var(--gold);font-size:12px}
+
+    /* Action buttons */
+    .cm-actions{display:flex;gap:8px;margin:20px 0 16px;flex-wrap:wrap}
+    .cm-btn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .2s;border:1.5px solid var(--gray-200);background:#fff;color:var(--gray-600)}
+    .cm-btn:hover{border-color:var(--gold);color:var(--brand-dark)}
+    .cm-btn.primary{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark)}
+    .cm-btn.primary:hover{background:var(--brand-navy)}
+    .cm-btn i{font-size:11px}
+
+    /* Result area */
+    .cm-result{padding:20px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:14px;margin-top:20px}
+    .cm-result .rr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:13px}
+    .cm-result .rr:last-child{border-bottom:none}
+    .cm-result .rr .rl{color:var(--gray-500);font-weight:500}
+    .cm-result .rr .rv{color:var(--gray-900);font-weight:700;font-size:14px}
+    .cm-result .rr .rv.gold{color:var(--gold)}
+    .cm-result .rr .rv.red{color:#EF4444}
+    .cm-result .rr .rv.green{color:#059669}
+    .cm-result-hero{text-align:center;padding:20px 0;margin-bottom:12px;border-bottom:1px solid var(--gray-100)}
+    .cm-result-hero .rh-val{font-size:32px;font-weight:900;color:var(--brand-dark);margin-bottom:4px}
+    .cm-result-hero .rh-label{font-size:13px;color:var(--gray-500)}
+
+    /* Badge */
+    .badge-judge{display:inline-flex;align-items:center;gap:4px;padding:5px 14px;border-radius:8px;font-size:12px;font-weight:700}
+    .badge-good{background:#E8F5E9;color:#2E7D32}
+    .badge-normal{background:rgba(195,165,105,.1);color:#8B7340}
+    .badge-bad{background:#FDECEA;color:#D6423A}
+
+    /* Notice */
+    .cm-notice{margin-top:16px;padding:14px;background:rgba(195,165,105,.04);border:1px solid rgba(195,165,105,.1);border-radius:10px;font-size:11.5px;color:var(--gray-500);line-height:1.6}
+    .cm-notice i{color:var(--gold);margin-right:4px}
+
+    /* Slider */
+    .slider-wrap{display:flex;align-items:center;gap:10px}
+    .slider-wrap input[type=range]{flex:1;accent-color:var(--gold)}
+    .slider-wrap .sv{min-width:60px;font-size:13px;font-weight:700;color:var(--brand-dark);text-align:right}
+
+    /* ═══ 종합 분석 서비스 ═══ */
+    .ca-sum{display:flex;gap:12px;margin-bottom:20px;padding:14px 18px;background:var(--brand-dark);border-radius:12px;flex-wrap:wrap}
+    .ca-sum-item{flex:1;min-width:120px;text-align:center}
+    .ca-sum-label{display:block;font-size:10px;color:rgba(255,255,255,.45);font-weight:500;margin-bottom:2px}
+    .ca-sum-val{font-size:16px;font-weight:800;color:var(--gold)}
+    .ca-main{display:flex;gap:18px;min-height:500px}
+    @media(max-width:768px){.ca-main{flex-direction:column}}
+    .ca-nav{width:180px;flex-shrink:0;display:flex;flex-direction:column;gap:4px}
+    @media(max-width:768px){.ca-nav{width:100%;flex-direction:row;flex-wrap:wrap;gap:6px}}
+    .ca-nav-btn{display:flex;align-items:center;gap:8px;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;background:#fff;color:var(--gray-600);font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .2s;text-align:left;width:100%}
+    .ca-nav-btn:hover{border-color:var(--gold);color:var(--brand-dark)}
+    .ca-nav-btn.active{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark)}
+    .ca-nav-btn i{font-size:12px;width:16px;text-align:center}
+    @media(max-width:768px){.ca-nav-btn{width:auto;padding:8px 12px;font-size:11px}.ca-nav-btn span{display:none}}
+    .ca-nav-actions{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+    @media(max-width:768px){.ca-nav-actions{flex-direction:row;margin-top:8px}}
+    .ca-panel{flex:1;background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;padding:24px;overflow-y:auto;max-height:70vh}
+    @media(max-width:768px){.ca-panel{max-height:none}}
+    .ca-step-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .ca-step-head h3{font-size:17px;font-weight:800;color:var(--gray-900)}
+    .ca-sec{font-size:12.5px;font-weight:700;color:var(--brand-dark);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;gap:6px}
+    .ca-sec i{color:var(--gold);font-size:11px}
+    .ca-fg{margin-bottom:12px}
+    .ca-fg label{display:block;font-size:11.5px;font-weight:600;color:var(--gray-600);margin-bottom:3px}
+    .ca-fg select{width:100%;height:38px;padding:0 12px;border:1.5px solid var(--gray-200);border-radius:9px;font-size:13px;font-family:var(--font);color:var(--gray-800);background:#fff}
+    .ca-input-wrap{display:flex;align-items:center;border:1.5px solid var(--gray-200);border-radius:9px;overflow:hidden;transition:border-color .2s}
+    .ca-input-wrap:focus-within{border-color:var(--gold)}
+    .ca-input-wrap input{flex:1;height:38px;border:none;padding:0 10px;font-size:13px;font-weight:500;color:var(--gray-800);text-align:right;outline:none;font-family:var(--font)}
+    .ca-unit{font-size:11px;color:var(--gray-400);padding:0 10px;flex-shrink:0;background:var(--gray-50)}
+    .ca-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:540px){.ca-row{grid-template-columns:1fr}}
+    .ca-result-mini{margin-top:12px;padding:12px;background:var(--gray-50);border-radius:10px;font-size:13px;color:var(--gray-700);font-weight:600}
+    .ca-kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+    .ca-kpi{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:12px;padding:18px;text-align:center}
+    .ca-kpi-val{font-size:22px;font-weight:800;color:var(--brand-dark);margin-bottom:2px}
+    .ca-kpi-label{font-size:11px;color:var(--gray-500);margin-bottom:6px}
+    .ca-badge{display:inline-flex;padding:3px 10px;border-radius:6px;font-size:10.5px;font-weight:700}
+    .ca-good{background:#E8F5E9;color:#2E7D32}
+    .ca-normal{background:rgba(195,165,105,.1);color:#8B7340}
+    .ca-bad{background:#FDECEA;color:#D6423A}
+    .ca-neutral{background:var(--gray-100);color:var(--gray-500)}
+    .ca-table{overflow-x:auto;margin:10px 0}
+    .ca-table table{width:100%;border-collapse:collapse;font-size:12.5px}
+    .ca-table th{background:var(--gray-50);font-weight:600;color:var(--gray-700);text-align:left;padding:8px 12px;border:1px solid var(--gray-200)}
+    .ca-table td{padding:8px 12px;border:1px solid var(--gray-100);color:var(--gray-700)}
+    .ca-green{color:#059669;font-weight:600}
+    .ca-insights{margin:12px 0;display:flex;flex-direction:column;gap:8px}
+    .ca-insight{display:flex;align-items:flex-start;gap:8px;padding:10px 14px;background:rgba(195,165,105,.04);border:1px solid rgba(195,165,105,.08);border-radius:9px;font-size:12.5px;color:var(--gray-700);line-height:1.55}
+    .ca-insight i{color:var(--gold);margin-top:2px;flex-shrink:0}
+    .ca-warns{margin:10px 0}
+    .ca-warn{display:flex;align-items:center;gap:6px;padding:6px 10px;background:#FDECEA;border-radius:7px;font-size:12px;color:#D6423A;font-weight:600;margin-bottom:4px}
+    .ca-scenario-box{padding:14px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;margin-bottom:12px}
+    .ca-scenario-title{font-size:13px;font-weight:700;color:var(--brand-dark);margin-bottom:10px}
+    /* Service Selector — 2카드 선택 UI */
+    .svc-selector{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:32px}
+    @media(max-width:640px){.svc-selector{grid-template-columns:1fr;gap:12px}}
+    .svc-option{background:#fff;border:2px solid var(--gray-200);border-radius:16px;padding:28px 24px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+    .svc-option:hover{border-color:rgba(195,165,105,.4);box-shadow:0 8px 24px rgba(195,165,105,.08);transform:translateY(-2px)}
+    .svc-option.active{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 8px 24px rgba(195,165,105,.12)}
+    .svc-option.active::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
+    .svc-option .svc-badge{position:absolute;top:16px;right:16px;padding:4px 10px;border-radius:6px;font-size:10px;font-weight:700}
+    .svc-option .svc-badge.quick{background:rgba(195,165,105,.1);color:#8B7340}
+    .svc-option .svc-badge.pro{background:var(--brand-dark);color:var(--gold)}
+    .svc-option .svc-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-navy));display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--gold);margin-bottom:16px}
+    .svc-option.active .svc-icon{box-shadow:0 4px 12px rgba(195,165,105,.2)}
+    .svc-option h3{font-size:18px;font-weight:800;color:var(--gray-900);margin-bottom:6px}
+    .svc-option .svc-desc{font-size:13px;color:var(--gray-500);line-height:1.6;margin-bottom:14px}
+    .svc-option .svc-features{display:flex;flex-wrap:wrap;gap:6px}
+    .svc-option .svc-feat{padding:4px 10px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:6px;font-size:11px;font-weight:500;color:var(--gray-600)}
+    .svc-option.active .svc-feat{background:rgba(195,165,105,.06);border-color:rgba(195,165,105,.15);color:var(--brand-dark)}
+    .svc-option .svc-arrow{display:flex;align-items:center;gap:6px;margin-top:16px;font-size:13px;font-weight:700;color:var(--gold);opacity:0;transition:opacity .2s}
+    .svc-option.active .svc-arrow,.svc-option:hover .svc-arrow{opacity:1}
+
+    /* CTA */
+    .fs-cta{background:linear-gradient(135deg,#0A0F1C,#142644);border-radius:18px;padding:44px;display:flex;align-items:center;justify-content:space-between;gap:28px;position:relative;overflow:hidden}
+    .fs-cta .cb{position:relative;z-index:1}
+    .fs-cta h3{font-size:21px;font-weight:800;color:#fff;margin-bottom:6px}
+    .fs-cta p{font-size:14px;color:rgba(255,255,255,.5);line-height:1.7}
+    .fs-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;background:var(--gold);color:#0A0F1C;border-radius:10px;font-size:15px;font-weight:800;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0}
+    .fs-cta-btn:hover{background:#d4b56a;box-shadow:0 8px 24px rgba(195,165,105,.3)}
+    @media(max-width:640px){.fs-cta{flex-direction:column;padding:28px 22px;text-align:center}}
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="fh">
+    <div class="hero-bg-photo"><img src="../jpg/hero_feasibility.png" alt="사업성 검토"></div>
+    <div class="inner">
+        <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>사업성 검토</span></div>
+        <h1>사업성 검토</h1>
+        <p class="fh-sub">정비사업의 비례율, 분담금, 총사업비, 수익성을 검토할 수 있습니다.<br><strong style="color:var(--gold)">개별 검토</strong>는 비례율·분담금 등 특정 항목을 빠르게 계산하는 간편 도구이고, <strong style="color:var(--gold)">종합 분석</strong>은 기초데이터부터 사업비까지 단계별로 입력하여 비례율·평균분담금·시나리오를 종합적으로 분석하는 전문가용 도구입니다.</p>
+
+        <!-- 히어로 안 서비스 선택 -->
+        <div class="hero-selector">
+            <div class="hero-opt active" onclick="switchTab('individual')">
+                <div class="ho-top">
+                    <div class="ho-icon"><i class="fa-solid fa-calculator"></i></div>
+                    <div><span class="ho-title">개별 검토</span><span class="ho-badge quick">간편</span></div>
+                </div>
+                <p class="ho-desc">특정 항목만 빠르게 계산합니다. 비례율, 분담금, 시뮬레이션 등 단일 기능 실행.</p>
+                <div class="ho-tags">
+                    <span class="ho-tag">비례율</span><span class="ho-tag">분담금</span><span class="ho-tag">시뮬레이션</span><span class="ho-tag">총사업비</span><span class="ho-tag">수익성</span>
+                </div>
+                <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 개별 계산 시작</div>
+            </div>
+            <div class="hero-opt" onclick="switchTab('comprehensive')">
+                <div class="ho-top">
+                    <div class="ho-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <div><span class="ho-title">종합 분석</span><span class="ho-badge pro">전문가용</span></div>
+                </div>
+                <p class="ho-desc">기초데이터부터 사업비까지 단계별 입력. 비례율·분담금·시나리오 종합 분석.</p>
+                <div class="ho-tags">
+                    <span class="ho-tag">6단계 분석</span><span class="ho-tag">유형별 분담금</span><span class="ho-tag">시나리오 비교</span><span class="ho-tag">자동 해석</span>
+                </div>
+                <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 종합 분석 시작</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body"><div class="inner">
+
+    <!-- 개별 검토 서비스 -->
+    <div id="tabIndividual">
+        <div class="fs">
+            <div class="fs-h"><div class="hi"><i class="fa-solid fa-calculator"></i></div><h2>개별 검토 서비스</h2></div>
+            <div class="sv-grid" id="cardGrid"></div>
+        </div>
+    </div>
+
+    <!-- 종합 분석 서비스 -->
+    <div id="tabComprehensive" style="display:none">
+        <div class="fs">
+            <div class="fs-h"><div class="hi"><i class="fa-solid fa-chart-pie"></i></div><h2>종합 분석 서비스</h2></div>
+            <div id="compWrap"></div>
+        </div>
+    </div>
+
+    <div class="fs-cta">
+        <div class="cb">
+            <h3>기초자료만 있어도 1차 사업성 검토가 가능합니다</h3>
+            <p>비례율, 분담금, 수익성, 리스크를 종합적으로 검토해드립니다.</p>
+        </div>
+        <a href="contact.html" class="fs-cta-btn"><i class="fa-solid fa-paper-plane"></i> 사업성 검토 의뢰하기</a>
+    </div>
+</div></div>
+
+<!-- 5개 계산기 모달 컨테이너 -->
+<div id="modalContainer"></div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=20260407"></script>
+<script src="../assets/js/data-service.js?v=20260407"></script>
+<script src="../assets/js/common.js?v=20260407"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+<script src="../assets/js/feasibility-comprehensive.js?v=20260407d"></script>
+<script>
+/* 구 인라인 코드 — 외부 JS로 완전 이전. 아래는 실행 차단 */
+if(false){(function(){
+
+/* ════════════════════════════════════════
+   CONSTANTS & CONFIG
+   ════════════════════════════════════════ */
+var CFG = {
+  RATIO_LOW: 1.00, RATIO_MID: 1.10, RATIO_HIGH: 1.20,
+  BURDEN_LOW: 0.10, BURDEN_MID: 0.30,
+  COST_RESERVE_WARN: 0.10, COST_FINANCE_WARN: 0.15, COST_OPER_WARN: 0.08,
+  SQM_PER_PYEONG: 3.3058,
+  STORAGE_KEY: 'seul_comp_analysis',
+  PROJECT_TYPES: ['재건축','재개발','소규모 정비사업','총회기획·대행','기타'],
+  PHASES: ['추진위 구성','조합설립인가','사업시행인가','관리처분 준비','관리처분인가','착공','시공중','준공'],
+  SCENARIOS: ['기준안','보수안','낙관안']
+};
+
+/* ════════════════════════════════════════
+   UTILITIES
+   ════════════════════════════════════════ */
+function fmt(n){if(n===null||n===undefined||isNaN(n))return'0';return Math.round(n).toLocaleString('ko-KR')}
+function fmtWon(n){if(!n||isNaN(n))return'-';var a=Math.abs(n);if(a>=1e12)return(n/1e12).toFixed(1)+'조';if(a>=1e11)return(n/1e11).toFixed(1)+'천억';if(a>=1e8)return(n/1e8).toFixed(0)+'억';if(a>=1e4)return(n/1e4).toFixed(0)+'만';return fmt(n)+'원'}
+function fmtPct(n,d){d=d||2;if(!n||isNaN(n))return'-';return(n*100).toFixed(d)+'%'}
+function pn(v){if(!v)return 0;return parseFloat(String(v).replace(/[^0-9.\-]/g,''))||0}
+function sqmToPy(sqm){return sqm/CFG.SQM_PER_PYEONG}
+function pyToSqm(py){return py*CFG.SQM_PER_PYEONG}
+
+/* ════════════════════════════════════════
+   DATA MODEL
+   ════════════════════════════════════════ */
+var D = {
+  // Step 1: 기초
+  projectType:'재건축', projectName:'', location:'', zoneArea:0, siteArea:0,
+  grossFloorArea:0, farExisting:0, farPlanned:0, bcr:0,
+  memberCount:0, ownerCount:0, existingUnits:0, plannedUnits:0,
+  generalUnits:0, rentalUnits:0, hasCommercial:false, phase:'추진위 구성',
+  // Step 3: 종전자산
+  prevAssetMode:'simple', prevAssetTotal:0,
+  prevTypes:[{name:'24평형',count:0,avgValue:0},{name:'32평형',count:0,avgValue:0},{name:'상가',count:0,avgValue:0}],
+  // Step 4: 종후자산
+  postMemberValue:0, postGeneralValue:0, postCommercialValue:0, postReserveValue:0, postEtcValue:0,
+  // Step 5: 분양가
+  generalAvgPrice:0, memberAvgPrice:0, commercialPrice:0,
+  // Step 6: 보류지
+  reserveUnits:0, reserveAvgPrice:0, reserveCommercialArea:0, reserveCommercialPrice:0,
+  // Step 7: 사업비
+  costMode:'ratio', // 'ratio' or 'detail'
+  costConstruction:0, costDesign:0, costSupervision:0, costDemolition:0,
+  costSurvey:0, costPM:0, costOperation:0, costMeeting:0,
+  costFinance:0, costRelocation:0, costTax:0, costInfra:0,
+  costEtc:0, costReserve:0,
+  // 비율 모드용
+  costRatioDesign:3, costRatioSupervision:2, costRatioDemolition:5,
+  costRatioFinance:8, costRatioOperation:3, costRatioEtc:2, costRatioReserve:5,
+  // Step 9: 시나리오
+  scenarios:[
+    {name:'기준안',costChange:0,priceChange:0,financeChange:0,reserveChange:0},
+    {name:'보수안',costChange:10,priceChange:-5,financeChange:20,reserveChange:-10},
+    {name:'낙관안',costChange:-5,priceChange:5,financeChange:-10,reserveChange:10}
+  ]
+};
+
+/* ════════════════════════════════════════
+   CALCULATION ENGINE
+   ════════════════════════════════════════ */
+var Engine = {
+  prevAssetTotal: function(){
+    if(D.prevAssetMode==='simple') return D.prevAssetTotal;
+    var total=0;
+    D.prevTypes.forEach(function(t){total+=(t.count||0)*(t.avgValue||0)});
+    return total;
+  },
+  totalRevenue: function(){
+    var genRev = D.generalUnits * D.generalAvgPrice;
+    var memRev = D.postMemberValue || (D.memberCount * D.memberAvgPrice);
+    var comRev = D.postCommercialValue || D.commercialPrice;
+    var resRev = (D.reserveUnits * D.reserveAvgPrice) + (D.reserveCommercialArea * D.reserveCommercialPrice);
+    return genRev + memRev + comRev + resRev + (D.postEtcValue||0);
+  },
+  totalCost: function(){
+    if(D.costMode==='ratio' && D.costConstruction>0){
+      var c = D.costConstruction;
+      return c + c*D.costRatioDesign/100 + c*D.costRatioSupervision/100 + c*D.costRatioDemolition/100 +
+             c*D.costRatioFinance/100 + c*D.costRatioOperation/100 + c*D.costRatioEtc/100 + c*D.costRatioReserve/100;
+    }
+    return D.costConstruction + D.costDesign + D.costSupervision + D.costDemolition +
+           D.costSurvey + D.costPM + D.costOperation + D.costMeeting +
+           D.costFinance + D.costRelocation + D.costTax + D.costInfra + D.costEtc + D.costReserve;
+  },
+  costBreakdown: function(){
+    if(D.costMode==='ratio' && D.costConstruction>0){
+      var c=D.costConstruction;
+      return [
+        {name:'공사비',value:c},{name:'설계비',value:c*D.costRatioDesign/100},
+        {name:'감리비',value:c*D.costRatioSupervision/100},{name:'철거비',value:c*D.costRatioDemolition/100},
+        {name:'금융비용',value:c*D.costRatioFinance/100},{name:'운영비',value:c*D.costRatioOperation/100},
+        {name:'기타',value:c*D.costRatioEtc/100},{name:'예비비',value:c*D.costRatioReserve/100}
+      ];
+    }
+    return [
+      {name:'공사비',value:D.costConstruction},{name:'설계비',value:D.costDesign},
+      {name:'감리비',value:D.costSupervision},{name:'철거비',value:D.costDemolition},
+      {name:'측량/용역',value:D.costSurvey},{name:'PM/관리',value:D.costPM},
+      {name:'운영비',value:D.costOperation},{name:'총회/홍보',value:D.costMeeting},
+      {name:'금융비용',value:D.costFinance},{name:'이주비금융',value:D.costRelocation},
+      {name:'세금/공과',value:D.costTax},{name:'기반시설',value:D.costInfra},
+      {name:'기타',value:D.costEtc},{name:'예비비',value:D.costReserve}
+    ].filter(function(i){return i.value>0});
+  },
+  postAssetTotal: function(){
+    return this.totalRevenue() - this.totalCost();
+  },
+  ratio: function(){
+    var prev = this.prevAssetTotal();
+    if(prev<=0) return 0;
+    return this.postAssetTotal() / prev;
+  },
+  avgBurden: function(){
+    var rights = this.prevAssetTotal() * this.ratio();
+    var avgMemberPrice = D.memberAvgPrice || (D.memberCount>0 ? (D.postMemberValue||0)/D.memberCount : 0);
+    if(D.memberCount<=0 || avgMemberPrice<=0) return 0;
+    var avgRights = rights / D.memberCount;
+    return avgMemberPrice - avgRights;
+  },
+  burdenByType: function(){
+    var r = this.ratio();
+    return D.prevTypes.map(function(t){
+      var rights = (t.avgValue||0) * r;
+      var memberPrice = D.memberAvgPrice || 0;
+      return {name:t.name, count:t.count, avgPrev:t.avgValue, rights:rights, burden:memberPrice-rights, isRefund:memberPrice<rights};
+    }).filter(function(t){return t.count>0});
+  },
+  scenarioCalc: function(sc){
+    var costAdj = this.totalCost() * (1 + (sc.costChange||0)/100);
+    var revAdj = this.totalRevenue() * (1 + (sc.priceChange||0)/100);
+    var finAdj = (D.costFinance||0) * (sc.financeChange||0)/100;
+    costAdj += finAdj;
+    var postAdj = revAdj - costAdj;
+    var prev = this.prevAssetTotal();
+    var ratioAdj = prev>0 ? postAdj/prev : 0;
+    var avgRightsAdj = prev>0 ? postAdj / D.memberCount : 0;
+    var avgBurdenAdj = (D.memberAvgPrice||0) - avgRightsAdj;
+    return {name:sc.name,totalRev:revAdj,totalCost:costAdj,postAsset:postAdj,ratio:ratioAdj,avgBurden:avgBurdenAdj};
+  },
+  insights: function(){
+    var msgs=[];
+    var r=this.ratio();
+    if(r>=CFG.RATIO_MID) msgs.push('현재 입력 기준에서는 종후자산 형성 수준이 종전자산을 상회하여 비례율이 '+(r*100).toFixed(1)+'%로 추정됩니다.');
+    else if(r>=CFG.RATIO_LOW) msgs.push('비례율이 '+(r*100).toFixed(1)+'%로 사업성이 보통 수준입니다. 사업비 절감 또는 분양가 확보가 중요합니다.');
+    else if(r>0) msgs.push('비례율이 '+(r*100).toFixed(1)+'%로 사업성이 낮습니다. 사업비 구조 재검토가 필요합니다.');
+
+    var tc=this.totalCost(),tr=this.totalRevenue();
+    if(tc>0 && D.costFinance/tc>CFG.COST_FINANCE_WARN) msgs.push('총사업비 대비 금융비용 비중이 높아 분담금 민감도가 큰 구조로 판단됩니다.');
+
+    var base=this.scenarioCalc(D.scenarios[0]),pessim=this.scenarioCalc(D.scenarios[1]);
+    if(base.avgBurden>0 && pessim.avgBurden>0){
+      var diff=pessim.avgBurden-base.avgBurden;
+      if(diff>0) msgs.push('보수 시나리오 적용 시 평균분담금이 '+fmtWon(diff)+' 상승할 수 있습니다.');
+    }
+    return msgs;
+  },
+  costWarnings: function(){
+    var warns=[];
+    var bd=this.costBreakdown();
+    var total=this.totalCost();
+    if(total<=0)return warns;
+    bd.forEach(function(b){
+      var pct=b.value/total;
+      if(b.name==='예비비'&&pct>CFG.COST_RESERVE_WARN) warns.push(b.name+' 비중 과다 ('+fmtPct(pct)+')');
+      if(b.name==='금융비용'&&pct>CFG.COST_FINANCE_WARN) warns.push(b.name+' 비중 과다 ('+fmtPct(pct)+')');
+      if(b.name==='운영비'&&pct>CFG.COST_OPER_WARN) warns.push(b.name+' 비중 과다 ('+fmtPct(pct)+')');
+    });
+    return warns;
+  }
+};
+
+/* ════════════════════════════════════════
+   BADGE HELPERS
+   ════════════════════════════════════════ */
+function rBadge(r){
+  if(r>=CFG.RATIO_HIGH)return'<span class="ca-badge ca-good">사업성 양호 ('+fmtPct(r)+')</span>';
+  if(r>=CFG.RATIO_LOW)return'<span class="ca-badge ca-normal">사업성 보통 ('+fmtPct(r)+')</span>';
+  if(r>0)return'<span class="ca-badge ca-bad">사업성 낮음 ('+fmtPct(r)+')</span>';
+  return'<span class="ca-badge ca-neutral">미산출</span>';
+}
+
+/* ════════════════════════════════════════
+   STEP DEFINITIONS
+   ════════════════════════════════════════ */
+var STEPS = [
+  {id:'basic',title:'기초 데이터',icon:'fa-building'},
+  {id:'prev',title:'종전자산',icon:'fa-landmark'},
+  {id:'post',title:'종후자산·분양가',icon:'fa-city'},
+  {id:'cost',title:'사업비',icon:'fa-coins'},
+  {id:'result',title:'분석 결과',icon:'fa-chart-pie'},
+  {id:'scenario',title:'시나리오 비교',icon:'fa-code-compare'}
+];
+var curStep = 0;
+
+/* ════════════════════════════════════════
+   RENDER
+   ════════════════════════════════════════ */
+function renderComprehensive(){
+  var wrap = document.getElementById('compWrap');
+  if(!wrap)return;
+
+  // Summary bar
+  var r=Engine.ratio(), ab=Engine.avgBurden(), tc=Engine.totalCost(), tr=Engine.totalRevenue();
+  var sumHTML='<div class="ca-sum">'+
+    '<div class="ca-sum-item"><span class="ca-sum-label">비례율</span><span class="ca-sum-val">'+(r>0?fmtPct(r):'-')+'</span></div>'+
+    '<div class="ca-sum-item"><span class="ca-sum-label">평균분담금</span><span class="ca-sum-val">'+(ab?fmtWon(ab):'-')+'</span></div>'+
+    '<div class="ca-sum-item"><span class="ca-sum-label">총사업비</span><span class="ca-sum-val">'+(tc>0?fmtWon(tc):'-')+'</span></div>'+
+    '<div class="ca-sum-item"><span class="ca-sum-label">총수입</span><span class="ca-sum-val">'+(tr>0?fmtWon(tr):'-')+'</span></div>'+
+  '</div>';
+
+  // Left nav
+  var navHTML='<div class="ca-nav">';
+  STEPS.forEach(function(s,i){
+    navHTML+='<button class="ca-nav-btn'+(i===curStep?' active':'')+'" onclick="CA.goStep('+i+')"><i class="fa-solid '+s.icon+'"></i><span>'+s.title+'</span></button>';
+  });
+  navHTML+='<div class="ca-nav-actions"><button class="cm-btn" onclick="CA.fillExample()"><i class="fa-solid fa-lightbulb"></i> 예시값</button><button class="cm-btn" onclick="CA.resetAll()"><i class="fa-solid fa-rotate-left"></i> 초기화</button><button class="cm-btn" onclick="CA.saveData()"><i class="fa-solid fa-floppy-disk"></i> 저장</button></div>';
+  navHTML+='</div>';
+
+  // Right panel — step content
+  var panelHTML='<div class="ca-panel">'+buildStep(curStep)+'</div>';
+
+  wrap.innerHTML = sumHTML + '<div class="ca-main">' + navHTML + panelHTML + '</div>';
+
+  // Bind inputs
+  wrap.querySelectorAll('input[data-field]').forEach(function(inp){
+    inp.addEventListener('input',function(){
+      var f=this.dataset.field;
+      if(f.indexOf('prevTypes.')===0){
+        var parts=f.split('.');
+        var idx=parseInt(parts[1]),prop=parts[2];
+        D.prevTypes[idx][prop]=pn(this.value);
+      } else if(f.indexOf('scenarios.')===0){
+        var parts=f.split('.');
+        var idx=parseInt(parts[1]),prop=parts[2];
+        D.scenarios[idx][prop]=pn(this.value);
+      } else {
+        D[f]=pn(this.value);
+      }
+      updateSummary();
+    });
+    inp.addEventListener('focus',function(){this.value=this.value.replace(/[^0-9.\-]/g,'')});
+    inp.addEventListener('blur',function(){
+      var v=pn(this.value);
+      if(v&&this.dataset.unit!=='pct'&&this.dataset.unit!=='ratio')this.value=fmt(v);
+    });
+  });
+  wrap.querySelectorAll('select[data-field]').forEach(function(sel){
+    sel.addEventListener('change',function(){D[this.dataset.field]=this.value;updateSummary()});
+  });
+}
+
+function updateSummary(){
+  var sum=document.querySelector('.ca-sum');
+  if(!sum)return;
+  var r=Engine.ratio(),ab=Engine.avgBurden(),tc=Engine.totalCost(),tr=Engine.totalRevenue();
+  var items=sum.querySelectorAll('.ca-sum-val');
+  if(items[0])items[0].textContent=r>0?fmtPct(r):'-';
+  if(items[1])items[1].textContent=ab?fmtWon(ab):'-';
+  if(items[2])items[2].textContent=tc>0?fmtWon(tc):'-';
+  if(items[3])items[3].textContent=tr>0?fmtWon(tr):'-';
+  // 결과/시나리오 탭이면 리렌더
+  if(curStep===4||curStep===5){
+    var panel=document.querySelector('.ca-panel');
+    if(panel)panel.innerHTML=buildStep(curStep);
+  }
+}
+
+/* ════════════════════════════════════════
+   STEP BUILDERS
+   ════════════════════════════════════════ */
+function field(dataField,label,unit,val){
+  var v=val!==undefined?val:(typeof D[dataField]==='number'&&D[dataField]?fmt(D[dataField]):'');
+  var u=unit||'원';
+  return'<div class="ca-fg"><label>'+label+'</label><div class="ca-input-wrap"><input type="text" data-field="'+dataField+'" data-unit="'+(unit==='%'?'pct':'')+'" value="'+v+'" inputmode="numeric"><span class="ca-unit">'+u+'</span></div></div>';
+}
+function row(){return'<div class="ca-row">'+Array.from(arguments).join('')+'</div>'}
+function sec(icon,title){return'<div class="ca-sec"><i class="fa-solid '+icon+'"></i> '+title+'</div>'}
+
+function buildStep(idx){
+  var h='<div class="ca-step-head"><h3>'+STEPS[idx].title+'</h3>';
+  if(idx<STEPS.length-1)h+='<button class="cm-btn primary" onclick="CA.goStep('+(idx+1)+')">다음 단계 <i class="fa-solid fa-arrow-right"></i></button>';
+  h+='</div>';
+
+  if(idx===0){
+    // 기초 데이터
+    h+=sec('fa-tag','사업 기본정보');
+    h+='<div class="ca-fg"><label>사업유형</label><select data-field="projectType">'+CFG.PROJECT_TYPES.map(function(t){return'<option'+(D.projectType===t?' selected':'')+'>'+t+'</option>'}).join('')+'</select></div>';
+    h+=row(field('siteArea','대지면적','㎡'),field('grossFloorArea','연면적','㎡'));
+    h+=row(field('farPlanned','계획 용적률','%'),field('bcr','건폐율','%'));
+    h+=sec('fa-users','세대·조합원');
+    h+=row(field('memberCount','조합원 수','명'),field('existingUnits','기존 세대수','세대'));
+    h+=row(field('plannedUnits','계획 세대수','세대'),field('generalUnits','일반분양 세대수','세대'));
+    h+=row(field('rentalUnits','임대주택 세대수','세대'));
+  }
+  else if(idx===1){
+    // 종전자산
+    h+=sec('fa-landmark','종전자산 입력');
+    h+='<div class="ca-fg"><label>입력 방식</label><div style="display:flex;gap:8px;margin-bottom:12px">'+
+      '<button class="cm-btn'+(D.prevAssetMode==='simple'?' primary':'')+'" onclick="CA.setPrevMode(\'simple\')">간편 입력</button>'+
+      '<button class="cm-btn'+(D.prevAssetMode==='detail'?' primary':'')+'" onclick="CA.setPrevMode(\'detail\')">유형별 상세 입력</button></div></div>';
+    if(D.prevAssetMode==='simple'){
+      h+=field('prevAssetTotal','종전자산 총액','원');
+    } else {
+      D.prevTypes.forEach(function(t,i){
+        h+='<div class="ca-sec" style="font-size:12px"><i class="fa-solid fa-layer-group"></i> '+t.name+'</div>';
+        h+=row(
+          '<div class="ca-fg"><label>소유자 수</label><div class="ca-input-wrap"><input type="text" data-field="prevTypes.'+i+'.count" value="'+(t.count||'')+'" inputmode="numeric"><span class="ca-unit">명</span></div></div>',
+          '<div class="ca-fg"><label>평균 종전자산가액</label><div class="ca-input-wrap"><input type="text" data-field="prevTypes.'+i+'.avgValue" value="'+(t.avgValue?fmt(t.avgValue):'')+'" inputmode="numeric"><span class="ca-unit">원</span></div></div>'
+        );
+      });
+      h+='<button class="cm-btn" onclick="CA.addPrevType()" style="margin-top:8px"><i class="fa-solid fa-plus"></i> 유형 추가</button>';
+      var prevTotal=Engine.prevAssetTotal();
+      h+='<div class="ca-result-mini">종전자산 합계: <strong>'+fmtWon(prevTotal)+'</strong></div>';
+    }
+  }
+  else if(idx===2){
+    // 종후자산 + 분양가
+    h+=sec('fa-city','분양가 입력');
+    h+=row(field('generalAvgPrice','일반분양 평균가','원'),field('memberAvgPrice','조합원 분양 평균가','원'));
+    h+=row(field('commercialPrice','상가 분양수입 총액','원'));
+    h+=sec('fa-warehouse','보류지');
+    h+=row(field('reserveUnits','보류지 세대수','세대'),field('reserveAvgPrice','보류지 평균 처분가','원'));
+    h+=field('postEtcValue','기타 수입','원');
+    var tr=Engine.totalRevenue();
+    h+='<div class="ca-result-mini">총수입 추정: <strong>'+fmtWon(tr)+'</strong></div>';
+  }
+  else if(idx===3){
+    // 사업비
+    h+=sec('fa-coins','사업비 입력 방식');
+    h+='<div style="display:flex;gap:8px;margin-bottom:14px">'+
+      '<button class="cm-btn'+(D.costMode==='ratio'?' primary':'')+'" onclick="CA.setCostMode(\'ratio\')">총공사비 기준 비율</button>'+
+      '<button class="cm-btn'+(D.costMode==='detail'?' primary':'')+'" onclick="CA.setCostMode(\'detail\')">세부항목 직접입력</button></div>';
+    if(D.costMode==='ratio'){
+      h+=field('costConstruction','총공사비','원');
+      h+=sec('fa-percentage','비율 설정 (총공사비 대비 %)');
+      h+=row(field('costRatioDesign','설계비','%'),field('costRatioSupervision','감리비','%'));
+      h+=row(field('costRatioDemolition','철거비','%'),field('costRatioFinance','금융비용','%'));
+      h+=row(field('costRatioOperation','운영비','%'),field('costRatioEtc','기타','%'));
+      h+=field('costRatioReserve','예비비','%');
+    } else {
+      h+=row(field('costConstruction','공사비','원'),field('costDesign','설계비','원'));
+      h+=row(field('costSupervision','감리비','원'),field('costDemolition','철거비','원'));
+      h+=row(field('costSurvey','측량/용역비','원'),field('costPM','PM/관리비','원'));
+      h+=row(field('costOperation','조합운영비','원'),field('costMeeting','총회/홍보비','원'));
+      h+=row(field('costFinance','금융비용','원'),field('costRelocation','이주비 금융','원'));
+      h+=row(field('costTax','세금/공과','원'),field('costInfra','기반시설 부담금','원'));
+      h+=row(field('costEtc','기타비용','원'),field('costReserve','예비비','원'));
+    }
+    var tc=Engine.totalCost();
+    h+='<div class="ca-result-mini">총사업비 합계: <strong>'+fmtWon(tc)+'</strong></div>';
+    var warns=Engine.costWarnings();
+    if(warns.length) h+='<div class="ca-warns">'+warns.map(function(w){return'<div class="ca-warn"><i class="fa-solid fa-triangle-exclamation"></i> '+w+'</div>'}).join('')+'</div>';
+  }
+  else if(idx===4){
+    // 결과
+    var r=Engine.ratio(),tr=Engine.totalRevenue(),tc=Engine.totalCost(),
+        prev=Engine.prevAssetTotal(),post=Engine.postAssetTotal(),ab=Engine.avgBurden();
+    h+=sec('fa-chart-pie','핵심 결과');
+    h+='<div class="ca-kpi-grid">'+
+      '<div class="ca-kpi"><div class="ca-kpi-val">'+(r>0?fmtPct(r):'-')+'</div><div class="ca-kpi-label">비례율</div>'+rBadge(r)+'</div>'+
+      '<div class="ca-kpi"><div class="ca-kpi-val">'+(ab?fmtWon(ab):'-')+'</div><div class="ca-kpi-label">예상 평균분담금</div></div>'+
+      '<div class="ca-kpi"><div class="ca-kpi-val">'+fmtWon(tr)+'</div><div class="ca-kpi-label">총수입</div></div>'+
+      '<div class="ca-kpi"><div class="ca-kpi-val">'+fmtWon(tc)+'</div><div class="ca-kpi-label">총사업비</div></div>'+
+    '</div>';
+
+    h+=sec('fa-table','수입·비용 구조');
+    h+='<div class="ca-table"><table><tr><th>항목</th><th>금액</th><th>비중</th></tr>';
+    h+='<tr><td>종전자산 총액</td><td>'+fmtWon(prev)+'</td><td>-</td></tr>';
+    h+='<tr><td>총수입</td><td>'+fmtWon(tr)+'</td><td>100%</td></tr>';
+    h+='<tr><td>총사업비</td><td>'+fmtWon(tc)+'</td><td>'+(tr>0?fmtPct(tc/tr):'-')+'</td></tr>';
+    h+='<tr><td>종후자산</td><td>'+fmtWon(post)+'</td><td>'+(tr>0?fmtPct(post/tr):'-')+'</td></tr>';
+    h+='</table></div>';
+
+    // 사업비 구성
+    h+=sec('fa-list','사업비 구성');
+    var bd=Engine.costBreakdown();
+    h+='<div class="ca-table"><table><tr><th>항목</th><th>금액</th><th>비중</th></tr>';
+    bd.forEach(function(b){h+='<tr><td>'+b.name+'</td><td>'+fmtWon(b.value)+'</td><td>'+(tc>0?fmtPct(b.value/tc):'-')+'</td></tr>'});
+    h+='</table></div>';
+
+    // 유형별 분담금
+    if(D.prevAssetMode==='detail'){
+      var types=Engine.burdenByType();
+      if(types.length){
+        h+=sec('fa-users','유형별 평균 분담금');
+        h+='<div class="ca-table"><table><tr><th>유형</th><th>인원</th><th>평균종전</th><th>권리가액</th><th>분담금</th></tr>';
+        types.forEach(function(t){
+          h+='<tr><td>'+t.name+'</td><td>'+t.count+'명</td><td>'+fmtWon(t.avgPrev)+'</td><td>'+fmtWon(t.rights)+'</td><td class="'+(t.isRefund?'ca-green':'')+'">'+fmtWon(Math.abs(t.burden))+(t.isRefund?' (환급)':'')+'</td></tr>';
+        });
+        h+='</table></div>';
+      }
+    }
+
+    // 인사이트
+    var insights=Engine.insights();
+    if(insights.length){
+      h+=sec('fa-lightbulb','분석 인사이트');
+      h+='<div class="ca-insights">'+insights.map(function(m){return'<div class="ca-insight"><i class="fa-solid fa-circle-info"></i> '+m+'</div>'}).join('')+'</div>';
+    }
+  }
+  else if(idx===5){
+    // 시나리오 비교
+    h+=sec('fa-code-compare','시나리오 설정');
+    D.scenarios.forEach(function(sc,i){
+      h+='<div class="ca-scenario-box"><div class="ca-scenario-title">'+sc.name+'</div>';
+      h+=row(
+        '<div class="ca-fg"><label>공사비 변동(%)</label><div class="ca-input-wrap"><input type="text" data-field="scenarios.'+i+'.costChange" value="'+(sc.costChange||0)+'" data-unit="pct"><span class="ca-unit">%</span></div></div>',
+        '<div class="ca-fg"><label>분양가 변동(%)</label><div class="ca-input-wrap"><input type="text" data-field="scenarios.'+i+'.priceChange" value="'+(sc.priceChange||0)+'" data-unit="pct"><span class="ca-unit">%</span></div></div>'
+      );
+      h+=row(
+        '<div class="ca-fg"><label>금융비용 변동(%)</label><div class="ca-input-wrap"><input type="text" data-field="scenarios.'+i+'.financeChange" value="'+(sc.financeChange||0)+'" data-unit="pct"><span class="ca-unit">%</span></div></div>',
+        '<div class="ca-fg"><label>보류지 변동(%)</label><div class="ca-input-wrap"><input type="text" data-field="scenarios.'+i+'.reserveChange" value="'+(sc.reserveChange||0)+'" data-unit="pct"><span class="ca-unit">%</span></div></div>'
+      );
+      h+='</div>';
+    });
+
+    // 비교표
+    h+=sec('fa-table','시나리오 비교 결과');
+    var results=D.scenarios.map(function(sc){return Engine.scenarioCalc(sc)});
+    h+='<div class="ca-table"><table><tr><th>항목</th>';
+    results.forEach(function(r){h+='<th>'+r.name+'</th>'});
+    h+='</tr>';
+    h+='<tr><td>비례율</td>';results.forEach(function(r){h+='<td>'+fmtPct(r.ratio)+'</td>'});h+='</tr>';
+    h+='<tr><td>총수입</td>';results.forEach(function(r){h+='<td>'+fmtWon(r.totalRev)+'</td>'});h+='</tr>';
+    h+='<tr><td>총사업비</td>';results.forEach(function(r){h+='<td>'+fmtWon(r.totalCost)+'</td>'});h+='</tr>';
+    h+='<tr><td>평균분담금</td>';results.forEach(function(r){h+='<td>'+fmtWon(r.avgBurden)+'</td>'});h+='</tr>';
+    h+='</table></div>';
+
+    if(results.length>=2){
+      var diff=results[1].avgBurden-results[0].avgBurden;
+      h+='<div class="ca-insights"><div class="ca-insight"><i class="fa-solid fa-triangle-exclamation"></i> 보수안 대비 기준안 평균분담금 차이: <strong>'+fmtWon(diff)+'</strong></div></div>';
+    }
+  }
+
+  h+='<div class="cm-notice" style="margin-top:20px"><i class="fa-solid fa-circle-info"></i> 본 분석 결과는 입력값 기준의 참고용 추정치입니다. 실제 사업성 판단은 감정평가, 설계, 인허가, 금융조건 등에 따라 달라질 수 있습니다.</div>';
+  return h;
+}
+
+/* ════════════════════════════════════════
+   ACTIONS
+   ════════════════════════════════════════ */
+function goStep(n){curStep=n;renderComprehensive()}
+function setPrevMode(m){D.prevAssetMode=m;renderComprehensive()}
+function setCostMode(m){D.costMode=m;renderComprehensive()}
+function addPrevType(){
+  D.prevTypes.push({name:(D.prevTypes.length+1)+'번 유형',count:0,avgValue:0});
+  renderComprehensive();
+}
+function fillExample(){
+  D.projectType='재건축';D.siteArea=50000;D.grossFloorArea=350000;D.farPlanned=299;
+  D.memberCount=1200;D.existingUnits=1200;D.plannedUnits=2500;D.generalUnits=1300;
+  D.prevAssetMode='detail';
+  D.prevTypes=[{name:'24평형',count:600,avgValue:350000000},{name:'32평형',count:500,avgValue:480000000},{name:'상가',count:100,avgValue:600000000}];
+  D.generalAvgPrice=900000000;D.memberAvgPrice=700000000;D.commercialPrice=80000000000;
+  D.reserveUnits=50;D.reserveAvgPrice=800000000;D.postEtcValue=10000000000;
+  D.costMode='ratio';D.costConstruction=800000000000;
+  D.costRatioDesign=3;D.costRatioSupervision=2;D.costRatioDemolition=4;
+  D.costRatioFinance=8;D.costRatioOperation=3;D.costRatioEtc=2;D.costRatioReserve=5;
+  if(typeof App!=='undefined')App.toast('예시 데이터가 입력되었습니다.','success');
+  renderComprehensive();
+}
+function resetAll(){
+  Object.keys(D).forEach(function(k){
+    if(typeof D[k]==='number')D[k]=0;
+    else if(typeof D[k]==='string'&&k!=='projectType'&&k!=='prevAssetMode'&&k!=='costMode'&&k!=='phase')D[k]='';
+  });
+  D.prevTypes=[{name:'24평형',count:0,avgValue:0},{name:'32평형',count:0,avgValue:0},{name:'상가',count:0,avgValue:0}];
+  D.scenarios=[
+    {name:'기준안',costChange:0,priceChange:0,financeChange:0,reserveChange:0},
+    {name:'보수안',costChange:10,priceChange:-5,financeChange:20,reserveChange:-10},
+    {name:'낙관안',costChange:-5,priceChange:5,financeChange:-10,reserveChange:10}
+  ];
+  localStorage.removeItem(CFG.STORAGE_KEY);
+  curStep=0;
+  renderComprehensive();
+}
+function saveData(){
+  try{localStorage.setItem(CFG.STORAGE_KEY,JSON.stringify(D));if(typeof App!=='undefined')App.toast('분석 데이터가 저장되었습니다.','success')}catch(e){}
+}
+function loadData(){
+  try{var s=localStorage.getItem(CFG.STORAGE_KEY);if(s){var d=JSON.parse(s);Object.assign(D,d);return true}}catch(e){}return false;
+}
+
+/* ════════════════════════════════════════
+   INIT
+   ════════════════════════════════════════ */
+loadData();
+
+window.CA = {
+  render: renderComprehensive,
+  goStep: goStep,
+  setPrevMode: setPrevMode,
+  setCostMode: setCostMode,
+  addPrevType: addPrevType,
+  fillExample: fillExample,
+  resetAll: resetAll,
+  saveData: saveData
+};
+
+})();}
+</script>
+<script>
+/* 탭 전환 */
+function switchTab(tab){
+  document.getElementById('tabIndividual').style.display = tab==='individual'?'':'none';
+  document.getElementById('tabComprehensive').style.display = tab==='comprehensive'?'':'none';
+  var opts = document.querySelectorAll('.hero-opt');
+  if(opts.length>=2){opts[0].classList.toggle('active',tab==='individual');opts[1].classList.toggle('active',tab==='comprehensive')}
+  if(tab==='comprehensive' && window.CA) setTimeout(function(){CA.render()},50);
+  document.querySelector('.page-body').scrollIntoView({behavior:'smooth'});
+}
+/* URL 파라미터 */
+if(new URLSearchParams(location.search).get('tab')==='comprehensive') setTimeout(function(){switchTab('comprehensive')},300);
+</script>
+<script>
+/* ================================================================
+   사업성 검토 — 5종 실무형 계산 프로그램
+   ================================================================ */
+(function(){
+'use strict';
+
+/* ────── CONSTANTS ────── */
+var C = {
+  RATIO_LOW: 1.00, RATIO_MID: 1.10,
+  BURDEN_LOW: 0.10, BURDEN_MID: 0.30,
+  COST_RESERVE_WARN: 0.10, COST_FINANCE_WARN: 0.15, COST_OPER_WARN: 0.08,
+  SQM_TO_PYEONG: 3.3058,
+  STORAGE_PREFIX: 'seul_calc_'
+};
+
+var EXAMPLES = {
+  ratio: {prevAsset:500000000000,salesGeneral:800000000000,salesMember:200000000000,salesCommercial:50000000000,salesReserve:30000000000,salesEtc:10000000000,costConst:400000000000,costDesign:20000000000,costSupervise:15000000000,costDemo:30000000000,costOper:25000000000,costFinance:40000000000,costReserve:30000000000,costEtc:10000000000},
+  burden: {prevIndiv:300000000,ratioVal:1.072,applyType:'84㎡',desiredPrice:800000000,optionCost:20000000,financeBurden:15000000,etcBurden:5000000,adjustVal:0},
+  cost: {costConst:400000000000,costDesign:20000000000,costSupervise:15000000000,costDemo:30000000000,costFinance:40000000000,costOper:25000000000,costPR:5000000000,costLegal:8000000000,costTax:12000000000,costReserve:30000000000,costEtc:10000000000,grossArea:350000,units:2500,totalRevenue:1090000000000},
+  profit: {genUnits:1500,genAvgPrice:500000000,memberRevenue:200000000000,commercialRevenue:50000000000,reserveRevenue:30000000000,etcRevenue:10000000000,totalCost:570000000000,financeCost:40000000000,taxReserve:42000000000,prevAsset:500000000000}
+};
+
+/* ────── UTILITIES ────── */
+function fmt(n){if(n===null||n===undefined||isNaN(n))return'-';return Math.round(n).toLocaleString('ko-KR')}
+function fmtWon(n){if(n===null||isNaN(n))return'-';var abs=Math.abs(n);if(abs>=100000000000)return(n/100000000000).toFixed(1)+'천억';if(abs>=100000000)return(n/100000000).toFixed(0)+'억';if(abs>=10000)return(n/10000).toFixed(0)+'만';return fmt(n)+'원'}
+function fmtPct(n,d){d=d||2;if(n===null||isNaN(n))return'-';return(n*100).toFixed(d)+'%'}
+function parseNum(v){if(!v)return 0;return parseFloat(String(v).replace(/[^0-9.\-]/g,''))||0}
+function $(id){return document.getElementById(id)}
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html)e.innerHTML=html;return e}
+
+/* ────── STORAGE ────── */
+function saveCalc(key,data){try{localStorage.setItem(C.STORAGE_PREFIX+key,JSON.stringify(data))}catch(e){}}
+function loadCalc(key){try{var d=localStorage.getItem(C.STORAGE_PREFIX+key);return d?JSON.parse(d):null}catch(e){return null}}
+
+/* ────── SHARED STORE ────── */
+var Store = {};
+function setStore(k,v){Store[k]=v}
+function getStore(k){return Store[k]||null}
+
+/* ────── BADGE ────── */
+function ratioBadge(r){if(r>=C.RATIO_MID)return{cls:'badge-good',text:'사업성 양호'};if(r>=C.RATIO_LOW)return{cls:'badge-normal',text:'사업성 보통'};return{cls:'badge-bad',text:'사업성 낮음'}}
+function burdenBadge(rate){if(rate<=C.BURDEN_LOW)return{cls:'badge-good',text:'부담 낮음'};if(rate<=C.BURDEN_MID)return{cls:'badge-normal',text:'부담 보통'};return{cls:'badge-bad',text:'부담 높음'}}
+function profitBadge(pl){if(pl>0)return{cls:'badge-good',text:'수익 양호'};if(pl===0)return{cls:'badge-normal',text:'보합'};return{cls:'badge-bad',text:'적자 예상'}}
+
+/* ────── CALCULATION ENGINES (Pure Functions) ────── */
+var Calc = {
+  ratio: function(d){
+    var totalRev = (d.salesGeneral||0)+(d.salesMember||0)+(d.salesCommercial||0)+(d.salesReserve||0)+(d.salesEtc||0);
+    var totalCost = (d.costConst||0)+(d.costDesign||0)+(d.costSupervise||0)+(d.costDemo||0)+(d.costOper||0)+(d.costFinance||0)+(d.costReserve||0)+(d.costEtc||0);
+    var postAsset = totalRev - totalCost;
+    var ratio = d.prevAsset>0 ? postAsset/d.prevAsset : 0;
+    return {totalRev:totalRev,totalCost:totalCost,postAsset:postAsset,ratio:ratio,ratioPct:ratio*100,valid:d.prevAsset>0};
+  },
+  burden: function(d){
+    var rights = (d.prevIndiv||0) * (d.ratioVal||0);
+    var finalPrice = (d.desiredPrice||0)+(d.optionCost||0)+(d.financeBurden||0)+(d.etcBurden||0)+(d.adjustVal||0);
+    var burden = finalPrice - rights;
+    var burdenRate = rights>0 ? Math.abs(burden)/rights : 0;
+    return {rights:rights,finalPrice:finalPrice,burden:burden,isRefund:burden<0,burdenRate:burdenRate,valid:d.prevIndiv>0&&d.ratioVal>0};
+  },
+  simulation: function(d){
+    var costInc = (d.totalCost||0)*(d.costUpPct||0)/100;
+    var revAdj = (d.totalRev||0)*(d.revChangePct||0)/100;
+    var delayFin = (d.delayMonths||0)*(d.monthlyFinCost||0);
+    var adjCost = (d.totalCost||0)+costInc+(d.financeInc||0)+delayFin;
+    var adjRev = (d.totalRev||0)+revAdj+(d.etcRevChange||0);
+    var adjPost = adjRev - adjCost;
+    var adjRatio = d.prevAsset>0 ? adjPost/d.prevAsset : 0;
+    var adjRights = (d.prevIndiv||0)*adjRatio;
+    var adjBurden = (d.desiredPrice||0) - adjRights;
+    var baseBurden = d.baseBurden||0;
+    var diff = adjBurden - baseBurden;
+    return {adjCost:adjCost,adjRev:adjRev,adjPost:adjPost,adjRatio:adjRatio,adjRights:adjRights,adjBurden:adjBurden,diff:diff,baseBurden:baseBurden,valid:d.prevAsset>0};
+  },
+  cost: function(d){
+    var items = [d.costConst||0,d.costDesign||0,d.costSupervise||0,d.costDemo||0,d.costFinance||0,d.costOper||0,d.costPR||0,d.costLegal||0,d.costTax||0,d.costReserve||0,d.costEtc||0];
+    var total = items.reduce(function(a,b){return a+b},0);
+    var labels = ['공사비','설계비','감리비','철거비','금융비용','조합운영비','홍보비','법무/자문비','세금/공과','예비비','기타비용'];
+    var pcts = items.map(function(v){return total>0?v/total:0});
+    var perUnit = d.units>0?total/d.units:0;
+    var perSqm = d.grossArea>0?total/d.grossArea*C.SQM_TO_PYEONG:0;
+    var costRatio = d.totalRevenue>0?total/d.totalRevenue:0;
+    var warnings = [];
+    if(pcts[9]>C.COST_RESERVE_WARN)warnings.push('예비비 비중 과다 ('+fmtPct(pcts[9])+')');
+    if(pcts[4]>C.COST_FINANCE_WARN)warnings.push('금융비용 비중 과다 ('+fmtPct(pcts[4])+')');
+    if(pcts[5]>C.COST_OPER_WARN)warnings.push('운영비 비중 과다 ('+fmtPct(pcts[5])+')');
+    return {total:total,items:items,labels:labels,pcts:pcts,perUnit:perUnit,perSqm:perSqm,costRatio:costRatio,warnings:warnings,valid:total>0};
+  },
+  profit: function(d){
+    var genRev = (d.genUnits||0)*(d.genAvgPrice||0);
+    var totalRev = genRev+(d.memberRevenue||0)+(d.commercialRevenue||0)+(d.reserveRevenue||0)+(d.etcRevenue||0);
+    var totalExp = (d.totalCost||0)+(d.financeCost||0)+(d.taxReserve||0);
+    var pl = totalRev - totalExp;
+    var plRate = totalExp>0?pl/totalExp:0;
+    var breakEvenPrice = d.genUnits>0?(totalExp-((d.memberRevenue||0)+(d.commercialRevenue||0)+(d.reserveRevenue||0)+(d.etcRevenue||0)))/d.genUnits:0;
+    var refRatio = d.prevAsset>0?(totalRev-totalExp)/d.prevAsset:0;
+    return {genRev:genRev,totalRev:totalRev,totalExp:totalExp,pl:pl,plRate:plRate,breakEvenPrice:breakEvenPrice,refRatio:refRatio,valid:totalExp>0};
+  }
+};
+
+/* ────── CARD DEFINITIONS ────── */
+var CARDS = [
+  {id:'ratio',icon:'fa-percent',title:'추정 비례율 산정',desc:'종전·종후 자산가치를 비교하여 사업성 핵심 지표를 산출합니다.'},
+  {id:'burden',icon:'fa-calculator',title:'추정 분담금 산정',desc:'권리가액과 분양가를 기반으로 조합원 예상 분담금을 산정합니다.'},
+  {id:'sim',icon:'fa-sliders',title:'분담금 변동 시뮬레이션',desc:'공사비·분양가·금융비용 변동에 따른 분담금 변동폭을 분석합니다.'},
+  {id:'cost',icon:'fa-coins',title:'총사업비 검증',desc:'총사업비를 항목별로 산정하고 적정성을 검증합니다.'},
+  {id:'profit',icon:'fa-chart-line',title:'수익성 분석',desc:'전체 수익구조를 분석하여 수익성 수준을 판단합니다.'}
+];
+
+/* ────── RENDER CARDS ────── */
+var grid = $('cardGrid');
+CARDS.forEach(function(c){
+  var card = el('div','sv-card');
+  card.dataset.calc = c.id;
+  card.innerHTML = '<div class="si"><i class="fa-solid '+c.icon+'"></i></div><h3>'+c.title+'</h3><p class="sd">'+c.desc+'</p><button class="sv-btn"><i class="fa-solid fa-play"></i> 계산 시작</button>';
+  card.addEventListener('click',function(){openCalc(c.id)});
+  grid.appendChild(card);
+});
+
+/* ────── MODAL GENERATOR ────── */
+function fieldHTML(id,label,placeholder,helper){
+  return '<div class="fg"><label for="'+id+'">'+label+'</label><input type="text" id="'+id+'" placeholder="'+(placeholder||'0')+'" inputmode="numeric" autocomplete="off">'+(helper?'<div class="helper">'+helper+'</div>':'')+'</div>';
+}
+function rowFields(fields){
+  return '<div class="fg-row">'+fields.map(function(f){return fieldHTML(f[0],f[1],f[2],f[3])}).join('')+'</div>';
+}
+
+function buildModal(id,title,subtitle,bodyHTML){
+  var ov = el('div','calc-overlay');
+  ov.id = 'ov-'+id;
+  ov.innerHTML =
+    '<div class="calc-modal">' +
+      '<button class="calc-close" onclick="FC.close(\''+id+'\')"><i class="fa-solid fa-xmark"></i></button>' +
+      /* ── Sticky Header: 제목+설명+액션버튼 ── */
+      '<div class="cm-head">' +
+        '<h2>'+title+'</h2>' +
+        '<p>'+subtitle+'</p>' +
+        '<div class="cm-actions">' +
+          '<button class="cm-btn" onclick="FC.example(\''+id+'\')"><i class="fa-solid fa-lightbulb"></i> 예시값</button>' +
+          '<button class="cm-btn" onclick="FC.reset(\''+id+'\')"><i class="fa-solid fa-rotate-left"></i> 초기화</button>' +
+          '<button class="cm-btn" onclick="FC.copy(\''+id+'\')"><i class="fa-solid fa-copy"></i> 결과 복사</button>' +
+        '</div>' +
+      '</div>' +
+      /* ── Scrollable Body: 입력폼+결과만 스크롤 ── */
+      '<div class="cm-body">' +
+        bodyHTML +
+        '<div id="result-'+id+'" class="cm-result" style="display:none"></div>' +
+        '<div class="cm-notice"><i class="fa-solid fa-circle-info"></i> 본 계산 결과는 입력값 기준의 참고용 추정치입니다. 실제 사업성 판단은 감정평가, 설계, 인허가, 금융조건, 분양가, 정비계획 변경 등에 따라 달라질 수 있습니다.</div>' +
+      '</div>' +
+    '</div>';
+  ov.addEventListener('click',function(e){if(e.target===ov)FC.close(id)});
+  return ov;
+}
+
+/* ────── BUILD ALL MODALS ────── */
+var container = $('modalContainer');
+
+// A. 비례율
+container.appendChild(buildModal('ratio','추정 비례율 산정','종전자산 대비 종후자산 형성 비율을 산출합니다.',
+  '<div class="cm-sec"><i class="fa-solid fa-building"></i> 종전자산</div>'+
+  fieldHTML('r_prevAsset','종전자산 총액','500,000,000,000','단위: 원')+
+  '<div class="cm-sec"><i class="fa-solid fa-arrow-trend-up"></i> 수입 항목</div>'+
+  rowFields([['r_salesGeneral','일반분양 수입'],['r_salesMember','조합원 분양 수입']])+
+  rowFields([['r_salesCommercial','상가 분양 수입'],['r_salesReserve','보류지 처분 수입']])+
+  fieldHTML('r_salesEtc','기타 수입')+
+  '<div class="cm-sec"><i class="fa-solid fa-arrow-trend-down"></i> 사업비 항목</div>'+
+  rowFields([['r_costConst','공사비'],['r_costDesign','설계비']])+
+  rowFields([['r_costSupervise','감리비'],['r_costDemo','철거비']])+
+  rowFields([['r_costOper','조합운영비'],['r_costFinance','금융비용']])+
+  rowFields([['r_costReserve','예비비'],['r_costEtc','기타 사업비']])
+));
+
+// B. 분담금
+container.appendChild(buildModal('burden','추정 분담금 산정','조합원 개별 분담금을 추정합니다.',
+  '<div class="cm-sec"><i class="fa-solid fa-user"></i> 조합원 정보</div>'+
+  rowFields([['b_prevIndiv','종전자산 평가액(개별)'],['b_ratioVal','비례율 (소수)','1.072','1번 결과 자동 연동 가능']])+
+  '<div class="cm-actions" style="margin:8px 0"><button class="cm-btn" onclick="FC.loadRatio()"><i class="fa-solid fa-link"></i> 비례율 결과 불러오기</button></div>'+
+  '<div class="cm-sec"><i class="fa-solid fa-house"></i> 분양 정보</div>'+
+  rowFields([['b_desiredPrice','희망 분양가'],['b_optionCost','추가 선택 품목비']])+
+  rowFields([['b_financeBurden','이주비 이자/금융부담'],['b_etcBurden','기타 개인부담금']])+
+  fieldHTML('b_adjustVal','조합원 분양가 조정값','0','가산(+) 또는 감액(-)')
+));
+
+// C. 시뮬레이션
+container.appendChild(buildModal('sim','분담금 변동 시뮬레이션','변수 변동이 분담금에 미치는 영향을 분석합니다.',
+  '<div class="cm-sec"><i class="fa-solid fa-database"></i> 기준값</div>'+
+  rowFields([['s_prevAsset','종전자산 총액'],['s_totalRev','현재 총수입']])+
+  rowFields([['s_totalCost','현재 총사업비'],['s_ratioVal','현재 비례율','1.072']])+
+  rowFields([['s_prevIndiv','개별 종전자산 평가액'],['s_desiredPrice','현재 희망 분양가']])+
+  fieldHTML('s_baseBurden','현재 기준 분담금','0','2번 결과 자동 연동 가능')+
+  '<div class="cm-actions" style="margin:8px 0"><button class="cm-btn" onclick="FC.loadPrev()"><i class="fa-solid fa-link"></i> 1·2번 결과 불러오기</button></div>'+
+  '<div class="cm-sec"><i class="fa-solid fa-sliders"></i> 변동 변수</div>'+
+  '<div class="fg"><label>공사비 상승률 (%)</label><div class="slider-wrap"><input type="range" id="s_costUpPct" min="-20" max="50" value="0" step="1"><span class="sv" id="s_costUpPct_v">0%</span></div></div>'+
+  '<div class="fg"><label>일반분양가 변동률 (%)</label><div class="slider-wrap"><input type="range" id="s_revChangePct" min="-30" max="30" value="0" step="1"><span class="sv" id="s_revChangePct_v">0%</span></div></div>'+
+  rowFields([['s_financeInc','금융비용 증가액'],['s_delayMonths','사업 지연 개월 수']])+
+  rowFields([['s_monthlyFinCost','월간 추가 금융부담액'],['s_etcRevChange','기타 수입 증감액']])
+));
+
+// D. 총사업비
+container.appendChild(buildModal('cost','총사업비 검증','총사업비 구성 항목을 체계적으로 검토합니다.',
+  '<div class="cm-sec"><i class="fa-solid fa-list-ol"></i> 사업비 항목</div>'+
+  rowFields([['c_costConst','공사비'],['c_costDesign','설계비']])+
+  rowFields([['c_costSupervise','감리비'],['c_costDemo','철거비']])+
+  rowFields([['c_costFinance','금융비용'],['c_costOper','조합운영비']])+
+  rowFields([['c_costPR','홍보비'],['c_costLegal','법무/자문비']])+
+  rowFields([['c_costTax','세금 및 공과'],['c_costReserve','예비비']])+
+  fieldHTML('c_costEtc','기타비용')+
+  '<div class="cm-sec"><i class="fa-solid fa-ruler"></i> 참고 정보 (선택)</div>'+
+  rowFields([['c_grossArea','연면적 (㎡)'],['c_units','세대수']])+
+  fieldHTML('c_totalRevenue','총수입 (사업비율 산출용)')
+));
+
+// E. 수익성
+container.appendChild(buildModal('profit','수익성 분석','전체 수익구조를 분석하여 수익성을 판단합니다.',
+  '<div class="cm-sec"><i class="fa-solid fa-arrow-trend-up"></i> 수입 항목</div>'+
+  rowFields([['p_genUnits','일반분양 세대수'],['p_genAvgPrice','일반분양 평균 분양가']])+
+  rowFields([['p_memberRevenue','조합원 분양 수입'],['p_commercialRevenue','상가 수입']])+
+  rowFields([['p_reserveRevenue','보류지 수입'],['p_etcRevenue','기타 수입']])+
+  '<div class="cm-sec"><i class="fa-solid fa-arrow-trend-down"></i> 비용 항목</div>'+
+  rowFields([['p_totalCost','총사업비'],['p_financeCost','금융비용']])+
+  fieldHTML('p_taxReserve','세금/예비비')+
+  '<div class="cm-sec"><i class="fa-solid fa-building"></i> 참고</div>'+
+  fieldHTML('p_prevAsset','종전자산 총액 (참고 비례율 산출용)')
+));
+
+/* ────── INPUT EVENT BINDING ────── */
+document.querySelectorAll('.calc-modal input[type=text]').forEach(function(inp){
+  inp.addEventListener('input',function(){
+    // 숫자 포맷 실시간 적용
+    var raw = this.value.replace(/[^0-9.\-]/g,'');
+    if(raw && !isNaN(parseFloat(raw))){
+      var num = parseFloat(raw);
+      // 비례율 필드는 소수 유지
+      if(this.id.indexOf('ratioVal')>-1) this.value = raw;
+      else this.value = fmt(Math.round(num));
+    }
+    autoCalc(this);
+  });
+  inp.addEventListener('focus',function(){
+    // 포커스 시 raw 숫자로
+    var raw = this.value.replace(/[^0-9.\-]/g,'');
+    this.value = raw;
+  });
+  inp.addEventListener('blur',function(){
+    var num = parseNum(this.value);
+    if(this.id.indexOf('ratioVal')>-1) this.value = num||'';
+    else if(num) this.value = fmt(num);
+  });
+});
+
+// 슬라이더
+['s_costUpPct','s_revChangePct'].forEach(function(id){
+  var slider = $(id);
+  if(!slider)return;
+  slider.addEventListener('input',function(){
+    $(id+'_v').textContent = this.value+'%';
+    autoCalc(this);
+  });
+});
+
+/* ────── AUTO CALC ────── */
+function autoCalc(trigger){
+  var modal = trigger.closest('.calc-modal');
+  if(!modal)return;
+  var ovId = modal.parentElement.id;
+  var calcId = ovId.replace('ov-','');
+  runCalc(calcId);
+}
+
+function getInputs(prefix, fields){
+  var d = {};
+  fields.forEach(function(f){
+    var inp = $(prefix+'_'+f);
+    if(!inp)return;
+    if(inp.type==='range') d[f] = parseFloat(inp.value)||0;
+    else d[f] = parseNum(inp.value);
+  });
+  return d;
+}
+
+function runCalc(id){
+  var result, html='';
+  if(id==='ratio'){
+    var d = getInputs('r',['prevAsset','salesGeneral','salesMember','salesCommercial','salesReserve','salesEtc','costConst','costDesign','costSupervise','costDemo','costOper','costFinance','costReserve','costEtc']);
+    result = Calc.ratio(d);
+    if(!result.valid){$('result-ratio').style.display='none';return}
+    var b = ratioBadge(result.ratio);
+    setStore('ratio',result.ratio);setStore('totalRev',result.totalRev);setStore('totalCost',result.totalCost);setStore('prevAsset',d.prevAsset);
+    html = '<div class="cm-result-hero"><div class="rh-val">'+fmtPct(result.ratio)+'</div><div class="rh-label">추정 비례율</div><span class="badge-judge '+b.cls+'">'+b.text+'</span></div>'+
+      '<div class="rr"><span class="rl">총수입</span><span class="rv">'+fmtWon(result.totalRev)+'</span></div>'+
+      '<div class="rr"><span class="rl">총사업비</span><span class="rv">'+fmtWon(result.totalCost)+'</span></div>'+
+      '<div class="rr"><span class="rl">종후자산 총액</span><span class="rv '+(result.postAsset<0?'red':'')+'">'+fmtWon(result.postAsset)+'</span></div>'+
+      '<div class="rr"><span class="rl">종전자산 총액</span><span class="rv">'+fmtWon(d.prevAsset)+'</span></div>';
+    if(result.postAsset<0) html+='<div style="color:#EF4444;font-size:12px;margin-top:8px;font-weight:600">⚠ 종후자산이 음수입니다. 사업비가 수입을 초과합니다.</div>';
+  }
+  else if(id==='burden'){
+    var d = getInputs('b',['prevIndiv','ratioVal','desiredPrice','optionCost','financeBurden','etcBurden','adjustVal']);
+    result = Calc.burden(d);
+    if(!result.valid){$('result-burden').style.display='none';return}
+    var b = burdenBadge(result.burdenRate);
+    setStore('burden',result.burden);setStore('rights',result.rights);
+    html = '<div class="cm-result-hero"><div class="rh-val '+(result.isRefund?'green':'')+'">'+fmtWon(Math.abs(result.burden))+'</div><div class="rh-label">'+(result.isRefund?'예상 환급액':'예상 추가분담금')+'</div><span class="badge-judge '+b.cls+'">'+b.text+'</span></div>'+
+      '<div class="rr"><span class="rl">권리가액</span><span class="rv">'+fmtWon(result.rights)+'</span></div>'+
+      '<div class="rr"><span class="rl">최종 분양가</span><span class="rv">'+fmtWon(result.finalPrice)+'</span></div>'+
+      '<div class="rr"><span class="rl">부담 비율</span><span class="rv">'+fmtPct(result.burdenRate)+'</span></div>';
+  }
+  else if(id==='sim'){
+    var d = getInputs('s',['prevAsset','totalRev','totalCost','ratioVal','prevIndiv','desiredPrice','baseBurden','costUpPct','revChangePct','financeInc','delayMonths','monthlyFinCost','etcRevChange']);
+    result = Calc.simulation(d);
+    if(!result.valid){$('result-sim').style.display='none';return}
+    var diffColor = result.diff>0?'red':result.diff<0?'green':'';
+    html = '<div class="cm-result-hero"><div class="rh-val '+diffColor+'">'+fmtWon(result.diff)+'</div><div class="rh-label">분담금 변동액</div></div>'+
+      '<div class="rr"><span class="rl">기존 분담금</span><span class="rv">'+fmtWon(result.baseBurden)+'</span></div>'+
+      '<div class="rr"><span class="rl">조정 분담금</span><span class="rv">'+fmtWon(result.adjBurden)+'</span></div>'+
+      '<div class="rr"><span class="rl">조정 비례율</span><span class="rv">'+fmtPct(result.adjRatio)+'</span></div>'+
+      '<div class="rr"><span class="rl">조정 총사업비</span><span class="rv">'+fmtWon(result.adjCost)+'</span></div>'+
+      '<div class="rr"><span class="rl">조정 총수입</span><span class="rv">'+fmtWon(result.adjRev)+'</span></div>';
+  }
+  else if(id==='cost'){
+    var d = getInputs('c',['costConst','costDesign','costSupervise','costDemo','costFinance','costOper','costPR','costLegal','costTax','costReserve','costEtc','grossArea','units','totalRevenue']);
+    result = Calc.cost(d);
+    if(!result.valid){$('result-cost').style.display='none';return}
+    setStore('totalCostVerified',result.total);
+    html = '<div class="cm-result-hero"><div class="rh-val">'+fmtWon(result.total)+'</div><div class="rh-label">총사업비 합계</div></div>';
+    result.labels.forEach(function(l,i){
+      if(result.items[i]>0) html+='<div class="rr"><span class="rl">'+l+'</span><span class="rv">'+fmtWon(result.items[i])+' ('+fmtPct(result.pcts[i])+')</span></div>';
+    });
+    if(result.perUnit>0) html+='<div class="rr"><span class="rl">세대당 사업비</span><span class="rv">'+fmtWon(result.perUnit)+'</span></div>';
+    if(result.perSqm>0) html+='<div class="rr"><span class="rl">3.3㎡당 사업비</span><span class="rv">'+fmtWon(result.perSqm)+'</span></div>';
+    if(result.costRatio>0) html+='<div class="rr"><span class="rl">사업비율 (사업비/수입)</span><span class="rv">'+fmtPct(result.costRatio)+'</span></div>';
+    if(result.warnings.length) html+='<div style="margin-top:10px">'+result.warnings.map(function(w){return'<div style="color:#EF4444;font-size:12px;font-weight:600;margin-top:4px">⚠ '+w+'</div>'}).join('')+'</div>';
+  }
+  else if(id==='profit'){
+    var d = getInputs('p',['genUnits','genAvgPrice','memberRevenue','commercialRevenue','reserveRevenue','etcRevenue','totalCost','financeCost','taxReserve','prevAsset']);
+    result = Calc.profit(d);
+    if(!result.valid){$('result-profit').style.display='none';return}
+    var b = profitBadge(result.pl);
+    html = '<div class="cm-result-hero"><div class="rh-val '+(result.pl<0?'red':result.pl>0?'green':'')+'">'+fmtWon(result.pl)+'</div><div class="rh-label">예상 손익</div><span class="badge-judge '+b.cls+'">'+b.text+'</span></div>'+
+      '<div class="rr"><span class="rl">일반분양 수입</span><span class="rv">'+fmtWon(result.genRev)+'</span></div>'+
+      '<div class="rr"><span class="rl">총수입</span><span class="rv">'+fmtWon(result.totalRev)+'</span></div>'+
+      '<div class="rr"><span class="rl">총비용</span><span class="rv">'+fmtWon(result.totalExp)+'</span></div>'+
+      '<div class="rr"><span class="rl">수익률</span><span class="rv">'+fmtPct(result.plRate)+'</span></div>'+
+      '<div class="rr"><span class="rl">손익분기 일반분양가</span><span class="rv">'+fmtWon(result.breakEvenPrice)+'</span></div>';
+    if(result.refRatio>0) html+='<div class="rr"><span class="rl">참고 비례율</span><span class="rv">'+fmtPct(result.refRatio)+'</span></div>';
+  }
+
+  var rEl = $('result-'+id);
+  if(rEl && html){rEl.innerHTML=html;rEl.style.display=''}
+}
+
+/* ────── OPEN / CLOSE ────── */
+function openCalc(id){
+  var ov = $('ov-'+id);
+  if(!ov)return;
+  ov.classList.add('open');
+  // body 영역 스크롤 맨 위로
+  var body = ov.querySelector('.cm-body');
+  if(body) body.scrollTop = 0;
+  document.body.style.overflow='hidden';
+  // 카드 active
+  document.querySelectorAll('.sv-card').forEach(function(c){c.classList.toggle('active',c.dataset.calc===id)});
+  // 저장된 값 복원
+  var saved = loadCalc(id);
+  if(saved){
+    Object.keys(saved).forEach(function(k){
+      var inp = $(k);
+      if(inp){
+        if(inp.type==='range'){inp.value=saved[k];var vEl=$(k+'_v');if(vEl)vEl.textContent=saved[k]+'%'}
+        else{var n=saved[k];inp.value=inp.id.indexOf('ratioVal')>-1?n:(n?fmt(n):'');}
+      }
+    });
+    setTimeout(function(){runCalc(id)},100);
+  }
+}
+
+function closeCalc(id){
+  var ov = $('ov-'+id);
+  if(!ov)return;
+  ov.classList.remove('open');
+  document.body.style.overflow='';
+  document.querySelectorAll('.sv-card').forEach(function(c){c.classList.remove('active')});
+  // 현재 입력값 저장
+  var data = {};
+  ov.querySelectorAll('input').forEach(function(inp){
+    if(inp.type==='range') data[inp.id]=parseFloat(inp.value)||0;
+    else data[inp.id]=parseNum(inp.value);
+  });
+  saveCalc(id,data);
+}
+
+/* ────── EXAMPLE / RESET / COPY / LOAD ────── */
+function fillExample(id){
+  var ex = EXAMPLES[id==='sim'?'ratio':id];
+  if(!ex)return;
+  var prefix = {ratio:'r',burden:'b',sim:'s',cost:'c',profit:'p'}[id];
+  Object.keys(ex).forEach(function(k){
+    var inp = $(prefix+'_'+k);
+    if(inp){
+      if(inp.id.indexOf('ratioVal')>-1) inp.value=ex[k];
+      else inp.value = fmt(ex[k]);
+    }
+  });
+  runCalc(id);
+}
+
+function resetCalc(id){
+  var ov = $('ov-'+id);
+  if(!ov)return;
+  ov.querySelectorAll('input[type=text]').forEach(function(inp){inp.value=''});
+  ov.querySelectorAll('input[type=range]').forEach(function(inp){inp.value=0;var vEl=$(inp.id+'_v');if(vEl)vEl.textContent='0%'});
+  $('result-'+id).style.display='none';
+  $('result-'+id).innerHTML='';
+  localStorage.removeItem(C.STORAGE_PREFIX+id);
+}
+
+function copyResult(id){
+  var rEl = $('result-'+id);
+  if(!rEl||rEl.style.display==='none'){if(typeof App!=='undefined')App.toast('먼저 계산을 실행해주세요.','info');return}
+  var text = rEl.innerText;
+  navigator.clipboard.writeText(text).then(function(){if(typeof App!=='undefined')App.toast('결과가 복사되었습니다.','success')});
+}
+
+function loadRatioResult(){
+  var r = getStore('ratio');
+  if(r){$('b_ratioVal').value=r.toFixed(4);if(typeof App!=='undefined')App.toast('비례율 '+fmtPct(r)+' 불러옴','success')}
+  else{if(typeof App!=='undefined')App.toast('비례율 결과가 없습니다. 1번을 먼저 계산해주세요.','info')}
+}
+
+function loadPrevResults(){
+  var loaded = [];
+  if(getStore('prevAsset')){$('s_prevAsset').value=fmt(getStore('prevAsset'));loaded.push('종전자산')}
+  if(getStore('totalRev')){$('s_totalRev').value=fmt(getStore('totalRev'));loaded.push('총수입')}
+  if(getStore('totalCost')){$('s_totalCost').value=fmt(getStore('totalCost'));loaded.push('총사업비')}
+  if(getStore('ratio')){$('s_ratioVal').value=getStore('ratio').toFixed(4);loaded.push('비례율')}
+  if(getStore('burden')!==null){$('s_baseBurden').value=fmt(getStore('burden'));loaded.push('기준분담금')}
+  if(loaded.length&&typeof App!=='undefined')App.toast(loaded.join(', ')+' 불러옴','success');
+  else if(typeof App!=='undefined')App.toast('불러올 결과가 없습니다.','info');
+}
+
+/* ────── KEYBOARD ────── */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    var open = document.querySelector('.calc-overlay.open');
+    if(open) closeCalc(open.id.replace('ov-',''));
+  }
+});
+
+/* ────── URL PARAM AUTO OPEN ────── */
+var urlTool = new URLSearchParams(location.search).get('tool');
+if(urlTool){
+  var mapId = {ratio:'ratio',burden:'burden',risk:'sim',simulation:'sim',cost:'cost',profit:'profit'}[urlTool];
+  if(mapId) setTimeout(function(){openCalc(mapId)},500);
+}
+
+/* ────── GLOBAL API ────── */
+window.FC = {
+  open: openCalc,
+  close: closeCalc,
+  example: fillExample,
+  reset: resetCalc,
+  copy: copyResult,
+  loadRatio: loadRatioResult,
+  loadPrev: loadPrevResults
+};
+
+})();
+</script>
+</body>
+</html>

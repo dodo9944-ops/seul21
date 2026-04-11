@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정비사업 단계별 업무 체크리스트 - (주)세울엔지니어링</title>
+<style>
+  @page {
+    size: A4;
+    margin: 15mm 18mm 20mm 18mm;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif;
+    font-size: 10pt;
+    color: #1a1a1a;
+    line-height: 1.5;
+    background: #f0f0f0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .document {
+    max-width: 210mm;
+    margin: 0 auto;
+    background: #fff;
+    padding: 15mm 18mm 20mm 18mm;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .document { padding: 0; max-width: none; }
+  }
+
+  /* ── Header ── */
+  .header {
+    border-bottom: 3px solid #0A0F1C;
+    padding-bottom: 12pt;
+    margin-bottom: 14pt;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .header-left {
+    flex: 1;
+  }
+
+  .company-name {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #0A0F1C;
+    letter-spacing: 1px;
+    margin-bottom: 2pt;
+  }
+
+  .company-sub {
+    font-size: 7.5pt;
+    color: #666;
+    letter-spacing: 0.5px;
+  }
+
+  .doc-title-block {
+    text-align: right;
+  }
+
+  .doc-title {
+    font-size: 18pt;
+    font-weight: 800;
+    color: #0A0F1C;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  .doc-title .accent {
+    color: #C3A569;
+  }
+
+  .doc-meta {
+    font-size: 8pt;
+    color: #888;
+    margin-top: 4pt;
+    text-align: right;
+  }
+
+  /* ── Info Bar ── */
+  .info-bar {
+    display: flex;
+    gap: 0;
+    margin-bottom: 14pt;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .info-cell {
+    flex: 1;
+    padding: 6pt 10pt;
+    border-right: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    gap: 6pt;
+  }
+
+  .info-cell:last-child {
+    border-right: none;
+  }
+
+  .info-label {
+    font-size: 7.5pt;
+    font-weight: 700;
+    color: #0A0F1C;
+    background: #f4f1eb;
+    padding: 2pt 6pt;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .info-value {
+    font-size: 9pt;
+    color: #555;
+    flex: 1;
+    border-bottom: 1px dotted #bbb;
+    min-height: 14pt;
+    padding-bottom: 1pt;
+  }
+
+  /* ── Phase Section ── */
+  .phase-section {
+    margin-bottom: 10pt;
+    page-break-inside: avoid;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 8pt;
+    margin-bottom: 0;
+  }
+
+  .phase-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24pt;
+    height: 24pt;
+    background: #0A0F1C;
+    color: #C3A569;
+    font-size: 11pt;
+    font-weight: 800;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .phase-title {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #0A0F1C;
+  }
+
+  .phase-title .phase-sub {
+    font-size: 8.5pt;
+    font-weight: 400;
+    color: #888;
+    margin-left: 6pt;
+  }
+
+  .phase-bar {
+    height: 2px;
+    background: linear-gradient(90deg, #C3A569, #e8dcc8);
+    margin: 4pt 0 6pt 0;
+  }
+
+  /* ── Task Table ── */
+  .task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2pt;
+    font-size: 9pt;
+  }
+
+  .task-table thead th {
+    background: #0A0F1C;
+    color: #fff;
+    font-size: 7.5pt;
+    font-weight: 600;
+    padding: 4pt 6pt;
+    text-align: center;
+    letter-spacing: 0.5px;
+    border: 1px solid #0A0F1C;
+  }
+
+  .task-table thead th:first-child {
+    width: 28pt;
+  }
+
+  .task-table thead th:nth-child(2) {
+    width: 28pt;
+  }
+
+  .task-table thead th:nth-child(3) {
+    text-align: left;
+    width: auto;
+  }
+
+  .task-table thead th:nth-child(4) {
+    width: 70pt;
+  }
+
+  .task-table thead th:nth-child(5) {
+    width: 74pt;
+  }
+
+  .task-table thead th:nth-child(6) {
+    width: 110pt;
+  }
+
+  .task-table tbody td {
+    padding: 5pt 6pt;
+    border: 1px solid #d0d0d0;
+    vertical-align: middle;
+  }
+
+  .task-table tbody tr:nth-child(even) {
+    background: #fafaf8;
+  }
+
+  .task-table tbody tr:hover {
+    background: #f5f3ed;
+  }
+
+  .td-center {
+    text-align: center;
+  }
+
+  .checkbox-cell {
+    text-align: center;
+    font-size: 12pt;
+    line-height: 1;
+  }
+
+  .checkbox {
+    display: inline-block;
+    width: 12pt;
+    height: 12pt;
+    border: 1.5px solid #0A0F1C;
+    border-radius: 2px;
+    vertical-align: middle;
+  }
+
+  .task-name {
+    font-weight: 500;
+    color: #1a1a1a;
+  }
+
+  .responsible {
+    text-align: center;
+    font-size: 8.5pt;
+    color: #555;
+  }
+
+  .deadline-field, .notes-field {
+    border-bottom: 1px dotted #bbb;
+    min-height: 12pt;
+    color: #999;
+    font-size: 8pt;
+  }
+
+  .deadline-field {
+    text-align: center;
+  }
+
+  /* ── Separator between groups ── */
+  .group-separator {
+    height: 6pt;
+  }
+
+  /* ── Page Break Hints ── */
+  .page-break-before {
+    page-break-before: always;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 16pt;
+    padding-top: 10pt;
+    border-top: 2px solid #0A0F1C;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer-left {
+    font-size: 7pt;
+    color: #999;
+    line-height: 1.6;
+  }
+
+  .footer-right {
+    text-align: right;
+  }
+
+  .footer-company {
+    font-size: 8pt;
+    font-weight: 700;
+    color: #0A0F1C;
+  }
+
+  .footer-web {
+    font-size: 7.5pt;
+    color: #C3A569;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .footer-contact {
+    font-size: 7pt;
+    color: #999;
+    margin-top: 1pt;
+  }
+
+  /* ── Approval Box ── */
+  .approval-box {
+    margin-top: 20pt;
+    margin-bottom: 8pt;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0;
+  }
+
+  .approval-cell {
+    width: 64pt;
+    text-align: center;
+    border: 1px solid #bbb;
+    border-right: none;
+  }
+
+  .approval-cell:last-child {
+    border-right: 1px solid #bbb;
+  }
+
+  .approval-title {
+    font-size: 7pt;
+    font-weight: 700;
+    background: #f4f1eb;
+    padding: 3pt 0;
+    border-bottom: 1px solid #bbb;
+    color: #0A0F1C;
+  }
+
+  .approval-sign {
+    height: 36pt;
+    padding: 2pt;
+  }
+
+  /* ── Summary Legend ── */
+  .legend {
+    margin-top: 10pt;
+    padding: 8pt 10pt;
+    background: #fafaf8;
+    border: 1px solid #e0ddd6;
+    border-radius: 3px;
+    font-size: 7.5pt;
+    color: #777;
+    display: flex;
+    gap: 16pt;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4pt;
+  }
+
+  .legend-icon {
+    display: inline-block;
+    width: 9pt;
+    height: 9pt;
+    border: 1.2px solid #0A0F1C;
+    border-radius: 1.5px;
+  }
+
+  .legend-icon.checked {
+    background: #0A0F1C;
+    position: relative;
+  }
+
+  .legend-icon.checked::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 2.5px;
+    width: 3px;
+    height: 5px;
+    border: solid #C3A569;
+    border-width: 0 1.5px 1.5px 0;
+    transform: rotate(45deg);
+  }
+
+  @media print {
+    .legend { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="document">
+
+  <!-- ========== HEADER ========== -->
+  <div class="header">
+    <div class="header-left">
+      <div class="company-name">(주)세울엔지니어링</div>
+      <div class="company-sub">SEUL ENGINEERING CO., LTD.</div>
+    </div>
+    <div class="doc-title-block">
+      <div class="doc-title">정비사업 단계별 업무 <span class="accent">체크리스트</span></div>
+      <div class="doc-meta">문서번호: SE-CK-2026-001 &nbsp;|&nbsp; 작성일: 2026년 04월 03일 &nbsp;|&nbsp; Rev.01</div>
+    </div>
+  </div>
+
+  <!-- ========== INFO BAR ========== -->
+  <div class="info-bar">
+    <div class="info-cell">
+      <span class="info-label">사업명</span>
+      <span class="info-value"></span>
+    </div>
+    <div class="info-cell">
+      <span class="info-label">구역명</span>
+      <span class="info-value"></span>
+    </div>
+    <div class="info-cell">
+      <span class="info-label">작성자</span>
+      <span class="info-value"></span>
+    </div>
+  </div>
+
+  <!-- ========== APPROVAL BOX ========== -->
+  <div class="approval-box">
+    <div class="approval-cell">
+      <div class="approval-title">담당</div>
+      <div class="approval-sign"></div>
+    </div>
+    <div class="approval-cell">
+      <div class="approval-title">검토</div>
+      <div class="approval-sign"></div>
+    </div>
+    <div class="approval-cell">
+      <div class="approval-title">승인</div>
+      <div class="approval-sign"></div>
+    </div>
+  </div>
+
+  <!-- ========== PHASE 1 ========== -->
+  <div class="phase-section">
+    <div class="phase-header">
+      <span class="phase-number">1</span>
+      <span class="phase-title">기본계획 수립 <span class="phase-sub">Basic Plan Establishment</span></span>
+    </div>
+    <div class="phase-bar"></div>
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>완료</th>
+          <th>No.</th>
+          <th>업무 내용</th>
+          <th>담당자/부서</th>
+          <th>완료기한</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">1</td>
+          <td class="task-name">정비기본계획 수립 및 변경 (10년 단위)</td>
+          <td class="responsible">지자체</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">2</td>
+          <td class="task-name">안전진단 실시 및 결과보고서 작성</td>
+          <td class="responsible">안전진단기관</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">3</td>
+          <td class="task-name">주민설명회 개최 및 의견 수렴</td>
+          <td class="responsible">추진위원회</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">4</td>
+          <td class="task-name">도시계획위원회 심의 및 자문</td>
+          <td class="responsible">도시계획위원회</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">5</td>
+          <td class="task-name">기본계획 고시 및 열람 공고</td>
+          <td class="responsible">지자체</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== PHASE 2 ========== -->
+  <div class="phase-section">
+    <div class="phase-header">
+      <span class="phase-number">2</span>
+      <span class="phase-title">정비구역 지정 <span class="phase-sub">Designation of Improvement Zone</span></span>
+    </div>
+    <div class="phase-bar"></div>
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>완료</th>
+          <th>No.</th>
+          <th>업무 내용</th>
+          <th>담당자/부서</th>
+          <th>완료기한</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">1</td>
+          <td class="task-name">정비계획 수립 및 정비구역 지정 신청</td>
+          <td class="responsible">추진위원회</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">2</td>
+          <td class="task-name">토지이용계획 및 정비계획도서 작성</td>
+          <td class="responsible">설계용역사</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">3</td>
+          <td class="task-name">주민공람 및 지방의회 의견 청취</td>
+          <td class="responsible">지자체</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">4</td>
+          <td class="task-name">도시계획위원회 심의 (구역지정)</td>
+          <td class="responsible">도시계획위원회</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">5</td>
+          <td class="task-name">정비구역 지정 고시 및 공보 게재</td>
+          <td class="responsible">지자체</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== PHASE 3 ========== -->
+  <div class="phase-section">
+    <div class="phase-header">
+      <span class="phase-number">3</span>
+      <span class="phase-title">조합설립 인가 <span class="phase-sub">Approval of Association Establishment</span></span>
+    </div>
+    <div class="phase-bar"></div>
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>완료</th>
+          <th>No.</th>
+          <th>업무 내용</th>
+          <th>담당자/부서</th>
+          <th>완료기한</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">1</td>
+          <td class="task-name">추진위원회 구성 및 승인 신청</td>
+          <td class="responsible">추진위원회</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">2</td>
+          <td class="task-name">토지등소유자 동의율 확보 자문 (3/4 이상)</td>
+          <td class="responsible">추진위원회</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">3</td>
+          <td class="task-name">창립총회 개최 및 정관 의결</td>
+          <td class="responsible">추진위원회</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">4</td>
+          <td class="task-name">조합설립인가 신청 서류 준비 및 제출</td>
+          <td class="responsible">조합(설립중)</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">5</td>
+          <td class="task-name">시·도지사 조합설립 인가 및 고시</td>
+          <td class="responsible">지자체</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">6</td>
+          <td class="task-name">조합 법인등기 및 사업자등록</td>
+          <td class="responsible">조합</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== PHASE 4 ========== -->
+  <div class="phase-section page-break-before">
+    <div class="phase-header">
+      <span class="phase-number">4</span>
+      <span class="phase-title">사업시행 인가 <span class="phase-sub">Project Implementation Approval</span></span>
+    </div>
+    <div class="phase-bar"></div>
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>완료</th>
+          <th>No.</th>
+          <th>업무 내용</th>
+          <th>담당자/부서</th>
+          <th>완료기한</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">1</td>
+          <td class="task-name">건축설계 및 사업시행계획서 작성</td>
+          <td class="responsible">설계용역사</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">2</td>
+          <td class="task-name">환경영향평가 및 교통영향평가 실시</td>
+          <td class="responsible">전문용역사</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">3</td>
+          <td class="task-name">총회 의결 (사업시행계획 승인)</td>
+          <td class="responsible">조합</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">4</td>
+          <td class="task-name">사업시행인가 신청 및 관계기관 협의</td>
+          <td class="responsible">조합</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">5</td>
+          <td class="task-name">사업시행 인가 고시 및 통지</td>
+          <td class="responsible">지자체</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== PHASE 5 ========== -->
+  <div class="phase-section">
+    <div class="phase-header">
+      <span class="phase-number">5</span>
+      <span class="phase-title">관리처분 인가 <span class="phase-sub">Disposition Plan Approval</span></span>
+    </div>
+    <div class="phase-bar"></div>
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>완료</th>
+          <th>No.</th>
+          <th>업무 내용</th>
+          <th>담당자/부서</th>
+          <th>완료기한</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">1</td>
+          <td class="task-name">분양공고 및 분양신청 접수</td>
+          <td class="responsible">조합</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">2</td>
+          <td class="task-name">감정평가 실시 (종전·종후 자산)</td>
+          <td class="responsible">감정평가법인</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">3</td>
+          <td class="task-name">관리처분계획 수립 및 총회 의결</td>
+          <td class="responsible">조합</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">4</td>
+          <td class="task-name">관리처분인가 신청 및 공람</td>
+          <td class="responsible">조합</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">5</td>
+          <td class="task-name">관리처분계획 인가 고시</td>
+          <td class="responsible">지자체</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== PHASE 6 ========== -->
+  <div class="phase-section">
+    <div class="phase-header">
+      <span class="phase-number">6</span>
+      <span class="phase-title">착공 / 분양 <span class="phase-sub">Construction & Sale</span></span>
+    </div>
+    <div class="phase-bar"></div>
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>완료</th>
+          <th>No.</th>
+          <th>업무 내용</th>
+          <th>담당자/부서</th>
+          <th>완료기한</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">1</td>
+          <td class="task-name">이주 및 철거 (손실보상 협의)</td>
+          <td class="responsible">조합/시공사</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">2</td>
+          <td class="task-name">착공신고 및 공사 착수</td>
+          <td class="responsible">시공사</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">3</td>
+          <td class="task-name">일반분양 공고 및 청약 접수</td>
+          <td class="responsible">시공사/조합</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">4</td>
+          <td class="task-name">공사 중간점검 및 품질관리</td>
+          <td class="responsible">감리단</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">5</td>
+          <td class="task-name">공사비 정산 및 변경계약 관리</td>
+          <td class="responsible">조합/시공사</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== PHASE 7 ========== -->
+  <div class="phase-section">
+    <div class="phase-header">
+      <span class="phase-number">7</span>
+      <span class="phase-title">준공 / 입주 <span class="phase-sub">Completion & Move-in</span></span>
+    </div>
+    <div class="phase-bar"></div>
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>완료</th>
+          <th>No.</th>
+          <th>업무 내용</th>
+          <th>담당자/부서</th>
+          <th>완료기한</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">1</td>
+          <td class="task-name">준공검사 신청 및 사용검사 완료</td>
+          <td class="responsible">시공사/감리단</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">2</td>
+          <td class="task-name">이전고시 및 소유권 이전등기</td>
+          <td class="responsible">조합/법무사</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">3</td>
+          <td class="task-name">청산금 징수·지급 및 최종 정산</td>
+          <td class="responsible">조합</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+        <tr>
+          <td class="checkbox-cell"><span class="checkbox"></span></td>
+          <td class="td-center">4</td>
+          <td class="task-name">조합 해산 및 청산종결 등기</td>
+          <td class="responsible">조합/법무사</td>
+          <td class="deadline-field">____.__.__</td>
+          <td class="notes-field"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== LEGEND ========== -->
+  <div class="legend">
+    <div class="legend-item">
+      <span class="legend-icon"></span>
+      <span>미완료</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-icon checked"></span>
+      <span>완료</span>
+    </div>
+    <div style="flex:1"></div>
+    <span>* 본 체크리스트는 「도시 및 주거환경정비법」에 근거하여 작성되었습니다.</span>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <div class="footer">
+    <div class="footer-left">
+      &copy; 2026 (주)세울엔지니어링. All rights reserved.<br>
+      본 문서는 사내 업무용으로 작성되었으며, 무단 복제 및 배포를 금합니다.
+    </div>
+    <div class="footer-right">
+      <div class="footer-company">(주)세울엔지니어링</div>
+      <a class="footer-web" href="https://www.seul21.com">www.seul21.com</a>
+      <div class="footer-contact">TEL 010-2230-9210 &nbsp;|&nbsp; FAX 0504-340-9210</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

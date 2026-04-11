@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>업무실적 — (주)세울엔지니어링 </title>
+    <meta name="description" content="(주)세울엔지니어링의 재개발·재건축·소규모정비 업무 수행실적을 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    /* === Hero === */
+    .pf-hero{padding:64px 0 56px;background:linear-gradient(135deg,#070B15 0%,var(--brand-dark) 40%,var(--brand-navy) 100%);position:relative;overflow:hidden}
+    .pf-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(195,165,105,0.3),transparent)}
+    .pf-hero .breadcrumb{margin-bottom:20px}
+    .pf-hero h1{font-size:36px;font-weight:900;color:#fff;margin-bottom:14px;padding-left:18px;border-left:3px solid var(--gold)}
+    .pf-hero .hero-tag{font-size:17px;font-weight:600;color:var(--gold);margin-bottom:8px}
+    .pf-hero .hero-sub{font-size:14px;color:rgba(255,255,255,.5)}
+    @media(max-width:768px){.pf-hero{padding:40px 0 32px}.pf-hero h1{font-size:26px}}
+
+    /* === KPI (차등 강조) === */
+    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:64px}
+    @media(max-width:1024px){.kpi-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
+    .kpi-card{background:var(--brand-dark);border-radius:14px;padding:14px 20px;text-align:center;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;border:1px solid rgba(195,165,105,.08)}
+    .kpi-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    .kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3}
+    .kpi-card .kv{font-size:26px;font-weight:800;color:var(--gold);margin:6px 0 3px}
+    .kpi-card .kl{font-size:12px;font-weight:500;color:rgba(255,255,255,.5)}
+    .kpi-card .ki{font-size:18px;color:var(--gold);opacity:.7}
+    /* 마지막 카드(총 관리세대) 강조 */
+    .kpi-card.kpi-highlight{background:linear-gradient(135deg,var(--brand-dark),var(--brand-navy));border-color:rgba(195,165,105,.2)}
+    .kpi-card.kpi-highlight::after{opacity:.6}
+    .kpi-card.kpi-highlight .kv{font-size:26px}
+    .kpi-card.kpi-highlight .ki{opacity:1}
+
+    /* === Section === */
+    .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+    .sec-title{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;position:relative}
+    .sec-title::before{content:'';position:absolute;left:0;top:4px;width:3px;height:22px;border-radius:2px;background:linear-gradient(to bottom,var(--gold),rgba(195,165,105,.3))}
+    .sec-divider{margin:64px 0;border:none;border-top:1px solid var(--gray-200)}
+
+    /* === Badges === */
+    .pb{display:inline-flex;align-items:center;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;line-height:1}
+    .pb-type{background:rgba(10,15,28,.85);color:#fff}
+    .pb-ing{background:rgba(195,165,105,.9);color:#0A0F1C}
+    .pb-done{background:rgba(255,255,255,.9);color:#0A0F1C}
+
+    /* === Featured Cards === */
+    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+    @media(max-width:1024px){.feat-grid{grid-template-columns:1fr;gap:20px}}
+    .fc{background:#fff;border:2px solid var(--gray-300);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+    .fc:hover{border-color:var(--gold);box-shadow:0 20px 48px rgba(195,165,105,.18);transform:translateY(-8px)}
+    .fc-img{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0}
+    .fc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+    .fc:hover .fc-img img{transform:scale(1.06)}
+    .fc-img .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.5) 0%,transparent 50%);pointer-events:none}
+    .fc-img .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
+    .fc-fb{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+    .fc-fb[data-t=r]{background:linear-gradient(135deg,#0A0F1C,#1a3055,#2a4a75)}
+    .fc-fb[data-t=c]{background:linear-gradient(135deg,#142644,#1e3a5f,#0A0F1C)}
+    .fc-fb[data-t=s]{background:linear-gradient(135deg,#1a2a40,#243a55,#C3A569)}
+    .fc-fb .fbi{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
+    .fc-fb .fbi i{font-size:28px;color:rgba(195,165,105,.6)}
+    .fc-fb .fbl{font-size:13px;font-weight:600;color:rgba(255,255,255,.35)}
+    .fc-fb .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
+    .fc-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+    .fc-body .fn{font-size:18px;font-weight:800;color:var(--gray-900);margin-bottom:12px;line-height:1.4}
+    .fc-body .fspecs{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;margin-bottom:12px;padding:10px 12px;background:var(--gray-50);border-radius:9px}
+    .fc-body .fsp{display:flex;align-items:center;font-size:12px;color:var(--gray-600)}
+    .fc-body .fsp i{width:14px;color:var(--gold);margin-right:5px;font-size:10px;text-align:center}
+    .fc-body .fsp strong{font-weight:600;color:var(--gray-800)}
+    /* 핵심 3개만 강조, 나머지 보조 */
+    .fc-body .fsp.secondary{color:var(--gray-400);font-size:11.5px}
+    .fc-body .fdesc{font-size:13px;color:var(--gray-500);line-height:1.6;margin-top:auto;padding-top:12px;border-top:1px solid var(--gray-100);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .fc-body .fbtn{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:10px 20px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:9px;font-size:13.5px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .25s;align-self:flex-start}
+    .fc-body .fbtn:hover{background:var(--brand-navy);box-shadow:0 4px 12px rgba(10,15,28,.15);transform:translateX(3px)}
+    .fc-body .fbtn i{font-size:12px;transition:transform .2s}
+    .fc-body .fbtn:hover i{transform:translateX(2px)}
+    /* 첫 카드 대표 프로젝트 강조 */
+    .fc.fc-primary{border-color:rgba(195,165,105,.2);box-shadow:0 6px 20px rgba(195,165,105,.08)}
+    .fc.fc-primary .fc-img::after{content:'대표 실적';position:absolute;bottom:14px;right:14px;padding:4px 12px;background:rgba(195,165,105,.9);color:#0A0F1C;font-size:10px;font-weight:700;border-radius:5px;z-index:3;letter-spacing:.3px}
+
+    /* === Filter Bar === */
+    .filter-bar{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding:16px 20px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100);flex-wrap:wrap}
+    .filter-bar select{height:40px;padding:0 32px 0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13.5px;font-weight:500;color:var(--gray-800);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s;min-width:130px}
+    .filter-bar select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(195,165,105,.1)}
+    .filter-bar .rc{margin-left:auto;font-size:14px;color:var(--gray-500);font-weight:500}
+    .filter-bar .rc strong{color:var(--brand-dark);font-weight:700}
+    @media(max-width:540px){.filter-bar{flex-direction:column;align-items:stretch;gap:10px}.filter-bar select{width:100%;min-width:unset}.filter-bar .rc{margin-left:0;text-align:center}}
+
+    /* === All Cards Grid === */
+    .pg-grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:24px;row-gap:36px}
+    @media(max-width:1024px){.pg-grid{grid-template-columns:repeat(2,1fr);gap:18px}}
+    @media(max-width:540px){.pg-grid{grid-template-columns:1fr;gap:14px}}
+    .pc{background:#fff;border:2px solid var(--gray-300);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .25s;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+    .pc:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(195,165,105,.12);transform:translateY(-4px)}
+    .pc-img{width:100%;height:140px;position:relative;overflow:hidden;flex-shrink:0}
+    .pc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+    .pc:hover .pc-img img{transform:scale(1.05)}
+    .pc-img .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.4) 0%,transparent 50%);pointer-events:none}
+    .pc-img .badges{position:absolute;top:10px;left:10px;display:flex;gap:5px;z-index:2}
+    .pc-fb{width:100%;height:140px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px}
+    .pc-fb[data-t=r]{background:linear-gradient(135deg,#0A0F1C,#1a3055,#2a4a75)}
+    .pc-fb[data-t=c]{background:linear-gradient(135deg,#142644,#1e3a5f,#0A0F1C)}
+    .pc-fb[data-t=s]{background:linear-gradient(135deg,#1a2a40,#243a55,#C3A569)}
+    .pc-fb .fbi{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
+    .pc-fb .fbi i{font-size:20px;color:rgba(195,165,105,.6)}
+    .pc-fb .badges{position:absolute;top:10px;left:10px;display:flex;gap:5px;z-index:2}
+    .pc-body{padding:18px 20px 22px;display:flex;flex-direction:column;flex:1}
+    .pc-body .pn{font-size:15px;font-weight:700;color:var(--gray-900);margin-bottom:10px;line-height:1.4}
+    .pc-body .pr{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--gray-600);padding:4px 0}
+    .pc-body .pr+.pr{border-top:1px solid var(--gray-50)}
+    .pc-body .pr .pl{display:flex;align-items:center;gap:5px;font-weight:500;color:var(--gray-500)}
+    .pc-body .pr .pl i{font-size:10px;color:var(--gold);width:13px;text-align:center}
+    .pc-body .pr .pv{font-weight:600;color:var(--gray-800)}
+    .pc-body .pbtn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;width:100%;height:36px;background:transparent;color:var(--brand-dark);border:1.5px solid var(--gray-200);border-radius:10px;font-size:12.5px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
+    .pc-body .pbtn:hover{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark)}
+
+    /* === Empty === */
+    .pg-empty{grid-column:1/-1;text-align:center;padding:56px 20px}
+    .pg-empty i{font-size:48px;color:var(--gray-300);margin-bottom:16px}
+    .pg-empty h3{font-size:18px;font-weight:700;color:var(--gray-600);margin-bottom:8px}
+
+    /* === Pagination === */
+    .pager-wrap{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:40px;padding-top:24px;border-top:1px solid var(--gray-100)}
+    .pager{display:flex;align-items:center;gap:4px}
+    .pager button{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--gray-200);border-radius:10px;background:#fff;color:var(--gray-600);font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
+    .pager button:hover{border-color:var(--gold);color:var(--brand-dark);background:rgba(195,165,105,.04)}
+    .pager button.active{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark);box-shadow:0 2px 8px rgba(10,15,28,.12)}
+    .pager button.arr{color:var(--gray-400);font-size:13px}
+    .pager button:disabled{opacity:.25;cursor:default;pointer-events:none}
+    .pager-per{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-400)}
+    .pager-per select{height:32px;padding:0 24px 0 8px;border:1px solid var(--gray-200);border-radius:6px;font-size:12px;font-family:var(--font);color:var(--gray-600);cursor:pointer;appearance:auto}
+    @media(max-width:768px){.pager-wrap{flex-direction:column;gap:12px}}
+
+    /* ========================================
+       DETAIL MODAL — Full project portfolio
+       ======================================== */
+    .d-overlay{position:fixed;inset:0;background:rgba(10,15,28,.65);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
+    .d-overlay.open{opacity:1;pointer-events:auto}
+    .d-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
+    .d-overlay.open .d-modal{transform:translateY(0) scale(1)}
+    .d-close{position:absolute;top:14px;right:14px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.6);border:1.5px solid rgba(255,255,255,.3);border-radius:50%;cursor:pointer;font-size:15px;color:#fff;transition:all .2s;backdrop-filter:blur(4px)}
+    .d-close:hover{background:rgba(10,15,28,.9);transform:scale(1.1)}
+    @media(max-width:540px){.d-close{top:10px;right:10px;width:32px;height:32px;font-size:13px}}
+
+    /* Detail Hero Image */
+    .d-hero{width:100%;height:300px;position:relative;overflow:hidden;flex-shrink:0;border-radius:18px 18px 0 0}
+    .d-hero img{width:100%;height:100%;object-fit:cover;display:block}
+    .d-hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.75) 0%,rgba(10,15,28,.15) 50%,transparent 100%);pointer-events:none}
+    .d-hero .d-title-area{position:absolute;bottom:0;left:0;right:0;padding:24px 32px;z-index:2}
+    .d-hero .d-title-area .badges{display:flex;gap:6px;margin-bottom:10px}
+    .d-hero .d-title-area h2{font-size:22px;font-weight:800;color:#fff;line-height:1.35;margin-bottom:8px}
+    .d-hero .d-title-area .d-phase{font-size:13px;font-weight:600;color:var(--gold);display:flex;align-items:center;gap:6px}
+    .d-hero-fb{width:100%;height:240px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+    .d-hero-fb[data-t=r]{background:linear-gradient(135deg,#0A0F1C,#1a3055,#2a4a75)}
+    .d-hero-fb[data-t=c]{background:linear-gradient(135deg,#142644,#1e3a5f,#0A0F1C)}
+    .d-hero-fb[data-t=s]{background:linear-gradient(135deg,#1a2a40,#243a55,#C3A569)}
+    .d-hero-fb .d-title-area{position:absolute;bottom:0;left:0;right:0;padding:24px 32px;z-index:2;background:linear-gradient(to top,rgba(10,15,28,.6),transparent)}
+    .d-hero-fb .d-title-area .badges{display:flex;gap:6px;margin-bottom:10px}
+    .d-hero-fb .d-title-area h2{font-size:22px;font-weight:800;color:#fff;line-height:1.35;margin-bottom:8px}
+    .d-hero-fb .d-title-area .d-phase{font-size:13px;font-weight:600;color:var(--gold)}
+    @media(max-width:540px){.d-hero,.d-hero-fb{height:200px}.d-hero .d-title-area h2,.d-hero-fb .d-title-area h2{font-size:18px}}
+
+    /* Detail Body */
+    .d-body{padding:32px}
+    @media(max-width:540px){.d-body{padding:20px}}
+
+    /* Section labels in detail */
+    .d-sec{margin-bottom:28px}
+    .d-sec:last-child{margin-bottom:0}
+    .d-sec-title{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .d-sec-title::after{content:'';flex:1;height:1px;background:var(--gray-100)}
+
+    /* Info Grid — 핵심 사업 정보 */
+    .d-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--gray-100);border-radius:12px;overflow:hidden}
+    .d-info-item{display:flex;flex-direction:column;padding:13px 16px;border-bottom:1px solid var(--gray-100)}
+    .d-info-item:nth-child(odd){border-right:1px solid var(--gray-100)}
+    .d-info-item:nth-last-child(-n+2){border-bottom:none}
+    .d-info-item .il{font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:.3px;margin-bottom:4px}
+    .d-info-item .iv{font-size:14.5px;font-weight:600;color:var(--gray-900)}
+    @media(max-width:540px){.d-info-grid{grid-template-columns:1fr}.d-info-item:nth-child(odd){border-right:none}.d-info-item{border-bottom:1px solid var(--gray-100)}.d-info-item:last-child{border-bottom:none}}
+
+    /* Spec Grid — 건축·사업 스펙 (3열) */
+    .d-spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--gray-100);border-radius:12px;overflow:hidden}
+    .d-spec-item{display:flex;flex-direction:column;padding:12px 14px;border-bottom:1px solid var(--gray-100);border-right:1px solid var(--gray-100)}
+    .d-spec-item:nth-child(3n){border-right:none}
+    .d-spec-item:nth-last-child(-n+3){border-bottom:none}
+    .d-spec-item .sl{font-size:10.5px;font-weight:600;color:var(--gray-400);letter-spacing:.2px;margin-bottom:3px}
+    .d-spec-item .sv{font-size:13.5px;font-weight:700;color:var(--gray-900)}
+    @media(max-width:540px){.d-spec-grid{grid-template-columns:1fr 1fr}.d-spec-item:nth-child(3n){border-right:1px solid var(--gray-100)}.d-spec-item:nth-child(2n){border-right:none}}
+
+    /* Tasks list */
+    .d-tasks{display:flex;flex-wrap:wrap;gap:8px}
+    .d-task{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:8px;font-size:13px;font-weight:500;color:var(--gray-700)}
+    .d-task i{font-size:10px;color:var(--gold)}
+
+    /* Description */
+    .d-desc{font-size:14.5px;color:var(--gray-700);line-height:1.8;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:12px;padding:20px}
+
+    /* Issues */
+    .d-issues{list-style:none;padding:0;margin:0}
+    .d-issues li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;font-size:13.5px;color:var(--gray-700);line-height:1.6;border-bottom:1px solid var(--gray-50)}
+    .d-issues li:last-child{border-bottom:none}
+    .d-issues li::before{content:'\f06a';font-family:'Font Awesome 6 Free';font-weight:900;font-size:11px;color:var(--gold);margin-top:4px;flex-shrink:0}
+
+    /* Detail Footer */
+    .d-footer{padding:16px 32px;border-top:1px solid var(--gray-100);display:flex;justify-content:flex-end}
+    .d-footer button{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;background:var(--brand-dark);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
+    .d-footer button:hover{background:var(--brand-navy)}
+    
+    /* === Unified Hero (3안 패밀리) === */
+    .uni-hero {
+        background: linear-gradient(135deg, #0F1D35 0%, #142644 40%, #0A0F1C 100%);
+        position: relative; overflow: hidden; padding: 72px 0 64px;
+    }
+    .uni-hero .hero-bg-photo { position: absolute; top: 0; right: 0; width: 58%; height: 100%; z-index: 0; }
+    .uni-hero .hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; filter: brightness(0.88) contrast(1.1); }
+    .uni-hero .hero-bg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #0A0F1C 0%, rgba(10,15,28,0.94) 6%, rgba(14,24,42,0.65) 24%, rgba(18,32,56,0.4) 48%, rgba(20,38,68,0.28) 72%, rgba(20,38,68,0.22) 100%); z-index: 1; }
+    .uni-hero .hero-bg-photo::before { content: ''; position: absolute; top: 0; bottom: 0; left: 22%; width: 56%; pointer-events: none; background: linear-gradient(90deg, rgba(15,26,46,0) 0%, rgba(15,26,46,0.06) 25%, rgba(14,22,40,0.16) 52%, rgba(14,22,40,0.18) 62%, rgba(15,26,46,0.08) 80%, rgba(15,26,46,0) 100%); filter: blur(24px); z-index: 2; }
+    .uni-hero::before {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
+        pointer-events: none; z-index: 1;
+    }
+    .uni-hero::after {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
+        background-size: 60px 60px; pointer-events: none; z-index: 1;
+    }
+    .uni-hero .inner { position: relative; z-index: 2; display: flex; align-items: center; gap: 56px; }
+    .uni-hero .uh-text { flex: 1; min-width: 0; }
+    .uni-hero .uh-bc { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+    .uni-hero .uh-bc a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
+    .uni-hero .uh-bc a:hover { color: #C3A569; }
+    .uni-hero .uh-bc span { color: #C3A569; font-weight: 600; }
+    .uni-hero .uh-bc i { font-size: 10px; }
+    .uni-hero .uh-label { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; color: #C3A569; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+    .uni-hero .uh-label::before { content: ''; width: 24px; height: 1px; background: #C3A569; }
+    .uni-hero .uh-text h1 { font-size: 36px; font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -1px; margin-bottom: 14px; }
+    .uni-hero .uh-text h1 em { font-style: normal; color: #C3A569; }
+    .uni-hero .uh-sub { font-size: 15px; color: rgba(255,255,255,0.68); line-height: 1.8; max-width: 500px; }
+    .uni-hero .uh-visual { flex-shrink: 0; width: 360px; position: relative; z-index: 2; }
+    .uni-hero .uh-photo { display: none; }
+    .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .uni-hero .uh-card { background: rgba(10,16,30,0.57); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; padding: 20px 18px; transition: all 0.3s; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .uni-hero .uh-card:hover { background: rgba(14,22,40,0.70); border-color: rgba(195,165,105,0.3); transform: translateY(-2px); }
+    .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.16); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .uni-hero .uh-ci i { font-size: 14px; color: #C3A569; }
+    .uni-hero .uh-card h4 { font-size: 13.5px; font-weight: 800; color: #fff; margin-bottom: 3px; }
+    .uni-hero .uh-card p { font-size: 11px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(10,15,28,0.5) 0%, rgba(20,38,68,0.7) 100%); } }
+    @media (max-width: 600px) { .uni-hero { padding: 52px 0 44px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
+
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="uni-hero">
+    <div class="hero-bg-photo"><img src="../jpg/hero_portfolio.png" alt="세울엔지니어링 업무실적"></div>
+    <div class="inner">
+        <div class="uh-text">
+            <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>업무실적</span></div>
+            <div class="uh-label">PORTFOLIO</div>
+            <h1>축적된 <em>수행 경험</em>이 신뢰의 기준입니다</h1>
+            <p class="uh-sub">재개발·재건축·소규모정비사업의 다양한 현장에서 쌓은 실전 경험과 자문실적</p>
+        </div>
+        <div class="uh-visual">
+            <div class="uh-photo"><img src="../jpg/hero_portfolio.png" alt="세울엔지니어링 업무실적"></div>
+            <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-building"></i></div><h4>재개발</h4><p>주택재개발 정비사업 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-city"></i></div><h4>재건축</h4><p>주택재건축 정비사업 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-house-chimney"></i></div><h4>소규모정비</h4><p>소규모재건축·가로주택</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-city"></i></div><h4>도심복합개발</h4><p>복합개발·엔지니어링 통합 자문</p></div></div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body"><div class="inner">
+    <div class="kpi-grid" id="kpiGrid"></div>
+
+    <div class="sec-head"><h2 class="sec-title">주요 수행실적</h2></div>
+    <div class="feat-grid" id="featGrid"></div>
+
+    <hr class="sec-divider">
+
+    <div class="sec-head"><h2 class="sec-title">전체 수행실적</h2></div>
+    <div class="filter-bar">
+        <select id="fType"><option value="전체">유형 전체</option><option value="재개발">재개발</option><option value="재건축">재건축</option><option value="소규모정비">소규모정비</option></select>
+        <select id="fStatus"><option value="전체">상태 전체</option><option value="진행중">진행중</option><option value="완료">완료</option></select>
+        <div class="rc" id="rc"></div>
+    </div>
+    <div class="pg-grid" id="pgGrid"></div>
+    <div class="pager-wrap" id="pagerWrap">
+        <div class="pager" id="pager"></div>
+        <div class="pager-per"><span>페이지당</span><select id="pfPerSelect"><option value="6">6개</option><option value="9">9개</option><option value="12">12개</option></select></div>
+    </div>
+</div></div>
+
+<!-- Detail Modal -->
+<div class="d-overlay" id="dOverlay">
+    <div class="d-modal">
+        <div id="dHero"></div>
+        <button class="d-close" id="dCloseTop"><i class="fa-solid fa-xmark"></i></button>
+        <div class="d-body" id="dBody"></div>
+        <div class="d-footer"><button id="dCloseBot"><i class="fa-solid fa-xmark"></i> 닫기</button></div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=20260407"></script>
+<script src="../assets/js/data-service.js?v=20260407"></script>
+<script src="../assets/js/common.js?v=20260407"></script>
+<script>
+(function(){
+var D=MOCK.portfolio, PER=6, curPage=1;
+
+/* helpers */
+function ti(t){return{'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney'}[t]||'fa-building-columns'}
+function dt(t){return t==='재건축'?'c':t==='소규모정비'?'s':'r'}
+function sb(s){return s==='완료'?'pb-done':'pb-ing'}
+function bg(p){return'<span class="pb pb-type">'+p.type+'</span><span class="pb '+sb(p.status)+'">'+p.status+'</span>'}
+function safe(v){return v||'정보 확인중'}
+function dn(p){return p.name}
+
+/* KPI */
+!function(){var t=D.length,i=0,d=0,u=0;D.forEach(function(p){if(p.status==='진행중')i++;else d++;u+=parseInt(p.scale.replace(/[^0-9]/g,''))||0});
+document.getElementById('kpiGrid').innerHTML=
+'<div class="kpi-card"><div class="ki"><i class="fa-solid fa-building"></i></div><div class="kv">'+t+'건</div><div class="kl">총 수행실적</div></div>'+
+'<div class="kpi-card"><div class="ki"><i class="fa-solid fa-spinner"></i></div><div class="kv">'+i+'건</div><div class="kl">진행중 사업</div></div>'+
+'<div class="kpi-card kpi-highlight"><div class="ki"><i class="fa-solid fa-circle-check"></i></div><div class="kv">'+d+'건</div><div class="kl">완료 사업</div></div>'+
+'<div class="kpi-card kpi-highlight"><div class="ki"><i class="fa-solid fa-house-chimney"></i></div><div class="kv">약 '+u.toLocaleString()+'세대</div><div class="kl">총 관리세대</div></div>'}();
+
+/* Featured */
+function renderFeat(){
+var items=D.filter(function(p){return p.featured});
+document.getElementById('featGrid').innerHTML=items.map(function(p,idx){
+var img=p.featuredImage?
+'<div class="fc-img"><img src="'+p.featuredImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+bg(p)+'</div></div>':
+'<div class="fc-fb" data-t="'+dt(p.type)+'"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+bg(p)+'</div></div>';
+var primary=idx===0?' fc-primary':'';
+return'<div class="fc'+primary+'" onclick="PF.open(\''+p.id+'\')">'+img+
+'<div class="fc-body"><div class="fn">'+dn(p)+'</div>'+
+'<div class="fspecs">'+
+'<div class="fsp"><i class="fa-solid fa-location-dot"></i> <strong>'+p.district+'</strong></div>'+
+'<div class="fsp"><i class="fa-solid fa-building"></i> '+p.scale+'</div>'+
+'<div class="fsp"><i class="fa-solid fa-user-tie"></i> '+p.role+'</div>'+
+'<div class="fsp secondary"><i class="fa-solid fa-users"></i> '+safe(p.members)+'</div>'+
+'<div class="fsp secondary"><i class="fa-solid fa-layer-group"></i> '+safe(p.floorInfo)+'</div>'+
+'<div class="fsp secondary"><i class="fa-solid fa-chart-pie"></i> '+safe(p.floorAreaRatio)+'</div>'+
+'</div>'+
+'<div class="fdesc">'+p.description+'</div>'+
+'<button class="fbtn" onclick="event.stopPropagation();PF.open(\''+p.id+'\')">상세보기 <i class="fa-solid fa-arrow-right"></i></button>'+
+'</div></div>'}).join('')}
+
+/* Filtered items — 진행중 최신순 → 완료 최신순 */
+function getFiltered(){
+var ft=document.getElementById('fType').value,fs=document.getElementById('fStatus').value;
+var items=D.filter(function(p){
+if(ft!=='전체'&&p.type!==ft)return false;
+if(fs!=='전체'&&p.status!==fs)return false;
+return true});
+items.sort(function(a,b){
+var sa=a.status==='완료'?1:0,sb=b.status==='완료'?1:0;
+if(sa!==sb)return sa-sb;
+return parseInt(b.year||0)-parseInt(a.year||0);
+});
+return items;}
+
+/* All cards + pagination */
+function renderAll(){
+var items=getFiltered();
+var total=items.length,pages=Math.ceil(total/PER);
+if(curPage>pages)curPage=1;
+var start=(curPage-1)*PER,slice=items.slice(start,start+PER);
+document.getElementById('rc').innerHTML='총 <strong>'+total+'</strong>건';
+var grid=document.getElementById('pgGrid');
+
+if(!slice.length){grid.innerHTML='<div class="pg-empty"><i class="fa-solid fa-search"></i><h3>해당 조건의 실적이 없습니다</h3></div>';document.getElementById('pager').innerHTML='';return}
+
+grid.innerHTML=slice.map(function(p){
+var img=p.thumbnail?
+'<div class="pc-img"><img src="'+p.thumbnail+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="pc-fb" data-t="'+dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+bg(p)+'</div></div>':
+'<div class="pc-fb" data-t="'+dt(p.type)+'"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div><div class="badges">'+bg(p)+'</div></div>';
+return'<div class="pc" onclick="PF.open(\''+p.id+'\')">'+img+
+'<div class="pc-body"><div class="pn">'+dn(p)+'</div>'+
+'<div class="pr"><span class="pl"><i class="fa-solid fa-location-dot"></i> 위치</span><span class="pv">'+p.district+'</span></div>'+
+'<div class="pr"><span class="pl"><i class="fa-solid fa-building"></i> 규모</span><span class="pv">'+p.scale+'</span></div>'+
+'<div class="pr"><span class="pl"><i class="fa-solid fa-users"></i> 조합원</span><span class="pv">'+safe(p.members)+'</span></div>'+
+'<div class="pr"><span class="pl"><i class="fa-solid fa-hard-hat"></i> 사업자</span><span class="pv">'+safe(p.constructor||p.client)+'</span></div>'+
+'<div class="pr"><span class="pl"><i class="fa-solid fa-user-tie"></i> 역할</span><span class="pv">'+p.role+'</span></div>'+
+'<div class="pr"><span class="pl"><i class="fa-solid fa-calendar"></i> 연도</span><span class="pv">'+p.year+'년</span></div>'+
+'<button class="pbtn" onclick="event.stopPropagation();PF.open(\''+p.id+'\')"><i class="fa-solid fa-eye"></i> 상세보기</button>'+
+'</div></div>'}).join('');
+
+/* Pager */
+var pg=document.getElementById('pager');
+if(pages<=1){pg.innerHTML='';return}
+var h='<button class="arr" '+(curPage===1?'disabled':'')+' onclick="PF.page('+(curPage-1)+')"><i class="fa-solid fa-chevron-left"></i></button>';
+for(var i=1;i<=pages;i++)h+='<button'+(i===curPage?' class="active"':'')+' onclick="PF.page('+i+')">'+i+'</button>';
+h+='<button class="arr" '+(curPage===pages?'disabled':'')+' onclick="PF.page('+(curPage+1)+')"><i class="fa-solid fa-chevron-right"></i></button>';
+pg.innerHTML=h;}
+
+/* Detail */
+function openDetail(id){
+var p=null;for(var i=0;i<D.length;i++)if(D[i].id===id){p=D[i];break}
+if(!p)return;
+var dh=document.getElementById('dHero'),t=dt(p.type);
+var mn=p.name;
+var closeBtn='<button onclick="PF.close()" style="position:absolute;top:14px;right:14px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.6);border:1.5px solid rgba(255,255,255,.35);border-radius:50%;cursor:pointer;font-size:15px;color:#fff;backdrop-filter:blur(4px)"><i class="fa-solid fa-xmark"></i></button>';
+var titleArea='<div class="d-title-area"><div class="badges">'+bg(p)+'</div><h2>'+mn+'</h2><div class="d-phase"><i class="fa-solid fa-flag"></i> '+(p.phase||p.status)+'</div></div>';
+if(p.detailImage){
+dh.innerHTML='<div class="d-hero"><img src="'+p.detailImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#0A0F1C,#1a3055)\';this.style.display=\'none\'"><div class="ov"></div>'+titleArea+closeBtn+'</div>'}
+else{dh.innerHTML='<div class="d-hero-fb" data-t="'+t+'"><div class="fbi" style="width:72px;height:72px"><i class="fa-solid '+ti(p.type)+'" style="font-size:32px;color:rgba(195,165,105,.6)"></i></div>'+titleArea+closeBtn+'</div>'}
+
+/* Body sections */
+var html='';
+
+/* Section 1: 핵심 사업 정보 */
+html+='<div class="d-sec"><div class="d-sec-title">핵심 사업 정보</div><div class="d-info-grid">';
+var infoItems=[
+['사업유형',p.type],['진행상태',p.status],
+['위치',p.district],['규모',p.scale],
+['조합원 수',safe(p.members)],['연도',p.year+'년'],
+['역할',p.role],['사업단계',safe(p.phase)]];
+infoItems.forEach(function(it){html+='<div class="d-info-item"><span class="il">'+it[0]+'</span><span class="iv">'+it[1]+'</span></div>'});
+html+='</div></div>';
+
+/* Section 2: 건축·사업 스펙 */
+html+='<div class="d-sec"><div class="d-sec-title">건축·사업 스펙</div><div class="d-spec-grid">';
+var specs=[
+['용적률',safe(p.floorAreaRatio)],['건축연면적',safe(p.grossFloorArea)],['대지면적',safe(p.siteArea)],
+['건축면적',safe(p.buildingArea)],['층수',safe(p.floorInfo)],['시공사',safe(p.constructor)],
+['발주처',safe(p.client)],['총사업비',safe(p.totalCost)],['비례율',safe(p.proportionalRate)]];
+specs.forEach(function(s){html+='<div class="d-spec-item"><span class="sl">'+s[0]+'</span><span class="sv">'+s[1]+'</span></div>'});
+html+='</div></div>';
+
+/* Section 3: 수행업무 상세 */
+if(p.tasks&&p.tasks.length){
+html+='<div class="d-sec"><div class="d-sec-title">수행업무 상세</div><div class="d-tasks">';
+p.tasks.forEach(function(t){html+='<div class="d-task"><i class="fa-solid fa-check"></i> '+t+'</div>'});
+html+='</div></div>'}
+
+/* Section 4: 프로젝트 개요 */
+html+='<div class="d-sec"><div class="d-sec-title">프로젝트 개요</div><div class="d-desc">'+p.description+'</div></div>';
+
+/* Section 5: 주요 이슈 / 특이사항 */
+if(p.issues&&p.issues.length){
+html+='<div class="d-sec"><div class="d-sec-title">주요 이슈 · 특이사항</div><ul class="d-issues">';
+p.issues.forEach(function(is){html+='<li>'+is+'</li>'});
+html+='</ul></div>'}
+
+document.getElementById('dBody').innerHTML=html;
+var ov=document.getElementById('dOverlay');
+ov.scrollTop=0;
+ov.classList.add('open');
+document.body.style.overflow='hidden';
+document.body.style.paddingRight=(window.innerWidth-document.documentElement.clientWidth)+'px'}
+
+function closeDetail(){
+document.getElementById('dOverlay').classList.remove('open');
+document.body.style.overflow='';document.body.style.paddingRight=''}
+
+/* Events */
+document.getElementById('fType').addEventListener('change',function(){curPage=1;renderAll()});
+document.getElementById('fStatus').addEventListener('change',function(){curPage=1;renderAll()});
+document.getElementById('pfPerSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;renderAll()});
+document.getElementById('dCloseTop').addEventListener('click',closeDetail);
+document.getElementById('dCloseBot').addEventListener('click',closeDetail);
+document.getElementById('dOverlay').addEventListener('click',function(e){if(e.target===this)closeDetail()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDetail()});
+
+/* Global */
+window.PF={open:openDetail,close:closeDetail,page:function(n){curPage=n;renderAll();window.scrollTo({top:document.querySelector('.filter-bar').offsetTop-80,behavior:'smooth'})}};
+
+renderFeat();renderAll();
+// URL param ?type= 지원
+(function(){var p=new URLSearchParams(location.search).get('type');if(p){var s=document.getElementById('fType');if(s){s.value=p;renderAll();document.querySelector('.filter-bar').scrollIntoView({behavior:'smooth',block:'start'});}}})();
+})();
+</script>
+</body>
+</html>
+<!-- deploy trigger 1775316134 -->

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주택재개발 정비사업 — (주)세울엔지니어링</title>
+    <meta name="description" content="현행 도시정비법에 따른 재개발 추진절차를 일반절차와 서울시 신속통합기획으로 구분하여 안내합니다. 정비구역 지정부터 준공까지 전 과정 전문 관리.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .rd-section { margin-bottom:35px; }
+    .rd-section:last-child { margin-bottom:0; }
+    .rd-section .section-title { margin-bottom:28px; }
+
+    /* 비주얼 히어로 */
+    .rd-visual {
+        background:linear-gradient(135deg,#0A0F1C 0%,#142644 100%);
+        border-radius:16px; padding:48px 52px; position:relative; overflow:hidden;
+        display:flex; align-items:center; gap:40px;
+    }
+    .rd-visual::before {
+        content:''; position:absolute; right:-80px; top:-80px; width:300px; height:300px;
+        background:radial-gradient(circle,rgba(195,165,105,0.06) 0%,transparent 70%); border-radius:50%;
+    }
+    .rd-visual::after {
+        content:''; position:absolute; left:-40px; bottom:-40px; width:200px; height:200px;
+        background:radial-gradient(circle,rgba(195,165,105,0.04) 0%,transparent 70%); border-radius:50%;
+    }
+    .rd-visual-text { position:relative; z-index:1; flex:1; }
+    .rd-visual-badge {
+        display:inline-flex; align-items:center; gap:8px;
+        font-size:11px; font-weight:700; color:var(--gold); letter-spacing:1.5px;
+        margin-bottom:16px; text-transform:uppercase;
+    }
+    .rd-visual-badge i { font-size:14px; }
+    .rd-visual h2 { font-size:28px; font-weight:800; color:#fff; line-height:1.45; margin-bottom:14px; letter-spacing:-0.5px; }
+    .rd-visual p { font-size:15px; color:rgba(255,255,255,0.55); line-height:1.8; }
+    .rd-visual-stats {
+        position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:16px; flex-shrink:0;
+    }
+    .rd-vstat {
+        background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06);
+        border-radius:12px; padding:20px 24px; text-align:center; min-width:130px;
+    }
+    .rd-vstat .vn { font-size:24px; font-weight:800; color:var(--gold); margin-bottom:4px; }
+    .rd-vstat .vd { font-size:11px; color:rgba(255,255,255,0.5); }
+    @media(max-width:860px){
+        .rd-visual{flex-direction:column;padding:36px 28px;}
+        .rd-visual h2{font-size:22px;}
+        .rd-visual-stats{grid-template-columns:repeat(4,1fr);width:100%;}
+    }
+    @media(max-width:540px){
+        .rd-visual-stats{grid-template-columns:repeat(2,1fr);}
+    }
+
+    /* 추진 절차 타임라인 */
+    .rd-timeline { position:relative; padding-left:36px; }
+    .rd-timeline::before {
+        content:''; position:absolute; left:15px; top:0; bottom:0; width:2px;
+        background:linear-gradient(to bottom, var(--gold), var(--gray-200));
+    }
+    .rd-tl-item { position:relative; margin-bottom:36px; }
+    .rd-tl-item:last-child { margin-bottom:0; }
+    .rd-tl-dot {
+        position:absolute; left:-36px; top:2px;
+        width:32px; height:32px; border-radius:50%;
+        background:var(--brand-dark); border:3px solid var(--gold);
+        display:flex; align-items:center; justify-content:center;
+        font-size:12px; font-weight:800; color:var(--gold); z-index:2;
+    }
+    .rd-tl-content {
+        background:#fff; border:1px solid var(--gray-200); border-radius:12px;
+        padding:24px 28px; transition:all 0.2s;
+    }
+    .rd-tl-content:hover { border-color:var(--gold); box-shadow:0 6px 20px rgba(0,0,0,0.05); }
+    .rd-tl-content h4 { font-size:17px; font-weight:700; color:var(--gray-900); margin-bottom:8px; }
+    .rd-tl-content p { font-size:14px; color:var(--gray-600); line-height:1.8; margin-bottom:12px; }
+    .rd-tl-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .rd-tl-tag {
+        padding:4px 12px; border-radius:16px; font-size:11px; font-weight:600;
+        background:rgba(195,165,105,0.08); color:var(--gold); border:1px solid rgba(195,165,105,0.12);
+    }
+    .rd-tl-seul {
+        margin-top:12px; padding:12px 16px; border-radius:8px;
+        background:rgba(20,38,68,0.03); border-left:3px solid var(--brand-navy);
+        font-size:13px; color:var(--gray-700); line-height:1.7;
+    }
+    .rd-tl-seul strong { color:var(--brand-navy); }
+
+    /* 실무기준 특별 단계 */
+    .rd-tl-item.practical .rd-tl-dot {
+        background:transparent; border:3px dashed var(--gold);
+        font-size:9px; font-weight:800; letter-spacing:0.5px;
+    }
+    .rd-tl-item.practical .rd-tl-content {
+        background:linear-gradient(135deg, rgba(195,165,105,0.04) 0%, rgba(195,165,105,0.01) 100%);
+        border:1.5px dashed rgba(195,165,105,0.3); border-radius:12px;
+    }
+    .rd-tl-item.practical .rd-tl-content:hover { border-color:var(--gold); }
+    .rd-tl-practical-badge {
+        display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:6px;
+        background:rgba(195,165,105,0.1); border:1px solid rgba(195,165,105,0.2);
+        font-size:11px; font-weight:700; color:var(--gold); margin-bottom:12px;
+    }
+    .rd-tl-practical-badge i { font-size:12px; }
+    .rd-tl-sub { margin-top:16px; }
+    .rd-tl-sub h5 {
+        font-size:14px; font-weight:700; color:var(--gray-800); margin-bottom:6px;
+        display:flex; align-items:center; gap:8px;
+    }
+    .rd-tl-sub h5 .num {
+        width:20px; height:20px; border-radius:50%; background:var(--gold); color:#0A0F1C;
+        display:inline-flex; align-items:center; justify-content:center;
+        font-size:10px; font-weight:800; flex-shrink:0;
+    }
+    .rd-tl-sub p { font-size:13px; color:var(--gray-600); line-height:1.75; margin-bottom:12px; padding-left:28px; }
+    .rd-tl-caution {
+        margin-top:16px; padding:16px 20px; border-radius:8px;
+        background:rgba(220,53,69,0.04); border:1px solid rgba(220,53,69,0.12);
+        font-size:13px; color:var(--gray-700); line-height:1.75;
+    }
+    .rd-tl-caution strong { color:#DC3545; }
+
+    /* 왜 세울인가 */
+    .rd-why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    .rd-why-card {
+        background:#fff; border:1px solid var(--gray-200); border-radius:12px;
+        padding:32px 28px; text-align:center; transition:all 0.2s;
+    }
+    .rd-why-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); transform:translateY(-2px); }
+    .rd-why-icon {
+        width:56px; height:56px; border-radius:14px; background:var(--brand-dark);
+        display:flex; align-items:center; justify-content:center; margin:0 auto 18px;
+    }
+    .rd-why-icon i { font-size:22px; color:var(--gold); }
+    .rd-why-card h4 { font-size:16px; font-weight:700; color:var(--gray-900); margin-bottom:10px; }
+    .rd-why-card p { font-size:13px; color:var(--gray-600); line-height:1.75; }
+    @media(max-width:768px){ .rd-why-grid{grid-template-columns:1fr;} }
+
+    /* 실적 하이라이트 */
+    .rd-case-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+    .rd-case-card {
+        background:var(--gray-50); border:1px solid var(--gray-200); border-radius:12px;
+        padding:24px 28px; display:flex; align-items:flex-start; gap:16px;
+    }
+    .rd-case-num {
+        width:36px; height:36px; border-radius:8px; background:var(--brand-dark);
+        display:flex; align-items:center; justify-content:center;
+        color:var(--gold); font-size:14px; font-weight:800; flex-shrink:0;
+    }
+    .rd-case-card h5 { font-size:15px; font-weight:700; color:var(--gray-900); margin-bottom:4px; }
+    .rd-case-card p { font-size:13px; color:var(--gray-500); line-height:1.6; }
+    .rd-case-card .case-badge {
+        display:inline-block; margin-top:6px; padding:3px 10px; border-radius:12px;
+        font-size:11px; font-weight:600; background:rgba(30,140,94,0.08); color:#1E8C5E;
+    }
+    @media(max-width:768px){ .rd-case-grid{grid-template-columns:1fr;} }
+
+    /* FAQ */
+    .rd-faq-item { border-bottom:1px solid var(--gray-200); }
+    .rd-faq-q {
+        display:flex; align-items:center; justify-content:space-between; gap:16px;
+        padding:20px 0; cursor:pointer; font-size:15px; font-weight:600; color:var(--gray-900);
+    }
+    .rd-faq-q i { color:var(--gold); transition:transform 0.2s; font-size:14px; flex-shrink:0; }
+    .rd-faq-q.open i { transform:rotate(180deg); }
+    .rd-faq-a {
+        max-height:0; overflow:hidden; transition:max-height 0.3s ease;
+        font-size:14px; color:var(--gray-600); line-height:1.8; padding:0 0 0 4px;
+    }
+    .rd-faq-a.open { max-height:300px; padding-bottom:20px; }
+
+    /* CTA */
+    .rd-cta {
+        background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:16px;
+        padding:56px 52px; text-align:center; position:relative; overflow:hidden;
+    }
+    .rd-cta::before { content:''; position:absolute; right:-60px; top:-60px; width:250px; height:250px; background:radial-gradient(circle,rgba(195,165,105,0.06) 0%,transparent 70%); border-radius:50%; }
+    .rd-cta::after { content:''; position:absolute; left:-40px; bottom:-40px; width:180px; height:180px; background:radial-gradient(circle,rgba(195,165,105,0.04) 0%,transparent 70%); border-radius:50%; }
+    .rd-cta-inner { position:relative; z-index:1; }
+    .rd-cta h3 { font-size:26px; font-weight:800; color:#fff; margin-bottom:12px; letter-spacing:-0.3px; }
+    .rd-cta p { font-size:15px; color:rgba(255,255,255,0.5); line-height:1.8; margin-bottom:28px; max-width:560px; margin-left:auto; margin-right:auto; }
+    .rd-cta-btns { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+    .rd-cta-btn {
+        display:inline-flex; align-items:center; gap:8px; padding:15px 32px;
+        border-radius:8px; font-size:15px; font-weight:700; text-decoration:none;
+    }
+    .rd-cta-btn.primary { background:var(--gold); color:#0A0F1C; }
+    .rd-cta-btn.primary:hover { background:var(--gold-hover); }
+    .rd-cta-btn.outline { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.2); }
+    .rd-cta-btn.outline:hover { border-color:var(--gold); color:var(--gold); }
+
+    /* 탭 전환 */
+    .rd-tab-wrap { display:flex; gap:0; margin-bottom:32px; border-bottom:2px solid var(--gray-200); }
+    .rd-tab { padding:14px 28px; font-size:15px; font-weight:700; color:var(--gray-500); cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.2s; }
+    .rd-tab:hover { color:var(--gray-700); }
+    .rd-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+    .rd-tab-panel { display:none; }
+    .rd-tab-panel.active { display:block; }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="services.html">사업분야</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>주택재개발 정비사업</span>
+        </div>
+        <h1>주택재개발 정비사업</h1>
+        <p>현행 도시정비법에 따른 재개발 사업의 전 과정을 현장에서 직접 관리합니다</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <!-- 비주얼 히어로 -->
+        <div class="rd-section">
+            <div class="rd-visual">
+                <div class="rd-visual-text">
+                    <div class="rd-visual-badge"><i class="fa-solid fa-building-columns"></i> URBAN REDEVELOPMENT</div>
+                    <h2>사업이 멈추지 않도록<br>현장에서 끝까지 함께합니다</h2>
+                    <p>재개발 사업은 수백 명의 이해관계자, 수십 건의 인허가, 수년의 사업 기간이 얽힌 복합 프로젝트입니다. 세울엔지니어링은 서류 위의 자문이 아닌 현장에서의 실행으로 사업을 움직입니다.</p>
+                </div>
+                <div class="rd-visual-stats">
+                    <div class="rd-vstat"><div class="vn">20+</div><div class="vd">년 현장 경험</div></div>
+                    <div class="rd-vstat"><div class="vn">전 과정</div><div class="vd">설립~준공 일괄</div></div>
+                    <div class="rd-vstat"><div class="vn">통합</div><div class="vd">행정·기술·관리</div></div>
+                    <div class="rd-vstat"><div class="vn">실행</div><div class="vd">중심 조율 역량</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 추진 절차 (탭 방식) -->
+        <div class="rd-section">
+            <h2 class="section-title">재개발 사업 추진 절차</h2>
+            <p style="font-size:14px;color:var(--gray-500);margin-bottom:28px;">각 단계마다 세울엔지니어링이 어떤 역할을 하는지 확인하세요</p>
+
+            <div class="rd-tab-wrap">
+                <div class="rd-tab active" data-target="tab-general">일반절차 (조합방식)</div>
+                <div class="rd-tab" data-target="tab-fast">서울시 신속통합기획</div>
+            </div>
+
+            <!-- TAB 1: 일반절차 (조합방식 재개발) -->
+            <div id="tab-general" class="rd-tab-panel active">
+
+                <div style="background:rgba(195,165,105,0.06);border:1px solid rgba(195,165,105,0.15);border-radius:10px;padding:20px 24px;margin-bottom:28px;font-size:13.5px;color:var(--gray-700);line-height:1.85;">
+                    <strong style="color:var(--brand-navy);">법적 근거</strong> — 현행 「도시 및 주거환경정비법」(이하 도시정비법) 상 조합방식 재개발의 표준 절차입니다.<br>
+                    <strong style="color:var(--brand-navy);">참고</strong> — 법 제31조제7항에 따라 제118조의 공공지원을 받는 경우, 추진위원회를 구성하지 않을 수 있으며, 이 경우 토지등소유자 대표자가 창립총회를 소집합니다.
+                </div>
+
+                <div class="rd-timeline">
+                    <!-- Step 1 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">1</div>
+                        <div class="rd-tl-content">
+                            <h4>기본계획 수립</h4>
+                            <p>법 제6조에 따라 특별시장·광역시장 또는 시장이 10년 단위로 도시·주거환경정비 기본계획을 수립합니다. 정비사업의 기본방향, 정비예정구역의 개략적 범위, 단계별 추진계획 등이 포함되며, 5년마다 타당성을 재검토합니다. 기본계획에 정비예정구역으로 포함되어야 이후 정비구역 지정이 가능합니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">법 제6조</span>
+                                <span class="rd-tl-tag">10년 단위 수립</span>
+                                <span class="rd-tl-tag">정비예정구역</span>
+                                <span class="rd-tl-tag">5년 재검토</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 기본계획 수립 동향 분석, 정비예정구역 포함 여부 검토, 기본계획 반영 전략 자문, 행정기관 사전 협의</div>
+                        </div>
+                    </div>
+
+                    <!-- 실무 단계: 준비위원회 -->
+                    <div class="rd-tl-item practical">
+                        <div class="rd-tl-dot">실무</div>
+                        <div class="rd-tl-content">
+                            <div class="rd-tl-practical-badge"><i class="fa-solid fa-users-gear"></i> 실무기준 — 알권리 안내</div>
+                            <h4>준비위원회 구성</h4>
+                            <p>실무상 정비구역 지정 이전에 토지등소유자들이 자발적으로 준비위원회(준비모임)를 구성하여 사업 추진을 준비합니다. 다만 도정법상 공식 권한은 승인된 추진위원회에 부여되므로, 준비위원회는 법적 지위가 아닌 <strong>실무적 준비 주체</strong>로 이해해야 합니다.</p>
+
+                            <div class="rd-tl-sub">
+                                <h5><span class="num">1</span> 사업대상·소유자 범위 정리</h5>
+                                <p>토지등소유자가 누구인지, 사업구역이 어디까지인지, 동의 징구 대상이 누구인지 정리합니다. 정비구역 지정과 소유자 범위가 선행되지 않으면 추진위 구성 자체가 문제될 수 있습니다.</p>
+                            </div>
+                            <div class="rd-tl-sub">
+                                <h5><span class="num">2</span> 사업 기본안 작성</h5>
+                                <p>대략적인 사업방식, 건축계획 방향, 자금조달 윤곽, 일정, 예상 분담구조를 잡아야 이후 동의 징구가 가능합니다. 법에서 말하는 「개략적 시행계획서 작성」의 실무 준비 단계입니다.</p>
+                            </div>
+                            <div class="rd-tl-sub">
+                                <h5><span class="num">3</span> 협력전문가 선정 준비</h5>
+                                <p>정비사업전문관리업자와 설계자 선정을 준비합니다. 다만 정비사업전문관리업자의 정식 선정은 추진위원회 승인 후 가능하므로, 승인 전 임의 준비모임이 정식 선정하는 것은 법적으로 안전하지 않습니다.</p>
+                            </div>
+                            <div class="rd-tl-sub">
+                                <h5><span class="num">4</span> 조합설립 동의 징구 준비</h5>
+                                <p>도정법상 추진위원회는 조합설립 동의 전에 추정분담금 등 대통령령이 정한 정보를 토지등소유자에게 제공해야 합니다. 단순 홍보가 아니라 비용·권리변동의 기초정보를 제공하고 적법하게 동의를 받는 역할이 핵심입니다.</p>
+                            </div>
+                            <div class="rd-tl-sub">
+                                <h5><span class="num">5</span> 창립총회 준비</h5>
+                                <p>도정법상 추진위원회는 조합설립인가 신청 전에 창립총회를 개최해야 하므로, 총회 안건, 정관안, 임원선출안, 예산안 등을 준비합니다.</p>
+                            </div>
+
+                            <div class="rd-tl-caution">
+                                <strong><i class="fa-solid fa-triangle-exclamation"></i> 법적 유의사항</strong><br>
+                                "준비위원회"라는 이름만으로는 법적 권한이 생기지 않습니다. 도정법상 공식 권한은 승인된 추진위원회에 부여됩니다. 승인 전 임의모임은 주민 의견수렴이나 설명회 준비 정도는 가능하나, 소유자에게 비용부담을 지우거나 권리·의무에 영향을 주는 계약을 임의로 확정하는 것은 매우 위험합니다. 법원도 토지등소유자 동의 없이 체결된 비용부담 계약은 무효라고 본 사례가 있으며, 운영규정상 업무범위를 초과한 계약은 조합에 승계되지 않습니다.
+                            </div>
+
+                            <div class="rd-tl-tags" style="margin-top:16px;">
+                                <span class="rd-tl-tag">실무기준</span>
+                                <span class="rd-tl-tag">준비위원회</span>
+                                <span class="rd-tl-tag">소유자 범위 정리</span>
+                                <span class="rd-tl-tag">기본안 작성</span>
+                                <span class="rd-tl-tag">동의 징구 준비</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 사업대상 범위 분석, 기본안 작성 자문, 추정분담금 시뮬레이션, 전문관리업자 선정 절차 안내, 창립총회 준비 지원, 법적 리스크 사전 검토</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">2</div>
+                        <div class="rd-tl-content">
+                            <h4>정비구역 지정</h4>
+                            <p>지자체의 도시·주거환경정비 기본계획에 따라 정비예정구역을 확인하고, 정비계획을 수립하여 정비구역 지정을 신청합니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">기초조사</span>
+                                <span class="rd-tl-tag">정비계획 수립</span>
+                                <span class="rd-tl-tag">도시계획위 심의</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 기초조사 데이터 분석, 정비계획 수립 자문, 행정기관 사전 협의, 도시계획위원회 심의 대응</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">3</div>
+                        <div class="rd-tl-content">
+                            <h4>추진위원회 구성·승인</h4>
+                            <p>법 제31조에 따라 토지등소유자 과반수의 동의를 받아 추진위원회를 구성하고, 시장·군수등의 승인을 받습니다. 추진위원은 위원장을 포함하여 5인 이상이어야 합니다.</p>
+                            <p>법 제32조에 따라 추진위원회는 정비사업전문관리업자 선정, 설계자 선정, 개략적인 사업시행계획서 작성, 조합설립인가를 위한 준비업무 등을 수행합니다. 추진위원회는 단순한 형식 단계가 아니라 조합설립 전 핵심 준비 주체입니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">법 제31조</span>
+                                <span class="rd-tl-tag">토지등소유자 과반수</span>
+                                <span class="rd-tl-tag">추진위원장 포함 5인 이상</span>
+                                <span class="rd-tl-tag">시장·군수 승인</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 추진위 구성 자문, 동의서 징구 전략, 정비사업전문관리업자 선정 지원, 개략적 사업시행계획 수립</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">4</div>
+                        <div class="rd-tl-content">
+                            <h4>창립총회 및 조합설립인가</h4>
+                            <p>법 제35조에 따라, 추진위원회가 토지등소유자 3/4 이상 및 토지면적 1/2 이상 토지소유자의 동의를 받아 조합설립인가를 신청합니다. 창립총회를 개최하여 정관 확정, 임원 선출, 대의원 선출 등을 의결합니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">법 제35조</span>
+                                <span class="rd-tl-tag">토지등소유자 3/4 동의</span>
+                                <span class="rd-tl-tag">토지면적 1/2</span>
+                                <span class="rd-tl-tag">창립총회</span>
+                                <span class="rd-tl-tag">정관 확정</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 동의율 확보 전략, 동의서 법적 유효성 검증, 창립총회 운영, 정관 작성 자문, 인가 서류 작성</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">5</div>
+                        <div class="rd-tl-content">
+                            <h4>통합건축심의</h4>
+                            <p>정비사업의 건축계획에 대해 건축위원회와 도시계획위원회가 공동으로 통합심의를 진행합니다. 건축물의 높이, 용적률, 건폐율, 주동 배치, 외관 디자인 등을 종합적으로 심의하며, 통합심의를 거치면 개별 건축심의와 도시계획심의를 별도로 받지 않아도 되어 절차가 간소화됩니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">건축위원회·도시계획위 공동심의</span>
+                                <span class="rd-tl-tag">용적률·높이 확정</span>
+                                <span class="rd-tl-tag">주동 배치</span>
+                                <span class="rd-tl-tag">절차 간소화</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 건축계획 사전 검토, 심의 자료 작성 지원, 심의위원회 대응 전략, 심의 조건 이행 관리</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">6</div>
+                        <div class="rd-tl-content">
+                            <h4>사업시행계획인가</h4>
+                            <p>건축 설계, 사업비 추정, 분양 계획을 포함한 사업시행계획서를 수립하고 시장·군수등의 인가를 받습니다. 시공사 선정, 환경·교통 영향평가도 이 단계에서 진행됩니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">사업시행계획</span>
+                                <span class="rd-tl-tag">시공사 선정</span>
+                                <span class="rd-tl-tag">환경·교통 영향평가</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 사업시행계획 수립 자문, 시공사 입찰 평가 지원, 인허가 서류 작성 및 관계 부서 협의</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 7 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">7</div>
+                        <div class="rd-tl-content">
+                            <h4>관리처분계획인가</h4>
+                            <p>조합원 각각의 종전 자산을 감정평가하고, 새 주택의 분양 대상과 조건을 확정합니다. 비례율과 분담금이 이 단계에서 결정되므로 조합원에게 가장 중요한 절차입니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">감정평가</span>
+                                <span class="rd-tl-tag">비례율 산정</span>
+                                <span class="rd-tl-tag">분양설계</span>
+                                <span class="rd-tl-tag">관리처분계획</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 감정평가 검토 지원, 분양설계 분석, 관리처분계획 수립 자문, 총회 운영</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 8 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">8</div>
+                        <div class="rd-tl-content">
+                            <h4>조합원 분양신청</h4>
+                            <p>관리처분계획인가 후, 조합원이 분양받을 주택의 유형·규모·위치를 신청합니다. 정해진 기간 내에 분양신청서를 제출해야 하며, 미신청 시 현금청산 대상이 될 수 있습니다. 분양신청 결과에 따라 세부 배정 기준이 확정되고, 추첨 또는 순위 배정이 이루어집니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">분양신청서 제출</span>
+                                <span class="rd-tl-tag">분양유형·규모 선택</span>
+                                <span class="rd-tl-tag">미신청 시 현금청산</span>
+                                <span class="rd-tl-tag">배정 기준 확정</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 분양신청 안내 및 설명회 운영, 신청서 접수·관리, 배정 기준 수립 자문, 현금청산 대상 관리</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 9 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">9</div>
+                        <div class="rd-tl-content">
+                            <h4>이주·철거</h4>
+                            <p>조합원 이주와 세입자 보상을 진행하고 기존 건물을 철거합니다. 이주 일정 조율, 이주비 지원 계획 수립, 세입자 보상 협의를 통해 원활한 이주를 완료합니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">이주 관리</span>
+                                <span class="rd-tl-tag">세입자 보상</span>
+                                <span class="rd-tl-tag">이주비 지원</span>
+                                <span class="rd-tl-tag">건물 철거</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 이주 일정 관리, 세입자 보상 절차 지원, 이주비 계획 수립, 철거 일정 조율</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 10 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">10</div>
+                        <div class="rd-tl-content">
+                            <h4>철거심의·철거</h4>
+                            <p>이주 완료 후 기존 건축물 철거를 진행합니다. 철거 전에 「건축물관리법」에 따라 철거 계획서를 제출하고, 석면 조사·제거, 안전관리계획 수립 등을 이행해야 합니다. 대규모 건축물의 경우 철거심의위원회의 심의를 거쳐 철거 허가를 받습니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">건축물관리법</span>
+                                <span class="rd-tl-tag">철거 계획서</span>
+                                <span class="rd-tl-tag">석면 조사</span>
+                                <span class="rd-tl-tag">안전관리계획</span>
+                                <span class="rd-tl-tag">철거심의위원회</span>
+                                <span class="rd-tl-tag">철거 허가</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 철거 계획서 작성 지원, 석면 조사 관리, 안전관리계획 수립, 철거심의위원회 대응, 철거 허가 행정 대응</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 11 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">11</div>
+                        <div class="rd-tl-content">
+                            <h4>착공·일반분양</h4>
+                            <p>철거 완료 후 신축 공사를 시작합니다. 일반분양도 이 시기에 진행되며, 분양가 산정과 분양 행정이 이루어집니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">착공</span>
+                                <span class="rd-tl-tag">일반분양</span>
+                                <span class="rd-tl-tag">분양가 산정</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 시공 품질 관리, 분양 행정 업무, 공정 관리</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 12 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">12</div>
+                        <div class="rd-tl-content">
+                            <h4>준공·입주·조합 해산</h4>
+                            <p>공사 완료 후 준공인가, 소유권 이전 등기, 조합 해산·청산까지 사업의 최종 마무리 단계입니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">준공검사</span>
+                                <span class="rd-tl-tag">소유권 이전</span>
+                                <span class="rd-tl-tag">하자관리</span>
+                                <span class="rd-tl-tag">조합 청산</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 준공 후 입주 지원, 소유권 이전 절차 안내, 하자관리 체계 구축, 조합 해산·청산 절차 지원</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: 서울시 신속통합기획 -->
+            <div id="tab-fast" class="rd-tab-panel">
+
+                <div style="background:rgba(30,100,200,0.05);border:1px solid rgba(30,100,200,0.15);border-radius:10px;padding:20px 24px;margin-bottom:28px;font-size:13.5px;color:var(--gray-700);line-height:1.85;">
+                    <strong style="color:#1E64C8;">서울시 신속통합기획이란?</strong> — 서울시가 2021년부터 시행 중인 공공지원 재개발 방식으로, 정비계획 수립 단계에서 서울시가 직접 기획하고, 정비계획·건축계획·정비기반시설을 통합 수립하여 사업 기간을 대폭 단축하는 제도입니다. 기존 10년 이상 소요되던 사업 기간을 5~7년으로 단축하는 것을 목표로 합니다.<br>
+                    <strong style="color:#1E64C8;">핵심 특징</strong> — ① 서울시 총괄계획가(MP) 주도 통합 설계 ② 공공기여(기부채납) 비율 사전 확정 ③ 용적률 인센티브 제공 ④ 정비계획 수립 기간 단축 (기존 3~5년 → 1~2년)
+                </div>
+
+                <div class="rd-timeline">
+                    <!-- Step 1 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">1</div>
+                        <div class="rd-tl-content">
+                            <h4>후보지 선정 및 주민 동의</h4>
+                            <p>서울시가 노후·불량 주거지를 대상으로 후보지를 공모·선정합니다. 토지등소유자 10% 이상의 동의로 신청할 수 있으며, 50% 이상 동의 시 본격 추진됩니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">후보지 공모</span>
+                                <span class="rd-tl-tag">주민 동의 10%~50%</span>
+                                <span class="rd-tl-tag">서울시 선정</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 후보지 선정 요건 분석, 주민 설명회 지원, 동의서 징구 전략</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">2</div>
+                        <div class="rd-tl-content">
+                            <h4>통합 정비계획 수립 (서울시 주도)</h4>
+                            <p>서울시 총괄계획가(MP)가 주도하여 정비계획·건축계획·정비기반시설계획을 통합 수립합니다. 용적률 인센티브와 공공기여 비율이 이 단계에서 확정됩니다. 기존 방식 대비 정비계획 수립 기간이 1~2년으로 대폭 단축됩니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">총괄계획가(MP)</span>
+                                <span class="rd-tl-tag">통합 설계</span>
+                                <span class="rd-tl-tag">용적률 인센티브</span>
+                                <span class="rd-tl-tag">공공기여 확정</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> MP 협의 지원, 사업성 분석, 주민 의견 수렴 지원, 정비기반시설 검토</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">3</div>
+                        <div class="rd-tl-content">
+                            <h4>정비구역 지정 및 조합설립</h4>
+                            <p>통합 정비계획을 바탕으로 정비구역이 지정되며, 조합설립인가를 진행합니다. 신속통합기획은 공공지원 방식이므로, 법 제31조제7항에 따라 추진위원회를 구성하지 않고 바로 조합설립으로 넘어갈 수 있습니다. 이 경우 토지등소유자 대표자가 창립총회를 소집합니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">정비구역 지정</span>
+                                <span class="rd-tl-tag">조합설립인가</span>
+                                <span class="rd-tl-tag">추진위 생략 가능</span>
+                                <span class="rd-tl-tag">토지등소유자 3/4 동의</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 정비구역 지정 행정 지원, 조합설립인가 서류 작성, 창립총회 운영</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">4</div>
+                        <div class="rd-tl-content">
+                            <h4>사업시행인가 ~ 관리처분인가</h4>
+                            <p>이미 통합 계획이 수립되어 있으므로, 통합건축심의·사업시행계획인가·관리처분계획인가가 일반절차보다 신속하게 진행됩니다. 시공사 선정, 감정평가, 분양설계가 이 단계에서 이루어지며, 관리처분인가 후 조합원 분양신청도 함께 진행됩니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">통합건축심의</span>
+                                <span class="rd-tl-tag">사업시행계획</span>
+                                <span class="rd-tl-tag">관리처분계획</span>
+                                <span class="rd-tl-tag">시공사 선정</span>
+                                <span class="rd-tl-tag">감정평가</span>
+                                <span class="rd-tl-tag">조합원 분양신청</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 건축심의 대응, 사업시행계획 자문, 시공사 입찰 지원, 감정평가 검토, 관리처분계획 수립 자문, 분양신청 관리</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="rd-tl-item">
+                        <div class="rd-tl-dot">5</div>
+                        <div class="rd-tl-content">
+                            <h4>이주·철거심의·착공·준공·입주</h4>
+                            <p>이주, 철거심의·철거, 착공, 일반분양, 준공, 입주, 조합 해산까지 일반절차와 동일하게 진행됩니다. 철거 전 「건축물관리법」에 따른 철거심의를 거쳐 철거 허가를 받습니다.</p>
+                            <div class="rd-tl-tags">
+                                <span class="rd-tl-tag">이주·철거심의</span>
+                                <span class="rd-tl-tag">철거·착공</span>
+                                <span class="rd-tl-tag">일반분양</span>
+                                <span class="rd-tl-tag">준공·입주</span>
+                                <span class="rd-tl-tag">조합 해산</span>
+                            </div>
+                            <div class="rd-tl-seul"><strong>세울의 역할:</strong> 이주 관리, 철거심의 대응, 시공 품질 관리, 준공·입주 지원, 조합 해산·청산</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 비교표 -->
+            <div style="margin-top:36px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:12px; padding:28px 32px;">
+                <h4 style="font-size:16px; font-weight:700; margin-bottom:16px; color:var(--gray-900);">일반절차 vs 신속통합기획 비교</h4>
+                <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+                    <thead>
+                        <tr style="border-bottom:2px solid var(--gray-300);">
+                            <th style="padding:10px 12px; text-align:left; color:var(--gray-600);">구분</th>
+                            <th style="padding:10px 12px; text-align:center; color:var(--gray-600);">일반절차</th>
+                            <th style="padding:10px 12px; text-align:center; color:var(--gold);">신속통합기획</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid var(--gray-200);">
+                            <td style="padding:10px 12px; font-weight:600;">절차 단계</td>
+                            <td style="padding:10px 12px; text-align:center;">12단계</td>
+                            <td style="padding:10px 12px; text-align:center;">7단계 (통합·간소화)</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--gray-200);">
+                            <td style="padding:10px 12px; font-weight:600;">정비계획 수립</td>
+                            <td style="padding:10px 12px; text-align:center;">3~5년 (자치구)</td>
+                            <td style="padding:10px 12px; text-align:center;">1~2년 (서울시 MP)</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--gray-200);">
+                            <td style="padding:10px 12px; font-weight:600;">추진위원회</td>
+                            <td style="padding:10px 12px; text-align:center;">필수 (법 제31조)</td>
+                            <td style="padding:10px 12px; text-align:center;">생략 가능 (법 제31조제7항)</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--gray-200);">
+                            <td style="padding:10px 12px; font-weight:600;">전체 사업기간</td>
+                            <td style="padding:10px 12px; text-align:center;">10~15년</td>
+                            <td style="padding:10px 12px; text-align:center;">5~7년 (목표)</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--gray-200);">
+                            <td style="padding:10px 12px; font-weight:600;">용적률 인센티브</td>
+                            <td style="padding:10px 12px; text-align:center;">일반 기준</td>
+                            <td style="padding:10px 12px; text-align:center;">추가 인센티브 제공</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px 12px; font-weight:600;">적용 지역</td>
+                            <td style="padding:10px 12px; text-align:center;">전국</td>
+                            <td style="padding:10px 12px; text-align:center;">서울시</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 왜 세울인가 -->
+        <div class="rd-section">
+            <h2 class="section-title">왜 세울엔지니어링인가</h2>
+            <div class="rd-why-grid">
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-handshake"></i></div>
+                    <h4>이해관계 조율 전문</h4>
+                    <p>수백 명의 토지등소유자, 세입자, 시공사, 행정기관 사이에서 합의를 이끌어낸 현장 경험. 개정된 동의율(70%) 기준에 맞춘 전략 수립부터 전자투표·온라인 의결을 활용한 총회 운영까지 갈등 없이 진행합니다.</p>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-gears"></i></div>
+                    <h4>끊김 없는 실행력</h4>
+                    <p>인허가 서류 작성, 행정기관 협의, 총회 운영, 계약 검토까지 단계 사이의 공백 없이 연결합니다. 사업이 멈추는 시간을 최소화합니다.</p>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4>리스크 사전 차단</h4>
+                    <p>사업비 증가, 분양가 변동, 공사 지연 등 예상 리스크를 사전에 분석하고 대응 방안을 수립합니다. 문제가 터진 후가 아니라 터지기 전에 관리합니다.</p>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-file-signature"></i></div>
+                    <h4>문서·행정 완결 역량</h4>
+                    <p>동의서, 인가 관련 서류, 총회 의사록, 관리처분계획서 등 법적 요건을 갖춘 문서의 검토 및 자문을 수행합니다.</p>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h4>사업성 검증 능력</h4>
+                    <p>비례율, 분담금, 총사업비를 정밀하게 분석하여 사업 착수 전에 경제적 타당성을 확인합니다. 근거 있는 숫자로 조합원을 설득합니다.</p>
+                </div>
+                <div class="rd-why-card">
+                    <div class="rd-why-icon"><i class="fa-solid fa-people-arrows"></i></div>
+                    <h4>현장 밀착 관리</h4>
+                    <p>사무실에서 보고서만 쓰는 회사가 아닙니다. 현장에 상주하며 조합원 면담, 민원 대응, 행정 협의를 직접 수행합니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 자주 묻는 질문 -->
+        <div class="rd-section">
+            <h2 class="section-title">재개발 사업 Q&A</h2>
+            <div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>재개발 일반절차와 신속통합기획의 가장 큰 차이는 무엇인가요?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">가장 큰 차이는 정비계획 수립 주체와 기간입니다. 일반절차는 자치구가 3~5년에 걸쳐 정비계획을 수립하지만, 신속통합기획은 서울시 총괄계획가(MP)가 1~2년 내에 정비계획·건축계획·기반시설계획을 통합 수립합니다. 또한 신속통합기획은 공공지원 방식이므로 추진위원회 구성을 생략할 수 있습니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>추진위원회는 반드시 구성해야 하나요?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">원칙적으로 법 제31조에 따라 추진위원회를 구성하여야 합니다. 다만 법 제31조제7항에 따라 제118조의 공공지원을 받는 경우에는 추진위원회를 구성하지 않을 수 있으며, 이 경우 토지등소유자 대표자가 창립총회를 소집하는 구조입니다. 서울시 신속통합기획이 이 공공지원 방식에 해당합니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>조합설립 동의율은 어떻게 되나요?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">법 제35조에 따라, 재개발사업의 조합설립인가를 위해서는 토지등소유자 3/4 이상 및 토지면적 1/2 이상 토지소유자의 동의가 필요합니다. 추진위원회 구성 시에는 법 제31조에 따라 토지등소유자 과반수의 동의가 필요합니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>재개발 사업은 보통 얼마나 걸리나요?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">일반절차는 정비구역 지정부터 준공까지 통상 10~15년 소요됩니다. 서울시 신속통합기획은 5~7년을 목표로 합니다. 동의율 확보 속도, 인허가 심의 일정 등에 따라 달라질 수 있습니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>세울엔지니어링은 어느 단계부터 참여할 수 있나요?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">사업 초기(추진위원회 구성 전)부터 참여 가능합니다. 이미 사업이 진행 중인 경우에도 현재 단계에 맞는 실무 지원이 가능합니다.</div>
+                </div>
+                <div class="rd-faq-item">
+                    <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+                        <span>정비사업전문관리업자와 엔지니어링 회사의 차이는?</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="rd-faq-a">정비사업전문관리업자는 「도시정비법」에 따라 등록한 사업자로서 추진위원회가 법 제32조에 따라 선정합니다. 세울엔지니어링은 「엔지니어링산업 진흥법」에 따른 엔지니어링사업자로서 사업성 분석, 기술 자문, 행정 절차 자문 등을 수행합니다.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="rd-section">
+            <div class="rd-cta">
+                <div class="rd-cta-inner">
+                    <h3>재개발 사업, 어디서부터 시작해야 할지 모르겠다면</h3>
+                    <p>세울엔지니어링이 사업장 현황을 분석하고 최적의 추진 방향을 제안합니다.<br>초기 상담은 무료로 진행됩니다.</p>
+                    <div class="rd-cta-btns">
+                        <a href="contact.html" class="rd-cta-btn primary"><i class="fa-solid fa-paper-plane"></i> 무료 상담 신청</a>
+                        <a href="contact.html" class="rd-cta-btn outline"><i class="fa-solid fa-envelope"></i> 상담 문의</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+document.querySelectorAll('.rd-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+        document.querySelectorAll('.rd-tab').forEach(function(t){t.classList.remove('active')});
+        document.querySelectorAll('.rd-tab-panel').forEach(function(p){p.classList.remove('active')});
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.target).classList.add('active');
+    });
+});
+</script>
+</body>
+</html>

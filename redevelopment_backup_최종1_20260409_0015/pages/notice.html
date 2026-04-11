@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 — (주)세울엔지니어링</title>
+    <meta name="description" content="세울엔지니어링의 공지사항 및 서비스 안내를 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .notice-row { cursor: pointer; }
+    .notice-row:hover td:nth-child(2) { color: var(--accent); }
+    .notice-row td:nth-child(2) { font-weight: 500; transition: color var(--transition); }
+    .notice-detail { display: none; }
+    .notice-detail.open { display: table-row; }
+    .notice-detail td { background: var(--gray-50); padding: 24px 20px !important; }
+    .notice-detail-content { font-size: 14px; line-height: 1.85; color: var(--gray-700); white-space: pre-line; }
+    .badge-important { background: var(--red); color: var(--white); }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>공지사항</span>
+        </div>
+        <h1>공지사항</h1>
+        <p>세울엔지니어링의 소식과 주요 안내사항을 확인하세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="tbl-wrap">
+            <table class="tbl">
+                <thead>
+                    <tr>
+                        <th style="width:60px;text-align:center;">번호</th>
+                        <th>제목</th>
+                        <th style="width:120px;">날짜</th>
+                    </tr>
+                </thead>
+                <tbody id="noticeBody"></tbody>
+            </table>
+        </div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    const notices = DataService.getAll('notices');
+    let openId = null;
+
+    function render() {
+        const tbody = document.getElementById('noticeBody');
+        tbody.innerHTML = notices.map((n, i) => {
+            const num = notices.length - i;
+            const importantBadge = n.important ? '<span class="badge badge-important" style="margin-right:8px;">중요</span>' : '';
+            const isOpen = openId === n.id;
+            return `
+                <tr class="notice-row" data-id="${n.id}">
+                    <td style="text-align:center;color:var(--gray-400);font-size:13px;">${num}</td>
+                    <td>${importantBadge}${n.title}</td>
+                    <td style="color:var(--gray-400);font-size:13px;">${n.date}</td>
+                </tr>
+                <tr class="notice-detail ${isOpen ? 'open' : ''}" id="detail-${n.id}">
+                    <td colspan="3">
+                        <div class="notice-detail-content">${n.content}</div>
+                    </td>
+                </tr>`;
+        }).join('');
+
+        tbody.querySelectorAll('.notice-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const id = row.dataset.id;
+                if (openId === id) {
+                    openId = null;
+                } else {
+                    openId = id;
+                }
+                // 모든 상세를 닫고 해당 항목만 열기
+                document.querySelectorAll('.notice-detail').forEach(d => d.classList.remove('open'));
+                if (openId) {
+                    document.getElementById('detail-' + openId).classList.add('open');
+                }
+            });
+        });
+    }
+
+    render();
+})();
+</script>
+</body>
+</html>

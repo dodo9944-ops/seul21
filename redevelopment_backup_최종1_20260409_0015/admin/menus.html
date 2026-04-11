@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴 관리 — 관리자</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+<div class="admin-wrap">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="admin-sidebar-header">
+            <div class="logo">세울 <small>관리자</small></div>
+        </div>
+        <nav class="admin-nav">
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">대시보드</div>
+                <a href="index.html"><i class="fa-solid fa-gauge-high"></i> 대시보드</a>
+            </div>
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">콘텐츠 관리</div>
+                <a href="areas.html"><i class="fa-solid fa-map-location-dot"></i> 구역 관리</a>
+                <a href="listings.html"><i class="fa-solid fa-building"></i> 매물 관리</a>
+                <a href="news.html"><i class="fa-solid fa-newspaper"></i> 뉴스 관리</a>
+                <a href="columns.html"><i class="fa-solid fa-pen-fancy"></i> 칼럼 관리</a>
+                <a href="community.html"><i class="fa-solid fa-comments"></i> 게시글 관리</a>
+                <a href="inquiries.html"><i class="fa-solid fa-envelope"></i> 문의 관리</a>
+            </div>
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">알림 서비스</div>
+                <a href="alimtalk.html"><i class="fa-regular fa-comment-dots"></i> 알림톡 관리</a>
+            </div>
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">사이트 관리</div>
+                <a href="banners.html"><i class="fa-solid fa-images"></i> 배너 관리</a>
+                <a href="schedule.html"><i class="fa-solid fa-calendar-days"></i> 일정 관리</a>
+                <a href="members.html"><i class="fa-solid fa-users"></i> 회원 관리</a>
+                <a href="menus.html" class="active"><i class="fa-solid fa-bars"></i> 메뉴 관리</a>
+            </div>
+            <div class="admin-nav-group">
+                <div class="admin-nav-group-title">설정</div>
+                <a href="settings.html"><i class="fa-solid fa-gear"></i> 사이트 설정</a>
+                <a href="seo.html"><i class="fa-solid fa-magnifying-glass-chart"></i> SEO 관리</a>
+            </div>
+        </nav>
+        <div class="admin-sidebar-footer">
+            <a href="../index.html" target="_blank"><i class="fa-solid fa-external-link-alt"></i> 사이트 보기</a>
+        </div>
+    </aside>
+    <div class="admin-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="admin-main">
+        <div class="admin-topbar">
+            <div class="admin-topbar-left">
+                <button class="admin-mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
+                <h2>메뉴 관리</h2>
+            </div>
+            <div class="admin-topbar-right">
+                <div class="admin-user"><span>안녕하세요, <strong id="adminName"></strong>님</span></div>
+                <button class="btn btn-sm btn-outline" id="adminLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
+            </div>
+        </div>
+
+        <div class="admin-content">
+            <!-- Info Message -->
+            <div style="background:var(--blue-50, #eff6ff);border:1px solid var(--blue-200, #bfdbfe);border-radius:8px;padding:16px;margin-bottom:24px;display:flex;align-items:center;gap:12px;">
+                <i class="fa-solid fa-circle-info" style="color:var(--blue-500, #3b82f6);font-size:20px;"></i>
+                <div>
+                    <strong style="color:var(--blue-700, #1d4ed8);">안내</strong>
+                    <p style="margin:4px 0 0;font-size:13px;color:var(--blue-600, #2563eb);">메뉴 변경은 common.js 파일 수정이 필요합니다. 이 페이지는 현재 메뉴 구조를 확인하고 관리하는 참조용 도구입니다.</p>
+                </div>
+            </div>
+
+            <!-- GNB Section -->
+            <div class="admin-table-header">
+                <h3><i class="fa-solid fa-compass"></i> GNB (상단 메뉴)</h3>
+            </div>
+            <div class="admin-tbl-wrap">
+                <table class="admin-tbl">
+                    <thead>
+                        <tr>
+                            <th>순서</th>
+                            <th>메뉴명</th>
+                            <th>URL</th>
+                            <th>활성</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gnbBody"></tbody>
+                </table>
+            </div>
+
+            <!-- Footer Section -->
+            <div class="admin-table-header" style="margin-top:32px;">
+                <h3><i class="fa-solid fa-shoe-prints"></i> Footer (하단 메뉴)</h3>
+            </div>
+            <div class="admin-tbl-wrap">
+                <table class="admin-tbl">
+                    <thead>
+                        <tr>
+                            <th>순서</th>
+                            <th>메뉴명</th>
+                            <th>URL</th>
+                            <th>활성</th>
+                        </tr>
+                    </thead>
+                    <tbody id="footerBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script>
+(function() {
+    // Auth check
+    if (!DataService.isAdminLoggedIn()) { location.href = 'login.html'; return; }
+    document.getElementById('adminName').textContent = DataService.getAdminName();
+    document.getElementById('adminLogoutBtn').addEventListener('click', () => { DataService.adminLogout(); location.href = 'login.html'; });
+    document.getElementById('mobileToggle').addEventListener('click', () => {
+        document.getElementById('adminSidebar').classList.toggle('open');
+        document.getElementById('sidebarOverlay').classList.toggle('open');
+    });
+    document.getElementById('sidebarOverlay').addEventListener('click', () => {
+        document.getElementById('adminSidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('open');
+    });
+
+    function toast(msg, type='info') {
+        const c = document.getElementById('toastContainer');
+        const el = document.createElement('div');
+        el.className = 'toast toast-' + type;
+        el.innerHTML = '<i class="fa-solid fa-' + (type==='success'?'check-circle':type==='error'?'exclamation-circle':'info-circle') + '"></i> ' + msg;
+        c.appendChild(el);
+        setTimeout(() => { el.style.opacity='0'; setTimeout(() => el.remove(), 300); }, 3000);
+    }
+
+    // GNB menu items (from common.js structure)
+    const gnbMenus = [
+        { order: 1, name: '구역 정보', url: '/pages/areas.html', active: true },
+        { order: 2, name: '매물 정보', url: '/pages/listings.html', active: true },
+        { order: 3, name: '뉴스', url: '/pages/news.html', active: true },
+        { order: 4, name: '칼럼', url: '/pages/columns.html', active: true },
+        { order: 5, name: '커뮤니티', url: '/pages/community.html', active: true },
+        { order: 6, name: '비례율 계산기', url: '/pages/calculator.html', active: true },
+        { order: 7, name: '법률·세금', url: '/pages/legal-guide.html', active: true },
+        { order: 8, name: '상담 문의', url: '/pages/contact.html', active: true }
+    ];
+
+    const footerMenus = [
+        { order: 1, name: '회사 소개', url: '#', active: true },
+        { order: 2, name: '이용약관', url: '#', active: true },
+        { order: 3, name: '개인정보처리방침', url: '#', active: true },
+        { order: 4, name: '구역 정보', url: '/pages/areas.html', active: true },
+        { order: 5, name: '매물 정보', url: '/pages/listings.html', active: true },
+        { order: 6, name: '뉴스', url: '/pages/news.html', active: true },
+        { order: 7, name: '상담 문의', url: '/pages/contact.html', active: true }
+    ];
+
+    function renderTable(items, tbodyId) {
+        const tbody = document.getElementById(tbodyId);
+        tbody.innerHTML = items.map(m => `
+            <tr>
+                <td>
+                    <input type="number" value="${m.order}" min="1" style="width:60px;padding:4px 8px;border:1px solid var(--gray-300);border-radius:6px;text-align:center;" readonly>
+                </td>
+                <td class="name">${m.name}</td>
+                <td><code style="background:var(--gray-100);padding:2px 8px;border-radius:4px;font-size:12px;">${m.url}</code></td>
+                <td>
+                    <label class="toggle">
+                        <input type="checkbox" ${m.active?'checked':''} disabled>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    renderTable(gnbMenus, 'gnbBody');
+    renderTable(footerMenus, 'footerBody');
+})();
+</script>
+</body>
+</html>

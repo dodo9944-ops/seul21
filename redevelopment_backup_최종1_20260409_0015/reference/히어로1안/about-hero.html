@@ -1,0 +1,138 @@
+<!-- 회사소개 (about.html) — Hero Section Reference -->
+<style>
+/* ── ABOUT HERO SECTION ── */
+.about-hero {
+    background: linear-gradient(160deg, #0A0F1C 0%, #142644 50%, #0A0F1C 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0 72px;
+}
+.about-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
+    pointer-events: none;
+}
+.about-hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+}
+.about-hero .inner {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; gap: 60px;
+}
+.hero-text { flex: 1; min-width: 0; }
+.hero-breadcrumb {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 24px;
+}
+.hero-breadcrumb a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
+.hero-breadcrumb a:hover { color: #C3A569; }
+.hero-breadcrumb span { color: #C3A569; font-weight: 600; }
+.hero-breadcrumb i { font-size: 10px; }
+.hero-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 700; color: #C3A569;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 16px;
+}
+.hero-label::before {
+    content: ''; display: block;
+    width: 24px; height: 1px; background: #C3A569;
+}
+.hero-text h1 {
+    font-size: 38px; font-weight: 900; color: #fff;
+    line-height: 1.35; letter-spacing: -1px;
+    margin-bottom: 16px;
+}
+.hero-text h1 em {
+    font-style: normal; color: #C3A569;
+}
+.hero-sub {
+    font-size: 16px; color: rgba(255,255,255,0.5);
+    line-height: 1.7; max-width: 480px;
+}
+.hero-cards {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 16px; flex-shrink: 0; width: 400px;
+}
+.hero-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(195,165,105,0.12);
+    border-radius: 12px; padding: 24px 20px;
+    transition: all 0.3s;
+}
+.hero-card:hover {
+    background: rgba(195,165,105,0.06);
+    border-color: rgba(195,165,105,0.25);
+}
+.hero-card-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: rgba(195,165,105,0.1);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+}
+.hero-card-icon i { font-size: 15px; color: #C3A569; }
+.hero-card h4 {
+    font-size: 14px; font-weight: 800; color: #fff;
+    margin-bottom: 4px;
+}
+.hero-card p {
+    font-size: 11.5px; color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+}
+@media (max-width: 1024px) {
+    .about-hero .inner { flex-direction: column; gap: 40px; }
+    .hero-cards { width: 100%; max-width: 420px; }
+}
+@media (max-width: 600px) {
+    .about-hero { padding: 56px 0 48px; }
+    .hero-text h1 { font-size: 28px; }
+    .hero-sub { font-size: 14px; }
+    .hero-cards { grid-template-columns: 1fr; width: 100%; }
+}
+</style>
+
+<div class="about-hero">
+    <div class="inner">
+        <div class="hero-text">
+            <div class="hero-breadcrumb">
+                <a href="../index.html">홈</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span>회사소개</span>
+            </div>
+            <div class="hero-label">SEUL Engineering</div>
+            <h1>도시정비의 <em>기준</em>을 세우고,<br>사업의 <em>완성</em>까지 함께합니다</h1>
+            <p class="hero-sub">재개발·재건축·소규모정비사업의 실무를 책임지는 도시정비 전문 파트너</p>
+        </div>
+        <div class="hero-cards">
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4>정비사업전문관리</h4>
+                <p>사업 전 과정 실무 책임 수행</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h4>사업성 분석</h4>
+                <p>정밀 타당성 검토 및 전략 수립</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-file-signature"></i></div>
+                <h4>인허가 대응</h4>
+                <p>행정절차 전략 수립 및 실행</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                <h4>CM / PM 관리</h4>
+                <p>품질 · 공정 · 원가 통합 관리</p>
+            </div>
+        </div>
+    </div>
+</div>

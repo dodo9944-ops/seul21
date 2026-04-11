@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026년 1분기 정비사업 정책 동향 | 세울엔지니어링</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm 18mm 25mm 18mm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif;
+            color: #1a1a1a;
+            background: #f4f5f7;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .document-wrapper {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Header */
+        .doc-header {
+            background: linear-gradient(135deg, #0A0F1C 0%, #141c30 50%, #0A0F1C 100%);
+            color: #fff;
+            padding: 45px 50px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-header::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -8%;
+            width: 280px;
+            height: 280px;
+            border: 1px solid rgba(195, 165, 105, 0.12);
+            border-radius: 50%;
+        }
+
+        .doc-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 180px;
+            height: 180px;
+            border: 1px solid rgba(195, 165, 105, 0.08);
+            border-radius: 50%;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .company-name {
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #C3A569;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .doc-badge {
+            background: rgba(195, 165, 105, 0.15);
+            border: 1px solid rgba(195, 165, 105, 0.3);
+            color: #C3A569;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .doc-title {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .doc-subtitle {
+            font-size: 15px;
+            color: rgba(255,255,255,0.65);
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 3px;
+            background: #C3A569;
+            margin: 20px 0 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .meta-item {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .meta-item strong {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Content */
+        .content {
+            padding: 40px 50px 50px;
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            margin-top: 10px;
+            page-break-after: avoid;
+        }
+
+        .section-icon {
+            width: 44px;
+            height: 44px;
+            background: #0A0F1C;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #C3A569;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .section-title-group {
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0A0F1C;
+        }
+
+        .section-desc {
+            font-size: 12.5px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, #C3A569, transparent);
+            margin-bottom: 0;
+        }
+
+        /* Policy Card */
+        .policy-card {
+            border: 1px solid #e5e7ec;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .policy-card-header {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background: #fafbfc;
+            border-bottom: 1px solid #eee;
+        }
+
+        .policy-title-area {
+            flex: 1;
+        }
+
+        .policy-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0A0F1C;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .policy-source {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .policy-date {
+            background: #0A0F1C;
+            color: #C3A569;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-left: 15px;
+        }
+
+        .policy-card-body {
+            padding: 22px 25px;
+        }
+
+        /* Detail Grid */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .detail-box {
+            padding: 18px 20px;
+            border-radius: 8px;
+        }
+
+        .detail-box.core {
+            background: #f8f9fb;
+            border: 1px solid #e8eaef;
+            grid-column: 1 / -1;
+        }
+
+        .detail-box.impact {
+            background: #fdf8f0;
+            border: 1px solid #f0e0c4;
+        }
+
+        .detail-box.response {
+            background: #f0f4f8;
+            border: 1px solid #d0dce8;
+        }
+
+        .detail-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .detail-box.core .detail-label {
+            color: #0A0F1C;
+        }
+
+        .detail-box.impact .detail-label {
+            color: #b8860b;
+        }
+
+        .detail-box.response .detail-label {
+            color: #2c5f8a;
+        }
+
+        .detail-content {
+            font-size: 13px;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        .detail-content p {
+            margin-bottom: 6px;
+        }
+
+        .detail-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detail-content ul li {
+            padding-left: 16px;
+            position: relative;
+            margin-bottom: 5px;
+        }
+
+        .detail-content ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .detail-box.core ul li::before {
+            background: #C3A569;
+        }
+
+        .detail-box.impact ul li::before {
+            background: #d4a017;
+        }
+
+        .detail-box.response ul li::before {
+            background: #3a7cc0;
+        }
+
+        /* Category Tag */
+        .category-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+
+        .tag-regulation {
+            background: #eef2ff;
+            color: #4a5fc1;
+        }
+
+        .tag-finance {
+            background: #fef3e5;
+            color: #c07d1f;
+        }
+
+        .tag-safety {
+            background: #e8f8ef;
+            color: #2d8a56;
+        }
+
+        .tag-housing {
+            background: #fce8ec;
+            color: #c0392b;
+        }
+
+        .tag-local {
+            background: #f3e8fd;
+            color: #7b3fa0;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            margin-top: 45px;
+            page-break-before: auto;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #C3A569, #e8e9ed);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            background: #C3A569;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px #C3A569;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #C3A569;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .timeline-text {
+            font-size: 13px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .timeline-text strong {
+            color: #0A0F1C;
+        }
+
+        /* Outlook Box */
+        .outlook-box {
+            background: linear-gradient(135deg, #0A0F1C, #1a2340);
+            color: #fff;
+            padding: 30px 35px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .outlook-box h3 {
+            font-size: 17px;
+            color: #C3A569;
+            margin-bottom: 15px;
+        }
+
+        .outlook-box p {
+            font-size: 13.5px;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .outlook-box .key-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 15px;
+            padding: 15px 20px;
+            background: rgba(195, 165, 105, 0.1);
+            border: 1px solid rgba(195, 165, 105, 0.2);
+            border-radius: 8px;
+        }
+
+        .outlook-box .key-point-icon {
+            color: #C3A569;
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .outlook-box .key-point p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.75);
+            margin: 0;
+        }
+
+        /* Footer */
+        .doc-footer {
+            background: #0A0F1C;
+            color: rgba(255,255,255,0.5);
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+        }
+
+        .footer-company {
+            color: #C3A569;
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .footer-disclaimer {
+            max-width: 420px;
+            line-height: 1.5;
+        }
+
+        .footer-contact {
+            text-align: right;
+        }
+
+        .footer-contact div {
+            margin-bottom: 3px;
+        }
+
+        /* Print */
+        @media print {
+            body {
+                background: #fff;
+                font-size: 12px;
+            }
+
+            .document-wrapper {
+                box-shadow: none;
+                max-width: 100%;
+            }
+
+            .doc-header, .doc-footer, .policy-date, .section-icon, .outlook-box {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .policy-card {
+                break-inside: avoid;
+            }
+
+            .content {
+                padding: 25px 35px 30px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .doc-header {
+                padding: 30px 25px;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .doc-title {
+                font-size: 22px;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-box.core {
+                grid-column: 1;
+            }
+
+            .policy-card-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .policy-date {
+                margin-left: 0;
+                align-self: flex-start;
+            }
+
+            .doc-footer {
+                flex-direction: column;
+                gap: 15px;
+                padding: 25px;
+            }
+
+            .footer-contact {
+                text-align: left;
+            }
+
+            .header-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document-wrapper">
+
+        <!-- Header -->
+        <div class="doc-header">
+            <div class="header-top">
+                <div class="company-name">세울엔지니어링</div>
+                <div class="doc-badge">QUARTERLY REPORT</div>
+            </div>
+            <h1 class="doc-title">2026년 1분기<br>정비사업 정책 동향</h1>
+            <p class="doc-subtitle">국토교통부 · 서울특별시 · 지방자치단체 주요 정책 종합 분석</p>
+            <div class="gold-line"></div>
+            <div class="header-meta">
+                <div class="meta-item"><strong>분석 기간</strong>&nbsp; 2026.01 ~ 2026.03</div>
+                <div class="meta-item"><strong>발행일</strong>&nbsp; 2026년 4월</div>
+                <div class="meta-item"><strong>분류</strong>&nbsp; 정책동향 리포트</div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+
+            <!-- ===============================
+                 SECTION 1: 국토교통부
+                 =============================== -->
+            <div class="section-header">
+                <div class="section-icon">&#9733;</div>
+                <div class="section-title-group">
+                    <div class="section-title">국토교통부 주요 정책 발표</div>
+                    <div class="section-desc">중앙정부 차원의 정비사업 관련 핵심 정책 동향 4건</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <!-- Policy 1-1 -->
+            <div class="policy-card" style="margin-top:25px;">
+                <div class="policy-card-header">
+                    <div class="policy-title-area">
+                        <div class="policy-title">「신속통합 정비사업 활성화 방안」 발표</div>
+                        <div class="policy-source">
+                            <span class="category-tag tag-regulation">제도개선</span>
+                            국토교통부 도시정비과
+                        </div>
+                    </div>
+                    <div class="policy-date">2026.01.15</div>
+                </div>
+                <div class="policy-card-body">
+                    <div class="detail-grid">
+                        <div class="detail-box core">
+                            <div class="detail-label">&#9670; 핵심 내용</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>신속통합기획 대상 구역을 기존 서울·수도권에서 <strong>전국 광역시</strong>로 확대</li>
+                                    <li>기획 단계부터 인허가까지 <strong>원스톱 패스트트랙</strong> 절차 도입 — 사업기간 최대 2년 단축 목표</li>
+                                    <li>통합기획 참여 구역에 <strong>용적률 인센티브 10~20%</strong> 추가 부여</li>
+                                    <li>공공기여(임대주택) 비율을 기존 20%에서 <strong>15%</strong>로 완화(수도권 외 지역)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box impact">
+                            <div class="detail-label">&#9670; 영향 분석</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>전국 정비사업 가속화 기대</li>
+                                    <li>용적률 인센티브로 사업성 개선</li>
+                                    <li>광역시 정비구역 지정 경쟁 심화 전망</li>
+                                    <li>공공기여 완화로 조합원 부담 감소</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box response">
+                            <div class="detail-label">&#9654; 대응 방안</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>신속통합기획 신청 요건 확인 및 준비</li>
+                                    <li>용적률 인센티브 적용 시 사업성 재분석</li>
+                                    <li>지자체 담당부서와 사전 협의 추진</li>
+                                    <li>기존 정비계획과의 전환 가능성 검토</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Policy 1-2 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-title-area">
+                        <div class="policy-title">정비사업 금융지원 패키지 — 「도시정비 금융 혁신안」</div>
+                        <div class="policy-source">
+                            <span class="category-tag tag-finance">금융지원</span>
+                            국토교통부 · 금융위원회 합동
+                        </div>
+                    </div>
+                    <div class="policy-date">2026.02.05</div>
+                </div>
+                <div class="policy-card-body">
+                    <div class="detail-grid">
+                        <div class="detail-box core">
+                            <div class="detail-label">&#9670; 핵심 내용</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>정비사업 전용 <strong>저리 브릿지론</strong> 신설 — 주택도시기금 활용, 연이율 2.5~3.5%</li>
+                                    <li>조합 사업비 대출 시 <strong>HUG 보증</strong> 범위 확대(기존 시공자 선정 후 → 조합설립 인가 후)</li>
+                                    <li>조합원 이주비 대출 한도 <strong>3억 원 → 4억 원</strong> 상향(수도권 기준)</li>
+                                    <li>사업 지연 구역에 대한 <strong>긴급 유동성 지원</strong> 프로그램 운영</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box impact">
+                            <div class="detail-label">&#9670; 영향 분석</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>초기 단계 자금조달 부담 대폭 경감</li>
+                                    <li>고금리 사업비 대출 대체 효과</li>
+                                    <li>조합원 이주비 부담 실질적 완화</li>
+                                    <li>지연 사업장 정상화 촉진</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box response">
+                            <div class="detail-label">&#9654; 대응 방안</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>현재 대출 조건과 신규 상품 비교 분석</li>
+                                    <li>HUG 보증 신청 가능 시점 확인 및 준비</li>
+                                    <li>이주비 대출 한도 상향분 반영한 이주계획</li>
+                                    <li>지연 사업장은 긴급 지원 요건 자체 점검</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Policy 1-3 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-title-area">
+                        <div class="policy-title">「정비사업 안전관리 강화 종합대책」 시행</div>
+                        <div class="policy-source">
+                            <span class="category-tag tag-safety">안전관리</span>
+                            국토교통부 건설안전과
+                        </div>
+                    </div>
+                    <div class="policy-date">2026.02.20</div>
+                </div>
+                <div class="policy-card-body">
+                    <div class="detail-grid">
+                        <div class="detail-box core">
+                            <div class="detail-label">&#9670; 핵심 내용</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>정비사업 철거·착공 단계 <strong>안전관리계획 심의</strong> 의무화</li>
+                                    <li>해체공사 시 <strong>해체공사감리자</strong> 배치 의무(건축물 해체 관련법 연계)</li>
+                                    <li>공사 중 안전사고 발생 시 <strong>시공자 영업정지</strong> 기준 강화(중대사고 즉시 정지)</li>
+                                    <li>인접 건물 안전 모니터링 시스템 <strong>IoT 기반 실시간 계측</strong> 의무 적용</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box impact">
+                            <div class="detail-label">&#9670; 영향 분석</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>철거·시공 단계 안전사고 예방 강화</li>
+                                    <li>해체감리 비용 추가 발생(공사비 1~2% 수준)</li>
+                                    <li>시공자 선정 시 안전실적 중요도 상승</li>
+                                    <li>인접 주민 민원 감소 기대</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box response">
+                            <div class="detail-label">&#9654; 대응 방안</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>안전관리계획 수립 비용 사업비에 반영</li>
+                                    <li>시공자 선정 시 안전관리 역량 평가 강화</li>
+                                    <li>해체감리자 선정 절차 사전 준비</li>
+                                    <li>IoT 계측 시스템 도입 계획 수립</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Policy 1-4 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-title-area">
+                        <div class="policy-title">도시정비법 시행령 개정안 입법예고</div>
+                        <div class="policy-source">
+                            <span class="category-tag tag-regulation">제도개선</span>
+                            국토교통부 정비사업기획과
+                        </div>
+                    </div>
+                    <div class="policy-date">2026.03.12</div>
+                </div>
+                <div class="policy-card-body">
+                    <div class="detail-grid">
+                        <div class="detail-box core">
+                            <div class="detail-label">&#9670; 핵심 내용</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>2026년 도시정비법 개정에 따른 <strong>하위법령 정비</strong> — 전자투표 인증기준, 회계처리기준 등 세부 사항 규정</li>
+                                    <li>정비구역 지정 해제 요건 중 <strong>장기 방치 구역</strong> 기준을 10년에서 <strong>7년</strong>으로 단축</li>
+                                    <li>조합 설립 동의율 산정 시 <strong>상속 미등기 물건</strong> 처리 기준 명확화</li>
+                                    <li>입법예고 기간: 2026.03.12 ~ 2026.04.22 (40일간)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box impact">
+                            <div class="detail-label">&#9670; 영향 분석</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>모법 개정 사항의 실질적 시행 기반 마련</li>
+                                    <li>장기 방치 구역 해제 압박 강화</li>
+                                    <li>동의율 분쟁 소지 감소</li>
+                                    <li>의견제출 기간 내 이해관계자 대응 필요</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box response">
+                            <div class="detail-label">&#9654; 대응 방안</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>입법예고문 상세 검토 후 의견서 제출 검토</li>
+                                    <li>장기 방치 구역 해당 여부 확인</li>
+                                    <li>상속 미등기 물건 보유 현황 파악</li>
+                                    <li>시행령 확정 시 정관·규약 개정 준비</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===============================
+                 SECTION 2: 서울시
+                 =============================== -->
+            <div class="section-header" style="margin-top:45px;">
+                <div class="section-icon">&#9679;</div>
+                <div class="section-title-group">
+                    <div class="section-title">서울특별시 정비사업 정책</div>
+                    <div class="section-desc">수도권 정비사업에 직접적 영향을 미치는 서울시 정책 3건</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <!-- Policy 2-1 -->
+            <div class="policy-card" style="margin-top:25px;">
+                <div class="policy-card-header">
+                    <div class="policy-title-area">
+                        <div class="policy-title">「2026 서울 도시정비 기본계획」 변경 고시</div>
+                        <div class="policy-source">
+                            <span class="category-tag tag-housing">주거정비</span>
+                            서울특별시 주거정비과
+                        </div>
+                    </div>
+                    <div class="policy-date">2026.01.22</div>
+                </div>
+                <div class="policy-card-body">
+                    <div class="detail-grid">
+                        <div class="detail-box core">
+                            <div class="detail-label">&#9670; 핵심 내용</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>서울시 정비예정구역 <strong>23개 신규 지정</strong>, 4개 구역 해제</li>
+                                    <li>역세권 정비구역 용적률 상한 <strong>최대 500%</strong>까지 완화(역세권 고밀 복합개발 연계)</li>
+                                    <li>소규모 정비사업(가로주택·소규모재건축) <strong>층수 규제 완화</strong> — 7층 → 15층까지 허용</li>
+                                    <li>정비기반시설 설치비용의 <strong>시비 지원 비율 확대</strong>(30% → 50%)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box impact">
+                            <div class="detail-label">&#9670; 영향 분석</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>서울 주택공급 확대 기반 강화</li>
+                                    <li>역세권 사업성 대폭 향상</li>
+                                    <li>소규모 정비사업 활성화 전기 마련</li>
+                                    <li>기반시설 부담 완화로 사업비 절감</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box response">
+                            <div class="detail-label">&#9654; 대응 방안</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>신규 지정 구역 해당 여부 확인 및 추진위 구성</li>
+                                    <li>역세권 입지 사업장 용적률 상향 반영 재설계</li>
+                                    <li>소규모 정비사업 전환 가능성 분석</li>
+                                    <li>기반시설 시비 지원 신청 절차 확인</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Policy 2-2 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-title-area">
+                        <div class="policy-title">서울시 정비사업 분쟁조정위원회 기능 강화</div>
+                        <div class="policy-source">
+                            <span class="category-tag tag-regulation">제도개선</span>
+                            서울특별시 도시계획국
+                        </div>
+                    </div>
+                    <div class="policy-date">2026.02.14</div>
+                </div>
+                <div class="policy-card-body">
+                    <div class="detail-grid">
+                        <div class="detail-box core">
+                            <div class="detail-label">&#9670; 핵심 내용</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>분쟁조정위원회 <strong>상설화</strong> 및 전담 사무국 설치(기존 비상설 → 월 2회 정기회의)</li>
+                                    <li>조정 대상 확대: 시공자-조합 분쟁, 조합원 간 분쟁까지 포함</li>
+                                    <li>조정안 수락 시 <strong>재판상 화해</strong>와 동일한 효력 부여</li>
+                                    <li>무료 법률상담 서비스 연계(서울시 마을변호사 제도 활용)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box impact">
+                            <div class="detail-label">&#9670; 영향 분석</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>소송 의존도 감소, 분쟁 해결 기간 단축</li>
+                                    <li>조합 법률 비용 절감 효과</li>
+                                    <li>시공자와의 갈등 조기 해소 기대</li>
+                                    <li>소규모 조합원의 권리구제 접근성 향상</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box response">
+                            <div class="detail-label">&#9654; 대응 방안</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>기존 분쟁 사안에 대한 조정 신청 검토</li>
+                                    <li>분쟁조정 절차 및 신청 방법 사전 파악</li>
+                                    <li>조합원 대상 무료 법률상담 안내</li>
+                                    <li>향후 계약서에 분쟁조정 우선 조항 반영</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Policy 2-3 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-title-area">
+                        <div class="policy-title">「서울형 녹색 정비사업」 시범사업 공모</div>
+                        <div class="policy-source">
+                            <span class="category-tag tag-safety">친환경</span>
+                            서울특별시 기후환경본부 · 주거정비과 합동
+                        </div>
+                    </div>
+                    <div class="policy-date">2026.03.25</div>
+                </div>
+                <div class="policy-card-body">
+                    <div class="detail-grid">
+                        <div class="detail-box core">
+                            <div class="detail-label">&#9670; 핵심 내용</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>탄소중립 실현을 위한 <strong>제로에너지건축물(ZEB) 3등급 이상</strong> 정비사업 시범 5개 구역 공모</li>
+                                    <li>선정 구역에 <strong>용적률 보너스 15%</strong> + <strong>사업비 보조금 최대 50억 원</strong> 지원</li>
+                                    <li>친환경 건축자재 사용 의무화, 에너지 자립률 40% 이상 달성 조건</li>
+                                    <li>공모 접수: 2026.04.01 ~ 2026.05.31</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box impact">
+                            <div class="detail-label">&#9670; 영향 분석</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>시범사업 성공 시 전면 확대 가능성 높음</li>
+                                    <li>용적률 + 보조금 이중 인센티브 매력적</li>
+                                    <li>친환경 시공비 증가분 상쇄 가능</li>
+                                    <li>브랜드 가치·분양 프리미엄 기대</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box response">
+                            <div class="detail-label">&#9654; 대응 방안</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>ZEB 인증 요건 충족 가능성 사전 검토</li>
+                                    <li>시공사와 친환경 설계 협의 착수</li>
+                                    <li>공모 신청서 작성 준비(5월 마감)</li>
+                                    <li>에너지 자립률 달성을 위한 설비 계획 수립</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===============================
+                 SECTION 3: 지방자치단체
+                 =============================== -->
+            <div class="section-header" style="margin-top:45px;">
+                <div class="section-icon">&#9632;</div>
+                <div class="section-title-group">
+                    <div class="section-title">지방자치단체 동향</div>
+                    <div class="section-desc">광역시 및 지방 정비사업 관련 주요 정책 변화 2건</div>
+                </div>
+            </div>
+            <div class="section-divider"></div>
+
+            <!-- Policy 3-1 -->
+            <div class="policy-card" style="margin-top:25px;">
+                <div class="policy-card-header">
+                    <div class="policy-title-area">
+                        <div class="policy-title">부산광역시 「노후 주거지 재생 특별구역」 지정</div>
+                        <div class="policy-source">
+                            <span class="category-tag tag-local">지자체</span>
+                            부산광역시 도시재생과
+                        </div>
+                    </div>
+                    <div class="policy-date">2026.01.30</div>
+                </div>
+                <div class="policy-card-body">
+                    <div class="detail-grid">
+                        <div class="detail-box core">
+                            <div class="detail-label">&#9670; 핵심 내용</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>부산시 자체 조례로 <strong>노후 주거지 재생 특별구역</strong> 12개 지정(영도구·사하구·동구 등)</li>
+                                    <li>특별구역 내 정비사업 인허가 <strong>원스톱 처리</strong>(건축·환경·교통 통합심의)</li>
+                                    <li>지방세(취득세·등록세) <strong>50% 감면</strong> 혜택 3년간 적용</li>
+                                    <li>부산시 도시재생기금에서 <strong>구역당 최대 30억 원</strong> 기반시설비 지원</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box impact">
+                            <div class="detail-label">&#9670; 영향 분석</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>지방 대도시 정비사업 모델 제시</li>
+                                    <li>인허가 기간 대폭 단축 효과</li>
+                                    <li>세제 혜택으로 사업 참여 유인 증가</li>
+                                    <li>타 광역시 유사 제도 확산 가능성</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box response">
+                            <div class="detail-label">&#9654; 대응 방안</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>부산 사업장의 특별구역 포함 여부 확인</li>
+                                    <li>세제 감면 요건 및 신청 절차 파악</li>
+                                    <li>기반시설비 지원 신청 일정 확인</li>
+                                    <li>타 지자체 유사 제도 도입 동향 모니터링</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Policy 3-2 -->
+            <div class="policy-card">
+                <div class="policy-card-header">
+                    <div class="policy-title-area">
+                        <div class="policy-title">경기도 「소규모 정비사업 활성화 지원 조례」 제정</div>
+                        <div class="policy-source">
+                            <span class="category-tag tag-local">지자체</span>
+                            경기도 도시주택실
+                        </div>
+                    </div>
+                    <div class="policy-date">2026.03.05</div>
+                </div>
+                <div class="policy-card-body">
+                    <div class="detail-grid">
+                        <div class="detail-box core">
+                            <div class="detail-label">&#9670; 핵심 내용</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>가로주택정비사업·소규모재건축에 대한 <strong>경기도 통합 지원 조례</strong> 최초 제정</li>
+                                    <li>사업 초기 <strong>설계비·감정평가비</strong> 도비 지원(구역당 최대 2억 원)</li>
+                                    <li>소규모 정비사업 <strong>전담 지원센터</strong> 설치(경기주택도시공사 위탁 운영)</li>
+                                    <li>노후도 기준 완화: 건축 후 <strong>25년</strong>(기존 30년)부터 사업 추진 가능</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box impact">
+                            <div class="detail-label">&#9670; 영향 분석</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>경기도 내 소규모 정비사업 본격 활성화</li>
+                                    <li>초기 비용 부담 해소로 사업 착수 촉진</li>
+                                    <li>전담 지원센터를 통한 전문성 보완</li>
+                                    <li>1기 신도시 외 지역으로 정비 확대</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-box response">
+                            <div class="detail-label">&#9654; 대응 방안</div>
+                            <div class="detail-content">
+                                <ul>
+                                    <li>경기도 내 소규모 정비 대상지 발굴</li>
+                                    <li>설계비·감정평가비 지원 신청 준비</li>
+                                    <li>전담 지원센터 상담 예약 및 활용</li>
+                                    <li>노후도 25년 기준 해당 단지 현황 파악</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===============================
+                 TIMELINE & OUTLOOK
+                 =============================== -->
+            <div class="timeline-section">
+                <div class="section-header">
+                    <div class="section-icon">&#9202;</div>
+                    <div class="section-title-group">
+                        <div class="section-title">1분기 정책 일지</div>
+                        <div class="section-desc">주요 정책 발표 시간순 정리</div>
+                    </div>
+                </div>
+                <div class="section-divider" style="margin-bottom:25px;"></div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026.01.15</div>
+                        <div class="timeline-text"><strong>국토부</strong> — 신속통합 정비사업 활성화 방안 발표</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026.01.22</div>
+                        <div class="timeline-text"><strong>서울시</strong> — 도시정비 기본계획 변경 고시 (23개 구역 신규 지정)</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026.01.30</div>
+                        <div class="timeline-text"><strong>부산시</strong> — 노후 주거지 재생 특별구역 12개 지정</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026.02.05</div>
+                        <div class="timeline-text"><strong>국토부·금융위</strong> — 도시정비 금융 혁신안 발표</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026.02.14</div>
+                        <div class="timeline-text"><strong>서울시</strong> — 정비사업 분쟁조정위원회 기능 강화 발표</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026.02.20</div>
+                        <div class="timeline-text"><strong>국토부</strong> — 정비사업 안전관리 강화 종합대책 시행</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026.03.01</div>
+                        <div class="timeline-text"><strong>전체</strong> — 도시정비법 주요 개정 사항 시행 (전자투표·회계·임원 등)</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026.03.05</div>
+                        <div class="timeline-text"><strong>경기도</strong> — 소규모 정비사업 활성화 지원 조례 제정</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026.03.12</div>
+                        <div class="timeline-text"><strong>국토부</strong> — 도시정비법 시행령 개정안 입법예고</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2026.03.25</div>
+                        <div class="timeline-text"><strong>서울시</strong> — 녹색 정비사업 시범사업 공모 개시</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outlook -->
+            <div class="outlook-box">
+                <h3>2분기 전망 및 주요 관전 포인트</h3>
+                <p>
+                    2026년 1분기는 정비사업 제도의 근본적 변화가 시작된 분기로 평가됩니다.
+                    도시정비법 개정 시행, 금융지원 확대, 안전관리 강화 등 3대 축의 정책이 동시에 추진되면서
+                    정비사업 환경이 빠르게 재편되고 있습니다. 2분기에는 다음 사항에 주목할 필요가 있습니다.
+                </p>
+                <div class="key-point">
+                    <div class="key-point-icon">&#9656;</div>
+                    <p>
+                        <strong>시행령 확정(4월 말 예상)</strong>에 따른 세부 기준 확정 여부,
+                        <strong>안전진단 기준 변경(6월 시행)</strong> 전 신청 러시 가능성,
+                        <strong>녹색 정비사업 공모 결과(6월)</strong> 및 향후 의무화 방향성,
+                        <strong>하반기 추가 규제완화</strong> 여부에 대한 국토부 입장 등이 핵심 모니터링 사항입니다.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="doc-footer">
+            <div>
+                <div class="footer-company">세울엔지니어링</div>
+                <div class="footer-disclaimer">
+                    본 자료는 공개된 정책 자료를 바탕으로 정리한 정보 제공 목적의 문서이며,
+                    각 정책의 세부 시행 내용은 관할 기관의 최종 발표를 확인하시기 바랍니다.
+                    특정 사업장에 대한 적용 여부는 전문가 상담을 권장합니다.
+                </div>
+            </div>
+            <div class="footer-contact">
+                <div>www.seul21.com</div>
+                <div>TEL 010-2230-9210</div>
+                <div>&copy; 2026 세울엔지니어링. All rights reserved.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

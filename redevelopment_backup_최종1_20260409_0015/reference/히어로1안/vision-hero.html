@@ -1,0 +1,114 @@
+<!-- 세울의길 (vision.html) — Hero Section Reference -->
+<!-- 참고: vision.html에는 vs-hero CSS(배경이미지 포함)도 정의되어 있으나,
+     실제 사용하는 히어로는 uni-hero 클래스임. vs-hero CSS도 함께 보존. -->
+<style>
+/* === vs-hero (vision 전용 — 배경이미지 포함, 현재 미사용이나 참고용 보존) === */
+.vs-hero {
+    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #060A14 0%, #0A0F1C 40%, #142644 100%);
+    padding: 0; margin-top: -1px;
+}
+.vs-hero-img {
+    position: absolute; inset: 0; z-index: 0;
+    background: url('../jpg/사옥 2청사1.png') center/cover no-repeat;
+    opacity: 0.45;
+}
+.vs-hero-inner {
+    position: relative; z-index: 1;
+    max-width: var(--maxw); margin: 0 auto;
+    padding: 80px 40px 72px;
+    display: flex; align-items: center; justify-content: space-between; gap: 48px;
+}
+.vs-hero-text { max-width: 580px; }
+.vs-hero-label {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; color: var(--gold); text-transform: uppercase;
+    margin-bottom: 16px; opacity: 0.8;
+}
+.vs-hero-text h1 {
+    font-size: 38px; font-weight: 900; color: #fff;
+    line-height: 1.35; margin-bottom: 20px; letter-spacing: -1px;
+}
+.vs-hero-text h1 em { font-style: normal; color: var(--gold); }
+.vs-hero-sub {
+    font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.55);
+    max-width: 480px;
+}
+.vs-hero-keywords {
+    display: flex; flex-direction: column; gap: 12px; flex-shrink: 0;
+}
+.vs-hero-kw {
+    padding: 14px 28px; border-radius: 10px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.15);
+    font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7);
+    letter-spacing: 0.3px;
+}
+.vs-hero-kw span { color: var(--gold); margin-right: 8px; }
+.vs-hero-scroll {
+    position: absolute; bottom: 24px; left: 50%;
+    transform: translateX(-50%); z-index: 2;
+    font-size: 11px; color: rgba(255,255,255,0.25);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.vs-hero-scroll i { animation: scrollBounce 2s infinite; }
+@keyframes scrollBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+
+@media(max-width:860px) {
+    .vs-hero-inner { flex-direction: column; padding: 56px 24px 48px; }
+    .vs-hero-text h1 { font-size: 28px; }
+    .vs-hero-keywords { flex-direction: row; flex-wrap: wrap; }
+}
+
+/* === Unified Hero (실제 사용 중) === */
+.uni-hero {
+    background: linear-gradient(160deg, #0A0F1C 0%, #142644 50%, #0A0F1C 100%);
+    position: relative; overflow: hidden; padding: 72px 0 64px;
+}
+.uni-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
+    pointer-events: none;
+}
+.uni-hero::after {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none;
+}
+.uni-hero .inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 56px; }
+.uni-hero .uh-text { flex: 1; min-width: 0; }
+.uni-hero .uh-bc { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+.uni-hero .uh-bc a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
+.uni-hero .uh-bc a:hover { color: #C3A569; }
+.uni-hero .uh-bc span { color: #C3A569; font-weight: 600; }
+.uni-hero .uh-bc i { font-size: 10px; }
+.uni-hero .uh-label { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; color: #C3A569; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+.uni-hero .uh-label::before { content: ''; width: 24px; height: 1px; background: #C3A569; }
+.uni-hero .uh-text h1 { font-size: 36px; font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -1px; margin-bottom: 14px; }
+.uni-hero .uh-text h1 em { font-style: normal; color: #C3A569; }
+.uni-hero .uh-sub { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 460px; }
+.uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; flex-shrink: 0; width: 380px; }
+.uni-hero .uh-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(195,165,105,0.1); border-radius: 10px; padding: 20px 18px; transition: all 0.3s; }
+.uni-hero .uh-card:hover { background: rgba(195,165,105,0.06); border-color: rgba(195,165,105,0.22); }
+.uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+.uni-hero .uh-ci i { font-size: 14px; color: #C3A569; }
+.uni-hero .uh-card h4 { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.uni-hero .uh-card p { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+@media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-cards { width: 100%; max-width: 400px; } }
+@media (max-width: 600px) { .uni-hero { padding: 52px 0 44px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } }
+</style>
+
+<div class="uni-hero">
+    <div class="inner">
+        <div class="uh-text">
+            <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>세울의 길</span></div>
+            <div class="uh-label">THE PATH OF SEUL</div>
+            <h1>절차의 <em>정합성</em>, 실행의 <em>책임</em></h1>
+            <p class="uh-sub">정비사업의 기준을 바로 세우고, 사업의 가치를 끝까지 완성하는 세울엔지니어링의 길</p>
+        </div>
+        <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>절차의 정합성</h4><p>법과 원칙에 기반한 실무</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-handshake"></i></div><h4>이해관계 조율</h4><p>조합·행정·시공 균형 자문</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-route"></i></div><h4>단계별 추진</h4><p>기획부터 준공까지 로드맵</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-shield-halved"></i></div><h4>책임지는 완결</h4><p>사업 완료까지 동행</p></div></div>
+    </div>
+</div>

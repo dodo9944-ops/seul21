@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도심복합개발 — (주)세울엔지니어링</title>
+    <meta name="description" content="통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등 복합적 사업구조와 고밀 개발방식을 종합적으로 검토하고 대상지에 맞는 현실적인 추진전략을 제시합니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .rd-section { margin-bottom: 56px; }
+    .rd-section:last-child { margin-bottom: 0; }
+    .rd-section .section-title { margin-bottom: 32px; }
+
+    /* 히어로 비주얼 */
+    .rd-visual {
+        background: linear-gradient(135deg, #0A0F1C 0%, #142644 60%, #1a3055 100%);
+        border-radius: 18px; padding: 56px 60px; position: relative; overflow: hidden;
+    }
+    .rd-visual::before {
+        content: ''; position: absolute; right: -100px; top: -100px; width: 400px; height: 400px;
+        background: radial-gradient(circle, rgba(195,165,105,0.07) 0%, transparent 65%); border-radius: 50%;
+    }
+    .rd-visual::after {
+        content: ''; position: absolute; left: -60px; bottom: -60px; width: 280px; height: 280px;
+        background: radial-gradient(circle, rgba(195,165,105,0.04) 0%, transparent 65%); border-radius: 50%;
+    }
+    .rd-visual-inner { position: relative; z-index: 1; max-width: 780px; }
+    .rd-visual-badge {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 2px;
+        margin-bottom: 20px; text-transform: uppercase;
+    }
+    .rd-visual-badge i { font-size: 13px; }
+    .rd-visual h2 { font-size: 32px; font-weight: 900; color: #fff; line-height: 1.4; margin-bottom: 18px; letter-spacing: -0.8px; }
+    .rd-visual p { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 28px; }
+    .rd-keywords {
+        display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .rd-kw {
+        padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+        background: rgba(195,165,105,0.12); color: var(--gold);
+        border: 1px solid rgba(195,165,105,0.2);
+    }
+    @media(max-width: 768px) {
+        .rd-visual { padding: 40px 28px; }
+        .rd-visual h2 { font-size: 24px; }
+        .rd-visual p { font-size: 14px; }
+    }
+
+    /* 소개 블록 */
+    .rd-intro {
+        background: #fff; border: 1px solid var(--gray-200); border-radius: 14px;
+        padding: 40px 44px;
+    }
+    .rd-intro h4 { font-size: 18px; font-weight: 800; color: var(--gray-900); margin-bottom: 18px; }
+    .rd-intro p {
+        font-size: 15px; color: var(--gray-600); line-height: 1.9; margin-bottom: 14px;
+    }
+    .rd-intro p:last-child { margin-bottom: 0; }
+    @media(max-width: 768px) { .rd-intro { padding: 28px 24px; } }
+
+    /* 업무내용 카드 그리드 */
+    .rd-work-grid {
+        display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    }
+    @media(max-width: 768px) { .rd-work-grid { grid-template-columns: 1fr; } }
+
+    .rd-work-card {
+        background: #fff; border: 1.5px solid var(--gray-200); border-radius: 14px;
+        padding: 32px 32px 28px; transition: all 0.25s; display: flex; flex-direction: column;
+    }
+    .rd-work-card:hover { border-color: var(--gold); box-shadow: 0 12px 32px rgba(0,0,0,0.07); transform: translateY(-4px); }
+
+    .rd-work-icon {
+        width: 52px; height: 52px; border-radius: 13px; background: var(--brand-dark);
+        display: flex; align-items: center; justify-content: center; margin-bottom: 20px; flex-shrink: 0;
+    }
+    .rd-work-icon i { font-size: 22px; color: var(--gold); }
+
+    .rd-work-card h4 { font-size: 18px; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; letter-spacing: -0.3px; }
+    .rd-work-card .rd-work-desc { font-size: 14px; color: var(--gray-600); line-height: 1.85; margin-bottom: 20px; }
+
+    .rd-work-support { margin-top: auto; }
+    .rd-work-support-title {
+        font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px;
+        margin-bottom: 10px; text-transform: uppercase;
+    }
+    .rd-work-support ul { padding: 0; margin: 0; }
+    .rd-work-support ul li {
+        display: flex; align-items: flex-start; gap: 10px;
+        font-size: 13.5px; color: var(--gray-700); line-height: 1.7;
+        padding: 8px 0; border-bottom: 1px solid var(--gray-100);
+    }
+    .rd-work-support ul li:last-child { border-bottom: none; padding-bottom: 0; }
+    .rd-work-support ul li i { color: var(--gold); font-size: 10px; margin-top: 5px; flex-shrink: 0; }
+
+    /* 지원범위 섹션 */
+    .rd-scope {
+        background: linear-gradient(135deg, #0A0F1C, #142644);
+        border-radius: 16px; padding: 52px 56px; position: relative; overflow: hidden;
+    }
+    .rd-scope::before { content: ''; position: absolute; right: -60px; top: -60px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(195,165,105,0.06) 0%, transparent 70%); border-radius: 50%; }
+    .rd-scope-inner { position: relative; z-index: 1; }
+    .rd-scope h3 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 14px; letter-spacing: -0.3px; }
+    .rd-scope .rd-scope-desc { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.85; margin-bottom: 28px; }
+    .rd-scope-em {
+        background: rgba(195,165,105,0.08); border-left: 3px solid var(--gold);
+        border-radius: 0 8px 8px 0; padding: 18px 22px;
+        font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8;
+    }
+    .rd-scope-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+    .rd-scope-btn {
+        display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
+        border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; border: none; font-family: inherit;
+    }
+    .rd-scope-btn.primary { background: var(--gold); color: #0A0F1C; }
+    .rd-scope-btn.primary:hover { background: var(--gold-hover); }
+    .rd-scope-btn.outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.2); }
+    .rd-scope-btn.outline:hover { border-color: var(--gold); color: var(--gold); }
+    @media(max-width: 768px) { .rd-scope { padding: 36px 28px; } .rd-scope h3 { font-size: 18px; } }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="services.html">사업분야</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>도심복합개발</span>
+        </div>
+        <h1>도심복합개발</h1>
+        <p>통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등<br>복합적 사업구조와 고밀 개발방식을 종합적으로 검토하고 대상지에 맞는 현실적인 추진전략을 제시합니다.</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <!-- 히어로 비주얼 -->
+        <div class="rd-section">
+            <div class="rd-visual">
+                <div class="rd-visual-inner">
+                    <div class="rd-visual-badge"><i class="fa-solid fa-city"></i> URBAN COMPLEX DEVELOPMENT</div>
+                    <h2>도심복합개발</h2>
+                    <p>통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등<br>복합적 사업구조와 고밀 개발방식을 종합적으로 검토하고<br>대상지에 맞는 현실적인 추진전략을 제시합니다.</p>
+                    <div class="rd-keywords">
+                        <span class="rd-kw">통합재건축</span>
+                        <span class="rd-kw">신속통합기획</span>
+                        <span class="rd-kw">민간도심복합개발</span>
+                        <span class="rd-kw">역세권 개발</span>
+                        <span class="rd-kw">사업구조 분석</span>
+                        <span class="rd-kw">인허가 대응</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 도심복합개발이란 -->
+        <div class="rd-section">
+            <h2 class="section-title">도심복합개발이란</h2>
+            <div class="rd-intro">
+                <h4>개념 및 범위</h4>
+                <p>도심복합개발은 일반적인 재개발·재건축의 범위를 넘어, 도시계획, 입지 특성, 복합용도 개발, 고밀화 전략, 주민합의 구조를 함께 검토하는 확장형 개발영역입니다.</p>
+                <p>대상지의 여건에 따라 통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등 서로 다른 방식이 적용될 수 있으며, 각 사업유형별 제도 이해와 사업성 분석, 행정 대응 전략이 함께 필요합니다.</p>
+                <p>세울은 도심복합개발 분야에 대해 초기 대상지 검토부터 사업구조 분석, 주민협의, 인허가 대응까지 실무 중심으로 종합 지원합니다.</p>
+            </div>
+        </div>
+
+        <!-- 업무내용 -->
+        <div class="rd-section">
+            <h2 class="section-title">업무내용</h2>
+            <div class="rd-work-grid">
+
+                <!-- 통합재건축 -->
+                <div class="rd-work-card">
+                    <div class="rd-work-icon"><i class="fa-solid fa-building-circle-arrow-right"></i></div>
+                    <h4>통합재건축</h4>
+                    <p class="rd-work-desc">인접 또는 연계된 복수 단지를 하나의 사업구조로 통합하여 추진하는 방식으로, 단지별 사업조건과 이해관계를 종합적으로 조정하면서 통합 개발의 실익과 실행 가능성을 검토합니다.</p>
+                    <div class="rd-work-support">
+                        <div class="rd-work-support-title">지원 내용</div>
+                        <ul>
+                            <li><i class="fa-solid fa-chevron-right"></i>단지별 사업조건 비교 검토</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>통합 추진의 타당성 분석</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>주민합의 및 이해관계 조정 구조 검토</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 신속통합기획 -->
+                <div class="rd-work-card">
+                    <div class="rd-work-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+                    <h4>신속통합기획</h4>
+                    <p class="rd-work-desc">도시계획과 정비계획을 연계하여 사업기간을 단축하고 신속한 인허가 추진 기반을 마련하는 공공지원형 기획 방식입니다.</p>
+                    <div class="rd-work-support">
+                        <div class="rd-work-support-title">지원 내용</div>
+                        <ul>
+                            <li><i class="fa-solid fa-chevron-right"></i>대상지 여건 및 적용 가능성 검토</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>기획 방향 및 정비계획 연계 검토</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>행정 협의 및 추진전략 자문</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 민간도심복합개발 -->
+                <div class="rd-work-card">
+                    <div class="rd-work-icon"><i class="fa-solid fa-landmark"></i></div>
+                    <h4>민간도심복합개발</h4>
+                    <p class="rd-work-desc">역세권·준공업지역 등 도심 내 입지를 중심으로 신탁·리츠 등 민간 전문방식을 활용하여 고밀 복합개발을 추진하는 사업영역입니다.</p>
+                    <div class="rd-work-support">
+                        <div class="rd-work-support-title">지원 내용</div>
+                        <ul>
+                            <li><i class="fa-solid fa-chevron-right"></i>대상지 요건 및 입지 적정성 검토</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>사업방식 및 권리구조 분석</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>동의요건·매도청구·현금청산 등 리스크 검토</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 역세권 개발 -->
+                <div class="rd-work-card">
+                    <div class="rd-work-icon"><i class="fa-solid fa-train-subway"></i></div>
+                    <h4>역세권 개발</h4>
+                    <p class="rd-work-desc">철도역과 주변 입지를 기반으로 주거·상업·업무 기능을 복합화하여 고밀·고효율의 도시공간을 조성하는 개발영역입니다.</p>
+                    <div class="rd-work-support">
+                        <div class="rd-work-support-title">지원 내용</div>
+                        <ul>
+                            <li><i class="fa-solid fa-chevron-right"></i>역세권 범위 및 입지 분석</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>용도지역 상향 및 개발밀도 검토</li>
+                            <li><i class="fa-solid fa-chevron-right"></i>사업성 및 인허가 방향 검토</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 세울의 지원 범위 -->
+        <div class="rd-section">
+            <div class="rd-scope">
+                <div class="rd-scope-inner">
+                    <h3>세울의 지원 범위</h3>
+                    <p class="rd-scope-desc">세울은 도심복합개발 분야에 대해 대상지 기초검토, 사업성 분석, 추진방식 검토, 주민협의, 인허가 대응까지 각 사업유형에 맞는 실무 중심의 지원을 제공합니다.</p>
+                    <div class="rd-scope-em">
+                        도심복합개발은 사업유형별 제도 차이와 권리구조를 정확히 이해하고,<br>
+                        대상지에 맞는 현실적인 추진방향을 설정하는 것이 핵심입니다.
+                    </div>
+                    <div class="rd-scope-btns">
+                        <a href="consultation.html" class="rd-scope-btn primary"><i class="fa-solid fa-comments"></i> 상담 문의</a>
+                        <a href="feasibility.html" class="rd-scope-btn outline"><i class="fa-solid fa-calculator"></i> 사업성 검토</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<div id="chatbot-container"></div>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/chatbot.js"></script>
+<script src="../assets/data/mock-data.js"></script>
+</body>
+</html>

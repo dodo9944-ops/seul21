@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사업분야 — (주)세울엔지니어링</title>
+    <meta name="description" content="주택재개발, 주택재건축, 도시계획, 도시정비 PM/CM — 조합설립부터 준공까지 정비사업 전 과정을 실행 중심으로 관리합니다. (주)세울엔지니어링">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .sv-section { margin-bottom:35px; }
+    .sv-section:last-child { margin-bottom:0; }
+    .sv-section .section-title { margin-bottom:28px; }
+
+    /* 개요 */
+    .sv-intro {
+        font-size:16px; line-height:2; color:var(--gray-700); max-width:820px;
+    }
+    .sv-intro strong { color:var(--brand-navy); font-weight:700; }
+
+    /* 핵심 수치 바 */
+    .sv-highlight {
+        display:flex; gap:0; border-radius:var(--radius); overflow:hidden;
+        border:1px solid var(--gray-200); margin-bottom:64px;
+    }
+    .sv-highlight-item {
+        flex:1; padding:24px 20px; text-align:center;
+        border-right:1px solid var(--gray-200);
+    }
+    .sv-highlight-item:last-child { border-right:none; }
+    .sv-highlight-item .hl-num { font-size:22px; font-weight:800; color:var(--brand-dark); margin-bottom:4px; }
+    .sv-highlight-item .hl-num span { color:var(--gold); }
+    .sv-highlight-item .hl-desc { font-size:13px; color:var(--gray-600); }
+    @media(max-width:768px){
+        .sv-highlight{flex-wrap:wrap;}
+        .sv-highlight-item{flex:1 1 50%;border-bottom:1px solid var(--gray-200);}
+        .sv-highlight-item:nth-child(2){border-right:none;}
+        .sv-highlight-item:nth-child(3),.sv-highlight-item:nth-child(4){border-bottom:none;}
+    }
+
+    /* 4대 사업영역 카드 */
+    .sv-card-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
+    @media(max-width:860px){ .sv-card-grid{grid-template-columns:1fr;} }
+
+    .sv-card {
+        background:#fff; border:1px solid var(--gray-200); border-radius:16px;
+        padding:0; overflow:hidden; transition:all 0.25s;
+        display:flex; flex-direction:column;
+    }
+    .sv-card:hover { border-color:var(--gold); box-shadow:0 12px 36px rgba(0,0,0,0.07); transform:translateY(-3px); }
+
+    .sv-card-header {
+        background:linear-gradient(135deg,#0A0F1C,#142644);
+        padding:18px 24px; display:flex; align-items:center; gap:14px;
+        position:relative;
+    }
+    .sv-card-header::after {
+        content:''; position:absolute; right:-30px; top:-30px; width:120px; height:120px;
+        background:radial-gradient(circle,rgba(195,165,105,0.06) 0%,transparent 70%); border-radius:50%;
+    }
+    .sv-card-num {
+        width:38px; height:38px; border-radius:9px;
+        background:rgba(195,165,105,0.15); display:flex; align-items:center; justify-content:center;
+        font-size:15px; font-weight:800; color:var(--gold); flex-shrink:0;
+    }
+    .sv-card-header h3 { font-size:22px; font-weight:800; color:#fff; letter-spacing:-0.4px; line-height:1.25; }
+    .sv-card-header .sv-sub { font-size:10px; color:rgba(255,255,255,0.35); margin-top:5px; }
+    @media(max-width:860px){ .sv-card-header h3 { font-size:20px; } }
+    @media(max-width:480px){ .sv-card-header h3 { font-size:18px; } .sv-card-header { padding:14px 18px; } }
+
+    .sv-card-body { padding:32px 32px; flex:1; }
+    .sv-card-body .sv-desc {
+        font-size:14px; line-height:1.85; color:var(--gray-700); margin-bottom:20px;
+    }
+
+    .sv-strengths { list-style:none; margin-bottom:20px; }
+    .sv-strengths li {
+        display:flex; align-items:flex-start; gap:10px;
+        font-size:13px; color:var(--gray-700); line-height:1.7; margin-bottom:10px;
+    }
+    .sv-strengths li:last-child { margin-bottom:0; }
+    .sv-strengths li i { color:var(--gold); font-size:12px; margin-top:5px; flex-shrink:0; }
+
+    .sv-tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .sv-tag {
+        display:inline-block; padding:5px 14px; border-radius:20px;
+        font-size:12px; font-weight:600; color:var(--brand-navy);
+        background:rgba(20,38,68,0.05); border:1px solid rgba(20,38,68,0.08);
+    }
+
+    /* Hero keyword badges */
+    .hero-badges { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; justify-content:center; }
+    .hero-badge {
+        display:inline-block; padding:8px 20px; border-radius:20px;
+        font-size:13px; font-weight:700; color:#fff;
+        background:rgba(195,165,105,0.12); border:1px solid rgba(195,165,105,0.25);
+        transition:all 0.2s;
+    }
+    .hero-badge:hover {
+        background:rgba(195,165,105,0.25); border-color:rgba(195,165,105,0.5);
+    }
+
+    /* Hero tagline */
+    .hero-tagline {
+        font-size:18px; font-weight:700; color:#fff; margin-bottom:8px; letter-spacing:-0.3px;
+    }
+
+    /* CTA */
+    .sv-cta {
+        background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:var(--radius);
+        padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px;
+        position:relative; overflow:hidden;
+    }
+    .sv-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(195,165,105,0.08) 0%,transparent 70%); border-radius:50%; }
+    .sv-cta h3 { font-size:22px; font-weight:800; color:#fff; margin-bottom:8px; }
+    .sv-cta p { font-size:15px; color:rgba(255,255,255,0.55); }
+    .sv-cta-btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:var(--gold); color:#0A0F1C; border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap; }
+    .sv-cta-btn:hover { background:var(--gold-hover); }
+    @media(max-width:640px){ .sv-cta{flex-direction:column;padding:32px 24px;text-align:center;} }
+
+    /* 안내문 */
+    .sv-disclaimer {
+        background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius);
+        padding:20px 28px; font-size:13px; line-height:1.8; color:var(--gray-500);
+    }
+    
+    /* === Services Hero (about-hero 3안 패밀리) === */
+    .services-hero {
+        background: linear-gradient(135deg, #0F1D35 0%, #142644 40%, #0A0F1C 100%);
+        position: relative; overflow: hidden;
+        padding: 56px 0 52px; min-height: 400px;
+    }
+    .services-hero .hero-bg-photo {
+        position: absolute; top: 0; right: 0;
+        width: 58%; height: 100%; z-index: 0;
+    }
+    .services-hero .hero-bg-photo img {
+        width: 100%; height: 100%;
+        object-fit: cover; object-position: center 30%;
+        display: block; filter: brightness(0.86) contrast(1.12);
+    }
+    .services-hero .hero-bg-photo::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(90deg,
+            #0A0F1C 0%, rgba(10,15,28,0.94) 6%,
+            rgba(14,24,42,0.65) 24%, rgba(18,32,56,0.4) 48%,
+            rgba(20,38,68,0.28) 72%, rgba(20,38,68,0.22) 100%
+        ); z-index: 1;
+    }
+    .services-hero .hero-bg-photo::before {
+        content: ''; position: absolute;
+        top: 0; bottom: 0; left: 22%; width: 56%;
+        pointer-events: none;
+        background: linear-gradient(90deg,
+            rgba(15,26,46,0) 0%, rgba(15,26,46,0.06) 25%,
+            rgba(14,22,40,0.16) 52%, rgba(14,22,40,0.18) 62%,
+            rgba(15,26,46,0.08) 80%, rgba(15,26,46,0) 100%
+        ); filter: blur(24px); z-index: 2;
+    }
+    .services-hero::before {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
+        pointer-events: none; z-index: 1;
+    }
+    .services-hero::after {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
+        background-size: 60px 60px; pointer-events: none; z-index: 1;
+    }
+    .services-hero .inner {
+        position: relative; z-index: 2;
+        display: flex; align-items: center; gap: 48px;
+    }
+    .services-hero .hero-text { flex: 1; min-width: 0; position: relative; z-index: 2; }
+    .services-hero .hero-cards-float {
+        flex-shrink: 0; width: 360px;
+        display: grid; grid-template-columns: repeat(2, 1fr);
+        gap: 12px; position: relative; z-index: 2;
+        transform: translateY(6px);
+    }
+    .services-hero .hero-breadcrumb {
+        display: flex; align-items: center; gap: 6px;
+        font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 24px;
+    }
+    .services-hero .hero-breadcrumb a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
+    .services-hero .hero-breadcrumb a:hover { color: #C3A569; }
+    .services-hero .hero-breadcrumb span { color: #C3A569; font-weight: 600; }
+    .services-hero .hero-breadcrumb i { font-size: 10px; }
+    .services-hero .hero-label {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 12px; font-weight: 700; color: #C3A569;
+        letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .services-hero .hero-label::before { content: ''; display: block; width: 24px; height: 1px; background: #C3A569; }
+    .services-hero .hero-text h1 {
+        font-size: 38px; font-weight: 900; color: #fff;
+        line-height: 1.35; letter-spacing: -1px; margin-bottom: 16px;
+    }
+    .services-hero .hero-text h1 em { font-style: normal; color: #C3A569; }
+    .services-hero .hero-sub {
+        font-size: 16px; color: rgba(255,255,255,0.55);
+        line-height: 1.7; max-width: 480px;
+    }
+    .services-hero .hero-card {
+        background: rgba(10,16,30,0.57);
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 12px; padding: 22px 18px;
+        transition: all 0.3s;
+        backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .services-hero .hero-card:hover {
+        background: rgba(14,22,40,0.70);
+        border-color: rgba(195,165,105,0.3);
+        transform: translateY(-2px);
+    }
+    .services-hero .hero-card-icon {
+        width: 36px; height: 36px; border-radius: 8px;
+        background: rgba(195,165,105,0.16);
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 12px;
+    }
+    .services-hero .hero-card-icon i { font-size: 15px; color: #C3A569; }
+    .services-hero .hero-card h4 { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .services-hero .hero-card p { font-size: 11.5px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    @media (max-width: 1024px) {
+        .services-hero .inner { flex-direction: column; gap: 32px; }
+        .services-hero .hero-cards-float { width: 100%; max-width: 420px; }
+        .services-hero .hero-bg-photo { width: 100%; opacity: 0.25; }
+        .services-hero .hero-bg-photo::after {
+            background: linear-gradient(180deg, rgba(10,15,28,0.5) 0%, rgba(20,38,68,0.7) 100%);
+        }
+    }
+    @media (max-width: 600px) {
+        .services-hero { padding: 48px 0 40px; min-height: auto; }
+        .services-hero .hero-text h1 { font-size: 28px; }
+        .services-hero .hero-sub { font-size: 14px; }
+        .services-hero .hero-cards-float { grid-template-columns: 1fr; gap: 10px; }
+        .services-hero .hero-bg-photo { opacity: 0.15; }
+    }
+
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="services-hero">
+    <div class="hero-bg-photo">
+        <img src="../jpg/hero_services.png" alt="세울엔지니어링 사업분야">
+    </div>
+    <div class="inner">
+        <div class="hero-text">
+            <div class="hero-breadcrumb">
+                <a href="../index.html">홈</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span>사업분야</span>
+            </div>
+            <div class="hero-label">Business Areas</div>
+            <h1>정비사업의 <em>전 영역</em>을<br>다룹니다</h1>
+            <p class="hero-sub">재개발·재건축·소규모정비·도시계획·CM/PM — 사업 초기부터 준공까지 체계적으로 자문합니다</p>
+        </div>
+        <div class="hero-cards-float">
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h4>사업성 분석</h4>
+                <p>추진전략 및 수지분석 자문</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-handshake"></i></div>
+                <h4>이해관계 조율</h4>
+                <p>조합·행정·시공사 간 자문</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-stamp"></i></div>
+                <h4>인허가 자문</h4>
+                <p>인가 절차 및 행정 대응</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon"><i class="fa-solid fa-helmet-safety"></i></div>
+                <h4>CM / PM</h4>
+                <p>설계·시공·준공 품질 관리</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <!-- 개요 -->
+        <div class="sv-section">
+            <h2 class="section-title">사업분야 개요</h2>
+            <p class="sv-intro">
+                세울엔지니어링은 재개발·재건축·소규모정비사업을 중심으로, 도시정비사업의 실제 추진을 지원하는 전문조직입니다. 사업성 검토, 인허가 대응, 문서체계화, 이해관계 조율, 추진관리까지 분리하지 않고 하나의 흐름으로 통합 지원합니다.
+            </p>
+        </div>
+
+        <!-- 핵심 수치 -->
+        <div class="sv-highlight">
+            <div class="sv-highlight-item"><div class="hl-num">20<span>년+</span></div><div class="hl-desc">정비사업 실무경험 기반</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">전 <span>과정</span></div><div class="hl-desc">기획부터 인허가·추진까지</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">통합 <span>대응</span></div><div class="hl-desc">행정·사업성·문서 통합</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">실행 <span>중심</span></div><div class="hl-desc">현장 중심 사업관리</div></div>
+        </div>
+
+        <!-- 정비사업 -->
+        <div class="sv-section">
+            <h2 class="section-title">정비사업</h2>
+            <div class="sv-card-grid">
+
+                <!-- 1. 주택재개발 -->
+                <a href="redevelopment-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">01</div>
+                        <div>
+                            <h3>주택재개발 정비사업</h3>
+                            <div class="sv-sub">Urban Redevelopment — 상세보기 →</div>
+                        </div>
+                    </div>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            현행 도시정비법에 따른 일반절차(11단계)와 서울시 신속통합기획을 구분하여 기본계획 수립부터 준공·조합 해산까지 전 과정을 관리합니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>권리관계 및 이해관계 조율</li>
+                            <li><i class="fa-solid fa-check"></i>조합설립·동의징구·관리처분·분양신청 대응</li>
+                            <li><i class="fa-solid fa-check"></i>일반절차(11단계)·신속통합기획 이원 추진관리</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">일반절차 11단계</span>
+                            <span class="sv-tag">신속통합기획</span>
+                            <span class="sv-tag">통합건축심의</span>
+                            <span class="sv-tag">관리처분</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 2. 주택재건축 -->
+                <a href="reconstruction-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">02</div>
+                        <div>
+                            <h3>주택재건축 정비사업</h3>
+                            <div class="sv-sub">Housing Reconstruction — 상세보기 →</div>
+                        </div>
+                    </div>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            현행 도시정비법에 따른 일반절차(12단계)와 서울시 신속통합기획을 구분하여 안전진단(재건축진단)부터 준공까지 전 과정을 관리합니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>일반절차(12단계)·신속통합기획 이원 추진관리</li>
+                            <li><i class="fa-solid fa-check"></i>안전진단(재건축진단) 및 사업시행 대응</li>
+                            <li><i class="fa-solid fa-check"></i>관리처분 및 이해관계 검토</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">일반절차 12단계</span>
+                            <span class="sv-tag">신속통합기획</span>
+                            <span class="sv-tag">재건축진단</span>
+                            <span class="sv-tag">관리처분</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 3. 소규모 정비사업 -->
+                <a href="small-reconstruction-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">03</div>
+                        <div>
+                            <h3>소규모 정비사업</h3>
+                            <div class="sv-sub">Small-scale Improvement — 상세보기 →</div>
+                        </div>
+                        <span style="position:absolute;top:12px;right:16px;background:var(--gold);color:#0A0F1C;font-size:10px;font-weight:800;padding:4px 10px;border-radius:4px;z-index:1;">SEUL 특화분야</span>
+                    </div>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            소규모재건축과 가로주택정비사업을 포괄하는 소규모 정비사업. 정비구역 지정 없이 200세대 미만 노후 주거지를 신속하게 정비합니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>주민합의형 추진 대응</li>
+                            <li><i class="fa-solid fa-check"></i>기획부터 인허가까지 밀착 지원</li>
+                            <li><i class="fa-solid fa-check"></i>소규모 사업 특성에 맞는 절차관리</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">소규모재건축</span>
+                            <span class="sv-tag">가로주택정비</span>
+                            <span class="sv-tag">주민합의</span>
+                            <span class="sv-tag">인허가지원</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 4. 도심복합개발 -->
+                <a href="garoju-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">04</div>
+                        <div>
+                            <h3>도심복합개발</h3>
+                            <div class="sv-sub">Urban Complex Development — 상세보기 →</div>
+                        </div>
+                    </div>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등 복합적 사업구조와 고밀 개발방식을 종합적으로 검토하고 대상지에 맞는 현실적인 추진전략을 제시합니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>통합재건축·신속통합기획 적용 검토</li>
+                            <li><i class="fa-solid fa-check"></i>민간도심복합개발 사업구조 분석</li>
+                            <li><i class="fa-solid fa-check"></i>역세권 개발 입지·사업성 검토</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">통합재건축</span>
+                            <span class="sv-tag">신속통합기획</span>
+                            <span class="sv-tag">역세권개발</span>
+                            <span class="sv-tag">민간복합개발</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- 특화사업 -->
+        <div class="sv-section" style="margin-top:64px">
+            <h2 class="section-title">엔지니어링사업</h2>
+            <div class="sv-card-grid">
+
+                <a href="urbanplanning-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">05</div>
+                        <div>
+                            <h3>도시계획(엔지니어링)</h3>
+                            <div class="sv-sub">Urban Planning & Engineering — 상세보기 →</div>
+                        </div>
+                    </div>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            사업구조와 계획기준을 검토하고, 정비사업과 연결되는 실행 가능한 계획 수립을 지원합니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>사업구조 및 사업성 검토</li>
+                            <li><i class="fa-solid fa-check"></i>계획기준 및 정비계획 연계</li>
+                            <li><i class="fa-solid fa-check"></i>실행 가능한 계획 수립 지원</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">도시계획</span>
+                            <span class="sv-tag">사업성검토</span>
+                            <span class="sv-tag">정비계획</span>
+                            <span class="sv-tag">실행전략</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pmcm-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">06</div>
+                        <div>
+                            <h3>도시정비 PM/CM</h3>
+                            <div class="sv-sub">Project & Construction Management — 상세보기 →</div>
+                        </div>
+                    </div>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            일정, 리스크, 협력사, 문서체계를 통합 관리하여 사업의 추진력을 높입니다. 단순 자문을 넘어 실제 사업관리 관점에서 추진체계를 정비합니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>일정 및 단계별 실행관리</li>
+                            <li><i class="fa-solid fa-check"></i>리스크 및 협력사 관리</li>
+                            <li><i class="fa-solid fa-check"></i>문서체계 및 추진체계 정비</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">PM</span>
+                            <span class="sv-tag">CM</span>
+                            <span class="sv-tag">일정관리</span>
+                            <span class="sv-tag">추진체계</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="sv-section">
+            <div class="sv-cta">
+                <div style="position:relative;z-index:1;">
+                    <h3>내 사업에 맞는 추진방식을 상담받으세요</h3>
+                    <p>재개발·재건축·소규모정비사업별 맞춤 검토와 추진 방향을 안내합니다</p>
+                </div>
+                <a href="contact.html" class="sv-cta-btn"><i class="fa-solid fa-paper-plane"></i> 맞춤 상담 요청</a>
+            </div>
+        </div>
+
+        <!-- 안내 -->
+        <div class="sv-section">
+            <div class="sv-disclaimer">
+                사업유형의 적용 여부와 추진 방식은 대상지 요건과 권리구조에 따라 달라질 수 있습니다.
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+</body>
+</html>

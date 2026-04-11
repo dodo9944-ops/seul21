@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 — (주)세울엔지니어링</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .auth-container { max-width: 440px; margin: 0 auto; padding: 60px 20px 80px; }
+    .auth-logo { text-align: center; margin-bottom: 8px; }
+    .auth-logo a { font-size: 28px; font-weight: 900; color: var(--gray-900); letter-spacing: -0.5px; }
+    .auth-subtitle { text-align: center; font-size: 14px; color: var(--gray-500); margin-bottom: 36px; }
+    .auth-box { border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 40px 32px; }
+    .auth-box h2 { font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 32px; }
+    .login-error {
+        display: none; background: #FDECEA; color: var(--red);
+        padding: 12px 16px; border-radius: var(--radius-sm);
+        font-size: 13px; margin-bottom: 16px; text-align: center;
+    }
+    .demo-info {
+        background: var(--accent-light); color: var(--accent);
+        padding: 12px 16px; border-radius: var(--radius-sm);
+        font-size: 13px; margin-bottom: 24px; text-align: center;
+    }
+    .demo-info i { margin-right: 4px; }
+    .remember-row {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: 24px; font-size: 13px;
+    }
+    .remember-row label { display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--gray-600); }
+    .remember-row label input { width: 16px; height: 16px; accent-color: var(--accent); }
+    .auth-links { display: flex; justify-content: center; gap: 16px; margin-top: 20px; font-size: 13px; }
+    .auth-links a { color: var(--gray-500); transition: color var(--transition); }
+    .auth-links a:hover { color: var(--gray-900); }
+    .auth-links .sep { color: var(--gray-300); }
+    .auth-divider {
+        display: flex; align-items: center; gap: 12px;
+        margin: 28px 0; color: var(--gray-400); font-size: 12px;
+    }
+    .auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+    .social-buttons { display: flex; gap: 12px; }
+    .social-btn {
+        flex: 1; height: 48px; border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        font-size: 14px; font-weight: 600; cursor: pointer; transition: all var(--transition);
+        font-family: var(--font); background: var(--white);
+    }
+    .social-btn:hover { border-color: var(--gray-400); background: var(--gray-50); }
+    .social-btn.kakao { background: #FEE500; border-color: #FEE500; color: #3C1E1E; }
+    .social-btn.kakao:hover { background: #F0D900; border-color: #F0D900; }
+    .social-btn.naver { background: #03C75A; border-color: #03C75A; color: var(--white); }
+    .social-btn.naver:hover { background: #02B350; border-color: #02B350; }
+    .social-btn.google { background: var(--white); color: var(--gray-700); }
+    .social-btn.google:hover { background: var(--gray-50); }
+    @media (max-width: 540px) {
+        .auth-box { padding: 32px 20px; }
+        .social-buttons { flex-direction: column; }
+    }
+    </style>
+</head>
+<body style="background:var(--gray-50);">
+<div id="site-header"></div>
+
+<div class="auth-container">
+    <div class="auth-logo"><a href="../index.html">세울</a></div>
+    <p class="auth-subtitle">도시정비 전문 엔지니어링</p>
+
+    <div class="auth-box">
+        <h2>로그인</h2>
+
+        <div class="demo-info">
+            <i class="fa-solid fa-circle-info"></i> 데모 모드: 아무 이메일로 로그인 가능합니다 (예: kim@test.com)
+        </div>
+
+        <div class="login-error" id="loginError"></div>
+
+        <form id="loginForm" autocomplete="off">
+            <div class="form-group">
+                <label class="form-label" for="email">이메일</label>
+                <input type="email" class="form-input" id="email" placeholder="이메일 주소를 입력하세요" autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="password">비밀번호</label>
+                <input type="password" class="form-input" id="password" placeholder="비밀번호를 입력하세요" autocomplete="current-password">
+            </div>
+
+            <div class="remember-row">
+                <label><input type="checkbox" id="rememberMe"> 로그인 상태 유지</label>
+                <a href="reset-password.html" style="color:var(--accent);font-weight:500;">비밀번호 찾기</a>
+            </div>
+
+            <button type="submit" class="btn btn-accent btn-lg" style="width:100%;">
+                <i class="fa-solid fa-right-to-bracket"></i> 로그인
+            </button>
+        </form>
+
+        <div class="auth-links">
+            <a href="find-id.html">아이디(이메일) 찾기</a>
+            <span class="sep">|</span>
+            <a href="reset-password.html">비밀번호 재설정</a>
+            <span class="sep">|</span>
+            <a href="register.html">회원가입</a>
+        </div>
+
+        <div class="auth-divider">간편 로그인</div>
+
+        <div class="social-buttons">
+            <button type="button" class="social-btn kakao" id="btnKakao">
+                <i class="fa-solid fa-comment"></i> 카카오
+            </button>
+            <button type="button" class="social-btn naver" id="btnNaver">
+                <strong>N</strong> 네이버
+            </button>
+            <button type="button" class="social-btn google" id="btnGoogle">
+                <i class="fa-brands fa-google"></i> 구글
+            </button>
+        </div>
+        <p id="socialNote" style="text-align:center;font-size:11px;color:var(--gray-400);margin-top:8px;display:none;">
+            소셜 로그인 시 자동으로 회원가입됩니다.
+        </p>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    // 이미 로그인 상태면 메인으로 이동
+    if (DataService.isUserLoggedIn()) {
+        location.href = '../index.html';
+        return;
+    }
+
+    const form = document.getElementById('loginForm');
+    const errorEl = document.getElementById('loginError');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        errorEl.style.display = 'none';
+
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!email) {
+            errorEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> 연락처 또는 이메일을 입력해주세요.';
+            errorEl.style.display = 'block';
+            document.getElementById('email').focus();
+            return;
+        }
+
+        var submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 로그인 중...';
+
+        fetch('/api/members', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'login', phone: email, password: password })
+        })
+        .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+        .then(function(res) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> 로그인';
+            if (res.ok) {
+                sessionStorage.setItem('seul_user', JSON.stringify(res.data.user));
+                App.toast('환영합니다, ' + res.data.user.name + '님!', 'success');
+                setTimeout(function() { location.href = '../index.html'; }, 800);
+            } else {
+                errorEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> ' + (res.data.error || '로그인에 실패했습니다.');
+                errorEl.style.display = 'block';
+            }
+        })
+        .catch(function() {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> 로그인';
+            errorEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> 서버 연결에 실패했습니다.';
+            errorEl.style.display = 'block';
+        });
+    });
+
+    // ── 소셜 로그인 설정 ──
+    var SOCIAL_CONFIG = {
+      naver: {
+        clientId: 'ckwTb7PgvVwgaojPNsvG',
+        authUrl: 'https://nid.naver.com/oauth2.0/authorize',
+        redirectUri: location.origin + '/pages/login.html'
+      },
+      kakao: {
+        clientId: '1b6880171cbd29e9b947a273199b4010',
+        authUrl: 'https://kauth.kakao.com/oauth/authorize',
+        redirectUri: location.origin + '/pages/login.html'
+      },
+      google: {
+        clientId: '928366849638-5u588474c3jhj3u46hi5d4insittituq.apps.googleusercontent.com',
+        authUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
+        redirectUri: location.origin + '/pages/login.html'
+      }
+    };
+
+    function socialLogin(provider) {
+      var cfg = SOCIAL_CONFIG[provider];
+      if (!cfg || !cfg.clientId) {
+        alert('소셜 로그인 준비 중입니다. 일반 로그인을 이용해주세요.');
+        return;
+      }
+      var state = Math.random().toString(36).substring(2);
+      sessionStorage.setItem('social_state', state);
+      sessionStorage.setItem('social_provider', provider);
+
+      var params = { response_type: 'code', client_id: cfg.clientId, redirect_uri: cfg.redirectUri, state: state };
+      if (provider === 'google') params.scope = 'openid email profile';
+      if (provider === 'naver') params.scope = 'name email mobile';
+
+      var url = cfg.authUrl + '?' + new URLSearchParams(params).toString();
+      location.href = url;
+    }
+
+    document.getElementById('btnNaver').addEventListener('click', function() { socialLogin('naver'); });
+    document.getElementById('btnKakao').addEventListener('click', function() { socialLogin('kakao'); });
+    document.getElementById('btnGoogle').addEventListener('click', function() { socialLogin('google'); });
+
+    // ── OAuth 콜백 처리 ──
+    var urlParams = new URLSearchParams(location.search);
+    var authCode = urlParams.get('code');
+    var authState = urlParams.get('state');
+    if (authCode) {
+      var provider = sessionStorage.getItem('social_provider');
+      var savedState = sessionStorage.getItem('social_state');
+      if (provider && (savedState === authState || provider === 'kakao')) {
+        errorEl.style.display = 'none';
+        var statusEl = document.createElement('div');
+        statusEl.style.cssText = 'text-align:center;padding:16px;color:var(--accent);font-weight:600;';
+        statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 소셜 로그인 처리 중...';
+        form.parentNode.insertBefore(statusEl, form);
+        form.style.display = 'none';
+
+        fetch('/api/social-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ provider: provider, code: authCode, state: authState })
+        })
+        .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+        .then(function(res) {
+          if (res.ok) {
+            sessionStorage.setItem('seul_user', JSON.stringify(res.data.user));
+            sessionStorage.removeItem('social_state');
+            sessionStorage.removeItem('social_provider');
+            App.toast('환영합니다, ' + res.data.user.name + '님!', 'success');
+            setTimeout(function() { location.href = '../index.html'; }, 800);
+          } else {
+            var errMsg = res.data.error || '소셜 로그인에 실패했습니다.';
+            if (res.data.detail) errMsg += ' (' + JSON.stringify(res.data.detail) + ')';
+            statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:var(--red)"></i> ' + errMsg;
+            form.style.display = '';
+          }
+        })
+        .catch(function() {
+          statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:var(--red)"></i> 서버 연결에 실패했습니다.';
+          form.style.display = '';
+        });
+      }
+      // URL에서 code 파라미터 제거
+      history.replaceState({}, '', location.pathname);
+    }
+
+    // 소셜 로그인 설정 여부 표시
+    if (SOCIAL_CONFIG.naver.clientId || SOCIAL_CONFIG.kakao.clientId || SOCIAL_CONFIG.google.clientId) {
+      document.getElementById('socialNote').style.display = 'block';
+    }
+})();
+</script>
+</body>
+</html>

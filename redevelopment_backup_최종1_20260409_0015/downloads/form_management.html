@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>관리처분계획 변경인가 신청서 - (주)세울엔지니어링</title>
+<style>
+  @page {
+    size: A4;
+    margin: 15mm 18mm 20mm 18mm;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif;
+    font-size: 10pt;
+    color: #1a1a1a;
+    line-height: 1.6;
+    background: #f0f0f0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .document {
+    max-width: 210mm;
+    margin: 0 auto;
+    background: #fff;
+    padding: 15mm 18mm 20mm 18mm;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .document { padding: 0; max-width: none; }
+    .no-print { display: none !important; }
+  }
+
+  /* ── Header ── */
+  .header {
+    border-bottom: 3px solid #0A0F1C;
+    padding-bottom: 10pt;
+    margin-bottom: 8pt;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .company-name {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #0A0F1C;
+    letter-spacing: 1px;
+  }
+
+  .company-sub {
+    font-size: 7.5pt;
+    color: #666;
+    margin-top: 1pt;
+  }
+
+  .doc-id {
+    font-size: 7.5pt;
+    color: #999;
+    text-align: right;
+  }
+
+  /* ── Title ── */
+  .form-title {
+    text-align: center;
+    font-size: 18pt;
+    font-weight: 800;
+    color: #0A0F1C;
+    letter-spacing: 4pt;
+    margin: 22pt 0 6pt 0;
+  }
+
+  .form-title-sub {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: 700;
+    color: #0A0F1C;
+    letter-spacing: 3pt;
+    margin-bottom: 16pt;
+  }
+
+  .form-subtitle {
+    text-align: center;
+    font-size: 10pt;
+    color: #555;
+    margin-bottom: 18pt;
+  }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12pt;
+  }
+
+  table, th, td {
+    border: 1px solid #333;
+  }
+
+  th {
+    background: #F4F1EB;
+    font-weight: 700;
+    font-size: 9pt;
+    color: #0A0F1C;
+    padding: 6pt 8pt;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  td {
+    padding: 6pt 8pt;
+    font-size: 9pt;
+    vertical-align: middle;
+  }
+
+  td.field-value {
+    min-height: 20pt;
+    color: #888;
+  }
+
+  .section-title {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #0A0F1C;
+    margin: 16pt 0 8pt 0;
+    padding-left: 8pt;
+    border-left: 4px solid #C3A569;
+  }
+
+  /* ── Checkbox ── */
+  .checkbox {
+    display: inline-block;
+    width: 12pt;
+    height: 12pt;
+    border: 1.5px solid #333;
+    border-radius: 2px;
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+
+  /* ── Signature ── */
+  .signature-area {
+    margin-top: 28pt;
+    text-align: center;
+  }
+
+  .signature-date {
+    font-size: 11pt;
+    margin-bottom: 28pt;
+    letter-spacing: 2pt;
+  }
+
+  .signature-line {
+    font-size: 10.5pt;
+    font-weight: 700;
+    margin-bottom: 6pt;
+  }
+
+  .seal-box {
+    display: inline-block;
+    width: 50pt;
+    height: 50pt;
+    border: 1.5px solid #c00;
+    border-radius: 50%;
+    margin-left: 10pt;
+    vertical-align: middle;
+    position: relative;
+  }
+
+  .seal-box::after {
+    content: '인';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16pt;
+    color: #c00;
+    font-weight: 900;
+  }
+
+  .recipient {
+    font-size: 12pt;
+    font-weight: 800;
+    text-align: center;
+    margin-top: 22pt;
+    color: #0A0F1C;
+    letter-spacing: 4pt;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 18pt;
+    padding-top: 8pt;
+    border-top: 2px solid #0A0F1C;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-size: 7pt;
+    color: #999;
+  }
+
+  .footer-right {
+    font-size: 7pt;
+    color: #C3A569;
+    font-weight: 700;
+  }
+
+  .print-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #0A0F1C;
+    color: #C3A569;
+    border: none;
+    padding: 10px 24px;
+    font-size: 11pt;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 100;
+  }
+
+  .print-btn:hover {
+    background: #1a2540;
+  }
+
+  .memo-area {
+    width: 100%;
+    min-height: 80pt;
+    border: 1px solid #333;
+    padding: 8pt;
+    font-size: 9pt;
+    line-height: 2;
+    background: repeating-linear-gradient(
+      transparent,
+      transparent 19pt,
+      #e8e8e8 19pt,
+      #e8e8e8 20pt
+    );
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ 인쇄</button>
+
+<div class="document">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <div class="company-name">(주)세울엔지니어링</div>
+      <div class="company-sub">SEUL ENGINEERING CO., LTD.</div>
+    </div>
+    <div class="doc-id">
+      문서번호: SE-FORM-002<br>
+      서식 버전: 2026.04
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="form-title">관리처분계획</div>
+  <div class="form-title-sub">변경인가 신청서</div>
+  <div class="form-subtitle">도시 및 주거환경정비법 제74조·제78조에 의거</div>
+
+  <!-- 기본 정보 -->
+  <div class="section-title">기본 사업 정보</div>
+  <table>
+    <tr>
+      <th style="width:22%;">사업명</th>
+      <td colspan="3" class="field-value">&nbsp;</td>
+    </tr>
+    <tr>
+      <th>정비구역명</th>
+      <td colspan="3" class="field-value">&nbsp;</td>
+    </tr>
+    <tr>
+      <th>조합명칭</th>
+      <td style="width:28%;" class="field-value">&nbsp;</td>
+      <th style="width:22%;">인가번호</th>
+      <td class="field-value">&nbsp;</td>
+    </tr>
+    <tr>
+      <th>최초 인가일</th>
+      <td class="field-value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;월 &nbsp;&nbsp;&nbsp;일</td>
+      <th>변경 차수</th>
+      <td class="field-value">제 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;차 변경</td>
+    </tr>
+  </table>
+
+  <!-- 변경 사유 -->
+  <div class="section-title">변경 사유</div>
+  <div class="memo-area">&nbsp;</div>
+
+  <!-- 변경 전/후 비교표 -->
+  <div class="section-title" style="margin-top:16pt;">주요 변경 내용 비교표</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">순번</th>
+        <th style="width:24%;">항목</th>
+        <th style="width:30%;">변경 전</th>
+        <th style="width:30%;">변경 후</th>
+        <th style="width:10%;">비고</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:center;">1</td>
+        <td style="text-align:center;">분양설계(세대수)</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">2</td>
+        <td style="text-align:center;">비례율(%)</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">3</td>
+        <td style="text-align:center;">조합원 분담금(평균)</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">4</td>
+        <td style="text-align:center;">일반분양 세대수</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">5</td>
+        <td style="text-align:center;">총 사업비(백만원)</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">6</td>
+        <td style="text-align:center;">정비기반시설</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">7</td>
+        <td style="text-align:center;">용적률(%)</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">8</td>
+        <td style="text-align:center;">건폐율(%)</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">9</td>
+        <td style="text-align:center;">임대주택 세대수</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">10</td>
+        <td style="text-align:center;">기타</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 총회 의결 현황 -->
+  <div class="section-title">총회 의결 현황</div>
+  <table>
+    <tr>
+      <th style="width:22%;">총회 개최일</th>
+      <td style="width:28%;" class="field-value">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;월 &nbsp;&nbsp;&nbsp;일</td>
+      <th style="width:22%;">총회 구분</th>
+      <td class="field-value">&nbsp;</td>
+    </tr>
+    <tr>
+      <th>조합원 총수</th>
+      <td class="field-value" style="text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명</td>
+      <th>출석 조합원</th>
+      <td class="field-value" style="text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명</td>
+    </tr>
+    <tr>
+      <th>찬성</th>
+      <td class="field-value" style="text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명</td>
+      <th>의결 결과</th>
+      <td class="field-value">&nbsp;</td>
+    </tr>
+  </table>
+
+  <!-- 첨부서류 -->
+  <div class="section-title">첨부서류 체크리스트</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">순번</th>
+        <th style="width:6%;">확인</th>
+        <th>서류명</th>
+        <th style="width:10%;">부수</th>
+        <th style="width:14%;">비고</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:center;">1</td>
+        <td style="text-align:center;"><span class="checkbox"></span></td>
+        <td>변경 관리처분계획서</td>
+        <td style="text-align:center;" class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">2</td>
+        <td style="text-align:center;"><span class="checkbox"></span></td>
+        <td>변경 총회 의사록(공증본)</td>
+        <td style="text-align:center;" class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">3</td>
+        <td style="text-align:center;"><span class="checkbox"></span></td>
+        <td>감정평가서(2개 업체 이상)</td>
+        <td style="text-align:center;" class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">4</td>
+        <td style="text-align:center;"><span class="checkbox"></span></td>
+        <td>분양설계 변경 도서</td>
+        <td style="text-align:center;" class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">5</td>
+        <td style="text-align:center;"><span class="checkbox"></span></td>
+        <td>사업시행계획 변경 인가서(해당 시)</td>
+        <td style="text-align:center;" class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">6</td>
+        <td style="text-align:center;"><span class="checkbox"></span></td>
+        <td>조합원별 분담금 추산액 내역서</td>
+        <td style="text-align:center;" class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">7</td>
+        <td style="text-align:center;"><span class="checkbox"></span></td>
+        <td>변경 전·후 대비표</td>
+        <td style="text-align:center;" class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">8</td>
+        <td style="text-align:center;"><span class="checkbox"></span></td>
+        <td>기타 구청장이 요구하는 서류</td>
+        <td style="text-align:center;" class="field-value">&nbsp;</td>
+        <td class="field-value">&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 서약 문구 -->
+  <div style="border:1.5px solid #0A0F1C; padding:10pt 14pt; margin:14pt 0; background:#FAFAF8; font-size:9pt; line-height:1.7;">
+    위와 같이 「도시 및 주거환경정비법」 제74조 및 제78조의 규정에 따라 관리처분계획 변경인가를 신청합니다.
+    기재 내용이 사실과 상이할 경우 이에 따른 법적 책임을 질 것을 서약합니다.
+  </div>
+
+  <!-- 서명란 -->
+  <div class="signature-area">
+    <div class="signature-date">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;월 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일
+    </div>
+    <div style="margin-bottom:10pt;">
+      <span class="signature-line">신청인 &nbsp;조합명: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
+    <div style="margin-bottom:22pt;">
+      <span class="signature-line">조합장: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="seal-box"></span>
+    </div>
+    <div class="recipient">○ ○ 구청장 &nbsp;귀하</div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left">
+      (주)세울엔지니어링 | 정비사업 전문관리 | www.seul21.com<br>
+      본 서식은 참고용이며, 관할 지자체 소정 양식을 반드시 확인하시기 바랍니다.
+    </div>
+    <div class="footer-right">SEUL ENGINEERING</div>
+  </div>
+
+</div>
+
+</body>
+</html>

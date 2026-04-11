@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서울시 정비사업 운영 가이드라인 핵심 요약 | (주)세울엔지니어링</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A0F1C;
+    --navy-light: #141B2D;
+    --navy-mid: #1E2A42;
+    --gold: #C3A569;
+    --gold-light: #D4BC8A;
+    --gold-pale: #F5EDD8;
+    --text: #2C2C2C;
+    --text-light: #555;
+    --bg: #FAFAF8;
+    --white: #FFFFFF;
+    --border: #E0DDD5;
+    --success: #2E7D4F;
+    --warning: #B85C1F;
+    --info: #1A5FA0;
+  }
+  @page {
+    size: A4;
+    margin: 18mm 15mm 20mm 15mm;
+  }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Print Utilities ── */
+  .page-break { page-break-after: always; }
+  .no-break { page-break-inside: avoid; }
+  @media print {
+    body { background: white; font-size: 9.5pt; }
+    .container { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* ═══════════════════════════════════════
+     TITLE PAGE
+     ═══════════════════════════════════════ */
+  .title-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .title-page::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(195, 165, 105, 0.08);
+    border-radius: 50%;
+  }
+  .title-page::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -80px;
+    width: 500px;
+    height: 500px;
+    border: 1px solid rgba(195, 165, 105, 0.05);
+    border-radius: 50%;
+  }
+  .title-brand {
+    font-size: 12pt;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .title-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 24px auto;
+  }
+  .title-main {
+    font-size: 30pt;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .title-main em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .title-sub {
+    font-size: 14pt;
+    font-weight: 300;
+    color: var(--gold-light);
+    margin-top: 8px;
+    letter-spacing: 2px;
+  }
+  .title-meta {
+    margin-top: 60px;
+    font-size: 9.5pt;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.9;
+  }
+  .title-meta strong {
+    color: rgba(255,255,255,0.7);
+  }
+  .title-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 6px 24px;
+    border-radius: 3px;
+    font-size: 9pt;
+    letter-spacing: 3px;
+    margin-top: 40px;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION STYLES
+     ═══════════════════════════════════════ */
+  .content-area {
+    padding: 50px 0;
+  }
+  section {
+    margin-bottom: 56px;
+  }
+  .section-number {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 3px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 20pt;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .section-subtitle {
+    font-size: 10.5pt;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--gold);
+  }
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 28px 0 12px;
+  }
+  h4 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--navy-mid);
+    margin: 20px 0 8px;
+  }
+  p {
+    margin-bottom: 14px;
+    text-align: justify;
+  }
+
+  /* ── Info Box ── */
+  .info-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin: 20px 0;
+  }
+  .info-box.navy {
+    border-left-color: var(--navy);
+    background: #F4F5F8;
+  }
+  .info-box.warning {
+    border-left-color: var(--warning);
+    background: #FFF9F0;
+  }
+  .info-box.success {
+    border-left-color: var(--success);
+    background: #F0F8F3;
+  }
+  .info-box-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* ── Table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 10pt;
+  }
+  table thead th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 9.5pt;
+    letter-spacing: 0.5px;
+  }
+  table thead th:first-child { border-radius: 4px 0 0 0; }
+  table thead th:last-child { border-radius: 0 4px 0 0; }
+  table tbody td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table tbody tr:nth-child(even) { background: #F8F8F6; }
+  table tbody tr:hover { background: var(--gold-pale); }
+  .highlight-cell {
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* ── List ── */
+  ul, ol {
+    margin: 12px 0 16px 20px;
+  }
+  ul li, ol li {
+    margin-bottom: 6px;
+    line-height: 1.7;
+  }
+
+  /* ── Footer ── */
+  .doc-footer {
+    margin-top: 60px;
+    padding: 30px 0;
+    border-top: 2px solid var(--navy);
+    text-align: center;
+    font-size: 9pt;
+    color: var(--text-light);
+  }
+  .doc-footer strong {
+    color: var(--navy);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ TITLE PAGE ═══════════ -->
+<div class="title-page">
+  <div class="title-brand">(주)세울엔지니어링</div>
+  <div class="title-divider"></div>
+  <h1 class="title-main">서울시 정비사업<br>운영 가이드라인<br><em>핵심 요약</em></h1>
+  <p class="title-sub">Seoul Urban Renewal Operation Guidelines</p>
+  <div class="title-meta">
+    <strong>발행</strong> (주)세울엔지니어링 정비사업팀<br>
+    <strong>기준</strong> 2026년 4월 현행 가이드라인<br>
+    <strong>용도</strong> 조합 임원 및 관계자 교육용
+  </div>
+  <div class="title-badge">Professional Guide</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<div class="container content-area">
+
+  <!-- ── 목차 ── -->
+  <section class="no-break">
+    <div class="section-number">CONTENTS</div>
+    <h2 class="section-title">목차</h2>
+    <div class="section-subtitle">서울시 정비사업 운영 가이드라인의 핵심 내용을 6개 분야로 정리하였습니다.</div>
+    <table>
+      <thead>
+        <tr><th style="width:80px">장</th><th>제목</th><th style="width:120px">페이지</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">제1장</td><td>정비구역 지정 기준</td><td>3</td></tr>
+        <tr><td class="highlight-cell">제2장</td><td>조합운영 기준</td><td>5</td></tr>
+        <tr><td class="highlight-cell">제3장</td><td>시공사 선정 기준</td><td>7</td></tr>
+        <tr><td class="highlight-cell">제4장</td><td>분양가 산정 기준</td><td>9</td></tr>
+        <tr><td class="highlight-cell">제5장</td><td>공공기여 및 기부채납</td><td>11</td></tr>
+        <tr><td class="highlight-cell">제6장</td><td>사업시행 관리 및 감독</td><td>13</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 제1장 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 01</div>
+    <h2 class="section-title">정비구역 지정 기준</h2>
+    <div class="section-subtitle">정비구역으로 지정되기 위한 법적·물리적 요건과 서울시 자체 운영기준을 정리합니다.</div>
+
+    <h3>1. 핵심 내용</h3>
+    <p>서울시 정비구역 지정은 「도시 및 주거환경정비법」 제16조에 근거하며, 서울시는 자체 가이드라인을 통해 보다 구체적인 지정 기준을 운영하고 있습니다. 정비구역 지정을 위해서는 노후·불량 건축물이 일정 비율 이상이어야 하며, 해당 구역의 기반시설 현황, 주거환경 실태조사 결과 등이 종합적으로 검토됩니다.</p>
+
+    <h3>2. 적용 기준</h3>
+    <table>
+      <thead>
+        <tr><th>구분</th><th>재개발사업</th><th>재건축사업</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">노후도 기준</td><td>노후·불량 건축물 2/3 이상</td><td>노후·불량 건축물 2/3 이상 (안전진단 D등급 이하)</td></tr>
+        <tr><td class="highlight-cell">면적 기준</td><td>10,000㎡ 이상 (예외 인정 가능)</td><td>기존 단지 또는 블록 단위</td></tr>
+        <tr><td class="highlight-cell">호수밀도</td><td>60호/ha 이상</td><td>해당 없음</td></tr>
+        <tr><td class="highlight-cell">기반시설</td><td>과소필지 비율, 도로율 등 검토</td><td>기존 기반시설 활용 여부 검토</td></tr>
+        <tr><td class="highlight-cell">주거환경</td><td>실태조사 점수 기준 충족</td><td>구조안전성 중심 평가</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3. 유의사항</h3>
+    <div class="info-box warning">
+      <div class="info-box-title">주의 : 정비구역 해제 위험</div>
+      <p>정비구역 지정 후 일정 기간 내 조합설립인가를 받지 못하면 자동 해제(일몰제)될 수 있습니다. 재개발의 경우 지정 고시일로부터 3년 이내 조합설립인가, 재건축의 경우 안전진단 후 2년 이내 추진위 구성이 필요합니다.</p>
+    </div>
+    <div class="info-box navy">
+      <div class="info-box-title">서울시 특별 기준</div>
+      <p>서울시는 역세권, 준공업지역 등에 대해 별도의 정비구역 지정 특례를 운영하고 있으며, 「2025 서울시 도시·주거환경정비 기본계획」에 따른 정비예정구역 우선순위 체계를 적용합니다. 특히 도시재생과 연계한 정비구역 지정을 권장하고 있습니다.</p>
+    </div>
+
+    <ul>
+      <li>정비구역 지정 전 주민설명회를 반드시 개최하여야 합니다.</li>
+      <li>환경영향평가, 교통영향평가 등 사전 협의가 필요합니다.</li>
+      <li>정비구역 경계 설정 시 필지 분할·합병을 최소화해야 합니다.</li>
+      <li>기존 세입자 보호를 위한 임대주택 건설 계획을 포함해야 합니다.</li>
+    </ul>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 제2장 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 02</div>
+    <h2 class="section-title">조합운영 기준</h2>
+    <div class="section-subtitle">정비사업 조합의 설립, 운영, 총회, 회계 등에 관한 서울시 운영 가이드라인을 정리합니다.</div>
+
+    <h3>1. 핵심 내용</h3>
+    <p>서울시 가이드라인은 조합의 투명한 운영을 위해 총회 운영, 이사회 구성, 회계 관리, 정보 공개 등에 대한 상세 기준을 제시하고 있습니다. 특히 조합 임원의 자격 요건 강화, 전문관리인 제도 도입, 클린업시스템 의무 등록 등을 통해 조합 운영의 공정성을 확보하고자 합니다.</p>
+
+    <h3>2. 적용 기준</h3>
+    <h4>가. 조합 임원 구성</h4>
+    <table>
+      <thead>
+        <tr><th>구분</th><th>인원</th><th>자격 요건</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">조합장</td><td>1명</td><td>토지등소유자, 결격사유 없는 자, 선거관리위원회 관리하 선출</td></tr>
+        <tr><td class="highlight-cell">이사</td><td>3~9명</td><td>토지등소유자, 조합원 총회에서 선출</td></tr>
+        <tr><td class="highlight-cell">감사</td><td>1~3명</td><td>토지등소유자 또는 외부전문가(1명 이상 외부 감사 권장)</td></tr>
+      </tbody>
+    </table>
+
+    <h4>나. 총회 운영 기준</h4>
+    <ul>
+      <li><strong>정기총회:</strong> 매 회계연도 종료 후 3개월 이내 개최</li>
+      <li><strong>임시총회:</strong> 조합원 1/5 이상 요구 시 1개월 이내 소집</li>
+      <li><strong>의결정족수:</strong> 일반 안건 - 조합원 과반수 출석 + 출석 과반수 찬성</li>
+      <li><strong>특별의결:</strong> 정관변경, 시공사선정 등 - 조합원 총수 과반수 찬성</li>
+      <li><strong>서면의결:</strong> 직접 참석이 어려운 경우 서면 또는 전자투표 가능</li>
+    </ul>
+
+    <h4>다. 회계 관리</h4>
+    <div class="info-box">
+      <div class="info-box-title">회계 투명성 확보 의무사항</div>
+      <p>모든 정비사업 조합은 「클린업시스템」에 회계 정보를 등록·공개해야 합니다. 분기별 수입·지출 현황, 용역비 집행 내역, 차입금 현황 등을 30일 이내에 공개하며, 미이행 시 서울시의 행정지도 또는 시정명령이 내려질 수 있습니다.</p>
+    </div>
+
+    <h3>3. 유의사항</h3>
+    <div class="info-box warning">
+      <div class="info-box-title">조합 임원 해임 및 직무정지</div>
+      <p>조합장 등 임원이 업무상 횡령, 배임 등의 혐의로 기소된 경우 직무가 정지되며, 조합원 1/10 이상의 요구로 해임 총회를 소집할 수 있습니다. 서울시는 중대한 법령 위반 시 시장 직권으로 직무정지 명령을 내릴 수 있습니다.</p>
+    </div>
+    <ul>
+      <li>조합 운영비 사용 내역은 매월 조합원에게 문자·우편으로 통지</li>
+      <li>용역업체 선정 시 경쟁입찰 원칙 (수의계약 사유 제한적 허용)</li>
+      <li>조합 정보 미공개 시 과태료 부과 대상</li>
+    </ul>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 제3장 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 03</div>
+    <h2 class="section-title">시공사 선정 기준</h2>
+    <div class="section-subtitle">정비사업 시공사(건설업체) 선정 절차 및 평가 기준에 관한 서울시 가이드라인을 정리합니다.</div>
+
+    <h3>1. 핵심 내용</h3>
+    <p>서울시는 정비사업 시공사 선정의 공정성과 투명성을 확보하기 위해 경쟁입찰 방식을 원칙으로 하며, 평가항목 및 배점 기준을 상세히 규정하고 있습니다. 시공사 선정은 조합원 총회의 특별의결 사항이며, 선정 과정에서 선거관리위원회의 관리를 받아야 합니다.</p>
+
+    <h3>2. 적용 기준</h3>
+    <table>
+      <thead>
+        <tr><th>평가 항목</th><th>배점</th><th>주요 내용</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">시공능력 평가</td><td>30점</td><td>시공능력 순위, 시공실적, 하자보수 이행률</td></tr>
+        <tr><td class="highlight-cell">사업수지 분석</td><td>25점</td><td>공사비, 사업비, 추정분담금, 수익성 분석</td></tr>
+        <tr><td class="highlight-cell">설계 제안</td><td>20점</td><td>단지 배치, 평면 설계, 조경, 커뮤니티 시설</td></tr>
+        <tr><td class="highlight-cell">재무건전성</td><td>15점</td><td>부채비율, 유동비율, 신용등급</td></tr>
+        <tr><td class="highlight-cell">입주자 서비스</td><td>10점</td><td>AS 체계, 입주 지원, 이주비 조건</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3. 유의사항</h3>
+    <div class="info-box warning">
+      <div class="info-box-title">불법 로비 및 과도한 홍보활동 금지</div>
+      <p>시공사 선정 과정에서 개별 조합원 접촉, 금품 제공, 과도한 홍보물 배포 등은 「도시정비법」 위반으로 형사처벌 대상입니다. 서울시는 시공사 선정 기간 중 모니터링을 실시하며, 위반 업체는 입찰 참가 자격을 제한합니다.</p>
+    </div>
+    <div class="info-box navy">
+      <div class="info-box-title">시공사 변경 절차</div>
+      <p>시공사 선정 후 공사비 증액, 공정 지연 등의 사유로 시공사를 변경하려면 조합원 총수 과반수의 동의를 얻어야 하며, 기존 시공사와의 계약 해지에 따른 위약금 문제를 사전에 검토해야 합니다. 재선정 시에도 동일한 경쟁입찰 절차를 거쳐야 합니다.</p>
+    </div>
+
+    <ul>
+      <li>입찰 공고 후 최소 45일 이상의 접수 기간 확보</li>
+      <li>평가위원회는 외부 전문가 과반수 이상으로 구성</li>
+      <li>시공사 제안 내용 중 '확정 보장'이 불가능한 사항 구분 필요</li>
+      <li>공사비 예정가격은 3개 이상 업체 견적을 비교하여 산정</li>
+    </ul>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 제4장 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 04</div>
+    <h2 class="section-title">분양가 산정 기준</h2>
+    <div class="section-subtitle">정비사업 조합원 분양가 및 일반 분양가 산정 기준에 관한 가이드라인을 정리합니다.</div>
+
+    <h3>1. 핵심 내용</h3>
+    <p>정비사업의 분양가는 조합원 분양가(관리처분계획 기준)와 일반 분양가(분양가상한제 적용 여부)로 구분됩니다. 서울시는 분양가 산정의 적정성을 확보하기 위해 건축비, 택지비, 가산비 등의 항목별 기준을 제시하고 있으며, HUG(주택도시보증공사)의 분양보증 심사 기준과도 연계됩니다.</p>
+
+    <h3>2. 적용 기준</h3>
+    <table>
+      <thead>
+        <tr><th>구분</th><th>조합원 분양가</th><th>일반 분양가</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">산정 기준</td><td>총 사업비 ÷ 조합원 분양면적</td><td>분양가상한제 또는 시장가격 기준</td></tr>
+        <tr><td class="highlight-cell">건축비</td><td>실제 공사비 기준</td><td>기본형건축비 + 가산비</td></tr>
+        <tr><td class="highlight-cell">택지비</td><td>감정평가 기반 종전자산가액</td><td>감정평가액 기준</td></tr>
+        <tr><td class="highlight-cell">기타비용</td><td>설계비, 감리비, 부대비 포함</td><td>간접비 포함</td></tr>
+        <tr><td class="highlight-cell">적용 범위</td><td>조합원 전원</td><td>일반분양분 (투기과열지구 상한제 적용)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3. 유의사항</h3>
+    <div class="info-box">
+      <div class="info-box-title">분양가와 추정분담금의 관계</div>
+      <p>조합원의 최종 부담금(추정분담금)은 「조합원 분양가 - 종전자산 감정평가액 + 기타 부담금」으로 산출됩니다. 따라서 분양가뿐 아니라 종전자산의 감정평가가 분담금에 결정적 영향을 미칩니다. 사업 초기 추정분담금은 변동 가능성이 크므로, 관리처분계획 인가 시점의 확정 분담금과 차이가 날 수 있음을 유의해야 합니다.</p>
+    </div>
+    <div class="info-box warning">
+      <div class="info-box-title">분양가상한제 적용 지역</div>
+      <p>서울시 투기과열지구 내 정비사업은 분양가상한제가 적용되며, 이 경우 일반분양 수입이 제한되어 조합원 분담금이 상승할 수 있습니다. 상한제 적용 시 기본형건축비, 택지비, 가산비 각 항목에 대해 주택도시보증공사의 엄격한 검증을 받게 됩니다.</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 제5장 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 05</div>
+    <h2 class="section-title">공공기여 및 기부채납</h2>
+    <div class="section-subtitle">정비사업 시 요구되는 공공기여 항목 및 기부채납 기준에 관한 가이드라인을 정리합니다.</div>
+
+    <h3>1. 핵심 내용</h3>
+    <p>서울시 정비사업에서는 용적률 인센티브 등을 받는 대가로 일정 규모의 공공기여를 요구하고 있습니다. 공공기여는 임대주택 건설, 기반시설 설치, 공공시설 기부채납 등의 형태로 이루어지며, 기여 규모는 용적률 증가분의 일정 비율로 산정됩니다.</p>
+
+    <h3>2. 적용 기준</h3>
+    <table>
+      <thead>
+        <tr><th>공공기여 유형</th><th>기준</th><th>비율/규모</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">임대주택</td><td>증가 용적률의 일정 비율</td><td>용적률 증가분의 25~50%</td></tr>
+        <tr><td class="highlight-cell">기반시설</td><td>도로, 공원, 주차장 등</td><td>구역면적의 15~25%</td></tr>
+        <tr><td class="highlight-cell">공공시설</td><td>주민센터, 어린이집 등</td><td>구청 협의에 따라 결정</td></tr>
+        <tr><td class="highlight-cell">현금 납부</td><td>기반시설 설치 불가 시</td><td>토지가액 기준 환산</td></tr>
+        <tr><td class="highlight-cell">공공임대</td><td>재건축 초과이익환수</td><td>부담금 납부 또는 임대주택 건설</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3. 유의사항</h3>
+    <div class="info-box navy">
+      <div class="info-box-title">공공기여 협상 전략</div>
+      <p>공공기여의 규모와 형태는 서울시·구청과의 협의를 통해 조정 가능합니다. 임대주택 비율을 낮추는 대신 기반시설 기여를 늘리거나, 소규모 공공시설 설치로 대체하는 등의 협상이 가능하며, 사업성 분석 단계에서 공공기여 비용을 반드시 반영해야 합니다.</p>
+    </div>
+    <div class="info-box warning">
+      <div class="info-box-title">재건축 초과이익환수</div>
+      <p>재건축사업의 경우 「재건축초과이익 환수에 관한 법률」에 따라 초과이익의 최대 50%를 부담금으로 납부해야 합니다. 부담금은 조합원별로 부과되며, 현금 납부 또는 임대주택 건설로 대체 가능합니다.</p>
+    </div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <!-- ═══════════ 제6장 ═══════════ -->
+  <section>
+    <div class="section-number">CHAPTER 06</div>
+    <h2 class="section-title">사업시행 관리 및 감독</h2>
+    <div class="section-subtitle">정비사업 전 과정에 걸친 행정기관의 관리·감독 기준과 사업시행자의 의무를 정리합니다.</div>
+
+    <h3>1. 핵심 내용</h3>
+    <p>서울시와 자치구는 정비사업의 적법한 시행을 위해 단계별 인허가, 정기 점검, 회계 감사 등 다양한 관리·감독 수단을 운영합니다. 사업시행자(조합)는 주요 의사결정 시 행정기관의 인가·승인을 받아야 하며, 사업 진행 상황을 정기적으로 보고할 의무가 있습니다.</p>
+
+    <h3>2. 적용 기준</h3>
+    <table>
+      <thead>
+        <tr><th>관리 단계</th><th>관리 주체</th><th>주요 내용</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="highlight-cell">추진위 승인</td><td>자치구</td><td>추진위원회 구성 승인, 운영규정 적정성 검토</td></tr>
+        <tr><td class="highlight-cell">조합설립 인가</td><td>자치구</td><td>동의율 확인, 정관 검토, 설립총회 적법성 확인</td></tr>
+        <tr><td class="highlight-cell">사업시행 인가</td><td>자치구/서울시</td><td>사업시행계획 검토, 건축·교통·환경 심의</td></tr>
+        <tr><td class="highlight-cell">관리처분 인가</td><td>자치구</td><td>분양설계, 종전자산평가, 분담금 산출의 적정성</td></tr>
+        <tr><td class="highlight-cell">준공 인가</td><td>자치구/서울시</td><td>시공 품질 검수, 인허가 조건 이행 확인</td></tr>
+        <tr><td class="highlight-cell">정기 점검</td><td>서울시</td><td>연 1회 이상 현장점검, 회계감사, 클린업시스템 점검</td></tr>
+      </tbody>
+    </table>
+
+    <h3>3. 유의사항</h3>
+    <div class="info-box success">
+      <div class="info-box-title">정비사업 지원센터 활용</div>
+      <p>서울시는 각 자치구에 정비사업 지원센터를 운영하여 조합 운영 컨설팅, 회계 자문, 법률 상담 등을 무료로 제공하고 있습니다. 조합 설립 전 단계부터 준공까지 전 과정에 걸쳐 지원을 받을 수 있으므로, 적극적으로 활용하는 것을 권장합니다.</p>
+    </div>
+    <div class="info-box warning">
+      <div class="info-box-title">행정처분 및 제재</div>
+      <p>서울시는 정비사업 조합의 중대한 법령 위반, 회계부정, 총회 절차 위반 등에 대해 시정명령, 조합 임원 직무정지, 공사 중지 명령 등의 행정처분을 내릴 수 있습니다. 반복적인 위반 시에는 정비구역 해제 또는 공공관리자 선정을 할 수 있습니다.</p>
+    </div>
+
+    <ul>
+      <li>분기별 사업 진행 현황 보고 의무 (클린업시스템 등록)</li>
+      <li>주요 용역 계약 체결 시 자치구 사전보고</li>
+      <li>공사비 증액 시 검증위원회 심의 필수</li>
+      <li>조합원 정보 공개 요청에 대한 10일 이내 회신 의무</li>
+    </ul>
+  </section>
+
+  <!-- ── Footer ── -->
+  <div class="doc-footer">
+    <strong>(주)세울엔지니어링</strong><br>
+    서울시 정비사업 운영 가이드라인 핵심 요약 | 2026년 4월 기준<br>
+    본 자료는 교육 및 참고 목적으로 작성되었으며, 구체적 사안에 대해서는 전문가 상담을 권장합니다.
+  </div>
+
+</div>
+
+</body>
+</html>

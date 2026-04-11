@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조합·토지등소유자 협의 및 갈등관리 — (주)세울엔지니어링</title>
+    <meta name="description" content="정비사업 조합원·토지등소유자 간 이해관계 조율, 동의율 확보 자문, 갈등 해소 및 합의 도출을 전문적으로 지원합니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    .cs-section { margin-bottom:56px; }
+    .cs-section:last-child { margin-bottom:0; }
+    .cs-section .section-title { margin-bottom:28px; }
+
+    .cs-intro {
+        background:linear-gradient(135deg,rgba(195,165,105,0.04),transparent 60%);
+        border-left:4px solid var(--gold); border-radius:0 var(--radius) var(--radius) 0;
+        padding:36px 40px 36px 36px;
+    }
+    .cs-intro p { font-size:16px; line-height:2; color:var(--gray-800); }
+    .cs-intro p strong { color:var(--brand-navy); }
+    @media(max-width:768px){ .cs-intro{padding:24px 20px 24px 24px;} .cs-intro p{font-size:14px;} }
+
+    .cs-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+    .cs-stat { background:var(--brand-dark); border-radius:var(--radius); padding:28px 24px; text-align:center; color:#fff; }
+    .cs-stat .num { font-size:28px; font-weight:800; color:var(--gold); margin-bottom:6px; }
+    .cs-stat .num i { font-size:22px; }
+    .cs-stat .desc { font-size:13px; color:rgba(255,255,255,0.6); }
+    @media(max-width:768px){ .cs-stats{grid-template-columns:repeat(2,1fr);} }
+
+    .cs-service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+    .cs-service-card {
+        background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius);
+        padding:32px 28px; transition:all 0.2s;
+    }
+    .cs-service-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); }
+    .cs-service-card .cs-icon {
+        width:48px; height:48px; border-radius:12px; background:var(--brand-dark);
+        display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+    }
+    .cs-service-card .cs-icon i { font-size:20px; color:var(--gold); }
+    .cs-service-card h4 { font-size:17px; font-weight:700; color:var(--gray-900); margin-bottom:10px; }
+    .cs-service-card p { font-size:14px; color:var(--gray-600); line-height:1.8; }
+    .cs-service-card ul { margin-top:12px; padding-left:18px; }
+    .cs-service-card li { font-size:13px; color:var(--gray-600); line-height:1.8; list-style:disc; }
+    @media(max-width:768px){ .cs-service-grid{grid-template-columns:1fr;} }
+
+    .cs-case { background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius); padding:28px 32px; }
+    .cs-case h4 { font-size:15px; font-weight:700; color:var(--brand-dark); margin-bottom:12px; }
+    .cs-case-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .cs-case-item { text-align:center; }
+    .cs-case-item .case-icon { font-size:28px; color:var(--gold); margin-bottom:10px; }
+    .cs-case-item h5 { font-size:14px; font-weight:700; color:var(--gray-900); margin-bottom:6px; }
+    .cs-case-item p { font-size:12px; color:var(--gray-500); line-height:1.6; }
+    @media(max-width:768px){ .cs-case-grid{grid-template-columns:1fr;} }
+
+    .cs-cta {
+        background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:var(--radius);
+        padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px;
+        position:relative; overflow:hidden;
+    }
+    .cs-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(195,165,105,0.08) 0%,transparent 70%); border-radius:50%; }
+    .cs-cta h3 { font-size:22px; font-weight:800; color:#fff; margin-bottom:8px; }
+    .cs-cta p { font-size:15px; color:rgba(255,255,255,0.55); }
+    .cs-cta-btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:var(--gold); color:#0A0F1C; border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap; }
+    .cs-cta-btn:hover { background:var(--gold-hover); }
+    @media(max-width:640px){ .cs-cta{flex-direction:column;padding:32px 24px;text-align:center;} }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="services.html">사업분야</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>조합·토지등소유자 협의 및 갈등관리</span>
+        </div>
+        <h1>조합·토지등소유자 협의 및 갈등관리</h1>
+        <p>정비사업의 성패를 좌우하는 이해관계 조율과 합의 도출을 전문적으로 지원합니다</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+
+        <div class="cs-section">
+            <div class="cs-intro">
+                <p>정비사업은 <strong>수백~수천 명의 토지등소유자</strong>가 참여하는 사업입니다. 각자의 재산 규모, 거주 상황, 기대 수익이 다르기 때문에 이해관계 충돌은 필연적으로 발생합니다. 동의율 확보 실패, 총회 무산, 조합 내부 분쟁은 사업 지연의 가장 큰 원인입니다. 세울엔지니어링은 <strong>현장 밀착형 소통과 체계적 갈등 관리</strong>를 통해 사업이 멈추지 않도록 지원합니다.</p>
+            </div>
+        </div>
+
+        <div class="cs-section">
+            <h2 class="section-title">핵심 역량</h2>
+            <div class="cs-stats">
+                <div class="cs-stat"><div class="num"><i class="fa-solid fa-handshake"></i></div><div class="desc">이해관계 조율</div></div>
+                <div class="cs-stat"><div class="num"><i class="fa-solid fa-file-signature"></i></div><div class="desc">동의율 확보 전략 자문</div></div>
+                <div class="cs-stat"><div class="num"><i class="fa-solid fa-users"></i></div><div class="desc">설명회·면담 운영</div></div>
+                <div class="cs-stat"><div class="num"><i class="fa-solid fa-scale-balanced"></i></div><div class="desc">분쟁 해소·중재</div></div>
+            </div>
+        </div>
+
+        <div class="cs-section">
+            <h2 class="section-title">서비스 상세</h2>
+            <div class="cs-service-grid">
+                <div class="cs-service-card">
+                    <div class="cs-icon"><i class="fa-solid fa-file-signature"></i></div>
+                    <h4>동의율 확보 전략 자문 수립</h4>
+                    <p>법정 동의율 확보를 위한 체계적 전략을 수립하고 실행합니다.</p>
+                    <ul>
+                        <li>토지등소유자 DB 구축 및 동의 현황 관리</li>
+                        <li>미동의자 유형 분석 및 맞춤 접근 전략</li>
+                        <li>동의서 법적 유효성 검증 (인감·신분확인)</li>
+                        <li>해외 거주자·공유지분 특수 케이스 대응</li>
+                    </ul>
+                </div>
+                <div class="cs-service-card">
+                    <div class="cs-icon"><i class="fa-solid fa-comments"></i></div>
+                    <h4>주민 설명회 및 개별 면담</h4>
+                    <p>조합원과 토지등소유자의 궁금증을 해소하고 사업 참여를 유도합니다.</p>
+                    <ul>
+                        <li>사업 현황 설명회 기획 및 운영</li>
+                        <li>개별 면담을 통한 맞춤형 상담</li>
+                        <li>분담금·비례율·이주 관련 Q&A 대응</li>
+                        <li>반대 의견 청취 및 대안 제시</li>
+                    </ul>
+                </div>
+                <div class="cs-service-card">
+                    <div class="cs-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h4>갈등 관리 및 분쟁 해소</h4>
+                    <p>조합 내부 갈등과 외부 민원을 체계적으로 관리하여 사업 지연을 방지합니다.</p>
+                    <ul>
+                        <li>조합 임원 간 의견 충돌 중재</li>
+                        <li>세입자 보상 관련 갈등 조율</li>
+                        <li>감정평가 이의·분담금 불만 대응</li>
+                        <li>소송·행정심판 관련 실무 지원</li>
+                    </ul>
+                </div>
+                <div class="cs-service-card">
+                    <div class="cs-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                    <h4>총회 운영 및 의결 지원</h4>
+                    <p>총회가 적법하고 원활하게 진행되도록 기획부터 의결까지 전 과정을 지원합니다.</p>
+                    <ul>
+                        <li>총회 안건 작성 및 사전 검토</li>
+                        <li>의결 정족수 확보 전략</li>
+                        <li>총회 진행 시나리오 및 리허설</li>
+                        <li>의사록 작성 및 법적 요건 준수</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="cs-section">
+            <h2 class="section-title">주요 갈등 유형과 대응</h2>
+            <div class="cs-case">
+                <div class="cs-case-grid">
+                    <div class="cs-case-item">
+                        <div class="case-icon"><i class="fa-solid fa-user-xmark"></i></div>
+                        <h5>동의 거부</h5>
+                        <p>사업 불신, 분담금 우려, 이주 불안 등으로 동의를 거부하는 소유자에 대한 맞춤 상담 및 설득</p>
+                    </div>
+                    <div class="cs-case-item">
+                        <div class="case-icon"><i class="fa-solid fa-gavel"></i></div>
+                        <h5>감정평가 이의</h5>
+                        <p>종전자산 감정평가 결과에 대한 불만, 재감정 요구 등에 대한 객관적 설명 및 절차 안내</p>
+                    </div>
+                    <div class="cs-case-item">
+                        <div class="case-icon"><i class="fa-solid fa-house-crack"></i></div>
+                        <h5>세입자 보상 분쟁</h5>
+                        <p>영업손실 보상, 이주비 산정, 퇴거 시기 등 세입자와의 갈등 조율 및 법적 절차 이행</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cs-section">
+            <div class="cs-cta">
+                <div style="position:relative;z-index:1;">
+                    <h3>조합 운영에 어려움을 겪고 계신가요?</h3>
+                    <p>세울엔지니어링이 이해관계 조율과 합의 도출을 체계적으로 지원합니다</p>
+                </div>
+                <a href="contact.html" class="cs-cta-btn"><i class="fa-solid fa-paper-plane"></i> 상담 문의하기</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+</body>
+</html>

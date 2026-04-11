@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정비사업 시공자 선정 업무 지침 | (주)세울엔지니어링</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A0F1C; --navy-light: #141B2D; --navy-mid: #1E2A42;
+    --gold: #C3A569; --gold-light: #D4BC8A; --gold-pale: #F5EDD8;
+    --text: #2C2C2C; --text-light: #555; --bg: #FAFAF8; --white: #FFFFFF;
+    --border: #E0DDD5; --success: #2E7D4F; --warning: #B85C1F; --info: #1A5FA0;
+  }
+  @page { size: A4; margin: 18mm 15mm 20mm 15mm; }
+  body {
+    font-family: 'Pretendard','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size: 10.5pt; line-height: 1.75; color: var(--text); background: var(--bg);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .page-break { page-break-after: always; }
+  .no-break { page-break-inside: avoid; }
+  @media print {
+    body { background: white; font-size: 9.5pt; }
+    .container { max-width: 100%; padding: 0; }
+    .no-print { display: none !important; }
+    section { page-break-inside: avoid; }
+  }
+  .title-page {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    align-items: center; background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
+    color: var(--white); text-align: center; padding: 60px 40px; position: relative; overflow: hidden;
+  }
+  .title-page::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px; border: 1px solid rgba(195,165,105,0.08); border-radius: 50%;
+  }
+  .title-brand { font-size: 12pt; letter-spacing: 6px; color: var(--gold); margin-bottom: 12px; font-weight: 500; }
+  .title-divider { width: 80px; height: 2px; background: var(--gold); margin: 24px auto; }
+  .title-main { font-size: 28pt; font-weight: 800; line-height: 1.3; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .title-main em { font-style: normal; color: var(--gold); }
+  .title-sub { font-size: 14pt; font-weight: 300; color: var(--gold-light); margin-top: 8px; letter-spacing: 2px; }
+  .title-meta { margin-top: 60px; font-size: 9.5pt; color: rgba(255,255,255,0.5); line-height: 1.9; }
+  .title-meta strong { color: rgba(255,255,255,0.7); }
+  .title-badge {
+    display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+    padding: 6px 24px; border-radius: 3px; font-size: 9pt; letter-spacing: 3px; margin-top: 40px;
+  }
+  .content-area { padding: 50px 0; }
+  section { margin-bottom: 56px; }
+  .section-number {
+    display: inline-block; background: var(--navy); color: var(--gold);
+    font-size: 9pt; font-weight: 700; padding: 3px 14px; border-radius: 3px;
+    letter-spacing: 2px; margin-bottom: 12px;
+  }
+  .section-title { font-size: 20pt; font-weight: 800; color: var(--navy); margin-bottom: 8px; line-height: 1.35; }
+  .section-subtitle {
+    font-size: 10.5pt; color: var(--text-light); margin-bottom: 28px;
+    padding-bottom: 20px; border-bottom: 2px solid var(--gold);
+  }
+  h3 { font-size: 13pt; font-weight: 700; color: var(--navy); margin: 28px 0 12px; }
+  p { margin-bottom: 14px; text-align: justify; }
+  .info-box {
+    background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold);
+    border-radius: 4px; padding: 22px 26px; margin: 20px 0;
+  }
+  .info-box.navy { border-left-color: var(--navy); background: #F4F5F8; }
+  .info-box.warning { border-left-color: var(--warning); background: #FFF9F0; }
+  .info-box.success { border-left-color: var(--success); background: #F0F8F3; }
+  .info-box-title { font-size: 11pt; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .info-box p:last-child { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 10pt; }
+  table thead th {
+    background: var(--navy); color: var(--white); padding: 12px 16px; text-align: left;
+    font-weight: 600; font-size: 9.5pt;
+  }
+  table tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table tbody tr:nth-child(even) { background: #F8F7F4; }
+  table tbody tr:hover { background: var(--gold-pale); }
+  ul, ol { margin: 12px 0 12px 20px; }
+  li { margin-bottom: 6px; }
+  .step-flow { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
+  .step-item {
+    flex: 1 1 140px; background: var(--white); border: 1px solid var(--border);
+    border-radius: 6px; padding: 16px; text-align: center;
+  }
+  .step-num {
+    display: inline-block; background: var(--navy); color: var(--gold);
+    width: 28px; height: 28px; line-height: 28px; border-radius: 50%;
+    font-size: 9pt; font-weight: 700; margin-bottom: 8px;
+  }
+  .step-label { font-size: 9.5pt; font-weight: 600; color: var(--navy); }
+  .footer {
+    margin-top: 60px; padding: 30px 0; border-top: 2px solid var(--navy);
+    text-align: center; font-size: 9pt; color: var(--text-light);
+  }
+  .footer strong { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="title-brand">SEUL ENGINEERING</div>
+  <div class="title-divider"></div>
+  <h1 class="title-main">정비사업<br><em>시공자 선정</em> 업무 지침</h1>
+  <p class="title-sub">Contractor Selection Guide</p>
+  <div class="title-meta">
+    <strong>발행</strong> (주)세울엔지니어링<br>
+    <strong>문서번호</strong> SE-GD-CONT-2026-001<br>
+    <strong>작성일</strong> 2026년 4월
+  </div>
+  <div class="title-badge">PROFESSIONAL GUIDE</div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="container content-area">
+
+  <!-- Section 1 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 01</div>
+    <h2 class="section-title">입찰 공고</h2>
+    <p class="section-subtitle">시공자 선정을 위한 경쟁입찰 공고 기준 및 절차</p>
+
+    <h3>1. 공고 요건</h3>
+    <p>「도시 및 주거환경정비법」 제29조 및 동법 시행령 제24조에 따라 시공자 선정은 경쟁입찰 방식으로 진행하여야 합니다. 조합은 사업시행계획인가 후 시공자 선정을 위한 입찰을 공고합니다.</p>
+
+    <table>
+      <thead>
+        <tr><th>항목</th><th>기준</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>공고 매체</td><td>일간신문 1회 이상 + 조합 홈페이지 게시</td></tr>
+        <tr><td>공고 기간</td><td>입찰일 30일 전까지</td></tr>
+        <tr><td>참가 자격</td><td>종합건설업 면허, 시공능력평가 순위 충족</td></tr>
+        <tr><td>보증금</td><td>총공사비의 3% 이상 입찰보증금</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2. 공고 포함사항</h3>
+    <ul>
+      <li>정비사업의 명칭, 종류, 위치 및 사업 규모</li>
+      <li>입찰 참가 자격 요건 및 제한 사항</li>
+      <li>설계 개요 및 공사 범위</li>
+      <li>입찰 일시, 장소 및 낙찰 방법</li>
+      <li>입찰보증금 납부 방법 및 반환 조건</li>
+    </ul>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 02</div>
+    <h2 class="section-title">평가 항목 및 배점</h2>
+    <p class="section-subtitle">시공자 선정을 위한 종합 평가 기준표</p>
+
+    <table>
+      <thead>
+        <tr><th>평가 항목</th><th>배점</th><th>세부 평가 내용</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>시공능력 및 실적</strong></td>
+          <td>30점</td>
+          <td>시공능력평가 순위, 정비사업 시공 실적, 하자 발생률</td>
+        </tr>
+        <tr>
+          <td><strong>공사비 적정성</strong></td>
+          <td>25점</td>
+          <td>총공사비 제안, 공종별 단가, 예비비 산정 적정성</td>
+        </tr>
+        <tr>
+          <td><strong>설계 및 기술력</strong></td>
+          <td>20점</td>
+          <td>단지배치 계획, 특화설계, 친환경 요소, 스마트홈 기술</td>
+        </tr>
+        <tr>
+          <td><strong>사업 조건</strong></td>
+          <td>15점</td>
+          <td>이주비 대여, 무이자 기간, 조합원 분양가 보장, 공사기간</td>
+        </tr>
+        <tr>
+          <td><strong>재무 건전성</strong></td>
+          <td>10점</td>
+          <td>부채비율, 신용등급, 유동비율, 금융기관 보증능력</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box navy">
+      <div class="info-box-title">배점 기준 유의사항</div>
+      <p>국토교통부 고시 「정비사업 시공자 선정기준」에 따라 공사비 관련 배점은 전체의 30%를 초과할 수 없습니다. 시·도 조례에서 별도 배점 기준을 정한 경우에는 해당 조례를 우선 적용합니다.</p>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 03</div>
+    <h2 class="section-title">선정 절차</h2>
+    <p class="section-subtitle">입찰 공고부터 최종 선정까지의 업무 흐름</p>
+
+    <div class="step-flow">
+      <div class="step-item"><div class="step-num">1</div><div class="step-label">입찰<br>공고</div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-label">현장<br>설명회</div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-label">입찰서<br>접수</div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-label">제안서<br>심사</div></div>
+      <div class="step-item"><div class="step-num">5</div><div class="step-label">총회<br>의결</div></div>
+      <div class="step-item"><div class="step-num">6</div><div class="step-label">계약<br>체결</div></div>
+    </div>
+
+    <h3>단계별 세부 절차</h3>
+    <ol>
+      <li><strong>입찰 공고:</strong> 일간신문 및 조합 홈페이지에 30일 이상 공고합니다.</li>
+      <li><strong>현장 설명회:</strong> 참가 희망 업체를 대상으로 사업 현황 및 입찰 조건을 설명합니다.</li>
+      <li><strong>입찰서 접수:</strong> 공고에 명시된 기한 내에 제안서 및 입찰보증금을 접수합니다. 2개 업체 이상 참가 시 유효합니다.</li>
+      <li><strong>제안서 심사:</strong> 선정위원회(조합원 대표 + 외부 전문가)가 평가항목에 따라 심사합니다.</li>
+      <li><strong>총회 의결:</strong> 조합원 과반수 출석 및 출석 조합원 과반수 찬성으로 시공자를 확정합니다.</li>
+      <li><strong>계약 체결:</strong> 총회 의결 후 30일 이내에 시공계약을 체결합니다.</li>
+    </ol>
+  </section>
+
+  <!-- Section 4 -->
+  <section class="no-break">
+    <div class="section-number">SECTION 04</div>
+    <h2 class="section-title">계약 체결 유의사항</h2>
+    <p class="section-subtitle">시공 계약 시 반드시 확인해야 할 핵심 사항</p>
+
+    <h3>1. 계약서 필수 포함사항</h3>
+    <ul>
+      <li>총공사비 및 공종별 내역서 (물가변동에 따른 조정 기준 포함)</li>
+      <li>공사기간 및 지체상금률 (일반적으로 일 0.05~0.1%)</li>
+      <li>하자보수 범위, 기간 및 하자보증금률</li>
+      <li>설계변경 절차 및 공사비 정산 기준</li>
+      <li>이주비·사업비 대여 조건 및 이자 부담</li>
+      <li>일반분양 보증 및 미분양 리스크 분담 방식</li>
+    </ul>
+
+    <h3>2. 주요 유의사항</h3>
+    <div class="info-box warning">
+      <div class="info-box-title">계약 전 필수 확인</div>
+      <p>시공자가 제시한 조건 중 이주비 무이자 대여, 공사비 확정, 일반분양 보증 등 핵심 조건이 계약서에 명확히 반영되었는지 반드시 확인하십시오. 구두 약속은 법적 효력이 없으므로 모든 합의사항을 계약서에 명문화해야 합니다.</p>
+    </div>
+
+    <div class="info-box success">
+      <div class="info-box-title">실무 권고사항</div>
+      <p>계약서 검토 시 반드시 법률 자문을 받으시기 바랍니다. 특히 공사비 변경 조건, 지체상금 면책사유, 계약 해제 사유 등은 향후 분쟁의 주요 원인이 되므로 세밀한 검토가 필요합니다.</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    <strong>(주)세울엔지니어링</strong><br>
+    본 자료는 정비사업 실무 참고용으로 작성되었으며, 법적 효력을 갖지 않습니다.<br>
+    최신 법령 및 지자체 조례를 반드시 확인하시기 바랍니다.
+  </div>
+</div>
+
+</body>
+</html>

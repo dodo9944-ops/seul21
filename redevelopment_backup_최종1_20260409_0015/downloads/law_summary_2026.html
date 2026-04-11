@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026년 도시정비법 주요 개정 내용 요약 | 세울엔지니어링</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm 18mm 25mm 18mm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif;
+            color: #1a1a1a;
+            background: #f4f5f7;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .document-wrapper {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Header */
+        .doc-header {
+            background: linear-gradient(135deg, #0A0F1C 0%, #1a2340 50%, #0A0F1C 100%);
+            color: #fff;
+            padding: 45px 50px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(195, 165, 105, 0.15);
+            border-radius: 50%;
+        }
+
+        .doc-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            right: 5%;
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(195, 165, 105, 0.1);
+            border-radius: 50%;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .company-name {
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #C3A569;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .doc-date {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            text-align: right;
+        }
+
+        .doc-date strong {
+            display: block;
+            color: #C3A569;
+            font-size: 13px;
+            margin-bottom: 2px;
+        }
+
+        .doc-title {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .doc-subtitle {
+            font-size: 15px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 3px;
+            background: #C3A569;
+            margin: 20px 0 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Content Area */
+        .content {
+            padding: 40px 50px 50px;
+        }
+
+        /* Overview Section */
+        .overview {
+            background: #f8f9fb;
+            border-left: 4px solid #C3A569;
+            padding: 25px 30px;
+            margin-bottom: 40px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .overview h2 {
+            font-size: 16px;
+            color: #0A0F1C;
+            margin-bottom: 12px;
+        }
+
+        .overview p {
+            font-size: 13.5px;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        /* Amendment Card */
+        .amendment-card {
+            margin-bottom: 35px;
+            border: 1px solid #e8e9ed;
+            border-radius: 10px;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .amendment-header {
+            background: #0A0F1C;
+            color: #fff;
+            padding: 16px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .amendment-number {
+            background: #C3A569;
+            color: #0A0F1C;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .amendment-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .amendment-ref {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 2px;
+        }
+
+        .amendment-body {
+            padding: 25px;
+        }
+
+        /* Before/After Comparison */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        .comp-before, .comp-after {
+            padding: 18px 20px;
+        }
+
+        .comp-before {
+            background: #fff5f5;
+            border-right: 2px solid #e0e0e0;
+        }
+
+        .comp-after {
+            background: #f0f7ff;
+        }
+
+        .comp-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .comp-before .comp-label {
+            color: #c0392b;
+        }
+
+        .comp-after .comp-label {
+            color: #2471a3;
+        }
+
+        .comp-before .comp-label::before {
+            content: '×';
+            font-size: 14px;
+        }
+
+        .comp-after .comp-label::before {
+            content: '→';
+            font-size: 14px;
+        }
+
+        .comp-text {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* Impact & Implication */
+        .impact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .impact-box, .implication-box {
+            padding: 18px 20px;
+            border-radius: 8px;
+        }
+
+        .impact-box {
+            background: #fdf8f0;
+            border: 1px solid #f0e0c4;
+        }
+
+        .implication-box {
+            background: #f0f4f8;
+            border: 1px solid #d0dce8;
+        }
+
+        .box-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #0A0F1C;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .box-title .icon {
+            font-size: 14px;
+        }
+
+        .box-content {
+            font-size: 12.5px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .box-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .box-content ul li {
+            padding-left: 14px;
+            position: relative;
+            margin-bottom: 4px;
+        }
+
+        .box-content ul li::before {
+            content: '·';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: #C3A569;
+        }
+
+        /* Summary Table */
+        .summary-section {
+            margin-top: 40px;
+            page-break-before: auto;
+        }
+
+        .summary-section h2 {
+            font-size: 18px;
+            color: #0A0F1C;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #C3A569;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.5px;
+        }
+
+        .summary-table thead th {
+            background: #0A0F1C;
+            color: #fff;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .summary-table thead th:first-child {
+            border-radius: 6px 0 0 0;
+        }
+
+        .summary-table thead th:last-child {
+            border-radius: 0 6px 0 0;
+        }
+
+        .summary-table tbody td {
+            padding: 11px 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        .summary-table tbody tr:nth-child(even) {
+            background: #f9f9fb;
+        }
+
+        .summary-table tbody tr:hover {
+            background: #f0f2f8;
+        }
+
+        .priority-high {
+            color: #c0392b;
+            font-weight: 600;
+        }
+
+        .priority-mid {
+            color: #d4880f;
+            font-weight: 600;
+        }
+
+        .priority-low {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .doc-footer {
+            background: #0A0F1C;
+            color: rgba(255,255,255,0.5);
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+        }
+
+        .footer-company {
+            color: #C3A569;
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .footer-disclaimer {
+            max-width: 400px;
+            line-height: 1.5;
+        }
+
+        .footer-contact {
+            text-align: right;
+        }
+
+        .footer-contact div {
+            margin-bottom: 3px;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: #fff;
+                font-size: 12px;
+            }
+
+            .document-wrapper {
+                box-shadow: none;
+                max-width: 100%;
+            }
+
+            .doc-header {
+                padding: 30px 35px 25px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .content {
+                padding: 25px 35px 30px;
+            }
+
+            .amendment-card {
+                break-inside: avoid;
+            }
+
+            .amendment-header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .doc-footer {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .comparison {
+                break-inside: avoid;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .doc-header {
+                padding: 30px 25px;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .doc-title {
+                font-size: 22px;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .comp-before {
+                border-right: none;
+                border-bottom: 2px solid #e0e0e0;
+            }
+
+            .impact-section {
+                grid-template-columns: 1fr;
+            }
+
+            .doc-footer {
+                flex-direction: column;
+                gap: 15px;
+                padding: 25px;
+            }
+
+            .footer-contact {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document-wrapper">
+
+        <!-- Header -->
+        <div class="doc-header">
+            <div class="header-top">
+                <div class="company-name">세울엔지니어링</div>
+                <div class="doc-date">
+                    <strong>법률분석 리포트</strong>
+                    2026년 4월 발행
+                </div>
+            </div>
+            <h1 class="doc-title">2026년 도시정비법<br>주요 개정 내용 요약</h1>
+            <p class="doc-subtitle">도시 및 주거환경정비법 개정안 핵심 분석 — 조합 실무 관점</p>
+            <div class="gold-line"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+
+            <!-- Overview -->
+            <div class="overview">
+                <h2>개정 배경 및 개요</h2>
+                <p>
+                    2026년 도시 및 주거환경정비법(이하 '도시정비법')은 정비사업의 투명성 강화, 조합원 권익 보호,
+                    사업 추진 효율화를 목표로 대폭 개정되었습니다. 2025년 12월 국회 본회의를 통과한 개정안은
+                    2026년 3월 1일부터 시행되며, 조합 운영·총회 의결·분양 절차·안전진단 기준 등
+                    정비사업 전반에 걸쳐 실질적인 변화를 가져옵니다. 본 리포트는 조합 및 조합원이 반드시
+                    숙지해야 할 7대 핵심 개정 사항을 정리합니다.
+                </p>
+            </div>
+
+            <!-- Amendment 1 -->
+            <div class="amendment-card">
+                <div class="amendment-header">
+                    <div class="amendment-number">1</div>
+                    <div>
+                        <div class="amendment-title">조합 총회 전자투표 의무화</div>
+                        <div class="amendment-ref">제45조 제1항, 제45조의2 신설 | 시행 2026.03.01</div>
+                    </div>
+                </div>
+                <div class="amendment-body">
+                    <div class="comparison">
+                        <div class="comp-before">
+                            <div class="comp-label">개정 전</div>
+                            <div class="comp-text">
+                                총회 참석 시 서면결의 또는 현장투표만 인정. 전자투표는 조합 정관에 별도 규정이 있는 경우에만 선택적으로 가능.
+                            </div>
+                        </div>
+                        <div class="comp-after">
+                            <div class="comp-label">개정 후</div>
+                            <div class="comp-text">
+                                조합원 50인 이상 조합은 전자투표 시스템을 <strong>의무 도입</strong>. 국토교통부 인증 전자투표 플랫폼만 사용 가능. 서면결의는 전자투표와 병행 허용.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-box">
+                            <div class="box-title"><span class="icon">&#9670;</span> 영향 분석</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>총회 정족수 충족률 크게 향상 예상</li>
+                                    <li>원거리 거주 조합원의 의결권 행사 보장</li>
+                                    <li>투표 결과의 실시간 집계 및 투명성 확보</li>
+                                    <li>총회 무산으로 인한 사업 지연 감소</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="implication-box">
+                            <div class="box-title"><span class="icon">&#9654;</span> 조합 대응 방안</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>2026년 6월까지 인증 플랫폼 도입 계약 완료 필요</li>
+                                    <li>정관 변경(전자투표 조항 추가) 선행 필수</li>
+                                    <li>고령 조합원 대상 사용법 교육 실시 권고</li>
+                                    <li>전자투표 비용은 정비사업비에서 집행 가능</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amendment 2 -->
+            <div class="amendment-card">
+                <div class="amendment-header">
+                    <div class="amendment-number">2</div>
+                    <div>
+                        <div class="amendment-title">정비사업 회계 독립 및 외부감사 확대</div>
+                        <div class="amendment-ref">제84조 개정, 제84조의3 신설 | 시행 2026.03.01</div>
+                    </div>
+                </div>
+                <div class="amendment-body">
+                    <div class="comparison">
+                        <div class="comp-before">
+                            <div class="comp-label">개정 전</div>
+                            <div class="comp-text">
+                                총 사업비 100억 원 이상 조합만 외부 회계감사 의무 대상. 회계 기준은 조합 자율에 맡김. 연 1회 감사 보고서 제출.
+                            </div>
+                        </div>
+                        <div class="comp-after">
+                            <div class="comp-label">개정 후</div>
+                            <div class="comp-text">
+                                총 사업비 <strong>50억 원 이상</strong>으로 외부감사 기준 하향. 국토부 고시 「정비사업 회계처리기준」 준수 의무화. <strong>반기별 감사보고서</strong> 제출 및 조합원 열람 공개 의무.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-box">
+                            <div class="box-title"><span class="icon">&#9670;</span> 영향 분석</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>외부감사 대상 조합 약 40% 증가 전망</li>
+                                    <li>회계 투명성 대폭 향상, 비리 예방 효과</li>
+                                    <li>감사 비용 증가(연간 2,000~5,000만 원 추정)</li>
+                                    <li>조합원 정보접근권 실질적 강화</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="implication-box">
+                            <div class="box-title"><span class="icon">&#9654;</span> 조합 대응 방안</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>회계법인 선정 계약 조기 추진(수요 급증 예상)</li>
+                                    <li>회계처리기준 변경에 따른 기존 장부 재정비</li>
+                                    <li>반기 감사 일정 수립 및 자료 준비 체계 구축</li>
+                                    <li>조합원 열람 시스템(온라인 포함) 마련</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amendment 3 -->
+            <div class="amendment-card">
+                <div class="amendment-header">
+                    <div class="amendment-number">3</div>
+                    <div>
+                        <div class="amendment-title">안전진단 절차 개선 및 기준 합리화</div>
+                        <div class="amendment-ref">제12조 제3항~제5항 개정 | 시행 2026.06.01</div>
+                    </div>
+                </div>
+                <div class="amendment-body">
+                    <div class="comparison">
+                        <div class="comp-before">
+                            <div class="comp-label">개정 전</div>
+                            <div class="comp-text">
+                                구조안전성 비중 50%, 주거환경 비중 15%로 구조 안전성 과도 편중. 안전진단 기관 선정은 지자체 재량. 결과에 대한 이의신청 절차 미비.
+                            </div>
+                        </div>
+                        <div class="comp-after">
+                            <div class="comp-label">개정 후</div>
+                            <div class="comp-text">
+                                구조안전성 비중 <strong>40%</strong>, 주거환경 <strong>25%</strong>로 조정. 안전진단 기관 <strong>무작위 배정제</strong> 도입. 결과에 대한 <strong>이의신청 절차</strong> 명문화(30일 이내).
+                            </div>
+                        </div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-box">
+                            <div class="box-title"><span class="icon">&#9670;</span> 영향 분석</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>노후 주거지 정비사업 추진 문턱 실질적 완화</li>
+                                    <li>안전진단 통과율 10~15%p 상승 전망</li>
+                                    <li>기관 선정 공정성 확보로 유착 차단</li>
+                                    <li>이의신청권 확보로 부당한 결과 시정 가능</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="implication-box">
+                            <div class="box-title"><span class="icon">&#9654;</span> 조합 대응 방안</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>새 평가 기준에 따른 사전 자체진단 실시</li>
+                                    <li>주거환경 항목(설비 노후도, 에너지 효율 등) 자료 확보</li>
+                                    <li>이의신청 요건 및 절차 숙지(관련 하위법령 확인)</li>
+                                    <li>6월 시행 전 안전진단 신청 시기 전략적 판단 필요</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amendment 4 -->
+            <div class="amendment-card">
+                <div class="amendment-header">
+                    <div class="amendment-number">4</div>
+                    <div>
+                        <div class="amendment-title">조합임원 자격요건 강화 및 해임 절차 개선</div>
+                        <div class="amendment-ref">제41조 제2항, 제43조 개정 | 시행 2026.03.01</div>
+                    </div>
+                </div>
+                <div class="amendment-body">
+                    <div class="comparison">
+                        <div class="comp-before">
+                            <div class="comp-label">개정 전</div>
+                            <div class="comp-text">
+                                조합장 결격사유는 형사처벌 전력 등 최소 기준만 규정. 해임은 조합원 1/10 이상 발의, 총회 과반수 의결 필요. 해임 청구에 대한 지자체 개입 근거 없음.
+                            </div>
+                        </div>
+                        <div class="comp-after">
+                            <div class="comp-label">개정 후</div>
+                            <div class="comp-text">
+                                조합장 결격사유에 <strong>횡령·배임 혐의 기소</strong> 추가(확정판결 전이라도 직무정지). 해임 발의 요건 <strong>1/20</strong>로 완화. 지자체장의 <strong>직무정지 명령권</strong> 신설.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-box">
+                            <div class="box-title"><span class="icon">&#9670;</span> 영향 분석</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>비위 임원에 대한 견제 장치 대폭 강화</li>
+                                    <li>조합원의 임원 교체 실효성 제고</li>
+                                    <li>지자체 감독기능 실질화</li>
+                                    <li>임원 리스크로 인한 사업 중단 사례 감소 기대</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="implication-box">
+                            <div class="box-title"><span class="icon">&#9654;</span> 조합 대응 방안</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>현 임원진 결격사유 해당 여부 사전 점검</li>
+                                    <li>정관상 임원 자격요건 조항 개정안 반영 필요</li>
+                                    <li>임원배상책임보험 가입 적극 검토</li>
+                                    <li>내부 감사 기능 강화(감사위원회 운영 등)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amendment 5 -->
+            <div class="amendment-card">
+                <div class="amendment-header">
+                    <div class="amendment-number">5</div>
+                    <div>
+                        <div class="amendment-title">분양공고 및 관리처분계획 절차 간소화</div>
+                        <div class="amendment-ref">제72조, 제74조 개정 | 시행 2026.03.01</div>
+                    </div>
+                </div>
+                <div class="amendment-body">
+                    <div class="comparison">
+                        <div class="comp-before">
+                            <div class="comp-label">개정 전</div>
+                            <div class="comp-text">
+                                관리처분계획 수립 → 총회 의결 → 시장·군수 인가까지 평균 8~12개월 소요. 경미한 변경도 총회 의결 필요. 분양공고 후 이의기간 30일.
+                            </div>
+                        </div>
+                        <div class="comp-after">
+                            <div class="comp-label">개정 후</div>
+                            <div class="comp-text">
+                                관리처분계획 <strong>사전검토제</strong> 도입(인가 전 지자체 협의). 경미한 변경 사항은 <strong>대의원회 의결</strong>로 갈음 가능. 인가 처리기한 <strong>60일</strong> 법정화. 분양공고 이의기간 <strong>20일</strong>로 단축.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-box">
+                            <div class="box-title"><span class="icon">&#9670;</span> 영향 분석</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>관리처분 인가 소요기간 3~5개월 단축 효과</li>
+                                    <li>사전검토로 인가 반려 리스크 감소</li>
+                                    <li>경미변경 처리 효율화로 사업 유연성 확보</li>
+                                    <li>전체 사업기간 단축에 따른 금융비용 절감</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="implication-box">
+                            <div class="box-title"><span class="icon">&#9654;</span> 조합 대응 방안</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>사전검토 신청 시점을 사업일정에 반영</li>
+                                    <li>대의원회 의결 가능 범위(경미변경) 명확화</li>
+                                    <li>단축된 이의기간 내 조합원 고지 철저</li>
+                                    <li>인가 처리기한 도과 시 의제인가 여부 확인</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amendment 6 -->
+            <div class="amendment-card">
+                <div class="amendment-header">
+                    <div class="amendment-number">6</div>
+                    <div>
+                        <div class="amendment-title">공공지원제도 확대 및 정비사업 전문관리 개선</div>
+                        <div class="amendment-ref">제29조의2 신설, 제102조 개정 | 시행 2026.03.01</div>
+                    </div>
+                </div>
+                <div class="amendment-body">
+                    <div class="comparison">
+                        <div class="comp-before">
+                            <div class="comp-label">개정 전</div>
+                            <div class="comp-text">
+                                공공지원은 추진위 구성 ~ 조합설립 단계에 한정. 정비사업전문관리업자(정비업자) 등록 기준 형식적. 공공의 시공자 선정 지원 범위 제한적.
+                            </div>
+                        </div>
+                        <div class="comp-after">
+                            <div class="comp-label">개정 후</div>
+                            <div class="comp-text">
+                                공공지원 범위를 <strong>사업시행 ~ 준공</strong>까지 확대. 정비업자 등록 시 <strong>전문인력 상주요건</strong> 강화. 시공자 선정 시 <strong>공공 입찰관리</strong> 의무화(조합원 200인 이상).
+                            </div>
+                        </div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-box">
+                            <div class="box-title"><span class="icon">&#9670;</span> 영향 분석</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>조합의 전문성 부족 문제 구조적 보완</li>
+                                    <li>시공자 선정 과정의 공정성·투명성 제고</li>
+                                    <li>부실 정비업자 퇴출 효과</li>
+                                    <li>공공지원 비용 부담 주체 명확화 필요</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="implication-box">
+                            <div class="box-title"><span class="icon">&#9654;</span> 조합 대응 방안</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>현재 계약 중인 정비업자의 등록요건 충족 여부 확인</li>
+                                    <li>공공 입찰관리 대상 해당 여부 사전 파악</li>
+                                    <li>확대된 공공지원 신청 절차 및 일정 확인</li>
+                                    <li>기존 용역계약과 신규 제도 간 충돌 여부 검토</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amendment 7 -->
+            <div class="amendment-card">
+                <div class="amendment-header">
+                    <div class="amendment-number">7</div>
+                    <div>
+                        <div class="amendment-title">세입자 보호 및 주거이전비 기준 현실화</div>
+                        <div class="amendment-ref">제73조 개정, 제73조의2 신설 | 시행 2026.06.01</div>
+                    </div>
+                </div>
+                <div class="amendment-body">
+                    <div class="comparison">
+                        <div class="comp-before">
+                            <div class="comp-label">개정 전</div>
+                            <div class="comp-text">
+                                주거이전비는 「공익사업법」 기준 준용(가구원수별 정액). 세입자 임시거주시설 제공 의무는 선언적 규정. 세입자 이주 시기 조율 의무 없음.
+                            </div>
+                        </div>
+                        <div class="comp-after">
+                            <div class="comp-label">개정 후</div>
+                            <div class="comp-text">
+                                주거이전비 산정 시 <strong>해당 지역 실거래 임대료</strong> 반영 의무화. 세입자 <strong>임시거주시설 제공 또는 임차보증금 지원</strong> 중 택일 의무. 이주 시기 <strong>6개월 전 사전통보</strong> 의무화.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-box">
+                            <div class="box-title"><span class="icon">&#9670;</span> 영향 분석</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>세입자 보호 수준 OECD 권고 기준 근접</li>
+                                    <li>주거이전비 실질 인상(지역별 20~50% 상승 예상)</li>
+                                    <li>사업비 증가 요인(세입자 보상비 확대)</li>
+                                    <li>이주 관련 분쟁 및 소송 감소 기대</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="implication-box">
+                            <div class="box-title"><span class="icon">&#9654;</span> 조합 대응 방안</div>
+                            <div class="box-content">
+                                <ul>
+                                    <li>관리처분계획 수립 시 증가된 세입자 보상비 반영</li>
+                                    <li>해당 지역 임대료 시세 자료 사전 수집</li>
+                                    <li>이주계획 수립 시 6개월 사전통보 의무 반영</li>
+                                    <li>임시거주시설 확보 방안 또는 임차보증금 지원 예산 편성</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Table -->
+            <div class="summary-section">
+                <h2>개정 사항 종합 요약</h2>
+                <table class="summary-table">
+                    <thead>
+                        <tr>
+                            <th style="width:5%">No.</th>
+                            <th style="width:28%">개정 사항</th>
+                            <th style="width:15%">시행일</th>
+                            <th style="width:12%">중요도</th>
+                            <th style="width:40%">조합 필수 조치</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>전자투표 의무화</td>
+                            <td>2026.03.01</td>
+                            <td class="priority-high">상</td>
+                            <td>인증 플랫폼 도입, 정관 변경</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>회계독립 및 외부감사 확대</td>
+                            <td>2026.03.01</td>
+                            <td class="priority-high">상</td>
+                            <td>회계법인 선정, 회계기준 전환</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>안전진단 기준 합리화</td>
+                            <td>2026.06.01</td>
+                            <td class="priority-high">상</td>
+                            <td>새 기준 자체진단, 신청시기 전략</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>조합임원 자격·해임 개선</td>
+                            <td>2026.03.01</td>
+                            <td class="priority-mid">중</td>
+                            <td>임원 결격사유 점검, 정관 반영</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>관리처분 절차 간소화</td>
+                            <td>2026.03.01</td>
+                            <td class="priority-mid">중</td>
+                            <td>사전검토 신청, 일정 재수립</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>공공지원 확대·정비업 개선</td>
+                            <td>2026.03.01</td>
+                            <td class="priority-mid">중</td>
+                            <td>정비업자 요건 확인, 입찰관리 대비</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>세입자 보호·주거이전비 현실화</td>
+                            <td>2026.06.01</td>
+                            <td class="priority-high">상</td>
+                            <td>보상비 재산정, 이주계획 수정</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="doc-footer">
+            <div>
+                <div class="footer-company">세울엔지니어링</div>
+                <div class="footer-disclaimer">
+                    본 자료는 법률 정보 제공 목적으로 작성되었으며, 구체적 사안에 대한 법률 자문을 대체하지 않습니다.
+                    개별 사업장의 상황에 따라 적용이 달라질 수 있으므로, 전문가 상담을 권장합니다.
+                </div>
+            </div>
+            <div class="footer-contact">
+                <div>www.seul21.com</div>
+                <div>TEL 010-2230-9210</div>
+                <div>&copy; 2026 세울엔지니어링. All rights reserved.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

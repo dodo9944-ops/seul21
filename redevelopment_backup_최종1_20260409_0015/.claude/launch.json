@@ -1,0 +1,1 @@
+{"version":"0.0.1","configurations":[{"name":"seul21-redevelopment","runtimeExecutable":"npx","runtimeArgs":["serve","-l","3001","."],"port":3001}]}

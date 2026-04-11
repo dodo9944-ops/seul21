@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커뮤니티 상세 — (주)세울엔지니어링</title>
+    <meta name="description" content="재개발·재건축 커뮤니티 게시글 상세 내용을 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+        .detail-wrap { max-width: 800px; margin: 0 auto; }
+        .detail-header { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-200); }
+        .detail-header .top-row {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+        }
+        .detail-header h1 {
+            font-size: 26px; font-weight: 800; color: var(--gray-900);
+            line-height: 1.4; margin-bottom: 14px; letter-spacing: -0.3px;
+        }
+        .detail-meta {
+            display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+            font-size: 13px; color: var(--gray-500);
+        }
+        .detail-meta i { font-size: 12px; margin-right: 4px; color: var(--gray-400); }
+
+        .detail-body { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--gray-200); }
+        .detail-body p {
+            font-size: 15px; line-height: 1.85; color: var(--gray-800);
+            margin-bottom: 20px;
+        }
+        .detail-body p:last-child { margin-bottom: 0; }
+
+        .like-section {
+            display: flex; align-items: center; justify-content: center;
+            padding: 24px 0; margin-bottom: 32px;
+        }
+        .like-btn {
+            display: flex; align-items: center; gap: 8px;
+            padding: 12px 28px; border-radius: 24px;
+            border: 1.5px solid var(--gray-200); background: var(--white);
+            font-size: 15px; font-weight: 600; color: var(--gray-600);
+            cursor: pointer; transition: all var(--transition);
+            font-family: var(--font);
+        }
+        .like-btn:hover { border-color: var(--red); color: var(--red); background: #FFF5F5; }
+        .like-btn.liked { border-color: var(--red); color: var(--red); background: #FFF5F5; }
+        .like-btn i { font-size: 16px; }
+
+        /* 댓글 영역 */
+        .comments-section { margin-bottom: 40px; }
+        .comments-section h2 {
+            font-size: 18px; font-weight: 700; margin-bottom: 20px;
+            color: var(--gray-900);
+        }
+        .comment-list { display: flex; flex-direction: column; gap: 0; }
+        .comment-item {
+            padding: 18px 0; border-bottom: 1px solid var(--gray-100);
+        }
+        .comment-item:last-child { border-bottom: none; }
+        .comment-header {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 8px;
+        }
+        .comment-avatar {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--gray-100); display: flex;
+            align-items: center; justify-content: center;
+            color: var(--gray-400); font-size: 14px;
+        }
+        .comment-author { font-size: 13px; font-weight: 700; color: var(--gray-800); }
+        .comment-date { font-size: 12px; color: var(--gray-400); }
+        .comment-body { font-size: 14px; line-height: 1.7; color: var(--gray-700); padding-left: 42px; }
+
+        .comment-form {
+            margin-top: 24px; padding: 20px; background: var(--gray-50);
+            border-radius: var(--radius); border: 1px solid var(--gray-200);
+        }
+        .comment-form textarea {
+            width: 100%; min-height: 80px; padding: 12px 16px;
+            border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+            font-size: 14px; font-family: var(--font); color: var(--gray-900);
+            outline: none; resize: vertical; background: var(--white);
+            transition: border-color var(--transition);
+        }
+        .comment-form textarea:focus { border-color: var(--accent); }
+        .comment-form textarea::placeholder { color: var(--gray-400); }
+        .comment-form-actions {
+            display: flex; justify-content: flex-end; margin-top: 10px;
+        }
+
+        .back-btn-area { margin-top: 32px; }
+
+        .category-badge {
+            display: inline-flex; align-items: center;
+            padding: 4px 10px; border-radius: 6px;
+            font-size: 11px; font-weight: 700;
+        }
+        .cat-질문 { background: #FFF4E5; color: var(--orange); }
+        .cat-정보 { background: var(--accent-light); color: var(--accent); }
+        .cat-후기 { background: #E6F9F0; color: var(--green); }
+        .cat-분석 { background: #F3E8FF; color: #7C3AED; }
+        .cat-칼럼 { background: var(--gray-100); color: var(--gray-600); }
+
+        @media (max-width: 768px) {
+            .detail-header h1 { font-size: 21px; }
+        }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="detail-wrap" id="detailWrap">
+            <div class="loading-spinner"><div class="spinner"></div></div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js"></script>
+<script src="../assets/js/data-service.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+(function() {
+    const mockComments = [
+        { author: '부동산전문가', date: '2026-04-02 11:30', body: '좋은 글이네요. 저도 비슷한 생각을 하고 있었는데 정리가 잘 되어 있어서 많은 도움이 됩니다. 추가로 금리 변동 추이도 함께 살펴보시면 좋을 것 같습니다.' },
+        { author: '재개발초보', date: '2026-04-02 12:15', body: '감사합니다! 정말 유용한 정보입니다. 혹시 관련 자료 더 공유해주실 수 있을까요?' },
+        { author: '투자고수맘', date: '2026-04-02 14:00', body: '이 내용은 정말 중요한 포인트를 짚어주셨네요. 특히 최근 정책 변화와 맞물려 시의적절한 분석이라고 생각합니다.' }
+    ];
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const id = App.getParam('id');
+        if (!id) { location.href = 'community.html'; return; }
+
+        const post = DataService.getById('community', id);
+        if (!post) {
+            document.getElementById('detailWrap').innerHTML = `<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>게시글을 찾을 수 없습니다</h3><p>삭제되었거나 존재하지 않는 게시글입니다.</p><a href="community.html" class="btn btn-outline btn-sm">목록으로 돌아가기</a></div>`;
+            return;
+        }
+
+        // 조회수 증가
+        DataService.update('community', id, { views: (post.views || 0) + 1 });
+
+        App.headTags(post.title, post.content.substring(0, 100));
+
+        // 좋아요 상태 확인 (localStorage)
+        const likeKey = 'rdc_like_' + id;
+        let liked = localStorage.getItem(likeKey) === '1';
+        let likeCount = post.likes || 0;
+
+        // 본문
+        const paragraphs = post.content.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+
+        // 댓글 HTML
+        const commentsHTML = mockComments.map(c => `
+            <div class="comment-item">
+                <div class="comment-header">
+                    <div class="comment-avatar"><i class="fa-solid fa-user"></i></div>
+                    <span class="comment-author">${c.author}</span>
+                    <span class="comment-date">${c.date}</span>
+                </div>
+                <div class="comment-body">${c.body}</div>
+            </div>
+        `).join('');
+
+        document.getElementById('detailWrap').innerHTML = `
+            <div class="breadcrumb">
+                <a href="../index.html">홈</a> <i class="fa-solid fa-chevron-right"></i>
+                <a href="community.html">커뮤니티</a> <i class="fa-solid fa-chevron-right"></i>
+                <span>${post.title}</span>
+            </div>
+            <div class="detail-header">
+                <div class="top-row">
+                    <span class="category-badge cat-${post.category}">${post.category}</span>
+                </div>
+                <h1>${post.title}</h1>
+                <div class="detail-meta">
+                    <span><i class="fa-regular fa-user"></i>${post.author}</span>
+                    <span><i class="fa-regular fa-calendar"></i>${App.timeAgo(post.date)}</span>
+                    <span><i class="fa-regular fa-eye"></i>${App.comma(post.views + 1)}</span>
+                    <span><i class="fa-regular fa-comment"></i>댓글 ${post.comments || 0}</span>
+                </div>
+            </div>
+            <div class="detail-body">${paragraphs}</div>
+            <div class="like-section">
+                <button class="like-btn${liked ? ' liked' : ''}" id="likeBtn">
+                    <i class="fa-${liked ? 'solid' : 'regular'} fa-heart"></i>
+                    <span>좋아요</span>
+                    <strong id="likeCount">${likeCount}</strong>
+                </button>
+            </div>
+            <div class="comments-section">
+                <h2>댓글 ${mockComments.length}개</h2>
+                <div class="comment-list">${commentsHTML}</div>
+                <div class="comment-form">
+                    <textarea id="commentInput" placeholder="댓글을 작성해주세요."></textarea>
+                    <div class="comment-form-actions">
+                        <button class="btn btn-accent btn-sm" id="commentSubmit">댓글 등록</button>
+                    </div>
+                </div>
+            </div>
+            <div class="back-btn-area">
+                <a href="community.html" class="btn btn-outline btn-md"><i class="fa-solid fa-list"></i> 목록으로 돌아가기</a>
+            </div>
+        `;
+
+        // 좋아요 이벤트
+        document.getElementById('likeBtn').addEventListener('click', function() {
+            liked = !liked;
+            if (liked) {
+                likeCount++;
+                localStorage.setItem(likeKey, '1');
+            } else {
+                likeCount--;
+                localStorage.removeItem(likeKey);
+            }
+            DataService.update('community', id, { likes: likeCount });
+            document.getElementById('likeCount').textContent = likeCount;
+            this.classList.toggle('liked', liked);
+            this.querySelector('i').className = liked ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+            if (liked) App.toast('좋아요를 눌렀습니다.', 'success');
+        });
+
+        // 댓글 등록
+        document.getElementById('commentSubmit').addEventListener('click', function() {
+            const input = document.getElementById('commentInput');
+            const text = input.value.trim();
+            if (!text) {
+                App.toast('댓글 내용을 입력해주세요.', 'error');
+                return;
+            }
+            if (!DataService.isUserLoggedIn()) {
+                App.toast('로그인이 필요합니다.', 'info');
+                return;
+            }
+            const user = DataService.getCurrentUser();
+            const commentEl = document.createElement('div');
+            commentEl.className = 'comment-item';
+            commentEl.innerHTML = `
+                <div class="comment-header">
+                    <div class="comment-avatar"><i class="fa-solid fa-user"></i></div>
+                    <span class="comment-author">${user.name}</span>
+                    <span class="comment-date">방금 전</span>
+                </div>
+                <div class="comment-body">${text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+            `;
+            document.querySelector('.comment-list').appendChild(commentEl);
+            input.value = '';
+            App.toast('댓글이 등록되었습니다.', 'success');
+        });
+    });
+})();
+</script>
+</body>
+</html>

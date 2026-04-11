@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객센터 — (주)세울엔지니어링</title>
+    <meta name="description" content="정비사업 전문 상담을 접수하세요. 재개발·재건축·소규모정비 문의를 빠르게 답변드립니다.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <style>
+    /* === Hero === */
+    .ct-hero{padding:56px 0 48px;background:linear-gradient(135deg,#070B15 0%,var(--brand-dark) 40%,var(--brand-navy) 100%);position:relative;overflow:hidden}
+    .ct-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(195,165,105,.3),transparent)}
+    .ct-hero h1{font-size:32px;font-weight:900;color:#fff;margin-bottom:10px;padding-left:18px;border-left:3px solid var(--gold)}
+    .ct-hero .hero-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.7}
+    .ct-hero .hero-badges{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .ct-hero .hb{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:8px;font-size:12px;font-weight:600;color:rgba(255,255,255,.55)}
+    .ct-hero .hb i{color:var(--gold);font-size:11px}
+    @media(max-width:768px){.ct-hero{padding:40px 0 32px}.ct-hero h1{font-size:26px}}
+
+    /* === Layout === */
+    .uni-hero + .page-body { padding-top: 28px; }
+    .ct-layout{display:grid;grid-template-columns:1fr 340px;gap:36px}
+    @media(max-width:1024px){.ct-layout{grid-template-columns:1fr}}
+
+    /* === Form Card === */
+    .ct-form-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:16px;padding:36px 32px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+    .ct-form-card .cf-head{display:flex;align-items:center;gap:10px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--gray-100)}
+    .ct-form-card .cf-head .cf-icon{width:36px;height:36px;border-radius:10px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--gold)}
+    .ct-form-card .cf-head h2{font-size:18px;font-weight:800;color:var(--gray-900)}
+    .ct-form-card .cf-notice{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;margin-bottom:24px;font-size:12.5px;color:var(--gray-500);line-height:1.65}
+    .ct-form-card .cf-notice i{color:var(--gold);margin-top:2px;flex-shrink:0}
+
+    /* Form fields */
+    .ct-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+    @media(max-width:540px){.ct-row{grid-template-columns:1fr}}
+    .ct-group{margin-bottom:16px}
+    .ct-label{display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px}
+    .ct-label .req{color:#EF4444;margin-left:2px}
+    .ct-input,.ct-textarea{width:100%;height:44px;padding:0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:#fff;font-family:var(--font);transition:all .2s}
+    .ct-input:focus,.ct-textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(195,165,105,.1)}
+    .ct-input.err,.ct-textarea.err{border-color:#EF4444}
+    .ct-textarea{height:auto;padding:12px 14px;resize:vertical;min-height:120px;line-height:1.6}
+    .ct-err{font-size:11.5px;color:#EF4444;margin-top:4px;display:none}
+    .ct-err.show{display:block}
+
+    /* Custom Select (강조형) */
+    .ct-select-wrap{position:relative}
+    .ct-select-btn{width:100%;height:44px;padding:0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:var(--gray-50);font-family:var(--font);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
+    .ct-select-btn.placeholder{color:var(--gray-400);font-weight:400}
+    .ct-select-btn:focus,.ct-select-btn.open{border-color:var(--gold);box-shadow:0 0 0 3px rgba(195,165,105,.12);background:#fff}
+    .ct-select-btn.has-value{border-color:rgba(195,165,105,.35);background:#fff;font-weight:600;color:var(--brand-dark)}
+    .ct-select-btn.err{border-color:#EF4444}
+    .ct-select-btn i{font-size:11px;color:var(--gray-400);transition:transform .2s}
+    .ct-select-btn.open i{transform:rotate(180deg);color:var(--gold)}
+    .ct-select-list{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.12);z-index:200;max-height:280px;overflow-y:auto;display:none;padding:6px}
+    .ct-select-list.open{display:block}
+    .ct-select-opt{padding:10px 14px;font-size:13px;font-weight:500;color:var(--gray-600);cursor:pointer;border-radius:8px;transition:all .15s;display:flex;align-items:center;gap:8px}
+    .ct-select-opt:hover{background:var(--gray-50);color:var(--brand-dark)}
+    .ct-select-opt.selected{background:rgba(195,165,105,.06);color:var(--brand-dark);font-weight:700;border-left:2px solid var(--gold)}
+
+    /* File Upload (강화형) */
+    .ct-upload{border:2px dashed var(--gray-200);border-radius:14px;padding:28px 24px;text-align:center;transition:all .25s;cursor:pointer;position:relative;background:var(--gray-50)}
+    .ct-upload:hover{border-color:var(--gold);background:rgba(195,165,105,.03)}
+    .ct-upload.dragover{border-color:var(--gold);background:rgba(195,165,105,.05);box-shadow:0 0 0 4px rgba(195,165,105,.08)}
+    .ct-upload .up-icon{font-size:36px;color:var(--gold);opacity:.4;margin-bottom:12px}
+    .ct-upload .up-text{font-size:14px;font-weight:600;color:var(--gray-700);margin-bottom:6px}
+    .ct-upload .up-formats{font-size:11px;color:var(--gray-400);margin-bottom:2px}
+    .ct-upload .up-limit{font-size:10.5px;color:var(--gray-300)}
+    .ct-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+    .ct-files{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+    .ct-file{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:1.5px solid var(--gray-200);border-radius:10px;font-size:12.5px;color:var(--gray-700)}
+    .ct-file .cf-icon{width:28px;height:28px;border-radius:7px;background:rgba(195,165,105,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ct-file .cf-icon i{color:var(--gold);font-size:12px}
+    .ct-file .cf-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+    .ct-file .cf-size{color:var(--gray-400);font-size:11px;flex-shrink:0}
+    .ct-file .cf-status{font-size:10px;color:#059669;font-weight:600;flex-shrink:0}
+    .ct-file .cf-del{width:24px;height:24px;border-radius:6px;border:none;background:var(--gray-50);color:var(--gray-400);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all .2s}
+    .ct-file .cf-del:hover{background:#FEE2E2;color:#EF4444}
+    .ct-upload-note{font-size:11px;color:var(--gray-400);margin-top:6px;line-height:1.4}
+
+    /* Submit Button */
+    .ct-submit{width:100%;height:50px;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--brand-dark);color:var(--gold);border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .25s;margin-top:8px}
+    .ct-submit:hover{background:var(--brand-navy);box-shadow:0 6px 20px rgba(10,15,28,.15)}
+    .ct-submit:disabled{opacity:.5;cursor:default}
+    .ct-submit i{font-size:14px}
+
+    /* === Info Cards (compact) === */
+    .ct-info{display:flex;flex-direction:column;gap:12px}
+    .ct-info-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:18px 20px;transition:all .2s}
+    .ct-info-card:hover{border-color:var(--gold);box-shadow:0 4px 12px rgba(195,165,105,.08)}
+    .ct-info-card .ic-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .ct-info-card .ic-icon{width:36px;height:36px;border-radius:9px;background:var(--brand-dark);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--gold);flex-shrink:0}
+    .ct-info-card h3{font-size:14px;font-weight:700;color:var(--gray-900)}
+    .ct-info-card .ic-sub{font-size:10.5px;color:var(--gray-400);font-weight:500}
+    .ct-info-card .ic-highlight{font-size:22px;font-weight:800;color:var(--brand-dark);margin-bottom:2px;letter-spacing:-.5px}
+    .ct-info-card p{font-size:12.5px;color:var(--gray-500);line-height:1.55}
+    .ct-info-card .ic-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;background:rgba(195,165,105,.08);border-radius:5px;font-size:10.5px;font-weight:600;color:var(--gold);margin-top:6px}
+
+    /* Process (compact) */
+    .ct-process{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:12px;padding:16px 18px;margin-top:12px}
+    .ct-process h4{font-size:13px;font-weight:700;color:var(--gray-900);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    .ct-process h4 i{color:var(--gold);font-size:12px}
+    .ct-steps{display:flex;flex-direction:column;gap:7px}
+    .ct-step{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--gray-600);line-height:1.5}
+    .ct-step .sn{width:24px;height:24px;border-radius:50%;background:var(--brand-dark);color:var(--gold);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    
+    /* === Unified Hero (about-hero 기준) === */
+    .uni-hero {
+        background: linear-gradient(160deg, #0A0F1C 0%, #142644 50%, #0A0F1C 100%);
+        position: relative; overflow: hidden; padding: 64px 0 56px;
+    }
+    .uni-hero::before {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
+        pointer-events: none;
+    }
+    .uni-hero::after {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
+        background-size: 60px 60px; pointer-events: none;
+    }
+    .uni-hero .inner { position: relative; z-index: 1; display: flex; align-items: center; gap: 56px; }
+    .uni-hero .uh-text { flex: 1; min-width: 0; }
+    .uni-hero .uh-bc { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+    .uni-hero .uh-bc a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
+    .uni-hero .uh-bc a:hover { color: #C3A569; }
+    .uni-hero .uh-bc span { color: #C3A569; font-weight: 600; }
+    .uni-hero .uh-bc i { font-size: 10px; }
+    .uni-hero .uh-label { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; color: #C3A569; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+    .uni-hero .uh-label::before { content: ''; width: 24px; height: 1px; background: #C3A569; }
+    .uni-hero .uh-text h1 { font-size: 36px; font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -1px; margin-bottom: 14px; }
+    .uni-hero .uh-text h1 em { font-style: normal; color: #C3A569; }
+    .uni-hero .uh-sub { font-size: 15px; color: rgba(255,255,255,0.68); line-height: 1.7; max-width: 460px; }
+    .uni-hero .uh-visual { flex-shrink: 0; width: 440px; position: relative; transform: translateY(4px); }
+    .uni-hero .uh-photo { width: 100%; max-width: 100%; border-radius: 10px; overflow: hidden; margin-bottom: 18px; position: relative; box-sizing: border-box; }
+    .uni-hero .uh-photo img { width: 100%; display: block; filter: brightness(0.92) saturate(0.9); }
+    .uni-hero .uh-photo::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(135deg, rgba(10,15,28,0.3) 0%, transparent 55%); border-radius: 10px; }
+    .uni-hero .uh-photo::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40px; z-index: 1; background: linear-gradient(to top, rgba(10,15,28,0.25), transparent); pointer-events: none; }
+    .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .uni-hero .uh-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(195,165,105,0.1); border-radius: 10px; padding: 16px 18px; transition: all 0.3s; }
+    .uni-hero .uh-card:hover { background: rgba(195,165,105,0.06); border-color: rgba(195,165,105,0.22); }
+    .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .uni-hero .uh-ci i { font-size: 14px; color: #C3A569; }
+    .uni-hero .uh-card h4 { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .uni-hero .uh-card p { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 500; line-height: 1.5; }
+    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 36px; } .uni-hero .uh-visual { width: 100%; max-width: 460px; } }
+    @media (max-width: 600px) { .uni-hero { padding: 52px 0 44px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } }
+
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="uni-hero">
+    <div class="inner">
+        <div class="uh-text">
+            <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>고객센터</span></div>
+            <div class="uh-label">CONTACT US</div>
+            <h1>정비사업 <em>전문 상담</em>을 접수하세요</h1>
+            <p class="uh-sub">문의유형을 선택하고 관련 자료를 첨부하시면<br>담당 전문가가 신속히 검토 후 답변드립니다</p>
+        </div>
+        <div class="uh-visual">
+            <div class="uh-photo"><img src="../jpg/hero_contact.png" alt="세울엔지니어링 고객센터"></div>
+            <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-phone"></i></div><h4>전화 상담</h4><p>010-2230-9210</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-envelope"></i></div><h4>이메일</h4><p>dodo6666@naver.com</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-clock"></i></div><h4>응답 시간</h4><p>1~2영업일 내 회신</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-building"></i></div><h4>방문 상담</h4><p>사전 예약 권장</p></div></div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body"><div class="inner">
+    <div class="ct-layout">
+
+        <!-- 문의 폼 -->
+        <div class="ct-form-card">
+            <div class="cf-head">
+                <div class="cf-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+                <h2>상담 문의 접수</h2>
+            </div>
+            <div class="cf-notice">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>문의유형을 선택하시면 담당 전문가가 더 빠르게 검토할 수 있습니다. 사업 관련 자료가 있으시면 첨부해 주세요.</span>
+            </div>
+
+            <form id="ctForm" novalidate>
+                <div class="ct-row">
+                    <div>
+                        <label class="ct-label">이름 <span class="req">*</span></label>
+                        <input type="text" class="ct-input" id="cName" placeholder="이름" required>
+                        <div class="ct-err" id="errName">이름을 입력해주세요.</div>
+                    </div>
+                    <div>
+                        <label class="ct-label">이메일 <span class="req">*</span></label>
+                        <input type="email" class="ct-input" id="cEmail" placeholder="example@email.com" required>
+                        <div class="ct-err" id="errEmail">올바른 이메일을 입력해주세요.</div>
+                    </div>
+                </div>
+                <div class="ct-row">
+                    <div>
+                        <label class="ct-label">연락처</label>
+                        <input type="tel" class="ct-input" id="cPhone" placeholder="010-0000-0000">
+                    </div>
+                    <div>
+                        <label class="ct-label">문의유형 <span class="req">*</span></label>
+                        <div class="ct-select-wrap" id="selWrap">
+                            <button type="button" class="ct-select-btn placeholder" id="selBtn">
+                                <span>문의유형을 선택해주세요</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="ct-select-list" id="selList">
+                                <div class="ct-select-opt" data-val="재개발사업">재개발 사업 문의</div>
+                                <div class="ct-select-opt" data-val="재건축사업">재건축 사업 문의</div>
+                                <div class="ct-select-opt" data-val="소규모재건축">소규모재건축 문의</div>
+                                <div class="ct-select-opt" data-val="사업성검토">사업성 검토 문의</div>
+                                <div class="ct-select-opt" data-val="조합설립">조합설립 / 추진위 문의</div>
+                                <div class="ct-select-opt" data-val="관리처분">관리처분 / 분담금 문의</div>
+                                <div class="ct-select-opt" data-val="상가협의">상가협의 / 권리관계 문의</div>
+                                <div class="ct-select-opt" data-val="법률행정">법률 / 행정 절차 문의</div>
+                                <div class="ct-select-opt" data-val="용역협업">용역 / 협업 문의</div>
+                                <div class="ct-select-opt" data-val="홈페이지">홈페이지 / 자료실 문의</div>
+                                <div class="ct-select-opt" data-val="기타">기타 문의</div>
+                            </div>
+                            <input type="hidden" id="cType" value="">
+                        </div>
+                        <div class="ct-err" id="errType">문의유형을 선택해주세요.</div>
+                    </div>
+                </div>
+                <div class="ct-group">
+                    <label class="ct-label">제목 <span class="req">*</span></label>
+                    <input type="text" class="ct-input" id="cTitle" placeholder="문의 제목을 입력해주세요" required>
+                    <div class="ct-err" id="errTitle">제목을 입력해주세요.</div>
+                </div>
+                <div class="ct-group">
+                    <label class="ct-label">내용 <span class="req">*</span></label>
+                    <textarea class="ct-textarea" id="cContent" placeholder="문의 내용을 상세히 작성해주세요. 사업 구역명, 현재 단계, 궁금한 점 등을 포함하면 더 정확한 답변이 가능합니다." rows="6" required></textarea>
+                    <div class="ct-err" id="errContent">내용을 입력해주세요.</div>
+                </div>
+                <div class="ct-group">
+                    <label class="ct-label">첨부파일</label>
+                    <div class="ct-upload" id="uploadArea">
+                        <div class="up-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                        <div class="up-text">파일을 드래그하거나 클릭하여 첨부하세요</div>
+                        <div class="up-formats">PDF · HWP · DOC · XLS · JPG · PNG · ZIP</div>
+                        <div class="up-limit">파일당 최대 10MB · 최대 5개</div>
+                        <input type="file" id="fileInput" multiple accept=".pdf,.hwp,.hwpx,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.zip">
+                    </div>
+                    <div class="ct-files" id="fileList"></div>
+                    <div class="ct-upload-note">사업 관련 자료·도면·공문 등을 첨부할 수 있습니다. 민감자료는 필요 범위 내에서만 제출해 주세요.</div>
+                </div>
+                <!-- 개인정보 수집·이용 동의 -->
+                <div class="ct-group" style="margin-top:4px">
+                    <div style="padding:16px 18px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;font-size:12px;color:var(--gray-600);line-height:1.7">
+                        <div style="font-weight:700;color:var(--gray-800);margin-bottom:8px;font-size:12.5px"><i class="fa-solid fa-shield-halved" style="color:var(--gold);margin-right:4px"></i> 개인정보 수집·이용 동의</div>
+                        <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin-bottom:10px">
+                            <tr style="border-bottom:1px solid var(--gray-200)">
+                                <th style="text-align:left;padding:6px 8px;background:rgba(10,15,28,.03);font-weight:600;color:var(--gray-700);width:25%">구분</th>
+                                <th style="text-align:left;padding:6px 8px;background:rgba(10,15,28,.03);font-weight:600;color:var(--gray-700)">수집항목</th>
+                                <th style="text-align:left;padding:6px 8px;background:rgba(10,15,28,.03);font-weight:600;color:var(--gray-700);width:28%">목적</th>
+                            </tr>
+                            <tr style="border-bottom:1px solid var(--gray-100)">
+                                <td style="padding:6px 8px;font-weight:600;color:var(--brand-dark)">필수</td>
+                                <td style="padding:6px 8px">이름, 이메일, 문의유형, 제목, 내용</td>
+                                <td style="padding:6px 8px">문의 접수 및 회신</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px 8px;color:var(--gray-500)">선택</td>
+                                <td style="padding:6px 8px">연락처, 첨부파일</td>
+                                <td style="padding:6px 8px">상세 상담 및 자료 검토</td>
+                            </tr>
+                        </table>
+                        <div style="font-size:11px;color:var(--gray-400);margin-bottom:10px">보유기간: 문의 처리 완료 후 <strong style="color:var(--gray-600)">3년</strong> (전자상거래법) | 동의를 거부할 수 있으나, 필수항목 미동의 시 문의 접수가 불가합니다.</div>
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12.5px;font-weight:600;color:var(--gray-800)">
+                            <input type="checkbox" id="cPrivacy" style="width:16px;height:16px;accent-color:var(--gold)">
+                            개인정보 수집·이용에 동의합니다 <span class="req">*</span>
+                        </label>
+                        <div class="ct-err" id="errPrivacy" style="margin-top:4px">개인정보 수집·이용에 동의해주세요.</div>
+                        <a href="privacy.html" target="_blank" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:11px;color:var(--gold);font-weight:500"><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:9px"></i> 개인정보 처리방침 전문 보기</a>
+                    </div>
+                </div>
+                <button type="submit" class="ct-submit" id="submitBtn">
+                    <i class="fa-solid fa-paper-plane"></i> 상담 문의 접수
+                </button>
+            </form>
+        </div>
+
+        <!-- 안내 정보 -->
+        <div class="ct-info">
+            <div class="ct-info-card">
+                <div class="ic-head">
+                    <div class="ic-icon"><i class="fa-solid fa-phone"></i></div>
+                    <div><h3>전화 상담</h3><span class="ic-sub">빠른 상담이 필요할 때</span></div>
+                </div>
+                <div class="ic-highlight">010-2230-9210</div>
+                <p>평일 09:00 ~ 18:00<br>(토·일·공휴일 휴무)</p>
+                <div class="ic-tag"><i class="fa-solid fa-bolt"></i> 즉시 상담 가능</div>
+            </div>
+            <div class="ct-info-card">
+                <div class="ic-head">
+                    <div class="ic-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div><h3>이메일 문의</h3><span class="ic-sub">자료 첨부 및 상세 문의</span></div>
+                </div>
+                <div class="ic-highlight" style="font-size:18px">dodo6666@naver.com</div>
+                <p>대용량 파일, 도면, 사업 관련 서류를 함께 보내실 때 이메일을 이용해 주세요.</p>
+                <div class="ic-tag"><i class="fa-solid fa-clock"></i> 1~2영업일 내 회신</div>
+            </div>
+            <div class="ct-info-card">
+                <div class="ic-head">
+                    <div class="ic-icon"><i class="fa-solid fa-building"></i></div>
+                    <div><h3>방문 상담</h3><span class="ic-sub">대면 상담 예약</span></div>
+                </div>
+                <p>경기도 하남시 감일백제로 70, 204동 1104호<br>세울엔지니어링 본사</p>
+                <div class="ic-tag"><i class="fa-solid fa-calendar-check"></i> 사전 예약 권장</div>
+            </div>
+
+            <!-- 접수 흐름 -->
+            <div class="ct-process">
+                <h4><i class="fa-solid fa-route"></i> 문의 접수 흐름</h4>
+                <div class="ct-steps">
+                    <div class="ct-step"><div class="sn">1</div><span>문의유형 선택 및 내용 작성</span></div>
+                    <div class="ct-step"><div class="sn">2</div><span>관련 자료 첨부 (선택)</span></div>
+                    <div class="ct-step"><div class="sn">3</div><span>담당 전문가 배정 및 검토</span></div>
+                    <div class="ct-step"><div class="sn">4</div><span>이메일 또는 전화로 회신</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div></div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=20260407"></script>
+<script src="../assets/js/data-service.js?v=20260407"></script>
+<script src="../assets/js/common.js?v=20260407"></script>
+<script>
+(function(){
+/* Custom Select */
+var selBtn=document.getElementById('selBtn'),selList=document.getElementById('selList'),selInput=document.getElementById('cType');
+selBtn.addEventListener('click',function(){selList.classList.toggle('open');selBtn.classList.toggle('open')});
+document.addEventListener('click',function(e){if(!e.target.closest('#selWrap')){selList.classList.remove('open');selBtn.classList.remove('open')}});
+selList.addEventListener('click',function(e){
+    var opt=e.target.closest('.ct-select-opt');if(!opt)return;
+    selInput.value=opt.dataset.val;
+    selBtn.innerHTML='<span>'+opt.textContent+'</span><i class="fa-solid fa-chevron-down"></i>';
+    selBtn.classList.remove('placeholder','err');selBtn.classList.add('has-value');
+    selList.querySelectorAll('.ct-select-opt').forEach(function(o){o.classList.remove('selected')});
+    opt.classList.add('selected');
+    selList.classList.remove('open');selBtn.classList.remove('open');
+    document.getElementById('errType').classList.remove('show');
+});
+
+/* File Upload */
+var uploadArea=document.getElementById('uploadArea'),fileInput=document.getElementById('fileInput'),fileListEl=document.getElementById('fileList');
+var uploadedFiles=[];
+uploadArea.addEventListener('dragover',function(e){e.preventDefault();uploadArea.classList.add('dragover')});
+uploadArea.addEventListener('dragleave',function(){uploadArea.classList.remove('dragover')});
+uploadArea.addEventListener('drop',function(e){e.preventDefault();uploadArea.classList.remove('dragover');handleFiles(e.dataTransfer.files)});
+fileInput.addEventListener('change',function(){handleFiles(this.files);this.value=''});
+function handleFiles(files){
+    Array.from(files).forEach(function(f){
+        if(f.size>10*1024*1024){App.toast(f.name+': 10MB 초과','error');return}
+        if(uploadedFiles.length>=5){App.toast('최대 5개까지 첨부 가능합니다','error');return}
+        uploadedFiles.push(f);
+    });
+    renderFiles();
+}
+function renderFiles(){
+    fileListEl.innerHTML=uploadedFiles.map(function(f,i){
+        var sz=f.size<1024*1024?(f.size/1024).toFixed(0)+'KB':(f.size/1024/1024).toFixed(1)+'MB';
+        return'<div class="ct-file"><div class="cf-icon"><i class="fa-solid fa-file"></i></div><span class="cf-name">'+f.name+'</span><span class="cf-size">'+sz+'</span><span class="cf-status">첨부완료</span><button type="button" class="cf-del" onclick="CT.removeFile('+i+')"><i class="fa-solid fa-xmark"></i></button></div>';
+    }).join('');
+}
+
+/* Validation + Submit */
+var form=document.getElementById('ctForm');
+function showErr(id,show){var el=document.getElementById(id);if(show)el.classList.add('show');else el.classList.remove('show')}
+function validEmail(e){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
+
+form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=document.getElementById('cName').value.trim();
+    var email=document.getElementById('cEmail').value.trim();
+    var type=selInput.value;
+    var title=document.getElementById('cTitle').value.trim();
+    var content=document.getElementById('cContent').value.trim();
+    var ok=true;
+
+    showErr('errName',!name);if(!name){document.getElementById('cName').classList.add('err');ok=false}
+    showErr('errEmail',!email||!validEmail(email));if(!email||!validEmail(email)){document.getElementById('cEmail').classList.add('err');ok=false}
+    showErr('errType',!type);if(!type){selBtn.classList.add('err');ok=false}
+    showErr('errTitle',!title);if(!title){document.getElementById('cTitle').classList.add('err');ok=false}
+    showErr('errContent',!content);if(!content){document.getElementById('cContent').classList.add('err');ok=false}
+    var privacy=document.getElementById('cPrivacy').checked;
+    showErr('errPrivacy',!privacy);if(!privacy)ok=false
+
+    if(!ok){App.toast('필수 입력 항목을 확인해주세요.','error');return}
+
+    var btn=document.getElementById('submitBtn');
+    btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> 접수 중...';
+
+    var phone=document.getElementById('cPhone').value.trim();
+    fetch('/api/inquiries',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name:name,email:email,phone:phone,type:type,title:title,content:content,files:uploadedFiles.map(function(f){return{name:f.name,size:f.size<1048576?(f.size/1024).toFixed(0)+'KB':(f.size/1048576).toFixed(1)+'MB'}})})
+    }).then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d}})})
+    .then(function(res){
+        btn.disabled=false;
+        if(res.ok){
+            btn.innerHTML='<i class="fa-solid fa-circle-check"></i> 접수 완료';
+            btn.style.background='#059669';
+            App.toast('상담 문의가 접수되었습니다. 빠른 시일 내 답변드리겠습니다.','success');
+            setTimeout(function(){btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';btn.style.background='';form.reset();uploadedFiles=[];renderFiles();selBtn.innerHTML='<span>문의유형을 선택해주세요</span><i class="fa-solid fa-chevron-down"></i>';selBtn.classList.add('placeholder');selBtn.classList.remove('has-value');selInput.value=''},3000);
+        }else{
+            btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';
+            App.toast(res.data.error||'접수에 실패했습니다.','error');
+        }
+    }).catch(function(){btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';App.toast('서버 연결에 실패했습니다.','error')});
+});
+
+/* Clear errors on input */
+['cName','cEmail','cTitle','cContent'].forEach(function(id){
+    document.getElementById(id).addEventListener('input',function(){
+        this.classList.remove('err');
+        var errId='err'+id.charAt(1).toUpperCase()+id.slice(2);
+        showErr(errId,false);
+    });
+});
+
+/* Global */
+window.CT={removeFile:function(i){uploadedFiles.splice(i,1);renderFiles()}};
+})();
+</script>
+</body>
+</html>
