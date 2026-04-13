@@ -257,14 +257,158 @@ const App = (() => {
     const overlay = document.getElementById('drawerOverlay');
     const openBtn = document.getElementById('openDrawer');
     const closeBtn = document.getElementById('drawerClose');
-    if (openBtn) openBtn.addEventListener('click', () => { drawer.classList.add('open'); overlay.classList.add('open'); lockScroll(); });
+    if (openBtn) openBtn.addEventListener('click', openDrawer);
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
     if (overlay) overlay.addEventListener('click', closeDrawer);
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      lockScroll();
+    }
 
     function closeDrawer() {
       drawer.classList.remove('open');
       overlay.classList.remove('open');
       unlockScroll();
+    }
+
+    /* ── 모바일 스와이프 메뉴 ── */
+    if (drawer && overlay) {
+      var swipe = { startX: 0, startY: 0, curX: 0, dragging: false, edgeOpen: false, locked: false };
+      var EDGE_ZONE = 25;    // 오른쪽 가장자리 감지 영역(px)
+      var THRESHOLD = 60;    // 스와이프 완료 최소 거리(px)
+      var VELOCITY_TH = 0.3; // 빠른 스와이프 감지 속도(px/ms)
+      var startTime = 0;
+
+      function drawerWidth() { return drawer.offsetWidth; }
+
+      function setDrawerTransform(dx) {
+        drawer.style.transition = 'none';
+        overlay.style.transition = 'none';
+        drawer.style.transform = 'translateX(' + Math.max(0, dx) + 'px)';
+        overlay.style.opacity = Math.max(0, 1 - dx / drawerWidth());
+      }
+
+      function resetDrawerTransition() {
+        drawer.style.transition = '';
+        overlay.style.transition = '';
+        drawer.style.transform = '';
+        overlay.style.opacity = '';
+      }
+
+      // 드로어 위 터치(닫기 스와이프)
+      drawer.addEventListener('touchstart', function(e) {
+        if (window.innerWidth > 1024) return;
+        if (!drawer.classList.contains('open')) return;
+        var t = e.touches[0];
+        swipe.startX = t.clientX;
+        swipe.startY = t.clientY;
+        swipe.curX = t.clientX;
+        swipe.dragging = false;
+        swipe.edgeOpen = false;
+        swipe.locked = false;
+        startTime = Date.now();
+      }, { passive: true });
+
+      drawer.addEventListener('touchmove', function(e) {
+        if (window.innerWidth > 1024) return;
+        if (!drawer.classList.contains('open')) return;
+        var t = e.touches[0];
+        var dx = t.clientX - swipe.startX;
+        var dy = t.clientY - swipe.startY;
+
+        if (!swipe.locked) {
+          if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+            swipe.locked = true;
+            swipe.dragging = Math.abs(dx) > Math.abs(dy) && dx > 0;
+          }
+        }
+        if (!swipe.dragging) return;
+        e.preventDefault();
+        swipe.curX = t.clientX;
+        setDrawerTransform(dx);
+      }, { passive: false });
+
+      drawer.addEventListener('touchend', function(e) {
+        if (window.innerWidth > 1024) return;
+        if (!swipe.dragging) { swipe.locked = false; return; }
+        var dx = swipe.curX - swipe.startX;
+        var velocity = dx / (Date.now() - startTime);
+        resetDrawerTransition();
+        if (dx > THRESHOLD || velocity > VELOCITY_TH) {
+          closeDrawer();
+        }
+        swipe.dragging = false;
+        swipe.locked = false;
+      }, { passive: true });
+
+      // 화면 오른쪽 가장자리 터치(열기 스와이프)
+      document.addEventListener('touchstart', function(e) {
+        if (window.innerWidth > 1024) return;
+        if (drawer.classList.contains('open')) return;
+        var t = e.touches[0];
+        if (t.clientX < window.innerWidth - EDGE_ZONE) return;
+        swipe.startX = t.clientX;
+        swipe.startY = t.clientY;
+        swipe.curX = t.clientX;
+        swipe.edgeOpen = true;
+        swipe.dragging = false;
+        swipe.locked = false;
+        startTime = Date.now();
+      }, { passive: true });
+
+      document.addEventListener('touchmove', function(e) {
+        if (!swipe.edgeOpen) return;
+        if (window.innerWidth > 1024) return;
+        var t = e.touches[0];
+        var dx = swipe.startX - t.clientX; // 왼쪽으로 이동한 거리
+        var dy = t.clientY - swipe.startY;
+
+        if (!swipe.locked) {
+          if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+            swipe.locked = true;
+            swipe.dragging = Math.abs(dx) > Math.abs(dy) && dx > 0;
+            if (swipe.dragging) {
+              drawer.style.visibility = 'visible';
+              overlay.style.pointerEvents = 'auto';
+            }
+          }
+        }
+        if (!swipe.dragging) return;
+        e.preventDefault();
+        swipe.curX = t.clientX;
+        var dw = drawerWidth();
+        var openAmount = Math.min(dw, dx);
+        var shift = dw - openAmount;
+        drawer.style.transition = 'none';
+        overlay.style.transition = 'none';
+        drawer.style.transform = 'translateX(' + shift + 'px)';
+        overlay.style.opacity = Math.max(0, openAmount / dw);
+        overlay.style.pointerEvents = openAmount > 10 ? 'auto' : 'none';
+      }, { passive: false });
+
+      document.addEventListener('touchend', function(e) {
+        if (!swipe.edgeOpen) return;
+        swipe.edgeOpen = false;
+        if (!swipe.dragging) {
+          drawer.style.visibility = '';
+          overlay.style.pointerEvents = '';
+          swipe.locked = false;
+          return;
+        }
+        var dx = swipe.startX - swipe.curX;
+        var velocity = dx / (Date.now() - startTime);
+        resetDrawerTransition();
+        drawer.style.visibility = '';
+        if (dx > THRESHOLD || velocity > VELOCITY_TH) {
+          openDrawer();
+        } else {
+          overlay.style.pointerEvents = '';
+        }
+        swipe.dragging = false;
+        swipe.locked = false;
+      }, { passive: true });
     }
 
     // Search
