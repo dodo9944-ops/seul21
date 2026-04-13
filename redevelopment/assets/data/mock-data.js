@@ -598,7 +598,7 @@ const MOCK = {
   /* ──────────────────────────── 관리자 계정 ──────────────────────────── */
   adminAccount: {
     username: 'dodo6656',
-    password: '9210',
+    password: '1318',
     name: '이창우'
   }
 };
