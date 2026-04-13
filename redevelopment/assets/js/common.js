@@ -274,142 +274,101 @@ const App = (() => {
     }
 
     /* ── 모바일 스와이프 메뉴 ── */
-    if (drawer && overlay) {
-      var swipe = { startX: 0, startY: 0, curX: 0, dragging: false, edgeOpen: false, locked: false };
-      var EDGE_ZONE = 25;    // 오른쪽 가장자리 감지 영역(px)
-      var THRESHOLD = 60;    // 스와이프 완료 최소 거리(px)
-      var VELOCITY_TH = 0.3; // 빠른 스와이프 감지 속도(px/ms)
-      var startTime = 0;
+    (function initSwipe() {
+      if (!drawer || !overlay) return;
+      var THRESHOLD = 50;
+      var VELOCITY = 0.25;
+      var st = { x0: 0, y0: 0, cx: 0, t0: 0, mode: '' }; // mode: '' | 'close' | 'open'
 
-      function drawerWidth() { return drawer.offsetWidth; }
+      function dw() { return drawer.offsetWidth || 300; }
 
-      function setDrawerTransform(dx) {
+      function applyPos(shift, opacity) {
         drawer.style.transition = 'none';
         overlay.style.transition = 'none';
-        drawer.style.transform = 'translateX(' + Math.max(0, dx) + 'px)';
-        overlay.style.opacity = Math.max(0, 1 - dx / drawerWidth());
+        drawer.style.transform = 'translateX(' + shift + 'px)';
+        overlay.style.opacity = opacity;
       }
 
-      function resetDrawerTransition() {
+      function clearStyle() {
         drawer.style.transition = '';
         overlay.style.transition = '';
         drawer.style.transform = '';
         overlay.style.opacity = '';
       }
 
-      // 드로어 위 터치(닫기 스와이프)
-      drawer.addEventListener('touchstart', function(e) {
-        if (window.innerWidth > 1024) return;
-        if (!drawer.classList.contains('open')) return;
-        var t = e.touches[0];
-        swipe.startX = t.clientX;
-        swipe.startY = t.clientY;
-        swipe.curX = t.clientX;
-        swipe.dragging = false;
-        swipe.edgeOpen = false;
-        swipe.locked = false;
-        startTime = Date.now();
-      }, { passive: true });
-
-      drawer.addEventListener('touchmove', function(e) {
-        if (window.innerWidth > 1024) return;
-        if (!drawer.classList.contains('open')) return;
-        var t = e.touches[0];
-        var dx = t.clientX - swipe.startX;
-        var dy = t.clientY - swipe.startY;
-
-        if (!swipe.locked) {
-          if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
-            swipe.locked = true;
-            swipe.dragging = Math.abs(dx) > Math.abs(dy) && dx > 0;
-          }
-        }
-        if (!swipe.dragging) return;
-        e.preventDefault();
-        swipe.curX = t.clientX;
-        setDrawerTransform(dx);
-      }, { passive: false });
-
-      drawer.addEventListener('touchend', function(e) {
-        if (window.innerWidth > 1024) return;
-        if (!swipe.dragging) { swipe.locked = false; return; }
-        var dx = swipe.curX - swipe.startX;
-        var velocity = dx / (Date.now() - startTime);
-        resetDrawerTransition();
-        if (dx > THRESHOLD || velocity > VELOCITY_TH) {
-          closeDrawer();
-        }
-        swipe.dragging = false;
-        swipe.locked = false;
-      }, { passive: true });
-
-      // 화면 오른쪽 가장자리 터치(열기 스와이프)
+      /* === 통합 touchstart (document 레벨) === */
       document.addEventListener('touchstart', function(e) {
         if (window.innerWidth > 1024) return;
-        if (drawer.classList.contains('open')) return;
         var t = e.touches[0];
-        if (t.clientX < window.innerWidth - EDGE_ZONE) return;
-        swipe.startX = t.clientX;
-        swipe.startY = t.clientY;
-        swipe.curX = t.clientX;
-        swipe.edgeOpen = true;
-        swipe.dragging = false;
-        swipe.locked = false;
-        startTime = Date.now();
+        st.x0 = t.clientX;
+        st.y0 = t.clientY;
+        st.cx = t.clientX;
+        st.t0 = Date.now();
+        st.mode = '';
       }, { passive: true });
 
+      /* === 통합 touchmove === */
       document.addEventListener('touchmove', function(e) {
-        if (!swipe.edgeOpen) return;
         if (window.innerWidth > 1024) return;
         var t = e.touches[0];
-        var dx = swipe.startX - t.clientX; // 왼쪽으로 이동한 거리
-        var dy = t.clientY - swipe.startY;
+        var dx = t.clientX - st.x0;
+        var dy = t.clientY - st.y0;
+        var ax = Math.abs(dx), ay = Math.abs(dy);
 
-        if (!swipe.locked) {
-          if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
-            swipe.locked = true;
-            swipe.dragging = Math.abs(dx) > Math.abs(dy) && dx > 0;
-            if (swipe.dragging) {
-              drawer.style.visibility = 'visible';
-              overlay.style.pointerEvents = 'auto';
-            }
-          }
+        // 방향 결정 (한 번만)
+        if (!st.mode) {
+          if (ax < 10 && ay < 10) return; // 아직 판별 불가
+          if (ay > ax) { st.mode = 'scroll'; return; } // 세로 스크롤
+          var isOpen = drawer.classList.contains('open');
+          if (isOpen && dx > 0) st.mode = 'close';       // 열림 → 오른쪽 = 닫기
+          else if (!isOpen && dx < 0) st.mode = 'open';   // 닫힘 → 왼쪽 = 열기
+          else { st.mode = 'scroll'; return; }
         }
-        if (!swipe.dragging) return;
+
+        if (st.mode === 'scroll') return;
         e.preventDefault();
-        swipe.curX = t.clientX;
-        var dw = drawerWidth();
-        var openAmount = Math.min(dw, dx);
-        var shift = dw - openAmount;
-        drawer.style.transition = 'none';
-        overlay.style.transition = 'none';
-        drawer.style.transform = 'translateX(' + shift + 'px)';
-        overlay.style.opacity = Math.max(0, openAmount / dw);
-        overlay.style.pointerEvents = openAmount > 10 ? 'auto' : 'none';
+        st.cx = t.clientX;
+
+        var w = dw();
+        if (st.mode === 'close') {
+          var shift = Math.max(0, Math.min(w, dx));
+          applyPos(shift, Math.max(0, 1 - shift / w));
+        } else if (st.mode === 'open') {
+          var pull = Math.max(0, Math.min(w, -dx)); // 왼쪽 이동량
+          var shift2 = w - pull;
+          applyPos(shift2, Math.max(0, pull / w));
+          overlay.style.pointerEvents = pull > 10 ? 'auto' : 'none';
+        }
       }, { passive: false });
 
-      document.addEventListener('touchend', function(e) {
-        if (!swipe.edgeOpen) return;
-        swipe.edgeOpen = false;
-        if (!swipe.dragging) {
-          drawer.style.visibility = '';
-          overlay.style.pointerEvents = '';
-          swipe.locked = false;
-          return;
+      /* === 통합 touchend === */
+      document.addEventListener('touchend', function() {
+        if (window.innerWidth > 1024) return;
+        var mode = st.mode;
+        if (!mode || mode === 'scroll') { st.mode = ''; return; }
+
+        var dx = st.cx - st.x0;
+        var elapsed = Date.now() - st.t0 || 1;
+        var v = Math.abs(dx) / elapsed;
+        var w = dw();
+
+        clearStyle();
+
+        if (mode === 'close') {
+          if (dx > THRESHOLD || v > VELOCITY) {
+            closeDrawer();
+          }
+        } else if (mode === 'open') {
+          var pull = -dx;
+          if (pull > THRESHOLD || v > VELOCITY) {
+            openDrawer();
+          } else {
+            overlay.style.pointerEvents = '';
+          }
         }
-        var dx = swipe.startX - swipe.curX;
-        var velocity = dx / (Date.now() - startTime);
-        resetDrawerTransition();
-        drawer.style.visibility = '';
-        if (dx > THRESHOLD || velocity > VELOCITY_TH) {
-          openDrawer();
-        } else {
-          overlay.style.pointerEvents = '';
-        }
-        swipe.dragging = false;
-        swipe.locked = false;
+        st.mode = '';
       }, { passive: true });
-    }
+    })();
 
     // Search
     const searchOverlay = document.getElementById('searchOverlay');
