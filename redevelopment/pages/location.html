@@ -117,6 +117,8 @@
     }
     .area-card .ac-tag.type-재개발 { background: rgba(10,15,28,.08); color: var(--brand-dark); }
     .area-card .ac-tag.type-재건축 { background: rgba(195,165,105,.1); color: #8B7340; }
+    .area-card .ac-tag.type-소규모재건축 { background: rgba(76,175,80,.1); color: #2E7D32; }
+    .area-card .ac-tag.type-가로정비 { background: rgba(156,39,176,.1); color: #7B1FA2; }
 
     .area-card .ac-meta { display: flex; gap: 14px; font-size: 12px; color: var(--gray-500); }
     .area-card .ac-meta i { color: var(--gold); margin-right: 4px; font-size: 10px; }
@@ -206,6 +208,8 @@
     .map-popup .mp-type { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
     .map-popup .mp-type.t-rd { background: rgba(10,15,28,.08); color: var(--brand-dark); }
     .map-popup .mp-type.t-rc { background: rgba(195,165,105,.1); color: #8B7340; }
+    .map-popup .mp-type.t-sr { background: rgba(76,175,80,.1); color: #2E7D32; }
+    .map-popup .mp-type.t-gs { background: rgba(156,39,176,.1); color: #7B1FA2; }
     .map-popup .mp-info { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
     .map-popup .mp-info strong { color: var(--gray-800); }
     .map-popup .mp-dist { font-size: 12px; font-weight: 700; color: var(--gold); margin-top: 6px; }
@@ -231,10 +235,10 @@
             <div class="breadcrumb" style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:20px;">
                 <a href="../index.html" style="color:rgba(255,255,255,.35);">홈</a>
                 <i class="fa-solid fa-chevron-right" style="font-size:8px;margin:0 8px;opacity:.5;"></i>
-                <span style="color:rgba(195,165,105,.6);">내 위치 파악</span>
+                <span style="color:rgba(195,165,105,.6);">재개발지도</span>
             </div>
-            <h1><i class="fa-solid fa-location-crosshairs" style="margin-right:12px;color:var(--gold);font-size:30px;"></i>내 위치 파악</h1>
-            <p class="hero-sub">현재 위치를 기반으로 주변 정비사업 구역을 확인하고, 거리·프리미엄·진행 단계를 한눈에 비교하세요.</p>
+            <h1><i class="fa-solid fa-map-location-dot" style="margin-right:12px;color:var(--gold);font-size:30px;"></i>재개발지도</h1>
+            <p class="hero-sub">서울시 정비사업 구역을 지도에서 확인하고, 거리·프리미엄·진행 단계를 한눈에 비교하세요.</p>
         </div>
     </section>
 
@@ -373,7 +377,7 @@
                 marker.bindPopup(
                     '<div class="map-popup">' +
                         '<div class="mp-name">' + area.name + '</div>' +
-                        '<span class="mp-type ' + (area.type === '재개발' ? 't-rd' : 't-rc') + '">' + area.type + '</span>' +
+                        '<span class="mp-type ' + (area.type==='재개발'?'t-rd':area.type==='재건축'?'t-rc':area.type==='소규모재건축'?'t-sr':'t-gs') + '">' + area.type + '</span>' +
                         '<div class="mp-info">' +
                             '<strong>' + area.district + '</strong> · ' + area.stage + '<br>' +
                             '프리미엄 <strong>' + formatNum(area.premium) + '만</strong> · 비례율 <strong>' + (area.ratio || '-') + '%</strong>' +
