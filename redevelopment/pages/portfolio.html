@@ -64,6 +64,7 @@
     .fc-img .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.5) 0%,transparent 50%);pointer-events:none}
     .fc-img .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
     .fc-fb{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+    @media(max-width:768px){.fc-img{height:160px}.fc-fb{height:160px}}
     .fc-fb[data-t=r]{background:linear-gradient(135deg,#0A0F1C,#1a3055,#2a4a75)}
     .fc-fb[data-t=c]{background:linear-gradient(135deg,#142644,#1e3a5f,#0A0F1C)}
     .fc-fb[data-t=s]{background:linear-gradient(135deg,#1a2a40,#243a55,#C3A569)}
@@ -346,7 +347,7 @@ function renderFeat(){
 var items=D.filter(function(p){return p.featured});
 document.getElementById('featGrid').innerHTML=items.map(function(p,idx){
 var img=p.featuredImage?
-'<div class="fc-img"><img src="'+p.featuredImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+bg(p)+'</div></div>':
+'<div class="fc-img"><img src="'+p.featuredImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.parentElement.querySelector(\'.fc-fb\').style.display=\'flex\'"><div class="fc-fb" data-t="'+dt(p.type)+'" style="display:none;position:absolute;inset:0;z-index:1"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span></div><div class="ov"></div><div class="badges">'+bg(p)+'</div></div>':
 '<div class="fc-fb" data-t="'+dt(p.type)+'"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+bg(p)+'</div></div>';
 var primary=idx===0?' fc-primary':'';
 return'<div class="fc'+primary+'" onclick="PF.open(\''+p.id+'\')">'+img+
