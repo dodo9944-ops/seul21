@@ -2,7 +2,7 @@ const REPO = 'dodo9944-ops/seul21';
 const FILE_PATH = 'redevelopment/data/inquiries.json';
 const GITHUB_API = 'https://api.github.com';
 const ADMIN_LINK = 'https://seul21.vercel.app/admin/inquiries.html';
-const EMAIL_RECIPIENTS = ['dodo66666@naver.com', 'dodo9944@mail.com'];
+const EMAIL_RECIPIENTS = ['dodo66666@naver.com', 'dodo9944@mail.com', 'dodo9944@gmail.com'];
 
 // ─── GitHub helpers ──────────────────────────────────────
 async function ghFetch(path, opts = {}) {
