@@ -44,7 +44,7 @@
 
 /* ── RESET & BASE ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; overflow-x: hidden; }
 body {
   font-family: var(--font);
   background: var(--white);
@@ -54,6 +54,7 @@ body {
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
   overflow-wrap: break-word;
+  overflow-x: hidden;
 }
 a { text-decoration: none; color: inherit; }
 ul, ol { list-style: none; }
@@ -228,6 +229,8 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
   scrollbar-width: none;
   -ms-overflow-style: none;
   height: 100%; padding: 0 12px; gap: 0;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
 }
 .mobile-tab-bar .tab-scroll::-webkit-scrollbar { display: none; }
 .mobile-tab-bar .tab-item {
