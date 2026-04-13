@@ -346,7 +346,7 @@ function renderFeat(){
 var items=D.filter(function(p){return p.featured});
 document.getElementById('featGrid').innerHTML=items.map(function(p,idx){
 var img=p.featuredImage?
-'<div class="fc-img"><img src="'+p.featuredImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+bg(p)+'</div></div>':
+'<div class="fc-img"><div class="fc-fb" data-t="'+dt(p.type)+'" style="position:absolute;inset:0;z-index:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span></div><img src="'+p.featuredImage+'" alt="'+(p.imageAlt||p.name)+'" style="position:relative;z-index:1" onerror="this.style.display=\'none\'"><div class="ov" style="z-index:2"></div><div class="badges" style="z-index:3">'+bg(p)+'</div></div>':
 '<div class="fc-fb" data-t="'+dt(p.type)+'"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+bg(p)+'</div></div>';
 var primary=idx===0?' fc-primary':'';
 return'<div class="fc'+primary+'" onclick="PF.open(\''+p.id+'\')">'+img+
@@ -390,7 +390,7 @@ if(!slice.length){grid.innerHTML='<div class="pg-empty"><i class="fa-solid fa-se
 
 grid.innerHTML=slice.map(function(p){
 var img=p.thumbnail?
-'<div class="pc-img"><img src="'+p.thumbnail+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="pc-fb" data-t="'+dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+bg(p)+'</div></div>':
+'<div class="pc-img"><div class="pc-fb" data-t="'+dt(p.type)+'" style="position:absolute;inset:0;z-index:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div></div><img src="'+p.thumbnail+'" alt="'+(p.imageAlt||p.name)+'" style="position:relative;z-index:1" onerror="this.style.display=\'none\'"><div class="ov" style="z-index:2"></div><div class="badges" style="z-index:3">'+bg(p)+'</div></div>':
 '<div class="pc-fb" data-t="'+dt(p.type)+'"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div><div class="badges">'+bg(p)+'</div></div>';
 return'<div class="pc" onclick="PF.open(\''+p.id+'\')">'+img+
 '<div class="pc-body"><div class="pn">'+dn(p)+'</div>'+
