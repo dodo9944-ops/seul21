@@ -69,6 +69,12 @@ const App = (() => {
     </div></header>
     </div>
 
+    <nav class="mobile-tab-bar" id="mobileTabBar">
+      <div class="tab-scroll" id="tabScroll">
+        ${links.map(l => `<a href="${l.href}" class="tab-item${navActive(l.href) ? ' active' : ''}">${l.label}</a>`).join('')}
+      </div>
+    </nav>
+
     <div class="drawer-overlay" id="drawerOverlay"></div>
     <aside class="drawer" id="drawer">
       <div class="drawer-header">
@@ -273,102 +279,16 @@ const App = (() => {
       unlockScroll();
     }
 
-    /* ── 모바일 스와이프 메뉴 ── */
-    (function initSwipe() {
-      if (!drawer || !overlay) return;
-      var THRESHOLD = 50;
-      var VELOCITY = 0.25;
-      var st = { x0: 0, y0: 0, cx: 0, t0: 0, mode: '' }; // mode: '' | 'close' | 'open'
-
-      function dw() { return drawer.offsetWidth || 300; }
-
-      function applyPos(shift, opacity) {
-        drawer.style.transition = 'none';
-        overlay.style.transition = 'none';
-        drawer.style.transform = 'translateX(' + shift + 'px)';
-        overlay.style.opacity = opacity;
+    /* ── 모바일 탭바: 활성 탭 자동 스크롤 ── */
+    var tabScroll = document.getElementById('tabScroll');
+    if (tabScroll) {
+      var activeTab = tabScroll.querySelector('.tab-item.active');
+      if (activeTab) {
+        setTimeout(function() {
+          activeTab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'auto' });
+        }, 100);
       }
-
-      function clearStyle() {
-        drawer.style.transition = '';
-        overlay.style.transition = '';
-        drawer.style.transform = '';
-        overlay.style.opacity = '';
-      }
-
-      /* === 통합 touchstart (document 레벨) === */
-      document.addEventListener('touchstart', function(e) {
-        if (window.innerWidth > 1024) return;
-        var t = e.touches[0];
-        st.x0 = t.clientX;
-        st.y0 = t.clientY;
-        st.cx = t.clientX;
-        st.t0 = Date.now();
-        st.mode = '';
-      }, { passive: true });
-
-      /* === 통합 touchmove === */
-      document.addEventListener('touchmove', function(e) {
-        if (window.innerWidth > 1024) return;
-        var t = e.touches[0];
-        var dx = t.clientX - st.x0;
-        var dy = t.clientY - st.y0;
-        var ax = Math.abs(dx), ay = Math.abs(dy);
-
-        // 방향 결정 (한 번만)
-        if (!st.mode) {
-          if (ax < 10 && ay < 10) return; // 아직 판별 불가
-          if (ay > ax) { st.mode = 'scroll'; return; } // 세로 스크롤
-          var isOpen = drawer.classList.contains('open');
-          if (isOpen && dx > 0) st.mode = 'close';       // 열림 → 오른쪽 = 닫기
-          else if (!isOpen && dx < 0) st.mode = 'open';   // 닫힘 → 왼쪽 = 열기
-          else { st.mode = 'scroll'; return; }
-        }
-
-        if (st.mode === 'scroll') return;
-        e.preventDefault();
-        st.cx = t.clientX;
-
-        var w = dw();
-        if (st.mode === 'close') {
-          var shift = Math.max(0, Math.min(w, dx));
-          applyPos(shift, Math.max(0, 1 - shift / w));
-        } else if (st.mode === 'open') {
-          var pull = Math.max(0, Math.min(w, -dx)); // 왼쪽 이동량
-          var shift2 = w - pull;
-          applyPos(shift2, Math.max(0, pull / w));
-          overlay.style.pointerEvents = pull > 10 ? 'auto' : 'none';
-        }
-      }, { passive: false });
-
-      /* === 통합 touchend === */
-      document.addEventListener('touchend', function() {
-        if (window.innerWidth > 1024) return;
-        var mode = st.mode;
-        if (!mode || mode === 'scroll') { st.mode = ''; return; }
-
-        var dx = st.cx - st.x0;
-        var elapsed = Date.now() - st.t0 || 1;
-        var v = Math.abs(dx) / elapsed;
-        var w = dw();
-
-        clearStyle();
-
-        if (mode === 'close') {
-          if (dx > THRESHOLD || v > VELOCITY) {
-            closeDrawer();
-          }
-        } else if (mode === 'open') {
-          var pull = -dx;
-          if (pull > THRESHOLD || v > VELOCITY) {
-            openDrawer();
-          } else {
-            overlay.style.pointerEvents = '';
-          }
-        }
-        st.mode = '';
-      }, { passive: true });
-    })();
+    }
 
     // Search
     const searchOverlay = document.getElementById('searchOverlay');
