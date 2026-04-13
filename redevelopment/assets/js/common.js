@@ -31,7 +31,6 @@ const App = (() => {
       { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-calculator' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
       { href: `${B}/intranet/index.html`, label: '인트라넷', icon: 'fa-solid fa-lock' },
-      { href: `${B}/pages/webhard.html`, label: '웹하드', icon: 'fa-solid fa-hard-drive', target: '_blank' },
     ];
     const moreLinks = [
       { href: `${B}/pages/notice.html`, label: '공지사항', icon: 'fa-solid fa-bullhorn' },
@@ -61,7 +60,7 @@ const App = (() => {
         </span>
       </a>
       <nav class="gnb">
-        ${links.map(l => `<a href="${l.href}"${l.target ? ' target="'+l.target+'"' : ''}${navActive(l.href) ? ' class="active"' : ''}>${l.label}</a>`).join('')}
+        ${links.map(l => `<a href="${l.href}"${navActive(l.href) ? ' class="active"' : ''}>${l.label}</a>`).join('')}
       </nav>
       <div class="header-actions">
         <button class="icon-btn" aria-label="검색" id="openSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -139,7 +138,6 @@ const App = (() => {
             { href:`${B}/intranet/calendar.html`, label:'일정 관리' },
             { href:`${B}/intranet/contacts.html`, label:'주소록' },
           ]},
-          { href:`${B}/pages/webhard.html`, label:'웹하드', icon:'fa-solid fa-hard-drive', target:'_blank' },
         ].map(g => g.sub
           ? `<div class="drawer-group">
               <button class="drawer-group-btn" onclick="(function(btn){var g=btn.closest('.drawer-group');g.classList.toggle('open');})(this)">
@@ -148,7 +146,7 @@ const App = (() => {
               <div class="drawer-sub">${g.sub.map(s=>`<a href="${s.href}">${s.label}</a>`).join('')}</div>
             </div>`
           : `<div class="drawer-group">
-              <a href="${g.href}"${g.target ? ' target="'+g.target+'"' : ''} class="drawer-group-btn solo"><i class="${g.icon} dg-icon"></i>${g.label}</a>
+              <a href="${g.href}" class="drawer-group-btn solo"><i class="${g.icon} dg-icon"></i>${g.label}</a>
             </div>`
         ).join('')}
       </nav>
@@ -259,109 +257,15 @@ const App = (() => {
     const overlay = document.getElementById('drawerOverlay');
     const openBtn = document.getElementById('openDrawer');
     const closeBtn = document.getElementById('drawerClose');
-    if (openBtn) openBtn.addEventListener('click', openDrawer);
+    if (openBtn) openBtn.addEventListener('click', () => { drawer.classList.add('open'); overlay.classList.add('open'); lockScroll(); });
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
     if (overlay) overlay.addEventListener('click', closeDrawer);
-
-    function openDrawer() {
-      drawer.classList.add('open');
-      overlay.classList.add('open');
-      lockScroll();
-    }
 
     function closeDrawer() {
       drawer.classList.remove('open');
       overlay.classList.remove('open');
       unlockScroll();
     }
-
-    /* ── 우측 드로어 스와이프 열기/닫기 ── */
-    (function initDrawerSwipe() {
-      if (!drawer || !overlay) return;
-      var THRESHOLD = 50;
-      var VELOCITY = 0.25;
-      var EDGE = 30;
-      var st = { x0: 0, y0: 0, cx: 0, t0: 0, mode: '' };
-
-      function dw() { return drawer.offsetWidth || 300; }
-
-      document.addEventListener('touchstart', function(e) {
-        if (window.innerWidth > 1024) return;
-        // 탭바 영역 스와이프는 무시
-        if (e.target.closest && e.target.closest('.mobile-tab-bar')) return;
-        var t = e.touches[0];
-        var isOpen = drawer.classList.contains('open');
-        // 닫힌 상태: 오른쪽 가장자리에서만 감지
-        if (!isOpen && t.clientX < window.innerWidth - EDGE) return;
-        st.x0 = t.clientX;
-        st.y0 = t.clientY;
-        st.cx = t.clientX;
-        st.t0 = Date.now();
-        st.mode = isOpen ? 'pending-close' : 'pending-open';
-      }, { passive: true });
-
-      document.addEventListener('touchmove', function(e) {
-        if (!st.mode || st.mode === 'none') return;
-        if (window.innerWidth > 1024) return;
-        var t = e.touches[0];
-        var dx = t.clientX - st.x0;
-        var dy = t.clientY - st.y0;
-        var ax = Math.abs(dx), ay = Math.abs(dy);
-
-        // 방향 결정 (한 번만)
-        if (st.mode === 'pending-close' || st.mode === 'pending-open') {
-          if (ax < 10 && ay < 10) return;
-          if (ay > ax) { st.mode = 'none'; return; }
-          if (st.mode === 'pending-close' && dx > 0) st.mode = 'close';
-          else if (st.mode === 'pending-open' && dx < 0) st.mode = 'open';
-          else { st.mode = 'none'; return; }
-        }
-
-        if (st.mode === 'none') return;
-        e.preventDefault();
-        st.cx = t.clientX;
-
-        var w = dw();
-        if (st.mode === 'close') {
-          var shift = Math.max(0, Math.min(w, dx));
-          drawer.style.transition = 'none';
-          overlay.style.transition = 'none';
-          drawer.style.transform = 'translateX(' + shift + 'px)';
-          overlay.style.opacity = Math.max(0, 1 - shift / w);
-        } else if (st.mode === 'open') {
-          var pull = Math.max(0, Math.min(w, -dx));
-          drawer.style.transition = 'none';
-          overlay.style.transition = 'none';
-          drawer.style.transform = 'translateX(' + (w - pull) + 'px)';
-          overlay.style.opacity = Math.max(0, pull / w);
-          overlay.style.pointerEvents = pull > 10 ? 'auto' : 'none';
-        }
-      }, { passive: false });
-
-      document.addEventListener('touchend', function() {
-        if (!st.mode || st.mode === 'none' || st.mode.startsWith('pending')) {
-          st.mode = '';
-          return;
-        }
-        var dx = st.cx - st.x0;
-        var v = Math.abs(dx) / (Date.now() - st.t0 || 1);
-        var mode = st.mode;
-
-        drawer.style.transition = '';
-        overlay.style.transition = '';
-        drawer.style.transform = '';
-        overlay.style.opacity = '';
-
-        if (mode === 'close' && (dx > THRESHOLD || v > VELOCITY)) {
-          closeDrawer();
-        } else if (mode === 'open' && (-dx > THRESHOLD || v > VELOCITY)) {
-          openDrawer();
-        } else {
-          overlay.style.pointerEvents = '';
-        }
-        st.mode = '';
-      }, { passive: true });
-    })();
 
     // Search
     const searchOverlay = document.getElementById('searchOverlay');
@@ -531,7 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!location.pathname.includes('/admin/') && !location.pathname.includes('/intranet/')) {
     const b = App.basePath();
     const s = document.createElement('script');
-    s.src = b + '/assets/js/chatbot.js?v=20260413d';
+    s.src = b + '/assets/js/chatbot.js?v=20260408d';
     document.body.appendChild(s);
 
     /* 텍스트 복사 금지 + 이미지 다운로드 금지 */

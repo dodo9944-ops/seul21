@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260413h">
+    <link rel="stylesheet" href="../assets/css/common.css">
     <style>
     /* ================================================================
        자료실 — 정비사업 전문 아카이브 (Premium Redesign)
@@ -277,7 +277,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260413b"></script>
 <script src="../assets/js/data-service.js?v=20260407"></script>
-<script src="../assets/js/common.js?v=20260413h"></script>
+<script src="../assets/js/common.js?v=20260407"></script>
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}
@@ -533,12 +533,7 @@ var fileMap={
 'news0410h':{web:'../downloads/news_20260410h.html'},
 'news0413a':{web:'../downloads/news_20260413a.html'},
 'news0413b':{web:'../downloads/news_20260413b.html'},
-'news0413c':{web:'../downloads/news_20260413c.html'},
-'news0413d':{web:'../downloads/news_20260413d.html'},
-'news0413e':{web:'../downloads/news_20260413e.html'},
-'news0413f':{web:'../downloads/news_20260413f.html'},
-'law0413a':{web:'../downloads/law_20260413a.html'},
-'case0413a':{web:'../downloads/case_20260413a.html'}};
+'news0413c':{web:'../downloads/news_20260413c.html'}};
 function handleDownload(id){
 var m=fileMap[id];
 if(!m){var item=allItems.find(function(i){return i.id===id});

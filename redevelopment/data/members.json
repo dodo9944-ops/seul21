@@ -5,11 +5,11 @@
     "userid": "dodo6656",
     "phone": "010-2230-9210",
     "email": "dodo6666@naver.com",
-    "password": "1318",
+    "password": "9210",
     "zipcode": "13006",
     "address": "경기 하남시 감일백제로 70 204동 1104호",
     "area": "가락현대5차",
-    "grade": "관리자",
+    "grade": "일반",
     "status": "활성",
     "date": "2026-04-03",
     "memo": ""
@@ -75,20 +75,5 @@
     "memo": "kakao 소셜 로그인",
     "provider": "kakao",
     "providerId": "4829346582"
-  },
-  {
-    "id": "guest001",
-    "name": "게스트",
-    "userid": "guest",
-    "phone": "guest",
-    "email": "guest@seul21.com",
-    "password": "1234",
-    "zipcode": "",
-    "address": "",
-    "area": "",
-    "grade": "게스트",
-    "status": "활성",
-    "date": "2026-04-13",
-    "memo": "게스트 계정"
   }
 ]

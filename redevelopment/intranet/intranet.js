@@ -6,7 +6,7 @@ const Intra = (() => {
 
   /* ── 계정 (비밀번호는 SHA-256 해시로 저장) ── */
   const ACCOUNTS = [
-    { id:'dodo6656', pwHash:'095eaa09cd36d1f1e7a963c9ad618edab13f466882c9027ab81ffc18b0eb727e', name:'이창우', role:'admin', dept:'대표이사' },
+    { id:'dodo6656', pwHash:'9d9c699441902026a0981cdf285b5b32141885d21508d41029385d4a1caa8f93', name:'이창우', role:'admin', dept:'대표이사' },
   ];
 
   /* ── 권한 레벨 ── */
@@ -153,30 +153,15 @@ const Intra = (() => {
     const logBtn = document.getElementById('intraLogout');
     if (logBtn) logBtn.addEventListener('click', logout);
 
-    // 모바일 메뉴 + 오버레이
+    // 모바일 메뉴
     const mBtn = document.getElementById('mobileMenuBtn');
     const sidebar = document.getElementById('intraSidebar');
-    // 오버레이 생성
-    let sidebarOv = document.querySelector('.sidebar-overlay');
-    if (!sidebarOv) {
-      sidebarOv = document.createElement('div');
-      sidebarOv.className = 'sidebar-overlay';
-      document.body.insertBefore(sidebarOv, document.body.firstChild);
+    if (mBtn && sidebar) {
+      mBtn.addEventListener('click', () => sidebar.classList.toggle('mobile-open'));
+      document.addEventListener('click', e => {
+        if (!sidebar.contains(e.target) && !mBtn.contains(e.target)) sidebar.classList.remove('mobile-open');
+      });
     }
-    function openIntraSidebar() {
-      if (sidebar) sidebar.classList.add('mobile-open');
-      if (sidebarOv) sidebarOv.classList.add('open');
-    }
-    function closeIntraSidebar() {
-      if (sidebar) sidebar.classList.remove('mobile-open');
-      if (sidebarOv) sidebarOv.classList.remove('open');
-    }
-    if (mBtn) mBtn.addEventListener('click', openIntraSidebar);
-    if (sidebarOv) sidebarOv.addEventListener('click', closeIntraSidebar);
-    // 메뉴 클릭 시 사이드바 닫기
-    if (sidebar) sidebar.querySelectorAll('.nav-item').forEach(function(item) {
-      item.addEventListener('click', closeIntraSidebar);
-    });
 
     return true;
   }

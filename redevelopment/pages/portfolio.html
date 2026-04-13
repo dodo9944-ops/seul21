@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260413h">
+    <link rel="stylesheet" href="../assets/css/common.css">
     <style>
     /* === Hero === */
     .pf-hero{padding:64px 0 56px;background:linear-gradient(135deg,#070B15 0%,var(--brand-dark) 40%,var(--brand-navy) 100%);position:relative;overflow:hidden}
@@ -64,7 +64,6 @@
     .fc-img .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.5) 0%,transparent 50%);pointer-events:none}
     .fc-img .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
     .fc-fb{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
-    @media(max-width:768px){.fc-img{height:160px}.fc-fb{height:160px}}
     .fc-fb[data-t=r]{background:linear-gradient(135deg,#0A0F1C,#1a3055,#2a4a75)}
     .fc-fb[data-t=c]{background:linear-gradient(135deg,#142644,#1e3a5f,#0A0F1C)}
     .fc-fb[data-t=s]{background:linear-gradient(135deg,#1a2a40,#243a55,#C3A569)}
@@ -321,7 +320,7 @@
 <script src="../assets/data/mock-data.js?v=20260411"></script>
 <script src="../assets/data/areas-data.js?v=20260411"></script>
 <script src="../assets/js/data-service.js?v=20260407"></script>
-<script src="../assets/js/common.js?v=20260413h"></script>
+<script src="../assets/js/common.js?v=20260407"></script>
 <script>
 (function(){
 var D=MOCK.portfolio, PER=6, curPage=1;
@@ -347,7 +346,7 @@ function renderFeat(){
 var items=D.filter(function(p){return p.featured});
 document.getElementById('featGrid').innerHTML=items.map(function(p,idx){
 var img=p.featuredImage?
-'<div class="fc-img"><div class="fc-fb" data-t="'+dt(p.type)+'" style="position:absolute;inset:0;z-index:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span></div><img src="'+p.featuredImage+'" alt="'+(p.imageAlt||p.name)+'" style="position:relative;z-index:1" onerror="this.style.display=\'none\'"><div class="ov" style="z-index:2"></div><div class="badges" style="z-index:3">'+bg(p)+'</div></div>':
+'<div class="fc-img"><img src="'+p.featuredImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+bg(p)+'</div></div>':
 '<div class="fc-fb" data-t="'+dt(p.type)+'"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+bg(p)+'</div></div>';
 var primary=idx===0?' fc-primary':'';
 return'<div class="fc'+primary+'" onclick="PF.open(\''+p.id+'\')">'+img+
@@ -391,7 +390,7 @@ if(!slice.length){grid.innerHTML='<div class="pg-empty"><i class="fa-solid fa-se
 
 grid.innerHTML=slice.map(function(p){
 var img=p.thumbnail?
-'<div class="pc-img"><div class="pc-fb" data-t="'+dt(p.type)+'" style="position:absolute;inset:0;z-index:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div></div><img src="'+p.thumbnail+'" alt="'+(p.imageAlt||p.name)+'" style="position:relative;z-index:1" onerror="this.style.display=\'none\'"><div class="ov" style="z-index:2"></div><div class="badges" style="z-index:3">'+bg(p)+'</div></div>':
+'<div class="pc-img"><img src="'+p.thumbnail+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="pc-fb" data-t="'+dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+bg(p)+'</div></div>':
 '<div class="pc-fb" data-t="'+dt(p.type)+'"><div class="fbi"><i class="fa-solid '+ti(p.type)+'"></i></div><div class="badges">'+bg(p)+'</div></div>';
 return'<div class="pc" onclick="PF.open(\''+p.id+'\')">'+img+
 '<div class="pc-body"><div class="pn">'+dn(p)+'</div>'+

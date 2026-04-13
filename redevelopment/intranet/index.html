@@ -14,7 +14,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="intranet-mobile.css?v=20260413a">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -242,7 +241,7 @@ button,input,select,textarea{font-family:inherit}
   .bottom-row{grid-template-columns:1fr 1fr}
 }
 @media(max-width:1024px){
-  .sidebar{transform:translateX(-100%);transition:transform .3s ease}
+  .sidebar{display:none}
   .main{margin-left:0}
   .quick-grid{grid-template-columns:repeat(2,1fr)}
 }

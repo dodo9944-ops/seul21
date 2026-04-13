@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260413h">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260408e">
     <style>
         /* ============================================================
            INDEX PAGE — 고유 스타일
@@ -177,6 +177,9 @@
         @media (max-width: 1024px) {
             .hero-banner { min-height: auto; padding: 48px 0 0; }
         }
+        @media (max-width: 768px) {
+            .hero-banner { padding: 36px 0 0; }
+        }
 
         /* ── 히어로 콘텐츠 좌측 정렬 ── */
         .hero-banner .inner {
@@ -252,15 +255,15 @@
 
         /* ── 반응형 ── */
         @media (max-width: 768px) {
-            .hero-banner { padding: 16px 0 0; min-height: auto; }
-            .hero-banner .inner { padding: 0 20px 20px; }
+            .hero-banner { padding: 20px 0 0; }
+            .hero-banner .inner { padding: 0 20px 24px; }
             .hero-bg-photo::before { height: 40px; }
-            .hero-label { font-size: 8.5px; letter-spacing: 1.5px; padding: 4px 10px; margin-bottom: 10px; }
-            .hero-section h1 { font-size: 22px; letter-spacing: -.5px; line-height: 1.3; max-width: 100%; margin-bottom: 8px; word-break: keep-all; }
-            .hero-subtitle { font-size: 12px; line-height: 1.5; margin-bottom: 12px; max-width: 95%; color: rgba(255,255,255,0.6); }
-            .hero-actions { flex-direction: column; gap: 6px; width: 100%; }
-            .hero-actions .btn-hero-primary { width: 100%; justify-content: center; height: 40px; font-size: 13px; }
-            .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 38px; font-size: 12.5px; }
+            .hero-label { font-size: 8.5px; letter-spacing: 1.5px; padding: 4px 10px; margin-bottom: 12px; }
+            .hero-section h1 { font-size: 24px; letter-spacing: -.5px; line-height: 1.35; max-width: 100%; margin-bottom: 10px; word-break: keep-all; }
+            .hero-subtitle { font-size: 12.5px; line-height: 1.6; margin-bottom: 16px; max-width: 95%; color: rgba(255,255,255,0.6); }
+            .hero-actions { flex-direction: column; gap: 7px; width: 100%; }
+            .hero-actions .btn-hero-primary { width: 100%; justify-content: center; height: 44px; font-size: 13.5px; }
+            .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 42px; font-size: 13px; }
 
             .category-section { display: none; }
             .process-bar { padding: 20px 0 8px; }
@@ -609,7 +612,7 @@
             <p class="hero-subtitle">재개발·재건축·소규모정비사업 전 과정에서 사업성 검토, 인허가 대응, 조합 운영지원, 이해관계 조율까지 체계적으로 수행합니다.</p>
 
             <div class="hero-actions">
-                <a href="pages/contact.html" class="btn-hero-primary"><i class="fa-solid fa-paper-plane"></i> 상담 문의</a>
+                <a href="pages/contact.html" class="btn-hero-primary" onclick="if(typeof DataService!=='undefined'&&!DataService.isUserLoggedIn()){event.preventDefault();location.href='pages/login.html';return false}"><i class="fa-solid fa-paper-plane"></i> 상담 문의</a>
                 <a href="pages/feasibility.html" class="btn-hero-outline"><i class="fa-solid fa-chart-line"></i> 사업성 검토</a>
             </div>
         </div>
@@ -782,7 +785,7 @@
                 <h3>정비사업, 어디서부터 시작해야 할지 막막하신가요?</h3>
                 <p>세울엔지니어링이 사업 초기 검토부터 함께합니다. 부담 없이 문의하세요.</p>
             </div>
-            <a href="pages/contact.html" class="btn btn-lg">상담 문의하기 <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="pages/contact.html" class="btn btn-lg" onclick="if(typeof DataService!=='undefined'&&!DataService.isUserLoggedIn()){event.preventDefault();location.href='pages/login.html';return false}">상담 문의하기 <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
@@ -887,7 +890,7 @@
 <!-- 공통 JS -->
 <script src="assets/data/mock-data.js?v=20260408e"></script>
 <script src="assets/js/data-service.js?v=20260408e"></script>
-<script src="assets/js/common.js?v=20260413h"></script>
+<script src="assets/js/common.js?v=20260408e"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1146,25 +1149,20 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             'lib45':{ext:'downloads/files/lib45_서울시_공공지원_정비사업_표준정관_2024.pdf'},
             'lib46':{ext:'downloads/files/lib46_건설공사_표준시장단가_2025상반기.pdf'},
             'lib47':{ext:'downloads/files/lib47_도시정비법_질의회신_사례_국토부.pdf'},
-            'lib48':{ext:'downloads/files/lib48_서울시_정비사업_사업성개선_기본계획재정비_2024.pdf'},
-            'form0413a':{ext:'downloads/files/form_조합설립총회_의안서_서식.pdf'},
-            'form0413b':{ext:'downloads/files/form_분담금_산정_계산서.pdf'},
-            'form0413c':{ext:'downloads/files/form_시공사_선정_평가표.pdf'},
-            'guide0413a':{ext:'downloads/files/guide_정비사업_단계별_체크리스트.pdf'},
-            'guide0413b':{ext:'downloads/files/guide_이주비_이사비_정산_안내서.pdf'},
-            'guide0411a':{ext:'downloads/files/guide_2026상반기_정비사업일정표.pdf'},
-            'guide0411b':{ext:'downloads/files/guide_관리처분계획_읽는법.pdf'}
+            'lib48':{ext:'downloads/files/lib48_서울시_정비사업_사업성개선_기본계획재정비_2024.pdf'}
         };
         var _catKeyMap={'법령':'법령','법령·조례':'법령','관련판례':'판례지침','지침':'판례지침','판례·질의회신':'판례지침','서식':'서식가이드','가이드':'서식가이드','주요뉴스':'주요뉴스','투자정보':'투자정보'};
         window.mainLibDownload=function(id,cat){
             var m=window._libFileMap[id];
             if(!m){
-                /* 파일맵에 없으면 자료실에서 해당 항목 상세 보기 */
-                location.href='pages/library.html?item='+encodeURIComponent(id);
+                /* 파일맵에 없으면 자료실 해당 카테고리로 이동 */
+                var mappedCat=cat?(_catKeyMap[cat]||cat):null;
+                location.href='pages/library.html'+(mappedCat?'?cat='+encodeURIComponent(mappedCat):'');
                 return;
             }
-            if(m.ext){var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();document.body.appendChild(a);a.click();document.body.removeChild(a);return}
-            if(m.web){location.href=m.web;return}
+            if(m.web){location.href=m.web;return;}
+            if(m.ext){var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();document.body.appendChild(a);a.click();document.body.removeChild(a)}
+            else if(m.gov){window.open(m.gov,'_blank')}
         };
         libEl.innerHTML=libs.map(function(i){
             var ic=iconMap[i.fileType]||'fa-file';

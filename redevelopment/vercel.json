@@ -13,43 +13,29 @@
     { "source": "/api/members", "destination": "/api/members" },
     { "source": "/api/social-login", "destination": "/api/social-login" },
     { "source": "/api/status", "destination": "/api/status" },
-    { "source": "/api/report", "destination": "/api/report" },
-    { "source": "/api/webhard-notify", "destination": "/api/webhard-notify" },
-    { "source": "/api/deploy", "destination": "/api/deploy" },
-    { "source": "/api/upload-image", "destination": "/api/upload-image" }
+    { "source": "/api/report", "destination": "/api/report" }
   ],
   "headers": [
     {
       "source": "/",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0" },
-        { "key": "Pragma", "value": "no-cache" },
-        { "key": "Expires", "value": "0" }
+        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0" }
       ]
     },
     {
       "source": "/(.*)\\.html",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0" },
-        { "key": "Pragma", "value": "no-cache" }
+        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0" }
       ]
     },
     {
       "source": "/assets/(.*)\\.js",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0" },
-        { "key": "Pragma", "value": "no-cache" }
+        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0" }
       ]
     },
     {
       "source": "/assets/(.*)\\.css",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0" },
-        { "key": "Pragma", "value": "no-cache" }
-      ]
-    },
-    {
-      "source": "/assets/data/(.*)\\.js",
       "headers": [
         { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, max-age=0" }
       ]

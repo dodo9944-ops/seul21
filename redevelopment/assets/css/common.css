@@ -44,7 +44,7 @@
 
 /* ── RESET & BASE ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scrollbar-gutter: stable; overflow-x: hidden; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 body {
   font-family: var(--font);
   background: var(--white);
@@ -54,7 +54,6 @@ body {
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
   overflow-wrap: break-word;
-  overflow-x: hidden;
 }
 a { text-decoration: none; color: inherit; }
 ul, ol { list-style: none; }
@@ -210,9 +209,6 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
   .header .inner { gap: 16px; }
 }
 
-/* ── MOBILE TAB BAR — 비활성화 ── */
-.mobile-tab-bar { display: none !important; }
-
 /* ── MOBILE DRAWER ── */
 .drawer-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.4);
@@ -227,7 +223,6 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
   display: flex; flex-direction: column; overflow-y: auto;
 }
 .drawer.open { transform: translateX(0); }
-.drawer { will-change: transform; -webkit-overflow-scrolling: touch; }
 .drawer-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 24px; border-bottom: 1px solid var(--gray-100);
@@ -384,7 +379,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 .scroll-top.visible { opacity: 1; pointer-events: auto; }
 .scroll-top:hover { background: var(--brand-dark); color: var(--gold); border-color: var(--brand-dark); }
 @media (max-width: 768px) {
-  .scroll-top { width: 40px; height: 40px; font-size: 15px; bottom: 64px; right: 16px; }
+  .scroll-top { width: 40px; height: 40px; font-size: 15px; bottom: 20px; right: 16px; }
 }
 
 /* ── PAGE LAYOUT ── */

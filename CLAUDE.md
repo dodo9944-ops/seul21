@@ -35,18 +35,6 @@
 
 ---
 
-## 실시간 라이브 반영 시스템 (2026-04-13~)
-
-> **코드 수정 → git push → Vercel 자동 배포 → 즉시 라이브 반영. 캐시 완전 무효화.**
-
-1. **자동 배포** — master push 시 Vercel이 자동 빌드·배포 (30~60초)
-2. **캐시 완전 무효화** — vercel.json에 HTML/JS/CSS/데이터 파일 전부 `no-store, no-cache, must-revalidate, max-age=0` + `Pragma: no-cache` 설정
-3. **수동 즉시 배포** — 관리자 대시보드 "즉시 배포" 버튼 → `/api/deploy` → GitHub dispatch + Vercel Deploy Hook + 텔레그램 알림
-4. **텔레그램 배포 알림** — 배포 시 시간·사유 즉시 보고
-5. **환경변수** — `VERCEL_DEPLOY_HOOK` (Vercel 프로젝트 설정에서 발급) 설정 시 Deploy Hook도 동시 호출
-
----
-
 ## 홈페이지 관리 지침 (2026-04-10~)
 
 > **코드 삭제·변경 후 라이브 미반영 시 될 때까지 재시도한다. 캐시 문제는 핑계가 아니다.**
@@ -200,15 +188,15 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 
 ---
 
-## 상담 정책 (2026-04-13 변경)
+## 전문가 상담 정책 (2026-04-13 변경)
 
-> **홈페이지 전체 상담은 회원가입 없이 누구나 이용 가능. 상담 신청 시 텔레그램 즉시 통지.**
+> **고객센터 문의는 비회원도 이용 가능. 전문가 실시간 상담(챗봇)은 회원 전용.**
 
-1. **contact.html** (고객센터 폼) → 비회원도 문의 가능. 로그인 시 이름·이메일 자동 채움(readOnly). 접수 시 텔레그램 즉시 통지 (`/api/inquiries`)
-2. **chatbot.js** (전문가 탭 포함 전체) → 비회원도 이용 가능. 로그인 요구 없음
-3. **index.html** (상담 문의 버튼 2곳) → 로그인 체크 없이 바로 `contact.html` 이동
-4. **consultation.html** (CTA 버튼) → 로그인 체크 없이 바로 `contact.html` 이동
-5. **home.html** (상담 문의 버튼 2곳) → 로그인 체크 없이 바로 `contact.html` 이동
+1. **contact.html** (고객센터 폼) → 비회원도 문의 가능. 로그인 시 이름·이메일 자동 채움(readOnly)
+2. **chatbot.js** (전문가 탭) → 비로그인 시 전문가 탭 클릭하면 로그인/회원가입 안내 표시, 입력창 비활성화. AI 상담·법률상담은 비회원도 이용 가능
+3. **index.html** (상담 문의 버튼 2곳) → 비로그인 클릭 시 `login.html`로 리디렉션
+4. **consultation.html** (CTA 버튼) → 비로그인 클릭 시 `login.html`로 리디렉션
+5. 로그인 체크: `DataService.isUserLoggedIn()` 사용 (sessionStorage `seul_user` 키 기반)
 
 ---
 
