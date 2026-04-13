@@ -139,11 +139,11 @@ button, input, select, textarea { font-family: inherit; }
 /* ── 헤더 아래 본문 여백 ── */
 body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 @media (min-width: 769px) and (max-width: 1024px) {
-  body { padding-top: 146px; } /* 104(header) + 42(tab) */
+  body { padding-top: 140px; } /* 104(header) + 36(tab) */
 }
 @media (max-width: 768px) {
   .header .inner { height: 54px; }
-  body { padding-top: 96px; } /* 54(header) + 42(tab) */
+  body { padding-top: 90px; } /* 54(header) + 36(tab) */
 }
 
 /* ── LOGO ── */
@@ -219,7 +219,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
   position: fixed; left: 0; right: 0; z-index: 9999;
   background: var(--white);
   border-bottom: 1px solid var(--gray-200);
-  height: 42px;
+  height: 36px;
 }
 .mobile-tab-bar .tab-scroll {
   display: flex; align-items: center;
@@ -228,16 +228,16 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  height: 100%; padding: 0 12px; gap: 0;
+  height: 100%; padding: 0 6px; gap: 0;
   touch-action: pan-x;
   overscroll-behavior-x: contain;
 }
 .mobile-tab-bar .tab-scroll::-webkit-scrollbar { display: none; }
 .mobile-tab-bar .tab-item {
   flex-shrink: 0;
-  padding: 0 14px; height: 100%;
+  padding: 0 9px; height: 100%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 14px; font-weight: 500; color: var(--gray-500);
+  font-size: 12.5px; font-weight: 500; color: var(--gray-500);
   text-decoration: none; white-space: nowrap;
   position: relative; transition: color 0.2s;
 }
@@ -247,7 +247,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 .mobile-tab-bar .tab-item.active::after {
   content: '';
   position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 6px; height: 6px; border-radius: 50%;
+  width: 16px; height: 2px; border-radius: 1px;
   background: var(--gold);
 }
 @media (max-width: 1024px) {
