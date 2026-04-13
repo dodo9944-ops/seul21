@@ -35,6 +35,18 @@
 
 ---
 
+## 실시간 라이브 반영 시스템 (2026-04-13~)
+
+> **코드 수정 → git push → Vercel 자동 배포 → 즉시 라이브 반영. 캐시 완전 무효화.**
+
+1. **자동 배포** — master push 시 Vercel이 자동 빌드·배포 (30~60초)
+2. **캐시 완전 무효화** — vercel.json에 HTML/JS/CSS/데이터 파일 전부 `no-store, no-cache, must-revalidate, max-age=0` + `Pragma: no-cache` 설정
+3. **수동 즉시 배포** — 관리자 대시보드 "즉시 배포" 버튼 → `/api/deploy` → GitHub dispatch + Vercel Deploy Hook + 텔레그램 알림
+4. **텔레그램 배포 알림** — 배포 시 시간·사유 즉시 보고
+5. **환경변수** — `VERCEL_DEPLOY_HOOK` (Vercel 프로젝트 설정에서 발급) 설정 시 Deploy Hook도 동시 호출
+
+---
+
 ## 홈페이지 관리 지침 (2026-04-10~)
 
 > **코드 삭제·변경 후 라이브 미반영 시 될 때까지 재시도한다. 캐시 문제는 핑계가 아니다.**

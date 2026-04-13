@@ -68,8 +68,9 @@
                 <h2>통합 관리센터</h2>
             </div>
             <div class="admin-topbar-right">
+                <button class="btn btn-accent btn-xs" id="deployBtn" style="gap:4px"><i class="fa-solid fa-rocket"></i> <span>즉시 배포</span></button>
                 <div class="admin-user"><i class="fa-solid fa-circle-user"></i> <strong id="adminName"></strong></div>
-                <button class="btn btn-outline btn-xs" id="adminLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
+                <button class="btn btn-outline btn-xs" id="adminLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> <span>로그아웃</span></button>
             </div>
         </div>
 
@@ -194,6 +195,32 @@
     });
     overlay.addEventListener('click', function() {
         sidebar.classList.remove('open'); overlay.classList.remove('open');
+    });
+
+    // Deploy button
+    document.getElementById('deployBtn').addEventListener('click', function() {
+        var btn = this;
+        if (!confirm('즉시 배포를 실행하시겠습니까?')) return;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 배포 중...';
+        fetch('/api/deploy', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: '관리자 수동 배포' })
+        }).then(function(r) { return r.json(); })
+        .then(function(d) {
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> 완료';
+            btn.style.background = '#059669';
+            setTimeout(function() {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-rocket"></i> <span>즉시 배포</span>';
+                btn.style.background = '';
+            }, 3000);
+        }).catch(function() {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-rocket"></i> <span>즉시 배포</span>';
+            alert('배포 요청 실패');
+        });
     });
 
     // KPI
