@@ -458,7 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!location.pathname.includes('/admin/') && !location.pathname.includes('/intranet/')) {
     const b = App.basePath();
     const s = document.createElement('script');
-    s.src = b + '/assets/js/chatbot.js?v=20260408d';
+    s.src = b + '/assets/js/chatbot.js?v=20260413d';
     document.body.appendChild(s);
 
     /* 텍스트 복사 금지 + 이미지 다운로드 금지 */

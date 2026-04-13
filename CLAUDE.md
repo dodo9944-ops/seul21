@@ -188,15 +188,15 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 
 ---
 
-## 전문가 상담 정책 (2026-04-13 변경)
+## 상담 정책 (2026-04-13 변경)
 
-> **고객센터 문의는 비회원도 이용 가능. 전문가 실시간 상담(챗봇)은 회원 전용.**
+> **홈페이지 전체 상담은 회원가입 없이 누구나 이용 가능. 상담 신청 시 텔레그램 즉시 통지.**
 
-1. **contact.html** (고객센터 폼) → 비회원도 문의 가능. 로그인 시 이름·이메일 자동 채움(readOnly)
-2. **chatbot.js** (전문가 탭) → 비로그인 시 전문가 탭 클릭하면 로그인/회원가입 안내 표시, 입력창 비활성화. AI 상담·법률상담은 비회원도 이용 가능
-3. **index.html** (상담 문의 버튼 2곳) → 비로그인 클릭 시 `login.html`로 리디렉션
-4. **consultation.html** (CTA 버튼) → 비로그인 클릭 시 `login.html`로 리디렉션
-5. 로그인 체크: `DataService.isUserLoggedIn()` 사용 (sessionStorage `seul_user` 키 기반)
+1. **contact.html** (고객센터 폼) → 비회원도 문의 가능. 로그인 시 이름·이메일 자동 채움(readOnly). 접수 시 텔레그램 즉시 통지 (`/api/inquiries`)
+2. **chatbot.js** (전문가 탭 포함 전체) → 비회원도 이용 가능. 로그인 요구 없음
+3. **index.html** (상담 문의 버튼 2곳) → 로그인 체크 없이 바로 `contact.html` 이동
+4. **consultation.html** (CTA 버튼) → 로그인 체크 없이 바로 `contact.html` 이동
+5. **home.html** (상담 문의 버튼 2곳) → 로그인 체크 없이 바로 `contact.html` 이동
 
 ---
 
