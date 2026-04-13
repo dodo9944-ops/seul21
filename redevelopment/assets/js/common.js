@@ -70,12 +70,6 @@ const App = (() => {
     </div></header>
     </div>
 
-    <nav class="mobile-tab-bar" id="mobileTabBar">
-      <div class="tab-scroll" id="tabScroll">
-        ${links.map(l => `<a href="${l.href}"${l.target ? ' target="'+l.target+'"' : ''} class="tab-item${navActive(l.href) ? ' active' : ''}">${l.label}</a>`).join('')}
-      </div>
-    </nav>
-
     <div class="drawer-overlay" id="drawerOverlay"></div>
     <aside class="drawer" id="drawer">
       <div class="drawer-header">
@@ -368,17 +362,6 @@ const App = (() => {
         st.mode = '';
       }, { passive: true });
     })();
-
-    /* ── 모바일 탭바: 활성 탭 자동 스크롤 ── */
-    var tabScroll = document.getElementById('tabScroll');
-    if (tabScroll) {
-      var activeTab = tabScroll.querySelector('.tab-item.active');
-      if (activeTab) {
-        setTimeout(function() {
-          activeTab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'auto' });
-        }, 100);
-      }
-    }
 
     // Search
     const searchOverlay = document.getElementById('searchOverlay');
