@@ -1163,14 +1163,12 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         window.mainLibDownload=function(id,cat){
             var m=window._libFileMap[id];
             if(!m){
-                /* 파일맵에 없으면 자료실 해당 카테고리로 이동 */
-                var mappedCat=cat?(_catKeyMap[cat]||cat):null;
-                location.href='pages/library.html'+(mappedCat?'?cat='+encodeURIComponent(mappedCat):'');
+                /* 파일맵에 없으면 자료실에서 해당 항목 상세 보기 */
+                location.href='pages/library.html?item='+encodeURIComponent(id);
                 return;
             }
-            if(m.web){location.href=m.web;return;}
-            if(m.ext){var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();document.body.appendChild(a);a.click();document.body.removeChild(a)}
-            else if(m.gov){window.open(m.gov,'_blank')}
+            if(m.ext){var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();document.body.appendChild(a);a.click();document.body.removeChild(a);return}
+            if(m.web){location.href=m.web;return}
         };
         libEl.innerHTML=libs.map(function(i){
             var ic=iconMap[i.fileType]||'fa-file';
