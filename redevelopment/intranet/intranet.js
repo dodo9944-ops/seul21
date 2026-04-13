@@ -153,15 +153,30 @@ const Intra = (() => {
     const logBtn = document.getElementById('intraLogout');
     if (logBtn) logBtn.addEventListener('click', logout);
 
-    // 모바일 메뉴
+    // 모바일 메뉴 + 오버레이
     const mBtn = document.getElementById('mobileMenuBtn');
     const sidebar = document.getElementById('intraSidebar');
-    if (mBtn && sidebar) {
-      mBtn.addEventListener('click', () => sidebar.classList.toggle('mobile-open'));
-      document.addEventListener('click', e => {
-        if (!sidebar.contains(e.target) && !mBtn.contains(e.target)) sidebar.classList.remove('mobile-open');
-      });
+    // 오버레이 생성
+    let sidebarOv = document.querySelector('.sidebar-overlay');
+    if (!sidebarOv) {
+      sidebarOv = document.createElement('div');
+      sidebarOv.className = 'sidebar-overlay';
+      document.body.insertBefore(sidebarOv, document.body.firstChild);
     }
+    function openIntraSidebar() {
+      if (sidebar) sidebar.classList.add('mobile-open');
+      if (sidebarOv) sidebarOv.classList.add('open');
+    }
+    function closeIntraSidebar() {
+      if (sidebar) sidebar.classList.remove('mobile-open');
+      if (sidebarOv) sidebarOv.classList.remove('open');
+    }
+    if (mBtn) mBtn.addEventListener('click', openIntraSidebar);
+    if (sidebarOv) sidebarOv.addEventListener('click', closeIntraSidebar);
+    // 메뉴 클릭 시 사이드바 닫기
+    if (sidebar) sidebar.querySelectorAll('.nav-item').forEach(function(item) {
+      item.addEventListener('click', closeIntraSidebar);
+    });
 
     return true;
   }

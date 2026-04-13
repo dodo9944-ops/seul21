@@ -1,0 +1,73 @@
+/* ══════════ 인트라넷 모바일 최적화 ══════════ */
+
+/* 모바일 메뉴 버튼 */
+.mobile-menu-btn {
+  display: none; width: 40px; height: 40px;
+  align-items: center; justify-content: center;
+  background: none; border: none; cursor: pointer;
+  font-size: 20px; color: var(--gray-700); border-radius: 8px;
+}
+.mobile-menu-btn:hover { background: var(--gray-100); }
+
+/* 사이드바 오버레이 */
+.sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45); z-index: 99;
+}
+.sidebar-overlay.open { display: block; }
+
+@media (max-width: 1024px) {
+  /* 사이드바: 슬라이드 드로어 */
+  .sidebar {
+    display: flex !important;
+    position: fixed; top: 0; left: 0; bottom: 0;
+    width: 280px; max-width: 85vw; z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  .main { margin-left: 0 !important; }
+  .mobile-menu-btn { display: flex; }
+}
+
+@media (max-width: 768px) {
+  .topbar { padding: 0 12px; gap: 8px; height: 52px; }
+  .topbar-title { font-size: 15px; }
+  .topbar-search { display: none; }
+  .topbar-date { display: none; }
+  .topbar-actions { gap: 4px; }
+  .content { padding: 12px !important; }
+  .content-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+  .kpi { padding: 14px; }
+  .kpi-value { font-size: 22px; }
+  .kpi-label { font-size: 11px; }
+  .kpi-icon { width: 32px; height: 32px; font-size: 14px; }
+  .kpi-header { margin-bottom: 8px; }
+  .quick-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 6px !important; }
+  .quick-btn { padding: 12px 6px; gap: 6px; }
+  .quick-btn i { font-size: 16px; }
+  .quick-btn span { font-size: 10px; }
+  .cards-row { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .bottom-row { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .card-head { padding: 14px 16px; }
+  .card-title { font-size: 14px; }
+  .proj-row { padding: 10px 16px; gap: 10px; }
+  .proj-icon { width: 32px; height: 32px; font-size: 12px; }
+  .proj-name { font-size: 12px; }
+  .schedule-item { padding: 10px 16px; gap: 10px; }
+  .sched-date { width: 38px; height: 38px; }
+  .sched-date .sd-day { font-size: 14px; }
+  .notice-item { padding: 10px 16px; }
+  .member-row { padding: 10px 16px; }
+  /* 테이블 가로 스크롤 */
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+
+@media (max-width: 480px) {
+  .content-grid { grid-template-columns: 1fr 1fr !important; }
+  .kpi { padding: 10px; }
+  .kpi-value { font-size: 18px; }
+  .kpi-icon { width: 28px; height: 28px; font-size: 12px; border-radius: 6px; }
+}
