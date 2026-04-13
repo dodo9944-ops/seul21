@@ -513,6 +513,11 @@ var fileMap={
 'case0411a':{web:'../downloads/case_20260411a.html'},
 'guide0411a':{ext:'../downloads/files/guide_2026상반기_정비사업일정표.pdf'},
 'guide0411b':{ext:'../downloads/files/guide_관리처분계획_읽는법.pdf'},
+'form0413a':{ext:'../downloads/files/form_조합설립총회_의안서_서식.pdf'},
+'form0413b':{ext:'../downloads/files/form_분담금_산정_계산서.pdf'},
+'form0413c':{ext:'../downloads/files/form_시공사_선정_평가표.pdf'},
+'guide0413a':{ext:'../downloads/files/guide_정비사업_단계별_체크리스트.pdf'},
+'guide0413b':{ext:'../downloads/files/guide_이주비_이사비_정산_안내서.pdf'},
 'news0411h':{web:'../downloads/news_20260411h.html'},
 'news0411i':{web:'../downloads/news_20260411i.html'},
 'news0411j':{web:'../downloads/news_20260411j.html'},
@@ -544,6 +549,49 @@ var catWrap=document.querySelector('.cat-wrap');
 if(catWrap){var stickyTop=parseInt(getComputedStyle(catWrap).top)||104;
 window.addEventListener('scroll',function(){catWrap.classList.toggle('stuck',catWrap.getBoundingClientRect().top<=stickyTop+1)},{passive:true})}
 })();
+</script>
+
+<div id="posts" style="max-width:1200px; margin:40px auto; padding:0 20px;">
+  <div style="background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:24px;">
+    <h2 style="margin:0 0 16px; font-size:24px; font-weight:800;">Supabase 게시물</h2>
+    <div id="postsList"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseUrl = 'https://vpyxjovsgsvsqbfebjrm.supabase.co';
+  const supabaseKey = 'sb_publishable_E0vo2tVZJ6AP7wzfYZWQPQ__t0EaMwN';
+  const client = supabase.createClient(supabaseUrl, supabaseKey);
+
+  async function loadPosts() {
+    const { data, error } = await client
+      .from('posts')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    const container = document.getElementById('postsList');
+    if (!container) return;
+
+    if (error) {
+      container.innerHTML = '불러오기 실패';
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      container.innerHTML = '데이터 없음';
+      return;
+    }
+
+    container.innerHTML = data.map(post => `
+      <div style="padding:12px; border:1px solid #ddd; margin-bottom:10px;">
+        <h3>${post.title}</h3>
+        <p>${post.content}</p>
+      </div>
+    `).join('');
+  }
+
+  loadPosts();   // 
 </script>
 </body>
 </html>
