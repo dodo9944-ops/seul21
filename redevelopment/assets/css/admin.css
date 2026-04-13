@@ -3,7 +3,8 @@
    ============================================================ */
 
 /* ── LAYOUT ── */
-.admin-wrap { display: flex; min-height: 100vh; }
+.admin-wrap { display: flex; min-height: 100vh; width: 100%; overflow-x: hidden; }
+body.admin-body { padding-top: 0 !important; }
 
 /* ── SIDEBAR ── */
 .admin-sidebar {
@@ -56,7 +57,7 @@
 /* ── MAIN CONTENT ── */
 .admin-main {
   flex: 1; margin-left: 260px; background: var(--gray-50);
-  min-height: 100vh;
+  min-height: 100vh; min-width: 0; overflow-x: hidden;
 }
 
 /* ── TOP BAR ── */
@@ -279,16 +280,16 @@
   .admin-topbar-right .admin-user span { display: none; }
 }
 @media (max-width: 540px) {
-  .admin-kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  .admin-kpi { padding: 14px; gap: 10px; flex-direction: column; align-items: center; text-align: center; }
-  .admin-kpi-icon { width: 36px; height: 36px; font-size: 16px; }
-  .admin-kpi-info .value { font-size: 22px; }
+  .admin-kpi-grid { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .admin-kpi { padding: 12px; gap: 8px; }
+  .admin-kpi-icon { width: 32px; height: 32px; font-size: 14px; }
+  .admin-kpi-info .value { font-size: 20px; }
   .admin-kpi-info .label { font-size: 11px; }
-  .admin-content { padding: 12px; }
-  .quick-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  .quick-card { padding: 14px; }
-  .quick-card i { font-size: 20px; margin-bottom: 4px; }
-  .quick-card span { font-size: 12px; }
+  .admin-content { padding: 10px; }
+  .quick-grid { grid-template-columns: 1fr 1fr 1fr 1fr !important; gap: 6px; }
+  .quick-card { padding: 10px 4px; }
+  .quick-card i { font-size: 18px; margin-bottom: 2px; }
+  .quick-card span { font-size: 10px; }
   .dash-panel-header { padding: 12px 14px; }
   .dash-panel-body { padding: 14px; }
   .admin-tbl thead th { padding: 8px 10px; font-size: 11px; }
