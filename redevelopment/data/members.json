@@ -75,5 +75,20 @@
     "memo": "kakao 소셜 로그인",
     "provider": "kakao",
     "providerId": "4829346582"
+  },
+  {
+    "id": "guest001",
+    "name": "게스트",
+    "userid": "guest",
+    "phone": "guest",
+    "email": "guest@seul21.com",
+    "password": "1234",
+    "zipcode": "",
+    "address": "",
+    "area": "",
+    "grade": "게스트",
+    "status": "활성",
+    "date": "2026-04-13",
+    "memo": "게스트 계정"
   }
 ]
