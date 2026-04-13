@@ -274,6 +274,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
   display: flex; flex-direction: column; overflow-y: auto;
 }
 .drawer.open { transform: translateX(0); }
+.drawer { will-change: transform; -webkit-overflow-scrolling: touch; }
 .drawer-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 24px; border-bottom: 1px solid var(--gray-100);

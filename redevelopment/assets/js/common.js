@@ -279,6 +279,94 @@ const App = (() => {
       unlockScroll();
     }
 
+    /* ── 우측 드로어 스와이프 열기/닫기 ── */
+    (function initDrawerSwipe() {
+      if (!drawer || !overlay) return;
+      var THRESHOLD = 50;
+      var VELOCITY = 0.25;
+      var EDGE = 30;
+      var st = { x0: 0, y0: 0, cx: 0, t0: 0, mode: '' };
+
+      function dw() { return drawer.offsetWidth || 300; }
+
+      document.addEventListener('touchstart', function(e) {
+        if (window.innerWidth > 1024) return;
+        // 탭바 영역 스와이프는 무시
+        if (e.target.closest && e.target.closest('.mobile-tab-bar')) return;
+        var t = e.touches[0];
+        var isOpen = drawer.classList.contains('open');
+        // 닫힌 상태: 오른쪽 가장자리에서만 감지
+        if (!isOpen && t.clientX < window.innerWidth - EDGE) return;
+        st.x0 = t.clientX;
+        st.y0 = t.clientY;
+        st.cx = t.clientX;
+        st.t0 = Date.now();
+        st.mode = isOpen ? 'pending-close' : 'pending-open';
+      }, { passive: true });
+
+      document.addEventListener('touchmove', function(e) {
+        if (!st.mode || st.mode === 'none') return;
+        if (window.innerWidth > 1024) return;
+        var t = e.touches[0];
+        var dx = t.clientX - st.x0;
+        var dy = t.clientY - st.y0;
+        var ax = Math.abs(dx), ay = Math.abs(dy);
+
+        // 방향 결정 (한 번만)
+        if (st.mode === 'pending-close' || st.mode === 'pending-open') {
+          if (ax < 10 && ay < 10) return;
+          if (ay > ax) { st.mode = 'none'; return; }
+          if (st.mode === 'pending-close' && dx > 0) st.mode = 'close';
+          else if (st.mode === 'pending-open' && dx < 0) st.mode = 'open';
+          else { st.mode = 'none'; return; }
+        }
+
+        if (st.mode === 'none') return;
+        e.preventDefault();
+        st.cx = t.clientX;
+
+        var w = dw();
+        if (st.mode === 'close') {
+          var shift = Math.max(0, Math.min(w, dx));
+          drawer.style.transition = 'none';
+          overlay.style.transition = 'none';
+          drawer.style.transform = 'translateX(' + shift + 'px)';
+          overlay.style.opacity = Math.max(0, 1 - shift / w);
+        } else if (st.mode === 'open') {
+          var pull = Math.max(0, Math.min(w, -dx));
+          drawer.style.transition = 'none';
+          overlay.style.transition = 'none';
+          drawer.style.transform = 'translateX(' + (w - pull) + 'px)';
+          overlay.style.opacity = Math.max(0, pull / w);
+          overlay.style.pointerEvents = pull > 10 ? 'auto' : 'none';
+        }
+      }, { passive: false });
+
+      document.addEventListener('touchend', function() {
+        if (!st.mode || st.mode === 'none' || st.mode.startsWith('pending')) {
+          st.mode = '';
+          return;
+        }
+        var dx = st.cx - st.x0;
+        var v = Math.abs(dx) / (Date.now() - st.t0 || 1);
+        var mode = st.mode;
+
+        drawer.style.transition = '';
+        overlay.style.transition = '';
+        drawer.style.transform = '';
+        overlay.style.opacity = '';
+
+        if (mode === 'close' && (dx > THRESHOLD || v > VELOCITY)) {
+          closeDrawer();
+        } else if (mode === 'open' && (-dx > THRESHOLD || v > VELOCITY)) {
+          openDrawer();
+        } else {
+          overlay.style.pointerEvents = '';
+        }
+        st.mode = '';
+      }, { passive: true });
+    })();
+
     /* ── 모바일 탭바: 활성 탭 자동 스크롤 ── */
     var tabScroll = document.getElementById('tabScroll');
     if (tabScroll) {
