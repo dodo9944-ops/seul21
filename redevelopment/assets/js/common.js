@@ -31,6 +31,7 @@ const App = (() => {
       { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-calculator' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
       { href: `${B}/intranet/index.html`, label: '인트라넷', icon: 'fa-solid fa-lock' },
+      { href: `${B}/pages/webhard.html`, label: '웹하드', icon: 'fa-solid fa-hard-drive', target: '_blank' },
     ];
     const moreLinks = [
       { href: `${B}/pages/notice.html`, label: '공지사항', icon: 'fa-solid fa-bullhorn' },
@@ -60,7 +61,7 @@ const App = (() => {
         </span>
       </a>
       <nav class="gnb">
-        ${links.map(l => `<a href="${l.href}"${navActive(l.href) ? ' class="active"' : ''}>${l.label}</a>`).join('')}
+        ${links.map(l => `<a href="${l.href}"${l.target ? ' target="'+l.target+'"' : ''}${navActive(l.href) ? ' class="active"' : ''}>${l.label}</a>`).join('')}
       </nav>
       <div class="header-actions">
         <button class="icon-btn" aria-label="검색" id="openSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -71,7 +72,7 @@ const App = (() => {
 
     <nav class="mobile-tab-bar" id="mobileTabBar">
       <div class="tab-scroll" id="tabScroll">
-        ${links.map(l => `<a href="${l.href}" class="tab-item${navActive(l.href) ? ' active' : ''}">${l.label}</a>`).join('')}
+        ${links.map(l => `<a href="${l.href}"${l.target ? ' target="'+l.target+'"' : ''} class="tab-item${navActive(l.href) ? ' active' : ''}">${l.label}</a>`).join('')}
       </div>
     </nav>
 
@@ -144,6 +145,7 @@ const App = (() => {
             { href:`${B}/intranet/calendar.html`, label:'일정 관리' },
             { href:`${B}/intranet/contacts.html`, label:'주소록' },
           ]},
+          { href:`${B}/pages/webhard.html`, label:'웹하드', icon:'fa-solid fa-hard-drive', target:'_blank' },
         ].map(g => g.sub
           ? `<div class="drawer-group">
               <button class="drawer-group-btn" onclick="(function(btn){var g=btn.closest('.drawer-group');g.classList.toggle('open');})(this)">
@@ -152,7 +154,7 @@ const App = (() => {
               <div class="drawer-sub">${g.sub.map(s=>`<a href="${s.href}">${s.label}</a>`).join('')}</div>
             </div>`
           : `<div class="drawer-group">
-              <a href="${g.href}" class="drawer-group-btn solo"><i class="${g.icon} dg-icon"></i>${g.label}</a>
+              <a href="${g.href}"${g.target ? ' target="'+g.target+'"' : ''} class="drawer-group-btn solo"><i class="${g.icon} dg-icon"></i>${g.label}</a>
             </div>`
         ).join('')}
       </nav>
