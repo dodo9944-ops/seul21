@@ -179,12 +179,21 @@
         '답변완료': 'status-completed'
     };
 
+    // 실시간 API 데이터 로드
+    var liveData = [];
+    function loadLive() {
+        fetch('/api/inquiries',{headers:{'x-admin-key':'admin123'}}).then(r=>r.json()).then(d=>{
+            if(d.inquiries) { liveData=d.inquiries; render(); }
+        }).catch(()=>{});
+    }
+    loadLive();
+
     function render() {
         const keyword = document.getElementById('searchInput').value.trim();
         const statusVal = document.getElementById('statusFilter').value;
-        let items = DataService.getAll('inquiries');
+        let items = liveData.length ? liveData : DataService.getAll('inquiries');
         if (statusVal) items = items.filter(a => a.status === statusVal);
-        if (keyword) items = items.filter(a => a.title.includes(keyword));
+        if (keyword) items = items.filter(a => (a.title||'').includes(keyword));
         const tbody = document.getElementById('tableBody');
         tbody.innerHTML = items.map(a => `
             <tr style="cursor:pointer;" onclick="viewItem('${a.id}')">
@@ -203,7 +212,7 @@
     }
 
     window.viewItem = function(id) {
-        const a = DataService.getById('inquiries', id);
+        const a = liveData.find(x=>x.id===id) || DataService.getById('inquiries', id);
         if (!a) return;
         document.getElementById('editId').value = id;
         document.getElementById('detailTitle').textContent = a.title;

@@ -140,9 +140,15 @@
         '탈퇴': 'status-inactive'
     };
 
+    // 실시간 API 데이터 로드
+    var liveMembers = [];
+    fetch('/api/members',{headers:{'x-admin-key':'admin123'}}).then(r=>r.json()).then(d=>{
+        if(d.members){liveMembers=d.members;render();}
+    }).catch(()=>{});
+
     function render(keyword='') {
-        const items = DataService.getAll('members');
-        const filtered = keyword ? items.filter(m => m.name.includes(keyword) || m.email.includes(keyword)) : items;
+        const items = liveMembers.length ? liveMembers : DataService.getAll('members');
+        const filtered = keyword ? items.filter(m => (m.name||'').includes(keyword) || (m.email||'').includes(keyword) || (m.phone||'').includes(keyword)) : items;
         const tbody = document.getElementById('tableBody');
         tbody.innerHTML = filtered.map(m => `
             <tr>

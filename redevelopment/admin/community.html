@@ -154,9 +154,15 @@
         '칼럼': 'status-inactive'
     };
 
+    // 실시간 API 데이터 로드
+    var livePosts = [];
+    fetch('/api/community').then(r=>r.json()).then(d=>{
+        if(d.posts){livePosts=d.posts;render();}
+    }).catch(()=>{});
+
     function render(keyword='') {
-        const items = DataService.getAll('community');
-        const filtered = keyword ? items.filter(a => a.title.includes(keyword) || a.author.includes(keyword)) : items;
+        const items = livePosts.length ? livePosts : DataService.getAll('community');
+        const filtered = keyword ? items.filter(a => (a.title||'').includes(keyword) || (a.author||'').includes(keyword)) : items;
         const tbody = document.getElementById('tableBody');
         tbody.innerHTML = filtered.map(a => `
             <tr>

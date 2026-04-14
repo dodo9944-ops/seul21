@@ -219,11 +219,24 @@
     toggle.addEventListener('click', openSidebar);
     overlay.addEventListener('click', closeSidebar);
 
-    /* ── KPI Stats ── */
+    /* ── KPI Stats (실시간 API 연동) ── */
     const stats = DataService.getDashboardStats();
     document.getElementById('kpiAreas').textContent = stats.totalAreas.toLocaleString();
     document.getElementById('kpiMembers').textContent = stats.totalMembers.toLocaleString();
     document.getElementById('kpiPending').textContent = stats.pendingInquiries.toLocaleString();
+
+    // 실시간 회원수 로드
+    fetch('/api/members',{headers:{'x-admin-key':'admin123'}}).then(r=>r.json()).then(d=>{
+        if(d.total) document.getElementById('kpiMembers').textContent = d.total;
+    }).catch(()=>{});
+    // 실시간 문의 로드
+    fetch('/api/inquiries',{headers:{'x-admin-key':'admin123'}}).then(r=>r.json()).then(d=>{
+        if(d.inquiries){
+            var pending = d.inquiries.filter(function(i){return !i.status || i.status==='접수'}).length;
+            document.getElementById('kpiPending').textContent = pending;
+            if(pending>0) document.getElementById('pendingCount').textContent = pending;
+        }
+    }).catch(()=>{});
 
     // Sidebar pending count badge
     const pendingBadge = document.getElementById('pendingCount');
@@ -284,10 +297,14 @@
         activityEl.innerHTML = html;
     }
 
-    /* ── Recent Inquiries ── */
+    /* ── Recent Inquiries (실시간 API) ── */
     function renderRecentInquiries() {
         const inqEl = document.getElementById('recentInquiries');
-        const inquiries = DataService.getAll('inquiries');
+        var inquiries = DataService.getAll('inquiries');
+        // 실시간 API 데이터 로드
+        fetch('/api/inquiries',{headers:{'x-admin-key':'admin123'}}).then(r=>r.json()).then(d=>{
+            if(d.inquiries && d.inquiries.length){ renderInqList(inqEl, d.inquiries); }
+        }).catch(()=>{});
 
         if (!inquiries || inquiries.length === 0) {
             inqEl.innerHTML = '<p style="font-size:13px;color:var(--gray-400);text-align:center;padding:20px 0;">문의가 없습니다.</p>';
@@ -308,6 +325,14 @@
         });
 
         inqEl.innerHTML = html;
+    }
+    function renderInqList(el, list) {
+        if(!list||!list.length){el.innerHTML='<p style="font-size:13px;color:var(--gray-400);text-align:center;padding:20px 0;">문의가 없습니다.</p>';return;}
+        var h='';list.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});
+        list.slice(0,3).forEach(function(q){
+            var sc=q.status==='접수'?'status-pending':q.status==='답변완료'?'status-completed':'status-active';
+            h+='<div class="recent-item"><div style="flex:1"><div style="font-size:14px;font-weight:600;color:var(--gray-900);margin-bottom:4px">'+(q.title||q.type||'문의')+'</div><div style="font-size:12px;color:var(--gray-500)">'+(q.name||'')+'·'+(q.date||'')+'</div></div><span class="status '+sc+'">'+(q.status||'접수')+'</span></div>';
+        });el.innerHTML=h;
     }
 
     renderRecentActivity();
