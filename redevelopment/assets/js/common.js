@@ -206,17 +206,18 @@ const App = (() => {
           <a href="${B}/pages/portfolio.html">업무실적</a>
         </div>
         <div class="footer-col">
-          <h5>자료·정보</h5>
+          <h5>자료·서비스</h5>
           <a href="${B}/pages/library.html">자료실</a>
           <a href="${B}/pages/community.html">커뮤니티</a>
-          <a href="${B}/pages/notice.html">공지사항</a>
-          <a href="${B}/pages/faq.html">자주 묻는 질문</a>
+          <a href="${B}/pages/location.html">재개발지도</a>
+          <a href="${B}/pages/feasibility.html">사업성 검토</a>
         </div>
         <div class="footer-col">
           <h5>문의·지원</h5>
-          <a href="${B}/pages/feasibility.html">사업성 검토</a>
           <a href="${B}/pages/contact.html">고객센터</a>
           <a href="${B}/intranet/index.html">인트라넷</a>
+          <a href="${B}/pages/webhard.html" target="_blank">웹하드</a>
+          <a href="${B}/pages/faq.html">자주 묻는 질문</a>
         </div>
         <div class="footer-col footer-contact">
           <h5>고객센터</h5>
