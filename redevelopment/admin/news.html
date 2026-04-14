@@ -284,30 +284,41 @@
         var fileInput = document.getElementById('fFile');
         var newFile = fileInput.files && fileInput.files[0];
 
+        var saveBtn = document.getElementById('btnSave');
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 저장 중...';
+        var fSize = newFile ? (newFile.size/1024).toFixed(0)+'KB' : '';
+
+        var itemData = { id: editId || ('lib_'+Date.now().toString(36)), title:title, category:cat, fileType:ft, date:dt, tags:tags, description:desc, fileSize: fSize || '', downloads:0 };
+        var apiAction = editId ? 'update' : 'add';
+
+        // 로컬 즉시 반영
         if (editId) {
             var idx = libItems.findIndex(function(x){return x.id===editId});
-            if (idx >= 0) {
-                libItems[idx].title = title;
-                libItems[idx].category = cat;
-                libItems[idx].fileType = ft;
-                libItems[idx].date = dt;
-                libItems[idx].tags = tags;
-                libItems[idx].description = desc;
-                if (newFile) {
-                    libItems[idx].fileSize = (newFile.size/1024).toFixed(0) + 'KB';
-                    libItems[idx]._newFileName = newFile.name;
-                }
-                toast('자료가 수정되었습니다.' + (newFile ? ' (새 파일: '+newFile.name+')' : ''), 'success');
-            }
+            if (idx>=0) { Object.assign(libItems[idx], {title:title,category:cat,fileType:ft,date:dt,tags:tags,description:desc}); if(fSize) libItems[idx].fileSize=fSize; }
         } else {
-            var newId = 'lib_' + Date.now().toString(36);
-            var fSize = newFile ? (newFile.size/1024).toFixed(0)+'KB' : '';
-            libItems.unshift({
-                id: newId, title: title, category: cat, fileType: ft,
-                fileSize: fSize, date: dt, downloads: 0, tags: tags, description: desc
-            });
-            toast('자료가 등록되었습니다. (세션 내 반영)', 'success');
+            libItems.unshift(itemData);
         }
+
+        // API로 GitHub에 영구 저장 + 라이브 배포
+        fetch('/api/library', {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({action:apiAction, item:itemData})
+        }).then(function(r){return r.json()}).then(function(d){
+            saveBtn.disabled=false;
+            saveBtn.innerHTML='<i class="fa-solid fa-check"></i> 저장';
+            if(d.ok){
+                toast(apiAction==='add'?'자료가 등록되어 라이브에 반영되었습니다.':'자료가 수정되어 라이브에 반영되었습니다.','success');
+            } else {
+                toast('로컬 반영 완료. 라이브 반영 실패: '+(d.error||''), 'error');
+            }
+        }).catch(function(e){
+            saveBtn.disabled=false;
+            saveBtn.innerHTML='<i class="fa-solid fa-check"></i> 저장';
+            toast('로컬 반영 완료. 서버 연결 실패.', 'error');
+        });
+
         document.getElementById('formPanel').style.display = 'none';
         render(document.getElementById('searchInput').value);
     });
