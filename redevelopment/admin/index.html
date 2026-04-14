@@ -36,7 +36,6 @@
             <div class="admin-nav-group">
                 <div class="admin-nav-group-title">콘텐츠 관리</div>
                 <a href="areas.html"><i class="fa-solid fa-building"></i> 구역 관리</a>
-                <a href="listings.html"><i class="fa-solid fa-house"></i> 매물 관리</a>
                 <a href="news.html"><i class="fa-solid fa-newspaper"></i> 뉴스 관리</a>
                 <a href="columns.html"><i class="fa-solid fa-pen-fancy"></i> 칼럼 관리</a>
                 <a href="community.html"><i class="fa-solid fa-comments"></i> 게시글 관리</a>
@@ -90,13 +89,6 @@
                     <div class="admin-kpi-info">
                         <div class="label">총 구역수</div>
                         <div class="value" id="kpiAreas">0</div>
-                    </div>
-                </div>
-                <div class="admin-kpi">
-                    <div class="admin-kpi-icon green"><i class="fa-solid fa-house"></i></div>
-                    <div class="admin-kpi-info">
-                        <div class="label">총 매물수</div>
-                        <div class="value" id="kpiListings">0</div>
                     </div>
                 </div>
                 <div class="admin-kpi">
@@ -230,7 +222,6 @@
     /* ── KPI Stats ── */
     const stats = DataService.getDashboardStats();
     document.getElementById('kpiAreas').textContent = stats.totalAreas.toLocaleString();
-    document.getElementById('kpiListings').textContent = stats.totalListings.toLocaleString();
     document.getElementById('kpiMembers').textContent = stats.totalMembers.toLocaleString();
     document.getElementById('kpiPending').textContent = stats.pendingInquiries.toLocaleString();
 
@@ -253,17 +244,6 @@
                 iconClass: 'blue',
                 text: '<strong>' + a.name + '</strong> 구역이 등록되었습니다.',
                 date: a.createdAt || ''
-            });
-        });
-
-        // 최근 매물
-        const listings = DataService.getAll('listings');
-        listings.slice(0, 3).forEach(function(l) {
-            items.push({
-                icon: 'fa-house',
-                iconClass: 'green',
-                text: '<strong>' + (l.title || l.name || '매물') + '</strong> 매물이 등록되었습니다.',
-                date: l.createdAt || ''
             });
         });
 
