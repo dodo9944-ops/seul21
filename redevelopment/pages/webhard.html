@@ -10,7 +10,7 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#F5F6F8;--white:#fff;--dark:#0A0F1C;--navy:#142644;--gold:#C3A569;--gray-100:#F3F3F3;--gray-200:#E5E5E5;--gray-300:#D1D1D1;--gray-400:#AAA;--gray-500:#888;--gray-600:#666;--gray-700:#444;--gray-900:#1A1A1A;--font:'Noto Sans KR',sans-serif;--radius:12px;--shadow:0 1px 4px rgba(0,0,0,0.06)}
-body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-size:14px;line-height:1.6;min-height:100vh}
+body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-size:14px;line-height:1.6;min-height:100vh;overflow-x:hidden}
 
 /* AUTH SCREEN */
 .auth-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--dark)}
@@ -115,17 +115,17 @@ body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-siz
   .wh-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9999}
   .wh-overlay.open{display:block}
   /* 헤더 */
-  .wh-header{padding:10px 12px}
+  .wh-header{padding:10px 16px}
   .wh-logo{font-size:14px;gap:6px}
   .wh-actions{gap:6px}
   .wh-btn{padding:6px 10px;font-size:11px;gap:4px}
   /* 툴바 */
-  .wh-toolbar{padding:8px 12px;gap:6px;flex-wrap:wrap}
+  .wh-toolbar{padding:8px 16px;gap:6px;flex-wrap:wrap}
   .wh-search{width:100%;order:10;font-size:12px;padding:6px 10px}
   .wh-path{font-size:12px}
   .wh-info{display:none}
   /* 콘텐츠 */
-  .wh-content{padding:0 10px;margin:10px auto}
+  .wh-content{padding:0 16px;margin:10px auto}
   /* 통계: 2x2 그리드 */
   .wh-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
   .wh-stat{padding:10px 8px}
