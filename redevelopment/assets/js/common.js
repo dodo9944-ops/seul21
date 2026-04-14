@@ -279,13 +279,10 @@ const App = (() => {
       unlockScroll();
     }
 
-    /* ── 모바일 탭바: 활성 탭 자동 스크롤 ── */
+    /* ── 모바일 탭바: 항상 회사소개(맨 처음)부터 표시 ── */
     var tabScroll = document.getElementById('tabScroll');
-    if (tabScroll) {
-      var activeTab = tabScroll.querySelector('.tab-item.active');
-      if (activeTab) {
-        setTimeout(function() { activeTab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'auto' }); }, 100);
-      }
+    if (tabScroll && window.innerWidth <= 1024) {
+      setTimeout(function() { tabScroll.scrollLeft = 0; }, 50);
     }
 
     /* ── 우측 드로어 스와이프 열기/닫기 ── */
