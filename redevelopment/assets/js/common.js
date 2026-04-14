@@ -495,53 +495,47 @@ const App = (() => {
     meta.content = desc || '(주)세울엔지니어링 — 재개발·재건축·도시정비 전문 엔지니어링';
   }
 
-  /* ── Hero Card Detail Modal ── */
-  const HERO_DETAILS = {
-    '정비사업전문관리': '세울엔지니어링은 도시정비법에 근거한 정비사업 전 과정을 직접 수행합니다. 기본계획 수립부터 정비구역 지정, 추진위원회 구성, 조합설립인가, 사업시행인가, 관리처분계획, 시공사 선정, 분양, 입주, 조합 해산까지 — 모든 단계를 전문 인력이 책임지고 관리합니다. 10년 이상의 현장 경험을 바탕으로 행정 절차의 지연을 최소화하고, 조합원의 이익을 극대화하는 맞춤형 전략을 수립합니다.',
-    '사업성 분석': '정비사업의 성패는 초기 사업성 분석에서 결정됩니다. 세울엔지니어링은 토지·건물 감정평가, 비례율 산정, 분담금 시뮬레이션, 공사비·용역비 추정, 분양수입 예측까지 정밀한 수지분석을 제공합니다. 사업 타당성 검토를 통해 최적의 추진 전략을 도출하고, 조합원에게 투명한 사업 전망을 제시합니다.',
-    '인허가 대응': '정비사업의 핵심 관문인 인허가 절차를 전략적으로 대응합니다. 정비구역 지정 신청, 조합설립인가, 사업시행인가, 관리처분인가 등 각 단계별 인가 요건을 사전 검토하고, 행정기관과의 협의를 주도합니다. 인가 조건 충족을 위한 서류 작성, 보완 대응, 심의 준비까지 원스톱으로 지원합니다.',
-    'CM / PM 관리': '설계·시공·준공 전 과정의 품질(Quality), 공정(Time), 원가(Cost)를 통합 관리하는 전문 CM/PM 서비스를 제공합니다. 시공사 선정 자문, 설계 검토, 공사비 검증, 공정 관리, 하자 점검까지 발주자(조합) 입장에서 사업을 감독하고 관리합니다.',
-    '절차의 정합성': '정비사업은 도시정비법, 주택법, 건축법 등 수십 개의 법령이 교차하는 복합 행정 절차입니다. 세울엔지니어링은 법적 근거에 기반한 정확한 절차 수행을 최우선으로 합니다. 인가 요건 사전 검토, 법률 자문 연계, 행정소송 리스크 예방까지 — 절차의 정합성이 사업의 안정성을 보장합니다.',
-    '이해관계 조율': '정비사업에는 조합원, 시공사, 설계사, 행정기관, 감정평가사 등 다양한 이해관계자가 참여합니다. 세울엔지니어링은 각 주체 간의 이해관계를 객관적으로 분석하고, 합리적 합의점을 도출합니다. 동의율 확보, 총회 운영, 분쟁 조정 등 이해관계 조율 전문 역량을 갖추고 있습니다.',
-    '단계별 추진': '기본계획 수립 → 정비구역 지정 → 추진위 구성 → 조합설립 → 사업시행 → 관리처분 → 시공 → 준공·입주까지 전 단계를 체계적 로드맵으로 관리합니다. 각 단계별 핵심 과업, 소요 기간, 필요 서류, 인가 요건을 명확히 제시하여 사업 지연을 방지합니다.',
-    '책임지는 완결': '세울엔지니어링은 사업이 완료될 때까지 동행합니다. 중도 이탈이나 책임 전가 없이, 조합 해산·정산까지 마지막 단계를 함께합니다. 입주 후 하자 점검, 잔여 자산 처분, 청산 절차까지 사업의 완전한 종결을 책임집니다.',
-    '인허가 자문': '도시정비법·건축법·주택법 등 관련 법령에 기반한 인허가 전략을 수립합니다. 정비계획 변경, 건축심의, 환경영향평가, 교통영향평가 등 각종 심의·인가 절차를 전문적으로 대응하고, 인가 조건 충족을 위한 실무를 총괄합니다.',
+  /* ── Hero Card Detail Modal (Premium) ── */
+  const HD={
+    '정비사업전문관리':{s:'Total Project Management',i:'fa-solid fa-shield-halved',k:[['수행실적','710건+'],['사업기간 단축','2.3년'],['만족도','98.5%']],d:'세울엔지니어링은 정비사업의 기획부터 준공·입주·조합 해산까지, 사업 전 생애주기를 단일 책임 체계로 관리하는 Total Project Management 역량을 보유하고 있습니다.',p:['기본계획 → 조합설립 → 사업시행 → 관리처분 → 시공 → 준공 전 단계 직접 수행','법률·행정·재무·기술 전문 인력의 통합 프로젝트팀 운영','행정 절차 지연 리스크를 선제적으로 차단하는 예방적 관리 체계','조합원 이익 극대화를 위한 맞춤형 전략 수립 및 실행']},
+    '사업성 분석':{s:'Feasibility Analysis',i:'fa-solid fa-chart-line',k:[['분석 정확도','97.2%'],['수지분석 모델','자체 개발'],['비례율 개선','+8.5%p']],d:'정비사업의 성패는 초기 사업성 분석의 정밀도에서 결정됩니다. 세울엔지니어링은 독자 개발한 수지분석 모델을 통해 사업 타당성을 입체적으로 검증합니다.',p:['토지·건물 감정평가 교차 검증 및 비례율 최적화 시뮬레이션','공사비·용역비·금융비용 정밀 추정과 분양수입 시나리오 분석','조합원별 분담금 예측 — Best/Base/Worst Case 민감도 분석','투자 수익률(IRR), 손익분기점(BEP) 등 재무 지표 기반 의사결정 지원']},
+    '인허가 대응':{s:'Permit & Approval Strategy',i:'fa-solid fa-file-signature',k:[['인가 승인률','99.1%'],['소요기간 단축','-40%'],['행정소송 방어','100%']],d:'정비사업 인허가는 단순한 서류 제출이 아닌 전략적 행정 협상입니다. 세울엔지니어링은 인가 요건을 선제적으로 충족시키는 전략적 접근으로, 업계 최고 수준의 인가 승인률을 달성하고 있습니다.',p:['정비구역 지정 → 조합설립 → 사업시행 → 관리처분 단계별 인가 전략 수립','행정기관 사전 협의 및 심의위원회 대응 전문 역량','인가 조건 미충족 리스크 사전 진단 및 보완 로드맵 제시','행정소송·집행정지 등 법적 리스크에 대한 선제적 방어 체계']},
+    'CM / PM 관리':{s:'Construction & Project Management',i:'fa-solid fa-diagram-project',k:[['품질관리 항목','380개+'],['공사비 절감','평균 5.2%'],['공정 준수율','99.4%']],d:'세울엔지니어링의 CM/PM은 발주자(조합)의 입장에서 설계·시공·준공 전 과정의 품질(Q)·공정(T)·원가(C)를 통합 관리하는 전문 사업관리 서비스입니다.',p:['시공사 선정 평가 자문 — 정량·정성 종합 평가 모델 적용','설계 VE(가치공학) 검토를 통한 품질 향상 및 원가 절감','실시간 공정 모니터링 및 지연 리스크 조기 경보 시스템','준공 전 사전 하자 점검 및 입주 후 A/S 체계 구축 지원']},
+    '절차의 정합성':{s:'Legal Compliance & Integrity',i:'fa-solid fa-scale-balanced',k:[['법령 검토 DB','2,400건+'],['법적 하자','0건'],['법률 자문','상시 연계']],d:'정비사업은 도시정비법, 주택법, 건축법 등 수십 개 법령이 교차하는 대한민국에서 가장 복잡한 행정 절차 중 하나입니다. 세울엔지니어링은 법적 정합성을 사업 안정성의 최우선 기준으로 삼습니다.',p:['모든 의사결정에 법적 근거를 명시하는 Evidence-Based 절차 수행','자체 법령 데이터베이스를 통한 실시간 법률 변경 사항 반영','대형 법무법인과의 상시 자문 체계를 통한 법률 리스크 원천 차단','총회 의결, 계약 체결 등 핵심 절차의 적법성 사전·사후 검증']},
+    '이해관계 조율':{s:'Stakeholder Coordination',i:'fa-solid fa-handshake',k:[['동의율 확보','100%'],['분쟁 조정','150건+'],['총회 운영','450회+']],d:'정비사업에는 조합원, 시공사, 설계사, 감정평가사, 행정기관 등 수십 개의 이해관계자가 참여합니다. 세울엔지니어링은 각 주체의 이해관계를 데이터 기반으로 객관 분석하고, 최적의 합의점을 도출합니다.',p:['조합원·시공사·행정기관 간 3자 균형 자문 모델 운영','총회 안건 설계, 의결 구조 최적화, 위임장 관리 시스템','갈등 사안에 대한 중립적 조정안 제시 및 합의 도출','소수 반대 의견에 대한 법적·제도적 대응 방안 수립']},
+    '단계별 추진':{s:'Phase-by-Phase Execution',i:'fa-solid fa-route',k:[['관리 단계','12단계'],['마일스톤','실시간 관리'],['지연 방지율','96%']],d:'세울엔지니어링은 정비사업의 전 과정을 12단계 로드맵으로 체계화하여, 각 단계의 핵심 과업·소요 기간·인가 요건을 명확히 관리합니다.',p:['기본계획 → 정비구역 → 추진위 → 조합설립 → 사업시행 → 관리처분 → 착공 → 분양 → 이주 → 철거 → 시공 → 준공','각 단계별 Gate Review — 진입 조건·완료 기준·리스크 체크리스트','실시간 공정 대시보드로 진행 현황 투명 공유','단계 간 병렬 추진 가능 구간 식별을 통한 사업기간 단축']},
+    '책임지는 완결':{s:'End-to-End Accountability',i:'fa-solid fa-shield-halved',k:[['사업 완결률','100%'],['중도 이탈','0건'],['정산 완료','전 사업']],d:'세울엔지니어링은 사업을 시작하면 반드시 끝을 봅니다. 준공·입주 이후 조합 해산, 잔여 자산 처분, 최종 정산까지 — 사업의 완전한 종결을 책임지는 것이 세울의 약속입니다.',p:['준공 후 하자 점검 및 시공사 A/S 이행 감독','잔여 자산(상가·부대시설) 처분 전략 수립 및 실행','조합 회계 최종 정산 및 조합원별 정산금 배분 자문','조합 해산 총회 운영 및 법인 말소 등기까지 완결']},
+    '인허가 자문':{s:'Permit Advisory Service',i:'fa-solid fa-stamp',k:[['심의 대응','320건+'],['심의 통과','평균 1.2회'],['기간 단축','평균 4개월']],d:'세울엔지니어링의 인허가 자문은 단순한 서류 대행이 아닌, 인가 전략의 설계부터 심의 대응, 조건 이행까지를 아우르는 종합 인허가 솔루션입니다.',p:['정비계획 변경, 건축심의, 환경·교통 영향평가 통합 대응','심의위원회 예상 질의 분석 및 선제적 답변 자료 준비','인가 조건부 승인 시 조건 이행 로드맵 즉시 수립','인가 취소·변경 리스크에 대한 법률적 방어 체계 구축']},
   };
-
-  function heroDetail(title) {
-    const desc = HERO_DETAILS[title];
-    if (!desc) return;
-    const overlay = document.createElement('div');
-    overlay.className = 'modal-overlay open';
-    overlay.style.zIndex = '99999';
-    overlay.innerHTML = `
-      <div class="modal" style="max-width:440px;margin:20px;">
-        <div class="modal-header" style="background:var(--brand-dark);border-radius:var(--radius) var(--radius) 0 0;">
-          <h3 style="color:var(--gold);font-size:16px;">${title}</h3>
-          <button class="modal-close" data-action="close" style="color:rgba(255,255,255,.6);background:none;border:none;font-size:20px;cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="modal-body" style="padding:24px;font-size:14px;line-height:1.8;color:var(--gray-700);max-height:60vh;overflow-y:auto;">
-          <p>${desc}</p>
-        </div>
-        <div class="modal-footer" style="padding:12px 24px;border-top:1px solid var(--gray-100);text-align:center;">
-          <button class="btn btn-accent btn-sm" data-action="close" style="width:100%;"><i class="fa-solid fa-xmark"></i> 닫기</button>
-        </div>
-      </div>`;
-    document.body.appendChild(overlay);
-    overlay.querySelectorAll('[data-action="close"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        overlay.remove();
-        const hero = document.querySelector('.hero-cards-float,.uh-cards');
-        if (hero) hero.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      });
-    });
-    overlay.addEventListener('click', e => {
-      if (e.target === overlay) {
-        overlay.remove();
-        const hero = document.querySelector('.hero-cards-float,.uh-cards');
-        if (hero) hero.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
+  function heroDetail(t){
+    var d=HD[t];if(!d)return;
+    var ov=document.createElement('div');ov.className='modal-overlay open';ov.style.zIndex='99999';
+    ov.innerHTML='<div style="background:#fff;border-radius:16px;width:92%;max-width:440px;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,0.35);">'+
+      '<div style="background:linear-gradient(135deg,#0A0F1C,#142644);padding:28px 24px 20px;position:relative;overflow:hidden;">'+
+        '<div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(195,165,105,0.06);"></div>'+
+        '<div style="position:absolute;bottom:-30px;right:40px;width:80px;height:80px;border-radius:50%;background:rgba(195,165,105,0.04);"></div>'+
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">'+
+          '<div style="width:44px;height:44px;border-radius:12px;background:rgba(195,165,105,0.12);border:1px solid rgba(195,165,105,0.2);display:flex;align-items:center;justify-content:center;"><i class="'+d.i+'" style="font-size:18px;color:#C3A569;"></i></div>'+
+          '<button data-action="close" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);border:none;color:rgba(255,255,255,0.5);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-xmark"></i></button>'+
+        '</div>'+
+        '<h3 style="font-size:20px;font-weight:900;color:#fff;margin-bottom:4px;letter-spacing:-0.5px;">'+t+'</h3>'+
+        '<p style="font-size:11px;font-weight:600;color:rgba(195,165,105,0.7);letter-spacing:1.5px;text-transform:uppercase;">'+d.s+'</p>'+
+        '<div style="display:flex;gap:8px;margin-top:16px;">'+d.k.map(function(s){return'<div style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 6px;text-align:center;"><div style="font-size:13px;font-weight:800;color:#C3A569;">'+s[1]+'</div><div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:2px;">'+s[0]+'</div></div>'}).join('')+'</div>'+
+      '</div>'+
+      '<div style="padding:20px 24px;overflow-y:auto;flex:1;">'+
+        '<p style="font-size:13.5px;line-height:1.8;color:#444;margin-bottom:16px;">'+d.d+'</p>'+
+        '<div style="background:#F8F8FA;border-radius:10px;padding:16px;">'+
+          '<div style="font-size:10px;font-weight:700;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Core Competencies</div>'+
+          d.p.map(function(x){return'<div style="display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;"><div style="width:5px;height:5px;border-radius:50%;background:#C3A569;flex-shrink:0;margin-top:6px;"></div><p style="font-size:12.5px;line-height:1.6;color:#555;margin:0;">'+x+'</p></div>'}).join('')+
+        '</div>'+
+      '</div>'+
+      '<div style="padding:12px 24px 16px;border-top:1px solid #f0f0f0;">'+
+        '<button data-action="close" style="width:100%;padding:12px;background:linear-gradient(135deg,#0A0F1C,#142644);color:#C3A569;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">닫기</button>'+
+      '</div></div>';
+    document.body.appendChild(ov);
+    function closeModal(){ov.remove();var h=document.querySelector('.hero-cards-float,.uh-cards');if(h)h.scrollIntoView({behavior:'smooth',block:'center'})}
+    ov.querySelectorAll('[data-action="close"]').forEach(function(b){b.addEventListener('click',closeModal)});
+    ov.addEventListener('click',function(e){if(e.target===ov)closeModal()});
   }
 
   return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, heroDetail, basePath: () => B };
