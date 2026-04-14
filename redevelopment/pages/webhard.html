@@ -125,9 +125,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-siz
   .wh-path{font-size:12px}
   .wh-info{display:none}
   /* 콘텐츠 */
-  .wh-content{padding:0 16px;margin:10px auto}
+  .wh-content{padding:0 16px;margin:10px auto;max-width:100%;box-sizing:border-box}
   /* 통계: 2x2 그리드 */
-  .wh-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+  .wh-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;max-width:100%}
+  /* 전체 오버플로 방지 */
+  .wh-main{overflow-x:hidden}
+  .wh-table{max-width:100%;overflow-x:auto}
   .wh-stat{padding:10px 8px}
   .wh-stat-val{font-size:18px}
   .wh-stat-label{font-size:10px}
