@@ -106,43 +106,45 @@
 
             <!-- Form Panel -->
             <div class="admin-form-panel" id="formPanel" style="display:none; margin-top:24px;">
-                <h3 id="formTitle">뉴스 등록</h3>
+                <h3 id="formTitle">자료 수정</h3>
                 <input type="hidden" id="editId">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
                     <div class="form-group">
                         <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">제목 *</label>
-                        <input type="text" id="fTitle" class="form-control" placeholder="뉴스 제목을 입력하세요">
+                        <input type="text" id="fTitle" class="form-control" placeholder="자료 제목">
                     </div>
                     <div class="form-group">
                         <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">카테고리 *</label>
                         <select id="fCategory" class="form-control">
-                            <option value="정책">정책</option>
-                            <option value="시장분석">시장분석</option>
-                            <option value="분석">분석</option>
-                            <option value="개발호재">개발호재</option>
+                            <option value="주요뉴스">주요뉴스</option>
+                            <option value="법령">법령</option>
+                            <option value="법령·조례">법령·조례</option>
+                            <option value="관련판례">관련판례</option>
+                            <option value="지침">지침</option>
+                            <option value="판례·질의회신">판례·질의회신</option>
+                            <option value="서식">서식</option>
+                            <option value="가이드">가이드</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">작성자 *</label>
-                        <input type="text" id="fAuthor" class="form-control" placeholder="예: 김기자">
+                        <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">파일유형</label>
+                        <select id="fFileType" class="form-control">
+                            <option value="pdf">PDF</option>
+                            <option value="web">웹문서</option>
+                        </select>
                     </div>
                     <div class="form-group">
+                        <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">날짜</label>
+                        <input type="date" id="fDate" class="form-control">
+                    </div>
+                    <div class="form-group" style="grid-column:1/-1">
                         <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">태그 (쉼표 구분)</label>
-                        <input type="text" id="fTags" class="form-control" placeholder="예: 정비사업,특별법">
+                        <input type="text" id="fTags" class="form-control" placeholder="예: 정비사업,법령,2026">
                     </div>
                 </div>
                 <div class="form-group" style="margin-top:16px;">
-                    <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">요약</label>
-                    <textarea id="fSummary" class="form-control" rows="2" placeholder="뉴스 요약을 입력하세요" style="width:100%;resize:vertical;"></textarea>
-                </div>
-                <div class="form-group" style="margin-top:16px;">
-                    <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">본문 *</label>
-                    <textarea id="fContent" class="form-control" rows="8" placeholder="뉴스 본문을 입력하세요" style="width:100%;resize:vertical;"></textarea>
-                </div>
-                <div class="form-group" style="margin-top:12px;">
-                    <label style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--gray-700);cursor:pointer;">
-                        <input type="checkbox" id="fFeatured"> Featured (메인 노출)
-                    </label>
+                    <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">설명</label>
+                    <textarea id="fContent" class="form-control" rows="4" placeholder="자료 설명을 입력하세요" style="width:100%;resize:vertical;"></textarea>
                 </div>
                 <div class="admin-form-actions">
                     <button class="btn btn-outline btn-sm" id="btnCancel">취소</button>
@@ -206,6 +208,7 @@
                 <td style="font-size:11px">${a.date||''}</td>
                 <td style="font-size:11px">${a.downloads||0}</td>
                 <td class="actions">
+                    <button title="수정" onclick="editLib('${a.id}')"><i class="fa-solid fa-pen"></i></button>
                     <button title="보기" onclick="viewLib('${a.id}')"><i class="fa-solid fa-eye"></i></button>
                 </td>
             </tr>
@@ -215,42 +218,34 @@
     window.viewLib = function(id) {
         var item = libItems.find(function(x){return x.id===id});
         if(!item) return;
-        alert('제목: ' + item.title + '\n카테고리: ' + item.category + '\n날짜: ' + item.date + '\n설명: ' + (item.description||'').slice(0,100) + '...');
+        alert('ID: ' + item.id + '\n제목: ' + item.title + '\n카테고리: ' + item.category + '\n유형: ' + (item.fileType||'') + '\n날짜: ' + item.date + '\n다운로드: ' + (item.downloads||0) + '\n태그: ' + (item.tags||[]).join(', ') + '\n\n설명:\n' + (item.description||''));
+    };
+
+    window.editLib = function(id) {
+        var item = libItems.find(function(x){return x.id===id});
+        if(!item) return;
+        document.getElementById('editId').value = id;
+        document.getElementById('fTitle').value = item.title || '';
+        document.getElementById('fCategory').value = item.category || '주요뉴스';
+        document.getElementById('fFileType').value = item.fileType || 'pdf';
+        document.getElementById('fDate').value = item.date || '';
+        document.getElementById('fTags').value = (item.tags||[]).join(', ');
+        document.getElementById('fContent').value = item.description || '';
+        document.getElementById('formTitle').textContent = '자료 수정 — ' + id;
+        document.getElementById('formPanel').style.display = 'block';
+        document.getElementById('formPanel').scrollIntoView({behavior:'smooth'});
     };
 
     window.toggleFeatured = function(id, val) {
         toast(val ? '메인 노출 활성화' : '메인 노출 비활성화', 'success');
     };
 
-    window.deleteItem = function(id, title) {
-        if (!confirm(`"${title}" 뉴스를 삭제하시겠습니까?`)) return;
-        DataService.remove('news', id);
-        render(document.getElementById('searchInput').value);
-        toast('삭제되었습니다.', 'success');
-    };
-
-    window.editItem = function(id) {
-        const a = DataService.getById('news', id);
-        if (!a) return;
-        document.getElementById('formTitle').textContent = '뉴스 수정';
-        document.getElementById('editId').value = id;
-        document.getElementById('fTitle').value = a.title || '';
-        document.getElementById('fCategory').value = a.category || '정책';
-        document.getElementById('fAuthor').value = a.author || '';
-        document.getElementById('fTags').value = (a.tags||[]).join(',');
-        document.getElementById('fSummary').value = a.summary || '';
-        document.getElementById('fContent').value = a.content || '';
-        document.getElementById('fFeatured').checked = !!a.featured;
-        document.getElementById('formPanel').style.display = 'block';
-        document.getElementById('formPanel').scrollIntoView({ behavior: 'smooth' });
-    };
-
     document.getElementById('btnNew').addEventListener('click', () => {
-        document.getElementById('formTitle').textContent = '뉴스 등록';
+        document.getElementById('formTitle').textContent = '자료 신규 등록';
         document.getElementById('editId').value = '';
-        document.querySelectorAll('#formPanel input:not([type=hidden]):not([type=checkbox]), #formPanel textarea').forEach(el => el.value = '');
+        document.querySelectorAll('#formPanel input:not([type=hidden]), #formPanel textarea').forEach(el => el.value = '');
         document.querySelectorAll('#formPanel select').forEach(el => el.selectedIndex = 0);
-        document.getElementById('fFeatured').checked = false;
+        document.getElementById('fDate').value = new Date().toISOString().slice(0,10);
         document.getElementById('formPanel').style.display = 'block';
         document.getElementById('formPanel').scrollIntoView({ behavior: 'smooth' });
     });
@@ -260,30 +255,35 @@
     });
 
     document.getElementById('btnSave').addEventListener('click', () => {
-        const title = document.getElementById('fTitle').value.trim();
-        const content = document.getElementById('fContent').value.trim();
+        var title = document.getElementById('fTitle').value.trim();
         if (!title) { toast('제목을 입력하세요.', 'error'); return; }
-        if (!content) { toast('본문을 입력하세요.', 'error'); return; }
-        const data = {
-            title,
-            category: document.getElementById('fCategory').value,
-            author: document.getElementById('fAuthor').value.trim(),
-            summary: document.getElementById('fSummary').value.trim(),
-            content,
-            tags: document.getElementById('fTags').value.split(',').map(s=>s.trim()).filter(Boolean),
-            featured: document.getElementById('fFeatured').checked
-        };
-        const editId = document.getElementById('editId').value;
+        var editId = document.getElementById('editId').value;
+        var cat = document.getElementById('fCategory').value;
+        var ft = document.getElementById('fFileType').value;
+        var dt = document.getElementById('fDate').value;
+        var tags = document.getElementById('fTags').value.split(',').map(function(s){return s.trim()}).filter(Boolean);
+        var desc = document.getElementById('fContent').value.trim();
+
         if (editId) {
-            DataService.update('news', editId, data);
-            toast('뉴스가 수정되었습니다.', 'success');
+            // 기존 자료 수정 (MOCK.library 직접 수정)
+            var idx = libItems.findIndex(function(x){return x.id===editId});
+            if (idx >= 0) {
+                libItems[idx].title = title;
+                libItems[idx].category = cat;
+                libItems[idx].fileType = ft;
+                libItems[idx].date = dt;
+                libItems[idx].tags = tags;
+                libItems[idx].description = desc;
+                toast('자료가 수정되었습니다. (세션 내 반영)', 'success');
+            }
         } else {
-            data.id = DataService._genId('n');
-            data.date = new Date().toISOString().slice(0,10);
-            data.views = 0;
-            data.image = '';
-            DataService.create('news', data);
-            toast('뉴스가 등록되었습니다.', 'success');
+            // 신규 등록
+            var newId = 'lib_' + Date.now().toString(36);
+            libItems.unshift({
+                id: newId, title: title, category: cat, fileType: ft,
+                fileSize: '', date: dt, downloads: 0, tags: tags, description: desc
+            });
+            toast('자료가 등록되었습니다. (세션 내 반영)', 'success');
         }
         document.getElementById('formPanel').style.display = 'none';
         render(document.getElementById('searchInput').value);
