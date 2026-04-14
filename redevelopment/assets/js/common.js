@@ -227,7 +227,7 @@ const App = (() => {
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copy">&copy; 2026 (주)세울엔지니어링. All rights reserved. &nbsp;|&nbsp; <a href="${B}/pages/privacy.html" style="color:rgba(255,255,255,.4);text-decoration:underline">개인정보 처리방침</a></div>
+        <div class="footer-copy">&copy; 2026 (주)세울엔지니어링. All rights reserved. &nbsp;|&nbsp; <a href="${B}/pages/privacy.html" style="color:rgba(255,255,255,.4);text-decoration:underline">개인정보 처리방침</a> &nbsp;|&nbsp; <a href="${B}/pages/sitemap.html" style="color:rgba(255,255,255,.4);text-decoration:underline">사이트맵</a> &nbsp;|&nbsp; <a href="${B}/admin/login.html" style="color:rgba(255,255,255,.4);text-decoration:underline">관리자</a></div>
         <div class="footer-info">경기도 하남시 감일백제로 70, 204동 1104호 | 대표 Charles Lee</div>
         <div class="footer-social">
           <a href="http://pf.kakao.com/_uNndX" target="_blank" aria-label="카카오톡"><i class="fa-solid fa-comment"></i></a>
