@@ -184,6 +184,8 @@
         document.getElementById('sidebarOverlay').classList.remove('open');
     });
 
+    AdminGuard.watchForm('#formPanel');
+
     function toast(msg, type='info') {
         const c = document.getElementById('toastContainer');
         const el = document.createElement('div');
@@ -309,6 +311,7 @@
         }).then(function(r){return r.json()}).then(function(d){
             saveBtn.disabled=false;
             saveBtn.innerHTML='<i class="fa-solid fa-check"></i> 저장';
+            AdminGuard.markClean();
             if(d.ok){
                 toast(apiAction==='add'?'자료가 등록되어 라이브에 반영되었습니다.':'자료가 수정되어 라이브에 반영되었습니다.','success');
             } else {

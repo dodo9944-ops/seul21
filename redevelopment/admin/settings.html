@@ -176,6 +176,8 @@
         document.getElementById('sidebarOverlay').classList.remove('open');
     });
 
+    AdminGuard.watchForm('.admin-content');
+
     function toast(msg, type='info') {
         const c = document.getElementById('toastContainer');
         const el = document.createElement('div');
@@ -220,6 +222,7 @@
             popupContent: document.getElementById('fPopupContent').value.trim()
         };
         DataService.updateSettings(data);
+        AdminGuard.markClean();
         toast('설정이 저장되었습니다.', 'success');
     });
 
