@@ -559,48 +559,5 @@ if(catWrap){var stickyTop=parseInt(getComputedStyle(catWrap).top)||104;
 window.addEventListener('scroll',function(){catWrap.classList.toggle('stuck',catWrap.getBoundingClientRect().top<=stickyTop+1)},{passive:true})}
 })();
 </script>
-
-<div id="posts" style="max-width:1200px; margin:40px auto; padding:0 20px;">
-  <div style="background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:24px;">
-    <h2 style="margin:0 0 16px; font-size:24px; font-weight:800;">Supabase 게시물</h2>
-    <div id="postsList"></div>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const supabaseUrl = 'https://vpyxjovsgsvsqbfebjrm.supabase.co';
-  const supabaseKey = 'sb_publishable_E0vo2tVZJ6AP7wzfYZWQPQ__t0EaMwN';
-  const client = supabase.createClient(supabaseUrl, supabaseKey);
-
-  async function loadPosts() {
-    const { data, error } = await client
-      .from('posts')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    const container = document.getElementById('postsList');
-    if (!container) return;
-
-    if (error) {
-      container.innerHTML = '불러오기 실패';
-      return;
-    }
-
-    if (!data || data.length === 0) {
-      container.innerHTML = '데이터 없음';
-      return;
-    }
-
-    container.innerHTML = data.map(post => `
-      <div style="padding:12px; border:1px solid #ddd; margin-bottom:10px;">
-        <h3>${post.title}</h3>
-        <p>${post.content}</p>
-      </div>
-    `).join('');
-  }
-
-  loadPosts();   // 
-</script>
 </body>
 </html>
