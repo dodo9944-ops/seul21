@@ -142,18 +142,18 @@
                         <input type="text" id="fTags" class="form-control" placeholder="예: 정비사업,법령,2026">
                     </div>
                 </div>
-                <div class="form-group" style="margin-top:16px;">
-                    <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">설명</label>
-                    <textarea id="fContent" class="form-control" rows="4" placeholder="자료 설명을 입력하세요" style="width:100%;resize:vertical;"></textarea>
+                <div style="margin-top:16px;padding:16px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;">
+                    <label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--gray-900);margin-bottom:8px;"><i class="fa-solid fa-paperclip" style="color:var(--accent)"></i> 첨부파일</label>
+                    <div id="currentFile" style="font-size:12px;color:var(--gray-600);margin-bottom:10px;padding:8px 12px;background:var(--white);border-radius:6px;border:1px solid var(--gray-200);"></div>
+                    <input type="file" id="fFile" accept=".pdf,.hwp,.docx,.xlsx,.zip,.jpg,.png" style="font-size:12px;width:100%;margin-bottom:6px;">
+                    <div style="display:flex;gap:8px;align-items:center;">
+                        <button type="button" class="btn btn-outline btn-xs" onclick="clearFile()" style="font-size:11px;"><i class="fa-solid fa-xmark"></i> 파일 초기화</button>
+                        <span style="font-size:10px;color:var(--gray-400);">PDF, HWP, DOCX, XLSX, ZIP, JPG, PNG (최대 10MB)</span>
+                    </div>
                 </div>
                 <div class="form-group" style="margin-top:16px;">
-                    <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">첨부파일</label>
-                    <div id="currentFile" style="font-size:12px;color:var(--gray-500);margin-bottom:8px;"></div>
-                    <div style="display:flex;gap:8px;align-items:center;">
-                        <input type="file" id="fFile" class="form-control" accept=".pdf,.hwp,.docx,.xlsx,.zip,.jpg,.png" style="font-size:12px;">
-                        <button type="button" class="btn btn-outline btn-xs" onclick="clearFile()" style="flex-shrink:0;font-size:11px;"><i class="fa-solid fa-xmark"></i> 초기화</button>
-                    </div>
-                    <p style="font-size:10px;color:var(--gray-400);margin-top:4px;">PDF, HWP, DOCX, XLSX, ZIP, JPG, PNG (최대 10MB) · 파일 변경 시 기존 파일이 교체됩니다</p>
+                    <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">설명</label>
+                    <textarea id="fContent" class="form-control" rows="3" placeholder="자료 설명을 입력하세요" style="width:100%;resize:vertical;"></textarea>
                 </div>
                 </div>
                 <div class="admin-form-actions">
