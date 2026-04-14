@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#0A0F1C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>커뮤니티 — (주)세울엔지니어링</title>
-    <meta name="description" content="재개발·재건축 커뮤니티에서 질문, 정보, 후기, 분석을 공유하세요.">
+    <meta name="description" content="재개발·재건축 커뮤니티에서 질문, 후기를 공유하세요.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -181,11 +181,11 @@
             <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>커뮤니티</span></div>
             <div class="uh-label">COMMUNITY</div>
             <h1>정비사업 <em>전문 커뮤니티</em></h1>
-            <p class="uh-sub">재개발·재건축·소규모정비사업 관련<br>실무 질의, 정책 정보, 현장 경험, 전문가 칼럼을 공유하는 공간</p>
+            <p class="uh-sub">재개발·재건축·소규모정비사업 관련<br>실무 질의, 현장 경험을 공유하는 공간</p>
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_community.png" alt="세울엔지니어링 커뮤니티"></div>
-            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('질문')"><div class="uh-ci"><i class="fa-solid fa-circle-question"></i></div><h4>질문·답변</h4><p>실무 질의 및 전문가 답변</p></div><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('정보')"><div class="uh-ci"><i class="fa-solid fa-circle-info"></i></div><h4>정보 공유</h4><p>최신 정책 및 실무 정보</p></div><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('후기')"><div class="uh-ci"><i class="fa-solid fa-comment-dots"></i></div><h4>후기·경험</h4><p>현장 경험 및 사례 공유</p></div><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('분석')"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>분석·칼럼</h4><p>전문가 분석 및 칼럼</p></div></div>
+            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('질문')"><div class="uh-ci"><i class="fa-solid fa-circle-question"></i></div><h4>질문·답변</h4><p>실무 질의 및 전문가 답변</p></div><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('후기')"><div class="uh-ci"><i class="fa-solid fa-comment-dots"></i></div><h4>후기·경험</h4><p>현장 경험 및 사례 공유</p></div></div>
         </div>
     </div>
 </div>
@@ -217,7 +217,7 @@
 if(typeof MOCK!=='undefined'&&MOCK.community){var s=JSON.parse(localStorage.getItem('rdc_community')||'[]');if(s.length!==MOCK.community.length)localStorage.setItem('rdc_community',JSON.stringify(MOCK.community))}
 var PER=10,curPage=1,curCat='전체';
 var catIcons={'질문':'fa-circle-question','정보':'fa-circle-info','후기':'fa-comment-dots','분석':'fa-chart-line','칼럼':'fa-feather'};
-var catDefs=[{key:'전체',label:'전체'},{key:'질문',label:'질문'},{key:'정보',label:'정보'},{key:'후기',label:'후기'},{key:'분석',label:'분석'},{key:'칼럼',label:'칼럼'}];
+var catDefs=[{key:'전체',label:'전체'},{key:'질문',label:'질문'},{key:'후기',label:'후기'},{key:'칼럼',label:'칼럼'}];
 
 function getAllPosts(){
     var r=DataService.query('community',{sort:'date:desc',page:1,pageSize:999});
