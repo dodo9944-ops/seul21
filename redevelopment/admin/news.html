@@ -146,6 +146,16 @@
                     <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">설명</label>
                     <textarea id="fContent" class="form-control" rows="4" placeholder="자료 설명을 입력하세요" style="width:100%;resize:vertical;"></textarea>
                 </div>
+                <div class="form-group" style="margin-top:16px;">
+                    <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">첨부파일</label>
+                    <div id="currentFile" style="font-size:12px;color:var(--gray-500);margin-bottom:8px;"></div>
+                    <div style="display:flex;gap:8px;align-items:center;">
+                        <input type="file" id="fFile" class="form-control" accept=".pdf,.hwp,.docx,.xlsx,.zip,.jpg,.png" style="font-size:12px;">
+                        <button type="button" class="btn btn-outline btn-xs" onclick="clearFile()" style="flex-shrink:0;font-size:11px;"><i class="fa-solid fa-xmark"></i> 초기화</button>
+                    </div>
+                    <p style="font-size:10px;color:var(--gray-400);margin-top:4px;">PDF, HWP, DOCX, XLSX, ZIP, JPG, PNG (최대 10MB) · 파일 변경 시 기존 파일이 교체됩니다</p>
+                </div>
+                </div>
                 <div class="admin-form-actions">
                     <button class="btn btn-outline btn-sm" id="btnCancel">취소</button>
                     <button class="btn btn-accent btn-sm" id="btnSave"><i class="fa-solid fa-check"></i> 저장</button>
@@ -231,6 +241,10 @@
         document.getElementById('fDate').value = item.date || '';
         document.getElementById('fTags').value = (item.tags||[]).join(', ');
         document.getElementById('fContent').value = item.description || '';
+        // 현재 첨부파일 표시
+        var curFile = item.fileSize ? (item.fileType==='pdf' ? 'PDF 파일 ('+item.fileSize+')' : '웹문서') : '파일 없음';
+        document.getElementById('currentFile').innerHTML = '<i class="fa-solid fa-paperclip"></i> 현재: <strong>' + curFile + '</strong>';
+        document.getElementById('fFile').value = '';
         document.getElementById('formTitle').textContent = '자료 수정 — ' + id;
         document.getElementById('formPanel').style.display = 'block';
         document.getElementById('formPanel').scrollIntoView({behavior:'smooth'});
@@ -240,12 +254,16 @@
         toast(val ? '메인 노출 활성화' : '메인 노출 비활성화', 'success');
     };
 
+    window.clearFile = function(){ document.getElementById('fFile').value=''; document.getElementById('currentFile').textContent='파일 없음'; };
+
     document.getElementById('btnNew').addEventListener('click', () => {
         document.getElementById('formTitle').textContent = '자료 신규 등록';
         document.getElementById('editId').value = '';
         document.querySelectorAll('#formPanel input:not([type=hidden]), #formPanel textarea').forEach(el => el.value = '');
         document.querySelectorAll('#formPanel select').forEach(el => el.selectedIndex = 0);
         document.getElementById('fDate').value = new Date().toISOString().slice(0,10);
+        document.getElementById('currentFile').textContent = '파일 없음';
+        document.getElementById('fFile').value = '';
         document.getElementById('formPanel').style.display = 'block';
         document.getElementById('formPanel').scrollIntoView({ behavior: 'smooth' });
     });
@@ -263,9 +281,10 @@
         var dt = document.getElementById('fDate').value;
         var tags = document.getElementById('fTags').value.split(',').map(function(s){return s.trim()}).filter(Boolean);
         var desc = document.getElementById('fContent').value.trim();
+        var fileInput = document.getElementById('fFile');
+        var newFile = fileInput.files && fileInput.files[0];
 
         if (editId) {
-            // 기존 자료 수정 (MOCK.library 직접 수정)
             var idx = libItems.findIndex(function(x){return x.id===editId});
             if (idx >= 0) {
                 libItems[idx].title = title;
@@ -274,14 +293,18 @@
                 libItems[idx].date = dt;
                 libItems[idx].tags = tags;
                 libItems[idx].description = desc;
-                toast('자료가 수정되었습니다. (세션 내 반영)', 'success');
+                if (newFile) {
+                    libItems[idx].fileSize = (newFile.size/1024).toFixed(0) + 'KB';
+                    libItems[idx]._newFileName = newFile.name;
+                }
+                toast('자료가 수정되었습니다.' + (newFile ? ' (새 파일: '+newFile.name+')' : ''), 'success');
             }
         } else {
-            // 신규 등록
             var newId = 'lib_' + Date.now().toString(36);
+            var fSize = newFile ? (newFile.size/1024).toFixed(0)+'KB' : '';
             libItems.unshift({
                 id: newId, title: title, category: cat, fileType: ft,
-                fileSize: '', date: dt, downloads: 0, tags: tags, description: desc
+                fileSize: fSize, date: dt, downloads: 0, tags: tags, description: desc
             });
             toast('자료가 등록되었습니다. (세션 내 반영)', 'success');
         }
