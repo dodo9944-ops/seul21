@@ -69,6 +69,12 @@ const App = (() => {
     </div></header>
     </div>
 
+    <nav class="mobile-tab-bar" id="mobileTabBar">
+      <div class="tab-scroll" id="tabScroll">
+        ${links.map(l => `<a href="${l.href}" class="tab-item${navActive(l.href) ? ' active' : ''}">${l.label}</a>`).join('')}
+      </div>
+    </nav>
+
     <div class="drawer-overlay" id="drawerOverlay"></div>
     <aside class="drawer" id="drawer">
       <div class="drawer-header">
@@ -257,14 +263,75 @@ const App = (() => {
     const overlay = document.getElementById('drawerOverlay');
     const openBtn = document.getElementById('openDrawer');
     const closeBtn = document.getElementById('drawerClose');
-    if (openBtn) openBtn.addEventListener('click', () => { drawer.classList.add('open'); overlay.classList.add('open'); lockScroll(); });
+    if (openBtn) openBtn.addEventListener('click', function() { drawer.classList.add('open'); overlay.classList.add('open'); lockScroll(); });
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
     if (overlay) overlay.addEventListener('click', closeDrawer);
 
+    function openDrawer() {
+      drawer.classList.add('open'); overlay.classList.add('open'); lockScroll();
+    }
     function closeDrawer() {
       drawer.classList.remove('open');
       overlay.classList.remove('open');
       unlockScroll();
+    }
+
+    /* ── 모바일 탭바: 활성 탭 자동 스크롤 ── */
+    var tabScroll = document.getElementById('tabScroll');
+    if (tabScroll) {
+      var activeTab = tabScroll.querySelector('.tab-item.active');
+      if (activeTab) {
+        setTimeout(function() { activeTab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'auto' }); }, 100);
+      }
+    }
+
+    /* ── 우측 드로어 스와이프 열기/닫기 ── */
+    if (drawer && overlay) {
+      var sw = { x0:0, y0:0, cx:0, t0:0, mode:'' };
+      document.addEventListener('touchstart', function(e) {
+        if (window.innerWidth > 1024) return;
+        if (e.target.closest && e.target.closest('.mobile-tab-bar')) return;
+        var t = e.touches[0], isOpen = drawer.classList.contains('open');
+        if (!isOpen && t.clientX < window.innerWidth - 30) return;
+        sw.x0 = t.clientX; sw.y0 = t.clientY; sw.cx = t.clientX; sw.t0 = Date.now();
+        sw.mode = isOpen ? 'pc' : 'po';
+      }, { passive: true });
+      document.addEventListener('touchmove', function(e) {
+        if (!sw.mode || sw.mode === 'no') return;
+        var t = e.touches[0], dx = t.clientX - sw.x0, dy = t.clientY - sw.y0;
+        if (sw.mode === 'pc' || sw.mode === 'po') {
+          if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
+          if (Math.abs(dy) > Math.abs(dx)) { sw.mode = 'no'; return; }
+          if (sw.mode === 'pc' && dx > 0) sw.mode = 'close';
+          else if (sw.mode === 'po' && dx < 0) sw.mode = 'open';
+          else { sw.mode = 'no'; return; }
+        }
+        if (sw.mode === 'no') return;
+        e.preventDefault(); sw.cx = t.clientX;
+        var w = drawer.offsetWidth || 300;
+        if (sw.mode === 'close') {
+          var s = Math.max(0, Math.min(w, dx));
+          drawer.style.transition = 'none'; overlay.style.transition = 'none';
+          drawer.style.transform = 'translateX(' + s + 'px)';
+          overlay.style.opacity = Math.max(0, 1 - s / w);
+        } else {
+          var p = Math.max(0, Math.min(w, -dx));
+          drawer.style.transition = 'none'; overlay.style.transition = 'none';
+          drawer.style.transform = 'translateX(' + (w - p) + 'px)';
+          overlay.style.opacity = Math.max(0, p / w);
+          overlay.style.pointerEvents = p > 10 ? 'auto' : 'none';
+        }
+      }, { passive: false });
+      document.addEventListener('touchend', function() {
+        if (!sw.mode || sw.mode === 'no' || sw.mode === 'pc' || sw.mode === 'po') { sw.mode = ''; return; }
+        var dx = sw.cx - sw.x0, v = Math.abs(dx) / (Date.now() - sw.t0 || 1), m = sw.mode;
+        drawer.style.transition = ''; overlay.style.transition = '';
+        drawer.style.transform = ''; overlay.style.opacity = '';
+        if (m === 'close' && (dx > 50 || v > 0.25)) closeDrawer();
+        else if (m === 'open' && (-dx > 50 || v > 0.25)) openDrawer();
+        else overlay.style.pointerEvents = '';
+        sw.mode = '';
+      }, { passive: true });
     }
 
     // Search
