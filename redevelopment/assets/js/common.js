@@ -511,16 +511,15 @@ const App = (() => {
     var d=HD[t];if(!d)return;
     var ov=document.createElement('div');ov.className='modal-overlay open';ov.style.zIndex='99999';
     ov.innerHTML='<div style="background:#fff;border-radius:16px;width:92%;max-width:440px;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,0.35);">'+
-      '<div style="background:linear-gradient(135deg,#0A0F1C,#142644);padding:28px 24px 20px;position:relative;overflow:hidden;">'+
+      '<div style="background:linear-gradient(135deg,#0A0F1C,#142644);padding:14px 20px 12px;position:relative;overflow:hidden;">'+
         '<div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(195,165,105,0.06);"></div>'+
         '<div style="position:absolute;bottom:-30px;right:40px;width:80px;height:80px;border-radius:50%;background:rgba(195,165,105,0.04);"></div>'+
         '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">'+
-          '<div style="width:44px;height:44px;border-radius:12px;background:rgba(195,165,105,0.12);border:1px solid rgba(195,165,105,0.2);display:flex;align-items:center;justify-content:center;"><i class="'+d.i+'" style="font-size:18px;color:#C3A569;"></i></div>'+
-          '<button data-action="close" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);border:none;color:rgba(255,255,255,0.5);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-xmark"></i></button>'+
+          '<div style="width:34px;height:34px;border-radius:10px;background:rgba(195,165,105,0.12);border:1px solid rgba(195,165,105,0.2);display:flex;align-items:center;justify-content:center;"><i class="'+d.i+'" style="font-size:15px;color:#C3A569;"></i></div>'+
         '</div>'+
-        '<h3 style="font-size:20px;font-weight:900;color:#fff;margin-bottom:4px;letter-spacing:-0.5px;">'+t+'</h3>'+
-        '<p style="font-size:11px;font-weight:600;color:rgba(195,165,105,0.7);letter-spacing:1.5px;text-transform:uppercase;">'+d.s+'</p>'+
-        '<div style="display:flex;gap:8px;margin-top:16px;">'+d.k.map(function(s){return'<div style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 6px;text-align:center;"><div style="font-size:13px;font-weight:800;color:#C3A569;">'+s[1]+'</div><div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:2px;">'+s[0]+'</div></div>'}).join('')+'</div>'+
+        '<h3 style="font-size:17px;font-weight:900;color:#fff;margin-bottom:2px;letter-spacing:-0.5px;">'+t+'</h3>'+
+        '<p style="font-size:10px;font-weight:600;color:rgba(195,165,105,0.7);letter-spacing:1.5px;text-transform:uppercase;">'+d.s+'</p>'+
+        '<div style="display:flex;gap:6px;margin-top:10px;">'+d.k.map(function(s){return'<div style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 4px;text-align:center;"><div style="font-size:12px;font-weight:800;color:#C3A569;">'+s[1]+'</div><div style="font-size:8px;color:rgba(255,255,255,0.4);margin-top:1px;">'+s[0]+'</div></div>'}).join('')+'</div>'+
       '</div>'+
       '<div style="padding:20px 24px;overflow-y:auto;flex:1;">'+
         '<p style="font-size:13.5px;line-height:1.8;color:#444;margin-bottom:16px;">'+d.d+'</p>'+
