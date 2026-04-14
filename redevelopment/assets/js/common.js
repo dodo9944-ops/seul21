@@ -455,14 +455,17 @@ const App = (() => {
         if (Math.abs(dy) >= Math.abs(dx)) return;
 
         var newIdx;
-        if (dx > 0) {
-          /* 좌→우: 다음 메뉴 (메인→회사소개→세울의길→...→고객센터) */
-          newIdx = curIdx + 1;
-        } else {
-          /* 우→좌: 이전 메뉴 (고객센터→...→세울의길→회사소개) */
+        if (isMain) {
+          /* 메인화면: 어느 방향이든 회사소개(0)로 이동 */
+          newIdx = 0;
+        } else if (dx > 0) {
+          /* 좌→우: 이전 메뉴 */
           newIdx = curIdx - 1;
+        } else {
+          /* 우→좌: 다음 메뉴 */
+          newIdx = curIdx + 1;
         }
-        /* 회사소개(0) 이전 이동 불가, 고객센터(lastIdx) 이후 이동 불가 */
+        /* 회사소개(0) 이전 불가, 고객센터(lastIdx) 이후 불가 */
         if (newIdx < 0 || newIdx > lastIdx) return;
         location.href = menuList[newIdx];
       }, { passive: true });
