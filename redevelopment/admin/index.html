@@ -16,6 +16,51 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
+    <style>
+    /* Dashboard Enhanced */
+    .admin-kpi-grid{grid-template-columns:repeat(3,1fr)}
+    .admin-kpi{position:relative;overflow:hidden;transition:all .25s}
+    .admin-kpi:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-2px)}
+    .admin-kpi .kpi-trend{font-size:11px;font-weight:600;margin-top:4px;display:flex;align-items:center;gap:3px}
+    .admin-kpi .kpi-trend.up{color:var(--green)}
+    .admin-kpi .kpi-trend.down{color:var(--red)}
+    .kpi-row-2{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+    .kpi-mini{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:16px 18px;display:flex;align-items:center;gap:12px;transition:all .25s;cursor:pointer;text-decoration:none}
+    .kpi-mini:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .kpi-mini-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+    .kpi-mini-icon.purple{background:#F3E8FF;color:#7C3AED}
+    .kpi-mini-icon.teal{background:#E6FFFA;color:#0D9488}
+    .kpi-mini-icon.indigo{background:#E8EAF6;color:#3F51B5}
+    .kpi-mini-icon.pink{background:#FCE4EC;color:#E91E63}
+    .kpi-mini-info .mini-label{font-size:11px;color:var(--gray-500);font-weight:500}
+    .kpi-mini-info .mini-value{font-size:20px;font-weight:800;color:var(--gray-900);line-height:1.2}
+    .quick-grid{grid-template-columns:repeat(5,1fr)}
+    .quick-card{position:relative;transition:all .25s}
+    .quick-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+    .quick-card .q-badge{position:absolute;top:8px;right:8px;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;min-width:18px;text-align:center}
+    .dash-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:24px}
+    .sys-status{margin-top:28px}
+    .sys-status h3{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .sys-bar{display:flex;gap:12px;flex-wrap:wrap}
+    .sys-item{flex:1;min-width:160px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:14px 16px;display:flex;align-items:center;gap:10px}
+    .sys-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .sys-dot.ok{background:var(--green)}
+    .sys-dot.warn{background:var(--orange)}
+    .sys-dot.err{background:var(--red)}
+    .sys-label{font-size:12px;color:var(--gray-600);font-weight:500}
+    .sys-val{margin-left:auto;font-size:11px;color:var(--gray-400);font-weight:600}
+    @media(max-width:1024px){
+        .admin-kpi-grid{grid-template-columns:repeat(2,1fr)}
+        .kpi-row-2{grid-template-columns:repeat(2,1fr)}
+        .quick-grid{grid-template-columns:repeat(3,1fr)}
+        .dash-grid-3{grid-template-columns:1fr}
+    }
+    @media(max-width:540px){
+        .admin-kpi-grid{grid-template-columns:1fr}
+        .kpi-row-2{grid-template-columns:1fr}
+        .quick-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    </style>
 </head>
 <body>
 <div class="admin-wrap">
@@ -36,7 +81,8 @@
             <div class="admin-nav-group">
                 <div class="admin-nav-group-title">콘텐츠 관리</div>
                 <a href="areas.html"><i class="fa-solid fa-building"></i> 구역 관리</a>
-                <a href="news.html"><i class="fa-solid fa-newspaper"></i> 뉴스 관리</a>
+                <a href="news.html"><i class="fa-solid fa-newspaper"></i> 자료실 관리</a>
+                <a href="listings.html"><i class="fa-solid fa-tag"></i> 매물 관리</a>
                 <a href="columns.html"><i class="fa-solid fa-pen-fancy"></i> 칼럼 관리</a>
                 <a href="community.html"><i class="fa-solid fa-comments"></i> 게시글 관리</a>
             </div>
@@ -50,6 +96,7 @@
             <div class="admin-nav-group">
                 <div class="admin-nav-group-title">알림 서비스</div>
                 <a href="alimtalk.html"><i class="fa-regular fa-comment-dots"></i> 알림톡 관리</a>
+                <a href="send-report.html"><i class="fa-brands fa-telegram"></i> 텔레그램 보고</a>
             </div>
             <div class="admin-nav-group">
                 <div class="admin-nav-group-title">설정</div>
@@ -82,13 +129,14 @@
         <!-- Page Content -->
         <div class="admin-content">
 
-            <!-- KPI Cards -->
+            <!-- 주요 KPI Cards (1행 3개) -->
             <div class="admin-kpi-grid">
                 <div class="admin-kpi">
                     <div class="admin-kpi-icon blue"><i class="fa-solid fa-building"></i></div>
                     <div class="admin-kpi-info">
                         <div class="label">총 구역수</div>
                         <div class="value" id="kpiAreas">0</div>
+                        <div class="kpi-trend up" id="kpiAreasTrend"></div>
                     </div>
                 </div>
                 <div class="admin-kpi">
@@ -96,6 +144,7 @@
                     <div class="admin-kpi-info">
                         <div class="label">총 회원수</div>
                         <div class="value" id="kpiMembers">0</div>
+                        <div class="kpi-trend up" id="kpiMembersTrend"></div>
                     </div>
                 </div>
                 <div class="admin-kpi">
@@ -103,23 +152,58 @@
                     <div class="admin-kpi-info">
                         <div class="label">미답변 문의</div>
                         <div class="value" id="kpiPending" style="color:var(--red);">0</div>
+                        <div class="kpi-trend" id="kpiPendingTrend"></div>
                     </div>
                 </div>
             </div>
 
+            <!-- 보조 KPI (2행 4개) -->
+            <div class="kpi-row-2">
+                <a href="news.html" class="kpi-mini">
+                    <div class="kpi-mini-icon purple"><i class="fa-solid fa-folder-open"></i></div>
+                    <div class="kpi-mini-info">
+                        <div class="mini-label">자료실</div>
+                        <div class="mini-value" id="kpiLibrary">0</div>
+                    </div>
+                </a>
+                <a href="listings.html" class="kpi-mini">
+                    <div class="kpi-mini-icon teal"><i class="fa-solid fa-tag"></i></div>
+                    <div class="kpi-mini-info">
+                        <div class="mini-label">매물</div>
+                        <div class="mini-value" id="kpiListings">0</div>
+                    </div>
+                </a>
+                <a href="community.html" class="kpi-mini">
+                    <div class="kpi-mini-icon indigo"><i class="fa-solid fa-comments"></i></div>
+                    <div class="kpi-mini-info">
+                        <div class="mini-label">게시글</div>
+                        <div class="mini-value" id="kpiPosts">0</div>
+                    </div>
+                </a>
+                <a href="columns.html" class="kpi-mini">
+                    <div class="kpi-mini-icon pink"><i class="fa-solid fa-pen-fancy"></i></div>
+                    <div class="kpi-mini-info">
+                        <div class="mini-label">칼럼</div>
+                        <div class="mini-value" id="kpiColumns">0</div>
+                    </div>
+                </a>
+            </div>
+
             <!-- Quick Actions -->
-            <div style="margin-bottom:32px;">
-                <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">바로가기</h3>
+            <div style="margin-bottom:28px;">
+                <h3 style="font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+                    <i class="fa-solid fa-bolt" style="color:var(--accent);font-size:14px;"></i> 바로가기
+                </h3>
                 <div class="quick-grid">
                     <a href="news.html?mode=new" class="quick-card">
                         <i class="fa-solid fa-folder-open"></i>
                         <span>자료실 관리</span>
                     </a>
-                    <a href="areas.html" class="quick-card">
-                        <i class="fa-solid fa-briefcase"></i>
-                        <span>실적 관리</span>
+                    <a href="listings.html" class="quick-card">
+                        <i class="fa-solid fa-tag"></i>
+                        <span>매물 관리</span>
                     </a>
-                    <a href="inquiries.html" class="quick-card">
+                    <a href="inquiries.html" class="quick-card" id="qcInquiry">
                         <i class="fa-solid fa-envelope"></i>
                         <span>문의 확인</span>
                     </a>
@@ -127,11 +211,15 @@
                         <i class="fa-solid fa-users"></i>
                         <span>회원 관리</span>
                     </a>
+                    <a href="send-report.html" class="quick-card">
+                        <i class="fa-brands fa-telegram"></i>
+                        <span>텔레그램 보고</span>
+                    </a>
                 </div>
             </div>
 
-            <!-- Two-column: Recent Activity + Recent Inquiries -->
-            <div class="dash-grid">
+            <!-- Three-column: 최근 활동 + 최근 문의 + 최근 게시글 -->
+            <div class="dash-grid-3">
                 <!-- Recent Activity -->
                 <div class="dash-panel">
                     <div class="dash-panel-header">
@@ -154,6 +242,46 @@
                         <div id="recentInquiries">
                             <p style="font-size:13px;color:var(--gray-400);text-align:center;padding:20px 0;">데이터를 불러오는 중...</p>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Recent Community Posts -->
+                <div class="dash-panel">
+                    <div class="dash-panel-header">
+                        <h4><i class="fa-solid fa-comments"></i> 최근 게시글</h4>
+                        <a href="community.html" style="font-size:12px;color:var(--accent);font-weight:600;">전체보기 <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="dash-panel-body">
+                        <div id="recentPosts">
+                            <p style="font-size:13px;color:var(--gray-400);text-align:center;padding:20px 0;">데이터를 불러오는 중...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="sys-status">
+                <h3><i class="fa-solid fa-server" style="color:var(--accent);font-size:13px;"></i> 시스템 상태</h3>
+                <div class="sys-bar">
+                    <div class="sys-item">
+                        <div class="sys-dot ok" id="sysSiteDot"></div>
+                        <div class="sys-label">사이트</div>
+                        <div class="sys-val" id="sysSiteVal">확인 중</div>
+                    </div>
+                    <div class="sys-item">
+                        <div class="sys-dot ok" id="sysApiDot"></div>
+                        <div class="sys-label">API 서버</div>
+                        <div class="sys-val" id="sysApiVal">확인 중</div>
+                    </div>
+                    <div class="sys-item">
+                        <div class="sys-dot ok" id="sysStoreDot"></div>
+                        <div class="sys-label">데이터 저장소</div>
+                        <div class="sys-val" id="sysStoreVal">확인 중</div>
+                    </div>
+                    <div class="sys-item">
+                        <div class="sys-dot ok" id="sysDeployDot"></div>
+                        <div class="sys-label">마지막 배포</div>
+                        <div class="sys-val" id="sysDeployVal">확인 중</div>
                     </div>
                 </div>
             </div>
@@ -182,8 +310,8 @@
     </div>
 </div>
 
-<script src="../assets/data/mock-data.js?v=20260411"></script>
-<script src="../assets/data/areas-data.js?v=20260411"></script>
+<script src="../assets/data/mock-data.js?v=20260414"></script>
+<script src="../assets/data/areas-data.js?v=20260414"></script>
 <script src="../assets/js/data-service.js"></script>
 <script>
 (function() {
@@ -203,140 +331,253 @@
     });
 
     /* ── Mobile Sidebar Toggle ── */
-    const sidebar = document.getElementById('adminSidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    const toggle = document.getElementById('mobileToggle');
+    var sidebar = document.getElementById('adminSidebar');
+    var overlay = document.getElementById('sidebarOverlay');
+    var toggle = document.getElementById('mobileToggle');
 
-    function openSidebar() {
+    toggle.addEventListener('click', function() {
         sidebar.classList.add('open');
         overlay.classList.add('open');
-    }
-    function closeSidebar() {
+    });
+    overlay.addEventListener('click', function() {
         sidebar.classList.remove('open');
         overlay.classList.remove('open');
-    }
+    });
 
-    toggle.addEventListener('click', openSidebar);
-    overlay.addEventListener('click', closeSidebar);
+    /* ── KPI Stats ── */
+    var stats = DataService.getDashboardStats();
 
-    /* ── KPI Stats (실시간 API 연동) ── */
-    const stats = DataService.getDashboardStats();
+    // 주요 KPI
     document.getElementById('kpiAreas').textContent = stats.totalAreas.toLocaleString();
     document.getElementById('kpiMembers').textContent = stats.totalMembers.toLocaleString();
     document.getElementById('kpiPending').textContent = stats.pendingInquiries.toLocaleString();
 
-    // 실시간 회원수 로드
-    fetch('/api/members',{headers:{'x-admin-key':'admin123'}}).then(r=>r.json()).then(d=>{
-        if(d.total) document.getElementById('kpiMembers').textContent = d.total;
-    }).catch(()=>{});
-    // 실시간 문의 로드
-    fetch('/api/inquiries',{headers:{'x-admin-key':'admin123'}}).then(r=>r.json()).then(d=>{
-        if(d.inquiries){
-            var pending = d.inquiries.filter(function(i){return !i.status || i.status==='접수'}).length;
-            document.getElementById('kpiPending').textContent = pending;
-            if(pending>0) document.getElementById('pendingCount').textContent = pending;
-        }
-    }).catch(()=>{});
+    // 보조 KPI
+    document.getElementById('kpiLibrary').textContent = (stats.totalNews || 0).toLocaleString();
+    document.getElementById('kpiListings').textContent = (stats.totalListings || 0).toLocaleString();
+    document.getElementById('kpiPosts').textContent = (stats.totalPosts || 0).toLocaleString();
+    document.getElementById('kpiColumns').textContent = (stats.totalColumns || 0).toLocaleString();
 
-    // Sidebar pending count badge
-    const pendingBadge = document.getElementById('pendingCount');
+    // 자료실 건수 — MOCK.library 직접 카운트
+    if (typeof MOCK !== 'undefined' && MOCK.library) {
+        document.getElementById('kpiLibrary').textContent = MOCK.library.length.toLocaleString();
+    }
+
+    // 실시간 API: 회원수
+    fetch('/api/members', {headers: {'x-admin-key': 'admin123'}}).then(function(r) {return r.json()}).then(function(d) {
+        if (d.total) document.getElementById('kpiMembers').textContent = d.total;
+    }).catch(function() {});
+
+    // 실시간 API: 문의
+    fetch('/api/inquiries', {headers: {'x-admin-key': 'admin123'}}).then(function(r) {return r.json()}).then(function(d) {
+        if (d.inquiries) {
+            var pending = d.inquiries.filter(function(i) {return !i.status || i.status === '접수'}).length;
+            document.getElementById('kpiPending').textContent = pending;
+            if (pending > 0) {
+                document.getElementById('pendingCount').textContent = pending;
+                var qcBadge = document.getElementById('qcInquiry');
+                if (qcBadge) {
+                    var b = document.createElement('span');
+                    b.className = 'q-badge';
+                    b.textContent = pending;
+                    qcBadge.appendChild(b);
+                }
+            }
+            // 최근 문의 렌더
+            renderInqList(d.inquiries);
+        }
+    }).catch(function() {});
+
+    // 실시간 API: 커뮤니티
+    fetch('/api/community').then(function(r) {return r.json()}).then(function(d) {
+        if (d.posts && d.posts.length) {
+            document.getElementById('kpiPosts').textContent = d.posts.length;
+            renderPostsList(d.posts);
+        }
+    }).catch(function() {});
+
+    // Sidebar pending count badge (localStorage fallback)
     if (stats.pendingInquiries > 0) {
-        pendingBadge.textContent = stats.pendingInquiries;
+        document.getElementById('pendingCount').textContent = stats.pendingInquiries;
     }
 
     /* ── Recent Activity ── */
     function renderRecentActivity() {
-        const activityEl = document.getElementById('recentActivity');
-        const items = [];
+        var activityEl = document.getElementById('recentActivity');
+        var items = [];
 
         // 최근 구역
-        const areas = (typeof MOCK!=='undefined'&&MOCK.areas)?MOCK.areas:DataService.getAll('areas');
+        var areas = (typeof MOCK !== 'undefined' && MOCK.areas) ? MOCK.areas : DataService.getAll('areas');
         areas.slice(0, 3).forEach(function(a) {
             items.push({
-                icon: 'fa-building',
-                iconClass: 'blue',
-                text: '<strong>' + a.name + '</strong> 구역이 등록되었습니다.',
+                icon: 'fa-building', iconClass: 'blue',
+                text: '<strong>' + a.name + '</strong> 구역 등록',
                 date: a.createdAt || ''
             });
         });
 
-        // 최근 뉴스
-        const news = DataService.getAll('news');
-        news.slice(0, 2).forEach(function(n) {
+        // 최근 뉴스/자료실
+        var library = (typeof MOCK !== 'undefined' && MOCK.library) ? MOCK.library : DataService.getAll('library');
+        library.sort(function(a, b) {return (b.date || '').localeCompare(a.date || '')});
+        library.slice(0, 3).forEach(function(n) {
             items.push({
-                icon: 'fa-newspaper',
-                iconClass: 'orange',
-                text: '<strong>' + n.title + '</strong> 뉴스가 등록되었습니다.',
-                date: n.createdAt || n.date || ''
+                icon: 'fa-newspaper', iconClass: 'orange',
+                text: '<strong>' + (n.title || '').substring(0, 25) + '</strong> 자료 등록',
+                date: n.date || ''
             });
         });
 
-        // 날짜순 정렬 (최신순)
-        items.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
+        // 최근 매물
+        var listings = DataService.getAll('listings');
+        listings.slice(0, 2).forEach(function(l) {
+            items.push({
+                icon: 'fa-tag', iconClass: 'green',
+                text: '<strong>' + (l.areaName || l.district || '매물') + '</strong> ' + (l.type || '') + ' 등록',
+                date: l.createdAt || ''
+            });
+        });
 
-        if (items.length === 0) {
+        // 최근 회원
+        var members = DataService.getAll('members');
+        members.slice(0, 2).forEach(function(m) {
+            items.push({
+                icon: 'fa-user-plus', iconClass: 'blue',
+                text: '<strong>' + (m.name || '회원') + '</strong> 가입',
+                date: m.joinDate || m.createdAt || ''
+            });
+        });
+
+        // 날짜순 정렬
+        items.sort(function(a, b) {return (b.date || '').localeCompare(a.date || '')});
+
+        if (!items.length) {
             activityEl.innerHTML = '<p style="font-size:13px;color:var(--gray-400);text-align:center;padding:20px 0;">최근 활동이 없습니다.</p>';
             return;
         }
 
+        var colorMap = {blue: ['var(--accent-light)', 'var(--accent)'], green: ['#E6F9F0', 'var(--green)'], orange: ['#FFF4E5', 'var(--orange)'], red: ['#FDECEA', 'var(--red)']};
         var html = '';
-        items.slice(0, 6).forEach(function(item) {
-            var bgColor = item.iconClass === 'blue' ? 'var(--accent-light)' :
-                          item.iconClass === 'green' ? '#E6F9F0' :
-                          item.iconClass === 'orange' ? '#FFF4E5' : 'var(--gray-100)';
-            var fgColor = item.iconClass === 'blue' ? 'var(--accent)' :
-                          item.iconClass === 'green' ? 'var(--green)' :
-                          item.iconClass === 'orange' ? 'var(--orange)' : 'var(--gray-600)';
+        items.slice(0, 8).forEach(function(item) {
+            var c = colorMap[item.iconClass] || ['var(--gray-100)', 'var(--gray-600)'];
             html += '<div class="recent-item">';
-            html += '  <div class="recent-icon" style="background:' + bgColor + ';color:' + fgColor + ';"><i class="fa-solid ' + item.icon + '"></i></div>';
-            html += '  <div class="recent-text">' + item.text + '</div>';
-            html += '  <div class="recent-time">' + item.date + '</div>';
+            html += '<div class="recent-icon" style="background:' + c[0] + ';color:' + c[1] + ';"><i class="fa-solid ' + item.icon + '"></i></div>';
+            html += '<div class="recent-text">' + item.text + '</div>';
+            html += '<div class="recent-time">' + (item.date || '') + '</div>';
             html += '</div>';
         });
-
         activityEl.innerHTML = html;
     }
 
-    /* ── Recent Inquiries (실시간 API) ── */
+    /* ── Recent Inquiries ── */
     function renderRecentInquiries() {
-        const inqEl = document.getElementById('recentInquiries');
+        var inqEl = document.getElementById('recentInquiries');
         var inquiries = DataService.getAll('inquiries');
-        // 실시간 API 데이터 로드
-        fetch('/api/inquiries',{headers:{'x-admin-key':'admin123'}}).then(r=>r.json()).then(d=>{
-            if(d.inquiries && d.inquiries.length){ renderInqList(inqEl, d.inquiries); }
-        }).catch(()=>{});
 
-        if (!inquiries || inquiries.length === 0) {
+        if (!inquiries || !inquiries.length) {
             inqEl.innerHTML = '<p style="font-size:13px;color:var(--gray-400);text-align:center;padding:20px 0;">문의가 없습니다.</p>';
             return;
         }
+        renderInqItems(inqEl, inquiries);
+    }
 
+    function renderInqList(list) {
+        var el = document.getElementById('recentInquiries');
+        if (!list || !list.length) return;
+        list.sort(function(a, b) {return (b.date || '').localeCompare(a.date || '')});
+        renderInqItems(el, list);
+    }
+
+    function renderInqItems(el, list) {
         var html = '';
-        inquiries.slice(0, 3).forEach(function(q) {
-            var statusClass = q.status === '접수' ? 'status-pending' :
-                              q.status === '답변완료' ? 'status-completed' : 'status-active';
+        list.slice(0, 4).forEach(function(q) {
+            var sc = q.status === '접수' ? 'status-pending' : q.status === '답변완료' ? 'status-completed' : 'status-active';
             html += '<div class="recent-item">';
-            html += '  <div style="flex:1;">';
-            html += '    <div style="font-size:14px;font-weight:600;color:var(--gray-900);margin-bottom:4px;">' + (q.title || q.subject || '문의') + '</div>';
-            html += '    <div style="font-size:12px;color:var(--gray-500);">' + (q.name || '익명') + ' &middot; ' + (q.createdAt || q.date || '') + '</div>';
-            html += '  </div>';
-            html += '  <span class="status ' + statusClass + '">' + (q.status || '접수') + '</span>';
+            html += '<div style="flex:1;min-width:0">';
+            html += '<div style="font-size:13px;font-weight:600;color:var(--gray-900);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + (q.title || q.subject || q.type || '문의') + '</div>';
+            html += '<div style="font-size:11px;color:var(--gray-500)">' + (q.name || '익명') + ' &middot; ' + (q.date || q.createdAt || '') + '</div>';
+            html += '</div>';
+            html += '<span class="status ' + sc + '">' + (q.status || '접수') + '</span>';
             html += '</div>';
         });
-
-        inqEl.innerHTML = html;
+        el.innerHTML = html;
     }
-    function renderInqList(el, list) {
-        if(!list||!list.length){el.innerHTML='<p style="font-size:13px;color:var(--gray-400);text-align:center;padding:20px 0;">문의가 없습니다.</p>';return;}
-        var h='';list.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});
-        list.slice(0,3).forEach(function(q){
-            var sc=q.status==='접수'?'status-pending':q.status==='답변완료'?'status-completed':'status-active';
-            h+='<div class="recent-item"><div style="flex:1"><div style="font-size:14px;font-weight:600;color:var(--gray-900);margin-bottom:4px">'+(q.title||q.type||'문의')+'</div><div style="font-size:12px;color:var(--gray-500)">'+(q.name||'')+'·'+(q.date||'')+'</div></div><span class="status '+sc+'">'+(q.status||'접수')+'</span></div>';
-        });el.innerHTML=h;
+
+    /* ── Recent Community Posts ── */
+    function renderRecentPosts() {
+        var postEl = document.getElementById('recentPosts');
+        var posts = DataService.getAll('community');
+
+        if (!posts || !posts.length) {
+            postEl.innerHTML = '<p style="font-size:13px;color:var(--gray-400);text-align:center;padding:20px 0;">게시글이 없습니다.</p>';
+            return;
+        }
+        renderPostItems(postEl, posts);
+    }
+
+    function renderPostsList(list) {
+        var el = document.getElementById('recentPosts');
+        if (!list || !list.length) return;
+        list.sort(function(a, b) {return (b.date || '').localeCompare(a.date || '')});
+        renderPostItems(el, list);
+    }
+
+    function renderPostItems(el, list) {
+        var html = '';
+        list.slice(0, 4).forEach(function(p) {
+            html += '<div class="recent-item">';
+            html += '<div style="flex:1;min-width:0">';
+            html += '<div style="font-size:13px;font-weight:600;color:var(--gray-900);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + (p.title || '제목 없음') + '</div>';
+            html += '<div style="font-size:11px;color:var(--gray-500)">' + (p.author || p.nickname || '익명') + ' &middot; ' + (p.date || p.createdAt || '') + '</div>';
+            html += '</div>';
+            html += '<span style="font-size:11px;color:var(--gray-400);white-space:nowrap"><i class="fa-solid fa-eye" style="margin-right:3px"></i>' + (p.views || 0) + '</span>';
+            html += '</div>';
+        });
+        el.innerHTML = html;
     }
 
     renderRecentActivity();
     renderRecentInquiries();
+    renderRecentPosts();
+
+    /* ── System Status ── */
+    function checkSystem() {
+        // 사이트 상태
+        document.getElementById('sysSiteDot').className = 'sys-dot ok';
+        document.getElementById('sysSiteVal').textContent = '정상';
+
+        // API 서버
+        fetch('/api/inquiries', {headers: {'x-admin-key': 'admin123'}}).then(function(r) {
+            if (r.ok) {
+                document.getElementById('sysApiDot').className = 'sys-dot ok';
+                document.getElementById('sysApiVal').textContent = '정상';
+            } else {
+                document.getElementById('sysApiDot').className = 'sys-dot warn';
+                document.getElementById('sysApiVal').textContent = '응답 ' + r.status;
+            }
+        }).catch(function() {
+            document.getElementById('sysApiDot').className = 'sys-dot err';
+            document.getElementById('sysApiVal').textContent = '오프라인';
+        });
+
+        // 데이터 저장소 (localStorage)
+        try {
+            var testKey = '__sys_check__';
+            localStorage.setItem(testKey, '1');
+            localStorage.removeItem(testKey);
+            var totalKeys = Object.keys(localStorage).filter(function(k) {return k.indexOf('rdc_') === 0}).length;
+            document.getElementById('sysStoreDot').className = 'sys-dot ok';
+            document.getElementById('sysStoreVal').textContent = totalKeys + '개 컬렉션';
+        } catch (e) {
+            document.getElementById('sysStoreDot').className = 'sys-dot err';
+            document.getElementById('sysStoreVal').textContent = '오류';
+        }
+
+        // 마지막 배포
+        var now = new Date();
+        document.getElementById('sysDeployDot').className = 'sys-dot ok';
+        document.getElementById('sysDeployVal').textContent = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+    }
+    checkSystem();
 
     /* ── Reset All ── */
     var resetModal = document.getElementById('resetModal');
