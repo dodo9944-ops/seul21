@@ -65,7 +65,7 @@
         <div class="admin-topbar">
             <div class="admin-topbar-left">
                 <button class="admin-mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
-                <h2>뉴스 관리</h2>
+                <h2>자료실 관리</h2>
             </div>
             <div class="admin-topbar-right">
                 <div class="admin-user"><span>안녕하세요, <strong id="adminName"></strong>님</span></div>
@@ -76,7 +76,7 @@
         <div class="admin-content">
             <!-- Table Header -->
             <div class="admin-table-header">
-                <h3>뉴스 목록</h3>
+                <h3>자료실 전체 목록</h3>
                 <div class="admin-table-actions">
                     <div class="admin-search">
                         <i class="fa-solid fa-search"></i>
@@ -94,10 +94,9 @@
                             <th>ID</th>
                             <th>제목</th>
                             <th>카테고리</th>
-                            <th>작성자</th>
+                            <th>유형</th>
                             <th>날짜</th>
-                            <th>조회수</th>
-                            <th>Featured</th>
+                            <th>다운로드</th>
                             <th>관리</th>
                         </tr>
                     </thead>
@@ -182,40 +181,44 @@
     }
 
     const categoryMap = {
-        '정책': 'status-active',
-        '시장분석': 'status-pending',
-        '분석': 'status-completed',
-        '개발호재': 'status-inactive'
+        '주요뉴스': 'status-active',
+        '법령': 'status-completed', '법령·조례': 'status-completed',
+        '관련판례': 'status-pending', '지침': 'status-pending', '판례·질의회신': 'status-pending',
+        '서식': 'status-inactive', '가이드': 'status-inactive'
     };
 
+    // MOCK.library 데이터 사용 (실제 자료실 데이터)
+    var libItems = (typeof MOCK !== 'undefined' && MOCK.library) ? MOCK.library : [];
+    var statEl = document.getElementById('searchInput');
+    if(statEl) statEl.placeholder = '자료 제목 검색... (총 ' + libItems.length + '건)';
+
     function render(keyword='') {
-        const items = DataService.getAll('news');
-        const filtered = keyword ? items.filter(a => a.title.includes(keyword)) : items;
+        var items = libItems.slice();
+        if (keyword) items = items.filter(a => (a.title||'').includes(keyword));
+        items.sort(function(a,b){return (b.date||'').localeCompare(a.date||'')});
         const tbody = document.getElementById('tableBody');
-        tbody.innerHTML = filtered.map(a => `
+        tbody.innerHTML = items.map(a => `
             <tr>
-                <td>${a.id}</td>
-                <td class="name">${a.title}</td>
+                <td style="font-size:11px;color:var(--gray-400)">${a.id}</td>
+                <td class="name" style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.title}</td>
                 <td><span class="status ${categoryMap[a.category]||'status-inactive'}">${a.category}</span></td>
-                <td>${a.author}</td>
-                <td>${a.date}</td>
-                <td>${(a.views||0).toLocaleString()}</td>
-                <td>
-                    <label class="toggle">
-                        <input type="checkbox" ${a.featured?'checked':''} onchange="toggleFeatured('${a.id}', this.checked)">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </td>
+                <td style="font-size:11px">${a.fileType||''}</td>
+                <td style="font-size:11px">${a.date||''}</td>
+                <td style="font-size:11px">${a.downloads||0}</td>
                 <td class="actions">
-                    <button title="수정" onclick="editItem('${a.id}')"><i class="fa-solid fa-pen"></i></button>
-                    <button class="danger" title="삭제" onclick="deleteItem('${a.id}','${a.title.replace(/'/g,"\\'")}')"><i class="fa-solid fa-trash"></i></button>
+                    <button title="보기" onclick="viewLib('${a.id}')"><i class="fa-solid fa-eye"></i></button>
                 </td>
             </tr>
         `).join('');
     }
 
+    window.viewLib = function(id) {
+        var item = libItems.find(function(x){return x.id===id});
+        if(!item) return;
+        alert('제목: ' + item.title + '\n카테고리: ' + item.category + '\n날짜: ' + item.date + '\n설명: ' + (item.description||'').slice(0,100) + '...');
+    };
+
     window.toggleFeatured = function(id, val) {
-        DataService.update('news', id, { featured: val });
         toast(val ? '메인 노출 활성화' : '메인 노출 비활성화', 'success');
     };
 
