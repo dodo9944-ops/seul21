@@ -398,6 +398,63 @@ const App = (() => {
     if (logoutBtn) logoutBtn.addEventListener('click', e => { e.preventDefault(); DataService.userLogout(); location.reload(); });
     const drawerLogout = document.getElementById('drawerLogout');
     if (drawerLogout) drawerLogout.addEventListener('click', e => { e.preventDefault(); DataService.userLogout(); location.reload(); });
+
+    /* ── 모바일 페이지 스와이프 네비게이션 ── */
+    (function initPageSwipe() {
+      if (!('ontouchstart' in window)) return;
+      var gnbLinks = document.querySelectorAll('.gnb > a');
+      if (!gnbLinks.length) return;
+      var menuList = [];
+      gnbLinks.forEach(function(a) {
+        if (a.getAttribute('target') === '_blank') return;
+        var h = a.getAttribute('href');
+        if (h) menuList.push(h);
+      });
+      if (menuList.length < 2) return;
+
+      var curPath = location.pathname;
+      var curIdx = -1;
+      for (var mi = 0; mi < menuList.length; mi++) {
+        var mp = menuList[mi];
+        try { mp = new URL(mp, location.href).pathname; } catch(e) {}
+        if (curPath === mp || curPath.endsWith(mp.replace('..', ''))) { curIdx = mi; break; }
+      }
+      if (curIdx === -1) {
+        for (var mi2 = 0; mi2 < menuList.length; mi2++) {
+          var mp2 = menuList[mi2];
+          var fn = mp2.split('/').pop();
+          if (fn && curPath.indexOf(fn) !== -1) { curIdx = mi2; break; }
+        }
+      }
+      if (curIdx === -1) return;
+
+      var ps = { x0: 0, y0: 0, active: false };
+      var skipSel = 'input,textarea,select,button,a,iframe,.leaflet-container,.swiper-container,.swiper,.slider,.carousel,.process-bar,.tab-scroll';
+
+      document.addEventListener('touchstart', function(e) {
+        if (window.innerWidth > 1024) return;
+        if (e.target.closest && e.target.closest(skipSel)) { ps.active = false; return; }
+        if (drawer && drawer.classList.contains('open')) { ps.active = false; return; }
+        var t = e.touches[0];
+        if (t.clientX < 30 || t.clientX > window.innerWidth - 30) { ps.active = false; return; }
+        ps.x0 = t.clientX; ps.y0 = t.clientY; ps.active = true;
+      }, { passive: true });
+
+      document.addEventListener('touchend', function(e) {
+        if (!ps.active) return;
+        ps.active = false;
+        var t = e.changedTouches[0];
+        var dx = t.clientX - ps.x0;
+        var dy = t.clientY - ps.y0;
+        if (Math.abs(dx) < 60) return;
+        if (Math.abs(dy) >= Math.abs(dx)) return;
+        var newIdx;
+        if (dx > 0) { newIdx = curIdx - 1; }
+        else { newIdx = curIdx + 1; }
+        if (newIdx < 0 || newIdx >= menuList.length) return;
+        location.href = menuList[newIdx];
+      }, { passive: true });
+    })();
   }
 
   /* ── Toast ── */
