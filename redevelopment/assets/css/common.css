@@ -139,7 +139,7 @@ button, input, select, textarea { font-family: inherit; }
 body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 @media (max-width: 768px) {
   .header .inner { height: 54px; }
-  body { padding-top: 54px; }
+  body { padding-top: 86px; } /* 54(header) + 32(tab) */
 }
 
 /* ── MOBILE TAB BAR (오버레이, body 여백 변경 없음) ── */
