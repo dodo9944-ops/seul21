@@ -185,7 +185,7 @@
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_community.png" alt="세울엔지니어링 커뮤니티"></div>
-            <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-circle-question"></i></div><h4>질문·답변</h4><p>실무 질의 및 전문가 답변</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-circle-info"></i></div><h4>정보 공유</h4><p>최신 정책 및 실무 정보</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-comment-dots"></i></div><h4>후기·경험</h4><p>현장 경험 및 사례 공유</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>분석·칼럼</h4><p>전문가 분석 및 칼럼</p></div></div>
+            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('질문')"><div class="uh-ci"><i class="fa-solid fa-circle-question"></i></div><h4>질문·답변</h4><p>실무 질의 및 전문가 답변</p></div><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('정보')"><div class="uh-ci"><i class="fa-solid fa-circle-info"></i></div><h4>정보 공유</h4><p>최신 정책 및 실무 정보</p></div><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('후기')"><div class="uh-ci"><i class="fa-solid fa-comment-dots"></i></div><h4>후기·경험</h4><p>현장 경험 및 사례 공유</p></div><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('분석')"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>분석·칼럼</h4><p>전문가 분석 및 칼럼</p></div></div>
         </div>
     </div>
 </div>
@@ -321,6 +321,7 @@ function render(){
 }
 
 /* Events */
+window.cmSwitch=function(cat){curCat=cat;curPage=1;renderTabs();render();var t=document.getElementById('cmTabs');if(t)window.scrollTo({top:t.offsetTop-80,behavior:'smooth'})};
 document.getElementById('cmTabs').addEventListener('click',function(e){
     var btn=e.target.closest('.cm-tab');if(!btn)return;
     curCat=btn.dataset.cat;curPage=1;renderTabs();render();
