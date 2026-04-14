@@ -495,7 +495,56 @@ const App = (() => {
     meta.content = desc || '(주)세울엔지니어링 — 재개발·재건축·도시정비 전문 엔지니어링';
   }
 
-  return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, basePath: () => B };
+  /* ── Hero Card Detail Modal ── */
+  const HERO_DETAILS = {
+    '정비사업전문관리': '세울엔지니어링은 도시정비법에 근거한 정비사업 전 과정을 직접 수행합니다. 기본계획 수립부터 정비구역 지정, 추진위원회 구성, 조합설립인가, 사업시행인가, 관리처분계획, 시공사 선정, 분양, 입주, 조합 해산까지 — 모든 단계를 전문 인력이 책임지고 관리합니다. 10년 이상의 현장 경험을 바탕으로 행정 절차의 지연을 최소화하고, 조합원의 이익을 극대화하는 맞춤형 전략을 수립합니다.',
+    '사업성 분석': '정비사업의 성패는 초기 사업성 분석에서 결정됩니다. 세울엔지니어링은 토지·건물 감정평가, 비례율 산정, 분담금 시뮬레이션, 공사비·용역비 추정, 분양수입 예측까지 정밀한 수지분석을 제공합니다. 사업 타당성 검토를 통해 최적의 추진 전략을 도출하고, 조합원에게 투명한 사업 전망을 제시합니다.',
+    '인허가 대응': '정비사업의 핵심 관문인 인허가 절차를 전략적으로 대응합니다. 정비구역 지정 신청, 조합설립인가, 사업시행인가, 관리처분인가 등 각 단계별 인가 요건을 사전 검토하고, 행정기관과의 협의를 주도합니다. 인가 조건 충족을 위한 서류 작성, 보완 대응, 심의 준비까지 원스톱으로 지원합니다.',
+    'CM / PM 관리': '설계·시공·준공 전 과정의 품질(Quality), 공정(Time), 원가(Cost)를 통합 관리하는 전문 CM/PM 서비스를 제공합니다. 시공사 선정 자문, 설계 검토, 공사비 검증, 공정 관리, 하자 점검까지 발주자(조합) 입장에서 사업을 감독하고 관리합니다.',
+    '절차의 정합성': '정비사업은 도시정비법, 주택법, 건축법 등 수십 개의 법령이 교차하는 복합 행정 절차입니다. 세울엔지니어링은 법적 근거에 기반한 정확한 절차 수행을 최우선으로 합니다. 인가 요건 사전 검토, 법률 자문 연계, 행정소송 리스크 예방까지 — 절차의 정합성이 사업의 안정성을 보장합니다.',
+    '이해관계 조율': '정비사업에는 조합원, 시공사, 설계사, 행정기관, 감정평가사 등 다양한 이해관계자가 참여합니다. 세울엔지니어링은 각 주체 간의 이해관계를 객관적으로 분석하고, 합리적 합의점을 도출합니다. 동의율 확보, 총회 운영, 분쟁 조정 등 이해관계 조율 전문 역량을 갖추고 있습니다.',
+    '단계별 추진': '기본계획 수립 → 정비구역 지정 → 추진위 구성 → 조합설립 → 사업시행 → 관리처분 → 시공 → 준공·입주까지 전 단계를 체계적 로드맵으로 관리합니다. 각 단계별 핵심 과업, 소요 기간, 필요 서류, 인가 요건을 명확히 제시하여 사업 지연을 방지합니다.',
+    '책임지는 완결': '세울엔지니어링은 사업이 완료될 때까지 동행합니다. 중도 이탈이나 책임 전가 없이, 조합 해산·정산까지 마지막 단계를 함께합니다. 입주 후 하자 점검, 잔여 자산 처분, 청산 절차까지 사업의 완전한 종결을 책임집니다.',
+    '인허가 자문': '도시정비법·건축법·주택법 등 관련 법령에 기반한 인허가 전략을 수립합니다. 정비계획 변경, 건축심의, 환경영향평가, 교통영향평가 등 각종 심의·인가 절차를 전문적으로 대응하고, 인가 조건 충족을 위한 실무를 총괄합니다.',
+  };
+
+  function heroDetail(title) {
+    const desc = HERO_DETAILS[title];
+    if (!desc) return;
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay open';
+    overlay.style.zIndex = '99999';
+    overlay.innerHTML = `
+      <div class="modal" style="max-width:440px;margin:20px;">
+        <div class="modal-header" style="background:var(--brand-dark);border-radius:var(--radius) var(--radius) 0 0;">
+          <h3 style="color:var(--gold);font-size:16px;">${title}</h3>
+          <button class="modal-close" data-action="close" style="color:rgba(255,255,255,.6);background:none;border:none;font-size:20px;cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" style="padding:24px;font-size:14px;line-height:1.8;color:var(--gray-700);max-height:60vh;overflow-y:auto;">
+          <p>${desc}</p>
+        </div>
+        <div class="modal-footer" style="padding:12px 24px;border-top:1px solid var(--gray-100);text-align:center;">
+          <button class="btn btn-accent btn-sm" data-action="close" style="width:100%;"><i class="fa-solid fa-xmark"></i> 닫기</button>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+    overlay.querySelectorAll('[data-action="close"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        overlay.remove();
+        const hero = document.querySelector('.hero-cards-float,.uh-cards');
+        if (hero) hero.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) {
+        overlay.remove();
+        const hero = document.querySelector('.hero-cards-float,.uh-cards');
+        if (hero) hero.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  }
+
+  return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, heroDetail, basePath: () => B };
 })();
 
 /* DOM Ready */
