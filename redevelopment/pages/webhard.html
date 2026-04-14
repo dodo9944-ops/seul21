@@ -129,8 +129,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-siz
   /* 통계: 2x2 그리드 */
   .wh-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;max-width:100%}
   /* 전체 오버플로 방지 */
-  .wh-main{overflow-x:hidden}
+  .wh-body{display:block}
+  .wh-main{overflow-x:hidden;width:100%}
   .wh-table{max-width:100%;overflow-x:auto}
+  .wh-dropzone{max-width:100%;box-sizing:border-box}
   .wh-stat{padding:10px 8px}
   .wh-stat-val{font-size:18px}
   .wh-stat-label{font-size:10px}
