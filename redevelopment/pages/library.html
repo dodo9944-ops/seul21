@@ -231,7 +231,7 @@
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_library.png" alt="세울엔지니어링 자료실"></div>
-            <div class="uh-cards"><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>법령·제도</h4><p>도시정비법 및 관련 법령</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-gavel"></i></div><h4>고시·공고</h4><p>판례·질의회신 및 지침·규정</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div><div class="uh-card"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></div><div class="uh-card" id="investCard" style="cursor:pointer;"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>투자정보</h4><p>매물·시세·투자 분석</p><span style="display:block;font-size:9px;color:rgba(195,165,105,0.7);margin-top:4px;"><i class="fa-solid fa-lock" style="margin-right:3px;"></i>회원 전용</span></div></div>
+            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="switchCat('법령')"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>법령·제도</h4><p>도시정비법 및 관련 법령</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('판례지침')"><div class="uh-ci"><i class="fa-solid fa-gavel"></i></div><h4>고시·공고</h4><p>판례·질의회신 및 지침·규정</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('서식가이드')"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('주요뉴스')"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></div><div class="uh-card" id="investCard" style="cursor:pointer;" onclick="switchCat('투자정보')"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>투자정보</h4><p>매물·시세·투자 분석</p><span style="display:block;font-size:9px;color:rgba(195,165,105,0.7);margin-top:4px;"><i class="fa-solid fa-lock" style="margin-right:3px;"></i>회원 전용</span></div></div>
         </div>
     </div>
 </div>
@@ -397,6 +397,13 @@ var h='<button class="arr" '+(curPage===1?'disabled':'')+' onclick="LIB.page('+(
 for(var i=1;i<=pages;i++)h+='<button'+(i===curPage?' class="active"':'')+' onclick="LIB.page('+i+')">'+i+'</button>';
 h+='<button class="arr" '+(curPage===pages?'disabled':'')+' onclick="LIB.page('+(curPage+1)+')"><i class="fa-solid fa-chevron-right"></i></button>';
 pg.innerHTML=h}
+
+/* 히어로 카드 클릭 → 카테고리 전환 */
+window.switchCat=function(cat){
+    curCat=cat;curPage=1;renderTabs();render();
+    var target=document.querySelector('.page-body')||document.getElementById('catTabs');
+    if(target) window.scrollTo({top:target.offsetTop-80,behavior:'smooth'});
+};
 
 /* Events */
 document.getElementById('catTabs').addEventListener('click',function(e){var btn=e.target.closest('.cat-tab');if(!btn)return;curCat=btn.dataset.cat;curPage=1;renderTabs();render()});
