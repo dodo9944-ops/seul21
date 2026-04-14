@@ -198,6 +198,8 @@
         document.getElementById('sidebarOverlay').classList.remove('open');
     });
 
+    AdminGuard.watchForm('#formPanel');
+
     function toast(msg, type='info') {
         const c = document.getElementById('toastContainer');
         const el = document.createElement('div');
@@ -326,6 +328,7 @@
             DataService.create('listings', data);
             toast('매물이 등록되었습니다.', 'success');
         }
+        AdminGuard.markClean();
         document.getElementById('formPanel').style.display = 'none';
         render(document.getElementById('searchInput').value);
     });

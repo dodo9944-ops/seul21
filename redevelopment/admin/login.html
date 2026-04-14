@@ -38,6 +38,12 @@
                        onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--gray-200)'">
             </div>
 
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;font-size:13px;">
+                <label style="display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--gray-600);">
+                    <input type="checkbox" id="rememberMe" style="width:16px;height:16px;accent-color:var(--accent);"> 로그인 상태 유지
+                </label>
+            </div>
+
             <div id="loginError" style="display:none;background:#FDECEA;color:var(--red);padding:10px 14px;border-radius:var(--radius-sm);font-size:13px;margin-bottom:16px;text-align:center;">
                 <i class="fa-solid fa-triangle-exclamation"></i> 아이디 또는 비밀번호가 올바르지 않습니다.
             </div>
@@ -82,7 +88,8 @@
             return;
         }
 
-        const success = DataService.adminLogin(username, password);
+        const remember = document.getElementById('rememberMe').checked;
+        const success = DataService.adminLogin(username, password, remember);
 
         if (success) {
             location.href = 'index.html';

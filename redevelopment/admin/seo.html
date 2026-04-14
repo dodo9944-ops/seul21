@@ -139,6 +139,8 @@
         document.getElementById('sidebarOverlay').classList.remove('open');
     });
 
+    AdminGuard.watchForm('.admin-content');
+
     function toast(msg, type='info') {
         const c = document.getElementById('toastContainer');
         const el = document.createElement('div');
@@ -223,6 +225,7 @@
         };
 
         DataService.updateSettings({ seo });
+        AdminGuard.markClean();
         toast('SEO 설정이 저장되었습니다.', 'success');
     });
 

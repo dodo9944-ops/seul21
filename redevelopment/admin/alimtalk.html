@@ -213,10 +213,9 @@
 <script>
 (function(){
     /* Auth */
-    var admin = DataService.isAdminLoggedIn();
-    if(!admin){location.href='login.html';return;}
-    document.getElementById('adminName').textContent=admin.name||'관리자';
-    var ADMIN_KEY=admin.key||'';
+    if(!DataService.isAdminLoggedIn()){location.href='login.html';return;}
+    document.getElementById('adminName').textContent=DataService.getAdminName()||'관리자';
+    var ADMIN_KEY='admin123';
 
     /* Sidebar toggle */
     var sb=document.getElementById('adminSidebar'),ov=document.getElementById('sidebarOverlay'),mt=document.getElementById('mobileToggle');

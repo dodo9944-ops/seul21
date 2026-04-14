@@ -174,7 +174,8 @@
             submitBtn.disabled = false;
             submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> 로그인';
             if (res.ok) {
-                sessionStorage.setItem('seul_user', JSON.stringify(res.data.user));
+                var remember = document.getElementById('rememberMe').checked;
+                DataService.setUserSession(res.data.user, remember);
                 App.toast('환영합니다, ' + res.data.user.name + '님!', 'success');
                 setTimeout(function() { location.href = '../index.html'; }, 800);
             } else {
@@ -254,7 +255,7 @@
         .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
         .then(function(res) {
           if (res.ok) {
-            sessionStorage.setItem('seul_user', JSON.stringify(res.data.user));
+            DataService.setUserSession(res.data.user, false);
             sessionStorage.removeItem('social_state');
             sessionStorage.removeItem('social_provider');
             App.toast('환영합니다, ' + res.data.user.name + '님!', 'success');

@@ -127,51 +127,77 @@ const DataService = (() => {
   }
 
   /* ── auth (simple mock) ── */
-  function adminLogin(username, password) {
+
+  /* 로그인 상태유지: localStorage에도 저장하여 브라우저 재시작 후에도 유지 */
+  function _getAuth(key) {
+    var s = sessionStorage.getItem(key);
+    if (s) return s;
+    var l = localStorage.getItem(key);
+    if (l) { sessionStorage.setItem(key, l); return l; }
+    return null;
+  }
+  function _setAuth(key, data, remember) {
+    var json = JSON.stringify(data);
+    sessionStorage.setItem(key, json);
+    if (remember) localStorage.setItem(key, json);
+  }
+  function _clearAuth(key) {
+    sessionStorage.removeItem(key);
+    localStorage.removeItem(key);
+  }
+
+  function adminLogin(username, password, remember) {
     const acc = (MOCK && MOCK.adminAccount) || _load('adminAccount');
     if (acc && acc.username === username && acc.password === password) {
-      sessionStorage.setItem('rdc_admin', JSON.stringify({ loggedIn: true, name: acc.name }));
+      _setAuth('rdc_admin', { loggedIn: true, name: acc.name }, remember);
       return true;
     }
     return false;
   }
   function isAdminLoggedIn() {
-    const s = sessionStorage.getItem('rdc_admin');
-    return s ? JSON.parse(s).loggedIn : false;
+    const s = _getAuth('rdc_admin');
+    if (!s) return false;
+    try { return JSON.parse(s).loggedIn; } catch(e) { return false; }
   }
   function getAdminName() {
-    const s = sessionStorage.getItem('rdc_admin');
-    return s ? JSON.parse(s).name : '';
+    const s = _getAuth('rdc_admin');
+    if (!s) return '';
+    try { return JSON.parse(s).name || ''; } catch(e) { return ''; }
   }
-  function adminLogout() { sessionStorage.removeItem('rdc_admin'); }
+  function adminLogout() { _clearAuth('rdc_admin'); }
 
-  function userLogin(email, password) {
+  function userLogin(email, password, remember) {
     const members = getAll('members');
     const user = members.find(m => m.email === email);
     if (user) {
-      sessionStorage.setItem('seul_user', JSON.stringify({ loggedIn: true, id: user.id, name: user.name, email: user.email, grade: user.grade || '일반' }));
+      var data = { loggedIn: true, id: user.id, name: user.name, email: user.email, grade: user.grade || '일반' };
+      _setAuth('seul_user', data, remember);
       return user;
     }
     return null;
   }
+  function setUserSession(userData, remember) {
+    _setAuth('seul_user', userData, remember);
+  }
   function isUserLoggedIn() {
-    const s = sessionStorage.getItem('seul_user');
+    const s = _getAuth('seul_user');
     if (!s) return false;
     try { return !!JSON.parse(s).name; } catch(e) { return false; }
   }
   function getCurrentUser() {
-    const s = sessionStorage.getItem('seul_user');
+    const s = _getAuth('seul_user');
     if (!s) return null;
     try {
       const u = JSON.parse(s);
       return { loggedIn: true, id: u.id, name: u.name, email: u.email || '', grade: u.grade || '일반' };
     } catch(e) { return null; }
   }
-  function userLogout() { sessionStorage.removeItem('seul_user'); }
+  function userLogout() { _clearAuth('seul_user'); }
 
   /* ── reset ── */
   function resetAll() {
     Object.keys(localStorage).forEach(k => { if (k.startsWith(LS_PREFIX)) localStorage.removeItem(k); });
+    localStorage.removeItem('seul_user');
     sessionStorage.clear();
   }
 
@@ -194,9 +220,33 @@ const DataService = (() => {
     getSettings, updateSettings,
     getFavorites, toggleFavorite, isFavorite,
     adminLogin, isAdminLoggedIn, getAdminName, adminLogout,
-    userLogin, isUserLoggedIn, getCurrentUser, userLogout,
+    userLogin, setUserSession, isUserLoggedIn, getCurrentUser, userLogout,
     resetAll, getDashboardStats, _genId
   };
 })();
 
 if (typeof window !== 'undefined') window.DataService = DataService;
+
+/* ── Admin Page Guard: 편집 중 이탈 방지 ── */
+(function() {
+  if (typeof window === 'undefined') return;
+  var _dirty = false;
+
+  window.AdminGuard = {
+    markDirty: function() { _dirty = true; },
+    markClean: function() { _dirty = false; },
+    isDirty: function() { return _dirty; },
+    /* 폼 입력 감시 자동 등록 */
+    watchForm: function(formOrSelector) {
+      var el = typeof formOrSelector === 'string' ? document.querySelector(formOrSelector) : formOrSelector;
+      if (!el) return;
+      el.addEventListener('input', function() { _dirty = true; });
+      el.addEventListener('change', function() { _dirty = true; });
+    }
+  };
+
+  /* beforeunload — 편집 중 탭 닫기/새로고침/뒤로가기 방지 */
+  window.addEventListener('beforeunload', function(e) {
+    if (_dirty) { e.preventDefault(); e.returnValue = ''; }
+  });
+})();

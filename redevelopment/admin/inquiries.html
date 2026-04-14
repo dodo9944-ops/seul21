@@ -165,6 +165,8 @@
         document.getElementById('sidebarOverlay').classList.remove('open');
     });
 
+    AdminGuard.watchForm('#detailPanel');
+
     function toast(msg, type='info') {
         const c = document.getElementById('toastContainer');
         const el = document.createElement('div');
@@ -252,6 +254,7 @@
             data.answeredAt = new Date().toISOString().slice(0,10);
         }
         DataService.update('inquiries', id, data);
+        AdminGuard.markClean();
         document.getElementById('detailPanel').style.display = 'none';
         render();
         toast('문의가 업데이트되었습니다.', 'success');
