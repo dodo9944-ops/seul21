@@ -408,32 +408,34 @@ const App = (() => {
       gnbLinks.forEach(function(a) {
         if (a.getAttribute('target') === '_blank') return;
         var h = a.getAttribute('href');
-        if (!h) return;
-        if (h.indexOf('intranet') !== -1) return;
+        if (!h || h.indexOf('intranet') !== -1) return;
         menuList.push(h);
       });
       if (menuList.length < 2) return;
 
+      /* 현재 페이지 위치 판별 */
       var curPath = location.pathname;
       var isMain = (curPath === '/' || curPath.endsWith('/index.html') || curPath.endsWith('/home.html') || curPath.endsWith('/redevelopment/'));
-      var curIdx = isMain ? -1 : -2;
+      var curIdx = -99;
 
-      if (!isMain) {
+      if (isMain) {
+        curIdx = -1; /* 메인 = 회사소개(0) 직전 */
+      } else {
         for (var mi = 0; mi < menuList.length; mi++) {
           var mp = menuList[mi];
           try { mp = new URL(mp, location.href).pathname; } catch(e) {}
           if (curPath === mp || curPath.endsWith(mp.replace('..', ''))) { curIdx = mi; break; }
         }
-        if (curIdx === -2) {
+        if (curIdx === -99) {
           for (var mi2 = 0; mi2 < menuList.length; mi2++) {
             var fn = menuList[mi2].split('/').pop();
             if (fn && curPath.indexOf(fn) !== -1) { curIdx = mi2; break; }
           }
         }
-        if (curIdx === -2) return;
+        if (curIdx === -99) return;
       }
 
-      var lastIdx = menuList.length - 1;
+      var lastIdx = menuList.length - 1; /* 고객센터 */
       var ps = { x0: 0, y0: 0, active: false };
       var skipSel = 'input,textarea,select,button,a,iframe,.leaflet-container,.swiper-container,.swiper,.slider,.carousel,.process-bar,.tab-scroll';
 
@@ -454,9 +456,16 @@ const App = (() => {
         var dy = t.clientY - ps.y0;
         if (Math.abs(dx) < 60) return;
         if (Math.abs(dy) >= Math.abs(dx)) return;
+
         var newIdx;
-        if (dx > 0) { newIdx = curIdx + 1; }
-        else { newIdx = curIdx - 1; }
+        if (dx > 0) {
+          /* 좌→우: 다음 메뉴 (메인→회사소개→세울의길→...→고객센터) */
+          newIdx = curIdx + 1;
+        } else {
+          /* 우→좌: 이전 메뉴 (고객센터→...→세울의길→회사소개) */
+          newIdx = curIdx - 1;
+        }
+        /* 회사소개(0) 이전 이동 불가, 고객센터(lastIdx) 이후 이동 불가 */
         if (newIdx < 0 || newIdx > lastIdx) return;
         location.href = menuList[newIdx];
       }, { passive: true });
