@@ -411,7 +411,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 .scroll-top.visible { opacity: 1; pointer-events: auto; }
 .scroll-top:hover { background: var(--brand-dark); color: var(--gold); border-color: var(--brand-dark); }
 @media (max-width: 768px) {
-  .scroll-top { width: 40px; height: 40px; font-size: 15px; bottom: 20px; right: 16px; }
+  .scroll-top { width: 40px; height: 40px; font-size: 15px; bottom: 64px; right: 16px; }
 }
 
 /* ── PAGE LAYOUT ── */
