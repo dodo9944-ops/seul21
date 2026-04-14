@@ -279,7 +279,12 @@ const App = (() => {
       unlockScroll();
     }
 
-    /* ── 모바일 탭바: 항상 회사소개(맨 처음)부터 표시 ── */
+    /* ── 모바일: 가로 스크롤 강제 리셋 + 탭바 회사소개부터 표시 ── */
+    if (window.innerWidth <= 1024) {
+      window.scrollTo({ left: 0, top: window.scrollY, behavior: 'auto' });
+      document.documentElement.scrollLeft = 0;
+      document.body.scrollLeft = 0;
+    }
     var tabScroll = document.getElementById('tabScroll');
     if (tabScroll && window.innerWidth <= 1024) {
       setTimeout(function() { tabScroll.scrollLeft = 0; }, 50);
