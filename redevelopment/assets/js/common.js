@@ -111,7 +111,7 @@ const App = (() => {
           ]},
           { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open', sub:[
             { href:`${B}/pages/library.html`, label:'자료실 전체' },
-            { href:`${B}/pages/library.html?cat=법령`, label:'입찰공고' },
+            { href:`${B}/pages/library.html?cat=법령`, label:'법령·제도' },
             { href:`${B}/pages/library.html?cat=판례지침`, label:'고시·공고' },
             { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
             { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
