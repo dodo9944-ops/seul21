@@ -281,8 +281,8 @@
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}
-var now=new Date(),sevenAgo=new Date(now.getTime()-7*864e5);
-var allItems=DataService.getAll('library').filter(function(i){if(i.category!=='주요뉴스')return true;return i.date&&new Date(i.date)>=sevenAgo});
+var now=new Date(),oneYearAgo=new Date(now.getTime()-365*864e5);
+var allItems=DataService.getAll('library').filter(function(i){if(i.category!=='주요뉴스')return true;return i.date&&new Date(i.date)>=oneYearAgo});
 
 var PER=10,curPage=1,curCat='전체',curSort='date',searchQ='';
 

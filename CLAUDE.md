@@ -131,7 +131,7 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 2. **fileMap 등록** — 새 ID가 fileMap에 있는지, 클릭 시 정상 동작할지
 3. **newsFileMap** — 주요뉴스 ID가 newsFileMap에 있거나 fallback이 정상인지
 4. **_catKeyMap** — 새 카테고리가 매핑되어 있는지
-5. **홈페이지 노출** — 주요뉴스 3일 필터(`cutStr`), 자료실 최신 4건 필터 확인
+5. **홈페이지 노출** — 주요뉴스 7일 필터(`cutStr`), 자료실 최신 4건 필터 확인
 6. **건수 일치** — 추가/삭제 건수가 맞는지
 
 ---
@@ -197,6 +197,37 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 3. **index.html** (상담 문의 버튼 2곳) → 비로그인 클릭 시 `login.html`로 리디렉션
 4. **consultation.html** (CTA 버튼) → 비로그인 클릭 시 `login.html`로 리디렉션
 5. 로그인 체크: `DataService.isUserLoggedIn()` 사용 (sessionStorage `seul_user` 키 기반)
+
+---
+
+## 보도자료(주요뉴스) 게시·백업 정책 (2026-04-15~)
+
+> **주요뉴스는 게시 후 1년간 자료실에 노출. 1년 경과 시 mock-data에서 분리하여 백업.**
+
+### 게시 기간
+
+| 영역 | 필터 기간 | 변수/파일 |
+|------|-----------|-----------|
+| **자료실** (`library.html`) | **1년** (365일) | `oneYearAgo` = `now - 365*864e5` |
+| **홈페이지** (`index.html`) | **7일** | `cutoff` = `today - 7일` |
+| **NEW 뱃지** (`library.html`) | 7일 | `isNew()` = `now - 7*864e5` |
+
+### 백업 절차 (1년 경과 시)
+
+1. **대상 식별** — `MOCK.library`에서 `date`가 1년 이상 경과한 주요뉴스 항목 추출
+2. **백업 파일 생성** — `redevelopment/assets/data/archive/news_YYYY.js` 형태로 연도별 분리 저장
+3. **mock-data.js에서 제거** — 백업 완료 후 해당 항목을 `MOCK.library` 배열에서 삭제
+4. **fileMap·newsFileMap 정리** — 해당 ID를 fileMap/newsFileMap에서 제거
+5. **다운로드 HTML 유지** — `downloads/` 폴더의 상세 HTML은 직접 URL 접근용으로 유지 (삭제하지 않음)
+6. **백업 주기** — 분기 1회 (1·4·7·10월 초) 점검 권장
+
+### 코드 변경 이력 (2026-04-15)
+
+| 파일 | 구 | 신 |
+|------|---|---|
+| `library.html` | `sevenAgo = now - 7*864e5` (7일) | `oneYearAgo = now - 365*864e5` (1년) |
+| `index.html` | `cutoff = today - 3일` | `cutoff = today - 7일` |
+| `home.html` | `cutoff = today - 3일` | `cutoff = today - 7일` |
 
 ---
 
