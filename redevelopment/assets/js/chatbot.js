@@ -363,15 +363,15 @@
 
     /* == 모바일 == */
     @media(max-width:768px) {
-      #seul-chatbot { bottom:calc(62px + env(safe-area-inset-bottom, 0px)); right:12px; }
-      #chat-toggle { height:34px; padding:0 11px 0 10px; border-radius:17px; gap:5px; opacity:0.78; }
+      #seul-chatbot { bottom:calc(58px + env(safe-area-inset-bottom, 0px)); right:10px; }
+      #chat-toggle { height:30px; padding:0 9px 0 8px; border-radius:15px; gap:4px; opacity:0.8; }
       #chat-toggle:hover, #chat-toggle.active { opacity:1; }
-      #chat-toggle.active { width:34px; height:34px; }
-      #chat-toggle-label { font-size:10px; }
-      #chat-toggle-inner svg { width:16px; height:16px; }
+      #chat-toggle.active { width:30px; height:30px; }
+      #chat-toggle-label { font-size:9px; }
+      #chat-toggle-inner svg { width:14px; height:14px; }
       #chat-window {
-        width:calc(100vw - 28px); height:calc(100vh - 110px);
-        right:-6px; bottom:48px; border-radius:16px;
+        width:calc(100vw - 32px); height:calc(100vh - 120px);
+        right:-6px; bottom:44px; border-radius:16px;
       }
     }
   `;
