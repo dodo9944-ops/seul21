@@ -30,7 +30,6 @@ const App = (() => {
       { href: `${B}/pages/location.html`, label: '재개발지도', icon: 'fa-solid fa-map-location-dot' },
       { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-calculator' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
-      { href: `${B}/intranet/index.html`, label: '인트라넷', icon: 'fa-solid fa-lock' },
       { href: `${B}/pages/webhard.html`, label: '웹하드', icon: 'fa-solid fa-hard-drive', target: '_blank' },
     ];
     const moreLinks = [
@@ -138,13 +137,6 @@ const App = (() => {
             { href:`${B}/pages/permit-support.html`, label:'인허가 지원' },
             { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
           ]},
-          { href:`${B}/intranet/index.html`, label:'인트라넷', icon:'fa-solid fa-lock', sub:[
-            { href:`${B}/intranet/index.html`, label:'인트라넷 홈' },
-            { href:`${B}/intranet/projects.html`, label:'프로젝트 관리' },
-            { href:`${B}/intranet/documents.html`, label:'문서 관리' },
-            { href:`${B}/intranet/calendar.html`, label:'일정 관리' },
-            { href:`${B}/intranet/contacts.html`, label:'주소록' },
-          ]},
           { href:`${B}/pages/webhard.html`, label:'웹하드', icon:'fa-solid fa-hard-drive', target:'_blank' },
         ].map(g => g.sub
           ? `<div class="drawer-group">
@@ -227,7 +219,7 @@ const App = (() => {
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copy">&copy; 2026 (주)세울엔지니어링. All rights reserved. &nbsp;|&nbsp; <a href="${B}/pages/privacy.html" style="color:rgba(255,255,255,.4);text-decoration:underline">개인정보 처리방침</a> &nbsp;|&nbsp; <a href="${B}/pages/sitemap.html" style="color:rgba(255,255,255,.4);text-decoration:underline">사이트맵</a> &nbsp;|&nbsp; <a href="${B}/admin/login.html" style="color:rgba(255,255,255,.4);text-decoration:underline">관리자</a></div>
+        <div class="footer-copy">&copy; 2026 (주)세울엔지니어링. All rights reserved. &nbsp;|&nbsp; <a href="${B}/pages/privacy.html" style="color:rgba(255,255,255,.4);text-decoration:underline">개인정보 처리방침</a> &nbsp;|&nbsp; <a href="${B}/pages/sitemap.html" style="color:rgba(255,255,255,.4);text-decoration:underline">사이트맵</a> &nbsp;|&nbsp; <a href="${B}/admin/login.html" style="color:rgba(255,255,255,.4);text-decoration:underline">관리자</a> &nbsp;|&nbsp; <a href="${B}/intranet/index.html" style="color:rgba(255,255,255,.4);text-decoration:underline">인트라넷</a></div>
         <div class="footer-info">경기도 하남시 감일백제로 70, 204동 1104호 | 대표 Charles Lee</div>
         <div class="footer-social">
           <a href="http://pf.kakao.com/_uNndX" target="_blank" aria-label="카카오톡"><i class="fa-solid fa-comment"></i></a>
