@@ -235,7 +235,31 @@ const App = (() => {
       </div>
     </div></footer>
     <button class="scroll-top" id="scrollTop" aria-label="맨 위로"><i class="fa-solid fa-chevron-up"></i></button>
-    <div class="toast-container" id="toastContainer"></div>`;
+    <div class="toast-container" id="toastContainer"></div>
+    <nav class="mobile-bottom-nav" id="mobileBottomNav">
+      <div class="mobile-bottom-nav-inner">
+        <a href="${B}/index.html" class="${navActive('index.html')?'active':''}">
+          <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 14 15 14 15 21"/></svg>
+          <span>홈</span>
+        </a>
+        <a href="${B}/pages/services.html" class="${navActive('services.html')?'active':''}">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+          <span>사업분야</span>
+        </a>
+        <a href="${B}/pages/feasibility.html" class="${navActive('feasibility.html')?'active':''}">
+          <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          <span>사업성분석</span>
+        </a>
+        <a href="${B}/pages/library.html" class="${navActive('library.html')?'active':''}">
+          <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span>자료실</span>
+        </a>
+        <a href="${B}/pages/contact.html" class="${navActive('contact.html')?'active':''}">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
+          <span>사업문의</span>
+        </a>
+      </div>
+    </nav>`;
   }
 
   /* ── 초기화 ── */
