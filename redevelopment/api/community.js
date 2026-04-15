@@ -61,7 +61,7 @@ module.exports = async function handler(req, res) {
 
     // POST: 글 작성
     if (req.method === 'POST') {
-      const { title, category, content, author } = req.body;
+      const { title, category, content, author, images, attachments } = req.body;
       if (!title || !content) return res.status(400).json({ error: '제목과 내용은 필수입니다.' });
       const { items, sha } = await getData();
       const now = new Date();
@@ -70,6 +70,7 @@ module.exports = async function handler(req, res) {
       const newPost = {
         id: Date.now().toString(36),
         title, category: category || '정보', content,
+        images: images || [], attachments: attachments || [],
         author: author || '익명', date: dateStr,
         views: 0, comments: 0, likes: 0, status: '공개'
       };
@@ -78,12 +79,14 @@ module.exports = async function handler(req, res) {
 
       // 텔레그램 알림
       const preview = content.length > 200 ? content.substring(0, 200) + '...' : content;
+      const attInfo = (newPost.attachments && newPost.attachments.length) ?
+        `\n📎 <b>첨부파일:</b> ${newPost.attachments.map(a => a.name).join(', ')}` : '';
       const tgMsg = `📝 <b>[커뮤니티 새 글]</b>\n\n` +
         `<b>카테고리:</b> ${newPost.category}\n` +
         `<b>제목:</b> ${newPost.title}\n` +
         `<b>작성자:</b> ${newPost.author}\n` +
         `<b>작성일:</b> ${newPost.date}\n\n` +
-        `<b>내용:</b>\n${preview}\n\n` +
+        `<b>내용:</b>\n${preview}${attInfo}\n\n` +
         `🔗 https://seul21.com/pages/community-detail.html?id=${newPost.id}`;
       sendTelegram(tgMsg);
 

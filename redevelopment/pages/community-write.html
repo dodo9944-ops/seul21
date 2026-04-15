@@ -84,6 +84,58 @@
         .img-status.done { background: rgba(5,150,105,.9); color: #fff; }
         .img-status.fail { background: rgba(239,68,68,.9); color: #fff; }
 
+        /* 첨부파일 업로드 */
+        .file-upload-area {
+            border: 2px dashed var(--gray-300); border-radius: var(--radius-sm);
+            padding: 20px; text-align: center; cursor: pointer;
+            transition: all .2s; background: var(--gray-50);
+        }
+        .file-upload-area:hover, .file-upload-area.dragover {
+            border-color: var(--accent); background: rgba(195,165,105,.05);
+        }
+        .file-upload-area i { font-size: 24px; color: var(--gray-400); margin-bottom: 8px; }
+        .file-upload-area .up-text { font-size: 13px; color: var(--gray-500); }
+        .file-upload-area .up-hint { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+        .file-preview-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+        .file-preview-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 16px; border-radius: 8px;
+            border: 1px solid var(--gray-200); background: var(--white);
+        }
+        .file-preview-item .file-icon {
+            width: 40px; height: 40px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; flex-shrink: 0;
+        }
+        .file-icon.pdf { background: #FEE2E2; color: #DC2626; }
+        .file-icon.hwp { background: #DBEAFE; color: #2563EB; }
+        .file-icon.doc { background: #DBEAFE; color: #2563EB; }
+        .file-icon.xls { background: #D1FAE5; color: #059669; }
+        .file-icon.ppt { background: #FFE4C4; color: #EA580C; }
+        .file-icon.zip { background: #F3E8FF; color: #7C3AED; }
+        .file-icon.default { background: var(--gray-100); color: var(--gray-500); }
+        .file-preview-item .file-info { flex: 1; min-width: 0; }
+        .file-preview-item .file-name {
+            font-size: 13px; font-weight: 600; color: var(--gray-800);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .file-preview-item .file-size { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+        .file-preview-item .file-status {
+            font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px;
+            flex-shrink: 0;
+        }
+        .file-status.uploading { background: rgba(195,165,105,.15); color: #B8860B; }
+        .file-status.done { background: rgba(5,150,105,.1); color: #059669; }
+        .file-status.fail { background: rgba(239,68,68,.1); color: #DC2626; }
+        .file-preview-item .file-del {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: var(--gray-100); color: var(--gray-500); border: none;
+            font-size: 12px; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0;
+            transition: all .2s;
+        }
+        .file-preview-item .file-del:hover { background: #FEE2E2; color: #DC2626; }
+
         @media (max-width: 540px) {
             .write-card { padding: 24px 20px; }
             .write-card h2 { font-size: 19px; }
@@ -130,6 +182,16 @@
                             <input type="file" id="imgInput" multiple accept="image/*" style="display:none">
                         </div>
                         <div class="img-preview-list" id="imgPreviewList"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">첨부파일</label>
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <i class="fa-solid fa-paperclip"></i>
+                            <div class="up-text">파일을 드래그하거나 클릭하여 첨부</div>
+                            <div class="up-hint">PDF · HWP · DOC · XLS · PPT · ZIP 등 (최대 10MB, 3개)</div>
+                            <input type="file" id="fileInput" multiple style="display:none" accept=".pdf,.hwp,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.7z,.txt,.csv">
+                        </div>
+                        <div class="file-preview-list" id="filePreviewList"></div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">내용 <span class="required">*</span></label>
@@ -236,6 +298,93 @@
         }
         window.removeImg = function(i) { uploadedImages.splice(i, 1); renderImages(); };
 
+        /* ── 첨부파일 업로드 ── */
+        var uploadedFiles = []; // {file, url, name, size, status}
+        var fileArea = document.getElementById('fileUploadArea');
+        var fileInput = document.getElementById('fileInput');
+        var fileList = document.getElementById('filePreviewList');
+
+        fileArea.addEventListener('click', function() { fileInput.click(); });
+        fileArea.addEventListener('dragover', function(e) { e.preventDefault(); fileArea.classList.add('dragover'); });
+        fileArea.addEventListener('dragleave', function() { fileArea.classList.remove('dragover'); });
+        fileArea.addEventListener('drop', function(e) { e.preventDefault(); fileArea.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+        fileInput.addEventListener('change', function() { handleFiles(this.files); this.value = ''; });
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + 'B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + 'KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + 'MB';
+        }
+
+        function getFileIconClass(ext) {
+            if (ext === 'pdf') return 'pdf';
+            if (ext === 'hwp' || ext === 'hwpx') return 'hwp';
+            if (ext === 'doc' || ext === 'docx') return 'doc';
+            if (ext === 'xls' || ext === 'xlsx' || ext === 'csv') return 'xls';
+            if (ext === 'ppt' || ext === 'pptx') return 'ppt';
+            if (ext === 'zip' || ext === 'rar' || ext === '7z') return 'zip';
+            return 'default';
+        }
+
+        function getFileIcon(ext) {
+            if (ext === 'pdf') return 'fa-file-pdf';
+            if (ext === 'hwp' || ext === 'hwpx') return 'fa-file-lines';
+            if (ext === 'doc' || ext === 'docx') return 'fa-file-word';
+            if (ext === 'xls' || ext === 'xlsx' || ext === 'csv') return 'fa-file-excel';
+            if (ext === 'ppt' || ext === 'pptx') return 'fa-file-powerpoint';
+            if (ext === 'zip' || ext === 'rar' || ext === '7z') return 'fa-file-zipper';
+            return 'fa-file';
+        }
+
+        function handleFiles(files) {
+            Array.from(files).forEach(function(f) {
+                if (f.size > 10 * 1024 * 1024) { App.toast(f.name + ': 10MB 초과', 'error'); return; }
+                if (uploadedFiles.length >= 3) { App.toast('첨부파일은 최대 3개까지 가능합니다.', 'error'); return; }
+                var item = { file: f, url: '', name: f.name, size: formatFileSize(f.size), status: 'uploading' };
+                uploadedFiles.push(item);
+                renderFiles();
+                uploadFile(item, uploadedFiles.length - 1);
+            });
+        }
+
+        function uploadFile(item, idx) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var base64 = reader.result.split(',')[1];
+                var ext = item.file.name.split('.').pop().toLowerCase();
+                var filename = 'file_' + Date.now() + '_' + idx + '.' + ext;
+                fetch('/api/upload-file', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ filename: filename, content: base64, originalName: item.file.name })
+                })
+                .then(function(r) { return r.json(); })
+                .then(function(res) {
+                    if (res.url) { item.url = res.url; item.status = 'done'; }
+                    else { item.status = 'fail'; }
+                    renderFiles();
+                })
+                .catch(function() { item.status = 'fail'; renderFiles(); });
+            };
+            reader.readAsDataURL(item.file);
+        }
+
+        function renderFiles() {
+            fileList.innerHTML = uploadedFiles.map(function(item, i) {
+                var ext = item.name.split('.').pop().toLowerCase();
+                var iconCls = getFileIconClass(ext);
+                var icon = getFileIcon(ext);
+                var statusText = item.status === 'uploading' ? '업로드 중...' : item.status === 'done' ? '완료' : '실패';
+                return '<div class="file-preview-item">' +
+                    '<div class="file-icon ' + iconCls + '"><i class="fa-solid ' + icon + '"></i></div>' +
+                    '<div class="file-info"><div class="file-name">' + item.name + '</div><div class="file-size">' + item.size + '</div></div>' +
+                    '<span class="file-status ' + item.status + '">' + statusText + '</span>' +
+                    '<button type="button" class="file-del" onclick="removeFile(' + i + ')"><i class="fa-solid fa-xmark"></i></button>' +
+                '</div>';
+            }).join('');
+        }
+        window.removeFile = function(i) { uploadedFiles.splice(i, 1); renderFiles(); };
+
         // 유효성 검사
         function validate() {
             let valid = true;
@@ -285,12 +434,14 @@
                 String(now.getMinutes()).padStart(2, '0');
 
             var images = uploadedImages.filter(function(img) { return img.status === 'done' && img.url; }).map(function(img) { return img.url; });
+            var attachments = uploadedFiles.filter(function(f) { return f.status === 'done' && f.url; }).map(function(f) { return { name: f.name, url: f.url, size: f.size }; });
 
             const newPost = {
                 title: titleEl.value.trim(),
                 category: categoryEl.value,
                 content: contentEl.value.trim(),
                 images: images,
+                attachments: attachments,
                 author: user.name,
                 date: dateStr,
                 views: 0,
