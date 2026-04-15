@@ -26,7 +26,6 @@ const App = (() => {
       { href: `${B}/pages/services.html`, label: '사업분야', icon: 'fa-solid fa-diagram-project' },
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
-      { href: `${B}/pages/community.html`, label: '커뮤니티', icon: 'fa-solid fa-comments' },
       { href: `${B}/pages/location.html`, label: '재개발지도', icon: 'fa-solid fa-map-location-dot' },
       { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-calculator' },
       { href: `${B}/pages/contact.html`, label: '상담문의', icon: 'fa-solid fa-envelope' },
@@ -113,11 +112,8 @@ const App = (() => {
             { href:`${B}/pages/library.html?cat=판례지침`, label:'고시·공고' },
             { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
             { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
-          ]},
-          { href:`${B}/pages/community.html`, label:'커뮤니티', icon:'fa-solid fa-comments', sub:[
-            { href:`${B}/pages/community.html`, label:'커뮤니티' },
+            { href:`${B}/pages/community.html`, label:'커뮤니티 게시판' },
             { href:`${B}/pages/notice.html`, label:'공지사항' },
-            { href:`${B}/pages/library.html?cat=주요뉴스`, label:'뉴스·자료' },
             { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
           ]},
           { href:`${B}/pages/location.html`, label:'재개발지도', icon:'fa-solid fa-map-location-dot', sub:[
@@ -198,7 +194,6 @@ const App = (() => {
         <div class="footer-col">
           <h5>자료·서비스</h5>
           <a href="${B}/pages/library.html">자료실</a>
-          <a href="${B}/pages/community.html">커뮤니티</a>
           <a href="${B}/pages/location.html">재개발지도</a>
           <a href="${B}/pages/feasibility.html">사업성 검토</a>
         </div>
