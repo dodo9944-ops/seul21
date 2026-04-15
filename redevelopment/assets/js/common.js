@@ -26,7 +26,6 @@ const App = (() => {
       { href: `${B}/pages/services.html`, label: '사업분야', icon: 'fa-solid fa-diagram-project' },
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
-      { href: `${B}/pages/location.html`, label: '재개발지도', icon: 'fa-solid fa-map-location-dot' },
       { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-calculator' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
     ];
