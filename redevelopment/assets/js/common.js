@@ -112,10 +112,6 @@ const App = (() => {
             { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
             { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
           ]},
-          { href:`${B}/pages/location.html`, label:'재개발지도', icon:'fa-solid fa-map-location-dot', sub:[
-            { href:`${B}/pages/location.html`, label:'재개발지도' },
-            { href:`${B}/pages/portfolio.html`, label:'사업구역 전체' },
-          ]},
           { href:`${B}/pages/feasibility.html`, label:'사업성 검토', icon:'fa-solid fa-calculator', sub:[
             { href:`${B}/pages/feasibility.html`, label:'사업성 분석 도구' },
             { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
@@ -190,7 +186,6 @@ const App = (() => {
         <div class="footer-col">
           <h5>자료·서비스</h5>
           <a href="${B}/pages/library.html">자료실</a>
-          <a href="${B}/pages/location.html">재개발지도</a>
           <a href="${B}/pages/feasibility.html">사업성 검토</a>
         </div>
         <div class="footer-col">
