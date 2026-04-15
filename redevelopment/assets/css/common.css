@@ -44,7 +44,7 @@
 
 /* ── RESET & BASE ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scrollbar-gutter: stable; overflow-x: hidden; overscroll-behavior-x: none; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; overscroll-behavior-x: none; }
 html, body { max-width: 100%; }
 body {
   font-family: var(--font);
@@ -55,6 +55,7 @@ body {
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
   overflow-wrap: break-word;
+  overflow-x: hidden;
 }
 a { text-decoration: none; color: inherit; }
 ul, ol { list-style: none; }
@@ -112,6 +113,7 @@ button, input, select, textarea { font-family: inherit; }
 /* ── HEADER WRAP (sticky container) ── */
 .header-wrap {
   position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+  -webkit-transform: translateZ(0); transform: translateZ(0);
 }
 
 /* ── UTILITY BAR ── */
@@ -148,6 +150,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 .mobile-tab-bar {
   display: none;
   position: fixed; left: 0; right: 0; z-index: 9998;
+  -webkit-transform: translateZ(0); transform: translateZ(0);
   background: rgba(255,255,255,0.95);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--gray-200);
