@@ -30,7 +30,8 @@
     /* === Tabs + Write === */
     .cm-toolbar{position:sticky;top:104px;z-index:100;background:#fff;padding:8px 0;margin-top:28px;margin-bottom:-8px;border-bottom:1px solid var(--gray-100);transition:box-shadow .2s}
     .cm-toolbar.stuck{box-shadow:0 2px 12px rgba(0,0,0,.05)}
-    @media(max-width:768px){.cm-toolbar{top:72px}}
+    @media(max-width:1024px) and (min-width:769px){.cm-toolbar{top:136px}}
+    @media(max-width:768px){.cm-toolbar{top:90px}}
     .cm-toolbar .inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
     .cm-tabs{display:flex;gap:4px;flex-wrap:wrap;padding:3px;background:var(--gray-50);border-radius:10px;border:1px solid var(--gray-100)}
     .cm-tab{display:inline-flex;align-items:center;gap:5px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--gray-500);transition:all .2s;font-family:var(--font)}
