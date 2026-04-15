@@ -962,7 +962,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
   .mobile-bottom-nav { display: block; }
   .page-body { padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important; }
   .footer { padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
-  .scroll-top { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  .scroll-top { bottom: calc(120px + env(safe-area-inset-bottom, 0px)); right: 16px; }
 }
 @media (min-width: 769px) {
   .mobile-bottom-nav { display: none !important; }
