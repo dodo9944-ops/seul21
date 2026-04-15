@@ -44,7 +44,7 @@
 
 /* ── RESET & BASE ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scrollbar-gutter: stable; overflow-x: hidden; overscroll-behavior-x: none; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; overscroll-behavior-x: none; }
 html, body { max-width: 100%; }
 body {
   font-family: var(--font);
@@ -55,6 +55,7 @@ body {
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
   overflow-wrap: break-word;
+  overflow-x: clip;
 }
 a { text-decoration: none; color: inherit; }
 ul, ol { list-style: none; }
