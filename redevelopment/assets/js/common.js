@@ -64,13 +64,12 @@ const App = (() => {
       </div>
       <button class="menu-toggle" aria-label="메뉴" id="openDrawer"><i class="fa-solid fa-bars"></i></button>
     </div></header>
-    </div>
-
     <nav class="mobile-tab-bar" id="mobileTabBar">
       <div class="tab-scroll" id="tabScroll">
         ${links.map(l => `<a href="${l.href}"${l.target?' target="'+l.target+'"':''} class="tab-item${navActive(l.href) ? ' active' : ''}">${l.label}</a>`).join('')}
       </div>
     </nav>
+    </div>
 
     <div class="drawer-overlay" id="drawerOverlay"></div>
     <aside class="drawer" id="drawer">

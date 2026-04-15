@@ -138,19 +138,21 @@ button, input, select, textarea { font-family: inherit; }
 }
 
 /* ── 헤더 아래 본문 여백 ── */
-body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
+body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
+@media (max-width: 1024px) and (min-width: 769px) {
+  body { padding-top: 136px; } /* 32(util) + 72(header) + 32(tab) */
+}
 @media (max-width: 768px) {
   .header .inner { height: 58px; }
   body { padding-top: 90px; } /* 58(header) + 32(tab) */
 }
 
-/* ── MOBILE TAB BAR (오버레이, body 여백 변경 없음) ── */
+/* ── MOBILE TAB BAR — header-wrap 내부, fixed 불필요 ── */
 .mobile-tab-bar {
   display: none;
-  position: fixed; left: 0; right: 0; z-index: 9998;
   background: #fff;
   border-bottom: 1px solid var(--gray-200);
-  height: 32px; top: 58px;
+  height: 32px;
 }
 .mobile-tab-bar .tab-scroll {
   display: flex; align-items: center;
@@ -173,7 +175,6 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
   width: 14px; height: 2px; border-radius: 1px; background: var(--gold);
 }
 @media (max-width: 1024px) { .mobile-tab-bar { display: block; } }
-@media (min-width: 769px) { .mobile-tab-bar { top: 104px; } }
 
 /* ── LOGO ── */
 .logo {
