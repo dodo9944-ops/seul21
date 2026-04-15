@@ -29,7 +29,7 @@ const App = (() => {
       { href: `${B}/pages/community.html`, label: '커뮤니티', icon: 'fa-solid fa-comments' },
       { href: `${B}/pages/location.html`, label: '재개발지도', icon: 'fa-solid fa-map-location-dot' },
       { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-calculator' },
-      { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
+      { href: `${B}/pages/contact.html`, label: '상담문의', icon: 'fa-solid fa-envelope' },
     ];
     const moreLinks = [
       { href: `${B}/pages/notice.html`, label: '공지사항', icon: 'fa-solid fa-bullhorn' },
@@ -129,7 +129,7 @@ const App = (() => {
             { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
             { href:`${B}/pages/contact.html`, label:'전문가 문의' },
           ]},
-          { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
+          { href:`${B}/pages/contact.html`, label:'상담문의', icon:'fa-solid fa-envelope', sub:[
             { href:`${B}/pages/contact.html`, label:'문의하기' },
             { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
             { href:`${B}/pages/legal-guide.html`, label:'법령 안내' },
@@ -204,13 +204,13 @@ const App = (() => {
         </div>
         <div class="footer-col">
           <h5>문의·지원</h5>
-          <a href="${B}/pages/contact.html">고객센터</a>
+          <a href="${B}/pages/contact.html">상담문의</a>
           <a href="${B}/intranet/index.html">인트라넷</a>
           <a href="${B}/pages/webhard.html" target="_blank">웹하드</a>
           <a href="${B}/pages/faq.html">자주 묻는 질문</a>
         </div>
         <div class="footer-col footer-contact">
-          <h5>고객센터</h5>
+          <h5>상담문의</h5>
           <span class="phone">010-2230-9210</span>
           <a href="mailto:dodo6666@naver.com" class="email-link"><i class="fa-solid fa-envelope" style="font-size:11px"></i> dodo6666@naver.com</a>
           <p>FAX 0504-340-9210<br>평일 09:00 – 18:00 (토·일·공휴일 휴무)</p>
