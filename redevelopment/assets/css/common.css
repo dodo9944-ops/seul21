@@ -55,6 +55,7 @@ body {
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
   overflow-wrap: break-word;
+  overflow-x: hidden;
   overflow-x: clip;
 }
 a { text-decoration: none; color: inherit; }
@@ -113,6 +114,7 @@ button, input, select, textarea { font-family: inherit; }
 /* ── HEADER WRAP (sticky container) ── */
 .header-wrap {
   position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+  background: var(--white);
 }
 
 /* ── UTILITY BAR ── */
@@ -128,9 +130,7 @@ button, input, select, textarea { font-family: inherit; }
 
 /* ── HEADER ── */
 .header {
-  background: rgba(255,255,255,0.98);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: #fff;
   border-bottom: 1px solid var(--gray-200);
 }
 .header .inner {
@@ -148,8 +148,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — 고정 */
 .mobile-tab-bar {
   display: none;
   position: fixed; left: 0; right: 0; z-index: 9998;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  background: #fff;
   border-bottom: 1px solid var(--gray-200);
   height: 32px; top: 58px;
 }
