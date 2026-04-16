@@ -1264,5 +1264,65 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.ge
 window.MPF={open:openDetail,close:closeDetail};
 })();
 </script>
+<div id="posts" style="max-width:1200px; margin:0 auto 32px; padding:0 20px;">
+  <div style="background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:24px;">
+    <h2 style="margin:0 0 16px; font-size:24px; font-weight:800; color:#0A0F1C;">최신 게시물</h2>
+    <div id="postsList" style="display:grid; gap:16px;"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseUrl = 'https://vpyxjovsgsvsqbfebjrm.supabase.co';
+  const supabaseKey = 'sb_publishable_E0vo2tVZJ6AP7wzfYZWQPQ__t0EaMwN';
+  const client = supabase.createClient(supabaseUrl, supabaseKey);
+
+  async function loadPosts() {
+    const { data, error } = await client
+      .from('게시물')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    const container = document.getElementById('postsList');
+    if (!container) return;
+
+    if (error) {
+      console.error('불러오기 오류:', error);
+      container.innerHTML = '<div style="padding:16px; border:1px solid #fecaca; background:#fef2f2; color:#991b1b; border-radius:10px;">게시물을 불러오지 못했습니다.</div>';
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      container.innerHTML = '<div style="padding:16px; border:1px solid #e5e7eb; background:#f9fafb; color:#6b7280; border-radius:10px;">등록된 게시물이 없습니다.</div>';
+      return;
+    }
+
+    container.innerHTML = '';
+
+    data.forEach(post => {
+      const item = document.createElement('div');
+      item.style.border = '1px solid #e5e7eb';
+      item.style.borderRadius = '10px';
+      item.style.padding = '18px';
+      item.style.background = '#ffffff';
+
+      item.innerHTML = `
+        <div style="margin:0 0 8px; font-size:13px; color:#6b7280;">
+          ${post.created_at ? new Date(post.created_at).toLocaleDateString('ko-KR') : ''}
+        </div>
+        <h3 style="margin:0 0 10px; font-size:20px; font-weight:700; color:#111827;">
+          ${post.제목 ?? ''}
+        </h3>
+        <p style="margin:0; font-size:15px; line-height:1.7; color:#4b5563;">
+          ${post.내용 ?? ''}
+        </p>
+      `;
+
+      container.appendChild(item);
+    });
+  }
+
+  loadPosts();
+</script>
 </body>
 </html>
