@@ -33,7 +33,7 @@
       <div id="chat-tabs">
         <button class="chat-tab active" data-mode="general">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          AI 상담
+          세울상담사
         </button>
         <button class="chat-tab" data-mode="law">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -506,23 +506,27 @@
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      if (tab.dataset.mode === 'expert' && typeof DataService !== 'undefined' && !DataService.isUserLoggedIn()) {
-        messages.innerHTML = `<div style="text-align:center;padding:40px 20px">
-          <div style="width:56px;height:56px;border-radius:50%;background:rgba(195,165,105,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><i class="fa-solid fa-lock" style="font-size:22px;color:#C3A569"></i></div>
-          <h4 style="font-size:15px;font-weight:800;color:#0A0F1C;margin-bottom:8px">회원 전용 서비스</h4>
-          <p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:20px">전문가 상담은 회원가입 후<br>이용하실 수 있습니다.</p>
-          <div style="display:flex;gap:8px;justify-content:center">
-            <a href="${B}/pages/login.html" style="padding:8px 18px;background:#0A0F1C;color:#C3A569;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">로그인</a>
-            <a href="${B}/pages/register.html" style="padding:8px 18px;background:#C3A569;color:#fff;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">회원가입</a>
-          </div>
-        </div>`;
-        currentMode = 'expert';
-        tabs.forEach(t => t.classList.toggle('active', t.dataset.mode === 'expert'));
-        headerTitle.textContent = '세울 전문가';
-        headerSub.textContent = '전문가 직접 상담';
-        input.disabled = true;
-        input.placeholder = '로그인 후 이용 가능합니다';
-        return;
+      if (tab.dataset.mode === 'expert') {
+        const loggedIn = typeof DataService !== 'undefined' && DataService.isUserLoggedIn && DataService.isUserLoggedIn();
+
+        if (!loggedIn) {
+          messages.innerHTML = `<div style="text-align:center;padding:40px 20px">
+            <div style="width:56px;height:56px;border-radius:50%;background:rgba(195,165,105,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><i class="fa-solid fa-lock" style="font-size:22px;color:#C3A569"></i></div>
+            <h4 style="font-size:15px;font-weight:800;color:#0A0F1C;margin-bottom:8px">회원 전용 서비스</h4>
+            <p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:20px">전문가 상담은 회원가입 후<br>이용하실 수 있습니다.</p>
+            <div style="display:flex;gap:8px;justify-content:center">
+              <a href="${B}/pages/login.html" style="padding:8px 18px;background:#0A0F1C;color:#C3A569;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">로그인</a>
+              <a href="${B}/pages/register.html" style="padding:8px 18px;background:#C3A569;color:#fff;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">회원가입</a>
+            </div>
+          </div>`;
+          currentMode = 'expert';
+          tabs.forEach(t => t.classList.toggle('active', t.dataset.mode === 'expert'));
+          headerTitle.textContent = '세울 전문가';
+          headerSub.textContent = '전문가 직접 상담';
+          input.disabled = true;
+          input.placeholder = '로그인 후 이용 가능합니다';
+          return;
+        }
       }
       input.disabled = false;
       switchMode(tab.dataset.mode);

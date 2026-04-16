@@ -1,2 +1,4 @@
 .vercel
 redevelopment_backup_20260403/
+
+.env*.local
