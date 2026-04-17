@@ -49,8 +49,28 @@
     .auth-links { display: flex; justify-content: center; gap: 16px; margin-top: 20px; font-size: 13px; }
     .auth-links a { color: var(--gray-500); transition: color var(--transition); }
     .auth-links a:hover { color: var(--gray-900); }
+    .auth-divider {
+        display: flex; align-items: center; gap: 12px;
+        margin: 28px 0 16px; color: var(--gray-400); font-size: 12px;
+    }
+    .auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+    .social-buttons { display: flex; gap: 12px; }
+    .social-btn {
+        flex: 1; height: 48px; border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        font-size: 14px; font-weight: 600; cursor: pointer; transition: all var(--transition);
+        font-family: var(--font); background: var(--white);
+    }
+    .social-btn:hover { border-color: var(--gray-400); background: var(--gray-50); }
+    .social-btn.kakao { background: #FEE500; border-color: #FEE500; color: #3C1E1E; }
+    .social-btn.kakao:hover { background: #F0D900; border-color: #F0D900; }
+    .social-btn.naver { background: #03C75A; border-color: #03C75A; color: var(--white); }
+    .social-btn.naver:hover { background: #02B350; border-color: #02B350; }
+    .social-btn.google { background: var(--white); color: var(--gray-700); }
+    .social-btn.google:hover { background: var(--gray-50); }
     @media (max-width: 540px) {
         .auth-box { padding: 32px 20px; }
+        .social-buttons { flex-direction: column; }
     }
     </style>
 </head>
@@ -156,6 +176,23 @@
             <span style="color:var(--gray-500);">이미 계정이 있으신가요?</span>
             <a href="login.html" style="color:var(--accent);font-weight:600;">로그인</a>
         </div>
+
+        <div class="auth-divider">SNS 간편 가입</div>
+
+        <div class="social-buttons">
+            <button type="button" class="social-btn kakao" id="btnKakao">
+                <i class="fa-solid fa-comment"></i> 카카오
+            </button>
+            <button type="button" class="social-btn naver" id="btnNaver">
+                <strong>N</strong> 네이버
+            </button>
+            <button type="button" class="social-btn google" id="btnGoogle">
+                <i class="fa-brands fa-google"></i> 구글
+            </button>
+        </div>
+        <p style="text-align:center;font-size:11px;color:var(--gray-400);margin-top:8px;">
+            SNS 계정으로 즉시 회원가입 및 로그인됩니다.
+        </p>
     </div>
 </div>
 
@@ -338,6 +375,46 @@ function searchAddress() {
             App.toast('서버 연결에 실패했습니다.', 'error');
         });
     });
+
+    // ── 소셜 간편 가입 (OAuth 콜백은 login.html에서 일괄 처리) ──
+    var SOCIAL_CONFIG = {
+      naver: {
+        clientId: 'ckwTb7PgvVwgaojPNsvG',
+        authUrl: 'https://nid.naver.com/oauth2.0/authorize',
+        redirectUri: location.origin + '/pages/login.html'
+      },
+      kakao: {
+        clientId: '1b6880171cbd29e9b947a273199b4010',
+        authUrl: 'https://kauth.kakao.com/oauth/authorize',
+        redirectUri: location.origin + '/pages/login.html'
+      },
+      google: {
+        clientId: '928366849638-5u588474c3jhj3u46hi5d4insittituq.apps.googleusercontent.com',
+        authUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
+        redirectUri: location.origin + '/pages/login.html'
+      }
+    };
+
+    function socialSignup(provider) {
+      var cfg = SOCIAL_CONFIG[provider];
+      if (!cfg || !cfg.clientId) {
+        alert('소셜 가입 준비 중입니다. 일반 회원가입을 이용해주세요.');
+        return;
+      }
+      var state = Math.random().toString(36).substring(2);
+      sessionStorage.setItem('social_state', state);
+      sessionStorage.setItem('social_provider', provider);
+
+      var params = { response_type: 'code', client_id: cfg.clientId, redirect_uri: cfg.redirectUri, state: state };
+      if (provider === 'google') params.scope = 'openid email profile';
+      if (provider === 'naver') params.scope = 'name email mobile';
+
+      location.href = cfg.authUrl + '?' + new URLSearchParams(params).toString();
+    }
+
+    document.getElementById('btnNaver').addEventListener('click', function() { socialSignup('naver'); });
+    document.getElementById('btnKakao').addEventListener('click', function() { socialSignup('kakao'); });
+    document.getElementById('btnGoogle').addEventListener('click', function() { socialSignup('google'); });
 })();
 </script>
 </body>
