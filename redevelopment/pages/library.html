@@ -43,10 +43,11 @@
     .lib-alimtalk-btn i{font-size:15px}
     @media(max-width:600px){.lib-alimtalk-btn{font-size:12px;padding:9px 18px}}
 
-    /* === Category Tabs === */
-    .cat-wrap{margin-bottom:20px;position:sticky;top:104px;z-index:9997;background:var(--white);padding-top:12px;padding-bottom:4px;margin-top:-8px;transition:box-shadow .2s}
-    @media(max-width:1024px) and (min-width:769px){.cat-wrap{top:136px}}
-    .cat-wrap.stuck{box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    /* === Category Tabs (항상 상단 고정) === */
+    .cat-wrap{position:fixed;top:104px;left:0;right:0;z-index:9997;background:var(--white);padding:10px 40px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-bottom:1px solid var(--gray-100);margin:0}
+    @media(max-width:1024px) and (min-width:769px){.cat-wrap{top:136px;padding:10px 40px}}
+    .cat-wrap-inner{max-width:var(--maxw);margin:0 auto}
+    .page-body.lib-page{padding-top:80px}
     .cat-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:4px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100)}
     .cat-tab{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:10px;font-size:13.5px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--gray-500);transition:all .25s;font-family:var(--font);position:relative}
     .cat-tab i{font-size:13px;opacity:.45;transition:opacity .25s}
@@ -57,10 +58,8 @@
     .cat-tab:not(.on):hover{background:#fff;color:var(--gray-800);box-shadow:0 1px 4px rgba(0,0,0,.04)}
     .cat-tab:not(.on):hover i{opacity:.7}
     @media(max-width:768px){
-        /* 모바일: 스와이프·스크롤 중 고정 해제 버그 차단 — position: fixed 로 강제 고정 */
-        .cat-wrap{position:fixed!important;top:90px!important;left:0!important;right:0!important;margin:0!important;padding:8px 20px 4px!important;background:#fff;z-index:9998;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-        /* cat-wrap 이 flow 에서 빠진 만큼 다음 요소 시작 위치 보정 (레이아웃 변경 없음) */
-        .page-body .inner > .cat-wrap + .ctrl-bar{margin-top:52px}
+        .cat-wrap{top:90px;padding:6px 16px}
+        .page-body.lib-page{padding-top:64px}
         .cat-tabs{flex-wrap:nowrap!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;gap:3px!important;padding:3px!important;border-radius:8px}
         .cat-tabs::-webkit-scrollbar{display:none}
         .cat-tab{padding:5px 9px!important;font-size:10.5px!important;white-space:nowrap;flex-shrink:0;gap:4px;border-radius:6px}
@@ -240,9 +239,9 @@
     </div>
 </div>
 
-<div class="page-body"><div class="inner">
+<div class="cat-wrap"><div class="cat-wrap-inner"><div class="cat-tabs" id="catTabs"></div></div></div>
 
-    <div class="cat-wrap"><div class="cat-tabs" id="catTabs"></div></div>
+<div class="page-body lib-page"><div class="inner">
 
     <div class="ctrl-bar">
         <div class="ctrl-search">
@@ -573,11 +572,6 @@ var item=allItems.find(function(i){return i.id===id});if(item){item.downloads=(i
 window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.querySelector('.ctrl-bar').offsetTop-80,behavior:'smooth'})}};
 
 renderTabs();render();
-
-/* sticky shadow toggle */
-var catWrap=document.querySelector('.cat-wrap');
-if(catWrap){var stickyTop=parseInt(getComputedStyle(catWrap).top)||104;
-window.addEventListener('scroll',function(){catWrap.classList.toggle('stuck',catWrap.getBoundingClientRect().top<=stickyTop+1)},{passive:true})}
 })();
 </script>
 </body>
