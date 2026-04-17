@@ -109,11 +109,7 @@ const App = (() => {
             { href:`${B}/pages/library.html?cat=법령`, label:'법령·제도' },
             { href:`${B}/pages/library.html?cat=판례지침`, label:'고시·공고' },
             { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
-          ]},
-          { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스', icon:'fa-solid fa-newspaper', sub:[
-            { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스 전체' },
-            { href:`${B}/pages/notice.html`, label:'공지사항' },
-            { href:`${B}/pages/alimtalk.html`, label:'소식받기 신청' },
+            { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
           ]},
           { href:`${B}/pages/feasibility.html`, label:'사업성 검토', icon:'fa-solid fa-calculator', sub:[
             { href:`${B}/pages/feasibility.html`, label:'사업성 분석 도구' },
