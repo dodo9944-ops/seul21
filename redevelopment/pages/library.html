@@ -57,7 +57,10 @@
     .cat-tab:not(.on):hover{background:#fff;color:var(--gray-800);box-shadow:0 1px 4px rgba(0,0,0,.04)}
     .cat-tab:not(.on):hover i{opacity:.7}
     @media(max-width:768px){
-        .cat-wrap{top:90px;padding-top:8px;padding-bottom:2px;margin-bottom:12px}
+        /* 모바일: 스와이프·스크롤 중 고정 해제 버그 차단 — position: fixed 로 강제 고정 */
+        .cat-wrap{position:fixed!important;top:90px!important;left:0!important;right:0!important;margin:0!important;padding:8px 20px 4px!important;background:#fff;z-index:9998;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+        /* cat-wrap 이 flow 에서 빠진 만큼 다음 요소 시작 위치 보정 (레이아웃 변경 없음) */
+        .page-body .inner > .cat-wrap + .ctrl-bar{margin-top:52px}
         .cat-tabs{flex-wrap:nowrap!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;gap:3px!important;padding:3px!important;border-radius:8px}
         .cat-tabs::-webkit-scrollbar{display:none}
         .cat-tab{padding:5px 9px!important;font-size:10.5px!important;white-space:nowrap;flex-shrink:0;gap:4px;border-radius:6px}
