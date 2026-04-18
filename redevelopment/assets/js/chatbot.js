@@ -363,7 +363,7 @@
 
     /* == 모바일 == */
     @media(max-width:768px) {
-      #seul-chatbot { bottom:calc(60px + env(safe-area-inset-bottom, 0px)); right:10px; }
+      #seul-chatbot { bottom:calc(54px + env(safe-area-inset-bottom, 0px)); right:10px; }
       #chat-toggle { height:30px; padding:0 9px 0 8px; border-radius:15px; gap:4px; opacity:0.8; }
       #chat-toggle:hover, #chat-toggle.active { opacity:1; }
       #chat-toggle.active { width:30px; height:30px; }
