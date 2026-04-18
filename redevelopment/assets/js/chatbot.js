@@ -45,11 +45,6 @@
         </button>
       </div>
       <div id="chat-messages"></div>
-      <div id="chat-quick">
-        <button class="chat-quick-btn" data-q="정비사업 절차가 궁금해요">정비사업 절차</button>
-        <button class="chat-quick-btn" data-q="사업성 검토를 받고 싶어요">사업성 검토</button>
-        <button class="chat-quick-btn" data-q="상담 문의하기">상담 문의</button>
-      </div>
       <div id="chat-input-area">
         <input id="chat-input" type="text" placeholder="궁금한 점을 입력하세요..." maxlength="500">
         <button id="chat-send" aria-label="전송">
@@ -510,6 +505,7 @@
   }
 
   function updateQuickButtons(mode) {
+    if (!quickArea) return;
     const btns = quickButtons[mode];
     quickArea.innerHTML = btns.map(b =>
       `<button class="chat-quick-btn ${mode === 'expert' ? 'expert-quick' : mode === 'law' ? 'law-quick' : ''}" data-q="${b.q}">${b.text}</button>`
