@@ -48,7 +48,7 @@
     .cat-wrap{position:fixed;top:124px;left:0;right:0;z-index:9997;background:var(--white);padding:10px 40px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-bottom:1px solid var(--gray-100);margin:0}
     @media(max-width:1024px) and (min-width:769px){.cat-wrap{top:156px;padding:10px 40px}}
     .cat-wrap-inner{max-width:var(--maxw);margin:0 auto}
-    .page-body.lib-page{padding-top:80px}
+    .page-body.lib-page{padding-top:0}
     .cat-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:4px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100)}
     .cat-tab{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:10px;font-size:13.5px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--gray-500);transition:all .25s;font-family:var(--font);position:relative}
     .cat-tab i{font-size:13px;opacity:.45;transition:opacity .25s}
@@ -228,7 +228,6 @@
     </div>
 </div>
 
-<div class="cat-wrap"><div class="cat-wrap-inner"><div class="cat-tabs" id="catTabs"></div></div></div>
 
 <div class="page-body lib-page"><div class="inner">
 
@@ -325,8 +324,8 @@ if(e5)e5.textContent=cc['주요뉴스']||0;
 }();
 
 /* Tabs */
-function renderTabs(){var cc=getCatCounts();
-document.getElementById('catTabs').innerHTML=catDefs.map(function(d){
+function renderTabs(){var el=document.getElementById('catTabs');if(!el)return;var cc=getCatCounts();
+el.innerHTML=catDefs.map(function(d){
 var ic=d.icon?'<i class="fa-solid '+d.icon+'"></i> ':'';
 return'<button class="cat-tab'+(curCat===d.key?' on':'')+'" data-cat="'+d.key+'">'+ic+d.label+'<span class="cnt">'+cc[d.key]+'</span></button>'}).join('')}
 
@@ -397,7 +396,7 @@ window.switchCat=function(cat){
 };
 
 /* Events */
-document.getElementById('catTabs').addEventListener('click',function(e){var btn=e.target.closest('.cat-tab');if(!btn)return;curCat=btn.dataset.cat;curPage=1;renderTabs();render()});
+(function(){var el=document.getElementById('catTabs');if(el)el.addEventListener('click',function(e){var btn=e.target.closest('.cat-tab');if(!btn)return;curCat=btn.dataset.cat;curPage=1;renderTabs();render()});})();
 document.getElementById('searchInput').addEventListener('input',function(){searchQ=this.value.trim();curPage=1;render()});
 document.getElementById('sortSelect').addEventListener('change',function(){curSort=this.value;curPage=1;render()});
 document.getElementById('perSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;render()});
