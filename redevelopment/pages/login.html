@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#0A0F1C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 — (주)세울엔지니어링</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">h
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
@@ -215,7 +215,7 @@
       if (provider === 'naver') params.scope = 'name email mobile';
 
       var url = cfg.authUrl + '?' + new URLSearchParams(params).toString();
-      location.href = url;
+if (provider === 'google') { window.open(url, '_blank', 'noopener,noreferrer'); } else { location.href = url; }
     }
 
     document.getElementById('btnNaver').addEventListener('click', function() { socialLogin('naver'); });
