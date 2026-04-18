@@ -9,30 +9,57 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#0A0F1C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자료실 2 — 실전 사례집 — (주)세울엔지니어링</title>
-    <meta name="description" content="정비사업 실전 사례집 — 재개발·재건축·소규모정비·신통기획 실제 진행 사례와 핵심 교훈을 정리한 케이스스터디 자료실.">
+    <title>자료실 2 — 사례집 · 주요뉴스 — (주)세울엔지니어링</title>
+    <meta name="description" content="정비사업 실전 사례집 · 주요뉴스 — 재개발·재건축·소규모정비·신통기획 사례 분석 + 정비사업 최신 뉴스 아카이브.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260418k">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260418l">
     <style>
-    /* === 자료실 2 — 실전 사례집 === */
-    .lib2-hero{background:linear-gradient(135deg,var(--brand-dark) 0%,var(--brand-navy) 100%);color:#fff;padding:48px 0 36px;position:relative;overflow:hidden}
-    .lib2-hero::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><circle cx="30" cy="30" r="1" fill="rgba(195,165,105,0.08)"/></svg>');opacity:.5}
-    .lib2-hero .inner{position:relative;z-index:1}
-    .lib2-bc{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.55);margin-bottom:14px}
-    .lib2-bc a{color:rgba(255,255,255,.55);transition:color .2s}
-    .lib2-bc a:hover{color:var(--gold)}
-    .lib2-bc i{font-size:9px;opacity:.5}
-    .lib2-bc .cur{color:var(--gold)}
-    .lib2-label{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:10px;text-transform:uppercase}
-    .lib2-hero h1{font-size:34px;font-weight:800;margin-bottom:12px;letter-spacing:-.5px}
-    .lib2-hero .lead{font-size:14px;color:rgba(255,255,255,.65);max-width:620px;line-height:1.7}
-    @media(max-width:768px){.lib2-hero{padding:32px 0 28px}.lib2-hero h1{font-size:24px}.lib2-hero .lead{font-size:13px}}
+    /* === 자료실 2 — 통합 (사례집 + 주요뉴스) === */
+    .uni-hero{background:linear-gradient(135deg,var(--brand-dark) 0%,var(--brand-navy) 100%);color:#fff;padding:48px 0 36px;position:relative;overflow:hidden}
+    .uni-hero::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><circle cx="30" cy="30" r="1" fill="rgba(195,165,105,0.08)"/></svg>');opacity:.5}
+    .uni-hero .inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+    @media(max-width:1024px){.uni-hero .inner{grid-template-columns:1fr;gap:24px}}
+    .uh-text{}
+    .uh-bc{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.55);margin-bottom:14px}
+    .uh-bc a{color:rgba(255,255,255,.55);transition:color .2s}
+    .uh-bc a:hover{color:var(--gold)}
+    .uh-bc i{font-size:9px;opacity:.5}
+    .uh-bc .cur{color:var(--gold)}
+    .uh-label{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:10px;text-transform:uppercase}
+    .uh-text h1{font-size:32px;font-weight:800;margin-bottom:12px;letter-spacing:-.5px}
+    .uh-sub{font-size:14px;color:rgba(255,255,255,.65);max-width:580px;line-height:1.7}
+
+    /* 소식받기 버튼 (자료실 1에서 이전) */
+    .lib-alimtalk-btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:11px 24px;background:rgba(195,165,105,.1);border:1.5px solid rgba(195,165,105,.35);border-radius:10px;color:#C3A569;font-size:13.5px;font-weight:700;text-decoration:none;transition:all .2s;font-family:var(--font)}
+    .lib-alimtalk-btn:hover{background:rgba(195,165,105,.2);border-color:rgba(195,165,105,.5)}
+    .lib-alimtalk-btn i{font-size:15px}
+    @media(max-width:600px){.lib-alimtalk-btn{font-size:12px;padding:9px 18px}}
+
+    /* 히어로 카드 (자료실 1과 동일 스타일) */
+    .uh-cards{display:grid;grid-template-columns:1fr;gap:10px;width:300px}
+    @media(max-width:1024px){.uh-cards{width:100%;max-width:320px;grid-template-columns:1fr 1fr}}
+    @media(max-width:600px){.uh-cards{grid-template-columns:1fr;max-width:none}}
+    .uh-card{padding:14px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(195,165,105,.18);border-radius:12px;transition:all .25s;cursor:pointer;color:inherit;text-decoration:none;display:block}
+    .uh-card:hover{background:rgba(255,255,255,.08);border-color:rgba(195,165,105,.4);transform:translateY(-2px)}
+    .uh-ci{width:32px;height:32px;border-radius:8px;background:rgba(195,165,105,.15);display:flex;align-items:center;justify-content:center;margin-bottom:8px;color:var(--gold);font-size:13px}
+    .uh-card h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px;letter-spacing:-.2px}
+    .uh-card p{font-size:11px;color:rgba(255,255,255,.55);line-height:1.5}
+
+    @media(max-width:768px){.uni-hero{padding:32px 0 28px}.uh-text h1{font-size:24px}.uh-sub{font-size:13px}}
+
+    /* === 섹션 헤더 === */
+    .sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin:40px 0 18px;gap:14px;flex-wrap:wrap}
+    .sec-head h2{font-size:22px;font-weight:800;color:var(--gray-900);letter-spacing:-.4px}
+    .sec-head .sub{font-size:13px;color:var(--gray-500);margin-top:4px}
+    .sec-head .more{font-size:12px;color:var(--brand-dark);font-weight:700;text-decoration:none}
+    .sec-head .more:hover{color:var(--gold)}
+    .sec-anchor{padding-top:90px;margin-top:-90px}
 
     /* === 카테고리 필터 === */
-    .lib2-cats{display:flex;gap:6px;flex-wrap:wrap;margin:24px 0 20px}
+    .lib2-cats{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 20px}
     .lib2-cat{padding:8px 16px;border-radius:10px;background:#fff;border:1.5px solid var(--gray-200);font-size:13px;font-weight:600;color:var(--gray-600);cursor:pointer;transition:all .2s;font-family:var(--font)}
     .lib2-cat.on{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark)}
     .lib2-cat:not(.on):hover{border-color:var(--gold);color:var(--brand-dark)}
@@ -69,6 +96,19 @@
     .case-cta{color:var(--brand-dark);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color .2s}
     .case-cta:hover{color:var(--gold)}
 
+    /* === 주요뉴스 리스트 === */
+    .news-list{background:#fff;border:1px solid var(--gray-200);border-radius:14px;overflow:hidden}
+    .news-row{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid var(--gray-100);transition:background .2s;cursor:pointer;text-decoration:none;color:inherit}
+    .news-row:last-child{border-bottom:none}
+    .news-row:hover{background:var(--gray-50)}
+    .news-row .nb{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-navy));color:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px}
+    .news-row .nm{flex:1;min-width:0}
+    .news-row .nt{font-size:14px;font-weight:600;color:var(--gray-800);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .news-row .nd{font-size:12px;color:var(--gray-500)}
+    .news-row .new-badge{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:4px;background:#D6423A;color:#fff;font-size:9px;font-weight:700;letter-spacing:.5px;vertical-align:middle}
+    .news-row .nx{font-size:11px;color:var(--gray-400)}
+    @media(max-width:600px){.news-row{padding:14px 16px;gap:10px}.news-row .nb{width:28px;height:28px;font-size:11px}.news-row .nt{font-size:13px}.news-row .nd{font-size:11px}}
+
     .empty-state{text-align:center;padding:60px 20px;color:var(--gray-400)}
     .empty-state i{font-size:48px;color:var(--gray-200);margin-bottom:16px;display:block}
     .empty-state h3{font-size:16px;color:var(--gray-600);margin-bottom:6px}
@@ -86,23 +126,51 @@
 <body>
 <div id="site-header"></div>
 
-<section class="lib2-hero">
+<section class="uni-hero">
     <div class="inner">
-        <div class="lib2-bc">
-            <a href="../index.html">홈</a>
-            <i class="fa-solid fa-chevron-right"></i>
-            <span class="cur">자료실 2</span>
+        <div class="uh-text">
+            <div class="uh-bc">
+                <a href="../index.html">홈</a>
+                <i class="fa-solid fa-chevron-right"></i>
+                <span class="cur">자료실 2</span>
+            </div>
+            <div class="uh-label">CASE STUDY · NEWS ARCHIVE</div>
+            <h1>실전 사례집 + 주요뉴스</h1>
+            <p class="uh-sub">재개발·재건축·소규모정비·신통기획 실제 진행 사례 + 정비사업 최신 뉴스를 한곳에서. 유사 사업장 검토와 시장 동향 파악에 필수.</p>
+            <a href="alimtalk.html" class="lib-alimtalk-btn"><i class="fa-regular fa-comment-dots"></i> 소식받기 신청</a>
         </div>
-        <div class="lib2-label">CASE STUDY ARCHIVE</div>
-        <h1>정비사업 실전 사례집</h1>
-        <p class="lead">재개발·재건축·소규모정비·신통기획 — 실제 진행된 사업 사례를 카테고리별로 정리하고 핵심 의사결정과 교훈을 분석합니다. 유사 사업을 검토 중이라면 반드시 참고하세요.</p>
+        <div class="uh-cards">
+            <a href="#sec-case" class="uh-card" onclick="window.lib2Switch&&window.lib2Switch('재개발');return true"><div class="uh-ci"><i class="fa-solid fa-building"></i></div><h4>재개발 사례</h4><p>도심 재개발 실전 분석</p></a>
+            <a href="#sec-case" class="uh-card" onclick="window.lib2Switch&&window.lib2Switch('재건축');return true"><div class="uh-ci"><i class="fa-solid fa-city"></i></div><h4>재건축 사례</h4><p>아파트 재건축 케이스</p></a>
+            <a href="#sec-case" class="uh-card" onclick="window.lib2Switch&&window.lib2Switch('소규모정비');return true"><div class="uh-ci"><i class="fa-solid fa-house-chimney"></i></div><h4>소규모정비</h4><p>가로주택·자율주택 사례</p></a>
+            <a href="#sec-case" class="uh-card" onclick="window.lib2Switch&&window.lib2Switch('신통기획');return true"><div class="uh-ci"><i class="fa-solid fa-route"></i></div><h4>신통기획</h4><p>신속통합기획 적용 사례</p></a>
+            <a href="#sec-news" class="uh-card"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스 (1년)</p></a>
+        </div>
     </div>
 </section>
 
 <div class="page-body">
     <div class="inner">
+
+        <span id="sec-case" class="sec-anchor"></span>
+        <div class="sec-head">
+            <div>
+                <h2>실전 사례집</h2>
+                <div class="sub">정비사업 실제 진행 사례 + 핵심 의사결정 + 교훈</div>
+            </div>
+        </div>
         <div class="lib2-cats" id="lib2Cats"></div>
         <div class="case-grid" id="caseGrid"></div>
+
+        <span id="sec-news" class="sec-anchor"></span>
+        <div class="sec-head">
+            <div>
+                <h2>주요뉴스</h2>
+                <div class="sub">최근 1년간의 정비사업 관련 뉴스 — 자료실 1에서 이전</div>
+            </div>
+            <a href="alimtalk.html" class="more"><i class="fa-regular fa-bell" style="margin-right:4px"></i>새 뉴스 알림 받기</a>
+        </div>
+        <div class="news-list" id="newsList"></div>
 
         <div class="lib2-cta">
             <div class="lib2-cta-text">
@@ -115,11 +183,12 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260418k"></script>
-<script src="../assets/js/data-service.js?v=20260418k"></script>
-<script src="../assets/js/common.js?v=20260418k"></script>
+<script src="../assets/data/mock-data.js?v=20260418l"></script>
+<script src="../assets/js/data-service.js?v=20260418l"></script>
+<script src="../assets/js/common.js?v=20260418l"></script>
 <script>
 (function(){
+    /* === 사례집 === */
     var cases = (typeof MOCK !== 'undefined' && MOCK.library2) ? MOCK.library2 : [];
     var cats = ['전체'].concat(Array.from(new Set(cases.map(function(c){return c.category}))));
     var curCat = '전체';
@@ -144,7 +213,7 @@
     function renderGrid(){
         var filtered = curCat==='전체' ? cases : cases.filter(function(c){return c.category===curCat});
         if (filtered.length === 0) {
-            gridEl.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fa-solid fa-folder-open"></i><h3>해당 카테고리에 사례가 없습니다</h3><p>다른 카테고리를 선택해보세요</p></div>';
+            gridEl.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fa-solid fa-folder-open"></i><h3>해당 카테고리에 사례가 없습니다</h3></div>';
             return;
         }
         gridEl.innerHTML = filtered.map(function(c){
@@ -171,8 +240,51 @@
         }).join('');
     }
 
+    /* 외부 호출용 카테고리 스위처 (히어로 카드 클릭 시) */
+    window.lib2Switch = function(cat){
+        if (cats.indexOf(cat) < 0) return;
+        curCat = cat;
+        renderCats();
+        renderGrid();
+    };
+
     renderCats();
     renderGrid();
+
+    /* === 주요뉴스 (자료실 1에서 이전) === */
+    var now = new Date();
+    var oneYearAgo = new Date(now.getTime() - 365*864e5);
+    var libAll = (typeof MOCK !== 'undefined' && MOCK.library) ? MOCK.library : [];
+    var newsItems = libAll.filter(function(i){
+        return i.category==='주요뉴스' && i.date && new Date(i.date) >= oneYearAgo;
+    }).sort(function(a,b){return (b.date||'').localeCompare(a.date||'')});
+
+    var newsEl = document.getElementById('newsList');
+    function isNew(d){return d && (now - new Date(d)) < 7*864e5}
+    function newsUrl(item){
+        var d = (item.date||'').replace(/-/g,'');
+        var suffix = (item.id||'').replace(/^news/,'');
+        var letter = suffix.match(/[a-z]$/) ? suffix.slice(-1) : '';
+        return '../downloads/news_' + d + letter + '.html';
+    }
+
+    if (newsItems.length === 0) {
+        newsEl.innerHTML = '<div class="empty-state"><i class="fa-regular fa-newspaper"></i><h3>최근 1년간의 뉴스가 없습니다</h3></div>';
+    } else {
+        newsEl.innerHTML = newsItems.map(function(it){
+            return '<a class="news-row" href="'+newsUrl(it)+'">'
+                + '<div class="nb"><i class="fa-solid fa-newspaper"></i></div>'
+                + '<div class="nm"><div class="nt">'+it.title+(isNew(it.date)?'<span class="new-badge">NEW</span>':'')+'</div>'
+                + '<div class="nd">'+it.date+(it.tags&&it.tags.length?' · '+it.tags.slice(0,2).join(', '):'')+'</div></div>'
+                + '<i class="fa-solid fa-chevron-right nx"></i></a>';
+        }).join('');
+    }
+
+    /* 해시 앵커 즉시 이동 */
+    if (location.hash) {
+        var t = document.querySelector(location.hash);
+        if (t) setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'})}, 200);
+    }
 })();
 </script>
 </body>
