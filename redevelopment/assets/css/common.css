@@ -115,6 +115,17 @@ button, input, select, textarea { font-family: inherit; }
   background: var(--white);
   padding-top: env(safe-area-inset-top, 0);
   padding-top: constant(safe-area-inset-top, 0);
+  /* 스크롤 시 떨림·사라짐 방지: GPU 합성 레이어 분리 */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.mobile-tab-bar {
+  /* 부모(.header-wrap)가 fixed이므로 자동 고정이지만, 일부 모바일 브라우저 안정화 */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 /* ── UTILITY BAR ── */
