@@ -345,3 +345,77 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 | **신** | `index.html` 상담 버튼 | 비로그인 클릭 시 `login.html`로 리디렉션 (onclick 체크) |
 | **구** | `consultation.html` CTA | `<a href="contact.html">` 직접 이동 |
 | **신** | `consultation.html` CTA | 비로그인 클릭 시 `login.html`로 리디렉션 (onclick 체크) |
+
+---
+
+## 백업 정책 (2026-04-18 신설)
+
+> **모든 주요 작업 완료 시점에는 반드시 백업 라벨을 생성한다. 사용자가 별도 지시 없어도 주간 단위로 자동 백업된다.**
+
+### 1. 백업 트리거
+
+| 상황 | 자동/수동 | 절차 |
+|------|----------|------|
+| 매주 일요일 02:00 KST | 자동 | `.github/workflows/backup-to-gdrive.yml` cron 실행 |
+| 사용자 "백업해" 지시 | 수동 | git tag + branch 생성 + 푸시 |
+| 주요 마일스톤 완료 시 | 자동 | Claude가 판단하여 `backup-YYYYMMDD-<라벨>` 형태로 생성 |
+| Workflow Dispatch | 수동 | GitHub Actions 페이지에서 직접 실행 가능 |
+
+### 2. 백업 형태 (3중 보관)
+
+1. **GitHub 브랜치** — `backup-YYYYMMDD` 형태로 푸시 (영구 보관, 무료)
+2. **GitHub Actions 아티팩트** — ZIP 파일 90일 보관
+3. **Google Drive** — `세울21/백업/` 폴더에 ZIP + 설명서 영구 보관
+
+### 3. 백업 패키지 구성
+
+각 백업마다 다음 2개 파일 동시 생성:
+
+- `seul21_backup_YYYYMMDD_<sha>_<라벨>.zip` — 소스 전체 (downloads/files, uploads, jpg 제외하여 용량 절감)
+- `BACKUP_YYYYMMDD.md` — 백업 설명서 (커밋 SHA, 디렉토리 구조, 환경변수 키, 복원 방법)
+
+### 4. Google Drive 자동 업로드 사전 설정 (사용자 1회 작업)
+
+GitHub Secrets에 다음 등록 필요:
+
+| Secret | 발급 방법 |
+|--------|----------|
+| `GOOGLE_REFRESH_TOKEN` | Google OAuth 2.0 Playground에서 Drive API 권한 동의 후 발급 |
+| `GOOGLE_CLIENT_ID` | Google Cloud Console → API 및 서비스 → 사용자 인증 정보 |
+| `GOOGLE_CLIENT_SECRET` | 동일 |
+| `GOOGLE_DRIVE_FOLDER_ID` | Drive에서 백업 폴더 URL의 `/folders/<ID>` 부분 |
+
+미설정 시 → GitHub Actions 아티팩트로만 보관 (90일).
+
+### 5. 백업 후 즉시 검증
+
+- `git ls-remote origin | grep backup-` 으로 원격 반영 확인
+- GitHub Actions Artifacts 탭에서 ZIP 다운로드 가능 확인
+- Google Drive 시크릿 설정 시 → Drive 폴더에 파일 도착 확인
+
+### 6. 복원 절차 (CLAUDE 가 자동 수행 가능)
+
+```bash
+# 백업 라벨 확인
+git fetch origin
+git branch -r | grep backup-
+
+# 특정 시점 복원 (안전 — 새 브랜치)
+git checkout -b restore-test backup-20260418
+
+# master를 백업 시점으로 강제 되돌리기 (사용자 명시 지시 시에만)
+git checkout master
+git reset --hard origin/backup-20260418
+git push -u origin master --force-with-lease
+```
+
+### 7. 보존 정책
+
+- **GitHub 브랜치 백업**: 영구 보관 (수동 삭제 전까지)
+- **GitHub Actions 아티팩트**: 90일 자동 만료
+- **Google Drive**: 영구 보관 (사용자 정기 정리)
+
+### 8. 관련 파일
+
+- `.github/workflows/backup-to-gdrive.yml` — 자동 백업 워크플로
+- `BACKUP_YYYYMMDD.md` — 시점별 백업 설명서 (master 루트에 보관)
