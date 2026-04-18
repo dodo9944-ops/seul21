@@ -144,11 +144,11 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   body { padding-top: 136px; } /* 32(util) + 72(header) + 32(tab) */
 }
 @media (max-width: 768px) {
-  .header .inner { height: 58px; }
+  .header .inner { height: 50px; }
   body {
-    padding-top: 90px;
-    padding-top: calc(90px + env(safe-area-inset-top, 0));
-    padding-top: calc(90px + constant(safe-area-inset-top, 0));
+    padding-top: 82px;
+    padding-top: calc(82px + env(safe-area-inset-top, 0));
+    padding-top: calc(82px + constant(safe-area-inset-top, 0));
   }
 }
 
@@ -198,10 +198,10 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   color: var(--gray-400); text-transform: uppercase; margin-top: 2px;
 }
 @media (max-width: 768px) {
-  .logo-mark { width: 32px; height: 32px; }
-  .logo-company { font-size: 15px; }
-  .logo-sub { font-size: 8px; letter-spacing: 1.5px; }
-  .logo { gap: 10px; }
+  .logo-mark { width: 26px; height: 26px; }
+  .logo-company { font-size: 13px; }
+  .logo-sub { font-size: 7px; letter-spacing: 1.3px; margin-top: 1px; }
+  .logo { gap: 8px; }
 }
 
 /* ── GNB ── */
