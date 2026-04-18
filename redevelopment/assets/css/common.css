@@ -115,14 +115,6 @@ button, input, select, textarea { font-family: inherit; }
   background: var(--white);
   padding-top: env(safe-area-inset-top, 0);
   padding-top: constant(safe-area-inset-top, 0);
-  /* .header와 .mobile-tab-bar 모두 완전히 렌더링되도록 명시 */
-  display: block; visibility: visible;
-  contain: layout style;
-}
-.header-wrap .header { display: block !important; visibility: visible !important; }
-.header-wrap .mobile-tab-bar { display: none; }
-@media (max-width: 1024px) {
-  .header-wrap .mobile-tab-bar { display: block !important; visibility: visible !important; }
 }
 
 /* ── UTILITY BAR ── */
