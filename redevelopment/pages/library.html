@@ -29,7 +29,8 @@
     .uni-hero.lib-compact .uh-sub { font-size: 14px; max-width: 420px; }
     .uni-hero.lib-compact .uh-bc { margin-bottom: 14px; }
     .uni-hero.lib-compact .uh-label { margin-bottom: 12px; }
-    .uni-hero.lib-compact .uh-cards { width: 300px; gap: 10px; }
+    .uni-hero.lib-compact .uh-visual { display: flex; justify-content: center; align-items: center; }
+    .uni-hero.lib-compact .uh-cards { width: 300px; gap: 10px; margin: 0 auto; }
     .uni-hero.lib-compact .uh-card { padding: 14px 14px; }
     .uni-hero.lib-compact .uh-ci { width: 28px; height: 28px; margin-bottom: 6px; }
     .uni-hero.lib-compact .uh-ci i { font-size: 12px; }
@@ -221,6 +222,13 @@
 <div class="uni-hero lib-compact">
     <div class="hero-bg-photo"><img src="../jpg/hero_library.png" alt="세울엔지니어링 자료실"></div>
     <div class="inner">
+        <div class="uh-text">
+            <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>자료실</span></div>
+            <div class="uh-label">PROFESSIONAL ARCHIVE</div>
+            <h1>정비사업 <em>실무 자료</em>를 한곳에서</h1>
+            <p class="uh-sub">관계법령 · 서식·매뉴얼 · 주요뉴스 · 투자정보 — 정비사업에 필요한 공식 자료를 체계적으로 제공합니다</p>
+            <a href="alimtalk.html" class="lib-alimtalk-btn"><i class="fa-regular fa-comment-dots"></i> 소식받기 신청</a>
+        </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_library.png" alt="세울엔지니어링 자료실"></div>
             <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="switchCat('법령')"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>도시정비법·고시·공고·판례·질의회신 및 지침·규정</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('서식가이드')"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('주요뉴스')"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></div><div class="uh-card" id="investCard" style="cursor:pointer;" onclick="switchCat('투자정보')"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>투자정보</h4><p>매물·시세·투자 분석</p><span style="display:block;font-size:9px;color:rgba(195,165,105,0.7);margin-top:4px;"><i class="fa-solid fa-lock" style="margin-right:3px;"></i>회원 전용</span></div></div>
