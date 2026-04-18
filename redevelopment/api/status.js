@@ -41,7 +41,7 @@ module.exports = async function handler(req, res) {
       contact: '/pages/contact.html',
       areas: '/pages/areas.html',
       news: '/pages/news.html',
-      library: '/pages/library2.html'
+      library: '/pages/library.html'
     },
     chatbot: true,
     ssl: true,

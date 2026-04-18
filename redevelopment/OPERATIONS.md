@@ -113,7 +113,7 @@
 | 역할 | 경로 |
 |------|------|
 | 메인화면 | `redevelopment/index.html` |
-| 자료실 | `redevelopment/pages/library2.html` |
+| 자료실 | `redevelopment/pages/library.html` |
 | 뉴스 기사 | `redevelopment/downloads/news_*.html` |
 | 데이터 | `redevelopment/assets/data/mock-data.js` |
 | 뉴스 파일 매핑 | `redevelopment/index.html` newsFileMap (1091줄) |
@@ -154,7 +154,7 @@
 
 검수 대상:
 - 메인화면: https://seul21.vercel.app/
-- 자료실: https://seul21.vercel.app/pages/library2.html?cat=주요뉴스
+- 자료실: https://seul21.vercel.app/pages/library.html?cat=주요뉴스
 
 검수 항목:
 1. 메인화면 주요뉴스 섹션 → 기사 3건 노출 확인

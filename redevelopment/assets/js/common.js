@@ -25,7 +25,7 @@ const App = (() => {
       { href: `${B}/pages/vision.html`, label: '세울의 길', icon: 'fa-solid fa-road' },
       { href: `${B}/pages/services.html`, label: '사업분야', icon: 'fa-solid fa-diagram-project' },
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
-      { href: `${B}/pages/library2.html`, label: '자료실 2', icon: 'fa-solid fa-folder-open' },
+      { href: `${B}/pages/library2.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
       { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-calculator' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
     ];
@@ -178,7 +178,7 @@ const App = (() => {
         </div>
         <div class="footer-col">
           <h5>자료·서비스</h5>
-          <a href="${B}/pages/library2.html">자료실</a>
+          <a href="${B}/pages/library.html">자료실</a>
           <a href="${B}/pages/feasibility.html">사업성 검토</a>
         </div>
         <div class="footer-col">
@@ -219,7 +219,7 @@ const App = (() => {
           <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
           <span>사업성분석</span>
         </a>
-        <a href="${B}/pages/library2.html" class="${navActive('library2.html')?'active':''}">
+        <a href="${B}/pages/library.html" class="${navActive('library.html')?'active':''}">
           <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
           <span>자료실</span>
         </a>
@@ -363,7 +363,7 @@ const App = (() => {
         const q = searchField.value.trim();
         searchOverlay.classList.remove('open');
         unlockScroll();
-        location.href = `${B}/pages/library2.html?search=${encodeURIComponent(q)}`;
+        location.href = `${B}/pages/library.html?search=${encodeURIComponent(q)}`;
       }
     });
 
