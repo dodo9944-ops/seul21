@@ -224,12 +224,12 @@
             <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>자료실</span></div>
             <div class="uh-label">PROFESSIONAL ARCHIVE</div>
             <h1>정비사업 <em>실무 자료</em>를 한곳에서</h1>
-            <p class="uh-sub">법령·제도 / 고시·공고 / 서식·매뉴얼 / 주요뉴스 / 투자정보 — 정비사업에 필요한 공식 자료를 체계적으로 제공합니다</p>
-            <a href="alimtalk.html" class="lib-alimtalk-btn"><i class="fa-regular fa-comment-dots"></i> 소식받기 신청</a>
+            <p class="uh-sub">법령·제도 / 고시·공고 / 서식·매뉴얼 / 투자정보 — 정비사업에 필요한 공식 자료를 체계적으로 제공합니다</p>
+            <p class="uh-sub" style="font-size:12px;color:rgba(195,165,105,0.7);margin-top:8px"><i class="fa-solid fa-arrow-right" style="margin-right:4px"></i>주요뉴스는 <a href="library2.html" style="color:var(--gold);text-decoration:underline">자료실 2 — 실전 사례집</a>으로 이전되었습니다</p>
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_library.png" alt="세울엔지니어링 자료실"></div>
-            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="switchCat('법령')"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>법령·제도</h4><p>도시정비법 및 관련 법령</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('판례지침')"><div class="uh-ci"><i class="fa-solid fa-gavel"></i></div><h4>고시·공고</h4><p>판례·질의회신 및 지침·규정</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('서식가이드')"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('주요뉴스')"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></div><div class="uh-card" id="investCard" style="cursor:pointer;" onclick="switchCat('투자정보')"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>투자정보</h4><p>매물·시세·투자 분석</p><span style="display:block;font-size:9px;color:rgba(195,165,105,0.7);margin-top:4px;"><i class="fa-solid fa-lock" style="margin-right:3px;"></i>회원 전용</span></div><a href="location.html" class="uh-card" style="cursor:pointer;text-decoration:none;color:inherit;"><div class="uh-ci"><i class="fa-solid fa-map-location-dot"></i></div><h4>재개발지도</h4><p>전국 주요 구역 정보 확인</p></a></div>
+            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="switchCat('법령')"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>법령·제도</h4><p>도시정비법 및 관련 법령</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('판례지침')"><div class="uh-ci"><i class="fa-solid fa-gavel"></i></div><h4>고시·공고</h4><p>판례·질의회신 및 지침·규정</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('서식가이드')"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div><a href="library2.html" class="uh-card" style="cursor:pointer;text-decoration:none;color:inherit"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스 →</h4><p>자료실 2로 이전</p></a><div class="uh-card" id="investCard" style="cursor:pointer;" onclick="switchCat('투자정보')"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>투자정보</h4><p>매물·시세·투자 분석</p><span style="display:block;font-size:9px;color:rgba(195,165,105,0.7);margin-top:4px;"><i class="fa-solid fa-lock" style="margin-right:3px;"></i>회원 전용</span></div><a href="location.html" class="uh-card" style="cursor:pointer;text-decoration:none;color:inherit;"><div class="uh-ci"><i class="fa-solid fa-map-location-dot"></i></div><h4>재개발지도</h4><p>전국 주요 구역 정보 확인</p></a></div>
         </div>
     </div>
 </div>
@@ -273,14 +273,14 @@
 </div></div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260418n"></script>
-<script src="../assets/js/data-service.js?v=20260418n"></script>
-<script src="../assets/js/common.js?v=20260418n"></script>
+<script src="../assets/data/mock-data.js?v=20260418m"></script>
+<script src="../assets/js/data-service.js?v=20260418l"></script>
+<script src="../assets/js/common.js?v=20260418l"></script>
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}
 var now=new Date(),oneYearAgo=new Date(now.getTime()-365*864e5);
-var allItems=DataService.getAll('library').filter(function(i){if(i.category!=='주요뉴스')return true;return i.date&&new Date(i.date)>=oneYearAgo});
+var allItems=DataService.getAll('library').filter(function(i){return i.category!=='주요뉴스'});
 
 var PER=10,curPage=1,curCat='전체',curSort='date',searchQ='';
 
@@ -307,7 +307,6 @@ var catDefs=[
     {key:'법령',keys:['법령','법령·조례'],icon:'fa-scale-balanced',label:'법령·제도'},
     {key:'판례지침',keys:['관련판례','지침','판례·질의회신'],icon:'fa-gavel',label:'고시·공고'},
     {key:'서식가이드',keys:['서식','가이드'],icon:'fa-file-pen',label:'서식·매뉴얼'},
-    {key:'주요뉴스',keys:['주요뉴스'],icon:'fa-newspaper',label:'주요뉴스'},
     {key:'투자정보',keys:['투자정보'],icon:'fa-chart-line',label:'투자정보'}];
 function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){c['전체']++;catDefs.forEach(function(d){if(d.keys&&d.keys.indexOf(i.category)>=0)c[d.key]++})});return c}
 
@@ -317,17 +316,15 @@ el.innerHTML=
 '<div class="hs"><strong>'+cc['전체']+'</strong><span>전체 자료</span></div>'+
 '<div class="hs"><strong>'+cc['법령']+'</strong><span>법령·제도</span></div>'+
 '<div class="hs"><strong>'+cc['판례지침']+'</strong><span>고시·공고</span></div>'+
-'<div class="hs"><strong>'+cc['서식가이드']+'</strong><span>서식·매뉴얼</span></div>'+
-'<div class="hs"><strong>'+cc['주요뉴스']+'</strong><span>주요뉴스</span></div>'}();
+'<div class="hs"><strong>'+cc['서식가이드']+'</strong><span>서식·매뉴얼</span></div>'}();
 
 /* Hero inline stats */
 !function(){var cc=getCatCounts();
-var e1=document.getElementById('libTotal'),e2=document.getElementById('libLaw'),e3=document.getElementById('libCase'),e4=document.getElementById('libGuide'),e5=document.getElementById('libNews');
+var e1=document.getElementById('libTotal'),e2=document.getElementById('libLaw'),e3=document.getElementById('libCase'),e4=document.getElementById('libGuide');
 if(e1)e1.textContent=cc['전체']||0;
 if(e2)e2.textContent=cc['법령']||0;
 if(e3)e3.textContent=cc['판례지침']||0;
 if(e4)e4.textContent=cc['서식가이드']||0;
-if(e5)e5.textContent=cc['주요뉴스']||0;
 }();
 
 /* Tabs */

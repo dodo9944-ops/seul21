@@ -26,6 +26,7 @@ const App = (() => {
       { href: `${B}/pages/services.html`, label: '사업분야', icon: 'fa-solid fa-diagram-project' },
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
+      { href: `${B}/pages/library2.html`, label: '자료실 2', icon: 'fa-solid fa-book-open' },
       { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-calculator' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
     ];
@@ -105,6 +106,7 @@ const App = (() => {
             { href:`${B}/pages/portfolio.html?type=소규모정비`, label:'소규모정비 실적' },
           ]},
           { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open' },
+          { href:`${B}/pages/library2.html`, label:'자료실 2', icon:'fa-solid fa-book-open' },
           { href:`${B}/pages/feasibility.html`, label:'사업성 검토', icon:'fa-solid fa-calculator', sub:[
             { href:`${B}/pages/feasibility.html`, label:'사업성 분석 도구' },
             { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
