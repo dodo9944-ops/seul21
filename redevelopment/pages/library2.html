@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자료실 2 — 실전 사례집 — (주)세울엔지니어링</title>
+    <meta name="description" content="정비사업 실전 사례집 — 재개발·재건축·소규모정비·신통기획 실제 진행 사례와 핵심 교훈을 정리한 케이스스터디 자료실.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260418k">
+    <style>
+    /* === 자료실 2 — 실전 사례집 === */
+    .lib2-hero{background:linear-gradient(135deg,var(--brand-dark) 0%,var(--brand-navy) 100%);color:#fff;padding:48px 0 36px;position:relative;overflow:hidden}
+    .lib2-hero::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><circle cx="30" cy="30" r="1" fill="rgba(195,165,105,0.08)"/></svg>');opacity:.5}
+    .lib2-hero .inner{position:relative;z-index:1}
+    .lib2-bc{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.55);margin-bottom:14px}
+    .lib2-bc a{color:rgba(255,255,255,.55);transition:color .2s}
+    .lib2-bc a:hover{color:var(--gold)}
+    .lib2-bc i{font-size:9px;opacity:.5}
+    .lib2-bc .cur{color:var(--gold)}
+    .lib2-label{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:10px;text-transform:uppercase}
+    .lib2-hero h1{font-size:34px;font-weight:800;margin-bottom:12px;letter-spacing:-.5px}
+    .lib2-hero .lead{font-size:14px;color:rgba(255,255,255,.65);max-width:620px;line-height:1.7}
+    @media(max-width:768px){.lib2-hero{padding:32px 0 28px}.lib2-hero h1{font-size:24px}.lib2-hero .lead{font-size:13px}}
+
+    /* === 카테고리 필터 === */
+    .lib2-cats{display:flex;gap:6px;flex-wrap:wrap;margin:24px 0 20px}
+    .lib2-cat{padding:8px 16px;border-radius:10px;background:#fff;border:1.5px solid var(--gray-200);font-size:13px;font-weight:600;color:var(--gray-600);cursor:pointer;transition:all .2s;font-family:var(--font)}
+    .lib2-cat.on{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark)}
+    .lib2-cat:not(.on):hover{border-color:var(--gold);color:var(--brand-dark)}
+    @media(max-width:768px){.lib2-cats{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}.lib2-cat{padding:7px 13px;font-size:12px;flex-shrink:0;white-space:nowrap}}
+
+    /* === 사례 카드 === */
+    .case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    @media(max-width:900px){.case-grid{grid-template-columns:1fr}}
+    .case-card{background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:24px;transition:all .25s;position:relative;overflow:hidden}
+    .case-card:hover{border-color:var(--gold);box-shadow:0 10px 30px rgba(195,165,105,.12);transform:translateY(-3px)}
+    .case-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brand-dark),var(--gold));opacity:0;transition:opacity .25s}
+    .case-card:hover::before{opacity:1}
+    .case-meta{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+    .case-cat-tag{padding:4px 10px;border-radius:6px;background:var(--gray-50);color:var(--brand-dark);font-size:11px;font-weight:700;letter-spacing:.3px}
+    .case-cat-tag.재개발{background:rgba(195,165,105,.15);color:#8a6c2f}
+    .case-cat-tag.재건축{background:rgba(42,125,225,.12);color:#1d5fa8}
+    .case-cat-tag.소규모정비{background:rgba(76,175,80,.12);color:#3a7a3d}
+    .case-cat-tag.신통기획{background:rgba(214,66,58,.1);color:#a8332b}
+    .case-area{font-size:11.5px;color:var(--gray-500);font-weight:500}
+    .case-area i{color:var(--gold);margin-right:4px}
+    .case-time{margin-left:auto;font-size:11px;color:var(--gray-400)}
+    .case-time i{margin-right:3px}
+    .case-card h3{font-size:17px;font-weight:800;color:var(--gray-900);margin-bottom:10px;line-height:1.4;letter-spacing:-.3px}
+    .case-summary{font-size:13.5px;color:var(--gray-600);line-height:1.65;margin-bottom:16px}
+    .case-points{background:var(--gray-50);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+    .case-points-title{font-size:11px;font-weight:700;color:var(--brand-dark);letter-spacing:.5px;margin-bottom:8px;text-transform:uppercase}
+    .case-points ul{list-style:none;padding:0;margin:0}
+    .case-points li{font-size:12.5px;color:var(--gray-700);padding-left:14px;position:relative;line-height:1.6;margin-bottom:4px}
+    .case-points li::before{content:'•';position:absolute;left:2px;color:var(--gold);font-weight:700}
+    .case-lessons{padding-top:14px;border-top:1px dashed var(--gray-200);font-size:12.5px;color:var(--gray-700);line-height:1.65;font-style:italic}
+    .case-lessons strong{color:var(--brand-dark);font-style:normal;font-weight:700;letter-spacing:.3px}
+    .case-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:14px;border-top:1px solid var(--gray-100);font-size:11.5px;color:var(--gray-400)}
+    .case-id{font-family:'Courier New',monospace;letter-spacing:.5px}
+    .case-cta{color:var(--brand-dark);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:color .2s}
+    .case-cta:hover{color:var(--gold)}
+
+    .empty-state{text-align:center;padding:60px 20px;color:var(--gray-400)}
+    .empty-state i{font-size:48px;color:var(--gray-200);margin-bottom:16px;display:block}
+    .empty-state h3{font-size:16px;color:var(--gray-600);margin-bottom:6px}
+    .empty-state p{font-size:13px}
+
+    /* CTA 배너 */
+    .lib2-cta{background:linear-gradient(135deg,#1a2238 0%,#0A0F1C 100%);color:#fff;border-radius:16px;padding:32px 28px;margin:40px 0 0;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .lib2-cta-text h3{font-size:18px;font-weight:800;margin-bottom:6px;color:var(--gold)}
+    .lib2-cta-text p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.6}
+    .lib2-cta-btn{padding:12px 24px;background:var(--gold);color:var(--brand-dark);border-radius:10px;font-weight:700;font-size:13.5px;text-decoration:none;white-space:nowrap;transition:all .2s}
+    .lib2-cta-btn:hover{background:#d4b577;transform:translateY(-1px)}
+    @media(max-width:600px){.lib2-cta{padding:24px 20px;flex-direction:column;align-items:stretch;text-align:center}.lib2-cta-btn{justify-content:center;display:inline-flex}}
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="lib2-hero">
+    <div class="inner">
+        <div class="lib2-bc">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span class="cur">자료실 2</span>
+        </div>
+        <div class="lib2-label">CASE STUDY ARCHIVE</div>
+        <h1>정비사업 실전 사례집</h1>
+        <p class="lead">재개발·재건축·소규모정비·신통기획 — 실제 진행된 사업 사례를 카테고리별로 정리하고 핵심 의사결정과 교훈을 분석합니다. 유사 사업을 검토 중이라면 반드시 참고하세요.</p>
+    </div>
+</section>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="lib2-cats" id="lib2Cats"></div>
+        <div class="case-grid" id="caseGrid"></div>
+
+        <div class="lib2-cta">
+            <div class="lib2-cta-text">
+                <h3>유사 사업장 컨설팅이 필요하신가요?</h3>
+                <p>본 사례 분석을 토대로 귀하의 사업장에 맞춤형 전략을 제안드립니다.</p>
+            </div>
+            <a href="contact.html" class="lib2-cta-btn"><i class="fa-solid fa-comments" style="margin-right:6px"></i>컨설팅 상담 신청</a>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=20260418k"></script>
+<script src="../assets/js/data-service.js?v=20260418k"></script>
+<script src="../assets/js/common.js?v=20260418k"></script>
+<script>
+(function(){
+    var cases = (typeof MOCK !== 'undefined' && MOCK.library2) ? MOCK.library2 : [];
+    var cats = ['전체'].concat(Array.from(new Set(cases.map(function(c){return c.category}))));
+    var curCat = '전체';
+
+    var catsEl = document.getElementById('lib2Cats');
+    var gridEl = document.getElementById('caseGrid');
+
+    function renderCats(){
+        catsEl.innerHTML = cats.map(function(c){
+            var cnt = c==='전체' ? cases.length : cases.filter(function(x){return x.category===c}).length;
+            return '<button class="lib2-cat'+(curCat===c?' on':'')+'" data-cat="'+c+'">'+c+' <span style="opacity:.6;margin-left:3px">'+cnt+'</span></button>';
+        }).join('');
+        catsEl.querySelectorAll('.lib2-cat').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                curCat = btn.dataset.cat;
+                renderCats();
+                renderGrid();
+            });
+        });
+    }
+
+    function renderGrid(){
+        var filtered = curCat==='전체' ? cases : cases.filter(function(c){return c.category===curCat});
+        if (filtered.length === 0) {
+            gridEl.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fa-solid fa-folder-open"></i><h3>해당 카테고리에 사례가 없습니다</h3><p>다른 카테고리를 선택해보세요</p></div>';
+            return;
+        }
+        gridEl.innerHTML = filtered.map(function(c){
+            var pointsHtml = c.keyPoints.map(function(p){return '<li>'+p+'</li>'}).join('');
+            return ''
+                +'<article class="case-card">'
+                +  '<div class="case-meta">'
+                +    '<span class="case-cat-tag '+c.category+'">'+c.category+'</span>'
+                +    '<span class="case-area"><i class="fa-solid fa-location-dot"></i>'+c.area+'</span>'
+                +    '<span class="case-time"><i class="fa-regular fa-clock"></i>'+c.readTime+'분 읽기</span>'
+                +  '</div>'
+                +  '<h3>'+c.title+'</h3>'
+                +  '<p class="case-summary">'+c.summary+'</p>'
+                +  '<div class="case-points">'
+                +    '<div class="case-points-title">핵심 포인트</div>'
+                +    '<ul>'+pointsHtml+'</ul>'
+                +  '</div>'
+                +  '<div class="case-lessons"><strong>교훈 ›</strong> '+c.lessons+'</div>'
+                +  '<div class="case-footer">'
+                +    '<span class="case-id">'+c.id.toUpperCase()+' · '+c.date+'</span>'
+                +    '<a href="contact.html?case='+c.id+'" class="case-cta">유사 사업 상담 <i class="fa-solid fa-arrow-right"></i></a>'
+                +  '</div>'
+                +'</article>';
+        }).join('');
+    }
+
+    renderCats();
+    renderGrid();
+})();
+</script>
+</body>
+</html>
