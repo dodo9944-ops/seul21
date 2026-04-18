@@ -429,13 +429,12 @@
         .pm-title { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.5px; margin-bottom: 6px; }
         .pm-summary { font-size: 14px; color: rgba(255,255,255,0.5); }
         .pm-close {
-            position: fixed; top: 112px; right: 20px; z-index: 10001;
-            width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.25); color: #fff;
-            font-size: 18px; cursor: pointer; transition: all 0.2s;
+            position: absolute; top: 20px; right: 20px;
+            width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.06); border: none; color: rgba(255,255,255,0.5);
+            font-size: 16px; cursor: pointer; transition: all 0.2s;
         }
-        .pm-close:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
-        @media(max-width:768px){ .pm-close { top:80px; right:14px; } }
+        .pm-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
         .pm-body { padding: 32px 36px; overflow-y: auto; flex: 1; }
         .pm-section { margin-bottom: 28px; }
         .pm-section:last-child { margin-bottom: 0; }
@@ -612,7 +611,7 @@
 
         <div class="inner">
             <div class="hero-label"><i class="fa-solid fa-shield-halved"></i> 정비사업 전문 엔지니어링</div>
-            <h1>도시의 가치를 <em>다시 세우는</em><br>세울엔지니어링</h1>
+            <h1>도시의 가치를 <em>다시 세우는</em><br>정비사업 파트너</h1>
             <p class="hero-subtitle">재개발·재건축·소규모정비사업 전 과정에서 사업성 검토, 인허가 대응, 조합 운영지원, 이해관계 조율까지 체계적으로 수행합니다.</p>
 
             <div class="hero-actions">
@@ -830,10 +829,10 @@
 .mp-overlay.open{opacity:1;pointer-events:auto}
 .mp-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
 .mp-overlay.open .mp-modal{transform:translateY(0) scale(1)}
-.mp-close{position:fixed;top:112px;right:20px;z-index:10001;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.85);border:1.5px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.mp-close{position:absolute;top:-20px;right:-20px;z-index:20;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.85);border:2px solid rgba(255,255,255,.3);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.5)}
 .mp-close:hover{background:#0A0F1C;transform:scale(1.1)}
-@media(max-width:768px){.mp-close{top:80px;right:14px}}
-.mp-hero{width:100%;height:300px;position:relative;overflow:hidden}
+@media(max-width:540px){.mp-close{top:-16px;right:-16px;width:38px;height:38px;font-size:15px}}
+.mp-hero{width:100%;height:300px;position:relative;overflow:hidden;border-radius:18px 18px 0 0}
 .mp-hero img{width:100%;height:100%;object-fit:cover;display:block}
 .mp-hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.75) 0%,rgba(10,15,28,.15) 50%,transparent 100%);pointer-events:none}
 .mp-title-area{position:absolute;bottom:0;left:0;right:0;padding:24px 32px;z-index:2}
@@ -896,8 +895,7 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260418x1"></script>
-<script src="assets/data/areas-data.js?v=20260411"></script>
+<script src="assets/data/mock-data.js?v=20260419a"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
 <script src="assets/js/common.js?v=20260418rv4"></script>
 
@@ -1104,7 +1102,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var today=new Date(); today.setHours(0,0,0,0);
         var cutoff=new Date(today); cutoff.setDate(cutoff.getDate()-7);
         var cutStr=cutoff.toISOString().slice(0,10);
-        var newsFileMap={'news0329':'downloads/news_20260329.html','news0330':'downloads/news_20260330.html','news0331':'downloads/news_20260331.html','news0401':'downloads/news_20260401.html','news0402':'downloads/news_20260402.html','news0405':'downloads/news_20260405.html','news0408':'downloads/news_20260408.html','news0408a':'downloads/news_20260408a.html','news0408b':'downloads/news_20260408b.html','news0408c':'downloads/news_20260408c.html','news0408d':'downloads/news_20260408d.html','news0409a':'downloads/news_20260409a.html','news0409b':'downloads/news_20260409b.html','news0409c':'downloads/news_20260409c.html','news0409d':'downloads/news_20260409d.html','news0409e':'downloads/news_20260409e.html','news0409f':'downloads/news_20260409f.html','news0409g':'downloads/news_20260409g.html','news0410a':'downloads/news_20260410a.html','news0410b':'downloads/news_20260410b.html','news0410c':'downloads/news_20260410c.html','news0410d':'downloads/news_20260410d.html','news0411a':'downloads/news_20260411a.html','news0411b':'downloads/news_20260411b.html','news0411c':'downloads/news_20260411c.html','news0411d':'downloads/news_20260411d.html','news0411e':'downloads/news_20260411e.html','news0411f':'downloads/news_20260411f.html','news0411g':'downloads/news_20260411g.html','news0411h':'downloads/news_20260411h.html','news0410e':'downloads/news_20260410e.html','news0410f':'downloads/news_20260410f.html','news0410g':'downloads/news_20260410g.html','news0411i':'downloads/news_20260411i.html','news0411j':'downloads/news_20260411j.html','news0411k':'downloads/news_20260411k.html','news0412a':'downloads/news_20260412a.html','news0412b':'downloads/news_20260412b.html','news0412c':'downloads/news_20260412c.html','news0412d':'downloads/news_20260412d.html','news0412e':'downloads/news_20260412e.html','news0412f':'downloads/news_20260412f.html','news0410h':'downloads/news_20260410h.html','news0413a':'downloads/news_20260413a.html','news0413b':'downloads/news_20260413b.html','news0413c':'downloads/news_20260413c.html','news0414a':'downloads/news_20260414a.html','news0414b':'downloads/news_20260414b.html','news0414c':'downloads/news_20260414c.html','news0414d':'downloads/news_20260414d.html','news0415a':'downloads/news_20260415a.html','news0415b':'downloads/news_20260415b.html','news0415c':'downloads/news_20260415c.html','news0415d':'downloads/news_20260415d.html','news0415e':'downloads/news_20260415e.html','news0415f':'downloads/news_20260415f.html','news0415g':'downloads/news_20260415g.html','news0418a':'downloads/news_20260418a.html','news0418b':'downloads/news_20260418b.html','news0418c':'downloads/news_20260418c.html','news0418d':'downloads/news_20260418d.html','news0418e':'downloads/news_20260418e.html','news0418f':'downloads/news_20260418f.html','news0418g':'downloads/news_20260418g.html','lib48':'downloads/news_20260405.html'};
+        var newsFileMap={'news0329':'downloads/news_20260329.html','news0330':'downloads/news_20260330.html','news0331':'downloads/news_20260331.html','news0401':'downloads/news_20260401.html','news0402':'downloads/news_20260402.html','news0403':'downloads/news_20260403.html','news0404':'downloads/news_20260404.html','news0405':'downloads/news_20260405.html','news0407a':'downloads/news_20260407a.html','news0407b':'downloads/news_20260407b.html','news0407c':'downloads/news_20260407c.html','news0407d':'downloads/news_20260407d.html','news0408':'downloads/news_20260408.html','news0408a':'downloads/news_20260408a.html','news0408b':'downloads/news_20260408b.html','news0408c':'downloads/news_20260408c.html','news0408d':'downloads/news_20260408d.html','news0409a':'downloads/news_20260409a.html','news0409b':'downloads/news_20260409b.html','news0409c':'downloads/news_20260409c.html','news0409d':'downloads/news_20260409d.html','news0409e':'downloads/news_20260409e.html','news0409f':'downloads/news_20260409f.html','news0409g':'downloads/news_20260409g.html','news0410a':'downloads/news_20260410a.html','news0410b':'downloads/news_20260410b.html','news0410c':'downloads/news_20260410c.html','news0410d':'downloads/news_20260410d.html','lib48':'downloads/news_20260405.html'};
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
@@ -1160,7 +1158,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             'lib47':{ext:'downloads/files/lib47_도시정비법_질의회신_사례_국토부.pdf'},
             'lib48':{ext:'downloads/files/lib48_서울시_정비사업_사업성개선_기본계획재정비_2024.pdf'}
         };
-        var _catKeyMap={'법령':'법령','법령·조례':'법령','관련판례':'판례지침','지침':'판례지침','판례·질의회신':'판례지침','서식':'서식가이드','가이드':'서식가이드','주요뉴스':'주요뉴스','투자정보':'투자정보'};
+        var _catKeyMap={'법령':'법령','법령·조례':'법령','관련판례':'판례지침','지침':'판례지침','판례·질의회신':'판례지침','서식':'서식가이드','가이드':'서식가이드','절차·서류':'서식가이드','주요뉴스':'주요뉴스','칼럼':'주요뉴스','정책':'주요뉴스','일반':'주요뉴스','투자정보':'투자정보','투자':'투자정보','시장분석':'투자정보','분석':'투자정보','개발호재':'투자정보','양도소득세':'투자정보','취득세':'투자정보','종합부동산세':'투자정보'};
         window.mainLibDownload=function(id,cat){
             var m=window._libFileMap[id];
             if(!m){

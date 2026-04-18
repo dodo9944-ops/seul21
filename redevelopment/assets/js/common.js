@@ -410,7 +410,7 @@ const App = (() => {
 
       /* 현재 페이지 위치 판별 */
       var curPath = location.pathname;
-      var isMain = (curPath === '/' || curPath.endsWith('/index.html') || curPath.endsWith('/home.html') || curPath.endsWith('/redevelopment/'));
+      var isMain = (curPath === '/' || curPath.endsWith('/index.html') || curPath.endsWith('/redevelopment/'));
       var curIdx = -99;
 
       if (isMain) {

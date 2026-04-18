@@ -277,7 +277,7 @@
 </div></div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260418x1"></script>
+<script src="../assets/data/mock-data.js?v=20260419a"></script>
 <script src="../assets/js/data-service.js?v=20260418k"></script>
 <script src="../assets/js/common.js?v=20260418rv4"></script>
 <script>
@@ -310,9 +310,9 @@ var catDefs=[
     {key:'전체',keys:null,icon:'',label:'전체'},
     {key:'법령',keys:['법령','법령·조례'],icon:'fa-scale-balanced',label:'법령·제도'},
     {key:'판례지침',keys:['관련판례','지침','판례·질의회신'],icon:'fa-gavel',label:'고시·공고'},
-    {key:'서식가이드',keys:['서식','가이드'],icon:'fa-file-pen',label:'서식·매뉴얼'},
-    {key:'주요뉴스',keys:['주요뉴스'],icon:'fa-newspaper',label:'주요뉴스'},
-    {key:'투자정보',keys:['투자정보'],icon:'fa-chart-line',label:'투자정보'}];
+    {key:'서식가이드',keys:['서식','가이드','절차·서류'],icon:'fa-file-pen',label:'서식·매뉴얼'},
+    {key:'주요뉴스',keys:['주요뉴스','칼럼','정책','일반'],icon:'fa-newspaper',label:'주요뉴스'},
+    {key:'투자정보',keys:['투자정보','투자','시장분석','분석','개발호재','양도소득세','취득세','종합부동산세'],icon:'fa-chart-line',label:'투자정보'}];
 function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){c['전체']++;catDefs.forEach(function(d){if(d.keys&&d.keys.indexOf(i.category)>=0)c[d.key]++})});return c}
 
 /* Hero stats */
@@ -429,9 +429,9 @@ var fileMap={
 'lib1':{ext:'../downloads/files/lib1_조합설립인가_신청서.pdf',web:'../downloads/form_association.html'},
 'lib2':{ext:'../downloads/files/lib2_관리처분_변경인가_신청서.pdf',web:'../downloads/form_management.html'},
 'lib3':{ext:'../downloads/files/lib3_총회_위임장.pdf',web:'../downloads/form_proxy.html'},
-'lib4':{ext:'../downloads/files/lib4_도시정비법_개정요약.pdf',gov:'https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=259069',web:'../downloads/law_summary_2026.html',label:'법제처 원문'},
-'lib5':{ext:'../downloads/files/lib5_서울시_가이드라인.pdf',gov:'https://news.seoul.go.kr/citybuild/archives/507738',web:'../downloads/guide_seoul_guidelines.html',label:'서울시 원문'},
-'lib6':{ext:'../downloads/files/lib6_소규모주택정비법.pdf',gov:'https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=243625',web:'../downloads/guide_small_housing.html',label:'법제처 원문'},
+'lib4':{ext:'../downloads/files/lib4_도시정비법_개정요약.pdf',web:'../downloads/law_summary_2026.html'},
+'lib5':{ext:'../downloads/files/lib5_서울시_가이드라인.pdf',web:'../downloads/guide_seoul_guidelines.html'},
+'lib6':{ext:'../downloads/files/lib6_소규모주택정비법.pdf',web:'../downloads/guide_small_housing.html'},
 'lib7':{ext:'../downloads/files/lib7_업무체크리스트.pdf',web:'../downloads/checklist_steps.html'},
 'lib8':{ext:'../downloads/files/lib8_분담금_산정_가이드.pdf',web:'../downloads/guide_burden.html'},
 'lib9':{ext:'../downloads/files/lib9_시공사_선정_해설.pdf',web:'../downloads/guide_contractor.html'},
@@ -446,13 +446,13 @@ var fileMap={
 'lib18':{ext:'../downloads/files/lib18_이주보상_지침.pdf',web:'../downloads/guide_relocation.html'},
 'lib19':{ext:'../downloads/files/lib19_1기신도시_특별법.pdf',web:'../downloads/news_new_town.html'},
 'lib20':{ext:'../downloads/files/lib20_공공재개발_후보지.pdf',web:'../downloads/news_public_redevelopment.html'},
-'lib21':{ext:'../downloads/files/lib21_추진위원회_운영규정.pdf',gov:'https://law.go.kr',web:'../downloads/guide_committee_rules.html',label:'법제처 원문'},
-'lib22':{ext:'../downloads/files/lib22_서울시_의사진행_표준운영규정.pdf',gov:'https://cleanup.seoul.go.kr',label:'정비사업몽땅'},
-'lib23':{ext:'../downloads/files/lib23_서울시_정비사업_실무매뉴얼.pdf',gov:'https://news.seoul.go.kr/citybuild/',label:'서울시 도시재생'},
+'lib21':{ext:'../downloads/files/lib21_추진위원회_운영규정.pdf',web:'../downloads/guide_committee_rules.html'},
+'lib22':{ext:'../downloads/files/lib22_서울시_의사진행_표준운영규정.pdf'},
+'lib23':{ext:'../downloads/files/lib23_서울시_정비사업_실무매뉴얼.pdf'},
 'lib30':{ext:'../downloads/files/lib30_도시정비법_질의회신_사례집.pdf'},
 'lib31':{ext:'../downloads/files/lib31_서울시_도시정비법령_질의회신_2024.pdf'},
 'lib33':{ext:'../downloads/files/lib33_경기도_정비사업_질의회신_매뉴얼.pdf'},
-'lib34':{ext:'../downloads/files/lib34_서울시_도시정비_조례.pdf',gov:'https://cleanup.seoul.go.kr',label:'정비사업몽땅'},
+'lib34':{ext:'../downloads/files/lib34_서울시_도시정비_조례.pdf'},
 'lib40':{ext:'../downloads/files/lib40_서울시_도시정비조례_2024개정.pdf'},
 'lib41':{ext:'../downloads/files/lib41_도시정비법_질의회신_판례집.pdf'},
 'lib42':{ext:'../downloads/files/lib42_제주도_재건축재개발_업무편람_2025.pdf'},
