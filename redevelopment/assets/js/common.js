@@ -39,8 +39,8 @@ const App = (() => {
     const user = DataService.getCurrentUser();
 
     const utilRight = isLoggedIn
-      ? `<a href="${B}/pages/mypage.html">${user.name}님</a><a href="#" id="logoutBtn">로그아웃</a>`
-      : `<a href="${B}/pages/login.html">로그인</a><a href="${B}/pages/register.html">회원가입</a><a href="${B}/pages/webhard.html" target="_blank">웹하드</a>`;
+      ? `<a href="${B}/pages/mypage.html">${user.name}님</a><a href="#" id="logoutBtn">로그아웃</a><a href="${B}/pages/location.html">재개발 지도</a>`
+      : `<a href="${B}/pages/login.html">로그인</a><a href="${B}/pages/register.html">회원가입</a><a href="${B}/pages/webhard.html" target="_blank">웹하드</a><a href="${B}/pages/location.html">재개발 지도</a>`;
 
     return `
     <div class="header-wrap" id="headerWrap">
@@ -133,8 +133,8 @@ const App = (() => {
       </nav>
       <div class="drawer-footer">
         ${isLoggedIn
-          ? `<a href="${B}/pages/mypage.html" class="btn btn-outline btn-md">마이페이지</a><a href="#" class="btn btn-primary btn-md" id="drawerLogout">로그아웃</a>`
-          : `<a href="${B}/pages/login.html" class="btn btn-outline btn-md">로그인</a><a href="${B}/pages/register.html" class="btn btn-primary btn-md">회원가입</a><a href="${B}/pages/webhard.html" target="_blank" class="btn btn-outline btn-md">웹하드</a>`}
+          ? `<a href="${B}/pages/mypage.html" class="btn btn-outline btn-md">마이페이지</a><a href="#" class="btn btn-primary btn-md" id="drawerLogout">로그아웃</a><a href="${B}/pages/location.html" class="btn btn-outline btn-md">재개발 지도</a>`
+          : `<a href="${B}/pages/login.html" class="btn btn-outline btn-md">로그인</a><a href="${B}/pages/register.html" class="btn btn-primary btn-md">회원가입</a><a href="${B}/pages/webhard.html" target="_blank" class="btn btn-outline btn-md">웹하드</a><a href="${B}/pages/location.html" class="btn btn-outline btn-md">재개발 지도</a>`}
       </div>
     </aside>
 
