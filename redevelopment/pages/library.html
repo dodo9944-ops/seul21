@@ -58,8 +58,13 @@
     .cat-tab:not(.on):hover{background:#fff;color:var(--gray-800);box-shadow:0 1px 4px rgba(0,0,0,.04)}
     .cat-tab:not(.on):hover i{opacity:.7}
     @media(max-width:768px){
-        .cat-wrap{display:none!important}
-        .page-body.lib-page{padding-top:0}
+        .cat-wrap{position:fixed!important;top:58px;left:0;right:0;z-index:9999;padding:6px 16px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06);border-bottom:1px solid var(--gray-100);transform:translateZ(0);-webkit-backface-visibility:hidden;will-change:transform}
+        .page-body.lib-page{padding-top:64px}
+        .cat-tabs{flex-wrap:nowrap!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;gap:3px!important;padding:3px!important;border-radius:8px}
+        .cat-tabs::-webkit-scrollbar{display:none}
+        .cat-tab{padding:5px 9px!important;font-size:10.5px!important;white-space:nowrap;flex-shrink:0;gap:4px;border-radius:6px}
+        .cat-tab i{display:none!important}
+        .cat-tab .cnt{min-width:15px;height:15px;padding:0 4px;font-size:8.5px!important;border-radius:8px}
     }
 
     /* === Control Bar === */
