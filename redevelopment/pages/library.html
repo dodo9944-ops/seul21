@@ -15,69 +15,94 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260419hero5am">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260419unified">
     <style>
     /* ================================================================
        자료실 — 정비사업 전문 아카이브 (Premium Redesign)
        ================================================================ */
 
-    /* === 2026-04-19: 자료실 히어로 영역 레이아웃 정렬 및 잘림 수정 === */
+    /* === 2026-04-19: 자료실 히어로 통합 반응형 재구조 ===
+       원인: .uni-hero 풀너비(100vw) 배경 vs .inner max-width:1280px 콘텐츠
+            → 서로 다른 기준으로 반응하여 브라우저 축소 시 배경만 유지, 콘텐츠만 축소
+       조치: max-width 제약을 외곽 컨테이너로 이동, 배경·콘텐츠 전부 같은 단위에서 스케일 */
     html, body { overflow-x: hidden; max-width: 100vw; }
 
-    /* 1. 히어로 전체 높이 재정의 — 헤더 높이 고려, 화면 기준 min-height */
+    /* 통합 컨테이너 — 배경+콘텐츠 같은 1280px 기준, 브라우저 축소 시 전체가 함께 반응 */
     .uni-hero.lib-compact {
-      min-height: calc(100vh - 120px);
-      padding-top: 140px;
-      padding-bottom: 60px;
-      display: flex;
-      align-items: center;
-      background-size: cover;
-      background-position: center center;
+      max-width: 1280px;
+      width: calc(100% - 48px);
+      margin: 32px auto;
+      padding: 64px 56px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #0F1D35 0%, #142644 40%, #0A0F1C 100%);
+      display: block;
+      min-height: auto;
+    }
+    /* 기존 풀너비용 ::before/::after 장식은 새 컨테이너에 맞게 재조정 */
+    .uni-hero.lib-compact::before,
+    .uni-hero.lib-compact::after { border-radius: 24px; }
+
+    /* 배경 사진 — 같은 컨테이너 내부 absolute, 부모 크기 기준으로 반응 */
+    .uni-hero.lib-compact .hero-bg-photo {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 58%;
+      height: 100%;
+      z-index: 0;
+      border-radius: 0 24px 24px 0;
     }
 
-    /* 2. 상단 잘림 방지 — inner 컨테이너 */
+    /* .inner 의 이중 max-width 제거 — 부모가 이미 max-width 1280 이므로 풀너비 채움 */
     .uni-hero.lib-compact .inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 40px;
+      max-width: none;
       width: 100%;
-      /* 3. 좌우 균형 — 텍스트 1.1fr vs 카드 0.9fr */
+      margin: 0;
+      padding: 0;
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       align-items: center;
       gap: 40px;
+      position: relative;
+      z-index: 2;
     }
 
     /* 텍스트 영역 */
+    .uni-hero.lib-compact .uh-text { position: relative; z-index: 2; }
     .uni-hero.lib-compact .uh-text h1 { font-size: 32px; margin-bottom: 10px; }
-    .uni-hero.lib-compact .uh-sub { font-size: 14px; max-width: 420px; }
+    .uni-hero.lib-compact .uh-sub { font-size: 14px; max-width: 100%; }
     .uni-hero.lib-compact .uh-bc { margin-bottom: 14px; }
     .uni-hero.lib-compact .uh-label { margin-bottom: 12px; }
 
-    /* 4. 카드 영역 위치 고정 — 흐트러짐 방지 */
-    .uni-hero.lib-compact .uh-visual { width: 100%; }
+    /* 카드 영역 — grid 2열, 부모 컨테이너에 맞춰 유동 */
+    .uni-hero.lib-compact .uh-visual { width: 100%; position: relative; z-index: 2; }
     .uni-hero.lib-compact .uh-cards {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 16px;
       width: 100%;
-      transform: translateY(20px);
     }
-    .uni-hero.lib-compact .uh-card { padding: 18px 16px; }
+    .uni-hero.lib-compact .uh-card { padding: 16px 14px; }
     .uni-hero.lib-compact .uh-ci { width: 30px; height: 30px; margin-bottom: 8px; }
     .uni-hero.lib-compact .uh-ci i { font-size: 13px; }
     .uni-hero.lib-compact .uh-card h4 { font-size: 13px; margin-bottom: 3px; }
     .uni-hero.lib-compact .uh-card p { font-size: 11px; line-height: 1.5; }
 
-    /* 5. 모바일 대응 — 잘림 방지 핵심 */
+    /* 모바일: 단일 컬럼, 배경 전폭으로 흐림 */
     @media (max-width: 768px) {
       .uni-hero.lib-compact {
-        min-height: auto;
-        padding-top: 120px;
-        padding-bottom: 60px;
+        width: calc(100% - 24px);
+        margin: 16px auto;
+        padding: 40px 28px;
+        border-radius: 16px;
       }
-      .uni-hero.lib-compact .inner { grid-template-columns: 1fr; gap: 32px; padding: 0 20px; }
-      .uni-hero.lib-compact .uh-cards { transform: none; }
+      .uni-hero.lib-compact .hero-bg-photo {
+        width: 100%;
+        opacity: 0.18;
+        border-radius: 16px;
+      }
+      .uni-hero.lib-compact .inner { grid-template-columns: 1fr; gap: 28px; }
       .uni-hero.lib-compact .uh-text h1 { font-size: 24px; }
     }
     @media (max-width: 600px) {
