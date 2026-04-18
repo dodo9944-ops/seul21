@@ -58,15 +58,16 @@
       </div>
       <div id="chat-footer">© (주)세울엔지니어링 · 실시간 스마트 상담 시스템</div>
     </div>
-    <button id="chat-toggle" aria-label="카카오톡 상담하기">
+    <button id="chat-toggle" aria-label="상담하기">
       <div id="chat-toggle-inner">
-        <svg id="chat-icon-open" width="26" height="26" viewBox="0 0 36 36" fill="#3C1E1E" aria-hidden="true">
-          <path d="M18 5C9.716 5 3 10.42 3 17.105c0 4.217 2.67 7.92 6.73 10.02-.297 1.09-1.077 3.955-1.232 4.57-.192.76.28.75.588.547.242-.16 3.85-2.62 5.41-3.68 1.147.17 2.325.258 3.504.258 8.284 0 15-5.42 15-12.105C33 10.42 26.284 5 18 5z"/>
+        <svg id="chat-icon-open" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
         </svg>
-        <svg id="chat-icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3C1E1E" stroke-width="2.5" stroke-linecap="round" style="display:none">
+        <svg id="chat-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="display:none">
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </div>
+      <span id="chat-toggle-label">실시간 상담</span>
     </button>
   </div>`;
 
@@ -79,24 +80,28 @@
       font-family:'Noto Sans KR',-apple-system,sans-serif;
     }
 
-    /* == 토글 버튼 (카카오톡 스타일) == */
+    /* == 토글 버튼 == */
     #chat-toggle {
-      width:52px; height:52px; border-radius:50%; border:none;
-      background:#FEE500;
-      cursor:pointer; padding:0;
-      box-shadow: 0 6px 18px rgba(10,15,28,0.25), 0 0 0 1px rgba(10,15,28,0.04);
-      display:flex; align-items:center; justify-content:center;
-      opacity:0.3;
-      transition: opacity .25s ease, transform .25s ease, box-shadow .25s ease;
+      width:auto; height:42px; border-radius:21px; border:none;
+      background: linear-gradient(145deg, #0A0F1C, #1a3055);
+      color:#C3A569; cursor:pointer; padding:0 16px 0 13px;
+      box-shadow: 0 4px 20px rgba(10,15,28,0.45), inset 0 1px 0 rgba(195,165,105,0.15);
+      display:flex; align-items:center; gap:6px;
+      transition: all .3s ease;
     }
-    #chat-toggle:hover, #chat-toggle:focus-visible, #chat-toggle.active {
-      opacity:1;
+    #chat-toggle:hover {
       transform:translateY(-2px);
-      box-shadow: 0 10px 28px rgba(10,15,28,0.35);
+      box-shadow: 0 8px 32px rgba(10,15,28,0.55), inset 0 1px 0 rgba(195,165,105,0.2);
     }
-    #chat-toggle-inner { display:flex; align-items:center; justify-content:center; }
+    #chat-toggle-inner { display:flex; align-items:center; }
+    #chat-toggle-label {
+      font-size:11.5px; font-weight:700; letter-spacing:0.3px;
+      color:#C3A569;
+    }
+    #chat-toggle.active { border-radius:50%; width:42px; padding:0; justify-content:center; }
     #chat-toggle.active #chat-icon-open { display:none; }
     #chat-toggle.active #chat-icon-close { display:block; }
+    #chat-toggle.active #chat-toggle-label { display:none; }
 
     /* == 채팅 윈도우 == */
     #chat-window {
@@ -358,13 +363,15 @@
 
     /* == 모바일 == */
     @media(max-width:768px) {
-      #seul-chatbot { bottom:calc(66px + env(safe-area-inset-bottom, 0px)); right:12px; }
-      #chat-toggle { width:46px; height:46px; opacity:0.3; }
-      #chat-toggle:hover, #chat-toggle:focus-visible, #chat-toggle.active { opacity:1; }
-      #chat-toggle-inner svg { width:22px; height:22px; }
+      #seul-chatbot { bottom:calc(58px + env(safe-area-inset-bottom, 0px)); right:10px; }
+      #chat-toggle { height:30px; padding:0 9px 0 8px; border-radius:15px; gap:4px; opacity:0.8; }
+      #chat-toggle:hover, #chat-toggle.active { opacity:1; }
+      #chat-toggle.active { width:30px; height:30px; }
+      #chat-toggle-label { font-size:9px; }
+      #chat-toggle-inner svg { width:14px; height:14px; }
       #chat-window {
         width:calc(100vw - 32px); height:calc(100vh - 120px);
-        right:-6px; bottom:56px; border-radius:16px;
+        right:-6px; bottom:44px; border-radius:16px;
       }
     }
   `;
