@@ -21,6 +21,15 @@
        자료실 — 정비사업 전문 아카이브 (Premium Redesign)
        ================================================================ */
 
+    /* === 2026-04-18: 자료실 전용 레이아웃 보정 ===
+       - 좌우 overflow 차단
+       - 다른 페이지와 동일한 본문 너비/여백
+       - 모바일 상단 메뉴바 고정 해제 (스크롤 시 함께 이동) */
+    html, body { overflow-x: hidden; max-width: 100vw; }
+    @media(max-width:1024px) {
+      .header-wrap { position: absolute !important; top: 0; left: 0; right: 0; }
+    }
+
     /* === 자료실 히어로 보정 — 탐색형 컴팩트 === */
     .uni-hero.lib-compact { padding: 32px 0 28px; }
     .uni-hero.lib-compact .inner { gap: 24px; }
