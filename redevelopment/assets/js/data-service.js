@@ -5,10 +5,21 @@
 const DataService = (() => {
   const LS_PREFIX = 'rdc_';
 
+  /* localStorage 캐시를 우회하고 항상 MOCK에서 최신 데이터를 읽어야 하는
+     읽기 전용 컬렉션 목록. mock-data.js 갱신이 즉시 라이브 반영되어야 하는
+     공지·자료실·뉴스 등이 대상. 사용자 생성 데이터(members/inquiries/community/listings)는 제외. */
+  const READONLY_COLLECTIONS = ['notices', 'library', 'news', 'schedule', 'columns', 'areas', 'banners'];
+
   /* ── helpers ── */
   function _key(name) { return LS_PREFIX + name; }
 
   function _load(name) {
+    if (READONLY_COLLECTIONS.indexOf(name) !== -1) {
+      if (typeof MOCK !== 'undefined' && MOCK[name]) {
+        return JSON.parse(JSON.stringify(MOCK[name]));
+      }
+      return null;
+    }
     const raw = localStorage.getItem(_key(name));
     if (raw) return JSON.parse(raw);
     if (typeof MOCK !== 'undefined' && MOCK[name]) {
