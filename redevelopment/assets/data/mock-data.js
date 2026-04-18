@@ -335,13 +335,13 @@ const MOCK = {
   portfolio: [
     /* ===== 주요실적 (Featured) ===== */
     { id:'pf1', name:'가락현대5차아파트 소규모재건축정비사업', type:'소규모정비', district:'송파구', status:'진행중', year:'2026', scale:'179세대', role:'기본계획~준공 CM업무 총괄수행',
-      description:'서울 송파구 가락동 161-3번지 일대의 기존 144세대(15층, 2개동) 노후 아파트를 지하3층~지상25층, 4개동 179세대 규모의 신축 단지(더샵 송파루미스타)로 재건축하는 소규모재건축정비사업. 포스코이앤씨가 시공하며, 2026년 5월 입주 예정이다. 당사는 기본계획 수립 단계부터 사업시행계획인가, 관리처분계획, 시공사 선정, 분양·입주까지 기본계획~준공 CM업무를 총괄수행하였다.',
+      description:'서울 송파구 가락동 161-3번지 일대의 기존 145세대(15층, 2개동) 노후 아파트를 지하3층~지상25층, 4개동 179세대 규모의 신축 단지(더샵 송파루미스타)로 재건축하는 소규모재건축정비사업. 포스코이앤씨가 시공하며, 2026년 5월 입주 예정이다. 당사는 기본계획 수립 단계부터 사업시행계획인가, 관리처분계획, 시공사 선정, 분양·입주까지 기본계획~준공 CM업무를 총괄수행하였다.',
       featured:true,
       thumbnail:'../assets/images/portfolio/garak5.jpg', featuredImage:'../assets/images/portfolio/garak5.jpg',
       detailImage:'../assets/images/portfolio/garak5.jpg', imageAlt:'가락현대5차 더샵 송파루미스타 조감도',
       floorInfo:'지하3층 / 지상25층', floorAbove:25, floorBelow:3,
       grossFloorArea:'18,500㎡', floorAreaRatio:'249.8%',
-      members:'144명', memberCount:144,
+      members:'145명', memberCount:145,
       siteArea:'4,950㎡', buildingArea:'2,200㎡', constructor:'포스코이앤씨', client:'가락현대5차 소규모재건축정비사업조합',
       phase:'입주 직전 (2026.05)', totalCost:'약 738억원', proportionalRate:null,
       tasks:['기본계획 수립 자문','사업시행계획 수립 및 변경인가 자문','관리처분계획 수립 자문','시공사 선정 자문','분양설계 검토 자문','조합 운영 자문','사업성 분석 및 수지분석','준공·입주 절차 자문','조합 해산·정산 절차 자문'],
