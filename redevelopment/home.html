@@ -628,7 +628,7 @@
     <div class="inner">
         <div class="section-head">
             <h2 class="section-title">주요뉴스</h2>
-            <a href="pages/library.html?cat=주요뉴스" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+            <a href="pages/library2.html?cat=주요뉴스" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
         </div>
         <div id="mainNews"></div>
     </div>
@@ -785,7 +785,7 @@
     <div class="inner">
         <div class="section-head">
             <h2 class="section-title">자료실</h2>
-            <a href="pages/library.html" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+            <a href="pages/library2.html" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
         </div>
         <div class="two-col-grid">
 
@@ -793,7 +793,7 @@
             <div class="panel">
                 <div class="panel-head">
                     <h3 class="panel-title">최신 자료</h3>
-                    <a href="pages/library.html" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+                    <a href="pages/library2.html" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
                 </div>
                 <div id="mainLibrary"></div>
             </div>
@@ -1106,7 +1106,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
-            var href=newsFileMap[i.id]||'pages/library.html?cat=주요뉴스';
+            var href=newsFileMap[i.id]||'pages/library2.html?cat=주요뉴스';
             return'<a href="'+href+'" class="news-item" style="gap:10px;padding:12px 20px;">'+
                 '<span style="color:#C3A569;font-size:11px;flex-shrink:0;">●</span>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
@@ -1119,7 +1119,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     if(libEl && MOCK.library){
         var libs=MOCK.library.filter(function(i){return i.category!=='주요뉴스'})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,4);
-        /* 파일 맵 (library.html과 동일) */
+        /* 파일 맵 (library2.html과 동일) */
         window._libFileMap={
             'lib1':{ext:'downloads/files/lib1_조합설립인가_신청서.pdf',web:'downloads/form_association.html'},
             'lib2':{ext:'downloads/files/lib2_관리처분_변경인가_신청서.pdf',web:'downloads/form_management.html'},
@@ -1164,7 +1164,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             if(!m){
                 /* 파일맵에 없으면 자료실 해당 카테고리로 이동 */
                 var mappedCat=cat?(_catKeyMap[cat]||cat):null;
-                location.href='pages/library.html'+(mappedCat?'?cat='+encodeURIComponent(mappedCat):'');
+                location.href='pages/library2.html'+(mappedCat?'?cat='+encodeURIComponent(mappedCat):'');
                 return;
             }
             if(m.web){location.href=m.web;return;}
