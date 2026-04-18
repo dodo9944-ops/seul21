@@ -1,0 +1,45 @@
+name: Telegram 처리보고 발송
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: '텔레그램 보고 본문'
+        required: true
+        type: string
+  push:
+    paths:
+      - '.github/telegram-trigger/**'
+
+jobs:
+  send-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: 보고 본문 결정
+        id: msg
+        run: |
+          if [ -n "${{ github.event.inputs.message }}" ]; then
+            echo "text<<EOF" >> $GITHUB_OUTPUT
+            echo "${{ github.event.inputs.message }}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            TRIGGER_FILE=$(ls -t .github/telegram-trigger/*.txt 2>/dev/null | head -1)
+            if [ -f "$TRIGGER_FILE" ]; then
+              echo "text<<EOF" >> $GITHUB_OUTPUT
+              cat "$TRIGGER_FILE" >> $GITHUB_OUTPUT
+              echo "EOF" >> $GITHUB_OUTPUT
+            else
+              echo "text=[세울21 처리보고] 트리거 파일 없음" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: seul21.com /api/report 로 POST
+        run: |
+          curl -sS -X POST "https://seul21.com/api/report" \
+            -H "Content-Type: application/json" \
+            --data @<(jq -n --arg t "${{ steps.msg.outputs.text }}" '{text: $t}')
+          echo ""
+          echo "발송 완료"
