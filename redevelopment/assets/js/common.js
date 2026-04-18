@@ -104,13 +104,7 @@ const App = (() => {
             { href:`${B}/pages/portfolio.html?type=재건축`, label:'재건축 실적' },
             { href:`${B}/pages/portfolio.html?type=소규모정비`, label:'소규모정비 실적' },
           ]},
-          { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open', sub:[
-            { href:`${B}/pages/library.html`, label:'자료실 전체' },
-            { href:`${B}/pages/library.html?cat=법령`, label:'법령·제도' },
-            { href:`${B}/pages/library.html?cat=판례지침`, label:'고시·공고' },
-            { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
-            { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
-          ]},
+          { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open' },
           { href:`${B}/pages/feasibility.html`, label:'사업성 검토', icon:'fa-solid fa-calculator', sub:[
             { href:`${B}/pages/feasibility.html`, label:'사업성 분석 도구' },
             { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },

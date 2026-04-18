@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260416d">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260418c">
     <style>
         /* ============================================================
            INDEX PAGE — 고유 스타일
@@ -826,7 +826,6 @@
 
 <!-- ===== 업무실적 상세 모달 ===== -->
 <style>
-.<style>
 .mp-overlay{position:fixed;inset:0;background:rgba(10,15,28,.65);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
 .mp-overlay.open{opacity:1;pointer-events:auto}
 .mp-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
@@ -897,10 +896,10 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260415a"></script>
+<script src="assets/data/mock-data.js?v=20260418g"></script>
 <script src="assets/data/areas-data.js?v=20260411"></script>
 <script src="assets/js/data-service.js?v=20260411b"></script>
-<script src="assets/js/common.js?v=20260416d"></script>
+<script src="assets/js/common.js?v=20260417b"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1105,7 +1104,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var today=new Date(); today.setHours(0,0,0,0);
         var cutoff=new Date(today); cutoff.setDate(cutoff.getDate()-7);
         var cutStr=cutoff.toISOString().slice(0,10);
-        var newsFileMap={'news0329':'downloads/news_20260329.html','news0330':'downloads/news_20260330.html','news0331':'downloads/news_20260331.html','news0401':'downloads/news_20260401.html','news0402':'downloads/news_20260402.html','news0405':'downloads/news_20260405.html','news0408':'downloads/news_20260408.html','news0408a':'downloads/news_20260408a.html','news0408b':'downloads/news_20260408b.html','news0408c':'downloads/news_20260408c.html','news0408d':'downloads/news_20260408d.html','news0409a':'downloads/news_20260409a.html','news0409b':'downloads/news_20260409b.html','news0409c':'downloads/news_20260409c.html','news0409d':'downloads/news_20260409d.html','news0409e':'downloads/news_20260409e.html','news0409f':'downloads/news_20260409f.html','news0409g':'downloads/news_20260409g.html','news0410a':'downloads/news_20260410a.html','news0410b':'downloads/news_20260410b.html','news0410c':'downloads/news_20260410c.html','news0410d':'downloads/news_20260410d.html','news0411a':'downloads/news_20260411a.html','news0411b':'downloads/news_20260411b.html','news0411c':'downloads/news_20260411c.html','news0411d':'downloads/news_20260411d.html','news0411e':'downloads/news_20260411e.html','news0411f':'downloads/news_20260411f.html','news0411g':'downloads/news_20260411g.html','news0411h':'downloads/news_20260411h.html','news0410e':'downloads/news_20260410e.html','news0410f':'downloads/news_20260410f.html','news0410g':'downloads/news_20260410g.html','news0411i':'downloads/news_20260411i.html','news0411j':'downloads/news_20260411j.html','news0411k':'downloads/news_20260411k.html','news0412a':'downloads/news_20260412a.html','news0412b':'downloads/news_20260412b.html','news0412c':'downloads/news_20260412c.html','news0412d':'downloads/news_20260412d.html','news0412e':'downloads/news_20260412e.html','news0412f':'downloads/news_20260412f.html','news0410h':'downloads/news_20260410h.html','news0413a':'downloads/news_20260413a.html','news0413b':'downloads/news_20260413b.html','news0413c':'downloads/news_20260413c.html','news0414a':'downloads/news_20260414a.html','news0414b':'downloads/news_20260414b.html','news0414c':'downloads/news_20260414c.html','news0414d':'downloads/news_20260414d.html','news0415a':'downloads/news_20260415a.html','news0415b':'downloads/news_20260415b.html','news0415c':'downloads/news_20260415c.html','news0415d':'downloads/news_20260415d.html','news0415e':'downloads/news_20260415e.html','news0415f':'downloads/news_20260415f.html','news0415g':'downloads/news_20260415g.html','lib48':'downloads/news_20260405.html'};
+        var newsFileMap={'news0329':'downloads/news_20260329.html','news0330':'downloads/news_20260330.html','news0331':'downloads/news_20260331.html','news0401':'downloads/news_20260401.html','news0402':'downloads/news_20260402.html','news0405':'downloads/news_20260405.html','news0408':'downloads/news_20260408.html','news0408a':'downloads/news_20260408a.html','news0408b':'downloads/news_20260408b.html','news0408c':'downloads/news_20260408c.html','news0408d':'downloads/news_20260408d.html','news0409a':'downloads/news_20260409a.html','news0409b':'downloads/news_20260409b.html','news0409c':'downloads/news_20260409c.html','news0409d':'downloads/news_20260409d.html','news0409e':'downloads/news_20260409e.html','news0409f':'downloads/news_20260409f.html','news0409g':'downloads/news_20260409g.html','news0410a':'downloads/news_20260410a.html','news0410b':'downloads/news_20260410b.html','news0410c':'downloads/news_20260410c.html','news0410d':'downloads/news_20260410d.html','news0411a':'downloads/news_20260411a.html','news0411b':'downloads/news_20260411b.html','news0411c':'downloads/news_20260411c.html','news0411d':'downloads/news_20260411d.html','news0411e':'downloads/news_20260411e.html','news0411f':'downloads/news_20260411f.html','news0411g':'downloads/news_20260411g.html','news0411h':'downloads/news_20260411h.html','news0410e':'downloads/news_20260410e.html','news0410f':'downloads/news_20260410f.html','news0410g':'downloads/news_20260410g.html','news0411i':'downloads/news_20260411i.html','news0411j':'downloads/news_20260411j.html','news0411k':'downloads/news_20260411k.html','news0412a':'downloads/news_20260412a.html','news0412b':'downloads/news_20260412b.html','news0412c':'downloads/news_20260412c.html','news0412d':'downloads/news_20260412d.html','news0412e':'downloads/news_20260412e.html','news0412f':'downloads/news_20260412f.html','news0410h':'downloads/news_20260410h.html','news0413a':'downloads/news_20260413a.html','news0413b':'downloads/news_20260413b.html','news0413c':'downloads/news_20260413c.html','news0414a':'downloads/news_20260414a.html','news0414b':'downloads/news_20260414b.html','news0414c':'downloads/news_20260414c.html','news0414d':'downloads/news_20260414d.html','news0415a':'downloads/news_20260415a.html','news0415b':'downloads/news_20260415b.html','news0415c':'downloads/news_20260415c.html','news0415d':'downloads/news_20260415d.html','news0415e':'downloads/news_20260415e.html','news0415f':'downloads/news_20260415f.html','news0415g':'downloads/news_20260415g.html','news0418a':'downloads/news_20260418a.html','news0418b':'downloads/news_20260418b.html','news0418c':'downloads/news_20260418c.html','news0418d':'downloads/news_20260418d.html','news0418e':'downloads/news_20260418e.html','news0418f':'downloads/news_20260418f.html','news0418g':'downloads/news_20260418g.html','lib48':'downloads/news_20260405.html'};
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
@@ -1265,66 +1264,6 @@ document.getElementById('mpOverlay').addEventListener('click',function(e){if(e.t
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('mpOverlay').classList.contains('open'))closeDetail()});
 window.MPF={open:openDetail,close:closeDetail};
 })();
-</script>
-<div id="posts" style="max-width:1200px; margin:0 auto 32px; padding:0 20px;">
-  <div style="background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:24px;">
-    <h2 style="margin:0 0 16px; font-size:24px; font-weight:800; color:#0A0F1C;">최신 게시물</h2>
-    <div id="postsList" style="display:grid; gap:16px;"></div>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const supabaseUrl = 'https://vpyxjovsgsvsqbfebjrm.supabase.co';
-  const supabaseKey = 'sb_publishable_E0vo2tVZJ6AP7wzfYZWQPQ__t0EaMwN';
-  const client = supabase.createClient(supabaseUrl, supabaseKey);
-
-  async function loadPosts() {
-    const { data, error } = await client
-      .from('게시물')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    const container = document.getElementById('postsList');
-    if (!container) return;
-
-    if (error) {
-      console.error('불러오기 오류:', error);
-      container.innerHTML = '<div style="padding:16px; border:1px solid #fecaca; background:#fef2f2; color:#991b1b; border-radius:10px;">게시물을 불러오지 못했습니다.</div>';
-      return;
-    }
-
-    if (!data || data.length === 0) {
-      container.innerHTML = '<div style="padding:16px; border:1px solid #e5e7eb; background:#f9fafb; color:#6b7280; border-radius:10px;">등록된 게시물이 없습니다.</div>';
-      return;
-    }
-
-    container.innerHTML = '';
-
-    data.forEach(post => {
-      const item = document.createElement('div');
-      item.style.border = '1px solid #e5e7eb';
-      item.style.borderRadius = '10px';
-      item.style.padding = '18px';
-      item.style.background = '#ffffff';
-
-      item.innerHTML = `
-        <div style="margin:0 0 8px; font-size:13px; color:#6b7280;">
-          ${post.created_at ? new Date(post.created_at).toLocaleDateString('ko-KR') : ''}
-        </div>
-        <h3 style="margin:0 0 10px; font-size:20px; font-weight:700; color:#111827;">
-          ${post.제목 ?? ''}
-        </h3>
-        <p style="margin:0; font-size:15px; line-height:1.7; color:#4b5563;">
-          ${post.내용 ?? ''}
-        </p>
-      `;
-
-      container.appendChild(item);
-    });
-  }
-
-  loadPosts();
 </script>
 </body>
 </html>

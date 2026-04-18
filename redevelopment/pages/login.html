@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260415f">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260418c">
     <style>
     .auth-container { max-width: 440px; margin: 0 auto; padding: 60px 20px 80px; }
     .auth-logo { text-align: center; margin-bottom: 8px; }
@@ -27,12 +27,6 @@
         padding: 12px 16px; border-radius: var(--radius-sm);
         font-size: 13px; margin-bottom: 16px; text-align: center;
     }
-    .demo-info {
-        background: var(--accent-light); color: var(--accent);
-        padding: 12px 16px; border-radius: var(--radius-sm);
-        font-size: 13px; margin-bottom: 24px; text-align: center;
-    }
-    .demo-info i { margin-right: 4px; }
     .remember-row {
         display: flex; align-items: center; justify-content: space-between;
         margin-bottom: 24px; font-size: 13px;
@@ -77,10 +71,6 @@
 
     <div class="auth-box">
         <h2>로그인</h2>
-
-        <div class="demo-info">
-            <i class="fa-solid fa-circle-info"></i> 데모 모드: 아무 이메일로 로그인 가능합니다 (예: kim@test.com)
-        </div>
 
         <div class="login-error" id="loginError"></div>
 
@@ -134,7 +124,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js"></script>
 <script src="../assets/js/data-service.js"></script>
-<script src="../assets/js/common.js?v=20260415g"></script>
+<script src="../assets/js/common.js?v=20260417b"></script>
 <script>
 (function() {
     // 이미 로그인 상태면 메인으로 이동
