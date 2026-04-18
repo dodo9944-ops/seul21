@@ -370,7 +370,7 @@
       #chat-toggle-label { font-size:9px; }
       #chat-toggle-inner svg { width:14px; height:14px; }
       #chat-window {
-        width:calc(100vw - 32px); height:calc(100vh - 120px);
+        width:calc(100vw - 32px); height:calc(100vh - 90px);
         right:-6px; bottom:44px; border-radius:16px;
       }
     }
