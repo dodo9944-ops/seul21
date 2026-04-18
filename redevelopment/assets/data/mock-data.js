@@ -4,7 +4,7 @@
  * 향후 실 API 전환 시 data-service.js만 교체하면 됨.
  */
 const MOCK = {
-  /* ──────────────────────────── 구역 ──────────────────────────── */h
+  /* ──────────────────────────── 구역 ──────────────────────────── */
   areas: [
     { id:'a1', name:'한남3구역', type:'재개발', district:'용산구', dong:'한남동',
       stage:'관리처분인가', premium:5800, change:200, changeDir:'up', ratio:112,
@@ -83,7 +83,7 @@ const MOCK = {
     { id:'l1', areaId:'a1', areaName:'한남3구역', type:'입주권', district:'용산구',
       price:125000, priceText:'12억 5,000만', size:84, sizeType:'전용 84㎡',
       premium:58000, floor:'', description:'한강 조망 가능 고층 배정 예정. 프리미엄 5.8억 포함. 현재 이주 완료 상태.',
-      tags:['관리처분인가','한강뷰','역세권'], status:'매물', featured:truhe, hot:true,
+      tags:['관리처분인가','한강뷰','역세권'], status:'매물', featured:true, hot:true,
       seller:'김민수', phone:'010-1234-5678', createdAt:'2026-03-28' },
     { id:'l2', areaId:'a2', areaName:'흑석9구역', type:'입주권', district:'동작구',
       price:82000, priceText:'8억 2,000만', size:59, sizeType:'전용 59㎡',
