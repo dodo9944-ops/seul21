@@ -15,20 +15,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260418v1">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260418v2">
     <style>
     /* ================================================================
        자료실 — 정비사업 전문 아카이브 (Premium Redesign)
        ================================================================ */
 
     /* === 2026-04-18: 자료실 전용 레이아웃 보정 ===
-       - 좌우 overflow 차단
-       - 다른 페이지와 동일한 본문 너비/여백
-       - 모바일 상단 메뉴바 고정 해제 (스크롤 시 함께 이동) */
+       - 좌우 overflow 차단 (다른 페이지와 동일한 본문 너비) */
     html, body { overflow-x: hidden; max-width: 100vw; }
-    @media(max-width:1024px) {
-      .header-wrap { position: absolute !important; top: 0; left: 0; right: 0; }
-    }
 
     /* === 자료실 히어로 보정 — 탐색형 컴팩트 === */
     .uni-hero.lib-compact { padding: 32px 0 28px; }
@@ -284,7 +279,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260418x1"></script>
 <script src="../assets/js/data-service.js?v=20260418k"></script>
-<script src="../assets/js/common.js?v=20260418rv3"></script>
+<script src="../assets/js/common.js?v=20260418rv4"></script>
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}
