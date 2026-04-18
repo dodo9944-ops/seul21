@@ -370,9 +370,24 @@
       #chat-toggle-label { font-size:9px; }
       #chat-toggle-inner svg { width:14px; height:14px; }
       #chat-window {
-        width:calc(100vw - 32px); height:calc(100vh - 120px);
+        width:calc(100vw - 32px);
+        height:calc(100vh - 120px);
+        height:calc(100dvh - 70px);
+        max-height:calc(100dvh - 70px);
         right:-6px; bottom:44px; border-radius:16px;
       }
+      /* 헤더 컴팩트 */
+      #chat-header { padding:10px 14px 8px; }
+      #chat-logo { width:30px; height:30px; border-radius:8px; }
+      #chat-title { font-size:12.5px; }
+      #chat-subtitle { font-size:10px; margin-top:1px; }
+      #chat-close { width:28px; height:28px; font-size:18px; }
+      /* 탭 컴팩트 — 키보드 열려도 항상 노출 */
+      #chat-tabs { padding:0 10px 8px; gap:4px; }
+      .chat-tab { padding:6px 6px; font-size:11px; gap:3px; border-radius:8px; }
+      .chat-tab svg { width:12px; height:12px; }
+      /* 푸터 모바일 숨김 (공간 확보) */
+      #chat-footer { display:none; }
     }
   `;
   document.head.appendChild(style);
