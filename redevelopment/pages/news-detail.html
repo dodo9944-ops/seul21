@@ -97,7 +97,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260418q"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260418q"></script>
+<script src="../assets/js/common.js?v=20260418u"></script>
 <script>
 (function() {
     function badgeClass(cat) {
@@ -111,7 +111,7 @@
 
         const news = DataService.getById('news', id);
         if (!news) {
-            document.getElementById('detailWrap').innerHTML = `<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>뉴스를 찾을 수 없습니다</h3><p>삭제되었거나 존재하지 않는 뉴스입니다.</p><a href="library.html?cat=주요뉴스" class="btn btn-outline btn-sm">목록으로 돌아가기</a></div>`;
+            document.getElementById('detailWrap').innerHTML = `<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>뉴스를 찾을 수 없습니다</h3><p>삭제되었거나 존재하지 않는 뉴스입니다.</p><a href="library2.html?cat=주요뉴스" class="btn btn-outline btn-sm">목록으로 돌아가기</a></div>`;
             return;
         }
 
@@ -143,7 +143,7 @@
         document.getElementById('detailWrap').innerHTML = `
             <div class="breadcrumb">
                 <a href="../index.html">홈</a> <i class="fa-solid fa-chevron-right"></i>
-                <a href="library.html?cat=주요뉴스">뉴스</a> <i class="fa-solid fa-chevron-right"></i>
+                <a href="library2.html?cat=주요뉴스">뉴스</a> <i class="fa-solid fa-chevron-right"></i>
                 <span>${news.title}</span>
             </div>
             <div class="detail-header">
@@ -163,7 +163,7 @@
                 <button class="share-btn" title="페이스북" id="shareFb"><i class="fa-brands fa-facebook-f"></i></button>
             </div>
             ${relatedHTML}
-            <a href="library.html?cat=주요뉴스" class="back-link"><i class="fa-solid fa-arrow-left"></i> 뉴스 목록으로</a>
+            <a href="library2.html?cat=주요뉴스" class="back-link"><i class="fa-solid fa-arrow-left"></i> 뉴스 목록으로</a>
         `;
 
         // 공유 버튼 이벤트
