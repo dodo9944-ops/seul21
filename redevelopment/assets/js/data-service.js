@@ -21,7 +21,17 @@ const DataService = (() => {
       return null;
     }
     const raw = localStorage.getItem(_key(name));
-    if (raw) return JSON.parse(raw);
+    let stored = raw ? JSON.parse(raw) : null;
+    if (stored && typeof MOCK !== 'undefined' && MOCK[name] && Array.isArray(MOCK[name]) && Array.isArray(stored)) {
+      const storedIds = new Set(stored.map(function(item){ return item.id; }));
+      const newItems = MOCK[name].filter(function(item){ return !storedIds.has(item.id); });
+      if (newItems.length > 0) {
+        stored = newItems.concat(stored);
+        _save(name, stored);
+      }
+      return JSON.parse(JSON.stringify(stored));
+    }
+    if (stored) return stored;
     if (typeof MOCK !== 'undefined' && MOCK[name]) {
       _save(name, MOCK[name]);
       return JSON.parse(JSON.stringify(MOCK[name]));
