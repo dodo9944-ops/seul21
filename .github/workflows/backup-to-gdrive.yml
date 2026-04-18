@@ -1,0 +1,112 @@
+name: 주간 자동 백업 → Google Drive
+
+on:
+  schedule:
+    # 매주 일요일 02:00 KST (UTC 17:00 토요일)
+    - cron: '0 17 * * 6'
+  workflow_dispatch:
+    inputs:
+      label:
+        description: '백업 라벨 (선택)'
+        required: false
+        default: 'manual'
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 전체 이력
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 백업 메타데이터 수집
+        id: meta
+        run: |
+          DATE=$(date +%Y%m%d_%H%M)
+          SHA=$(git rev-parse --short HEAD)
+          LABEL="${{ github.event.inputs.label || 'weekly' }}"
+          FILENAME="seul21_backup_${DATE}_${SHA}_${LABEL}.zip"
+          echo "date=$DATE" >> $GITHUB_OUTPUT
+          echo "sha=$SHA" >> $GITHUB_OUTPUT
+          echo "filename=$FILENAME" >> $GITHUB_OUTPUT
+          echo "백업 파일명: $FILENAME"
+
+      - name: 백업 ZIP 생성 (downloads/files 제외 — 용량 절감)
+        run: |
+          zip -r "${{ steps.meta.outputs.filename }}" . \
+            -x "*.git*" \
+            -x "node_modules/*" \
+            -x "redevelopment/downloads/files/*" \
+            -x "redevelopment/uploads/*" \
+            -x "redevelopment/jpg/*"
+          ls -lh "${{ steps.meta.outputs.filename }}"
+
+      - name: 자동 BACKUP_*.md 생성
+        run: |
+          cat > "BACKUP_${{ steps.meta.outputs.date }}.md" <<EOF
+          # 세울21 자동 백업 — ${{ steps.meta.outputs.date }}
+
+          - 커밋: ${{ steps.meta.outputs.sha }}
+          - 트리거: ${{ github.event_name }}
+          - 라벨: ${{ github.event.inputs.label || 'weekly' }}
+          - GitHub: https://github.com/${{ github.repository }}/commit/${{ steps.meta.outputs.sha }}
+
+          ## 최근 5개 커밋
+          $(git log --oneline -5)
+
+          ## 백업 ZIP
+          ${{ steps.meta.outputs.filename }}
+
+          상세 설명서는 동일 시점의 BACKUP_YYYYMMDD.md 또는 CLAUDE.md 참조.
+          EOF
+
+      - name: Google Drive 업로드 (rclone)
+        env:
+          GDRIVE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          GDRIVE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GDRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+        run: |
+          if [ -z "$GDRIVE_REFRESH_TOKEN" ] || [ -z "$GDRIVE_CLIENT_ID" ] || [ -z "$GDRIVE_FOLDER_ID" ]; then
+            echo "::warning::Google Drive 시크릿 미설정. 백업 ZIP은 GitHub Actions 아티팩트로만 보관됩니다."
+            exit 0
+          fi
+
+          curl https://rclone.org/install.sh | sudo bash
+
+          mkdir -p ~/.config/rclone
+          cat > ~/.config/rclone/rclone.conf <<EOF
+          [gdrive]
+          type = drive
+          client_id = $GDRIVE_CLIENT_ID
+          client_secret = $GDRIVE_CLIENT_SECRET
+          token = {"access_token":"","token_type":"Bearer","refresh_token":"$GDRIVE_REFRESH_TOKEN","expiry":"0001-01-01T00:00:00Z"}
+          root_folder_id = $GDRIVE_FOLDER_ID
+          EOF
+
+          rclone copy "${{ steps.meta.outputs.filename }}" gdrive:백업/ -v
+          rclone copy "BACKUP_${{ steps.meta.outputs.date }}.md" gdrive:백업_설명서/ -v
+          echo "Google Drive 업로드 완료"
+
+      - name: GitHub Actions 아티팩트로도 보관 (Google Drive 실패 대비)
+        uses: actions/upload-artifact@v4
+        with:
+          name: seul21-backup-${{ steps.meta.outputs.date }}
+          path: |
+            ${{ steps.meta.outputs.filename }}
+            BACKUP_${{ steps.meta.outputs.date }}.md
+          retention-days: 90
+
+      - name: 텔레그램 백업 완료 알림
+        if: always()
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$TG_TOKEN" ]; then exit 0; fi
+          STATUS="${{ job.status }}"
+          MSG="[세울21 백업] ${STATUS}%0A시점: ${{ steps.meta.outputs.date }}%0A커밋: ${{ steps.meta.outputs.sha }}%0A파일: ${{ steps.meta.outputs.filename }}%0A아티팩트: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TG_CHAT}" \
+            --data-urlencode "text=${MSG}"
