@@ -12,7 +12,8 @@
     { "source": "/api/social-login", "destination": "/api/social-login" },
     { "source": "/api/status", "destination": "/api/status" },
     { "source": "/api/report", "destination": "/api/report" },
-    { "source": "/api/library", "destination": "/api/library" }
+    { "source": "/api/library", "destination": "/api/library" },
+    { "source": "/api/telegram-admin", "destination": "/api/telegram-admin" }
   ],
   "headers": [
     {
