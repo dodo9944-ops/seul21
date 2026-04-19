@@ -36,6 +36,19 @@ async function saveMembers(members, sha) {
   });
 }
 
+async function sendTelegram(text) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) return;
+  try {
+    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML', disable_web_page_preview: true })
+    });
+  } catch (e) { /* 텔레그램 실패해도 회원가입은 유지 */ }
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -77,6 +90,20 @@ module.exports = async function handler(req, res) {
         };
         members.push(newMember);
         await saveMembers(members, sha);
+
+        // 텔레그램 신규 가입 알림 (비밀번호는 제외)
+        const tgMsg = `👤 <b>[신규 회원가입]</b>\n\n` +
+          `<b>이름:</b> ${newMember.name}\n` +
+          `<b>연락처:</b> ${newMember.phone}\n` +
+          (newMember.email ? `<b>이메일:</b> ${newMember.email}\n` : '') +
+          (newMember.area ? `<b>지역:</b> ${newMember.area}\n` : '') +
+          (newMember.address ? `<b>주소:</b> ${newMember.address}\n` : '') +
+          `<b>등급:</b> ${newMember.grade}\n` +
+          `<b>가입일:</b> ${newMember.date}\n` +
+          `<b>ID:</b> <code>${newMember.id}</code>\n\n` +
+          `🔗 https://seul21.com/redevelopment/admin/members.html`;
+        sendTelegram(tgMsg);
+
         return res.status(201).json({ message: '회원가입 완료', id: newMember.id });
       }
 
