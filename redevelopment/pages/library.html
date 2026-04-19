@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260419indexHero">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260419libWrap">
     <style>
     /* ================================================================
        자료실 — 정비사업 전문 아카이브 (Premium Redesign)
@@ -45,24 +45,11 @@
     .lib-alimtalk-btn i{font-size:15px}
     @media(max-width:600px){.lib-alimtalk-btn{font-size:12px;padding:9px 18px}}
 
-    /* === Category Tabs (항상 상단 고정) === */
-    .cat-wrap{position:fixed;top:124px;left:0;right:0;z-index:9997;background:var(--white);padding:10px 40px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-bottom:1px solid var(--gray-100);margin:0}
-    @media(max-width:1024px) and (min-width:769px){.cat-wrap{top:156px;padding:10px 40px}}
-    .cat-wrap-inner{max-width:var(--maxw);margin:0 auto}
+    /* === Page Body (히어로 바로 아래 시작) === */
     .page-body.lib-page{padding-top:0}
-    .cat-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:4px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100)}
-    .cat-tab{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:10px;font-size:13.5px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--gray-500);transition:all .25s;font-family:var(--font);position:relative}
-    .cat-tab i{font-size:13px;opacity:.45;transition:opacity .25s}
-    .cat-tab .cnt{min-width:22px;height:20px;padding:0 7px;border-radius:10px;font-size:10.5px;font-weight:700;background:var(--gray-200);color:var(--gray-500);display:inline-flex;align-items:center;justify-content:center;transition:all .25s}
-    .cat-tab.on{background:var(--brand-dark);color:var(--gold);box-shadow:0 2px 8px rgba(10,15,28,.15)}
-    .cat-tab.on i{opacity:1}
-    .cat-tab.on .cnt{background:rgba(195,165,105,.2);color:var(--gold)}
-    .cat-tab:not(.on):hover{background:#fff;color:var(--gray-800);box-shadow:0 1px 4px rgba(0,0,0,.04)}
-    .cat-tab:not(.on):hover i{opacity:.7}
-    @media(max-width:768px){
-        .cat-wrap{display:none!important}
-        .page-body.lib-page{padding-top:0}
-    }
+    .page-body.lib-page,
+    .page-body.lib-page > .inner{max-width:100%;overflow:hidden}
+    .lib-item{min-width:0;max-width:100%}
 
     /* === Control Bar === */
     .ctrl-bar{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap}
@@ -76,7 +63,7 @@
     .ctrl-sort select:focus{border-color:var(--gold);outline:none}
     .ctrl-count{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap}
     .ctrl-count strong{color:var(--brand-dark);font-weight:700}
-    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ctrl-search{max-width:100%}.ctrl-sort{margin-left:0;justify-content:flex-end}}
+    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ctrl-search{min-width:0;max-width:100%}.ctrl-sort{margin-left:0;justify-content:flex-end}}
 
     /* === Popular Section === */
     .pop-sec{margin-bottom:36px}
@@ -114,11 +101,11 @@
     .lib-icon .ft-label{position:absolute;bottom:-3px;right:-3px;background:#fff;border:1px solid var(--gray-200);border-radius:4px;font-size:8px;font-weight:800;color:var(--gray-600);padding:1px 4px;text-transform:uppercase;line-height:1}
 
     /* Content */
-    .lib-content{flex:1;min-width:0}
-    .lib-title{font-size:15.5px;font-weight:700;color:var(--gray-900);margin-bottom:5px;line-height:1.45;cursor:pointer;transition:color .2s;letter-spacing:-.2px}
+    .lib-content{flex:1;min-width:0;max-width:100%}
+    .lib-title{font-size:15.5px;font-weight:700;color:var(--gray-900);margin-bottom:5px;line-height:1.45;cursor:pointer;transition:color .2s;letter-spacing:-.2px;word-break:break-word;overflow-wrap:anywhere}
     .lib-title:hover{color:var(--gold)}
-    .lib-desc{font-size:13px;color:var(--gray-500);line-height:1.55;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .lib-meta-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+    .lib-desc{font-size:13px;color:var(--gray-500);line-height:1.55;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word;overflow-wrap:anywhere}
+    .lib-meta-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;min-width:0;max-width:100%}
 
     /* Badge system */
     .lb{display:inline-flex;align-items:center;padding:3px 9px;border-radius:5px;font-size:10.5px;font-weight:600;line-height:1.3;letter-spacing:.1px}
