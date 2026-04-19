@@ -21,29 +21,15 @@
        자료실 — 정비사업 전문 아카이브 (Premium Redesign)
        ================================================================ */
 
-    /* === 자료실 히어로 보정 — 탐색형 컴팩트 (dd9c245 2026-04-18 19:49 KST 원복 + 상단 여백만 추가) === */
-    .uni-hero.lib-compact { padding: 38px 0 38px; }
-    .uni-hero.lib-compact .inner { gap: 24px; }
-    .uni-hero.lib-compact .uh-text { margin-top: 40px; }
-    .uni-hero.lib-compact .uh-text h1 { font-size: 32px; margin-bottom: 10px; }
-    .uni-hero.lib-compact .uh-sub { font-size: 14px; max-width: 420px; }
-    .uni-hero.lib-compact .uh-bc { margin-bottom: 14px; }
-    .uni-hero.lib-compact .uh-label { margin-bottom: 12px; }
-    .uni-hero.lib-compact .uh-visual { display: flex; justify-content: center; align-items: center; }
-    .uni-hero.lib-compact .uh-cards { width: 300px; gap: 10px; margin: 0 auto; }
-    .uni-hero.lib-compact .uh-card { padding: 14px 14px; }
-    .uni-hero.lib-compact .uh-ci { width: 28px; height: 28px; margin-bottom: 6px; }
-    .uni-hero.lib-compact .uh-ci i { font-size: 12px; }
-    .uni-hero.lib-compact .uh-card h4 { font-size: 12px; margin-bottom: 1px; }
-    .uni-hero.lib-compact .uh-card p { font-size: 10px; }
-    @media (max-width: 1024px) { .uni-hero.lib-compact .uh-cards { width: 100%; max-width: 320px; } }
-    @media (max-width: 600px) { .uni-hero.lib-compact { padding: 40px 0 28px; } .uni-hero.lib-compact .uh-text h1 { font-size: 24px; } }
+    /* === 자료실 히어로 — 업무실적 기본 .uni-hero 와 완전 동일 (2026-04-19) ===
+       .uni-hero.lib-compact override 100% 제거. 카드/폰트/패딩/flex 전부 기본 규칙 상속. */
 
-    /* === 소식받기 버튼 === */
-    .lib-alimtalk-btn{display:inline-flex;align-items:center;gap:8px;margin-top:18px;margin-bottom:8px;padding:11px 24px;background:rgba(195,165,105,.1);border:1.5px solid rgba(195,165,105,.35);border-radius:10px;color:#C3A569;font-size:13.5px;font-weight:700;text-decoration:none;transition:all .2s;font-family:var(--font)}
+    /* === 소식받기 버튼 — 히어로 최하단 중앙 배치, 컴팩트 === */
+    .lib-alimtalk-wrap{display:flex;justify-content:center;margin-top:28px;position:relative;z-index:3}
+    .lib-alimtalk-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:rgba(195,165,105,.1);border:1.5px solid rgba(195,165,105,.35);border-radius:8px;color:#C3A569;font-size:12px;font-weight:700;text-decoration:none;transition:all .2s;font-family:var(--font)}
     .lib-alimtalk-btn:hover{background:rgba(195,165,105,.2);border-color:rgba(195,165,105,.5)}
-    .lib-alimtalk-btn i{font-size:15px}
-    @media(max-width:600px){.lib-alimtalk-btn{font-size:12px;padding:9px 18px}}
+    .lib-alimtalk-btn i{font-size:12px}
+    @media(max-width:600px){.lib-alimtalk-wrap{margin-top:20px}.lib-alimtalk-btn{font-size:11px;padding:6px 14px;gap:5px}.lib-alimtalk-btn i{font-size:11px}}
 
     /* === Page Body (히어로 바로 아래 시작) === */
     .page-body.lib-page{padding-top:0}
@@ -214,13 +200,13 @@
             <div class="uh-label">PROFESSIONAL ARCHIVE</div>
             <h1>정비사업 <em>실무 자료</em>를 한곳에서</h1>
             <p class="uh-sub">관계법령 · 서식·매뉴얼 · 주요뉴스 · 투자정보 — 정비사업에 필요한 공식 자료를 체계적으로 제공합니다</p>
-            <a href="alimtalk.html" class="lib-alimtalk-btn"><i class="fa-regular fa-comment-dots"></i> 소식받기 신청</a>
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_library.png" alt="세울엔지니어링 자료실"></div>
             <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="switchCat('법령')"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>도시정비법·고시·공고·판례·질의회신 및 지침·규정</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('서식가이드')"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('주요뉴스')"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></div><div class="uh-card" id="investCard" style="cursor:pointer;" onclick="switchCat('투자정보')"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>투자정보</h4><p>매물·시세·투자 분석</p><span style="display:block;font-size:9px;color:rgba(195,165,105,0.7);margin-top:4px;"><i class="fa-solid fa-lock" style="margin-right:3px;"></i>회원 전용</span></div></div>
         </div>
     </div>
+    <div class="lib-alimtalk-wrap"><a href="alimtalk.html" class="lib-alimtalk-btn"><i class="fa-regular fa-comment-dots"></i> 소식받기 신청</a></div>
 </div>
 
 
