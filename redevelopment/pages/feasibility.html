@@ -51,6 +51,11 @@
     .hero-opt .ho-tag{padding:3px 9px;border-radius:5px;font-size:10.5px;font-weight:500;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08)}
     .hero-opt.active .ho-tag{background:rgba(195,165,105,.1);color:var(--gold);border-color:rgba(195,165,105,.2)}
     .hero-opt .ho-arrow{display:flex;align-items:center;gap:5px;margin-top:12px;font-size:12px;font-weight:700;color:var(--gold);opacity:0;transition:opacity .2s}
+    .hero-opt .ho-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:12px}
+    .hero-opt .ho-mini{display:flex;gap:6px}
+    .hero-opt .ho-mini i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,rgba(195,165,105,.14),rgba(195,165,105,.06));border:1px solid rgba(195,165,105,.22);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 2px 6px rgba(0,0,0,.15);transition:all .25s}
+    .hero-opt:hover .ho-mini i{transform:translateY(-1px);border-color:rgba(195,165,105,.4);background:linear-gradient(135deg,rgba(195,165,105,.22),rgba(195,165,105,.1))}
+    .hero-opt.active .ho-mini i{background:linear-gradient(135deg,rgba(195,165,105,.28),rgba(195,165,105,.14));border-color:rgba(195,165,105,.45)}
     .hero-opt:hover .ho-arrow{opacity:1}
     .hero-opt .ho-arrow i{font-size:10px;transition:transform .2s}
     .hero-opt:hover .ho-arrow i{transform:translateX(3px)}
@@ -248,24 +253,24 @@
             <div class="hero-opt active" onclick="switchTab('individual')">
                 <div class="ho-top">
                     <div class="ho-icon"><i class="fa-solid fa-calculator"></i></div>
-                    <div><span class="ho-title">개별 검토</span><span class="ho-badge quick">간편</span></div>
+                    <div><span class="ho-title">개별 분석</span><span class="ho-badge quick">간편</span></div>
                 </div>
-                <p class="ho-desc">특정 항목만 빠르게 계산합니다. 비례율, 분담금, 시뮬레이션 등 단일 기능 실행.</p>
-                <div class="ho-tags">
-                    <span class="ho-tag">비례율</span><span class="ho-tag">분담금</span><span class="ho-tag">시뮬레이션</span><span class="ho-tag">총사업비</span><span class="ho-tag">수익성</span>
+                <p class="ho-desc">필요한 항목을 빠르게 확인하는 간편형 서비스입니다.</p>
+                <div class="ho-bottom">
+                    <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 개별 계산 시작</div>
+                    <div class="ho-mini"><i class="fa-solid fa-percent" title="비례율"></i><i class="fa-solid fa-coins" title="분담금"></i><i class="fa-solid fa-wave-square" title="시뮬레이션"></i></div>
                 </div>
-                <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 개별 계산 시작</div>
             </div>
             <div class="hero-opt" onclick="switchTab('comprehensive')">
                 <div class="ho-top">
                     <div class="ho-icon"><i class="fa-solid fa-chart-pie"></i></div>
                     <div><span class="ho-title">종합 분석</span><span class="ho-badge pro">전문가용</span></div>
                 </div>
-                <p class="ho-desc">기초데이터부터 사업비까지 단계별 입력. 비례율·분담금·시나리오 종합 분석.</p>
-                <div class="ho-tags">
-                    <span class="ho-tag">6단계 분석</span><span class="ho-tag">유형별 분담금</span><span class="ho-tag">시나리오 비교</span><span class="ho-tag">자동 해석</span>
+                <p class="ho-desc">전체 사업성을 단계별로 검토하는 전문형 서비스입니다.</p>
+                <div class="ho-bottom">
+                    <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 종합 분석 시작</div>
+                    <div class="ho-mini"><i class="fa-solid fa-layer-group" title="6단계 분석"></i><i class="fa-solid fa-shuffle" title="시나리오 비교"></i><i class="fa-solid fa-wand-magic-sparkles" title="자동 해석"></i></div>
                 </div>
-                <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 종합 분석 시작</div>
             </div>
         </div>
     </div>
