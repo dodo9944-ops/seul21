@@ -53,6 +53,7 @@
 | 증상 | 기간 | 원인 | 해결 |
 |------|------|------|------|
 | 자료실 메뉴바 고정 깨짐 반복 | 3일 12시간 | library.html만 `header-wrap: absolute !important` 땜질 → 다른 29개 페이지와 불일치 | 전수조사 1회로 ① library override 제거 ② community sticky top 90→82px ③ tab-scroll max-width 100vw→100% 동시 수정. 1커밋 해결 |
+| 자료실 가로폭 초과·상단 메뉴바 고정 깨짐 재발 (2026-04-19) | 1일 | `html, body { max-width: 100vw }` 만 설정되고 `overflow-x: hidden` 누락 → uni-hero 내부 absolute 요소가 미세 overflow 발생 시 가로 스크롤 생김 → position:fixed 헤더가 가로 스크롤에 끌려 움직이는 것처럼 보임. 또한 library.html의 고아 `.cat-wrap`(HTML 미존재) / legal-guide.html의 `header-wrap !important` 중복 override 잔존 | 공유 common.css에 `html, body { overflow-x: hidden }` 전역 추가 + library.html 고아 cat-wrap/cat-tabs CSS 제거 + legal-guide.html 중복 override 제거 + 50개 HTML `common.css?v=` 일괄 갱신. 1커밋 해결 |
 
 ### 위반 시
 
