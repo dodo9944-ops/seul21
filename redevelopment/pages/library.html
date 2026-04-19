@@ -21,16 +21,9 @@
        자료실 — 정비사업 전문 아카이브 (Premium Redesign)
        ================================================================ */
 
-    /* === 자료실 히어로 보정 — 업무실적(.uni-hero) 카드 크기와 통일 (2026-04-19) === */
-    .uni-hero.lib-compact { padding: 38px 0 38px; }
-    .uni-hero.lib-compact .inner { gap: 40px; }
-    .uni-hero.lib-compact .uh-text { margin-top: 40px; }
-    .uni-hero.lib-compact .uh-text h1 { font-size: 32px; margin-bottom: 10px; }
-    .uni-hero.lib-compact .uh-sub { font-size: 14px; max-width: 420px; }
-    .uni-hero.lib-compact .uh-bc { margin-bottom: 14px; }
-    .uni-hero.lib-compact .uh-label { margin-bottom: 12px; }
+    /* === 자료실 히어로 — 업무실적 기본 .uni-hero 와 완전 동일 (2026-04-19) ===
+       기존 .uni-hero.lib-compact override 전부 제거. 카드/폰트/패딩 모두 기본 규칙 상속. */
     .uni-hero.lib-compact .uh-visual { display: flex; justify-content: center; align-items: center; }
-    @media (max-width: 600px) { .uni-hero.lib-compact { padding: 40px 0 28px; } .uni-hero.lib-compact .uh-text h1 { font-size: 24px; } }
 
     /* === 소식받기 버튼 === */
     .lib-alimtalk-btn{display:inline-flex;align-items:center;gap:8px;margin-top:18px;margin-bottom:8px;padding:11px 24px;background:rgba(195,165,105,.1);border:1.5px solid rgba(195,165,105,.35);border-radius:10px;color:#C3A569;font-size:13.5px;font-weight:700;text-decoration:none;transition:all .2s;font-family:var(--font)}
