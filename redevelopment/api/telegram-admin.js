@@ -816,6 +816,22 @@ module.exports = async function handler(req, res) {
       const r = await fetch(`${TGAPI}/getWebhookInfo`);
       return res.status(200).json(await r.json());
     }
+    if (action === 'updates') {
+      // 1회용 디버그: webhook 설정 전 pending 업데이트에서 user ID 추출 (부트스트랩)
+      // 관리자 ID 확인 후 이 블록은 코드에서 제거할 것
+      const r = await fetch(`${TGAPI}/getUpdates`);
+      const d = await r.json();
+      const users = new Map();
+      for (const u of (d.result || [])) {
+        const from = u.message?.from || u.callback_query?.from;
+        if (from) users.set(from.id, { id: from.id, first_name: from.first_name, last_name: from.last_name, username: from.username });
+      }
+      return res.status(200).json({
+        user_ids: [...users.values()],
+        raw_count: d.result?.length || 0,
+        note: '부트스트랩 1회용 엔드포인트. 확인 후 코드에서 제거.'
+      });
+    }
     return res.status(200).json({
       bot: 'telegram-admin',
       webhookUrl,
