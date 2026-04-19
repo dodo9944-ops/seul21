@@ -274,7 +274,7 @@
 </div></div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260419c-restore"></script>
+<script src="../assets/data/mock-data.js?v=20260419d-fullrestore"></script>
 <script src="../assets/js/data-service.js?v=20260418k"></script>
 <script src="../assets/js/common.js?v=20260419noCopyOff"></script>
 <script>
@@ -308,7 +308,8 @@ var catDefs=[
     {key:'법령',keys:['법령','법령·조례','관련판례','지침','판례·질의회신'],icon:'fa-scale-balanced',label:'관계법령'},
     {key:'서식가이드',keys:['서식','가이드','절차·서류'],icon:'fa-file-pen',label:'서식·매뉴얼'},
     {key:'주요뉴스',keys:['주요뉴스','칼럼','정책','일반'],icon:'fa-newspaper',label:'주요뉴스'},
-    {key:'투자정보',keys:['투자정보','투자','시장분석','분석','개발호재','양도소득세','취득세','종합부동산세'],icon:'fa-chart-line',label:'투자정보'}];
+    {key:'투자정보',keys:['투자정보','투자','시장분석','분석','개발호재','양도소득세','취득세','종합부동산세'],icon:'fa-chart-line',label:'투자정보'},
+    {key:'사례',keys:['사례'],icon:'fa-bookmark',label:'사례집'}];
 function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){c['전체']++;catDefs.forEach(function(d){if(d.keys&&d.keys.indexOf(i.category)>=0)c[d.key]++})});return c}
 
 /* Hero stats */
@@ -422,6 +423,17 @@ if(investCard){investCard.addEventListener('click',function(){
 
 /* Download handler */
 var fileMap={
+'cs01':{web:'../downloads/case_study_cs01.html'},
+'cs02':{web:'../downloads/case_study_cs02.html'},
+'cs03':{web:'../downloads/case_study_cs03.html'},
+'cs04':{web:'../downloads/case_study_cs04.html'},
+'cs05':{web:'../downloads/case_study_cs05.html'},
+'cs06':{web:'../downloads/case_study_cs06.html'},
+'cs07':{web:'../downloads/case_study_cs07.html'},
+'cs08':{web:'../downloads/case_study_cs08.html'},
+'case0418d':{web:'../downloads/case_20260418d.html'},
+'case0418e':{web:'../downloads/case_20260418e.html'},
+'case0418f':{web:'../downloads/case_20260418f.html'},
 'lib1':{ext:'../downloads/files/lib1_조합설립인가_신청서.pdf',web:'../downloads/form_association.html'},
 'lib2':{ext:'../downloads/files/lib2_관리처분_변경인가_신청서.pdf',web:'../downloads/form_management.html'},
 'lib3':{ext:'../downloads/files/lib3_총회_위임장.pdf',web:'../downloads/form_proxy.html'},
