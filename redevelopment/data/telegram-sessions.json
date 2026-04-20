@@ -1,10 +1,11 @@
 {
   "8742684901": {
     "cmd": "news_add",
-    "step": "category",
+    "step": "summary",
     "data": {
-      "title": "/news_crawl"
+      "title": "/news_crawl",
+      "category": "기타"
     },
-    "updatedAt": 1776717217530
+    "updatedAt": 1776717317418
   }
 }
