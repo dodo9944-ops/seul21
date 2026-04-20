@@ -1,8 +1,10 @@
 {
   "8742684901": {
     "cmd": "news_add",
-    "step": "title",
-    "data": {},
-    "updatedAt": 1776717216702
+    "step": "category",
+    "data": {
+      "title": "/news_crawl"
+    },
+    "updatedAt": 1776717217530
   }
 }
