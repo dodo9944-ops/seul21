@@ -1,8 +1,10 @@
 {
   "8742684901": {
     "cmd": "news_add",
-    "step": "title",
-    "data": {},
-    "updatedAt": 1776687451076
+    "step": "category",
+    "data": {
+      "title": "/pc_screen"
+    },
+    "updatedAt": 1776687727517
   }
 }
