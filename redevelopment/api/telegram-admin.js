@@ -38,6 +38,16 @@ const CASE_DIR = 'redevelopment/downloads';
 const PC_QUEUE_PATH = 'redevelopment/data/pc-queue.json';
 const PC_QUEUE_TTL_MS = 7 * 24 * 3600 * 1000;
 const PC_COMMANDS = new Set(['pc_info', 'pc_screen', 'pc_lock', 'pc_shutdown', 'pc_restart', 'pc_abort', 'pc_run', 'pc_ping']);
+const PC_ALIASES = {
+  '핑': 'pc_ping',
+  '정보': 'pc_info',
+  '화면': 'pc_screen',
+  '잠금': 'pc_lock',
+  '컴꺼': 'pc_shutdown',
+  '재시작': 'pc_restart',
+  '취소': 'pc_abort',
+  '실행': 'pc_run'
+};
 const DEFAULT_SITE_URL = 'https://seul21.vercel.app';
 
 const NEWS_CATEGORIES = ['정책', '시장분석', '개발호재', '분석', '판례', '기타'];
@@ -843,14 +853,15 @@ async function handleMessage(msg) {
         + '<b>/news_crawl</b> — 정비사업 뉴스 수집·등록\n'
         + '<b>/case_add</b> — 사례집 PDF/HWP 업로드\n'
         + '<b>/cancel</b> — 진행 중 작업 취소\n\n'
-        + '<b>🖥 로컬 PC 제어</b> (브릿지 필요)\n'
-        + '<b>/pc_ping</b> — 브릿지 생존 확인\n'
-        + '<b>/pc_info</b> — 시스템 정보\n'
-        + '<b>/pc_screen</b> — 화면 캡처\n'
-        + '<b>/pc_lock</b> — 화면 잠금\n'
-        + '<b>/pc_shutdown</b> — 60초 후 종료 (/pc_abort로 취소)\n'
-        + '<b>/pc_restart</b> — 60초 후 재시작\n'
-        + '<b>/pc_run</b> <code>&lt;cmd&gt;</code> — 화이트리스트 명령 실행');
+        + '<b>🖥 로컬 PC 제어</b> (브릿지 필요, 한글 단축어 지원)\n'
+        + '<b>/핑</b> (/pc_ping) — 브릿지 생존 확인\n'
+        + '<b>/정보</b> (/pc_info) — 시스템 정보\n'
+        + '<b>/화면</b> (/pc_screen) — 화면 캡처\n'
+        + '<b>/잠금</b> (/pc_lock) — 화면 잠금\n'
+        + '<b>/컴꺼</b> (/pc_shutdown) — 60초 후 종료 (/취소로 중단)\n'
+        + '<b>/재시작</b> (/pc_restart) — 60초 후 재시작\n'
+        + '<b>/취소</b> (/pc_abort) — 예약된 종료/재시작 취소\n'
+        + '<b>/실행</b> <code>&lt;cmd&gt;</code> (/pc_run) — 화이트리스트 명령 실행');
     case 'status': return cmdStatus(msg);
     case 'deploy': return cmdDeploy(msg);
     case 'news_add': case 'newsadd': return cmdNewsAddStart(msg);
@@ -859,6 +870,7 @@ async function handleMessage(msg) {
     case 'case_add': case 'caseadd': return cmdCaseAddStart(msg);
     default:
       if (PC_COMMANDS.has(cmd)) return cmdPc(msg, cmd, args);
+      if (PC_ALIASES[cmdRaw]) return cmdPc(msg, PC_ALIASES[cmdRaw], args);
       return send(chatId, `알 수 없는 명령: <code>/${esc(cmd)}</code>\n<code>/help</code> 참고`);
   }
 }
