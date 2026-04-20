@@ -428,8 +428,12 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 
 /* ── PAGE LAYOUT ── */
+/* 홈 브레드크럼 Y좌표는 상단 padding 으로 결정된다.
+   회사소개 ~ 고객센터 전역에서 "홈" 글자가 동일 위치에 고정되도록
+   .uni-hero / .about-hero / .vision-hero / .services-hero / .fh 와
+   동일한 32px(데스크톱) · 28px(모바일) 로 통일한다. */
 .page-hero {
-  padding: 48px 0 40px;
+  padding: 32px 0 40px;
   background: linear-gradient(135deg, var(--brand-dark), var(--brand-navy));
   border-bottom: none;
 }
@@ -440,7 +444,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 .page-hero p { font-size: 15px; color: rgba(255,255,255,0.55); }
 @media (max-width: 768px) {
-  .page-hero { padding: 32px 0 28px; }
+  .page-hero { padding: 28px 0 28px; }
   .page-hero h1 { font-size: 24px; }
 }
 
