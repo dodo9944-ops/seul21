@@ -37,7 +37,23 @@ const NEWS_DIR = 'redevelopment/downloads';
 const CASE_DIR = 'redevelopment/downloads';
 const PC_QUEUE_PATH = 'redevelopment/data/pc-queue.json';
 const PC_QUEUE_TTL_MS = 7 * 24 * 3600 * 1000;
-const PC_COMMANDS = new Set(['pc_info', 'pc_screen', 'pc_lock', 'pc_shutdown', 'pc_restart', 'pc_abort', 'pc_run', 'pc_ping']);
+const PC_COMMANDS = new Set(['pc_info', 'pc_screen', 'pc_lock', 'pc_shutdown', 'pc_restart', 'pc_abort', 'pc_run', 'pc_ping', 'pc_youtube', 'pc_music', 'pc_trot', 'pc_mail', 'pc_claude']);
+const PC_ALIASES = {
+  '핑': 'pc_ping',
+  '정보': 'pc_info',
+  '화면': 'pc_screen',
+  '잠금': 'pc_lock',
+  '컴꺼': 'pc_shutdown',
+  '재시작': 'pc_restart',
+  '취소': 'pc_abort',
+  '실행': 'pc_run',
+  '유튜브': 'pc_youtube',
+  '음악': 'pc_music',
+  '트로트': 'pc_trot',
+  '메일': 'pc_mail',
+  '지메일': 'pc_mail',
+  '클로드': 'pc_claude'
+};
 const DEFAULT_SITE_URL = 'https://seul21.vercel.app';
 
 const NEWS_CATEGORIES = ['정책', '시장분석', '개발호재', '분석', '판례', '기타'];
@@ -376,6 +392,98 @@ async function cmdDeploy(msg) {
 // ══════════════════════════════════════════════════════════════
 // 명령 핸들러: /pc_* (로컬 PC 원격 제어)
 // ══════════════════════════════════════════════════════════════
+
+// 규칙 기반 한글 자연어 intent 추론 (LLM 없이 즉시 분기)
+function matchNaturalIntent(text) {
+  const t = String(text || '').trim();
+  if (!t) return null;
+
+  // 종료 (컴꺼, 컴퓨터 꺼, 전원 꺼, 종료)
+  if (/(컴\S{0,3}꺼|컴퓨터.{0,4}(꺼|끄|오프|off)|전원.{0,4}(꺼|끄|off)|셧다운|shutdown)/i.test(t)
+      && !/취소/.test(t)) return { cmd: 'pc_shutdown' };
+
+  // 재시작
+  if (/(재시작|재부팅|리부트|reboot|restart)/i.test(t)) return { cmd: 'pc_restart' };
+
+  // 종료/재시작 취소
+  if (/취소/.test(t) && /(종료|재시작|재부팅|shutdown|reboot)/i.test(t)) return { cmd: 'pc_abort' };
+
+  // 잠금
+  if (/(화면.{0,3}잠|잠\s*(금|가|궈|그)|lock\s*screen|잠금)/i.test(t)) return { cmd: 'pc_lock' };
+
+  // 스크린샷
+  if (/(스크린|화면).{0,4}(캡처|찍|잡|샷)|screenshot/i.test(t)) return { cmd: 'pc_screen' };
+
+  // 시스템 정보
+  if (/(시스템|pc|컴퓨터).{0,6}(정보|상태|알려|보여)|사양|cpu|메모리.{0,4}(얼마|보여|알려)/i.test(t)) return { cmd: 'pc_info' };
+
+  // 트로트 (우선순위: 유튜브보다 먼저)
+  if (/트로트/.test(t)) return { cmd: 'pc_trot' };
+
+  // 유튜브 검색
+  const ytm = t.match(/(?:유튜브|youtube)(?:에서)?\s*(.*?)\s*(?:틀어|재생|찾아|검색|켜)?\s*$/i);
+  if (ytm && /유튜브|youtube/i.test(t)) {
+    const q = (ytm[1] || '').trim();
+    return { cmd: 'pc_youtube', args: q };
+  }
+
+  // 음악/노래
+  const musicM = t.match(/(?:음악|노래)\s*(.*?)\s*(?:틀어|재생|찾아|켜)?\s*$/);
+  if (musicM && /(음악|노래)/.test(t)) {
+    const q = (musicM[1] || '').trim();
+    return { cmd: 'pc_music', args: q };
+  }
+
+  // 지메일/메일
+  if (/(지메일|메일|mail|gmail)/i.test(t)) {
+    const emailMatch = t.match(/[\w.+-]+@[\w-]+\.[\w.-]+/);
+    const args = emailMatch ? emailMatch[0] : '';
+    return { cmd: 'pc_mail', args };
+  }
+
+  // 클로드
+  if (/(클로드|claude)/i.test(t) && /(켜|열|실행|시작|접속|로그인|login)/i.test(t)) {
+    return { cmd: 'pc_claude' };
+  }
+
+  // 생존 확인
+  if (/(브릿지|브리지|bridge|살아|있|있냐|on(line)?)/i.test(t) && /(확인|체크|있|살아|ping|핑)/i.test(t)) {
+    return { cmd: 'pc_ping' };
+  }
+
+  return null;
+}
+
+// (선택) Anthropic API 기반 LLM intent 추론. ANTHROPIC_API_KEY 있을 때만 호출.
+async function aiNaturalIntent(text) {
+  const apiKey = env('ANTHROPIC_API_KEY');
+  if (!apiKey) return null;
+  const sys = '당신은 텔레그램 봇의 자연어 → 명령 해석기입니다. 사용자의 한국어 입력을 다음 JSON 스키마로 변환하세요: {"cmd":"pc_info|pc_screen|pc_lock|pc_shutdown|pc_restart|pc_abort|pc_run|pc_ping|pc_youtube|pc_music|pc_trot|pc_mail|none","args":"문자열"}. 매칭되지 않으면 cmd=none. JSON만 응답.';
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 128,
+        system: sys,
+        messages: [{ role: 'user', content: text }]
+      })
+    });
+    if (!r.ok) return null;
+    const d = await r.json();
+    const raw = d?.content?.[0]?.text || '';
+    const j = JSON.parse(raw);
+    if (!j.cmd || j.cmd === 'none') return null;
+    return { cmd: j.cmd, args: j.args || '' };
+  } catch (_) {
+    return null;
+  }
+}
 
 async function enqueuePcTask(req) {
   const cutoff = Date.now() - PC_QUEUE_TTL_MS;
@@ -825,7 +933,12 @@ async function handleMessage(msg) {
   // 2) 명령어 처리
   const text = (msg.text || '').trim();
   if (!text.startsWith('/')) {
-    await send(chatId, '명령어로 시작해주세요. <code>/help</code> 참고');
+    const intent = matchNaturalIntent(text) || await aiNaturalIntent(text);
+    if (intent) {
+      const iArgs = intent.args ? String(intent.args).trim().split(/\s+/).filter(Boolean) : [];
+      return cmdPc(msg, intent.cmd, iArgs);
+    }
+    await send(chatId, '이해하지 못한 요청입니다. 명령은 <code>/</code> 로 시작하거나 자연어로 "트로트 틀어", "컴퓨터 꺼", "화면 캡처" 같은 형식으로 입력하세요. <code>/help</code> 참고');
     return;
   }
   const [cmdRaw, ...args] = text.slice(1).split(/\s+/);
@@ -843,14 +956,21 @@ async function handleMessage(msg) {
         + '<b>/news_crawl</b> — 정비사업 뉴스 수집·등록\n'
         + '<b>/case_add</b> — 사례집 PDF/HWP 업로드\n'
         + '<b>/cancel</b> — 진행 중 작업 취소\n\n'
-        + '<b>🖥 로컬 PC 제어</b> (브릿지 필요)\n'
-        + '<b>/pc_ping</b> — 브릿지 생존 확인\n'
-        + '<b>/pc_info</b> — 시스템 정보\n'
-        + '<b>/pc_screen</b> — 화면 캡처\n'
-        + '<b>/pc_lock</b> — 화면 잠금\n'
-        + '<b>/pc_shutdown</b> — 60초 후 종료 (/pc_abort로 취소)\n'
-        + '<b>/pc_restart</b> — 60초 후 재시작\n'
-        + '<b>/pc_run</b> <code>&lt;cmd&gt;</code> — 화이트리스트 명령 실행');
+        + '<b>🖥 로컬 PC 제어</b> (브릿지 필요, 한글 단축어 지원)\n'
+        + '<b>/핑</b> (/pc_ping) — 브릿지 생존 확인\n'
+        + '<b>/정보</b> (/pc_info) — 시스템 정보\n'
+        + '<b>/화면</b> (/pc_screen) — 화면 캡처\n'
+        + '<b>/잠금</b> (/pc_lock) — 화면 잠금\n'
+        + '<b>/컴꺼</b> (/pc_shutdown) — 60초 후 종료 (/취소로 중단)\n'
+        + '<b>/재시작</b> (/pc_restart) — 60초 후 재시작\n'
+        + '<b>/취소</b> (/pc_abort) — 예약된 종료/재시작 취소\n'
+        + '<b>/실행</b> <code>&lt;cmd&gt;</code> (/pc_run) — 화이트리스트 명령 실행\n'
+        + '<b>/트로트</b> — 유튜브 트로트 메들리 검색·실행\n'
+        + '<b>/음악</b> <code>&lt;검색어&gt;</code> — 유튜브 검색 재생 (기본: 트로트)\n'
+        + '<b>/유튜브</b> <code>&lt;검색어&gt;</code> — 유튜브 검색 결과\n'
+        + '<b>/메일</b> <code>&lt;받는이&gt; [제목] [본문]</code> — 지메일 작성창 열기\n'
+        + '<b>/클로드</b> — claude.ai 로그인 페이지 열기\n\n'
+        + '<b>🧠 자연어 입력</b>: "/"없이 한국어 문장도 해석. 예) "트로트 틀어줘", "컴퓨터 꺼", "화면 캡처", "클로드 켜줘"');
     case 'status': return cmdStatus(msg);
     case 'deploy': return cmdDeploy(msg);
     case 'news_add': case 'newsadd': return cmdNewsAddStart(msg);
@@ -859,6 +979,7 @@ async function handleMessage(msg) {
     case 'case_add': case 'caseadd': return cmdCaseAddStart(msg);
     default:
       if (PC_COMMANDS.has(cmd)) return cmdPc(msg, cmd, args);
+      if (PC_ALIASES[cmdRaw]) return cmdPc(msg, PC_ALIASES[cmdRaw], args);
       return send(chatId, `알 수 없는 명령: <code>/${esc(cmd)}</code>\n<code>/help</code> 참고`);
   }
 }
