@@ -1,8 +1,8 @@
 {
   "8742684901": {
-    "cmd": "case_add",
-    "step": "file",
+    "cmd": "news_add",
+    "step": "title",
     "data": {},
-    "updatedAt": 1776683240705
+    "updatedAt": 1776687451076
   }
 }
