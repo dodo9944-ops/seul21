@@ -1086,6 +1086,37 @@ module.exports = async function handler(req, res) {
       const r = await fetch(`${TGAPI}/getWebhookInfo`);
       return res.status(200).json(await r.json());
     }
+    if (action === 'setcommands') {
+      const commands = [
+        { command: 'help', description: '명령어 목록' },
+        { command: 'status', description: '사이트·배포·커밋 상태' },
+        { command: 'deploy', description: 'Vercel 재배포' },
+        { command: 'news_add', description: '뉴스 등록 (대화형)' },
+        { command: 'news_del', description: '뉴스 삭제 (자동 백업)' },
+        { command: 'news_crawl', description: '뉴스 크롤링' },
+        { command: 'case_add', description: '사례집 PDF/HWP 업로드' },
+        { command: 'cancel', description: '진행 중 작업 취소' },
+        { command: 'pc_ping', description: 'PC 브릿지 생존 확인' },
+        { command: 'pc_info', description: 'PC 시스템 정보' },
+        { command: 'pc_screen', description: 'PC 화면 캡처' },
+        { command: 'pc_lock', description: 'PC 화면 잠금' },
+        { command: 'pc_shutdown', description: 'PC 60초 후 종료' },
+        { command: 'pc_restart', description: 'PC 60초 후 재시작' },
+        { command: 'pc_abort', description: 'PC 예약 종료/재시작 취소' },
+        { command: 'pc_run', description: 'PC 허용 명령 실행' },
+        { command: 'pc_youtube', description: '유튜브 검색 실행' },
+        { command: 'pc_music', description: '유튜브 음악 검색' },
+        { command: 'pc_trot', description: '유튜브 트로트 메들리' },
+        { command: 'pc_mail', description: '지메일 작성창 열기' },
+        { command: 'pc_claude', description: 'claude.ai 열기' }
+      ];
+      const r = await fetch(`${TGAPI}/setMyCommands`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ commands })
+      });
+      return res.status(200).json(await r.json());
+    }
     return res.status(200).json({
       bot: 'telegram-admin',
       webhookUrl,
