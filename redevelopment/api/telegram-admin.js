@@ -417,8 +417,8 @@ function matchNaturalIntent(text) {
   // 시스템 정보
   if (/(시스템|pc|컴퓨터).{0,6}(정보|상태|알려|보여)|사양|cpu|메모리.{0,4}(얼마|보여|알려)/i.test(t)) return { cmd: 'pc_info' };
 
-  // 트로트 (우선순위: 유튜브보다 먼저)
-  if (/트로트/.test(t)) return { cmd: 'pc_trot' };
+  // 트로트/트롯 (우선순위: 유튜브보다 먼저)
+  if (/트로트|트롯/.test(t)) return { cmd: 'pc_trot' };
 
   // 유튜브 검색
   const ytm = t.match(/(?:유튜브|youtube)(?:에서)?\s*(.*?)\s*(?:틀어|재생|찾아|검색|켜)?\s*$/i);
@@ -938,7 +938,7 @@ async function handleMessage(msg) {
       const iArgs = intent.args ? String(intent.args).trim().split(/\s+/).filter(Boolean) : [];
       return cmdPc(msg, intent.cmd, iArgs);
     }
-    await send(chatId, '이해하지 못한 요청입니다. 명령은 <code>/</code> 로 시작하거나 자연어로 "트로트 틀어", "컴퓨터 꺼", "화면 캡처" 같은 형식으로 입력하세요. <code>/help</code> 참고');
+    await send(chatId, `이해하지 못한 요청입니다.\n입력: <code>${esc(text)}</code>\n\n자연어 예) "트로트 틀어", "컴퓨터 꺼", "화면 캡처", "클로드 켜"\n<code>/help</code> 참고.`);
     return;
   }
   const [cmdRaw, ...args] = text.slice(1).split(/\s+/);
