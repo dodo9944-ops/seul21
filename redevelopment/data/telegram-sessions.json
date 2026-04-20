@@ -1,12 +1,13 @@
 {
   "8742684901": {
     "cmd": "news_add",
-    "step": "content",
+    "step": "tags",
     "data": {
       "title": "/news_crawl",
       "category": "기타",
-      "summary": "/news_crawl"
+      "summary": "/news_crawl",
+      "content": "https://github.com/dodo9944-ops/813700/pull/3"
     },
-    "updatedAt": 1776718044369
+    "updatedAt": 1776718361901
   }
 }
