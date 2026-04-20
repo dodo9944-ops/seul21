@@ -37,6 +37,8 @@ const NEWS_DIR = 'redevelopment/downloads';
 const CASE_DIR = 'redevelopment/downloads';
 const PC_QUEUE_PATH = 'redevelopment/data/pc-queue.json';
 const PC_QUEUE_TTL_MS = 7 * 24 * 3600 * 1000;
+const PC_BRIDGE_URL_PATH = 'redevelopment/data/pc-bridge-url.json';
+const PC_BRIDGE_URL_STALE_MS = 5 * 60 * 1000;
 const PC_COMMANDS = new Set(['pc_info', 'pc_screen', 'pc_lock', 'pc_shutdown', 'pc_restart', 'pc_abort', 'pc_run', 'pc_ping', 'pc_youtube', 'pc_music', 'pc_trot', 'pc_mail', 'pc_claude']);
 const PC_ALIASES = {
   '핑': 'pc_ping',
@@ -510,6 +512,29 @@ async function enqueuePcTask(req) {
   }
 }
 
+async function tryPushToBridge(req) {
+  let info;
+  try {
+    const f = await ghGetFile(PC_BRIDGE_URL_PATH);
+    if (!f.content) return false;
+    info = JSON.parse(f.content);
+  } catch (_) { return false; }
+  if (!info.url || info.stale) return false;
+  if (Date.now() - (info.ts || 0) > PC_BRIDGE_URL_STALE_MS) return false;
+  try {
+    const controller = new AbortController();
+    const to = setTimeout(() => controller.abort(), 3000);
+    const res = await fetch(`${info.url}/exec`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: env('TELEGRAM_WEBHOOK_SECRET'), ...req }),
+      signal: controller.signal
+    });
+    clearTimeout(to);
+    return res.ok;
+  } catch (_) { return false; }
+}
+
 async function cmdPc(msg, cmd, args) {
   const chatId = msg.chat.id;
   const userId = msg.from.id;
@@ -521,11 +546,14 @@ async function cmdPc(msg, cmd, args) {
     user_id: String(userId),
     ts: Date.now()
   };
+  // 1) Push (즉시): Cloudflare tunnel 경유 로컬 브릿지 직접 호출
+  if (await tryPushToBridge(req)) return; // 브릿지가 결과를 pc_reply로 직접 전송
+  // 2) Fallback: GitHub 큐 enqueue (브릿지 offline 시)
   try {
     await enqueuePcTask(req);
-    await send(chatId, `📨 PC 요청 대기열 추가: <code>${esc(cmd)}</code>${req.args ? ' <code>' + esc(req.args) + '</code>' : ''}\n로컬 브릿지 응답까지 최대 15초 내.`);
+    await send(chatId, `📨 <code>${esc(cmd)}</code> 큐 추가 (브릿지 오프라인 — 최대 7일 내 PC 온라인 시 실행)`);
   } catch (e) {
-    await send(chatId, `❌ 큐 기록 실패: ${esc(String(e.message).slice(0, 300))}`);
+    await send(chatId, `❌ 전송 실패: ${esc(String(e.message).slice(0, 300))}`);
   }
 }
 
