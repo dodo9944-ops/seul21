@@ -35,6 +35,9 @@ const MOCK_DATA_PATH = 'redevelopment/assets/data/mock-data.js';
 const SESSION_PATH = 'redevelopment/data/telegram-sessions.json';
 const NEWS_DIR = 'redevelopment/downloads';
 const CASE_DIR = 'redevelopment/downloads';
+const PC_QUEUE_PATH = 'redevelopment/data/pc-queue.json';
+const PC_QUEUE_TTL_MS = 7 * 24 * 3600 * 1000;
+const PC_COMMANDS = new Set(['pc_info', 'pc_screen', 'pc_lock', 'pc_shutdown', 'pc_restart', 'pc_abort', 'pc_run', 'pc_ping']);
 const DEFAULT_SITE_URL = 'https://seul21.vercel.app';
 
 const NEWS_CATEGORIES = ['정책', '시장분석', '개발호재', '분석', '판례', '기타'];
@@ -367,6 +370,54 @@ async function cmdDeploy(msg) {
     await send(chatId, `✅ 빈 커밋 푸시 완료\n<code>${esc(newCommit.sha.slice(0, 7))}</code>\nVercel 자동 배포가 1~2분 내 시작됩니다. <code>/status</code>로 확인하세요.`);
   } catch (e) {
     await send(chatId, `❌ 배포 오류: ${esc(e.message)}`);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// 명령 핸들러: /pc_* (로컬 PC 원격 제어)
+// ══════════════════════════════════════════════════════════════
+
+async function enqueuePcTask(req) {
+  const cutoff = Date.now() - PC_QUEUE_TTL_MS;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    let content = '{"requests":[]}';
+    let sha = null;
+    try {
+      const f = await ghGetFile(PC_QUEUE_PATH);
+      content = f.content || content;
+      sha = f.sha;
+    } catch (_) { /* file may not exist yet */ }
+    let q;
+    try { q = JSON.parse(content); } catch { q = { requests: [] }; }
+    if (!Array.isArray(q.requests)) q.requests = [];
+    q.requests = q.requests.filter(r => r && typeof r.ts === 'number' && r.ts > cutoff);
+    q.requests.push(req);
+    try {
+      await ghPutFile(PC_QUEUE_PATH, JSON.stringify(q), `chore(pc-queue): enqueue ${req.cmd} ${req.id}`, sha);
+      return;
+    } catch (e) {
+      const m = String(e.message || '');
+      if (!/409|sha|conflict/i.test(m) || attempt === 2) throw e;
+    }
+  }
+}
+
+async function cmdPc(msg, cmd, args) {
+  const chatId = msg.chat.id;
+  const userId = msg.from.id;
+  const req = {
+    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    cmd,
+    args: (args || []).join(' '),
+    chat_id: chatId,
+    user_id: String(userId),
+    ts: Date.now()
+  };
+  try {
+    await enqueuePcTask(req);
+    await send(chatId, `📨 PC 요청 대기열 추가: <code>${esc(cmd)}</code>${req.args ? ' <code>' + esc(req.args) + '</code>' : ''}\n로컬 브릿지 응답까지 최대 15초 내.`);
+  } catch (e) {
+    await send(chatId, `❌ 큐 기록 실패: ${esc(String(e.message).slice(0, 300))}`);
   }
 }
 
@@ -791,7 +842,15 @@ async function handleMessage(msg) {
         + '<b>/news_del</b> <code>&lt;id&gt;</code> — 뉴스 삭제 (자동 백업)\n'
         + '<b>/news_crawl</b> — 정비사업 뉴스 수집·등록\n'
         + '<b>/case_add</b> — 사례집 PDF/HWP 업로드\n'
-        + '<b>/cancel</b> — 진행 중 작업 취소');
+        + '<b>/cancel</b> — 진행 중 작업 취소\n\n'
+        + '<b>🖥 로컬 PC 제어</b> (브릿지 필요)\n'
+        + '<b>/pc_ping</b> — 브릿지 생존 확인\n'
+        + '<b>/pc_info</b> — 시스템 정보\n'
+        + '<b>/pc_screen</b> — 화면 캡처\n'
+        + '<b>/pc_lock</b> — 화면 잠금\n'
+        + '<b>/pc_shutdown</b> — 60초 후 종료 (/pc_abort로 취소)\n'
+        + '<b>/pc_restart</b> — 60초 후 재시작\n'
+        + '<b>/pc_run</b> <code>&lt;cmd&gt;</code> — 화이트리스트 명령 실행');
     case 'status': return cmdStatus(msg);
     case 'deploy': return cmdDeploy(msg);
     case 'news_add': case 'newsadd': return cmdNewsAddStart(msg);
@@ -799,7 +858,46 @@ async function handleMessage(msg) {
     case 'news_crawl': case 'newscrawl': return cmdNewsCrawl(msg);
     case 'case_add': case 'caseadd': return cmdCaseAddStart(msg);
     default:
+      if (PC_COMMANDS.has(cmd)) return cmdPc(msg, cmd, args);
       return send(chatId, `알 수 없는 명령: <code>/${esc(cmd)}</code>\n<code>/help</code> 참고`);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// 로컬 PC 브릿지 응답 프록시
+// ══════════════════════════════════════════════════════════════
+
+async function handlePcReply(req, res) {
+  try {
+    const body = req.body || {};
+    if (body.secret !== env('TELEGRAM_WEBHOOK_SECRET')) {
+      return res.status(401).json({ error: 'invalid secret' });
+    }
+    const chatId = body.chat_id;
+    if (!chatId) return res.status(400).json({ error: 'chat_id required' });
+    const token = env('TELEGRAM_BOT_TOKEN');
+    if (!token) return res.status(500).json({ error: 'TELEGRAM_BOT_TOKEN 미설정' });
+
+    if (body.photo_base64) {
+      const form = new FormData();
+      form.append('chat_id', String(chatId));
+      if (body.caption) form.append('caption', String(body.caption));
+      const bytes = Buffer.from(body.photo_base64, 'base64');
+      const blob = new Blob([bytes], { type: 'image/png' });
+      form.append('photo', blob, 'screen.png');
+      const r = await fetch(`${TELEGRAM_API}${token}/sendPhoto`, { method: 'POST', body: form });
+      const d = await r.json().catch(() => ({}));
+      return res.status(r.ok ? 200 : 500).json(d);
+    }
+
+    if (body.text) {
+      await send(chatId, String(body.text));
+      return res.status(200).json({ ok: true });
+    }
+
+    return res.status(400).json({ error: 'text or photo_base64 required' });
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
   }
 }
 
@@ -852,6 +950,11 @@ module.exports = async function handler(req, res) {
   }
 
   if (req.method !== 'POST') return res.status(405).json({ error: 'method not allowed' });
+
+  // 로컬 PC 브릿지 응답 프록시 (텔레그램 웹훅과 별도 경로)
+  if (req.query && req.query.action === 'pc_reply') {
+    return handlePcReply(req, res);
+  }
 
   // 웹훅 시크릿 검증
   const expectedSecret = env('TELEGRAM_WEBHOOK_SECRET');
