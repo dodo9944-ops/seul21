@@ -816,21 +816,6 @@ module.exports = async function handler(req, res) {
       const r = await fetch(`${TGAPI}/getWebhookInfo`);
       return res.status(200).json(await r.json());
     }
-    if (action === 'debug_env') {
-      // 1회용 ENV 상태 진단 (값 대신 길이/존재/파싱결과만 노출)
-      const adminsRaw = process.env.TELEGRAM_ADMIN_IDS;
-      const adminsParsed = (adminsRaw || '').split(',').map(s => s.trim()).filter(Boolean);
-      return res.status(200).json({
-        TELEGRAM_BOT_TOKEN: !!process.env.TELEGRAM_BOT_TOKEN,
-        TELEGRAM_WEBHOOK_SECRET_len: (process.env.TELEGRAM_WEBHOOK_SECRET || '').length,
-        TELEGRAM_ADMIN_IDS_raw_len: (adminsRaw || '').length,
-        TELEGRAM_ADMIN_IDS_parsed: adminsParsed,
-        TELEGRAM_ADMIN_IDS_match_8742684901: adminsParsed.includes('8742684901'),
-        GITHUB_TOKEN: !!process.env.GITHUB_TOKEN,
-        VERCEL_DEPLOY_HOOK_URL: !!process.env.VERCEL_DEPLOY_HOOK_URL,
-        note: '1회용 진단. 확인 후 코드에서 제거.'
-      });
-    }
     return res.status(200).json({
       bot: 'telegram-admin',
       webhookUrl,
