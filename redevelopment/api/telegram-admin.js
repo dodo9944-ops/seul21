@@ -18,7 +18,7 @@
  *   TELEGRAM_WEBHOOK_SECRET     - 웹훅 검증용 랜덤 문자열
  *   TELEGRAM_ADMIN_IDS          - 관리자 user ID 쉼표 구분 (예: "123,456")
  *   GITHUB_TOKEN                - PAT, scope: repo
- *   VERCEL_DEPLOY_HOOK_URL      - Vercel Git Deploy Hook URL
+ *   VERCEL_DEPLOY_HOOK_URL      - Vercel Git Deploy Hook URL (선택, 없으면 /deploy는 GitHub 빈 커밋 푸시로 fallback)
  *   VERCEL_API_TOKEN            - Vercel API 토큰 (선택, /status의 빌드상태)
  *   VERCEL_PROJECT_ID           - Vercel 프로젝트 ID (선택)
  *   VERCEL_TEAM_ID              - Vercel 팀 ID (팀 소유 프로젝트일 때)
@@ -329,19 +329,42 @@ async function cmdStatus(msg) {
 async function cmdDeploy(msg) {
   const chatId = msg.chat.id;
   const hook = env('VERCEL_DEPLOY_HOOK_URL');
-  if (!hook) {
-    await send(chatId, '❌ VERCEL_DEPLOY_HOOK_URL 미설정');
+
+  if (hook) {
+    await send(chatId, '🚀 배포 트리거 중 (deploy hook)...');
+    try {
+      const r = await fetch(hook, { method: 'POST' });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        await send(chatId, `❌ 배포 실패: ${r.status}\n<code>${esc(JSON.stringify(d).slice(0, 500))}</code>`);
+        return;
+      }
+      await send(chatId, `✅ 배포 시작됨\n<code>job: ${esc(d.job?.id || 'n/a')}</code>\n1~2분 후 <code>/status</code>로 확인하세요.`);
+    } catch (e) {
+      await send(chatId, `❌ 배포 오류: ${esc(e.message)}`);
+    }
     return;
   }
-  await send(chatId, '🚀 배포 트리거 중...');
+
+  // Fallback: GitHub 빈 커밋 푸시 → Vercel이 자동 감지하여 재배포
+  await send(chatId, '🚀 배포 트리거 중 (empty commit)...');
   try {
-    const r = await fetch(hook, { method: 'POST' });
-    const d = await r.json().catch(() => ({}));
-    if (!r.ok) {
-      await send(chatId, `❌ 배포 실패: ${r.status}\n<code>${esc(JSON.stringify(d).slice(0, 500))}</code>`);
-      return;
-    }
-    await send(chatId, `✅ 배포 시작됨\n<code>job: ${esc(d.job?.id || 'n/a')}</code>\n1~2분 후 <code>/status</code>로 확인하세요.`);
+    const ref = await gh(`/repos/${REPO}/git/ref/heads/${REPO_BRANCH}`);
+    const parentSha = ref.object.sha;
+    const parentCommit = await gh(`/repos/${REPO}/git/commits/${parentSha}`);
+    const newCommit = await gh(`/repos/${REPO}/git/commits`, {
+      method: 'POST',
+      body: JSON.stringify({
+        message: `ci: redeploy via telegram /deploy (${stampStr()})`,
+        tree: parentCommit.tree.sha,
+        parents: [parentSha]
+      })
+    });
+    await gh(`/repos/${REPO}/git/refs/heads/${REPO_BRANCH}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ sha: newCommit.sha })
+    });
+    await send(chatId, `✅ 빈 커밋 푸시 완료\n<code>${esc(newCommit.sha.slice(0, 7))}</code>\nVercel 자동 배포가 1~2분 내 시작됩니다. <code>/status</code>로 확인하세요.`);
   } catch (e) {
     await send(chatId, `❌ 배포 오류: ${esc(e.message)}`);
   }
