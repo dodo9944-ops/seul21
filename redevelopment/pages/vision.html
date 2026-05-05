@@ -547,12 +547,17 @@
         transition: all 0.3s;
         backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
         box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        display: block; text-decoration: none; color: inherit;
+        cursor: pointer;
     }
     .vision-hero .hero-card:hover {
         background: rgba(14,22,40,0.70);
         border-color: rgba(195,165,105,0.3);
         transform: translateY(-2px);
     }
+    /* 앵커 점프 시 sticky 헤더 가림 방지 */
+    html { scroll-behavior: smooth; }
+    #philosophy, #principles, #method, #growth { scroll-margin-top: 88px; }
     .vision-hero .hero-card-icon {
         width: 36px; height: 36px; border-radius: 8px;
         background: rgba(195,165,105,0.16);
@@ -600,26 +605,26 @@
             <p class="hero-sub">정비사업의 기준을 바로 세우고, 사업의 가치를 끝까지 완성하는 세울엔지니어링의 길</p>
         </div>
         <div class="hero-cards-float">
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('절차의 정합성')">
+            <a class="hero-card" href="#philosophy">
+                <div class="hero-card-icon"><i class="fa-solid fa-quote-left"></i></div>
+                <h4>브랜드 철학</h4>
+                <p>세울 = 바로 세우다</p>
+            </a>
+            <a class="hero-card" href="#principles">
                 <div class="hero-card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-                <h4>절차의 정합성</h4>
-                <p>법과 원칙에 기반한 실무</p>
-            </div>
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('이해관계 조율')">
-                <div class="hero-card-icon"><i class="fa-solid fa-handshake"></i></div>
-                <h4>이해관계 조율</h4>
-                <p>조합·행정·시공 균형 자문</p>
-            </div>
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('단계별 추진')">
+                <h4>우리의 원칙</h4>
+                <p>법·신뢰·책임의 6대 기준</p>
+            </a>
+            <a class="hero-card" href="#method">
                 <div class="hero-card-icon"><i class="fa-solid fa-route"></i></div>
-                <h4>단계별 추진</h4>
-                <p>기획부터 준공까지 로드맵</p>
-            </div>
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('책임지는 완결')">
-                <div class="hero-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <h4>책임지는 완결</h4>
-                <p>사업 완료까지 동행</p>
-            </div>
+                <h4>세울의 방식</h4>
+                <p>정비사업 6단계 추진 로드맵</p>
+            </a>
+            <a class="hero-card" href="#growth">
+                <div class="hero-card-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <h4>성장 스토리</h4>
+                <p>30년 정비사업 발자취</p>
+            </a>
         </div>
     </div>
 </div>
@@ -628,7 +633,7 @@
     <div class="inner">
 
         <!-- ══════ 브랜드 철학 ══════ -->
-        <div class="vs" style="margin-bottom:52px">
+        <div class="vs" id="philosophy" style="margin-bottom:52px">
             <div class="vs-philosophy">
                 <div class="vs-phil-mark">&ldquo;</div>
                 <div class="vs-phil-inner">
@@ -677,7 +682,7 @@
         </div>
 
         <!-- ══════ 우리가 지키는 원칙 ══════ -->
-        <div class="vs">
+        <div class="vs" id="principles">
             <h2 class="vs-title">우리가 지키는 원칙</h2>
             <div class="vs-principles">
                 <div class="vs-prin-card">
@@ -714,7 +719,7 @@
         </div>
 
         <!-- ══════ 세울의 방식 ══════ -->
-        <div class="vs">
+        <div class="vs" id="method">
             <div class="vs-process">
                 <h2>세울의 방식</h2>
                 <div class="vs-process-sub">HOW WE WORK — 정비사업의 처음부터 끝까지</div>
@@ -781,7 +786,7 @@
         </div>
 
         <!-- ══════ 성장 스토리 ══════ -->
-        <div class="vs">
+        <div class="vs" id="growth">
             <h2 class="vs-title">성장 스토리</h2>
             <div class="vs-timeline" id="vsTimeline"></div>
         </div>
