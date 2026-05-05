@@ -562,12 +562,22 @@
         padding: 28px 24px;
         transition: all 0.25s;
         display: flex; flex-direction: column;
+        text-decoration: none; color: inherit;
+        position: relative;
     }
     .pro-card:hover {
         border-color: var(--gold);
         box-shadow: 0 8px 24px rgba(0,0,0,0.06);
         transform: translateY(-2px);
     }
+    .pro-card-more {
+        margin-top: 14px;
+        font-size: 12.5px; font-weight: 600;
+        color: var(--gold);
+        display: inline-flex; align-items: center; gap: 6px;
+        opacity: 0.85; transition: opacity 0.2s, transform 0.2s;
+    }
+    .pro-card:hover .pro-card-more { opacity: 1; transform: translateX(2px); }
     .pro-card-icon {
         width: 52px; height: 52px; border-radius: 12px;
         background: linear-gradient(135deg, #0A0F1C, #142644);
@@ -965,36 +975,42 @@
             <div class="section-label">Professional Areas</div>
             <h2 class="section-title">사업분야</h2>
             <div class="pro-grid" id="proGrid">
-                <div class="pro-card">
+                <a class="pro-card" href="redevelopment-service.html">
                     <div class="pro-card-icon"><i class="fa-solid fa-building"></i></div>
-                    <h4>재개발</h4>
-                    <p>노후 주거지역의 주거환경을 개선하고 도시기능을 회복하는 재개발 사업 전 과정을 관리합니다.</p>
-                </div>
-                <div class="pro-card">
+                    <h4>주택재개발 정비사업</h4>
+                    <p>일반절차(12단계)와 서울시 신속통합기획을 구분하여 기본계획 수립부터 준공·조합 해산까지 전 과정을 관리합니다. HUG 보증 업무 원스톱 지원.</p>
+                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+                <a class="pro-card" href="reconstruction-service.html">
                     <div class="pro-card-icon"><i class="fa-solid fa-city"></i></div>
-                    <h4>재건축</h4>
-                    <p>기존 공동주택의 철거 및 신축을 위한 재건축 사업의 인허가와 조합 운영을 지원합니다.</p>
-                </div>
-                <div class="pro-card">
+                    <h4>주택재건축 정비사업</h4>
+                    <p>일반절차(12단계)와 서울시 신속통합기획을 구분하여 안전진단부터 준공까지 전 과정을 관리합니다. HUG 보증 업무 원스톱 지원.</p>
+                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+                <a class="pro-card" href="small-reconstruction-service.html">
                     <div class="pro-card-icon"><i class="fa-solid fa-house-chimney"></i></div>
                     <h4>소규모 정비사업</h4>
-                    <p>소규모재건축 · 가로주택정비 등 소규모 정비사업과 도심복합개발(통합재건축·신속통합기획·역세권 개발 등) 업무를 실무 중심으로 지원합니다.</p>
-                </div>
-                <div class="pro-card">
+                    <p>소규모재건축과 가로주택정비를 포괄. 정비구역 지정 없이 200세대 미만 노후 주거지를 신속하게 정비합니다.</p>
+                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+                <a class="pro-card" href="garoju-service.html">
+                    <div class="pro-card-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <h4>도심복합개발</h4>
+                    <p>통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등 복합적 사업구조와 고밀 개발방식을 종합 검토합니다.</p>
+                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+                <a class="pro-card" href="urbanplanning-service.html">
+                    <div class="pro-card-icon"><i class="fa-solid fa-drafting-compass"></i></div>
+                    <h4>도시계획(엔지니어링)</h4>
+                    <p>정비계획, 지구단위계획, 인허가 협의자료 작성, 서울시 신속통합기획 대응 업무를 수행합니다.</p>
+                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+                <a class="pro-card" href="pmcm-service.html">
                     <div class="pro-card-icon"><i class="fa-solid fa-diagram-project"></i></div>
-                    <h4>도시정비 PM</h4>
-                    <p>정비사업 전문관리(PM)를 통해 사업 전반의 품질, 일정, 원가를 통합 관리합니다.</p>
-                </div>
-                <div class="pro-card">
-                    <div class="pro-card-icon"><i class="fa-solid fa-file-signature"></i></div>
-                    <h4>인허가 지원</h4>
-                    <p>정비구역 지정, 도시계획 심의, 사업시행인가 등 인허가 행정절차를 전략적으로 대응합니다.</p>
-                </div>
-                <div class="pro-card">
-                    <div class="pro-card-icon"><i class="fa-solid fa-chart-pie"></i></div>
-                    <h4>사업성 검토</h4>
-                    <p>정비사업의 수익성과 실현 가능성을 종합 분석하여 최적 추진 전략을 도출합니다.</p>
-                </div>
+                    <h4>도시정비 PM/CM</h4>
+                    <p>일정·원가·품질·리스크 통합 관리. 조합·시공사·설계·감리·행정기관 간 실무 조정을 수행합니다.</p>
+                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                </a>
             </div>
         </div>
     </div>
@@ -1137,29 +1153,8 @@
         '</div>';
     }).join('');
 
-    /* ── 전문 업무분야 (mock에서 로드 시도, 없으면 하드코딩 유지) ── */
-    if (info.businessAreas && info.businessAreas.length > 0) {
-        var proIcons = {
-            '주택재개발 정비사업': 'fa-solid fa-building',
-            '주택재건축 정비사업': 'fa-solid fa-city',
-            '소규모주택 정비사업': 'fa-solid fa-house-chimney',
-            '도시정비 PM/CM': 'fa-solid fa-diagram-project',
-            '정비구역지정·도시계획': 'fa-solid fa-file-signature',
-            '사업성분석(타당성 검토)': 'fa-solid fa-chart-pie'
-        };
-        var proGrid = document.getElementById('proGrid');
-        if (proGrid) {
-            var areas = info.businessAreas.slice(0, 6);
-            proGrid.innerHTML = areas.map(function(b) {
-                var icon = proIcons[b.title] || b.icon || 'fa-solid fa-building';
-                return '<div class="pro-card">' +
-                    '<div class="pro-card-icon"><i class="' + icon + '"></i></div>' +
-                    '<h4>' + b.title + '</h4>' +
-                    '<p>' + b.desc + '</p>' +
-                '</div>';
-            }).join('');
-        }
-    }
+    /* ── 전문 업무분야 ── 메뉴(common.js)의 사업분야 6개와 동일 구조로 하드코딩 유지.
+       mock-data.businessAreas 는 다른 영역(services.html 등)에서 사용되므로 본 섹션은 override 하지 않는다. */
 })();
 </script>
 </body>
