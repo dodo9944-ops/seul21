@@ -140,12 +140,17 @@
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
         box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        display: block; text-decoration: none; color: inherit;
+        cursor: pointer;
     }
     .hero-card:hover {
         background: rgba(14,22,40,0.70);
         border-color: rgba(195,165,105,0.3);
         transform: translateY(-2px);
     }
+    /* sticky header 보정 — 앵커 스크롤 시 상단 헤더 가림 방지 */
+    html { scroll-behavior: smooth; }
+    #ceo, #history, #organization, #business { scroll-margin-top: 88px; }
     .hero-card-icon {
         width: 36px; height: 36px; border-radius: 8px;
         background: rgba(195,165,105,0.16);
@@ -766,26 +771,26 @@
             <p class="hero-sub">재개발·재건축·소규모정비사업의 실무를 책임지는 도시정비 전문 파트너</p>
         </div>
         <div class="hero-cards-float">
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('정비사업전문관리')">
-                <div class="hero-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <h4>정비사업전문관리</h4>
-                <p>사업 전 과정 실무 책임 수행</p>
-            </div>
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('사업성 분석')">
-                <div class="hero-card-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <h4>사업성 분석</h4>
-                <p>정밀 타당성 검토 및 전략 수립</p>
-            </div>
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('인허가 대응')">
-                <div class="hero-card-icon"><i class="fa-solid fa-file-signature"></i></div>
-                <h4>인허가 대응</h4>
-                <p>행정절차 전략 수립 및 실행</p>
-            </div>
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('CM / PM 관리')">
+            <a class="hero-card" href="#ceo">
+                <div class="hero-card-icon"><i class="fa-solid fa-user-tie"></i></div>
+                <h4>CEO 인사말</h4>
+                <p>대표이사의 경영 철학과 약속</p>
+            </a>
+            <a class="hero-card" href="#history">
+                <div class="hero-card-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <h4>회사연혁</h4>
+                <p>30년 정비사업 수행 발자취</p>
+            </a>
+            <a class="hero-card" href="#organization">
+                <div class="hero-card-icon"><i class="fa-solid fa-sitemap"></i></div>
+                <h4>조직도</h4>
+                <p>전문 본부·팀 구성 체계</p>
+            </a>
+            <a class="hero-card" href="#business">
                 <div class="hero-card-icon"><i class="fa-solid fa-diagram-project"></i></div>
-                <h4>CM / PM 관리</h4>
-                <p>품질 · 공정 · 원가 통합 관리</p>
-            </div>
+                <h4>사업분야</h4>
+                <p>재개발·재건축·소규모 정비</p>
+            </a>
         </div>
     </div>
 </div>
@@ -830,7 +835,7 @@
     <!-- ============================================================
          3. CEO GREETING
          ============================================================ -->
-    <div class="about-section bg-light">
+    <div class="about-section bg-light" id="ceo">
         <div class="inner">
             <div class="section-label">CEO Message</div>
             <h2 class="section-title">CEO 인사말</h2>
@@ -890,7 +895,7 @@
     <!-- ============================================================
          4. COMPANY HISTORY
          ============================================================ -->
-    <div class="about-section">
+    <div class="about-section" id="history">
         <div class="inner">
             <div class="section-label">History</div>
             <h2 class="section-title">회사연혁</h2>
@@ -901,7 +906,7 @@
     <!-- ============================================================
          5. ORGANIZATION CHART
          ============================================================ -->
-    <div class="about-section bg-light">
+    <div class="about-section bg-light" id="organization">
         <div class="inner">
             <div class="section-label">Organization</div>
             <h2 class="section-title">조직도</h2>
@@ -970,7 +975,7 @@
     <!-- ============================================================
          6. PROFESSIONAL AREAS
          ============================================================ -->
-    <div class="about-section">
+    <div class="about-section" id="business">
         <div class="inner">
             <div class="section-label">Professional Areas</div>
             <h2 class="section-title">사업분야</h2>
