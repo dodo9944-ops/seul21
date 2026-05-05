@@ -196,6 +196,9 @@
         font-size: 16px; color: rgba(255,255,255,0.55);
         line-height: 1.7; max-width: 480px;
     }
+    /* 앵커 점프 시 sticky 헤더 가림 방지 */
+    html { scroll-behavior: smooth; }
+    #overview, #highlights, #urban-renewal, #engineering { scroll-margin-top: 88px; }
     .services-hero .hero-card {
         background: rgba(10,16,30,0.57);
         border: 1px solid rgba(255,255,255,0.14);
@@ -203,6 +206,8 @@
         transition: all 0.3s;
         backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
         box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        display: block; text-decoration: none; color: inherit;
+        cursor: pointer;
     }
     .services-hero .hero-card:hover {
         background: rgba(14,22,40,0.70);
@@ -255,26 +260,26 @@
             <p class="hero-sub">재개발·재건축·소규모정비·도시계획·CM/PM — 사업 초기부터 준공까지 체계적으로 자문합니다</p>
         </div>
         <div class="hero-cards-float">
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('사업성 분석')">
-                <div class="hero-card-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <h4>사업성 분석</h4>
-                <p>추진전략 및 수지분석 자문</p>
-            </div>
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('이해관계 조율')">
-                <div class="hero-card-icon"><i class="fa-solid fa-handshake"></i></div>
-                <h4>이해관계 조율</h4>
-                <p>조합·행정·시공사 간 자문</p>
-            </div>
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('인허가 자문')">
-                <div class="hero-card-icon"><i class="fa-solid fa-stamp"></i></div>
-                <h4>인허가 자문</h4>
-                <p>인가 절차 및 행정 대응</p>
-            </div>
-            <div class="hero-card" style="cursor:pointer" onclick="App.heroDetail('CM / PM 관리')">
-                <div class="hero-card-icon"><i class="fa-solid fa-helmet-safety"></i></div>
-                <h4>CM / PM</h4>
-                <p>설계·시공·준공 품질 관리</p>
-            </div>
+            <a class="hero-card" href="#overview">
+                <div class="hero-card-icon"><i class="fa-solid fa-circle-info"></i></div>
+                <h4>사업분야 개요</h4>
+                <p>전 영역 통합 자문 안내</p>
+            </a>
+            <a class="hero-card" href="#highlights">
+                <div class="hero-card-icon"><i class="fa-solid fa-star"></i></div>
+                <h4>핵심 강점</h4>
+                <p>실무 20년+ · 통합 대응</p>
+            </a>
+            <a class="hero-card" href="#urban-renewal">
+                <div class="hero-card-icon"><i class="fa-solid fa-building"></i></div>
+                <h4>정비사업</h4>
+                <p>재개발·재건축·소규모·도심복합</p>
+            </a>
+            <a class="hero-card" href="#engineering">
+                <div class="hero-card-icon"><i class="fa-solid fa-drafting-compass"></i></div>
+                <h4>엔지니어링사업</h4>
+                <p>도시계획 · PM/CM 관리</p>
+            </a>
         </div>
     </div>
 </div>
@@ -283,7 +288,7 @@
     <div class="inner">
 
         <!-- 개요 -->
-        <div class="sv-section">
+        <div class="sv-section" id="overview">
             <h2 class="section-title">사업분야 개요</h2>
             <p class="sv-intro">
                 세울엔지니어링은 재개발·재건축·소규모정비사업을 중심으로, 도시정비사업의 실제 추진을 지원하는 전문조직입니다. 사업성 검토, 인허가 대응, 문서체계화, 이해관계 조율, 추진관리까지 분리하지 않고 하나의 흐름으로 통합 지원합니다.
@@ -291,7 +296,7 @@
         </div>
 
         <!-- 핵심 수치 -->
-        <div class="sv-highlight">
+        <div class="sv-highlight" id="highlights">
             <div class="sv-highlight-item"><div class="hl-num">20<span>년+</span></div><div class="hl-desc">정비사업 실무경험 기반</div></div>
             <div class="sv-highlight-item"><div class="hl-num">전 <span>과정</span></div><div class="hl-desc">기획부터 인허가·추진까지</div></div>
             <div class="sv-highlight-item"><div class="hl-num">통합 <span>대응</span></div><div class="hl-desc">행정·사업성·문서 통합</div></div>
@@ -299,7 +304,7 @@
         </div>
 
         <!-- 정비사업 -->
-        <div class="sv-section">
+        <div class="sv-section" id="urban-renewal">
             <h2 class="section-title">정비사업</h2>
             <div class="sv-card-grid">
 
@@ -416,7 +421,7 @@
         </div>
 
         <!-- 특화사업 -->
-        <div class="sv-section" style="margin-top:64px">
+        <div class="sv-section" id="engineering" style="margin-top:64px">
             <h2 class="section-title">엔지니어링사업</h2>
             <div class="sv-card-grid">
 

@@ -178,7 +178,10 @@
     .uni-hero .uh-visual { flex-shrink: 0; width: 360px; position: relative; z-index: 2; }
     .uni-hero .uh-photo { display: none; }
     .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .uni-hero .uh-card { background: rgba(10,16,30,0.57); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; padding: 20px 18px; transition: all 0.3s; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .uni-hero .uh-card { background: rgba(10,16,30,0.57); border: 1px solid rgba(255,255,255,0.14); border-radius: 12px; padding: 20px 18px; transition: all 0.3s; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); box-shadow: 0 1px 4px rgba(0,0,0,0.04); display: block; text-decoration: none; color: inherit; cursor: pointer; }
+    /* 앵커 점프 시 sticky 헤더 가림 방지 */
+    html { scroll-behavior: smooth; }
+    #libContent { scroll-margin-top: 88px; }
     .uni-hero .uh-card:hover { background: rgba(14,22,40,0.70); border-color: rgba(195,165,105,0.3); transform: translateY(-2px); }
     .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(195,165,105,0.16); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
     .uni-hero .uh-ci i { font-size: 14px; color: #C3A569; }
@@ -203,14 +206,14 @@
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_library.png" alt="세울엔지니어링 자료실"></div>
-            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="switchCat('법령')"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>도시정비법·고시·공고·판례·질의회신 및 지침·규정</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('서식가이드')"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div><div class="uh-card" style="cursor:pointer" onclick="switchCat('주요뉴스')"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></div><div class="uh-card" id="investCard" style="cursor:pointer;" onclick="switchCat('투자정보')"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>투자정보</h4><p>매물·시세·투자 분석</p><span style="display:block;font-size:9px;color:rgba(195,165,105,0.7);margin-top:4px;"><i class="fa-solid fa-lock" style="margin-right:3px;"></i>회원 전용</span></div></div>
+            <div class="uh-cards"><a class="uh-card" href="#libContent" onclick="switchCat('법령')"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>도시정비법·고시·공고·판례·질의회신 및 지침·규정</p></a><a class="uh-card" href="#libContent" onclick="switchCat('서식가이드')"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></a><a class="uh-card" href="#libContent" onclick="switchCat('주요뉴스')"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></a><a class="uh-card" id="investCard" href="#libContent" onclick="switchCat('투자정보')"><div class="uh-ci"><i class="fa-solid fa-chart-line"></i></div><h4>투자정보</h4><p>매물·시세·투자 분석</p><span style="display:block;font-size:9px;color:rgba(195,165,105,0.7);margin-top:4px;"><i class="fa-solid fa-lock" style="margin-right:3px;"></i>회원 전용</span></a></div>
         </div>
     </div>
     <div class="lib-alimtalk-wrap"><a href="alimtalk.html" class="lib-alimtalk-btn"><i class="fa-regular fa-comment-dots"></i> 소식받기 신청</a></div>
 </div>
 
 
-<div class="page-body lib-page"><div class="inner">
+<div class="page-body lib-page"><div class="inner" id="libContent">
 
     <div class="ctrl-bar">
         <div class="ctrl-search">
