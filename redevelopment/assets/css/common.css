@@ -984,38 +984,39 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 
 /* === Unified Page CTA — 회사소개·세울의 길·사업분야·업무실적·자료실·사업성 검토 공통 (2026-05-05) ===
-   짧은 안내글 + 상담 버튼 */
+   단일행 레이아웃: 좌측 안내글 / 우측 상담 버튼 */
 .uni-cta {
   margin: 64px 0 0;
-  padding: 28px 32px;
+  padding: 16px 24px;
   background: linear-gradient(135deg, #0A0F1C 0%, #142644 100%);
-  border-radius: 14px;
-  text-align: center;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 .uni-cta h3 {
-  font-size: 17px; font-weight: 800; color: #fff;
-  line-height: 1.5; margin: 0 0 6px; letter-spacing: -0.3px;
+  font-size: 15px; font-weight: 700; color: #fff;
+  line-height: 1.4; margin: 0; letter-spacing: -0.2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.uni-cta p {
-  font-size: 13px; color: rgba(255,255,255,0.6);
-  line-height: 1.65; margin: 0 0 16px;
-}
+.uni-cta p { display: none; }
 .uni-cta a.uc-primary {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 13px 32px;
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 20px;
   background: var(--gold); color: #0A0F1C;
-  border-radius: 10px;
-  font-size: 14.5px; font-weight: 800;
+  border-radius: 8px;
+  font-size: 13.5px; font-weight: 800;
   text-decoration: none;
   transition: all 0.2s;
 }
 .uni-cta a.uc-primary:hover {
   background: #D4B87A; transform: translateY(-1px);
-  box-shadow: 0 8px 22px rgba(195,165,105,0.28);
+  box-shadow: 0 6px 18px rgba(195,165,105,0.28);
 }
 @media (max-width: 640px) {
-  .uni-cta { margin-top: 48px; padding: 22px 18px; }
-  .uni-cta h3 { font-size: 15px; }
-  .uni-cta p { font-size: 12px; margin-bottom: 14px; }
-  .uni-cta a.uc-primary { width: 100%; justify-content: center; padding: 12px 20px; }
+  .uni-cta { margin-top: 48px; padding: 14px 16px; gap: 12px; }
+  .uni-cta h3 { font-size: 13px; }
+  .uni-cta a.uc-primary { padding: 9px 14px; font-size: 12.5px; }
 }
