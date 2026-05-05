@@ -90,10 +90,10 @@
     .calc-modal{background:#fff;border-radius:16px;width:100%;max-width:860px;max-height:80vh;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.25);transform:translateY(20px) scale(.97);transition:transform .3s;display:flex;flex-direction:column;overflow:hidden;margin-top:40px}
     .calc-overlay.open .calc-modal{transform:translateY(0) scale(1)}
 
-    /* 닫기 버튼 — 오버레이와 동일/상위 stacking context 유지 (position:fixed 라 별도 명시) */
-    .calc-close{position:fixed;top:32px;right:20px;z-index:11001;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.85);border:1.5px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.5)}
-    .calc-close:hover{background:#0A0F1C;transform:scale(1.1)}
-    @media(max-width:768px){.calc-close{top:24px;right:14px}}
+    /* 닫기 버튼 — 모달 내부 우상단 (position:absolute, .calc-modal 기준) */
+    .calc-close{position:absolute;top:14px;right:14px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--gray-100);border:1px solid var(--gray-200);border-radius:50%;cursor:pointer;font-size:14px;color:var(--gray-600);transition:all .2s;padding:0}
+    .calc-close:hover{background:var(--brand-dark);border-color:var(--brand-dark);color:#fff;transform:rotate(90deg)}
+    @media(max-width:768px){.calc-close{top:10px;right:10px;width:32px;height:32px;font-size:13px}}
 
     /* Header — 고정, 제목+설명+액션버튼 */
     .cm-head{padding:22px 24px 0;flex-shrink:0;position:relative;z-index:10;background:#fff;border-radius:16px 16px 0 0}
@@ -963,8 +963,9 @@ function buildModal(id,title,subtitle,bodyHTML){
   var ov = el('div','calc-overlay');
   ov.id = 'ov-'+id;
   ov.innerHTML =
-    '<button class="calc-close" onclick="FC.close(\''+id+'\')"><i class="fa-solid fa-xmark"></i></button>' +
     '<div class="calc-modal">' +
+      /* ── 닫기 버튼: 모달 내부 우상단 ── */
+      '<button class="calc-close" onclick="FC.close(\''+id+'\')" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>' +
       /* ── Sticky Header: 제목+설명+액션버튼 ── */
       '<div class="cm-head">' +
         '<h2>'+title+'</h2>' +
@@ -1190,7 +1191,17 @@ function openCalc(id){
   // body 영역 스크롤 맨 위로
   var body = ov.querySelector('.cm-body');
   if(body) body.scrollTop = 0;
-  document.body.style.overflow='hidden';
+  // 본 화면 스크롤 락 — iOS Safari 포함 모든 환경에서 동작 (position:fixed + 스크롤 위치 보존)
+  if(!document.body.classList.contains('fc-modal-open')){
+    var sy = window.scrollY || window.pageYOffset || 0;
+    document.body.dataset.fcScrollY = String(sy);
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + sy + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.classList.add('fc-modal-open');
+  }
   // 카드 active
   document.querySelectorAll('.sv-card').forEach(function(c){c.classList.toggle('active',c.dataset.calc===id)});
   // 저장된 값 복원
@@ -1211,7 +1222,18 @@ function closeCalc(id){
   var ov = $('ov-'+id);
   if(!ov)return;
   ov.classList.remove('open');
-  document.body.style.overflow='';
+  // 본 화면 스크롤 락 해제 — 저장된 스크롤 위치 복원
+  if(document.body.classList.contains('fc-modal-open')){
+    var sy = parseInt(document.body.dataset.fcScrollY || '0', 10);
+    document.body.classList.remove('fc-modal-open');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    delete document.body.dataset.fcScrollY;
+    window.scrollTo(0, sy);
+  }
   document.querySelectorAll('.sv-card').forEach(function(c){c.classList.remove('active')});
   // 현재 입력값 저장
   var data = {};
