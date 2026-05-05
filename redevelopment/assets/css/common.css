@@ -983,79 +983,29 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   .mobile-bottom-nav { display: none !important; }
 }
 
-/* === Unified Page CTA — 회사소개·세울의 길·사업분야·업무실적·자료실·사업성 검토 공통 (2026-05-05 신설) === */
+/* === Unified Page CTA — 회사소개·세울의 길·사업분야·업무실적·자료실·사업성 검토 공통 (2026-05-05) ===
+   심플 버전: 상담 문의 단일 버튼만 표시 */
 .uni-cta {
   margin: 64px 0 0;
-  padding: 56px 48px;
+  padding: 36px 32px;
   background: linear-gradient(135deg, #0A0F1C 0%, #142644 100%);
-  border-radius: 18px;
-  position: relative;
-  overflow: hidden;
+  border-radius: 14px;
   text-align: center;
 }
-.uni-cta::before {
-  content: '';
-  position: absolute; right: -80px; top: -80px;
-  width: 280px; height: 280px;
-  background: radial-gradient(circle, rgba(195,165,105,0.10) 0%, transparent 70%);
-  border-radius: 50%;
-}
-.uni-cta::after {
-  content: '';
-  position: absolute; left: -60px; bottom: -60px;
-  width: 220px; height: 220px;
-  background: radial-gradient(circle, rgba(195,165,105,0.06) 0%, transparent 70%);
-  border-radius: 50%;
-}
-.uni-cta .uc-label {
-  position: relative; z-index: 1;
-  display: inline-block;
-  font-size: 11px; font-weight: 700; letter-spacing: 2px;
-  color: var(--gold);
-  margin-bottom: 14px; text-transform: uppercase;
-}
-.uni-cta h3 {
-  position: relative; z-index: 1;
-  font-size: 26px; font-weight: 800; color: #fff;
-  line-height: 1.45; margin-bottom: 12px; letter-spacing: -0.5px;
-}
-.uni-cta p {
-  position: relative; z-index: 1;
-  font-size: 15px; color: rgba(255,255,255,0.62);
-  line-height: 1.85; margin-bottom: 32px;
-  max-width: 640px; margin-left: auto; margin-right: auto;
-}
-.uni-cta .uc-actions {
-  position: relative; z-index: 1;
-  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
-}
-.uni-cta a {
+.uni-cta a.uc-primary {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 14px 28px;
+  padding: 14px 36px;
+  background: var(--gold); color: #0A0F1C;
   border-radius: 10px;
-  font-size: 14px; font-weight: 700;
+  font-size: 15px; font-weight: 800;
   text-decoration: none;
   transition: all 0.2s;
-}
-.uni-cta a.uc-primary {
-  background: var(--gold); color: #0A0F1C;
 }
 .uni-cta a.uc-primary:hover {
   background: #D4B87A; transform: translateY(-1px);
   box-shadow: 0 8px 22px rgba(195,165,105,0.28);
 }
-.uni-cta a.uc-outline {
-  background: transparent; color: rgba(255,255,255,0.85);
-  border: 1px solid rgba(255,255,255,0.22);
-}
-.uni-cta a.uc-outline:hover {
-  border-color: var(--gold); color: var(--gold);
-  background: rgba(195,165,105,0.06);
-}
 @media (max-width: 640px) {
-  .uni-cta { margin-top: 48px; padding: 40px 24px; border-radius: 14px; }
-  .uni-cta h3 { font-size: 20px; }
-  .uni-cta p { font-size: 13.5px; margin-bottom: 24px; }
-  .uni-cta .uc-actions { flex-direction: column; gap: 10px; }
-  .uni-cta a { width: 100%; justify-content: center; padding: 13px 20px; }
+  .uni-cta { margin-top: 48px; padding: 28px 20px; }
+  .uni-cta a.uc-primary { width: 100%; justify-content: center; padding: 13px 20px; }
 }
