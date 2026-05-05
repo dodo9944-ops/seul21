@@ -229,7 +229,15 @@
         background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.10);
         border-radius: 14px; padding: 28px 24px; transition: all 0.3s;
         position: relative; overflow: hidden;
+        display: block; text-decoration: none; color: inherit;
     }
+    .vs-step-more {
+        display: inline-flex; align-items: center; gap: 6px;
+        margin-top: 14px; font-size: 12px; font-weight: 700;
+        color: var(--gold); opacity: 0.55;
+        transition: opacity 0.3s, transform 0.3s;
+    }
+    .vs-step:hover .vs-step-more { opacity: 1; transform: translateX(2px); }
     .vs-step::before {
         content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
         background: linear-gradient(90deg, var(--gold), rgba(195,165,105,0.2));
@@ -712,47 +720,53 @@
                 <div class="vs-process-sub">HOW WE WORK — 정비사업의 처음부터 끝까지</div>
                 <!-- Row 1: 진단 → 검토 → 조율 -->
                 <div class="vs-steps-row">
-                    <div class="vs-step step-first">
+                    <a class="vs-step step-first" href="method-diagnosis.html">
                         <div class="vs-step-num">01</div>
                         <div><span class="vs-step-badge">01</span><span class="vs-step-icon"><i class="fa-solid fa-stethoscope"></i></span></div>
                         <h4>기초 진단</h4>
                         <p>사업 대상지의 법적·물리적 현황을 분석하고 추진 가능성을 진단합니다</p>
-                    </div>
-                    <div class="vs-step">
+                        <span class="vs-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a class="vs-step" href="method-feasibility.html">
                         <div class="vs-step-num">02</div>
                         <div><span class="vs-step-badge">02</span><span class="vs-step-icon"><i class="fa-solid fa-chart-line"></i></span></div>
                         <h4>사업성 검토</h4>
                         <p>비례율·분담금·총사업비를 분석하여 사업의 경제적 타당성을 검증합니다</p>
-                    </div>
-                    <div class="vs-step">
+                        <span class="vs-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a class="vs-step" href="method-coordination.html">
                         <div class="vs-step-num">03</div>
                         <div><span class="vs-step-badge">03</span><span class="vs-step-icon"><i class="fa-solid fa-handshake"></i></span></div>
                         <h4>이해관계 조율</h4>
                         <p>조합원·행정기관·시공사 간 이해관계를 조정하고 합의를 이끌어냅니다</p>
-                    </div>
+                        <span class="vs-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
                 </div>
                 <!-- Row arrow -->
                 <div class="vs-row-arrow"><i class="fa-solid fa-arrow-down"></i></div>
                 <!-- Row 2: 행정 → 인허가 → 완성 -->
                 <div class="vs-steps-row">
-                    <div class="vs-step">
+                    <a class="vs-step" href="method-documentation.html">
                         <div class="vs-step-num">04</div>
                         <div><span class="vs-step-badge">04</span><span class="vs-step-icon"><i class="fa-solid fa-file-signature"></i></span></div>
                         <h4>행정·문서 체계화</h4>
                         <p>인허가 서류, 총회 자료, 공문을 법적 기준에 맞게 체계적으로 관리합니다</p>
-                    </div>
-                    <div class="vs-step">
+                        <span class="vs-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a class="vs-step" href="method-permit.html">
                         <div class="vs-step-num">05</div>
                         <div><span class="vs-step-badge">05</span><span class="vs-step-icon"><i class="fa-solid fa-stamp"></i></span></div>
                         <h4>인허가 및 추진 지원</h4>
                         <p>사업시행인가, 관리처분인가 등 핵심 인허가를 실행력 있게 추진합니다</p>
-                    </div>
-                    <div class="vs-step step-last">
+                        <span class="vs-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a class="vs-step step-last" href="method-completion.html">
                         <div class="vs-step-num">06</div>
                         <div><span class="vs-step-badge">06</span><span class="vs-step-icon"><i class="fa-solid fa-flag-checkered"></i></span></div>
                         <h4>사업 완성 및 안정화</h4>
                         <p>착공부터 준공·입주·청산까지 사업의 마지막 단계를 책임지고 완결합니다</p>
-                    </div>
+                        <span class="vs-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
                 </div>
             </div>
         </div>
