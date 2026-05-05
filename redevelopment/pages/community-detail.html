@@ -152,6 +152,20 @@
         .cat-분석 { background: #F3E8FF; color: #7C3AED; }
         .cat-칼럼 { background: var(--gray-100); color: var(--gray-600); }
 
+        /* 작성자 액션 (수정/삭제) */
+        .owner-actions { display: flex; gap: 8px; margin-top: 14px; }
+        .owner-actions .btn-mini {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 7px 14px; border-radius: 8px;
+            border: 1.5px solid var(--gray-200); background: var(--white);
+            font-size: 12.5px; font-weight: 600; color: var(--gray-700);
+            cursor: pointer; transition: all .2s; font-family: var(--font);
+        }
+        .owner-actions .btn-mini i { font-size: 11px; }
+        .owner-actions .btn-edit:hover { border-color: var(--accent); color: var(--accent); background: rgba(195,165,105,.05); }
+        .owner-actions .btn-del { color: var(--red); border-color: rgba(239,68,68,.2); }
+        .owner-actions .btn-del:hover { background: #FEE2E2; border-color: var(--red); }
+
         @media (max-width: 768px) {
             .detail-header h1 { font-size: 21px; }
         }
@@ -252,6 +266,10 @@
                     <span><i class="fa-regular fa-calendar"></i>${App.timeAgo(post.date)}</span>
                     <span><i class="fa-regular fa-eye"></i>${App.comma(viewCount)}</span>
                 </div>
+                <div class="owner-actions" id="ownerActions" style="display:none">
+                    <button type="button" class="btn-mini btn-edit" id="editPostBtn"><i class="fa-solid fa-pen"></i> 수정</button>
+                    <button type="button" class="btn-mini btn-del" id="deletePostBtn"><i class="fa-solid fa-trash"></i> 삭제</button>
+                </div>
             </div>
             <div class="detail-body">${paragraphs}${imagesHTML}</div>
             ${attachHTML}
@@ -276,6 +294,48 @@
                 <a href="community.html" class="btn btn-outline btn-md"><i class="fa-solid fa-list"></i> 목록으로 돌아가기</a>
             </div>
         `;
+
+        // 작성자 본인이면 수정/삭제 버튼 노출
+        var currentUser = DataService.getCurrentUser();
+        var isOwner = !!(currentUser && currentUser.id && post.ownerId && String(currentUser.id) === String(post.ownerId));
+        if (isOwner) {
+            var actions = document.getElementById('ownerActions');
+            if (actions) actions.style.display = 'flex';
+            document.getElementById('editPostBtn').addEventListener('click', function() {
+                location.href = 'community-write.html?id=' + encodeURIComponent(id);
+            });
+            document.getElementById('deletePostBtn').addEventListener('click', function() {
+                if (!confirm('이 게시글을 삭제하시겠습니까?')) return;
+                var btn = this;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 삭제 중...';
+                fetch('/api/community', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-owner-id': String(currentUser.id)
+                    },
+                    body: JSON.stringify({ id: id })
+                })
+                .then(function(r) { return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
+                .then(function(out) {
+                    if (!out.ok) {
+                        btn.disabled = false;
+                        btn.innerHTML = '<i class="fa-solid fa-trash"></i> 삭제';
+                        App.toast(out.body.error || '삭제 실패', 'error');
+                        return;
+                    }
+                    DataService.remove('community', id);
+                    App.toast('게시글이 삭제되었습니다.', 'success');
+                    setTimeout(function() { location.href = 'community.html'; }, 700);
+                })
+                .catch(function() {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-trash"></i> 삭제';
+                    App.toast('삭제 중 오류가 발생했습니다.', 'error');
+                });
+            });
+        }
 
         // 좋아요: 로그인 필수 + 1회 제한
         document.getElementById('likeBtn').addEventListener('click', function() {

@@ -47,7 +47,7 @@ async function sendTelegram(text) {
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-admin-key');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-admin-key, x-owner-id');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   const ADMIN_KEY = process.env.ANTHROPIC_API_KEY ? process.env.ANTHROPIC_API_KEY.slice(-8) : 'admin123';
@@ -61,7 +61,7 @@ module.exports = async function handler(req, res) {
 
     // POST: 글 작성
     if (req.method === 'POST') {
-      const { title, category, content, author, images, attachments } = req.body;
+      const { title, category, content, author, images, attachments, ownerId, ownerEmail } = req.body;
       if (!title || !content) return res.status(400).json({ error: '제목과 내용은 필수입니다.' });
       const { items, sha } = await getData();
       const now = new Date();
@@ -72,6 +72,7 @@ module.exports = async function handler(req, res) {
         title, category: category || '정보', content,
         images: images || [], attachments: attachments || [],
         author: author || '익명', date: dateStr,
+        ownerId: ownerId || '', ownerEmail: ownerEmail || '',
         views: 0, comments: 0, likes: 0, status: '공개'
       };
       items.unshift(newPost);
@@ -93,25 +94,43 @@ module.exports = async function handler(req, res) {
       return res.status(201).json({ message: '게시글 등록 완료', id: newPost.id });
     }
 
-    // PUT: 글 수정 (관리자)
+    // PUT: 글 수정 (관리자 또는 작성자 본인)
     if (req.method === 'PUT') {
-      const key = req.headers['x-admin-key'];
-      if (key !== ADMIN_KEY) return res.status(401).json({ error: '관리자 인증 필요' });
+      const adminKey = req.headers['x-admin-key'];
+      const ownerIdHdr = req.headers['x-owner-id'] || '';
+      const isAdmin = adminKey === ADMIN_KEY;
       const { id, ...updates } = req.body;
+      if (!id) return res.status(400).json({ error: 'id 누락' });
       const { items, sha } = await getData();
       const idx = items.findIndex(i => i.id === id);
       if (idx === -1) return res.status(404).json({ error: '게시글을 찾을 수 없습니다.' });
-      items[idx] = { ...items[idx], ...updates };
+      const target = items[idx];
+      const isOwner = !!ownerIdHdr && !!target.ownerId && String(target.ownerId) === String(ownerIdHdr);
+      if (!isAdmin && !isOwner) return res.status(403).json({ error: '수정 권한이 없습니다.' });
+      // 본인 수정 시 변경 가능 필드 제한
+      let nextUpdates = updates;
+      if (!isAdmin) {
+        const allowed = ['title', 'category', 'content', 'images', 'attachments'];
+        nextUpdates = {};
+        allowed.forEach(k => { if (k in updates) nextUpdates[k] = updates[k]; });
+      }
+      items[idx] = { ...target, ...nextUpdates };
       await saveData(items, sha);
       return res.status(200).json({ message: '수정 완료' });
     }
 
-    // DELETE: 글 삭제 (관리자)
+    // DELETE: 글 삭제 (관리자 또는 작성자 본인)
     if (req.method === 'DELETE') {
-      const key = req.headers['x-admin-key'];
-      if (key !== ADMIN_KEY) return res.status(401).json({ error: '관리자 인증 필요' });
+      const adminKey = req.headers['x-admin-key'];
+      const ownerIdHdr = req.headers['x-owner-id'] || '';
+      const isAdmin = adminKey === ADMIN_KEY;
       const { id } = req.body;
+      if (!id) return res.status(400).json({ error: 'id 누락' });
       const { items, sha } = await getData();
+      const target = items.find(i => i.id === id);
+      if (!target) return res.status(404).json({ error: '게시글을 찾을 수 없습니다.' });
+      const isOwner = !!ownerIdHdr && !!target.ownerId && String(target.ownerId) === String(ownerIdHdr);
+      if (!isAdmin && !isOwner) return res.status(403).json({ error: '삭제 권한이 없습니다.' });
       const filtered = items.filter(i => i.id !== id);
       await saveData(filtered, sha);
       return res.status(200).json({ message: '삭제 완료' });

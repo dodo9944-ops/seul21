@@ -154,7 +154,7 @@
                 <span>글쓰기</span>
             </div>
             <div class="write-card">
-                <h2>새 글 작성</h2>
+                <h2 id="writeHeading">새 글 작성</h2>
                 <form id="writeForm" novalidate>
                     <div class="form-group">
                         <label class="form-label">카테고리 <span class="required">*</span></label>
@@ -201,7 +201,7 @@
                     </div>
                     <div class="form-actions">
                         <button type="button" class="btn btn-outline btn-md" id="cancelBtn">취소</button>
-                        <button type="submit" class="btn btn-accent btn-md"><i class="fa-solid fa-check"></i> 등록</button>
+                        <button type="submit" class="btn btn-accent btn-md" id="submitBtn"><i class="fa-solid fa-check"></i> 등록</button>
                     </div>
                 </form>
             </div>
@@ -228,6 +228,13 @@
         const titleEl = document.getElementById('postTitle');
         const contentEl = document.getElementById('postContent');
         const charCount = document.getElementById('charCount');
+        const headingEl = document.getElementById('writeHeading');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // 수정 모드: ?id=xxx 가 있으면 기존 글 로드
+        const editId = App.getParam('id');
+        let editingPost = null;
+        let editMode = false;
 
         // 글자수 카운트
         contentEl.addEventListener('input', function() {
@@ -287,7 +294,7 @@
 
         function renderImages() {
             imgList.innerHTML = uploadedImages.map(function(img, i) {
-                var src = URL.createObjectURL(img.file);
+                var src = img.url || (img.file ? URL.createObjectURL(img.file) : '');
                 var statusText = img.status === 'uploading' ? '업로드 중...' : img.status === 'done' ? '완료' : '실패';
                 return '<div class="img-preview-item">' +
                     '<img src="' + src + '">' +
@@ -385,6 +392,51 @@
         }
         window.removeFile = function(i) { uploadedFiles.splice(i, 1); renderFiles(); };
 
+        function applyEditPrefill(post) {
+            editingPost = post;
+            editMode = true;
+            headingEl.textContent = '글 수정';
+            submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 수정';
+            categoryEl.value = post.category || '';
+            titleEl.value = post.title || '';
+            contentEl.value = post.content || '';
+            charCount.textContent = (post.content || '').length;
+            (post.images || []).forEach(function(u) {
+                uploadedImages.push({ file: null, url: u, status: 'done', existing: true });
+            });
+            (post.attachments || []).forEach(function(a) {
+                uploadedFiles.push({ file: null, url: a.url, name: a.name, size: a.size || '', status: 'done', existing: true });
+            });
+            renderImages();
+            renderFiles();
+        }
+
+        if (editId) {
+            var local = DataService.getById('community', editId);
+            var currentUser = DataService.getCurrentUser();
+            function checkOwner(p) {
+                if (!p) return false;
+                if (!p.ownerId || !currentUser || !currentUser.id) return false;
+                return String(p.ownerId) === String(currentUser.id);
+            }
+            if (local && checkOwner(local)) {
+                applyEditPrefill(local);
+            } else {
+                fetch('/api/community').then(function(r){return r.json()}).then(function(res){
+                    var found = (res.posts || []).find(function(p){return p.id === editId});
+                    if (found && checkOwner(found)) {
+                        applyEditPrefill(found);
+                    } else {
+                        App.toast('수정 권한이 없거나 게시글을 찾을 수 없습니다.', 'error');
+                        setTimeout(function(){ location.href = 'community.html'; }, 1000);
+                    }
+                }).catch(function(){
+                    App.toast('게시글을 불러올 수 없습니다.', 'error');
+                    setTimeout(function(){ location.href = 'community.html'; }, 1000);
+                });
+            }
+        }
+
         // 유효성 검사
         function validate() {
             let valid = true;
@@ -417,7 +469,7 @@
             return valid;
         }
 
-        // 등록
+        // 등록 / 수정
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             if (!validate()) {
@@ -426,15 +478,55 @@
             }
 
             const user = DataService.getCurrentUser();
+            var images = uploadedImages.filter(function(img) { return img.status === 'done' && img.url; }).map(function(img) { return img.url; });
+            var attachments = uploadedFiles.filter(function(f) { return f.status === 'done' && f.url; }).map(function(f) { return { name: f.name, url: f.url, size: f.size }; });
+
+            if (editMode && editingPost) {
+                // 수정 모드
+                var updates = {
+                    title: titleEl.value.trim(),
+                    category: categoryEl.value,
+                    content: contentEl.value.trim(),
+                    images: images,
+                    attachments: attachments
+                };
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 수정 중...';
+                fetch('/api/community', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-owner-id': user && user.id ? String(user.id) : ''
+                    },
+                    body: JSON.stringify(Object.assign({ id: editingPost.id }, updates))
+                })
+                .then(function(r) { return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
+                .then(function(out) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 수정';
+                    if (!out.ok) {
+                        App.toast(out.body.error || '수정 실패', 'error');
+                        return;
+                    }
+                    DataService.update('community', editingPost.id, updates);
+                    App.toast('게시글이 수정되었습니다.', 'success');
+                    setTimeout(function() { location.href = 'community-detail.html?id=' + editingPost.id; }, 700);
+                })
+                .catch(function() {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 수정';
+                    App.toast('수정 중 오류가 발생했습니다.', 'error');
+                });
+                return;
+            }
+
+            // 신규 등록
             const now = new Date();
             const dateStr = now.getFullYear() + '-' +
                 String(now.getMonth() + 1).padStart(2, '0') + '-' +
                 String(now.getDate()).padStart(2, '0') + ' ' +
                 String(now.getHours()).padStart(2, '0') + ':' +
                 String(now.getMinutes()).padStart(2, '0');
-
-            var images = uploadedImages.filter(function(img) { return img.status === 'done' && img.url; }).map(function(img) { return img.url; });
-            var attachments = uploadedFiles.filter(function(f) { return f.status === 'done' && f.url; }).map(function(f) { return { name: f.name, url: f.url, size: f.size }; });
 
             const newPost = {
                 title: titleEl.value.trim(),
@@ -443,13 +535,14 @@
                 images: images,
                 attachments: attachments,
                 author: user.name,
+                ownerId: user && user.id ? user.id : '',
+                ownerEmail: user && user.email ? user.email : '',
                 date: dateStr,
                 views: 0,
                 comments: 0,
                 likes: 0
             };
 
-            var submitBtn = form.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 등록 중...';
 
@@ -471,6 +564,7 @@
             .catch(function() {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 등록';
+                newPost.id = Date.now().toString(36);
                 DataService.create('community', newPost);
                 App.toast('게시글이 등록되었습니다.', 'success');
                 setTimeout(function() { location.href = 'community.html'; }, 800);
