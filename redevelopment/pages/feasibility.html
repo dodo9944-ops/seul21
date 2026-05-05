@@ -82,18 +82,18 @@
     .fs-h .hi{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0A0F1C,#1a2d50);display:flex;align-items:center;justify-content:center;font-size:18px;color:#C3A569;flex-shrink:0;box-shadow:0 2px 8px rgba(10,15,28,0.18)}
     .fs-h h2{font-size:26px;font-weight:900;color:#0A0F1C;letter-spacing:-0.5px}
 
-    /* Modal Overlay */
-    .calc-overlay{position:fixed;inset:0;background:rgba(10,15,28,.55);backdrop-filter:blur(3px);z-index:600;display:flex;align-items:flex-start;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s;overflow:hidden}
+    /* Modal Overlay — 사이트 헤더(z-index:10000)보다 높게 배치하여 모달 상단 가림 방지 */
+    .calc-overlay{position:fixed;inset:0;background:rgba(10,15,28,.55);backdrop-filter:blur(3px);z-index:11000;display:flex;align-items:flex-start;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s;overflow:hidden}
     .calc-overlay.open{opacity:1;pointer-events:auto}
 
     /* Modal — 화면 80% 높이, 상단 고정 + 내부 스크롤 */
     .calc-modal{background:#fff;border-radius:16px;width:100%;max-width:860px;max-height:80vh;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.25);transform:translateY(20px) scale(.97);transition:transform .3s;display:flex;flex-direction:column;overflow:hidden;margin-top:40px}
     .calc-overlay.open .calc-modal{transform:translateY(0) scale(1)}
 
-    /* 닫기 버튼 */
-    .calc-close{position:fixed;top:112px;right:20px;z-index:10001;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.85);border:1.5px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+    /* 닫기 버튼 — 오버레이와 동일/상위 stacking context 유지 (position:fixed 라 별도 명시) */
+    .calc-close{position:fixed;top:32px;right:20px;z-index:11001;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.85);border:1.5px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.5)}
     .calc-close:hover{background:#0A0F1C;transform:scale(1.1)}
-    @media(max-width:768px){.calc-close{top:80px;right:14px}}
+    @media(max-width:768px){.calc-close{top:24px;right:14px}}
 
     /* Header — 고정, 제목+설명+액션버튼 */
     .cm-head{padding:22px 24px 0;flex-shrink:0;position:relative;z-index:10;background:#fff;border-radius:16px 16px 0 0}
