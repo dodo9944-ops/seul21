@@ -325,6 +325,106 @@
         .ceo-photo-area { height: 340px; }
     }
 
+    /* ── 3-2. CEO CERTIFICATION (정비사업 코디네이터) ── */
+    .cert-section {
+        display: flex; align-items: stretch; gap: 32px;
+        max-width: 1100px; margin: 0 auto;
+        background: linear-gradient(135deg, #0F1D35 0%, #142644 60%, #0A0F1C 100%);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 16px 48px rgba(10,15,28,0.18);
+        border: 1px solid rgba(195,165,105,0.18);
+        position: relative;
+    }
+    .cert-section::before {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+            radial-gradient(circle at 80% 20%, rgba(195,165,105,0.06) 0%, transparent 50%),
+            linear-gradient(rgba(195,165,105,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(195,165,105,0.012) 1px, transparent 1px);
+        background-size: auto, 60px 60px, 60px 60px;
+        pointer-events: none;
+    }
+    .cert-photo {
+        flex: 0 0 320px;
+        position: relative; z-index: 1;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(255,255,255,0.06);
+        padding: 28px;
+        border-right: 1px solid rgba(195,165,105,0.15);
+    }
+    .cert-photo img {
+        width: 100%; max-width: 280px; height: auto;
+        display: block; border-radius: 6px;
+        box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
+        cursor: zoom-in; transition: transform .35s ease;
+    }
+    .cert-photo img:hover { transform: scale(1.02); }
+    .cert-text {
+        flex: 1; min-width: 0; position: relative; z-index: 1;
+        padding: 36px 40px;
+        color: #fff;
+        display: flex; flex-direction: column; justify-content: center;
+    }
+    .cert-label {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 11px; font-weight: 700; color: var(--gold);
+        letter-spacing: 2px; text-transform: uppercase;
+        margin-bottom: 14px;
+    }
+    .cert-label::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+    .cert-title {
+        font-size: 24px; font-weight: 900; color: #fff;
+        line-height: 1.35; margin-bottom: 6px; letter-spacing: -0.4px;
+    }
+    .cert-title em { font-style: normal; color: var(--gold); }
+    .cert-issuer {
+        font-size: 13px; color: rgba(255,255,255,0.62);
+        margin-bottom: 22px; padding-bottom: 16px;
+        border-bottom: 1px solid rgba(195,165,105,0.16);
+    }
+    .cert-issuer strong { color: var(--gold); font-weight: 700; }
+    .cert-desc {
+        font-size: 14px; line-height: 1.85;
+        color: rgba(255,255,255,0.78); margin-bottom: 18px;
+    }
+    .cert-meta {
+        display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 10px 24px;
+    }
+    .cert-meta .cm-item {
+        display: flex; flex-direction: column; gap: 2px;
+        padding: 10px 14px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(195,165,105,0.12);
+        border-radius: 8px;
+    }
+    .cert-meta .cm-key {
+        font-size: 10.5px; font-weight: 700; color: var(--gold);
+        letter-spacing: 1.2px; text-transform: uppercase;
+    }
+    .cert-meta .cm-val {
+        font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.92);
+    }
+    .cert-source {
+        margin-top: 18px; font-size: 11.5px; color: rgba(255,255,255,0.42);
+    }
+    .cert-source a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted rgba(195,165,105,0.35); }
+    .cert-source a:hover { color: #fff; border-bottom-color: #fff; }
+    @media (max-width: 900px) {
+        .cert-section { flex-direction: column; }
+        .cert-photo { flex: 0 0 auto; border-right: none; border-bottom: 1px solid rgba(195,165,105,0.15); padding: 28px 20px; }
+        .cert-photo img { max-width: 240px; }
+        .cert-text { padding: 28px 24px; }
+        .cert-title { font-size: 20px; }
+    }
+    @media (max-width: 480px) {
+        .cert-meta { grid-template-columns: 1fr; }
+        .cert-text { padding: 24px 20px; }
+        .cert-title { font-size: 18px; }
+        .cert-desc { font-size: 13px; }
+    }
+
     /* ── 4. COMPANY HISTORY ── */
     .timeline-center {
         position: relative;
@@ -742,6 +842,36 @@
                 </div>
                 <div class="ceo-photo-area">
                     <img src="../jpg/ceo_portrait.jpg?v=20260429a" alt="Charles Lee 대표이사">
+                </div>
+            </div>
+
+            <!-- CEO 자격: 서울특별시 정비사업 코디네이터 위촉장 -->
+            <div class="cert-section" style="margin-top:48px">
+                <div class="cert-photo">
+                    <a href="../jpg/ceo_coordinator_certificate.png?v=20260505a" target="_blank" rel="noopener" title="원본 위촉장 보기">
+                        <img src="../jpg/ceo_coordinator_certificate.png?v=20260505a" alt="서울특별시 정비사업 코디네이터 위촉장 — 이창우">
+                    </a>
+                </div>
+                <div class="cert-text">
+                    <div class="cert-label">CEO Certification</div>
+                    <h3 class="cert-title">서울특별시 <em>정비사업 코디네이터</em></h3>
+                    <div class="cert-issuer">위촉기관 — <strong>서울특별시장</strong> · 위촉대상 도시정비 분야 전문가</div>
+                    <p class="cert-desc">
+                        <strong style="color:#fff">정비사업 코디네이터</strong>는 서울특별시가 재개발·재건축·소규모정비사업 등 도시정비 현장의
+                        <strong style="color:var(--gold)">갈등을 사전 관리</strong>하고 사업이 원활히 추진되도록 자문·조정 역할을 수행하기 위해
+                        도시계획·법률·세무·회계 등 분야의 전문가를 <strong style="color:#fff">서울시장 명의로 위촉</strong>하는 공식 제도입니다.
+                        본 회사 대표 <strong style="color:#fff">이창우</strong>는 정비사업 실무 경험과 전문성을 인정받아 코디네이터로 위촉되어,
+                        조합 운영의 투명성 확보, 사업단계별 의사결정 자문, 분쟁 사전 조정 등의 활동을 수행하고 있습니다.
+                    </p>
+                    <div class="cert-meta">
+                        <div class="cm-item"><span class="cm-key">위촉주체</span><span class="cm-val">서울특별시장</span></div>
+                        <div class="cm-item"><span class="cm-key">위촉일자</span><span class="cm-val">2025년 2월 25일</span></div>
+                        <div class="cm-item"><span class="cm-key">위촉기간</span><span class="cm-val">2025.02.20 ~ 2027.02.19</span></div>
+                        <div class="cm-item"><span class="cm-key">주요역할</span><span class="cm-val">갈등관리 · 사업 자문 · 분쟁 조정</span></div>
+                    </div>
+                    <div class="cert-source">
+                        ※ 제도 안내: <a href="https://cleanup.seoul.go.kr/" target="_blank" rel="noopener">서울시 정비사업 정보몽땅</a>
+                    </div>
                 </div>
             </div>
         </div>
