@@ -430,6 +430,52 @@
         .cert-desc { font-size: 13px; }
     }
 
+    /* ── 3-3. CEO Achievement (조감도 hero + cert-section) ── */
+    .cert-with-hero {
+        max-width: 1100px; margin: 48px auto 0;
+        border-radius: 18px; overflow: hidden;
+        box-shadow: 0 16px 48px rgba(10,15,28,0.18);
+        border: 1px solid rgba(195,165,105,0.18);
+        background: #0A0F1C;
+    }
+    .cert-with-hero .cert-hero {
+        width: 100%; aspect-ratio: 16/6;
+        position: relative; overflow: hidden;
+        border-bottom: 1px solid rgba(195,165,105,0.18);
+    }
+    .cert-with-hero .cert-hero img {
+        width: 100%; height: 100%; object-fit: cover; display: block;
+        transition: transform .6s ease;
+    }
+    .cert-with-hero .cert-hero:hover img { transform: scale(1.03); }
+    .cert-with-hero .cert-hero::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(10,15,28,0) 55%, rgba(10,15,28,0.55) 100%);
+        pointer-events: none;
+    }
+    .cert-with-hero .cert-hero-cap {
+        position: absolute; left: 24px; bottom: 18px; z-index: 2;
+        color: #fff; font-size: 12.5px; font-weight: 700;
+        padding: 7px 14px;
+        background: rgba(15,29,53,0.78);
+        border: 1px solid rgba(195,165,105,0.35);
+        border-radius: 8px;
+        backdrop-filter: blur(8px);
+        letter-spacing: 0.4px;
+    }
+    .cert-with-hero .cert-hero-cap i { color: var(--gold); margin-right: 6px; font-size: 11px; }
+    .cert-with-hero .cert-section {
+        max-width: 100%; margin: 0;
+        border-radius: 0; border: none; box-shadow: none;
+    }
+    @media (max-width: 900px) {
+        .cert-with-hero .cert-hero { aspect-ratio: 16/8; }
+        .cert-with-hero .cert-hero-cap { left: 16px; bottom: 14px; font-size: 11.5px; padding: 6px 11px; }
+    }
+    @media (max-width: 480px) {
+        .cert-with-hero .cert-hero { aspect-ratio: 16/9; }
+    }
+
     /* ── 4. COMPANY HISTORY ── */
     .timeline-center {
         position: relative;
@@ -887,6 +933,39 @@
                     <div class="cert-source">
                         ※ 제도 안내: <a href="https://cleanup.seoul.go.kr/" target="_blank" rel="noopener">서울시 정비사업 정보몽땅</a>
                     </div>
+                </div>
+            </div>
+
+            <!-- CEO 주요실적: 가락현대5차 준공 머릿돌 등재 (조감도 + 머릿돌) -->
+            <div class="cert-with-hero">
+                <div class="cert-hero">
+                    <img src="../jpg/ceo_cornerstone_aerial.jpg?v=20260509a" alt="가락현대5차 THE SHARP — 준공 단지 야경 조감">
+                    <div class="cert-hero-cap"><i class="fa-solid fa-building"></i>가락현대5차 · THE SHARP — 준공 단지 야경</div>
+                </div>
+                <div class="cert-section">
+                <div class="cert-photo">
+                    <a href="../jpg/ceo_cornerstone.png?v=20260509a" target="_blank" rel="noopener" title="원본 머릿돌 사진 보기">
+                        <img src="../jpg/ceo_cornerstone.png?v=20260509a" alt="가락현대5차아파트 소규모재건축정비사업 준공 머릿돌 — 서울특별시 정비사업 코디네이터 이창우 등재">
+                    </a>
+                </div>
+                <div class="cert-text">
+                    <div class="cert-label">CEO Achievement</div>
+                    <h3 class="cert-title">정비업계 <em>최초</em> — 가락현대5차 준공 머릿돌 등재</h3>
+                    <div class="cert-issuer">시행 — <strong>가락현대5차아파트 소규모재건축정비사업조합</strong> · 시공 — <strong>(주)포스코이앤씨</strong> [THE SHARP]</div>
+                    <p class="cert-desc">
+                        본 회사 대표 <strong style="color:#fff">이창우</strong>는 <strong style="color:var(--gold)">정비업계 최초</strong>로
+                        <strong style="color:#fff">가락현대5차아파트 소규모재건축정비사업</strong>의 사업 착수부터 준공까지 전 과정을 총괄 수행하였습니다.
+                        사업의 <strong style="color:var(--gold)">성공적 준공을 기념</strong>하여 시공사가 새긴 준공 머릿돌(竣工 銘文石)에
+                        <strong style="color:#fff">「서울특별시 정비사업 코디네이터 — 이창우」</strong>의 이름이 영구 등재되었습니다.
+                        이는 정비사업 코디네이터가 단지 머릿돌에 등재된 <strong style="color:var(--gold)">업계 최초의 사례</strong>로 평가됩니다.
+                    </p>
+                    <div class="cert-meta">
+                        <div class="cm-item"><span class="cm-key">사업명</span><span class="cm-val">가락현대5차아파트 소규모재건축정비사업</span></div>
+                        <div class="cm-item"><span class="cm-key">사업승인일</span><span class="cm-val">2022년 1월 18일</span></div>
+                        <div class="cm-item"><span class="cm-key">시공사</span><span class="cm-val">(주)포스코이앤씨 · THE SHARP</span></div>
+                        <div class="cm-item"><span class="cm-key">대표 직위</span><span class="cm-val">서울특별시 정비사업 코디네이터</span></div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
