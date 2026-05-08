@@ -1160,21 +1160,12 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             'lib48':{ext:'downloads/files/lib48_서울시_정비사업_사업성개선_기본계획재정비_2024.pdf'}
         };
         var _catKeyMap={'법령':'법령','법령·조례':'법령','관련판례':'법령','지침':'법령','판례·질의회신':'법령','서식':'서식가이드','가이드':'서식가이드','절차·서류':'서식가이드','주요뉴스':'주요뉴스','칼럼':'주요뉴스','정책':'주요뉴스','일반':'주요뉴스','투자정보':'투자정보','투자':'투자정보','시장분석':'투자정보','분석':'투자정보','개발호재':'투자정보','양도소득세':'투자정보','취득세':'투자정보','종합부동산세':'투자정보','사례':'사례'};
-        window.mainLibDownload=function(id,cat){
-            var m=window._libFileMap[id];
-            if(!m){
-                /* 파일맵에 없으면 자료실 해당 카테고리로 이동 */
-                var mappedCat=cat?(_catKeyMap[cat]||cat):null;
-                location.href='pages/library.html'+(mappedCat?'?cat='+encodeURIComponent(mappedCat):'');
-                return;
-            }
-            if(m.web){location.href=m.web;return;}
-            if(m.ext){var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();document.body.appendChild(a);a.click();document.body.removeChild(a)}
-            else if(m.gov){window.open(m.gov,'_blank')}
+        window.mainLibDownload=function(id){
+            location.href='pages/library.html?id='+encodeURIComponent(id);
         };
         libEl.innerHTML=libs.map(function(i){
             var ic=iconMap[i.fileType]||'fa-file';
-            return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\',\''+i.category+'\')">'+
+            return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
                 '<div class="news-thumb"><i class="fa-solid '+ic+'"></i></div>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
                 '<div class="news-date">'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></div></div></div>';

@@ -594,6 +594,8 @@ var item=allItems.find(function(i){return i.id===id});if(item){item.downloads=(i
 window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.querySelector('.ctrl-bar').offsetTop-80,behavior:'smooth'})}};
 
 renderTabs();render();
+var urlId=new URLSearchParams(location.search).get('id');
+if(urlId){handleDownload(urlId)}
 })();
 </script>
 </body>
