@@ -495,7 +495,7 @@ const MOCK = {
       floorInfo:'지하3층 / 지상20층', floorAbove:20, floorBelow:3,
       grossFloorArea:'약 29,200㎡', floorAreaRatio:'-',
       members:'-', memberCount:0,
-      siteArea:'-', buildingArea:'-', constructor:'-', client:'당산현대2차 소규모재건축정비사업조합',
+      siteArea:'-', buildingArea:'-', constructor:'DL이엔씨', client:'당산현대2차 소규모재건축정비사업조합',
       phase:'관리처분 준비 (사업시행인가 후)', totalCost:'-', proportionalRate:null,
       tasks:['사업시행 절차 자문','인허가 자문','관리처분계획 준비 자문','조합 운영 자문'],
       issues:['소규모재건축 — 빈집법 적용','2025년 사업시행계획(변경)인가 고시','2026.03 정비사업전문관리업자 선정'] },
