@@ -9,124 +9,87 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#0A0F1C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>쉼터 — 게임 모음 | (주)세울엔지니어링</title>
-    <meta name="description" content="세울 쉼터의 가벼운 미니게임 모음. 777 슬롯 게임으로 잠시 쉬어가세요.">
+    <title>게임 모음 — 세울 쉼터 | (주)세울엔지니어링</title>
+    <meta name="description" content="세울 쉼터 게임 모음 허브. 슬롯·카드·퍼즐·아케이드·보드 카테고리의 가벼운 미니게임을 즐겨보세요.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260505e">
     <style>
-    .lgg-hero{padding:48px 0 36px;background:linear-gradient(135deg,#060A14 0%,#0A0F1C 40%,#142644 100%);position:relative;overflow:hidden}
-    .lgg-hero .inner{position:relative;z-index:1;text-align:center}
-    .lgg-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:14px;letter-spacing:.5px}
-    .lgg-back:hover{color:var(--gold)}
-    .lgg-back i{font-size:11px}
-    .lgg-hero h1{font-size:30px;font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:8px}
-    .lgg-hero h1 em{font-style:normal;color:var(--gold)}
-    .lgg-hero p{font-size:13.5px;color:rgba(255,255,255,.55);margin:0}
+    /* === Hub Hero === */
+    .lgh-hero{padding:56px 0 40px;background:linear-gradient(135deg,#060A14 0%,#0A0F1C 40%,#142644 100%);position:relative;overflow:hidden}
+    .lgh-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(195,165,105,.1) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(195,165,105,.06) 0%,transparent 50%);pointer-events:none}
+    .lgh-hero .inner{position:relative;z-index:1;text-align:center}
+    .lgh-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:14px;letter-spacing:.5px}
+    .lgh-back:hover{color:var(--gold)}
+    .lgh-back i{font-size:11px}
+    .lgh-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+    .lgh-label::before,.lgh-label::after{content:'';width:24px;height:1px;background:var(--gold);opacity:.6}
+    .lgh-hero h1{font-size:32px;font-weight:900;color:#fff;line-height:1.3;margin-bottom:10px;letter-spacing:-.6px}
+    .lgh-hero h1 em{font-style:normal;color:var(--gold)}
+    .lgh-hero p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.6);max-width:520px;margin:0 auto}
 
-    .lgg-body{padding:56px 0 96px;background:linear-gradient(180deg,#fff,#f7f8fb)}
+    /* === Body === */
+    .lgh-body{padding:48px 0 96px;background:linear-gradient(180deg,#fff,#f7f8fb)}
 
-    /* === Slot 777 Game === */
-    .slot{max-width:520px;margin:0 auto;background:linear-gradient(180deg,#0F1D35,#0A0F1C);border-radius:22px;padding:36px 28px;box-shadow:0 24px 64px rgba(10,15,28,.25);border:1px solid rgba(195,165,105,.22);position:relative;overflow:hidden}
-    .slot::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 50% -10%,rgba(195,165,105,.15) 0%,transparent 50%);pointer-events:none}
-    .slot-title{position:relative;text-align:center;font-size:13px;font-weight:800;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:6px}
-    .slot-sub{position:relative;text-align:center;font-size:11px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:24px}
-    .slot-frame{position:relative;display:flex;gap:10px;justify-content:center;background:linear-gradient(180deg,#070A14,#0F1D35);padding:18px 16px;border-radius:14px;border:2px solid rgba(195,165,105,.4);box-shadow:inset 0 4px 18px rgba(0,0,0,.6),0 0 0 4px rgba(195,165,105,.12)}
-    .reel{width:80px;height:96px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:46px;line-height:1;font-weight:800;overflow:hidden;position:relative;box-shadow:inset 0 -6px 12px rgba(0,0,0,.15),inset 0 6px 12px rgba(255,255,255,.6)}
-    .reel.spin{animation:reelSpin .08s linear infinite}
-    @keyframes reelSpin{0%{transform:translateY(-6px)}50%{transform:translateY(6px)}100%{transform:translateY(-6px)}}
-    .slot-info{position:relative;display:flex;justify-content:space-between;margin-top:22px;padding:14px 18px;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid rgba(195,165,105,.15)}
-    .slot-info-item{text-align:center;flex:1}
-    .slot-info-item .si-label{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;opacity:.85}
-    .slot-info-item .si-value{font-size:22px;font-weight:900;color:#fff;font-feature-settings:"tnum";font-variant-numeric:tabular-nums}
-    .slot-info-divider{width:1px;background:rgba(195,165,105,.18);margin:0 8px}
-    .slot-actions{position:relative;display:flex;gap:10px;margin-top:20px}
-    .slot-btn{flex:1;padding:14px 18px;border-radius:12px;border:none;cursor:pointer;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font);transition:all .2s}
-    .slot-btn-primary{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C;box-shadow:0 6px 18px rgba(195,165,105,.35)}
-    .slot-btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(195,165,105,.45)}
-    .slot-btn-primary:active{transform:translateY(0)}
-    .slot-btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
-    .slot-btn-ghost{flex:0 0 110px;background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.18)}
-    .slot-btn-ghost:hover{background:rgba(255,255,255,.06);color:#fff}
-    .slot-msg{position:relative;text-align:center;margin-top:18px;min-height:24px;font-size:14px;font-weight:700;color:rgba(255,255,255,.55)}
-    .slot-msg.win{color:var(--gold);animation:winPulse 1.2s ease-in-out infinite}
-    .slot-msg.jackpot{color:#fff;background:linear-gradient(135deg,#C3A569,#D4B87A);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:18px;letter-spacing:1.5px}
-    @keyframes winPulse{0%,100%{opacity:.7}50%{opacity:1}}
-    .slot-paytable{position:relative;margin-top:24px;padding-top:18px;border-top:1px dashed rgba(195,165,105,.2)}
-    .slot-paytable h4{font-size:10px;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:10px}
-    .slot-paytable-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 16px;font-size:12px;color:rgba(255,255,255,.65)}
-    .slot-paytable-grid div{display:flex;justify-content:space-between;padding:3px 0}
-    .slot-paytable-grid .pt-sym{font-size:16px}
-    .slot-paytable-grid .pt-pay{color:var(--gold);font-weight:700;font-feature-settings:"tnum";font-variant-numeric:tabular-nums}
+    /* === Category Tabs === */
+    .lgh-cats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px;padding:0 16px}
+    .lgh-cat-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:#fff;border:1.5px solid var(--gray-200);border-radius:30px;cursor:pointer;font-size:13px;font-weight:700;color:var(--gray-600);font-family:var(--font);transition:all .2s;letter-spacing:-.2px}
+    .lgh-cat-btn i{font-size:11px;opacity:.7}
+    .lgh-cat-btn:hover{border-color:rgba(195,165,105,.45);color:var(--brand-dark)}
+    .lgh-cat-btn.on{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark);box-shadow:0 6px 18px rgba(10,15,28,.18)}
+    .lgh-cat-btn.on i{opacity:1}
+    .lgh-cat-btn .lgh-cat-cnt{display:inline-block;min-width:18px;padding:1px 6px;background:rgba(195,165,105,.15);color:var(--gold);border-radius:9px;font-size:10.5px;font-weight:800;text-align:center;margin-left:2px}
+    .lgh-cat-btn.on .lgh-cat-cnt{background:rgba(195,165,105,.25);color:var(--gold)}
 
-    @media(max-width:520px){
-        .slot{padding:28px 18px;border-radius:18px}
-        .reel{width:64px;height:80px;font-size:36px}
-        .slot-info-item .si-value{font-size:18px}
-        .slot-btn{font-size:12px;padding:12px 14px}
-        .slot-btn-ghost{flex:0 0 84px}
+    /* === Game Card Grid === */
+    .lgh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;max-width:1080px;margin:0 auto}
+    .lgh-game{background:#fff;border:1px solid var(--gray-200);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:all .25s;text-decoration:none;color:inherit;position:relative}
+    .lgh-game.playable{cursor:pointer}
+    .lgh-game.playable:hover{transform:translateY(-4px);border-color:rgba(195,165,105,.4);box-shadow:0 16px 36px rgba(10,15,28,.08)}
+    .lgh-game.soon{opacity:.65;cursor:default}
+    .lgh-game-thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#0F1D35,#1a2d50);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .lgh-game-thumb::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 30% 30%,rgba(195,165,105,.18),transparent 60%);pointer-events:none}
+    .lgh-game-thumb i{font-size:54px;color:rgba(195,165,105,.7);position:relative;z-index:1}
+    .lgh-game.playable:hover .lgh-game-thumb i{color:var(--gold);transform:scale(1.08);transition:all .3s}
+    .lgh-game-cat{position:absolute;top:12px;left:12px;font-size:9.5px;font-weight:800;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;background:rgba(10,15,28,.7);padding:4px 9px;border-radius:6px;border:1px solid rgba(195,165,105,.3);z-index:2}
+    .lgh-game-soon-badge{position:absolute;top:12px;right:12px;font-size:9.5px;font-weight:800;color:rgba(255,255,255,.8);letter-spacing:1px;text-transform:uppercase;background:rgba(255,255,255,.12);padding:4px 9px;border-radius:6px;border:1px solid rgba(255,255,255,.2);z-index:2}
+    .lgh-game-body{padding:20px 22px 22px;flex:1;display:flex;flex-direction:column}
+    .lgh-game-title{font-size:16px;font-weight:800;color:var(--brand-dark);margin-bottom:6px;letter-spacing:-.2px}
+    .lgh-game-desc{font-size:12.5px;color:var(--gray-500);line-height:1.65;margin-bottom:14px;flex:1}
+    .lgh-game-cta{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--gold);letter-spacing:.8px}
+    .lgh-game-cta i{font-size:10px;transition:transform .2s}
+    .lgh-game.playable:hover .lgh-game-cta i{transform:translateX(3px)}
+    .lgh-game.soon .lgh-game-cta{color:var(--gray-400)}
+
+    .lgh-empty{text-align:center;padding:48px 20px;color:var(--gray-400);font-size:14px}
+    .lgh-empty i{display:block;font-size:32px;color:var(--gray-300);margin-bottom:10px}
+
+    @media(max-width:540px){
+        .lgh-hero{padding:40px 0 28px}
+        .lgh-hero h1{font-size:24px}
+        .lgh-cat-btn{font-size:12px;padding:8px 14px}
+        .lgh-grid{grid-template-columns:1fr;gap:14px}
     }
     </style>
 </head>
 <body>
 <div id="site-header"></div>
 
-<div class="lgg-hero">
+<div class="lgh-hero">
     <div class="inner">
-        <a href="lounge.html" class="lgg-back"><i class="fa-solid fa-arrow-left"></i> 쉼터로 돌아가기</a>
+        <a href="lounge.html" class="lgh-back"><i class="fa-solid fa-arrow-left"></i> 쉼터로 돌아가기</a>
+        <div class="lgh-label">Game Lounge</div>
         <h1>게임 <em>모음</em></h1>
-        <p>잠시 쉬어가는 가벼운 미니게임</p>
+        <p>잠시 쉬어가는 가벼운 미니게임. 카테고리로 골라 즐겨보세요.</p>
     </div>
 </div>
 
-<div class="lgg-body">
+<div class="lgh-body">
     <div class="inner">
-        <!-- 777 Slot -->
-        <div class="slot" id="slot777">
-            <div class="slot-title">★ Lucky 777 Slot ★</div>
-            <div class="slot-sub">세 개의 7을 맞추면 잭팟!</div>
-            <div class="slot-frame">
-                <div class="reel" id="reel0">7</div>
-                <div class="reel" id="reel1">7</div>
-                <div class="reel" id="reel2">7</div>
-            </div>
-            <div class="slot-info">
-                <div class="slot-info-item">
-                    <div class="si-label">Credit</div>
-                    <div class="si-value" id="slCredit">100</div>
-                </div>
-                <div class="slot-info-divider"></div>
-                <div class="slot-info-item">
-                    <div class="si-label">Bet</div>
-                    <div class="si-value" id="slBet">10</div>
-                </div>
-                <div class="slot-info-divider"></div>
-                <div class="slot-info-item">
-                    <div class="si-label">Win</div>
-                    <div class="si-value" id="slWin">0</div>
-                </div>
-            </div>
-            <div class="slot-actions">
-                <button class="slot-btn slot-btn-primary" id="slSpin"><i class="fa-solid fa-rotate"></i> SPIN</button>
-                <button class="slot-btn slot-btn-ghost" id="slReset">Reset</button>
-            </div>
-            <div class="slot-msg" id="slMsg">베팅 10 크레딧 · 스핀 버튼을 눌러 시작하세요</div>
-            <div class="slot-paytable">
-                <h4>Pay Table (Bet × N)</h4>
-                <div class="slot-paytable-grid">
-                    <div><span><span class="pt-sym">7️⃣7️⃣7️⃣</span> JACKPOT</span><span class="pt-pay">×50</span></div>
-                    <div><span><span class="pt-sym">💎💎💎</span></span><span class="pt-pay">×20</span></div>
-                    <div><span><span class="pt-sym">⭐⭐⭐</span></span><span class="pt-pay">×10</span></div>
-                    <div><span><span class="pt-sym">🔔🔔🔔</span></span><span class="pt-pay">×6</span></div>
-                    <div><span><span class="pt-sym">🍒🍒🍒</span></span><span class="pt-pay">×4</span></div>
-                    <div><span><span class="pt-sym">🍋🍋🍋</span></span><span class="pt-pay">×3</span></div>
-                    <div><span>2개 일치</span><span class="pt-pay">×2</span></div>
-                    <div><span>불일치</span><span class="pt-pay">—</span></div>
-                </div>
-            </div>
-        </div>
+        <div class="lgh-cats" id="lghCats"></div>
+        <div class="lgh-grid" id="lghGrid"></div>
     </div>
 </div>
 
@@ -136,106 +99,105 @@
 <script src="../assets/js/common.js?v=20260509a"></script>
 <script>
 (function(){
-    const SYMS = ['7️⃣','💎','⭐','🔔','🍒','🍋'];
-    const PAYS = {'7️⃣':50,'💎':20,'⭐':10,'🔔':6,'🍒':4,'🍋':3};
-    const WEIGHTS = [3,5,8,10,14,18]; // 7이 가장 희귀
-    const totalW = WEIGHTS.reduce((a,b)=>a+b,0);
+    /* === Game Catalog (확장 시 이 배열에 항목 추가) ===
+       cat: 카테고리 키 (CATS의 key와 일치)
+       status: 'play' | 'soon'  ('play'면 url로 이동, 'soon'은 비활성)
+    */
+    const CATS = [
+        { key:'all',    label:'전체',     icon:'fa-th' },
+        { key:'slot',   label:'슬롯',     icon:'fa-dice' },
+        { key:'card',   label:'카드',     icon:'fa-clone' },
+        { key:'puzzle', label:'퍼즐',     icon:'fa-puzzle-piece' },
+        { key:'arcade', label:'아케이드', icon:'fa-gamepad' },
+        { key:'board',  label:'보드',     icon:'fa-chess-board' }
+    ];
+    const GAMES = [
+        { id:'slot777', cat:'slot', title:'Lucky 777 슬롯',
+          desc:'세 개의 7을 맞추면 잭팟! 가벼운 슬롯 머신 한 판.',
+          icon:'fa-dice', url:'lounge-game-slot777.html', status:'play' },
+        { id:'memory',  cat:'card', title:'기억력 카드',
+          desc:'뒤집어진 카드 짝 맞추기. 두뇌 워밍업.',
+          icon:'fa-clone', url:'#', status:'soon' },
+        { id:'2048',    cat:'puzzle', title:'2048',
+          desc:'숫자 타일을 합쳐 2048을 만들어보세요.',
+          icon:'fa-puzzle-piece', url:'#', status:'soon' },
+        { id:'tetris',  cat:'arcade', title:'테트리스 라이트',
+          desc:'블록을 쌓아 줄을 지우는 클래식 아케이드.',
+          icon:'fa-gamepad', url:'#', status:'soon' },
+        { id:'sudoku',  cat:'puzzle', title:'스도쿠',
+          desc:'9×9 격자에 숫자 1~9를 채우는 논리 퍼즐.',
+          icon:'fa-table-cells', url:'#', status:'soon' },
+        { id:'omok',    cat:'board', title:'오목',
+          desc:'다섯 개를 먼저 잇는 사람이 승리. AI 대전.',
+          icon:'fa-chess-board', url:'#', status:'soon' },
+        { id:'snake',   cat:'arcade', title:'스네이크',
+          desc:'먹이를 먹어 길어지는 뱀. 벽·꼬리에 닿으면 끝.',
+          icon:'fa-staff-snake', url:'#', status:'soon' }
+    ];
 
-    let credit = 100;
-    const BET = 10;
+    const elCats = document.getElementById('lghCats');
+    const elGrid = document.getElementById('lghGrid');
+    let curCat = 'all';
 
-    const reels = [document.getElementById('reel0'),document.getElementById('reel1'),document.getElementById('reel2')];
-    const elCredit = document.getElementById('slCredit');
-    const elBet = document.getElementById('slBet');
-    const elWin = document.getElementById('slWin');
-    const elMsg = document.getElementById('slMsg');
-    const btnSpin = document.getElementById('slSpin');
-    const btnReset = document.getElementById('slReset');
-
-    function pickSym(){
-        let r = Math.random()*totalW, acc=0;
-        for(let i=0;i<SYMS.length;i++){
-            acc += WEIGHTS[i];
-            if(r < acc) return SYMS[i];
-        }
-        return SYMS[SYMS.length-1];
+    function countByCat(key){
+        return key === 'all' ? GAMES.length : GAMES.filter(g => g.cat === key).length;
     }
 
-    function setMsg(text, type){
-        elMsg.textContent = text;
-        elMsg.className = 'slot-msg' + (type ? ' '+type : '');
+    function renderCats(){
+        elCats.innerHTML = CATS.filter(c => c.key === 'all' || countByCat(c.key) > 0).map(c => {
+            const cnt = countByCat(c.key);
+            return '<button class="lgh-cat-btn'+(curCat===c.key?' on':'')+'" data-cat="'+c.key+'">'
+                + '<i class="fa-solid '+c.icon+'"></i>'+c.label
+                + '<span class="lgh-cat-cnt">'+cnt+'</span></button>';
+        }).join('');
     }
 
-    function spin(){
-        if(credit < BET){
-            setMsg('크레딧이 부족합니다. Reset으로 재시작하세요','');
+    function catLabel(key){
+        const c = CATS.find(x => x.key === key);
+        return c ? c.label : key;
+    }
+
+    function renderGrid(){
+        const list = curCat === 'all' ? GAMES : GAMES.filter(g => g.cat === curCat);
+        if(!list.length){
+            elGrid.innerHTML = '<div class="lgh-empty"><i class="fa-solid fa-ghost"></i>해당 카테고리에 등록된 게임이 없습니다.</div>';
             return;
         }
-        credit -= BET;
-        elCredit.textContent = credit;
-        elWin.textContent = 0;
-        setMsg('스핀 중...','');
-        btnSpin.disabled = true;
-
-        reels.forEach(r => r.classList.add('spin'));
-
-        const result = [pickSym(), pickSym(), pickSym()];
-        const stopDelays = [600, 900, 1200];
-
-        result.forEach((sym, i) => {
-            const tickStart = setInterval(() => {
-                reels[i].textContent = pickSym();
-            }, 80);
-            setTimeout(() => {
-                clearInterval(tickStart);
-                reels[i].classList.remove('spin');
-                reels[i].textContent = sym;
-                if(i === 2) finishSpin(result);
-            }, stopDelays[i]);
-        });
+        elGrid.innerHTML = list.map(g => {
+            const playable = g.status === 'play';
+            const tag = playable
+                ? '<a href="'+g.url+'" class="lgh-game playable">'
+                : '<div class="lgh-game soon" role="button" aria-disabled="true">';
+            const close = playable ? '</a>' : '</div>';
+            const soonBadge = playable ? '' : '<span class="lgh-game-soon-badge">Coming Soon</span>';
+            const cta = playable
+                ? '<span class="lgh-game-cta">▶ Play Now <i class="fa-solid fa-arrow-right"></i></span>'
+                : '<span class="lgh-game-cta">준비 중</span>';
+            return tag
+                + '<div class="lgh-game-thumb">'
+                +   '<span class="lgh-game-cat">'+catLabel(g.cat)+'</span>'
+                +   soonBadge
+                +   '<i class="fa-solid '+g.icon+'"></i>'
+                + '</div>'
+                + '<div class="lgh-game-body">'
+                +   '<div class="lgh-game-title">'+g.title+'</div>'
+                +   '<div class="lgh-game-desc">'+g.desc+'</div>'
+                +   cta
+                + '</div>'
+                + close;
+        }).join('');
     }
 
-    function finishSpin(result){
-        const [a,b,c] = result;
-        let win = 0, msgType = '', msg = '';
-        if(a===b && b===c){
-            const mult = PAYS[a];
-            win = BET * mult;
-            if(a === '7️⃣'){
-                msg = '🎉 JACKPOT! ' + a+a+a + ' — '+win+' 크레딧!';
-                msgType = 'jackpot';
-            } else {
-                msg = a+a+a + ' 일치! ×'+mult+' = '+win+' 크레딧';
-                msgType = 'win';
-            }
-        } else if(a===b || b===c || a===c){
-            win = BET * 2;
-            msg = '두 개 일치! ×2 = '+win+' 크레딧';
-            msgType = 'win';
-        } else {
-            msg = '아쉬워요. 다시 도전!';
-        }
-        credit += win;
-        elCredit.textContent = credit;
-        elWin.textContent = win;
-        setMsg(msg, msgType);
-        btnSpin.disabled = false;
-        if(credit < BET){
-            setTimeout(()=>setMsg('크레딧이 부족합니다. Reset으로 재시작하세요',''), 2000);
-        }
-    }
+    elCats.addEventListener('click', function(e){
+        const btn = e.target.closest('.lgh-cat-btn');
+        if(!btn) return;
+        curCat = btn.dataset.cat;
+        renderCats();
+        renderGrid();
+    });
 
-    function reset(){
-        credit = 100;
-        elCredit.textContent = credit;
-        elWin.textContent = 0;
-        reels.forEach(r => { r.textContent = '7'; r.classList.remove('spin'); });
-        setMsg('베팅 '+BET+' 크레딧 · 스핀 버튼을 눌러 시작하세요','');
-        btnSpin.disabled = false;
-    }
-
-    btnSpin.addEventListener('click', spin);
-    btnReset.addEventListener('click', reset);
+    renderCats();
+    renderGrid();
 })();
 </script>
 </body>
