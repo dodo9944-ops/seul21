@@ -426,8 +426,12 @@ const MOCK = {
     { id:'pf9', name:'옥수제13구역 주택재개발정비사업', type:'재개발', district:'성동구', status:'완료', year:'2016', scale:'1,897세대', role:'사업시행 자문',
       description:'서울 성동구 옥수동 526번지 일대 124,431.2㎡ 부지의 주택재개발정비사업(주택정비형). 정비구역 명칭은 「옥수 제13주택재개발구역」으로, 조합원 1,574명·토지등소유자 1,515명·세입자 1,653명 규모로 추진된 대형 사업장이다.\n\n용도지역 제2종 일반주거지역, 용도지구 일반미관지구로, 건폐율 20%·용적률 199% 적용 지하4층~지상20층, 최고높이 57m 아파트 단지로 조성되었다. 주택공급은 분양 1,569세대(60㎡이하 784·60~85㎡ 651·85㎡초과 134)와 임대 328세대(40㎡이하 110·40~50㎡ 218)로 총 1,897세대 규모이다.\n\n토지이용 계획상 도로 18,049.08㎡, 공원 13,741.1㎡, 녹지 19,614.2㎡의 정비기반시설을 함께 조성하였으며, 기존 건축물 755동을 일괄 철거 후 신축하는 방식으로 2013년 철거 착수, 2016년 11월 공사 완료 고시되었다. 완성 단지는 「e편한세상 옥수 파크힐스」다.',
       featured:false,
-      thumbnail:'../assets/images/portfolio/oksu13.jpg', featuredImage:'../assets/images/portfolio/oksu13.jpg',
-      detailImage:'../assets/images/portfolio/oksu13.jpg', imageAlt:'옥수13구역 e편한세상 옥수 파크힐스',
+      thumbnail:'../jpg/oksu13_aerial.jpg', featuredImage:'../jpg/oksu13_aerial.jpg',
+      detailImage:'../jpg/oksu13_aerial.jpg', imageAlt:'옥수제13구역 e편한세상 옥수 파크힐스 — 단지 조감도',
+      gallery:[
+        { src:'../jpg/oksu13_aerial.jpg', alt:'옥수제13구역 e편한세상 옥수 파크힐스 단지 조감도', cap:'단지 조감도 — e편한세상 옥수 파크힐스' },
+        { src:'../jpg/oksu13_layout.jpg', alt:'옥수제13구역 단지 배치도', cap:'단지 배치도 (1,897세대 · 지하4층/지상20층)' }
+      ],
       floorInfo:'지하4층 / 지상20층 (최고 57m)', floorAbove:20, floorBelow:4,
       grossFloorArea:'-', floorAreaRatio:'199%',
       members:'1,574명', memberCount:1574,
