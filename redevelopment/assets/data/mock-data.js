@@ -529,7 +529,7 @@ const MOCK = {
       detailImage:'../assets/images/portfolio/gongdeok.jpg', imageAlt:'공덕현대 한화 포레나 마포공덕 조감도',
       floorInfo:'지하2층 / 지상20층', floorAbove:20, floorBelow:2,
       grossFloorArea:'-', floorAreaRatio:'273.64%',
-      members:'-', memberCount:0,
+      members:'187명', memberCount:187,
       siteArea:'8,259㎡', buildingArea:'-', constructor:'한화 건설부문', client:'공덕현대아파트 소규모재건축정비사업조합',
       phase:'사업시행인가 단계', totalCost:'-', proportionalRate:null,
       tasks:['조합설립 자문','사업시행 절차 자문','시공사 선정 자문','사업성 분석 자문'],
