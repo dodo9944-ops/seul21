@@ -320,74 +320,80 @@
         .vs-visual img { height: 220px; }
     }
 
-    /* ── 성장 스토리 — Milestone 카드 그리드 (Editorial Index 풍) ── */
-    .vs-milestones {
-        display: grid; grid-template-columns: repeat(3, 1fr);
-        gap: 18px; max-width: 1080px; margin: 0 auto;
+    /* ── 성장 스토리 — Editorial Spread (자서전 챕터 양면 풍) ── */
+    .vs-saga { max-width: 1000px; margin: 0 auto; }
+    .vs-saga-row {
+        display: grid; grid-template-columns: 38% 1fr;
+        gap: 56px; padding: 56px 0;
+        border-top: 1px solid var(--gray-200);
+        position: relative;
     }
-    .vs-mstone {
-        position: relative; padding: 28px 26px 26px;
-        background: #fff; border: 1px solid var(--gray-200);
-        border-radius: 16px; transition: all .28s ease;
-        display: flex; flex-direction: column; gap: 12px;
-        overflow: hidden;
+    .vs-saga-row:first-child { border-top: none; padding-top: 24px; }
+    .vs-saga-row:last-child { padding-bottom: 24px; }
+    .vs-saga-row::before {
+        content: ''; position: absolute; left: 0; top: -1px;
+        width: 48px; height: 2px; background: var(--gold);
     }
-    .vs-mstone::before {
-        content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-        width: 3px; background: linear-gradient(180deg, var(--gold), rgba(195,165,105,0.15));
-        opacity: .35; transition: opacity .28s ease;
+    .vs-saga-row:first-child::before { display: none; }
+    .vs-saga-left {
+        display: flex; flex-direction: column; gap: 14px;
+        position: sticky; top: 100px; align-self: flex-start;
     }
-    .vs-mstone:hover {
-        transform: translateY(-4px);
-        border-color: rgba(195,165,105,0.4);
-        box-shadow: 0 16px 36px rgba(10,15,28,0.08);
-    }
-    .vs-mstone:hover::before { opacity: 1; }
-    .vs-ms-head {
-        display: flex; align-items: center; justify-content: space-between;
-        gap: 12px;
-    }
-    .vs-ms-icon {
-        width: 38px; height: 38px; border-radius: 10px;
-        background: linear-gradient(135deg, #0F1D35, #1a2d50);
-        display: flex; align-items: center; justify-content: center;
-        flex-shrink: 0;
-    }
-    .vs-ms-icon i { color: var(--gold); font-size: 15px; }
-    .vs-ms-chap {
-        font-size: 10px; font-weight: 800; letter-spacing: 2px;
+    .vs-saga-chap {
+        font-size: 10.5px; font-weight: 800; letter-spacing: 3px;
         color: var(--gray-400); text-transform: uppercase;
     }
-    .vs-ms-year {
-        font-size: 36px; font-weight: 900; color: var(--brand-dark);
-        line-height: 1; letter-spacing: -1px;
+    .vs-saga-year {
+        font-size: 84px; font-weight: 900; color: var(--brand-dark);
+        line-height: 0.95; letter-spacing: -3px;
         font-feature-settings: "tnum"; font-variant-numeric: tabular-nums;
+        background: linear-gradient(180deg, var(--brand-dark) 0%, var(--brand-navy) 100%);
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
-    .vs-ms-line {
-        width: 28px; height: 2px; background: var(--gold);
-        margin: 2px 0 4px;
+    .vs-saga-icon {
+        width: 36px; height: 1px; background: var(--gold);
+        position: relative; margin-top: 2px;
     }
-    .vs-ms-en {
-        font-size: 14px; font-weight: 800; color: var(--brand-dark);
-        letter-spacing: 0.5px;
+    .vs-saga-icon i {
+        position: absolute; left: 44px; top: 50%; transform: translateY(-50%);
+        color: var(--gold); font-size: 13px;
     }
-    .vs-ms-en .ko {
-        font-size: 12px; font-weight: 600; color: var(--gray-500);
-        margin-left: 8px; letter-spacing: 0;
+    .vs-saga-right { padding-top: 4px; }
+    .vs-saga-en {
+        font-size: 26px; font-weight: 900; color: var(--brand-dark);
+        letter-spacing: -0.4px; line-height: 1.2;
+        margin-bottom: 6px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-style: italic;
     }
-    .vs-ms-body {
-        font-size: 13.5px; line-height: 1.75; color: var(--gray-600);
-        word-break: keep-all;
-        margin-top: 2px;
+    .vs-saga-en .ko {
+        font-family: var(--font); font-style: normal;
+        font-size: 13px; font-weight: 600; color: var(--gold);
+        letter-spacing: 1.5px; text-transform: uppercase;
+        display: block; margin-top: 4px;
     }
-    @media(max-width:900px) {
-        .vs-milestones { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-        .vs-ms-year { font-size: 32px; }
+    .vs-saga-quote {
+        font-size: 17px; line-height: 1.85; color: var(--gray-700);
+        font-weight: 500; word-break: keep-all;
+        margin-top: 22px; padding-left: 18px;
+        border-left: 2px solid rgba(195,165,105,0.3);
     }
-    @media(max-width:540px) {
-        .vs-milestones { grid-template-columns: 1fr; gap: 12px; }
-        .vs-mstone { padding: 22px 20px; }
-        .vs-ms-year { font-size: 30px; }
+    .vs-saga-body {
+        font-size: 14.5px; line-height: 1.95; color: var(--gray-500);
+        word-break: keep-all; margin-top: 16px;
+    }
+    @media(max-width:860px) {
+        .vs-saga-row { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
+        .vs-saga-left { position: static; flex-direction: row; align-items: baseline; gap: 18px; flex-wrap: wrap; }
+        .vs-saga-year { font-size: 56px; letter-spacing: -2px; }
+        .vs-saga-icon { display: none; }
+        .vs-saga-en { font-size: 22px; }
+        .vs-saga-quote { font-size: 15.5px; padding-left: 14px; }
+    }
+    @media(max-width:480px) {
+        .vs-saga-year { font-size: 46px; }
+        .vs-saga-en { font-size: 20px; }
     }
 
     /* ── 앞으로의 방향 ── */
@@ -804,7 +810,7 @@
         <!-- ══════ 성장 스토리 ══════ -->
         <div class="vs" id="growth">
             <h2 class="vs-title">성장 스토리</h2>
-            <div class="vs-milestones" id="vsMilestones"></div>
+            <div class="vs-saga" id="vsSaga"></div>
         </div>
 
         <!-- ══════ 앞으로의 방향 ══════ -->
@@ -837,33 +843,42 @@
 <script>
 (function() {
     const info = MOCK.companyInfo;
-    const ms = document.getElementById('vsMilestones');
-    if (ms && info.history) {
+    const saga = document.getElementById('vsSaga');
+    if (saga && info.history) {
         const chapter = {
-            '2002': { en: 'Origin',         ko: '시작',       icon: 'fa-seedling' },
-            '2019': { en: 'Foundation',     ko: '법인 설립',  icon: 'fa-flag' },
-            '2022': { en: 'Identity',       ko: '브랜드 정립', icon: 'fa-fingerprint' },
-            '2023': { en: 'Pivot',          ko: '사업 확장',  icon: 'fa-compass' },
-            '2024': { en: 'Specialization', ko: '전문화',     icon: 'fa-cubes' },
-            '2025': { en: 'Authorization',  ko: '인증·자문',  icon: 'fa-stamp' },
-            '2026': { en: 'Expansion',      ko: '본격 확대',  icon: 'fa-rocket' }
+            '2002': { en: 'The Origin',          ko: '시작',         icon: 'fa-seedling',
+                      quote: '도시정비라는 평생의 길에 첫발을 디뎠습니다.' },
+            '2019': { en: 'The Foundation',      ko: '법인 설립',     icon: 'fa-flag',
+                      quote: '개인의 경험을 조직의 자산으로 — 회사를 세웠습니다.' },
+            '2022': { en: 'The Identity',        ko: '브랜드 정립',   icon: 'fa-fingerprint',
+                      quote: '(주)세울엔지니어링이라는 이름으로 정체성을 새겼습니다.' },
+            '2023': { en: 'The Pivot',           ko: '사업 확장',     icon: 'fa-compass',
+                      quote: '컨설팅의 깊이를 더하고, 전문 인력으로 폭을 넓혔습니다.' },
+            '2024': { en: 'The Specialization',  ko: '전문화',       icon: 'fa-cubes',
+                      quote: '도시정비 PM과 소규모정비 전담조직으로 영역을 분화했습니다.' },
+            '2025': { en: 'The Authorization',   ko: '인증·자문',    icon: 'fa-stamp',
+                      quote: '엔지니어링사업자로 등록되며 공식 자문 영역에 진입했습니다.' },
+            '2026': { en: 'The Expansion',       ko: '본격 확대',    icon: 'fa-rocket',
+                      quote: '쌓아온 23년의 발자취를 토대로, 다음 장을 향해 나아갑니다.' }
         };
-        // 시간 흐름순(과거→현재)으로 카드 정렬 — 회사연혁(최신순)과 차별화
+        // 시간 흐름순(과거→현재) — 자서전 챕터 진행 방향과 일치
         const ordered = info.history.slice().sort((a, b) => +a.year - +b.year);
-        ms.innerHTML = ordered.map((h, idx) => {
-            const c = chapter[h.year] || { en: '', ko: '', icon: 'fa-circle' };
+        saga.innerHTML = ordered.map((h, idx) => {
+            const c = chapter[h.year] || { en: '', ko: '', icon: 'fa-circle', quote: '' };
             const num = String(idx + 1).padStart(2, '0');
             const body = h.items.join(' · ');
             return `
-                <div class="vs-mstone">
-                    <div class="vs-ms-head">
-                        <div class="vs-ms-icon"><i class="fa-solid ${c.icon}"></i></div>
-                        <div class="vs-ms-chap">Chapter ${num}</div>
+                <div class="vs-saga-row">
+                    <div class="vs-saga-left">
+                        <div class="vs-saga-chap">Chapter ${num}</div>
+                        <div class="vs-saga-year">${h.year}</div>
+                        <div class="vs-saga-icon"><i class="fa-solid ${c.icon}"></i></div>
                     </div>
-                    <div class="vs-ms-year">${h.year}</div>
-                    <div class="vs-ms-line"></div>
-                    <div class="vs-ms-en">${c.en}<span class="ko">${c.ko}</span></div>
-                    <div class="vs-ms-body">${body}</div>
+                    <div class="vs-saga-right">
+                        <div class="vs-saga-en">${c.en}<span class="ko">${c.ko}</span></div>
+                        <div class="vs-saga-quote">${c.quote}</div>
+                        <div class="vs-saga-body">${body}</div>
+                    </div>
                 </div>`;
         }).join('');
     }
