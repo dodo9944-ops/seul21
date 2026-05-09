@@ -148,9 +148,9 @@
     .d-overlay.open{opacity:1;pointer-events:auto}
     .d-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
     .d-overlay.open .d-modal{transform:translateY(0) scale(1)}
-    .d-close{position:absolute;top:14px;right:14px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.6);border:1.5px solid rgba(255,255,255,.3);border-radius:50%;cursor:pointer;font-size:15px;color:#fff;transition:all .2s;backdrop-filter:blur(4px)}
+    .d-close{position:absolute;top:60px;right:14px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.6);border:1.5px solid rgba(255,255,255,.3);border-radius:50%;cursor:pointer;font-size:15px;color:#fff;transition:all .2s;backdrop-filter:blur(4px)}
     .d-close:hover{background:rgba(10,15,28,.9);transform:scale(1.1)}
-    @media(max-width:540px){.d-close{top:10px;right:10px;width:32px;height:32px;font-size:13px}}
+    @media(max-width:540px){.d-close{top:50px;right:10px;width:32px;height:32px;font-size:13px}}
 
     /* Detail Hero Image */
     .d-hero{width:100%;height:300px;position:relative;overflow:hidden;flex-shrink:0;border-radius:18px 18px 0 0}
@@ -431,7 +431,7 @@ var p=null;for(var i=0;i<D.length;i++)if(D[i].id===id){p=D[i];break}
 if(!p)return;
 var dh=document.getElementById('dHero'),t=dt(p.type);
 var mn=p.name;
-var closeBtn='<button onclick="PF.close()" style="position:absolute;top:14px;right:14px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.6);border:1.5px solid rgba(255,255,255,.35);border-radius:50%;cursor:pointer;font-size:15px;color:#fff;backdrop-filter:blur(4px)"><i class="fa-solid fa-xmark"></i></button>';
+var closeBtn='<button onclick="PF.close()" style="position:absolute;top:60px;right:14px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.6);border:1.5px solid rgba(255,255,255,.35);border-radius:50%;cursor:pointer;font-size:15px;color:#fff;backdrop-filter:blur(4px)"><i class="fa-solid fa-xmark"></i></button>';
 var titleArea='<div class="d-title-area"><div class="badges">'+bg(p)+'</div><h2>'+mn+'</h2><div class="d-phase"><i class="fa-solid fa-flag"></i> '+(p.phase||p.status)+'</div></div>';
 if(p.detailImage){
 dh.innerHTML='<div class="d-hero"><img src="'+p.detailImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#0A0F1C,#1a3055)\';this.style.display=\'none\'"><div class="ov"></div>'+titleArea+closeBtn+'</div>'}
