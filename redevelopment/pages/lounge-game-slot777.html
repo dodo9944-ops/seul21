@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260505e">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260509b">
     <style>
     .lgg-hero{padding:48px 0 36px;background:linear-gradient(135deg,#060A14 0%,#0A0F1C 40%,#142644 100%);position:relative;overflow:hidden}
     .lgg-hero .inner{position:relative;z-index:1;text-align:center}
@@ -195,11 +195,11 @@
                     <div class="sb-pt-row"><span><span class="pt-sym" data-pt-sym="B"></span>BELL</span><span class="pt-pay">×12</span></div>
                     <div class="sb-pt-row"><span><span class="pt-sym" data-pt-sym="C"></span>CHERRY</span><span class="pt-pay">×8</span></div>
                     <div class="sb-pt-row"><span><span class="pt-sym" data-pt-sym="L"></span>LEMON</span><span class="pt-pay">×6</span></div>
-                    <div class="sb-pt-row" style="border-top:1px dashed rgba(195,165,105,.35);padding-top:6px;margin-top:4px"><span><span class="pt-sym" data-pt-sym="E"></span><strong style="color:var(--gold)">SEUL</strong></span><span class="pt-pay">크레딧 ×3</span></div>
+                    <div class="sb-pt-row" style="border-top:1px dashed rgba(195,165,105,.35);padding-top:6px;margin-top:4px"><span><span class="pt-sym" data-pt-sym="E"></span><strong style="color:var(--gold)">SEUL</strong></span><span class="pt-pay">크레딧 ×1</span></div>
                     <div class="sb-rule">
                         매칭 점수 = 심볼 배수 × 3 × 베팅 ÷ 5<br>
                         7️⃣ 한 라인(3개) 매칭 시 <strong style="color:var(--gold)">JACKPOT</strong><br>
-                        ★ <strong style="color:var(--gold)">SEUL 보너스</strong> — 그리드에 등장 시 남은 크레딧 ×3 점수 추가
+                        ★ <strong style="color:var(--gold)">SEUL 보너스</strong> — 가로/세로 한 라인(3개) 매칭 시 남은 크레딧 ×1 점수 추가
                     </div>
                 </div>
 
@@ -417,8 +417,8 @@
     renderBet();
 
     function clearHighlights(){
-        document.querySelectorAll('.cell.match,.cell.match7,.cell.dim').forEach(c => {
-            c.classList.remove('match','match7','dim');
+        document.querySelectorAll('.cell.match,.cell.match7,.cell.dim,.cell.bonus,.cell.spin').forEach(c => {
+            c.classList.remove('match','match7','dim','bonus','spin');
         });
     }
 
@@ -475,24 +475,22 @@
     function finishSpin(g){
         const matches = detectMatches(g);
         const matchedCells = new Set();
-        const bonusCells = [];
         let has7Jackpot = false;
-        // SEUL 'E' 보너스 셀 수집
-        for(let i=0;i<g.length;i++){if(g[i]==='E') bonusCells.push(i)}
+        let hasBonusLine = false; // SEUL 가로/세로 3개 라인 매칭 여부
         matches.forEach(m => {
             if(m.sym === '7' && m.len === N) has7Jackpot = true;
+            if(m.sym === 'E' && m.len === N) hasBonusLine = true;
             m.cells.forEach(i => matchedCells.add(i));
         });
 
-        // dim non-matched/bonus, glow matched/bonus
+        // dim non-matched, glow matched (E 라인 매칭 시 bonus 클래스, 그 외 E는 일반 표시)
         const cells = elGrid.children;
-        const hasAnyHighlight = matches.length || bonusCells.length;
-        if(hasAnyHighlight){
+        if(matches.length){
             for(let i=0;i<cells.length;i++){
-                if(g[i] === 'E'){
-                    cells[i].classList.add('bonus');
-                } else if(matchedCells.has(i)){
-                    cells[i].classList.add(g[i] === '7' ? 'match7' : 'match');
+                if(matchedCells.has(i)){
+                    if(g[i] === 'E') cells[i].classList.add('bonus');
+                    else if(g[i] === '7') cells[i].classList.add('match7');
+                    else cells[i].classList.add('match');
                 } else {
                     cells[i].classList.add('dim');
                 }
@@ -500,11 +498,10 @@
         }
 
         const {win, jackpot} = computeWin(matches);
-        // SEUL 보너스: 'E' 1개 이상 등장 시 남은 크레딧(스핀 후 win 추가 전 기준) × 3
+        // SEUL 보너스: 'E' 가로/세로 3개 라인 매칭 시 (현재 credit + win) × 1
         let bonus = 0;
-        if(bonusCells.length > 0){
-            // bonus 기준 크레딧 = 현재 credit (이번 스핀 베팅 차감 + 라인 win 합산 후)
-            bonus = (credit + win) * 3;
+        if(hasBonusLine){
+            bonus = (credit + win) * 1;
         }
         const totalGain = win + bonus;
         credit += totalGain;
@@ -515,8 +512,7 @@
 
         // 메시지 우선순위: bonus > jackpot > win > lose
         if(bonus > 0){
-            const lineNote = matches.length ? ' (+'+matches.length+'라인 '+win+')' : '';
-            setMsg('🎁 SEUL 보너스! 크레딧 ×3 = '+bonus.toLocaleString()+' 점!'+lineNote, 'jackpot');
+            setMsg('🎁 SEUL 라인 보너스! 크레딧 ×1 = '+bonus.toLocaleString()+' 점!', 'jackpot');
             SFX.bonus();
         } else if(jackpot){
             setMsg('🎉 JACKPOT! 7 한 라인 — '+win+' 크레딧!', 'jackpot');
