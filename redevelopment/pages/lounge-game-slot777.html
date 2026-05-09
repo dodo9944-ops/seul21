@@ -52,11 +52,11 @@
     .bet-chip:hover{border-color:var(--gold);color:#fff}
     .bet-chip.on{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C;border-color:#C3A569;box-shadow:0 4px 12px rgba(195,165,105,.3)}
 
-    .slot-frame{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:linear-gradient(180deg,#070A14,#0F1D35);padding:16px;border-radius:14px;border:2px solid rgba(195,165,105,.4);box-shadow:inset 0 4px 18px rgba(0,0,0,.6),0 0 0 4px rgba(195,165,105,.1);perspective:600px;perspective-origin:50% 50%}
-    .cell{aspect-ratio:1;background:linear-gradient(180deg,#fff,#eef1f5);border-radius:10px;display:flex;align-items:center;justify-content:center;padding:8px;line-height:1;overflow:hidden;position:relative;transition:transform .18s,box-shadow .25s;box-shadow:inset 0 -6px 12px rgba(0,0,0,.12),inset 0 6px 12px rgba(255,255,255,.6);transform-style:preserve-3d;backface-visibility:hidden}
+    .slot-frame{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:linear-gradient(180deg,#070A14,#0F1D35);padding:16px;border-radius:14px;border:2px solid rgba(195,165,105,.4);box-shadow:inset 0 4px 18px rgba(0,0,0,.6),0 0 0 4px rgba(195,165,105,.1)}
+    .cell{aspect-ratio:1;background:linear-gradient(180deg,#fff,#eef1f5);border-radius:10px;display:flex;align-items:center;justify-content:center;padding:8px;line-height:1;overflow:hidden;position:relative;transition:transform .18s,box-shadow .25s;box-shadow:inset 0 -6px 12px rgba(0,0,0,.12),inset 0 6px 12px rgba(255,255,255,.6)}
     .cell svg{width:100%;height:100%;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}
-    .cell.spin{animation:cellSwing .55s cubic-bezier(.45,.05,.55,.95) infinite}
-    @keyframes cellSwing{0%,100%{transform:rotateX(0deg) scale(1)}50%{transform:rotateX(180deg) scale(.92)}}
+    .cell.spin{animation:cellShake .07s linear infinite}
+    @keyframes cellShake{0%{transform:translateY(-3px)}50%{transform:translateY(3px)}100%{transform:translateY(-3px)}}
     .cell.match{animation:cellGlow 1s ease-in-out infinite;box-shadow:0 0 0 2px var(--gold),0 0 16px rgba(195,165,105,.7);z-index:2}
     .cell.match7{animation:cellGlow .6s ease-in-out infinite;box-shadow:0 0 0 3px #C3A569,0 0 24px rgba(195,165,105,.95);z-index:3}
     @keyframes cellGlow{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
@@ -185,12 +185,12 @@
             <div class="sb">
                 <div class="sb-card">
                     <h4><i class="fa-solid fa-table-list"></i> Pay Table</h4>
-                    <div class="sb-pt-row"><span><span class="pt-sym">7️⃣</span> SEVEN</span><span class="pt-pay">×50</span></div>
-                    <div class="sb-pt-row"><span><span class="pt-sym">💎</span> DIAMOND</span><span class="pt-pay">×20</span></div>
-                    <div class="sb-pt-row"><span><span class="pt-sym">⭐</span> STAR</span><span class="pt-pay">×10</span></div>
-                    <div class="sb-pt-row"><span><span class="pt-sym">🔔</span> BELL</span><span class="pt-pay">×6</span></div>
-                    <div class="sb-pt-row"><span><span class="pt-sym">🍒</span> CHERRY</span><span class="pt-pay">×4</span></div>
-                    <div class="sb-pt-row"><span><span class="pt-sym">🍋</span> LEMON</span><span class="pt-pay">×3</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym">7️⃣</span> SEVEN</span><span class="pt-pay">×100</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym">💎</span> DIAMOND</span><span class="pt-pay">×40</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym">⭐</span> STAR</span><span class="pt-pay">×20</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym">🔔</span> BELL</span><span class="pt-pay">×12</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym">🍒</span> CHERRY</span><span class="pt-pay">×8</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym">🍋</span> LEMON</span><span class="pt-pay">×6</span></div>
                     <div class="sb-rule">
                         매칭 점수 = 심볼 배수 × 3 × 베팅 ÷ 5<br>
                         7️⃣ 한 라인(3개) 매칭 시 <strong style="color:var(--gold)">JACKPOT</strong>
@@ -227,7 +227,7 @@
 <script>
 (function(){
     const SYMS = ['7','D','S','B','C','L'];
-    const PAYS = {'7':50,'D':20,'S':10,'B':6,'C':4,'L':3};
+    const PAYS = {'7':100,'D':40,'S':20,'B':12,'C':8,'L':6};
     const WEIGHTS = [3,5,8,10,14,18];
     const totalW = WEIGHTS.reduce((a,b)=>a+b,0);
 
