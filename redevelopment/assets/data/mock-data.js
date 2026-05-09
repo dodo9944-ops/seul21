@@ -373,7 +373,7 @@ const MOCK = {
         { src:'../jpg/wangsimni1_layout.jpg', alt:'왕십리뉴타운 제1구역 텐즈힐 단지 배치도', cap:'단지 배치도 (1,702세대 · 20개동 · 지하3층/지상25층)' }
       ],
       floorInfo:'지하3층 / 지상25층', floorAbove:25, floorBelow:3,
-      grossFloorArea:'-', floorAreaRatio:'-',
+      grossFloorArea:'-', floorAreaRatio:'224%',
       members:'774명', memberCount:774,
       siteArea:'-', buildingArea:'-', constructor:'삼성물산·GS건설·대림산업·현대산업개발 (컨소시엄)', client:'왕십리뉴타운제1구역 주택재개발정비사업조합',
       phase:'입주 완료 (2015.04) — 조합 해산·정산 진행', totalCost:'-', proportionalRate:null,
