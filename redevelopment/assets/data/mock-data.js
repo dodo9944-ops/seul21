@@ -366,8 +366,12 @@ const MOCK = {
     { id:'pf3', name:'왕십리뉴타운 제1구역 주택재개발정비사업', type:'재개발', district:'성동구', status:'완료', year:'2015', scale:'1,702세대', role:'사업시행 자문',
       description:'서울 성동구 하왕십리동 339-67번지 일대 「왕십리뉴타운 제1구역」 주택재개발정비사업. 사업주체는 「왕십리뉴타운제1구역 주택재개발정비사업조합」이며, 왕십리 광역 뉴타운 사업의 핵심 축이자 1구역 중 최대 규모의 단지이다.\n\n삼성물산·GS건설·대림산업·현대산업개발 4개사 컨소시엄이 시공을 수행하여 총 1,702세대, 20개동, 지하3층~지상 최고25층 규모의 「텐즈힐(Tens Hill)」 단지로 완성되었다. 2013년 일반분양, 2015년 4월 입주를 완료하였으며, 현재 조합 해산·정산 단계에 있다.\n\n조합 사무실은 성동구 왕십리로28길 28-1(홍익동) 소재이며, 서울시 정비사업 정보몽땅(cleanup.seoul.go.kr/cafe/?cafeUrl=s926Ff9L)에 사업개요·위치도·조감도·배치도·단위세대평면도·추진경과·공지사항·조합입찰공고·확정 사업비 및 분담금 등이 공식 등재되어 운영 중이다.',
       featured:true,
-      thumbnail:'../assets/images/portfolio/wangsimni1.jpg', featuredImage:'../assets/images/portfolio/wangsimni1.jpg',
-      detailImage:'../assets/images/portfolio/wangsimni1.jpg', imageAlt:'왕십리1구역 텐즈힐 조감도',
+      thumbnail:'../jpg/wangsimni1_aerial.jpg', featuredImage:'../jpg/wangsimni1_aerial.jpg',
+      detailImage:'../jpg/wangsimni1_aerial.jpg', imageAlt:'왕십리뉴타운 제1구역 텐즈힐 단지 조감도',
+      gallery:[
+        { src:'../jpg/wangsimni1_aerial.jpg', alt:'왕십리뉴타운 제1구역 텐즈힐 단지 광역 조감도', cap:'단지 조감도 — 텐즈힐(Tens Hill) 광역 전경' },
+        { src:'../jpg/wangsimni1_layout.jpg', alt:'왕십리뉴타운 제1구역 텐즈힐 단지 배치도', cap:'단지 배치도 (1,702세대 · 20개동 · 지하3층/지상25층)' }
+      ],
       floorInfo:'지하3층 / 지상25층', floorAbove:25, floorBelow:3,
       grossFloorArea:'-', floorAreaRatio:'-',
       members:'-', memberCount:0,
