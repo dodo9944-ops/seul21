@@ -110,7 +110,8 @@
         { key:'puzzle',  label:'퍼즐',     icon:'fa-puzzle-piece' },
         { key:'arcade',  label:'아케이드', icon:'fa-gamepad' },
         { key:'board',   label:'보드',     icon:'fa-chess-board' },
-        { key:'lottery', label:'추첨',     icon:'fa-stairs' }
+        { key:'lottery', label:'추첨',     icon:'fa-stairs' },
+        { key:'quiz',    label:'퀴즈',     icon:'fa-circle-question' }
     ];
     const GAMES = [
         { id:'slot777', cat:'slot', title:'Lucky 777 슬롯',
@@ -136,7 +137,10 @@
           icon:'fa-table-cells', url:'lounge-game-sudoku.html', status:'play' },
         { id:'ladder',  cat:'lottery', title:'사다리타기',
           desc:'밥값 내기·용돈 주기·쓰레기 버리기 등. 인원 2~10명, 결과 자유 입력.',
-          icon:'fa-stairs', url:'lounge-game-ladder.html', status:'play' }
+          icon:'fa-stairs', url:'lounge-game-ladder.html', status:'play' },
+        { id:'quiz',    cat:'quiz', title:'재개발 OX 퀴즈',
+          desc:'도시정비법·실무 절차 12문항 중 10문항 무작위. 정답·해설 즉시 표시.',
+          icon:'fa-circle-question', url:'lounge-game-quiz.html', status:'play' }
     ];
 
     const elCats = document.getElementById('lghCats');
