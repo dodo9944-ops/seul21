@@ -338,17 +338,21 @@ const MOCK = {
     { id:'pf1', name:'가락현대5차아파트 소규모재건축정비사업', type:'소규모정비', district:'송파구', status:'진행중', year:'2026', scale:'179세대', role:'기본계획~준공 CM업무 총괄수행',
       description:'서울 송파구 가락동 161-3번지 일대의 기존 145세대(15층, 2개동) 노후 아파트를 지하3층~지상25층, 4개동 179세대 규모의 신축 단지 「더샵 송파루미스타」로 재건축하는 소규모재건축정비사업. 포스코이앤씨가 시공하며, 2026년 5월 입주 예정이다. 당사는 기본계획 수립 단계부터 사업시행계획인가, 관리처분계획, 시공사 선정, 분양·입주까지 기본계획~준공 CM업무를 총괄수행하였다.\n\n본 사업은 정비업계에 다음과 같은 선례를 남긴 상징적 프로젝트이다. ① 소규모재건축 역사상 최초로 1군 시공사(포스코이앤씨)를 유치한 사례, ② 업계 최단기간인 5년 만에 사업 착수~준공·입주를 완료한 신속 추진 모델, ③ 정비업계 최초로 시공사가 새긴 준공 머릿돌(竣工 銘文石)에 「서울특별시 정비사업 코디네이터 — 이창우」(본 회사 대표)의 이름이 영구 등재된 사례. 이는 단순 기록이 아니라 사업의 처음부터 끝까지 현장에서 함께한 실행력과 신뢰가 만들어낸 결과이며, 세울엔지니어링이 추구하는 정비사업 관리의 본질을 증명하는 성과이다.',
       featured:true,
-      thumbnail:'../assets/images/portfolio/garak5.jpg', featuredImage:'../assets/images/portfolio/garak5.jpg',
-      detailImage:'../assets/images/portfolio/garak5.jpg', imageAlt:'가락현대5차 더샵 송파루미스타 조감도',
+      thumbnail:'../jpg/garak5_cornerstone.png?v=20260510c', featuredImage:'../jpg/garak5_cornerstone.png?v=20260510c',
+      detailImage:'../jpg/garak5_night.jpg?v=20260510c', imageAlt:'가락현대5차 더샵 송파루미스타 — 준공 머릿돌 및 야경',
+      featuredImages:[
+        { src:'../jpg/garak5_cornerstone.png?v=20260510c', alt:'가락현대5차 준공 머릿돌 — 서울특별시 정비사업 코디네이터 이창우 등재' },
+        { src:'../jpg/garak5_night.jpg?v=20260510c', alt:'가락현대5차 더샵 송파루미스타 — 준공 단지 야경' }
+      ],
       gallery:[
-        { src:'../jpg/garak5_night.jpg', alt:'가락현대5차 더샵 송파루미스타 — 준공 단지 야경', cap:'준공 단지 야경 (THE SHARP)' },
-        { src:'../jpg/garak5_cornerstone.png', alt:'가락현대5차 준공 머릿돌 — 서울특별시 정비사업 코디네이터 이창우 등재', cap:'준공 머릿돌 — 정비업계 최초 코디네이터 이름 등재' }
+        { src:'../jpg/garak5_cornerstone.png?v=20260510c', alt:'가락현대5차 준공 머릿돌 — 서울특별시 정비사업 코디네이터 이창우 등재', cap:'준공 머릿돌 — 정비업계 최초 코디네이터 이름 등재' },
+        { src:'../jpg/garak5_night.jpg?v=20260510c', alt:'가락현대5차 더샵 송파루미스타 — 준공 단지 야경', cap:'준공 단지 야경 (THE SHARP)' }
       ],
       floorInfo:'지하3층 / 지상25층', floorAbove:25, floorBelow:3,
       grossFloorArea:'18,500㎡', floorAreaRatio:'249.8%',
-      members:'145명', memberCount:145,
+      members:'107명', memberCount:107,
       siteArea:'4,950㎡', buildingArea:'2,200㎡', constructor:'포스코이앤씨', client:'가락현대5차 소규모재건축정비사업조합',
-      phase:'입주 직전 (2026.05)', totalCost:'약 738억원', proportionalRate:null,
+      phase:'관리처분(변경)인가 2026.03.31 — 준공예정 2026.05.08 / 입주 진행', totalCost:'약 738억원', proportionalRate:'85.563%',
       tasks:['기본계획 수립 자문','사업시행계획 수립 및 변경인가 자문','관리처분계획 수립 자문','시공사 선정 자문','분양설계 검토 자문','조합 운영 자문','사업성 분석 및 수지분석','준공·입주 절차 자문','조합 해산·정산 절차 자문'],
       issues:['정비업계 최초 — 소규모재건축 1군 시공사(포스코이앤씨) 유치','업계 최단 — 사업 착수~준공·입주 5년 완수','정비업계 최초 — 준공 머릿돌에 정비사업 코디네이터(대표 이창우) 이름 영구 등재','소규모재건축 특례법 적용 — 빈집법상 관리처분계획 포함 사업시행계획 구조','더샵 송파루미스타 브랜드 — 포스코이앤씨 시공','2026년 5월 입주 예정 — 잔여 자산 처분·정산 단계 진입','공정률 100% — 본공사 사실상 마무리 후 입주 직전'] },
     { id:'pf2', name:'반포주공1단지(1·2·4주구) 주택재건축정비사업', type:'재건축', district:'서초구', status:'진행중', year:'2026', scale:'5,007세대', role:'공공관리·사업성분석 자문',

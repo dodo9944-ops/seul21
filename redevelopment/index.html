@@ -513,6 +513,9 @@
         .fc-img{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0}
         .fc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
         .fc:hover .fc-img img{transform:scale(1.06)}
+        .fc-img.fc-img--split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#0A0F1C}
+        .fc-img.fc-img--split .fc-img-cell{position:relative;overflow:hidden;width:100%;height:100%}
+        .fc-img.fc-img--split .fc-img-cell img{width:100%;height:100%;object-fit:cover}
         .fc-img .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.5) 0%,transparent 50%);pointer-events:none}
         .fc-img .badges,.fc-fb .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
         .fc-fb{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
@@ -877,7 +880,7 @@
 .pb{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.3px}
 .pb-type{background:#C3A569;color:#0A0F1C}
 .pb-ing{background:rgba(195,165,105,.15);color:#C3A569;border:1px solid rgba(195,165,105,.3)}
-.pb-done{background:rgba(126,200,160,.15);color:#7ec8a0;border:1px solid rgba(126,200,160,.3)}
+.pb-done{background:rgba(255,255,255,.92);color:#0A0F1C;border:1px solid rgba(0,0,0,.12)}
 @media(max-width:540px){.mp-hero,.mp-hero-fb{height:200px}.mp-title-area h2{font-size:18px}.mp-body{padding:20px}.mp-info-grid{grid-template-columns:1fr}.mp-info-item:nth-child(odd){border-right:none}.mp-spec-grid{grid-template-columns:1fr 1fr}.mp-spec-item:nth-child(3n){border-right:1px solid #eee}.mp-spec-item:nth-child(2n){border-right:none}}
 </style>
 <div class="mp-overlay" id="mpOverlay">
@@ -896,7 +899,7 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260510b"></script>
+<script src="assets/data/mock-data.js?v=20260510c"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
 <script src="assets/js/common.js?v=20260509a"></script>
 
@@ -1075,9 +1078,18 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         function _safe(v){return v||'정보 확인중'}
         pfEl.innerHTML=featured.map(function(p,idx){
             var imgSrc=p.featuredImage||p.thumbnail;
-            var img=imgSrc?
-                '<div class="fc-img"><img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+_dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+_bg(p)+'</div></div>':
-                '<div class="fc-fb" data-t="'+_dt(p.type)+'"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+_bg(p)+'</div></div>';
+            var img;
+            if(p.featuredImages && p.featuredImages.length>=2){
+                var c0=p.featuredImages[0], c1=p.featuredImages[1];
+                img='<div class="fc-img fc-img--split">'+
+                    '<div class="fc-img-cell"><img src="'+c0.src+'" alt="'+(c0.alt||p.name)+'"></div>'+
+                    '<div class="fc-img-cell"><img src="'+c1.src+'" alt="'+(c1.alt||p.name)+'"></div>'+
+                    '<div class="ov"></div><div class="badges">'+_bg(p)+'</div></div>';
+            } else if(imgSrc){
+                img='<div class="fc-img"><img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+_dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+_bg(p)+'</div></div>';
+            } else {
+                img='<div class="fc-fb" data-t="'+_dt(p.type)+'"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+_bg(p)+'</div></div>';
+            }
             var primary=idx===0?' fc-primary':'';
             return'<div class="fc'+primary+'" onclick="MPF.open(\''+p.id+'\')">'+img+
                 '<div class="fc-body"><div class="fn">'+p.name+'</div>'+
