@@ -502,7 +502,11 @@ const MOCK = {
     { id:'pf14', name:'미아1구역 가로주택정비사업', type:'소규모정비', district:'강북구', status:'진행중', year:'2024', scale:'79세대', role:'사업시행 자문',
       description:'서울 강북구 미아동 833-2번지 일대 가로주택정비사업. 구역면적 6,439.44㎡, 조합원 60명, 토지등소유자 63명. 지하2층~지상8층, 연면적 19,982㎡, 용적률 240%, 건폐율 52%, 3개동 총 79세대. 한양이 시공사로 선정.',
       featured:false,
-      thumbnail:'', featuredImage:'', detailImage:'', imageAlt:'미아1구역 가로주택정비사업',
+      thumbnail:'../jpg/mia1_aerial.jpg', featuredImage:'../jpg/mia1_aerial.jpg',
+      detailImage:'../jpg/mia1_aerial.jpg', imageAlt:'미아1구역 가로주택정비사업 단지 조감도',
+      gallery:[
+        { src:'../jpg/mia1_aerial.jpg', alt:'미아1구역 가로주택정비사업 단지 조감도', cap:'단지 조감도 (3개동 · 지하2층/지상8층 · 79세대)' }
+      ],
       floorInfo:'지하2층 / 지상8층', floorAbove:8, floorBelow:2,
       grossFloorArea:'19,982㎡', floorAreaRatio:'240%',
       members:'60명', memberCount:60,
