@@ -36,11 +36,21 @@
     .slot::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 50% -10%,rgba(195,165,105,.12) 0%,transparent 50%);pointer-events:none}
     .slot-title{position:relative;text-align:center;font-size:13px;font-weight:800;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:4px}
     .slot-sub{position:relative;text-align:center;font-size:11px;color:rgba(255,255,255,.42);letter-spacing:1px;margin-bottom:18px}
-    .slot-info{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;padding:12px 14px;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid rgba(195,165,105,.15)}
+    .slot-info{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;padding:12px 14px;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid rgba(195,165,105,.15)}
     .si-cell{text-align:center;border-right:1px solid rgba(195,165,105,.12);padding:0 4px}
     .si-cell:last-child{border-right:none}
     .si-cell .si-label{font-size:9.5px;font-weight:700;color:var(--gold);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:3px;opacity:.85}
     .si-cell .si-value{font-size:18px;font-weight:900;color:#fff;font-feature-settings:"tnum";font-variant-numeric:tabular-nums;line-height:1}
+
+    /* === Bet bar === */
+    .slot-betbar{position:relative;display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:14px;padding:8px 10px;background:rgba(195,165,105,.05);border-radius:10px;border:1px solid rgba(195,165,105,.18)}
+    .slot-betbar-label{font-size:10px;font-weight:800;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-right:8px}
+    .bet-step{width:30px;height:30px;border-radius:8px;border:1px solid rgba(195,165,105,.3);background:rgba(255,255,255,.06);color:var(--gold);font-size:14px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .15s}
+    .bet-step:hover:not(:disabled){background:var(--gold);color:#0A0F1C}
+    .bet-step:disabled{opacity:.3;cursor:not-allowed}
+    .bet-chip{padding:6px 14px;border-radius:8px;border:1px solid rgba(195,165,105,.25);background:rgba(255,255,255,.04);color:rgba(255,255,255,.6);font-size:12.5px;font-weight:800;cursor:pointer;font-family:var(--font);transition:all .15s;font-feature-settings:"tnum";font-variant-numeric:tabular-nums}
+    .bet-chip:hover{border-color:var(--gold);color:#fff}
+    .bet-chip.on{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C;border-color:#C3A569;box-shadow:0 4px 12px rgba(195,165,105,.3)}
 
     .slot-frame{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:linear-gradient(180deg,#070A14,#0F1D35);padding:16px;border-radius:14px;border:2px solid rgba(195,165,105,.4);box-shadow:inset 0 4px 18px rgba(0,0,0,.6),0 0 0 4px rgba(195,165,105,.1)}
     .cell{aspect-ratio:1;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:56px;line-height:1;font-weight:800;overflow:hidden;position:relative;transition:transform .18s,box-shadow .25s;box-shadow:inset 0 -6px 12px rgba(0,0,0,.12),inset 0 6px 12px rgba(255,255,255,.6)}
@@ -51,16 +61,23 @@
     @keyframes cellGlow{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
     .cell.dim{opacity:.42;filter:saturate(.6)}
 
-    .slot-actions{position:relative;display:flex;gap:8px;margin-top:18px}
-    .slot-btn{flex:1;padding:13px 14px;border-radius:11px;border:none;cursor:pointer;font-size:13px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;font-family:var(--font);transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+    .slot-actions{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+    .slot-actions-row{display:flex;gap:8px}
+    .slot-btn{padding:13px 14px;border-radius:11px;border:none;cursor:pointer;font-size:13px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;font-family:var(--font);transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
     .slot-btn-primary{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C;box-shadow:0 6px 18px rgba(195,165,105,.35)}
-    .slot-btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(195,165,105,.45)}
-    .slot-btn-primary:active{transform:translateY(0)}
+    .slot-btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 24px rgba(195,165,105,.45)}
+    .slot-btn-primary:active:not(:disabled){transform:translateY(0)}
     .slot-btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
-    .slot-btn-ghost{flex:0 0 100px;background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.18)}
+    .slot-btn-auto{background:linear-gradient(135deg,#1e3a5f,#2a4a75);color:#fff;border:1px solid rgba(195,165,105,.3);box-shadow:0 4px 12px rgba(10,15,28,.3)}
+    .slot-btn-auto:hover:not(:disabled){background:linear-gradient(135deg,#2a4a75,#34588a);transform:translateY(-2px)}
+    .slot-btn-auto.stop{background:linear-gradient(135deg,#D6423A,#B5332B);border-color:#D6423A;animation:autoStopPulse 1.4s ease-in-out infinite}
+    .slot-btn-auto.stop:hover{background:linear-gradient(135deg,#E04A40,#C5392F)}
+    @keyframes autoStopPulse{0%,100%{box-shadow:0 4px 12px rgba(214,66,58,.3)}50%{box-shadow:0 4px 22px rgba(214,66,58,.7)}}
+    .slot-btn-ghost{flex:1;background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.18)}
     .slot-btn-ghost:hover{background:rgba(255,255,255,.06);color:#fff}
-    .slot-btn-end{flex:0 0 110px;background:rgba(214,66,58,.15);color:#ff8a82;border:1px solid rgba(214,66,58,.4)}
+    .slot-btn-end{flex:1;background:rgba(214,66,58,.15);color:#ff8a82;border:1px solid rgba(214,66,58,.4)}
     .slot-btn-end:hover{background:rgba(214,66,58,.25);color:#fff}
+    .slot-btn-end:disabled{opacity:.4;cursor:not-allowed}
 
     .slot-msg{position:relative;text-align:center;margin-top:14px;min-height:22px;font-size:13px;font-weight:700;color:rgba(255,255,255,.55)}
     .slot-msg.win{color:var(--gold);animation:winPulse 1.2s ease-in-out infinite}
@@ -142,13 +159,26 @@
 
                 <div class="slot-frame" id="slGrid"></div>
 
-                <div class="slot-actions">
-                    <button class="slot-btn slot-btn-primary" id="slSpin"><i class="fa-solid fa-rotate"></i> SPIN</button>
-                    <button class="slot-btn slot-btn-ghost" id="slReset">Reset</button>
-                    <button class="slot-btn slot-btn-end" id="slEnd"><i class="fa-solid fa-flag-checkered"></i> 끝내기</button>
+                <div class="slot-betbar">
+                    <span class="slot-betbar-label">Bet</span>
+                    <button class="bet-step" id="slBetMinus" aria-label="베팅 감소"><i class="fa-solid fa-minus"></i></button>
+                    <button class="bet-chip" data-bet="10">10</button>
+                    <button class="bet-chip" data-bet="20">20</button>
+                    <button class="bet-chip" data-bet="50">50</button>
+                    <button class="bet-chip" data-bet="100">100</button>
+                    <button class="bet-step" id="slBetPlus" aria-label="베팅 증가"><i class="fa-solid fa-plus"></i></button>
                 </div>
 
-                <div class="slot-msg" id="slMsg">SPIN 버튼을 눌러 시작하세요. 베팅 10 크레딧.</div>
+                <div class="slot-actions">
+                    <button class="slot-btn slot-btn-primary" id="slSpin"><i class="fa-solid fa-rotate"></i> SPIN</button>
+                    <button class="slot-btn slot-btn-auto" id="slAuto"><i class="fa-solid fa-arrows-rotate"></i> AUTO</button>
+                    <div class="slot-actions-row" style="grid-column:1/-1">
+                        <button class="slot-btn slot-btn-ghost" id="slReset">Reset</button>
+                        <button class="slot-btn slot-btn-end" id="slEnd"><i class="fa-solid fa-flag-checkered"></i> 끝내기</button>
+                    </div>
+                </div>
+
+                <div class="slot-msg" id="slMsg">SPIN 버튼을 눌러 시작하세요.</div>
             </div>
 
             <!-- Sidebar -->
@@ -202,10 +232,15 @@
     const totalW = WEIGHTS.reduce((a,b)=>a+b,0);
     const N = 3;
     const RANK_KEY = 'seul_lounge_slot777_rank';
-    const BET = 10;
+    const BET_LEVELS = [10, 20, 50, 100];
+    let betIdx = 0; // 시작 BET=10
+    let bet = BET_LEVELS[betIdx];
     let credit = 100;
     let score = 0;
     let grid = [];
+    let autoOn = false;
+    let autoTimer = null;
+    let isSpinning = false;
 
     const elGrid = document.getElementById('slGrid');
     const elCredit = document.getElementById('slCredit');
@@ -214,8 +249,12 @@
     const elScore = document.getElementById('slScore');
     const elMsg = document.getElementById('slMsg');
     const btnSpin = document.getElementById('slSpin');
+    const btnAuto = document.getElementById('slAuto');
     const btnReset = document.getElementById('slReset');
     const btnEnd = document.getElementById('slEnd');
+    const btnBetMinus = document.getElementById('slBetMinus');
+    const btnBetPlus = document.getElementById('slBetPlus');
+    const betChips = document.querySelectorAll('.bet-chip');
     const elRank = document.getElementById('slRankList');
 
     // build grid cells
@@ -277,12 +316,35 @@
         let win = 0, jackpot=false;
         matches.forEach(m => {
             const mult = PAYS[m.sym] || 0;
-            // line score = mult * len * BET / 5  (정수 round)
-            win += Math.round(mult * m.len * BET / 5);
+            // line score = mult * len * bet / 5  (정수 round)
+            win += Math.round(mult * m.len * bet / 5);
             if(m.sym === '7️⃣' && m.len === N) jackpot = true;
         });
         return {win, jackpot};
     }
+
+    /* === Bet control === */
+    function renderBet(){
+        elBet.textContent = bet;
+        betChips.forEach(c => c.classList.toggle('on', parseInt(c.dataset.bet,10) === bet));
+        btnBetMinus.disabled = (betIdx === 0);
+        btnBetPlus.disabled = (betIdx === BET_LEVELS.length - 1);
+    }
+    function setBetByIdx(i){
+        if(isSpinning || autoOn) return; // 스핀 중·자동 중에는 변경 금지
+        if(i < 0 || i >= BET_LEVELS.length) return;
+        betIdx = i;
+        bet = BET_LEVELS[betIdx];
+        renderBet();
+    }
+    btnBetMinus.addEventListener('click', () => setBetByIdx(betIdx - 1));
+    btnBetPlus.addEventListener('click', () => setBetByIdx(betIdx + 1));
+    betChips.forEach(c => c.addEventListener('click', () => {
+        const b = parseInt(c.dataset.bet, 10);
+        const i = BET_LEVELS.indexOf(b);
+        if(i >= 0) setBetByIdx(i);
+    }));
+    renderBet();
 
     function clearHighlights(){
         document.querySelectorAll('.cell.match,.cell.match7,.cell.dim').forEach(c => {
@@ -291,14 +353,20 @@
     }
 
     function spin(){
-        if(credit < BET){setMsg('크레딧이 부족합니다. Reset 또는 끝내기로 종료하세요',''); return}
+        if(credit < bet){
+            setMsg('크레딧이 부족합니다. Reset 또는 끝내기로 종료하세요','');
+            stopAuto();
+            return;
+        }
         clearHighlights();
-        credit -= BET;
+        credit -= bet;
         elCredit.textContent = credit;
         elWin.textContent = 0;
         setMsg('스핀 중...','');
+        isSpinning = true;
         btnSpin.disabled = true;
         btnEnd.disabled = true;
+        renderBet(); // 베팅 ± 비활성
 
         // shake all cells
         const cells = elGrid.children;
@@ -369,24 +437,57 @@
             setMsg('매칭 없음. 다시 도전하세요!','');
         }
 
+        isSpinning = false;
         btnSpin.disabled = false;
         btnEnd.disabled = false;
-        if(credit < BET) setTimeout(() => setMsg('크레딧이 부족합니다. Reset 또는 끝내기로 종료하세요',''), 2200);
+        renderBet();
+        if(credit < bet){
+            setTimeout(() => setMsg('크레딧이 부족합니다. Reset 또는 끝내기로 종료하세요',''), 2200);
+            stopAuto();
+            return;
+        }
+        // 자동 모드면 1초 후 다음 스핀
+        if(autoOn){
+            autoTimer = setTimeout(() => { if(autoOn) spin(); }, 1000);
+        }
+    }
+
+    /* === Auto Spin === */
+    function startAuto(){
+        if(credit < bet){setMsg('크레딧 부족 — 자동 시작 불가',''); return}
+        autoOn = true;
+        btnAuto.classList.add('stop');
+        btnAuto.innerHTML = '<i class="fa-solid fa-stop"></i> STOP';
+        renderBet();
+        spin();
+    }
+    function stopAuto(){
+        autoOn = false;
+        if(autoTimer){clearTimeout(autoTimer); autoTimer = null;}
+        btnAuto.classList.remove('stop');
+        btnAuto.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> AUTO';
+        renderBet();
+    }
+    function toggleAuto(){
+        if(autoOn) stopAuto();
+        else startAuto();
     }
 
     function reset(){
+        stopAuto();
         credit = 100;
         score = 0;
         elCredit.textContent = credit;
         elWin.textContent = 0;
         elScore.textContent = score;
         clearHighlights();
-        // rebuild random initial grid
         const cells = elGrid.children;
         for(let i=0;i<cells.length;i++){cells[i].textContent = SYMS[Math.floor(Math.random()*SYMS.length)]}
-        setMsg('SPIN 버튼을 눌러 시작하세요. 베팅 10 크레딧.','');
+        setMsg('SPIN 버튼을 눌러 시작하세요.','');
+        isSpinning = false;
         btnSpin.disabled = false;
         btnEnd.disabled = false;
+        renderBet();
     }
 
     /* === Ranking (localStorage TOP 5) === */
@@ -423,6 +524,7 @@
     const endSkip = document.getElementById('endSkip');
 
     function endGame(){
+        stopAuto();
         const list = loadRank();
         // find prospective rank
         let rankPos = list.length + 1;
@@ -466,7 +568,8 @@
     endName.addEventListener('keydown', (e) => {if(e.key==='Enter') endSave.click()});
     endOv.addEventListener('click', (e) => {if(e.target===endOv) closeEnd()});
 
-    btnSpin.addEventListener('click', spin);
+    btnSpin.addEventListener('click', () => { if(autoOn) return; spin(); });
+    btnAuto.addEventListener('click', toggleAuto);
     btnReset.addEventListener('click', reset);
     btnEnd.addEventListener('click', endGame);
 })();
