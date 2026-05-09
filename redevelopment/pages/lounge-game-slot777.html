@@ -52,11 +52,11 @@
     .bet-chip:hover{border-color:var(--gold);color:#fff}
     .bet-chip.on{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C;border-color:#C3A569;box-shadow:0 4px 12px rgba(195,165,105,.3)}
 
-    .slot-frame{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:linear-gradient(180deg,#070A14,#0F1D35);padding:16px;border-radius:14px;border:2px solid rgba(195,165,105,.4);box-shadow:inset 0 4px 18px rgba(0,0,0,.6),0 0 0 4px rgba(195,165,105,.1)}
-    .cell{aspect-ratio:1;background:linear-gradient(180deg,#fff,#eef1f5);border-radius:10px;display:flex;align-items:center;justify-content:center;padding:8px;line-height:1;overflow:hidden;position:relative;transition:transform .18s,box-shadow .25s;box-shadow:inset 0 -6px 12px rgba(0,0,0,.12),inset 0 6px 12px rgba(255,255,255,.6)}
+    .slot-frame{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:linear-gradient(180deg,#070A14,#0F1D35);padding:16px;border-radius:14px;border:2px solid rgba(195,165,105,.4);box-shadow:inset 0 4px 18px rgba(0,0,0,.6),0 0 0 4px rgba(195,165,105,.1);perspective:600px;perspective-origin:50% 50%}
+    .cell{aspect-ratio:1;background:linear-gradient(180deg,#fff,#eef1f5);border-radius:10px;display:flex;align-items:center;justify-content:center;padding:8px;line-height:1;overflow:hidden;position:relative;transition:transform .18s,box-shadow .25s;box-shadow:inset 0 -6px 12px rgba(0,0,0,.12),inset 0 6px 12px rgba(255,255,255,.6);transform-style:preserve-3d;backface-visibility:hidden}
     .cell svg{width:100%;height:100%;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}
-    .cell.spin{animation:cellShake .07s linear infinite}
-    @keyframes cellShake{0%{transform:translateY(-2px)}50%{transform:translateY(2px)}100%{transform:translateY(-2px)}}
+    .cell.spin{animation:cellSwing .55s cubic-bezier(.45,.05,.55,.95) infinite}
+    @keyframes cellSwing{0%,100%{transform:rotateX(0deg) scale(1)}50%{transform:rotateX(180deg) scale(.92)}}
     .cell.match{animation:cellGlow 1s ease-in-out infinite;box-shadow:0 0 0 2px var(--gold),0 0 16px rgba(195,165,105,.7);z-index:2}
     .cell.match7{animation:cellGlow .6s ease-in-out infinite;box-shadow:0 0 0 3px #C3A569,0 0 24px rgba(195,165,105,.95);z-index:3}
     @keyframes cellGlow{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
@@ -233,7 +233,7 @@
 
     /* === Inline SVG Symbols (카지노 슬롯 풍 그라데이션·입체) === */
     const SVG = {
-        '7': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF6F5C"/><stop offset="0.5" stop-color="#E63E32"/><stop offset="1" stop-color="#9C2018"/></linearGradient></defs><rect x="6" y="14" width="88" height="80" rx="10" fill="#FFE8B0" stroke="#C9A04A" stroke-width="3"/><text x="50" y="80" font-family="Arial Black,Impact,sans-serif" font-size="78" font-weight="900" fill="url(#g7)" text-anchor="middle" stroke="#7A1F18" stroke-width="2.2" paint-order="stroke">7</text></svg>',
+        '7': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="g7bg" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#FFEC6A"/><stop offset="0.55" stop-color="#FFC72E"/><stop offset="1" stop-color="#E0890A"/></radialGradient><linearGradient id="g7txt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF6E5C"/><stop offset="0.5" stop-color="#E63E32"/><stop offset="1" stop-color="#8C1A14"/></linearGradient><radialGradient id="g7sp" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFE08A"/></radialGradient></defs><circle cx="50" cy="50" r="44" fill="url(#g7bg)" stroke="#7A4F0F" stroke-width="3.5"/><ellipse cx="34" cy="28" rx="18" ry="9" fill="rgba(255,255,255,0.55)" transform="rotate(-20 34 28)"/><text x="50" y="78" font-family="Arial Black,Impact,sans-serif" font-size="74" font-weight="900" fill="url(#g7txt)" text-anchor="middle" stroke="#5A1612" stroke-width="3" paint-order="stroke" letter-spacing="-2">7</text><polygon points="84,22 86,28 92,28 87,32 89,38 84,34 79,38 81,32 76,28 82,28" fill="url(#g7sp)" stroke="#C9A04A" stroke-width="1"/><polygon points="14,72 15.5,76 19.5,76 16.5,79 18,83 14,80 10,83 11.5,79 8.5,76 12.5,76" fill="#FFFFFF" stroke="#C9A04A" stroke-width="1" opacity="0.9"/></svg>',
         'D': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFF1FF"/><stop offset="0.45" stop-color="#5BC9F5"/><stop offset="1" stop-color="#1568A8"/></linearGradient></defs><polygon points="50,8 90,40 50,94 10,40" fill="url(#gd)" stroke="#0E4870" stroke-width="3"/><polygon points="50,8 90,40 50,40" fill="rgba(255,255,255,0.45)"/><polygon points="50,8 10,40 50,40" fill="rgba(255,255,255,0.28)"/><polygon points="50,40 90,40 50,94" fill="rgba(0,40,80,0.12)"/><polygon points="20,28 30,20 40,30 30,38" fill="rgba(255,255,255,0.55)"/></svg>',
         'S': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gs" cx="0.5" cy="0.4" r="0.7"><stop offset="0" stop-color="#FFF1B0"/><stop offset="0.5" stop-color="#FFD24A"/><stop offset="1" stop-color="#A06B0E"/></radialGradient></defs><polygon points="50,6 61,38 95,38 67,58 77,92 50,71 23,92 33,58 5,38 39,38" fill="url(#gs)" stroke="#7A4F0F" stroke-width="3" stroke-linejoin="round"/><polygon points="50,6 61,38 50,38" fill="rgba(255,255,255,0.5)"/></svg>',
         'B': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEAA0"/><stop offset="0.5" stop-color="#E6B438"/><stop offset="1" stop-color="#9C7212"/></linearGradient></defs><path d="M50 12 C50 12 44 12 42 18 C28 22 22 38 22 58 L16 72 L84 72 L78 58 C78 38 72 22 58 18 C56 12 50 12 50 12 Z" fill="url(#gb)" stroke="#7A4F0F" stroke-width="3"/><circle cx="50" cy="84" r="9" fill="url(#gb)" stroke="#7A4F0F" stroke-width="3"/><ellipse cx="38" cy="34" rx="6" ry="14" fill="rgba(255,255,255,0.4)" transform="rotate(-15 38 34)"/></svg>',
@@ -241,6 +241,51 @@
         'L': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gl" cx="0.4" cy="0.4" r="0.7"><stop offset="0" stop-color="#FFF7A0"/><stop offset="0.5" stop-color="#FFD42E"/><stop offset="1" stop-color="#9C7A0A"/></radialGradient></defs><ellipse cx="50" cy="58" rx="36" ry="30" fill="url(#gl)" stroke="#7A6308" stroke-width="3"/><path d="M14 58 Q22 52 28 58" fill="none" stroke="#7A6308" stroke-width="2.5" stroke-linecap="round"/><path d="M86 58 Q78 52 72 58" fill="none" stroke="#7A6308" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="38" cy="44" rx="12" ry="4" fill="rgba(255,255,255,0.55)"/><path d="M48 26 Q56 16 66 22" fill="none" stroke="#3A6B1F" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="64" cy="20" rx="6" ry="3" fill="#5A9B2F" stroke="#3A6B1F" stroke-width="1.5" transform="rotate(20 64 20)"/></svg>'
     };
     function svg(sym){return SVG[sym] || ''}
+
+    /* === Web Audio 합성 효과음 (외부 자산 무사용) === */
+    let audioCtx = null;
+    function ac(){
+        if(audioCtx) return audioCtx;
+        try{
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }catch(e){audioCtx = null}
+        return audioCtx;
+    }
+    function tone(freq, dur, type, vol, attack){
+        const a = ac(); if(!a) return;
+        const osc = a.createOscillator();
+        const g = a.createGain();
+        osc.type = type || 'sine';
+        osc.frequency.setValueAtTime(freq, a.currentTime);
+        const v = vol == null ? 0.18 : vol;
+        const at = attack == null ? 0.005 : attack;
+        g.gain.setValueAtTime(0.0001, a.currentTime);
+        g.gain.exponentialRampToValueAtTime(v, a.currentTime + at);
+        g.gain.exponentialRampToValueAtTime(0.0001, a.currentTime + dur);
+        osc.connect(g); g.connect(a.destination);
+        osc.start();
+        osc.stop(a.currentTime + dur + 0.02);
+    }
+    function noiseBurst(dur, vol){
+        const a = ac(); if(!a) return;
+        const buf = a.createBuffer(1, a.sampleRate * dur, a.sampleRate);
+        const d = buf.getChannelData(0);
+        for(let i=0;i<d.length;i++){d[i] = (Math.random()*2-1) * (1 - i/d.length)}
+        const src = a.createBufferSource(); src.buffer = buf;
+        const g = a.createGain(); g.gain.value = vol == null ? 0.08 : vol;
+        const f = a.createBiquadFilter(); f.type='highpass'; f.frequency.value = 1200;
+        src.connect(f); f.connect(g); g.connect(a.destination);
+        src.start();
+    }
+    const SFX = {
+        spinStart(){tone(220, 0.15, 'square', 0.08); setTimeout(()=>tone(330, 0.12, 'square', 0.06), 60)},
+        reelTick(){noiseBurst(0.04, 0.06)},
+        reelStop(){tone(180, 0.18, 'sine', 0.16, 0.002); noiseBurst(0.08, 0.05)},
+        win(){const seq=[523.25,659.25,783.99]; seq.forEach((f,i)=>setTimeout(()=>tone(f,0.18,'triangle',0.18),i*90))},
+        jackpot(){const seq=[523.25,659.25,783.99,1046.5,783.99,1046.5]; seq.forEach((f,i)=>setTimeout(()=>tone(f,0.22,'triangle',0.22),i*110))},
+        lose(){tone(220, 0.18, 'sawtooth', 0.08); setTimeout(()=>tone(160, 0.22, 'sawtooth', 0.07), 100)},
+        click(){tone(800, 0.04, 'square', 0.06)}
+    };
     const N = 3;
     const RANK_KEY = 'seul_lounge_slot777_rank';
     const BET_LEVELS = [10, 20, 50, 100];
@@ -378,7 +423,8 @@
         isSpinning = true;
         btnSpin.disabled = true;
         btnEnd.disabled = true;
-        renderBet(); // 베팅 ± 비활성
+        renderBet();
+        SFX.spinStart();
 
         // shake all cells
         const cells = elGrid.children;
@@ -397,7 +443,7 @@
             for(let i=0;i<g.length;i++) g[i] = pickSym();
             grid = g;
 
-            // column-staggered stop
+            // column-staggered stop (각 컬럼 정지 시 reelStop 사운드)
             for(let c=0;c<N;c++){
                 setTimeout(() => {
                     for(let r=0;r<N;r++){
@@ -406,8 +452,9 @@
                         cell.classList.remove('spin');
                         cell.innerHTML = svg(g[idx]);
                     }
+                    SFX.reelStop();
                     if(c === N-1) finishSpin(g);
-                }, c*70);
+                }, 200 + c*180);
             }
         }, 1000);
     }
@@ -442,11 +489,14 @@
 
         if(jackpot){
             setMsg('🎉 JACKPOT! 7 한 라인 — '+win+' 크레딧!', 'jackpot');
+            SFX.jackpot();
         } else if(matches.length){
             const lineCnt = matches.length;
             setMsg(lineCnt+'개 라인 매칭 — '+win+' 크레딧 획득!', 'win');
+            SFX.win();
         } else {
             setMsg('매칭 없음. 다시 도전하세요!','');
+            SFX.lose();
         }
 
         isSpinning = false;
@@ -580,10 +630,13 @@
     endName.addEventListener('keydown', (e) => {if(e.key==='Enter') endSave.click()});
     endOv.addEventListener('click', (e) => {if(e.target===endOv) closeEnd()});
 
-    btnSpin.addEventListener('click', () => { if(autoOn) return; spin(); });
-    btnAuto.addEventListener('click', toggleAuto);
-    btnReset.addEventListener('click', reset);
-    btnEnd.addEventListener('click', endGame);
+    btnSpin.addEventListener('click', () => { if(autoOn) return; SFX.click(); spin(); });
+    btnAuto.addEventListener('click', () => { SFX.click(); toggleAuto(); });
+    btnReset.addEventListener('click', () => { SFX.click(); reset(); });
+    btnEnd.addEventListener('click', () => { SFX.click(); endGame(); });
+    btnBetMinus.addEventListener('click', () => SFX.click());
+    btnBetPlus.addEventListener('click', () => SFX.click());
+    betChips.forEach(c => c.addEventListener('click', () => SFX.click()));
 })();
 </script>
 </body>
