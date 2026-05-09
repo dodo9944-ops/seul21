@@ -104,12 +104,13 @@
        status: 'play' | 'soon'  ('play'면 url로 이동, 'soon'은 비활성)
     */
     const CATS = [
-        { key:'all',    label:'전체',     icon:'fa-th' },
-        { key:'slot',   label:'슬롯',     icon:'fa-dice' },
-        { key:'card',   label:'카드',     icon:'fa-clone' },
-        { key:'puzzle', label:'퍼즐',     icon:'fa-puzzle-piece' },
-        { key:'arcade', label:'아케이드', icon:'fa-gamepad' },
-        { key:'board',  label:'보드',     icon:'fa-chess-board' }
+        { key:'all',     label:'전체',     icon:'fa-th' },
+        { key:'slot',    label:'슬롯',     icon:'fa-dice' },
+        { key:'card',    label:'카드',     icon:'fa-clone' },
+        { key:'puzzle',  label:'퍼즐',     icon:'fa-puzzle-piece' },
+        { key:'arcade',  label:'아케이드', icon:'fa-gamepad' },
+        { key:'board',   label:'보드',     icon:'fa-chess-board' },
+        { key:'lottery', label:'추첨',     icon:'fa-stairs' }
     ];
     const GAMES = [
         { id:'slot777', cat:'slot', title:'Lucky 777 슬롯',
@@ -132,7 +133,10 @@
           icon:'fa-gamepad', url:'lounge-game-tetris.html', status:'play' },
         { id:'sudoku',  cat:'puzzle', title:'스도쿠',
           desc:'9×9 논리 퍼즐. 쉬움·보통·어려움 난이도 + 검증/힌트.',
-          icon:'fa-table-cells', url:'lounge-game-sudoku.html', status:'play' }
+          icon:'fa-table-cells', url:'lounge-game-sudoku.html', status:'play' },
+        { id:'ladder',  cat:'lottery', title:'사다리타기',
+          desc:'밥값 내기·용돈 주기·쓰레기 버리기 등. 인원 2~10명, 결과 자유 입력.',
+          icon:'fa-stairs', url:'lounge-game-ladder.html', status:'play' }
     ];
 
     const elCats = document.getElementById('lghCats');

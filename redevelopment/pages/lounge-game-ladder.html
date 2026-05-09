@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사다리타기 — 게임 모음 | 세울 쉼터</title>
+    <meta name="description" content="밥값 내기·용돈 주기·쓰레기 버리기 등 누가 걸릴지 정해주는 사다리타기. 인원·결과 자유 조정.">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260509e">
+    <style>
+    .lgg-hero{padding:48px 0 36px;background:linear-gradient(135deg,#060A14 0%,#0A0F1C 40%,#142644 100%);text-align:center}
+    .lgg-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:14px}
+    .lgg-back:hover{color:var(--gold)}
+    .lgg-cat-tag{display:inline-block;font-size:10.5px;font-weight:800;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;padding:4px 12px;border:1px solid rgba(195,165,105,.35);border-radius:20px}
+    .lgg-hero h1{font-size:30px;font-weight:900;color:#fff;margin-bottom:8px}
+    .lgg-hero h1 em{font-style:normal;color:var(--gold)}
+    .lgg-hero p{font-size:13.5px;color:rgba(255,255,255,.55);margin:0}
+    .lgg-body{padding:48px 0 96px;background:linear-gradient(180deg,#fff,#f7f8fb)}
+
+    .ld-wrap{max-width:760px;margin:0 auto}
+
+    /* 프리셋 */
+    .ld-presets{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:20px}
+    .ld-preset{padding:8px 14px;background:#fff;border:1.5px solid var(--gray-200);border-radius:20px;cursor:pointer;font-size:12.5px;font-weight:700;color:var(--gray-700);font-family:var(--font);transition:all .15s;letter-spacing:-.2px}
+    .ld-preset:hover{border-color:rgba(195,165,105,.5);color:var(--brand-dark)}
+    .ld-preset i{margin-right:5px;font-size:11px;color:var(--gold)}
+
+    /* 설정 카드 */
+    .ld-card{background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+    .ld-card-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .ld-card-h .t{font-size:13px;font-weight:800;color:var(--brand-dark);letter-spacing:-.2px}
+    .ld-card-h .t i{margin-right:6px;color:var(--gold)}
+    .ld-count{display:flex;align-items:center;gap:8px}
+    .ld-count button{width:30px;height:30px;border-radius:8px;border:1.5px solid var(--gray-200);background:#fff;cursor:pointer;font-size:14px;font-weight:900;color:var(--brand-dark);font-family:var(--font);transition:all .15s}
+    .ld-count button:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+    .ld-count button:disabled{opacity:.4;cursor:not-allowed}
+    .ld-count .num{min-width:28px;text-align:center;font-size:15px;font-weight:900;color:var(--brand-dark);font-feature-settings:"tnum"}
+
+    /* 입력 그리드 */
+    .ld-inputs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+    .ld-inputs input{padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:13px;font-family:var(--font);color:var(--brand-dark);background:#fff;transition:border-color .15s}
+    .ld-inputs input:focus{outline:none;border-color:var(--gold)}
+    .ld-inputs.players input{font-weight:700}
+    .ld-inputs.results input{background:#fafbfd}
+
+    /* 사다리 영역 */
+    .ld-stage{background:#0F1D35;border-radius:14px;padding:16px 12px;margin-bottom:16px;position:relative;overflow:hidden}
+    .ld-stage::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 30% 20%,rgba(195,165,105,.08),transparent 50%);pointer-events:none}
+    .ld-svg-wrap{position:relative;z-index:1;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .ld-svg{display:block;margin:0 auto;min-width:100%}
+    .ld-vline{stroke:rgba(195,165,105,.45);stroke-width:2;fill:none}
+    .ld-rung{stroke:rgba(255,255,255,.55);stroke-width:2.5;stroke-linecap:round}
+    .ld-trace{stroke:#FF6B6B;stroke-width:3.5;fill:none;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(255,107,107,.55));pointer-events:none}
+    .ld-trace.tr2{stroke:#4DABF7}
+    .ld-trace.tr3{stroke:#51CF66}
+    .ld-trace.tr4{stroke:#FFD43B}
+    .ld-trace.tr5{stroke:#CC5DE8}
+    .ld-trace.tr6{stroke:#FF922B}
+    .ld-trace.tr7{stroke:#22B8CF}
+    .ld-trace.tr8{stroke:#F783AC}
+    .ld-trace.tr9{stroke:#A9E34B}
+    .ld-trace.tr10{stroke:#E599F7}
+
+    .ld-label{font-size:13px;font-weight:800;font-family:var(--font);text-anchor:middle;dominant-baseline:middle;cursor:pointer}
+    .ld-label-top{fill:var(--gold)}
+    .ld-label-top:hover{fill:#fff}
+    .ld-label-bot{fill:rgba(255,255,255,.85)}
+    .ld-label-pill{fill:rgba(195,165,105,.12);stroke:rgba(195,165,105,.35);stroke-width:1;cursor:pointer;transition:fill .15s}
+    .ld-label-pill:hover{fill:rgba(195,165,105,.28)}
+    .ld-label-pill.bot{fill:rgba(255,255,255,.05);stroke:rgba(255,255,255,.18)}
+    .ld-label-pill.matched{fill:rgba(195,165,105,.4);stroke:var(--gold);stroke-width:1.5}
+
+    /* 액션 */
+    .ld-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .ld-btn{flex:1;min-width:130px;padding:13px;border-radius:10px;border:none;cursor:pointer;font-size:13px;font-weight:800;letter-spacing:.6px;font-family:var(--font);transition:all .15s;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+    .ld-btn:disabled{opacity:.5;cursor:not-allowed}
+    .ld-btn-primary{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C}
+    .ld-btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 20px rgba(195,165,105,.3)}
+    .ld-btn-ghost{background:#fff;color:var(--brand-dark);border:1.5px solid var(--gray-200)}
+    .ld-btn-ghost:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+    .ld-btn-dark{background:#0F1D35;color:#fff}
+    .ld-btn-dark:hover:not(:disabled){background:#142644}
+
+    /* 결과 패널 */
+    .ld-result{margin-top:16px;padding:16px 18px;background:#fff;border:1px solid var(--gray-200);border-radius:12px;display:none}
+    .ld-result.show{display:block}
+    .ld-result h3{font-size:13px;font-weight:800;color:var(--brand-dark);margin-bottom:10px;letter-spacing:-.2px}
+    .ld-result h3 i{margin-right:6px;color:var(--gold)}
+    .ld-result-list{display:flex;flex-direction:column;gap:6px}
+    .ld-result-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#f7f8fb;border-radius:8px;font-size:13px}
+    .ld-result-row .who{font-weight:800;color:var(--brand-dark);min-width:80px}
+    .ld-result-row .arr{color:var(--gray-400);font-size:11px}
+    .ld-result-row .what{font-weight:700;color:var(--gold)}
+
+    .ld-help{margin-top:12px;padding:10px 14px;background:rgba(0,0,0,.04);border-radius:10px;font-size:12px;color:var(--gray-500);text-align:center;line-height:1.65}
+
+    @media(max-width:540px){
+        .ld-card{padding:14px 14px}
+        .ld-inputs{grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:6px}
+        .ld-inputs input{padding:9px 10px;font-size:12.5px}
+        .ld-btn{min-width:48%}
+        .ld-label{font-size:11px}
+    }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="lgg-hero">
+    <div class="inner">
+        <a href="lounge-games.html" class="lgg-back"><i class="fa-solid fa-arrow-left"></i> 게임 모음으로 돌아가기</a>
+        <div class="lgg-cat-tag">▣ Lottery</div>
+        <h1>사다리 <em>타기</em></h1>
+        <p>밥값 내기·용돈 주기·쓰레기 버리기 — 누가 걸릴까? 인원·결과 자유롭게.</p>
+    </div>
+</div>
+
+<div class="lgg-body">
+    <div class="inner">
+        <div class="ld-wrap">
+
+            <div class="ld-presets">
+                <button class="ld-preset" data-preset="meal"><i class="fa-solid fa-bowl-rice"></i>직장 밥값 내기</button>
+                <button class="ld-preset" data-preset="allowance"><i class="fa-solid fa-won-sign"></i>가족 용돈 주기</button>
+                <button class="ld-preset" data-preset="trash"><i class="fa-solid fa-trash-can"></i>쓰레기 버리기</button>
+                <button class="ld-preset" data-preset="custom"><i class="fa-solid fa-pen"></i>직접 입력</button>
+            </div>
+
+            <div class="ld-card">
+                <div class="ld-card-h">
+                    <div class="t"><i class="fa-solid fa-users"></i>참가 인원</div>
+                    <div class="ld-count">
+                        <button id="ldDec" type="button" aria-label="줄이기">−</button>
+                        <span class="num" id="ldNum">5</span>
+                        <button id="ldInc" type="button" aria-label="늘리기">+</button>
+                    </div>
+                </div>
+                <div class="ld-inputs players" id="ldPlayers"></div>
+            </div>
+
+            <div class="ld-card">
+                <div class="ld-card-h">
+                    <div class="t"><i class="fa-solid fa-flag-checkered"></i>결과 항목</div>
+                    <button class="ld-btn-ghost" id="ldShuffleResults" type="button" style="padding:6px 12px;border-radius:8px;font-size:11.5px;font-weight:700;cursor:pointer"><i class="fa-solid fa-shuffle"></i> 결과 섞기</button>
+                </div>
+                <div class="ld-inputs results" id="ldResults"></div>
+            </div>
+
+            <div class="ld-stage">
+                <div class="ld-svg-wrap">
+                    <svg class="ld-svg" id="ldSvg" xmlns="http://www.w3.org/2000/svg"></svg>
+                </div>
+            </div>
+
+            <div class="ld-actions">
+                <button class="ld-btn ld-btn-primary" id="ldRunAll" type="button"><i class="fa-solid fa-play"></i> 전원 동시 출발</button>
+                <button class="ld-btn ld-btn-dark" id="ldRebuild" type="button"><i class="fa-solid fa-rotate"></i> 새 사다리</button>
+                <button class="ld-btn ld-btn-ghost" id="ldClear" type="button"><i class="fa-solid fa-eraser"></i> 결과 지우기</button>
+            </div>
+
+            <div class="ld-result" id="ldResultBox">
+                <h3><i class="fa-solid fa-trophy"></i>결과</h3>
+                <div class="ld-result-list" id="ldResultList"></div>
+            </div>
+
+            <div class="ld-help">
+                상단 이름표를 <strong>탭</strong>하면 한 명씩 출발합니다. 인원은 <strong>2~10명</strong>까지 조정 가능. 결과 칸은 직접 수정해 자유롭게 사용하세요.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=20260509w"></script>
+<script src="../assets/js/data-service.js?v=20260418q"></script>
+<script src="../assets/js/common.js?v=20260509a"></script>
+<script>
+(function(){
+    const MIN_N = 2, MAX_N = 10, DEFAULT_N = 5;
+    const ROW_COUNT = 12; // 다리 후보 행
+    const COL_W_DESKTOP = 110, COL_W_MOBILE = 78;
+    const TOP_PAD = 56, BOT_PAD = 56, ROW_GAP = 30;
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+
+    const SVG = document.getElementById('ldSvg');
+    const elNum = document.getElementById('ldNum');
+    const btnDec = document.getElementById('ldDec');
+    const btnInc = document.getElementById('ldInc');
+    const elPlayers = document.getElementById('ldPlayers');
+    const elResults = document.getElementById('ldResults');
+    const btnRunAll = document.getElementById('ldRunAll');
+    const btnRebuild = document.getElementById('ldRebuild');
+    const btnClear = document.getElementById('ldClear');
+    const btnShuffleR = document.getElementById('ldShuffleResults');
+    const resultBox = document.getElementById('ldResultBox');
+    const resultList = document.getElementById('ldResultList');
+
+    const PRESETS = {
+        meal: {
+            label: '직장 밥값 내기',
+            players: ['김과장','이대리','박주임','최사원','정사원','한차장','조부장','신팀장','윤매니저','강사원'],
+            results: ['🍴 밥값 내기','🎉 통과','🎉 통과','🎉 통과','🎉 통과','🎉 통과','🎉 통과','🎉 통과','🎉 통과','🎉 통과']
+        },
+        allowance: {
+            label: '가족 용돈 주기',
+            players: ['아빠','엄마','형','누나','동생','삼촌','이모','할머니','할아버지','막내'],
+            results: ['💰 5만원','💰 3만원','💰 1만원','💸 꽝','💸 꽝','💰 2만원','💸 꽝','💰 1만원','💸 꽝','💸 꽝']
+        },
+        trash: {
+            label: '쓰레기 버리기',
+            players: ['1호','2호','3호','4호','5호','6호','7호','8호','9호','10호'],
+            results: ['🗑️ 당첨!','✅ 통과','✅ 통과','✅ 통과','✅ 통과','✅ 통과','✅ 통과','✅ 통과','✅ 통과','✅ 통과']
+        },
+        custom: {
+            label: '직접 입력',
+            players: ['참가자1','참가자2','참가자3','참가자4','참가자5','참가자6','참가자7','참가자8','참가자9','참가자10'],
+            results: ['결과1','결과2','결과3','결과4','결과5','결과6','결과7','결과8','결과9','결과10']
+        }
+    };
+
+    let n = DEFAULT_N;
+    let players = PRESETS.meal.players.slice(0,n);
+    let results = PRESETS.meal.results.slice(0,n);
+    let rungs = []; // [[row, leftCol], ...] — leftCol: 다리가 col~col+1 사이
+    let mapping = []; // playerIdx -> resultIdx
+    let running = false;
+    let finishedSet = new Set(); // 결과 표시된 idx
+
+    // ====== 인원 컨트롤 ======
+    function updateCountUI(){
+        elNum.textContent = n;
+        btnDec.disabled = n <= MIN_N;
+        btnInc.disabled = n >= MAX_N;
+    }
+
+    function applyN(newN){
+        newN = Math.max(MIN_N, Math.min(MAX_N, newN|0));
+        if(newN === n) return;
+        // 길이 조정
+        if(newN > n){
+            // 부족분은 현재 프리셋 또는 빈 값으로 채움
+            for(let i=n;i<newN;i++){
+                players.push(players[i] || ('참가자'+(i+1)));
+                results.push(results[i] || ('결과'+(i+1)));
+            }
+        } else {
+            players = players.slice(0,newN);
+            results = results.slice(0,newN);
+        }
+        n = newN;
+        updateCountUI();
+        renderInputs();
+        rebuild();
+    }
+
+    btnDec.addEventListener('click', function(){ applyN(n-1) });
+    btnInc.addEventListener('click', function(){ applyN(n+1) });
+
+    // ====== 입력 렌더 ======
+    function renderInputs(){
+        elPlayers.innerHTML = '';
+        elResults.innerHTML = '';
+        for(let i=0;i<n;i++){
+            const ip = document.createElement('input');
+            ip.type='text'; ip.maxLength=14; ip.value=players[i]||''; ip.placeholder='참가자'+(i+1);
+            ip.addEventListener('input', function(){ players[i]=ip.value; refreshLabels() });
+            elPlayers.appendChild(ip);
+
+            const ir = document.createElement('input');
+            ir.type='text'; ir.maxLength=18; ir.value=results[i]||''; ir.placeholder='결과'+(i+1);
+            ir.addEventListener('input', function(){ results[i]=ir.value; refreshLabels() });
+            elResults.appendChild(ir);
+        }
+    }
+
+    // ====== 프리셋 ======
+    document.querySelectorAll('.ld-preset').forEach(btn=>{
+        btn.addEventListener('click', function(){
+            const key = btn.dataset.preset;
+            const p = PRESETS[key]; if(!p) return;
+            players = p.players.slice(0,n);
+            results = p.results.slice(0,n);
+            renderInputs();
+            rebuild();
+        });
+    });
+
+    // ====== 결과 섞기 ======
+    btnShuffleR.addEventListener('click', function(){
+        for(let i=results.length-1;i>0;i--){
+            const j = Math.floor(Math.random()*(i+1));
+            const t = results[i]; results[i]=results[j]; results[j]=t;
+        }
+        renderInputs();
+        clearTraces();
+    });
+
+    // ====== 사다리 생성 ======
+    function buildRungs(){
+        rungs = [];
+        // 각 행마다 인접하지 않은 위치에 무작위로 다리 배치
+        for(let r=0;r<ROW_COUNT;r++){
+            const used = new Set();
+            const targetCount = Math.max(1, Math.floor((n-1)*0.55));
+            let tries = 0;
+            for(let k=0;k<targetCount && tries<30;k++){
+                const c = Math.floor(Math.random()*(n-1));
+                if(used.has(c) || used.has(c-1) || used.has(c+1)){ tries++; k--; continue }
+                used.add(c);
+                rungs.push([r,c]);
+                tries++;
+            }
+        }
+        computeMapping();
+    }
+
+    function computeMapping(){
+        mapping = [];
+        for(let i=0;i<n;i++){
+            let col = i;
+            for(let r=0;r<ROW_COUNT;r++){
+                // 같은 행에서 col-1~col 또는 col~col+1 다리 확인
+                const left = rungs.some(([rr,c])=>rr===r && c===col-1);
+                const right = rungs.some(([rr,c])=>rr===r && c===col);
+                if(right){ col = col+1 }
+                else if(left){ col = col-1 }
+            }
+            mapping[i] = col;
+        }
+    }
+
+    // ====== SVG 그리기 ======
+    function colW(){
+        return window.innerWidth <= 540 ? COL_W_MOBILE : COL_W_DESKTOP;
+    }
+
+    function svgDims(){
+        const w = colW()*(n-1) + 80;
+        const h = TOP_PAD + ROW_GAP*(ROW_COUNT+1) + BOT_PAD;
+        return [w,h];
+    }
+
+    function colX(c){
+        return 40 + c*colW();
+    }
+    function rowY(r){
+        return TOP_PAD + ROW_GAP*(r+1);
+    }
+    function topY(){ return TOP_PAD - 6 }
+    function botY(){ return TOP_PAD + ROW_GAP*(ROW_COUNT+1) + 6 }
+
+    function clear(el){ while(el.firstChild) el.removeChild(el.firstChild) }
+
+    function drawLadder(){
+        const [w,h] = svgDims();
+        SVG.setAttribute('viewBox','0 0 '+w+' '+h);
+        SVG.setAttribute('width', w);
+        SVG.setAttribute('height', h);
+        clear(SVG);
+
+        // 세로선
+        for(let i=0;i<n;i++){
+            const x = colX(i);
+            const line = document.createElementNS(SVG_NS,'line');
+            line.setAttribute('x1',x); line.setAttribute('x2',x);
+            line.setAttribute('y1',rowY(-1)+10); line.setAttribute('y2',rowY(ROW_COUNT)-10);
+            line.setAttribute('class','ld-vline');
+            SVG.appendChild(line);
+        }
+
+        // 가로 다리
+        rungs.forEach(([r,c])=>{
+            const line = document.createElementNS(SVG_NS,'line');
+            line.setAttribute('x1',colX(c)); line.setAttribute('x2',colX(c+1));
+            line.setAttribute('y1',rowY(r)); line.setAttribute('y2',rowY(r));
+            line.setAttribute('class','ld-rung');
+            SVG.appendChild(line);
+        });
+
+        // 라벨
+        for(let i=0;i<n;i++){
+            // 상단 (참가자) — 클릭 가능
+            const pillT = document.createElementNS(SVG_NS,'rect');
+            const tx = colX(i), ty = topY()-22;
+            pillT.setAttribute('x', tx-Math.min(colW()*0.45,55));
+            pillT.setAttribute('y', ty);
+            pillT.setAttribute('width', Math.min(colW()*0.9,110));
+            pillT.setAttribute('height', 26);
+            pillT.setAttribute('rx', 13);
+            pillT.setAttribute('class','ld-label-pill');
+            pillT.dataset.idx = i;
+            pillT.addEventListener('click', function(){ runOne(i) });
+            SVG.appendChild(pillT);
+
+            const lblT = document.createElementNS(SVG_NS,'text');
+            lblT.setAttribute('x', tx); lblT.setAttribute('y', ty+13);
+            lblT.setAttribute('class','ld-label ld-label-top');
+            lblT.dataset.idx = i;
+            lblT.textContent = players[i] || ('참가자'+(i+1));
+            lblT.addEventListener('click', function(){ runOne(i) });
+            SVG.appendChild(lblT);
+
+            // 하단 (결과)
+            const pillB = document.createElementNS(SVG_NS,'rect');
+            const by = botY()-4;
+            pillB.setAttribute('x', tx-Math.min(colW()*0.45,55));
+            pillB.setAttribute('y', by);
+            pillB.setAttribute('width', Math.min(colW()*0.9,110));
+            pillB.setAttribute('height', 26);
+            pillB.setAttribute('rx', 13);
+            pillB.setAttribute('class','ld-label-pill bot');
+            pillB.dataset.bidx = i;
+            SVG.appendChild(pillB);
+
+            const lblB = document.createElementNS(SVG_NS,'text');
+            lblB.setAttribute('x', tx); lblB.setAttribute('y', by+13);
+            lblB.setAttribute('class','ld-label ld-label-bot');
+            lblB.textContent = results[i] || ('결과'+(i+1));
+            SVG.appendChild(lblB);
+        }
+    }
+
+    function refreshLabels(){
+        // 텍스트만 업데이트 (사다리 재생성 X)
+        const tops = SVG.querySelectorAll('text.ld-label-top');
+        const bots = SVG.querySelectorAll('text.ld-label-bot');
+        tops.forEach(t=>{ const i = +t.dataset.idx; t.textContent = players[i] || ('참가자'+(i+1)) });
+        let bi=0; bots.forEach(t=>{ t.textContent = results[bi] || ('결과'+(bi+1)); bi++ });
+    }
+
+    function clearTraces(){
+        SVG.querySelectorAll('.ld-trace').forEach(n=>n.remove());
+        SVG.querySelectorAll('.ld-label-pill.matched').forEach(n=>n.classList.remove('matched'));
+        finishedSet.clear();
+        resultBox.classList.remove('show');
+        resultList.innerHTML = '';
+    }
+
+    function rebuild(){
+        clearTraces();
+        buildRungs();
+        drawLadder();
+    }
+
+    // ====== 경로 추적 ======
+    function pathFor(i){
+        const pts = [];
+        let col = i;
+        pts.push([colX(col), topY()+4]);
+        pts.push([colX(col), rowY(-1)+10]);
+        for(let r=0;r<ROW_COUNT;r++){
+            pts.push([colX(col), rowY(r)]);
+            const left = rungs.some(([rr,c])=>rr===r && c===col-1);
+            const right = rungs.some(([rr,c])=>rr===r && c===col);
+            if(right){ col = col+1; pts.push([colX(col), rowY(r)]) }
+            else if(left){ col = col-1; pts.push([colX(col), rowY(r)]) }
+        }
+        pts.push([colX(col), rowY(ROW_COUNT)-10]);
+        pts.push([colX(col), botY()-2]);
+        return {pts:pts, end:col};
+    }
+
+    function ptsToD(pts){
+        return pts.map((p,i)=> (i===0?'M':'L')+p[0]+' '+p[1]).join(' ');
+    }
+
+    function animatePath(i, onDone){
+        const {pts,end} = pathFor(i);
+        const path = document.createElementNS(SVG_NS,'path');
+        path.setAttribute('d', ptsToD(pts));
+        path.setAttribute('class','ld-trace tr'+((i%10)+1));
+        SVG.appendChild(path);
+        const len = path.getTotalLength();
+        path.style.strokeDasharray = len;
+        path.style.strokeDashoffset = len;
+        const dur = Math.max(700, 120*ROW_COUNT);
+        path.animate(
+            [{strokeDashoffset:len},{strokeDashoffset:0}],
+            {duration: dur, easing:'cubic-bezier(.5,.05,.4,1)', fill:'forwards'}
+        ).onfinish = function(){
+            path.style.strokeDashoffset = 0;
+            // 매칭 표시
+            const pillB = SVG.querySelector('rect.ld-label-pill.bot[data-bidx="'+end+'"]');
+            if(pillB) pillB.classList.add('matched');
+            const pillT = SVG.querySelector('rect.ld-label-pill[data-idx="'+i+'"]');
+            if(pillT) pillT.classList.add('matched');
+            finishedSet.add(i);
+            addResultRow(i, end);
+            if(onDone) onDone();
+        };
+    }
+
+    function addResultRow(playerIdx, resultIdx){
+        if(!resultBox.classList.contains('show')) resultBox.classList.add('show');
+        const row = document.createElement('div');
+        row.className = 'ld-result-row';
+        const who = (players[playerIdx]||('참가자'+(playerIdx+1)));
+        const what = (results[resultIdx]||('결과'+(resultIdx+1)));
+        row.innerHTML = '<span class="who">'+escapeHtml(who)+'</span>'
+                      + '<span class="arr"><i class="fa-solid fa-arrow-right"></i></span>'
+                      + '<span class="what">'+escapeHtml(what)+'</span>';
+        resultList.appendChild(row);
+    }
+
+    function escapeHtml(s){
+        return String(s).replace(/[&<>"']/g, function(c){
+            return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+        });
+    }
+
+    function runOne(i){
+        if(running) return;
+        if(finishedSet.has(i)) return;
+        running = true;
+        animatePath(i, function(){ running=false });
+    }
+
+    function runAll(){
+        if(running) return;
+        // 이미 표시된 경로 정리
+        clearTraces();
+        running = true;
+        let order = []; for(let i=0;i<n;i++) order.push(i);
+        // 살짝씩 시차를 두고 동시 출발
+        let pending = order.length;
+        order.forEach((i,k)=>{
+            setTimeout(()=>{
+                animatePath(i, function(){ pending--; if(pending===0) running=false });
+            }, k*120);
+        });
+    }
+
+    btnRunAll.addEventListener('click', runAll);
+    btnRebuild.addEventListener('click', rebuild);
+    btnClear.addEventListener('click', clearTraces);
+
+    // 리사이즈 대응 (모바일/데스크톱 콜럼 폭 변경)
+    let resizeT;
+    window.addEventListener('resize', function(){
+        clearTimeout(resizeT);
+        resizeT = setTimeout(function(){
+            drawLadder();
+            // 진행 중 trace 는 좌표 변경으로 어긋날 수 있으므로 클리어
+            clearTraces();
+        }, 200);
+    });
+
+    // ====== 초기화 ======
+    updateCountUI();
+    renderInputs();
+    rebuild();
+})();
+</script>
+</body>
+</html>
