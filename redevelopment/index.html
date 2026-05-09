@@ -395,7 +395,7 @@
 
         /* ── PROCESS MODAL ── */
         .pm-overlay {
-            position: fixed; inset: 0; z-index: 9000;
+            position: fixed; inset: 0; z-index: 10010;
             background: rgba(10,15,28,0.7); backdrop-filter: blur(6px);
             display: flex; align-items: center; justify-content: center;
             opacity: 0; visibility: hidden; transition: all 0.35s ease;
@@ -826,7 +826,7 @@
 
 <!-- ===== 업무실적 상세 모달 ===== -->
 <style>
-.mp-overlay{position:fixed;inset:0;background:rgba(10,15,28,.65);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
+.mp-overlay{position:fixed;inset:0;background:rgba(10,15,28,.65);backdrop-filter:blur(4px);z-index:10010;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
 .mp-overlay.open{opacity:1;pointer-events:auto}
 .mp-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
 .mp-overlay.open .mp-modal{transform:translateY(0) scale(1)}
