@@ -206,7 +206,7 @@
     /* Description */
     .d-desc{font-size:14.5px;color:var(--gray-700);line-height:1.8;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:12px;padding:20px;white-space:pre-line;word-break:keep-all}
     /* 갤러리 — 사진(야경·머릿돌 등) */
-    .d-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .d-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
     .d-gallery-card{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--gray-200);background:#0A0F1C;cursor:zoom-in}
     .d-gallery-card img{width:100%;height:100%;display:block;object-fit:cover;aspect-ratio:4/3;transition:transform .4s ease}
     .d-gallery-card:hover img{transform:scale(1.04)}
@@ -331,7 +331,7 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260509g"></script>
+<script src="../assets/data/mock-data.js?v=20260509h"></script>
 <script src="../assets/data/areas-data.js?v=20260411"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260419noCopyOff"></script>
