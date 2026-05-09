@@ -297,6 +297,23 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   display: flex; gap: 8px;
 }
 .drawer-footer .btn { flex: 1; }
+
+/* === 모바일 한정 — 우측 drawer 메뉴: 화면 넘침 방지 + footer 세로 축소 === */
+@media (max-width: 768px) {
+  .drawer { width: 280px; max-width: 80vw; }
+  .drawer-footer {
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 16px calc(14px + env(safe-area-inset-bottom, 0));
+  }
+  .drawer-footer .btn {
+    flex: none; width: 100%;
+    padding: 8px 10px; font-size: 12.5px; min-height: 0; line-height: 1.2;
+  }
+  .drawer-nav a, .drawer-group-btn { padding: 11px 22px; font-size: 14px; }
+  .drawer-sub a { padding-top: 7px; padding-bottom: 7px; font-size: 13px; }
+  .drawer-header { padding: 16px 22px; }
+}
 /* drawer accordion */
 .drawer-group { border-bottom: 1px solid var(--gray-100); }
 .drawer-group-btn {
