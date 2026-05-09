@@ -541,8 +541,11 @@ const MOCK = {
     { id:'pf17', name:'행당제4구역 주택재개발정비사업', type:'재개발', district:'성동구', status:'진행중', year:'2026', scale:'-', role:'사업시행 자문',
       description:'서울 성동구 행당동 일대 「행당제4구역」 주택재개발정비사업. 사업주체는 「행당제4구역 주택재개발정비사업조합」(조합원 268명). 시공사는 두산위브(두산건설)로 선정되어 본공사를 수행한다.',
       featured:false,
-      thumbnail:'', featuredImage:'',
-      detailImage:'', imageAlt:'행당제4구역 주택재개발정비사업',
+      thumbnail:'../jpg/haengdang4_aerial.png', featuredImage:'../jpg/haengdang4_aerial.png',
+      detailImage:'../jpg/haengdang4_aerial.png', imageAlt:'행당제4구역 주택재개발정비사업 단지 조감도',
+      gallery:[
+        { src:'../jpg/haengdang4_aerial.png', alt:'행당제4구역 주택재개발정비사업 단지 조감도', cap:'단지 조감도 — 두산위브 시공' }
+      ],
       floorInfo:'-', floorAbove:0, floorBelow:0,
       grossFloorArea:'-', floorAreaRatio:'-',
       members:'268명', memberCount:268,
