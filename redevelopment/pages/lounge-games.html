@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쉼터 — 게임 모음 | (주)세울엔지니어링</title>
+    <meta name="description" content="세울 쉼터의 가벼운 미니게임 모음. 777 슬롯 게임으로 잠시 쉬어가세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260505e">
+    <style>
+    .lgg-hero{padding:48px 0 36px;background:linear-gradient(135deg,#060A14 0%,#0A0F1C 40%,#142644 100%);position:relative;overflow:hidden}
+    .lgg-hero .inner{position:relative;z-index:1;text-align:center}
+    .lgg-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:14px;letter-spacing:.5px}
+    .lgg-back:hover{color:var(--gold)}
+    .lgg-back i{font-size:11px}
+    .lgg-hero h1{font-size:30px;font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:8px}
+    .lgg-hero h1 em{font-style:normal;color:var(--gold)}
+    .lgg-hero p{font-size:13.5px;color:rgba(255,255,255,.55);margin:0}
+
+    .lgg-body{padding:56px 0 96px;background:linear-gradient(180deg,#fff,#f7f8fb)}
+
+    /* === Slot 777 Game === */
+    .slot{max-width:520px;margin:0 auto;background:linear-gradient(180deg,#0F1D35,#0A0F1C);border-radius:22px;padding:36px 28px;box-shadow:0 24px 64px rgba(10,15,28,.25);border:1px solid rgba(195,165,105,.22);position:relative;overflow:hidden}
+    .slot::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 50% -10%,rgba(195,165,105,.15) 0%,transparent 50%);pointer-events:none}
+    .slot-title{position:relative;text-align:center;font-size:13px;font-weight:800;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:6px}
+    .slot-sub{position:relative;text-align:center;font-size:11px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:24px}
+    .slot-frame{position:relative;display:flex;gap:10px;justify-content:center;background:linear-gradient(180deg,#070A14,#0F1D35);padding:18px 16px;border-radius:14px;border:2px solid rgba(195,165,105,.4);box-shadow:inset 0 4px 18px rgba(0,0,0,.6),0 0 0 4px rgba(195,165,105,.12)}
+    .reel{width:80px;height:96px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:46px;line-height:1;font-weight:800;overflow:hidden;position:relative;box-shadow:inset 0 -6px 12px rgba(0,0,0,.15),inset 0 6px 12px rgba(255,255,255,.6)}
+    .reel.spin{animation:reelSpin .08s linear infinite}
+    @keyframes reelSpin{0%{transform:translateY(-6px)}50%{transform:translateY(6px)}100%{transform:translateY(-6px)}}
+    .slot-info{position:relative;display:flex;justify-content:space-between;margin-top:22px;padding:14px 18px;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid rgba(195,165,105,.15)}
+    .slot-info-item{text-align:center;flex:1}
+    .slot-info-item .si-label{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;opacity:.85}
+    .slot-info-item .si-value{font-size:22px;font-weight:900;color:#fff;font-feature-settings:"tnum";font-variant-numeric:tabular-nums}
+    .slot-info-divider{width:1px;background:rgba(195,165,105,.18);margin:0 8px}
+    .slot-actions{position:relative;display:flex;gap:10px;margin-top:20px}
+    .slot-btn{flex:1;padding:14px 18px;border-radius:12px;border:none;cursor:pointer;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font);transition:all .2s}
+    .slot-btn-primary{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C;box-shadow:0 6px 18px rgba(195,165,105,.35)}
+    .slot-btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(195,165,105,.45)}
+    .slot-btn-primary:active{transform:translateY(0)}
+    .slot-btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    .slot-btn-ghost{flex:0 0 110px;background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.18)}
+    .slot-btn-ghost:hover{background:rgba(255,255,255,.06);color:#fff}
+    .slot-msg{position:relative;text-align:center;margin-top:18px;min-height:24px;font-size:14px;font-weight:700;color:rgba(255,255,255,.55)}
+    .slot-msg.win{color:var(--gold);animation:winPulse 1.2s ease-in-out infinite}
+    .slot-msg.jackpot{color:#fff;background:linear-gradient(135deg,#C3A569,#D4B87A);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:18px;letter-spacing:1.5px}
+    @keyframes winPulse{0%,100%{opacity:.7}50%{opacity:1}}
+    .slot-paytable{position:relative;margin-top:24px;padding-top:18px;border-top:1px dashed rgba(195,165,105,.2)}
+    .slot-paytable h4{font-size:10px;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:10px}
+    .slot-paytable-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 16px;font-size:12px;color:rgba(255,255,255,.65)}
+    .slot-paytable-grid div{display:flex;justify-content:space-between;padding:3px 0}
+    .slot-paytable-grid .pt-sym{font-size:16px}
+    .slot-paytable-grid .pt-pay{color:var(--gold);font-weight:700;font-feature-settings:"tnum";font-variant-numeric:tabular-nums}
+
+    @media(max-width:520px){
+        .slot{padding:28px 18px;border-radius:18px}
+        .reel{width:64px;height:80px;font-size:36px}
+        .slot-info-item .si-value{font-size:18px}
+        .slot-btn{font-size:12px;padding:12px 14px}
+        .slot-btn-ghost{flex:0 0 84px}
+    }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="lgg-hero">
+    <div class="inner">
+        <a href="lounge.html" class="lgg-back"><i class="fa-solid fa-arrow-left"></i> 쉼터로 돌아가기</a>
+        <h1>게임 <em>모음</em></h1>
+        <p>잠시 쉬어가는 가벼운 미니게임</p>
+    </div>
+</div>
+
+<div class="lgg-body">
+    <div class="inner">
+        <!-- 777 Slot -->
+        <div class="slot" id="slot777">
+            <div class="slot-title">★ Lucky 777 Slot ★</div>
+            <div class="slot-sub">세 개의 7을 맞추면 잭팟!</div>
+            <div class="slot-frame">
+                <div class="reel" id="reel0">7</div>
+                <div class="reel" id="reel1">7</div>
+                <div class="reel" id="reel2">7</div>
+            </div>
+            <div class="slot-info">
+                <div class="slot-info-item">
+                    <div class="si-label">Credit</div>
+                    <div class="si-value" id="slCredit">100</div>
+                </div>
+                <div class="slot-info-divider"></div>
+                <div class="slot-info-item">
+                    <div class="si-label">Bet</div>
+                    <div class="si-value" id="slBet">10</div>
+                </div>
+                <div class="slot-info-divider"></div>
+                <div class="slot-info-item">
+                    <div class="si-label">Win</div>
+                    <div class="si-value" id="slWin">0</div>
+                </div>
+            </div>
+            <div class="slot-actions">
+                <button class="slot-btn slot-btn-primary" id="slSpin"><i class="fa-solid fa-rotate"></i> SPIN</button>
+                <button class="slot-btn slot-btn-ghost" id="slReset">Reset</button>
+            </div>
+            <div class="slot-msg" id="slMsg">베팅 10 크레딧 · 스핀 버튼을 눌러 시작하세요</div>
+            <div class="slot-paytable">
+                <h4>Pay Table (Bet × N)</h4>
+                <div class="slot-paytable-grid">
+                    <div><span><span class="pt-sym">7️⃣7️⃣7️⃣</span> JACKPOT</span><span class="pt-pay">×50</span></div>
+                    <div><span><span class="pt-sym">💎💎💎</span></span><span class="pt-pay">×20</span></div>
+                    <div><span><span class="pt-sym">⭐⭐⭐</span></span><span class="pt-pay">×10</span></div>
+                    <div><span><span class="pt-sym">🔔🔔🔔</span></span><span class="pt-pay">×6</span></div>
+                    <div><span><span class="pt-sym">🍒🍒🍒</span></span><span class="pt-pay">×4</span></div>
+                    <div><span><span class="pt-sym">🍋🍋🍋</span></span><span class="pt-pay">×3</span></div>
+                    <div><span>2개 일치</span><span class="pt-pay">×2</span></div>
+                    <div><span>불일치</span><span class="pt-pay">—</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=20260509w"></script>
+<script src="../assets/js/data-service.js?v=20260418q"></script>
+<script src="../assets/js/common.js?v=20260509a"></script>
+<script>
+(function(){
+    const SYMS = ['7️⃣','💎','⭐','🔔','🍒','🍋'];
+    const PAYS = {'7️⃣':50,'💎':20,'⭐':10,'🔔':6,'🍒':4,'🍋':3};
+    const WEIGHTS = [3,5,8,10,14,18]; // 7이 가장 희귀
+    const totalW = WEIGHTS.reduce((a,b)=>a+b,0);
+
+    let credit = 100;
+    const BET = 10;
+
+    const reels = [document.getElementById('reel0'),document.getElementById('reel1'),document.getElementById('reel2')];
+    const elCredit = document.getElementById('slCredit');
+    const elBet = document.getElementById('slBet');
+    const elWin = document.getElementById('slWin');
+    const elMsg = document.getElementById('slMsg');
+    const btnSpin = document.getElementById('slSpin');
+    const btnReset = document.getElementById('slReset');
+
+    function pickSym(){
+        let r = Math.random()*totalW, acc=0;
+        for(let i=0;i<SYMS.length;i++){
+            acc += WEIGHTS[i];
+            if(r < acc) return SYMS[i];
+        }
+        return SYMS[SYMS.length-1];
+    }
+
+    function setMsg(text, type){
+        elMsg.textContent = text;
+        elMsg.className = 'slot-msg' + (type ? ' '+type : '');
+    }
+
+    function spin(){
+        if(credit < BET){
+            setMsg('크레딧이 부족합니다. Reset으로 재시작하세요','');
+            return;
+        }
+        credit -= BET;
+        elCredit.textContent = credit;
+        elWin.textContent = 0;
+        setMsg('스핀 중...','');
+        btnSpin.disabled = true;
+
+        reels.forEach(r => r.classList.add('spin'));
+
+        const result = [pickSym(), pickSym(), pickSym()];
+        const stopDelays = [600, 900, 1200];
+
+        result.forEach((sym, i) => {
+            const tickStart = setInterval(() => {
+                reels[i].textContent = pickSym();
+            }, 80);
+            setTimeout(() => {
+                clearInterval(tickStart);
+                reels[i].classList.remove('spin');
+                reels[i].textContent = sym;
+                if(i === 2) finishSpin(result);
+            }, stopDelays[i]);
+        });
+    }
+
+    function finishSpin(result){
+        const [a,b,c] = result;
+        let win = 0, msgType = '', msg = '';
+        if(a===b && b===c){
+            const mult = PAYS[a];
+            win = BET * mult;
+            if(a === '7️⃣'){
+                msg = '🎉 JACKPOT! ' + a+a+a + ' — '+win+' 크레딧!';
+                msgType = 'jackpot';
+            } else {
+                msg = a+a+a + ' 일치! ×'+mult+' = '+win+' 크레딧';
+                msgType = 'win';
+            }
+        } else if(a===b || b===c || a===c){
+            win = BET * 2;
+            msg = '두 개 일치! ×2 = '+win+' 크레딧';
+            msgType = 'win';
+        } else {
+            msg = '아쉬워요. 다시 도전!';
+        }
+        credit += win;
+        elCredit.textContent = credit;
+        elWin.textContent = win;
+        setMsg(msg, msgType);
+        btnSpin.disabled = false;
+        if(credit < BET){
+            setTimeout(()=>setMsg('크레딧이 부족합니다. Reset으로 재시작하세요',''), 2000);
+        }
+    }
+
+    function reset(){
+        credit = 100;
+        elCredit.textContent = credit;
+        elWin.textContent = 0;
+        reels.forEach(r => { r.textContent = '7'; r.classList.remove('spin'); });
+        setMsg('베팅 '+BET+' 크레딧 · 스핀 버튼을 눌러 시작하세요','');
+        btnSpin.disabled = false;
+    }
+
+    btnSpin.addEventListener('click', spin);
+    btnReset.addEventListener('click', reset);
+})();
+</script>
+</body>
+</html>
