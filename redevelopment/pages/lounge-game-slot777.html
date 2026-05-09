@@ -53,7 +53,8 @@
     .bet-chip.on{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C;border-color:#C3A569;box-shadow:0 4px 12px rgba(195,165,105,.3)}
 
     .slot-frame{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:linear-gradient(180deg,#070A14,#0F1D35);padding:16px;border-radius:14px;border:2px solid rgba(195,165,105,.4);box-shadow:inset 0 4px 18px rgba(0,0,0,.6),0 0 0 4px rgba(195,165,105,.1)}
-    .cell{aspect-ratio:1;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:56px;line-height:1;font-weight:800;overflow:hidden;position:relative;transition:transform .18s,box-shadow .25s;box-shadow:inset 0 -6px 12px rgba(0,0,0,.12),inset 0 6px 12px rgba(255,255,255,.6)}
+    .cell{aspect-ratio:1;background:linear-gradient(180deg,#fff,#eef1f5);border-radius:10px;display:flex;align-items:center;justify-content:center;padding:8px;line-height:1;overflow:hidden;position:relative;transition:transform .18s,box-shadow .25s;box-shadow:inset 0 -6px 12px rgba(0,0,0,.12),inset 0 6px 12px rgba(255,255,255,.6)}
+    .cell svg{width:100%;height:100%;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}
     .cell.spin{animation:cellShake .07s linear infinite}
     @keyframes cellShake{0%{transform:translateY(-2px)}50%{transform:translateY(2px)}100%{transform:translateY(-2px)}}
     .cell.match{animation:cellGlow 1s ease-in-out infinite;box-shadow:0 0 0 2px var(--gold),0 0 16px rgba(195,165,105,.7);z-index:2}
@@ -123,10 +124,9 @@
     @media(max-width:540px){
         .slot{padding:22px 16px 18px;border-radius:18px}
         .slot-frame{gap:8px;padding:12px}
-        .cell{font-size:42px;border-radius:8px}
+        .cell{padding:6px;border-radius:8px}
         .si-cell .si-value{font-size:15px}
         .slot-btn{font-size:11.5px;padding:11px 10px;letter-spacing:.6px}
-        .slot-btn-ghost,.slot-btn-end{flex:0 0 80px}
     }
     </style>
 </head>
@@ -151,7 +151,7 @@
                 <div class="slot-sub">가로/세로 3 연속 매칭 · 7️⃣ 라인 잭팟</div>
 
                 <div class="slot-info">
-                    <div class="si-cell"><div class="si-label">Credit</div><div class="si-value" id="slCredit">100</div></div>
+                    <div class="si-cell"><div class="si-label">Credit</div><div class="si-value" id="slCredit">1000</div></div>
                     <div class="si-cell"><div class="si-label">Bet</div><div class="si-value" id="slBet">10</div></div>
                     <div class="si-cell"><div class="si-label">Win</div><div class="si-value" id="slWin">0</div></div>
                     <div class="si-cell"><div class="si-label">Score</div><div class="si-value" id="slScore">0</div></div>
@@ -226,16 +226,28 @@
 <script src="../assets/js/common.js?v=20260509a"></script>
 <script>
 (function(){
-    const SYMS = ['7️⃣','💎','⭐','🔔','🍒','🍋'];
-    const PAYS = {'7️⃣':50,'💎':20,'⭐':10,'🔔':6,'🍒':4,'🍋':3};
+    const SYMS = ['7','D','S','B','C','L'];
+    const PAYS = {'7':50,'D':20,'S':10,'B':6,'C':4,'L':3};
     const WEIGHTS = [3,5,8,10,14,18];
     const totalW = WEIGHTS.reduce((a,b)=>a+b,0);
+
+    /* === Inline SVG Symbols (카지노 슬롯 풍 그라데이션·입체) === */
+    const SVG = {
+        '7': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF6F5C"/><stop offset="0.5" stop-color="#E63E32"/><stop offset="1" stop-color="#9C2018"/></linearGradient></defs><rect x="6" y="14" width="88" height="80" rx="10" fill="#FFE8B0" stroke="#C9A04A" stroke-width="3"/><text x="50" y="80" font-family="Arial Black,Impact,sans-serif" font-size="78" font-weight="900" fill="url(#g7)" text-anchor="middle" stroke="#7A1F18" stroke-width="2.2" paint-order="stroke">7</text></svg>',
+        'D': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFF1FF"/><stop offset="0.45" stop-color="#5BC9F5"/><stop offset="1" stop-color="#1568A8"/></linearGradient></defs><polygon points="50,8 90,40 50,94 10,40" fill="url(#gd)" stroke="#0E4870" stroke-width="3"/><polygon points="50,8 90,40 50,40" fill="rgba(255,255,255,0.45)"/><polygon points="50,8 10,40 50,40" fill="rgba(255,255,255,0.28)"/><polygon points="50,40 90,40 50,94" fill="rgba(0,40,80,0.12)"/><polygon points="20,28 30,20 40,30 30,38" fill="rgba(255,255,255,0.55)"/></svg>',
+        'S': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gs" cx="0.5" cy="0.4" r="0.7"><stop offset="0" stop-color="#FFF1B0"/><stop offset="0.5" stop-color="#FFD24A"/><stop offset="1" stop-color="#A06B0E"/></radialGradient></defs><polygon points="50,6 61,38 95,38 67,58 77,92 50,71 23,92 33,58 5,38 39,38" fill="url(#gs)" stroke="#7A4F0F" stroke-width="3" stroke-linejoin="round"/><polygon points="50,6 61,38 50,38" fill="rgba(255,255,255,0.5)"/></svg>',
+        'B': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEAA0"/><stop offset="0.5" stop-color="#E6B438"/><stop offset="1" stop-color="#9C7212"/></linearGradient></defs><path d="M50 12 C50 12 44 12 42 18 C28 22 22 38 22 58 L16 72 L84 72 L78 58 C78 38 72 22 58 18 C56 12 50 12 50 12 Z" fill="url(#gb)" stroke="#7A4F0F" stroke-width="3"/><circle cx="50" cy="84" r="9" fill="url(#gb)" stroke="#7A4F0F" stroke-width="3"/><ellipse cx="38" cy="34" rx="6" ry="14" fill="rgba(255,255,255,0.4)" transform="rotate(-15 38 34)"/></svg>',
+        'C': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gc1" cx="0.35" cy="0.35" r="0.7"><stop offset="0" stop-color="#FF8A82"/><stop offset="0.4" stop-color="#E63E32"/><stop offset="1" stop-color="#7A1F18"/></radialGradient><radialGradient id="gc2" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#FF7A70"/><stop offset="0.4" stop-color="#D6322A"/><stop offset="1" stop-color="#6A1612"/></radialGradient></defs><path d="M30 40 Q42 22 60 18 Q76 16 84 24" fill="none" stroke="#3A6B1F" stroke-width="4" stroke-linecap="round"/><path d="M30 42 Q40 30 58 28" fill="none" stroke="#3A6B1F" stroke-width="3" stroke-linecap="round"/><ellipse cx="80" cy="14" rx="12" ry="6" fill="#5A9B2F" stroke="#3A6B1F" stroke-width="2" transform="rotate(-25 80 14)"/><circle cx="36" cy="68" r="22" fill="url(#gc1)" stroke="#5A1612" stroke-width="2.5"/><circle cx="68" cy="74" r="20" fill="url(#gc2)" stroke="#5A1612" stroke-width="2.5"/><ellipse cx="28" cy="60" rx="6" ry="3" fill="rgba(255,255,255,0.6)" transform="rotate(-30 28 60)"/><ellipse cx="60" cy="68" rx="5" ry="2.5" fill="rgba(255,255,255,0.55)" transform="rotate(-30 60 68)"/></svg>',
+        'L': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gl" cx="0.4" cy="0.4" r="0.7"><stop offset="0" stop-color="#FFF7A0"/><stop offset="0.5" stop-color="#FFD42E"/><stop offset="1" stop-color="#9C7A0A"/></radialGradient></defs><ellipse cx="50" cy="58" rx="36" ry="30" fill="url(#gl)" stroke="#7A6308" stroke-width="3"/><path d="M14 58 Q22 52 28 58" fill="none" stroke="#7A6308" stroke-width="2.5" stroke-linecap="round"/><path d="M86 58 Q78 52 72 58" fill="none" stroke="#7A6308" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="38" cy="44" rx="12" ry="4" fill="rgba(255,255,255,0.55)"/><path d="M48 26 Q56 16 66 22" fill="none" stroke="#3A6B1F" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="64" cy="20" rx="6" ry="3" fill="#5A9B2F" stroke="#3A6B1F" stroke-width="1.5" transform="rotate(20 64 20)"/></svg>'
+    };
+    function svg(sym){return SVG[sym] || ''}
     const N = 3;
     const RANK_KEY = 'seul_lounge_slot777_rank';
     const BET_LEVELS = [10, 20, 50, 100];
     let betIdx = 0; // 시작 BET=10
     let bet = BET_LEVELS[betIdx];
-    let credit = 100;
+    const START_CREDIT = 1000;
+    let credit = START_CREDIT;
     let score = 0;
     let grid = [];
     let autoOn = false;
@@ -264,7 +276,7 @@
             const c = document.createElement('div');
             c.className = 'cell';
             c.id = 'c'+i;
-            c.textContent = SYMS[Math.floor(Math.random()*SYMS.length)];
+            c.innerHTML = svg(SYMS[Math.floor(Math.random()*SYMS.length)]);
             elGrid.appendChild(c);
         }
     }
@@ -374,7 +386,7 @@
 
         // rolling preview (every 70ms randomize)
         const tk = setInterval(() => {
-            for(let i=0;i<cells.length;i++) cells[i].textContent = pickSym();
+            for(let i=0;i<cells.length;i++) cells[i].innerHTML = svg(pickSym());
         }, 70);
 
         // stop after 1.0s, then column-by-column reveal
@@ -392,7 +404,7 @@
                         const idx = r*N+c;
                         const cell = cells[idx];
                         cell.classList.remove('spin');
-                        cell.textContent = g[idx];
+                        cell.innerHTML = svg(g[idx]);
                     }
                     if(c === N-1) finishSpin(g);
                 }, c*70);
@@ -405,7 +417,7 @@
         const matchedCells = new Set();
         let has7Jackpot = false;
         matches.forEach(m => {
-            if(m.sym === '7️⃣' && m.len === N) has7Jackpot = true;
+            if(m.sym === '7' && m.len === N) has7Jackpot = true;
             m.cells.forEach(i => matchedCells.add(i));
         });
 
@@ -414,7 +426,7 @@
         if(matches.length){
             for(let i=0;i<cells.length;i++){
                 if(matchedCells.has(i)){
-                    cells[i].classList.add(g[i] === '7️⃣' ? 'match7' : 'match');
+                    cells[i].classList.add(g[i] === '7' ? 'match7' : 'match');
                 } else {
                     cells[i].classList.add('dim');
                 }
@@ -429,7 +441,7 @@
         elScore.textContent = score;
 
         if(jackpot){
-            setMsg('🎉 JACKPOT! 7️⃣ 한 라인 — '+win+' 크레딧!', 'jackpot');
+            setMsg('🎉 JACKPOT! 7 한 라인 — '+win+' 크레딧!', 'jackpot');
         } else if(matches.length){
             const lineCnt = matches.length;
             setMsg(lineCnt+'개 라인 매칭 — '+win+' 크레딧 획득!', 'win');
@@ -475,14 +487,14 @@
 
     function reset(){
         stopAuto();
-        credit = 100;
+        credit = START_CREDIT;
         score = 0;
         elCredit.textContent = credit;
         elWin.textContent = 0;
         elScore.textContent = score;
         clearHighlights();
         const cells = elGrid.children;
-        for(let i=0;i<cells.length;i++){cells[i].textContent = SYMS[Math.floor(Math.random()*SYMS.length)]}
+        for(let i=0;i<cells.length;i++){cells[i].innerHTML = svg(SYMS[Math.floor(Math.random()*SYMS.length)])}
         setMsg('SPIN 버튼을 눌러 시작하세요.','');
         isSpinning = false;
         btnSpin.disabled = false;
