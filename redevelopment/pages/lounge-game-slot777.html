@@ -59,7 +59,9 @@
     @keyframes cellShake{0%{transform:translateY(-3px)}50%{transform:translateY(3px)}100%{transform:translateY(-3px)}}
     .cell.match{animation:cellGlow 1s ease-in-out infinite;box-shadow:0 0 0 2px var(--gold),0 0 16px rgba(195,165,105,.7);z-index:2}
     .cell.match7{animation:cellGlow .6s ease-in-out infinite;box-shadow:0 0 0 3px #C3A569,0 0 24px rgba(195,165,105,.95);z-index:3}
+    .cell.bonus{animation:cellBonus .6s ease-in-out infinite;box-shadow:0 0 0 4px var(--gold),0 0 32px rgba(195,165,105,1),inset 0 0 0 2px rgba(195,165,105,.4);z-index:4;background:linear-gradient(180deg,#FFF6D6,#FFE08A)}
     @keyframes cellGlow{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+    @keyframes cellBonus{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.18) rotate(4deg)}}
     .cell.dim{opacity:.42;filter:saturate(.6)}
 
     .slot-actions{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
@@ -91,7 +93,9 @@
     .sb-card h4{font-size:11px;font-weight:800;color:var(--brand-dark);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;gap:6px}
     .sb-card h4 i{color:var(--gold);font-size:12px}
     .sb-pt-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:12.5px;color:var(--gray-700)}
-    .sb-pt-row .pt-sym{font-size:16px;margin-right:4px}
+    .sb-pt-row > span:first-child{display:inline-flex;align-items:center;gap:8px}
+    .sb-pt-row .pt-sym{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;flex-shrink:0}
+    .sb-pt-row .pt-sym svg{width:100%;height:100%;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.18))}
     .sb-pt-row .pt-pay{color:var(--brand-dark);font-weight:800;font-feature-settings:"tnum";font-variant-numeric:tabular-nums}
     .sb-rule{font-size:11px;color:var(--gray-400);line-height:1.55;margin-top:6px;padding-top:8px;border-top:1px dashed var(--gray-200)}
 
@@ -185,15 +189,17 @@
             <div class="sb">
                 <div class="sb-card">
                     <h4><i class="fa-solid fa-table-list"></i> Pay Table</h4>
-                    <div class="sb-pt-row"><span><span class="pt-sym">7️⃣</span> SEVEN</span><span class="pt-pay">×100</span></div>
-                    <div class="sb-pt-row"><span><span class="pt-sym">💎</span> DIAMOND</span><span class="pt-pay">×40</span></div>
-                    <div class="sb-pt-row"><span><span class="pt-sym">⭐</span> STAR</span><span class="pt-pay">×20</span></div>
-                    <div class="sb-pt-row"><span><span class="pt-sym">🔔</span> BELL</span><span class="pt-pay">×12</span></div>
-                    <div class="sb-pt-row"><span><span class="pt-sym">🍒</span> CHERRY</span><span class="pt-pay">×8</span></div>
-                    <div class="sb-pt-row"><span><span class="pt-sym">🍋</span> LEMON</span><span class="pt-pay">×6</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym" data-pt-sym="7"></span>SEVEN</span><span class="pt-pay">×100</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym" data-pt-sym="D"></span>DIAMOND</span><span class="pt-pay">×40</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym" data-pt-sym="S"></span>STAR</span><span class="pt-pay">×20</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym" data-pt-sym="B"></span>BELL</span><span class="pt-pay">×12</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym" data-pt-sym="C"></span>CHERRY</span><span class="pt-pay">×8</span></div>
+                    <div class="sb-pt-row"><span><span class="pt-sym" data-pt-sym="L"></span>LEMON</span><span class="pt-pay">×6</span></div>
+                    <div class="sb-pt-row" style="border-top:1px dashed rgba(195,165,105,.35);padding-top:6px;margin-top:4px"><span><span class="pt-sym" data-pt-sym="E"></span><strong style="color:var(--gold)">SEUL</strong></span><span class="pt-pay">크레딧 ×3</span></div>
                     <div class="sb-rule">
                         매칭 점수 = 심볼 배수 × 3 × 베팅 ÷ 5<br>
-                        7️⃣ 한 라인(3개) 매칭 시 <strong style="color:var(--gold)">JACKPOT</strong>
+                        7️⃣ 한 라인(3개) 매칭 시 <strong style="color:var(--gold)">JACKPOT</strong><br>
+                        ★ <strong style="color:var(--gold)">SEUL 보너스</strong> — 그리드에 등장 시 남은 크레딧 ×3 점수 추가
                     </div>
                 </div>
 
@@ -226,9 +232,9 @@
 <script src="../assets/js/common.js?v=20260509a"></script>
 <script>
 (function(){
-    const SYMS = ['7','D','S','B','C','L'];
-    const PAYS = {'7':100,'D':40,'S':20,'B':12,'C':8,'L':6};
-    const WEIGHTS = [3,5,8,10,14,18];
+    const SYMS = ['7','D','S','B','C','L','E']; // E = SEUL 보너스 심볼
+    const PAYS = {'7':100,'D':40,'S':20,'B':12,'C':8,'L':6,'E':0}; // E는 라인 매칭 점수 없음, 등장 보너스만
+    const WEIGHTS = [3,5,8,10,14,18,1]; // E 가중치 1 (전체 59 → 1/59 ≈ 1.7%)
     const totalW = WEIGHTS.reduce((a,b)=>a+b,0);
 
     /* === Inline SVG Symbols (카지노 슬롯 풍 그라데이션·입체) === */
@@ -238,9 +244,15 @@
         'S': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gs" cx="0.5" cy="0.4" r="0.7"><stop offset="0" stop-color="#FFF1B0"/><stop offset="0.5" stop-color="#FFD24A"/><stop offset="1" stop-color="#A06B0E"/></radialGradient></defs><polygon points="50,6 61,38 95,38 67,58 77,92 50,71 23,92 33,58 5,38 39,38" fill="url(#gs)" stroke="#7A4F0F" stroke-width="3" stroke-linejoin="round"/><polygon points="50,6 61,38 50,38" fill="rgba(255,255,255,0.5)"/></svg>',
         'B': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEAA0"/><stop offset="0.5" stop-color="#E6B438"/><stop offset="1" stop-color="#9C7212"/></linearGradient></defs><path d="M50 12 C50 12 44 12 42 18 C28 22 22 38 22 58 L16 72 L84 72 L78 58 C78 38 72 22 58 18 C56 12 50 12 50 12 Z" fill="url(#gb)" stroke="#7A4F0F" stroke-width="3"/><circle cx="50" cy="84" r="9" fill="url(#gb)" stroke="#7A4F0F" stroke-width="3"/><ellipse cx="38" cy="34" rx="6" ry="14" fill="rgba(255,255,255,0.4)" transform="rotate(-15 38 34)"/></svg>',
         'C': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gc1" cx="0.35" cy="0.35" r="0.7"><stop offset="0" stop-color="#FF8A82"/><stop offset="0.4" stop-color="#E63E32"/><stop offset="1" stop-color="#7A1F18"/></radialGradient><radialGradient id="gc2" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#FF7A70"/><stop offset="0.4" stop-color="#D6322A"/><stop offset="1" stop-color="#6A1612"/></radialGradient></defs><path d="M30 40 Q42 22 60 18 Q76 16 84 24" fill="none" stroke="#3A6B1F" stroke-width="4" stroke-linecap="round"/><path d="M30 42 Q40 30 58 28" fill="none" stroke="#3A6B1F" stroke-width="3" stroke-linecap="round"/><ellipse cx="80" cy="14" rx="12" ry="6" fill="#5A9B2F" stroke="#3A6B1F" stroke-width="2" transform="rotate(-25 80 14)"/><circle cx="36" cy="68" r="22" fill="url(#gc1)" stroke="#5A1612" stroke-width="2.5"/><circle cx="68" cy="74" r="20" fill="url(#gc2)" stroke="#5A1612" stroke-width="2.5"/><ellipse cx="28" cy="60" rx="6" ry="3" fill="rgba(255,255,255,0.6)" transform="rotate(-30 28 60)"/><ellipse cx="60" cy="68" rx="5" ry="2.5" fill="rgba(255,255,255,0.55)" transform="rotate(-30 60 68)"/></svg>',
-        'L': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gl" cx="0.4" cy="0.4" r="0.7"><stop offset="0" stop-color="#FFF7A0"/><stop offset="0.5" stop-color="#FFD42E"/><stop offset="1" stop-color="#9C7A0A"/></radialGradient></defs><ellipse cx="50" cy="58" rx="36" ry="30" fill="url(#gl)" stroke="#7A6308" stroke-width="3"/><path d="M14 58 Q22 52 28 58" fill="none" stroke="#7A6308" stroke-width="2.5" stroke-linecap="round"/><path d="M86 58 Q78 52 72 58" fill="none" stroke="#7A6308" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="38" cy="44" rx="12" ry="4" fill="rgba(255,255,255,0.55)"/><path d="M48 26 Q56 16 66 22" fill="none" stroke="#3A6B1F" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="64" cy="20" rx="6" ry="3" fill="#5A9B2F" stroke="#3A6B1F" stroke-width="1.5" transform="rotate(20 64 20)"/></svg>'
+        'L': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="gl" cx="0.4" cy="0.4" r="0.7"><stop offset="0" stop-color="#FFF7A0"/><stop offset="0.5" stop-color="#FFD42E"/><stop offset="1" stop-color="#9C7A0A"/></radialGradient></defs><ellipse cx="50" cy="58" rx="36" ry="30" fill="url(#gl)" stroke="#7A6308" stroke-width="3"/><path d="M14 58 Q22 52 28 58" fill="none" stroke="#7A6308" stroke-width="2.5" stroke-linecap="round"/><path d="M86 58 Q78 52 72 58" fill="none" stroke="#7A6308" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="38" cy="44" rx="12" ry="4" fill="rgba(255,255,255,0.55)"/><path d="M48 26 Q56 16 66 22" fill="none" stroke="#3A6B1F" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="64" cy="20" rx="6" ry="3" fill="#5A9B2F" stroke="#3A6B1F" stroke-width="1.5" transform="rotate(20 64 20)"/></svg>',
+        'E': '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a3055"/><stop offset="1" stop-color="#0A0F1C"/></linearGradient><linearGradient id="getxt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEC9E"/><stop offset="1" stop-color="#C3A569"/></linearGradient></defs><circle cx="50" cy="50" r="45" fill="url(#ge)" stroke="#C3A569" stroke-width="3.5"/><polygon points="50,15 53,23 62,23 55,28 58,37 50,32 42,37 45,28 38,23 47,23" fill="#FFE08A" stroke="#C3A569" stroke-width="0.8"/><text x="50" y="62" font-family="Arial Black,Impact,sans-serif" font-size="28" font-weight="900" fill="url(#getxt)" text-anchor="middle" letter-spacing="-1" stroke="#0A0F1C" stroke-width="0.5">SEUL</text><text x="50" y="80" font-family="Arial,sans-serif" font-size="9" font-weight="800" fill="#C3A569" text-anchor="middle" letter-spacing="2.5">★ BONUS ★</text></svg>'
     };
     function svg(sym){return SVG[sym] || ''}
+
+    /* Pay Table 심볼 그림 동기화 (게임 그리드와 동일 SVG) */
+    document.querySelectorAll('[data-pt-sym]').forEach(el => {
+        el.innerHTML = svg(el.dataset.ptSym);
+    });
 
     /* === Web Audio 합성 효과음 (외부 자산 무사용) === */
     let audioCtx = null;
@@ -283,6 +295,7 @@
         reelStop(){tone(180, 0.18, 'sine', 0.16, 0.002); noiseBurst(0.08, 0.05)},
         win(){const seq=[523.25,659.25,783.99]; seq.forEach((f,i)=>setTimeout(()=>tone(f,0.18,'triangle',0.18),i*90))},
         jackpot(){const seq=[523.25,659.25,783.99,1046.5,783.99,1046.5]; seq.forEach((f,i)=>setTimeout(()=>tone(f,0.22,'triangle',0.22),i*110))},
+        bonus(){const seq=[783.99,987.77,1318.51,1567.98,1318.51,1975.53]; seq.forEach((f,i)=>setTimeout(()=>tone(f,0.18,'sine',0.2),i*80))},
         lose(){tone(220, 0.18, 'sawtooth', 0.08); setTimeout(()=>tone(160, 0.22, 'sawtooth', 0.07), 100)},
         click(){tone(800, 0.04, 'square', 0.06)}
     };
@@ -462,17 +475,23 @@
     function finishSpin(g){
         const matches = detectMatches(g);
         const matchedCells = new Set();
+        const bonusCells = [];
         let has7Jackpot = false;
+        // SEUL 'E' 보너스 셀 수집
+        for(let i=0;i<g.length;i++){if(g[i]==='E') bonusCells.push(i)}
         matches.forEach(m => {
             if(m.sym === '7' && m.len === N) has7Jackpot = true;
             m.cells.forEach(i => matchedCells.add(i));
         });
 
-        // dim non-matched, glow matched
+        // dim non-matched/bonus, glow matched/bonus
         const cells = elGrid.children;
-        if(matches.length){
+        const hasAnyHighlight = matches.length || bonusCells.length;
+        if(hasAnyHighlight){
             for(let i=0;i<cells.length;i++){
-                if(matchedCells.has(i)){
+                if(g[i] === 'E'){
+                    cells[i].classList.add('bonus');
+                } else if(matchedCells.has(i)){
                     cells[i].classList.add(g[i] === '7' ? 'match7' : 'match');
                 } else {
                     cells[i].classList.add('dim');
@@ -481,13 +500,25 @@
         }
 
         const {win, jackpot} = computeWin(matches);
-        credit += win;
-        score += win;
+        // SEUL 보너스: 'E' 1개 이상 등장 시 남은 크레딧(스핀 후 win 추가 전 기준) × 3
+        let bonus = 0;
+        if(bonusCells.length > 0){
+            // bonus 기준 크레딧 = 현재 credit (이번 스핀 베팅 차감 + 라인 win 합산 후)
+            bonus = (credit + win) * 3;
+        }
+        const totalGain = win + bonus;
+        credit += totalGain;
+        score += totalGain;
         elCredit.textContent = credit;
-        elWin.textContent = win;
+        elWin.textContent = totalGain;
         elScore.textContent = score;
 
-        if(jackpot){
+        // 메시지 우선순위: bonus > jackpot > win > lose
+        if(bonus > 0){
+            const lineNote = matches.length ? ' (+'+matches.length+'라인 '+win+')' : '';
+            setMsg('🎁 SEUL 보너스! 크레딧 ×3 = '+bonus.toLocaleString()+' 점!'+lineNote, 'jackpot');
+            SFX.bonus();
+        } else if(jackpot){
             setMsg('🎉 JACKPOT! 7 한 라인 — '+win+' 크레딧!', 'jackpot');
             SFX.jackpot();
         } else if(matches.length){
