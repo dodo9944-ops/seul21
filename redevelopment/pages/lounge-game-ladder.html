@@ -93,11 +93,21 @@
     .ld-result.show{display:block}
     .ld-result h3{font-size:13px;font-weight:800;color:var(--brand-dark);margin-bottom:10px;letter-spacing:-.2px}
     .ld-result h3 i{margin-right:6px;color:var(--gold)}
-    .ld-result-list{display:flex;flex-direction:column;gap:6px}
-    .ld-result-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#f7f8fb;border-radius:8px;font-size:13px}
-    .ld-result-row .who{font-weight:800;color:var(--brand-dark);min-width:80px}
-    .ld-result-row .arr{color:var(--gray-400);font-size:11px}
-    .ld-result-row .what{font-weight:700;color:var(--gold)}
+    .ld-result h3 .ld-progress{float:right;font-size:11.5px;font-weight:700;color:var(--gray-500);letter-spacing:.3px}
+    .ld-result-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+    .ld-result-row{display:flex;flex-direction:column;gap:8px;padding:11px 13px;background:#f7f8fb;border-radius:10px;border:1px solid var(--gray-200);transition:all .2s}
+    .ld-result-row.has{background:#fff;border-color:rgba(195,165,105,.45);box-shadow:0 6px 16px rgba(195,165,105,.1)}
+    .ld-result-row .what{font-size:13px;font-weight:800;color:var(--brand-dark);letter-spacing:-.2px;display:flex;align-items:center;gap:6px}
+    .ld-result-row .what .idx{font-size:10px;font-weight:800;color:var(--gold);background:rgba(195,165,105,.14);padding:2px 7px;border-radius:10px;letter-spacing:.5px}
+    .ld-result-row .winners{display:flex;flex-wrap:wrap;gap:5px;min-height:24px;align-items:center}
+    .ld-result-row .winners:empty::before{content:'대기';font-size:11px;color:var(--gray-400);font-weight:600;letter-spacing:.5px}
+    .ld-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:14px;background:#0F1D35;color:#fff;font-size:11.5px;font-weight:700;animation:ldChipIn .25s ease}
+    .ld-chip .dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0}
+    @keyframes ldChipIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+
+    /* 사다리 하단 도달자 표기 */
+    .ld-arrived-bg{fill:rgba(0,0,0,.35);stroke:rgba(195,165,105,.3);stroke-width:1}
+    .ld-arrived{font-size:10.5px;font-weight:800;font-family:var(--font);text-anchor:middle;dominant-baseline:middle;pointer-events:none}
 
     .ld-help{margin-top:12px;padding:10px 14px;background:rgba(0,0,0,.04);border-radius:10px;font-size:12px;color:var(--gray-500);text-align:center;line-height:1.65}
 
@@ -166,7 +176,7 @@
             </div>
 
             <div class="ld-result" id="ldResultBox">
-                <h3><i class="fa-solid fa-trophy"></i>결과</h3>
+                <h3><i class="fa-solid fa-trophy"></i>결과<span class="ld-progress" id="ldProgress"></span></h3>
                 <div class="ld-result-list" id="ldResultList"></div>
             </div>
 
@@ -186,8 +196,10 @@
     const MIN_N = 2, MAX_N = 10, DEFAULT_N = 5;
     const ROW_COUNT = 12; // 다리 후보 행
     const COL_W_DESKTOP = 110, COL_W_MOBILE = 78;
-    const TOP_PAD = 56, BOT_PAD = 56, ROW_GAP = 30;
+    const TOP_PAD = 56, BOT_PAD = 92, ROW_GAP = 30; // BOT_PAD: 결과 + 도달자 표기 공간
     const SVG_NS = 'http://www.w3.org/2000/svg';
+    // 참가자 색상 (CSS .tr1~.tr10 와 동일)
+    const TRACE_COLORS = ['#FF6B6B','#4DABF7','#51CF66','#FFD43B','#CC5DE8','#FF922B','#22B8CF','#F783AC','#A9E34B','#E599F7'];
 
     const SVG = document.getElementById('ldSvg');
     const elNum = document.getElementById('ldNum');
@@ -201,6 +213,7 @@
     const btnShuffleR = document.getElementById('ldShuffleResults');
     const resultBox = document.getElementById('ldResultBox');
     const resultList = document.getElementById('ldResultList');
+    const elProgress = document.getElementById('ldProgress');
 
     const PRESETS = {
         meal: {
@@ -433,14 +446,124 @@
         const bots = SVG.querySelectorAll('text.ld-label-bot');
         tops.forEach(t=>{ const i = +t.dataset.idx; t.textContent = players[i] || ('참가자'+(i+1)) });
         let bi=0; bots.forEach(t=>{ t.textContent = results[bi] || ('결과'+(bi+1)); bi++ });
+        // 결과 카드의 결과 텍스트 동기화
+        resultList.querySelectorAll('.ld-result-row').forEach(row=>{
+            const idx = +row.dataset.ridx;
+            const t = row.querySelector('.what .t');
+            if(t) t.textContent = results[idx] || ('결과'+(idx+1));
+        });
+        // 이미 도달한 칩의 이름도 동기화
+        for(let r=0;r<arrivalsByResult.length;r++){
+            arrivalsByResult[r].forEach((pi, ci)=>{
+                const chip = resultList.querySelectorAll('.ld-result-row[data-ridx="'+r+'"] .ld-chip .nm')[ci];
+                if(chip) chip.textContent = players[pi] || ('참가자'+(pi+1));
+            });
+            if(arrivalsByResult[r].length) renderArrivedOnSVG(r);
+        }
+    }
+
+    // 결과별 도달자 그룹: arrivalsByResult[resultIdx] = [playerIdx, ...]
+    let arrivalsByResult = [];
+
+    function renderResultBoxes(){
+        arrivalsByResult = [];
+        for(let i=0;i<n;i++) arrivalsByResult.push([]);
+        resultList.innerHTML = '';
+        for(let i=0;i<n;i++){
+            const row = document.createElement('div');
+            row.className = 'ld-result-row';
+            row.dataset.ridx = i;
+            row.innerHTML = '<div class="what"><span class="idx">'+(i+1)+'</span><span class="t"></span></div>'
+                          + '<div class="winners"></div>';
+            row.querySelector('.t').textContent = results[i] || ('결과'+(i+1));
+            resultList.appendChild(row);
+        }
+        updateProgress();
+    }
+
+    function updateProgress(){
+        elProgress.textContent = finishedSet.size + ' / ' + n + ' 도달';
+    }
+
+    function recordArrival(playerIdx, resultIdx){
+        if(arrivalsByResult[resultIdx].indexOf(playerIdx) >= 0) return;
+        arrivalsByResult[resultIdx].push(playerIdx);
+
+        // 결과 패널 칩 추가
+        const row = resultList.querySelector('.ld-result-row[data-ridx="'+resultIdx+'"]');
+        if(row){
+            row.classList.add('has');
+            const winners = row.querySelector('.winners');
+            const chip = document.createElement('span');
+            chip.className = 'ld-chip';
+            const color = TRACE_COLORS[playerIdx % TRACE_COLORS.length];
+            chip.innerHTML = '<span class="dot" style="background:'+color+'"></span>'
+                           + '<span class="nm">'+escapeHtml(players[playerIdx]||('참가자'+(playerIdx+1)))+'</span>';
+            winners.appendChild(chip);
+        }
+
+        // SVG 하단 도달자 표기 갱신
+        renderArrivedOnSVG(resultIdx);
+
+        if(!resultBox.classList.contains('show')) resultBox.classList.add('show');
+        updateProgress();
+    }
+
+    function renderArrivedOnSVG(resultIdx){
+        // 기존 도달자 박스/텍스트 제거 후 재생성
+        SVG.querySelectorAll('[data-arr-ridx="'+resultIdx+'"]').forEach(n=>n.remove());
+        const list = arrivalsByResult[resultIdx];
+        if(!list || !list.length) return;
+
+        const cw = colW();
+        const pillW = Math.min(cw*0.92, 116);
+        const x = colX(resultIdx);
+        const y = botY() + 28;
+
+        // 표시 문자열: 1명이면 이름, 2명이면 둘 콤마, 3명 이상이면 "이름,이름 외 N명"
+        let label;
+        if(list.length === 1){
+            label = players[list[0]] || ('참가자'+(list[0]+1));
+        } else if(list.length === 2){
+            const a = players[list[0]] || ('참가자'+(list[0]+1));
+            const b = players[list[1]] || ('참가자'+(list[1]+1));
+            label = a + ', ' + b;
+        } else {
+            const a = players[list[0]] || ('참가자'+(list[0]+1));
+            label = a + ' 외 ' + (list.length-1) + '명';
+        }
+        // 길이 제한
+        const maxLen = window.innerWidth <= 540 ? 8 : 12;
+        if(label.length > maxLen) label = label.slice(0, maxLen-1) + '…';
+
+        const bg = document.createElementNS(SVG_NS,'rect');
+        bg.setAttribute('x', x - pillW/2);
+        bg.setAttribute('y', y - 11);
+        bg.setAttribute('width', pillW);
+        bg.setAttribute('height', 22);
+        bg.setAttribute('rx', 11);
+        bg.setAttribute('class','ld-arrived-bg');
+        bg.dataset.arrRidx = resultIdx;
+        SVG.appendChild(bg);
+
+        const txt = document.createElementNS(SVG_NS,'text');
+        txt.setAttribute('x', x);
+        txt.setAttribute('y', y);
+        txt.setAttribute('class','ld-arrived');
+        // 단일 도달자면 그 색상, 여러 명이면 골드
+        txt.setAttribute('fill', list.length === 1 ? TRACE_COLORS[list[0] % TRACE_COLORS.length] : '#C3A569');
+        txt.dataset.arrRidx = resultIdx;
+        txt.textContent = label;
+        SVG.appendChild(txt);
     }
 
     function clearTraces(){
         SVG.querySelectorAll('.ld-trace').forEach(n=>n.remove());
         SVG.querySelectorAll('.ld-label-pill.matched').forEach(n=>n.classList.remove('matched'));
+        SVG.querySelectorAll('[data-arr-ridx]').forEach(n=>n.remove());
         finishedSet.clear();
+        renderResultBoxes(); // 카드는 유지하되 칩만 비움 (n 동기화)
         resultBox.classList.remove('show');
-        resultList.innerHTML = '';
     }
 
     function rebuild(){
@@ -492,21 +615,9 @@
             const pillT = SVG.querySelector('rect.ld-label-pill[data-idx="'+i+'"]');
             if(pillT) pillT.classList.add('matched');
             finishedSet.add(i);
-            addResultRow(i, end);
+            recordArrival(i, end);
             if(onDone) onDone();
         };
-    }
-
-    function addResultRow(playerIdx, resultIdx){
-        if(!resultBox.classList.contains('show')) resultBox.classList.add('show');
-        const row = document.createElement('div');
-        row.className = 'ld-result-row';
-        const who = (players[playerIdx]||('참가자'+(playerIdx+1)));
-        const what = (results[resultIdx]||('결과'+(resultIdx+1)));
-        row.innerHTML = '<span class="who">'+escapeHtml(who)+'</span>'
-                      + '<span class="arr"><i class="fa-solid fa-arrow-right"></i></span>'
-                      + '<span class="what">'+escapeHtml(what)+'</span>';
-        resultList.appendChild(row);
     }
 
     function escapeHtml(s){
