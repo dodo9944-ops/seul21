@@ -9,8 +9,8 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#0A0F1C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucky 777 슬롯 9×9 — 게임 모음 | 세울 쉼터</title>
-    <meta name="description" content="9×9 그리드 슬롯 머신. 가로·세로 3개 이상 같은 심볼을 맞추면 점수! TOP5 랭킹 도전.">
+    <title>Lucky 777 슬롯 3×3 — 게임 모음 | 세울 쉼터</title>
+    <meta name="description" content="3×3 그리드 슬롯 머신. 가로·세로 3개 같은 심볼을 맞추면 점수! TOP5 랭킹 도전.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -42,8 +42,8 @@
     .si-cell .si-label{font-size:9.5px;font-weight:700;color:var(--gold);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:3px;opacity:.85}
     .si-cell .si-value{font-size:18px;font-weight:900;color:#fff;font-feature-settings:"tnum";font-variant-numeric:tabular-nums;line-height:1}
 
-    .slot-frame{position:relative;display:grid;grid-template-columns:repeat(9,1fr);gap:4px;background:linear-gradient(180deg,#070A14,#0F1D35);padding:10px;border-radius:14px;border:2px solid rgba(195,165,105,.4);box-shadow:inset 0 4px 18px rgba(0,0,0,.6),0 0 0 4px rgba(195,165,105,.1)}
-    .cell{aspect-ratio:1;background:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;font-weight:800;overflow:hidden;position:relative;transition:transform .18s,box-shadow .25s}
+    .slot-frame{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:linear-gradient(180deg,#070A14,#0F1D35);padding:16px;border-radius:14px;border:2px solid rgba(195,165,105,.4);box-shadow:inset 0 4px 18px rgba(0,0,0,.6),0 0 0 4px rgba(195,165,105,.1)}
+    .cell{aspect-ratio:1;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:56px;line-height:1;font-weight:800;overflow:hidden;position:relative;transition:transform .18s,box-shadow .25s;box-shadow:inset 0 -6px 12px rgba(0,0,0,.12),inset 0 6px 12px rgba(255,255,255,.6)}
     .cell.spin{animation:cellShake .07s linear infinite}
     @keyframes cellShake{0%{transform:translateY(-2px)}50%{transform:translateY(2px)}100%{transform:translateY(-2px)}}
     .cell.match{animation:cellGlow 1s ease-in-out infinite;box-shadow:0 0 0 2px var(--gold),0 0 16px rgba(195,165,105,.7);z-index:2}
@@ -105,7 +105,8 @@
 
     @media(max-width:540px){
         .slot{padding:22px 16px 18px;border-radius:18px}
-        .cell{font-size:14px}
+        .slot-frame{gap:8px;padding:12px}
+        .cell{font-size:42px;border-radius:8px}
         .si-cell .si-value{font-size:15px}
         .slot-btn{font-size:11.5px;padding:11px 10px;letter-spacing:.6px}
         .slot-btn-ghost,.slot-btn-end{flex:0 0 80px}
@@ -118,9 +119,9 @@
 <div class="lgg-hero">
     <div class="inner">
         <a href="lounge-games.html" class="lgg-back"><i class="fa-solid fa-arrow-left"></i> 게임 모음으로 돌아가기</a>
-        <div class="lgg-cat-tag">▣ Slot · 9×9</div>
-        <h1>Lucky <em>777</em> Slot 9×9</h1>
-        <p>가로·세로 3개 이상 같은 심볼이 연속되면 점수! TOP 5 랭킹에 도전하세요.</p>
+        <div class="lgg-cat-tag">▣ Slot · 3×3</div>
+        <h1>Lucky <em>777</em> Slot 3×3</h1>
+        <p>가로·세로 3개 같은 심볼이 한 줄로 맞으면 점수! TOP 5 랭킹에 도전하세요.</p>
     </div>
 </div>
 
@@ -129,8 +130,8 @@
         <div class="lgg-wrap">
             <!-- Game -->
             <div class="slot" id="slot777">
-                <div class="slot-title">★ Lucky 777 — 9×9 Grid ★</div>
-                <div class="slot-sub">가로/세로 3+ 연속 매칭 · 7×9 잭팟</div>
+                <div class="slot-title">★ Lucky 777 — 3×3 Grid ★</div>
+                <div class="slot-sub">가로/세로 3 연속 매칭 · 7️⃣ 라인 잭팟</div>
 
                 <div class="slot-info">
                     <div class="si-cell"><div class="si-label">Credit</div><div class="si-value" id="slCredit">100</div></div>
@@ -161,8 +162,8 @@
                     <div class="sb-pt-row"><span><span class="pt-sym">🍒</span> CHERRY</span><span class="pt-pay">×4</span></div>
                     <div class="sb-pt-row"><span><span class="pt-sym">🍋</span> LEMON</span><span class="pt-pay">×3</span></div>
                     <div class="sb-rule">
-                        매칭 점수 = 심볼 배수 × 매칭 길이(3~9) × 베팅 ÷ 5<br>
-                        7️⃣ 9개 라인 매칭 시 <strong style="color:var(--gold)">JACKPOT</strong>
+                        매칭 점수 = 심볼 배수 × 3 × 베팅 ÷ 5<br>
+                        7️⃣ 한 라인(3개) 매칭 시 <strong style="color:var(--gold)">JACKPOT</strong>
                     </div>
                 </div>
 
@@ -199,7 +200,7 @@
     const PAYS = {'7️⃣':50,'💎':20,'⭐':10,'🔔':6,'🍒':4,'🍋':3};
     const WEIGHTS = [3,5,8,10,14,18];
     const totalW = WEIGHTS.reduce((a,b)=>a+b,0);
-    const N = 9;
+    const N = 3;
     const RANK_KEY = 'seul_lounge_slot777_rank';
     const BET = 10;
     let credit = 100;
@@ -278,7 +279,7 @@
             const mult = PAYS[m.sym] || 0;
             // line score = mult * len * BET / 5  (정수 round)
             win += Math.round(mult * m.len * BET / 5);
-            if(m.sym === '7️⃣' && m.len === 9) jackpot = true;
+            if(m.sym === '7️⃣' && m.len === N) jackpot = true;
         });
         return {win, jackpot};
     }
@@ -336,7 +337,7 @@
         const matchedCells = new Set();
         let has7Jackpot = false;
         matches.forEach(m => {
-            if(m.sym === '7️⃣' && m.len === 9) has7Jackpot = true;
+            if(m.sym === '7️⃣' && m.len === N) has7Jackpot = true;
             m.cells.forEach(i => matchedCells.add(i));
         });
 
@@ -360,11 +361,10 @@
         elScore.textContent = score;
 
         if(jackpot){
-            setMsg('🎉 JACKPOT! 7️⃣ 라인 매칭 — '+win+' 크레딧!', 'jackpot');
+            setMsg('🎉 JACKPOT! 7️⃣ 한 라인 — '+win+' 크레딧!', 'jackpot');
         } else if(matches.length){
             const lineCnt = matches.length;
-            const maxRun = Math.max.apply(null, matches.map(m=>m.len));
-            setMsg(lineCnt+'개 라인 매칭 (최대 '+maxRun+'연속) — '+win+' 크레딧 획득!', 'win');
+            setMsg(lineCnt+'개 라인 매칭 — '+win+' 크레딧 획득!', 'win');
         } else {
             setMsg('매칭 없음. 다시 도전하세요!','');
         }
