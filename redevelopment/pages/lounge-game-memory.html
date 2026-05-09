@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기억력 카드 — 게임 모음 | 세울 쉼터</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260505e">
+    <style>
+    .lgg-hero{padding:48px 0 36px;background:linear-gradient(135deg,#060A14 0%,#0A0F1C 40%,#142644 100%);text-align:center}
+    .lgg-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:14px}
+    .lgg-back:hover{color:var(--gold)}
+    .lgg-cat-tag{display:inline-block;font-size:10.5px;font-weight:800;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;padding:4px 12px;border:1px solid rgba(195,165,105,.35);border-radius:20px}
+    .lgg-hero h1{font-size:30px;font-weight:900;color:#fff;margin-bottom:8px}
+    .lgg-hero h1 em{font-style:normal;color:var(--gold)}
+    .lgg-hero p{font-size:13.5px;color:rgba(255,255,255,.55);margin:0}
+    .lgg-body{padding:48px 0 96px;background:linear-gradient(180deg,#fff,#f7f8fb)}
+
+    .mem-wrap{max-width:520px;margin:0 auto;background:linear-gradient(180deg,#0F1D35,#0A0F1C);border-radius:22px;padding:28px 24px;box-shadow:0 24px 64px rgba(10,15,28,.25);border:1px solid rgba(195,165,105,.22)}
+    .mem-info{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;padding:12px 14px;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid rgba(195,165,105,.15)}
+    .mem-info-cell{text-align:center;padding:0 4px}
+    .mem-info-cell .mil{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
+    .mem-info-cell .miv{font-size:20px;font-weight:900;color:#fff;font-feature-settings:"tnum"}
+
+    .mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+    .mcard{aspect-ratio:1;perspective:600px;cursor:pointer}
+    .mcard-inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+    .mcard.flipped .mcard-inner,.mcard.matched .mcard-inner{transform:rotateY(180deg)}
+    .mcard-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:10px;backface-visibility:hidden;font-size:34px}
+    .mcard-front{background:linear-gradient(135deg,#1a3055,#0F1D35);border:2px solid rgba(195,165,105,.3);color:var(--gold);font-size:24px}
+    .mcard-back{background:linear-gradient(180deg,#fff,#eef1f5);border:2px solid rgba(195,165,105,.4);transform:rotateY(180deg);box-shadow:inset 0 -4px 8px rgba(0,0,0,.08)}
+    .mcard.matched .mcard-back{background:linear-gradient(180deg,#FFF6D6,#FFE08A);border-color:#C3A569;animation:matchPulse 1s ease-out 1}
+    @keyframes matchPulse{0%{transform:rotateY(180deg) scale(1)}50%{transform:rotateY(180deg) scale(1.12)}100%{transform:rotateY(180deg) scale(1)}}
+
+    .mem-actions{display:flex;gap:8px}
+    .mem-btn{flex:1;padding:12px;border-radius:11px;border:none;cursor:pointer;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;font-family:var(--font);transition:all .2s}
+    .mem-btn-primary{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C;box-shadow:0 6px 18px rgba(195,165,105,.35)}
+    .mem-btn-primary:hover{transform:translateY(-2px)}
+    .mem-btn-ghost{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.18)}
+    .mem-btn-ghost:hover{background:rgba(255,255,255,.06);color:#fff}
+    .mem-msg{text-align:center;margin-top:14px;min-height:22px;font-size:13px;font-weight:700;color:rgba(255,255,255,.55)}
+    .mem-msg.win{color:var(--gold);font-size:15px}
+    @media(max-width:540px){.mcard-face{font-size:28px}.mcard-front{font-size:18px}}
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="lgg-hero">
+    <div class="inner">
+        <a href="lounge-games.html" class="lgg-back"><i class="fa-solid fa-arrow-left"></i> 게임 모음으로 돌아가기</a>
+        <div class="lgg-cat-tag">▣ Card</div>
+        <h1>기억력 <em>카드</em></h1>
+        <p>같은 그림 두 장씩 짝 맞추기. 적은 횟수로 클리어할수록 고득점!</p>
+    </div>
+</div>
+
+<div class="lgg-body">
+    <div class="inner">
+        <div class="mem-wrap">
+            <div class="mem-info">
+                <div class="mem-info-cell"><div class="mil">Moves</div><div class="miv" id="mMoves">0</div></div>
+                <div class="mem-info-cell"><div class="mil">Matches</div><div class="miv" id="mMatch">0/8</div></div>
+                <div class="mem-info-cell"><div class="mil">Time</div><div class="miv" id="mTime">0s</div></div>
+            </div>
+            <div class="mem-grid" id="mGrid"></div>
+            <div class="mem-actions">
+                <button class="mem-btn mem-btn-primary" id="mNew"><i class="fa-solid fa-rotate"></i> 새 게임</button>
+                <button class="mem-btn mem-btn-ghost" id="mPeek"><i class="fa-solid fa-eye"></i> 1초 미리보기</button>
+            </div>
+            <div class="mem-msg" id="mMsg">카드를 눌러 짝을 맞춰보세요. (4×4, 8쌍)</div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=20260509w"></script>
+<script src="../assets/js/data-service.js?v=20260418q"></script>
+<script src="../assets/js/common.js?v=20260509a"></script>
+<script>
+(function(){
+    const SYMS = ['🍎','🍌','🍇','🍓','🍒','🍑','🥝','🍉'];
+    const grid = document.getElementById('mGrid');
+    const elMoves = document.getElementById('mMoves');
+    const elMatch = document.getElementById('mMatch');
+    const elTime = document.getElementById('mTime');
+    const elMsg = document.getElementById('mMsg');
+    let cards=[], flipped=[], matched=0, moves=0, lock=false, t0=0, timer=null;
+
+    function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+    function startTimer(){
+        if(timer) return;
+        t0 = Date.now();
+        timer = setInterval(() => {elTime.textContent = Math.floor((Date.now()-t0)/1000)+'s'}, 250);
+    }
+    function stopTimer(){if(timer){clearInterval(timer);timer=null}}
+
+    function build(){
+        stopTimer();
+        cards = shuffle([...SYMS, ...SYMS]);
+        flipped=[]; matched=0; moves=0; lock=false; t0=0;
+        elMoves.textContent='0'; elMatch.textContent='0/8'; elTime.textContent='0s';
+        elMsg.textContent = '카드를 눌러 짝을 맞춰보세요. (4×4, 8쌍)';
+        elMsg.className = 'mem-msg';
+        grid.innerHTML = cards.map((s,i) =>
+            '<div class="mcard" data-i="'+i+'"><div class="mcard-inner">'
+            +'<div class="mcard-face mcard-front"><i class="fa-solid fa-question"></i></div>'
+            +'<div class="mcard-face mcard-back">'+s+'</div></div></div>').join('');
+    }
+
+    function flip(idx){
+        if(lock) return;
+        const card = grid.children[idx];
+        if(card.classList.contains('flipped') || card.classList.contains('matched')) return;
+        if(!timer) startTimer();
+        card.classList.add('flipped');
+        flipped.push(idx);
+        if(flipped.length === 2){
+            moves++;
+            elMoves.textContent = moves;
+            const [a,b] = flipped;
+            if(cards[a] === cards[b]){
+                setTimeout(() => {
+                    grid.children[a].classList.add('matched');
+                    grid.children[b].classList.add('matched');
+                    flipped = [];
+                    matched++;
+                    elMatch.textContent = matched+'/8';
+                    if(matched === 8){
+                        stopTimer();
+                        const sec = Math.floor((Date.now()-t0)/1000);
+                        elMsg.textContent = '🎉 클리어! '+moves+'회 · '+sec+'초';
+                        elMsg.className = 'mem-msg win';
+                    }
+                }, 250);
+            } else {
+                lock = true;
+                setTimeout(() => {
+                    grid.children[a].classList.remove('flipped');
+                    grid.children[b].classList.remove('flipped');
+                    flipped = [];
+                    lock = false;
+                }, 800);
+            }
+        }
+    }
+
+    grid.addEventListener('click', e => {
+        const c = e.target.closest('.mcard');
+        if(!c) return;
+        flip(parseInt(c.dataset.i,10));
+    });
+
+    document.getElementById('mNew').addEventListener('click', build);
+    document.getElementById('mPeek').addEventListener('click', () => {
+        if(lock) return;
+        lock = true;
+        for(let i=0;i<grid.children.length;i++){
+            if(!grid.children[i].classList.contains('matched')) grid.children[i].classList.add('flipped');
+        }
+        setTimeout(() => {
+            for(let i=0;i<grid.children.length;i++){
+                if(!grid.children[i].classList.contains('matched')) grid.children[i].classList.remove('flipped');
+            }
+            flipped = [];
+            lock = false;
+        }, 1000);
+    });
+
+    build();
+})();
+</script>
+</body>
+</html>

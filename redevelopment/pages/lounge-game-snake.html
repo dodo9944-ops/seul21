@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스네이크 — 게임 모음 | 세울 쉼터</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260505e">
+    <style>
+    .lgg-hero{padding:48px 0 36px;background:linear-gradient(135deg,#060A14 0%,#0A0F1C 40%,#142644 100%);text-align:center}
+    .lgg-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:14px}
+    .lgg-back:hover{color:var(--gold)}
+    .lgg-cat-tag{display:inline-block;font-size:10.5px;font-weight:800;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;padding:4px 12px;border:1px solid rgba(195,165,105,.35);border-radius:20px}
+    .lgg-hero h1{font-size:30px;font-weight:900;color:#fff;margin-bottom:8px}
+    .lgg-hero h1 em{font-style:normal;color:var(--gold)}
+    .lgg-hero p{font-size:13.5px;color:rgba(255,255,255,.55);margin:0}
+    .lgg-body{padding:48px 0 96px;background:linear-gradient(180deg,#fff,#f7f8fb)}
+
+    .sn-wrap{max-width:480px;margin:0 auto}
+    .sn-info{display:flex;justify-content:space-between;margin-bottom:14px;gap:8px}
+    .sn-stat{flex:1;background:#0F1D35;color:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid rgba(195,165,105,.2)}
+    .sn-stat .lbl{font-size:10.5px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
+    .sn-stat .val{font-size:22px;font-weight:900;font-feature-settings:"tnum"}
+    .sn-canvas-wrap{position:relative;background:#0A0F1C;border-radius:14px;padding:8px;border:2px solid rgba(195,165,105,.3)}
+    canvas#snCanvas{display:block;width:100%;aspect-ratio:1;background:#142644;border-radius:8px;touch-action:none}
+
+    .sn-actions{display:flex;gap:8px;margin-top:14px}
+    .sn-btn{flex:1;padding:12px;border-radius:10px;border:none;cursor:pointer;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;font-family:var(--font);transition:all .15s}
+    .sn-btn-primary{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C}
+    .sn-btn-primary:hover{transform:translateY(-2px)}
+    .sn-btn-ghost{background:transparent;color:var(--gray-600);border:1px solid var(--gray-300)}
+    .sn-btn-ghost:hover{background:var(--gray-50)}
+    .sn-msg{text-align:center;margin-top:14px;min-height:22px;font-size:13px;font-weight:700;color:var(--gray-600)}
+    .sn-msg.over{color:#D6423A;font-size:15px}
+    .sn-help{margin-top:12px;padding:10px 14px;background:rgba(0,0,0,.04);border-radius:10px;font-size:12px;color:var(--gray-500);text-align:center;line-height:1.6}
+    .sn-help kbd{display:inline-block;padding:2px 7px;background:#fff;border:1px solid var(--gray-300);border-radius:4px;font-size:11px;font-family:monospace;margin:0 2px}
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="lgg-hero">
+    <div class="inner">
+        <a href="lounge-games.html" class="lgg-back"><i class="fa-solid fa-arrow-left"></i> 게임 모음으로 돌아가기</a>
+        <div class="lgg-cat-tag">▣ Arcade</div>
+        <h1>스네이크 <em>SNAKE</em></h1>
+        <p>먹이를 먹어 길어지는 뱀. 벽이나 자기 몸에 부딪히면 끝!</p>
+    </div>
+</div>
+
+<div class="lgg-body">
+    <div class="inner">
+        <div class="sn-wrap">
+            <div class="sn-info">
+                <div class="sn-stat"><div class="lbl">Score</div><div class="val" id="snScore">0</div></div>
+                <div class="sn-stat"><div class="lbl">Length</div><div class="val" id="snLen">3</div></div>
+                <div class="sn-stat"><div class="lbl">Best</div><div class="val" id="snBest">0</div></div>
+            </div>
+            <div class="sn-canvas-wrap"><canvas id="snCanvas" width="400" height="400"></canvas></div>
+            <div class="sn-actions">
+                <button class="sn-btn sn-btn-primary" id="snStart"><i class="fa-solid fa-play"></i> 시작</button>
+                <button class="sn-btn sn-btn-ghost" id="snPause"><i class="fa-solid fa-pause"></i> 일시정지</button>
+            </div>
+            <div class="sn-msg" id="snMsg">시작 버튼을 누른 뒤 화살표 / WASD로 조작</div>
+            <div class="sn-help"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> 또는 <kbd>WASD</kbd> · 모바일은 캔버스 위 스와이프 · <kbd>Space</kbd> 일시정지</div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=20260509w"></script>
+<script src="../assets/js/data-service.js?v=20260418q"></script>
+<script src="../assets/js/common.js?v=20260509a"></script>
+<script>
+(function(){
+    const N = 20;
+    const BEST_KEY = 'seul_lounge_snake_best';
+    const cv = document.getElementById('snCanvas');
+    const ctx = cv.getContext('2d');
+    const elScore = document.getElementById('snScore');
+    const elLen = document.getElementById('snLen');
+    const elBest = document.getElementById('snBest');
+    const elMsg = document.getElementById('snMsg');
+    let snake, dir, nextDir, food, score, best=0, running=false, paused=false, loop=null;
+
+    try{best = parseInt(localStorage.getItem(BEST_KEY)||'0',10)||0}catch(e){}
+    elBest.textContent = best;
+
+    function reset(){
+        snake = [{x:10,y:10},{x:9,y:10},{x:8,y:10}];
+        dir = {x:1,y:0}; nextDir = dir;
+        score = 0;
+        placeFood();
+        update();
+    }
+
+    function placeFood(){
+        while(true){
+            const f = {x:Math.floor(Math.random()*N), y:Math.floor(Math.random()*N)};
+            if(!snake.some(s => s.x===f.x && s.y===f.y)){food=f; return}
+        }
+    }
+
+    function update(){
+        elScore.textContent = score;
+        elLen.textContent = snake.length;
+        const cell = cv.width / N;
+        ctx.fillStyle = '#142644';
+        ctx.fillRect(0,0,cv.width,cv.height);
+        // grid
+        ctx.strokeStyle = 'rgba(195,165,105,0.06)';
+        ctx.lineWidth = 1;
+        for(let i=1;i<N;i++){
+            ctx.beginPath();ctx.moveTo(i*cell,0);ctx.lineTo(i*cell,cv.height);ctx.stroke();
+            ctx.beginPath();ctx.moveTo(0,i*cell);ctx.lineTo(cv.width,i*cell);ctx.stroke();
+        }
+        // food
+        ctx.fillStyle = '#D6423A';
+        ctx.beginPath();
+        ctx.arc(food.x*cell+cell/2, food.y*cell+cell/2, cell*0.38, 0, Math.PI*2);
+        ctx.fill();
+        // snake
+        snake.forEach((s,i) => {
+            ctx.fillStyle = i===0 ? '#FFD24A' : 'rgba(195,165,105,'+(0.85-i*0.018)+')';
+            ctx.fillRect(s.x*cell+1, s.y*cell+1, cell-2, cell-2);
+        });
+    }
+
+    function step(){
+        dir = nextDir;
+        const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+        if(head.x<0||head.x>=N||head.y<0||head.y>=N || snake.some(s=>s.x===head.x&&s.y===head.y)){
+            gameOver(); return;
+        }
+        snake.unshift(head);
+        if(head.x===food.x && head.y===food.y){
+            score += 10;
+            placeFood();
+        } else {
+            snake.pop();
+        }
+        update();
+    }
+
+    function gameOver(){
+        running = false;
+        if(loop){clearInterval(loop);loop=null}
+        if(score > best){best=score;elBest.textContent=best;try{localStorage.setItem(BEST_KEY,String(best))}catch(e){}}
+        elMsg.textContent = 'Game Over · Score '+score+' · 길이 '+snake.length;
+        elMsg.className = 'sn-msg over';
+    }
+
+    function start(){
+        reset();
+        running = true; paused = false;
+        if(loop) clearInterval(loop);
+        loop = setInterval(() => { if(!paused) step() }, 110);
+        elMsg.textContent = '게임 진행 중';
+        elMsg.className = 'sn-msg';
+    }
+
+    function pause(){
+        if(!running) return;
+        paused = !paused;
+        elMsg.textContent = paused ? '일시정지 — 다시 누르면 재개' : '게임 진행 중';
+    }
+
+    function turn(nx, ny){
+        if(!running||paused) return;
+        if(dir.x === -nx && dir.y === -ny) return; // 반대방향 금지
+        nextDir = {x:nx,y:ny};
+    }
+
+    document.addEventListener('keydown', e => {
+        const k = e.key.toLowerCase();
+        if(k==='arrowleft'||k==='a'){turn(-1,0);e.preventDefault()}
+        else if(k==='arrowup'||k==='w'){turn(0,-1);e.preventDefault()}
+        else if(k==='arrowright'||k==='d'){turn(1,0);e.preventDefault()}
+        else if(k==='arrowdown'||k==='s'){turn(0,1);e.preventDefault()}
+        else if(k===' '){pause();e.preventDefault()}
+    });
+
+    let tx=0,ty=0;
+    cv.addEventListener('touchstart', e => {const t=e.changedTouches[0];tx=t.clientX;ty=t.clientY;e.preventDefault()},{passive:false});
+    cv.addEventListener('touchend', e => {
+        const t=e.changedTouches[0]; const dx=t.clientX-tx, dy=t.clientY-ty;
+        if(Math.abs(dx)<20 && Math.abs(dy)<20) return;
+        if(Math.abs(dx)>Math.abs(dy)) turn(dx>0?1:-1, 0);
+        else turn(0, dy>0?1:-1);
+    });
+
+    document.getElementById('snStart').addEventListener('click', start);
+    document.getElementById('snPause').addEventListener('click', pause);
+
+    reset();
+})();
+</script>
+</body>
+</html>
