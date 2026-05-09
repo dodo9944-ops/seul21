@@ -374,7 +374,7 @@ const MOCK = {
       ],
       floorInfo:'지하3층 / 지상25층', floorAbove:25, floorBelow:3,
       grossFloorArea:'-', floorAreaRatio:'-',
-      members:'-', memberCount:0,
+      members:'774명', memberCount:774,
       siteArea:'-', buildingArea:'-', constructor:'삼성물산·GS건설·대림산업·현대산업개발 (컨소시엄)', client:'왕십리뉴타운제1구역 주택재개발정비사업조합',
       phase:'입주 완료 (2015.04) — 조합 해산·정산 진행', totalCost:'-', proportionalRate:null,
       tasks:['사업시행계획 수립·인가 자문','시공자 선정·계약 자문 (4사 컨소시엄)','시공관리 자문','분양 절차 자문','조합 운영·정산 자문','조합 해산 절차 자문'],
