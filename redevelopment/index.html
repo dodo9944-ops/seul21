@@ -395,7 +395,7 @@
 
         /* ── PROCESS MODAL ── */
         .pm-overlay {
-            position: fixed; inset: 0; z-index: 10010;
+            position: fixed; inset: 0; z-index: 9000;
             background: rgba(10,15,28,0.7); backdrop-filter: blur(6px);
             display: flex; align-items: center; justify-content: center;
             opacity: 0; visibility: hidden; transition: all 0.35s ease;
@@ -513,9 +513,6 @@
         .fc-img{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0}
         .fc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
         .fc:hover .fc-img img{transform:scale(1.06)}
-        .fc-img.fc-img--split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#0A0F1C}
-        .fc-img.fc-img--split .fc-img-cell{position:relative;overflow:hidden;width:100%;height:100%}
-        .fc-img.fc-img--split .fc-img-cell img{width:100%;height:100%;object-fit:cover}
         .fc-img .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.5) 0%,transparent 50%);pointer-events:none}
         .fc-img .badges,.fc-fb .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
         .fc-fb{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
@@ -829,13 +826,13 @@
 
 <!-- ===== 업무실적 상세 모달 ===== -->
 <style>
-.mp-overlay{position:fixed;inset:0;background:rgba(10,15,28,.65);backdrop-filter:blur(4px);z-index:10010;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
+.mp-overlay{position:fixed;inset:0;background:rgba(10,15,28,.65);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
 .mp-overlay.open{opacity:1;pointer-events:auto}
 .mp-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
 .mp-overlay.open .mp-modal{transform:translateY(0) scale(1)}
-.mp-close{position:absolute;top:60px;right:14px;z-index:20;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.85);border:2px solid rgba(255,255,255,.3);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.mp-close{position:absolute;top:-20px;right:-20px;z-index:20;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.85);border:2px solid rgba(255,255,255,.3);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.5)}
 .mp-close:hover{background:#0A0F1C;transform:scale(1.1)}
-@media(max-width:540px){.mp-close{top:50px;right:10px;width:38px;height:38px;font-size:15px}}
+@media(max-width:540px){.mp-close{top:-16px;right:-16px;width:38px;height:38px;font-size:15px}}
 .mp-hero{width:100%;height:300px;position:relative;overflow:hidden;border-radius:18px 18px 0 0}
 .mp-hero img{width:100%;height:100%;object-fit:cover;display:block}
 .mp-hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.75) 0%,rgba(10,15,28,.15) 50%,transparent 100%);pointer-events:none}
@@ -880,7 +877,7 @@
 .pb{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.3px}
 .pb-type{background:#C3A569;color:#0A0F1C}
 .pb-ing{background:rgba(195,165,105,.15);color:#C3A569;border:1px solid rgba(195,165,105,.3)}
-.pb-done{background:rgba(255,255,255,.92);color:#0A0F1C;border:1px solid rgba(0,0,0,.12)}
+.pb-done{background:rgba(126,200,160,.15);color:#7ec8a0;border:1px solid rgba(126,200,160,.3)}
 @media(max-width:540px){.mp-hero,.mp-hero-fb{height:200px}.mp-title-area h2{font-size:18px}.mp-body{padding:20px}.mp-info-grid{grid-template-columns:1fr}.mp-info-item:nth-child(odd){border-right:none}.mp-spec-grid{grid-template-columns:1fr 1fr}.mp-spec-item:nth-child(3n){border-right:1px solid #eee}.mp-spec-item:nth-child(2n){border-right:none}}
 </style>
 <div class="mp-overlay" id="mpOverlay">
@@ -1078,18 +1075,9 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         function _safe(v){return v||'정보 확인중'}
         pfEl.innerHTML=featured.map(function(p,idx){
             var imgSrc=p.featuredImage||p.thumbnail;
-            var img;
-            if(p.featuredImages && p.featuredImages.length>=2){
-                var c0=p.featuredImages[0], c1=p.featuredImages[1];
-                img='<div class="fc-img fc-img--split">'+
-                    '<div class="fc-img-cell"><img src="'+c0.src+'" alt="'+(c0.alt||p.name)+'"></div>'+
-                    '<div class="fc-img-cell"><img src="'+c1.src+'" alt="'+(c1.alt||p.name)+'"></div>'+
-                    '<div class="ov"></div><div class="badges">'+_bg(p)+'</div></div>';
-            } else if(imgSrc){
-                img='<div class="fc-img"><img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+_dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+_bg(p)+'</div></div>';
-            } else {
-                img='<div class="fc-fb" data-t="'+_dt(p.type)+'"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+_bg(p)+'</div></div>';
-            }
+            var img=imgSrc?
+                '<div class="fc-img"><img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+_dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+_bg(p)+'</div></div>':
+                '<div class="fc-fb" data-t="'+_dt(p.type)+'"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+_bg(p)+'</div></div>';
             var primary=idx===0?' fc-primary':'';
             return'<div class="fc'+primary+'" onclick="MPF.open(\''+p.id+'\')">'+img+
                 '<div class="fc-body"><div class="fn">'+p.name+'</div>'+
