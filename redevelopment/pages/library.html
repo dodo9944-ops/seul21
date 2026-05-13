@@ -256,7 +256,7 @@
 </div></div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260510f"></script>
+<script src="../assets/data/mock-data.js?v=20260513a"></script>
 <script src="../assets/js/data-service.js?v=20260418k"></script>
 <script src="../assets/js/common.js?v=20260509a"></script>
 <script>
@@ -359,17 +359,7 @@ var ftLabel=item.fileType==='pdf'?'PDF':item.fileType==='hwp'?'HWP':item.fileTyp
 var btnIcon=isWeb?'fa-newspaper':'fa-arrow-down';
 var btnText=isWeb?'뉴스보기':ftLabel+' 다운로드';
 
-return'<div class="lib-item'+pinCls+'">'+
-'<div class="lib-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i><span class="ft-label">'+(isWeb?'NEWS':ftLabel)+'</span></div>'+
-'<div class="lib-content">'+
-    '<div class="lib-title" data-id="'+item.id+'">'+item.title+'</div>'+
-    '<div class="lib-desc">'+item.description+'</div>'+
-    '<div class="lib-meta-row">'+badges+'</div>'+
-'</div>'+
-'<div class="lib-action">'+
-    '<span class="lib-size">'+item.fileSize+'</span>'+
-    '<button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid '+btnIcon+'"></i> '+btnText+'</button>'+
-'</div></div>'}).join('');
+return'<div class="lib-item'+pinCls+'">'+'<div class="lib-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i><span class="ft-label">'+(isWeb?'NEWS':ftLabel)+'</span></div>'+'<div class="lib-content">'+'    <div class="lib-title" data-id="'+item.id+'">'+item.title+'</div>'+'    <div class="lib-desc">'+item.description+'</div>'+'    <div class="lib-meta-row">'+badges+'</div>'+'</div>'+'<div class="lib-action">'+'    <span class="lib-size">'+item.fileSize+'</span>'+'    <button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid '+btnIcon+'"></i> '+btnText+'</button>'+'</div></div>'}).join('');
 
 /* Pager */
 var pg=document.getElementById('pager');
@@ -583,7 +573,7 @@ var fileMap={
 'news0509f':{web:'../downloads/news_20260509f.html'},
 'news0509g':{web:'../downloads/news_20260509g.html'},
 'law0509a':{web:'../downloads/law_20260509a.html'},
-'case0509a':{web:'../downloads/case_20260509a.html'},'news0510a':{web:'../downloads/news_20260510a.html'},'news0510b':{web:'../downloads/news_20260510b.html'},'news0510c':{web:'../downloads/news_20260510c.html'},'law0510a':{web:'../downloads/law_20260510a.html'},'case0510a':{web:'../downloads/case_20260510a.html'}};
+'case0509a':{web:'../downloads/case_20260509a.html'},'news0510a':{web:'../downloads/news_20260510a.html'},'news0510b':{web:'../downloads/news_20260510b.html'},'news0510c':{web:'../downloads/news_20260510c.html'},'law0510a':{web:'../downloads/law_20260510a.html'},'case0510a':{web:'../downloads/case_20260510a.html'},'news0512a':{web:'../downloads/news_20260512a.html'},'news0513a':{web:'../downloads/news_20260513a.html'},'news0513b':{web:'../downloads/news_20260513b.html'}};
 function handleDownload(id){
 var m=fileMap[id];
 if(!m){var item=allItems.find(function(i){return i.id===id});
