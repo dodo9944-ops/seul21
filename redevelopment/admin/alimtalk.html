@@ -208,7 +208,7 @@
     </div>
 </div>
 
-<script src="../assets/data/mock-data.js?v=20260513a"></script>
+<script src="../assets/data/mock-data.js?v=20260513c"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script>
 (function(){
@@ -337,7 +337,7 @@
 
     /* Export Excel */
     document.getElementById('exportExcel').addEventListener('click',function(){
-        var csv='\uFEFF이름,전화번호,관심분야,신청일,상태\n';
+        var csv='﻿이름,전화번호,관심분야,신청일,상태\n';
         subscribers.forEach(function(s){
             csv+=s.name+','+formatPhone(s.phone)+','+(s.interests||[]).join('/')+','+s.subscribedAt+','+(s.status==='active'?'수신중':'수신거부')+'\n';
         });

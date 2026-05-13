@@ -395,7 +395,7 @@
 
         /* ── PROCESS MODAL ── */
         .pm-overlay {
-            position: fixed; inset: 0; z-index: 10010;
+            position: fixed; inset: 0; z-index: 9000;
             background: rgba(10,15,28,0.7); backdrop-filter: blur(6px);
             display: flex; align-items: center; justify-content: center;
             opacity: 0; visibility: hidden; transition: all 0.35s ease;
@@ -513,9 +513,6 @@
         .fc-img{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0}
         .fc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
         .fc:hover .fc-img img{transform:scale(1.06)}
-        .fc-img.fc-img--split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#0A0F1C}
-        .fc-img.fc-img--split .fc-img-cell{position:relative;overflow:hidden;width:100%;height:100%}
-        .fc-img.fc-img--split .fc-img-cell img{width:100%;height:100%;object-fit:cover}
         .fc-img .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.5) 0%,transparent 50%);pointer-events:none}
         .fc-img .badges,.fc-fb .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
         .fc-fb{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
@@ -829,13 +826,13 @@
 
 <!-- ===== 업무실적 상세 모달 ===== -->
 <style>
-.mp-overlay{position:fixed;inset:0;background:rgba(10,15,28,.65);backdrop-filter:blur(4px);z-index:10010;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
+.mp-overlay{position:fixed;inset:0;background:rgba(10,15,28,.65);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
 .mp-overlay.open{opacity:1;pointer-events:auto}
 .mp-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
 .mp-overlay.open .mp-modal{transform:translateY(0) scale(1)}
-.mp-close{position:absolute;top:60px;right:14px;z-index:20;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.85);border:2px solid rgba(255,255,255,.3);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.mp-close{position:absolute;top:-20px;right:-20px;z-index:20;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.85);border:2px solid rgba(255,255,255,.3);border-radius:50%;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.5)}
 .mp-close:hover{background:#0A0F1C;transform:scale(1.1)}
-@media(max-width:540px){.mp-close{top:50px;right:10px;width:38px;height:38px;font-size:15px}}
+@media(max-width:540px){.mp-close{top:-16px;right:-16px;width:38px;height:38px;font-size:15px}}
 .mp-hero{width:100%;height:300px;position:relative;overflow:hidden;border-radius:18px 18px 0 0}
 .mp-hero img{width:100%;height:100%;object-fit:cover;display:block}
 .mp-hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,15,28,.75) 0%,rgba(10,15,28,.15) 50%,transparent 100%);pointer-events:none}
@@ -880,7 +877,7 @@
 .pb{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.3px}
 .pb-type{background:#C3A569;color:#0A0F1C}
 .pb-ing{background:rgba(195,165,105,.15);color:#C3A569;border:1px solid rgba(195,165,105,.3)}
-.pb-done{background:rgba(255,255,255,.92);color:#0A0F1C;border:1px solid rgba(0,0,0,.12)}
+.pb-done{background:rgba(126,200,160,.15);color:#7ec8a0;border:1px solid rgba(126,200,160,.3)}
 @media(max-width:540px){.mp-hero,.mp-hero-fb{height:200px}.mp-title-area h2{font-size:18px}.mp-body{padding:20px}.mp-info-grid{grid-template-columns:1fr}.mp-info-item:nth-child(odd){border-right:none}.mp-spec-grid{grid-template-columns:1fr 1fr}.mp-spec-item:nth-child(3n){border-right:1px solid #eee}.mp-spec-item:nth-child(2n){border-right:none}}
 </style>
 <div class="mp-overlay" id="mpOverlay">
@@ -899,7 +896,7 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260513a"></script>
+<script src="assets/data/mock-data.js?v=20260513c"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
 <script src="assets/js/common.js?v=20260509a"></script>
 
@@ -1078,18 +1075,9 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         function _safe(v){return v||'정보 확인중'}
         pfEl.innerHTML=featured.map(function(p,idx){
             var imgSrc=p.featuredImage||p.thumbnail;
-            var img;
-            if(p.featuredImages && p.featuredImages.length>=2){
-                var c0=p.featuredImages[0], c1=p.featuredImages[1];
-                img='<div class="fc-img fc-img--split">'+
-                    '<div class="fc-img-cell"><img src="'+c0.src+'" alt="'+(c0.alt||p.name)+'"></div>'+
-                    '<div class="fc-img-cell"><img src="'+c1.src+'" alt="'+(c1.alt||p.name)+'"></div>'+
-                    '<div class="ov"></div><div class="badges">'+_bg(p)+'</div></div>';
-            } else if(imgSrc){
-                img='<div class="fc-img"><img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+_dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+_bg(p)+'</div></div>';
-            } else {
-                img='<div class="fc-fb" data-t="'+_dt(p.type)+'"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+_bg(p)+'</div></div>';
-            }
+            var img=imgSrc?
+                '<div class="fc-img"><img src="'+imgSrc+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fc-fb" data-t="'+_dt(p.type)+'" style="display:none;position:absolute;inset:0"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div></div><div class="ov"></div><div class="badges">'+_bg(p)+'</div></div>':
+                '<div class="fc-fb" data-t="'+_dt(p.type)+'"><div class="fbi"><i class="fa-solid '+_ti(p.type)+'"></i></div><span class="fbl">'+p.type+'</span><div class="badges">'+_bg(p)+'</div></div>';
             var primary=idx===0?' fc-primary':'';
             return'<div class="fc'+primary+'" onclick="MPF.open(\''+p.id+'\')">'+img+
                 '<div class="fc-body"><div class="fn">'+p.name+'</div>'+
@@ -1115,7 +1103,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var today=new Date(); today.setHours(0,0,0,0);
         var cutoff=new Date(today); cutoff.setDate(cutoff.getDate()-7);
         var cutStr=cutoff.toISOString().slice(0,10);
-        var newsFileMap={'news0403':'downloads/news_20260403.html','news0404':'downloads/news_20260404.html','news0407a':'downloads/news_20260407a.html','news0407b':'downloads/news_20260407b.html','news0407c':'downloads/news_20260407c.html','news0407d':'downloads/news_20260407d.html','news0430a':'downloads/news_20260430a.html','news0430b':'downloads/news_20260430b.html','news0501a':'downloads/news_20260501a.html','news0501b':'downloads/news_20260501b.html','news0502a':'downloads/news_20260502a.html','news0502b':'downloads/news_20260502b.html','news0502c':'downloads/news_20260502c.html','news0502d':'downloads/news_20260502d.html','news0502e':'downloads/news_20260502e.html','news0502f':'downloads/news_20260502f.html','news0502g':'downloads/news_20260502g.html','news0503a':'downloads/news_20260503a.html','news0503b':'downloads/news_20260503b.html','news0503c':'downloads/news_20260503c.html','news0503d':'downloads/news_20260503d.html','news0503e':'downloads/news_20260503e.html','news0503f':'downloads/news_20260503f.html','news0503g':'downloads/news_20260503g.html','news0504a':'downloads/news_20260504a.html','news0504b':'downloads/news_20260504b.html','news0504c':'downloads/news_20260504c.html','news0504d':'downloads/news_20260504d.html','news0504e':'downloads/news_20260504e.html','news0505a':'downloads/news_20260505a.html','news0505b':'downloads/news_20260505b.html','news0505c':'downloads/news_20260505c.html','news0505d':'downloads/news_20260505d.html','news0505e':'downloads/news_20260505e.html','news0505f':'downloads/news_20260505f.html','news0506a':'downloads/news_20260506a.html','news0506b':'downloads/news_20260506b.html','news0506c':'downloads/news_20260506c.html','news0506d':'downloads/news_20260506d.html','news0506e':'downloads/news_20260506e.html','news0506f':'downloads/news_20260506f.html','news0506g':'downloads/news_20260506g.html','news0506h':'downloads/news_20260506h.html','news0506i':'downloads/news_20260506i.html','news0507a':'downloads/news_20260507a.html','news0507b':'downloads/news_20260507b.html','news0507c':'downloads/news_20260507c.html','news0507d':'downloads/news_20260507d.html','news0507f':'downloads/news_20260507f.html','news0508a':'downloads/news_20260508a.html','news0508b':'downloads/news_20260508b.html','news0508c':'downloads/news_20260508c.html','news0506j':'downloads/news_20260506j.html','news0506k':'downloads/news_20260506k.html','news0509a':'downloads/news_20260509a.html','news0509b':'downloads/news_20260509b.html','news0509c':'downloads/news_20260509c.html','news0509d':'downloads/news_20260509d.html','news0509e':'downloads/news_20260509e.html','news0509f':'downloads/news_20260509f.html','news0509g':'downloads/news_20260509g.html','news0510a':'downloads/news_20260510a.html','news0510b':'downloads/news_20260510b.html','news0510c':'downloads/news_20260510c.html'};
+        var newsFileMap={'news0403':'downloads/news_20260403.html','news0404':'downloads/news_20260404.html','news0407a':'downloads/news_20260407a.html','news0407b':'downloads/news_20260407b.html','news0407c':'downloads/news_20260407c.html','news0407d':'downloads/news_20260407d.html','news0430a':'downloads/news_20260430a.html','news0430b':'downloads/news_20260430b.html','news0501a':'downloads/news_20260501a.html','news0501b':'downloads/news_20260501b.html','news0502a':'downloads/news_20260502a.html','news0502b':'downloads/news_20260502b.html','news0502c':'downloads/news_20260502c.html','news0502d':'downloads/news_20260502d.html','news0502e':'downloads/news_20260502e.html','news0502f':'downloads/news_20260502f.html','news0502g':'downloads/news_20260502g.html','news0503a':'downloads/news_20260503a.html','news0503b':'downloads/news_20260503b.html','news0503c':'downloads/news_20260503c.html','news0503d':'downloads/news_20260503d.html','news0503e':'downloads/news_20260503e.html','news0503f':'downloads/news_20260503f.html','news0503g':'downloads/news_20260503g.html','news0504a':'downloads/news_20260504a.html','news0504b':'downloads/news_20260504b.html','news0504c':'downloads/news_20260504c.html','news0504d':'downloads/news_20260504d.html','news0504e':'downloads/news_20260504e.html','news0505a':'downloads/news_20260505a.html','news0505b':'downloads/news_20260505b.html','news0505c':'downloads/news_20260505c.html','news0505d':'downloads/news_20260505d.html','news0505e':'downloads/news_20260505e.html','news0505f':'downloads/news_20260505f.html','news0506a':'downloads/news_20260506a.html','news0506b':'downloads/news_20260506b.html','news0506c':'downloads/news_20260506c.html','news0506d':'downloads/news_20260506d.html','news0506e':'downloads/news_20260506e.html','news0506f':'downloads/news_20260506f.html','news0506g':'downloads/news_20260506g.html','news0506h':'downloads/news_20260506h.html','news0506i':'downloads/news_20260506i.html','news0507a':'downloads/news_20260507a.html','news0507b':'downloads/news_20260507b.html','news0507c':'downloads/news_20260507c.html','news0507d':'downloads/news_20260507d.html','news0507f':'downloads/news_20260507f.html','news0508a':'downloads/news_20260508a.html','news0508b':'downloads/news_20260508b.html','news0508c':'downloads/news_20260508c.html','news0506j':'downloads/news_20260506j.html','news0506k':'downloads/news_20260506k.html','news0509a':'downloads/news_20260509a.html','news0509b':'downloads/news_20260509b.html','news0509c':'downloads/news_20260509c.html','news0509d':'downloads/news_20260509d.html','news0509e':'downloads/news_20260509e.html','news0509f':'downloads/news_20260509f.html','news0509g':'downloads/news_20260509g.html','news0510a':'downloads/news_20260510a.html','news0510b':'downloads/news_20260510b.html','news0510c':'downloads/news_20260510c.html','news0512a':'downloads/news_20260512a.html','news0513a':'downloads/news_20260513a.html','news0513b':'downloads/news_20260513b.html'};
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
