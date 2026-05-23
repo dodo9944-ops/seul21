@@ -1,0 +1,91 @@
+/* ============================================================
+   download-view.css — 자료실 상세 페이지 전용 스타일 (dv-* 체계)
+   세울엔지니어링 자료실 / 2026-05-24 복구
+   - 5/18 도입된 dv-* 상세 템플릿이 의존하는 스타일.
+   - .inner / #header / #footer 는 common.css·common.js 가 처리.
+   - 디자인 톤: 네이비 #0A0F1C·#142644 / 골드 #C3A569 (자료실 원본 동일)
+   ============================================================ */
+
+.download-view-wrap{background:#f5f6f8;padding:32px 0 64px;min-height:60vh}
+.download-view-wrap .inner{max-width:860px;margin:0 auto;padding:0 24px}
+
+/* breadcrumb */
+.dv-breadcrumb{font-size:13px;color:#8a91a0;margin-bottom:18px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dv-breadcrumb a{color:#5a6678;text-decoration:none}
+.dv-breadcrumb a:hover{color:#142644;text-decoration:underline}
+.dv-breadcrumb span{color:#c0c6d0}
+
+/* article card */
+.dv-article{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:34px 32px;box-shadow:0 2px 12px rgba(10,15,28,.04)}
+
+/* category badge (상단 카테고리 라벨) */
+.dv-category-badge{display:inline-block;font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;margin-bottom:16px;color:#fff;background:#142644;letter-spacing:.02em}
+.dv-category-badge.badge-news{background:#1a3a6b}
+.dv-category-badge.badge-law{background:#5b3a8e}
+.dv-category-badge.badge-case{background:#1f7a5a}
+.dv-category-badge.badge-lease{background:#0f6e8c}
+.dv-category-badge.badge-sell{background:#c2671a}
+
+/* title */
+.dv-title{font-size:25px;font-weight:800;line-height:1.4;color:#0A0F1C;margin-bottom:16px;word-break:keep-all}
+
+/* meta */
+.dv-meta{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid #eef0f3;font-size:13px}
+.dv-source{color:#C3A569;font-weight:600}
+.dv-date{color:#9aa0ac}
+
+/* body */
+.dv-body{color:#2a2f3a;line-height:1.8;font-size:15px}
+.dv-section{margin-bottom:30px}
+.dv-section:last-child{margin-bottom:0}
+.dv-section h2{font-size:18px;font-weight:800;color:#0A0F1C;margin:0 0 16px;padding-bottom:10px;border-bottom:2px solid #C3A569}
+.dv-section h3{font-size:15.5px;font-weight:700;color:#142644;margin:20px 0 10px}
+.dv-section p{margin:0 0 12px;color:#3a414e}
+.dv-section p:last-child{margin-bottom:0}
+.dv-section ul,.dv-section ol{margin:0 0 14px;padding-left:4px;list-style:none}
+.dv-section ul li{position:relative;padding-left:18px;margin-bottom:8px;color:#3a414e}
+.dv-section ul li::before{content:'▪';position:absolute;left:0;top:2px;color:#C3A569;font-size:12px}
+.dv-section ol{counter-reset:dv;padding-left:0}
+.dv-section ol li{position:relative;padding-left:26px;margin-bottom:8px;color:#3a414e;counter-increment:dv}
+.dv-section ol li::before{content:counter(dv);position:absolute;left:0;top:1px;width:18px;height:18px;background:#142644;color:#fff;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.dv-body strong{color:#c0392b;font-weight:700}
+
+/* table */
+.dv-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+.dv-table th{background:#0A0F1C;color:#fff;padding:11px 13px;text-align:left;font-weight:600;font-size:13px}
+.dv-table td{padding:11px 13px;border-bottom:1px solid #e9ecf1;color:#3a414e;vertical-align:top}
+.dv-table tr:last-child td{border-bottom:none}
+.dv-table tr:nth-child(even) td{background:#f8f9fb}
+.dv-table strong{color:#0A0F1C}
+
+/* source section */
+.dv-source-section{margin-top:8px}
+.dv-source-section h2{border-bottom-color:#d8c19a}
+.dv-source-section li{font-size:13px;color:#6a7180;word-break:break-all}
+
+/* back button */
+.dv-back-btn-wrap{margin-top:30px;text-align:center}
+.dv-back-btn-wrap a,.dv-back-btn-wrap button{display:inline-block;padding:12px 28px;background:#142644;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;transition:background .15s}
+.dv-back-btn-wrap a:hover,.dv-back-btn-wrap button:hover{background:#0A0F1C}
+
+/* inline 강조 배지 (본문 표/문장 내) */
+.badge-hot,.badge-new,.badge-ok,.badge-no,.badge-warning,.badge-blue,.badge-gold,.badge-red,.badge-purple,.badge-posco{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;color:#fff;line-height:1.6;white-space:nowrap}
+.badge-hot,.badge-red,.badge-no{background:#c0392b}
+.badge-new,.badge-ok{background:#1f7a5a}
+.badge-warning,.badge-gold{background:#C3A569}
+.badge-blue,.badge-posco{background:#1a3a6b}
+.badge-purple{background:#5b3a8e}
+.badge-lease{background:#0f6e8c}
+.badge-sell{background:#c2671a}
+
+/* responsive */
+@media (max-width:640px){
+  .download-view-wrap{padding:20px 0 48px}
+  .download-view-wrap .inner{padding:0 14px}
+  .dv-article{padding:22px 18px;border-radius:12px}
+  .dv-title{font-size:20px}
+  .dv-meta{font-size:12px}
+  .dv-section h2{font-size:16px}
+  .dv-body{font-size:14px}
+  .dv-table{font-size:12.5px;display:block;overflow-x:auto;white-space:nowrap}
+}
