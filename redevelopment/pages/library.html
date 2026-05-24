@@ -318,7 +318,7 @@ if(e5)e5.textContent=cc['주요뉴스']||0;
 function renderTabs(){var el=document.getElementById('catTabs');if(!el)return;var cc=getCatCounts();
 el.innerHTML=catDefs.map(function(d){
 var ic=d.icon?'<i class="fa-solid '+d.icon+'"></i> ':'';
-return'<button class="cat-tab'+(curCat===d.key?' on':'')+' data-cat="'+d.key+'">'+ic+d.label+'<span class="cnt">'+cc[d.key]+'</span></button>'}).join('')}
+return'<button class="cat-tab'+(curCat===d.key?' on':'')+'" data-cat="'+d.key+'">'+ic+d.label+'<span class="cnt">'+cc[d.key]+'</span></button>'}).join('')}
 
 /* Popular section */
 /* Filter + Sort */
