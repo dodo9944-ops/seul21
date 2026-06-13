@@ -112,9 +112,7 @@ const App = (() => {
           ]},
           { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
             { href:`${B}/pages/contact.html`, label:'문의하기' },
-            { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
-            { href:`${B}/pages/community.html`, label:'커뮤니티' },
-            { href:`${B}/pages/notice.html`, label:'공지사항' },
+            { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },            { href:`${B}/pages/notice.html`, label:'공지사항' },
             { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
           ]},
         ].map(g => g.sub
