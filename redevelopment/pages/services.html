@@ -164,14 +164,13 @@
     }
     .services-hero .inner {
         position: relative; z-index: 2;
-        display: flex; align-items: center; gap: 48px;
+        display: flex; align-items: flex-start; gap: 48px;
     }
     .services-hero .hero-text { flex: 1; min-width: 0; position: relative; z-index: 2; }
     .services-hero .hero-cards-float {
-        flex-shrink: 0; width: 360px;
+        flex-shrink: 0; align-self: center; width: 360px;
         display: grid; grid-template-columns: repeat(2, 1fr);
         gap: 12px; position: relative; z-index: 2;
-        transform: translateY(6px);
     }
     .services-hero .hero-breadcrumb {
         display: flex; align-items: center; gap: 6px;
