@@ -171,7 +171,7 @@
     @media (max-width: 600px) { .uni-hero { padding: 28px 0 28px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     /* === 본문 우측 바로가기 퀵네비 (스크롤 추종 + 상단/하단 리밋) === */
-    .lib-quicknav{position:fixed;top:50%;transform:translateY(-50%);right:calc((100vw - 1280px)/2 - 148px);width:132px;z-index:40;display:flex;flex-direction:column;gap:8px;opacity:0;pointer-events:none;transition:opacity .35s ease}
+    .lib-quicknav{position:fixed;top:0;right:calc((100vw - 1280px)/2 - 148px);width:132px;z-index:40;display:flex;flex-direction:column;gap:8px}
     .lib-quicknav.show{opacity:1;pointer-events:auto}
     .lqn-title{font-size:11px;font-weight:800;color:var(--gray-400);letter-spacing:1px;margin-bottom:3px;padding-left:3px}
     .lqn-card{display:flex;align-items:center;gap:9px;padding:11px 12px;background:#fff;border:1px solid var(--gray-200);border-radius:10px;cursor:pointer;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:all .2s}
@@ -345,13 +345,17 @@ window.cmSwitch=function(cat){curCat=cat;curPage=1;renderTabs();render();var t=d
   var nav=document.getElementById('libQuicknav');if(!nav)return;
   function upd(){
     var pb=document.querySelector('.page-body');if(!pb)return;
-    var y=window.scrollY||window.pageYOffset||0;var vh=window.innerHeight;var mid=y+vh/2;
+    var y=window.scrollY||window.pageYOffset||0;var vh=window.innerHeight;
     var pbTop=pb.offsetTop,pbBottom=pbTop+pb.offsetHeight;
-    if(mid>pbTop+40&&mid<pbBottom-40)nav.classList.add('show');else nav.classList.remove('show');
+    var navH=nav.offsetHeight||300;
+    var center=vh/2-navH/2;
+    var minTop=(pbTop-y)+10;
+    var maxTop=(pbBottom-y)-navH-10;
+    nav.style.top=Math.max(minTop,Math.min(center,maxTop))+'px';
   }
   window.addEventListener('scroll',upd,{passive:true});
   window.addEventListener('resize',upd);
-  setTimeout(upd,300);
+  upd();setTimeout(upd,300);
 })();
 document.getElementById('cmTabs').addEventListener('click',function(e){
     var btn=e.target.closest('.cm-tab');if(!btn)return;

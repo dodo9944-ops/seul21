@@ -191,7 +191,7 @@
     @media (max-width: 600px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     /* === 본문 우측 바로가기 퀵네비 (스크롤 추종 + 상단/하단 리밋) === */
-    .lib-quicknav{position:fixed;top:50%;transform:translateY(-50%);right:calc((100vw - 1280px)/2 - 148px);width:132px;z-index:40;display:flex;flex-direction:column;gap:8px;opacity:0;pointer-events:none;transition:opacity .35s ease}
+    .lib-quicknav{position:fixed;top:0;right:calc((100vw - 1280px)/2 - 148px);width:132px;z-index:40;display:flex;flex-direction:column;gap:8px}
     .lib-quicknav.show{opacity:1;pointer-events:auto}
     .lqn-title{font-size:11px;font-weight:800;color:var(--gray-400);letter-spacing:1px;margin-bottom:3px;padding-left:3px}
     .lqn-card{display:flex;align-items:center;gap:9px;padding:11px 12px;background:#fff;border:1px solid var(--gray-200);border-radius:10px;cursor:pointer;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:all .2s}
@@ -565,19 +565,20 @@ window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.qu
   var nav=document.getElementById('libQuicknav');if(!nav)return;
   function upd(){
     var pb=document.querySelector('.page-body');if(!pb)return;
-    var y=window.scrollY||window.pageYOffset||0;
-    var vh=window.innerHeight;
-    var mid=y+vh/2;
+    var y=window.scrollY||window.pageYOffset||0;var vh=window.innerHeight;
     var pbTop=pb.offsetTop,pbBottom=pbTop+pb.offsetHeight;
-    /* 퀵네비는 화면 세로 중앙 고정 → 화면 중앙이 본문 영역 안일 때만 표시.
-       상단 리밋: 히어로 침범 방지 / 하단 리밋: 푸터 침범 방지 */
-    if(mid>pbTop+40&&mid<pbBottom-40)nav.classList.add('show');else nav.classList.remove('show');
+    var navH=nav.offsetHeight||300;
+    var center=vh/2-navH/2;
+    var minTop=(pbTop-y)+10;       /* 상단: 시작글에서 멈춤 */
+    var maxTop=(pbBottom-y)-navH-10;/* 하단: 끝글에서 멈춤 */
+    /* 본문을 따라 내려오다 시작글/끝글 경계에서 멈춤(사라지지 않음) */
+    nav.style.top=Math.max(minTop,Math.min(center,maxTop))+'px';
   }
   window.addEventListener('scroll',upd,{passive:true});
   window.addEventListener('resize',upd);
   /* 카테고리 전환 등으로 본문 높이가 바뀐 직후에도 재판정 */
   window.LIB_REFRESH_QUICKNAV=upd;
-  setTimeout(upd,300);
+  upd();setTimeout(upd,300);
 })();
 
 renderTabs();render();
