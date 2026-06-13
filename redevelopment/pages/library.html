@@ -383,16 +383,28 @@ for(var i=bStart;i<=bEnd;i++)h+='<button'+(i===curPage?' class="active"':'')+' o
 h+='<button class="arr" '+(curPage===pages?'disabled':'')+' onclick="LIB.page('+(curPage+1)+')"><i class="fa-solid fa-chevron-right"></i></button>';
 pg.innerHTML=h}
 
+/* breadcrumb 동적: 홈 > 자료실 > [카테고리] + URL 동기화 */
+function updateBreadcrumb(cat){
+    var bc=document.querySelector('.uh-bc');if(!bc)return;
+    var m={'주요뉴스':'주요뉴스','법령':'관계법령','서식가이드':'서식·매뉴얼','사례':'사례집'};
+    var arrow='<i class="fa-solid fa-chevron-right"></i>';
+    var label=(cat&&cat!=='전체')?m[cat]:null;
+    if(label){bc.innerHTML='<a href="../index.html">홈</a>'+arrow+'<a href="library.html">자료실</a>'+arrow+'<span>'+label+'</span>';}
+    else{bc.innerHTML='<a href="../index.html">홈</a>'+arrow+'<span>자료실</span>';}
+}
+function syncCatUrl(cat){try{var u=new URL(location.href);if(cat&&cat!=='전체')u.searchParams.set('cat',cat);else u.searchParams.delete('cat');history.pushState({cat:cat},'',u.toString());}catch(e){}}
+
 /* 히어로 카드 클릭 → 카테고리 전환 */
 window.switchCat=function(cat){
     curCat=cat;curPage=1;renderTabs();render();
+    updateBreadcrumb(cat);syncCatUrl(cat);
     var target=document.querySelector('.page-body')||document.getElementById('catTabs');
     if(target) window.scrollTo({top:target.offsetTop-80,behavior:'smooth'});
     if(window.LIB_REFRESH_QUICKNAV)setTimeout(window.LIB_REFRESH_QUICKNAV,450);
 };
 
 /* Events */
-(function(){var el=document.getElementById('catTabs');if(el)el.addEventListener('click',function(e){var btn=e.target.closest('.cat-tab');if(!btn)return;curCat=btn.dataset.cat;curPage=1;renderTabs();render()});})();
+(function(){var el=document.getElementById('catTabs');if(el)el.addEventListener('click',function(e){var btn=e.target.closest('.cat-tab');if(!btn)return;switchCat(btn.dataset.cat)});})();
 document.getElementById('searchInput').addEventListener('input',function(){searchQ=this.value.trim();curPage=1;render()});
 document.getElementById('sortSelect').addEventListener('change',function(){curSort=this.value;curPage=1;render()});
 document.getElementById('perSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;render()});
@@ -400,6 +412,8 @@ document.getElementById('libList').addEventListener('click',function(e){var btn=
 
 var urlCat=new URLSearchParams(location.search).get('cat');
 if(urlCat){curCat=urlCat}
+updateBreadcrumb(curCat);
+window.addEventListener('popstate',function(){var c=new URLSearchParams(location.search).get('cat')||'전체';curCat=c;curPage=1;renderTabs();render();updateBreadcrumb(c);});
 
 
 /* Download handler */
