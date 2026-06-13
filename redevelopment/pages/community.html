@@ -170,6 +170,15 @@
     @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(10,15,28,0.5) 0%, rgba(20,38,68,0.7) 100%); } }
     @media (max-width: 600px) { .uni-hero { padding: 28px 0 28px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
+    /* === 본문 우측 바로가기 퀵네비 (스크롤 추종 + 상단/하단 리밋) === */
+    .lib-quicknav{position:fixed;top:50%;transform:translateY(-50%);right:calc((100vw - 1280px)/2 - 148px);width:132px;z-index:40;display:flex;flex-direction:column;gap:8px;opacity:0;pointer-events:none;transition:opacity .35s ease}
+    .lib-quicknav.show{opacity:1;pointer-events:auto}
+    .lqn-title{font-size:11px;font-weight:800;color:var(--gray-400);letter-spacing:1px;margin-bottom:3px;padding-left:3px}
+    .lqn-card{display:flex;align-items:center;gap:9px;padding:11px 12px;background:#fff;border:1px solid var(--gray-200);border-radius:10px;cursor:pointer;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:all .2s}
+    .lqn-card:hover{border-color:var(--gold);transform:translateX(-3px);box-shadow:0 6px 18px rgba(195,165,105,.14)}
+    .lqn-ic{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-navy));display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--gold);flex-shrink:0}
+    .lqn-card .lqn-tx{font-size:12.5px;font-weight:700;color:var(--gray-800)}
+    @media(max-width:1600px){.lib-quicknav{display:none}}
     </style>
 </head>
 <body>
@@ -186,7 +195,7 @@
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_community.png" alt="세울엔지니어링 커뮤니티"></div>
-            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('질문')"><div class="uh-ci"><i class="fa-solid fa-circle-question"></i></div><h4>질문·답변</h4><p>실무 질의 및 전문가 답변</p></div><div class="uh-card" style="cursor:pointer" onclick="cmSwitch('후기')"><div class="uh-ci"><i class="fa-solid fa-comment-dots"></i></div><h4>후기·경험</h4><p>현장 경험 및 사례 공유</p></div></div>
+            <div class="uh-cards"><a class="uh-card" href="library.html?cat=주요뉴스"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></a><a class="uh-card" href="library.html?cat=법령"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>도시정비법·고시·공고·판례·질의회신 및 지침·규정</p></a><a class="uh-card" href="library.html?cat=서식가이드"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></a><a class="uh-card" href="community.html"><div class="uh-ci"><i class="fa-solid fa-comments"></i></div><h4>커뮤니티</h4><p>정비사업 정보 공유·소통 공간</p></a></div>
         </div>
     </div>
 </div>
@@ -198,6 +207,13 @@
     </div>
 </div>
 
+<div class="lib-quicknav" id="libQuicknav">
+    <div class="lqn-title">바로가기</div>
+    <a class="lqn-card" href="library.html?cat=주요뉴스"><span class="lqn-ic"><i class="fa-solid fa-newspaper"></i></span><span class="lqn-tx">주요뉴스</span></a>
+    <a class="lqn-card" href="library.html?cat=법령"><span class="lqn-ic"><i class="fa-solid fa-scale-balanced"></i></span><span class="lqn-tx">관계법령</span></a>
+    <a class="lqn-card" href="library.html?cat=서식가이드"><span class="lqn-ic"><i class="fa-solid fa-file-pen"></i></span><span class="lqn-tx">서식·매뉴얼</span></a>
+    <a class="lqn-card" href="community.html"><span class="lqn-ic"><i class="fa-solid fa-comments"></i></span><span class="lqn-tx">커뮤니티</span></a>
+</div>
 <div class="page-body"><div class="inner">
     <div class="cm-featured" id="cmFeatured"></div>
     <div class="cm-list-head"><div class="count" id="cmCount"></div></div>
@@ -323,6 +339,20 @@ function render(){
 
 /* Events */
 window.cmSwitch=function(cat){curCat=cat;curPage=1;renderTabs();render();var t=document.getElementById('cmTabs');if(t)window.scrollTo({top:t.offsetTop-80,behavior:'smooth'})};
+
+/* 우측 퀵네비 — 스크롤 추종 + 화면 중앙 기준 리밋 (히어로/푸터 침범 방지) */
+(function(){
+  var nav=document.getElementById('libQuicknav');if(!nav)return;
+  function upd(){
+    var pb=document.querySelector('.page-body');if(!pb)return;
+    var y=window.scrollY||window.pageYOffset||0;var vh=window.innerHeight;var mid=y+vh/2;
+    var pbTop=pb.offsetTop,pbBottom=pbTop+pb.offsetHeight;
+    if(mid>pbTop+40&&mid<pbBottom-40)nav.classList.add('show');else nav.classList.remove('show');
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  window.addEventListener('resize',upd);
+  setTimeout(upd,300);
+})();
 document.getElementById('cmTabs').addEventListener('click',function(e){
     var btn=e.target.closest('.cm-tab');if(!btn)return;
     curCat=btn.dataset.cat;curPage=1;renderTabs();render();

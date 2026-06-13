@@ -567,10 +567,11 @@ window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.qu
     var pb=document.querySelector('.page-body');if(!pb)return;
     var y=window.scrollY||window.pageYOffset||0;
     var vh=window.innerHeight;
+    var mid=y+vh/2;
     var pbTop=pb.offsetTop,pbBottom=pbTop+pb.offsetHeight;
-    /* 본문(page-body)이 화면에 보이는 동안 항상 표시 — 카테고리 전환해도 유지.
-       상단 리밋: 히어로만 보이면 숨김 / 하단 리밋: 본문 다 지나 푸터면 숨김 */
-    if(y+vh>pbTop+120&&y<pbBottom-80)nav.classList.add('show');else nav.classList.remove('show');
+    /* 퀵네비는 화면 세로 중앙 고정 → 화면 중앙이 본문 영역 안일 때만 표시.
+       상단 리밋: 히어로 침범 방지 / 하단 리밋: 푸터 침범 방지 */
+    if(mid>pbTop+40&&mid<pbBottom-40)nav.classList.add('show');else nav.classList.remove('show');
   }
   window.addEventListener('scroll',upd,{passive:true});
   window.addEventListener('resize',upd);
