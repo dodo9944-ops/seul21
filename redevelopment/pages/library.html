@@ -362,7 +362,7 @@ function renderFeatured(){
   var html='<div class="pop-head"><div class="ph-icon"><i class="fa-solid fa-fire"></i></div><h3>인기 자료</h3><span>'+lbl+' · 다운로드순</span></div><div class="pop-grid">';
   top.forEach(function(item,idx){
     var fi=getIcon(item.fileType);
-    html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-rank">'+(idx+1)+'</div><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-download"></i> '+(item.downloads||0)+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
+    html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-download"></i> '+(item.downloads||0)+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
   });
   html+='</div>';
   fb.innerHTML=html;
