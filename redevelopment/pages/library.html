@@ -246,6 +246,8 @@
         <div class="ctrl-count" id="resultCount"></div>
     </div>
 
+    <div class="pop-sec" id="libFeatured"></div>
+
     <div class="lib-list" id="libList"></div>
 
     <div class="lib-empty" id="emptyState" style="display:none">
@@ -347,8 +349,28 @@ if(curSort==='title')return(a.title||'').localeCompare(b.title||'');
 return(b.date||'').localeCompare(a.date||'')});
 return items}
 
+/* 인기 자료 — 카테고리별 다운로드 top 3 (맨 상단, 커뮤니티 인기글과 동일 컨셉) */
+function renderFeatured(){
+  var fb=document.getElementById('libFeatured');if(!fb)return;
+  var items=allItems.slice();
+  if(curCat!=='전체'){var d=catDefs.find(function(x){return x.key===curCat});var ks=d&&d.keys?d.keys:[curCat];items=items.filter(function(i){return ks.indexOf(i.category)>=0});}
+  items.sort(function(a,b){return(b.downloads||0)-(a.downloads||0)});
+  var top=items.slice(0,3);
+  if(!top.length){fb.style.display='none';return}
+  fb.style.display='';
+  var lbl=(curCat==='전체')?'전체':((catDefs.find(function(x){return x.key===curCat})||{}).label||'');
+  var html='<div class="pop-head"><div class="ph-icon"><i class="fa-solid fa-fire"></i></div><h3>인기 자료</h3><span>'+lbl+' · 다운로드순</span></div><div class="pop-grid">';
+  top.forEach(function(item,idx){
+    var fi=getIcon(item.fileType);
+    html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-rank">'+(idx+1)+'</div><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-download"></i> '+(item.downloads||0)+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
+  });
+  html+='</div>';
+  fb.innerHTML=html;
+}
+
 /* Render list */
 function render(){
+renderFeatured();
 var items=getFiltered(),total=items.length,pages=Math.ceil(total/PER);
 if(curPage>pages)curPage=1;
 var start=(curPage-1)*PER,slice=items.slice(start,start+PER);
