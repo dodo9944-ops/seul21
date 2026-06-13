@@ -431,11 +431,10 @@ var p=null;for(var i=0;i<D.length;i++)if(D[i].id===id){p=D[i];break}
 if(!p)return;
 var dh=document.getElementById('dHero'),t=dt(p.type);
 var mn=p.name;
-var closeBtn='<button onclick="PF.close()" style="position:absolute;top:60px;right:14px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,15,28,.6);border:1.5px solid rgba(255,255,255,.35);border-radius:50%;cursor:pointer;font-size:15px;color:#fff;backdrop-filter:blur(4px)"><i class="fa-solid fa-xmark"></i></button>';
 var titleArea='<div class="d-title-area"><div class="badges">'+bg(p)+'</div><h2>'+mn+'</h2><div class="d-phase"><i class="fa-solid fa-flag"></i> '+(p.phase||p.status)+'</div></div>';
 if(p.detailImage){
-dh.innerHTML='<div class="d-hero"><img src="'+p.detailImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#0A0F1C,#1a3055)\';this.style.display=\'none\'"><div class="ov"></div>'+titleArea+closeBtn+'</div>'}
-else{dh.innerHTML='<div class="d-hero-fb" data-t="'+t+'"><div class="fbi" style="width:72px;height:72px"><i class="fa-solid '+ti(p.type)+'" style="font-size:32px;color:rgba(195,165,105,.6)"></i></div>'+titleArea+closeBtn+'</div>'}
+dh.innerHTML='<div class="d-hero"><img src="'+p.detailImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#0A0F1C,#1a3055)\';this.style.display=\'none\'"><div class="ov"></div>'+titleArea+'</div>'}
+else{dh.innerHTML='<div class="d-hero-fb" data-t="'+t+'"><div class="fbi" style="width:72px;height:72px"><i class="fa-solid '+ti(p.type)+'" style="font-size:32px;color:rgba(195,165,105,.6)"></i></div>'+titleArea+'</div>'}
 
 /* Body sections */
 var html='';
