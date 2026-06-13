@@ -339,7 +339,7 @@ function render(){
 var items=getFiltered(),total=items.length,pages=Math.ceil(total/PER);
 if(curPage>pages)curPage=1;
 var start=(curPage-1)*PER,slice=items.slice(start,start+PER);
-document.getElementById('resultCount').innerHTML='옵 <strong>'+total+'</strong>건';
+document.getElementById('resultCount').innerHTML='총 <strong>'+total+'</strong>건';
 var list=document.getElementById('libList'),empty=document.getElementById('emptyState');
 if(!slice.length){list.innerHTML='';empty.style.display='flex';document.getElementById('pagerWrap').style.display='none';return}
 empty.style.display='none';document.getElementById('pagerWrap').style.display='';
