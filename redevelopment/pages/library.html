@@ -388,6 +388,7 @@ window.switchCat=function(cat){
     curCat=cat;curPage=1;renderTabs();render();
     var target=document.querySelector('.page-body')||document.getElementById('catTabs');
     if(target) window.scrollTo({top:target.offsetTop-80,behavior:'smooth'});
+    if(window.LIB_REFRESH_QUICKNAV)setTimeout(window.LIB_REFRESH_QUICKNAV,450);
 };
 
 /* Events */
@@ -550,14 +551,17 @@ window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.qu
   var nav=document.getElementById('libQuicknav');if(!nav)return;
   function upd(){
     var pb=document.querySelector('.page-body');if(!pb)return;
-    var footer=document.getElementById('site-footer');
     var y=window.scrollY||window.pageYOffset||0;
-    var startY=pb.offsetTop-160;
-    var endY=(footer?footer.offsetTop:document.body.scrollHeight)-window.innerHeight-40;
-    if(y>startY&&y<endY)nav.classList.add('show');else nav.classList.remove('show');
+    var vh=window.innerHeight;
+    var pbTop=pb.offsetTop,pbBottom=pbTop+pb.offsetHeight;
+    /* 본문(page-body)이 화면에 보이는 동안 항상 표시 — 카테고리 전환해도 유지.
+       상단 리밋: 히어로만 보이면 숨김 / 하단 리밋: 본문 다 지나 푸터면 숨김 */
+    if(y+vh>pbTop+120&&y<pbBottom-80)nav.classList.add('show');else nav.classList.remove('show');
   }
   window.addEventListener('scroll',upd,{passive:true});
   window.addEventListener('resize',upd);
+  /* 카테고리 전환 등으로 본문 높이가 바뀐 직후에도 재판정 */
+  window.LIB_REFRESH_QUICKNAV=upd;
   setTimeout(upd,300);
 })();
 
