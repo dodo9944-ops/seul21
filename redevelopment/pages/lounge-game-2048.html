@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 — 게임 모음 | 세울 쉼터</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260614c">
+    <style>
+    .lgg-hero{padding:48px 0 36px;background:linear-gradient(135deg,#060A14 0%,#0A0F1C 40%,#142644 100%);text-align:center}
+    .lgg-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:14px}
+    .lgg-back:hover{color:var(--gold)}
+    .lgg-cat-tag{display:inline-block;font-size:10.5px;font-weight:800;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;padding:4px 12px;border:1px solid rgba(195,165,105,.35);border-radius:20px}
+    .lgg-hero h1{font-size:30px;font-weight:900;color:#fff;margin-bottom:8px}
+    .lgg-hero h1 em{font-style:normal;color:var(--gold)}
+    .lgg-hero p{font-size:13.5px;color:rgba(255,255,255,.55);margin:0}
+    .lgg-body{padding:48px 0 96px;background:linear-gradient(180deg,#fff,#f7f8fb)}
+
+    .g2-wrap{max-width:480px;margin:0 auto}
+    .g2-info{display:flex;justify-content:space-between;margin-bottom:16px;gap:8px}
+    .g2-stat{flex:1;background:#0F1D35;color:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid rgba(195,165,105,.2)}
+    .g2-stat .lbl{font-size:10.5px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
+    .g2-stat .val{font-size:22px;font-weight:900;font-feature-settings:"tnum"}
+    .g2-board{position:relative;background:#bbada0;border-radius:14px;padding:10px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;aspect-ratio:1;touch-action:none;user-select:none}
+    .g2-cell{background:rgba(238,228,218,.35);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;color:#776e65;font-feature-settings:"tnum";transition:transform .1s}
+    .g2-cell.t2{background:#eee4da;color:#776e65}
+    .g2-cell.t4{background:#ede0c8;color:#776e65}
+    .g2-cell.t8{background:#f2b179;color:#fff}
+    .g2-cell.t16{background:#f59563;color:#fff}
+    .g2-cell.t32{background:#f67c5f;color:#fff}
+    .g2-cell.t64{background:#f65e3b;color:#fff}
+    .g2-cell.t128{background:#edcf72;color:#fff;font-size:28px}
+    .g2-cell.t256{background:#edcc61;color:#fff;font-size:28px}
+    .g2-cell.t512{background:#edc850;color:#fff;font-size:28px}
+    .g2-cell.t1024{background:#edc53f;color:#fff;font-size:22px}
+    .g2-cell.t2048{background:#edc22e;color:#fff;font-size:22px;box-shadow:0 0 0 3px var(--gold)}
+    .g2-cell.t4096,.g2-cell.t8192{background:#3c3a32;color:#fff;font-size:22px}
+    .g2-cell.pop{animation:tilePop .18s ease}
+    @keyframes tilePop{0%{transform:scale(.4)}80%{transform:scale(1.1)}100%{transform:scale(1)}}
+
+    .g2-actions{display:flex;gap:8px;margin-top:14px}
+    .g2-btn{flex:1;padding:12px;border-radius:10px;border:none;cursor:pointer;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;font-family:var(--font);transition:all .15s}
+    .g2-btn-primary{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C}
+    .g2-btn-primary:hover{transform:translateY(-2px)}
+    .g2-msg{text-align:center;margin-top:14px;min-height:22px;font-size:13px;font-weight:700;color:var(--gray-600)}
+    .g2-msg.win{color:#E48706;font-weight:800;font-size:15px}
+    .g2-msg.over{color:#D6423A}
+    .g2-help{margin-top:12px;padding:10px 14px;background:rgba(0,0,0,.04);border-radius:10px;font-size:12px;color:var(--gray-500);text-align:center;line-height:1.6}
+    .g2-help kbd{display:inline-block;padding:2px 7px;background:#fff;border:1px solid var(--gray-300);border-radius:4px;font-size:11px;font-family:monospace;margin:0 2px}
+    @media(max-width:540px){.g2-cell{font-size:24px}.g2-cell.t128,.g2-cell.t256,.g2-cell.t512{font-size:20px}.g2-cell.t1024,.g2-cell.t2048{font-size:16px}}
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="lgg-hero">
+    <div class="inner">
+        <a href="lounge-games.html" class="lgg-back"><i class="fa-solid fa-arrow-left"></i> 게임 모음으로 돌아가기</a>
+        <div class="lgg-cat-tag">▣ Puzzle</div>
+        <h1><em>2048</em></h1>
+        <p>같은 숫자 타일 두 개를 합쳐 2048을 만드세요!</p>
+    </div>
+</div>
+
+<div class="lgg-body">
+    <div class="inner">
+        <div class="g2-wrap">
+            <div class="g2-info">
+                <div class="g2-stat"><div class="lbl">Score</div><div class="val" id="g2Score">0</div></div>
+                <div class="g2-stat"><div class="lbl">Best</div><div class="val" id="g2Best">0</div></div>
+            </div>
+            <div class="g2-board" id="g2Board"></div>
+            <div class="g2-actions">
+                <button class="g2-btn g2-btn-primary" id="g2New"><i class="fa-solid fa-rotate"></i> 새 게임</button>
+            </div>
+            <div class="g2-msg" id="g2Msg">화살표 또는 WASD 키 / 모바일은 스와이프</div>
+            <div class="g2-help"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> 또는 <kbd>W A S D</kbd> · 모바일은 보드 위 스와이프</div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=songrim0614"></script>
+<script src="../assets/js/data-service.js?v=20260418q"></script>
+<script src="../assets/js/common.js?v=20260614a"></script>
+<script>
+(function(){
+    const N = 4;
+    const BEST_KEY = 'seul_lounge_g2048_best';
+    const board = document.getElementById('g2Board');
+    const elScore = document.getElementById('g2Score');
+    const elBest = document.getElementById('g2Best');
+    const elMsg = document.getElementById('g2Msg');
+    let g = [], score = 0, best = 0, won = false, over = false;
+
+    try{best = parseInt(localStorage.getItem(BEST_KEY)||'0',10)||0}catch(e){}
+    elBest.textContent = best;
+
+    function init(){
+        board.innerHTML = '';
+        for(let i=0;i<N*N;i++){const c=document.createElement('div');c.className='g2-cell';c.id='g'+i;board.appendChild(c)}
+    }
+    init();
+
+    function newGame(){
+        g = new Array(N*N).fill(0);
+        score = 0; won = false; over = false;
+        spawn(); spawn();
+        render();
+        elMsg.textContent = '화살표 또는 WASD 키 / 모바일은 스와이프';
+        elMsg.className = 'g2-msg';
+    }
+
+    function spawn(){
+        const empty = [];
+        for(let i=0;i<g.length;i++) if(g[i]===0) empty.push(i);
+        if(!empty.length) return false;
+        const idx = empty[Math.floor(Math.random()*empty.length)];
+        g[idx] = Math.random() < 0.9 ? 2 : 4;
+        const cell = document.getElementById('g'+idx);
+        if(cell){cell.classList.add('pop'); setTimeout(()=>cell.classList.remove('pop'),200)}
+        return true;
+    }
+
+    function render(){
+        for(let i=0;i<g.length;i++){
+            const c = document.getElementById('g'+i);
+            const v = g[i];
+            c.textContent = v ? v : '';
+            c.className = 'g2-cell' + (v ? ' t'+v : '');
+        }
+        elScore.textContent = score;
+        if(score > best){best = score; elBest.textContent = best; try{localStorage.setItem(BEST_KEY, String(best))}catch(e){}}
+    }
+
+    function rotate(arr){const r=new Array(N*N).fill(0);for(let i=0;i<N;i++)for(let j=0;j<N;j++)r[j*N+(N-1-i)]=arr[i*N+j];return r}
+
+    function moveLeft(arr){
+        let moved = false;
+        const next = arr.slice();
+        for(let r=0;r<N;r++){
+            const row = next.slice(r*N, r*N+N).filter(v=>v!==0);
+            for(let i=0;i<row.length-1;i++){
+                if(row[i] === row[i+1]){row[i]*=2; score+=row[i]; row.splice(i+1,1); if(row[i]===2048) won=true}
+            }
+            while(row.length<N) row.push(0);
+            for(let c=0;c<N;c++){
+                if(next[r*N+c] !== row[c]) moved = true;
+                next[r*N+c] = row[c];
+            }
+        }
+        return {next, moved};
+    }
+
+    function move(dir){
+        if(over) return;
+        // dir: 0=left, 1=up, 2=right, 3=down
+        let arr = g;
+        for(let i=0;i<dir;i++) arr = rotate(arr);
+        const {next, moved} = moveLeft(arr);
+        let result = next;
+        for(let i=0;i<(4-dir)%4;i++) result = rotate(result);
+        if(!moved) return;
+        g = result;
+        spawn();
+        render();
+        if(won){elMsg.textContent='🎉 2048 달성! 계속 플레이 가능';elMsg.className='g2-msg win';won=false}
+        if(!canMove()){over=true;elMsg.textContent='Game Over · Score '+score;elMsg.className='g2-msg over'}
+    }
+
+    function canMove(){
+        if(g.indexOf(0) >= 0) return true;
+        for(let r=0;r<N;r++)for(let c=0;c<N;c++){
+            const v=g[r*N+c];
+            if(c<N-1 && g[r*N+c+1]===v) return true;
+            if(r<N-1 && g[(r+1)*N+c]===v) return true;
+        }
+        return false;
+    }
+
+    document.addEventListener('keydown', e => {
+        const k = e.key.toLowerCase();
+        if(k==='arrowleft'||k==='a'){move(0);e.preventDefault()}
+        else if(k==='arrowup'||k==='w'){move(1);e.preventDefault()}
+        else if(k==='arrowright'||k==='d'){move(2);e.preventDefault()}
+        else if(k==='arrowdown'||k==='s'){move(3);e.preventDefault()}
+    });
+
+    // touch swipe
+    let tx=0,ty=0;
+    board.addEventListener('touchstart', e => {const t=e.changedTouches[0];tx=t.clientX;ty=t.clientY},{passive:true});
+    board.addEventListener('touchend', e => {
+        const t=e.changedTouches[0]; const dx=t.clientX-tx, dy=t.clientY-ty;
+        if(Math.abs(dx)<25 && Math.abs(dy)<25) return;
+        if(Math.abs(dx)>Math.abs(dy)) move(dx>0?2:0);
+        else move(dy>0?3:1);
+    });
+
+    document.getElementById('g2New').addEventListener('click', newGame);
+    newGame();
+})();
+</script>
+</body>
+</html>

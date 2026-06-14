@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재개발 OX 퀴즈 — 게임 모음 | 세울 쉼터</title>
+    <meta name="description" content="재개발·재건축 상식 OX 퀴즈. 도시정비법·실무 절차 12문항 중 10문항 무작위 출제. 정답·해설 즉시 표시.">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260614c">
+    <style>
+    .lgg-hero{padding:48px 0 36px;background:linear-gradient(135deg,#060A14 0%,#0A0F1C 40%,#142644 100%);text-align:center}
+    .lgg-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:14px}
+    .lgg-back:hover{color:var(--gold)}
+    .lgg-cat-tag{display:inline-block;font-size:10.5px;font-weight:800;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;padding:4px 12px;border:1px solid rgba(195,165,105,.35);border-radius:20px}
+    .lgg-hero h1{font-size:30px;font-weight:900;color:#fff;margin-bottom:8px}
+    .lgg-hero h1 em{font-style:normal;color:var(--gold)}
+    .lgg-hero p{font-size:13.5px;color:rgba(255,255,255,.55);margin:0}
+    .lgg-body{padding:48px 0 96px;background:linear-gradient(180deg,#fff,#f7f8fb)}
+
+    .qz-wrap{max-width:600px;margin:0 auto}
+
+    /* 통계 카드 */
+    .qz-stats{display:flex;gap:8px;margin-bottom:14px}
+    .qz-stat{flex:1;background:#0F1D35;color:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid rgba(195,165,105,.2)}
+    .qz-stat .lbl{font-size:10.5px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
+    .qz-stat .val{font-size:22px;font-weight:900;font-feature-settings:"tnum"}
+
+    /* 진행 바 */
+    .qz-bar{height:6px;background:var(--gray-200);border-radius:99px;overflow:hidden;margin-bottom:18px}
+    .qz-bar > i{display:block;height:100%;background:linear-gradient(90deg,#C3A569,#D4B87A);width:0;transition:width .3s}
+
+    /* 카드 */
+    .qz-card{background:#fff;border:1px solid var(--gray-200);border-radius:16px;padding:28px 26px;min-height:260px;display:flex;flex-direction:column;box-shadow:0 8px 28px rgba(10,15,28,.05)}
+    .qz-num{font-size:11px;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+    .qz-q{font-size:18px;line-height:1.6;font-weight:700;color:var(--brand-dark);margin-bottom:22px;flex:1;letter-spacing:-.3px;word-break:keep-all}
+    .qz-q em{font-style:normal;background:linear-gradient(transparent 60%,rgba(195,165,105,.25) 60%);font-weight:800}
+
+    /* OX 버튼 */
+    .qz-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .qz-btn{padding:18px;border-radius:12px;border:2px solid transparent;cursor:pointer;font-size:24px;font-weight:900;font-family:var(--font);transition:all .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+    .qz-btn .k{font-size:11px;font-weight:700;opacity:.55;letter-spacing:1px}
+    .qz-btn-o{background:rgba(81,207,102,.12);color:#2F9E44;border-color:rgba(81,207,102,.35)}
+    .qz-btn-o:hover:not(:disabled){background:rgba(81,207,102,.22);transform:translateY(-2px);box-shadow:0 8px 18px rgba(81,207,102,.2)}
+    .qz-btn-x{background:rgba(255,107,107,.1);color:#E03131;border-color:rgba(255,107,107,.32)}
+    .qz-btn-x:hover:not(:disabled){background:rgba(255,107,107,.2);transform:translateY(-2px);box-shadow:0 8px 18px rgba(255,107,107,.2)}
+    .qz-btn:disabled{opacity:.55;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+    .qz-btn.picked-correct{background:rgba(81,207,102,.32)!important;border-color:#2F9E44!important;color:#1B7B33!important}
+    .qz-btn.picked-wrong{background:rgba(255,107,107,.3)!important;border-color:#E03131!important;color:#A61E1E!important}
+    .qz-btn.reveal-correct{outline:3px solid rgba(47,158,68,.5);outline-offset:-2px}
+
+    /* 피드백 */
+    .qz-fb{margin-top:14px;padding:14px 16px;border-radius:10px;background:#f7f8fb;border:1px solid var(--gray-200);display:none}
+    .qz-fb.show{display:block;animation:qzFb .3s ease}
+    @keyframes qzFb{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+    .qz-fb .head{font-size:13px;font-weight:800;margin-bottom:6px;letter-spacing:-.2px}
+    .qz-fb.ok .head{color:#2F9E44}
+    .qz-fb.no .head{color:#E03131}
+    .qz-fb .ex{font-size:13px;line-height:1.65;color:var(--gray-700);word-break:keep-all}
+    .qz-fb .ex b{color:var(--brand-dark)}
+
+    /* 다음 버튼 */
+    .qz-next-row{margin-top:14px;display:flex;gap:8px}
+    .qz-next{flex:1;padding:14px;border-radius:10px;border:none;cursor:pointer;font-size:14px;font-weight:800;letter-spacing:.5px;font-family:var(--font);background:linear-gradient(135deg,#0F1D35,#1a2d50);color:#fff;transition:all .15s;display:none;align-items:center;justify-content:center;gap:8px}
+    .qz-next.show{display:inline-flex}
+    .qz-next:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(15,29,53,.25)}
+
+    /* 시작 화면 */
+    .qz-start{text-align:center;padding:34px 24px}
+    .qz-start i.big{font-size:46px;color:var(--gold);margin-bottom:14px;display:block}
+    .qz-start h2{font-size:22px;font-weight:900;color:var(--brand-dark);margin-bottom:8px}
+    .qz-start p{font-size:13.5px;color:var(--gray-500);line-height:1.7;margin-bottom:20px;word-break:keep-all}
+    .qz-start-btn{padding:14px 36px;border-radius:12px;border:none;cursor:pointer;font-size:14px;font-weight:800;letter-spacing:1.2px;font-family:var(--font);background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C;transition:all .15s}
+    .qz-start-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(195,165,105,.3)}
+
+    /* 결과 화면 */
+    .qz-end{text-align:center;padding:30px 24px}
+    .qz-end .score{font-size:60px;font-weight:900;color:var(--brand-dark);font-feature-settings:"tnum";line-height:1;margin-bottom:6px}
+    .qz-end .score em{font-style:normal;color:var(--gold);font-size:38px}
+    .qz-end .grade{font-size:16px;font-weight:800;color:var(--gold);margin-bottom:6px;letter-spacing:.5px}
+    .qz-end .sub{font-size:13px;color:var(--gray-500);margin-bottom:20px}
+    .qz-end-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+    .qz-end-btns button,.qz-end-btns a{padding:12px 22px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:800;font-family:var(--font);text-decoration:none;display:inline-flex;align-items:center;gap:6px;letter-spacing:.5px;transition:all .15s;border:none}
+    .qz-end-btns .pri{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C}
+    .qz-end-btns .pri:hover{transform:translateY(-2px)}
+    .qz-end-btns .gh{background:#fff;color:var(--brand-dark);border:1.5px solid var(--gray-200)}
+    .qz-end-btns .gh:hover{border-color:var(--gold);color:var(--gold)}
+
+    /* 리뷰 표 */
+    .qz-review{margin-top:20px;text-align:left}
+    .qz-review h3{font-size:13px;font-weight:800;color:var(--brand-dark);margin-bottom:10px}
+    .qz-review h3 i{color:var(--gold);margin-right:6px}
+    .qz-rev-row{display:flex;gap:10px;padding:10px 12px;background:#f7f8fb;border-radius:8px;margin-bottom:6px;font-size:12.5px;align-items:flex-start}
+    .qz-rev-row .ic{flex-shrink:0;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff}
+    .qz-rev-row .ic.ok{background:#2F9E44}
+    .qz-rev-row .ic.no{background:#E03131}
+    .qz-rev-row .qt{flex:1;line-height:1.55;color:var(--gray-700);word-break:keep-all}
+    .qz-rev-row .qt b{color:var(--brand-dark)}
+    .qz-rev-row .ans{font-weight:800;font-size:11.5px;letter-spacing:.5px}
+    .qz-rev-row .ans.o{color:#2F9E44}
+    .qz-rev-row .ans.x{color:#E03131}
+
+    .qz-help{margin-top:12px;padding:10px 14px;background:rgba(0,0,0,.04);border-radius:10px;font-size:12px;color:var(--gray-500);text-align:center;line-height:1.65}
+    .qz-help kbd{display:inline-block;padding:2px 7px;background:#fff;border:1px solid var(--gray-300);border-radius:4px;font-size:11px;font-family:monospace;margin:0 2px}
+
+    @media(max-width:540px){
+        .qz-card{padding:22px 18px;min-height:220px}
+        .qz-q{font-size:16px}
+        .qz-btn{padding:16px;font-size:22px}
+        .qz-end .score{font-size:50px}
+    }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="lgg-hero">
+    <div class="inner">
+        <a href="lounge-games.html" class="lgg-back"><i class="fa-solid fa-arrow-left"></i> 게임 모음으로 돌아가기</a>
+        <div class="lgg-cat-tag">▣ Quiz</div>
+        <h1>재개발 <em>OX 퀴즈</em></h1>
+        <p>도시정비법·실무 절차·재건축 상식. 12문제 중 10문제 무작위 출제.</p>
+    </div>
+</div>
+
+<div class="lgg-body">
+    <div class="inner">
+        <div class="qz-wrap" id="qzWrap">
+            <!-- 동적 렌더 -->
+        </div>
+
+        <div class="qz-help">
+            <kbd>O</kbd> 또는 <kbd>1</kbd> · <kbd>←</kbd> = O / <kbd>X</kbd> 또는 <kbd>2</kbd> · <kbd>→</kbd> = X / <kbd>Enter</kbd> 또는 <kbd>Space</kbd> = 다음
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=songrim0614"></script>
+<script src="../assets/js/data-service.js?v=20260418q"></script>
+<script src="../assets/js/common.js?v=20260614a"></script>
+<script>
+(function(){
+    const ROUND_SIZE = 10;
+    const BEST_KEY = 'seul_lounge_quiz_best';
+
+    // 문제 풀 (정답·해설 검증된 도시정비법 기반)
+    const POOL = [
+        {q:'안전진단 D등급은 재건축 추진이 가능한 등급이다.', a:true,
+         ex:'안전진단 결과 <b>D·E등급</b>이면 재건축이 가능합니다. A·B등급은 유지·보수, C등급은 조건부.'},
+        {q:'정비구역 지정 결정 권한은 일반적으로 시·도지사에게 있다.', a:true,
+         ex:'도시 및 주거환경정비법상 정비기본계획 수립 및 정비구역 지정은 <b>시·도지사 권한</b>입니다.'},
+        {q:'추진위원회 단계는 조합 설립인가 이후에 진행되는 절차이다.', a:false,
+         ex:'순서는 <b>추진위원회 → 조합설립인가 → 시공자 선정 → 사업시행인가</b>. 추진위가 먼저입니다.'},
+        {q:'시공자(시공사)는 조합 총회 의결로 선정한다.', a:true,
+         ex:'도시정비법 제29조에 따라 <b>시공자 선정은 조합 총회</b>에서 결정합니다.'},
+        {q:'종전자산 평가의 기준일은 사업시행계획인가 고시일이다.', a:true,
+         ex:'도시정비법 제74조: 종전자산은 <b>사업시행계획인가 고시일</b>을 기준으로 평가합니다.'},
+        {q:'관리처분계획인가는 조합원 분양신청보다 먼저 이루어진다.', a:false,
+         ex:'사업시행인가 → <b>분양신청</b> → 관리처분계획 수립·인가 순서. 분양신청이 선행됩니다.'},
+        {q:'재건축에서 미동의자에게는 매도청구권을 행사할 수 있다.', a:true,
+         ex:'도시정비법 제64조 매도청구. <b>재개발은 토지수용</b>, <b>재건축은 매도청구</b>로 처리합니다.'},
+        {q:'재건축초과이익환수제는 현재 폐지된 제도이다.', a:false,
+         ex:'2024년 개정으로 부담금 면제·완화 기준이 상향되었으나 <b>제도 자체는 존속</b>합니다.'},
+        {q:'1+1 분양은 종전자산 가액 또는 면적이 일정 기준 이상이어야 가능하다.', a:true,
+         ex:'도시정비법 시행령상 <b>종전자산 가액·면적 요건</b> 충족 시 2주택 분양이 가능합니다.'},
+        {q:'가로주택정비사업은 도시정비법이 아닌 별도 법률에 따라 시행된다.', a:true,
+         ex:'<b>빈집 및 소규모주택 정비에 관한 특례법</b>(소규모정비법)이 적용됩니다.'},
+        {q:'재개발사업에는 임대주택 의무공급 비율이 적용된다.', a:true,
+         ex:'도시정비법 시행령 등에 따라 <b>재개발사업 임대주택 공급 비율</b>이 정해져 있습니다.'},
+        {q:'통상 일반분양가가 조합원 분양가보다 낮게 책정된다.', a:false,
+         ex:'<b>조합원 분양가</b>가 일반분양가보다 낮게 책정되는 것이 원칙입니다(추가 부담금 차이).'}
+    ];
+
+    const wrap = document.getElementById('qzWrap');
+    let questions = [];   // 이번 라운드 출제 문제
+    let idx = 0;          // 현재 인덱스
+    let score = 0;
+    let best = 0;
+    let answered = false;
+    let history = [];     // [{q, correct, picked}, ...]
+
+    try{ best = parseInt(localStorage.getItem(BEST_KEY)||'0',10)||0 }catch(e){}
+
+    function shuffle(arr){
+        const a = arr.slice();
+        for(let i=a.length-1;i>0;i--){
+            const j = Math.floor(Math.random()*(i+1));
+            const t = a[i]; a[i]=a[j]; a[j]=t;
+        }
+        return a;
+    }
+
+    function startGame(){
+        questions = shuffle(POOL).slice(0, ROUND_SIZE);
+        idx = 0; score = 0; answered = false; history = [];
+        renderQuestion();
+    }
+
+    function renderStart(){
+        wrap.innerHTML =
+            '<div class="qz-card qz-start">'
+          + '  <i class="fa-solid fa-circle-question big"></i>'
+          + '  <h2>재개발 OX 퀴즈</h2>'
+          + '  <p>도시정비법·재건축·재개발 실무 상식 <b>12문제</b> 중 <b>10문제</b>를 무작위로 출제합니다.<br>정답·해설은 매 문제마다 즉시 표시됩니다.</p>'
+          + '  <button class="qz-start-btn" id="qzStartBtn"><i class="fa-solid fa-play"></i> 시작하기</button>'
+          + (best>0 ? '<div style="margin-top:14px;font-size:12px;color:var(--gray-500)">최고 점수: <b style="color:var(--gold)">'+best+' / '+ROUND_SIZE+'</b></div>' : '')
+          + '</div>';
+        document.getElementById('qzStartBtn').addEventListener('click', startGame);
+    }
+
+    function renderQuestion(){
+        const cur = questions[idx];
+        answered = false;
+        const pct = Math.round((idx / ROUND_SIZE)*100);
+        wrap.innerHTML =
+            '<div class="qz-stats">'
+          + '  <div class="qz-stat"><div class="lbl">진행</div><div class="val">'+(idx+1)+' / '+ROUND_SIZE+'</div></div>'
+          + '  <div class="qz-stat"><div class="lbl">정답</div><div class="val" id="qzScore">'+score+'</div></div>'
+          + '  <div class="qz-stat"><div class="lbl">베스트</div><div class="val">'+best+'</div></div>'
+          + '</div>'
+          + '<div class="qz-bar"><i style="width:'+pct+'%"></i></div>'
+          + '<div class="qz-card">'
+          + '  <div class="qz-num">Question '+(idx+1)+'</div>'
+          + '  <div class="qz-q">'+escapeHtml(cur.q)+'</div>'
+          + '  <div class="qz-actions">'
+          + '    <button class="qz-btn qz-btn-o" data-pick="o"><span>O</span><span class="k">맞음</span></button>'
+          + '    <button class="qz-btn qz-btn-x" data-pick="x"><span>X</span><span class="k">틀림</span></button>'
+          + '  </div>'
+          + '  <div class="qz-fb" id="qzFb"></div>'
+          + '  <div class="qz-next-row"><button class="qz-next" id="qzNext">'
+          + (idx === ROUND_SIZE-1 ? '<i class="fa-solid fa-flag-checkered"></i> 결과 보기' : '다음 문제 <i class="fa-solid fa-arrow-right"></i>')
+          + '</button></div>'
+          + '</div>';
+
+        wrap.querySelectorAll('.qz-btn').forEach(b=>{
+            b.addEventListener('click', function(){ pick(b.dataset.pick === 'o') });
+        });
+        document.getElementById('qzNext').addEventListener('click', nextQuestion);
+    }
+
+    function pick(picked){
+        if(answered) return;
+        answered = true;
+        const cur = questions[idx];
+        const correct = (picked === cur.a);
+        if(correct) score++;
+        history.push({q: cur.q, correct: correct, picked: picked, answer: cur.a, ex: cur.ex});
+
+        const btnO = wrap.querySelector('.qz-btn-o');
+        const btnX = wrap.querySelector('.qz-btn-x');
+        btnO.disabled = true; btnX.disabled = true;
+
+        const pickedBtn = picked ? btnO : btnX;
+        const correctBtn = cur.a ? btnO : btnX;
+        pickedBtn.classList.add(correct ? 'picked-correct' : 'picked-wrong');
+        if(!correct) correctBtn.classList.add('reveal-correct');
+
+        const fb = document.getElementById('qzFb');
+        fb.classList.add('show', correct ? 'ok' : 'no');
+        fb.innerHTML =
+            '<div class="head">'
+          + (correct ? '<i class="fa-solid fa-circle-check"></i> 정답입니다!' : '<i class="fa-solid fa-circle-xmark"></i> 오답입니다 — 정답: <b>'+(cur.a?'O':'X')+'</b>')
+          + '</div>'
+          + '<div class="ex">'+cur.ex+'</div>';
+
+        document.getElementById('qzScore').textContent = score;
+        document.getElementById('qzNext').classList.add('show');
+    }
+
+    function nextQuestion(){
+        if(idx < ROUND_SIZE-1){
+            idx++;
+            renderQuestion();
+        } else {
+            renderEnd();
+        }
+    }
+
+    function renderEnd(){
+        if(score > best){
+            best = score;
+            try{ localStorage.setItem(BEST_KEY, String(best)) }catch(e){}
+        }
+        const pct = Math.round(score/ROUND_SIZE*100);
+        let grade, sub;
+        if(score === ROUND_SIZE){ grade='🏆 만점'; sub='재개발 박사 수준입니다!' }
+        else if(pct >= 80){ grade='🥇 우수'; sub='실무자급 이해도입니다.' }
+        else if(pct >= 60){ grade='🥈 양호'; sub='기본기는 탄탄합니다.' }
+        else if(pct >= 40){ grade='🥉 보통'; sub='조금만 더 학습하면 좋겠어요.' }
+        else { grade='📚 학습 필요'; sub='자료실의 법령·가이드를 살펴보세요.' }
+
+        let reviewHtml = '<div class="qz-review"><h3><i class="fa-solid fa-list-check"></i>풀이 리뷰</h3>';
+        history.forEach(h=>{
+            reviewHtml +=
+                '<div class="qz-rev-row">'
+              + '<span class="ic '+(h.correct?'ok':'no')+'">'+(h.correct?'<i class="fa-solid fa-check"></i>':'<i class="fa-solid fa-xmark"></i>')+'</span>'
+              + '<div class="qt"><b>'+escapeHtml(h.q)+'</b><br>정답: <span class="ans '+(h.answer?'o':'x')+'">'+(h.answer?'O':'X')+'</span> · '+h.ex+'</div>'
+              + '</div>';
+        });
+        reviewHtml += '</div>';
+
+        wrap.innerHTML =
+            '<div class="qz-card qz-end">'
+          + '  <div class="grade">'+grade+'</div>'
+          + '  <div class="score">'+score+' <em>/ '+ROUND_SIZE+'</em></div>'
+          + '  <div class="sub">'+sub+' (정답률 '+pct+'%, 베스트 '+best+')</div>'
+          + '  <div class="qz-end-btns">'
+          + '    <button class="pri" id="qzAgain"><i class="fa-solid fa-rotate"></i> 다시 도전</button>'
+          + '    <a class="gh" href="library.html"><i class="fa-solid fa-folder-open"></i> 자료실 가기</a>'
+          + '    <a class="gh" href="lounge-games.html"><i class="fa-solid fa-gamepad"></i> 다른 게임</a>'
+          + '  </div>'
+          + reviewHtml
+          + '</div>';
+
+        document.getElementById('qzAgain').addEventListener('click', startGame);
+    }
+
+    function escapeHtml(s){
+        return String(s).replace(/[&<>"']/g, function(c){
+            return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+        });
+    }
+
+    // 키보드
+    document.addEventListener('keydown', function(e){
+        const k = e.key.toLowerCase();
+        if(!answered){
+            if(k==='o' || k==='1' || k==='arrowleft'){ const b = wrap.querySelector('.qz-btn-o'); if(b && !b.disabled){ e.preventDefault(); pick(true) } }
+            else if(k==='x' || k==='2' || k==='arrowright'){ const b = wrap.querySelector('.qz-btn-x'); if(b && !b.disabled){ e.preventDefault(); pick(false) } }
+        } else {
+            if(k==='enter' || k===' '){ const n = document.getElementById('qzNext'); if(n && n.classList.contains('show')){ e.preventDefault(); nextQuestion() } }
+        }
+    });
+
+    renderStart();
+})();
+</script>
+</body>
+</html>

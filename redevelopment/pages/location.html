@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 위치 파악 — (주)세울엔지니어링</title>
+    <meta name="description" content="내 현재 위치에서 가까운 재개발·재건축 정비사업 구역을 확인하세요. (주)세울엔지니어링">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260614c">
+    <style>
+    /* ── Hero ──
+       홈 브레드크럼은 전 메뉴(회사소개~고객센터) 동일 Y좌표에 고정.
+       상단 padding 32px(데스크톱) · 28px(모바일) 로 통일. */
+    .loc-hero {
+        padding: 32px 0 48px;
+        background: linear-gradient(135deg, #070B15 0%, var(--brand-dark) 40%, var(--brand-navy) 100%);
+        position: relative; overflow: hidden;
+    }
+    .loc-hero::after {
+        content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(195,165,105,0.3), transparent);
+    }
+    .loc-hero .breadcrumb { margin-bottom: 14px; }
+    .loc-hero h1 {
+        font-size: 36px; font-weight: 900; color: #fff; margin-bottom: 14px;
+        padding-left: 18px; border-left: 3px solid var(--gold);
+    }
+    .loc-hero .hero-sub { font-size: 14px; color: rgba(255,255,255,.5); }
+    @media(max-width:768px) { .loc-hero { padding: 28px 0 28px; } .loc-hero h1 { font-size: 26px; } }
+
+    /* ── Status Bar ── */
+    .loc-status {
+        display: flex; align-items: center; gap: 12px; padding: 16px 24px;
+        background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 14px;
+        margin-bottom: 24px; flex-wrap: wrap;
+    }
+    .loc-status .status-icon {
+        width: 40px; height: 40px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 16px; flex-shrink: 0;
+    }
+    .loc-status .status-icon.loading { background: rgba(195,165,105,.12); color: var(--gold); }
+    .loc-status .status-icon.success { background: rgba(30,140,94,.1); color: var(--green); }
+    .loc-status .status-icon.error { background: rgba(214,66,58,.1); color: var(--red); }
+    .loc-status .status-text { flex: 1; }
+    .loc-status .status-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--gray-900); }
+    .loc-status .status-text span { font-size: 12.5px; color: var(--gray-500); }
+    .loc-status .btn-retry {
+        padding: 8px 20px; border: 1.5px solid var(--gold); border-radius: 8px;
+        background: transparent; color: var(--gold); font-size: 13px; font-weight: 600;
+        cursor: pointer; font-family: var(--font); transition: all .2s;
+    }
+    .loc-status .btn-retry:hover { background: var(--gold); color: var(--brand-dark); }
+
+    /* ── Map Container ── */
+    .map-wrap {
+        display: grid; grid-template-columns: 1fr 380px; gap: 24px;
+        margin-bottom: 48px; min-height: 520px;
+    }
+    @media(max-width:1024px) { .map-wrap { grid-template-columns: 1fr; } }
+
+    #mapContainer {
+        width: 100%; height: 520px; border-radius: 16px; overflow: hidden;
+        border: 1px solid var(--gray-200); background: var(--gray-100);
+        position: relative;
+    }
+    #mapContainer .leaflet-control-zoom { border-radius: 10px; overflow: hidden; border: 1px solid var(--gray-200); }
+    #mapContainer .leaflet-control-zoom a { width: 34px; height: 34px; line-height: 34px; font-size: 16px; color: var(--gray-700); }
+
+    .map-loading {
+        position: absolute; inset: 0; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; gap: 16px; z-index: 500;
+        background: var(--gray-100);
+    }
+    .map-loading i { font-size: 32px; color: var(--gold); animation: spin 1.2s linear infinite; }
+    .map-loading span { font-size: 14px; color: var(--gray-500); font-weight: 500; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .map-loading.hidden { display: none; }
+
+    /* ── Sidebar List ── */
+    .area-sidebar {
+        display: flex; flex-direction: column; gap: 12px;
+        max-height: 520px; overflow-y: auto; padding-right: 4px;
+    }
+    .area-sidebar::-webkit-scrollbar { width: 5px; }
+    .area-sidebar::-webkit-scrollbar-track { background: transparent; }
+    .area-sidebar::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
+
+    .area-card {
+        background: #fff; border: 1.5px solid var(--gray-200); border-radius: 14px;
+        padding: 18px 20px; cursor: pointer; transition: all .25s; position: relative;
+    }
+    .area-card:hover { border-color: var(--gold); box-shadow: 0 6px 20px rgba(195,165,105,.12); transform: translateY(-2px); }
+    .area-card.active { border-color: var(--gold); background: rgba(195,165,105,.03); box-shadow: 0 6px 20px rgba(195,165,105,.15); }
+
+    .area-card .ac-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+    .area-card .ac-name { font-size: 15px; font-weight: 800; color: var(--gray-900); }
+    .area-card .ac-dist {
+        padding: 4px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 700;
+        background: var(--brand-dark); color: var(--gold); white-space: nowrap; flex-shrink: 0;
+    }
+    .area-card .ac-dist.unknown { background: var(--gray-100); color: var(--gray-400); }
+
+    .area-card .ac-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+    .area-card .ac-tag {
+        padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 600;
+        background: var(--gray-100); color: var(--gray-600);
+    }
+    .area-card .ac-tag.type-재개발 { background: rgba(10,15,28,.08); color: var(--brand-dark); }
+    .area-card .ac-tag.type-재건축 { background: rgba(195,165,105,.1); color: #8B7340; }
+    .area-card .ac-tag.type-소규모재건축 { background: rgba(76,175,80,.1); color: #2E7D32; }
+    .area-card .ac-tag.type-가로정비 { background: rgba(156,39,176,.1); color: #7B1FA2; }
+
+    .area-card .ac-meta { display: flex; gap: 14px; font-size: 12px; color: var(--gray-500); }
+    .area-card .ac-meta i { color: var(--gold); margin-right: 4px; font-size: 10px; }
+
+    .area-card .ac-detail {
+        display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--gray-100);
+    }
+    .area-card.active .ac-detail { display: block; }
+
+    .ac-detail .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+    .ac-detail .dg-item { font-size: 12px; color: var(--gray-500); display: flex; align-items: center; gap: 6px; }
+    .ac-detail .dg-item strong { color: var(--gray-800); font-weight: 600; }
+
+    .ac-detail .btn-area-detail {
+        display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
+        padding: 8px 16px; background: var(--brand-dark); color: var(--gold);
+        border: none; border-radius: 8px; font-size: 12.5px; font-weight: 700;
+        font-family: var(--font); cursor: pointer; transition: all .2s;
+    }
+    .ac-detail .btn-area-detail:hover { background: var(--brand-navy); }
+
+    /* ── Summary Cards ── */
+    .loc-summary {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 48px;
+    }
+    @media(max-width:1024px) { .loc-summary { grid-template-columns: repeat(2, 1fr); } }
+    @media(max-width:540px) { .loc-summary { grid-template-columns: 1fr; } }
+
+    .sum-card {
+        background: var(--brand-dark); border-radius: 14px; padding: 20px 22px;
+        text-align: center; border: 1px solid rgba(195,165,105,.08);
+        position: relative; overflow: hidden;
+    }
+    .sum-card::after {
+        content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: .3;
+    }
+    .sum-card .si { font-size: 20px; color: var(--gold); opacity: .7; margin-bottom: 8px; }
+    .sum-card .sv { font-size: 26px; font-weight: 800; color: var(--gold); margin-bottom: 4px; }
+    .sum-card .sl { font-size: 12px; font-weight: 500; color: rgba(255,255,255,.5); }
+
+    /* ── No Location Fallback ── */
+    .no-location {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        padding: 48px 20px; text-align: center;
+    }
+    .no-location i { font-size: 48px; color: var(--gray-300); margin-bottom: 16px; }
+    .no-location h3 { font-size: 18px; font-weight: 700; color: var(--gray-700); margin-bottom: 8px; }
+    .no-location p { font-size: 14px; color: var(--gray-500); line-height: 1.7; max-width: 400px; }
+
+    /* ── Mobile sidebar ── */
+    @media(max-width:1024px) {
+        .area-sidebar { max-height: none; overflow: visible; }
+        #mapContainer { height: 400px; }
+    }
+    @media(max-width:540px) {
+        #mapContainer { height: 300px; border-radius: 12px; }
+    }
+
+    /* ── Pulse animation for user marker ── */
+    .user-marker-pulse {
+        width: 20px; height: 20px; border-radius: 50%;
+        background: rgba(42, 125, 225, 0.3); border: 3px solid #2A7DE1;
+        animation: pulse 2s ease-out infinite;
+        position: relative;
+    }
+    .user-marker-pulse::after {
+        content: ''; position: absolute; inset: -8px;
+        border-radius: 50%; background: rgba(42, 125, 225, 0.12);
+        animation: pulse 2s ease-out infinite;
+    }
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(42,125,225,0.4); }
+        70% { box-shadow: 0 0 0 16px rgba(42,125,225,0); }
+        100% { box-shadow: 0 0 0 0 rgba(42,125,225,0); }
+    }
+
+    /* ── Leaflet custom popup ── */
+    .leaflet-popup-content-wrapper {
+        border-radius: 12px !important; padding: 0 !important;
+        box-shadow: 0 6px 24px rgba(0,0,0,.15) !important;
+    }
+    .leaflet-popup-content { margin: 0 !important; min-width: 200px; }
+    .leaflet-popup-tip { box-shadow: 0 3px 14px rgba(0,0,0,.1) !important; }
+    .map-popup { padding: 14px 16px; }
+    .map-popup .mp-name { font-size: 14px; font-weight: 800; color: var(--gray-900); margin-bottom: 6px; }
+    .map-popup .mp-type { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+    .map-popup .mp-type.t-rd { background: rgba(10,15,28,.08); color: var(--brand-dark); }
+    .map-popup .mp-type.t-rc { background: rgba(195,165,105,.1); color: #8B7340; }
+    .map-popup .mp-type.t-sr { background: rgba(76,175,80,.1); color: #2E7D32; }
+    .map-popup .mp-type.t-gs { background: rgba(156,39,176,.1); color: #7B1FA2; }
+    .map-popup .mp-info { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
+    .map-popup .mp-info strong { color: var(--gray-800); }
+    .map-popup .mp-dist { font-size: 12px; font-weight: 700; color: var(--gold); margin-top: 6px; }
+
+    /* ── Custom area marker ── */
+    .area-marker {
+        width: 32px; height: 32px; border-radius: 50% 50% 50% 0;
+        background: var(--brand-dark); border: 2px solid var(--gold);
+        display: flex; align-items: center; justify-content: center;
+        transform: rotate(-45deg); box-shadow: 0 3px 10px rgba(0,0,0,.2);
+    }
+    .area-marker i { transform: rotate(45deg); color: var(--gold); font-size: 12px; }
+    .area-marker.hot { background: #8B2500; border-color: #FF6B35; }
+    .area-marker.hot i { color: #FF6B35; }
+    </style>
+</head>
+<body>
+    <div id="site-header"></div>
+
+    <!-- Hero -->
+    <section class="loc-hero">
+        <div class="inner">
+            <div class="breadcrumb" style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:20px;">
+                <a href="../index.html" style="color:rgba(255,255,255,.35);">홈</a>
+                <i class="fa-solid fa-chevron-right" style="font-size:8px;margin:0 8px;opacity:.5;"></i>
+                <span style="color:rgba(195,165,105,.6);">재개발지도</span>
+            </div>
+            <h1><i class="fa-solid fa-map-location-dot" style="margin-right:12px;color:var(--gold);font-size:30px;"></i>재개발지도</h1>
+            <p class="hero-sub">서울시 정비사업 구역을 지도에서 확인하고, 거리·프리미엄·진행 단계를 한눈에 비교하세요.</p>
+        </div>
+    </section>
+
+    <!-- Main -->
+    <section style="padding:40px 0 64px;">
+        <div class="inner">
+
+            <!-- Status -->
+            <div class="loc-status" id="locStatus">
+                <div class="status-icon loading" id="statusIcon">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                </div>
+                <div class="status-text">
+                    <strong id="statusTitle">위치 확인 중...</strong>
+                    <span id="statusDesc">GPS 신호를 수신하고 있습니다. 위치 권한을 허용해 주세요.</span>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="loc-summary" id="locSummary">
+                <div class="sum-card">
+                    <div class="si"><i class="fa-solid fa-building-circle-check"></i></div>
+                    <div class="sv" id="sumTotal">-</div>
+                    <div class="sl">전체 사업구역</div>
+                </div>
+                <div class="sum-card">
+                    <div class="si"><i class="fa-solid fa-location-arrow"></i></div>
+                    <div class="sv" id="sumNearest">-</div>
+                    <div class="sl">가장 가까운 구역</div>
+                </div>
+                <div class="sum-card">
+                    <div class="si"><i class="fa-solid fa-circle-dot"></i></div>
+                    <div class="sv" id="sumWithin5">-</div>
+                    <div class="sl">5km 이내 구역</div>
+                </div>
+                <div class="sum-card">
+                    <div class="si"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                    <div class="sv" id="sumHot">-</div>
+                    <div class="sl">인기 급등 구역</div>
+                </div>
+            </div>
+
+            <!-- Map + Sidebar -->
+            <div class="map-wrap">
+                <div id="mapContainer">
+                    <div class="map-loading" id="mapLoading">
+                        <i class="fa-solid fa-spinner"></i>
+                        <span>지도를 불러오는 중...</span>
+                    </div>
+                </div>
+                <div class="area-sidebar" id="areaSidebar">
+                    <!-- Cards rendered by JS -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="site-footer"></div>
+
+    <script src="../assets/data/mock-data.js?v=songrim0614"></script>
+    <script src="../assets/data/areas-data.js?v=20260411c"></script>
+    <script src="../assets/js/data-service.js?v=20260418q"></script>
+    <script src="../assets/js/common.js?v=20260614a"></script>
+    <script>
+    (function() {
+        'use strict';
+
+        /* ── State ── */
+        var map = null;
+        var userLatLng = null;
+        var userMarker = null;
+        var areaMarkers = {};
+        var areas = [];
+        var activeCardId = null;
+
+        /* ── Init ── */
+        document.addEventListener('DOMContentLoaded', function() {
+            /* MOCK.areas + AREAS_EXTRA 직접 병합 */
+            var base = (typeof MOCK!=='undefined'&&MOCK.areas) ? MOCK.areas.slice() : [];
+            if(typeof AREAS_EXTRA!=='undefined'){
+                var ids={};base.forEach(function(a){ids[a.id]=true});
+                AREAS_EXTRA.forEach(function(a){if(!ids[a.id])base.push(a)});
+            }
+            areas = base;
+            initMap();
+            requestLocation();
+        });
+
+        /* ── Leaflet Map Init ── */
+        function initMap() {
+            map = L.map('mapContainer', {
+                center: [37.5665, 126.9780],
+                zoom: 11,
+                zoomControl: true,
+                attributionControl: false
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18
+            }).addTo(map);
+
+            L.control.attribution({ prefix: false, position: 'bottomright' })
+                .addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>')
+                .addTo(map);
+
+            document.getElementById('mapLoading').classList.add('hidden');
+
+            // Render area markers
+            renderAreaMarkers();
+        }
+
+        /* ── Area Markers ── */
+        function renderAreaMarkers() {
+            var bounds = [];
+
+            areas.forEach(function(area) {
+                if (!area.lat || !area.lng) return;
+
+                var icon = L.divIcon({
+                    className: '',
+                    html: '<div class="area-marker' + (area.hot ? ' hot' : '') + '"><i class="fa-solid fa-building"></i></div>',
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -34]
+                });
+
+                var marker = L.marker([area.lat, area.lng], { icon: icon }).addTo(map);
+
+                var distHtml = '';
+                if (userLatLng) {
+                    var d = calcDistance(userLatLng[0], userLatLng[1], area.lat, area.lng);
+                    distHtml = '<div class="mp-dist"><i class="fa-solid fa-route" style="margin-right:4px;"></i>' + d.toFixed(1) + 'km</div>';
+                }
+
+                marker.bindPopup(
+                    '<div class="map-popup">' +
+                        '<div class="mp-name">' + area.name + '</div>' +
+                        '<span class="mp-type ' + (area.type==='재개발'?'t-rd':area.type==='재건축'?'t-rc':area.type==='소규모재건축'?'t-sr':'t-gs') + '">' + area.type + '</span>' +
+                        '<div class="mp-info">' +
+                            '<strong>' + area.district + '</strong> · ' + area.stage + '<br>' +
+                            '프리미엄 <strong>' + formatNum(area.premium) + '만</strong> · 비례율 <strong>' + (area.ratio || '-') + '%</strong>' +
+                        '</div>' +
+                        distHtml +
+                    '</div>',
+                    { closeButton: false, maxWidth: 260 }
+                );
+
+                marker.on('click', function() {
+                    setActiveCard(area.id);
+                });
+
+                areaMarkers[area.id] = marker;
+                bounds.push([area.lat, area.lng]);
+            });
+
+            if (bounds.length > 0) {
+                map.fitBounds(bounds, { padding: [40, 40] });
+            }
+        }
+
+        /* ── Request Geolocation ── */
+        function requestLocation() {
+            if (!navigator.geolocation) {
+                setStatus('error', '위치 서비스 미지원', '이 브라우저는 위치 서비스를 지원하지 않습니다. 최신 브라우저를 사용해 주세요.');
+                renderSidebar(null);
+                return;
+            }
+
+            setStatus('loading', '위치 확인 중...', 'GPS 신호를 수신하고 있습니다. 위치 권한을 허용해 주세요.');
+
+            navigator.geolocation.getCurrentPosition(
+                function(pos) {
+                    userLatLng = [pos.coords.latitude, pos.coords.longitude];
+                    onLocationSuccess();
+                },
+                function(err) {
+                    var msg = '위치 정보를 가져올 수 없습니다.';
+                    if (err.code === 1) msg = '위치 권한이 거부되었습니다. 브라우저 설정에서 위치 권한을 허용해 주세요.';
+                    else if (err.code === 2) msg = '위치 정보를 사용할 수 없습니다. GPS 신호를 확인해 주세요.';
+                    else if (err.code === 3) msg = '위치 확인 시간이 초과되었습니다. 다시 시도해 주세요.';
+
+                    setStatus('error', '위치 확인 실패', msg, true);
+                    renderSidebar(null);
+                },
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 }
+            );
+        }
+
+        /* ── Location Success ── */
+        function onLocationSuccess() {
+            // Add user marker
+            var userIcon = L.divIcon({
+                className: '',
+                html: '<div class="user-marker-pulse"></div>',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+
+            if (userMarker) map.removeLayer(userMarker);
+            userMarker = L.marker(userLatLng, { icon: userIcon, zIndexOffset: 1000 }).addTo(map);
+            userMarker.bindPopup(
+                '<div class="map-popup"><div class="mp-name"><i class="fa-solid fa-street-view" style="color:#2A7DE1;margin-right:6px;"></i>내 현재 위치</div></div>',
+                { closeButton: false }
+            );
+
+            // Re-render area markers with distance info
+            Object.keys(areaMarkers).forEach(function(id) {
+                map.removeLayer(areaMarkers[id]);
+            });
+            areaMarkers = {};
+            renderAreaMarkers();
+
+            // Fit bounds including user
+            var allPoints = [[userLatLng[0], userLatLng[1]]];
+            areas.forEach(function(a) { if (a.lat && a.lng) allPoints.push([a.lat, a.lng]); });
+            map.fitBounds(allPoints, { padding: [50, 50] });
+
+            // Status
+            reverseGeocode(userLatLng[0], userLatLng[1], function(addr) {
+                setStatus('success', '위치 확인 완료', addr || ('위도 ' + userLatLng[0].toFixed(4) + ', 경도 ' + userLatLng[1].toFixed(4)), true);
+            });
+
+            // Render sidebar sorted by distance
+            renderSidebar(userLatLng);
+            updateSummary();
+        }
+
+        /* ── Reverse Geocode (Nominatim) ── */
+        function reverseGeocode(lat, lng, cb) {
+            var url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lng + '&accept-language=ko&zoom=16';
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        var addr = data.display_name || '';
+                        // Simplify Korean address
+                        var parts = addr.split(',').map(function(s) { return s.trim(); });
+                        if (parts.length > 3) {
+                            addr = parts.slice(0, 3).reverse().join(' ');
+                        }
+                        cb(addr);
+                    } catch(e) { cb(null); }
+                } else { cb(null); }
+            };
+            xhr.onerror = function() { cb(null); };
+            xhr.send();
+        }
+
+        /* ── Render Sidebar ── */
+        function renderSidebar(userPos) {
+            var container = document.getElementById('areaSidebar');
+            var sorted = areas.slice();
+
+            if (userPos) {
+                sorted.forEach(function(a) {
+                    a._dist = calcDistance(userPos[0], userPos[1], a.lat, a.lng);
+                });
+                sorted.sort(function(a, b) { return a._dist - b._dist; });
+            }
+
+            var html = '';
+            sorted.forEach(function(area, idx) {
+                var distText = area._dist != null ? area._dist.toFixed(1) + 'km' : '-';
+                var distClass = area._dist != null ? '' : ' unknown';
+                var changeIcon = area.changeDir === 'up' ? 'fa-arrow-up' : area.changeDir === 'down' ? 'fa-arrow-down' : 'fa-minus';
+                var changeColor = area.changeDir === 'up' ? 'var(--red)' : area.changeDir === 'down' ? 'var(--blue)' : 'var(--gray-400)';
+
+                html += '<div class="area-card" data-id="' + area.id + '" onclick="window.__locClickCard(\'' + area.id + '\')">' +
+                    '<div class="ac-head">' +
+                        '<div class="ac-name">' + (idx + 1) + '. ' + area.name + '</div>' +
+                        '<div class="ac-dist' + distClass + '">' +
+                            (area._dist != null ? '<i class="fa-solid fa-route" style="margin-right:3px;font-size:10px;"></i>' : '') +
+                            distText +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="ac-tags">' +
+                        '<span class="ac-tag type-' + area.type + '">' + area.type + '</span>' +
+                        '<span class="ac-tag">' + area.stage + '</span>' +
+                        '<span class="ac-tag">' + area.district + '</span>' +
+                    '</div>' +
+                    '<div class="ac-meta">' +
+                        '<span><i class="fa-solid fa-coins"></i>프리미엄 ' + formatNum(area.premium) + '만</span>' +
+                        '<span><i class="fa-solid fa-chart-line" style="color:' + changeColor + '"></i>' +
+                            '<i class="fa-solid ' + changeIcon + '" style="font-size:9px;color:' + changeColor + ';margin-right:2px;"></i>' +
+                            formatNum(Math.abs(area.change)) + '만' +
+                        '</span>' +
+                        (area.ratio ? '<span><i class="fa-solid fa-percent"></i>비례율 ' + area.ratio + '%</span>' : '') +
+                    '</div>' +
+                    '<div class="ac-detail">' +
+                        '<div class="detail-grid">' +
+                            '<div class="dg-item"><i class="fa-solid fa-users" style="color:var(--gold);width:14px;"></i>총 <strong>' + formatNum(area.totalHouseholds) + '</strong>세대</div>' +
+                            '<div class="dg-item"><i class="fa-solid fa-ruler-combined" style="color:var(--gold);width:14px;"></i>면적 <strong>' + formatNum(area.totalArea) + '</strong>m²</div>' +
+                            '<div class="dg-item"><i class="fa-solid fa-building" style="color:var(--gold);width:14px;"></i>용적률 <strong>' + area.floorAreaRatio + '</strong>%</div>' +
+                            '<div class="dg-item"><i class="fa-solid fa-helmet-safety" style="color:var(--gold);width:14px;"></i>' + (area.developer !== '미정' ? '<strong>' + area.developer + '</strong>' : '<span style="color:var(--gray-400);">시공사 미정</span>') + '</div>' +
+                        '</div>' +
+                        '<p style="font-size:12.5px;color:var(--gray-500);line-height:1.6;margin-top:10px;">' + area.description + '</p>' +
+                        '<a href="portfolio.html" class="btn-area-detail"><i class="fa-solid fa-arrow-right" style="font-size:11px;"></i>상세 정보 보기</a>' +
+                    '</div>' +
+                '</div>';
+            });
+
+            container.innerHTML = html;
+        }
+
+        /* ── Card Click ── */
+        window.__locClickCard = function(id) {
+            setActiveCard(id);
+        };
+
+        function setActiveCard(id) {
+            // Toggle active
+            if (activeCardId === id) {
+                activeCardId = null;
+                document.querySelectorAll('.area-card').forEach(function(c) { c.classList.remove('active'); });
+                return;
+            }
+
+            activeCardId = id;
+            document.querySelectorAll('.area-card').forEach(function(c) {
+                if (c.getAttribute('data-id') === id) {
+                    c.classList.add('active');
+                    c.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    c.classList.remove('active');
+                }
+            });
+
+            // Pan map to area
+            var area = areas.find(function(a) { return a.id === id; });
+            if (area && areaMarkers[id]) {
+                map.setView([area.lat, area.lng], 14, { animate: true });
+                areaMarkers[id].openPopup();
+            }
+        }
+
+        /* ── Update Summary ── */
+        function updateSummary() {
+            document.getElementById('sumTotal').textContent = areas.length + '개';
+
+            var hot = areas.filter(function(a) { return a.hot; }).length;
+            document.getElementById('sumHot').textContent = hot + '개';
+
+            if (userLatLng) {
+                var sorted = areas.slice().sort(function(a, b) {
+                    return calcDistance(userLatLng[0], userLatLng[1], a.lat, a.lng) -
+                           calcDistance(userLatLng[0], userLatLng[1], b.lat, b.lng);
+                });
+
+                if (sorted.length > 0) {
+                    var nearestDist = calcDistance(userLatLng[0], userLatLng[1], sorted[0].lat, sorted[0].lng);
+                    document.getElementById('sumNearest').textContent = nearestDist.toFixed(1) + 'km';
+                }
+
+                var within5 = areas.filter(function(a) {
+                    return calcDistance(userLatLng[0], userLatLng[1], a.lat, a.lng) <= 5;
+                }).length;
+                document.getElementById('sumWithin5').textContent = within5 + '개';
+            } else {
+                document.getElementById('sumNearest').textContent = '-';
+                document.getElementById('sumWithin5').textContent = '-';
+            }
+        }
+
+        /* ── Set Status ── */
+        function setStatus(type, title, desc, showRetry) {
+            var iconEl = document.getElementById('statusIcon');
+            var titleEl = document.getElementById('statusTitle');
+            var descEl = document.getElementById('statusDesc');
+
+            iconEl.className = 'status-icon ' + type;
+
+            if (type === 'loading') {
+                iconEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+            } else if (type === 'success') {
+                iconEl.innerHTML = '<i class="fa-solid fa-location-dot"></i>';
+            } else {
+                iconEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+            }
+
+            titleEl.textContent = title;
+            descEl.textContent = desc;
+
+            // Retry button
+            var existing = document.querySelector('.btn-retry');
+            if (existing) existing.remove();
+            if (showRetry && type !== 'loading') {
+                var btn = document.createElement('button');
+                btn.className = 'btn-retry';
+                btn.innerHTML = '<i class="fa-solid fa-rotate-right" style="margin-right:4px;"></i>다시 시도';
+                btn.onclick = function() { requestLocation(); };
+                document.getElementById('locStatus').appendChild(btn);
+            }
+        }
+
+        /* ── Haversine Distance (km) ── */
+        function calcDistance(lat1, lng1, lat2, lng2) {
+            var R = 6371;
+            var dLat = toRad(lat2 - lat1);
+            var dLng = toRad(lng2 - lng1);
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+
+        function toRad(deg) { return deg * Math.PI / 180; }
+
+        /* ── Format Number ── */
+        function formatNum(n) {
+            if (!n && n !== 0) return '-';
+            return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+    })();
+    </script>
+</body>
+</html>

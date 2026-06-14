@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스도쿠 — 게임 모음 | 세울 쉼터</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260614c">
+    <style>
+    .lgg-hero{padding:48px 0 36px;background:linear-gradient(135deg,#060A14 0%,#0A0F1C 40%,#142644 100%);text-align:center}
+    .lgg-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:14px}
+    .lgg-back:hover{color:var(--gold)}
+    .lgg-cat-tag{display:inline-block;font-size:10.5px;font-weight:800;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;padding:4px 12px;border:1px solid rgba(195,165,105,.35);border-radius:20px}
+    .lgg-hero h1{font-size:30px;font-weight:900;color:#fff;margin-bottom:8px}
+    .lgg-hero h1 em{font-style:normal;color:var(--gold)}
+    .lgg-hero p{font-size:13.5px;color:rgba(255,255,255,.55);margin:0}
+    .lgg-body{padding:48px 0 96px;background:linear-gradient(180deg,#fff,#f7f8fb)}
+
+    .sd-wrap{max-width:520px;margin:0 auto}
+    .sd-info{display:flex;justify-content:space-between;margin-bottom:14px;gap:8px}
+    .sd-stat{flex:1;background:#0F1D35;color:#fff;border-radius:10px;padding:10px;text-align:center;border:1px solid rgba(195,165,105,.2)}
+    .sd-stat .lbl{font-size:10.5px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
+    .sd-stat .val{font-size:18px;font-weight:900}
+    .sd-diff{display:flex;gap:6px;margin-bottom:12px;justify-content:center}
+    .sd-diff button{padding:7px 14px;border-radius:8px;border:1px solid var(--gray-300);background:#fff;color:var(--gray-600);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .15s}
+    .sd-diff button:hover{border-color:var(--gold)}
+    .sd-diff button.on{background:var(--brand-dark);color:var(--gold);border-color:var(--brand-dark)}
+
+    .sd-board{display:grid;grid-template-columns:repeat(9,1fr);background:#0A0F1C;border:3px solid #0A0F1C;border-radius:8px;overflow:hidden;aspect-ratio:1;user-select:none}
+    .sd-cell{background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--brand-dark);cursor:pointer;border:1px solid #e5e7eb;font-feature-settings:"tnum"}
+    .sd-cell.given{background:#f7f8fb;color:#0A0F1C;cursor:default}
+    .sd-cell.sel{background:#FFE08A !important;color:#0A0F1C}
+    .sd-cell.peer{background:#FFF6D6}
+    .sd-cell.same{background:#FFD24A}
+    .sd-cell.err{color:#D6423A;background:#FEE2E0}
+    .sd-cell.b-r{border-right:2px solid #0A0F1C}
+    .sd-cell.b-b{border-bottom:2px solid #0A0F1C}
+
+    .sd-pad{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px}
+    .sd-num{padding:14px 0;border-radius:10px;border:1px solid var(--gray-300);background:#fff;color:var(--brand-dark);font-size:18px;font-weight:800;cursor:pointer;font-family:var(--font);transition:all .15s}
+    .sd-num:hover{background:var(--gold);color:#0A0F1C;border-color:var(--gold)}
+    .sd-num.erase{color:#D6423A}
+
+    .sd-actions{display:flex;gap:8px;margin-top:12px}
+    .sd-btn{flex:1;padding:11px;border-radius:10px;border:none;cursor:pointer;font-size:12.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;font-family:var(--font);transition:all .15s}
+    .sd-btn-primary{background:linear-gradient(135deg,#C3A569,#D4B87A);color:#0A0F1C}
+    .sd-btn-ghost{background:transparent;color:var(--gray-600);border:1px solid var(--gray-300)}
+    .sd-msg{text-align:center;margin-top:12px;min-height:22px;font-size:13px;font-weight:700;color:var(--gray-600)}
+    .sd-msg.win{color:#1E8C5E;font-size:15px}
+
+    @media(max-width:540px){.sd-cell{font-size:16px}.sd-num{font-size:16px;padding:12px 0}}
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="lgg-hero">
+    <div class="inner">
+        <a href="lounge-games.html" class="lgg-back"><i class="fa-solid fa-arrow-left"></i> 게임 모음으로 돌아가기</a>
+        <div class="lgg-cat-tag">▣ Puzzle</div>
+        <h1>스도쿠 <em>SUDOKU</em></h1>
+        <p>9×9 격자 — 가로·세로·3×3 박스에 1~9 한 번씩 채우기.</p>
+    </div>
+</div>
+
+<div class="lgg-body">
+    <div class="inner">
+        <div class="sd-wrap">
+            <div class="sd-info">
+                <div class="sd-stat"><div class="lbl">Time</div><div class="val" id="sdTime">0:00</div></div>
+                <div class="sd-stat"><div class="lbl">Empty</div><div class="val" id="sdEmpty">0</div></div>
+                <div class="sd-stat"><div class="lbl">Errors</div><div class="val" id="sdErr">0</div></div>
+            </div>
+            <div class="sd-diff" id="sdDiff">
+                <button data-d="easy" class="on">쉬움</button>
+                <button data-d="med">보통</button>
+                <button data-d="hard">어려움</button>
+            </div>
+            <div class="sd-board" id="sdBoard"></div>
+            <div class="sd-pad" id="sdPad">
+                <button class="sd-num" data-n="1">1</button>
+                <button class="sd-num" data-n="2">2</button>
+                <button class="sd-num" data-n="3">3</button>
+                <button class="sd-num" data-n="4">4</button>
+                <button class="sd-num" data-n="5">5</button>
+                <button class="sd-num" data-n="6">6</button>
+                <button class="sd-num" data-n="7">7</button>
+                <button class="sd-num" data-n="8">8</button>
+                <button class="sd-num" data-n="9">9</button>
+                <button class="sd-num erase" data-n="0"><i class="fa-solid fa-eraser"></i></button>
+            </div>
+            <div class="sd-actions">
+                <button class="sd-btn sd-btn-primary" id="sdNew"><i class="fa-solid fa-rotate"></i> 새 퍼즐</button>
+                <button class="sd-btn sd-btn-ghost" id="sdCheck"><i class="fa-solid fa-check"></i> 검증</button>
+                <button class="sd-btn sd-btn-ghost" id="sdHint"><i class="fa-solid fa-lightbulb"></i> 힌트</button>
+            </div>
+            <div class="sd-msg" id="sdMsg">난이도를 고르고 빈 칸을 채우세요.</div>
+        </div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=songrim0614"></script>
+<script src="../assets/js/data-service.js?v=20260418q"></script>
+<script src="../assets/js/common.js?v=20260614a"></script>
+<script>
+(function(){
+    const board = document.getElementById('sdBoard');
+    const elTime=document.getElementById('sdTime'),elEmpty=document.getElementById('sdEmpty'),elErr=document.getElementById('sdErr'),elMsg=document.getElementById('sdMsg');
+    let solution=[], puzzle=[], current=[], given=[], sel=-1, errors=0, t0=0, timer=null, diff='easy';
+
+    /* === 스도쿠 생성 (랜덤 시드 → 풀이 → 셀 제거) === */
+    function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+    function isValid(b,r,c,n){for(let i=0;i<9;i++){if(b[r*9+i]===n||b[i*9+c]===n)return false}const br=Math.floor(r/3)*3,bc=Math.floor(c/3)*3;for(let i=0;i<3;i++)for(let j=0;j<3;j++){if(b[(br+i)*9+(bc+j)]===n)return false}return true}
+    function solve(b,rand){
+        for(let i=0;i<81;i++){
+            if(b[i]===0){
+                const r=Math.floor(i/9),c=i%9;
+                const nums=rand?shuffle([1,2,3,4,5,6,7,8,9]):[1,2,3,4,5,6,7,8,9];
+                for(const n of nums){if(isValid(b,r,c,n)){b[i]=n;if(solve(b,rand))return true;b[i]=0}}
+                return false;
+            }
+        }
+        return true;
+    }
+    function generate(diff){
+        const b = new Array(81).fill(0);
+        solve(b, true);
+        solution = b.slice();
+        const removeCnt = diff==='easy'?40:diff==='med'?50:58;
+        const idxs = shuffle([...Array(81).keys()]);
+        for(let i=0;i<removeCnt;i++) b[idxs[i]] = 0;
+        puzzle = b.slice();
+        current = b.slice();
+        given = b.map(v => v!==0);
+    }
+
+    function fmtTime(s){const m=Math.floor(s/60);return m+':'+String(s%60).padStart(2,'0')}
+    function startTimer(){
+        if(timer) clearInterval(timer);
+        t0 = Date.now();
+        timer = setInterval(() => {elTime.textContent = fmtTime(Math.floor((Date.now()-t0)/1000))}, 250);
+    }
+    function emptyCount(){return current.filter(v => v===0).length}
+
+    function render(){
+        board.innerHTML = '';
+        for(let i=0;i<81;i++){
+            const r = Math.floor(i/9), c = i%9;
+            const cls = ['sd-cell'];
+            if(given[i]) cls.push('given');
+            if(c===2||c===5) cls.push('b-r');
+            if(r===2||r===5) cls.push('b-b');
+            const el = document.createElement('div');
+            el.className = cls.join(' ');
+            el.dataset.i = i;
+            el.textContent = current[i] ? current[i] : '';
+            board.appendChild(el);
+        }
+        elEmpty.textContent = emptyCount();
+        elErr.textContent = errors;
+        applySelection();
+    }
+
+    function applySelection(){
+        const cells = board.children;
+        for(let i=0;i<81;i++){
+            cells[i].classList.remove('sel','peer','same','err');
+        }
+        if(sel<0) return;
+        const sr=Math.floor(sel/9), sc=sel%9, sb=Math.floor(sr/3)*3+Math.floor(sc/3);
+        const sv = current[sel];
+        for(let i=0;i<81;i++){
+            const r=Math.floor(i/9),c=i%9,b=Math.floor(r/3)*3+Math.floor(c/3);
+            if(i===sel) cells[i].classList.add('sel');
+            else if(r===sr||c===sc||b===sb) cells[i].classList.add('peer');
+            if(sv && current[i]===sv && i!==sel) cells[i].classList.add('same');
+        }
+        // 오류 표시
+        for(let i=0;i<81;i++){if(!given[i] && current[i]!==0 && current[i]!==solution[i]) cells[i].classList.add('err')}
+    }
+
+    function newGame(){
+        errors = 0;
+        sel = -1;
+        generate(diff);
+        startTimer();
+        elMsg.textContent = '셀 클릭 후 숫자를 입력하세요.';
+        elMsg.className = 'sd-msg';
+        render();
+    }
+
+    function input(n){
+        if(sel<0||given[sel]) return;
+        if(n===0){current[sel]=0;render();return}
+        if(current[sel]!==solution[sel] || current[sel]===0){
+            if(n!==solution[sel]) errors++;
+        }
+        current[sel] = n;
+        render();
+        if(emptyCount()===0 && current.every((v,i)=>v===solution[i])){
+            if(timer){clearInterval(timer);timer=null}
+            elMsg.textContent='🎉 클리어! '+elTime.textContent+' · 오류 '+errors+'회';
+            elMsg.className='sd-msg win';
+        }
+    }
+
+    board.addEventListener('click', e => {
+        const c = e.target.closest('.sd-cell'); if(!c) return;
+        sel = parseInt(c.dataset.i,10);
+        applySelection();
+    });
+    document.getElementById('sdPad').addEventListener('click', e => {
+        const b = e.target.closest('.sd-num'); if(!b) return;
+        input(parseInt(b.dataset.n,10));
+    });
+    document.addEventListener('keydown', e => {
+        if(e.key>='1'&&e.key<='9') input(parseInt(e.key,10));
+        else if(e.key==='Backspace'||e.key==='Delete'||e.key==='0') input(0);
+    });
+    document.getElementById('sdDiff').addEventListener('click', e => {
+        const b = e.target.closest('button'); if(!b) return;
+        document.querySelectorAll('#sdDiff button').forEach(x=>x.classList.remove('on'));
+        b.classList.add('on');
+        diff = b.dataset.d;
+        newGame();
+    });
+    document.getElementById('sdNew').addEventListener('click', newGame);
+    document.getElementById('sdCheck').addEventListener('click', () => {
+        const wrong = current.filter((v,i)=>!given[i]&&v!==0&&v!==solution[i]).length;
+        if(emptyCount()===0 && !wrong){elMsg.textContent='✅ 모두 정답!';elMsg.className='sd-msg win'}
+        else elMsg.textContent='남은 빈 칸 '+emptyCount()+' · 오류 '+wrong+'개';
+    });
+    document.getElementById('sdHint').addEventListener('click', () => {
+        if(sel<0||given[sel]||current[sel]===solution[sel]) return;
+        current[sel] = solution[sel];
+        errors++;
+        render();
+    });
+
+    newGame();
+})();
+</script>
+</body>
+</html>
