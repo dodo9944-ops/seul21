@@ -66,17 +66,17 @@
         .splash-logo svg { width: 130px; height: 130px; }
         .splash-logo .s-frame {
             stroke-dasharray: 420; stroke-dashoffset: 420;
-            animation: drawFrame 1s ease-out 0.25s forwards;
+            animation: drawFrame 0.8s ease-out 0.2s forwards;
         }
         .splash-logo .s-bar {
             opacity: 0; transform: scaleX(0); transform-origin: left center;
         }
-        .splash-logo .s-bar-1 { animation: barReveal .4s ease-out 0.83s forwards; }
-        .splash-logo .s-bar-2 { animation: barReveal .4s ease-out 0.96s forwards; }
-        .splash-logo .s-bar-3 { animation: barReveal .4s ease-out 1.08s forwards; }
-        .splash-logo .s-bar-4 { animation: barReveal .4s ease-out 1.21s forwards; transform-origin: right center; }
-        .splash-logo .s-bar-5 { animation: barReveal .4s ease-out 1.33s forwards; }
-        .splash-logo .s-arrow { opacity: 0; animation: arrowPop .33s ease-out 1.5s forwards; }
+        .splash-logo .s-bar-1 { animation: barReveal .32s ease-out 0.66s forwards; }
+        .splash-logo .s-bar-2 { animation: barReveal .32s ease-out 0.77s forwards; }
+        .splash-logo .s-bar-3 { animation: barReveal .32s ease-out 0.86s forwards; }
+        .splash-logo .s-bar-4 { animation: barReveal .32s ease-out 0.97s forwards; transform-origin: right center; }
+        .splash-logo .s-bar-5 { animation: barReveal .32s ease-out 1.06s forwards; }
+        .splash-logo .s-arrow { opacity: 0; animation: arrowPop .26s ease-out 1.2s forwards; }
         @keyframes drawFrame { to { stroke-dashoffset: 0; } }
         @keyframes barReveal { to { opacity: 1; transform: scaleX(1); } }
         @keyframes arrowPop {
@@ -85,7 +85,7 @@
         }
         .splash-text {
             text-align: center; opacity: 0;
-            animation: splFadeUp .67s ease-out 1.67s forwards;
+            animation: splFadeUp .54s ease-out 1.34s forwards;
         }
         .splash-company {
             font-size: 26px; font-weight: 800; letter-spacing: -.5px;
@@ -99,7 +99,7 @@
             position: absolute; bottom: 80px;
             width: 200px; height: 2px; background: rgba(195,165,105,.08);
             border-radius: 2px; overflow: hidden;
-            opacity: 0; animation: splFadeUp .6s ease .5s forwards;
+            opacity: 0; animation: splFadeUp .48s ease .4s forwards;
         }
         .splash-loader-bar {
             width: 0; height: 100%;
@@ -1036,17 +1036,17 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         document.body.classList.remove('splash-active');
         document.body.style.overflow = '';
     } else {
-        // ★ 첫 접속: 로고+글자 다 보여준 후(2.8초) 페이드아웃
+        // ★ 첫 접속: 로고+글자 다 보여준 후(2.24초) 페이드아웃
         sessionStorage.setItem('seul_splash', '1');
         setTimeout(function(){
-            sp.style.transition = 'opacity 1.2s ease';
+            sp.style.transition = 'opacity 0.96s ease';
             sp.style.opacity = '0';
             document.body.classList.remove('splash-active');
             document.body.style.overflow = '';
             setTimeout(function(){
                 if(sp.parentNode) sp.parentNode.removeChild(sp);
-            }, 1200);
-        }, 2800);
+            }, 960);
+        }, 2240);
     }
 
     // 뒤로가기 시 잔상 방지
