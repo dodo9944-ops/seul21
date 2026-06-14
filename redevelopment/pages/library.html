@@ -55,6 +55,7 @@
     .pop-sec{margin-bottom:36px}
     .pop-sec .pop-head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
     .pop-sec .pop-head .ph-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-navy));display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold)}
+    .pop-sec .pop-head .ph-icon.news{width:38px;height:38px;font-size:18px;background:linear-gradient(135deg,#2563EB,#0EA5E9);color:#fff;box-shadow:0 3px 10px rgba(37,99,235,.28)}
     .pop-sec .pop-head h3{font-size:16px;font-weight:800;color:var(--gray-900);letter-spacing:-.3px}
     .pop-sec .pop-head span{font-size:12px;color:var(--gray-400);font-weight:500}
     .pop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -363,7 +364,8 @@ function renderFeatured(){
   var lbl=(curCat==='전체')?'전체':((catDefs.find(function(x){return x.key===curCat})||{}).label||'');
   var title=isNews?'중요뉴스':'인기 자료';
   var sub=isNews?'열람순':(lbl+' · 다운로드순');
-  var html='<div class="pop-head"><div class="ph-icon"><i class="fa-solid fa-fire"></i></div><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
+  var icCls=isNews?'ph-icon news':'ph-icon';var icSym=isNews?'fa-newspaper':'fa-fire';
+  var html='<div class="pop-head"><div class="'+icCls+'"><i class="fa-solid '+icSym+'"></i></div><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
   top.forEach(function(item,idx){
     var fi=getIcon(item.fileType);
     html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-download"></i> '+(item.downloads||0)+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
