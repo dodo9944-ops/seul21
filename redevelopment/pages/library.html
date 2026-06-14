@@ -367,11 +367,11 @@ function renderFeatured(){
   var top=items.slice(0,3);
   if(!top.length){fb.style.display='none';return}
   fb.style.display='';
-  var nameMap={'주요뉴스':'인기뉴스','법령':'인기법령','서식가이드':'인기서식','사례':'인기사례'};
+  var nameMap={'주요뉴스':'인기뉴스','법령':'관계법령','서식가이드':'서식 매뉴얼','사례':'인기사례'};
   var icMap={'주요뉴스':'fa-newspaper','법령':'fa-scale-balanced','서식가이드':'fa-file-pen','사례':'fa-bookmark'};
   var title=nameMap[curCat]||'인기 자료';
   var sub='열람순 · 인기순';
-  var icCls=(curCat==='주요뉴스')?'ph-icon news':'ph-icon';var icSym=icMap[curCat]||'fa-fire';
+  var icCls='ph-icon news';var icSym=icMap[curCat]||'fa-fire';
   var html='<div class="pop-head"><div class="'+icCls+'"><i class="fa-solid '+icSym+'"></i></div><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
   top.forEach(function(item,idx){
     var fi=getIcon(item.fileType);var vc=vmap[item.id]||0;
