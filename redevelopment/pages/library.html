@@ -351,35 +351,31 @@ return(b.date||'').localeCompare(a.date||'')});
 return items}
 
 /* 뉴스 로컬 조회수 추적 (정적 사이트 — 브라우저 localStorage 기준) */
-function getNewsViews(){try{return JSON.parse(localStorage.getItem('seul_news_views')||'{}')}catch(e){return{}}}
-function addNewsView(id){var v=getNewsViews();v[id]=(v[id]||0)+1;try{localStorage.setItem('seul_news_views',JSON.stringify(v))}catch(e){}return v[id]}
+function getNewsViews(){try{return JSON.parse(localStorage.getItem('seul_lib_views')||'{}')}catch(e){return{}}}
+function addNewsView(id){var v=getNewsViews();v[id]=(v[id]||0)+1;try{localStorage.setItem('seul_lib_views',JSON.stringify(v))}catch(e){}return v[id]}
 function newsUrl(item,id){var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');return'../downloads/news_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html'}
-function openNewsPopup(id){var item=allItems.find(function(x){return x.id===id});if(!item)return;addNewsView(id);window.open(newsUrl(item,id),'_blank','width=920,height=860,scrollbars=yes,resizable=yes');renderFeatured();}
+function libItemUrl(id){var m=fileMap[id];if(m){if(m.web)return m.web;if(m.ext)return m.ext;}var item=allItems.find(function(x){return x.id===id});if(item&&item.category==='주요뉴스')return newsUrl(item,id);return null;}
+function openNewsPopup(id){var url=libItemUrl(id);if(url){addNewsView(id);window.open(url,'_blank','width=920,height=860,scrollbars=yes,resizable=yes');renderFeatured();}else{handleDownload(id);}}
 
 /* 인기 자료 — 카테고리별 (커뮤니티 인기글과 동일 컨셉) */
 function renderFeatured(){
   var fb=document.getElementById('libFeatured');if(!fb)return;
   var items=allItems.slice();
   if(curCat!=='전체'){var d=catDefs.find(function(x){return x.key===curCat});var ks=d&&d.keys?d.keys:[curCat];items=items.filter(function(i){return ks.indexOf(i.category)>=0});}
-  var isNews=(curCat==='주요뉴스');
   var vmap=getNewsViews();
-  if(isNews){items.sort(function(a,b){var va=vmap[a.id]||0,vb=vmap[b.id]||0;if(vb!==va)return vb-va;return(b.date||'').localeCompare(a.date||'')});}
-  else{items.sort(function(a,b){return(b.downloads||0)-(a.downloads||0)});}
+  items.sort(function(a,b){var va=vmap[a.id]||0,vb=vmap[b.id]||0;if(vb!==va)return vb-va;var da=a.downloads||0,db=b.downloads||0;if(db!==da)return db-da;return(b.date||'').localeCompare(a.date||'')});
   var top=items.slice(0,3);
   if(!top.length){fb.style.display='none';return}
   fb.style.display='';
-  var lbl=(curCat==='전체')?'전체':((catDefs.find(function(x){return x.key===curCat})||{}).label||'');
-  var title=isNews?'인기뉴스':'인기 자료';
-  var sub=isNews?'열람순 · 인기순':(lbl+' · 다운로드순');
-  var icCls=isNews?'ph-icon news':'ph-icon';var icSym=isNews?'fa-newspaper':'fa-fire';
+  var nameMap={'주요뉴스':'인기뉴스','법령':'인기법령','서식가이드':'인기서식','사례':'인기사례'};
+  var icMap={'주요뉴스':'fa-newspaper','법령':'fa-scale-balanced','서식가이드':'fa-file-pen','사례':'fa-bookmark'};
+  var title=nameMap[curCat]||'인기 자료';
+  var sub='열람순 · 인기순';
+  var icCls=(curCat==='주요뉴스')?'ph-icon news':'ph-icon';var icSym=icMap[curCat]||'fa-fire';
   var html='<div class="pop-head"><div class="'+icCls+'"><i class="fa-solid '+icSym+'"></i></div><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
   top.forEach(function(item,idx){
-    var fi=getIcon(item.fileType);
-    if(isNews){var vc=vmap[item.id]||0;
-      html+='<div class="pop-card" onclick="openNewsPopup(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-eye"></i> '+vc+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
-    }else{
-      html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-download"></i> '+(item.downloads||0)+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
-    }
+    var fi=getIcon(item.fileType);var vc=vmap[item.id]||0;
+    html+='<div class="pop-card" onclick="openNewsPopup(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-eye"></i> '+vc+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
   });
   html+='</div>';
   fb.innerHTML=html;
@@ -587,9 +583,10 @@ var fileMap={
 'case0614a':{web:'../downloads/case_20260614a.html'},'law0613a':{web:'../downloads/law_20260613a.html'},'case0613a':{web:'../downloads/case_20260613a.html'},'law0604a':{web:'../downloads/law_20260604a.html'},'case0604a':{web:'../downloads/case_20260604a.html'},'law0605a':{web:'../downloads/law_20260605a.html'},'case0605a':{web:'../downloads/case_20260605a.html'},'law0606a':{web:'../downloads/law_20260606a.html'},'news0607a':{web:'../downloads/news_20260607a.html'},'news0607b':{web:'../downloads/news_20260607b.html'},'news0607c':{web:'../downloads/news_20260607c.html'},'news0607d':{web:'../downloads/news_20260607d.html'},'news0607e':{web:'../downloads/news_20260607e.html'},'news0607f':{web:'../downloads/news_20260607f.html'},'news0607g':{web:'../downloads/news_20260607g.html'},'news0607h':{web:'../downloads/news_20260607h.html'},'news0607i':{web:'../downloads/news_20260607i.html'},'news0607j':{web:'../downloads/news_20260607j.html'},'law0607a':{web:'../downloads/law_20260607a.html'},'case0607a':{web:'../downloads/case_20260607a.html'},'form0607a':{web:'../downloads/form_20260607a.html'},'form0607b':{web:'../downloads/form_20260607b.html'},'form0607c':{web:'../downloads/form_20260607c.html'},'guide0607a':{web:'../downloads/guide_20260607a.html'},'guide0607b':{web:'../downloads/guide_20260607b.html'},'guide0607c':{web:'../downloads/guide_20260607c.html'},'news0608a':{web:'../downloads/news_20260608a.html'},'news0608b':{web:'../downloads/news_20260608b.html'},'news0608c':{web:'../downloads/news_20260608c.html'},'news0608d':{web:'../downloads/news_20260608d.html'},'news0608e':{web:'../downloads/news_20260608e.html'},'news0608f':{web:'../downloads/news_20260608f.html'},'news0608g':{web:'../downloads/news_20260608g.html'},'news0608h':{web:'../downloads/news_20260608h.html'},'news0608i':{web:'../downloads/news_20260608i.html'},'law0608a':{web:'../downloads/law_20260608a.html'},'case0608a':{web:'../downloads/case_20260608a.html'},'news0609a':{web:'../downloads/news_20260609a.html'},'news0609b':{web:'../downloads/news_20260609b.html'},'news0609c':{web:'../downloads/news_20260609c.html'},'news0609d':{web:'../downloads/news_20260609d.html'},'news0609e':{web:'../downloads/news_20260609e.html'},'news0609f':{web:'../downloads/news_20260609f.html'},'news0609g':{web:'../downloads/news_20260609g.html'},'news0609h':{web:'../downloads/news_20260609h.html'},'news0609i':{web:'../downloads/news_20260609i.html'},'news0609j':{web:'../downloads/news_20260609j.html'},'law0609a':{web:'../downloads/law_20260609a.html'},'case0609a':{web:'../downloads/case_20260609a.html'},'news0610a':{web:'../downloads/news_20260610a.html'},'news0610b':{web:'../downloads/news_20260610b.html'},'news0610c':{web:'../downloads/news_20260610c.html'},'news0610d':{web:'../downloads/news_20260610d.html'},'news0610e':{web:'../downloads/news_20260610e.html'},'news0610f':{web:'../downloads/news_20260610f.html'},'news0610g':{web:'../downloads/news_20260610g.html'},'news0610h':{web:'../downloads/news_20260610h.html'},'news0610i':{web:'../downloads/news_20260610i.html'},'news0610j':{web:'../downloads/news_20260610j.html'},'law0610a':{web:'../downloads/law_20260610a.html'},'case0610a':{web:'../downloads/case_20260610a.html'},'news0611a':{web:'../downloads/news_20260611a.html'},'news0611b':{web:'../downloads/news_20260611b.html'},'news0611c':{web:'../downloads/news_20260611c.html'},'news0611d':{web:'../downloads/news_20260611d.html'},'news0611e':{web:'../downloads/news_20260611e.html'},'news0611f':{web:'../downloads/news_20260611f.html'},'news0611g':{web:'../downloads/news_20260611g.html'},'news0611h':{web:'../downloads/news_20260611h.html'},'news0611i':{web:'../downloads/news_20260611i.html'},'news0611j':{web:'../downloads/news_20260611j.html'},'news0611k':{web:'../downloads/news_20260611k.html'},'news0611l':{web:'../downloads/news_20260611l.html'},'news0611m':{web:'../downloads/news_20260611m.html'},'news0611n':{web:'../downloads/news_20260611n.html'},'news0611o':{web:'../downloads/news_20260611o.html'},'news0611p':{web:'../downloads/news_20260611p.html'},'law0611a':{web:'../downloads/law_20260611a.html'},'case0611a':{web:'../downloads/case_20260611a.html'},'news0611q':{web:'../downloads/news_20260611q.html'},'news0611r':{web:'../downloads/news_20260611r.html'},'law0611b':{web:'../downloads/law_20260611b.html'},'case0611b':{web:'../downloads/case_20260611b.html'},'form0614a':{web:'../downloads/form_20260614a.html'},'form0614b':{web:'../downloads/form_20260614b.html'},'form0614c':{web:'../downloads/form_20260614c.html'},'guide0614a':{web:'../downloads/guide_20260614a.html'},'guide0614b':{web:'../downloads/guide_20260614b.html'},'guide0614c':{web:'../downloads/guide_20260614c.html'}};
 
 function handleDownload(id){
+addNewsView(id);
 var m=fileMap[id];
 if(!m){var item=allItems.find(function(i){return i.id===id});
-if(item&&item.category==='주요뉴스'){addNewsView(id);var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');var tryUrl='../downloads/news_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html';location.href=tryUrl;return}
+if(item&&item.category==='주요뉴스'){var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');var tryUrl='../downloads/news_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html';location.href=tryUrl;return}
 if(item&&item.category==='칼럼'){var dateStr=(item.date||'').replace(/-/g,'').substring(0,8);var suffix=id.replace(/^col/,'');var tryUrl='../downloads/col_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html';location.href=tryUrl;return}
 App.toast('파일 준비 중입니다.','정보');return}
 if(m.ext){var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();document.body.appendChild(a);a.click();document.body.removeChild(a);App.toast('파일 다운로드 시작','success')}

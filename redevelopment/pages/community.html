@@ -269,11 +269,11 @@ function renderTabs(){
 
 /* Featured posts (top 3 by likes) */
 function renderFeatured(){
-    var top=allPosts.slice().sort(function(a,b){return(b.likes||0)-(a.likes||0)}).slice(0,3);
+    var top=allPosts.slice().sort(function(a,b){return(b.views||0)-(a.views||0)}).slice(0,3);
     if(!top.length){document.getElementById('cmFeatured').style.display='none';return}
-    var html='<div class="cf-head"><div class="cf-icon"><i class="fa-solid fa-fire"></i></div><h3>인기글</h3></div><div class="cf-grid">';
+    var html='<div class="cf-head"><div class="cf-icon"><i class="fa-solid fa-fire"></i></div><h3>인기글</h3><span style="font-size:12px;color:var(--gray-400);font-weight:500">열람순 · 인기순</span></div><div class="cf-grid">';
     top.forEach(function(p){
-        html+='<div class="cf-card" onclick="location.href=\'community-detail.html?id='+p.id+'\'">'+
+        html+='<div class="cf-card" onclick="window.open(\'community-detail.html?id='+p.id+'\',\'_blank\',\'width=920,height=860,scrollbars=yes,resizable=yes\')">'+
             '<div class="cf-hot"><i class="fa-solid fa-fire"></i></div>'+
             '<div class="cf-cat"><span class="cb cb-'+p.category+'">'+p.category+'</span></div>'+
             '<div class="cf-title">'+p.title+'</div>'+
