@@ -350,25 +350,36 @@ if(curSort==='title')return(a.title||'').localeCompare(b.title||'');
 return(b.date||'').localeCompare(a.date||'')});
 return items}
 
-/* 인기 자료 — 카테고리별 다운로드 top 3 (맨 상단, 커뮤니티 인기글과 동일 컨셉) */
+/* 뉴스 로컬 조회수 추적 (정적 사이트 — 브라우저 localStorage 기준) */
+function getNewsViews(){try{return JSON.parse(localStorage.getItem('seul_news_views')||'{}')}catch(e){return{}}}
+function addNewsView(id){var v=getNewsViews();v[id]=(v[id]||0)+1;try{localStorage.setItem('seul_news_views',JSON.stringify(v))}catch(e){}return v[id]}
+function newsUrl(item,id){var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');return'../downloads/news_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html'}
+function openNewsPopup(id){var item=allItems.find(function(x){return x.id===id});if(!item)return;addNewsView(id);window.open(newsUrl(item,id),'_blank','width=920,height=860,scrollbars=yes,resizable=yes');renderFeatured();}
+
+/* 인기 자료 — 카테고리별 (커뮤니티 인기글과 동일 컨셉) */
 function renderFeatured(){
   var fb=document.getElementById('libFeatured');if(!fb)return;
   var items=allItems.slice();
   if(curCat!=='전체'){var d=catDefs.find(function(x){return x.key===curCat});var ks=d&&d.keys?d.keys:[curCat];items=items.filter(function(i){return ks.indexOf(i.category)>=0});}
   var isNews=(curCat==='주요뉴스');
-  if(isNews){items.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});}
+  var vmap=getNewsViews();
+  if(isNews){items.sort(function(a,b){var va=vmap[a.id]||0,vb=vmap[b.id]||0;if(vb!==va)return vb-va;return(b.date||'').localeCompare(a.date||'')});}
   else{items.sort(function(a,b){return(b.downloads||0)-(a.downloads||0)});}
   var top=items.slice(0,3);
   if(!top.length){fb.style.display='none';return}
   fb.style.display='';
   var lbl=(curCat==='전체')?'전체':((catDefs.find(function(x){return x.key===curCat})||{}).label||'');
-  var title=isNews?'중요뉴스':'인기 자료';
-  var sub=isNews?'열람순':(lbl+' · 다운로드순');
+  var title=isNews?'인기뉴스':'인기 자료';
+  var sub=isNews?'열람순 · 인기순':(lbl+' · 다운로드순');
   var icCls=isNews?'ph-icon news':'ph-icon';var icSym=isNews?'fa-newspaper':'fa-fire';
   var html='<div class="pop-head"><div class="'+icCls+'"><i class="fa-solid '+icSym+'"></i></div><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
   top.forEach(function(item,idx){
     var fi=getIcon(item.fileType);
-    html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-download"></i> '+(item.downloads||0)+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
+    if(isNews){var vc=vmap[item.id]||0;
+      html+='<div class="pop-card" onclick="openNewsPopup(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-eye"></i> '+vc+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
+    }else{
+      html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-download"></i> '+(item.downloads||0)+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
+    }
   });
   html+='</div>';
   fb.innerHTML=html;
@@ -578,7 +589,7 @@ var fileMap={
 function handleDownload(id){
 var m=fileMap[id];
 if(!m){var item=allItems.find(function(i){return i.id===id});
-if(item&&item.category==='주요뉴스'){var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');var tryUrl='../downloads/news_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html';location.href=tryUrl;return}
+if(item&&item.category==='주요뉴스'){addNewsView(id);var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');var tryUrl='../downloads/news_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html';location.href=tryUrl;return}
 if(item&&item.category==='칼럼'){var dateStr=(item.date||'').replace(/-/g,'').substring(0,8);var suffix=id.replace(/^col/,'');var tryUrl='../downloads/col_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html';location.href=tryUrl;return}
 App.toast('파일 준비 중입니다.','정보');return}
 if(m.ext){var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();document.body.appendChild(a);a.click();document.body.removeChild(a);App.toast('파일 다운로드 시작','success')}
