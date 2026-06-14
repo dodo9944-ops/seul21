@@ -38,8 +38,8 @@ const App = (() => {
     const user = DataService.getCurrentUser();
 
     const utilRight = isLoggedIn
-      ? `<a href="${B}/pages/mypage.html">${user.name}님</a><a href="#" id="logoutBtn">로그아웃</a><a href="${B}/pages/webhard.html" target="_blank">웹하드</a>`
-      : `<a href="${B}/pages/login.html">로그인</a><a href="${B}/pages/register.html">회원가입</a><a href="${B}/pages/webhard.html" target="_blank">웹하드</a>`;
+      ? `<a href="${B}/pages/mypage.html">${user.name}님</a><a href="#" id="logoutBtn">로그아웃</a><a href="${B}/pages/feasibility.html">사업타당성 분석</a>`
+      : `<a href="${B}/pages/login.html">로그인</a><a href="${B}/pages/register.html">회원가입</a><a href="${B}/pages/feasibility.html">사업타당성 분석</a>`;
 
     return `
     <div class="header-wrap" id="headerWrap">
@@ -129,8 +129,8 @@ const App = (() => {
       </nav>
       <div class="drawer-footer">
         ${isLoggedIn
-          ? `<a href="${B}/pages/mypage.html" class="btn btn-outline btn-md">마이페이지</a><a href="#" class="btn btn-primary btn-md" id="drawerLogout">로그아웃</a><a href="${B}/pages/webhard.html" target="_blank" class="btn btn-outline btn-md">웹하드</a>`
-          : `<a href="${B}/pages/login.html" class="btn btn-outline btn-md">로그인</a><a href="${B}/pages/register.html" class="btn btn-primary btn-md">회원가입</a><a href="${B}/pages/webhard.html" target="_blank" class="btn btn-outline btn-md">웹하드</a>`}
+          ? `<a href="${B}/pages/mypage.html" class="btn btn-outline btn-md">마이페이지</a><a href="#" class="btn btn-primary btn-md" id="drawerLogout">로그아웃</a>`
+          : `<a href="${B}/pages/login.html" class="btn btn-outline btn-md">로그인</a><a href="${B}/pages/register.html" class="btn btn-primary btn-md">회원가입</a>`}
       </div>
     </aside>
 
@@ -183,7 +183,7 @@ const App = (() => {
           <h5>문의·지원</h5>
           <a href="${B}/pages/contact.html">고객센터</a>
           <a href="${B}/intranet/index.html">인트라넷</a>
-          <a href="${B}/pages/webhard.html" target="_blank">웹하드</a>
+          <a href="${B}/pages/feasibility.html">사업타당성 분석</a>
           <a href="${B}/pages/faq.html">자주 묻는 질문</a>
         </div>
         <div class="footer-col footer-contact">
@@ -194,7 +194,7 @@ const App = (() => {
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copy">&copy; 2026 (주)세울엔지니어링. All rights reserved. &nbsp;|&nbsp; <a href="${B}/pages/privacy.html" style="color:rgba(255,255,255,.4);text-decoration:underline">개인정보 처리방침</a> &nbsp;|&nbsp; <a href="${B}/pages/sitemap.html" style="color:rgba(255,255,255,.4);text-decoration:underline">사이트맵</a> &nbsp;|&nbsp; <a href="${B}/admin/login.html" style="color:rgba(255,255,255,.4);text-decoration:underline">관리자</a> &nbsp;|&nbsp; <a href="${B}/intranet/index.html" style="color:rgba(255,255,255,.4);text-decoration:underline">인트라넷</a> &nbsp;|&nbsp; <a href="${B}/pages/webhard.html" target="_blank" style="color:rgba(255,255,255,.4);text-decoration:underline">웹하드</a></div>
+        <div class="footer-copy">&copy; 2026 (주)세울엔지니어링. All rights reserved. &nbsp;|&nbsp; <a href="${B}/pages/privacy.html" style="color:rgba(255,255,255,.4);text-decoration:underline">개인정보 처리방침</a> &nbsp;|&nbsp; <a href="${B}/pages/sitemap.html" style="color:rgba(255,255,255,.4);text-decoration:underline">사이트맵</a> &nbsp;|&nbsp; <a href="${B}/admin/login.html" style="color:rgba(255,255,255,.4);text-decoration:underline">관리자</a> &nbsp;|&nbsp; <a href="${B}/intranet/index.html" style="color:rgba(255,255,255,.4);text-decoration:underline">인트라넷</a> &nbsp;|&nbsp; </div>
         <div class="footer-info">경기도 하남시 감일백제로 70, 204동 1104호 | 대표 Charles Lee</div>
         <div class="footer-social">
           <a href="http://pf.kakao.com/_uNndX" target="_blank" aria-label="카카오톡"><i class="fa-solid fa-comment"></i></a>
