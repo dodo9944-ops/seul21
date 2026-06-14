@@ -1,6 +1,5 @@
 {
   "rewrites": [
-    { "source": "/sotong/(.*)", "destination": "/api/reb-proxy?__path=/sotong/$1" },
     { "source": "/api/chat", "destination": "/api/chat" },
     { "source": "/api/chat-expert", "destination": "/api/chat-expert" },
     { "source": "/api/chat-expert-webhook", "destination": "/api/chat-expert-webhook" },
