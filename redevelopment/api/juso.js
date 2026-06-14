@@ -36,16 +36,18 @@ function fromKakaoAddress(doc) {
   };
 }
 
-async function searchKakao(keyword, size, key) {
+async function searchKakao(keyword, size, key, diag) {
   const headers = { Authorization: 'KakaoAK ' + key };
   // 1) 주소 검색
   let r = await fetch(KAKAO_ADDR + '?query=' + encodeURIComponent(keyword) + '&size=' + size, { headers });
   let d = await r.json();
+  if (diag) { diag.addrStatus = r.status; if (d && d.errorType) diag.addrErr = (d.errorType + ': ' + (d.message || '')); }
   let docs = (d && d.documents) || [];
   // 2) 주소 결과가 없으면 키워드(건물명/장소) 검색으로 보완
   if (!docs.length) {
     r = await fetch(KAKAO_KEYWORD + '?query=' + encodeURIComponent(keyword) + '&size=' + size, { headers });
     d = await r.json();
+    if (diag) { diag.kwStatus = r.status; if (d && d.errorType) diag.kwErr = (d.errorType + ': ' + (d.message || '')); }
     docs = (d && d.documents) || [];
   }
   return docs.map(fromKakaoAddress).filter((x) => x.jibunAddr || x.roadAddr);
@@ -88,13 +90,16 @@ module.exports = async function handler(req, res) {
   const kakaoKey = process.env.KAKAO_CLIENT_ID;
   let juso = [];
   let via = '';
+  const diag = {};
 
   // 1차: 카카오 로컬 API
   if (kakaoKey) {
     try {
-      juso = await searchKakao(keyword, size, kakaoKey);
+      juso = await searchKakao(keyword, size, kakaoKey, diag);
       via = 'kakao';
-    } catch (e) { /* 폴백 진행 */ }
+    } catch (e) { diag.kakaoThrow = (e && e.message) || String(e); }
+  } else {
+    diag.noKey = true;
   }
 
   // 2차: juso 직접 (Vercel 차단 시 실패할 수 있음 / 로컬·허용IP용 폴백)
@@ -107,7 +112,7 @@ module.exports = async function handler(req, res) {
 
   return res.status(200).json({
     results: {
-      common: jusoCommon({ totalCount: String(juso.length), currentPage, countPerPage, via }),
+      common: jusoCommon({ totalCount: String(juso.length), currentPage, countPerPage, via, diag: (juso.length ? undefined : diag) }),
       juso,
     },
   });
