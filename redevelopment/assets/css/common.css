@@ -430,7 +430,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 
 /* ── SCROLL TO TOP ── */
 .scroll-top {
-  position: fixed; bottom: 32px; right: 32px;
+  position: fixed; bottom: 100px; right: 32px;
   width: 48px; height: 48px; border-radius: 50%;
   background: var(--white); border: 1px solid var(--gray-200);
   color: var(--gray-700); font-size: 18px;
