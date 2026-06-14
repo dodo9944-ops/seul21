@@ -367,7 +367,7 @@ function renderFeatured(){
   var top=items.slice(0,3);
   if(!top.length){fb.style.display='none';return}
   fb.style.display='';
-  var nameMap={'주요뉴스':'인기뉴스','법령':'관계법령','서식가이드':'서식 매뉴얼','사례':'인기사례'};
+  var nameMap={'주요뉴스':'주요뉴스','법령':'관계법령','서식가이드':'서식 매뉴얼','사례':'사례집'};
   var icMap={'주요뉴스':'fa-newspaper','법령':'fa-scale-balanced','서식가이드':'fa-file-pen','사례':'fa-bookmark'};
   var title=nameMap[curCat]||'인기 자료';
   var sub='열람순 · 인기순';
