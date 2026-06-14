@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0A0F1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사업타당성 검토 — (주)세울엔지니어링</title>
+    <meta name="description" content="소규모주택정비사업 사업타당성 분석. 용적률·세대수·종전/종후자산·비례율·조합원 분담금을 단계별로 산출하는 세울엔지니어링 자체 분석 도구.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260614c">
+    <style>
+    /* === Hero === */
+    .fc-hero{padding:56px 0 44px;background:linear-gradient(135deg,#070B15 0%,var(--brand-dark) 40%,var(--brand-navy) 100%);position:relative;overflow:hidden}
+    .fc-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(195,165,105,.3),transparent)}
+    .fc-hero .hero-breadcrumb{display:flex;align-items:center;gap:9px;font-size:12.5px;color:rgba(255,255,255,.4);margin-bottom:16px}
+    .fc-hero .hero-breadcrumb a{color:rgba(255,255,255,.4)}
+    .fc-hero .hero-breadcrumb a:hover{color:var(--gold)}
+    .fc-hero .hero-breadcrumb i{font-size:9px;color:rgba(255,255,255,.25)}
+    .fc-hero .hero-label{font-family:'Montserrat',sans-serif;letter-spacing:3px;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:10px}
+    .fc-hero h1{font-size:32px;font-weight:900;color:#fff;margin-bottom:12px;padding-left:18px;border-left:3px solid var(--gold)}
+    .fc-hero .hero-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;max-width:760px}
+    .fc-hero .hero-badges{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+    .fc-hero .hb{display:inline-flex;align-items:center;gap:6px;padding:7px 15px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:8px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6)}
+    .fc-hero .hb i{color:var(--gold);font-size:11px}
+    @media(max-width:768px){.fc-hero{padding:40px 0 30px}.fc-hero h1{font-size:25px}}
+    /* === Tool frame === */
+    .fc-body{padding:34px 0 60px;background:var(--gray-50)}
+    .fc-frame-wrap{background:#fff;border:1px solid var(--gray-200);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+    #feasFrame{width:100%;border:0;display:block;min-height:760px}
+    .fc-note{margin-top:14px;font-size:12px;color:var(--gray-500);line-height:1.7;text-align:center}
+    .fc-note b{color:var(--gray-700)}
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="fc-hero">
+    <div class="inner">
+        <div class="hero-breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>사업타당성 검토</span>
+        </div>
+        <div class="hero-label">FEASIBILITY ANALYSIS</div>
+        <h1>사업타당성 검토</h1>
+        <p class="hero-sub">소규모주택정비사업의 규모추정 → 분양수입 → 총사업비 → <b style="color:#fff">비례율·조합원 분담금</b>까지 단계별로 산출하는 세울엔지니어링 자체 분석 도구입니다. (한국부동산원 사업타당성분석 매뉴얼 방법론 기반)</p>
+        <div class="hero-badges">
+            <span class="hb"><i class="fa-solid fa-cube"></i> 용적률·세대수 산정</span>
+            <span class="hb"><i class="fa-solid fa-coins"></i> 종전·종후자산</span>
+            <span class="hb"><i class="fa-solid fa-percent"></i> 비례율 산출</span>
+            <span class="hb"><i class="fa-solid fa-users"></i> 조합원 분담금</span>
+        </div>
+    </div>
+</section>
+
+<div class="fc-body"><div class="inner">
+    <div class="fc-frame-wrap">
+        <iframe id="feasFrame" src="feasibility-app.html" title="사업타당성 분석 도구" loading="lazy"></iframe>
+    </div>
+    <p class="fc-note">※ 본 분석은 입력값 기준의 <b>참고용 추정치</b>입니다. 실제 사업성은 감정평가·설계·인허가·금융조건 등에 따라 달라지며, 정밀 검토는 <b>(주)세울엔지니어링</b>으로 문의해 주세요.</p>
+</div></div>
+
+<div id="site-footer"></div>
+
+<script src="../assets/js/data-service.js?v=20260418q"></script>
+<script src="../assets/js/common.js?v=20260614a"></script>
+<script>
+/* 동일 출처 iframe 높이 자동조정 (외부 호출 없음) */
+(function(){
+    var f=document.getElementById('feasFrame');
+    function fit(){
+        try{
+            var d=f.contentWindow;
+            var doc=d&&d.document;
+            if(doc&&doc.body){
+                var h=Math.max(doc.body.scrollHeight,doc.documentElement.scrollHeight);
+                if(h>200) f.style.height=(h+24)+'px';
+            }
+        }catch(e){}
+    }
+    f.addEventListener('load',function(){ fit(); setTimeout(fit,300); });
+    setInterval(fit,500);
+})();
+</script>
+</body>
+</html>

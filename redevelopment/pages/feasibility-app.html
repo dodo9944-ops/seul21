@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>소규모주택정비사업 사업타당성 분석기</title>
+<style>
+  *{box-sizing:border-box;}
+  body{font-family:"맑은 고딕","Malgun Gothic",sans-serif;margin:0;background:#eef2f7;color:#1f2733;}
+  .wrap{max-width:800px;margin:0 auto;padding:20px 18px 90px;}
+  h1{font-size:21px;margin:4px 0 2px;}
+  .sub{color:#5b6675;font-size:12.5px;margin-bottom:14px;}
+  .addr{background:#eef4ff;border:1px solid #cfe0ff;border-radius:8px;padding:10px 12px;font-size:14px;margin-bottom:14px;}
+  .steps{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px;}
+  .steps .s{font-size:11px;padding:6px 9px;border-radius:7px;background:#dfe6f0;color:#7a8597;font-weight:700;}
+  .steps .s.active{background:#A8843D;color:#fff;} .steps .s.done{background:#8fd6a8;color:#155e34;}
+  .card{background:#fff;border:1px solid #e1e7ef;border-radius:12px;padding:18px 20px;margin-bottom:13px;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .card.hide{display:none;}
+  .card h2{font-size:15px;margin:0 0 3px;color:#A8843D;}
+  .card .src{font-size:11px;color:#aeb6c2;float:right;font-weight:400;}
+  .card .desc{font-size:12px;color:#8a94a3;margin-bottom:13px;}
+  .fld{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;}
+  .fld label{font-size:13px;color:#3a4453;flex:1;}
+  .fld .ipt{display:flex;align-items:center;gap:6px;}
+  .fld input,.fld select{padding:8px 10px;border:1px solid #ccd4df;border-radius:7px;font-size:14px;width:135px;text-align:right;}
+  .fld select{text-align:left;}
+  .fld .unit{font-size:12px;color:#8a94a3;width:54px;}
+  .btnrow{margin-top:15px;display:flex;gap:9px;align-items:center;}
+  button.go{background:#A8843D;color:#fff;border:0;padding:11px 22px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;}
+  button.go:hover{background:#093b7d;}
+  button.ghost{background:#fff;border:1px solid #b9c3d2;color:#33445c;padding:9px 15px;border-radius:8px;cursor:pointer;font-size:13px;}
+  .stepres{margin-top:13px;background:#f2f8f3;border:1px solid #cde8d6;border-radius:9px;padding:11px 13px;font-size:13.5px;color:#155e34;display:none;line-height:1.7;}
+  .stepres b{font-size:15px;}
+  .verdict{font-size:21px;font-weight:800;padding:15px;border-radius:12px;text-align:center;margin-bottom:11px;}
+  .v-ok{background:#e7f7ec;color:#147a3d;border:2px solid #8fd6a8;} .v-mid{background:#fff6e5;color:#9a6400;border:2px solid #f0cf86;} .v-no{background:#fdeaea;color:#b3261e;border:2px solid #efb0ac;}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:11px 0;}
+  @media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr);}}
+  .kpi{background:#f7f9fc;border:1px solid #e6ecf4;border-radius:10px;padding:10px;text-align:center;}
+  .kpi .l{font-size:11px;color:#6b7686;margin-bottom:4px;} .kpi .v{font-size:17px;font-weight:800;color:#A8843D;}
+  table.t{width:100%;border-collapse:collapse;font-size:13px;}
+  table.t th,table.t td{border-bottom:1px solid #eceff4;padding:8px 7px;}
+  table.t th{text-align:left;color:#5b6675;font-weight:600;} table.t td{text-align:right;font-variant-numeric:tabular-nums;}
+  table.t tr.sum td,table.t tr.sum th{border-top:2px solid #d6deea;font-weight:800;}
+  .note{font-size:11px;color:#8a94a3;margin-top:6px;line-height:1.6;}
+  .lawnote{font-size:11px;color:#7a8493;line-height:1.7;margin-top:10px;}
+  a.link{color:#A8843D;font-size:13px;}
+  @media print{body{background:#fff;}.noprint{display:none;}.card{box-shadow:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>소규모주택정비사업 사업타당성 분석기</h1>
+  <div class="sub">한국부동산원 「사업타당성분석 사용자 매뉴얼 ver.2(2025.03)」 방법론 기반 · 추정/참고용</div>
+  <div id="addrBox" class="addr">대상 주소를 검색에서 지정하거나 아래에서 바로 시작하세요.</div>
+
+  <div class="steps">
+    <div class="s active" id="si1">1. 대상지현황</div>
+    <div class="s" id="si2">2. 사업유형</div>
+    <div class="s" id="si3">3. 용적률</div>
+    <div class="s" id="si4">4. 분양설계</div>
+    <div class="s" id="si5">5. 종전자산</div>
+    <div class="s" id="si6">6. 종후자산</div>
+    <div class="s" id="si7">7. 사업비</div>
+    <div class="s" id="si8">8. 결과</div>
+  </div>
+
+  <!-- 1 대상지 현황 -->
+  <div class="card" id="step1">
+    <h2>① 사업시행구역 현황 <span class="src">매뉴얼 p12·14</span></h2>
+    <div class="desc">선택 구역의 면적·건물·노후도와 토지등소유자수를 확인합니다.</div>
+    <div class="fld"><label>구역면적(대지면적)</label><div class="ipt"><input id="landArea" type="number" value="3000"><span class="unit">㎡</span></div></div>
+    <div class="fld"><label>전체 건물수</label><div class="ipt"><input id="bldTotal" type="number" value="24"><span class="unit">동</span></div></div>
+    <div class="fld"><label>노후·불량건축물 수</label><div class="ipt"><input id="bldOld" type="number" value="18"><span class="unit">동</span></div></div>
+    <div style="border-top:1px dashed #e1e7ef;margin:12px 0;padding-top:10px;font-size:12px;color:#A8843D;font-weight:700;">토지등소유자수 추정 (p12)</div>
+    <div class="fld"><label>단독·다가구주택</label><div class="ipt"><input id="oDan" type="number" value="20"><span class="unit">동</span></div></div>
+    <div class="fld"><label>공동주택</label><div class="ipt"><input id="oGong" type="number" value="0"><span class="unit">세대</span></div></div>
+    <div class="fld"><label>기타(오피스텔 등 필지+나대지)</label><div class="ipt"><input id="oEtc" type="number" value="3"><span class="unit">필지</span></div></div>
+    <div class="note">※ 단독·다가구=동당 1인, 공동주택=세대당 1인, 기타=필지+나대지 수로 합산</div>
+    <div class="btnrow"><button class="go" onclick="doStep(1)">현황 확인 → 다음</button></div>
+    <div class="stepres" id="res1"></div>
+  </div>
+
+  <!-- 2 사업유형 -->
+  <div class="card hide" id="step2">
+    <h2>② 사업유형 · 시행조건 <span class="src">매뉴얼 p13·31</span></h2>
+    <div class="desc">사업유형을 선택하면 면적요건을 검토합니다.</div>
+    <div class="fld"><label>사업유형</label><div class="ipt">
+      <select id="bizType" style="width:230px;">
+        <option value="garo">가로주택정비사업</option>
+        <option value="jayul">자율주택정비사업</option>
+        <option value="sojae">소규모재개발사업</option>
+        <option value="sogeon">소규모재건축사업</option>
+      </select></div></div>
+    <div class="fld" id="garoOpt"><label>가로주택 면적상한 적용</label><div class="ipt">
+      <select id="garoCap" style="width:230px;">
+        <option value="10000">1만㎡ 미만 (원칙)</option>
+        <option value="20000">2만㎡ 미만 (관리지역 내)</option>
+        <option value="40000">4만㎡ 미만 (관리지역+공공성요건)</option>
+      </select></div></div>
+    <div class="note">※ 가로구역 도로요건·역세권·주택단지 등 일부 조건은 시스템 판단이 어려워 지자체 확인 필요(p13)</div>
+    <div class="btnrow"><button class="go" onclick="doStep(2)">시행조건 검토 → 다음</button><button class="ghost" onclick="back(1)">← 이전</button></div>
+    <div class="stepres" id="res2"></div>
+  </div>
+
+  <!-- 3 용적률 -->
+  <div class="card hide" id="step3">
+    <h2>③ 건축가능 용적률 산출 <span class="src">매뉴얼 p14</span></h2>
+    <div class="desc">공공임대 공급비율에 따라 적용용적률을 정하고, 조정변수를 곱해 실현용적률을 산정합니다.</div>
+    <div class="fld"><label>지자체 조례 용적률 (A)</label><div class="ipt"><input id="farA" type="number" value="200"><span class="unit">%</span></div></div>
+    <div class="fld"><label>법적상한 용적률 (B)</label><div class="ipt"><input id="farB" type="number" value="250"><span class="unit">%</span></div></div>
+    <div class="fld"><label>공공임대 공급비율 (C, 면적기준)</label><div class="ipt"><input id="rentC" type="number" value="0"><span class="unit">%</span></div></div>
+    <div class="fld"><label>조정변수(부정형·형태·경사·표고)</label><div class="ipt"><input id="adj" type="number" step="0.01" value="0.95"><span class="unit">배</span></div></div>
+    <div class="note">※ C≥20%→B / 10≤C&lt;20→A+[(B−A)×C/20] / C&lt;10→A · 실현용적률=적용용적률×조정변수</div>
+    <div class="btnrow"><button class="go" onclick="doStep(3)">용적률 산출 → 다음</button><button class="ghost" onclick="back(2)">← 이전</button></div>
+    <div class="stepres" id="res3"></div>
+  </div>
+
+  <!-- 4 분양설계 -->
+  <div class="card hide" id="step4">
+    <h2>④ 분양설계 (세대수·공급구성) <span class="src">매뉴얼 p15</span></h2>
+    <div class="desc">실현용적률 내 공급면적으로 총세대수를 산정하고 공공임대·조합원·일반분양으로 배분합니다.</div>
+    <div class="fld"><label>세대 평균 전용면적</label><div class="ipt"><input id="unitExcl" type="number" value="59"><span class="unit">㎡</span></div></div>
+    <div class="fld"><label>전용률(전용/공급)</label><div class="ipt"><input id="exclRate" type="number" value="72"><span class="unit">%</span></div></div>
+    <div class="note">※ 조합원분양 세대수 = 토지등소유자수, 공공임대 = 총세대×공급비율(C), 일반분양 = 잔여</div>
+    <div class="btnrow"><button class="go" onclick="doStep(4)">분양설계 → 다음</button><button class="ghost" onclick="back(3)">← 이전</button></div>
+    <div class="stepres" id="res4"></div>
+  </div>
+
+  <!-- 5 종전자산 -->
+  <div class="card hide" id="step5">
+    <h2>⑤ 종전자산 시세조사 <span class="src">매뉴얼 p18</span></h2>
+    <div class="desc">토지=대지면적×㎡당 공시지가×보정배율, 주택=총액공시×보정배율 (기본 1.5배).</div>
+    <div class="fld"><label>㎡당 평균 공시지가</label><div class="ipt"><input id="landGong" type="number" value="600"><span class="unit">만/㎡</span></div></div>
+    <div class="fld"><label>주택 공시가격 총액(단독+공동)</label><div class="ipt"><input id="houseGong" type="number" value="40"><span class="unit">억</span></div></div>
+    <div class="fld"><label>보정배율</label><div class="ipt"><input id="mult" type="number" step="0.1" value="1.5"><span class="unit">배</span></div></div>
+    <div class="btnrow"><button class="go" onclick="doStep(5)">종전자산 산출 → 다음</button><button class="ghost" onclick="back(4)">← 이전</button></div>
+    <div class="stepres" id="res5"></div>
+  </div>
+
+  <!-- 6 종후자산 -->
+  <div class="card hide" id="step6">
+    <h2>⑥ 종후자산 시세조사 <span class="src">매뉴얼 p19</span></h2>
+    <div class="desc">인근 실거래 기준 일반분양가 입력 → 조합원분양가=일반×80%, 공공임대=일반×60%.</div>
+    <div class="fld"><label>일반분양가(인근 실거래 기준)</label><div class="ipt"><input id="salePriceM2" type="number" value="1100"><span class="unit">만/㎡</span></div></div>
+    <div class="fld"><label>조합원분양가 비율</label><div class="ipt"><input id="memRate" type="number" value="80"><span class="unit">%</span></div></div>
+    <div class="fld"><label>공공임대 매입가 비율</label><div class="ipt"><input id="rentRate" type="number" value="60"><span class="unit">%</span></div></div>
+    <div class="btnrow"><button class="go" onclick="doStep(6)">종후자산 산출 → 다음</button><button class="ghost" onclick="back(5)">← 이전</button></div>
+    <div class="stepres" id="res6"></div>
+  </div>
+
+  <!-- 7 사업비 -->
+  <div class="card hide" id="step7">
+    <h2>⑦ 사업비 추정 <span class="src">매뉴얼 p20</span></h2>
+    <div class="desc">건축공사비=공급면적×평당단가, 가산공사비=30%, 기타사업비는 공사비비율로 역산.</div>
+    <div class="fld"><label>평당 건축공사비</label><div class="ipt"><input id="constPy" type="number" value="650"><span class="unit">만/평</span></div></div>
+    <div class="fld"><label>건축공사비 비율(전체사업비 중)</label><div class="ipt"><input id="constRate" type="number" value="75"><span class="unit">%</span></div></div>
+    <div class="fld"><label>국공유지 매입비</label><div class="ipt"><input id="gukgong" type="number" value="0"><span class="unit">억</span></div></div>
+    <div class="note">※ 가산공사비=건축공사비×30%(주차장·기계실 등 보완) · 총사업비=건축공사비(합)×100/비율 + 국공유지매입비</div>
+    <div class="btnrow"><button class="go" onclick="doStep(7)">사업비 산출 → 다음</button><button class="ghost" onclick="back(6)">← 이전</button></div>
+    <div class="stepres" id="res7"></div>
+  </div>
+
+  <!-- 8 결과 -->
+  <div class="card hide" id="step8">
+    <h2>⑧ 사업타당성 분석 결과 <span class="src">매뉴얼 p22</span></h2>
+    <div class="desc">비례율 = (종후자산 − 총사업비) ÷ 종전자산 × 100</div>
+    <div class="btnrow"><button class="go" onclick="doStep(8)">비례율 산출 · 최종 판정</button><button class="ghost" onclick="back(7)">← 이전</button></div>
+  </div>
+
+  <!-- FINAL -->
+  <div class="card hide" id="final">
+    <div id="verdict" class="verdict"></div>
+    <div class="kpis">
+      <div class="kpi"><div class="l">총 세대수</div><div class="v" id="kUnits">-</div></div>
+      <div class="kpi"><div class="l">비례율</div><div class="v" id="kRate">-</div></div>
+      <div class="kpi"><div class="l">사업이익</div><div class="v" id="kProfit">-</div></div>
+      <div class="kpi"><div class="l">조합원 평균 분담금</div><div class="v" id="kBurden">-</div></div>
+    </div>
+    <h2 style="font-size:13.5px;color:#A8843D;margin:14px 0 5px;">건축개요 · 분양구성</h2>
+    <table class="t"><tbody id="tBuild"></tbody></table>
+    <h2 style="font-size:13.5px;color:#A8843D;margin:18px 0 5px;">사업수지 (억원)</h2>
+    <table class="t"><tbody id="tMoney"></tbody></table>
+    <h2 style="font-size:13.5px;color:#A8843D;margin:18px 0 5px;">조합원 분담금 추정 (1인 평균)</h2>
+    <table class="t"><tbody id="tMember"></tbody></table>
+    <div class="lawnote">
+      ※ 비례율 = (종후자산 − 총사업비) ÷ 종전자산 × 100. 권리가액 = 종전자산 × 비례율, 분담금 = 조합원분양가 − 권리가액.<br>
+      ※ 한국부동산원 매뉴얼 ver.2 방법론을 따른 <b>간이 추정</b>입니다. 실제 분석은 토지·건축물대장, 공시가격, 인근 실거래 등 공부데이터와
+      GIS 구역설정이 반영되며, 가로구역 도로요건 등 일부는 지자체 확인이 필요합니다. 최종 사업성은 한국부동산원 정식 분석으로 확정하세요.
+    </div>
+    <div class="btnrow noprint">
+      <button class="ghost" onclick="window.print()">결과 인쇄/저장</button>
+      <button class="ghost" onclick="resetAll()">처음부터 다시</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){try{var p=new URLSearchParams(location.search);var a=p.get('addr')||sessionStorage.getItem('lastAddr')||'';if(a){document.getElementById('addrBox').innerHTML='<b>대상 주소:</b> '+a;}}catch(e){}})();
+document.getElementById('bizType').addEventListener('change',function(){
+  document.getElementById('garoOpt').style.display = this.value==='garo' ? 'flex':'none';
+});
+var PY=3.305785;
+var S={};
+function n(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)?0:v;}
+function eok(x){return (x).toLocaleString(undefined,{maximumFractionDigits:1});}
+function row(k,v){return '<tr><th>'+k+'</th><td>'+v+'</td></tr>';}
+function show(id){document.getElementById(id).classList.remove('hide');}
+function setStep(a){for(var i=1;i<=8;i++){var e=document.getElementById('si'+i);e.className='s'+(i<a?' done':(i===a?' active':''));}}
+function next(stepNo,resId,html){var r=document.getElementById(resId);r.style.display='block';r.innerHTML=html;show('step'+stepNo);setStep(stepNo);document.getElementById('step'+stepNo).scrollIntoView({behavior:'smooth'});}
+
+function doStep(k){
+  if(k===1){
+    S.landArea=n('landArea'); S.bldTotal=n('bldTotal'); S.bldOld=n('bldOld');
+    S.oDan=n('oDan'); S.oGong=n('oGong'); S.oEtc=n('oEtc');
+    S.owners=S.oDan+S.oGong+S.oEtc;
+    S.oldRatio=S.bldTotal>0?S.bldOld/S.bldTotal*100:0;
+    next(2,'res1','구역면적 <b>'+S.landArea.toLocaleString()+'㎡</b> · 노후도 <b>'+S.oldRatio.toFixed(1)+'%</b> · 토지등소유자 <b>'+S.owners+'인</b> (단독'+S.oDan+'+공동'+S.oGong+'+기타'+S.oEtc+')');
+  }
+  else if(k===2){
+    S.bizType=document.getElementById('bizType').value;
+    var name={garo:'가로주택정비사업',jayul:'자율주택정비사업',sojae:'소규모재개발사업',sogeon:'소규모재건축사업'}[S.bizType];
+    var msg='';
+    if(S.bizType==='garo'){
+      S.cap=parseFloat(document.getElementById('garoCap').value);
+      var ok=S.landArea<S.cap;
+      msg=name+' · 면적요건 '+(S.cap/10000)+'만㎡ 미만 → '+(ok?'<b style="color:#147a3d">충족</b>':'<b style="color:#b3261e">초과(미충족)</b>')+' ('+S.landArea.toLocaleString()+'㎡)';
+    } else { msg=name+' 선택 · 세부 시행요건은 지자체 확인 필요(p13)'; }
+    next(3,'res2',msg);
+  }
+  else if(k===3){
+    S.A=n('farA'); S.B=n('farB'); S.C=n('rentC'); S.adj=n('adj');
+    if(S.C>=20) S.appFar=S.B; else if(S.C>=10) S.appFar=S.A+(S.B-S.A)*S.C/20; else S.appFar=S.A;
+    S.realFar=S.appFar*S.adj;
+    next(4,'res3','적용용적률 <b>'+S.appFar.toFixed(1)+'%</b> × 조정변수 '+S.adj+' = 실현용적률 <b>'+S.realFar.toFixed(1)+'%</b>');
+  }
+  else if(k===4){
+    S.unitExcl=n('unitExcl'); S.exclRate=n('exclRate');
+    S.supplyM2=S.landArea*S.realFar/100;                 // 공급(연)면적 ㎡
+    S.unitSupplyM2=S.exclRate>0?S.unitExcl/(S.exclRate/100):0;
+    S.units=S.unitSupplyM2>0?Math.floor(S.supplyM2/S.unitSupplyM2):0;
+    S.rentUnits=Math.round(S.units*S.C/100);
+    S.memUnits=Math.min(S.owners, Math.max(0,S.units-S.rentUnits));
+    S.genUnits=Math.max(0, S.units-S.rentUnits-S.memUnits);
+    next(5,'res4','공급면적 <b>'+Math.round(S.supplyM2).toLocaleString()+'㎡</b> · 총 <b>'+S.units+'세대</b> (일반 '+S.genUnits+' / 조합원 '+S.memUnits+' / 공공임대 '+S.rentUnits+')');
+  }
+  else if(k===5){
+    S.landGong=n('landGong'); S.houseGongEok=n('houseGong'); S.mult=n('mult');
+    S.priorLand=S.landArea*S.landGong*S.mult/10000;       // 억 = ㎡*만/㎡ /10000
+    S.priorHouse=S.houseGongEok*S.mult;                   // 억
+    S.prior=S.priorLand+S.priorHouse;
+    next(6,'res5','종전자산 <b>'+eok(S.prior)+'억</b> (토지 '+eok(S.priorLand)+' + 주택 '+eok(S.priorHouse)+', 보정 '+S.mult+'배)');
+  }
+  else if(k===6){
+    S.salePriceM2=n('salePriceM2'); S.memRate=n('memRate'); S.rentRate=n('rentRate');
+    var perUnit=S.unitSupplyM2*S.salePriceM2/10000;       // 일반 세대당 분양가(억)
+    S.revGen=S.genUnits*perUnit;
+    S.revMem=S.memUnits*perUnit*S.memRate/100;
+    S.revRent=S.rentUnits*perUnit*S.rentRate/100;
+    S.after=S.revGen+S.revMem+S.revRent;                  // 종후자산(억)
+    S.memSalePrice=perUnit*S.memRate/100;                 // 조합원 세대 분양가(억)
+    next(7,'res6','종후자산 <b>'+eok(S.after)+'억</b> (일반 '+eok(S.revGen)+' + 조합원 '+eok(S.revMem)+' + 임대 '+eok(S.revRent)+')');
+  }
+  else if(k===7){
+    S.constPy=n('constPy'); S.constRate=n('constRate'); S.gukgong=n('gukgong');
+    S.supplyPy=S.supplyM2/PY;
+    S.constBase=S.supplyPy*S.constPy/10000;               // 건축공사비 기본(억)
+    S.constAdd=S.constBase*0.3;                           // 가산공사비
+    S.constTot=S.constBase+S.constAdd;                    // 건축공사비 합
+    S.totalCost=S.constRate>0?(S.constTot*100/S.constRate)+S.gukgong:S.constTot+S.gukgong;
+    S.etcCost=S.totalCost-S.constTot-S.gukgong;           // 기타사업비
+    next(8,'res7','건축공사비 '+eok(S.constTot)+'억(가산포함) + 기타 '+eok(S.etcCost)+'억 + 국공유지 '+eok(S.gukgong)+'억 = 총사업비 <b>'+eok(S.totalCost)+'억</b>');
+  }
+  else if(k===8){
+    S.profit=S.after-S.totalCost;
+    S.rate=S.prior>0?(S.after-S.totalCost)/S.prior*100:0;
+    S.priorPer=S.owners>0?S.prior/S.owners:0;
+    S.rightVal=S.priorPer*S.rate/100;
+    S.burden=S.memSalePrice-S.rightVal;
+    renderFinal(); setStep(8); show('final');
+    document.getElementById('final').scrollIntoView({behavior:'smooth'});
+  }
+}
+function back(k){document.getElementById('step'+k).scrollIntoView({behavior:'smooth'});setStep(k);}
+
+function renderFinal(){
+  var v=document.getElementById('verdict');
+  if(S.rate>=100){v.className='verdict v-ok';v.textContent='○ 사업성 양호 (비례율 '+S.rate.toFixed(1)+'%)';}
+  else if(S.rate>=80){v.className='verdict v-mid';v.textContent='△ 사업성 보통 — 면밀 검토 필요 (비례율 '+S.rate.toFixed(1)+'%)';}
+  else {v.className='verdict v-no';v.textContent='✕ 사업성 부족 (비례율 '+S.rate.toFixed(1)+'%)';}
+  document.getElementById('kUnits').textContent=S.units.toLocaleString()+' 세대';
+  document.getElementById('kRate').textContent=S.rate.toFixed(1)+' %';
+  document.getElementById('kProfit').textContent=eok(S.profit)+' 억';
+  document.getElementById('kBurden').textContent=(S.burden>=0?'+':'')+eok(S.burden)+' 억';
+  document.getElementById('tBuild').innerHTML=
+    row('구역면적',S.landArea.toLocaleString()+' ㎡ ('+eok(S.landArea/PY)+' 평)')+
+    row('노후도',S.oldRatio.toFixed(1)+' % (노후 '+S.bldOld+'/'+S.bldTotal+'동)')+
+    row('실현용적률',S.realFar.toFixed(1)+' % (적용 '+S.appFar.toFixed(1)+'×조정 '+S.adj+')')+
+    row('공급면적',Math.round(S.supplyM2).toLocaleString()+' ㎡ ('+eok(S.supplyPy)+' 평)')+
+    row('총 세대수','<b>'+S.units+' 세대</b> (일반 '+S.genUnits+'/조합원 '+S.memUnits+'/임대 '+S.rentUnits+')')+
+    row('토지등소유자수',S.owners+' 인');
+  document.getElementById('tMoney').innerHTML=
+    row('종후자산 (분양수입)',eok(S.after))+
+    row('건축공사비(가산 30% 포함)',eok(S.constTot))+
+    row('기타사업비',eok(S.etcCost))+
+    row('국공유지 매입비',eok(S.gukgong))+
+    '<tr class="sum"><th>총사업비</th><td>'+eok(S.totalCost)+'</td></tr>'+
+    row('종전자산 평가액',eok(S.prior))+
+    '<tr class="sum"><th>사업이익 (종후−사업비)</th><td>'+eok(S.profit)+'</td></tr>'+
+    '<tr class="sum"><th>비례율</th><td>'+S.rate.toFixed(1)+' %</td></tr>';
+  document.getElementById('tMember').innerHTML=
+    row('토지등소유자수',S.owners+' 인')+
+    row('종전자산 평균(1인)',eok(S.priorPer)+' 억')+
+    row('권리가액 (종전자산×비례율)',eok(S.rightVal)+' 억')+
+    row('조합원 평균 분양가',eok(S.memSalePrice)+' 억')+
+    '<tr class="sum"><th>예상 분담금 (분양가−권리가액)</th><td>'+(S.burden>=0?'+':'')+eok(S.burden)+' 억</td></tr>';
+}
+function resetAll(){
+  for(var i=2;i<=8;i++)document.getElementById('step'+i).classList.add('hide');
+  document.getElementById('final').classList.add('hide');
+  for(var j=1;j<=7;j++){var e=document.getElementById('res'+j);if(e)e.style.display='none';}
+  setStep(1);document.getElementById('step1').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
