@@ -354,12 +354,16 @@ function renderFeatured(){
   var fb=document.getElementById('libFeatured');if(!fb)return;
   var items=allItems.slice();
   if(curCat!=='전체'){var d=catDefs.find(function(x){return x.key===curCat});var ks=d&&d.keys?d.keys:[curCat];items=items.filter(function(i){return ks.indexOf(i.category)>=0});}
-  items.sort(function(a,b){return(b.downloads||0)-(a.downloads||0)});
+  var isNews=(curCat==='주요뉴스');
+  if(isNews){items.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});}
+  else{items.sort(function(a,b){return(b.downloads||0)-(a.downloads||0)});}
   var top=items.slice(0,3);
   if(!top.length){fb.style.display='none';return}
   fb.style.display='';
   var lbl=(curCat==='전체')?'전체':((catDefs.find(function(x){return x.key===curCat})||{}).label||'');
-  var html='<div class="pop-head"><div class="ph-icon"><i class="fa-solid fa-fire"></i></div><h3>인기 자료</h3><span>'+lbl+' · 다운로드순</span></div><div class="pop-grid">';
+  var title=isNews?'중요뉴스':'인기 자료';
+  var sub=isNews?'열람순':(lbl+' · 다운로드순');
+  var html='<div class="pop-head"><div class="ph-icon"><i class="fa-solid fa-fire"></i></div><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
   top.forEach(function(item,idx){
     var fi=getIcon(item.fileType);
     html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-download"></i> '+(item.downloads||0)+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
