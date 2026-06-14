@@ -38,8 +38,8 @@ const App = (() => {
     const user = DataService.getCurrentUser();
 
     const utilRight = isLoggedIn
-      ? `<a href="${B}/pages/mypage.html">${user.name}님</a><a href="#" id="logoutBtn">로그아웃</a><a href="${B}/pages/feasibility.html">사업타당성 분석</a>`
-      : `<a href="${B}/pages/login.html">로그인</a><a href="${B}/pages/register.html">회원가입</a><a href="${B}/pages/feasibility.html">사업타당성 분석</a>`;
+      ? `<a href="${B}/pages/mypage.html">${user.name}님</a><a href="#" id="logoutBtn">로그아웃</a><a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>`
+      : `<a href="${B}/pages/login.html">로그인</a><a href="${B}/pages/register.html">회원가입</a><a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>`;
 
     return `
     <div class="header-wrap" id="headerWrap">
@@ -183,7 +183,7 @@ const App = (() => {
           <h5>문의·지원</h5>
           <a href="${B}/pages/contact.html">고객센터</a>
           <a href="${B}/intranet/index.html">인트라넷</a>
-          <a href="${B}/pages/feasibility.html">사업타당성 분석</a>
+          <a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>
           <a href="${B}/pages/faq.html">자주 묻는 질문</a>
         </div>
         <div class="footer-col footer-contact">
