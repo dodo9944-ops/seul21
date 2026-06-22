@@ -61,6 +61,19 @@
     .hero-opt:hover .ho-arrow{opacity:1}
     .hero-opt .ho-arrow i{font-size:10px;transition:transform .2s}
     .hero-opt:hover .ho-arrow i{transform:translateX(3px)}
+    /* 상단 2개 카드 — 상하폭 절반 압축(개별/종합) */
+    .hero-selector .hero-opt:not(.full){padding:9px 14px}
+    .hero-selector .hero-opt:not(.full) .ho-top{margin-bottom:0}
+    .hero-selector .hero-opt:not(.full) .ho-icon{width:34px;height:34px;border-radius:9px;font-size:15px}
+    .hero-selector .hero-opt:not(.full) .ho-desc{display:none}
+    .hero-selector .hero-opt:not(.full) .ho-bottom{margin-top:9px}
+    /* 전체폭 카드 — 사업타당성 분석(REB 실시간 분석기) */
+    .hero-opt.full{grid-column:1/-1;background:linear-gradient(135deg,rgba(195,165,105,.16),rgba(10,16,30,.6));border-color:rgba(195,165,105,.32)}
+    .hero-opt.full:hover{background:linear-gradient(135deg,rgba(195,165,105,.24),rgba(14,22,40,.7));border-color:rgba(195,165,105,.5)}
+    .hero-opt.full:last-child{background:linear-gradient(135deg,rgba(195,165,105,.16),rgba(10,16,30,.6))}
+    .hero-opt.full:last-child:hover{background:linear-gradient(135deg,rgba(195,165,105,.24),rgba(14,22,40,.7))}
+    .hero-opt.full .ho-icon{background:rgba(195,165,105,.2)}
+    .ho-badge.live{background:var(--gold);color:var(--brand-dark)}
 
     /* Cards Grid */
     .sv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:48px}
@@ -274,6 +287,17 @@
                 <div class="ho-bottom">
                     <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 종합 분석 시작</div>
                     <div class="ho-mini"><i class="fa-solid fa-layer-group" title="6단계 분석"></i><i class="fa-solid fa-shuffle" title="시나리오 비교"></i><i class="fa-solid fa-wand-magic-sparkles" title="자동 해석"></i></div>
+                </div>
+            </div>
+            <div class="hero-opt full" onclick="location.href='feasibility-check.html'">
+                <div class="ho-top">
+                    <div class="ho-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <div><span class="ho-title">사업타당성 분석</span><span class="ho-badge live">실시간</span></div>
+                </div>
+                <p class="ho-desc">한국부동산원 데이터 기반으로 실제 대상지의 사업타당성을 직접 분석합니다.</p>
+                <div class="ho-bottom">
+                    <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 분석기 열기</div>
+                    <div class="ho-mini"><i class="fa-solid fa-map-location-dot" title="대상지 지도"></i><i class="fa-solid fa-building" title="토지·건축물"></i><i class="fa-solid fa-file-invoice-dollar" title="사업성 산출"></i></div>
                 </div>
             </div>
         </div>
