@@ -590,6 +590,7 @@ else if(m.web){location.href=m.web}
 else if(m.gov){window.open(m.gov,'_blank');App.toast((m.label||'공식 사이트')+'로 이동합니다','info')}
 var item=allItems.find(function(i){return i.id===id});if(item){item.downloads=(item.downloads||0)+1}render()}
 
+window.handleDownload=handleDownload;window.openNewsPopup=openNewsPopup;
 window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.querySelector('.ctrl-bar').offsetTop-80,behavior:'smooth'})}};
 
 /* 우측 퀵네비 — 스크롤 추종 + 상단/하단 리밋 */
