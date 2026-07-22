@@ -199,6 +199,10 @@
     .lqn-card:hover{border-color:var(--gold);transform:translateX(-3px);box-shadow:0 6px 18px rgba(195,165,105,.14)}
     .lqn-ic{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-navy));display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--gold);flex-shrink:0}
     .lqn-card .lqn-tx{font-size:12.5px;font-weight:700;color:var(--gray-800)}
+    .lqn-card.on{border-color:var(--gold);background:linear-gradient(135deg,rgba(195,165,105,.12),#fff);box-shadow:0 6px 18px rgba(195,165,105,.20)}
+    .lqn-card.on .lqn-ic{background:linear-gradient(135deg,var(--gold),#b7935a);color:#fff}
+    .lqn-card.on .lqn-tx{color:var(--brand-dark)}
+    .uni-hero .uh-card.on{border-color:var(--gold);background:rgba(14,22,40,0.80);box-shadow:0 8px 24px rgba(195,165,105,.30)}
     @media(max-width:1600px){.lib-quicknav{display:none}}
     </style>
 </head>
@@ -431,9 +435,17 @@ function updateBreadcrumb(cat){
 function syncCatUrl(cat){try{var u=new URL(location.href);if(cat&&cat!=='전체')u.searchParams.set('cat',cat);else u.searchParams.delete('cat');history.pushState({cat:cat},'',u.toString());}catch(e){}}
 
 /* 히어로 카드 클릭 → 카테고리 전환 */
+function syncActiveNav(cat){
+    ['.lqn-card','.uni-hero .uh-card'].forEach(function(sel){
+        document.querySelectorAll(sel).forEach(function(el){
+            var oc=el.getAttribute('onclick')||'';var m=oc.match(/switchCat\('([^']+)'\)/);
+            el.classList.toggle('on', !!m && m[1]===cat && cat!=='전체');
+        });
+    });
+}
 window.switchCat=function(cat){
     curCat=cat;curPage=1;renderTabs();render();
-    updateBreadcrumb(cat);syncCatUrl(cat);
+    updateBreadcrumb(cat);syncCatUrl(cat);syncActiveNav(cat);
     var target=document.querySelector('.page-body')||document.getElementById('catTabs');
     if(target) window.scrollTo({top:target.offsetTop-80,behavior:'smooth'});
     if(window.LIB_REFRESH_QUICKNAV)setTimeout(window.LIB_REFRESH_QUICKNAV,450);
@@ -448,8 +460,8 @@ document.getElementById('libList').addEventListener('click',function(e){var btn=
 
 var urlCat=new URLSearchParams(location.search).get('cat');
 if(urlCat){curCat=urlCat}
-updateBreadcrumb(curCat);
-window.addEventListener('popstate',function(){var c=new URLSearchParams(location.search).get('cat')||'전체';curCat=c;curPage=1;renderTabs();render();updateBreadcrumb(c);});
+updateBreadcrumb(curCat);syncActiveNav(curCat);
+window.addEventListener('popstate',function(){var c=new URLSearchParams(location.search).get('cat')||'전체';curCat=c;curPage=1;renderTabs();render();updateBreadcrumb(c);syncActiveNav(c);});
 
 
 /* Download handler */
