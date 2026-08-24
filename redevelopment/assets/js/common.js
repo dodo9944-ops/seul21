@@ -50,7 +50,7 @@ const App = (() => {
     </div></div>
     <header class="header"><div class="inner">
       <a href="${B}/index.html" class="logo">
-        <span class="logo-mark"><img src="${B}/jpg/visseum_logo.jpg" alt="빛세움 로고" style="width:100%;height:100%;object-fit:contain"></span>
+        <span class="logo-mark"><img src="${B}/jpg/visseum_logo2.png" alt="빛세움 로고" style="width:100%;height:100%;object-fit:contain"></span>
         <span class="logo-text">
           <span class="logo-company">(주)빛세움</span>
           <span class="logo-sub">VISSEUM</span>
@@ -173,7 +173,7 @@ const App = (() => {
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo">
-            <span class="logo-mark"><img src="${B}/jpg/visseum_logo2.png" alt="빛세움 로고" style="width:100%;height:100%;object-fit:contain"></span>
+            <span class="logo-mark"><img src="${B}/jpg/visseum_logo.jpg" alt="빛세움 로고" style="width:100%;height:100%;object-fit:contain"></span>
             <span class="logo-text">
               <span class="logo-company">(주)빛세움</span>
               <span class="logo-sub">VISSEUM</span>
