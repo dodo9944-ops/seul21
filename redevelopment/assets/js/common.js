@@ -215,9 +215,6 @@ const App = (() => {
           </div>
           <div class="footer-bottom-right">
             <div class="footer-info"><span>서울특별시 강동구 성내로6길 50, 피스센터 5층</span><span class="footer-representative">대표 조구형</span></div>
-            <div class="footer-social">
-              <a href="http://pf.kakao.com/_uNndX" target="_blank" aria-label="카카오톡"><i class="fa-solid fa-comment"></i></a>
-            </div>
           </div>
         </div>
       </div>
