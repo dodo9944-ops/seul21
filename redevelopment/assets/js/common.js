@@ -50,11 +50,7 @@ const App = (() => {
     </div></div>
     <header class="header"><div class="inner">
       <a href="${B}/index.html" class="logo">
-        <span class="logo-mark"><img src="${B}/jpg/visseum_logo2.png" alt="빛세움 로고" style="width:100%;height:100%;object-fit:contain"></span>
-        <span class="logo-text">
-          <span class="logo-company">(주)빛세움</span>
-          <span class="logo-sub">VISSEUM</span>
-        </span>
+        <span class="logo-mark"><img src="${B}/jpg/visseum_logo2.png" alt="(주)빛세움 VISSEUM" style="width:100%;height:100%;object-fit:contain"></span>
       </a>
       <nav class="gnb">
         ${links.map(l => `<a href="${l.href}"${l.target?' target="'+l.target+'"':''}${navActive(l.href)?' class="active"':''}>${l.label}</a>`).join('')}
