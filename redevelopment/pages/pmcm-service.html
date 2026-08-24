@@ -13,7 +13,7 @@
     <meta name="description" content="정비사업 전 과정의 일정, 원가, 품질, 리스크를 통합 관리하는 실행형 프로젝트 매니지먼트. 빛세움 PM/CM 서비스.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260614c">
     <style>
@@ -29,11 +29,11 @@
     }
     .rd-visual::before {
         content:''; position:absolute; right:-80px; top:-80px; width:300px; height:300px;
-        background:radial-gradient(circle,rgba(201,162,39,0.06) 0%,transparent 70%); border-radius:50%;
+        background:radial-gradient(circle,rgba(184,134,11,0.06) 0%,transparent 70%); border-radius:50%;
     }
     .rd-visual::after {
         content:''; position:absolute; left:-40px; bottom:-40px; width:200px; height:200px;
-        background:radial-gradient(circle,rgba(201,162,39,0.04) 0%,transparent 70%); border-radius:50%;
+        background:radial-gradient(circle,rgba(184,134,11,0.04) 0%,transparent 70%); border-radius:50%;
     }
     .rd-visual-text { position:relative; z-index:1; flex:1; }
     .rd-visual-badge {
@@ -89,7 +89,7 @@
     }
     .rd-strength-card::before {
         content:''; position:absolute; top:0; left:0; width:100%; height:4px;
-        background:linear-gradient(90deg, var(--gold), rgba(201,162,39,0.3));
+        background:linear-gradient(90deg, var(--gold), rgba(184,134,11,0.3));
     }
     .rd-strength-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); transform:translateY(-2px); }
     .rd-strength-card.full-width { grid-column:1 / -1; }
@@ -186,7 +186,7 @@
                 <div class="rd-why-card">
                     <div class="rd-why-icon"><i class="fa-solid fa-calendar-check"></i></div>
                     <div class="card-sub">Schedule Management</div>
-                    <h4>일정 관리<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(201,162,39,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></h4>
+                    <h4>일정 관리<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(184,134,11,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></h4>
                     <p>정비구역 지정~준공까지 전체 마스터 일정 수립, 단계별 마일스톤 관리, 지연 요인 사전 감지 및 대응. 재건축진단 유연화(30년 이상 진단 면제, 사업시행인가 전까지만 통과)에 따른 일정 최적화 및 동의율 완화(재건축·재개발 70%)를 반영한 신속 추진 일정 설계</p>
                 </div>
                 <div class="rd-why-card">
@@ -205,13 +205,13 @@
                 <div class="rd-why-card">
                     <div class="rd-why-icon"><i class="fa-solid fa-people-arrows"></i></div>
                     <div class="card-sub">Stakeholder Management</div>
-                    <h4>이해관계자 조율<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(201,162,39,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></h4>
+                    <h4>이해관계자 조율<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(184,134,11,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></h4>
                     <p>조합·시공사·설계·감리·행정기관 간 협의 조율, 회의 주재, 갈등 중재, 의사결정 지원. 전자투표·온라인 의결·모바일 동의서 등 전자적 의사결정 방식 운영 지원</p>
                 </div>
                 <div class="rd-why-card">
                     <div class="rd-why-icon"><i class="fa-solid fa-folder-open"></i></div>
                     <div class="card-sub">Reporting & Documentation</div>
-                    <h4>보고·문서 관리<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(201,162,39,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></h4>
+                    <h4>보고·문서 관리<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(184,134,11,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></h4>
                     <p>사업 현황 보고서, 의사결정 자료, 총회 안건, 계약서 검토 등 모든 문서의 작성·관리·보관. 전자화된 인허가 시스템 대응 및 심사기간 단축에 따른 신속 서류 준비 체계 구축</p>
                 </div>
                 <div class="rd-why-card">
@@ -316,14 +316,14 @@
                 </div>
                 <div class="rd-faq-item">
                     <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
-                        <span>2025 도시정비법 개정으로 PM/CM 업무가 어떻게 달라지나요?<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(201,162,39,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></span>
+                        <span>2025 도시정비법 개정으로 PM/CM 업무가 어떻게 달라지나요?<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(184,134,11,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></span>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="rd-faq-a">2025-2026 개정으로 크게 네 가지가 변화합니다. ①전자투표·온라인 회의·모바일 동의서 등 전자적 의사결정 방식이 도입되어 PM이 이를 운영·관리합니다. ②인허가 절차가 전자화되어 심사기간이 단축되므로 서류 준비 일정을 앞당겨 대응합니다. ③조합설립 동의율이 재건축·재개발 모두 70%로 완화되어 사업 초기 추진 속도가 빨라지며, PM의 조기 투입이 더욱 중요해집니다. ④30년 이상 건축물의 재건축진단이 면제되고, 사업시행인가 전까지만 통과하면 되므로 일정 관리의 유연성이 크게 높아집니다. 빛세움 PM/CM은 이 모든 변화를 반영한 최적화된 사업 관리를 제공합니다.</div>
                 </div>
                 <div class="rd-faq-item">
                     <div class="rd-faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
-                        <span>전자투표·온라인 의결 도입 시 PM은 어떤 역할을 하나요?<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(201,162,39,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></span>
+                        <span>전자투표·온라인 의결 도입 시 PM은 어떤 역할을 하나요?<span style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(184,134,11,0.12);color:var(--gold);font-size:11px;font-weight:700;margin-left:8px;">2025 개정</span></span>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="rd-faq-a">전자투표 시스템 선정·구축 지원, 온라인 총회·임시총회 운영 절차 수립, 모바일 동의서 수합 관리, 전자 의결 결과의 법적 유효성 검증 등을 PM이 총괄 지원합니다. 대면 회의와 전자적 방식을 병행하는 하이브리드 운영 체계를 구축하여 조합원 참여율을 극대화합니다.</div>

@@ -288,8 +288,8 @@ function sec(icon,title){return'<div class="ca-sec"><i class="fa-solid '+icon+'"
 function buildStep(idx){
   var h='<div class="ca-step-head"><h3>'+STEPS[idx].title+'</h3><div style="display:flex;gap:8px;align-items:center">';
   if(idx===0){
-    h+='<label style="display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:6px;border:1.5px dashed rgba(201,162,39,0.35);background:rgba(201,162,39,0.04);color:var(--gray-600);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">';
-    h+='<i class="fa-solid fa-file-arrow-up" style="color:#C9A227"></i> 파일 가져오기';
+    h+='<label style="display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:6px;border:1.5px dashed rgba(184,134,11,0.35);background:rgba(184,134,11,0.04);color:var(--gray-600);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">';
+    h+='<i class="fa-solid fa-file-arrow-up" style="color:#B8860B"></i> 파일 가져오기';
     h+='<input type="file" accept=".xlsx,.xls,.csv" onchange="CA.importFile(this)" style="display:none">';
     h+='</label>';
     h+='<button class="cm-btn" onclick="CA.downloadTemplate()" style="font-size:11px;white-space:nowrap"><i class="fa-solid fa-download"></i> 양식</button>';

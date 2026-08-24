@@ -244,7 +244,7 @@ function buildEmailHtml({ type, name, phone, email, title, content, fileCount })
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"></head>
 <body style="font-family:'Noto Sans KR',sans-serif;max-width:600px;margin:0 auto;padding:20px;background:#f8f9fa">
-  <div style="background:#0A0F1C;color:#C9A227;padding:20px 24px;border-radius:12px 12px 0 0;font-size:18px;font-weight:800">
+  <div style="background:#0A0F1C;color:#B8860B;padding:20px 24px;border-radius:12px 12px 0 0;font-size:18px;font-weight:800">
     빛세움 고객센터
   </div>
   <div style="background:#fff;padding:24px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
@@ -263,7 +263,7 @@ function buildEmailHtml({ type, name, phone, email, title, content, fileCount })
       <div style="font-size:14px;color:#1f2937;line-height:1.7;white-space:pre-wrap">${content}</div>
     </div>
     <div style="margin-top:24px;text-align:center">
-      <a href="${ADMIN_LINK}" style="display:inline-block;padding:12px 32px;background:#0A0F1C;color:#C9A227;text-decoration:none;border-radius:8px;font-size:14px;font-weight:700">관리자 페이지에서 확인하기</a>
+      <a href="${ADMIN_LINK}" style="display:inline-block;padding:12px 32px;background:#0A0F1C;color:#B8860B;text-decoration:none;border-radius:8px;font-size:14px;font-weight:700">관리자 페이지에서 확인하기</a>
     </div>
   </div>
 </body></html>`;

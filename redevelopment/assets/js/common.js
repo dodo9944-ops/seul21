@@ -50,7 +50,7 @@ const App = (() => {
     </div></div>
     <header class="header"><div class="inner">
       <a href="${B}/index.html" class="logo">
-        <span class="logo-mark"><svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="8" width="104" height="104" rx="4" stroke="#1A1A1A" stroke-width="2" opacity="0.15"/><rect x="28" y="24" width="52" height="6" rx="1" fill="#1A1A1A"/><rect x="28" y="24" width="6" height="28" rx="1" fill="#1A1A1A"/><rect x="40" y="52" width="52" height="6" rx="1" fill="#1A1A1A" opacity="0.5"/><rect x="86" y="58" width="6" height="28" rx="1" fill="#1A1A1A"/><rect x="40" y="86" width="52" height="6" rx="1" fill="#1A1A1A"/><path d="M86 24 L92 18 L98 24" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/></svg></span>
+        <span class="logo-mark"><img src="${B}/jpg/visseum_logo.jpg" alt="빛세움 로고" style="width:100%;height:100%;object-fit:contain"></span>
         <span class="logo-text">
           <span class="logo-company">(주)빛세움</span>
           <span class="logo-sub">VISSEUM</span>
@@ -75,7 +75,7 @@ const App = (() => {
     <aside class="drawer" id="drawer">
       <div class="drawer-header">
         <span class="logo">
-          <span class="logo-mark"><svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="8" width="104" height="104" rx="4" stroke="#1A1A1A" stroke-width="2" opacity="0.15"/><rect x="28" y="24" width="52" height="6" rx="1" fill="#1A1A1A"/><rect x="28" y="24" width="6" height="28" rx="1" fill="#1A1A1A"/><rect x="40" y="52" width="52" height="6" rx="1" fill="#1A1A1A" opacity="0.5"/><rect x="86" y="58" width="6" height="28" rx="1" fill="#1A1A1A"/><rect x="40" y="86" width="52" height="6" rx="1" fill="#1A1A1A"/></svg></span>
+          <span class="logo-mark"><img src="${B}/jpg/visseum_logo.jpg" alt="빛세움 로고" style="width:100%;height:100%;object-fit:contain"></span>
           <span class="logo-text">
             <span class="logo-company">(주)빛세움</span>
             <span class="logo-sub">VISSEUM</span>
@@ -159,7 +159,7 @@ const App = (() => {
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo">
-            <span class="logo-mark"><svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="8" width="104" height="104" rx="4" stroke="#fff" stroke-width="2" opacity="0.15"/><rect x="28" y="24" width="52" height="6" rx="1" fill="#fff"/><rect x="28" y="24" width="6" height="28" rx="1" fill="#fff"/><rect x="40" y="52" width="52" height="6" rx="1" fill="#fff" opacity="0.5"/><rect x="86" y="58" width="6" height="28" rx="1" fill="#fff"/><rect x="40" y="86" width="52" height="6" rx="1" fill="#fff"/></svg></span>
+            <span class="logo-mark"><img src="${B}/jpg/visseum_logo_white.png" alt="빛세움 로고" style="width:100%;height:100%;object-fit:contain"></span>
             <span class="logo-text">
               <span class="logo-company">(주)빛세움</span>
               <span class="logo-sub">VISSEUM</span>
@@ -578,24 +578,24 @@ const App = (() => {
     var ov=document.createElement('div');ov.className='modal-overlay open';ov.style.zIndex='99999';
     ov.innerHTML='<div style="background:#fff;border-radius:16px;width:92%;max-width:440px;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,0.35);">'+
       '<div style="background:linear-gradient(135deg,#0A0F1C,#142644);padding:14px 20px 12px;position:relative;overflow:hidden;">'+
-        '<div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(201,162,39,0.06);"></div>'+
-        '<div style="position:absolute;bottom:-30px;right:40px;width:80px;height:80px;border-radius:50%;background:rgba(201,162,39,0.04);"></div>'+
+        '<div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(184,134,11,0.06);"></div>'+
+        '<div style="position:absolute;bottom:-30px;right:40px;width:80px;height:80px;border-radius:50%;background:rgba(184,134,11,0.04);"></div>'+
         '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">'+
-          '<div style="width:34px;height:34px;border-radius:10px;background:rgba(201,162,39,0.12);border:1px solid rgba(201,162,39,0.2);display:flex;align-items:center;justify-content:center;"><i class="'+d.i+'" style="font-size:15px;color:#C9A227;"></i></div>'+
+          '<div style="width:34px;height:34px;border-radius:10px;background:rgba(184,134,11,0.12);border:1px solid rgba(184,134,11,0.2);display:flex;align-items:center;justify-content:center;"><i class="'+d.i+'" style="font-size:15px;color:#B8860B;"></i></div>'+
         '</div>'+
         '<h3 style="font-size:17px;font-weight:900;color:#fff;margin-bottom:2px;letter-spacing:-0.5px;">'+t+'</h3>'+
-        '<p style="font-size:10px;font-weight:600;color:rgba(201,162,39,0.7);letter-spacing:1.5px;text-transform:uppercase;">'+d.s+'</p>'+
-        '<div style="display:flex;gap:6px;margin-top:10px;">'+d.k.map(function(s){return'<div style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 4px;text-align:center;"><div style="font-size:12px;font-weight:800;color:#C9A227;">'+s[1]+'</div><div style="font-size:8px;color:rgba(255,255,255,0.4);margin-top:1px;">'+s[0]+'</div></div>'}).join('')+'</div>'+
+        '<p style="font-size:10px;font-weight:600;color:rgba(184,134,11,0.7);letter-spacing:1.5px;text-transform:uppercase;">'+d.s+'</p>'+
+        '<div style="display:flex;gap:6px;margin-top:10px;">'+d.k.map(function(s){return'<div style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 4px;text-align:center;"><div style="font-size:12px;font-weight:800;color:#B8860B;">'+s[1]+'</div><div style="font-size:8px;color:rgba(255,255,255,0.4);margin-top:1px;">'+s[0]+'</div></div>'}).join('')+'</div>'+
       '</div>'+
       '<div style="padding:20px 24px;overflow-y:auto;flex:1;">'+
         '<p style="font-size:13.5px;line-height:1.8;color:#444;margin-bottom:16px;">'+d.d+'</p>'+
         '<div style="background:#F8F8FA;border-radius:10px;padding:16px;">'+
           '<div style="font-size:10px;font-weight:700;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Core Competencies</div>'+
-          d.p.map(function(x){return'<div style="display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;"><div style="width:5px;height:5px;border-radius:50%;background:#C9A227;flex-shrink:0;margin-top:6px;"></div><p style="font-size:12.5px;line-height:1.6;color:#555;margin:0;">'+x+'</p></div>'}).join('')+
+          d.p.map(function(x){return'<div style="display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;"><div style="width:5px;height:5px;border-radius:50%;background:#B8860B;flex-shrink:0;margin-top:6px;"></div><p style="font-size:12.5px;line-height:1.6;color:#555;margin:0;">'+x+'</p></div>'}).join('')+
         '</div>'+
       '</div>'+
       '<div style="padding:12px 24px 16px;border-top:1px solid #f0f0f0;">'+
-        '<button data-action="close" style="width:100%;padding:12px;background:linear-gradient(135deg,#0A0F1C,#142644);color:#C9A227;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">닫기</button>'+
+        '<button data-action="close" style="width:100%;padding:12px;background:linear-gradient(135deg,#0A0F1C,#142644);color:#B8860B;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">닫기</button>'+
       '</div></div>';
     document.body.appendChild(ov);
     function closeModal(){ov.remove();var h=document.querySelector('.hero-cards-float,.uh-cards');if(h)h.scrollIntoView({behavior:'smooth',block:'center'})}

@@ -79,19 +79,19 @@
     #chat-toggle {
       width:auto; height:42px; border-radius:21px; border:none;
       background: linear-gradient(145deg, #0A0F1C, #1a3055);
-      color:#C9A227; cursor:pointer; padding:0 16px 0 13px;
-      box-shadow: 0 4px 20px rgba(10,15,28,0.45), inset 0 1px 0 rgba(201,162,39,0.15);
+      color:#B8860B; cursor:pointer; padding:0 16px 0 13px;
+      box-shadow: 0 4px 20px rgba(10,15,28,0.45), inset 0 1px 0 rgba(184,134,11,0.15);
       display:flex; align-items:center; gap:6px;
       transition: all .3s ease;
     }
     #chat-toggle:hover {
       transform:translateY(-2px);
-      box-shadow: 0 8px 32px rgba(10,15,28,0.55), inset 0 1px 0 rgba(201,162,39,0.2);
+      box-shadow: 0 8px 32px rgba(10,15,28,0.55), inset 0 1px 0 rgba(184,134,11,0.2);
     }
     #chat-toggle-inner { display:flex; align-items:center; }
     #chat-toggle-label {
       font-size:11.5px; font-weight:700; letter-spacing:0.3px;
-      color:#C9A227;
+      color:#B8860B;
     }
     #chat-toggle.active { border-radius:50%; width:42px; padding:0; justify-content:center; }
     #chat-toggle.active #chat-icon-open { display:none; }
@@ -120,13 +120,13 @@
     #chat-header-left { display:flex; align-items:center; gap:12px; }
     #chat-logo {
       width:38px; height:38px; border-radius:10px;
-      background: linear-gradient(135deg, #C9A227, #DDB84A);
+      background: linear-gradient(135deg, #B8860B, #D6A419);
       color:#0A0F1C;
       display:flex; align-items:center; justify-content:center;
     }
     #chat-header-text { display:flex; flex-direction:column; }
     #chat-title { color:#fff; font-size:14px; font-weight:700; }
-    #chat-subtitle { color:rgba(201,162,39,0.7); font-size:11px; font-weight:400; margin-top:2px; }
+    #chat-subtitle { color:rgba(184,134,11,0.7); font-size:11px; font-weight:400; margin-top:2px; }
     #chat-close {
       background:rgba(255,255,255,0.08); border:none; color:rgba(255,255,255,0.5);
       width:32px; height:32px; border-radius:8px;
@@ -142,7 +142,7 @@
       padding:0 16px 12px; gap:6px;
     }
     .chat-tab {
-      flex:1; padding:9px 12px; border:1.5px solid rgba(201,162,39,0.15);
+      flex:1; padding:9px 12px; border:1.5px solid rgba(184,134,11,0.15);
       border-radius:10px; background:rgba(255,255,255,0.04);
       color:rgba(255,255,255,0.45); font-size:12.5px; font-weight:600;
       cursor:pointer; transition:all .25s ease;
@@ -151,12 +151,12 @@
     }
     .chat-tab:hover {
       background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.7);
-      border-color:rgba(201,162,39,0.25);
+      border-color:rgba(184,134,11,0.25);
     }
     .chat-tab.active {
-      background:linear-gradient(135deg, rgba(201,162,39,0.15), rgba(201,162,39,0.08));
-      color:#C9A227; border-color:rgba(201,162,39,0.5);
-      box-shadow: 0 2px 8px rgba(201,162,39,0.15);
+      background:linear-gradient(135deg, rgba(184,134,11,0.15), rgba(184,134,11,0.08));
+      color:#B8860B; border-color:rgba(184,134,11,0.5);
+      box-shadow: 0 2px 8px rgba(184,134,11,0.15);
     }
     .chat-tab[data-mode="law"].active {
       background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(99,102,241,0.06));
@@ -200,7 +200,7 @@
     .expert-offline-notice .switch-btn {
       display:inline-block; padding:8px 20px; border-radius:20px;
       background:linear-gradient(135deg, #0A0F1C, #1a3055);
-      color:#C9A227; font-size:12px; font-weight:600; border:none;
+      color:#B8860B; font-size:12px; font-weight:600; border:none;
       cursor:pointer; font-family:'Noto Sans KR',sans-serif;
       transition:all .2s;
     }
@@ -221,7 +221,7 @@
     .chat-avatar {
       width:34px; height:34px; border-radius:50%; flex-shrink:0;
       background:linear-gradient(135deg,#0A0F1C,#1a3055);
-      color:#C9A227; font-size:13px; font-weight:800;
+      color:#B8860B; font-size:13px; font-weight:800;
       display:flex; align-items:center; justify-content:center;
       box-shadow:0 2px 8px rgba(10,15,28,0.15);
     }
@@ -265,7 +265,7 @@
     .chat-typing .chat-bubble { color:#999; }
     .chat-typing .dot-loader { display:inline-flex; gap:5px; margin-left:4px; vertical-align:middle; }
     .chat-typing .dot-loader span {
-      width:6px; height:6px; background:#C9A227; border-radius:50%;
+      width:6px; height:6px; background:#B8860B; border-radius:50%;
       animation:dotPulse .9s infinite ease-in-out;
     }
     .chat-typing.expert .dot-loader span { background:#10B981; }
@@ -306,7 +306,7 @@
       transition:all .2s;
     }
     .chat-quick-btn:hover {
-      border-color:#C9A227; color:#0A0F1C; background:#fdf8ef;
+      border-color:#B8860B; color:#0A0F1C; background:#fdf8ef;
     }
     .chat-quick-btn.expert-quick:hover {
       border-color:#10B981; color:#065F46; background:#f0fdf9;
@@ -327,14 +327,14 @@
       font-family:'Noto Sans KR',sans-serif;
       background:#f8f9fb; transition:all .2s;
     }
-    #chat-input:focus { border-color:#C9A227; background:#fff; box-shadow:0 0 0 3px rgba(201,162,39,0.1); }
+    #chat-input:focus { border-color:#B8860B; background:#fff; box-shadow:0 0 0 3px rgba(184,134,11,0.1); }
     #chat-input.expert-focus:focus { border-color:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,0.1); }
     #chat-input.law-focus:focus { border-color:#6366F1; box-shadow:0 0 0 3px rgba(99,102,241,0.1); }
     #chat-input::placeholder { color:#bbb; }
     #chat-send {
       width:42px; height:42px; border-radius:50%; border:none;
       background:linear-gradient(135deg,#0A0F1C,#1a3055);
-      color:#C9A227; cursor:pointer;
+      color:#B8860B; cursor:pointer;
       display:flex; align-items:center; justify-content:center;
       transition:all .2s;
     }
@@ -522,12 +522,12 @@
 
         if (!loggedIn) {
           messages.innerHTML = `<div style="text-align:center;padding:40px 20px">
-            <div style="width:56px;height:56px;border-radius:50%;background:rgba(201,162,39,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><i class="fa-solid fa-lock" style="font-size:22px;color:#C9A227"></i></div>
+            <div style="width:56px;height:56px;border-radius:50%;background:rgba(184,134,11,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><i class="fa-solid fa-lock" style="font-size:22px;color:#B8860B"></i></div>
             <h4 style="font-size:15px;font-weight:800;color:#0A0F1C;margin-bottom:8px">회원 전용 서비스</h4>
             <p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:20px">전문가 상담은 회원가입 후<br>이용하실 수 있습니다.</p>
             <div style="display:flex;gap:8px;justify-content:center">
-              <a href="${B}/pages/login.html" style="padding:8px 18px;background:#0A0F1C;color:#C9A227;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">로그인</a>
-              <a href="${B}/pages/register.html" style="padding:8px 18px;background:#C9A227;color:#fff;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">회원가입</a>
+              <a href="${B}/pages/login.html" style="padding:8px 18px;background:#0A0F1C;color:#B8860B;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">로그인</a>
+              <a href="${B}/pages/register.html" style="padding:8px 18px;background:#B8860B;color:#fff;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">회원가입</a>
             </div>
           </div>`;
           currentMode = 'expert';

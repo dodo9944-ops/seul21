@@ -13,7 +13,7 @@
     <meta name="description" content="도시정비의 기준을 만들고, 절차의 신뢰를 세우며, 사업의 가치를 끝까지 완성하는 길 — (주)빛세움">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260614c">
     <style>
@@ -63,7 +63,7 @@
     }
     .vs-hero-kw {
         padding: 14px 28px; border-radius: 10px;
-        background: rgba(255,255,255,0.04); border: 1px solid rgba(201,162,39,0.15);
+        background: rgba(255,255,255,0.04); border: 1px solid rgba(184,134,11,0.15);
         font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.7);
         letter-spacing: 0.3px;
     }
@@ -106,7 +106,7 @@
     }
     .vs-phil-line {
         width: 36px; height: 2px; margin: 28px 0 20px;
-        background: #C9A227;
+        background: #B8860B;
     }
     .vs-phil-sig {
         font-size: 11px; color: var(--gray-400);
@@ -137,13 +137,13 @@
     .vs-why-card {
         padding: 18px 20px 18px 18px; border-radius: 12px;
         background: #ffffff; border: 1px solid #e2e5ea;
-        border-left: 3px solid rgba(201,162,39,0.35);
+        border-left: 3px solid rgba(184,134,11,0.35);
         box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         transition: border-color 0.2s, box-shadow 0.2s;
     }
     .vs-why-card:hover {
         border-color: #e2e5ea;
-        border-left-color: #C9A227;
+        border-left-color: #B8860B;
         box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     }
     .vs-why-card h4 {
@@ -180,7 +180,7 @@
         margin-bottom: 20px;
         box-shadow: 0 2px 8px rgba(10,15,28,0.18);
     }
-    .vs-prin-icon i { color: #C9A227; font-size: 19px; }
+    .vs-prin-icon i { color: #B8860B; font-size: 19px; }
     .vs-prin-card h4 { font-size: 17px; font-weight: 800; color: #0d1420; margin-bottom: 10px; letter-spacing: -0.3px; }
     .vs-prin-card p { font-size: 13px; color: var(--gray-500); line-height: 1.78; flex: 1; }
     @media(max-width:860px) { .vs-principles { grid-template-columns: repeat(2,1fr); } }
@@ -194,7 +194,7 @@
     .vs-process::after {
         content: ''; position: absolute; top: -60px; right: -60px;
         width: 300px; height: 300px; border-radius: 50%;
-        background: radial-gradient(circle, rgba(201,162,39,0.06), transparent 70%);
+        background: radial-gradient(circle, rgba(184,134,11,0.06), transparent 70%);
     }
     .vs-process h2 {
         font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px;
@@ -218,10 +218,10 @@
     }
     .vs-row-arrow::before, .vs-row-arrow::after {
         content: ''; flex: 1; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(201,162,39,0.15), transparent);
+        background: linear-gradient(90deg, transparent, rgba(184,134,11,0.15), transparent);
     }
     .vs-row-arrow i {
-        color: rgba(201,162,39,0.3); font-size: 12px;
+        color: rgba(184,134,11,0.3); font-size: 12px;
     }
 
     /* Step card */
@@ -240,23 +240,23 @@
     .vs-step:hover .vs-step-more { opacity: 1; transform: translateX(2px); }
     .vs-step::before {
         content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-        background: linear-gradient(90deg, var(--gold), rgba(201,162,39,0.2));
+        background: linear-gradient(90deg, var(--gold), rgba(184,134,11,0.2));
         opacity: 0; transition: opacity 0.3s;
     }
     .vs-step:hover {
-        background: rgba(255,255,255,0.06); border-color: rgba(201,162,39,0.3);
+        background: rgba(255,255,255,0.06); border-color: rgba(184,134,11,0.3);
         transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.2);
     }
     .vs-step:hover::before { opacity: 1; }
 
     /* First step accent */
-    .vs-step.step-first { border-color: rgba(201,162,39,0.2); }
+    .vs-step.step-first { border-color: rgba(184,134,11,0.2); }
     .vs-step.step-first::before { opacity: 0.5; }
     /* Last step accent */
-    .vs-step.step-last { border-color: rgba(201,162,39,0.2); }
+    .vs-step.step-last { border-color: rgba(184,134,11,0.2); }
     .vs-step.step-last::after {
         content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-        background: linear-gradient(90deg, rgba(201,162,39,0.2), var(--gold));
+        background: linear-gradient(90deg, rgba(184,134,11,0.2), var(--gold));
     }
 
     /* Number */
@@ -280,9 +280,9 @@
     .vs-step-icon {
         display: inline-flex; align-items: center; justify-content: center;
         width: 30px; height: 30px; border-radius: 8px;
-        background: rgba(201,162,39,0.12); border: 1px solid rgba(201,162,39,0.2);
+        background: rgba(184,134,11,0.12); border: 1px solid rgba(184,134,11,0.2);
         backdrop-filter: blur(4px);
-        font-size: 13px; color: rgba(201,162,39,0.7);
+        font-size: 13px; color: rgba(184,134,11,0.7);
         margin-left: 8px; margin-bottom: 12px;
     }
 
@@ -294,7 +294,7 @@
     .vs-steps-row .vs-step:not(:last-child)::after {
         content: '\f054'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
         position: absolute; right: -12px; top: 50%; transform: translateY(-50%);
-        font-size: 10px; color: rgba(201,162,39,0.2); z-index: 3;
+        font-size: 10px; color: rgba(184,134,11,0.2); z-index: 3;
     }
 
     @media(max-width:860px) {
@@ -334,12 +334,12 @@
     }
     .vs-mstone::before {
         content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-        width: 3px; background: linear-gradient(180deg, var(--gold), rgba(201,162,39,0.15));
+        width: 3px; background: linear-gradient(180deg, var(--gold), rgba(184,134,11,0.15));
         opacity: .35; transition: opacity .28s ease;
     }
     .vs-mstone:hover {
         transform: translateY(-4px);
-        border-color: rgba(201,162,39,0.4);
+        border-color: rgba(184,134,11,0.4);
         box-shadow: 0 16px 36px rgba(10,15,28,0.08);
     }
     .vs-mstone:hover::before { opacity: 1; }
@@ -472,7 +472,7 @@
     .vs-title::before {
         content: ''; position: absolute; left: 0; top: 4px;
         width: 3px; height: 20px; border-radius: 2px;
-        background: linear-gradient(to bottom, var(--gold), rgba(201,162,39,0.3));
+        background: linear-gradient(to bottom, var(--gold), rgba(184,134,11,0.3));
     }
     
     /* === Vision Hero (about-hero 3안 패밀리) === */
@@ -511,15 +511,15 @@
     .vision-hero::before {
         content: ''; position: absolute; inset: 0;
         background-image:
-            radial-gradient(circle at 20% 50%, rgba(201,162,39,0.04) 0%, transparent 50%),
-            radial-gradient(circle at 80% 30%, rgba(201,162,39,0.03) 0%, transparent 40%);
+            radial-gradient(circle at 20% 50%, rgba(184,134,11,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 80% 30%, rgba(184,134,11,0.03) 0%, transparent 40%);
         pointer-events: none; z-index: 1;
     }
     .vision-hero::after {
         content: ''; position: absolute; inset: 0;
         background-image:
-            linear-gradient(rgba(201,162,39,0.015) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(201,162,39,0.015) 1px, transparent 1px);
+            linear-gradient(rgba(184,134,11,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(184,134,11,0.015) 1px, transparent 1px);
         background-size: 60px 60px; pointer-events: none; z-index: 1;
     }
     .vision-hero .inner {
@@ -537,20 +537,20 @@
         font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 13px;
     }
     .vision-hero .hero-breadcrumb a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
-    .vision-hero .hero-breadcrumb a:hover { color: #C9A227; }
-    .vision-hero .hero-breadcrumb span { color: #C9A227; font-weight: 600; }
+    .vision-hero .hero-breadcrumb a:hover { color: #B8860B; }
+    .vision-hero .hero-breadcrumb span { color: #B8860B; font-weight: 600; }
     .vision-hero .hero-breadcrumb i { font-size: 10px; }
     .vision-hero .hero-label {
         display: inline-flex; align-items: center; gap: 8px;
-        font-size: 12px; font-weight: 700; color: #C9A227;
+        font-size: 12px; font-weight: 700; color: #B8860B;
         letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
     }
-    .vision-hero .hero-label::before { content: ''; display: block; width: 24px; height: 1px; background: #C9A227; }
+    .vision-hero .hero-label::before { content: ''; display: block; width: 24px; height: 1px; background: #B8860B; }
     .vision-hero .hero-text h1 {
         font-size: 38px; font-weight: 900; color: #fff;
         line-height: 1.35; letter-spacing: -1px; margin-bottom: 16px;
     }
-    .vision-hero .hero-text h1 em { font-style: normal; color: #C9A227; }
+    .vision-hero .hero-text h1 em { font-style: normal; color: #B8860B; }
     .vision-hero .hero-sub {
         font-size: 16px; color: rgba(255,255,255,0.55);
         line-height: 1.7; max-width: 480px;
@@ -567,7 +567,7 @@
     }
     .vision-hero .hero-card:hover {
         background: rgba(14,22,40,0.70);
-        border-color: rgba(201,162,39,0.3);
+        border-color: rgba(184,134,11,0.3);
         transform: translateY(-2px);
     }
     /* 앵커 점프 시 sticky 헤더 가림 방지 */
@@ -575,11 +575,11 @@
     #philosophy, #principles, #method, #growth { scroll-margin-top: 88px; }
     .vision-hero .hero-card-icon {
         width: 36px; height: 36px; border-radius: 8px;
-        background: rgba(201,162,39,0.16);
+        background: rgba(184,134,11,0.16);
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 12px;
     }
-    .vision-hero .hero-card-icon i { font-size: 15px; color: #C9A227; }
+    .vision-hero .hero-card-icon i { font-size: 15px; color: #B8860B; }
     .vision-hero .hero-card h4 { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 4px; }
     .vision-hero .hero-card p { font-size: 11.5px; color: rgba(255,255,255,0.75); line-height: 1.5; }
     @media (max-width: 1024px) {

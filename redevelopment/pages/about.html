@@ -13,7 +13,7 @@
     <meta name="description" content="(주)빛세움 회사소개 — CEO 인사말, 연혁, 조직도, 사업분야, CI를 확인하세요.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260614c">
     <style>
@@ -78,16 +78,16 @@
         content: '';
         position: absolute; inset: 0;
         background-image:
-            radial-gradient(circle at 20% 50%, rgba(201,162,39,0.04) 0%, transparent 50%),
-            radial-gradient(circle at 80% 30%, rgba(201,162,39,0.03) 0%, transparent 40%);
+            radial-gradient(circle at 20% 50%, rgba(184,134,11,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 80% 30%, rgba(184,134,11,0.03) 0%, transparent 40%);
         pointer-events: none; z-index: 1;
     }
     .about-hero::after {
         content: '';
         position: absolute; inset: 0;
         background-image:
-            linear-gradient(rgba(201,162,39,0.015) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(201,162,39,0.015) 1px, transparent 1px);
+            linear-gradient(rgba(184,134,11,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(184,134,11,0.015) 1px, transparent 1px);
         background-size: 60px 60px;
         pointer-events: none; z-index: 1;
     }
@@ -107,18 +107,18 @@
         font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 13px;
     }
     .hero-breadcrumb a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
-    .hero-breadcrumb a:hover { color: #C9A227; }
-    .hero-breadcrumb span { color: #C9A227; font-weight: 600; }
+    .hero-breadcrumb a:hover { color: #B8860B; }
+    .hero-breadcrumb span { color: #B8860B; font-weight: 600; }
     .hero-breadcrumb i { font-size: 10px; }
     .hero-label {
         display: inline-flex; align-items: center; gap: 8px;
-        font-size: 12px; font-weight: 700; color: #C9A227;
+        font-size: 12px; font-weight: 700; color: #B8860B;
         letter-spacing: 2px; text-transform: uppercase;
         margin-bottom: 16px;
     }
     .hero-label::before {
         content: ''; display: block;
-        width: 24px; height: 1px; background: #C9A227;
+        width: 24px; height: 1px; background: #B8860B;
     }
     .hero-text h1 {
         font-size: 38px; font-weight: 900; color: #fff;
@@ -126,7 +126,7 @@
         margin-bottom: 16px;
     }
     .hero-text h1 em {
-        font-style: normal; color: #C9A227;
+        font-style: normal; color: #B8860B;
     }
     .hero-sub {
         font-size: 16px; color: rgba(255,255,255,0.55);
@@ -145,7 +145,7 @@
     }
     .hero-card:hover {
         background: rgba(14,22,40,0.70);
-        border-color: rgba(201,162,39,0.3);
+        border-color: rgba(184,134,11,0.3);
         transform: translateY(-2px);
     }
     /* sticky header 보정 — 앵커 스크롤 시 상단 헤더 가림 방지 */
@@ -153,11 +153,11 @@
     #ceo, #history, #organization, #business { scroll-margin-top: 88px; }
     .hero-card-icon {
         width: 36px; height: 36px; border-radius: 8px;
-        background: rgba(201,162,39,0.16);
+        background: rgba(184,134,11,0.16);
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 12px;
     }
-    .hero-card-icon i { font-size: 15px; color: #C9A227; }
+    .hero-card-icon i { font-size: 15px; color: #B8860B; }
     .hero-card h4 {
         font-size: 14px; font-weight: 800; color: #fff;
         margin-bottom: 4px;
@@ -198,13 +198,13 @@
     }
     .section-label {
         display: inline-flex; align-items: center; gap: 8px;
-        font-size: 11px; font-weight: 700; color: #C9A227;
+        font-size: 11px; font-weight: 700; color: #B8860B;
         letter-spacing: 2px; text-transform: uppercase;
         margin-bottom: 8px;
     }
     .section-label::before {
         content: ''; display: block;
-        width: 16px; height: 1px; background: #C9A227;
+        width: 16px; height: 1px; background: #B8860B;
     }
     .about-section .section-title {
         margin-bottom: 40px;
@@ -235,7 +235,7 @@
     }
     .trust-card-value {
         font-size: 36px; font-weight: 900;
-        color: #C9A227; line-height: 1.1; margin-bottom: 4px;
+        color: #B8860B; line-height: 1.1; margin-bottom: 4px;
     }
     .trust-card-unit {
         font-size: 14px; font-weight: 700; color: var(--gray-900);
@@ -272,7 +272,7 @@
     }
     .ceo-accent-line {
         width: 36px; height: 2px;
-        background: linear-gradient(90deg, var(--gold), rgba(201,162,39,0.15));
+        background: linear-gradient(90deg, var(--gold), rgba(184,134,11,0.15));
         border-radius: 1px; margin-bottom: 24px;
     }
     .ceo-greeting {
@@ -338,15 +338,15 @@
         border-radius: 18px;
         overflow: hidden;
         box-shadow: 0 16px 48px rgba(10,15,28,0.18);
-        border: 1px solid rgba(201,162,39,0.18);
+        border: 1px solid rgba(184,134,11,0.18);
         position: relative;
     }
     .cert-section::before {
         content: ''; position: absolute; inset: 0;
         background-image:
-            radial-gradient(circle at 80% 20%, rgba(201,162,39,0.06) 0%, transparent 50%),
-            linear-gradient(rgba(201,162,39,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(201,162,39,0.012) 1px, transparent 1px);
+            radial-gradient(circle at 80% 20%, rgba(184,134,11,0.06) 0%, transparent 50%),
+            linear-gradient(rgba(184,134,11,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(184,134,11,0.012) 1px, transparent 1px);
         background-size: auto, 60px 60px, 60px 60px;
         pointer-events: none;
     }
@@ -356,7 +356,7 @@
         display: flex; align-items: center; justify-content: center;
         background: rgba(255,255,255,0.06);
         padding: 28px;
-        border-right: 1px solid rgba(201,162,39,0.15);
+        border-right: 1px solid rgba(184,134,11,0.15);
     }
     .cert-photo img {
         width: 100%; max-width: 280px; height: auto;
@@ -386,7 +386,7 @@
     .cert-issuer {
         font-size: 13px; color: rgba(255,255,255,0.62);
         margin-bottom: 22px; padding-bottom: 16px;
-        border-bottom: 1px solid rgba(201,162,39,0.16);
+        border-bottom: 1px solid rgba(184,134,11,0.16);
     }
     .cert-issuer strong { color: var(--gold); font-weight: 700; }
     .cert-desc {
@@ -401,7 +401,7 @@
         display: flex; flex-direction: column; gap: 2px;
         padding: 10px 14px;
         background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(201,162,39,0.12);
+        border: 1px solid rgba(184,134,11,0.12);
         border-radius: 8px;
     }
     .cert-meta .cm-key {
@@ -414,11 +414,11 @@
     .cert-source {
         margin-top: 18px; font-size: 11.5px; color: rgba(255,255,255,0.42);
     }
-    .cert-source a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted rgba(201,162,39,0.35); }
+    .cert-source a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted rgba(184,134,11,0.35); }
     .cert-source a:hover { color: #fff; border-bottom-color: #fff; }
     @media (max-width: 900px) {
         .cert-section { flex-direction: column; }
-        .cert-photo { flex: 0 0 auto; border-right: none; border-bottom: 1px solid rgba(201,162,39,0.15); padding: 28px 20px; }
+        .cert-photo { flex: 0 0 auto; border-right: none; border-bottom: 1px solid rgba(184,134,11,0.15); padding: 28px 20px; }
         .cert-photo img { max-width: 240px; }
         .cert-text { padding: 28px 24px; }
         .cert-title { font-size: 20px; }
@@ -435,13 +435,13 @@
         max-width: 1100px; margin: 48px auto 0;
         border-radius: 18px; overflow: hidden;
         box-shadow: 0 16px 48px rgba(10,15,28,0.18);
-        border: 1px solid rgba(201,162,39,0.18);
+        border: 1px solid rgba(184,134,11,0.18);
         background: #0A0F1C;
     }
     .cert-with-hero .cert-hero {
         width: 100%; aspect-ratio: 16/6;
         position: relative; overflow: hidden;
-        border-bottom: 1px solid rgba(201,162,39,0.18);
+        border-bottom: 1px solid rgba(184,134,11,0.18);
     }
     .cert-with-hero .cert-hero img {
         width: 100%; height: 100%; object-fit: cover; display: block;
@@ -458,7 +458,7 @@
         color: #fff; font-size: 12.5px; font-weight: 700;
         padding: 7px 14px;
         background: rgba(15,29,53,0.78);
-        border: 1px solid rgba(201,162,39,0.35);
+        border: 1px solid rgba(184,134,11,0.35);
         border-radius: 8px;
         backdrop-filter: blur(8px);
         letter-spacing: 0.4px;
@@ -504,17 +504,17 @@
     .tl-dot {
         position: absolute; left: 50%; top: 4px;
         width: 14px; height: 14px; border-radius: 50%;
-        background: #C9A227; border: 3px solid #fff;
-        box-shadow: 0 0 0 2px #C9A227;
+        background: #B8860B; border: 3px solid #fff;
+        box-shadow: 0 0 0 2px #B8860B;
         transform: translateX(-50%);
         z-index: 2;
     }
     .tl-item.tl-recent .tl-dot {
         width: 18px; height: 18px; top: 2px;
-        box-shadow: 0 0 0 3px #C9A227, 0 0 12px rgba(201,162,39,0.3);
+        box-shadow: 0 0 0 3px #B8860B, 0 0 12px rgba(184,134,11,0.3);
     }
     .tl-year {
-        font-size: 26px; font-weight: 900; color: #C9A227;
+        font-size: 26px; font-weight: 900; color: #B8860B;
         margin-bottom: 8px;
     }
     .tl-item.tl-recent .tl-year {
@@ -559,7 +559,7 @@
         box-shadow: 0 8px 28px rgba(10,15,28,0.2);
     }
     .org-ceo-box .org-role {
-        font-size: 11px; font-weight: 700; color: #C9A227;
+        font-size: 11px; font-weight: 700; color: #B8860B;
         letter-spacing: 2px; text-transform: uppercase;
         margin-bottom: 4px;
     }
@@ -635,7 +635,7 @@
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 20px;
     }
-    .pro-card-icon i { font-size: 20px; color: #C9A227; }
+    .pro-card-icon i { font-size: 20px; color: #B8860B; }
     .pro-card h4 {
         font-size: 16px; font-weight: 700; color: var(--gray-900);
         margin-bottom: 8px;
@@ -668,7 +668,7 @@
         margin-bottom: 16px; letter-spacing: -0.5px;
     }
     .ci-text-area h3 em {
-        font-style: normal; color: #C9A227;
+        font-style: normal; color: #B8860B;
     }
     .ci-text-area p {
         font-size: 14.5px; color: var(--gray-600); line-height: 1.9;
@@ -680,9 +680,9 @@
     .ci-keyword {
         display: inline-flex; align-items: center; gap: 6px;
         padding: 8px 20px; border-radius: 8px;
-        background: rgba(201,162,39,0.06);
-        border: 1px solid rgba(201,162,39,0.15);
-        font-size: 14px; font-weight: 700; color: #C9A227;
+        background: rgba(184,134,11,0.06);
+        border: 1px solid rgba(184,134,11,0.15);
+        font-size: 14px; font-weight: 700; color: #B8860B;
     }
     @media (max-width: 860px) {
         .ci-layout { flex-direction: column; gap: 28px; }
@@ -708,8 +708,8 @@
     }
     .symbol-meaning {
         padding: 16px 20px;
-        background: rgba(201,162,39,0.05);
-        border-left: 3px solid #C9A227;
+        background: rgba(184,134,11,0.05);
+        border-left: 3px solid #B8860B;
         border-radius: 0 8px 8px 0;
         font-size: 13px; color: var(--gray-700); line-height: 1.7;
     }
@@ -732,7 +732,7 @@
         padding: 12px 24px; border-radius: 8px;
         font-size: 13px; font-weight: 700;
         text-decoration: none;
-        background: var(--brand-dark); color: #C9A227;
+        background: var(--brand-dark); color: #B8860B;
         transition: all 0.2s;
     }
     .ci-dl-btn:hover { background: #142644; }
@@ -753,8 +753,8 @@
         content: '';
         position: absolute; inset: 0;
         background:
-            radial-gradient(circle at 30% 50%, rgba(201,162,39,0.05) 0%, transparent 50%),
-            radial-gradient(circle at 70% 50%, rgba(201,162,39,0.03) 0%, transparent 40%);
+            radial-gradient(circle at 30% 50%, rgba(184,134,11,0.05) 0%, transparent 50%),
+            radial-gradient(circle at 70% 50%, rgba(184,134,11,0.03) 0%, transparent 40%);
         pointer-events: none;
     }
     .cta-section .inner { position: relative; z-index: 1; }
@@ -772,10 +772,10 @@
         padding: 14px 36px; border-radius: 8px;
         font-size: 15px; font-weight: 700;
         text-decoration: none;
-        background: #C9A227; color: #0A0F1C;
+        background: #B8860B; color: #0A0F1C;
         transition: all 0.2s;
     }
-    .cta-btn-primary:hover { background: #DDB84A; }
+    .cta-btn-primary:hover { background: #D6A419; }
     .cta-btn-outline {
         display: inline-flex; align-items: center; gap: 8px;
         padding: 14px 36px; border-radius: 8px;
@@ -786,8 +786,8 @@
         transition: all 0.2s;
     }
     .cta-btn-outline:hover {
-        border-color: rgba(201,162,39,0.5);
-        color: #C9A227;
+        border-color: rgba(184,134,11,0.5);
+        color: #B8860B;
     }
     @media (max-width: 600px) {
         .cta-section p { font-size: 17px; }
@@ -1133,13 +1133,13 @@
             <div class="symbol-layout">
                 <div class="symbol-mark-box">
                     <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="8" y="8" width="104" height="104" rx="8" stroke="#C9A227" stroke-width="1.5" opacity="0.25"/>
-                        <rect x="26" y="28" width="50" height="6" rx="1" fill="#C9A227"/>
-                        <rect x="26" y="28" width="6" height="30" rx="1" fill="#C9A227"/>
-                        <rect x="38" y="52" width="50" height="6" rx="1" fill="#C9A227" opacity="0.55"/>
-                        <rect x="82" y="58" width="6" height="30" rx="1" fill="#C9A227"/>
-                        <rect x="38" y="82" width="50" height="6" rx="1" fill="#C9A227"/>
-                        <path d="M85 28 L91 20 L97 28" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.45"/>
+                        <rect x="8" y="8" width="104" height="104" rx="8" stroke="#B8860B" stroke-width="1.5" opacity="0.25"/>
+                        <rect x="26" y="28" width="50" height="6" rx="1" fill="#B8860B"/>
+                        <rect x="26" y="28" width="6" height="30" rx="1" fill="#B8860B"/>
+                        <rect x="38" y="52" width="50" height="6" rx="1" fill="#B8860B" opacity="0.55"/>
+                        <rect x="82" y="58" width="6" height="30" rx="1" fill="#B8860B"/>
+                        <rect x="38" y="82" width="50" height="6" rx="1" fill="#B8860B"/>
+                        <path d="M85 28 L91 20 L97 28" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.45"/>
                     </svg>
                 </div>
                 <div class="symbol-desc">
@@ -1161,10 +1161,10 @@
                     </div>
                 </div>
                 <div class="color-card">
-                    <div class="color-swatch" style="background:#C9A227;"></div>
+                    <div class="color-swatch" style="background:#B8860B;"></div>
                     <div class="color-info">
                         <div class="color-name">Visseum Gold</div>
-                        <div class="color-hex">#C9A227</div>
+                        <div class="color-hex">#B8860B</div>
                     </div>
                 </div>
                 <div class="color-card">
@@ -1175,10 +1175,10 @@
                     </div>
                 </div>
                 <div class="color-card">
-                    <div class="color-swatch" style="background:#DDB84A;"></div>
+                    <div class="color-swatch" style="background:#D6A419;"></div>
                     <div class="color-info">
                         <div class="color-name">Light Gold</div>
-                        <div class="color-hex">#DDB84A</div>
+                        <div class="color-hex">#D6A419</div>
                     </div>
                 </div>
             </div>

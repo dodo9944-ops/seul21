@@ -6,7 +6,7 @@
 
 .md-step-badge {
     display:inline-flex; align-items:center; gap:10px;
-    background:rgba(201,162,39,0.1); border:1px solid rgba(201,162,39,0.3);
+    background:rgba(184,134,11,0.1); border:1px solid rgba(184,134,11,0.3);
     color:var(--gold); padding:8px 16px; border-radius:999px;
     font-size:12px; font-weight:700; letter-spacing:1px;
     margin-bottom:14px;
@@ -14,7 +14,7 @@
 .md-step-badge .num { font-size:14px; font-weight:900; }
 
 .md-intro {
-    background:linear-gradient(135deg,rgba(201,162,39,0.04),transparent 60%);
+    background:linear-gradient(135deg,rgba(184,134,11,0.04),transparent 60%);
     border-left:4px solid var(--gold); border-radius:0 var(--radius) var(--radius) 0;
     padding:36px 40px 36px 36px;
 }
@@ -33,7 +33,7 @@
     background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:16px;
     padding:48px; color:#fff; position:relative; overflow:hidden;
 }
-.md-strategy::before { content:''; position:absolute; right:-60px; top:-60px; width:240px; height:240px; background:radial-gradient(circle,rgba(201,162,39,0.08),transparent 70%); border-radius:50%; }
+.md-strategy::before { content:''; position:absolute; right:-60px; top:-60px; width:240px; height:240px; background:radial-gradient(circle,rgba(184,134,11,0.08),transparent 70%); border-radius:50%; }
 .md-strategy-label { font-size:11px; font-weight:700; color:var(--gold); letter-spacing:1.5px; margin-bottom:14px; }
 .md-strategy h3 { font-size:24px; font-weight:800; margin-bottom:14px; line-height:1.45; }
 .md-strategy > p { font-size:15px; color:rgba(255,255,255,0.65); line-height:1.85; max-width:780px; margin-bottom:32px; }
@@ -42,7 +42,7 @@
     background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
     border-radius:12px; padding:24px;
 }
-.md-strategy-item .ic { width:42px; height:42px; border-radius:10px; background:rgba(201,162,39,0.15); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:18px; margin-bottom:14px; }
+.md-strategy-item .ic { width:42px; height:42px; border-radius:10px; background:rgba(184,134,11,0.15); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:18px; margin-bottom:14px; }
 .md-strategy-item h5 { font-size:15px; font-weight:700; margin-bottom:8px; }
 .md-strategy-item p { font-size:13px; color:rgba(255,255,255,0.55); line-height:1.75; }
 @media(max-width:860px){ .md-strategy{padding:36px 28px;} .md-strategy-grid{grid-template-columns:1fr;} }
@@ -111,7 +111,7 @@
     padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px;
     position:relative; overflow:hidden;
 }
-.md-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(201,162,39,0.08),transparent 70%); border-radius:50%; }
+.md-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(184,134,11,0.08),transparent 70%); border-radius:50%; }
 .md-cta h3 { font-size:22px; font-weight:800; color:#fff; margin-bottom:8px; }
 .md-cta p { font-size:15px; color:rgba(255,255,255,0.55); }
 .md-cta-btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:var(--gold); color:#0A0F1C; border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap; }
