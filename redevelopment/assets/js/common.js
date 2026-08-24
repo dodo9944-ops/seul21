@@ -152,14 +152,53 @@ const App = (() => {
     </div>`;
   }
 
+  /* ── 공지사항 상위 3건 (Footer 상단 카드용) ── */
+  function footerNoticeCardsHTML() {
+    try {
+      var all = (window.DataService && DataService.getAll) ? DataService.getAll('notices') : ((window.MOCK && MOCK.notices) || []);
+      var top3 = (all || []).slice().sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); }).slice(0, 3);
+      if (!top3.length) return '';
+      return top3.map(function(n) {
+        var m = /^\[([^\]]+)\]\s*(.*)$/.exec(n.title || '');
+        var badge = m ? m[1] : '공지';
+        var title = m ? m[2] : (n.title || '');
+        var excerpt = (n.content || '').replace(/\n+/g, ' ').trim().slice(0, 72);
+        return '<a class="footer-news-item" href="' + B + '/pages/notice.html">' +
+          '<div class="fn-badge">' + badge + '</div>' +
+          '<div class="fn-body"><h4>' + title + '</h4><p>' + excerpt + (excerpt.length >= 72 ? '…' : '') + '</p><span class="fn-date">' + (n.date || '') + '</span></div>' +
+          '</a>';
+      }).join('');
+    } catch (e) { return ''; }
+  }
+
   /* ── 공통 푸터 HTML ── */
   function footerHTML() {
     return `
+    <div class="pre-footer-cta">
+      <div class="inner">
+        <div class="pfc-text">
+          <h3>정비사업, 어디서부터 시작해야 할지 막막하신가요?</h3>
+          <p>빛세움이 사업 초기 검토부터 함께합니다. 부담 없이 문의하세요.</p>
+        </div>
+        <a href="${B}/pages/contact.html" class="pfc-btn">상담 문의하기 <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-news">
+      <div class="inner">
+        <div class="footer-news-head">
+          <h3>공지사항</h3>
+          <a href="${B}/pages/notice.html" class="fn-more">서비스 전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+        </div>
+        <div class="footer-news-grid">${footerNoticeCardsHTML()}</div>
+      </div>
+    </div>
+
     <footer class="footer"><div class="inner">
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo">
-            <span class="logo-mark"><img src="${B}/jpg/visseum_logo_white.png" alt="빛세움 로고" style="width:100%;height:100%;object-fit:contain"></span>
+            <span class="logo-mark"><img src="${B}/jpg/visseum_logo.jpg" alt="빛세움 로고" style="width:100%;height:100%;object-fit:contain"></span>
             <span class="logo-text">
               <span class="logo-company">(주)빛세움</span>
               <span class="logo-sub">VISSEUM</span>
@@ -194,10 +233,19 @@ const App = (() => {
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copy">&copy; 2026 (주)빛세움. All rights reserved. &nbsp;|&nbsp; <a href="${B}/pages/privacy.html" style="color:rgba(255,255,255,.4);text-decoration:underline">개인정보 처리방침</a> &nbsp;|&nbsp; <a href="${B}/pages/sitemap.html" style="color:rgba(255,255,255,.4);text-decoration:underline">사이트맵</a> &nbsp;|&nbsp; <a href="${B}/admin/login.html" style="color:rgba(255,255,255,.4);text-decoration:underline">관리자</a> &nbsp;|&nbsp; <a href="${B}/intranet/index.html" style="color:rgba(255,255,255,.4);text-decoration:underline">인트라넷</a> &nbsp;|&nbsp; </div>
-        <div class="footer-info">서울특별시 강동구 성내로6길 50, 피스센터 5층 | 대표 조구형</div>
-        <div class="footer-social">
-          <a href="http://pf.kakao.com/_uNndX" target="_blank" aria-label="카카오톡"><i class="fa-solid fa-comment"></i></a>
+        <div class="footer-policy-links">
+          <a href="${B}/pages/about.html">회사소개</a>
+          <a href="${B}/pages/privacy.html" style="font-weight:700">개인정보 처리방침</a>
+          <a href="${B}/pages/sitemap.html">사이트맵</a>
+          <a href="${B}/admin/login.html">관리자</a>
+          <a href="${B}/intranet/index.html">인트라넷</a>
+        </div>
+        <div class="footer-company-info">
+          <div class="footer-copy">&copy; 2026 (주)빛세움. All rights reserved.</div>
+          <div class="footer-info"><span>서울특별시 강동구 성내로6길 50, 피스센터 5층</span><span>대표 조구형</span></div>
+          <div class="footer-social">
+            <a href="http://pf.kakao.com/_uNndX" target="_blank" aria-label="카카오톡"><i class="fa-solid fa-comment"></i></a>
+          </div>
         </div>
       </div>
     </div></footer>
