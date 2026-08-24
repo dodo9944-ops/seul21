@@ -407,14 +407,14 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 /* ══════════════════════════════════════════════════════════
    PRE-FOOTER CTA
    ══════════════════════════════════════════════════════════ */
-.pre-footer-cta { margin: 64px 0 40px; }
+.pre-footer-cta { margin: 24px 0 40px; }
 .pre-footer-cta .inner {
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
   background: linear-gradient(100deg, #FFFDF7 0%, #FFF4CB 100%);
   border-radius: 12px; padding: 22px 32px;
 }
-.pre-footer-cta .pfc-text h3 { font-size: 16px; font-weight: 800; color: var(--visseum-ink, #171C26); margin-bottom: 4px; }
-.pre-footer-cta .pfc-text p { font-size: 13px; color: var(--visseum-text, #666B73); }
+.pre-footer-cta .pfc-text h3 { font-size: 16px; font-weight: 800; color: var(--visseum-ink, #171C26); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pre-footer-cta .pfc-text p { display: none; }
 .pre-footer-cta .pfc-btn {
   display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
   background: linear-gradient(135deg, #C58B00, #FFC400);
@@ -424,7 +424,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 .pre-footer-cta .pfc-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(197,139,0,.18); }
 @media (max-width: 620px) {
-  .pre-footer-cta { margin: 48px 0 28px; }
+  .pre-footer-cta { margin: 24px 0 28px; }
   .pre-footer-cta .inner { flex-direction: column; align-items: flex-start; padding: 20px 22px; }
   .pre-footer-cta .pfc-btn { width: 100%; justify-content: center; }
 }
@@ -1080,7 +1080,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 /* === Unified Page CTA — 회사소개·빛세움의 길·사업분야·업무실적·자료실·사업성 검토 공통 (2026-05-05) ===
    단일행 레이아웃: 좌측 안내글 / 우측 상담 버튼 */
 .uni-cta {
-  margin: 64px 0 40px;
+  margin: 24px 0 40px;
   padding: 22px 32px;
   background: linear-gradient(100deg, #FFFDF7 0%, #FFF4CB 100%);
   border-radius: 12px;
@@ -1110,7 +1110,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   box-shadow: 0 8px 20px rgba(197,139,0,.18);
 }
 @media (max-width: 640px) {
-  .uni-cta { margin: 48px 0 28px; padding: 20px 22px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .uni-cta { margin: 24px 0 28px; padding: 20px 22px; flex-direction: column; align-items: flex-start; gap: 12px; }
   .uni-cta h3 { font-size: 13px; white-space: normal; }
   .uni-cta a.uc-primary { width: 100%; justify-content: center; padding: 9px 14px; font-size: 12.5px; }
 }
