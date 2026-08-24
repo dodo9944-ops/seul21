@@ -41,18 +41,18 @@
         object-fit: cover;
         object-position: center 30%;
         display: block;
-        filter: brightness(0.82) contrast(1.08);
+        filter: brightness(0.94) contrast(1.08);
     }
     .hero-bg-photo::after {
         content: '';
         position: absolute; inset: 0;
         background: linear-gradient(90deg,
-            #FFFFFF 0%,
-            rgba(255,255,255,0.94) 6%,
-            rgba(255,255,255,0.65) 24%,
-            rgba(255,255,255,0.4) 48%,
-            rgba(255,255,255,0.28) 72%,
-            rgba(255,255,255,0.22) 100%
+            rgba(255,253,247,0.99) 0%,
+            rgba(255,249,235,0.97) 22%,
+            rgba(255,242,202,0.84) 36%,
+            rgba(255,222,120,0.36) 49%,
+            rgba(255,196,0,0.08) 59%,
+            rgba(255,255,255,0) 72%
         );
         z-index: 1;
     }
@@ -91,16 +91,80 @@
         background-size: 60px 60px;
         pointer-events: none; z-index: 1;
     }
+    /* 골든 라이트 웨이브 — 하단을 가로지르는 다중 곡선 라인 */
+    .hero-golden-glow {
+        position: absolute; left: -8%; bottom: -42%;
+        width: 72%; height: 88%;
+        z-index: 2; pointer-events: none;
+        background: radial-gradient(ellipse at 24% 74%,
+            rgba(255,196,0,.24) 0%, rgba(255,196,0,.12) 25%,
+            rgba(255,196,0,.055) 46%, transparent 72%
+        );
+        filter: blur(3px);
+    }
+    .hero-golden-wave {
+        position: absolute; left: -10%; bottom: -23%;
+        width: 88%; height: 78%;
+        z-index: 3; pointer-events: none; opacity: .92;
+        -webkit-mask-image: linear-gradient(90deg,
+            rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%,
+            rgba(0,0,0,.82) 68%, rgba(0,0,0,.38) 82%, transparent 100%);
+        mask-image: linear-gradient(90deg,
+            rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%,
+            rgba(0,0,0,.82) 68%, rgba(0,0,0,.38) 82%, transparent 100%);
+    }
+    .wave-line {
+        position: absolute; left: -5%; bottom: 0;
+        transform-origin: left bottom;
+        border-top-style: solid; border-radius: 50%;
+        pointer-events: none;
+        filter: drop-shadow(0 0 3px rgba(255,196,0,.10)) drop-shadow(0 0 8px rgba(255,196,0,.05));
+    }
+    .wave-line.line-1  { width:1080px; height:220px; border-top:1px solid rgba(255,196,0,.42); transform:rotate(-6deg) skewX(-2deg); }
+    .wave-line.line-2  { width:1130px; height:250px; border-top:1px solid rgba(255,205,30,.39); transform:rotate(-5.3deg) skewX(-1deg); }
+    .wave-line.line-3  { width:1180px; height:285px; border-top:1px solid rgba(255,213,55,.36); transform:rotate(-4.7deg); }
+    .wave-line.line-4  { width:1235px; height:320px; border-top:1px solid rgba(255,220,80,.33); transform:rotate(-4.1deg); }
+    .wave-line.line-5  { width:1290px; height:355px; border-top:1px solid rgba(255,225,105,.30); transform:rotate(-3.5deg); }
+    .wave-line.line-6  { width:1350px; height:395px; border-top:1px solid rgba(255,230,130,.28); transform:rotate(-3deg); }
+    .wave-line.line-7  { width:1410px; height:435px; border-top:1px solid rgba(255,235,155,.26); transform:rotate(-2.6deg); }
+    .wave-line.line-8  { width:1470px; height:475px; border-top:1px solid rgba(255,240,180,.23); transform:rotate(-2.2deg); }
+    .wave-line.line-9  { width:1530px; height:515px; border-top:1px solid rgba(255,245,205,.20); transform:rotate(-1.8deg); }
+    .wave-line.line-10 { width:1590px; height:555px; border-top:1px solid rgba(255,250,225,.18); transform:rotate(-1.4deg); }
+    .wave-line.line-11 { width:1650px; height:600px; border-top:1px solid rgba(255,255,255,.16); transform:rotate(-1deg); }
+    .wave-line.line-12 { width:1710px; height:640px; border-top:1px solid rgba(255,255,255,.12); transform:rotate(-0.6deg); }
+    .wave-line.line-13 { width:1200px; height:270px; border-top:1px solid rgba(255,210,60,.14); transform:rotate(-5.6deg); opacity:.5; }
+    .wave-line.line-14 { width:1380px; height:420px; border-top:1px solid rgba(255,225,110,.12); transform:rotate(-3.2deg); opacity:.4; }
+    .wave-line.line-15 { width:1510px; height:500px; border-top:1px solid rgba(255,240,170,.10); transform:rotate(-1.9deg); opacity:.35; }
+    .wave-point {
+        position: absolute; width: 2.5px; height: 2.5px; border-radius: 50%;
+        background: #FFD95A;
+        box-shadow: 0 0 5px rgba(255,196,0,.55), 0 0 12px rgba(255,196,0,.22);
+    }
+    .wp-1 { left: 10%; bottom: 14%; opacity: .55; }
+    .wp-2 { left: 19%; bottom: 26%; opacity: .40; }
+    .wp-3 { left: 29%; bottom: 10%; opacity: .50; }
+    .wp-4 { left: 37%; bottom: 30%; opacity: .35; }
+    .wp-5 { left: 46%; bottom: 18%; opacity: .45; }
+    .wp-6 { left: 54%; bottom: 24%; opacity: .38; }
+    @media (max-width: 1024px) {
+        .wave-line.line-9, .wave-line.line-10, .wave-line.line-11, .wave-line.line-12,
+        .wave-line.line-13, .wave-line.line-14, .wave-line.line-15 { display: none; }
+    }
+    @media (max-width: 600px) {
+        .hero-golden-wave { opacity: .40; width: 130%; bottom: -10%; }
+        .wave-line.line-5, .wave-line.line-6, .wave-line.line-7, .wave-line.line-8,
+        .wave-point { display: none; }
+    }
     .about-hero .inner {
-        position: relative; z-index: 2;
+        position: relative; z-index: 6;
         display: flex; align-items: flex-start; gap: 48px;
     }
-    .hero-text { flex: 1; min-width: 0; position: relative; z-index: 2; }
+    .hero-text { flex: 1; min-width: 0; position: relative; z-index: 5; }
     .hero-cards-float {
         flex-shrink: 0; align-self: center; width: 360px;
         display: grid; grid-template-columns: repeat(2, 1fr);
         gap: 12px;
-        position: relative; z-index: 2;
+        position: relative; z-index: 5;
     }
     .hero-breadcrumb {
         display: flex; align-items: center; gap: 6px;
@@ -121,49 +185,49 @@
         width: 24px; height: 1px; background: #B8860B;
     }
     .hero-text h1 {
-        font-size: 38px; font-weight: 900; color: #0A0F1C;
+        font-size: 38px; font-weight: 900; color: #141A24;
         line-height: 1.35; letter-spacing: -1px;
         margin-bottom: 16px;
     }
     .hero-text h1 em {
-        font-style: normal; color: #B8860B;
+        font-style: normal; color: #C58B00;
     }
     .hero-sub {
         font-size: 16px; color: rgba(10,15,28,0.55);
         line-height: 1.7; max-width: 480px;
     }
     .hero-card {
-        background: rgba(10,16,30,0.57);
-        border: 1px solid rgba(10,15,28,0.14);
+        background: rgba(24,28,34,.78);
+        border: 1px solid rgba(255,255,255,.08);
         border-radius: 12px; padding: 22px 18px;
         transition: all 0.3s;
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 8px 24px rgba(0,0,0,.10);
         display: block; text-decoration: none; color: inherit;
         cursor: pointer;
+        position: relative; z-index: 5;
     }
     .hero-card:hover {
-        background: rgba(255,255,255,0.70);
-        border-color: rgba(184,134,11,0.3);
         transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0,0,0,.16);
     }
     /* sticky header 보정 — 앵커 스크롤 시 상단 헤더 가림 방지 */
     html { scroll-behavior: smooth; }
     #ceo, #history, #organization, #business { scroll-margin-top: 88px; }
     .hero-card-icon {
         width: 36px; height: 36px; border-radius: 8px;
-        background: rgba(184,134,11,0.16);
+        background: rgba(255,196,0,.15);
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 12px;
     }
-    .hero-card-icon i { font-size: 15px; color: #B8860B; }
+    .hero-card-icon i { font-size: 15px; color: #FFC400; }
     .hero-card h4 {
-        font-size: 14px; font-weight: 800; color: #0A0F1C;
+        font-size: 14px; font-weight: 800; color: #FFFFFF;
         margin-bottom: 4px;
     }
     .hero-card p {
-        font-size: 11.5px; color: rgba(10,15,28,0.75);
+        font-size: 11.5px; color: rgba(255,255,255,.65);
         line-height: 1.5;
     }
     @media (max-width: 1024px) {
@@ -804,6 +868,30 @@
 <div class="about-hero">
     <div class="hero-bg-photo">
         <img src="../jpg/hero_about.png" alt="빛세움 사옥">
+    </div>
+    <div class="hero-golden-glow" aria-hidden="true"></div>
+    <div class="hero-golden-wave" aria-hidden="true">
+        <span class="wave-line line-1"></span>
+        <span class="wave-line line-2"></span>
+        <span class="wave-line line-3"></span>
+        <span class="wave-line line-4"></span>
+        <span class="wave-line line-5"></span>
+        <span class="wave-line line-6"></span>
+        <span class="wave-line line-7"></span>
+        <span class="wave-line line-8"></span>
+        <span class="wave-line line-9"></span>
+        <span class="wave-line line-10"></span>
+        <span class="wave-line line-11"></span>
+        <span class="wave-line line-12"></span>
+        <span class="wave-line line-13"></span>
+        <span class="wave-line line-14"></span>
+        <span class="wave-line line-15"></span>
+        <span class="wave-point wp-1"></span>
+        <span class="wave-point wp-2"></span>
+        <span class="wave-point wp-3"></span>
+        <span class="wave-point wp-4"></span>
+        <span class="wave-point wp-5"></span>
+        <span class="wave-point wp-6"></span>
     </div>
     <div class="inner">
         <div class="hero-text">
