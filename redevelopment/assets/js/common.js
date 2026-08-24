@@ -44,7 +44,7 @@ const App = (() => {
     return `
     <div class="header-wrap" id="headerWrap">
     <div class="util-bar"><div class="inner">
-      <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링</span>
+      <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링그룹</span>
       <a href="${B}/pages/notice.html">공지사항</a>
       ${utilRight}
     </div></div>
