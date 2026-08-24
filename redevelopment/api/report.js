@@ -1,5 +1,5 @@
 /**
- * 세울 — 처리보고 텔레그램 발송 API
+ * 빛세움 — 처리보고 텔레그램 발송 API
  * POST /api/report { text: '보고 내용' }
  */
 module.exports = async function handler(req, res) {

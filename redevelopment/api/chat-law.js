@@ -8,7 +8,7 @@ module.exports = async function handler(req, res) {
   const { message } = req.body;
   if (!message) return res.status(400).json({ error: 'Message required' });
 
-  const systemPrompt = `당신은 (주)세울엔지니어링의 법률 상담 AI입니다.
+  const systemPrompt = `당신은 (주)빛세움의 법률 상담 AI입니다.
 
 [절대 규칙]
 - 오직 「국가법령정보 공동활용」(https://open.law.go.kr/LSO/main.do)에 게시된 현행 법률·시행령·시행규칙만을 근거로 답변합니다.

@@ -1,5 +1,5 @@
 /**
- * 세울 — Data Service Layer
+ * 빛세움 — Data Service Layer
  * localStorage + mock-data 기반. 향후 실 API 전환 시 이 파일만 교체.
  */
 const DataService = (() => {

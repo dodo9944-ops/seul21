@@ -12,7 +12,7 @@
     <title>SEO 관리 — 관리자</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260614c">
     <link rel="stylesheet" href="../assets/css/admin.css">
@@ -22,7 +22,7 @@
     <!-- Sidebar -->
     <aside class="admin-sidebar" id="adminSidebar">
         <div class="admin-sidebar-header">
-            <div class="logo">세울 <small>관리자</small></div>
+            <div class="logo">빛세움 <small>관리자</small></div>
         </div>
         <nav class="admin-nav">
             <div class="admin-nav-group">
@@ -80,7 +80,7 @@
                 <h3><i class="fa-solid fa-globe"></i> 기본 SEO 설정</h3>
                 <div class="form-group">
                     <label style="display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px;">Title 태그 템플릿</label>
-                    <input type="text" id="fTitleTemplate" class="form-control" placeholder="%page% — 세울">
+                    <input type="text" id="fTitleTemplate" class="form-control" placeholder="%page% — 빛세움">
                     <small style="color:var(--gray-500);font-size:12px;">%page% 자리에 페이지별 제목이 들어갑니다.</small>
                 </div>
                 <div class="form-group" style="margin-top:16px;">
@@ -165,7 +165,7 @@
         const s = DataService.getSettings();
         const seo = s.seo || {};
 
-        document.getElementById('fTitleTemplate').value = seo.titleTemplate || '%page% — ' + (s.siteName || '세울');
+        document.getElementById('fTitleTemplate').value = seo.titleTemplate || '%page% — ' + (s.siteName || '빛세움');
         document.getElementById('fMetaDescription').value = seo.metaDescription || s.siteDescription || '';
         document.getElementById('fOgImage').value = seo.ogImage || s.ogImage || '/assets/img/og-image.png';
 

@@ -9,11 +9,11 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#0A0F1C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>인허가·총회·계약 실무 전반 지원 — (주)세울엔지니어링</title>
+    <title>인허가·총회·계약 실무 전반 지원 — (주)빛세움</title>
     <meta name="description" content="정비사업 인허가 대응, 총회 운영, 시공사 선정, 계약 체결 등 실무 전 과정을 체계적으로 지원합니다.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260614c">
     <style>
@@ -22,7 +22,7 @@
     .ps-section .section-title { margin-bottom:28px; }
 
     .ps-intro {
-        background:linear-gradient(135deg,rgba(195,165,105,0.04),transparent 60%);
+        background:linear-gradient(135deg,rgba(184,134,11,0.04),transparent 60%);
         border-left:4px solid var(--gold); border-radius:0 var(--radius) var(--radius) 0;
         padding:36px 40px 36px 36px;
     }
@@ -31,10 +31,10 @@
     @media(max-width:768px){ .ps-intro{padding:24px 20px 24px 24px;} .ps-intro p{font-size:14px;} }
 
     .ps-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-    .ps-stat { background:var(--brand-dark); border-radius:var(--radius); padding:28px 24px; text-align:center; color:#fff; }
+    .ps-stat { background:#FFFFFF; border-radius:var(--radius); padding:28px 24px; text-align:center; color:#0A0F1C; }
     .ps-stat .num { font-size:28px; font-weight:800; color:var(--gold); margin-bottom:6px; }
     .ps-stat .num i { font-size:22px; }
-    .ps-stat .desc { font-size:13px; color:rgba(255,255,255,0.6); }
+    .ps-stat .desc { font-size:13px; color:rgba(10,15,28,0.6); }
     @media(max-width:768px){ .ps-stats{grid-template-columns:repeat(2,1fr);} }
 
     .ps-service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
@@ -44,7 +44,7 @@
     }
     .ps-service-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); }
     .ps-service-card .ps-icon {
-        width:48px; height:48px; border-radius:12px; background:var(--brand-dark);
+        width:48px; height:48px; border-radius:12px; background:#FFFFFF;
         display:flex; align-items:center; justify-content:center; margin-bottom:18px;
     }
     .ps-service-card .ps-icon i { font-size:20px; color:var(--gold); }
@@ -60,7 +60,7 @@
         counter-increment:pstep; content:counter(pstep);
         display:flex; align-items:center; justify-content:center;
         width:44px; height:44px; border-radius:50%; margin:0 auto 14px;
-        background:var(--brand-dark); color:var(--gold);
+        background:#FFFFFF; color:var(--gold);
         font-size:16px; font-weight:800; position:relative; z-index:2;
     }
     .ps-step::after {
@@ -88,13 +88,13 @@
     @media(max-width:768px){ .ps-checklist{grid-template-columns:1fr;} }
 
     .ps-cta {
-        background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:var(--radius);
+        background:linear-gradient(135deg,#FFFFFF,#FFF3C4); border-radius:var(--radius);
         padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px;
         position:relative; overflow:hidden;
     }
-    .ps-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(195,165,105,0.08) 0%,transparent 70%); border-radius:50%; }
-    .ps-cta h3 { font-size:22px; font-weight:800; color:#fff; margin-bottom:8px; }
-    .ps-cta p { font-size:15px; color:rgba(255,255,255,0.55); }
+    .ps-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(184,134,11,0.08) 0%,transparent 70%); border-radius:50%; }
+    .ps-cta h3 { font-size:22px; font-weight:800; color:#0A0F1C; margin-bottom:8px; }
+    .ps-cta p { font-size:15px; color:rgba(10,15,28,0.55); }
     .ps-cta-btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:var(--gold); color:#0A0F1C; border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap; }
     .ps-cta-btn:hover { background:var(--gold-hover); }
     @media(max-width:640px){ .ps-cta{flex-direction:column;padding:32px 24px;text-align:center;} }
@@ -122,7 +122,7 @@
 
         <div class="ps-section">
             <div class="ps-intro">
-                <p>정비사업은 <strong>정비구역 지정부터 준공까지 수십 건의 인허가</strong>를 거쳐야 합니다. 총회 의결, 시공사 입찰, 관리처분계획 수립, 각종 계약 체결까지 — 하나의 절차라도 법적 요건을 놓치면 사업이 수개월 이상 지연됩니다. 세울엔지니어링은 <strong>행정기관 협의, 총회 기획, 계약 검토</strong>를 통해 사업이 적법하고 원활하게 진행되도록 실무 전반을 지원합니다.</p>
+                <p>정비사업은 <strong>정비구역 지정부터 준공까지 수십 건의 인허가</strong>를 거쳐야 합니다. 총회 의결, 시공사 입찰, 관리처분계획 수립, 각종 계약 체결까지 — 하나의 절차라도 법적 요건을 놓치면 사업이 수개월 이상 지연됩니다. 빛세움은 <strong>행정기관 협의, 총회 기획, 계약 검토</strong>를 통해 사업이 적법하고 원활하게 진행되도록 실무 전반을 지원합니다.</p>
             </div>
         </div>
 
@@ -218,7 +218,7 @@
             <div class="ps-cta">
                 <div style="position:relative;z-index:1;">
                     <h3>인허가·총회·계약 실무가 필요하신가요?</h3>
-                    <p>세울엔지니어링이 정비사업의 행정·법률 실무를 체계적으로 지원합니다</p>
+                    <p>빛세움이 정비사업의 행정·법률 실무를 체계적으로 지원합니다</p>
                 </div>
                 <a href="contact.html" class="ps-cta-btn"><i class="fa-solid fa-paper-plane"></i> 실무 문의하기</a>
             </div>

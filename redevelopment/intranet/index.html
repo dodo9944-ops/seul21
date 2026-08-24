@@ -9,15 +9,15 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#0A0F1C">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>세울 인트라넷 — (주)세울엔지니어링</title>
+<title>빛세움 인트라넷 — (주)빛세움</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#F5F6F8; --white:#fff; --dark:#0A0F1C; --navy:#142644; --gold:#C3A569;
+  --bg:#F5F6F8; --white:#fff; --dark:#0A0F1C; --navy:#142644; --gold:#B8860B;
   --gray-50:#F9F9F9; --gray-100:#F3F3F3; --gray-200:#E5E5E5; --gray-300:#D1D1D1;
   --gray-400:#AAA; --gray-500:#888; --gray-600:#666; --gray-700:#444; --gray-900:#1A1A1A;
   --font:'Noto Sans KR',-apple-system,sans-serif; --radius:12px; --radius-sm:8px;
@@ -45,7 +45,7 @@ button,input,select,textarea{font-family:inherit}
 .sidebar-logo-sub{font-size:8px;font-weight:500;color:rgba(255,255,255,0.35);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
 .sidebar-badge{
   margin:16px 20px 12px; padding:6px 12px; border-radius:4px;
-  background:rgba(195,165,105,0.1); color:var(--gold);
+  background:rgba(184,134,11,0.1); color:var(--gold);
   font-size:10px; font-weight:700; letter-spacing:1px; text-align:center;
 }
 .sidebar-nav{flex:1;padding:8px 0;overflow-y:auto}
@@ -117,15 +117,15 @@ button,input,select,textarea{font-family:inherit}
   background:var(--white);border-radius:var(--radius);padding:22px 24px;
   border:1px solid var(--gray-200);transition:all var(--transition);
 }
-.kpi:hover{border-color:rgba(195,165,105,0.25);box-shadow:var(--shadow-hover)}
+.kpi:hover{border-color:rgba(184,134,11,0.25);box-shadow:var(--shadow-hover)}
 .kpi-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .kpi-icon{
   width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;
 }
 .kpi-icon.navy{background:var(--dark);color:var(--gold)}
-.kpi-icon.gold{background:rgba(195,165,105,0.1);color:var(--gold)}
+.kpi-icon.gold{background:rgba(184,134,11,0.1);color:var(--gold)}
 .kpi-icon.green{background:rgba(30,140,94,0.08);color:#1E8C5E}
-.kpi-icon.blue{background:rgba(18,89,170,0.08);color:#1259AA}
+.kpi-icon.blue{background:rgba(184,134,11,0.08);color:#B8860B}
 .kpi-change{font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px}
 .kpi-change.up{background:rgba(30,140,94,0.08);color:#1E8C5E}
 .kpi-change.down{background:rgba(214,66,58,0.08);color:#D6423A}
@@ -138,7 +138,7 @@ button,input,select,textarea{font-family:inherit}
   background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);
   overflow:hidden;transition:all var(--transition);
 }
-.card:hover{border-color:rgba(195,165,105,0.2);box-shadow:var(--shadow-hover)}
+.card:hover{border-color:rgba(184,134,11,0.2);box-shadow:var(--shadow-hover)}
 .card-head{
   display:flex;align-items:center;justify-content:space-between;
   padding:18px 24px;border-bottom:1px solid var(--gray-100);
@@ -159,15 +159,15 @@ button,input,select,textarea{font-family:inherit}
   display:flex;align-items:center;justify-content:center;font-size:14px;
 }
 .proj-icon.dev{background:var(--dark);color:var(--gold)}
-.proj-icon.recon{background:rgba(195,165,105,0.1);color:var(--gold)}
-.proj-icon.small{background:rgba(18,89,170,0.08);color:#1259AA}
+.proj-icon.recon{background:rgba(184,134,11,0.1);color:var(--gold)}
+.proj-icon.small{background:rgba(184,134,11,0.08);color:#B8860B}
 .proj-info{flex:1;min-width:0}
 .proj-name{font-size:13px;font-weight:700;margin-bottom:1px}
 .proj-meta{font-size:11px;color:var(--gray-400)}
 .proj-status{
   font-size:10px;font-weight:700;padding:3px 10px;border-radius:4px;flex-shrink:0;
 }
-.proj-status.active{background:rgba(195,165,105,0.1);color:var(--gold)}
+.proj-status.active{background:rgba(184,134,11,0.1);color:var(--gold)}
 .proj-status.done{background:var(--dark);color:var(--white)}
 .proj-status.pending{background:var(--gray-100);color:var(--gray-500)}
 
@@ -198,7 +198,7 @@ button,input,select,textarea{font-family:inherit}
 .notice-badge{
   font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;flex-shrink:0;
 }
-.notice-badge.important{background:rgba(195,165,105,0.12);color:var(--gold)}
+.notice-badge.important{background:rgba(184,134,11,0.12);color:var(--gold)}
 .notice-badge.normal{background:var(--gray-100);color:var(--gray-500)}
 .notice-title{flex:1;font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .notice-date{font-size:11px;color:var(--gray-400);flex-shrink:0}
@@ -210,7 +210,7 @@ button,input,select,textarea{font-family:inherit}
   background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);
   cursor:pointer;transition:all var(--transition);text-align:center;
 }
-.quick-btn:hover{border-color:rgba(195,165,105,0.3);box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.quick-btn:hover{border-color:rgba(184,134,11,0.3);box-shadow:var(--shadow-hover);transform:translateY(-2px)}
 .quick-btn i{font-size:20px;color:var(--gold)}
 .quick-btn span{font-size:12px;font-weight:600;color:var(--gray-700)}
 
@@ -508,7 +508,7 @@ button,input,select,textarea{font-family:inherit}
                 </div>
                 <div class="card-body">
                     <div class="notice-item">
-                        <span class="notice-badge" style="background:rgba(18,89,170,0.08);color:#1259AA"><i class="fa-solid fa-file-lines"></i></span>
+                        <span class="notice-badge" style="background:rgba(184,134,11,0.08);color:#B8860B"><i class="fa-solid fa-file-lines"></i></span>
                         <span class="notice-title">한남3구역 총회 안건 초안.hwp</span>
                         <span class="notice-date">오늘</span>
                     </div>
@@ -523,7 +523,7 @@ button,input,select,textarea{font-family:inherit}
                         <span class="notice-date">04.01</span>
                     </div>
                     <div class="notice-item">
-                        <span class="notice-badge" style="background:rgba(18,89,170,0.08);color:#1259AA"><i class="fa-solid fa-file-lines"></i></span>
+                        <span class="notice-badge" style="background:rgba(184,134,11,0.08);color:#B8860B"><i class="fa-solid fa-file-lines"></i></span>
                         <span class="notice-title">이문1구역 관리처분계획서 검토의견.hwp</span>
                         <span class="notice-date">03.30</span>
                     </div>

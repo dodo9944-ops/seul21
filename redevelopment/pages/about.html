@@ -9,11 +9,11 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#0A0F1C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회사소개 — (주)세울엔지니어링</title>
-    <meta name="description" content="(주)세울엔지니어링 회사소개 — CEO 인사말, 연혁, 조직도, 사업분야, CI를 확인하세요.">
+    <title>회사소개 — (주)빛세움</title>
+    <meta name="description" content="(주)빛세움 회사소개 — CEO 인사말, 연혁, 조직도, 사업분야, CI를 확인하세요.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260614c">
     <style>
@@ -23,7 +23,7 @@
 
     /* ── 1. HERO SECTION ── */
     .about-hero {
-        background: linear-gradient(135deg, #0F1D35 0%, #142644 40%, #0A0F1C 100%);
+        background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
         position: relative;
         overflow: hidden;
         padding: 32px 0 12px;
@@ -47,12 +47,12 @@
         content: '';
         position: absolute; inset: 0;
         background: linear-gradient(90deg,
-            #0A0F1C 0%,
-            rgba(10,15,28,0.94) 6%,
-            rgba(14,24,42,0.65) 24%,
-            rgba(18,32,56,0.4) 48%,
-            rgba(20,38,68,0.28) 72%,
-            rgba(20,38,68,0.22) 100%
+            #FFFFFF 0%,
+            rgba(255,255,255,0.94) 6%,
+            rgba(255,255,255,0.65) 24%,
+            rgba(255,255,255,0.4) 48%,
+            rgba(255,255,255,0.28) 72%,
+            rgba(255,255,255,0.22) 100%
         );
         z-index: 1;
     }
@@ -64,12 +64,12 @@
         left: 22%; width: 56%;
         pointer-events: none;
         background: linear-gradient(90deg,
-            rgba(15,26,46,0) 0%,
-            rgba(15,26,46,0.06) 25%,
-            rgba(14,22,40,0.16) 52%,
-            rgba(14,22,40,0.18) 62%,
-            rgba(15,26,46,0.08) 80%,
-            rgba(15,26,46,0) 100%
+            rgba(255,255,255,0) 0%,
+            rgba(255,255,255,0.06) 25%,
+            rgba(255,255,255,0.16) 52%,
+            rgba(255,255,255,0.18) 62%,
+            rgba(255,255,255,0.08) 80%,
+            rgba(255,255,255,0) 100%
         );
         filter: blur(24px);
         z-index: 2;
@@ -78,16 +78,16 @@
         content: '';
         position: absolute; inset: 0;
         background-image:
-            radial-gradient(circle at 20% 50%, rgba(195,165,105,0.04) 0%, transparent 50%),
-            radial-gradient(circle at 80% 30%, rgba(195,165,105,0.03) 0%, transparent 40%);
+            radial-gradient(circle at 20% 50%, rgba(184,134,11,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 80% 30%, rgba(184,134,11,0.03) 0%, transparent 40%);
         pointer-events: none; z-index: 1;
     }
     .about-hero::after {
         content: '';
         position: absolute; inset: 0;
         background-image:
-            linear-gradient(rgba(195,165,105,0.015) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(195,165,105,0.015) 1px, transparent 1px);
+            linear-gradient(rgba(184,134,11,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(184,134,11,0.015) 1px, transparent 1px);
         background-size: 60px 60px;
         pointer-events: none; z-index: 1;
     }
@@ -104,37 +104,37 @@
     }
     .hero-breadcrumb {
         display: flex; align-items: center; gap: 6px;
-        font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 13px;
+        font-size: 13px; color: rgba(10,15,28,0.4); margin-bottom: 13px;
     }
-    .hero-breadcrumb a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
-    .hero-breadcrumb a:hover { color: #C3A569; }
-    .hero-breadcrumb span { color: #C3A569; font-weight: 600; }
+    .hero-breadcrumb a { color: rgba(10,15,28,0.4); transition: color 0.2s; }
+    .hero-breadcrumb a:hover { color: #B8860B; }
+    .hero-breadcrumb span { color: #B8860B; font-weight: 600; }
     .hero-breadcrumb i { font-size: 10px; }
     .hero-label {
         display: inline-flex; align-items: center; gap: 8px;
-        font-size: 12px; font-weight: 700; color: #C3A569;
+        font-size: 12px; font-weight: 700; color: #B8860B;
         letter-spacing: 2px; text-transform: uppercase;
         margin-bottom: 16px;
     }
     .hero-label::before {
         content: ''; display: block;
-        width: 24px; height: 1px; background: #C3A569;
+        width: 24px; height: 1px; background: #B8860B;
     }
     .hero-text h1 {
-        font-size: 38px; font-weight: 900; color: #fff;
+        font-size: 38px; font-weight: 900; color: #0A0F1C;
         line-height: 1.35; letter-spacing: -1px;
         margin-bottom: 16px;
     }
     .hero-text h1 em {
-        font-style: normal; color: #C3A569;
+        font-style: normal; color: #B8860B;
     }
     .hero-sub {
-        font-size: 16px; color: rgba(255,255,255,0.55);
+        font-size: 16px; color: rgba(10,15,28,0.55);
         line-height: 1.7; max-width: 480px;
     }
     .hero-card {
         background: rgba(10,16,30,0.57);
-        border: 1px solid rgba(255,255,255,0.14);
+        border: 1px solid rgba(10,15,28,0.14);
         border-radius: 12px; padding: 22px 18px;
         transition: all 0.3s;
         backdrop-filter: blur(5px);
@@ -144,8 +144,8 @@
         cursor: pointer;
     }
     .hero-card:hover {
-        background: rgba(14,22,40,0.70);
-        border-color: rgba(195,165,105,0.3);
+        background: rgba(255,255,255,0.70);
+        border-color: rgba(184,134,11,0.3);
         transform: translateY(-2px);
     }
     /* sticky header 보정 — 앵커 스크롤 시 상단 헤더 가림 방지 */
@@ -153,17 +153,17 @@
     #ceo, #history, #organization, #business { scroll-margin-top: 88px; }
     .hero-card-icon {
         width: 36px; height: 36px; border-radius: 8px;
-        background: rgba(195,165,105,0.16);
+        background: rgba(184,134,11,0.16);
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 12px;
     }
-    .hero-card-icon i { font-size: 15px; color: #C3A569; }
+    .hero-card-icon i { font-size: 15px; color: #B8860B; }
     .hero-card h4 {
-        font-size: 14px; font-weight: 800; color: #fff;
+        font-size: 14px; font-weight: 800; color: #0A0F1C;
         margin-bottom: 4px;
     }
     .hero-card p {
-        font-size: 11.5px; color: rgba(255,255,255,0.75);
+        font-size: 11.5px; color: rgba(10,15,28,0.75);
         line-height: 1.5;
     }
     @media (max-width: 1024px) {
@@ -172,8 +172,8 @@
         .hero-bg-photo { width: 100%; opacity: 0.25; }
         .hero-bg-photo::after {
             background: linear-gradient(180deg,
-                rgba(10,15,28,0.5) 0%,
-                rgba(20,38,68,0.7) 100%
+                rgba(255,255,255,0.5) 0%,
+                rgba(255,255,255,0.7) 100%
             );
         }
     }
@@ -193,18 +193,18 @@
     .about-section:last-child { padding-bottom: 0; }
     .about-section.bg-light { background: #FAFBFC; }
     .about-section.bg-dark {
-        background: linear-gradient(160deg, #0A0F1C, #142644);
-        color: #fff;
+        background: linear-gradient(160deg, #FFFFFF, #FFF3C4);
+        color: #0A0F1C;
     }
     .section-label {
         display: inline-flex; align-items: center; gap: 8px;
-        font-size: 11px; font-weight: 700; color: #C3A569;
+        font-size: 11px; font-weight: 700; color: #B8860B;
         letter-spacing: 2px; text-transform: uppercase;
         margin-bottom: 8px;
     }
     .section-label::before {
         content: ''; display: block;
-        width: 16px; height: 1px; background: #C3A569;
+        width: 16px; height: 1px; background: #B8860B;
     }
     .about-section .section-title {
         margin-bottom: 40px;
@@ -235,7 +235,7 @@
     }
     .trust-card-value {
         font-size: 36px; font-weight: 900;
-        color: #C3A569; line-height: 1.1; margin-bottom: 4px;
+        color: #B8860B; line-height: 1.1; margin-bottom: 4px;
     }
     .trust-card-unit {
         font-size: 14px; font-weight: 700; color: var(--gray-900);
@@ -272,7 +272,7 @@
     }
     .ceo-accent-line {
         width: 36px; height: 2px;
-        background: linear-gradient(90deg, var(--gold), rgba(195,165,105,0.15));
+        background: linear-gradient(90deg, var(--gold), rgba(184,134,11,0.15));
         border-radius: 1px; margin-bottom: 24px;
     }
     .ceo-greeting {
@@ -334,19 +334,19 @@
     .cert-section {
         display: flex; align-items: stretch; gap: 32px;
         max-width: 1100px; margin: 0 auto;
-        background: linear-gradient(135deg, #0F1D35 0%, #142644 60%, #0A0F1C 100%);
+        background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 60%, #FFFFFF 100%);
         border-radius: 18px;
         overflow: hidden;
         box-shadow: 0 16px 48px rgba(10,15,28,0.18);
-        border: 1px solid rgba(195,165,105,0.18);
+        border: 1px solid rgba(184,134,11,0.18);
         position: relative;
     }
     .cert-section::before {
         content: ''; position: absolute; inset: 0;
         background-image:
-            radial-gradient(circle at 80% 20%, rgba(195,165,105,0.06) 0%, transparent 50%),
-            linear-gradient(rgba(195,165,105,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(195,165,105,0.012) 1px, transparent 1px);
+            radial-gradient(circle at 80% 20%, rgba(184,134,11,0.06) 0%, transparent 50%),
+            linear-gradient(rgba(184,134,11,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(184,134,11,0.012) 1px, transparent 1px);
         background-size: auto, 60px 60px, 60px 60px;
         pointer-events: none;
     }
@@ -356,19 +356,19 @@
         display: flex; align-items: center; justify-content: center;
         background: rgba(255,255,255,0.06);
         padding: 28px;
-        border-right: 1px solid rgba(195,165,105,0.15);
+        border-right: 1px solid rgba(184,134,11,0.15);
     }
     .cert-photo img {
         width: 100%; max-width: 280px; height: auto;
         display: block; border-radius: 6px;
-        box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(10,15,28,0.06);
         cursor: zoom-in; transition: transform .35s ease;
     }
     .cert-photo img:hover { transform: scale(1.02); }
     .cert-text {
         flex: 1; min-width: 0; position: relative; z-index: 1;
         padding: 36px 40px;
-        color: #fff;
+        color: #0A0F1C;
         display: flex; flex-direction: column; justify-content: center;
     }
     .cert-label {
@@ -379,19 +379,19 @@
     }
     .cert-label::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
     .cert-title {
-        font-size: 24px; font-weight: 900; color: #fff;
+        font-size: 24px; font-weight: 900; color: #0A0F1C;
         line-height: 1.35; margin-bottom: 6px; letter-spacing: -0.4px;
     }
     .cert-title em { font-style: normal; color: var(--gold); }
     .cert-issuer {
-        font-size: 13px; color: rgba(255,255,255,0.62);
+        font-size: 13px; color: rgba(10,15,28,0.62);
         margin-bottom: 22px; padding-bottom: 16px;
-        border-bottom: 1px solid rgba(195,165,105,0.16);
+        border-bottom: 1px solid rgba(184,134,11,0.16);
     }
     .cert-issuer strong { color: var(--gold); font-weight: 700; }
     .cert-desc {
         font-size: 14px; line-height: 1.85;
-        color: rgba(255,255,255,0.78); margin-bottom: 18px;
+        color: rgba(10,15,28,0.78); margin-bottom: 18px;
     }
     .cert-meta {
         display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
@@ -401,7 +401,7 @@
         display: flex; flex-direction: column; gap: 2px;
         padding: 10px 14px;
         background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(195,165,105,0.12);
+        border: 1px solid rgba(184,134,11,0.12);
         border-radius: 8px;
     }
     .cert-meta .cm-key {
@@ -409,16 +409,16 @@
         letter-spacing: 1.2px; text-transform: uppercase;
     }
     .cert-meta .cm-val {
-        font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.92);
+        font-size: 13px; font-weight: 600; color: rgba(10,15,28,0.92);
     }
     .cert-source {
-        margin-top: 18px; font-size: 11.5px; color: rgba(255,255,255,0.42);
+        margin-top: 18px; font-size: 11.5px; color: rgba(10,15,28,0.42);
     }
-    .cert-source a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted rgba(195,165,105,0.35); }
-    .cert-source a:hover { color: #fff; border-bottom-color: #fff; }
+    .cert-source a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted rgba(184,134,11,0.35); }
+    .cert-source a:hover { color: #0A0F1C; border-bottom-color: #0A0F1C; }
     @media (max-width: 900px) {
         .cert-section { flex-direction: column; }
-        .cert-photo { flex: 0 0 auto; border-right: none; border-bottom: 1px solid rgba(195,165,105,0.15); padding: 28px 20px; }
+        .cert-photo { flex: 0 0 auto; border-right: none; border-bottom: 1px solid rgba(184,134,11,0.15); padding: 28px 20px; }
         .cert-photo img { max-width: 240px; }
         .cert-text { padding: 28px 24px; }
         .cert-title { font-size: 20px; }
@@ -435,13 +435,13 @@
         max-width: 1100px; margin: 48px auto 0;
         border-radius: 18px; overflow: hidden;
         box-shadow: 0 16px 48px rgba(10,15,28,0.18);
-        border: 1px solid rgba(195,165,105,0.18);
-        background: #0A0F1C;
+        border: 1px solid rgba(184,134,11,0.18);
+        background: #FFFFFF;
     }
     .cert-with-hero .cert-hero {
         width: 100%; aspect-ratio: 16/6;
         position: relative; overflow: hidden;
-        border-bottom: 1px solid rgba(195,165,105,0.18);
+        border-bottom: 1px solid rgba(184,134,11,0.18);
     }
     .cert-with-hero .cert-hero img {
         width: 100%; height: 100%; object-fit: cover; display: block;
@@ -450,15 +450,15 @@
     .cert-with-hero .cert-hero:hover img { transform: scale(1.03); }
     .cert-with-hero .cert-hero::after {
         content: ''; position: absolute; inset: 0;
-        background: linear-gradient(180deg, rgba(10,15,28,0) 55%, rgba(10,15,28,0.55) 100%);
+        background: linear-gradient(180deg, rgba(255,255,255,0) 55%, rgba(255,255,255,0.55) 100%);
         pointer-events: none;
     }
     .cert-with-hero .cert-hero-cap {
         position: absolute; left: 24px; bottom: 18px; z-index: 2;
-        color: #fff; font-size: 12.5px; font-weight: 700;
+        color: #0A0F1C; font-size: 12.5px; font-weight: 700;
         padding: 7px 14px;
         background: rgba(15,29,53,0.78);
-        border: 1px solid rgba(195,165,105,0.35);
+        border: 1px solid rgba(184,134,11,0.35);
         border-radius: 8px;
         backdrop-filter: blur(8px);
         letter-spacing: 0.4px;
@@ -504,17 +504,17 @@
     .tl-dot {
         position: absolute; left: 50%; top: 4px;
         width: 14px; height: 14px; border-radius: 50%;
-        background: #C3A569; border: 3px solid #fff;
-        box-shadow: 0 0 0 2px #C3A569;
+        background: #B8860B; border: 3px solid #0A0F1C;
+        box-shadow: 0 0 0 2px #B8860B;
         transform: translateX(-50%);
         z-index: 2;
     }
     .tl-item.tl-recent .tl-dot {
         width: 18px; height: 18px; top: 2px;
-        box-shadow: 0 0 0 3px #C3A569, 0 0 12px rgba(195,165,105,0.3);
+        box-shadow: 0 0 0 3px #B8860B, 0 0 12px rgba(184,134,11,0.3);
     }
     .tl-year {
-        font-size: 26px; font-weight: 900; color: #C3A569;
+        font-size: 26px; font-weight: 900; color: #B8860B;
         margin-bottom: 8px;
     }
     .tl-item.tl-recent .tl-year {
@@ -553,13 +553,13 @@
     /* ── 5. ORGANIZATION CHART ── */
     .org-chart { display: flex; flex-direction: column; align-items: center; gap: 36px; }
     .org-ceo-box {
-        background: linear-gradient(135deg, #0A0F1C, #142644);
-        color: #fff; border-radius: 12px;
+        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
+        color: #0A0F1C; border-radius: 12px;
         padding: 20px 56px; text-align: center;
         box-shadow: 0 8px 28px rgba(10,15,28,0.2);
     }
     .org-ceo-box .org-role {
-        font-size: 11px; font-weight: 700; color: #C3A569;
+        font-size: 11px; font-weight: 700; color: #B8860B;
         letter-spacing: 2px; text-transform: uppercase;
         margin-bottom: 4px;
     }
@@ -581,14 +581,14 @@
         box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     }
     .org-dept-header {
-        background: linear-gradient(135deg, #0A0F1C, #142644);
-        color: #fff; padding: 16px 20px; text-align: center;
+        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
+        color: #0A0F1C; padding: 16px 20px; text-align: center;
     }
     .org-dept-header h4 {
         font-size: 14px; font-weight: 800; margin-bottom: 4px;
     }
     .org-dept-header .dept-desc {
-        font-size: 13px; color: rgba(255,255,255,0.65);
+        font-size: 13px; color: rgba(10,15,28,0.65);
         font-weight: 500;
     }
     .org-dept-body { padding: 16px 20px; }
@@ -631,11 +631,11 @@
     .pro-card:hover .pro-card-more { opacity: 1; transform: translateX(2px); }
     .pro-card-icon {
         width: 52px; height: 52px; border-radius: 12px;
-        background: linear-gradient(135deg, #0A0F1C, #142644);
+        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 20px;
     }
-    .pro-card-icon i { font-size: 20px; color: #C3A569; }
+    .pro-card-icon i { font-size: 20px; color: #B8860B; }
     .pro-card h4 {
         font-size: 16px; font-weight: 700; color: var(--gray-900);
         margin-bottom: 8px;
@@ -654,7 +654,7 @@
     }
     .ci-img-area {
         width: 360px; flex-shrink: 0;
-        background: linear-gradient(135deg, #0A0F1C, #142644);
+        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
         border-radius: 16px; padding: 48px 40px;
         display: flex; align-items: center; justify-content: center;
         box-shadow: 0 12px 40px rgba(10,15,28,0.2);
@@ -668,7 +668,7 @@
         margin-bottom: 16px; letter-spacing: -0.5px;
     }
     .ci-text-area h3 em {
-        font-style: normal; color: #C3A569;
+        font-style: normal; color: #B8860B;
     }
     .ci-text-area p {
         font-size: 14.5px; color: var(--gray-600); line-height: 1.9;
@@ -680,9 +680,9 @@
     .ci-keyword {
         display: inline-flex; align-items: center; gap: 6px;
         padding: 8px 20px; border-radius: 8px;
-        background: rgba(195,165,105,0.06);
-        border: 1px solid rgba(195,165,105,0.15);
-        font-size: 14px; font-weight: 700; color: #C3A569;
+        background: rgba(184,134,11,0.06);
+        border: 1px solid rgba(184,134,11,0.15);
+        font-size: 14px; font-weight: 700; color: #B8860B;
     }
     @media (max-width: 860px) {
         .ci-layout { flex-direction: column; gap: 28px; }
@@ -708,8 +708,8 @@
     }
     .symbol-meaning {
         padding: 16px 20px;
-        background: rgba(195,165,105,0.05);
-        border-left: 3px solid #C3A569;
+        background: rgba(184,134,11,0.05);
+        border-left: 3px solid #B8860B;
         border-radius: 0 8px 8px 0;
         font-size: 13px; color: var(--gray-700); line-height: 1.7;
     }
@@ -732,10 +732,10 @@
         padding: 12px 24px; border-radius: 8px;
         font-size: 13px; font-weight: 700;
         text-decoration: none;
-        background: var(--brand-dark); color: #C3A569;
+        background: #FFFFFF; color: #B8860B;
         transition: all 0.2s;
     }
-    .ci-dl-btn:hover { background: #142644; }
+    .ci-dl-btn:hover { background: #FFF3C4; }
     @media (max-width: 768px) {
         .symbol-layout { flex-direction: column; gap: 24px; }
         .symbol-mark-box { width: 140px; height: 140px; }
@@ -744,7 +744,7 @@
 
     /* ── 9. CTA SECTION ── */
     .cta-section {
-        background: linear-gradient(160deg, #0A0F1C, #142644);
+        background: linear-gradient(160deg, #FFFFFF, #FFF3C4);
         padding: 35px 0;
         text-align: center;
         position: relative; overflow: hidden;
@@ -753,13 +753,13 @@
         content: '';
         position: absolute; inset: 0;
         background:
-            radial-gradient(circle at 30% 50%, rgba(195,165,105,0.05) 0%, transparent 50%),
-            radial-gradient(circle at 70% 50%, rgba(195,165,105,0.03) 0%, transparent 40%);
+            radial-gradient(circle at 30% 50%, rgba(184,134,11,0.05) 0%, transparent 50%),
+            radial-gradient(circle at 70% 50%, rgba(184,134,11,0.03) 0%, transparent 40%);
         pointer-events: none;
     }
     .cta-section .inner { position: relative; z-index: 1; }
     .cta-section p {
-        font-size: 20px; font-weight: 700; color: #fff;
+        font-size: 20px; font-weight: 700; color: #0A0F1C;
         line-height: 1.6; margin-bottom: 32px;
         letter-spacing: -0.3px;
     }
@@ -772,22 +772,22 @@
         padding: 14px 36px; border-radius: 8px;
         font-size: 15px; font-weight: 700;
         text-decoration: none;
-        background: #C3A569; color: #0A0F1C;
+        background: #B8860B; color: #0A0F1C;
         transition: all 0.2s;
     }
-    .cta-btn-primary:hover { background: #D4B87A; }
+    .cta-btn-primary:hover { background: #D6A419; }
     .cta-btn-outline {
         display: inline-flex; align-items: center; gap: 8px;
         padding: 14px 36px; border-radius: 8px;
         font-size: 15px; font-weight: 700;
         text-decoration: none;
-        background: transparent; color: rgba(255,255,255,0.7);
-        border: 1px solid rgba(255,255,255,0.2);
+        background: transparent; color: rgba(10,15,28,0.7);
+        border: 1px solid rgba(10,15,28,0.2);
         transition: all 0.2s;
     }
     .cta-btn-outline:hover {
-        border-color: rgba(195,165,105,0.5);
-        color: #C3A569;
+        border-color: rgba(184,134,11,0.5);
+        color: #B8860B;
     }
     @media (max-width: 600px) {
         .cta-section p { font-size: 17px; }
@@ -803,7 +803,7 @@
      ============================================================ -->
 <div class="about-hero">
     <div class="hero-bg-photo">
-        <img src="../jpg/hero_about.png" alt="세울엔지니어링 사옥">
+        <img src="../jpg/hero_about.png" alt="빛세움 사옥">
     </div>
     <div class="inner">
         <div class="hero-text">
@@ -812,7 +812,7 @@
                 <i class="fa-solid fa-chevron-right"></i>
                 <span>회사소개</span>
             </div>
-            <div class="hero-label">SEUL Engineering</div>
+            <div class="hero-label">Visseum</div>
             <h1>도시정비의 <em>기준</em>을 세우고,<br>사업의 <em>완성</em>까지 함께합니다</h1>
             <p class="hero-sub">재개발·재건축·소규모정비사업의 실무를 책임지는 도시정비 전문 파트너</p>
         </div>
@@ -849,9 +849,9 @@
     <div class="about-section">
         <div class="inner">
             <div class="section-label">Trust Position</div>
-            <h2 class="section-title">(주)세울엔지니어링</h2>
+            <h2 class="section-title">(주)빛세움</h2>
             <div class="trust-intro">
-                <p>(주)세울엔지니어링은 재개발·재건축·소규모정비사업 전 과정을 직접 수행하는 도시정비 전문 엔지니어링 회사입니다. 사업성 검토부터 인허가 전략, 조합 운영, 시공사 선정, CM·PM 사업관리까지 정비사업의 처음과 끝을 책임집니다.</p>
+                <p>(주)빛세움은 재개발·재건축·소규모정비사업 전 과정을 직접 수행하는 도시정비 전문 엔지니어링 회사입니다. 사업성 검토부터 인허가 전략, 조합 운영, 시공사 선정, CM·PM 사업관리까지 정비사업의 처음과 끝을 책임집니다.</p>
             </div>
             <div class="trust-cards">
                 <div class="trust-card">
@@ -892,17 +892,17 @@
                     <div class="ceo-accent-line"></div>
                     <div class="ceo-greeting" id="ceoGreeting"></div>
                     <div class="ceo-signature">
-                        <div class="sig-name" id="ceoNameDisplay">Charles Lee</div>
-                        <div class="sig-title">CEO, Seul Engineering</div>
+                        <div class="sig-name" id="ceoNameDisplay">조구형</div>
+                        <div class="sig-title">대표이사, ㈜빛세움</div>
                     </div>
                     <div style="display:flex;gap:10px;margin-top:20px;">
-                        <span style="padding:6px 14px;border-radius:6px;background:rgba(10,15,28,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">책임경영</span>
-                        <span style="padding:6px 14px;border-radius:6px;background:rgba(10,15,28,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">도시정비 실무전문성</span>
-                        <span style="padding:6px 14px;border-radius:6px;background:rgba(10,15,28,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">이해관계 조율</span>
+                        <span style="padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">책임경영</span>
+                        <span style="padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">도시정비 실무전문성</span>
+                        <span style="padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">이해관계 조율</span>
                     </div>
                 </div>
                 <div class="ceo-photo-area">
-                    <img src="../jpg/ceo_portrait.jpg?v=20260429a" alt="Charles Lee 대표이사">
+                    <img src="../jpg/visseum_logo.jpg" alt="㈜빛세움 CI" style="object-fit:contain;background:#fff">
                 </div>
             </div>
 
@@ -914,14 +914,14 @@
                     </a>
                 </div>
                 <div class="cert-text">
-                    <div class="cert-label">CEO Certification</div>
+                    <div class="cert-label">Executive Certification</div>
                     <h3 class="cert-title">서울특별시 <em>정비사업 코디네이터</em></h3>
                     <div class="cert-issuer">위촉기관 — <strong>서울특별시장</strong> · 위촉대상 도시정비 분야 전문가</div>
                     <p class="cert-desc">
                         <strong style="color:#fff">정비사업 코디네이터</strong>는 서울특별시가 재개발·재건축·소규모정비사업 등 도시정비 현장의
                         <strong style="color:var(--gold)">갈등을 사전 관리</strong>하고 사업이 원활히 추진되도록 자문·조정 역할을 수행하기 위해
                         도시계획·법률·세무·회계 등 분야의 전문가를 <strong style="color:#fff">서울시장 명의로 위촉</strong>하는 공식 제도입니다.
-                        본 회사 대표 <strong style="color:#fff">이창우</strong>는 정비사업 실무 경험과 전문성을 인정받아 코디네이터로 위촉되어,
+                        당사 정비사업3부문 부문장 <strong style="color:#fff">이창우</strong>는 정비사업 실무 경험과 전문성을 인정받아 코디네이터로 위촉되어,
                         조합 운영의 투명성 확보, 사업단계별 의사결정 자문, 분쟁 사전 조정 등의 활동을 수행하고 있습니다.
                     </p>
                     <div class="cert-meta">
@@ -949,11 +949,11 @@
                     </a>
                 </div>
                 <div class="cert-text">
-                    <div class="cert-label">CEO Achievement</div>
+                    <div class="cert-label">Executive Achievement</div>
                     <h3 class="cert-title">정비업계 <em>최초</em> — 가락현대5차 준공 머릿돌 등재</h3>
                     <div class="cert-issuer">시행 — <strong>가락현대5차아파트 소규모재건축정비사업조합</strong> · 시공 — <strong>(주)포스코이앤씨</strong> [THE SHARP]</div>
                     <p class="cert-desc">
-                        본 회사 대표 <strong style="color:#fff">이창우</strong>는 <strong style="color:var(--gold)">정비업계 최초</strong>로
+                        당사 정비사업3부문 부문장 <strong style="color:#fff">이창우</strong>는 <strong style="color:var(--gold)">정비업계 최초</strong>로
                         <strong style="color:#fff">가락현대5차아파트 소규모재건축정비사업</strong>의 사업 착수부터 준공까지 전 과정을 총괄 수행하였습니다.
                         사업의 <strong style="color:var(--gold)">성공적 준공을 기념</strong>하여 시공사가 새긴 준공 머릿돌(竣工 銘文石)에
                         <strong style="color:#fff">「서울특별시 정비사업 코디네이터 — 이창우」</strong>의 이름이 영구 등재되었습니다.
@@ -963,7 +963,7 @@
                         <div class="cm-item"><span class="cm-key">사업명</span><span class="cm-val">가락현대5차아파트 소규모재건축정비사업</span></div>
                         <div class="cm-item"><span class="cm-key">사업승인일</span><span class="cm-val">2022년 1월 18일</span></div>
                         <div class="cm-item"><span class="cm-key">시공사</span><span class="cm-val">(주)포스코이앤씨 · THE SHARP</span></div>
-                        <div class="cm-item"><span class="cm-key">대표 직위</span><span class="cm-val">서울특별시 정비사업 코디네이터</span></div>
+                        <div class="cm-item"><span class="cm-key">직위</span><span class="cm-val">정비사업3부문 부문장 · 서울특별시 정비사업 코디네이터</span></div>
                     </div>
                 </div>
                 </div>
@@ -1108,11 +1108,11 @@
             <h2 class="section-title">CI 소개</h2>
             <div class="ci-layout">
                 <div class="ci-img-area">
-                    <img src="../jpg/ci_main.png" alt="세울엔지니어링 CI">
+                    <img src="../jpg/visseum_logo.jpg" alt="㈜빛세움 CI" style="object-fit:contain;background:#fff">
                 </div>
                 <div class="ci-text-area">
-                    <h3><em>세울(SEUL)</em> = 바로 세우다</h3>
-                    <p>세울엔지니어링의 브랜드는 '세우다'에서 출발합니다. 도시를 다시 세우고, 주거환경을 새롭게 만들며, 정비사업의 올바른 기준을 세운다는 의미를 담고 있습니다. 이는 단순한 사명이 아니라, 모든 프로젝트에서 지켜야 할 원칙이자 약속입니다.</p>
+                    <h3><em>빛세움(Visseum)</em> = 빛을 세우다</h3>
+                    <p>빛세움은 미래·희망·행복을 의미하는 '빛'과 '세움'을 조합하여 '빛을 세우다', 즉 인간의 삶을 행복하고 풍요롭게 창조한다는 Living-Value's Creation을 의미합니다. 영문 Visseum의 'vis'는 '힘'을, 'seum'은 유명 건축물 Colosseum에서 아름답고 웅장하며 오래도록 기억되는 건축물이라는 의미를 담아 차용한 것으로, 기업을 힘있고 웅대하게 번창시킨다는 Enterprise-Value's Growth를 의미합니다.</p>
                     <div class="ci-keywords">
                         <span class="ci-keyword"><i class="fa-solid fa-ruler-combined"></i> 기준</span>
                         <span class="ci-keyword"><i class="fa-solid fa-handshake"></i> 신뢰</span>
@@ -1133,17 +1133,17 @@
             <div class="symbol-layout">
                 <div class="symbol-mark-box">
                     <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="8" y="8" width="104" height="104" rx="8" stroke="#C3A569" stroke-width="1.5" opacity="0.25"/>
-                        <rect x="26" y="28" width="50" height="6" rx="1" fill="#C3A569"/>
-                        <rect x="26" y="28" width="6" height="30" rx="1" fill="#C3A569"/>
-                        <rect x="38" y="52" width="50" height="6" rx="1" fill="#C3A569" opacity="0.55"/>
-                        <rect x="82" y="58" width="6" height="30" rx="1" fill="#C3A569"/>
-                        <rect x="38" y="82" width="50" height="6" rx="1" fill="#C3A569"/>
-                        <path d="M85 28 L91 20 L97 28" stroke="#C3A569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.45"/>
+                        <rect x="8" y="8" width="104" height="104" rx="8" stroke="#B8860B" stroke-width="1.5" opacity="0.25"/>
+                        <rect x="26" y="28" width="50" height="6" rx="1" fill="#B8860B"/>
+                        <rect x="26" y="28" width="6" height="30" rx="1" fill="#B8860B"/>
+                        <rect x="38" y="52" width="50" height="6" rx="1" fill="#B8860B" opacity="0.55"/>
+                        <rect x="82" y="58" width="6" height="30" rx="1" fill="#B8860B"/>
+                        <rect x="38" y="82" width="50" height="6" rx="1" fill="#B8860B"/>
+                        <path d="M85 28 L91 20 L97 28" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.45"/>
                     </svg>
                 </div>
                 <div class="symbol-desc">
-                    <p>세울엔지니어링의 심볼마크는 한글 <strong>'세울'</strong>의 자음 <strong>'ㅅ'</strong>과 건물의 기둥·보 구조를 결합한 기하학적 형태입니다. 상승하는 화살표는 도시의 가치를 높이겠다는 의지를 상징합니다.</p>
+                    <p>빛세움의 심볼마크는 '빛'을 상징하는 삼색(적·녹·금) 삼각형과 건물의 기둥·보 구조를 결합한 기하학적 형태입니다. 상승하는 화살표는 도시의 가치를 높이겠다는 의지를 상징합니다.</p>
                     <div class="symbol-meaning">
                         <strong>디자인 의미</strong><br>
                         · 수직·수평선의 교차 — 건축 구조의 견고함과 정밀한 엔지니어링<br>
@@ -1154,36 +1154,36 @@
             </div>
             <div class="brand-colors">
                 <div class="color-card">
-                    <div class="color-swatch" style="background:#0A0F1C;"></div>
+                    <div class="color-swatch" style="background:#E60012;"></div>
                     <div class="color-info">
-                        <div class="color-name">SEUL Navy</div>
-                        <div class="color-hex">#0A0F1C</div>
+                        <div class="color-name">Bitseum Red</div>
+                        <div class="color-hex">#E60012</div>
                     </div>
                 </div>
                 <div class="color-card">
-                    <div class="color-swatch" style="background:#C3A569;"></div>
+                    <div class="color-swatch" style="background:#009A44;"></div>
                     <div class="color-info">
-                        <div class="color-name">SEUL Gold</div>
-                        <div class="color-hex">#C3A569</div>
+                        <div class="color-name">Bitseum Green</div>
+                        <div class="color-hex">#009A44</div>
                     </div>
                 </div>
                 <div class="color-card">
-                    <div class="color-swatch" style="background:#142644;"></div>
+                    <div class="color-swatch" style="background:#0068B7;"></div>
                     <div class="color-info">
-                        <div class="color-name">Deep Navy</div>
-                        <div class="color-hex">#142644</div>
+                        <div class="color-name">Bitseum Blue</div>
+                        <div class="color-hex">#0068B7</div>
                     </div>
                 </div>
-                <div class="color-card">
-                    <div class="color-swatch" style="background:#D4B87A;"></div>
+                <div class="color-card" style="box-shadow:0 0 0 2px #FFC400">
+                    <div class="color-swatch" style="background:#FFC400;"></div>
                     <div class="color-info">
-                        <div class="color-name">Light Gold</div>
-                        <div class="color-hex">#D4B87A</div>
+                        <div class="color-name">Bitseum Yellow <span style="font-size:10px;font-weight:800;color:#B8860B;border:1px solid #B8860B;border-radius:4px;padding:1px 6px;margin-left:4px">MAIN</span></div>
+                        <div class="color-hex">#FFC400</div>
                     </div>
                 </div>
             </div>
             <div style="text-align:right;">
-                <a href="../jpg/ci_main.png" download class="ci-dl-btn"><i class="fa-solid fa-download"></i> CI 다운로드</a>
+                <a href="../jpg/visseum_logo.jpg" download class="ci-dl-btn"><i class="fa-solid fa-download"></i> CI 다운로드</a>
             </div>
         </div>
     </div>
@@ -1196,7 +1196,7 @@
 <div class="page-body" style="padding:0 0 24px;min-height:0">
     <div class="inner">
         <div class="uni-cta" style="margin-top:24px">
-            <h3>정비사업의 기준을 제시합니다 │ 세울엔지니어링</h3>
+            <h3>정비사업의 기준을 제시합니다 │ 빛세움</h3>
             <a href="contact.html" class="uc-primary"><i class="fa-solid fa-paper-plane"></i> 상담 문의</a>
         </div>
     </div>
@@ -1214,10 +1214,9 @@
     document.getElementById('ceoGreeting').innerHTML = info.ceoGreeting.replace(/\n/g, '<br>');
 
     /* ── CEO 이름 ── */
-    /* Charles Lee 유지하되 한글명은 mock에서 로드 */
     var ceoNameEl = document.getElementById('ceoNameDisplay');
     if (ceoNameEl && info.ceoName) {
-        ceoNameEl.textContent = 'Charles Lee';
+        ceoNameEl.textContent = info.ceoName;
     }
 
     /* ── 회사연혁 — center timeline ── */

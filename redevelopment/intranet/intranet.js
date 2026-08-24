@@ -1,12 +1,12 @@
 /**
- * 세울 인트라넷 — 공통 JS
+ * 빛세움 인트라넷 — 공통 JS
  * 인증, 권한, 사이드바, 유틸리티
  */
 const Intra = (() => {
 
   /* ── 계정 (비밀번호는 SHA-256 해시로 저장) ── */
   const ACCOUNTS = [
-    { id:'dodo6656', pwHash:'9d9c699441902026a0981cdf285b5b32141885d21508d41029385d4a1caa8f93', name:'이창우', role:'admin', dept:'대표이사' },
+    { id:'dodo6656', pwHash:'9d9c699441902026a0981cdf285b5b32141885d21508d41029385d4a1caa8f93', name:'이창우', role:'admin', dept:'정비사업3부문 부문장' },
   ];
 
   /* ── 권한 레벨 ── */
@@ -47,7 +47,7 @@ const Intra = (() => {
       return false;
     }
     if (minRole && ROLES[getUser().role] < ROLES[minRole]) {
-      document.documentElement.innerHTML = '<html><body style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#888"><div style="text-align:center"><h2 style="margin-bottom:8px;color:#1A1A1A">접근 권한이 없습니다</h2><p>관리자에게 문의하세요.</p><a href="index.html" style="color:#C3A569;margin-top:16px;display:inline-block">대시보드로 돌아가기</a></div></div></body></html>';
+      document.documentElement.innerHTML = '<html><body style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#888"><div style="text-align:center"><h2 style="margin-bottom:8px;color:#1A1A1A">접근 권한이 없습니다</h2><p>관리자에게 문의하세요.</p><a href="index.html" style="color:#B8860B;margin-top:16px;display:inline-block">대시보드로 돌아가기</a></div></div></body></html>';
       return false;
     }
     /* 인증 성공 시에만 콘텐츠 표시 */
@@ -100,9 +100,9 @@ const Intra = (() => {
     return `
     <aside class="sidebar" id="intraSidebar">
       <div class="sidebar-logo">
-        <svg viewBox="0 0 120 120" fill="none" width="32" height="32"><rect x="8" y="8" width="104" height="104" rx="4" stroke="#C3A569" stroke-width="2" opacity="0.3"/><rect x="28" y="24" width="52" height="6" rx="1" fill="#C3A569"/><rect x="28" y="24" width="6" height="28" rx="1" fill="#C3A569"/><rect x="40" y="52" width="52" height="6" rx="1" fill="#C3A569" opacity="0.6"/><rect x="86" y="58" width="6" height="28" rx="1" fill="#C3A569"/><rect x="40" y="86" width="52" height="6" rx="1" fill="#C3A569"/></svg>
+        <svg viewBox="0 0 120 120" fill="none" width="32" height="32"><rect x="8" y="8" width="104" height="104" rx="4" stroke="#B8860B" stroke-width="2" opacity="0.3"/><rect x="28" y="24" width="52" height="6" rx="1" fill="#B8860B"/><rect x="28" y="24" width="6" height="28" rx="1" fill="#B8860B"/><rect x="40" y="52" width="52" height="6" rx="1" fill="#B8860B" opacity="0.6"/><rect x="86" y="58" width="6" height="28" rx="1" fill="#B8860B"/><rect x="40" y="86" width="52" height="6" rx="1" fill="#B8860B"/></svg>
         <div class="sidebar-logo-text">
-          <div class="sidebar-logo-company">(주)세울엔지니어링</div>
+          <div class="sidebar-logo-company">(주)빛세움</div>
           <div class="sidebar-logo-sub">INTRANET</div>
         </div>
       </div>

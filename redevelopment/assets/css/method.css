@@ -1,4 +1,4 @@
-/* 세울의 방식 — 6단계 홍보 페이지 공통 스타일 (2026-05-05 신설) */
+/* 빛세움의 방식 — 6단계 홍보 페이지 공통 스타일 (2026-05-05 신설) */
 
 .md-section { margin-bottom:56px; }
 .md-section:last-child { margin-bottom:0; }
@@ -6,7 +6,7 @@
 
 .md-step-badge {
     display:inline-flex; align-items:center; gap:10px;
-    background:rgba(195,165,105,0.1); border:1px solid rgba(195,165,105,0.3);
+    background:rgba(184,134,11,0.1); border:1px solid rgba(184,134,11,0.3);
     color:var(--gold); padding:8px 16px; border-radius:999px;
     font-size:12px; font-weight:700; letter-spacing:1px;
     margin-bottom:14px;
@@ -14,7 +14,7 @@
 .md-step-badge .num { font-size:14px; font-weight:900; }
 
 .md-intro {
-    background:linear-gradient(135deg,rgba(195,165,105,0.04),transparent 60%);
+    background:linear-gradient(135deg,rgba(184,134,11,0.04),transparent 60%);
     border-left:4px solid var(--gold); border-radius:0 var(--radius) var(--radius) 0;
     padding:36px 40px 36px 36px;
 }
@@ -23,28 +23,28 @@
 @media(max-width:768px){ .md-intro{padding:24px 20px;} .md-intro p{font-size:14px;} }
 
 .md-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-.md-stat { background:var(--brand-dark); border-radius:var(--radius); padding:28px 24px; text-align:center; color:#fff; }
+.md-stat { background:#FFFFFF; border-radius:var(--radius); padding:28px 24px; text-align:center; color:#0A0F1C; }
 .md-stat .num { font-size:28px; font-weight:800; color:var(--gold); margin-bottom:6px; }
 .md-stat .num i { font-size:22px; }
-.md-stat .desc { font-size:13px; color:rgba(255,255,255,0.6); }
+.md-stat .desc { font-size:13px; color:rgba(10,15,28,0.6); }
 @media(max-width:768px){ .md-stats{grid-template-columns:repeat(2,1fr);} }
 
 .md-strategy {
-    background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:16px;
-    padding:48px; color:#fff; position:relative; overflow:hidden;
+    background:linear-gradient(135deg,#FFFFFF,#FFF3C4); border-radius:16px;
+    padding:48px; color:#0A0F1C; position:relative; overflow:hidden;
 }
-.md-strategy::before { content:''; position:absolute; right:-60px; top:-60px; width:240px; height:240px; background:radial-gradient(circle,rgba(195,165,105,0.08),transparent 70%); border-radius:50%; }
+.md-strategy::before { content:''; position:absolute; right:-60px; top:-60px; width:240px; height:240px; background:radial-gradient(circle,rgba(184,134,11,0.08),transparent 70%); border-radius:50%; }
 .md-strategy-label { font-size:11px; font-weight:700; color:var(--gold); letter-spacing:1.5px; margin-bottom:14px; }
 .md-strategy h3 { font-size:24px; font-weight:800; margin-bottom:14px; line-height:1.45; }
-.md-strategy > p { font-size:15px; color:rgba(255,255,255,0.65); line-height:1.85; max-width:780px; margin-bottom:32px; }
+.md-strategy > p { font-size:15px; color:rgba(10,15,28,0.65); line-height:1.85; max-width:780px; margin-bottom:32px; }
 .md-strategy-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; position:relative; z-index:1; }
 .md-strategy-item {
-    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.04); border:1px solid rgba(10,15,28,0.08);
     border-radius:12px; padding:24px;
 }
-.md-strategy-item .ic { width:42px; height:42px; border-radius:10px; background:rgba(195,165,105,0.15); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:18px; margin-bottom:14px; }
+.md-strategy-item .ic { width:42px; height:42px; border-radius:10px; background:rgba(184,134,11,0.15); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:18px; margin-bottom:14px; }
 .md-strategy-item h5 { font-size:15px; font-weight:700; margin-bottom:8px; }
-.md-strategy-item p { font-size:13px; color:rgba(255,255,255,0.55); line-height:1.75; }
+.md-strategy-item p { font-size:13px; color:rgba(10,15,28,0.55); line-height:1.75; }
 @media(max-width:860px){ .md-strategy{padding:36px 28px;} .md-strategy-grid{grid-template-columns:1fr;} }
 
 .md-service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
@@ -54,7 +54,7 @@
 }
 .md-service-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); }
 .md-service-card .md-icon {
-    width:48px; height:48px; border-radius:12px; background:var(--brand-dark);
+    width:48px; height:48px; border-radius:12px; background:#FFFFFF;
     display:flex; align-items:center; justify-content:center; margin-bottom:18px;
 }
 .md-service-card .md-icon i { font-size:20px; color:var(--gold); }
@@ -70,7 +70,7 @@
     counter-increment:mdstep; content:counter(mdstep);
     display:flex; align-items:center; justify-content:center;
     width:44px; height:44px; border-radius:50%; margin:0 auto 14px;
-    background:var(--brand-dark); color:var(--gold);
+    background:#FFFFFF; color:var(--gold);
     font-size:16px; font-weight:800; position:relative; z-index:2;
 }
 .md-step::after {
@@ -107,13 +107,13 @@
 @media(max-width:540px){ .md-nav{flex-direction:column;} }
 
 .md-cta {
-    background:linear-gradient(135deg,#0A0F1C,#142644); border-radius:var(--radius);
+    background:linear-gradient(135deg,#FFFFFF,#FFF3C4); border-radius:var(--radius);
     padding:48px; display:flex; align-items:center; justify-content:space-between; gap:32px;
     position:relative; overflow:hidden;
 }
-.md-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(195,165,105,0.08),transparent 70%); border-radius:50%; }
-.md-cta h3 { font-size:22px; font-weight:800; color:#fff; margin-bottom:8px; }
-.md-cta p { font-size:15px; color:rgba(255,255,255,0.55); }
+.md-cta::before { content:''; position:absolute; right:-50px; top:-50px; width:200px; height:200px; background:radial-gradient(circle,rgba(184,134,11,0.08),transparent 70%); border-radius:50%; }
+.md-cta h3 { font-size:22px; font-weight:800; color:#0A0F1C; margin-bottom:8px; }
+.md-cta p { font-size:15px; color:rgba(10,15,28,0.55); }
 .md-cta-btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:var(--gold); color:#0A0F1C; border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; white-space:nowrap; }
 .md-cta-btn:hover { background:var(--gold-hover); }
 @media(max-width:640px){ .md-cta{flex-direction:column;padding:32px 24px;text-align:center;} }
