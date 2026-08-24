@@ -291,7 +291,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   padding: 20px 24px; border-bottom: 1px solid var(--gray-100);
 }
 .drawer-header .logo { gap: 16px; }
-.drawer-header .logo-mark { width: 25.2px; height: 25.2px; }
+.drawer-header .logo-mark { width: 22.4px; height: 22.4px; }
 .drawer-header .logo-company { font-size: 13px; }
 .drawer-header .logo-sub { font-size: 7px; }
 .drawer-close {
