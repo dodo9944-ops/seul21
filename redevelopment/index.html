@@ -189,38 +189,59 @@
             z-index: 1; pointer-events: none;
         }
 
-        /* 골든 라이트 웨이브 — 좌하단→우상단으로 흐르는 길고 뚜렷한 곡선 SVG */
+        /* 골든 라이트 웨이브 — 빛세움의 길 페이지와 동일 기법, 2/3 축소 + 아래→위 길이 테이퍼 + 글로우 강화 */
         .hero-light-wave {
-            position: absolute; left: -8%; bottom: -18%;
-            width: 92%; height: 78%;
-            z-index: 2; pointer-events: none; opacity: 1;
-            filter: drop-shadow(0 0 12px rgba(255,196,0,.22));
-            -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 70%, rgba(0,0,0,.82) 87%, transparent 100%);
-            mask-image: linear-gradient(90deg, #000 0%, #000 70%, rgba(0,0,0,.82) 87%, transparent 100%);
+            position: absolute; left: 0; bottom: -10%;
+            width: 44%; height: 44%;
+            overflow: hidden; pointer-events: none;
+            z-index: 2; opacity: .85;
+            -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%);
+            mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%);
         }
-        .hero-light-wave .wave-svg { width: 100%; height: 100%; display: block; overflow: visible; }
-        .hero-light-wave .wave-svg path { vector-effect: non-scaling-stroke; }
+        .hero-light-wave::before {
+            content: ''; position: absolute; left: 0; bottom: 0;
+            width: 70%; height: 70%;
+            background: radial-gradient(ellipse at 15% 100%,
+                rgba(255,196,0,.32) 0%, rgba(255,196,0,.16) 28%,
+                rgba(255,196,0,.06) 50%, transparent 72%);
+            filter: blur(2px);
+        }
+        .hero-light-wave .wave-line {
+            position: absolute; border-radius: 50%;
+            border-top: 1.4px solid transparent;
+            transform-origin: center;
+            filter: drop-shadow(0 0 4px rgba(255,196,0,.35)) drop-shadow(0 0 10px rgba(255,196,0,.18));
+        }
+        /* 아래(1번, 가장 길고 밝음) → 위(8번, 가장 짧고 옅음) 순서로 테이퍼 */
+        .hero-light-wave .wave-line:nth-child(1) { left:-15%; bottom:-10%; width:950px; height:260px; transform:rotate(-9deg);             border-top-color: rgba(255,196,0,.40); }
+        .hero-light-wave .wave-line:nth-child(2) { left:-12%; bottom:-4%;  width:870px; height:240px; transform:rotate(-8deg);             border-top-color: rgba(255,205,40,.35); }
+        .hero-light-wave .wave-line:nth-child(3) { left:-18%; bottom:-14%; width:790px; height:220px; transform:rotate(-6deg);             border-top-color: rgba(255,214,70,.31); }
+        .hero-light-wave .wave-line:nth-child(4) { left:-8%;  bottom:4%;   width:710px; height:200px; transform:rotate(-11deg);            border-top-color: rgba(255,196,0,.27); }
+        .hero-light-wave .wave-line:nth-child(5) { left:-20%; bottom:-18%; width:630px; height:180px; transform:rotate(-4deg);             border-top-color: rgba(255,223,100,.23); }
+        .hero-light-wave .wave-line:nth-child(6) { left:-6%;  bottom:0%;   width:560px; height:165px; transform:rotate(-13deg) scaleY(.9); border-top-color: rgba(255,214,70,.19); }
+        .hero-light-wave .wave-line:nth-child(7) { left:-16%; bottom:-8%;  width:500px; height:150px; transform:rotate(-3deg);             border-top-color: rgba(255,232,140,.16); }
+        .hero-light-wave .wave-line:nth-child(8) { left:-4%;  bottom:6%;   width:440px; height:135px; transform:rotate(-15deg);            border-top-color: rgba(255,240,170,.13); }
 
         /* 라이트 스파크 — 아주 작은 골드 포인트 */
         .hero-light-wave .spark {
             position: absolute; width: 3px; height: 3px; border-radius: 50%;
-            background: #FFC400; box-shadow: 0 0 10px rgba(255,196,0,.45);
+            background: #FFC400; box-shadow: 0 0 6px rgba(255,196,0,.65), 0 0 14px rgba(255,196,0,.30);
         }
-        .hero-light-wave .spark-1 { left: 8%;  bottom: 18%; opacity: .40; }
-        .hero-light-wave .spark-2 { left: 18%; bottom: 32%; opacity: .25; width:2px; height:2px; }
-        .hero-light-wave .spark-3 { left: 28%; bottom: 12%; opacity: .35; }
-        .hero-light-wave .spark-4 { left: 38%; bottom: 40%; opacity: .20; width:4px; height:4px; }
-        .hero-light-wave .spark-5 { left: 46%; bottom: 22%; opacity: .30; width:2px; height:2px; }
-        .hero-light-wave .spark-6 { left: 55%; bottom: 34%; opacity: .22; }
+        .hero-light-wave .spark-1 { left: 12%; bottom: 22%; opacity: .50; }
+        .hero-light-wave .spark-2 { left: 24%; bottom: 38%; opacity: .32; width:2px; height:2px; }
+        .hero-light-wave .spark-3 { left: 34%; bottom: 14%; opacity: .42; }
+        .hero-light-wave .spark-4 { left: 44%; bottom: 46%; opacity: .26; width:4px; height:4px; }
+        .hero-light-wave .spark-5 { left: 52%; bottom: 26%; opacity: .36; width:2px; height:2px; }
+        .hero-light-wave .spark-6 { left: 60%; bottom: 40%; opacity: .28; }
 
         @media (max-width: 1024px) {
             .hero-banner { min-height: auto; padding: 48px 0 0; }
-            .hero-light-wave .wave-svg path:nth-child(n+7) { display: none; }
+            .hero-light-wave .wave-line:nth-child(n+7) { display: none; }
         }
         @media (max-width: 768px) {
             .hero-banner { padding: 36px 0 0; }
-            .hero-light-wave { opacity: .45; }
-            .hero-light-wave .wave-svg path:nth-child(n+4) { display: none; }
+            .hero-light-wave { opacity: .40; }
+            .hero-light-wave .wave-line:nth-child(n+4) { display: none; }
             .hero-light-wave .spark { display: none; }
         }
 
@@ -649,18 +670,14 @@
         <div class="hero-hline hero-hline-top"></div>
         <div class="hero-hline hero-hline-bottom"></div>
         <div class="hero-light-wave" aria-hidden="true">
-            <svg class="wave-svg" viewBox="0 0 1400 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M -40,392 Q 550,336 1300,175" stroke="#FFC400"  stroke-width="2.6" fill="none" stroke-linecap="round" opacity=".78"/>
-                <path d="M -50,386 Q 565,312 1310,160" stroke="#FFC400"  stroke-width="2.3" fill="none" stroke-linecap="round" opacity=".68"/>
-                <path d="M -60,381 Q 580,287 1320,144" stroke="#FFD029"  stroke-width="2.1" fill="none" stroke-linecap="round" opacity=".60"/>
-                <path d="M -70,375 Q 595,263 1330,129" stroke="#FFD847"  stroke-width="2.0" fill="none" stroke-linecap="round" opacity=".54"/>
-                <path d="M -80,370 Q 610,238 1340,113" stroke="#FFDF66"  stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".47"/>
-                <path d="M -90,364 Q 625,214 1350,98"  stroke="#FFE685"  stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".40"/>
-                <path d="M -100,358 Q 640,189 1360,83" stroke="#FFEDA3"  stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".34"/>
-                <path d="M -110,353 Q 655,165 1370,67" stroke="#FFF3C2"  stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".28"/>
-                <path d="M -120,347 Q 670,140 1380,52" stroke="#FFFFFF"  stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".22"/>
-                <path d="M -130,342 Q 685,116 1390,36" stroke="#FFFFFF"  stroke-width="1.0" fill="none" stroke-linecap="round" opacity=".16"/>
-            </svg>
+            <span class="wave-line"></span>
+            <span class="wave-line"></span>
+            <span class="wave-line"></span>
+            <span class="wave-line"></span>
+            <span class="wave-line"></span>
+            <span class="wave-line"></span>
+            <span class="wave-line"></span>
+            <span class="wave-line"></span>
             <span class="spark spark-1"></span>
             <span class="spark spark-2"></span>
             <span class="spark spark-3"></span>
