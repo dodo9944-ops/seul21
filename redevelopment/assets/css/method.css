@@ -39,9 +39,11 @@
 .md-strategy > p { font-size:15px; color:rgba(10,15,28,0.65); line-height:1.85; max-width:780px; margin-bottom:32px; }
 .md-strategy-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; position:relative; z-index:1; }
 .md-strategy-item {
-    background:rgba(255,255,255,0.04); border:1px solid rgba(10,15,28,0.08);
-    border-radius:12px; padding:24px;
+    background:#fff; border:1px solid rgba(20,28,38,.08);
+    border-radius:14px; padding:24px; box-shadow:0 4px 16px rgba(20,28,38,.045);
+    transition:transform .2s,box-shadow .2s;
 }
+.md-strategy-item:hover { transform:translateY(-3px); box-shadow:0 10px 24px rgba(20,28,38,.08); }
 .md-strategy-item .ic { width:42px; height:42px; border-radius:10px; background:rgba(184,134,11,0.15); display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:18px; margin-bottom:14px; }
 .md-strategy-item h5 { font-size:15px; font-weight:700; margin-bottom:8px; }
 .md-strategy-item p { font-size:13px; color:rgba(10,15,28,0.55); line-height:1.75; }
@@ -70,12 +72,13 @@
     counter-increment:mdstep; content:counter(mdstep);
     display:flex; align-items:center; justify-content:center;
     width:44px; height:44px; border-radius:50%; margin:0 auto 14px;
-    background:#FFFFFF; color:var(--gold);
+    background:#FFFFFF; color:var(--gold); border:1.5px solid rgba(184,134,11,.28);
+    box-shadow:0 2px 8px rgba(20,28,38,.06);
     font-size:16px; font-weight:800; position:relative; z-index:2;
 }
 .md-step::after {
     content:''; position:absolute; top:22px; left:calc(50% + 22px); right:calc(-50% + 22px);
-    height:2px; background:var(--gray-200); z-index:1;
+    height:2px; background:linear-gradient(90deg,rgba(184,134,11,.30),rgba(184,134,11,.10)); z-index:1;
 }
 .md-step:last-child::after { display:none; }
 .md-step h5 { font-size:13px; font-weight:700; color:var(--gray-900); margin-bottom:6px; }
@@ -91,7 +94,9 @@
 .md-check-item {
     background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius-sm);
     padding:20px; display:flex; align-items:flex-start; gap:12px;
+    box-shadow:0 4px 16px rgba(20,28,38,.045); transition:box-shadow .2s;
 }
+.md-check-item:hover { box-shadow:0 8px 20px rgba(20,28,38,.08); }
 .md-check-item i { color:var(--gold); font-size:16px; margin-top:2px; flex-shrink:0; }
 .md-check-item div h5 { font-size:14px; font-weight:700; color:var(--gray-900); margin-bottom:4px; }
 .md-check-item div p { font-size:12px; color:var(--gray-500); line-height:1.6; }
