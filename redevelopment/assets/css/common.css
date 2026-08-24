@@ -449,7 +449,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 .footer-col a:hover { color: #C58B00; }
 .footer-col + .footer-col { border-left: 1px solid rgba(23,28,38,.08); padding-left: 36px; }
 .footer-phone {
-  display: inline-flex; align-items: center; gap: 32px;
+  display: inline-flex; align-items: center; gap: 58px;
   font-size: 42px; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em;
   color: #171C26; margin-bottom: 8px;
   text-decoration: none; cursor: pointer; transition: color .2s ease;
