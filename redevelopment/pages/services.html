@@ -59,7 +59,7 @@
     .sv-card:hover { border-color:var(--gold); box-shadow:0 12px 36px rgba(0,0,0,0.07); transform:translateY(-3px); }
 
     .sv-card-header {
-        background:linear-gradient(135deg,#0A0F1C,#142644);
+        background:linear-gradient(135deg,#FFFFFF,#FFF3C4);
         padding:18px 24px; display:flex; align-items:center; gap:14px;
         position:relative;
     }
@@ -72,8 +72,8 @@
         background:rgba(184,134,11,0.15); display:flex; align-items:center; justify-content:center;
         font-size:15px; font-weight:800; color:var(--gold); flex-shrink:0;
     }
-    .sv-card-header h3 { font-size:22px; font-weight:800; color:#fff; letter-spacing:-0.4px; line-height:1.25; }
-    .sv-card-header .sv-sub { font-size:10px; color:rgba(255,255,255,0.35); margin-top:5px; }
+    .sv-card-header h3 { font-size:22px; font-weight:800; color:#0A0F1C; letter-spacing:-0.4px; line-height:1.25; }
+    .sv-card-header .sv-sub { font-size:10px; color:rgba(10,15,28,0.35); margin-top:5px; }
     @media(max-width:860px){ .sv-card-header h3 { font-size:20px; } }
     @media(max-width:480px){ .sv-card-header h3 { font-size:18px; } .sv-card-header { padding:14px 18px; } }
 
@@ -94,14 +94,14 @@
     .sv-tag {
         display:inline-block; padding:5px 14px; border-radius:20px;
         font-size:12px; font-weight:600; color:var(--brand-navy);
-        background:rgba(20,38,68,0.05); border:1px solid rgba(20,38,68,0.08);
+        background:rgba(255,255,255,0.05); border:1px solid rgba(20,38,68,0.08);
     }
 
     /* Hero keyword badges */
     .hero-badges { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; justify-content:center; }
     .hero-badge {
         display:inline-block; padding:8px 20px; border-radius:20px;
-        font-size:13px; font-weight:700; color:#fff;
+        font-size:13px; font-weight:700; color:#0A0F1C;
         background:rgba(184,134,11,0.12); border:1px solid rgba(184,134,11,0.25);
         transition:all 0.2s;
     }
@@ -111,13 +111,13 @@
 
     /* Hero tagline */
     .hero-tagline {
-        font-size:18px; font-weight:700; color:#fff; margin-bottom:8px; letter-spacing:-0.3px;
+        font-size:18px; font-weight:700; color:#0A0F1C; margin-bottom:8px; letter-spacing:-0.3px;
     }
 
     
     /* === Services Hero (about-hero 3안 패밀리) === */
     .services-hero {
-        background: linear-gradient(135deg, #0F1D35 0%, #142644 40%, #0A0F1C 100%);
+        background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
         position: relative; overflow: hidden;
         padding: 32px 0 12px; min-height: 360px;
     }
@@ -133,9 +133,9 @@
     .services-hero .hero-bg-photo::after {
         content: ''; position: absolute; inset: 0;
         background: linear-gradient(90deg,
-            #0A0F1C 0%, rgba(10,15,28,0.94) 6%,
-            rgba(14,24,42,0.65) 24%, rgba(18,32,56,0.4) 48%,
-            rgba(20,38,68,0.28) 72%, rgba(20,38,68,0.22) 100%
+            #FFFFFF 0%, rgba(255,255,255,0.94) 6%,
+            rgba(255,255,255,0.65) 24%, rgba(255,255,255,0.4) 48%,
+            rgba(255,255,255,0.28) 72%, rgba(255,255,255,0.22) 100%
         ); z-index: 1;
     }
     .services-hero .hero-bg-photo::before {
@@ -143,9 +143,9 @@
         top: 0; bottom: 0; left: 22%; width: 56%;
         pointer-events: none;
         background: linear-gradient(90deg,
-            rgba(15,26,46,0) 0%, rgba(15,26,46,0.06) 25%,
-            rgba(14,22,40,0.16) 52%, rgba(14,22,40,0.18) 62%,
-            rgba(15,26,46,0.08) 80%, rgba(15,26,46,0) 100%
+            rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 25%,
+            rgba(255,255,255,0.16) 52%, rgba(255,255,255,0.18) 62%,
+            rgba(255,255,255,0.08) 80%, rgba(255,255,255,0) 100%
         ); filter: blur(24px); z-index: 2;
     }
     .services-hero::before {
@@ -174,9 +174,9 @@
     }
     .services-hero .hero-breadcrumb {
         display: flex; align-items: center; gap: 6px;
-        font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 13px;
+        font-size: 13px; color: rgba(10,15,28,0.4); margin-bottom: 13px;
     }
-    .services-hero .hero-breadcrumb a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
+    .services-hero .hero-breadcrumb a { color: rgba(10,15,28,0.4); transition: color 0.2s; }
     .services-hero .hero-breadcrumb a:hover { color: #B8860B; }
     .services-hero .hero-breadcrumb span { color: #B8860B; font-weight: 600; }
     .services-hero .hero-breadcrumb i { font-size: 10px; }
@@ -187,12 +187,12 @@
     }
     .services-hero .hero-label::before { content: ''; display: block; width: 24px; height: 1px; background: #B8860B; }
     .services-hero .hero-text h1 {
-        font-size: 38px; font-weight: 900; color: #fff;
+        font-size: 38px; font-weight: 900; color: #0A0F1C;
         line-height: 1.35; letter-spacing: -1px; margin-bottom: 16px;
     }
     .services-hero .hero-text h1 em { font-style: normal; color: #B8860B; }
     .services-hero .hero-sub {
-        font-size: 16px; color: rgba(255,255,255,0.55);
+        font-size: 16px; color: rgba(10,15,28,0.55);
         line-height: 1.7; max-width: 480px;
     }
     /* 앵커 점프 시 sticky 헤더 가림 방지 */
@@ -200,7 +200,7 @@
     #overview, #highlights, #urban-renewal, #engineering { scroll-margin-top: 88px; }
     .services-hero .hero-card {
         background: rgba(10,16,30,0.57);
-        border: 1px solid rgba(255,255,255,0.14);
+        border: 1px solid rgba(10,15,28,0.14);
         border-radius: 12px; padding: 22px 18px;
         transition: all 0.3s;
         backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
@@ -209,7 +209,7 @@
         cursor: pointer;
     }
     .services-hero .hero-card:hover {
-        background: rgba(14,22,40,0.70);
+        background: rgba(255,255,255,0.70);
         border-color: rgba(184,134,11,0.3);
         transform: translateY(-2px);
     }
@@ -220,14 +220,14 @@
         margin-bottom: 12px;
     }
     .services-hero .hero-card-icon i { font-size: 15px; color: #B8860B; }
-    .services-hero .hero-card h4 { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 4px; }
-    .services-hero .hero-card p { font-size: 11.5px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    .services-hero .hero-card h4 { font-size: 14px; font-weight: 800; color: #0A0F1C; margin-bottom: 4px; }
+    .services-hero .hero-card p { font-size: 11.5px; color: rgba(10,15,28,0.75); line-height: 1.5; }
     @media (max-width: 1024px) {
         .services-hero .inner { flex-direction: column; gap: 16px; }
         .services-hero .hero-cards-float { width: 100%; max-width: 420px; }
         .services-hero .hero-bg-photo { width: 100%; opacity: 0.25; }
         .services-hero .hero-bg-photo::after {
-            background: linear-gradient(180deg, rgba(10,15,28,0.5) 0%, rgba(20,38,68,0.7) 100%);
+            background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%);
         }
     }
     @media (max-width: 600px) {

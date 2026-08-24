@@ -1,28 +1,28 @@
 <!-- 사업성검토 (feasibility.html) — Hero Section Reference -->
 <style>
 /* === Hero — 서비스 선택 포함 === */
-.fh{padding:48px 0 0;background:linear-gradient(160deg,#0A0F1C 0%,#142644 50%,#0A0F1C 100%);position:relative;overflow:visible}
-.fh h1{font-size:34px;font-weight:900;color:#fff;margin-bottom:8px;padding-left:18px;border-left:3px solid var(--gold)}
-.fh .fh-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;max-width:650px;margin-bottom:32px}
+.fh{padding:48px 0 0;background:linear-gradient(160deg,#FFFFFF 0%,#FFF3C4 50%,#FFFFFF 100%);position:relative;overflow:visible}
+.fh h1{font-size:34px;font-weight:900;color:#0A0F1C;margin-bottom:8px;padding-left:18px;border-left:3px solid var(--gold)}
+.fh .fh-sub{font-size:15px;color:rgba(10,15,28,.55);line-height:1.7;max-width:650px;margin-bottom:32px}
 @media(max-width:768px){.fh{padding:36px 0 0}.fh h1{font-size:26px}.fh .fh-sub{margin-bottom:24px}}
 
 /* === 히어로 안 서비스 선택 카드 === */
 .hero-selector{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding-bottom:36px}
 @media(max-width:640px){.hero-selector{grid-template-columns:1fr;gap:12px;padding-bottom:28px}}
-.hero-opt{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:14px;padding:24px 22px;cursor:pointer;transition:all .3s;position:relative}
+.hero-opt{background:rgba(255,255,255,.06);border:1.5px solid rgba(10,15,28,.1);border-radius:14px;padding:24px 22px;cursor:pointer;transition:all .3s;position:relative}
 .hero-opt:hover{background:rgba(255,255,255,.1);border-color:rgba(184,134,11,.3);transform:translateY(-2px)}
 .hero-opt.active{background:rgba(184,134,11,.08);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
 .hero-opt.active::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);border-radius:14px 14px 0 0}
 .hero-opt .ho-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
 .hero-opt .ho-icon{width:44px;height:44px;border-radius:12px;background:rgba(184,134,11,.12);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--gold);flex-shrink:0}
 .hero-opt.active .ho-icon{background:var(--gold);color:var(--brand-dark)}
-.hero-opt .ho-title{font-size:17px;font-weight:800;color:#fff}
+.hero-opt .ho-title{font-size:17px;font-weight:800;color:#0A0F1C}
 .hero-opt .ho-badge{display:inline-block;padding:3px 9px;border-radius:5px;font-size:10px;font-weight:700;margin-left:8px;vertical-align:middle}
-.ho-badge.quick{background:rgba(255,255,255,.12);color:rgba(255,255,255,.6)}
+.ho-badge.quick{background:rgba(255,255,255,.12);color:rgba(10,15,28,.6)}
 .ho-badge.pro{background:var(--gold);color:var(--brand-dark)}
-.hero-opt .ho-desc{font-size:12.5px;color:rgba(255,255,255,.45);line-height:1.55;margin-bottom:12px}
+.hero-opt .ho-desc{font-size:12.5px;color:rgba(10,15,28,.45);line-height:1.55;margin-bottom:12px}
 .hero-opt .ho-tags{display:flex;flex-wrap:wrap;gap:5px}
-.hero-opt .ho-tag{padding:3px 9px;border-radius:5px;font-size:10.5px;font-weight:500;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08)}
+.hero-opt .ho-tag{padding:3px 9px;border-radius:5px;font-size:10.5px;font-weight:500;background:rgba(255,255,255,.06);color:rgba(10,15,28,.4);border:1px solid rgba(10,15,28,.08)}
 .hero-opt.active .ho-tag{background:rgba(184,134,11,.1);color:var(--gold);border-color:rgba(184,134,11,.2)}
 .hero-opt .ho-arrow{display:flex;align-items:center;gap:5px;margin-top:12px;font-size:12px;font-weight:700;color:var(--gold);opacity:0;transition:opacity .2s}
 .hero-opt.active .ho-arrow,.hero-opt:hover .ho-arrow{opacity:1}

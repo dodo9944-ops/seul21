@@ -19,7 +19,7 @@
 .dv-article{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:34px 32px;box-shadow:0 2px 12px rgba(10,15,28,.04)}
 
 /* category badge (상단 카테고리 라벨) */
-.dv-category-badge{display:inline-block;font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;margin-bottom:16px;color:#fff;background:#142644;letter-spacing:.02em}
+.dv-category-badge{display:inline-block;font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;margin-bottom:16px;color:#0A0F1C;background:#FFF3C4;letter-spacing:.02em}
 .dv-category-badge.badge-news{background:#1a3a6b}
 .dv-category-badge.badge-law{background:#5b3a8e}
 .dv-category-badge.badge-case{background:#1f7a5a}
@@ -47,12 +47,12 @@
 .dv-section ul li::before{content:'▪';position:absolute;left:0;top:2px;color:#B8860B;font-size:12px}
 .dv-section ol{counter-reset:dv;padding-left:0}
 .dv-section ol li{position:relative;padding-left:26px;margin-bottom:8px;color:#3a414e;counter-increment:dv}
-.dv-section ol li::before{content:counter(dv);position:absolute;left:0;top:1px;width:18px;height:18px;background:#142644;color:#fff;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.dv-section ol li::before{content:counter(dv);position:absolute;left:0;top:1px;width:18px;height:18px;background:#FFF3C4;color:#0A0F1C;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .dv-body strong{color:#c0392b;font-weight:700}
 
 /* table */
 .dv-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
-.dv-table th{background:#0A0F1C;color:#fff;padding:11px 13px;text-align:left;font-weight:600;font-size:13px}
+.dv-table th{background:#FFFFFF;color:#0A0F1C;padding:11px 13px;text-align:left;font-weight:600;font-size:13px}
 .dv-table td{padding:11px 13px;border-bottom:1px solid #e9ecf1;color:#3a414e;vertical-align:top}
 .dv-table tr:last-child td{border-bottom:none}
 .dv-table tr:nth-child(even) td{background:#f8f9fb}
@@ -65,11 +65,11 @@
 
 /* back button */
 .dv-back-btn-wrap{margin-top:30px;text-align:center}
-.dv-back-btn-wrap a,.dv-back-btn-wrap button{display:inline-block;padding:12px 28px;background:#142644;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;transition:background .15s}
-.dv-back-btn-wrap a:hover,.dv-back-btn-wrap button:hover{background:#0A0F1C}
+.dv-back-btn-wrap a,.dv-back-btn-wrap button{display:inline-block;padding:12px 28px;background:#FFF3C4;color:#0A0F1C;border:none;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;transition:background .15s}
+.dv-back-btn-wrap a:hover,.dv-back-btn-wrap button:hover{background:#FFFFFF}
 
 /* inline 강조 배지 (본문 표/문장 내) */
-.badge-hot,.badge-new,.badge-ok,.badge-no,.badge-warning,.badge-blue,.badge-gold,.badge-red,.badge-purple,.badge-posco{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;color:#fff;line-height:1.6;white-space:nowrap}
+.badge-hot,.badge-new,.badge-ok,.badge-no,.badge-warning,.badge-blue,.badge-gold,.badge-red,.badge-purple,.badge-posco{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;color:#0A0F1C;line-height:1.6;white-space:nowrap}
 .badge-hot,.badge-red,.badge-no{background:#c0392b}
 .badge-new,.badge-ok{background:#1f7a5a}
 .badge-warning,.badge-gold{background:#B8860B}

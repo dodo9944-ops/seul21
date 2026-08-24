@@ -23,7 +23,7 @@
 
     /* ── 1. HERO SECTION ── */
     .about-hero {
-        background: linear-gradient(135deg, #0F1D35 0%, #142644 40%, #0A0F1C 100%);
+        background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
         position: relative;
         overflow: hidden;
         padding: 32px 0 12px;
@@ -47,12 +47,12 @@
         content: '';
         position: absolute; inset: 0;
         background: linear-gradient(90deg,
-            #0A0F1C 0%,
-            rgba(10,15,28,0.94) 6%,
-            rgba(14,24,42,0.65) 24%,
-            rgba(18,32,56,0.4) 48%,
-            rgba(20,38,68,0.28) 72%,
-            rgba(20,38,68,0.22) 100%
+            #FFFFFF 0%,
+            rgba(255,255,255,0.94) 6%,
+            rgba(255,255,255,0.65) 24%,
+            rgba(255,255,255,0.4) 48%,
+            rgba(255,255,255,0.28) 72%,
+            rgba(255,255,255,0.22) 100%
         );
         z-index: 1;
     }
@@ -64,12 +64,12 @@
         left: 22%; width: 56%;
         pointer-events: none;
         background: linear-gradient(90deg,
-            rgba(15,26,46,0) 0%,
-            rgba(15,26,46,0.06) 25%,
-            rgba(14,22,40,0.16) 52%,
-            rgba(14,22,40,0.18) 62%,
-            rgba(15,26,46,0.08) 80%,
-            rgba(15,26,46,0) 100%
+            rgba(255,255,255,0) 0%,
+            rgba(255,255,255,0.06) 25%,
+            rgba(255,255,255,0.16) 52%,
+            rgba(255,255,255,0.18) 62%,
+            rgba(255,255,255,0.08) 80%,
+            rgba(255,255,255,0) 100%
         );
         filter: blur(24px);
         z-index: 2;
@@ -104,9 +104,9 @@
     }
     .hero-breadcrumb {
         display: flex; align-items: center; gap: 6px;
-        font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 13px;
+        font-size: 13px; color: rgba(10,15,28,0.4); margin-bottom: 13px;
     }
-    .hero-breadcrumb a { color: rgba(255,255,255,0.4); transition: color 0.2s; }
+    .hero-breadcrumb a { color: rgba(10,15,28,0.4); transition: color 0.2s; }
     .hero-breadcrumb a:hover { color: #B8860B; }
     .hero-breadcrumb span { color: #B8860B; font-weight: 600; }
     .hero-breadcrumb i { font-size: 10px; }
@@ -121,7 +121,7 @@
         width: 24px; height: 1px; background: #B8860B;
     }
     .hero-text h1 {
-        font-size: 38px; font-weight: 900; color: #fff;
+        font-size: 38px; font-weight: 900; color: #0A0F1C;
         line-height: 1.35; letter-spacing: -1px;
         margin-bottom: 16px;
     }
@@ -129,12 +129,12 @@
         font-style: normal; color: #B8860B;
     }
     .hero-sub {
-        font-size: 16px; color: rgba(255,255,255,0.55);
+        font-size: 16px; color: rgba(10,15,28,0.55);
         line-height: 1.7; max-width: 480px;
     }
     .hero-card {
         background: rgba(10,16,30,0.57);
-        border: 1px solid rgba(255,255,255,0.14);
+        border: 1px solid rgba(10,15,28,0.14);
         border-radius: 12px; padding: 22px 18px;
         transition: all 0.3s;
         backdrop-filter: blur(5px);
@@ -144,7 +144,7 @@
         cursor: pointer;
     }
     .hero-card:hover {
-        background: rgba(14,22,40,0.70);
+        background: rgba(255,255,255,0.70);
         border-color: rgba(184,134,11,0.3);
         transform: translateY(-2px);
     }
@@ -159,11 +159,11 @@
     }
     .hero-card-icon i { font-size: 15px; color: #B8860B; }
     .hero-card h4 {
-        font-size: 14px; font-weight: 800; color: #fff;
+        font-size: 14px; font-weight: 800; color: #0A0F1C;
         margin-bottom: 4px;
     }
     .hero-card p {
-        font-size: 11.5px; color: rgba(255,255,255,0.75);
+        font-size: 11.5px; color: rgba(10,15,28,0.75);
         line-height: 1.5;
     }
     @media (max-width: 1024px) {
@@ -172,8 +172,8 @@
         .hero-bg-photo { width: 100%; opacity: 0.25; }
         .hero-bg-photo::after {
             background: linear-gradient(180deg,
-                rgba(10,15,28,0.5) 0%,
-                rgba(20,38,68,0.7) 100%
+                rgba(255,255,255,0.5) 0%,
+                rgba(255,255,255,0.7) 100%
             );
         }
     }
@@ -193,8 +193,8 @@
     .about-section:last-child { padding-bottom: 0; }
     .about-section.bg-light { background: #FAFBFC; }
     .about-section.bg-dark {
-        background: linear-gradient(160deg, #0A0F1C, #142644);
-        color: #fff;
+        background: linear-gradient(160deg, #FFFFFF, #FFF3C4);
+        color: #0A0F1C;
     }
     .section-label {
         display: inline-flex; align-items: center; gap: 8px;
@@ -334,7 +334,7 @@
     .cert-section {
         display: flex; align-items: stretch; gap: 32px;
         max-width: 1100px; margin: 0 auto;
-        background: linear-gradient(135deg, #0F1D35 0%, #142644 60%, #0A0F1C 100%);
+        background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 60%, #FFFFFF 100%);
         border-radius: 18px;
         overflow: hidden;
         box-shadow: 0 16px 48px rgba(10,15,28,0.18);
@@ -361,14 +361,14 @@
     .cert-photo img {
         width: 100%; max-width: 280px; height: auto;
         display: block; border-radius: 6px;
-        box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(10,15,28,0.06);
         cursor: zoom-in; transition: transform .35s ease;
     }
     .cert-photo img:hover { transform: scale(1.02); }
     .cert-text {
         flex: 1; min-width: 0; position: relative; z-index: 1;
         padding: 36px 40px;
-        color: #fff;
+        color: #0A0F1C;
         display: flex; flex-direction: column; justify-content: center;
     }
     .cert-label {
@@ -379,19 +379,19 @@
     }
     .cert-label::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
     .cert-title {
-        font-size: 24px; font-weight: 900; color: #fff;
+        font-size: 24px; font-weight: 900; color: #0A0F1C;
         line-height: 1.35; margin-bottom: 6px; letter-spacing: -0.4px;
     }
     .cert-title em { font-style: normal; color: var(--gold); }
     .cert-issuer {
-        font-size: 13px; color: rgba(255,255,255,0.62);
+        font-size: 13px; color: rgba(10,15,28,0.62);
         margin-bottom: 22px; padding-bottom: 16px;
         border-bottom: 1px solid rgba(184,134,11,0.16);
     }
     .cert-issuer strong { color: var(--gold); font-weight: 700; }
     .cert-desc {
         font-size: 14px; line-height: 1.85;
-        color: rgba(255,255,255,0.78); margin-bottom: 18px;
+        color: rgba(10,15,28,0.78); margin-bottom: 18px;
     }
     .cert-meta {
         display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
@@ -409,13 +409,13 @@
         letter-spacing: 1.2px; text-transform: uppercase;
     }
     .cert-meta .cm-val {
-        font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.92);
+        font-size: 13px; font-weight: 600; color: rgba(10,15,28,0.92);
     }
     .cert-source {
-        margin-top: 18px; font-size: 11.5px; color: rgba(255,255,255,0.42);
+        margin-top: 18px; font-size: 11.5px; color: rgba(10,15,28,0.42);
     }
     .cert-source a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted rgba(184,134,11,0.35); }
-    .cert-source a:hover { color: #fff; border-bottom-color: #fff; }
+    .cert-source a:hover { color: #0A0F1C; border-bottom-color: #0A0F1C; }
     @media (max-width: 900px) {
         .cert-section { flex-direction: column; }
         .cert-photo { flex: 0 0 auto; border-right: none; border-bottom: 1px solid rgba(184,134,11,0.15); padding: 28px 20px; }
@@ -436,7 +436,7 @@
         border-radius: 18px; overflow: hidden;
         box-shadow: 0 16px 48px rgba(10,15,28,0.18);
         border: 1px solid rgba(184,134,11,0.18);
-        background: #0A0F1C;
+        background: #FFFFFF;
     }
     .cert-with-hero .cert-hero {
         width: 100%; aspect-ratio: 16/6;
@@ -450,12 +450,12 @@
     .cert-with-hero .cert-hero:hover img { transform: scale(1.03); }
     .cert-with-hero .cert-hero::after {
         content: ''; position: absolute; inset: 0;
-        background: linear-gradient(180deg, rgba(10,15,28,0) 55%, rgba(10,15,28,0.55) 100%);
+        background: linear-gradient(180deg, rgba(255,255,255,0) 55%, rgba(255,255,255,0.55) 100%);
         pointer-events: none;
     }
     .cert-with-hero .cert-hero-cap {
         position: absolute; left: 24px; bottom: 18px; z-index: 2;
-        color: #fff; font-size: 12.5px; font-weight: 700;
+        color: #0A0F1C; font-size: 12.5px; font-weight: 700;
         padding: 7px 14px;
         background: rgba(15,29,53,0.78);
         border: 1px solid rgba(184,134,11,0.35);
@@ -504,7 +504,7 @@
     .tl-dot {
         position: absolute; left: 50%; top: 4px;
         width: 14px; height: 14px; border-radius: 50%;
-        background: #B8860B; border: 3px solid #fff;
+        background: #B8860B; border: 3px solid #0A0F1C;
         box-shadow: 0 0 0 2px #B8860B;
         transform: translateX(-50%);
         z-index: 2;
@@ -553,8 +553,8 @@
     /* ── 5. ORGANIZATION CHART ── */
     .org-chart { display: flex; flex-direction: column; align-items: center; gap: 36px; }
     .org-ceo-box {
-        background: linear-gradient(135deg, #0A0F1C, #142644);
-        color: #fff; border-radius: 12px;
+        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
+        color: #0A0F1C; border-radius: 12px;
         padding: 20px 56px; text-align: center;
         box-shadow: 0 8px 28px rgba(10,15,28,0.2);
     }
@@ -581,14 +581,14 @@
         box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     }
     .org-dept-header {
-        background: linear-gradient(135deg, #0A0F1C, #142644);
-        color: #fff; padding: 16px 20px; text-align: center;
+        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
+        color: #0A0F1C; padding: 16px 20px; text-align: center;
     }
     .org-dept-header h4 {
         font-size: 14px; font-weight: 800; margin-bottom: 4px;
     }
     .org-dept-header .dept-desc {
-        font-size: 13px; color: rgba(255,255,255,0.65);
+        font-size: 13px; color: rgba(10,15,28,0.65);
         font-weight: 500;
     }
     .org-dept-body { padding: 16px 20px; }
@@ -631,7 +631,7 @@
     .pro-card:hover .pro-card-more { opacity: 1; transform: translateX(2px); }
     .pro-card-icon {
         width: 52px; height: 52px; border-radius: 12px;
-        background: linear-gradient(135deg, #0A0F1C, #142644);
+        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 20px;
     }
@@ -654,7 +654,7 @@
     }
     .ci-img-area {
         width: 360px; flex-shrink: 0;
-        background: linear-gradient(135deg, #0A0F1C, #142644);
+        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
         border-radius: 16px; padding: 48px 40px;
         display: flex; align-items: center; justify-content: center;
         box-shadow: 0 12px 40px rgba(10,15,28,0.2);
@@ -732,10 +732,10 @@
         padding: 12px 24px; border-radius: 8px;
         font-size: 13px; font-weight: 700;
         text-decoration: none;
-        background: var(--brand-dark); color: #B8860B;
+        background: #FFFFFF; color: #B8860B;
         transition: all 0.2s;
     }
-    .ci-dl-btn:hover { background: #142644; }
+    .ci-dl-btn:hover { background: #FFF3C4; }
     @media (max-width: 768px) {
         .symbol-layout { flex-direction: column; gap: 24px; }
         .symbol-mark-box { width: 140px; height: 140px; }
@@ -744,7 +744,7 @@
 
     /* ── 9. CTA SECTION ── */
     .cta-section {
-        background: linear-gradient(160deg, #0A0F1C, #142644);
+        background: linear-gradient(160deg, #FFFFFF, #FFF3C4);
         padding: 35px 0;
         text-align: center;
         position: relative; overflow: hidden;
@@ -759,7 +759,7 @@
     }
     .cta-section .inner { position: relative; z-index: 1; }
     .cta-section p {
-        font-size: 20px; font-weight: 700; color: #fff;
+        font-size: 20px; font-weight: 700; color: #0A0F1C;
         line-height: 1.6; margin-bottom: 32px;
         letter-spacing: -0.3px;
     }
@@ -781,8 +781,8 @@
         padding: 14px 36px; border-radius: 8px;
         font-size: 15px; font-weight: 700;
         text-decoration: none;
-        background: transparent; color: rgba(255,255,255,0.7);
-        border: 1px solid rgba(255,255,255,0.2);
+        background: transparent; color: rgba(10,15,28,0.7);
+        border: 1px solid rgba(10,15,28,0.2);
         transition: all 0.2s;
     }
     .cta-btn-outline:hover {
@@ -896,9 +896,9 @@
                         <div class="sig-title">대표이사, ㈜빛세움</div>
                     </div>
                     <div style="display:flex;gap:10px;margin-top:20px;">
-                        <span style="padding:6px 14px;border-radius:6px;background:rgba(10,15,28,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">책임경영</span>
-                        <span style="padding:6px 14px;border-radius:6px;background:rgba(10,15,28,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">도시정비 실무전문성</span>
-                        <span style="padding:6px 14px;border-radius:6px;background:rgba(10,15,28,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">이해관계 조율</span>
+                        <span style="padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">책임경영</span>
+                        <span style="padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">도시정비 실무전문성</span>
+                        <span style="padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.04);font-size:12px;font-weight:700;color:var(--brand-navy);">이해관계 조율</span>
                     </div>
                 </div>
                 <div class="ceo-photo-area">

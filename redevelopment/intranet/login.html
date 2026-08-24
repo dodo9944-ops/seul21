@@ -18,19 +18,19 @@
 body{font-family:var(--font);background:var(--gray-50);min-height:100vh;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
 
 /* === Intranet Hero Banner === */
-.intra-hero{background:linear-gradient(160deg,#0A0F1C 0%,#142644 50%,#0A0F1C 100%);position:relative;overflow:hidden;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.intra-hero{background:linear-gradient(160deg,#FFFFFF 0%,#FFF3C4 50%,#FFFFFF 100%);position:relative;overflow:hidden;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .intra-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(184,134,11,.04) 0%,transparent 50%),radial-gradient(circle at 80% 30%,rgba(184,134,11,.03) 0%,transparent 40%);pointer-events:none}
 .intra-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(184,134,11,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(184,134,11,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
 .intra-hero *{position:relative;z-index:1}
 .intra-hero .ih-left{display:flex;align-items:center;gap:14px}
-.intra-hero .ih-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+.intra-hero .ih-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0A0F1C}
 .intra-hero .ih-logo svg{width:30px;height:30px;flex-shrink:0}
-.intra-hero .ih-logo-text{font-size:15px;font-weight:800;color:#fff}
+.intra-hero .ih-logo-text{font-size:15px;font-weight:800;color:#0A0F1C}
 .intra-hero .ih-divider{width:1px;height:22px;background:rgba(255,255,255,.12)}
 .intra-hero .ih-label{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
 .intra-hero .ih-label::before{content:'';display:inline-block;width:16px;height:1px;background:var(--gold);margin-right:8px;vertical-align:middle}
 .intra-hero .ih-right{display:flex;align-items:center;gap:16px}
-.intra-hero .ih-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:rgba(255,255,255,.5);transition:color .2s;text-decoration:none}
+.intra-hero .ih-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:rgba(10,15,28,.5);transition:color .2s;text-decoration:none}
 .intra-hero .ih-link:hover{color:var(--gold)}
 .intra-hero .ih-link i{font-size:11px}
 @media(max-width:540px){.intra-hero{padding:20px 16px;flex-wrap:wrap;gap:10px}.intra-hero .ih-logo-text{display:none}}
