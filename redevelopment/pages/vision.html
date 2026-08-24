@@ -523,16 +523,37 @@
             linear-gradient(90deg, rgba(184,134,11,0.015) 1px, transparent 1px);
         background-size: 60px 60px; pointer-events: none; z-index: 1;
     }
-    /* 골든 라이트 웨이브 — 좌하단→우중앙으로 흐르는 얇고 부드러운 빛 */
-    .vision-hero .inner::before {
-        content: ''; position: absolute; inset: -20% -10%;
-        background:
-            linear-gradient(35deg, transparent 38%, rgba(255,196,0,0.30) 46%, rgba(255,220,120,0.20) 52%, rgba(255,255,255,0.35) 55%, transparent 62%);
-        filter: blur(18px);
-        pointer-events: none; z-index: 0; opacity: 0.8;
+    /* 골든 라이트 웨이브 — 좌하단에서 솟아올라 우측 사진으로 흐르는 얇은 곡선 라인 다발 */
+    .hero-gold-wave {
+        position: absolute; left: 0; bottom: -15%;
+        width: 65%; height: 65%;
+        overflow: hidden; pointer-events: none;
+        z-index: 1; opacity: .8;
+        mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%);
+        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%);
     }
+    .hero-gold-wave::before {
+        content: ''; position: absolute; left: 0; bottom: 0;
+        width: 70%; height: 70%;
+        background: radial-gradient(ellipse at 15% 100%, rgba(255,196,0,.22) 0%, rgba(255,196,0,.10) 30%, transparent 68%);
+        filter: drop-shadow(0 0 10px rgba(255,196,0,.10));
+    }
+    .hero-gold-wave .wave-line {
+        position: absolute; border-radius: 50%;
+        border-top: 1px solid transparent;
+        transform-origin: center;
+    }
+    .hero-gold-wave .wave-line:nth-child(1) { left:-15%; bottom:-10%; width:900px;  height:280px; transform:rotate(-9deg);              border-top-color: rgba(255,196,0,.30); }
+    .hero-gold-wave .wave-line:nth-child(2) { left:-12%; bottom:-6%;  width:980px;  height:320px; transform:rotate(-7deg);              border-top-color: rgba(255,218,90,.26); }
+    .hero-gold-wave .wave-line:nth-child(3) { left:-18%; bottom:-14%; width:1060px; height:360px; transform:rotate(-5deg);              border-top-color: rgba(255,232,163,.22); }
+    .hero-gold-wave .wave-line:nth-child(4) { left:-8%;  bottom:2%;   width:780px;  height:240px; transform:rotate(-11deg);             border-top-color: rgba(255,196,0,.20); }
+    .hero-gold-wave .wave-line:nth-child(5) { left:-22%; bottom:-20%; width:1140px; height:400px; transform:rotate(-4deg);              border-top-color: rgba(255,232,163,.16); }
+    .hero-gold-wave .wave-line:nth-child(6) { left:-6%;  bottom:-2%;  width:860px;  height:300px; transform:rotate(-13deg) scaleY(.9);  border-top-color: rgba(255,218,90,.18); }
     @media (max-width: 768px) {
-        .vision-hero .inner::before { opacity: 0.35; filter: blur(12px); }
+        .hero-gold-wave { opacity: .35; }
+        .hero-gold-wave .wave-line:nth-child(4),
+        .hero-gold-wave .wave-line:nth-child(5),
+        .hero-gold-wave .wave-line:nth-child(6) { display: none; }
     }
     .vision-hero .inner {
         position: relative; z-index: 2;
@@ -616,6 +637,14 @@
 
 <!-- ══════ HERO ══════ -->
 <div class="vision-hero">
+    <div class="hero-gold-wave" aria-hidden="true">
+        <span class="wave-line"></span>
+        <span class="wave-line"></span>
+        <span class="wave-line"></span>
+        <span class="wave-line"></span>
+        <span class="wave-line"></span>
+        <span class="wave-line"></span>
+    </div>
     <div class="hero-bg-photo">
         <img src="../jpg/hero_vision.png" alt="빛세움 도시모형 검토">
     </div>
