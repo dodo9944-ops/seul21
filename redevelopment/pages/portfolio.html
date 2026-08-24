@@ -50,6 +50,9 @@
     /* === Badges === */
     .pb{display:inline-flex;align-items:center;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;line-height:1}
     .pb-type{background:rgba(255,255,255,.85);color:#0A0F1C}
+    .pb-type.pb-r{background:rgba(230,0,18,.14);color:#B8000E}
+    .pb-type.pb-c{background:rgba(0,154,68,.14);color:#00793A}
+    .pb-type.pb-s{background:rgba(0,104,183,.14);color:#00568F}
     .pb-ing{background:rgba(184,134,11,.9);color:#0A0F1C}
     .pb-done{background:rgba(255,255,255,.9);color:#0A0F1C}
 
@@ -69,6 +72,9 @@
     .fc-fb[data-t=s]{background:linear-gradient(135deg,#F0F7FC,#DCEBF7)}
     .fc-fb .fbi{width:64px;height:64px;border-radius:50%;background:rgba(20,28,38,.05);border:1px solid rgba(20,28,38,.08);display:flex;align-items:center;justify-content:center}
     .fc-fb .fbi i{font-size:28px;color:var(--visseum-gold)}
+    .fc-fb[data-t=r] .fbi i{color:#E60012}
+    .fc-fb[data-t=c] .fbi i{color:#009A44}
+    .fc-fb[data-t=s] .fbi i{color:#0068B7}
     .fc-fb .fbl{font-size:13px;font-weight:600;color:var(--visseum-text)}
     .fc-fb .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
     .fc-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
@@ -113,6 +119,9 @@
     .pc-fb[data-t=s]{background:linear-gradient(135deg,#F0F7FC,#DCEBF7)}
     .pc-fb .fbi{width:48px;height:48px;border-radius:50%;background:rgba(20,28,38,.05);border:1px solid rgba(20,28,38,.08);display:flex;align-items:center;justify-content:center}
     .pc-fb .fbi i{font-size:20px;color:var(--visseum-gold)}
+    .pc-fb[data-t=r] .fbi i{color:#E60012}
+    .pc-fb[data-t=c] .fbi i{color:#009A44}
+    .pc-fb[data-t=s] .fbi i{color:#0068B7}
     .pc-fb .badges{position:absolute;top:10px;left:10px;display:flex;gap:5px;z-index:2}
     .pc-body{padding:18px 20px 22px;display:flex;flex-direction:column;flex:1}
     .pc-body .pn{font-size:15px;font-weight:700;color:var(--gray-900);margin-bottom:10px;line-height:1.4}
@@ -363,8 +372,9 @@ var D=MOCK.portfolio, PER=6, curPage=1;
 /* helpers */
 function ti(t){return{'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney'}[t]||'fa-building-columns'}
 function dt(t){return t==='재건축'?'c':t==='소규모정비'?'s':'r'}
+function tc(t){return t==='c'?'#009A44':t==='s'?'#0068B7':'#E60012'}
 function sb(s){return s==='완료'?'pb-done':'pb-ing'}
-function bg(p){return'<span class="pb pb-type">'+p.type+'</span><span class="pb '+sb(p.status)+'">'+p.status+'</span>'}
+function bg(p){return'<span class="pb pb-type pb-'+dt(p.type)+'">'+p.type+'</span><span class="pb '+sb(p.status)+'">'+p.status+'</span>'}
 function safe(v){return v||'정보 확인중'}
 function dn(p){return p.name}
 
@@ -455,7 +465,7 @@ var mn=p.name;
 var titleArea='<div class="d-title-area"><div class="badges">'+bg(p)+'</div><h2>'+mn+'</h2><div class="d-phase"><i class="fa-solid fa-flag"></i> '+(p.phase||p.status)+'</div></div>';
 if(p.detailImage){
 dh.innerHTML='<div class="d-hero"><img src="'+p.detailImage+'" alt="'+(p.imageAlt||p.name)+'" onerror="this.parentElement.style.background=\'linear-gradient(135deg,#0A0F1C,#1a3055)\';this.style.display=\'none\'"><div class="ov"></div>'+titleArea+'</div>'}
-else{dh.innerHTML='<div class="d-hero-fb" data-t="'+t+'"><div class="fbi" style="width:72px;height:72px"><i class="fa-solid '+ti(p.type)+'" style="font-size:32px;color:var(--visseum-gold)"></i></div>'+titleArea+'</div>'}
+else{dh.innerHTML='<div class="d-hero-fb" data-t="'+t+'"><div class="fbi" style="width:72px;height:72px"><i class="fa-solid '+ti(p.type)+'" style="font-size:32px;color:'+tc(t)+'"></i></div>'+titleArea+'</div>'}
 
 /* Body sections */
 var html='';
