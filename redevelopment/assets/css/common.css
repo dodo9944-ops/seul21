@@ -290,7 +290,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 24px; border-bottom: 1px solid var(--gray-100);
 }
-.drawer-header .logo { gap: 10px; }
+.drawer-header .logo { gap: 16px; }
 .drawer-header .logo-mark { width: 28px; height: 28px; }
 .drawer-header .logo-company { font-size: 13px; }
 .drawer-header .logo-sub { font-size: 7px; }
