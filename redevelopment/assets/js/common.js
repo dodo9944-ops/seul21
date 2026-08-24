@@ -208,9 +208,9 @@ const App = (() => {
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-legal"><a href="${B}/pages/privacy.html" class="footer-privacy-link">개인정보 처리방침</a></div>
         <div class="footer-bottom-content">
           <div class="footer-bottom-left">
+            <a href="${B}/pages/privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
             <div class="footer-copy">&copy; 2026 (주)빛세움. All rights reserved.</div>
           </div>
           <div class="footer-bottom-right">

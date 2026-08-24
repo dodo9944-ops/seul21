@@ -455,17 +455,15 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 .footer-contact .email-link:hover { opacity: .75; }
 .footer-contact p { font-size: 13px; color: #73777F; line-height: 1.8; }
 .footer-bottom {
-  border-top: 1px solid rgba(23,28,38,.10);
   margin-top: 28px; padding-top: 20px; padding-bottom: 36px;
   display: flex; flex-direction: column; gap: 14px;
 }
-.footer-legal { margin-bottom: 2px; }
 .footer-privacy-link { font-size: 14px; font-weight: 700; color: #444A52; transition: color .2s ease; }
 .footer-privacy-link:hover { color: #C58B00; }
-.footer-bottom-content { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; }
-.footer-bottom-left { text-align: left; }
+.footer-bottom-content { display: flex; justify-content: space-between; align-items: center; gap: 40px; flex-wrap: wrap; }
+.footer-bottom-left { text-align: left; display: flex; align-items: center; gap: 16px; }
 .footer-bottom-right { margin-left: auto; text-align: right; display: flex; align-items: center; gap: 14px; }
-.footer-copy { font-size: 13px; color: #7E848D; }
+.footer-copy { font-size: 13px; color: #7E848D; padding-left: 16px; border-left: 1px solid rgba(23,28,38,.12); }
 .footer-info { font-size: 13px; color: #70767F; display: flex; align-items: center; }
 .footer-representative { margin-left: 20px; padding-left: 20px; border-left: 1px solid rgba(23,28,38,.12); }
 @media (max-width: 1024px) {
@@ -476,6 +474,8 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 @media (max-width: 767px) {
   .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; padding: 32px 0 44px; }
   .footer-bottom-content { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-bottom-left { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .footer-copy { padding-left: 0; border-left: none; }
   .footer-bottom-right { margin-left: 0; text-align: left; align-items: flex-start; }
   .footer-info { flex-direction: column; align-items: flex-start; gap: 2px; }
   .footer-representative { margin-left: 0; padding-left: 0; border-left: none; }
