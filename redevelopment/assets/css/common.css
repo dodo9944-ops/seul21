@@ -208,7 +208,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 .logo-mark { flex-shrink: 0; width: 36px; height: 36px; }
 .logo-mark svg { width: 100%; height: 100%; }
-.header .logo-mark { width: 130px; height: 54px; } /* 상단 헤더 로고 — 로고2(가로형) 1.5배 확대 비율 */
+.header .logo-mark { width: 104px; height: 43px; } /* 상단 헤더 로고 — 기본 36px 대비 1.2배, 가로형 비율 유지 */
 .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
 .logo-company {
   font-size: 16px; font-weight: 800; letter-spacing: -0.3px;
@@ -220,7 +220,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 @media (max-width: 768px) {
   .logo-mark { width: 26px; height: 26px; }
-  .header .logo-mark { width: 94px; height: 39px; }
+  .header .logo-mark { width: 75px; height: 31px; }
   .logo-company { font-size: 13px; }
   .logo-sub { font-size: 7px; letter-spacing: 1.3px; margin-top: 1px; }
   .logo { gap: 8px; }
