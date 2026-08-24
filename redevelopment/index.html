@@ -77,26 +77,12 @@
             position: relative; z-index: 1;
             display: flex; flex-direction: column; align-items: center; gap: 32px;
         }
-        .splash-logo svg { width: 130px; height: 130px; }
-        .splash-logo .s-frame {
-            stroke-dasharray: 420; stroke-dashoffset: 420;
-            animation: drawFrame 1s ease-out 0.2s forwards;
+        .splash-logo img {
+            width: 130px; height: 130px; object-fit: contain;
+            opacity: 0; transform: scale(.82);
+            animation: logoReveal .7s cubic-bezier(.2,.9,.3,1.1) 0.2s forwards;
         }
-        .splash-logo .s-bar {
-            opacity: 0; transform: scaleX(0); transform-origin: left center;
-        }
-        .splash-logo .s-bar-1 { animation: barReveal .32s ease-out 0.66s forwards; }
-        .splash-logo .s-bar-2 { animation: barReveal .32s ease-out 0.77s forwards; }
-        .splash-logo .s-bar-3 { animation: barReveal .32s ease-out 0.86s forwards; }
-        .splash-logo .s-bar-4 { animation: barReveal .32s ease-out 0.97s forwards; transform-origin: right center; }
-        .splash-logo .s-bar-5 { animation: barReveal .32s ease-out 1.06s forwards; }
-        .splash-logo .s-arrow { opacity: 0; animation: arrowPop .26s ease-out 1.5s forwards; }
-        @keyframes drawFrame { to { stroke-dashoffset: 0; } }
-        @keyframes barReveal { to { opacity: 1; transform: scaleX(1); } }
-        @keyframes arrowPop {
-            0% { opacity: 0; transform: translateY(6px); }
-            100% { opacity: .5; transform: translateY(0); }
-        }
+        @keyframes logoReveal { to { opacity: 1; transform: scale(1); } }
         .splash-text {
             text-align: center; opacity: 0;
             animation: splFadeUp .67s ease-out 1.34s forwards;
@@ -127,7 +113,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         @media (max-width: 768px) {
-            .splash-logo svg { width: 100px; height: 100px; }
+            .splash-logo img { width: 100px; height: 100px; }
             .splash-company { font-size: 20px; }
             .splash-sub { font-size: 9px; letter-spacing: 3px; }
         }
@@ -675,17 +661,7 @@
     <div class="splash-glow"></div>
     <div class="splash-content">
         <div class="splash-logo">
-            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect class="s-frame" x="8" y="8" width="104" height="104" rx="4"
-                      stroke="#B8860B" stroke-width="1" fill="none"/>
-                <rect class="s-bar s-bar-1" x="28" y="24" width="52" height="6" rx="1" fill="#B8860B"/>
-                <rect class="s-bar s-bar-2" x="28" y="24" width="6" height="28" rx="1" fill="#B8860B"/>
-                <rect class="s-bar s-bar-3" x="40" y="52" width="52" height="6" rx="1" fill="#B8860B" opacity="0.7"/>
-                <rect class="s-bar s-bar-4" x="86" y="58" width="6" height="28" rx="1" fill="#B8860B"/>
-                <rect class="s-bar s-bar-5" x="40" y="86" width="52" height="6" rx="1" fill="#B8860B"/>
-                <path class="s-arrow" d="M86 24 L92 18 L98 24"
-                      stroke="#B8860B" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            </svg>
+            <img src="jpg/visseum_logo.jpg" alt="빛세움 로고">
         </div>
         <div class="splash-text">
             <div class="splash-company">(주)빛세움</div>
