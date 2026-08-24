@@ -700,6 +700,17 @@
     </div>
 </section>
 
+<!-- ===== 공지사항 ===== -->
+<section class="section">
+    <div class="inner">
+        <div class="section-head">
+            <h2 class="section-title">공지사항</h2>
+            <a href="pages/notice.html" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+        </div>
+        <div id="mainNotice"></div>
+    </div>
+</section>
+
 <!-- ===== 핵심 역량 소개 ===== -->
 <section class="section">
     <div class="inner">
@@ -1173,6 +1184,19 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
                 '<div class="news-date">'+i.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">최근 7일간 등록된 주요뉴스가 없습니다.</p>';
+    }
+
+    /* 공지사항: 최신 3건 */
+    var noticeEl=document.getElementById('mainNotice');
+    if(noticeEl && MOCK.notices){
+        var notices=MOCK.notices.slice().sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
+        noticeEl.innerHTML=notices.length?notices.map(function(n){
+            var badge=n.important?'<span style="color:#C58B00;font-weight:700;font-size:11px;margin-right:6px;">[중요]</span>':'';
+            return'<a href="pages/notice.html" class="news-item" style="gap:10px;padding:12px 20px;">'+
+                '<span style="color:#C58B00;font-size:11px;flex-shrink:0;">●</span>'+
+                '<div class="news-body"><h4>'+badge+n.title+'</h4>'+
+                '<div class="news-date">'+n.date+'</div></div></a>';
+        }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">등록된 공지사항이 없습니다.</p>';
     }
 
     /* 자료실: 최신 4건 (주요뉴스 제외) */
