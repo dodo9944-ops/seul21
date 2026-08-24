@@ -139,7 +139,7 @@ button, input, select, textarea { font-family: inherit; }
   font-size: 11px; color: rgba(10,15,28,0.55); height: 32px;
 }
 .util-bar .inner { display: flex; align-items: center; justify-content: flex-end; height: 100%; gap: 20px; }
-.util-bar a { color: rgba(10,15,28,0.55); transition: color var(--transition); font-weight: 500; }
+.util-bar a { color: rgba(10,15,28,0.35); transition: color var(--transition); font-weight: 500; }
 .util-bar a:hover { color: var(--gold); }
 .util-bar .util-left { flex:1; color: rgba(10,15,28,0.35); font-size:10px; letter-spacing:0.5px; }
 .util-bar .inner > a:first-of-type { margin-left: -8px; }
