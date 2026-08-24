@@ -227,10 +227,10 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 
 /* ── GNB ── */
-.gnb { display: flex; align-items: center; gap: 0; flex: 1; justify-content: flex-end; }
+.gnb { display: flex; align-items: center; gap: 18px; flex: 1; justify-content: flex-end; }
 .gnb a {
   position: relative;
-  padding: 8px 14px; font-size: 14px; font-weight: 500;
+  padding: 8px 0; font-size: 14px; font-weight: 500;
   color: var(--gray-600);
   transition: color 0.25s ease;
 }
