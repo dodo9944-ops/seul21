@@ -268,13 +268,13 @@
     }
     .section-label {
         display: inline-flex; align-items: center; gap: 8px;
-        font-size: 11px; font-weight: 700; color: #B8860B;
+        font-size: 11px; font-weight: 700; color: var(--visseum-gold);
         letter-spacing: 2px; text-transform: uppercase;
         margin-bottom: 8px;
     }
     .section-label::before {
         content: ''; display: block;
-        width: 16px; height: 1px; background: #B8860B;
+        width: 16px; height: 1px; background: var(--visseum-gold);
     }
     .about-section .section-title {
         margin-bottom: 40px;
@@ -294,25 +294,27 @@
     .trust-card {
         background: var(--white);
         border: 1px solid var(--gray-200);
+        border-top: 3px solid var(--visseum-gold);
         border-radius: 14px;
         padding: 28px 24px; text-align: center;
         transition: all 0.25s;
+        box-shadow: 0 4px 16px rgba(20,28,38,.045);
     }
     .trust-card:hover {
-        border-color: var(--gold);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-        transform: translateY(-2px);
+        border-color: var(--gray-200);
+        box-shadow: 0 12px 30px rgba(20,28,38,.09);
+        transform: translateY(-4px);
     }
     .trust-card-value {
         font-size: 36px; font-weight: 900;
-        color: #B8860B; line-height: 1.1; margin-bottom: 4px;
+        color: var(--visseum-gold); line-height: 1.1; margin-bottom: 4px;
     }
     .trust-card-unit {
-        font-size: 14px; font-weight: 700; color: var(--gray-900);
+        font-size: 14px; font-weight: 700; color: var(--visseum-ink);
         margin-bottom: 8px;
     }
     .trust-card p {
-        font-size: 13px; color: var(--gray-600); line-height: 1.5; font-weight: 500;
+        font-size: 13px; color: var(--visseum-text); line-height: 1.5; font-weight: 500;
     }
     @media (max-width: 1024px) { .trust-cards { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) { .trust-cards { grid-template-columns: 1fr; } }
@@ -574,14 +576,15 @@
     .tl-dot {
         position: absolute; left: 50%; top: 4px;
         width: 14px; height: 14px; border-radius: 50%;
-        background: #B8860B; border: 3px solid #0A0F1C;
-        box-shadow: 0 0 0 2px #B8860B;
+        background: var(--visseum-gold); border: 3px solid #fff;
+        box-shadow: 0 0 0 1px var(--visseum-border), 0 2px 6px rgba(20,28,38,.12);
         transform: translateX(-50%);
         z-index: 2;
     }
     .tl-item.tl-recent .tl-dot {
         width: 18px; height: 18px; top: 2px;
-        box-shadow: 0 0 0 3px #B8860B, 0 0 12px rgba(184,134,11,0.3);
+        background: var(--visseum-yellow);
+        box-shadow: 0 0 0 5px rgba(255,196,0,.14), 0 2px 8px rgba(20,28,38,.16);
     }
     .tl-year {
         font-size: 26px; font-weight: 900; color: #B8860B;
@@ -623,13 +626,14 @@
     /* ── 5. ORGANIZATION CHART ── */
     .org-chart { display: flex; flex-direction: column; align-items: center; gap: 36px; }
     .org-ceo-box {
-        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
-        color: #0A0F1C; border-radius: 12px;
+        background: linear-gradient(135deg, #FFFDF7, #FFF3C4);
+        color: var(--visseum-ink); border-radius: 12px;
         padding: 20px 56px; text-align: center;
-        box-shadow: 0 8px 28px rgba(10,15,28,0.2);
+        border: 1px solid rgba(197,139,0,.2);
+        box-shadow: 0 8px 24px rgba(20,28,38,.08);
     }
     .org-ceo-box .org-role {
-        font-size: 11px; font-weight: 700; color: #B8860B;
+        font-size: 11px; font-weight: 700; color: var(--visseum-gold);
         letter-spacing: 2px; text-transform: uppercase;
         margin-bottom: 4px;
     }
@@ -643,22 +647,30 @@
     .org-dept-card {
         background: var(--white);
         border: 1px solid var(--gray-200);
+        border-top: 3px solid var(--visseum-gold);
         border-radius: 14px; padding: 0;
         transition: all 0.25s; overflow: hidden;
+        box-shadow: 0 4px 16px rgba(20,28,38,.045);
     }
+    .org-dept-card:nth-child(1) { border-top-color: var(--visseum-red); }
+    .org-dept-card:nth-child(2) { border-top-color: var(--visseum-green); }
+    .org-dept-card:nth-child(3) { border-top-color: var(--visseum-blue); }
+    .org-dept-card:nth-child(4) { border-top-color: var(--visseum-gold); }
     .org-dept-card:hover {
-        border-color: var(--gold);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        border-color: var(--gray-200);
+        box-shadow: 0 12px 28px rgba(20,28,38,.09);
+        transform: translateY(-3px);
     }
     .org-dept-header {
-        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
-        color: #0A0F1C; padding: 16px 20px; text-align: center;
+        background: var(--gray-50);
+        color: var(--visseum-ink); padding: 16px 20px; text-align: center;
+        border-bottom: 1px solid var(--gray-100);
     }
     .org-dept-header h4 {
         font-size: 14px; font-weight: 800; margin-bottom: 4px;
     }
     .org-dept-header .dept-desc {
-        font-size: 13px; color: rgba(10,15,28,0.65);
+        font-size: 13px; color: var(--visseum-text);
         font-weight: 500;
     }
     .org-dept-body { padding: 16px 20px; }
@@ -679,39 +691,60 @@
     .pro-card {
         background: var(--white);
         border: 1px solid var(--gray-200);
+        border-top: 3px solid var(--visseum-gold);
         border-radius: 14px;
         padding: 28px 24px;
         transition: all 0.25s;
         display: flex; flex-direction: column;
         text-decoration: none; color: inherit;
         position: relative;
+        box-shadow: 0 4px 16px rgba(20,28,38,.045);
     }
     .pro-card:hover {
-        border-color: var(--gold);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-        transform: translateY(-2px);
+        border-color: var(--gray-200);
+        box-shadow: 0 12px 30px rgba(20,28,38,.09);
+        transform: translateY(-4px);
     }
+    /* CI 4색 순차 포인트 — 사업분야 6종 */
+    .pro-grid a.pro-card:nth-child(1) { border-top-color: var(--visseum-red); }
+    .pro-grid a.pro-card:nth-child(1) .pro-card-icon { background: rgba(230,0,18,.08); }
+    .pro-grid a.pro-card:nth-child(1) .pro-card-icon i { color: var(--visseum-red); }
+    .pro-grid a.pro-card:nth-child(2) { border-top-color: var(--visseum-green); }
+    .pro-grid a.pro-card:nth-child(2) .pro-card-icon { background: rgba(0,154,68,.08); }
+    .pro-grid a.pro-card:nth-child(2) .pro-card-icon i { color: var(--visseum-green); }
+    .pro-grid a.pro-card:nth-child(3) { border-top-color: var(--visseum-blue); }
+    .pro-grid a.pro-card:nth-child(3) .pro-card-icon { background: rgba(0,104,183,.08); }
+    .pro-grid a.pro-card:nth-child(3) .pro-card-icon i { color: var(--visseum-blue); }
+    .pro-grid a.pro-card:nth-child(4) { border-top-color: var(--visseum-yellow); }
+    .pro-grid a.pro-card:nth-child(4) .pro-card-icon { background: rgba(255,196,0,.12); }
+    .pro-grid a.pro-card:nth-child(4) .pro-card-icon i { color: var(--visseum-gold); }
+    .pro-grid a.pro-card:nth-child(5) { border-top-color: var(--visseum-gold); }
+    .pro-grid a.pro-card:nth-child(5) .pro-card-icon { background: rgba(197,139,0,.08); }
+    .pro-grid a.pro-card:nth-child(5) .pro-card-icon i { color: var(--visseum-gold); }
+    .pro-grid a.pro-card:nth-child(6) { border-top-color: #B98500; }
+    .pro-grid a.pro-card:nth-child(6) .pro-card-icon { background: rgba(185,133,0,.08); }
+    .pro-grid a.pro-card:nth-child(6) .pro-card-icon i { color: #B98500; }
     .pro-card-more {
         margin-top: 14px;
         font-size: 12.5px; font-weight: 600;
-        color: var(--gold);
+        color: var(--visseum-gold);
         display: inline-flex; align-items: center; gap: 6px;
         opacity: 0.85; transition: opacity 0.2s, transform 0.2s;
     }
-    .pro-card:hover .pro-card-more { opacity: 1; transform: translateX(2px); }
+    .pro-card:hover .pro-card-more { opacity: 1; transform: translateX(2px); color: #9F7000; }
     .pro-card-icon {
         width: 52px; height: 52px; border-radius: 12px;
-        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 20px;
+        transition: background .2s;
     }
-    .pro-card-icon i { font-size: 20px; color: #B8860B; }
+    .pro-card-icon i { font-size: 20px; }
     .pro-card h4 {
-        font-size: 16px; font-weight: 700; color: var(--gray-900);
+        font-size: 16px; font-weight: 700; color: var(--visseum-ink);
         margin-bottom: 8px;
     }
     .pro-card p {
-        font-size: 13.5px; color: var(--gray-600); line-height: 1.7; font-weight: 500;
+        font-size: 13.5px; color: var(--visseum-text); line-height: 1.7; font-weight: 500;
         flex: 1;
     }
     @media (max-width: 1024px) { .pro-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -1012,10 +1045,10 @@
                     <h3 class="cert-title">서울특별시 <em>정비사업 코디네이터</em></h3>
                     <div class="cert-issuer">위촉기관 — <strong>서울특별시장</strong> · 위촉대상 도시정비 분야 전문가</div>
                     <p class="cert-desc">
-                        <strong style="color:#fff">정비사업 코디네이터</strong>는 서울특별시가 재개발·재건축·소규모정비사업 등 도시정비 현장의
+                        <strong style="color:var(--visseum-ink)">정비사업 코디네이터</strong>는 서울특별시가 재개발·재건축·소규모정비사업 등 도시정비 현장의
                         <strong style="color:var(--gold)">갈등을 사전 관리</strong>하고 사업이 원활히 추진되도록 자문·조정 역할을 수행하기 위해
-                        도시계획·법률·세무·회계 등 분야의 전문가를 <strong style="color:#fff">서울시장 명의로 위촉</strong>하는 공식 제도입니다.
-                        당사 정비사업3부문 부문장 <strong style="color:#fff">이창우</strong>는 정비사업 실무 경험과 전문성을 인정받아 코디네이터로 위촉되어,
+                        도시계획·법률·세무·회계 등 분야의 전문가를 <strong style="color:var(--visseum-ink)">서울시장 명의로 위촉</strong>하는 공식 제도입니다.
+                        당사 정비사업3부문 부문장 <strong style="color:var(--visseum-ink)">이창우</strong>는 정비사업 실무 경험과 전문성을 인정받아 코디네이터로 위촉되어,
                         조합 운영의 투명성 확보, 사업단계별 의사결정 자문, 분쟁 사전 조정 등의 활동을 수행하고 있습니다.
                     </p>
                     <div class="cert-meta">
@@ -1047,10 +1080,10 @@
                     <h3 class="cert-title">정비업계 <em>최초</em> — 가락현대5차 준공 머릿돌 등재</h3>
                     <div class="cert-issuer">시행 — <strong>가락현대5차아파트 소규모재건축정비사업조합</strong> · 시공 — <strong>(주)포스코이앤씨</strong> [THE SHARP]</div>
                     <p class="cert-desc">
-                        당사 정비사업3부문 부문장 <strong style="color:#fff">이창우</strong>는 <strong style="color:var(--gold)">정비업계 최초</strong>로
-                        <strong style="color:#fff">가락현대5차아파트 소규모재건축정비사업</strong>의 사업 착수부터 준공까지 전 과정을 총괄 수행하였습니다.
+                        당사 정비사업3부문 부문장 <strong style="color:var(--visseum-ink)">이창우</strong>는 <strong style="color:var(--gold)">정비업계 최초</strong>로
+                        <strong style="color:var(--visseum-ink)">가락현대5차아파트 소규모재건축정비사업</strong>의 사업 착수부터 준공까지 전 과정을 총괄 수행하였습니다.
                         사업의 <strong style="color:var(--gold)">성공적 준공을 기념</strong>하여 시공사가 새긴 준공 머릿돌(竣工 銘文石)에
-                        <strong style="color:#fff">「서울특별시 정비사업 코디네이터 — 이창우」</strong>의 이름이 영구 등재되었습니다.
+                        <strong style="color:var(--visseum-ink)">「서울특별시 정비사업 코디네이터 — 이창우」</strong>의 이름이 영구 등재되었습니다.
                         이는 정비사업 코디네이터가 단지 머릿돌에 등재된 <strong style="color:var(--gold)">업계 최초의 사례</strong>로 평가됩니다.
                     </p>
                     <div class="cert-meta">

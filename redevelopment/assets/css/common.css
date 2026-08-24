@@ -34,6 +34,19 @@
   --gold-light: rgba(184,134,11,0.08);
   --gold-vivid: #FFC400;
 
+  /* ── VISSEUM CI 포인트 컬러 (서브 섹션 카드/뱃지/타임라인 전용) ── */
+  --visseum-red: #E60012;
+  --visseum-green: #009A44;
+  --visseum-blue: #0068B7;
+  --visseum-yellow: #FFC400;
+  --visseum-gold: #C58B00;
+  --visseum-ink: #171C26;
+  --visseum-text: #5F646C;
+  --visseum-muted: #92969C;
+  --visseum-ivory: #FFFDF7;
+  --visseum-cream: #FFF7DF;
+  --visseum-border: rgba(20,28,38,.08);
+
   --font: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-serif: 'Nanum Myeongjo', 'Noto Serif KR', serif;
   --maxw: 1280px;
