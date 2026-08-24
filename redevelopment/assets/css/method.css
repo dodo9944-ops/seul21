@@ -3,6 +3,13 @@
 .md-section { margin-bottom:56px; }
 .md-section:last-child { margin-bottom:0; }
 .md-section .section-title { margin-bottom:28px; }
+/* 하단 상담바(.md-cta) 상하 여백을 사이트 전체 상담바 기준(24px/40px)으로 통일 */
+.md-section:has(+ .md-section > .md-cta) { margin-bottom:24px; }
+.md-section:has(> .md-cta) { margin-bottom:40px; }
+@media (max-width:620px) {
+  .md-section:has(+ .md-section > .md-cta) { margin-bottom:24px; }
+  .md-section:has(> .md-cta) { margin-bottom:28px; }
+}
 
 .md-step-badge {
     display:inline-flex; align-items:center; gap:10px;
