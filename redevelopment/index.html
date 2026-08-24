@@ -557,31 +557,6 @@
             .pm-title { font-size: 20px; }
         }
 
-        /* ── CTA BANNER ── */
-        .cta-banner { background: linear-gradient(110deg, #FFFDF7 0%, #FFF3C7 100%); border-radius: var(--radius); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; position: relative; overflow: hidden; }
-        .cta-banner::before { content: ''; position: absolute; right: -50px; top: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(197,139,0,0.08) 0%, transparent 70%); border-radius: 50%; }
-        .cta-banner h3 { color: #171C26; }
-        .cta-text h3 {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 8px;
-        }
-        .cta-text p {
-            font-size: 15px;
-            color: var(--gray-400);
-        }
-        .cta-banner .btn { background: linear-gradient(135deg, #C58B00 0%, #FFC400 100%); color: #171C26; font-weight: 700; transition: all .2s; }
-        .cta-banner .btn:hover { filter: brightness(1.04); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(197,139,0,0.2); }
-        @media (max-width: 768px) {
-            .cta-banner {
-                flex-direction: column;
-                padding: 32px 24px;
-                text-align: center;
-            }
-            .cta-text h3 { font-size: 20px; }
-        }
-
         /* ── PORTFOLIO FEAT GRID (서브메뉴 동일 스타일) ── */
         .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
         @media(max-width:1024px){.feat-grid{grid-template-columns:1fr;gap:20px}}
@@ -653,7 +628,7 @@
         }
     </style>
 </head>
-<body class="splash-active">
+<body class="splash-active" data-no-precta>
 
 <!-- ═══════════ SPLASH (풀스크린 인트로) ═══════════ -->
 <div class="splash" id="splashScreen">

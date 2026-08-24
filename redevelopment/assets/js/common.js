@@ -150,8 +150,8 @@ const App = (() => {
 
   /* ── 공통 푸터 HTML ── */
   function footerHTML() {
-    /* 페이지 자체에 이미 동일한 상담 CTA(.cta-banner)가 있으면 중복 노출 방지 (예: index.html) */
-    const hasOwnCta = !!document.querySelector('.cta-banner');
+    /* 페이지 자체에 이미 상담 CTA(.cta-banner 구버전 / .uni-cta 통일CTA)가 있거나 명시적으로 제외(data-no-precta)한 경우 중복 노출 방지 */
+    const hasOwnCta = !!document.querySelector('.cta-banner, .uni-cta, .cs-cta, .md-cta, .ps-cta') || document.body.hasAttribute('data-no-precta');
     const preFooterCta = hasOwnCta ? '' : `
     <div class="pre-footer-cta">
       <div class="inner">

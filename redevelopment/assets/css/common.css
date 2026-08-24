@@ -407,7 +407,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 /* ══════════════════════════════════════════════════════════
    PRE-FOOTER CTA
    ══════════════════════════════════════════════════════════ */
-.pre-footer-cta { margin-top: 72px; }
+.pre-footer-cta { margin: 64px 0 40px; }
 .pre-footer-cta .inner {
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
   background: linear-gradient(100deg, #FFFDF7 0%, #FFF4CB 100%);
@@ -424,6 +424,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 .pre-footer-cta .pfc-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(197,139,0,.18); }
 @media (max-width: 620px) {
+  .pre-footer-cta { margin: 48px 0 28px; }
   .pre-footer-cta .inner { flex-direction: column; align-items: flex-start; padding: 20px 22px; }
   .pre-footer-cta .pfc-btn { width: 100%; justify-content: center; }
 }
@@ -1079,9 +1080,9 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 /* === Unified Page CTA — 회사소개·빛세움의 길·사업분야·업무실적·자료실·사업성 검토 공통 (2026-05-05) ===
    단일행 레이아웃: 좌측 안내글 / 우측 상담 버튼 */
 .uni-cta {
-  margin: 64px 0 0;
-  padding: 16px 24px;
-  background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 100%);
+  margin: 64px 0 40px;
+  padding: 22px 32px;
+  background: linear-gradient(100deg, #FFFDF7 0%, #FFF4CB 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -1089,27 +1090,27 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   gap: 20px;
 }
 .uni-cta h3 {
-  font-size: 15px; font-weight: 700; color: #0A0F1C;
+  font-size: 16px; font-weight: 800; color: #171C26;
   line-height: 1.4; margin: 0; letter-spacing: -0.2px;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .uni-cta p { display: none; }
 .uni-cta a.uc-primary {
   flex-shrink: 0;
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 10px 20px;
-  background: var(--gold); color: #0A0F1C;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 20px;
+  background: linear-gradient(135deg, #C58B00, #FFC400); color: #171C26;
   border-radius: 8px;
-  font-size: 13.5px; font-weight: 800;
+  font-size: 13.5px; font-weight: 700;
   text-decoration: none;
-  transition: all 0.2s;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 .uni-cta a.uc-primary:hover {
-  background: #D6A419; transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(184,134,11,0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(197,139,0,.18);
 }
 @media (max-width: 640px) {
-  .uni-cta { margin-top: 48px; padding: 14px 16px; gap: 12px; }
-  .uni-cta h3 { font-size: 13px; }
-  .uni-cta a.uc-primary { padding: 9px 14px; font-size: 12.5px; }
+  .uni-cta { margin: 48px 0 28px; padding: 20px 22px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .uni-cta h3 { font-size: 13px; white-space: normal; }
+  .uni-cta a.uc-primary { width: 100%; justify-content: center; padding: 9px 14px; font-size: 12.5px; }
 }
