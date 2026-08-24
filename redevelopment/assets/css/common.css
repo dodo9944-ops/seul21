@@ -453,15 +453,15 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
    동일한 32px(데스크톱) · 28px(모바일) 로 통일한다. */
 .page-hero {
   padding: 32px 0 40px;
-  background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
+  background: linear-gradient(105deg, #FFFDF7 0%, #FFF8E7 25%, #FFE9A8 48%, rgba(255,196,0,0.20) 62%, transparent 76%), #FFFDF7;
   border-bottom: none;
 }
 .page-hero h1 {
   font-size: 32px; font-weight: 800; letter-spacing: -0.5px;
-  color: var(--white); margin-bottom: 8px;
+  color: #171C26; margin-bottom: 8px;
   padding-left: 16px; border-left: 3px solid var(--gold);
 }
-.page-hero p { font-size: 15px; color: rgba(10,15,28,0.55); }
+.page-hero p { font-size: 15px; color: #565C66; }
 @media (max-width: 768px) {
   .page-hero { padding: 28px 0 28px; }
   .page-hero h1 { font-size: 24px; }
@@ -629,7 +629,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   font-family: var(--font);
 }
 .tabs a:hover, .tabs button:hover { color: var(--gray-900); background: var(--gray-50); }
-.tabs a.on, .tabs button.on { background: #FFFFFF; color: var(--white); font-weight: 600; }
+.tabs a.on, .tabs button.on { background: var(--gray-900); color: var(--white); font-weight: 600; }
 
 /* ── FILTER BAR ── */
 .filter-bar {

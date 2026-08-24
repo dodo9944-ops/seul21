@@ -41,18 +41,18 @@
         object-fit: cover;
         object-position: center 30%;
         display: block;
-        filter: brightness(0.94) contrast(1.08);
+        filter: contrast(1.03) saturate(0.95);
     }
     .hero-bg-photo::after {
         content: '';
         position: absolute; inset: 0;
         background: linear-gradient(90deg,
-            rgba(255,253,247,0.99) 0%,
-            rgba(255,249,235,0.97) 22%,
-            rgba(255,242,202,0.84) 36%,
-            rgba(255,222,120,0.36) 49%,
-            rgba(255,196,0,0.08) 59%,
-            rgba(255,255,255,0) 72%
+            rgba(255,253,247,0.98) 0%,
+            rgba(255,248,232,0.93) 24%,
+            rgba(255,241,201,0.72) 39%,
+            rgba(255,196,0,0.15) 51%,
+            rgba(20,28,38,0.05) 67%,
+            rgba(17,24,34,0.25) 100%
         );
         z-index: 1;
     }
@@ -119,6 +119,12 @@
         border-top-style: solid; border-radius: 50%;
         pointer-events: none;
         filter: drop-shadow(0 0 3px rgba(255,196,0,.10)) drop-shadow(0 0 8px rgba(255,196,0,.05));
+        -webkit-mask-image: linear-gradient(90deg,
+            transparent 0%, rgba(0,0,0,.35) 10%, #000 28%,
+            rgba(0,0,0,.55) 46%, #000 62%, rgba(0,0,0,.30) 82%, transparent 100%);
+        mask-image: linear-gradient(90deg,
+            transparent 0%, rgba(0,0,0,.35) 10%, #000 28%,
+            rgba(0,0,0,.55) 46%, #000 62%, rgba(0,0,0,.30) 82%, transparent 100%);
     }
     .wave-line.line-1  { width:1080px; height:220px; border-top:1px solid rgba(255,196,0,.42); transform:rotate(-6deg) skewX(-2deg); }
     .wave-line.line-2  { width:1130px; height:250px; border-top:1px solid rgba(255,205,30,.39); transform:rotate(-5.3deg) skewX(-1deg); }
@@ -185,7 +191,7 @@
         width: 24px; height: 1px; background: #B8860B;
     }
     .hero-text h1 {
-        font-size: 38px; font-weight: 900; color: #141A24;
+        font-size: 38px; font-weight: 900; color: #171C26;
         line-height: 1.35; letter-spacing: -1px;
         margin-bottom: 16px;
     }
@@ -193,7 +199,7 @@
         font-style: normal; color: #C58B00;
     }
     .hero-sub {
-        font-size: 16px; color: rgba(10,15,28,0.55);
+        font-size: 16px; color: #565C66;
         line-height: 1.7; max-width: 480px;
     }
     .hero-card {
