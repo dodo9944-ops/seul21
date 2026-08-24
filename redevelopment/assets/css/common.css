@@ -445,7 +445,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 .footer .logo-sub { font-size: 10px; color: rgba(17,24,39,0.4); }
 .footer-brand p { font-size: 13px; color: #666B73; line-height: 1.8; margin-top: 12px; }
 .footer-col h5 { font-size: 15px; font-weight: 700; color: #171C26; margin-bottom: 16px; letter-spacing: -.2px; }
-.footer-col a { display: block; font-size: 14px; color: #6D727A; margin-bottom: 0; line-height: 2.4; transition: color var(--transition); }
+.footer-col a { display: block; font-size: 14px; color: #6D727A; margin-bottom: 0; line-height: 31.6px; transition: color var(--transition); }
 .footer-col a:hover { color: #C58B00; }
 .footer-col + .footer-col { border-left: 1px solid rgba(23,28,38,.08); padding-left: 36px; }
 .footer-phone {
