@@ -1,5 +1,5 @@
 /**
- * 세울 홈페이지 텔레그램 관리자 봇 (Vercel Serverless)
+ * 빛세움 홈페이지 텔레그램 관리자 봇 (Vercel Serverless)
  *
  * 웹훅 URL: https://seul21.vercel.app/api/telegram-admin
  *
@@ -327,7 +327,7 @@ async function cmdStatus(msg) {
   }
 
   const text = [
-    '📊 <b>세울 홈페이지 상태</b>',
+    '📊 <b>빛세움 홈페이지 상태</b>',
     '',
     `🌐 사이트: ${siteStatus} (${responseMs}ms)`,
     `    ${esc(siteUrl)}`,
@@ -976,7 +976,7 @@ async function handleMessage(msg) {
     case 'start':
     case 'help':
       return send(chatId,
-        '🤖 <b>세울 홈페이지 관리자 봇</b>\n\n'
+        '🤖 <b>빛세움 홈페이지 관리자 봇</b>\n\n'
         + '<b>/status</b> — 사이트·배포·최근 커밋\n'
         + '<b>/deploy</b> — Vercel 재배포\n'
         + '<b>/news_add</b> — 뉴스 등록 (대화형)\n'

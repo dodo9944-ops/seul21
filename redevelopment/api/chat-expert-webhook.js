@@ -72,7 +72,7 @@ async function fetchMcpLaw(query) {
 
 // ─── Claude로 법률 답변 생성 (출처 필수) ───
 async function generateLawAnswer(question, lawData) {
-  const systemPrompt = `당신은 (주)세울엔지니어링의 법률 상담 AI입니다.
+  const systemPrompt = `당신은 (주)빛세움의 법률 상담 AI입니다.
 텔레그램을 통해 들어온 법률 질문에 답변합니다.
 
 답변 규칙:
@@ -89,7 +89,7 @@ async function generateLawAnswer(question, lawData) {
 • [인용한 법령명, 조문번호]
 • [인용한 판례번호 (있는 경우)]
 • 국가법령정보센터: https://open.law.go.kr
-• (주)세울엔지니어링 AI 법률상담
+• (주)빛세움 AI 법률상담
 ━━━━━━━━━━━━━━
 ${lawData ? '\n\n아래에 법령 검색 시스템(법제처 API)에서 조회한 참고 데이터가 있습니다. 이 데이터를 우선 활용하고 출처를 정확히 밝히세요.' : ''}`;
 

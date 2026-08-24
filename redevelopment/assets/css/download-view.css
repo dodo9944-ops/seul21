@@ -1,9 +1,9 @@
 /* ============================================================
    download-view.css — 자료실 상세 페이지 전용 스타일 (dv-* 체계)
-   세울엔지니어링 자료실 / 2026-05-24 복구
+   빛세움 자료실 / 2026-05-24 복구
    - 5/18 도입된 dv-* 상세 템플릿이 의존하는 스타일.
    - .inner / #header / #footer 는 common.css·common.js 가 처리.
-   - 디자인 톤: 네이비 #0A0F1C·#142644 / 골드 #C3A569 (자료실 원본 동일)
+   - 디자인 톤: 네이비 #0A0F1C·#142644 / 골드 #C9A227 (자료실 원본 동일)
    ============================================================ */
 
 .download-view-wrap{background:#f5f6f8;padding:32px 0 64px;min-height:60vh}
@@ -31,20 +31,20 @@
 
 /* meta */
 .dv-meta{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid #eef0f3;font-size:13px}
-.dv-source{color:#C3A569;font-weight:600}
+.dv-source{color:#C9A227;font-weight:600}
 .dv-date{color:#9aa0ac}
 
 /* body */
 .dv-body{color:#2a2f3a;line-height:1.8;font-size:15px}
 .dv-section{margin-bottom:30px}
 .dv-section:last-child{margin-bottom:0}
-.dv-section h2{font-size:18px;font-weight:800;color:#0A0F1C;margin:0 0 16px;padding-bottom:10px;border-bottom:2px solid #C3A569}
+.dv-section h2{font-size:18px;font-weight:800;color:#0A0F1C;margin:0 0 16px;padding-bottom:10px;border-bottom:2px solid #C9A227}
 .dv-section h3{font-size:15.5px;font-weight:700;color:#142644;margin:20px 0 10px}
 .dv-section p{margin:0 0 12px;color:#3a414e}
 .dv-section p:last-child{margin-bottom:0}
 .dv-section ul,.dv-section ol{margin:0 0 14px;padding-left:4px;list-style:none}
 .dv-section ul li{position:relative;padding-left:18px;margin-bottom:8px;color:#3a414e}
-.dv-section ul li::before{content:'▪';position:absolute;left:0;top:2px;color:#C3A569;font-size:12px}
+.dv-section ul li::before{content:'▪';position:absolute;left:0;top:2px;color:#C9A227;font-size:12px}
 .dv-section ol{counter-reset:dv;padding-left:0}
 .dv-section ol li{position:relative;padding-left:26px;margin-bottom:8px;color:#3a414e;counter-increment:dv}
 .dv-section ol li::before{content:counter(dv);position:absolute;left:0;top:1px;width:18px;height:18px;background:#142644;color:#fff;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
@@ -72,7 +72,7 @@
 .badge-hot,.badge-new,.badge-ok,.badge-no,.badge-warning,.badge-blue,.badge-gold,.badge-red,.badge-purple,.badge-posco{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;color:#fff;line-height:1.6;white-space:nowrap}
 .badge-hot,.badge-red,.badge-no{background:#c0392b}
 .badge-new,.badge-ok{background:#1f7a5a}
-.badge-warning,.badge-gold{background:#C3A569}
+.badge-warning,.badge-gold{background:#C9A227}
 .badge-blue,.badge-posco{background:#1a3a6b}
 .badge-purple{background:#5b3a8e}
 .badge-lease{background:#0f6e8c}

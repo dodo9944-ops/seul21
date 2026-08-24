@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>웹하드 — (주)세울엔지니어링</title>
+<title>웹하드 — (주)빛세움</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#F5F6F8;--white:#fff;--dark:#0A0F1C;--navy:#142644;--gold:#C3A569;--gray-100:#F3F3F3;--gray-200:#E5E5E5;--gray-300:#D1D1D1;--gray-400:#AAA;--gray-500:#888;--gray-600:#666;--gray-700:#444;--gray-900:#1A1A1A;--font:'Noto Sans KR',sans-serif;--radius:12px;--shadow:0 1px 4px rgba(0,0,0,0.06)}
+:root{--bg:#F5F6F8;--white:#fff;--dark:#0A0F1C;--navy:#142644;--gold:#C9A227;--gray-100:#F3F3F3;--gray-200:#E5E5E5;--gray-300:#D1D1D1;--gray-400:#AAA;--gray-500:#888;--gray-600:#666;--gray-700:#444;--gray-900:#1A1A1A;--font:'Noto Sans KR',sans-serif;--radius:12px;--shadow:0 1px 4px rgba(0,0,0,0.06)}
 body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-size:14px;line-height:1.6;min-height:100vh;overflow-x:hidden}
 
 /* AUTH SCREEN */
@@ -29,7 +29,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-siz
 .wh-actions{display:flex;gap:10px}
 .wh-btn{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;border:none;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:6px;transition:all .2s}
 .wh-btn.primary{background:var(--gold);color:var(--dark)}
-.wh-btn.primary:hover{background:#D4B87A}
+.wh-btn.primary:hover{background:#DDB84A}
 .wh-btn.outline{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15)}
 .wh-btn.outline:hover{color:#fff;border-color:rgba(255,255,255,.3)}
 
@@ -45,7 +45,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-siz
 
 /* DROPZONE */
 .wh-dropzone{border:2px dashed var(--gray-300);border-radius:var(--radius);padding:40px;text-align:center;margin-bottom:24px;transition:all .2s;cursor:pointer}
-.wh-dropzone:hover,.wh-dropzone.dragover{border-color:var(--gold);background:rgba(195,165,105,.04)}
+.wh-dropzone:hover,.wh-dropzone.dragover{border-color:var(--gold);background:rgba(201,162,39,.04)}
 .wh-dropzone i{font-size:32px;color:var(--gray-300);margin-bottom:12px}
 .wh-dropzone.dragover i{color:var(--gold)}
 .wh-dropzone p{font-size:13px;color:var(--gray-500)}
@@ -95,7 +95,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-siz
 .folder-tree{padding:8px 0}
 .ft-item{display:flex;align-items:center;gap:8px;padding:7px 16px;font-size:12px;font-weight:500;color:var(--gray-700);cursor:pointer;transition:all .15s;border-left:3px solid transparent}
 .ft-item:hover{background:var(--gray-100);color:var(--gray-900)}
-.ft-item.active{background:rgba(195,165,105,.06);color:var(--dark);font-weight:700;border-left-color:var(--gold)}
+.ft-item.active{background:rgba(201,162,39,.06);color:var(--dark);font-weight:700;border-left-color:var(--gold)}
 .ft-item i{font-size:13px;width:16px;text-align:center}
 .ft-item i.fa-folder{color:#F5C542}
 .ft-item i.fa-folder-open{color:var(--gold)}
@@ -164,7 +164,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-siz
 <div id="authScreen" class="auth-screen">
     <div class="auth-box">
         <h2><i class="fa-solid fa-hard-drive" style="color:var(--gold)"></i> 웹하드</h2>
-        <p>(주)세울엔지니어링 개인 파일 관리</p>
+        <p>(주)빛세움 개인 파일 관리</p>
         <div class="auth-error" id="authError">비밀번호가 올바르지 않습니다.</div>
         <input type="password" id="authPw" placeholder="비밀번호 입력" autofocus>
         <button onclick="authLogin()">접속</button>
@@ -174,7 +174,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-siz
 <!-- MAIN -->
 <div id="mainScreen" style="display:none">
     <div class="wh-header">
-        <div class="wh-logo"><i class="fa-solid fa-hard-drive"></i> 세울 웹하드</div>
+        <div class="wh-logo"><i class="fa-solid fa-hard-drive"></i> 빛세움 웹하드</div>
         <div class="wh-actions">
             <button class="wh-btn outline" onclick="location.href='../index.html'"><i class="fa-solid fa-house"></i> 홈</button>
             <button class="wh-btn outline" onclick="whLogout()"><i class="fa-solid fa-right-from-bracket"></i> 나가기</button>

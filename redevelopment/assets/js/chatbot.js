@@ -1,5 +1,5 @@
 /* ============================================================
-   세울엔지니어링 실시간 스마트 상담
+   빛세움 실시간 스마트 상담
    — 비서1 일반상담 (Claude) + 비서2 전문가 (Gemma4)
    — 다크네이비 + 골드 프리미엄 디자인
    — 전문가 모드 실시간 스트리밍 지원
@@ -24,7 +24,7 @@
             </svg>
           </div>
           <div id="chat-header-text">
-            <span id="chat-title">세울 실시간 상담</span>
+            <span id="chat-title">빛세움 실시간 상담</span>
             <span id="chat-subtitle">정비사업 전문 실시간 상담</span>
           </div>
         </div>
@@ -33,7 +33,7 @@
       <div id="chat-tabs">
         <button class="chat-tab active" data-mode="general">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          세울상담사
+          빛세움상담사
         </button>
         <button class="chat-tab" data-mode="law">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -51,7 +51,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
         </button>
       </div>
-      <div id="chat-footer">© (주)세울엔지니어링 · 실시간 스마트 상담 시스템</div>
+      <div id="chat-footer">© (주)빛세움 · 실시간 스마트 상담 시스템</div>
     </div>
     <button id="chat-toggle" aria-label="상담하기">
       <div id="chat-toggle-inner">
@@ -79,19 +79,19 @@
     #chat-toggle {
       width:auto; height:42px; border-radius:21px; border:none;
       background: linear-gradient(145deg, #0A0F1C, #1a3055);
-      color:#C3A569; cursor:pointer; padding:0 16px 0 13px;
-      box-shadow: 0 4px 20px rgba(10,15,28,0.45), inset 0 1px 0 rgba(195,165,105,0.15);
+      color:#C9A227; cursor:pointer; padding:0 16px 0 13px;
+      box-shadow: 0 4px 20px rgba(10,15,28,0.45), inset 0 1px 0 rgba(201,162,39,0.15);
       display:flex; align-items:center; gap:6px;
       transition: all .3s ease;
     }
     #chat-toggle:hover {
       transform:translateY(-2px);
-      box-shadow: 0 8px 32px rgba(10,15,28,0.55), inset 0 1px 0 rgba(195,165,105,0.2);
+      box-shadow: 0 8px 32px rgba(10,15,28,0.55), inset 0 1px 0 rgba(201,162,39,0.2);
     }
     #chat-toggle-inner { display:flex; align-items:center; }
     #chat-toggle-label {
       font-size:11.5px; font-weight:700; letter-spacing:0.3px;
-      color:#C3A569;
+      color:#C9A227;
     }
     #chat-toggle.active { border-radius:50%; width:42px; padding:0; justify-content:center; }
     #chat-toggle.active #chat-icon-open { display:none; }
@@ -120,13 +120,13 @@
     #chat-header-left { display:flex; align-items:center; gap:12px; }
     #chat-logo {
       width:38px; height:38px; border-radius:10px;
-      background: linear-gradient(135deg, #C3A569, #D4B87A);
+      background: linear-gradient(135deg, #C9A227, #DDB84A);
       color:#0A0F1C;
       display:flex; align-items:center; justify-content:center;
     }
     #chat-header-text { display:flex; flex-direction:column; }
     #chat-title { color:#fff; font-size:14px; font-weight:700; }
-    #chat-subtitle { color:rgba(195,165,105,0.7); font-size:11px; font-weight:400; margin-top:2px; }
+    #chat-subtitle { color:rgba(201,162,39,0.7); font-size:11px; font-weight:400; margin-top:2px; }
     #chat-close {
       background:rgba(255,255,255,0.08); border:none; color:rgba(255,255,255,0.5);
       width:32px; height:32px; border-radius:8px;
@@ -142,7 +142,7 @@
       padding:0 16px 12px; gap:6px;
     }
     .chat-tab {
-      flex:1; padding:9px 12px; border:1.5px solid rgba(195,165,105,0.15);
+      flex:1; padding:9px 12px; border:1.5px solid rgba(201,162,39,0.15);
       border-radius:10px; background:rgba(255,255,255,0.04);
       color:rgba(255,255,255,0.45); font-size:12.5px; font-weight:600;
       cursor:pointer; transition:all .25s ease;
@@ -151,12 +151,12 @@
     }
     .chat-tab:hover {
       background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.7);
-      border-color:rgba(195,165,105,0.25);
+      border-color:rgba(201,162,39,0.25);
     }
     .chat-tab.active {
-      background:linear-gradient(135deg, rgba(195,165,105,0.15), rgba(195,165,105,0.08));
-      color:#C3A569; border-color:rgba(195,165,105,0.5);
-      box-shadow: 0 2px 8px rgba(195,165,105,0.15);
+      background:linear-gradient(135deg, rgba(201,162,39,0.15), rgba(201,162,39,0.08));
+      color:#C9A227; border-color:rgba(201,162,39,0.5);
+      box-shadow: 0 2px 8px rgba(201,162,39,0.15);
     }
     .chat-tab[data-mode="law"].active {
       background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(99,102,241,0.06));
@@ -200,7 +200,7 @@
     .expert-offline-notice .switch-btn {
       display:inline-block; padding:8px 20px; border-radius:20px;
       background:linear-gradient(135deg, #0A0F1C, #1a3055);
-      color:#C3A569; font-size:12px; font-weight:600; border:none;
+      color:#C9A227; font-size:12px; font-weight:600; border:none;
       cursor:pointer; font-family:'Noto Sans KR',sans-serif;
       transition:all .2s;
     }
@@ -221,7 +221,7 @@
     .chat-avatar {
       width:34px; height:34px; border-radius:50%; flex-shrink:0;
       background:linear-gradient(135deg,#0A0F1C,#1a3055);
-      color:#C3A569; font-size:13px; font-weight:800;
+      color:#C9A227; font-size:13px; font-weight:800;
       display:flex; align-items:center; justify-content:center;
       box-shadow:0 2px 8px rgba(10,15,28,0.15);
     }
@@ -265,7 +265,7 @@
     .chat-typing .chat-bubble { color:#999; }
     .chat-typing .dot-loader { display:inline-flex; gap:5px; margin-left:4px; vertical-align:middle; }
     .chat-typing .dot-loader span {
-      width:6px; height:6px; background:#C3A569; border-radius:50%;
+      width:6px; height:6px; background:#C9A227; border-radius:50%;
       animation:dotPulse .9s infinite ease-in-out;
     }
     .chat-typing.expert .dot-loader span { background:#10B981; }
@@ -306,7 +306,7 @@
       transition:all .2s;
     }
     .chat-quick-btn:hover {
-      border-color:#C3A569; color:#0A0F1C; background:#fdf8ef;
+      border-color:#C9A227; color:#0A0F1C; background:#fdf8ef;
     }
     .chat-quick-btn.expert-quick:hover {
       border-color:#10B981; color:#065F46; background:#f0fdf9;
@@ -327,14 +327,14 @@
       font-family:'Noto Sans KR',sans-serif;
       background:#f8f9fb; transition:all .2s;
     }
-    #chat-input:focus { border-color:#C3A569; background:#fff; box-shadow:0 0 0 3px rgba(195,165,105,0.1); }
+    #chat-input:focus { border-color:#C9A227; background:#fff; box-shadow:0 0 0 3px rgba(201,162,39,0.1); }
     #chat-input.expert-focus:focus { border-color:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,0.1); }
     #chat-input.law-focus:focus { border-color:#6366F1; box-shadow:0 0 0 3px rgba(99,102,241,0.1); }
     #chat-input::placeholder { color:#bbb; }
     #chat-send {
       width:42px; height:42px; border-radius:50%; border:none;
       background:linear-gradient(135deg,#0A0F1C,#1a3055);
-      color:#C3A569; cursor:pointer;
+      color:#C9A227; cursor:pointer;
       display:flex; align-items:center; justify-content:center;
       transition:all .2s;
     }
@@ -404,22 +404,22 @@
     general: `<div class="chat-msg bot">
       <div class="chat-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
       <div class="chat-content">
-        <div class="chat-name">세울 상담사</div>
-        <div class="chat-bubble">안녕하세요, <strong>(주)세울엔지니어링</strong>입니다.<br>재개발·재건축 관련 궁금한 점을 편하게 물어보세요.</div>
+        <div class="chat-name">빛세움 상담사</div>
+        <div class="chat-bubble">안녕하세요, <strong>(주)빛세움</strong>입니다.<br>재개발·재건축 관련 궁금한 점을 편하게 물어보세요.</div>
       </div>
     </div>`,
     law: `<div class="chat-msg bot law">
       <div class="chat-avatar law-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <div class="chat-content">
         <div class="chat-name law-name">법률 상담사</div>
-        <div class="chat-bubble">안녕하세요, <strong>세울 법률 상담사</strong>입니다.<br>정비사업 관련 <strong>법령·판례·해석례</strong>를 검색하여<br>정확한 법률 정보를 제공해드립니다.</div>
+        <div class="chat-bubble">안녕하세요, <strong>빛세움 법률 상담사</strong>입니다.<br>정비사업 관련 <strong>법령·판례·해석례</strong>를 검색하여<br>정확한 법률 정보를 제공해드립니다.</div>
       </div>
     </div>`,
     expert: `<div class="chat-msg bot expert">
       <div class="chat-avatar expert-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
       <div class="chat-content">
-        <div class="chat-name expert-name">세울 전문가</div>
-        <div class="chat-bubble">안녕하세요, <strong>세울엔지니어링 전문가</strong>입니다.<br>정비사업 관련 <strong>전문 상담</strong>을 직접 도와드립니다.<br>궁금한 사항을 남겨주시면 빠르게 답변드리겠습니다.</div>
+        <div class="chat-name expert-name">빛세움 전문가</div>
+        <div class="chat-bubble">안녕하세요, <strong>빛세움 전문가</strong>입니다.<br>정비사업 관련 <strong>전문 상담</strong>을 직접 도와드립니다.<br>궁금한 사항을 남겨주시면 빠르게 답변드리겠습니다.</div>
       </div>
     </div>`
   };
@@ -479,7 +479,7 @@
     sendBtn.classList.remove('expert-send', 'law-send');
 
     if (mode === 'expert') {
-      headerTitle.textContent = '세울 전문가';
+      headerTitle.textContent = '빛세움 전문가';
       headerSub.textContent = '전문가 직접 상담';
       input.classList.add('expert-focus');
       sendBtn.classList.add('expert-send');
@@ -492,7 +492,7 @@
       sendBtn.classList.add('law-send');
       input.placeholder = '법률 관련 질문을 입력하세요...';
     } else {
-      headerTitle.textContent = '세울 실시간 상담';
+      headerTitle.textContent = '빛세움 실시간 상담';
       headerSub.textContent = '정비사업 전문 실시간 상담';
       input.placeholder = '궁금한 점을 입력하세요...';
     }
@@ -522,17 +522,17 @@
 
         if (!loggedIn) {
           messages.innerHTML = `<div style="text-align:center;padding:40px 20px">
-            <div style="width:56px;height:56px;border-radius:50%;background:rgba(195,165,105,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><i class="fa-solid fa-lock" style="font-size:22px;color:#C3A569"></i></div>
+            <div style="width:56px;height:56px;border-radius:50%;background:rgba(201,162,39,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><i class="fa-solid fa-lock" style="font-size:22px;color:#C9A227"></i></div>
             <h4 style="font-size:15px;font-weight:800;color:#0A0F1C;margin-bottom:8px">회원 전용 서비스</h4>
             <p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:20px">전문가 상담은 회원가입 후<br>이용하실 수 있습니다.</p>
             <div style="display:flex;gap:8px;justify-content:center">
-              <a href="${B}/pages/login.html" style="padding:8px 18px;background:#0A0F1C;color:#C3A569;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">로그인</a>
-              <a href="${B}/pages/register.html" style="padding:8px 18px;background:#C3A569;color:#fff;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">회원가입</a>
+              <a href="${B}/pages/login.html" style="padding:8px 18px;background:#0A0F1C;color:#C9A227;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">로그인</a>
+              <a href="${B}/pages/register.html" style="padding:8px 18px;background:#C9A227;color:#fff;font-size:12px;font-weight:700;border-radius:8px;text-decoration:none">회원가입</a>
             </div>
           </div>`;
           currentMode = 'expert';
           tabs.forEach(t => t.classList.toggle('active', t.dataset.mode === 'expert'));
-          headerTitle.textContent = '세울 전문가';
+          headerTitle.textContent = '빛세움 전문가';
           headerSub.textContent = '전문가 직접 상담';
           input.disabled = true;
           input.placeholder = '로그인 후 이용 가능합니다';
@@ -566,7 +566,7 @@
     if (sender === 'bot') {
       const avatarCls = isExpert ? 'chat-avatar expert-avatar' : isLaw ? 'chat-avatar law-avatar' : 'chat-avatar';
       const nameCls = isExpert ? 'chat-name expert-name' : isLaw ? 'chat-name law-name' : 'chat-name';
-      const botName = isExpert ? '세울 전문가' : isLaw ? '법률 상담사' : '세울 상담사';
+      const botName = isExpert ? '빛세움 전문가' : isLaw ? '법률 상담사' : '빛세움 상담사';
       const icon = isExpert
         ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'
         : isLaw
@@ -589,7 +589,7 @@
     div.className = `chat-msg bot chat-typing${modeClass}`;
     const avatarCls = isExpert ? 'chat-avatar expert-avatar' : isLaw ? 'chat-avatar law-avatar' : 'chat-avatar';
     const nameCls = isExpert ? 'chat-name expert-name' : isLaw ? 'chat-name law-name' : 'chat-name';
-    const botName = isExpert ? '세울 전문가' : isLaw ? '법률 상담사' : '세울 상담사';
+    const botName = isExpert ? '빛세움 전문가' : isLaw ? '법률 상담사' : '빛세움 상담사';
     const typingText = isLaw ? '법령 검색 중' : '답변 준비 중';
     const icon = isExpert
       ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'

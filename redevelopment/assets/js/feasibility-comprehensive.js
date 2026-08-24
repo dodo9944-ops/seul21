@@ -1,5 +1,5 @@
 /**
- * 세울엔지니어링 — 종합 사업성 분석 서비스
+ * 빛세움 — 종합 사업성 분석 서비스
  * 정비사업 전문가용 사업성 검토 도구
  */
 (function(){
@@ -288,8 +288,8 @@ function sec(icon,title){return'<div class="ca-sec"><i class="fa-solid '+icon+'"
 function buildStep(idx){
   var h='<div class="ca-step-head"><h3>'+STEPS[idx].title+'</h3><div style="display:flex;gap:8px;align-items:center">';
   if(idx===0){
-    h+='<label style="display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:6px;border:1.5px dashed rgba(195,165,105,0.35);background:rgba(195,165,105,0.04);color:var(--gray-600);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">';
-    h+='<i class="fa-solid fa-file-arrow-up" style="color:#C3A569"></i> 파일 가져오기';
+    h+='<label style="display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:6px;border:1.5px dashed rgba(201,162,39,0.35);background:rgba(201,162,39,0.04);color:var(--gray-600);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">';
+    h+='<i class="fa-solid fa-file-arrow-up" style="color:#C9A227"></i> 파일 가져오기';
     h+='<input type="file" accept=".xlsx,.xls,.csv" onchange="CA.importFile(this)" style="display:none">';
     h+='</label>';
     h+='<button class="cm-btn" onclick="CA.downloadTemplate()" style="font-size:11px;white-space:nowrap"><i class="fa-solid fa-download"></i> 양식</button>';
@@ -541,7 +541,7 @@ function downloadTemplate(){
   var csv='\uFEFF'+rows.map(function(r){return r.map(function(c){var s=String(c);if(s.indexOf(',')>=0)s='"'+s+'"';return s}).join(',')}).join('\r\n');
   var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
   var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='세울엔지니어링_사업성분석_입력양식.csv';
+  a.download='빛세움_사업성분석_입력양식.csv';
   document.body.appendChild(a);a.click();document.body.removeChild(a);
   if(typeof App!=='undefined')App.toast('입력양식이 다운로드되었습니다.','success');
 }
@@ -636,7 +636,7 @@ function exportExcel(){
      Sheet 1: 기본데이터 (입력값만, 수식 없음)
      ═══════════════════════════════════════════ */
   var s1=[
-    ['(주)세울엔지니어링 — 종합 사업성 분석'],
+    ['(주)빛세움 — 종합 사업성 분석'],
     ['생성일시',new Date().toLocaleString('ko-KR')],
     [],
     ['항목','값','단위'],
@@ -994,7 +994,7 @@ function exportExcel(){
   }
   s6.push([]);
   s6.push(['※ 본 분석은 입력 데이터 기준의 추정치이며, 실제 사업 여건에 따라 달라질 수 있습니다.']);
-  s6.push(['※ (주)세울엔지니어링 | seul21.com | '+new Date().toLocaleDateString('ko-KR')]);
+  s6.push(['※ (주)빛세움 | seul21.com | '+new Date().toLocaleDateString('ko-KR')]);
   var ws6=XLSX.utils.aoa_to_sheet(s6);
   colW(ws6,[30,18,18,18,12,18]);
   ws6['!merges']=[{s:{r:0,c:0},e:{r:0,c:5}}];
@@ -1016,7 +1016,7 @@ function exportExcel(){
   XLSX.utils.book_append_sheet(wb,ws6,'최종결과');
 
   /* ── 파일 다운로드 ── */
-  var fname='세울엔지니어링_사업성분석_'+(D.projectName||'종합')+'_'+new Date().toISOString().slice(0,10)+'.xlsx';
+  var fname='빛세움_사업성분석_'+(D.projectName||'종합')+'_'+new Date().toISOString().slice(0,10)+'.xlsx';
   XLSX.writeFile(wb,fname);
   if(typeof App!=='undefined')App.toast('엑셀 파일(6개 시트)이 다운로드되었습니다.','success');
 }

@@ -167,7 +167,7 @@ module.exports = async function handler(req, res) {
         targetCount: targets.length,
         targets: targets.map(t => ({ name: t.name, phone: t.phone })),
         status: 'pending',
-        message: `[세울엔지니어링] 주요뉴스가 업데이트되었습니다.\n제목: ${title}\n확인하기: ${link || ''}`,
+        message: `[빛세움] 주요뉴스가 업데이트되었습니다.\n제목: ${title}\n확인하기: ${link || ''}`,
         createdAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
         sentAt: ''
       };

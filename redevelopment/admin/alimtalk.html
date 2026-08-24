@@ -34,7 +34,7 @@
         .sf-checks{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
         .sf-checks label{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--gray-600);cursor:pointer}
         .sf-checks input{width:16px;height:16px;accent-color:var(--brand-dark)}
-        .send-btn{height:42px;padding:0 24px;background:var(--brand-dark);color:#C3A569;border:none;border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:var(--font)}
+        .send-btn{height:42px;padding:0 24px;background:var(--brand-dark);color:#C9A227;border:none;border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:var(--font)}
         .send-btn:disabled{opacity:.5;cursor:not-allowed}
         .log-status{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700}
         .log-status.pending{background:#FFF3E0;color:#E65100}
@@ -48,7 +48,7 @@
 <body>
 <div class="admin-wrap">
     <aside class="admin-sidebar" id="adminSidebar">
-        <div class="admin-sidebar-header"><div class="logo">세울 <small>관리자</small></div></div>
+        <div class="admin-sidebar-header"><div class="logo">빛세움 <small>관리자</small></div></div>
         <nav class="admin-nav">
             <div class="admin-nav-group">
                 <div class="admin-nav-group-title">대시보드</div>
@@ -145,7 +145,7 @@
             <!-- 탭 2: 알림 발송 -->
             <div class="tab-panel" id="tabSend">
                 <div class="send-form">
-                    <h4><i class="fa-solid fa-paper-plane" style="color:#C3A569;margin-right:6px"></i> 알림 발송</h4>
+                    <h4><i class="fa-solid fa-paper-plane" style="color:#C9A227;margin-right:6px"></i> 알림 발송</h4>
                     <div class="sf-row">
                         <div class="sf-field">
                             <label>게시글 제목 *</label>
@@ -183,7 +183,7 @@
                 <div style="padding:20px;background:#f8f9fa;border-radius:12px;border:1px solid var(--gray-200)">
                     <h4 style="font-size:14px;font-weight:700;color:var(--gray-700);margin-bottom:8px">발송 메시지 미리보기</h4>
                     <div id="msgPreview" style="font-size:13px;color:var(--gray-600);line-height:1.7;white-space:pre-line;background:#fff;padding:16px;border-radius:8px;border:1px solid var(--gray-200)">
-[세울엔지니어링] 주요뉴스가 업데이트되었습니다.
+[빛세움] 주요뉴스가 업데이트되었습니다.
 제목: (제목을 입력하세요)
 확인하기: (링크를 입력하세요)
                     </div>
@@ -360,7 +360,7 @@
     var linkInput=document.getElementById('sendLink');
     function updatePreview(){
         document.getElementById('msgPreview').textContent=
-            '[세울엔지니어링] 주요뉴스가 업데이트되었습니다.\n제목: '+(titleInput.value||'(제목을 입력하세요)')+'\n확인하기: '+(linkInput.value||'(링크를 입력하세요)');
+            '[빛세움] 주요뉴스가 업데이트되었습니다.\n제목: '+(titleInput.value||'(제목을 입력하세요)')+'\n확인하기: '+(linkInput.value||'(링크를 입력하세요)');
     }
     titleInput.addEventListener('input',updatePreview);
     linkInput.addEventListener('input',updatePreview);

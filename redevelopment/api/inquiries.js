@@ -203,7 +203,7 @@ async function sendEmail({ subject, htmlBody, attachments }) {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        from: '세울엔지니어링 <onboarding@resend.dev>',
+        from: '빛세움 <onboarding@resend.dev>',
         to: EMAIL_RECIPIENTS,
         subject,
         html: htmlBody,
@@ -223,7 +223,7 @@ async function sendEmail({ subject, htmlBody, attachments }) {
 
 // ─── Build notification messages ─────────────────────────
 function buildTelegramMessage({ type, name, phone, email, content, fileCount }) {
-  let msg = `[세울 고객센터 문의 접수]\n━━━━━━━━━━━━━━━━━━━━\n`;
+  let msg = `[빛세움 고객센터 문의 접수]\n━━━━━━━━━━━━━━━━━━━━\n`;
   msg += `- 접수시간: ${kstNow()}\n`;
   msg += `- 문의유형: ${type || '기타'}\n`;
   msg += `- 문의자: ${name}\n`;
@@ -244,8 +244,8 @@ function buildEmailHtml({ type, name, phone, email, title, content, fileCount })
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"></head>
 <body style="font-family:'Noto Sans KR',sans-serif;max-width:600px;margin:0 auto;padding:20px;background:#f8f9fa">
-  <div style="background:#0A0F1C;color:#C3A569;padding:20px 24px;border-radius:12px 12px 0 0;font-size:18px;font-weight:800">
-    세울엔지니어링 고객센터
+  <div style="background:#0A0F1C;color:#C9A227;padding:20px 24px;border-radius:12px 12px 0 0;font-size:18px;font-weight:800">
+    빛세움 고객센터
   </div>
   <div style="background:#fff;padding:24px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px">
     <h2 style="font-size:16px;color:#0A0F1C;margin:0 0 20px">신규 문의가 접수되었습니다</h2>
@@ -263,7 +263,7 @@ function buildEmailHtml({ type, name, phone, email, title, content, fileCount })
       <div style="font-size:14px;color:#1f2937;line-height:1.7;white-space:pre-wrap">${content}</div>
     </div>
     <div style="margin-top:24px;text-align:center">
-      <a href="${ADMIN_LINK}" style="display:inline-block;padding:12px 32px;background:#0A0F1C;color:#C3A569;text-decoration:none;border-radius:8px;font-size:14px;font-weight:700">관리자 페이지에서 확인하기</a>
+      <a href="${ADMIN_LINK}" style="display:inline-block;padding:12px 32px;background:#0A0F1C;color:#C9A227;text-decoration:none;border-radius:8px;font-size:14px;font-weight:700">관리자 페이지에서 확인하기</a>
     </div>
   </div>
 </body></html>`;
@@ -378,7 +378,7 @@ module.exports = async function handler(req, res) {
 
       // 3) 이메일 알림
       const emailResult = await sendEmail({
-        subject: `[세울 고객센터] 신규 문의 접수 - ${type || '기타'}`,
+        subject: `[빛세움 고객센터] 신규 문의 접수 - ${type || '기타'}`,
         htmlBody: buildEmailHtml({
           type, name, phone, email, title, content,
           fileCount: files.length

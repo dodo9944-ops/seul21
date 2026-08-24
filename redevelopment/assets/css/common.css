@@ -1,5 +1,5 @@
 /* ============================================================
-   세울 — Common Styles
+   빛세움 — Common Styles
    기존 index.html 디자인 토큰 & 공통 컴포넌트 분리
    ============================================================ */
 
@@ -29,9 +29,9 @@
   --brand-dark: #0A0F1C;
   --brand-mid: #111B2E;
   --brand-navy: #142644;
-  --gold: #C3A569;
-  --gold-hover: #D4B87A;
-  --gold-light: rgba(195,165,105,0.08);
+  --gold: #C9A227;
+  --gold-hover: #DDB84A;
+  --gold-light: rgba(201,162,39,0.08);
 
   --font: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --maxw: 1280px;
@@ -421,7 +421,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);
   color: rgba(255,255,255,0.35); font-size: 13px; transition: all 0.25s;
 }
-.footer-social a:hover { border-color: var(--gold); color: var(--gold); background: rgba(195,165,105,0.08); }
+.footer-social a:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,162,39,0.08); }
 @media (max-width: 1024px) { .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; } }
 @media (max-width: 540px) {
   .footer-grid { grid-template-columns: 1fr; gap: 24px; }
@@ -502,7 +502,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 .section-title::before {
   content: ''; position: absolute; left: 0; top: 4px;
   width: 3px; height: 20px; border-radius: 2px;
-  background: linear-gradient(to bottom, var(--gold), rgba(195,165,105,0.3));
+  background: linear-gradient(to bottom, var(--gold), rgba(201,162,39,0.3));
 }
 
 /* ── CARDS ── */
@@ -536,7 +536,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   padding: 4px 10px; border-radius: 6px;
   font-size: 11px; font-weight: 700; line-height: 1;
 }
-.badge-hot { background: rgba(195,165,105,0.12); color: #C3A569; }
+.badge-hot { background: rgba(201,162,39,0.12); color: #C9A227; }
 .badge-new { background: var(--accent); color: var(--white); }
 .badge-up  { background: var(--green); color: var(--white); }
 .badge-warn { background: var(--orange); color: var(--white); }
@@ -756,7 +756,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 .fav-btn.active { color: var(--yellow); }
 
 /* ── DIVIDER ── */
-.divider { border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(195,165,105,0.2), transparent); margin: 0; }
+.divider { border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,162,39,0.2), transparent); margin: 0; }
 
 /* ── LISTING GRID ── */
 .listing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -1000,7 +1000,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   .mobile-bottom-nav { display: none !important; }
 }
 
-/* === Unified Page CTA — 회사소개·세울의 길·사업분야·업무실적·자료실·사업성 검토 공통 (2026-05-05) ===
+/* === Unified Page CTA — 회사소개·빛세움의 길·사업분야·업무실적·자료실·사업성 검토 공통 (2026-05-05) ===
    단일행 레이아웃: 좌측 안내글 / 우측 상담 버튼 */
 .uni-cta {
   margin: 64px 0 0;
@@ -1029,8 +1029,8 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   transition: all 0.2s;
 }
 .uni-cta a.uc-primary:hover {
-  background: #D4B87A; transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(195,165,105,0.28);
+  background: #DDB84A; transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(201,162,39,0.28);
 }
 @media (max-width: 640px) {
   .uni-cta { margin-top: 48px; padding: 14px 16px; gap: 12px; }
