@@ -192,35 +192,35 @@
         /* 골든 라이트 웨이브 — 빛세움의 길 페이지와 동일 기법, 2/3 축소 + 아래→위 길이 테이퍼 + 글로우 강화 */
         .hero-light-wave {
             position: absolute; left: 0; bottom: -10%;
-            width: 44%; height: 44%;
+            width: 58%; height: 56%;
             overflow: hidden; pointer-events: none;
-            z-index: 2; opacity: .85;
-            -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%);
-            mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%);
+            z-index: 2; opacity: 1;
+            -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 68%, transparent 100%);
+            mask-image: linear-gradient(90deg, #000 0%, #000 68%, transparent 100%);
         }
         .hero-light-wave::before {
             content: ''; position: absolute; left: 0; bottom: 0;
-            width: 70%; height: 70%;
+            width: 75%; height: 75%;
             background: radial-gradient(ellipse at 15% 100%,
-                rgba(255,196,0,.32) 0%, rgba(255,196,0,.16) 28%,
-                rgba(255,196,0,.06) 50%, transparent 72%);
+                rgba(255,196,0,.48) 0%, rgba(255,196,0,.24) 28%,
+                rgba(255,196,0,.09) 50%, transparent 72%);
             filter: blur(2px);
         }
         .hero-light-wave .wave-line {
             position: absolute; border-radius: 50%;
-            border-top: 1.4px solid transparent;
+            border-top: 2px solid transparent;
             transform-origin: center;
-            filter: drop-shadow(0 0 4px rgba(255,196,0,.35)) drop-shadow(0 0 10px rgba(255,196,0,.18));
+            filter: drop-shadow(0 0 6px rgba(255,196,0,.55)) drop-shadow(0 0 16px rgba(255,196,0,.30));
         }
         /* 아래(1번, 가장 길고 밝음) → 위(8번, 가장 짧고 옅음) 순서로 테이퍼 */
-        .hero-light-wave .wave-line:nth-child(1) { left:-15%; bottom:-10%; width:950px; height:260px; transform:rotate(-9deg);             border-top-color: rgba(255,196,0,.40); }
-        .hero-light-wave .wave-line:nth-child(2) { left:-12%; bottom:-4%;  width:870px; height:240px; transform:rotate(-8deg);             border-top-color: rgba(255,205,40,.35); }
-        .hero-light-wave .wave-line:nth-child(3) { left:-18%; bottom:-14%; width:790px; height:220px; transform:rotate(-6deg);             border-top-color: rgba(255,214,70,.31); }
-        .hero-light-wave .wave-line:nth-child(4) { left:-8%;  bottom:4%;   width:710px; height:200px; transform:rotate(-11deg);            border-top-color: rgba(255,196,0,.27); }
-        .hero-light-wave .wave-line:nth-child(5) { left:-20%; bottom:-18%; width:630px; height:180px; transform:rotate(-4deg);             border-top-color: rgba(255,223,100,.23); }
-        .hero-light-wave .wave-line:nth-child(6) { left:-6%;  bottom:0%;   width:560px; height:165px; transform:rotate(-13deg) scaleY(.9); border-top-color: rgba(255,214,70,.19); }
-        .hero-light-wave .wave-line:nth-child(7) { left:-16%; bottom:-8%;  width:500px; height:150px; transform:rotate(-3deg);             border-top-color: rgba(255,232,140,.16); }
-        .hero-light-wave .wave-line:nth-child(8) { left:-4%;  bottom:6%;   width:440px; height:135px; transform:rotate(-15deg);            border-top-color: rgba(255,240,170,.13); }
+        .hero-light-wave .wave-line:nth-child(1) { left:-15%; bottom:-10%; width:1080px; height:290px; transform:rotate(-9deg);             border-top-width: 2.6px; border-top-color: rgba(255,196,0,.68); }
+        .hero-light-wave .wave-line:nth-child(2) { left:-12%; bottom:-4%;  width:990px;  height:265px; transform:rotate(-8deg);             border-top-width: 2.4px; border-top-color: rgba(255,205,40,.60); }
+        .hero-light-wave .wave-line:nth-child(3) { left:-18%; bottom:-14%; width:900px;  height:245px; transform:rotate(-6deg);             border-top-width: 2.2px; border-top-color: rgba(255,214,70,.54); }
+        .hero-light-wave .wave-line:nth-child(4) { left:-8%;  bottom:4%;   width:810px;  height:220px; transform:rotate(-11deg);            border-top-width: 2px;   border-top-color: rgba(255,196,0,.48); }
+        .hero-light-wave .wave-line:nth-child(5) { left:-20%; bottom:-18%; width:720px;  height:198px; transform:rotate(-4deg);             border-top-width: 1.8px; border-top-color: rgba(255,223,100,.42); }
+        .hero-light-wave .wave-line:nth-child(6) { left:-6%;  bottom:0%;   width:640px;  height:182px; transform:rotate(-13deg) scaleY(.9); border-top-width: 1.6px; border-top-color: rgba(255,214,70,.36); }
+        .hero-light-wave .wave-line:nth-child(7) { left:-16%; bottom:-8%;  width:570px;  height:165px; transform:rotate(-3deg);             border-top-width: 1.5px; border-top-color: rgba(255,232,140,.30); }
+        .hero-light-wave .wave-line:nth-child(8) { left:-4%;  bottom:6%;   width:500px;  height:148px; transform:rotate(-15deg);            border-top-width: 1.4px; border-top-color: rgba(255,240,170,.24); }
 
         /* 라이트 스파크 — 아주 작은 골드 포인트 */
         .hero-light-wave .spark {
