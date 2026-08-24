@@ -438,9 +438,10 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   padding: 40px 0 32px;
 }
 .footer-brand .logo { margin-bottom: 12px; }
-.footer-brand .logo-mark { width: 58px; height: 58px; }
-.footer .logo-company { font-size: 16px; font-weight: 800; color: #171C26; }
-.footer .logo-sub { color: rgba(17,24,39,0.4); }
+.footer-brand .logo.footer-logo-text-only { display: flex; justify-content: center; width: 100%; }
+.footer-logo-text-only .logo-text { align-items: center; }
+.footer .logo-company { font-size: 19px; font-weight: 800; color: #171C26; }
+.footer .logo-sub { font-size: 10px; color: rgba(17,24,39,0.4); }
 .footer-brand p { font-size: 13px; color: #666B73; line-height: 1.8; margin-top: 30px; }
 .footer-col h5 { font-size: 15px; font-weight: 700; color: #171C26; margin-bottom: 16px; letter-spacing: -.2px; }
 .footer-col a { display: block; font-size: 14px; color: #6D727A; margin-bottom: 0; line-height: 2.4; transition: color var(--transition); }
