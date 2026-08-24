@@ -208,19 +208,26 @@
         }
         .hero-light-wave .wave-line {
             position: absolute; border-radius: 50%;
-            border-top: 2px solid transparent;
+            border-top: 1.2px solid transparent;
             transform-origin: center;
             filter: drop-shadow(0 0 6px rgba(255,196,0,.55)) drop-shadow(0 0 16px rgba(255,196,0,.30));
+            /* 파도처럼 — 라인 흐름을 따라 옅게-짙게-옅게 물결지는 그라데이션 페이드 */
+            -webkit-mask-image: linear-gradient(90deg,
+                transparent 0%, rgba(0,0,0,.35) 10%, #000 28%,
+                rgba(0,0,0,.55) 46%, #000 62%, rgba(0,0,0,.30) 82%, transparent 100%);
+            mask-image: linear-gradient(90deg,
+                transparent 0%, rgba(0,0,0,.35) 10%, #000 28%,
+                rgba(0,0,0,.55) 46%, #000 62%, rgba(0,0,0,.30) 82%, transparent 100%);
         }
         /* 아래(1번, 가장 길고 밝음) → 위(8번, 가장 짧고 옅음) 순서로 테이퍼 */
-        .hero-light-wave .wave-line:nth-child(1) { left:-15%; bottom:-10%; width:1080px; height:290px; transform:rotate(-9deg);             border-top-width: 2.6px; border-top-color: rgba(255,196,0,.68); }
-        .hero-light-wave .wave-line:nth-child(2) { left:-12%; bottom:-4%;  width:990px;  height:265px; transform:rotate(-8deg);             border-top-width: 2.4px; border-top-color: rgba(255,205,40,.60); }
-        .hero-light-wave .wave-line:nth-child(3) { left:-18%; bottom:-14%; width:900px;  height:245px; transform:rotate(-6deg);             border-top-width: 2.2px; border-top-color: rgba(255,214,70,.54); }
-        .hero-light-wave .wave-line:nth-child(4) { left:-8%;  bottom:4%;   width:810px;  height:220px; transform:rotate(-11deg);            border-top-width: 2px;   border-top-color: rgba(255,196,0,.48); }
-        .hero-light-wave .wave-line:nth-child(5) { left:-20%; bottom:-18%; width:720px;  height:198px; transform:rotate(-4deg);             border-top-width: 1.8px; border-top-color: rgba(255,223,100,.42); }
-        .hero-light-wave .wave-line:nth-child(6) { left:-6%;  bottom:0%;   width:640px;  height:182px; transform:rotate(-13deg) scaleY(.9); border-top-width: 1.6px; border-top-color: rgba(255,214,70,.36); }
-        .hero-light-wave .wave-line:nth-child(7) { left:-16%; bottom:-8%;  width:570px;  height:165px; transform:rotate(-3deg);             border-top-width: 1.5px; border-top-color: rgba(255,232,140,.30); }
-        .hero-light-wave .wave-line:nth-child(8) { left:-4%;  bottom:6%;   width:500px;  height:148px; transform:rotate(-15deg);            border-top-width: 1.4px; border-top-color: rgba(255,240,170,.24); }
+        .hero-light-wave .wave-line:nth-child(1) { left:-15%; bottom:-10%; width:1080px; height:290px; transform:rotate(-9deg);             border-top-width: 1.6px; border-top-color: rgba(255,196,0,.68); }
+        .hero-light-wave .wave-line:nth-child(2) { left:-12%; bottom:-4%;  width:990px;  height:265px; transform:rotate(-8deg);             border-top-width: 1.5px; border-top-color: rgba(255,205,40,.60); }
+        .hero-light-wave .wave-line:nth-child(3) { left:-18%; bottom:-14%; width:900px;  height:245px; transform:rotate(-6deg);             border-top-width: 1.4px; border-top-color: rgba(255,214,70,.54); }
+        .hero-light-wave .wave-line:nth-child(4) { left:-8%;  bottom:4%;   width:810px;  height:220px; transform:rotate(-11deg);            border-top-width: 1.2px; border-top-color: rgba(255,196,0,.48); }
+        .hero-light-wave .wave-line:nth-child(5) { left:-20%; bottom:-18%; width:720px;  height:198px; transform:rotate(-4deg);             border-top-width: 1.1px; border-top-color: rgba(255,223,100,.42); }
+        .hero-light-wave .wave-line:nth-child(6) { left:-6%;  bottom:0%;   width:640px;  height:182px; transform:rotate(-13deg) scaleY(.9); border-top-width: 1px;   border-top-color: rgba(255,214,70,.36); }
+        .hero-light-wave .wave-line:nth-child(7) { left:-16%; bottom:-8%;  width:570px;  height:165px; transform:rotate(-3deg);             border-top-width: .9px;  border-top-color: rgba(255,232,140,.30); }
+        .hero-light-wave .wave-line:nth-child(8) { left:-4%;  bottom:6%;   width:500px;  height:148px; transform:rotate(-15deg);            border-top-width: .8px;  border-top-color: rgba(255,240,170,.24); }
 
         /* 라이트 스파크 — 아주 작은 골드 포인트 */
         .hero-light-wave .spark {
