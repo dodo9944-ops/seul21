@@ -570,7 +570,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   margin-bottom: 36px;
 }
 .section-title {
-  font-family: var(--font-serif);
+  font-family: var(--font);
   font-size: 24px; font-weight: 900; color: #111;
   letter-spacing: -0.5px; position: relative;
   padding-left: 14px;
