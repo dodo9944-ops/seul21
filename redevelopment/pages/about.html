@@ -60,69 +60,53 @@
         );
         z-index: 1;
     }
-    /* Center blend — ultra-wide depth transition */
-    .hero-bg-photo::before {
-        content: '';
-        position: absolute;
-        top: 0; bottom: 0;
-        left: 22%; width: 56%;
-        pointer-events: none;
-        background: linear-gradient(90deg,
-            rgba(255,253,247,0) 0%,
-            rgba(255,246,216,0.24) 25%,
-            rgba(255,231,160,0.34) 52%,
-            rgba(255,231,160,0.28) 62%,
-            rgba(255,246,216,0.14) 80%,
-            rgba(255,253,247,0) 100%
-        );
-        filter: blur(28px);
-        z-index: 2;
-    }
-    .about-hero::before {
-        content: '';
-        position: absolute; inset: 0;
-        background-image:
-            radial-gradient(circle at 20% 50%, rgba(184,134,11,0.04) 0%, transparent 50%),
-            radial-gradient(circle at 80% 30%, rgba(184,134,11,0.03) 0%, transparent 40%);
-        pointer-events: none; z-index: 1;
-    }
     .about-hero::after {
         content: '';
         position: absolute; inset: 0;
         background-image:
             linear-gradient(rgba(184,134,11,0.015) 1px, transparent 1px),
             linear-gradient(90deg, rgba(184,134,11,0.015) 1px, transparent 1px);
-        background-size: 60px 60px;
+        background-size: 56px 56px;
         pointer-events: none; z-index: 1;
     }
-    /* 골든 라이트 웨이브 — 하단을 가로지르는 다중 곡선 라인 */
-    .hero-golden-glow {
-        position: absolute; left: -8%; bottom: -42%;
-        width: 72%; height: 88%;
-        z-index: 2; pointer-events: none;
-        background: radial-gradient(ellipse at 24% 74%,
-            rgba(255,196,0,.24) 0%, rgba(255,196,0,.12) 25%,
-            rgba(255,196,0,.055) 46%, transparent 72%
-        );
-        filter: blur(3px);
+    /* 골드 수평선 — 메인 히어로와 동일 */
+    .hero-hline {
+        position: absolute; left: 0; right: 0; height: 1px; z-index: 3;
+        background: linear-gradient(90deg, transparent, rgba(184,134,11,.08) 30%, rgba(184,134,11,.08) 70%, transparent);
     }
+    .hero-hline-top { top: 0; }
+    .hero-hline-bottom { bottom: 0; }
+    /* 하단 골드 글로우 — 메인 히어로와 동일 */
+    .hero-golden-glow {
+        position: absolute; left: -10%; bottom: -50%; width: 75%; height: 95%;
+        background: radial-gradient(ellipse at 20% 70%,
+            rgba(255,196,0,.22) 0%, rgba(255,196,0,.10) 28%,
+            rgba(255,196,0,.04) 48%, transparent 72%
+        );
+        z-index: 1; pointer-events: none;
+    }
+    /* 골든 라이트 웨이브 — 메인 히어로와 동일 기법 */
     .hero-golden-wave {
-        position: absolute; left: -10%; bottom: -23%;
-        width: 88%; height: 78%;
-        z-index: 3; pointer-events: none; opacity: .92;
-        -webkit-mask-image: linear-gradient(90deg,
-            rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%,
-            rgba(0,0,0,.82) 68%, rgba(0,0,0,.38) 82%, transparent 100%);
-        mask-image: linear-gradient(90deg,
-            rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%,
-            rgba(0,0,0,.82) 68%, rgba(0,0,0,.38) 82%, transparent 100%);
+        position: absolute; left: 0; bottom: -10%;
+        width: 58%; height: 56%;
+        overflow: hidden; pointer-events: none;
+        z-index: 2; opacity: 1;
+        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 68%, transparent 100%);
+        mask-image: linear-gradient(90deg, #000 0%, #000 68%, transparent 100%);
+    }
+    .hero-golden-wave::before {
+        content: ''; position: absolute; left: 0; bottom: 0;
+        width: 75%; height: 75%;
+        background: radial-gradient(ellipse at 15% 100%,
+            rgba(255,196,0,.48) 0%, rgba(255,196,0,.24) 28%,
+            rgba(255,196,0,.09) 50%, transparent 72%);
+        filter: blur(2px);
     }
     .wave-line {
-        position: absolute; left: -5%; bottom: 0;
-        transform-origin: left bottom;
-        border-top-style: solid; border-radius: 50%;
-        pointer-events: none;
-        filter: drop-shadow(0 0 3px rgba(255,196,0,.10)) drop-shadow(0 0 8px rgba(255,196,0,.05));
+        position: absolute; border-radius: 50%;
+        border-top: 1.2px solid transparent;
+        transform-origin: center;
+        filter: drop-shadow(0 0 6px rgba(255,196,0,.55)) drop-shadow(0 0 16px rgba(255,196,0,.30));
         -webkit-mask-image: linear-gradient(90deg,
             transparent 0%, rgba(0,0,0,.35) 10%, #000 28%,
             rgba(0,0,0,.55) 46%, #000 62%, rgba(0,0,0,.30) 82%, transparent 100%);
@@ -130,39 +114,30 @@
             transparent 0%, rgba(0,0,0,.35) 10%, #000 28%,
             rgba(0,0,0,.55) 46%, #000 62%, rgba(0,0,0,.30) 82%, transparent 100%);
     }
-    .wave-line.line-1  { width:1080px; height:220px; border-top:1px solid rgba(255,196,0,.42); transform:rotate(-6deg) skewX(-2deg); }
-    .wave-line.line-2  { width:1130px; height:250px; border-top:1px solid rgba(255,205,30,.39); transform:rotate(-5.3deg) skewX(-1deg); }
-    .wave-line.line-3  { width:1180px; height:285px; border-top:1px solid rgba(255,213,55,.36); transform:rotate(-4.7deg); }
-    .wave-line.line-4  { width:1235px; height:320px; border-top:1px solid rgba(255,220,80,.33); transform:rotate(-4.1deg); }
-    .wave-line.line-5  { width:1290px; height:355px; border-top:1px solid rgba(255,225,105,.30); transform:rotate(-3.5deg); }
-    .wave-line.line-6  { width:1350px; height:395px; border-top:1px solid rgba(255,230,130,.28); transform:rotate(-3deg); }
-    .wave-line.line-7  { width:1410px; height:435px; border-top:1px solid rgba(255,235,155,.26); transform:rotate(-2.6deg); }
-    .wave-line.line-8  { width:1470px; height:475px; border-top:1px solid rgba(255,240,180,.23); transform:rotate(-2.2deg); }
-    .wave-line.line-9  { width:1530px; height:515px; border-top:1px solid rgba(255,245,205,.20); transform:rotate(-1.8deg); }
-    .wave-line.line-10 { width:1590px; height:555px; border-top:1px solid rgba(255,250,225,.18); transform:rotate(-1.4deg); }
-    .wave-line.line-11 { width:1650px; height:600px; border-top:1px solid rgba(255,255,255,.16); transform:rotate(-1deg); }
-    .wave-line.line-12 { width:1710px; height:640px; border-top:1px solid rgba(255,255,255,.12); transform:rotate(-0.6deg); }
-    .wave-line.line-13 { width:1200px; height:270px; border-top:1px solid rgba(255,210,60,.14); transform:rotate(-5.6deg); opacity:.5; }
-    .wave-line.line-14 { width:1380px; height:420px; border-top:1px solid rgba(255,225,110,.12); transform:rotate(-3.2deg); opacity:.4; }
-    .wave-line.line-15 { width:1510px; height:500px; border-top:1px solid rgba(255,240,170,.10); transform:rotate(-1.9deg); opacity:.35; }
+    .wave-line.line-1 { left:-15%; bottom:-10%; width:1080px; height:290px; transform:rotate(-9deg);             border-top-width: 1.6px; border-top-color: rgba(255,196,0,.68); }
+    .wave-line.line-2 { left:-12%; bottom:-4%;  width:990px;  height:265px; transform:rotate(-8deg);             border-top-width: 1.5px; border-top-color: rgba(255,205,40,.60); }
+    .wave-line.line-3 { left:-18%; bottom:-14%; width:900px;  height:245px; transform:rotate(-6deg);             border-top-width: 1.4px; border-top-color: rgba(255,214,70,.54); }
+    .wave-line.line-4 { left:-8%;  bottom:4%;   width:810px;  height:220px; transform:rotate(-11deg);            border-top-width: 1.2px; border-top-color: rgba(255,196,0,.48); }
+    .wave-line.line-5 { left:-20%; bottom:-18%; width:720px;  height:198px; transform:rotate(-4deg);             border-top-width: 1.1px; border-top-color: rgba(255,223,100,.42); }
+    .wave-line.line-6 { left:-6%;  bottom:0%;   width:640px;  height:182px; transform:rotate(-13deg) scaleY(.9); border-top-width: 1px;   border-top-color: rgba(255,214,70,.36); }
+    .wave-line.line-7 { left:-16%; bottom:-8%;  width:570px;  height:165px; transform:rotate(-3deg);             border-top-width: .9px;  border-top-color: rgba(255,232,140,.30); }
+    .wave-line.line-8 { left:-4%;  bottom:6%;   width:500px;  height:148px; transform:rotate(-15deg);            border-top-width: .8px;  border-top-color: rgba(255,240,170,.24); }
     .wave-point {
-        position: absolute; width: 2.5px; height: 2.5px; border-radius: 50%;
-        background: #FFD95A;
-        box-shadow: 0 0 5px rgba(255,196,0,.55), 0 0 12px rgba(255,196,0,.22);
+        position: absolute; width: 3px; height: 3px; border-radius: 50%;
+        background: #FFC400; box-shadow: 0 0 6px rgba(255,196,0,.65), 0 0 14px rgba(255,196,0,.30);
     }
-    .wp-1 { left: 10%; bottom: 14%; opacity: .55; }
-    .wp-2 { left: 19%; bottom: 26%; opacity: .40; }
-    .wp-3 { left: 29%; bottom: 10%; opacity: .50; }
-    .wp-4 { left: 37%; bottom: 30%; opacity: .35; }
-    .wp-5 { left: 46%; bottom: 18%; opacity: .45; }
-    .wp-6 { left: 54%; bottom: 24%; opacity: .38; }
+    .wp-1 { left: 12%; bottom: 22%; opacity: .50; }
+    .wp-2 { left: 24%; bottom: 38%; opacity: .32; width:2px; height:2px; }
+    .wp-3 { left: 34%; bottom: 14%; opacity: .42; }
+    .wp-4 { left: 44%; bottom: 46%; opacity: .26; width:4px; height:4px; }
+    .wp-5 { left: 52%; bottom: 26%; opacity: .36; width:2px; height:2px; }
+    .wp-6 { left: 60%; bottom: 40%; opacity: .28; }
     @media (max-width: 1024px) {
-        .wave-line.line-9, .wave-line.line-10, .wave-line.line-11, .wave-line.line-12,
-        .wave-line.line-13, .wave-line.line-14, .wave-line.line-15 { display: none; }
+        .wave-line.line-7, .wave-line.line-8 { display: none; }
     }
-    @media (max-width: 600px) {
-        .hero-golden-wave { opacity: .40; width: 130%; bottom: -10%; }
-        .wave-line.line-5, .wave-line.line-6, .wave-line.line-7, .wave-line.line-8,
+    @media (max-width: 768px) {
+        .hero-golden-wave { opacity: .40; }
+        .wave-line.line-4, .wave-line.line-5, .wave-line.line-6, .wave-line.line-7, .wave-line.line-8,
         .wave-point { display: none; }
     }
     .about-hero .inner {
@@ -917,6 +892,8 @@
     <div class="hero-bg-photo">
         <img src="../jpg/hero_about.png" alt="빛세움 사옥">
     </div>
+    <div class="hero-hline hero-hline-top"></div>
+    <div class="hero-hline hero-hline-bottom"></div>
     <div class="hero-golden-glow" aria-hidden="true"></div>
     <div class="hero-golden-wave" aria-hidden="true">
         <span class="wave-line line-1"></span>
@@ -927,13 +904,6 @@
         <span class="wave-line line-6"></span>
         <span class="wave-line line-7"></span>
         <span class="wave-line line-8"></span>
-        <span class="wave-line line-9"></span>
-        <span class="wave-line line-10"></span>
-        <span class="wave-line line-11"></span>
-        <span class="wave-line line-12"></span>
-        <span class="wave-line line-13"></span>
-        <span class="wave-line line-14"></span>
-        <span class="wave-line line-15"></span>
         <span class="wave-point wp-1"></span>
         <span class="wave-point wp-2"></span>
         <span class="wave-point wp-3"></span>
