@@ -426,37 +426,6 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 
 /* ══════════════════════════════════════════════════════════
-   FOOTER NEWS (공지사항 3카드)
-   ══════════════════════════════════════════════════════════ */
-.footer-news { padding: 42px 0 48px; border-bottom: 1px solid rgba(17,24,39,.10); }
-.footer-news-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
-.footer-news-head h3 { font-size: 22px; font-weight: 700; color: #171C26; }
-.footer-news-head .fn-more { font-size: 13px; font-weight: 600; color: #C58B00; transition: color .2s ease; }
-.footer-news-head .fn-more:hover { color: #9F7000; }
-.footer-news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-.footer-news-item { display: block; color: inherit; transition: opacity .2s ease; }
-.footer-news-item:hover { opacity: .82; }
-.footer-news-item + .footer-news-item { border-left: 1px solid rgba(17,24,39,.08); padding-left: 36px; }
-.footer-news-item .fn-badge {
-  display: inline-block; border: 1px solid rgba(197,139,0,.55); color: #C58B00;
-  background: transparent; font-size: 12px; padding: 3px 8px; border-radius: 4px;
-  margin-bottom: 10px;
-}
-.footer-news-item .fn-body h4 { font-size: 16px; font-weight: 700; color: #242A32; line-height: 1.45; margin-bottom: 6px; }
-.footer-news-item .fn-body p { font-size: 13.5px; line-height: 1.6; color: #777C84; margin-bottom: 8px; }
-.footer-news-item .fn-date { font-size: 12px; color: #92969C; }
-@media (max-width: 1024px) {
-  .footer-news-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
-  .footer-news-item:nth-child(3) { display: none; }
-  .footer-news-item + .footer-news-item { padding-left: 28px; }
-}
-@media (max-width: 620px) {
-  .footer-news-grid { grid-template-columns: 1fr; gap: 22px; }
-  .footer-news-item:nth-child(2) { display: block; }
-  .footer-news-item + .footer-news-item { border-left: none; padding-left: 0; border-top: 1px solid rgba(17,24,39,.08); padding-top: 18px; }
-}
-
-/* ══════════════════════════════════════════════════════════
    FOOTER MAIN
    ══════════════════════════════════════════════════════════ */
 .footer { background: #FFFFFF; }

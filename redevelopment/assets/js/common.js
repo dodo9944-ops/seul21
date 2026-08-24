@@ -152,25 +152,6 @@ const App = (() => {
     </div>`;
   }
 
-  /* ── 공지사항 상위 3건 (Footer 상단 카드용) ── */
-  function footerNoticeCardsHTML() {
-    try {
-      var all = (window.DataService && DataService.getAll) ? DataService.getAll('notices') : ((window.MOCK && MOCK.notices) || []);
-      var top3 = (all || []).slice().sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); }).slice(0, 3);
-      if (!top3.length) return '';
-      return top3.map(function(n) {
-        var m = /^\[([^\]]+)\]\s*(.*)$/.exec(n.title || '');
-        var badge = m ? m[1] : '공지';
-        var title = m ? m[2] : (n.title || '');
-        var excerpt = (n.content || '').replace(/\n+/g, ' ').trim().slice(0, 72);
-        return '<a class="footer-news-item" href="' + B + '/pages/notice.html">' +
-          '<div class="fn-badge">' + badge + '</div>' +
-          '<div class="fn-body"><h4>' + title + '</h4><p>' + excerpt + (excerpt.length >= 72 ? '…' : '') + '</p><span class="fn-date">' + (n.date || '') + '</span></div>' +
-          '</a>';
-      }).join('');
-    } catch (e) { return ''; }
-  }
-
   /* ── 공통 푸터 HTML ── */
   function footerHTML() {
     /* 페이지 자체에 이미 동일한 상담 CTA(.cta-banner)가 있으면 중복 노출 방지 (예: index.html) */
@@ -187,16 +168,6 @@ const App = (() => {
     </div>`;
     return `
     ${preFooterCta}
-
-    <div class="footer-news">
-      <div class="inner">
-        <div class="footer-news-head">
-          <h3>공지사항</h3>
-          <a href="${B}/pages/notice.html" class="fn-more">서비스 전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
-        </div>
-        <div class="footer-news-grid">${footerNoticeCardsHTML()}</div>
-      </div>
-    </div>
 
     <footer class="footer"><div class="inner">
       <div class="footer-grid">
