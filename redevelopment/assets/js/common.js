@@ -190,36 +190,34 @@ const App = (() => {
         </div>
         <div class="footer-col">
           <h5>자료·서비스</h5>
+          <a href="${B}/pages/library.html?cat=주요뉴스">주요뉴스</a>
           <a href="${B}/pages/library.html">자료실</a>
           <a href="${B}/pages/feasibility.html">사업성 검토</a>
         </div>
         <div class="footer-col">
           <h5>문의·지원</h5>
           <a href="${B}/pages/contact.html">고객센터</a>
-          <a href="${B}/intranet/index.html">인트라넷</a>
           <a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>
           <a href="${B}/pages/faq.html">자주 묻는 질문</a>
         </div>
         <div class="footer-col footer-contact">
           <h5>고객센터</h5>
-          <span class="phone">010-2230-9210</span>
-          <a href="mailto:dodo6666@naver.com" class="email-link"><i class="fa-solid fa-envelope" style="font-size:11px"></i> dodo6666@naver.com</a>
-          <p>FAX 02-478-6114<br>평일 09:00 – 18:00 (토·일·공휴일 휴무)</p>
+          <a href="tel:024787114" class="footer-phone" aria-label="빛세움 대표전화 02-478-7114로 전화하기">02-478-7114</a>
+          <a href="mailto:visseum@visseum.co.kr" class="email-link"><i class="fa-solid fa-envelope" style="font-size:11px"></i> visseum@visseum.co.kr</a>
+          <p>FAX 02-478-6114<br>서울특별시 강동구 성내로6길 50, 피스센터 5층<br>평일 09:00 – 18:00 (토·일·공휴일 휴무)</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-policy-links">
-          <a href="${B}/pages/about.html">회사소개</a>
-          <a href="${B}/pages/privacy.html" style="font-weight:700">개인정보 처리방침</a>
-          <a href="${B}/pages/sitemap.html">사이트맵</a>
-          <a href="${B}/admin/login.html">관리자</a>
-          <a href="${B}/intranet/index.html">인트라넷</a>
-        </div>
-        <div class="footer-company-info">
-          <div class="footer-copy">&copy; 2026 (주)빛세움. All rights reserved.</div>
-          <div class="footer-info"><span>서울특별시 강동구 성내로6길 50, 피스센터 5층</span><span>대표 조구형</span></div>
-          <div class="footer-social">
-            <a href="http://pf.kakao.com/_uNndX" target="_blank" aria-label="카카오톡"><i class="fa-solid fa-comment"></i></a>
+        <div class="footer-legal"><a href="${B}/pages/privacy.html" class="footer-privacy-link">개인정보 처리방침</a></div>
+        <div class="footer-bottom-content">
+          <div class="footer-bottom-left">
+            <div class="footer-copy">&copy; 2026 (주)빛세움. All rights reserved.</div>
+          </div>
+          <div class="footer-bottom-right">
+            <div class="footer-info"><span>서울특별시 강동구 성내로6길 50, 피스센터 5층</span><span class="footer-representative">대표 조구형</span></div>
+            <div class="footer-social">
+              <a href="http://pf.kakao.com/_uNndX" target="_blank" aria-label="카카오톡"><i class="fa-solid fa-comment"></i></a>
+            </div>
           </div>
         </div>
       </div>
