@@ -202,17 +202,6 @@ const App = (() => {
           <p>FAX 02-478-6114<br>서울특별시 강동구 성내로6길 50, 피스센터 5층<br>평일 09:00 – 18:00<br>(토·일·공휴일 휴무)</p>
         </div>
       </div>
-      <div class="footer-bottom">
-        <div class="footer-bottom-content">
-          <div class="footer-bottom-left">
-            <a href="${B}/pages/privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
-            <div class="footer-copy">&copy; 2026 (주)빛세움. All rights reserved.</div>
-          </div>
-          <div class="footer-bottom-right">
-            <div class="footer-info"><span>서울특별시 강동구 성내로6길 50, 피스센터 5층</span><span class="footer-representative">대표 조구형</span></div>
-          </div>
-        </div>
-      </div>
     </div></footer>
     <button class="scroll-top" id="scrollTop" aria-label="맨 위로"><i class="fa-solid fa-chevron-up"></i></button>
     <div class="toast-container" id="toastContainer"></div>
