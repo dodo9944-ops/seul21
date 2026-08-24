@@ -173,7 +173,9 @@ const App = (() => {
 
   /* ── 공통 푸터 HTML ── */
   function footerHTML() {
-    return `
+    /* 페이지 자체에 이미 동일한 상담 CTA(.cta-banner)가 있으면 중복 노출 방지 (예: index.html) */
+    const hasOwnCta = !!document.querySelector('.cta-banner');
+    const preFooterCta = hasOwnCta ? '' : `
     <div class="pre-footer-cta">
       <div class="inner">
         <div class="pfc-text">
@@ -182,7 +184,9 @@ const App = (() => {
         </div>
         <a href="${B}/pages/contact.html" class="pfc-btn">상담 문의하기 <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-    </div>
+    </div>`;
+    return `
+    ${preFooterCta}
 
     <div class="footer-news">
       <div class="inner">
