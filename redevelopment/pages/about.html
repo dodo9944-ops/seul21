@@ -42,6 +42,19 @@
         object-position: center 30%;
         display: block;
         filter: contrast(1.03) saturate(0.95);
+        /* 좌측은 투명하게 시작해 우측으로 자연스럽게 드러남 — 경계 없이 배경과 이어짐 */
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 4%, rgba(0,0,0,.5) 22%, #000 46%, #000 100%);
+        mask-image: linear-gradient(90deg, transparent 0%, transparent 4%, rgba(0,0,0,.5) 22%, #000 46%, #000 100%);
+    }
+    /* 우측 하단 모서리를 살짝 흐리게 — 각진 경계 없이 자연스럽게 */
+    .hero-bg-photo-corner-blur {
+        position: absolute; right: 0; bottom: 0;
+        width: 42%; height: 38%;
+        z-index: 3; pointer-events: none;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        -webkit-mask-image: radial-gradient(ellipse at 100% 100%, #000 0%, #000 35%, transparent 78%);
+        mask-image: radial-gradient(ellipse at 100% 100%, #000 0%, #000 35%, transparent 78%);
     }
     .hero-bg-photo::after {
         content: '';
@@ -890,8 +903,9 @@
      ============================================================ -->
 <div class="about-hero">
     <div class="hero-bg-photo">
-        <img src="../jpg/hero_about.png" alt="빛세움 사옥">
+        <img src="../jpg/hero_about_office.jpg" alt="(주)빛세움 사옥 — VISSEUM 사옥 전경">
     </div>
+    <div class="hero-bg-photo-corner-blur" aria-hidden="true"></div>
     <div class="hero-hline hero-hline-top"></div>
     <div class="hero-hline hero-hline-bottom"></div>
     <div class="hero-golden-glow" aria-hidden="true"></div>
