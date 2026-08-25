@@ -52,10 +52,10 @@
     /* 히어로 안 서비스 선택 카드 */
     .hero-selector{flex-shrink:0;align-self:center;width:360px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
     @media(max-width:640px){.hero-selector{grid-template-columns:1fr;gap:12px;width:100%}}
-    .hero-opt{background:rgba(10,16,30,0.57);border:1px solid rgba(10,15,28,0.14);border-radius:12px;padding:16px 14px;cursor:pointer;transition:all .3s;position:relative;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+    .hero-opt{background:rgba(10,16,30,0.80);border:1px solid rgba(10,15,28,0.14);border-radius:12px;padding:16px 14px;cursor:pointer;transition:all .3s;position:relative;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:0 1px 4px rgba(0,0,0,0.04)}
     .hero-opt:hover{background:rgba(255,255,255,0.70);border-color:rgba(184,134,11,.3);transform:translateY(-2px)}
-    .hero-opt.active{background:rgba(10,16,30,0.62);border-color:rgba(184,134,11,0.35);box-shadow:none}
-    .hero-opt:last-child{background:rgba(10,16,30,0.64)}
+    .hero-opt.active{background:rgba(10,16,30,0.85);border-color:rgba(184,134,11,0.35);box-shadow:none}
+    .hero-opt:last-child{background:rgba(10,16,30,0.82)}
     .hero-opt:last-child:hover{background:rgba(255,255,255,0.74)}
     .hero-opt.active::before{display:none}
     .hero-opt .ho-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
@@ -89,7 +89,7 @@
     .hero-selector .hero-opt:not(.full) .ho-desc{display:none}
     .hero-selector .hero-opt:not(.full) .ho-bottom{margin-top:9px}
     /* 전체폭 카드 — 사업타당성 분석(REB 실시간 분석기) */
-    .hero-opt.full{grid-column:1/-1;padding-bottom:1px;background:rgba(10,16,30,0.57);border-color:rgba(10,15,28,0.14)}
+    .hero-opt.full{grid-column:1/-1;padding-bottom:1px;background:rgba(10,16,30,0.80);border-color:rgba(10,15,28,0.14)}
     .hero-opt.full:hover{background:rgba(255,255,255,0.70);border-color:rgba(184,134,11,.3)}
     .hero-opt.full:last-child{background:rgba(10,16,30,0.57)}
     .hero-opt.full:last-child:hover{background:rgba(255,255,255,0.70)}
@@ -365,7 +365,7 @@
                 <p class="ho-desc">빛세움의 실무 노하우를 더한, 차별화된 사업타당성 분석을 직접 경험하세요.</p>
                 <div class="ho-bottom">
                     <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 분석기 열기</div>
-                    <div class="ho-mini"><i class="fa-solid fa-map-location-dot" title="대상지 지도"></i><i class="fa-solid fa-building" title="토지·건축물"></i><i class="fa-solid fa-file-invoice-dollar" title="사업성 산출"></i></div>
+                    <div class="ho-mini"><i class="fa-solid fa-file-invoice-dollar" title="사업성 산출"></i></div>
                 </div>
             </div>
         </div>
