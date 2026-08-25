@@ -59,20 +59,20 @@
         position: absolute; inset: 0;
         background:
             radial-gradient(ellipse at 48% 52%,
-                rgba(255,225,135,0.16) 0%,
-                rgba(255,243,210,0.10) 38%,
-                rgba(255,255,255,0.03) 65%,
-                transparent 78%
+                rgba(255,225,135,0.14) 0%,
+                rgba(255,243,210,0.09) 40%,
+                rgba(255,255,255,0.025) 68%,
+                transparent 80%
             ),
             linear-gradient(90deg,
                 rgba(255,219,92,0.58) 0%,
-                rgba(255,225,118,0.52) 24%,
-                rgba(247,207,105,0.42) 38%,
-                rgba(252,225,158,0.30) 49%,
-                rgba(255,241,205,0.19) 58%,
-                rgba(255,250,232,0.11) 67%,
-                rgba(255,255,255,0.05) 76%,
-                rgba(255,255,255,0) 88%
+                rgba(255,225,118,0.52) 26%,
+                rgba(247,207,105,0.37) 44%,
+                rgba(252,225,158,0.26) 56%,
+                rgba(255,241,205,0.16) 66%,
+                rgba(255,250,232,0.09) 75%,
+                rgba(255,255,255,0.04) 84%,
+                rgba(255,255,255,0) 96%
             );
         z-index: 1;
     }
@@ -104,11 +104,11 @@
     /* 골든 라이트 웨이브 — 메인 히어로와 동일 기법 */
     .hero-golden-wave {
         position: absolute; left: 0; bottom: -10%;
-        width: 72%; height: 56%;
+        width: 82%; height: 56%;
         overflow: hidden; pointer-events: none;
         z-index: 2; opacity: 1;
-        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 84%, transparent 100%);
-        mask-image: linear-gradient(90deg, #000 0%, #000 84%, transparent 100%);
+        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 88%, transparent 100%);
+        mask-image: linear-gradient(90deg, #000 0%, #000 88%, transparent 100%);
     }
     .hero-golden-wave::before {
         content: ''; position: absolute; left: 0; bottom: 0;
@@ -133,14 +133,14 @@
             transparent 0%, rgba(0,0,0,.35) 10%, #000 28%,
             rgba(0,0,0,.55) 46%, #000 62%, rgba(0,0,0,.30) 82%, transparent 100%);
     }
-    .wave-line.line-1 { left:-15%; bottom:-10%; width:1382px; height:290px; transform:rotate(-9deg);             border-top-width: 4px;   border-top-color: rgba(255,196,0,.68); }
-    .wave-line.line-2 { left:-12%; bottom:-4%;  width:1267px; height:265px; transform:rotate(-8deg);             border-top-width: 3.5px; border-top-color: rgba(255,205,40,.60); }
-    .wave-line.line-3 { left:-18%; bottom:-14%; width:1152px; height:245px; transform:rotate(-6deg);             border-top-width: 3px;   border-top-color: rgba(255,214,70,.54); }
-    .wave-line.line-4 { left:-8%;  bottom:4%;   width:1037px; height:220px; transform:rotate(-11deg);            border-top-width: 1.8px; border-top-color: rgba(255,196,0,.48); }
-    .wave-line.line-5 { left:-20%; bottom:-18%; width:922px;  height:198px; transform:rotate(-4deg);             border-top-width: 1.5px; border-top-color: rgba(255,223,100,.42); }
-    .wave-line.line-6 { left:-6%;  bottom:0%;   width:819px;  height:182px; transform:rotate(-13deg) scaleY(.9); border-top-width: 1.3px; border-top-color: rgba(255,214,70,.36); }
-    .wave-line.line-7 { left:-16%; bottom:-8%;  width:730px;  height:165px; transform:rotate(-3deg);             border-top-width: 1.1px; border-top-color: rgba(255,232,140,.30); }
-    .wave-line.line-8 { left:-4%;  bottom:6%;   width:640px;  height:148px; transform:rotate(-15deg);            border-top-width: 1px;   border-top-color: rgba(255,240,170,.24); }
+    .wave-line.line-1 { left:-15%; bottom:-10%; width:1728px; height:290px; transform:rotate(-9deg);             border-top-width: 4px;   border-top-color: rgba(255,196,0,.68); }
+    .wave-line.line-2 { left:-12%; bottom:-4%;  width:1584px; height:265px; transform:rotate(-8deg);             border-top-width: 3.5px; border-top-color: rgba(255,205,40,.60); }
+    .wave-line.line-3 { left:-18%; bottom:-14%; width:1440px; height:245px; transform:rotate(-6deg);             border-top-width: 3px;   border-top-color: rgba(255,214,70,.54); }
+    .wave-line.line-4 { left:-8%;  bottom:4%;   width:1296px; height:220px; transform:rotate(-11deg);            border-top-width: 1.8px; border-top-color: rgba(255,196,0,.48); }
+    .wave-line.line-5 { left:-20%; bottom:-18%; width:1153px; height:198px; transform:rotate(-4deg);             border-top-width: 1.5px; border-top-color: rgba(255,223,100,.42); }
+    .wave-line.line-6 { left:-6%;  bottom:0%;   width:1024px; height:182px; transform:rotate(-13deg) scaleY(.9); border-top-width: 1.3px; border-top-color: rgba(255,214,70,.36); }
+    .wave-line.line-7 { left:-16%; bottom:-8%;  width:913px;  height:165px; transform:rotate(-3deg);             border-top-width: 1.1px; border-top-color: rgba(255,232,140,.30); }
+    .wave-line.line-8 { left:-4%;  bottom:6%;   width:800px;  height:148px; transform:rotate(-15deg);            border-top-width: 1px;   border-top-color: rgba(255,240,170,.24); }
     .wave-point {
         position: absolute; width: 3px; height: 3px; border-radius: 50%;
         background: #FFC400; box-shadow: 0 0 6px rgba(255,196,0,.65), 0 0 14px rgba(255,196,0,.30);
@@ -161,11 +161,11 @@
     }
     .about-hero .inner {
         position: relative; z-index: 6;
-        display: flex; align-items: center; gap: 48px;
+        display: flex; align-items: center; gap: 32px;
     }
     .hero-text { flex: 1; min-width: 0; position: relative; z-index: 5; }
     .hero-cards-float {
-        flex-shrink: 0; align-self: center; width: 360px;
+        flex-shrink: 0; align-self: center; width: 322px;
         display: grid; grid-template-columns: repeat(2, 1fr);
         gap: 12px;
         position: relative; z-index: 5;
@@ -197,9 +197,9 @@
         font-style: normal; color: #C58B00;
     }
     .hero-sub {
-        font-size: 15.3px; color: #565C66;
-        line-height: 1.7; max-width: none;
-        white-space: nowrap;
+        font-size: 15px; color: #565C66;
+        line-height: 1.7; max-width: none; width: max-content;
+        white-space: nowrap; overflow: visible;
     }
     .hero-card {
         background: rgba(24,28,34,.78);
