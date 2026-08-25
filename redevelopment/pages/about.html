@@ -26,7 +26,8 @@
         background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
         position: relative;
         overflow: hidden;
-        padding: 32px 0 12px;
+        padding-top: clamp(45px, 4vw, 60px);
+        padding-bottom: clamp(40px, 3.5vw, 55px);
         min-height: 360px;
     }
     .hero-bg-photo {
@@ -57,19 +58,21 @@
         content: '';
         position: absolute; inset: 0;
         background:
-            radial-gradient(ellipse at 32% 55%,
-                rgba(255,222,120,0.22) 0%,
-                rgba(255,245,215,0.12) 35%,
-                transparent 70%
+            radial-gradient(ellipse at 48% 52%,
+                rgba(255,225,135,0.16) 0%,
+                rgba(255,243,210,0.10) 38%,
+                rgba(255,255,255,0.03) 65%,
+                transparent 78%
             ),
             linear-gradient(90deg,
-                rgba(255,218,92,0.58) 0%,
-                rgba(255,229,140,0.48) calc(18% + 10px),
-                rgba(255,242,196,0.38) calc(32% + 10px),
-                rgba(255,249,230,0.28) calc(45% + 10px),
-                rgba(255,255,255,0.15) calc(58% + 10px),
-                rgba(255,255,255,0.05) calc(70% + 10px),
-                rgba(255,255,255,0) calc(82% + 10px)
+                rgba(255,219,92,0.58) 0%,
+                rgba(255,225,118,0.52) 24%,
+                rgba(247,207,105,0.42) 38%,
+                rgba(252,225,158,0.30) 49%,
+                rgba(255,241,205,0.19) 58%,
+                rgba(255,250,232,0.11) 67%,
+                rgba(255,255,255,0.05) 76%,
+                rgba(255,255,255,0) 88%
             );
         z-index: 1;
     }
@@ -119,7 +122,10 @@
         position: absolute; border-radius: 50%;
         border-top: 1.2px solid transparent;
         transform-origin: center;
-        filter: drop-shadow(0 0 6px rgba(255,196,0,.55)) drop-shadow(0 0 16px rgba(255,196,0,.30));
+        filter:
+            drop-shadow(0 0 4px rgba(255,215,90,.90))
+            drop-shadow(0 0 10px rgba(223,160,0,.65))
+            drop-shadow(0 0 20px rgba(223,160,0,.35));
         -webkit-mask-image: linear-gradient(90deg,
             transparent 0%, rgba(0,0,0,.35) 10%, #000 28%,
             rgba(0,0,0,.55) 46%, #000 62%, rgba(0,0,0,.30) 82%, transparent 100%);
@@ -127,14 +133,14 @@
             transparent 0%, rgba(0,0,0,.35) 10%, #000 28%,
             rgba(0,0,0,.55) 46%, #000 62%, rgba(0,0,0,.30) 82%, transparent 100%);
     }
-    .wave-line.line-1 { left:-15%; bottom:-10%; width:1080px; height:290px; transform:rotate(-9deg);             border-top-width: 1.6px; border-top-color: rgba(255,196,0,.68); }
-    .wave-line.line-2 { left:-12%; bottom:-4%;  width:990px;  height:265px; transform:rotate(-8deg);             border-top-width: 1.5px; border-top-color: rgba(255,205,40,.60); }
-    .wave-line.line-3 { left:-18%; bottom:-14%; width:900px;  height:245px; transform:rotate(-6deg);             border-top-width: 1.4px; border-top-color: rgba(255,214,70,.54); }
-    .wave-line.line-4 { left:-8%;  bottom:4%;   width:810px;  height:220px; transform:rotate(-11deg);            border-top-width: 1.2px; border-top-color: rgba(255,196,0,.48); }
-    .wave-line.line-5 { left:-20%; bottom:-18%; width:720px;  height:198px; transform:rotate(-4deg);             border-top-width: 1.1px; border-top-color: rgba(255,223,100,.42); }
-    .wave-line.line-6 { left:-6%;  bottom:0%;   width:640px;  height:182px; transform:rotate(-13deg) scaleY(.9); border-top-width: 1px;   border-top-color: rgba(255,214,70,.36); }
-    .wave-line.line-7 { left:-16%; bottom:-8%;  width:570px;  height:165px; transform:rotate(-3deg);             border-top-width: .9px;  border-top-color: rgba(255,232,140,.30); }
-    .wave-line.line-8 { left:-4%;  bottom:6%;   width:500px;  height:148px; transform:rotate(-15deg);            border-top-width: .8px;  border-top-color: rgba(255,240,170,.24); }
+    .wave-line.line-1 { left:-15%; bottom:-10%; width:1382px; height:290px; transform:rotate(-9deg);             border-top-width: 4px;   border-top-color: rgba(255,196,0,.68); }
+    .wave-line.line-2 { left:-12%; bottom:-4%;  width:1267px; height:265px; transform:rotate(-8deg);             border-top-width: 3.5px; border-top-color: rgba(255,205,40,.60); }
+    .wave-line.line-3 { left:-18%; bottom:-14%; width:1152px; height:245px; transform:rotate(-6deg);             border-top-width: 3px;   border-top-color: rgba(255,214,70,.54); }
+    .wave-line.line-4 { left:-8%;  bottom:4%;   width:1037px; height:220px; transform:rotate(-11deg);            border-top-width: 1.8px; border-top-color: rgba(255,196,0,.48); }
+    .wave-line.line-5 { left:-20%; bottom:-18%; width:922px;  height:198px; transform:rotate(-4deg);             border-top-width: 1.5px; border-top-color: rgba(255,223,100,.42); }
+    .wave-line.line-6 { left:-6%;  bottom:0%;   width:819px;  height:182px; transform:rotate(-13deg) scaleY(.9); border-top-width: 1.3px; border-top-color: rgba(255,214,70,.36); }
+    .wave-line.line-7 { left:-16%; bottom:-8%;  width:730px;  height:165px; transform:rotate(-3deg);             border-top-width: 1.1px; border-top-color: rgba(255,232,140,.30); }
+    .wave-line.line-8 { left:-4%;  bottom:6%;   width:640px;  height:148px; transform:rotate(-15deg);            border-top-width: 1px;   border-top-color: rgba(255,240,170,.24); }
     .wave-point {
         position: absolute; width: 3px; height: 3px; border-radius: 50%;
         background: #FFC400; box-shadow: 0 0 6px rgba(255,196,0,.65), 0 0 14px rgba(255,196,0,.30);
@@ -155,7 +161,7 @@
     }
     .about-hero .inner {
         position: relative; z-index: 6;
-        display: flex; align-items: flex-start; gap: 48px;
+        display: flex; align-items: center; gap: 48px;
     }
     .hero-text { flex: 1; min-width: 0; position: relative; z-index: 5; }
     .hero-cards-float {
@@ -191,8 +197,9 @@
         font-style: normal; color: #C58B00;
     }
     .hero-sub {
-        font-size: 16px; color: #565C66;
-        line-height: 1.7; max-width: 480px;
+        font-size: 15.3px; color: #565C66;
+        line-height: 1.7; max-width: none;
+        white-space: nowrap;
     }
     .hero-card {
         background: rgba(24,28,34,.78);
