@@ -71,6 +71,16 @@
     .pop-card .pop-body{flex:1;min-width:0}
     .pop-card .pop-title{font-size:14px;font-weight:800;color:var(--gray-900);line-height:1.45;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
     .pop-card .pop-info{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--gray-500);font-weight:600}
+
+    /* === 갤러리 — 대표사진 카드형 (평시 사진 오픈 표시) === */
+    .cm-gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .cm-gallery-card{background:#fff;border:1.5px solid var(--gray-150,#eaedf0);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .25s}
+    .cm-gallery-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.08);border-color:rgba(184,134,11,.3)}
+    .cm-gallery-thumb{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--gray-100,#f3f4f6)}
+    .cm-gallery-thumb-empty{width:100%;aspect-ratio:4/3;background:var(--gray-100,#f3f4f6);display:flex;align-items:center;justify-content:center;color:var(--gray-300,#d1d5db);font-size:26px}
+    .cm-gallery-body{padding:12px 14px}
+    .cm-gallery-title{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .cm-gallery-meta{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;color:var(--gray-500)}
     .pop-card .pop-info i{font-size:10px;color:var(--gold)}
 
     /* === Document List === */
@@ -145,19 +155,19 @@
     .uni-hero .hero-bg-photo { position: absolute; top: 0; right: 0; width: 58%; height: 100%; z-index: 0; }
     .uni-hero .hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; filter: contrast(1.03) saturate(0.95); }
     .uni-hero .hero-bg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,253,247,1.00) 0%, rgba(255,253,247,0.99) 18%, rgba(255,249,232,0.96) 28%, rgba(255,247,225,0.88) 36%, rgba(255,247,225,0.70) 43%, rgba(255,247,225,0.48) 49%, rgba(255,247,225,0.28) 55%, rgba(255,247,225,0.12) 61%, rgba(255,247,225,0.04) 66%, rgba(255,247,225,0.00) 72%); z-index: 1; }
-    .uni-hero .hero-light-wave { position: absolute; left: 0; bottom: -10%; width: 60%; height: 60%; overflow: hidden; pointer-events: none; z-index: 1; opacity: 1; -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 70%, transparent 100%); mask-image: linear-gradient(90deg, #000 0%, #000 70%, transparent 100%); }
-    .uni-hero .hero-light-wave::before { content: ''; position: absolute; left: 0; bottom: 0; width: 78%; height: 78%; background: radial-gradient(ellipse at 18% 100%, rgba(255,196,0,.44) 0%, rgba(255,196,0,.22) 28%, rgba(255,196,0,.08) 50%, transparent 72%); filter: blur(2px); }
+    .uni-hero .hero-light-wave { position: absolute; left: 0; bottom: -9%; width: 55%; height: 53%; overflow: hidden; pointer-events: none; z-index: 1; opacity: 1; -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 67%, transparent 100%); mask-image: linear-gradient(90deg, #000 0%, #000 67%, transparent 100%); }
+    .uni-hero .hero-light-wave::before { content: ''; position: absolute; left: 0; bottom: 0; width: 73%; height: 73%; background: radial-gradient(ellipse at 17% 100%, rgba(255,196,0,.41) 0%, rgba(255,196,0,.19) 28%, rgba(255,196,0,.07) 50%, transparent 72%); filter: blur(2px); }
     .uni-hero .hero-light-wave .wave-line { position: absolute; border-radius: 50%; border-top: 1.2px solid transparent; transform-origin: center; filter: drop-shadow(0 0 5px rgba(255,196,0,.5)) drop-shadow(0 0 14px rgba(255,196,0,.26)); -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.35) 10%, #000 28%, rgba(0,0,0,.55) 46%, #000 62%, rgba(0,0,0,.30) 82%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.35) 10%, #000 28%, rgba(0,0,0,.55) 46%, #000 62%, rgba(0,0,0,.30) 82%, transparent 100%); }
-    .uni-hero .hero-light-wave .wave-line:nth-child(1) { left:-16%; bottom:-9%;  width:1000px; height:260px; transform:rotate(-16deg);            border-top-width: 1.6px; border-top-color: rgba(255,196,0,.66); }
-    .uni-hero .hero-light-wave .wave-line:nth-child(2) { left:-12%; bottom:-3%;  width:920px;  height:238px; transform:rotate(-13deg);            border-top-width: 1.4px; border-top-color: rgba(255,206,45,.58); }
-    .uni-hero .hero-light-wave .wave-line:nth-child(3) { left:-20%; bottom:-15%; width:840px;  height:216px; transform:rotate(-10deg);            border-top-width: 1.25px;border-top-color: rgba(255,216,75,.50); }
-    .uni-hero .hero-light-wave .wave-line:nth-child(4) { left:-8%;  bottom:5%;   width:760px;  height:195px; transform:rotate(-7deg);             border-top-width: 1.1px; border-top-color: rgba(255,196,0,.42); }
-    .uni-hero .hero-light-wave .wave-line:nth-child(5) { left:-24%; bottom:-20%; width:680px;  height:176px; transform:rotate(-5deg) scaleY(.9);  border-top-width: 1px;   border-top-color: rgba(255,226,115,.34); }
-    .uni-hero .hero-light-wave .wave-line:nth-child(6) { left:-4%;  bottom:1%;   width:600px;  height:156px; transform:rotate(-3deg);             border-top-width: .9px;  border-top-color: rgba(255,236,150,.26); }
-    .uni-hero .hero-light-wave .wave-line:nth-child(7) { left:-14%; bottom:-6%;  width:520px;  height:136px; transform:rotate(-18deg);            border-top-width: .8px;  border-top-color: rgba(255,244,178,.18); }
+    .uni-hero .hero-light-wave .wave-line:nth-child(1) { left:-12%; bottom:-8%;  width:900px; height:235px; transform:rotate(-7deg);              border-top-width: 1.55px; border-top-color: rgba(255,196,0,.63); }
+    .uni-hero .hero-light-wave .wave-line:nth-child(2) { left:-9%;  bottom:-2%;  width:820px; height:214px; transform:rotate(-5.5deg);            border-top-width: 1.35px; border-top-color: rgba(255,208,50,.55); }
+    .uni-hero .hero-light-wave .wave-line:nth-child(3) { left:-16%; bottom:-12%; width:740px; height:193px; transform:rotate(-4deg);              border-top-width: 1.2px;  border-top-color: rgba(255,218,80,.47); }
+    .uni-hero .hero-light-wave .wave-line:nth-child(4) { left:-6%;  bottom:5%;   width:660px; height:172px; transform:rotate(-10deg) scaleY(.94); border-top-width: 1.05px; border-top-color: rgba(255,196,0,.39); }
+    .uni-hero .hero-light-wave .wave-line:nth-child(5) { left:-19%; bottom:-16%; width:580px; height:151px; transform:rotate(-2.5deg);            border-top-width: .95px;  border-top-color: rgba(255,230,120,.31); }
+    .uni-hero .hero-light-wave .wave-line:nth-child(6) { left:-4%;  bottom:1%;   width:500px; height:130px; transform:rotate(-12deg);             border-top-width: .85px;  border-top-color: rgba(255,239,155,.23); }
+    .uni-hero .hero-light-wave .wave-line:nth-child(7) { left:-14%; bottom:-5%;  width:430px; height:112px; transform:rotate(-1deg);              border-top-width: .8px;   border-top-color: rgba(255,247,185,.16); }
     @media (max-width: 1024px) { .uni-hero .hero-light-wave .wave-line:nth-child(n+6) { display: none; } }
-    @media (max-width: 600px) { .uni-hero .hero-light-wave { opacity: .40; } .uni-hero .hero-light-wave .wave-line:nth-child(n+3) { display: none; } }
-    .uni-hero .hero-bg-photo::before { content: ''; position: absolute; top: 0; bottom: 0; left: 22%; width: 56%; pointer-events: none; background: linear-gradient(90deg, rgba(255,253,247,0) 0%, rgba(255,246,216,0.24) 25%, rgba(255,231,160,0.34) 52%, rgba(255,231,160,0.28) 62%, rgba(255,246,216,0.14) 80%, rgba(255,253,247,0) 100%); filter: blur(28px); z-index: 2; }
+    @media (max-width: 600px) { .uni-hero .hero-light-wave { opacity: .40; } .uni-hero .hero-light-wave .wave-line:nth-child(n+4) { display: none; } }
+    .uni-hero .hero-bg-photo::before { content: ''; position: absolute; top: 0; bottom: 0; left: 22%; width: 56%; pointer-events: none; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.16) 52%, rgba(255,255,255,0.18) 62%, rgba(255,255,255,0.08) 80%, rgba(255,255,255,0) 100%); filter: blur(28px); z-index: 2; }
     .uni-hero::before {
         content: ''; position: absolute; inset: 0;
         background-image:
@@ -191,31 +201,20 @@
     .uni-hero .uh-visual { flex-shrink: 0; align-self: center; width: 360px; position: relative; z-index: 2; }
     .uni-hero .uh-photo { display: none; }
     .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .uni-hero .uh-card { background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 20px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); display: block; text-decoration: none; color: inherit; cursor: pointer; position: relative; z-index: 5; }
+    .uni-hero .uh-card { width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); cursor: pointer; position: relative; z-index: 5; }
+    .uni-hero .uh-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
+    .uni-hero .uh-card.on { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(184,134,11,.5), 0 12px 30px rgba(0,0,0,.16); }
+    .uni-hero .uh-ci { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,196,0,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+    .uni-hero .uh-ci i { font-size: 15px; color: #FFC400; }
+    .uni-hero .uh-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
+    .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,.65); line-height: 1.5; }
+    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } }
     /* 앵커 점프 시 sticky 헤더 가림 방지 */
     html { scroll-behavior: smooth; }
     #libContent { scroll-margin-top: 88px; }
-    .uni-hero .uh-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
-    .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,196,0,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
-    .uni-hero .uh-ci i { font-size: 14px; color: #FFC400; }
-    .uni-hero .uh-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 3px; }
-    .uni-hero .uh-card p { font-size: 11px; color: rgba(255,255,255,.65); line-height: 1.5; }
-    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
-    @media (max-width: 600px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
+    @media (max-width: 1024px) { .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
+    @media (max-width: 600px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
-    /* === 본문 우측 바로가기 퀵네비 (스크롤 추종 + 상단/하단 리밋) === */
-    .lib-quicknav{position:fixed;top:0;right:calc((100vw - 1280px)/2 - 148px);width:132px;z-index:40;display:flex;flex-direction:column;gap:8px}
-    .lib-quicknav.show{opacity:1;pointer-events:auto}
-    .lqn-title{font-size:11px;font-weight:800;color:var(--gray-400);letter-spacing:1px;margin-bottom:3px;padding-left:3px}
-    .lqn-card{display:flex;align-items:center;gap:9px;padding:11px 12px;background:#fff;border:1px solid var(--gray-200);border-radius:10px;cursor:pointer;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:all .2s}
-    .lqn-card:hover{border-color:var(--gold);transform:translateX(-3px);box-shadow:0 6px 18px rgba(184,134,11,.14)}
-    .lqn-ic{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#FFFFFF,#FFF3C4);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--gold);flex-shrink:0}
-    .lqn-card .lqn-tx{font-size:12.5px;font-weight:700;color:var(--gray-800)}
-    .lqn-card.on{border-color:var(--gold);background:linear-gradient(135deg,rgba(184,134,11,.12),#fff);box-shadow:0 6px 18px rgba(184,134,11,.20)}
-    .lqn-card.on .lqn-ic{background:linear-gradient(135deg,var(--gold),#b7935a);color:#0A0F1C}
-    .lqn-card.on .lqn-tx{color:var(--brand-dark)}
-    .uni-hero .uh-card.on{border-color:var(--gold);background:rgba(255,255,255,0.80);box-shadow:0 8px 24px rgba(184,134,11,.30)}
-    @media(max-width:1600px){.lib-quicknav{display:none}}
     </style>
 </head>
 <body>
@@ -231,30 +230,26 @@
         <span class="wave-line"></span>
         <span class="wave-line"></span>
     </div>
-    <div class="hero-bg-photo"><img src="../jpg/hero_library.png?v=20260614g" alt="빛세움 자료실"></div>
+    <div class="hero-bg-photo"><img src="../jpg/hero_library.jpg?v=20260825a" alt="빛세움 자료실"></div>
     <div class="inner">
         <div class="uh-text">
             <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>자료실</span></div>
             <div class="uh-label">PROFESSIONAL ARCHIVE</div>
-            <h1>정비사업 <em>실무 자료</em>를 한곳에서</h1>
-            <p class="uh-sub">관계법령 · 서식·매뉴얼 · 주요뉴스 · 커뮤니티 — 정비사업에 필요한 공식 자료를 체계적으로 제공합니다</p>
+            <h1>정비사업 <em>실무 자료</em>를<br>한곳에 모았습니다</h1>
+            <p class="uh-sub">관계법령부터 서식·매뉴얼, 주요뉴스, 갤러리까지<br>정비사업 실무에 필요한 자료를 체계적으로 제공합니다</p>
         </div>
         <div class="uh-visual">
-            <div class="uh-photo"><img src="../jpg/hero_library.png?v=20260614g" alt="빛세움 자료실"></div>
-            <div class="uh-cards"><a class="uh-card" href="#libContent" onclick="switchCat('주요뉴스')"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></a><a class="uh-card" href="#libContent" onclick="switchCat('법령')"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>도시정비법·고시·공고·판례·질의회신 및 지침·규정</p></a><a class="uh-card" href="#libContent" onclick="switchCat('서식가이드')"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></a><a class="uh-card" href="community.html"><div class="uh-ci"><i class="fa-solid fa-comments"></i></div><h4>커뮤니티</h4><p>정비사업 정보 공유·소통 공간</p></a></div>
+            <div class="uh-photo"><img src="../jpg/hero_library.jpg?v=20260825a" alt="빛세움 자료실"></div>
+            <div class="uh-cards" id="heroCards">
+                <div class="uh-card" data-cat="주요뉴스"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></div>
+                <div class="uh-card" data-cat="법령"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>도시정비법 등 각종 판례</p></div>
+                <div class="uh-card" data-cat="서식가이드"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div>
+                <div class="uh-card" data-cat="갤러리"><div class="uh-ci"><i class="fa-solid fa-images"></i></div><h4>갤러리</h4><p>현장 갤러리·소통공간</p></div>
+            </div>
         </div>
     </div>
 </div>
 
-
-<div class="lib-quicknav" id="libQuicknav">
-    <div class="lqn-title">바로가기</div>
-    <a class="lqn-card" onclick="switchCat('주요뉴스')"><span class="lqn-ic"><i class="fa-solid fa-newspaper"></i></span><span class="lqn-tx">주요뉴스</span></a>
-    <a class="lqn-card" onclick="switchCat('법령')"><span class="lqn-ic"><i class="fa-solid fa-scale-balanced"></i></span><span class="lqn-tx">관계법령</span></a>
-    <a class="lqn-card" onclick="switchCat('서식가이드')"><span class="lqn-ic"><i class="fa-solid fa-file-pen"></i></span><span class="lqn-tx">서식·매뉴얼</span></a>
-    <a class="lqn-card" href="community.html"><span class="lqn-ic"><i class="fa-solid fa-comments"></i></span><span class="lqn-tx">커뮤니티</span></a>
-    <a class="lqn-card" href="alimtalk.html"><span class="lqn-ic" style="background:linear-gradient(135deg,#FAE100,#FFCD00);color:#3C1E1E"><i class="fa-solid fa-comment"></i></span><span class="lqn-tx">카카오톡 소식받기</span></a>
-</div>
 <div class="page-body lib-page"><div class="inner" id="libContent">
 
     <div class="ctrl-bar">
@@ -306,10 +301,22 @@
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}
+if(typeof MOCK!=='undefined'&&MOCK.community){var _cs=JSON.parse(localStorage.getItem('rdc_community')||'[]');if(_cs.length!==MOCK.community.length)localStorage.setItem('rdc_community',JSON.stringify(MOCK.community))}
 var now=new Date(),oneYearAgo=new Date(now.getTime()-365*864e5);
 var allItems=DataService.getAll('library').filter(function(i){if(i.category!=='주요뉴스')return true;return i.date&&new Date(i.date)>=oneYearAgo});
+var galleryItems=DataService.getAll('community').filter(function(i){return i.category==='갤러리'});
+fetch('/api/community').then(function(r){return r.json()}).then(function(res){
+    if(res.posts&&res.posts.length){
+        var localIds={};galleryItems.forEach(function(p){localIds[p.id]=true});
+        var merged=false;
+        res.posts.forEach(function(p){
+            if(p.category==='갤러리'&&!localIds[p.id]){galleryItems.unshift(p);merged=true;DataService.create('community',p)}
+        });
+        if(merged){galleryItems.sort(function(a,b){return new Date(b.date)-new Date(a.date)});renderTabs();render()}
+    }
+}).catch(function(){});
 
-var PER=10,curPage=1,curCat='전체',curSort='date',searchQ='';
+var PER=10,curPage=1,curCat='주요뉴스',curSort='date',searchQ='';
 
 var iconMap={hwp:{icon:'fa-file-lines',cls:'hwp'},pdf:{icon:'fa-file-pdf',cls:'pdf'},xlsx:{icon:'fa-file-excel',cls:'xlsx'}};
 function getIcon(ft){return iconMap[ft]||{icon:'fa-file',cls:'web'}}
@@ -330,46 +337,28 @@ function srcBadge(item){
     return null}
 
 var catDefs=[
-    {key:'전체',keys:null,icon:'',label:'전체'},
+    {key:'주요뉴스',keys:['주요뉴스','칼럼','정책','일반','사례'],icon:'fa-newspaper',label:'주요뉴스'},
     {key:'법령',keys:['법령','법령·조례','관련판례','지침','판례·질의회신'],icon:'fa-scale-balanced',label:'관계법령'},
     {key:'서식가이드',keys:['서식','가이드','절차·서류'],icon:'fa-file-pen',label:'서식·매뉴얼'},
-    {key:'주요뉴스',keys:['주요뉴스','칼럼','정책','일반'],icon:'fa-newspaper',label:'주요뉴스'},    {key:'사례',keys:['사례'],icon:'fa-bookmark',label:'사례집'}];
-function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){c['전체']++;catDefs.forEach(function(d){if(d.keys&&d.keys.indexOf(i.category)>=0)c[d.key]++})});return c}
-
-/* Hero stats */
-!function(){var el=document.getElementById('heroStats');if(!el)return;var cc=getCatCounts();
-el.innerHTML=
-'<div class="hs"><strong>'+cc['전체']+'</strong><span>전체 자료</span></div>'+
-'<div class="hs"><strong>'+cc['법령']+'</strong><span>법령·제도</span></div>'+
-'<div class="hs"><strong>'+cc['판레지침']+'</strong><span>고시·공고</span></div>'+
-'<div class="hs"><strong>'+cc['서식가이드']+'</strong><span>서식·매뉴얼</span></div>'+
-'<div class="hs"><strong>'+cc['주요뉴스']+'</strong><span>주요뉴스</span></div>'}();
-
-/* Hero inline stats */
-!function(){var cc=getCatCounts();
-var e1=document.getElementById('libTotal'),e2=document.getElementById('libLaw'),e3=document.getElementById('libCase'),e4=document.getElementById('libGuide'),e5=document.getElementById('libNews'),e6=document.getElementById('libBid');
-if(e1)e1.textContent=cc['전체']||0;
-/* 입산공고 제거됨 */
-if(e2)e2.textContent=cc['법령']||0;
-if(e3)e3.textContent=cc['판례지침']||0;
-if(e4)e4.textContent=cc['서식가이드']||0;
-if(e5)e5.textContent=cc['주요뉴스']||0;
-}();
+    {key:'갤러리',keys:['갤러리'],icon:'fa-images',label:'갤러리',gallery:true}
+];
+function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){catDefs.forEach(function(d){if(!d.gallery&&d.keys.indexOf(i.category)>=0)c[d.key]++})});c['갤러리']=galleryItems.length;return c}
 
 /* Tabs */
-function renderTabs(){var el=document.getElementById('catTabs');if(!el)return;var cc=getCatCounts();
-el.innerHTML=catDefs.map(function(d){
-var ic=d.icon?'<i class="fa-solid '+d.icon+'"></i> ':'';
-return'<button class="cat-tab'+(curCat===d.key?' on':'')+'" data-cat="'+d.key+'">'+ic+d.label+'<span class="cnt">'+cc[d.key]+'</span></button>'}).join('')}
+function renderTabs(){
+document.querySelectorAll('#heroCards .uh-card').forEach(function(el){el.classList.toggle('on',el.dataset.cat===curCat)});
+}
 
 /* Popular section */
 /* Filter + Sort */
 function getFiltered(){
-var items=allItems;
-if(curCat!=='전체'){var curDef=catDefs.find(function(d){return d.key===curCat});var curKeys=curDef&&curDef.keys?curDef.keys:[curCat];items=items.filter(function(i){return curKeys.indexOf(i.category)>=0});}
+var isGallery=curCat==='갤러리';
+var items=isGallery?galleryItems.slice():allItems;
+if(!isGallery){var curDef=catDefs.find(function(d){return d.key===curCat});var curKeys=curDef?curDef.keys:[curCat];items=items.filter(function(i){return curKeys.indexOf(i.category)>=0});}
 if(searchQ){var q=searchQ.toLowerCase();items=items.filter(function(i){
 return(i.title||'').toLowerCase().indexOf(q)>=0||(i.description||'').toLowerCase().indexOf(q)>=0||
 (i.tags||[]).some(function(t){return t.toLowerCase().indexOf(q)>=0})})}
+if(isGallery){items.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});return items}
 items.sort(function(a,b){
 if(curSort==='downloads')return(b.downloads||0)-(a.downloads||0);
 if(curSort==='title')return(a.title||'').localeCompare(b.title||'');
@@ -386,15 +375,30 @@ function openNewsPopup(id){var url=libItemUrl(id);if(url){addNewsView(id);window
 /* 인기 자료 — 카테고리별 (커뮤니티 인기글과 동일 컨셉) */
 function renderFeatured(){
   var fb=document.getElementById('libFeatured');if(!fb)return;
+  if(curCat==='갤러리'){
+    var gitems=galleryItems.slice();
+    gitems.sort(function(a,b){var va=(a.views||0),vb=(b.views||0);if(vb!==va)return vb-va;return(b.date||'').localeCompare(a.date||'')});
+    var gtop=gitems.slice(0,3);
+    if(!gtop.length){fb.style.display='none';return}
+    fb.style.display='';
+    var ghtml='<div class="pop-head"><div class="ph-icon news"><i class="fa-solid fa-images"></i></div><h3>갤러리</h3><span>열람순 · 인기순</span></div><div class="cm-gallery-grid">';
+    gtop.forEach(function(p){
+      var cover=(p.images&&p.images[0])?'<img class="cm-gallery-thumb" src="'+p.images[0]+'" alt="'+p.title+'" loading="lazy">':'<div class="cm-gallery-thumb-empty"><i class="fa-solid fa-image"></i></div>';
+      ghtml+='<div class="cm-gallery-card" onclick="location.href=\'community-detail.html?id='+p.id+'\'">'+cover+'<div class="cm-gallery-body"><div class="cm-gallery-title">'+p.title+'</div><div class="cm-gallery-meta"><span>'+(p.author||'')+'</span><span><i class="fa-solid fa-eye"></i> '+(p.views||0)+'</span></div></div></div>';
+    });
+    ghtml+='</div>';
+    fb.innerHTML=ghtml;
+    return;
+  }
   var items=allItems.slice();
-  if(curCat!=='전체'){var d=catDefs.find(function(x){return x.key===curCat});var ks=d&&d.keys?d.keys:[curCat];items=items.filter(function(i){return ks.indexOf(i.category)>=0});}
+  var d=catDefs.find(function(x){return x.key===curCat});var ks=d?d.keys:[curCat];items=items.filter(function(i){return ks.indexOf(i.category)>=0});
   var vmap=getNewsViews();
   items.sort(function(a,b){var va=vmap[a.id]||0,vb=vmap[b.id]||0;if(vb!==va)return vb-va;return(a.date||'').localeCompare(b.date||'')});
   var top=items.slice(0,3);
   if(!top.length){fb.style.display='none';return}
   fb.style.display='';
-  var nameMap={'주요뉴스':'주요뉴스','법령':'관계법령','서식가이드':'서식 매뉴얼','사례':'사례집'};
-  var icMap={'주요뉴스':'fa-newspaper','법령':'fa-scale-balanced','서식가이드':'fa-file-pen','사례':'fa-bookmark'};
+  var nameMap={'주요뉴스':'주요뉴스','법령':'관계법령','서식가이드':'서식 매뉴얼'};
+  var icMap={'주요뉴스':'fa-newspaper','법령':'fa-scale-balanced','서식가이드':'fa-file-pen'};
   var title=nameMap[curCat]||'인기 자료';
   var sub='열람순 · 인기순';
   var icCls='ph-icon news';var icSym=icMap[curCat]||'fa-fire';
@@ -410,14 +414,22 @@ function renderFeatured(){
 /* Render list */
 function render(){
 renderFeatured();
+var isGallery=curCat==='갤러리';
 var items=getFiltered(),total=items.length,pages=Math.ceil(total/PER);
 if(curPage>pages)curPage=1;
 var start=(curPage-1)*PER,slice=items.slice(start,start+PER);
 document.getElementById('resultCount').innerHTML='총 <strong>'+total+'</strong>건';
 var list=document.getElementById('libList'),empty=document.getElementById('emptyState');
+list.classList.toggle('cm-gallery-grid',isGallery);
 if(!slice.length){list.innerHTML='';empty.style.display='flex';document.getElementById('pagerWrap').style.display='none';return}
 empty.style.display='none';document.getElementById('pagerWrap').style.display='';
 
+if(isGallery){
+list.innerHTML=slice.map(function(p){
+var cover=(p.images&&p.images[0])?'<img class="cm-gallery-thumb" src="'+p.images[0]+'" alt="'+p.title+'" loading="lazy">':'<div class="cm-gallery-thumb-empty"><i class="fa-solid fa-image"></i></div>';
+return'<div class="cm-gallery-card" onclick="location.href=\'community-detail.html?id='+p.id+'\'">'+cover+'<div class="cm-gallery-body"><div class="cm-gallery-title">'+p.title+'</div><div class="cm-gallery-meta"><span>'+(p.author||'')+'</span><span><i class="fa-solid fa-eye"></i> '+(p.views||0)+'</span></div></div></div>';
+}).join('');
+}else{
 list.innerHTML=slice.map(function(item){
 var fi=getIcon(item.fileType),src=srcBadge(item);
 var badges='<span class="lb lb-cat">'+item.category+'</span>';
@@ -434,6 +446,7 @@ var btnIcon=isWeb?'fa-newspaper':'fa-arrow-down';
 var btnText=isWeb?'뉴스보기':ftLabel+' 다운로드';
 
 return'<div class="lib-item'+pinCls+'">'+'<div class="lib-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i><span class="ft-label">'+(isWeb?'NEWS':ftLabel)+'</span></div>'+'<div class="lib-content">'+'    <div class="lib-title" data-id="'+item.id+'">'+item.title+'</div>'+'    <div class="lib-desc">'+item.description+'</div>'+'    <div class="lib-meta-row">'+badges+'</div>'+'</div>'+'<div class="lib-action">'+'    <span class="lib-size">'+item.fileSize+'</span>'+'    <button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid '+btnIcon+'"></i> '+btnText+'</button>'+'</div></div>'}).join('');
+}
 
 /* Pager */
 var pg=document.getElementById('pager');
@@ -444,45 +457,27 @@ for(var i=bStart;i<=bEnd;i++)h+='<button'+(i===curPage?' class="active"':'')+' o
 h+='<button class="arr" '+(curPage===pages?'disabled':'')+' onclick="LIB.page('+(curPage+1)+')"><i class="fa-solid fa-chevron-right"></i></button>';
 pg.innerHTML=h}
 
-/* breadcrumb 동적: 홈 > 자료실 > [카테고리] + URL 동기화 */
-function updateBreadcrumb(cat){
-    var bc=document.querySelector('.uh-bc');if(!bc)return;
-    var m={'주요뉴스':'주요뉴스','법령':'관계법령','서식가이드':'서식·매뉴얼','사례':'사례집'};
-    var arrow='<i class="fa-solid fa-chevron-right"></i>';
-    var label=(cat&&cat!=='전체')?m[cat]:null;
-    if(label){bc.innerHTML='<a href="../index.html">홈</a>'+arrow+'<a href="library.html">자료실</a>'+arrow+'<span>'+label+'</span>';}
-    else{bc.innerHTML='<a href="../index.html">홈</a>'+arrow+'<span>자료실</span>';}
-}
-function syncCatUrl(cat){try{var u=new URL(location.href);if(cat&&cat!=='전체')u.searchParams.set('cat',cat);else u.searchParams.delete('cat');history.pushState({cat:cat},'',u.toString());}catch(e){}}
+/* URL 동기화 (히어로는 절대 변경하지 않음) */
+function syncCatUrl(cat){try{var u=new URL(location.href);u.searchParams.set('cat',cat);history.pushState({cat:cat},'',u.toString());}catch(e){}}
 
-/* 히어로 카드 클릭 → 카테고리 전환 */
-function syncActiveNav(cat){
-    ['.lqn-card','.uni-hero .uh-card'].forEach(function(sel){
-        document.querySelectorAll(sel).forEach(function(el){
-            var oc=el.getAttribute('onclick')||'';var m=oc.match(/switchCat\('([^']+)'\)/);
-            el.classList.toggle('on', !!m && m[1]===cat && cat!=='전체');
-        });
-    });
-}
 window.switchCat=function(cat){
     curCat=cat;curPage=1;renderTabs();render();
-    updateBreadcrumb(cat);syncCatUrl(cat);syncActiveNav(cat);
-    var target=document.querySelector('.page-body')||document.getElementById('catTabs');
+    syncCatUrl(cat);
+    var target=document.querySelector('.page-body');
     if(target) window.scrollTo({top:target.offsetTop-80,behavior:'smooth'});
-    if(window.LIB_REFRESH_QUICKNAV)setTimeout(window.LIB_REFRESH_QUICKNAV,450);
 };
 
 /* Events */
-(function(){var el=document.getElementById('catTabs');if(el)el.addEventListener('click',function(e){var btn=e.target.closest('.cat-tab');if(!btn)return;switchCat(btn.dataset.cat)});})();
+document.getElementById('heroCards').addEventListener('click',function(e){var btn=e.target.closest('.uh-card');if(!btn)return;switchCat(btn.dataset.cat)});
 document.getElementById('searchInput').addEventListener('input',function(){searchQ=this.value.trim();curPage=1;render()});
 document.getElementById('sortSelect').addEventListener('change',function(){curSort=this.value;curPage=1;render()});
 document.getElementById('perSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;render()});
 document.getElementById('libList').addEventListener('click',function(e){var btn=e.target.closest('.btn-dl')||e.target.closest('.lib-title');if(btn)handleDownload(btn.dataset.id)});
 
+var validCats=catDefs.map(function(d){return d.key});
 var urlCat=new URLSearchParams(location.search).get('cat');
-if(urlCat){curCat=urlCat}
-updateBreadcrumb(curCat);syncActiveNav(curCat);
-window.addEventListener('popstate',function(){var c=new URLSearchParams(location.search).get('cat')||'전체';curCat=c;curPage=1;renderTabs();render();updateBreadcrumb(c);syncActiveNav(c);});
+if(urlCat&&validCats.indexOf(urlCat)>=0){curCat=urlCat}
+window.addEventListener('popstate',function(){var c=new URLSearchParams(location.search).get('cat');if(!c||validCats.indexOf(c)<0)c='주요뉴스';curCat=c;curPage=1;renderTabs();render();});
 
 
 /* Download handler */
@@ -512,12 +507,12 @@ var fileMap={
 'lib12':{ext:'../downloads/files/lib12_안전진단_지침.pdf',web:'../downloads/guide_safety_inspection.html'},
 'lib13':{ext:'../downloads/files/lib13_회계처리_지침.pdf',web:'../downloads/guide_accounting.html'},
 'lib14':{ext:'../downloads/files/lib14_정책동향_2026Q1.pdf',web:'../downloads/policy_news_2026q1.html'},
-'lib15':{ext:'../downloads/files/lib15_신속통합기획.pdf',web:'../downloads/news_rapid_planning.html'},
-'lib16':{ext:'../downloads/files/lib16_소규모정비법_개정.pdf',web:'../downloads/news_small_housing_act.html'},
+'lib15':{ext:'../downloads/files/lib15_신속통합기획.pdf'},
+'lib16':{ext:'../downloads/files/lib16_소규모정비법_개정.pdf'},
 'lib17':{ext:'../downloads/files/lib17_시공자선정_지침.pdf',web:'../downloads/guide_contractor_selection.html'},
 'lib18':{ext:'../downloads/files/lib18_이주보상_지침.pdf',web:'../downloads/guide_relocation.html'},
-'lib19':{ext:'../downloads/files/lib19_1기신도시_특별법.pdf',web:'../downloads/news_new_town.html'},
-'lib20':{ext:'../downloads/files/lib20_공공재개발_후보지.pdf',web:'../downloads/news_public_redevelopment.html'},
+'lib19':{ext:'../downloads/files/lib19_1기신도시_특별법.pdf'},
+'lib20':{ext:'../downloads/files/lib20_공공재개발_후보지.pdf'},
 'lib21':{ext:'../downloads/files/lib21_추진위원회_운영규정.pdf',web:'../downloads/guide_committee_rules.html'},
 'lib22':{ext:'../downloads/files/lib22_서울시_의사진행_표준운영규정.pdf'},
 'lib23':{ext:'../downloads/files/lib23_서울시_정비사업_실무매뉴얼.pdf'},
@@ -607,9 +602,11 @@ var fileMap={
 'law0508a':{web:'../downloads/law_20260508a.html'},
 'case0508a':{web:'../downloads/case_20260508a.html'},
 'law0509a':{web:'../downloads/law_20260509a.html'},
-'case0509a':{web:'../downloads/case_20260509a.html'},'news0510a':{web:'../downloads/news_20260510a.html'},'law0510a':{web:'../downloads/law_20260510a.html'},'case0510a':{web:'../downloads/case_20260510a.html'},'law0514a':{web:'../downloads/law_20260514a.html'},'law0514b':{web:'../downloads/law_20260514b.html'},'case0514a':{web:'../downloads/case_20260514a.html'},'case0514b':{web:'../downloads/case_20260514b.html'},'law0517a':{web:'../downloads/law_20260517a.html'},'case0517a':{web:'../downloads/case_20260517a.html'},'form0517a':{web:'../downloads/form_20260517a.html'},'form0517b':{web:'../downloads/form_20260517b.html'},'form0517c':{web:'../downloads/form_20260517c.html'},'guide0517a':{web:'../downloads/guide_20260517a.html'},'guide0517b':{web:'../downloads/guide_20260517b.html'},'guide0517c':{web:'../downloads/guide_20260517c.html'},'law0518a':{web:'../downloads/law_20260518a.html'},'case0518a':{web:'../downloads/case_20260518a.html'},'law0520a':{web:'../downloads/law_20260520a.html'},'case0520a':{web:'../downloads/case_20260520a.html'},'law0521a':{web:'../downloads/law_20260521a.html'},'case0521a':{web:'../downloads/case_20260521a.html'},'law0521b':{web:'../downloads/law_20260521b.html'},'case0521b':{web:'../downloads/case_20260521b.html'},'law0523a':{web:'../downloads/law_20260523a.html'},'case0523a':{web:'../downloads/case_20260523a.html'},'form0523a':{web:'../downloads/form_20260523a.html'},'form0523b':{web:'../downloads/form_20260523b.html'},'form0523c':{web:'../downloads/form_20260523c.html'},'guide0523a':{web:'../downloads/guide_20260523a.html'},'guide0523b':{web:'../downloads/guide_20260523b.html'},'guide0523c':{web:'../downloads/guide_20260523c.html'},'law0526a':{web:'../downloads/law_20260526a.html'},'case0526a':{web:'../downloads/case_20260526a.html'},'law0526b':{web:'../downloads/law_20260526b.html'},'law0528a':{web:'../downloads/law_20260528a.html'},'case0528a':{web:'../downloads/case_20260528a.html'},'law0529a':{web:'../downloads/law_20260529a.html'},'case0529a':{web:'../downloads/case_20260529a.html'},'law0530a':{web:'../downloads/law_20260530a.html'},'case0530a':{web:'../downloads/case_20260530a.html'},'law0530b':{web:'../downloads/law_20260530b.html'},'case0530b':{web:'../downloads/case_20260530b.html'},'form0530a':{web:'../downloads/form_20260530a.html'},'form0530b':{web:'../downloads/form_20260530b.html'},'form0530c':{web:'../downloads/form_20260530c.html'},'guide0530a':{web:'../downloads/guide_20260530a.html'},'guide0530b':{web:'../downloads/guide_20260530b.html'},'guide0530c':{web:'../downloads/guide_20260530c.html'},'law0601a':{web:'../downloads/law_20260601a.html'},'case0601a':{web:'../downloads/case_20260601a.html'},'law0602a':{web:'../downloads/law_20260602a.html'},'case0602a':{web:'../downloads/case_20260602a.html'},
+'case0509a':{web:'../downloads/case_20260509a.html'},'law0510a':{web:'../downloads/law_20260510a.html'},'case0510a':{web:'../downloads/case_20260510a.html'},'law0514a':{web:'../downloads/law_20260514a.html'},'law0514b':{web:'../downloads/law_20260514b.html'},'case0514a':{web:'../downloads/case_20260514a.html'},'case0514b':{web:'../downloads/case_20260514b.html'},'law0517a':{web:'../downloads/law_20260517a.html'},'case0517a':{web:'../downloads/case_20260517a.html'},'form0517a':{web:'../downloads/form_20260517a.html'},'form0517b':{web:'../downloads/form_20260517b.html'},'form0517c':{web:'../downloads/form_20260517c.html'},'guide0517a':{web:'../downloads/guide_20260517a.html'},'guide0517b':{web:'../downloads/guide_20260517b.html'},'guide0517c':{web:'../downloads/guide_20260517c.html'},'law0518a':{web:'../downloads/law_20260518a.html'},'case0518a':{web:'../downloads/case_20260518a.html'},'law0520a':{web:'../downloads/law_20260520a.html'},'case0520a':{web:'../downloads/case_20260520a.html'},'law0521a':{web:'../downloads/law_20260521a.html'},'case0521a':{web:'../downloads/case_20260521a.html'},'law0521b':{web:'../downloads/law_20260521b.html'},'case0521b':{web:'../downloads/case_20260521b.html'},'law0523a':{web:'../downloads/law_20260523a.html'},'case0523a':{web:'../downloads/case_20260523a.html'},'form0523a':{web:'../downloads/form_20260523a.html'},'form0523b':{web:'../downloads/form_20260523b.html'},'form0523c':{web:'../downloads/form_20260523c.html'},'guide0523a':{web:'../downloads/guide_20260523a.html'},'guide0523b':{web:'../downloads/guide_20260523b.html'},'guide0523c':{web:'../downloads/guide_20260523c.html'},'law0526a':{web:'../downloads/law_20260526a.html'},'case0526a':{web:'../downloads/case_20260526a.html'},'law0526b':{web:'../downloads/law_20260526b.html'},'law0528a':{web:'../downloads/law_20260528a.html'},'case0528a':{web:'../downloads/case_20260528a.html'},'law0529a':{web:'../downloads/law_20260529a.html'},'case0529a':{web:'../downloads/case_20260529a.html'},'law0530a':{web:'../downloads/law_20260530a.html'},'case0530a':{web:'../downloads/case_20260530a.html'},'law0530b':{web:'../downloads/law_20260530b.html'},'case0530b':{web:'../downloads/case_20260530b.html'},'form0530a':{web:'../downloads/form_20260530a.html'},'form0530b':{web:'../downloads/form_20260530b.html'},'form0530c':{web:'../downloads/form_20260530c.html'},'guide0530a':{web:'../downloads/guide_20260530a.html'},'guide0530b':{web:'../downloads/guide_20260530b.html'},'guide0530c':{web:'../downloads/guide_20260530c.html'},'law0601a':{web:'../downloads/law_20260601a.html'},'case0601a':{web:'../downloads/case_20260601a.html'},'law0602a':{web:'../downloads/law_20260602a.html'},'case0602a':{web:'../downloads/case_20260602a.html'},
 'law0614a':{web:'../downloads/law_20260614a.html'},
-'case0614a':{web:'../downloads/case_20260614a.html'},'law0613a':{web:'../downloads/law_20260613a.html'},'case0613a':{web:'../downloads/case_20260613a.html'},'law0604a':{web:'../downloads/law_20260604a.html'},'case0604a':{web:'../downloads/case_20260604a.html'},'law0605a':{web:'../downloads/law_20260605a.html'},'case0605a':{web:'../downloads/case_20260605a.html'},'law0606a':{web:'../downloads/law_20260606a.html'},'law0607a':{web:'../downloads/law_20260607a.html'},'case0607a':{web:'../downloads/case_20260607a.html'},'form0607a':{web:'../downloads/form_20260607a.html'},'form0607b':{web:'../downloads/form_20260607b.html'},'form0607c':{web:'../downloads/form_20260607c.html'},'guide0607a':{web:'../downloads/guide_20260607a.html'},'guide0607b':{web:'../downloads/guide_20260607b.html'},'guide0607c':{web:'../downloads/guide_20260607c.html'},'law0608a':{web:'../downloads/law_20260608a.html'},'case0608a':{web:'../downloads/case_20260608a.html'},'law0609a':{web:'../downloads/law_20260609a.html'},'case0609a':{web:'../downloads/case_20260609a.html'},'law0610a':{web:'../downloads/law_20260610a.html'},'case0610a':{web:'../downloads/case_20260610a.html'},'law0611a':{web:'../downloads/law_20260611a.html'},'case0611a':{web:'../downloads/case_20260611a.html'},'law0611b':{web:'../downloads/law_20260611b.html'},'case0611b':{web:'../downloads/case_20260611b.html'},'form0614a':{web:'../downloads/form_20260614a.html'},'form0614b':{web:'../downloads/form_20260614b.html'},'form0614c':{web:'../downloads/form_20260614c.html'},'guide0614a':{web:'../downloads/guide_20260614a.html'},'guide0614b':{web:'../downloads/guide_20260614b.html'},'guide0614c':{web:'../downloads/guide_20260614c.html'},'law0615a':{web:'../downloads/law_20260615a.html'},'case0615a':{web:'../downloads/case_20260615a.html'},'law0616a':{web:'../downloads/law_20260616a.html'},'case0616a':{web:'../downloads/case_20260616a.html'},'law0618a':{web:'../downloads/law_20260618a.html'},'law0618b':{web:'../downloads/law_20260618b.html'},'case0618a':{web:'../downloads/case_20260618a.html'},'law0620a':{web:'../downloads/law_20260620a.html'},'case0620a':{web:'../downloads/case_20260620a.html'},'form0620a':{web:'../downloads/form_20260620a.html'},'form0620b':{web:'../downloads/form_20260620b.html'},'form0620c':{web:'../downloads/form_20260620c.html'},'guide0620a':{web:'../downloads/guide_20260620a.html'},'guide0620b':{web:'../downloads/guide_20260620b.html'},'guide0620c':{web:'../downloads/guide_20260620c.html'},'law0623a':{web:'../downloads/law_20260623a.html'},'case0623a':{web:'../downloads/case_20260623a.html'},'law0624a':{web:'../downloads/law_20260624a.html'},'case0624a':{web:'../downloads/case_20260624a.html'},'law0625a':{web:'../downloads/law_20260625a.html'},'case0625a':{web:'../downloads/case_20260625a.html'},'law0626a':{web:'../downloads/law_20260626a.html'},'case0626a':{web:'../downloads/case_20260626a.html'},'law0627a':{web:'../downloads/law_20260627a.html'},'case0627a':{web:'../downloads/case_20260627a.html'},'law0628a':{web:'../downloads/law_20260628a.html'},'case0628a':{web:'../downloads/case_20260628a.html'},'form0628a':{web:'../downloads/form_20260628a.html'},'form0628b':{web:'../downloads/form_20260628b.html'},'form0628c':{web:'../downloads/form_20260628c.html'},'guide0628a':{web:'../downloads/guide_20260628a.html'},'guide0628b':{web:'../downloads/guide_20260628b.html'},'guide0628c':{web:'../downloads/guide_20260628c.html'},'law0629a':{web:'../downloads/law_20260629a.html'},'case0629a':{web:'../downloads/case_20260629a.html'},'law0701a':{web:'../downloads/law_20260701a.html'},'case0701a':{web:'../downloads/case_20260701a.html'},'law0702a':{web:'../downloads/law_20260702a.html'},'case0702a':{web:'../downloads/case_20260702a.html'},'form0705a':{web:'../downloads/form_20260705a.html'},'form0705b':{web:'../downloads/form_20260705b.html'},'form0705c':{web:'../downloads/form_20260705c.html'},'guide0705a':{web:'../downloads/guide_20260705a.html'},'guide0705b':{web:'../downloads/guide_20260705b.html'},'guide0705c':{web:'../downloads/guide_20260705c.html'},'law0709a':{web:'../downloads/law_20260709a.html'},'case0709a':{web:'../downloads/case_20260709a.html'},'law0710a':{web:'../downloads/law_20260710a.html'},'case0710a':{web:'../downloads/case_20260710a.html'},'form0712a':{web:'../downloads/form_20260712a.html'},'form0712b':{web:'../downloads/form_20260712b.html'},'form0712c':{web:'../downloads/form_20260712c.html'},'guide0712a':{web:'../downloads/guide_20260712a.html'},'guide0712b':{web:'../downloads/guide_20260712b.html'},'guide0712c':{web:'../downloads/guide_20260712c.html'},'law0713a':{web:'../downloads/law_20260713a.html'},'case0713a':{web:'../downloads/case_20260713a.html'},'law0718a':{web:'../downloads/law_20260718a.html'},'case0718a':{web:'../downloads/case_20260718a.html'},'form0719a':{web:'../downloads/form_20260719a.html'},'form0719b':{web:'../downloads/form_20260719b.html'},'form0719c':{web:'../downloads/form_20260719c.html'},'guide0719a':{web:'../downloads/guide_20260719a.html'},'guide0719b':{web:'../downloads/guide_20260719b.html'},'guide0719c':{web:'../downloads/guide_20260719c.html'},'law0723a':{web:'../downloads/law_20260723a.html'},'form0726a':{web:'../downloads/form_20260726a.html'},'form0726b':{web:'../downloads/form_20260726b.html'},'form0726c':{web:'../downloads/form_20260726c.html'},'guide0726a':{web:'../downloads/guide_20260726a.html'},'guide0726b':{web:'../downloads/guide_20260726b.html'},'guide0726c':{web:'../downloads/guide_20260726c.html'},'law0801a':{web:'../downloads/law_20260801a.html'},'case0801a':{web:'../downloads/case_20260801a.html'},'form0802a':{web:'../downloads/form_20260802a.html'},'form0802b':{web:'../downloads/form_20260802b.html'},'form0802c':{web:'../downloads/form_20260802c.html'},'guide0802a':{web:'../downloads/guide_20260802a.html'},'guide0802b':{web:'../downloads/guide_20260802b.html'},'guide0802c':{web:'../downloads/guide_20260802c.html'},'law0803a':{web:'../downloads/law_20260803a.html'},'case0803a':{web:'../downloads/case_20260803a.html'},'law0804a':{web:'../downloads/law_20260804a.html'},'case0804a':{web:'../downloads/case_20260804a.html'},'law0806a':{web:'../downloads/law_20260806a.html'},'case0806a':{web:'../downloads/case_20260806a.html'},'law0807a':{web:'../downloads/law_20260807a.html'},'case0807a':{web:'../downloads/case_20260807a.html'},'law0809a':{web:'../downloads/law_20260809a.html'},'case0809a':{web:'../downloads/case_20260809a.html'},'form0809a':{web:'../downloads/form_20260809a.html'},'form0809b':{web:'../downloads/form_20260809b.html'},'form0809c':{web:'../downloads/form_20260809c.html'},'guide0809a':{web:'../downloads/guide_20260809a.html'},'guide0809b':{web:'../downloads/guide_20260809b.html'},'guide0809c':{web:'../downloads/guide_20260809c.html'},'law0810a':{web:'../downloads/law_20260810a.html'},'case0810a':{web:'../downloads/case_20260810a.html'},'law0811a':{web:'../downloads/law_20260811a.html'},'case0811a':{web:'../downloads/case_20260811a.html'},'law0812a':{web:'../downloads/law_20260812a.html'},'case0812a':{web:'../downloads/case_20260812a.html'},'law0813a':{web:'../downloads/law_20260813a.html'},'case0813a':{web:'../downloads/case_20260813a.html'},'law0814a':{web:'../downloads/law_20260814a.html'},'case0814a':{web:'../downloads/case_20260814a.html'},'form0816a':{web:'../downloads/form_20260816a.html'},'form0816b':{web:'../downloads/form_20260816b.html'},'form0816c':{web:'../downloads/form_20260816c.html'},'guide0816a':{web:'../downloads/guide_20260816a.html'},'guide0816b':{web:'../downloads/guide_20260816b.html'},'guide0816c':{web:'../downloads/guide_20260816c.html'},'news0817a':{web:'../downloads/news_20260817a.html'},'news0817b':{web:'../downloads/news_20260817b.html'},'news0817c':{web:'../downloads/news_20260817c.html'},'news0817d':{web:'../downloads/news_20260817d.html'},'news0817e':{web:'../downloads/news_20260817e.html'},'news0817f':{web:'../downloads/news_20260817f.html'},'news0817g':{web:'../downloads/news_20260817g.html'},'news0817h':{web:'../downloads/news_20260817h.html'},'news0817i':{web:'../downloads/news_20260817i.html'},'law0817a':{web:'../downloads/law_20260817a.html'},'case0817a':{web:'../downloads/case_20260817a.html'},'law0816a':{web:'../downloads/law_20260816a.html'},'news0818a':{web:'../downloads/news_20260818a.html'},'news0818b':{web:'../downloads/news_20260818b.html'},'news0818c':{web:'../downloads/news_20260818c.html'},'news0818d':{web:'../downloads/news_20260818d.html'},'news0818e':{web:'../downloads/news_20260818e.html'},'news0818f':{web:'../downloads/news_20260818f.html'},'news0818g':{web:'../downloads/news_20260818g.html'},'news0818h':{web:'../downloads/news_20260818h.html'},'news0818i':{web:'../downloads/news_20260818i.html'},'news0818j':{web:'../downloads/news_20260818j.html'},'news0818k':{web:'../downloads/news_20260818k.html'},'law0818a':{web:'../downloads/law_20260818a.html'},'case0818a':{web:'../downloads/case_20260818a.html'},'news0819a':{web:'../downloads/news_20260819a.html'},'news0819b':{web:'../downloads/news_20260819b.html'},'news0819c':{web:'../downloads/news_20260819c.html'},'news0819d':{web:'../downloads/news_20260819d.html'},'news0819e':{web:'../downloads/news_20260819e.html'},'news0819f':{web:'../downloads/news_20260819f.html'},'news0819g':{web:'../downloads/news_20260819g.html'},'law0819a':{web:'../downloads/law_20260819a.html'},'case0819a':{web:'../downloads/case_20260819a.html'},'news0820a':{web:'../downloads/news_20260820a.html'},'news0820b':{web:'../downloads/news_20260820b.html'},'news0820c':{web:'../downloads/news_20260820c.html'},'news0820d':{web:'../downloads/news_20260820d.html'},'news0820e':{web:'../downloads/news_20260820e.html'},'news0820f':{web:'../downloads/news_20260820f.html'},'news0820g':{web:'../downloads/news_20260820g.html'},'news0820h':{web:'../downloads/news_20260820h.html'},'news0820i':{web:'../downloads/news_20260820i.html'},'news0820j':{web:'../downloads/news_20260820j.html'},'law0820a':{web:'../downloads/law_20260820a.html'},'case0820a':{web:'../downloads/case_20260820a.html'},'news0821a':{web:'../downloads/news_20260821a.html'},'news0821b':{web:'../downloads/news_20260821b.html'},'news0821c':{web:'../downloads/news_20260821c.html'},'news0821d':{web:'../downloads/news_20260821d.html'},'news0821e':{web:'../downloads/news_20260821e.html'},'news0821f':{web:'../downloads/news_20260821f.html'},'news0821g':{web:'../downloads/news_20260821g.html'},'news0821h':{web:'../downloads/news_20260821h.html'},'news0821i':{web:'../downloads/news_20260821i.html'},'news0822a':{web:'../downloads/news_20260822a.html'},'news0822b':{web:'../downloads/news_20260822b.html'},'news0822c':{web:'../downloads/news_20260822c.html'},'news0822d':{web:'../downloads/news_20260822d.html'},'news0822e':{web:'../downloads/news_20260822e.html'},'news0823a':{web:'../downloads/news_20260823a.html'},'news0823b':{web:'../downloads/news_20260823b.html'},'news0823c':{web:'../downloads/news_20260823c.html'},'news0823d':{web:'../downloads/news_20260823d.html'},'news0823e':{web:'../downloads/news_20260823e.html'},'news0823f':{web:'../downloads/news_20260823f.html'},'news0823g':{web:'../downloads/news_20260823g.html'},'news0823h':{web:'../downloads/news_20260823h.html'},'news0824a':{web:'../downloads/news_20260824a.html'},'news0824b':{web:'../downloads/news_20260824b.html'},'news0824c':{web:'../downloads/news_20260824c.html'},'news0824d':{web:'../downloads/news_20260824d.html'},'news0824e':{web:'../downloads/news_20260824e.html'},'news0824f':{web:'../downloads/news_20260824f.html'},'news0824g':{web:'../downloads/news_20260824g.html'},'news0824h':{web:'../downloads/news_20260824h.html'},'news0824i':{web:'../downloads/news_20260824i.html'},'news0824j':{web:'../downloads/news_20260824j.html'},'law0823a':{web:'../downloads/law_20260823a.html'},'case0823a':{web:'../downloads/case_20260823a.html'},'form0823a':{web:'../downloads/form_20260823a.html'},'form0823b':{web:'../downloads/form_20260823b.html'},'form0823c':{web:'../downloads/form_20260823c.html'},'guide0823a':{web:'../downloads/guide_20260823a.html'},'guide0823b':{web:'../downloads/guide_20260823b.html'},'guide0823c':{web:'../downloads/guide_20260823c.html'},};;
+'case0614a':{web:'../downloads/case_20260614a.html'},'law0613a':{web:'../downloads/law_20260613a.html'},'case0613a':{web:'../downloads/case_20260613a.html'},'law0604a':{web:'../downloads/law_20260604a.html'},'case0604a':{web:'../downloads/case_20260604a.html'},'law0605a':{web:'../downloads/law_20260605a.html'},'case0605a':{web:'../downloads/case_20260605a.html'},'law0606a':{web:'../downloads/law_20260606a.html'},'law0607a':{web:'../downloads/law_20260607a.html'},'case0607a':{web:'../downloads/case_20260607a.html'},'form0607a':{web:'../downloads/form_20260607a.html'},'form0607b':{web:'../downloads/form_20260607b.html'},'form0607c':{web:'../downloads/form_20260607c.html'},'guide0607a':{web:'../downloads/guide_20260607a.html'},'guide0607b':{web:'../downloads/guide_20260607b.html'},'guide0607c':{web:'../downloads/guide_20260607c.html'},'law0608a':{web:'../downloads/law_20260608a.html'},'case0608a':{web:'../downloads/case_20260608a.html'},'law0609a':{web:'../downloads/law_20260609a.html'},'case0609a':{web:'../downloads/case_20260609a.html'},'law0610a':{web:'../downloads/law_20260610a.html'},'case0610a':{web:'../downloads/case_20260610a.html'},'law0611a':{web:'../downloads/law_20260611a.html'},'case0611a':{web:'../downloads/case_20260611a.html'},'law0611b':{web:'../downloads/law_20260611b.html'},'case0611b':{web:'../downloads/case_20260611b.html'},'form0614a':{web:'../downloads/form_20260614a.html'},'form0614b':{web:'../downloads/form_20260614b.html'},'form0614c':{web:'../downloads/form_20260614c.html'},'guide0614a':{web:'../downloads/guide_20260614a.html'},'guide0614b':{web:'../downloads/guide_20260614b.html'},'guide0614c':{web:'../downloads/guide_20260614c.html'},'law0615a':{web:'../downloads/law_20260615a.html'},'case0615a':{web:'../downloads/case_20260615a.html'},'law0616a':{web:'../downloads/law_20260616a.html'},'case0616a':{web:'../downloads/case_20260616a.html'},'law0618a':{web:'../downloads/law_20260618a.html'},'law0618b':{web:'../downloads/law_20260618b.html'},'case0618a':{web:'../downloads/case_20260618a.html'},'law0620a':{web:'../downloads/law_20260620a.html'},'case0620a':{web:'../downloads/case_20260620a.html'},'form0620a':{web:'../downloads/form_20260620a.html'},'form0620b':{web:'../downloads/form_20260620b.html'},'form0620c':{web:'../downloads/form_20260620c.html'},'guide0620a':{web:'../downloads/guide_20260620a.html'},'guide0620b':{web:'../downloads/guide_20260620b.html'},'guide0620c':{web:'../downloads/guide_20260620c.html'},'law0623a':{web:'../downloads/law_20260623a.html'},'case0623a':{web:'../downloads/case_20260623a.html'},'law0624a':{web:'../downloads/law_20260624a.html'},'case0624a':{web:'../downloads/case_20260624a.html'},'law0625a':{web:'../downloads/law_20260625a.html'},'case0625a':{web:'../downloads/case_20260625a.html'},'law0626a':{web:'../downloads/law_20260626a.html'},'case0626a':{web:'../downloads/case_20260626a.html'},'law0627a':{web:'../downloads/law_20260627a.html'},'case0627a':{web:'../downloads/case_20260627a.html'},'law0628a':{web:'../downloads/law_20260628a.html'},'case0628a':{web:'../downloads/case_20260628a.html'},'form0628a':{web:'../downloads/form_20260628a.html'},'form0628b':{web:'../downloads/form_20260628b.html'},'form0628c':{web:'../downloads/form_20260628c.html'},'guide0628a':{web:'../downloads/guide_20260628a.html'},'guide0628b':{web:'../downloads/guide_20260628b.html'},'guide0628c':{web:'../downloads/guide_20260628c.html'},'law0629a':{web:'../downloads/law_20260629a.html'},'case0629a':{web:'../downloads/case_20260629a.html'},'law0701a':{web:'../downloads/law_20260701a.html'},'case0701a':{web:'../downloads/case_20260701a.html'},'law0702a':{web:'../downloads/law_20260702a.html'},'case0702a':{web:'../downloads/case_20260702a.html'},'form0705a':{web:'../downloads/form_20260705a.html'},'form0705b':{web:'../downloads/form_20260705b.html'},'form0705c':{web:'../downloads/form_20260705c.html'},'guide0705a':{web:'../downloads/guide_20260705a.html'},'guide0705b':{web:'../downloads/guide_20260705b.html'},'guide0705c':{web:'../downloads/guide_20260705c.html'},'law0709a':{web:'../downloads/law_20260709a.html'},'case0709a':{web:'../downloads/case_20260709a.html'},'law0710a':{web:'../downloads/law_20260710a.html'},'case0710a':{web:'../downloads/case_20260710a.html'},'form0712a':{web:'../downloads/form_20260712a.html'},'form0712b':{web:'../downloads/form_20260712b.html'},'form0712c':{web:'../downloads/form_20260712c.html'},'guide0712a':{web:'../downloads/guide_20260712a.html'},'guide0712b':{web:'../downloads/guide_20260712b.html'},'guide0712c':{web:'../downloads/guide_20260712c.html'},'law0713a':{web:'../downloads/law_20260713a.html'},'case0713a':{web:'../downloads/case_20260713a.html'},'law0718a':{web:'../downloads/law_20260718a.html'},'case0718a':{web:'../downloads/case_20260718a.html'},'form0719a':{web:'../downloads/form_20260719a.html'},'form0719b':{web:'../downloads/form_20260719b.html'},'form0719c':{web:'../downloads/form_20260719c.html'},'guide0719a':{web:'../downloads/guide_20260719a.html'},'guide0719b':{web:'../downloads/guide_20260719b.html'},'guide0719c':{web:'../downloads/guide_20260719c.html'},'law0723a':{web:'../downloads/law_20260723a.html'},'form0726a':{web:'../downloads/form_20260726a.html'},'form0726b':{web:'../downloads/form_20260726b.html'},'form0726c':{web:'../downloads/form_20260726c.html'},'guide0726a':{web:'../downloads/guide_20260726a.html'},'guide0726b':{web:'../downloads/guide_20260726b.html'},'guide0726c':{web:'../downloads/guide_20260726c.html'},'law0801a':{web:'../downloads/law_20260801a.html'},'case0801a':{web:'../downloads/case_20260801a.html'},'form0802a':{web:'../downloads/form_20260802a.html'},'form0802b':{web:'../downloads/form_20260802b.html'},'form0802c':{web:'../downloads/form_20260802c.html'},'guide0802a':{web:'../downloads/guide_20260802a.html'},'guide0802b':{web:'../downloads/guide_20260802b.html'},'guide0802c':{web:'../downloads/guide_20260802c.html'},'law0803a':{web:'../downloads/law_20260803a.html'},'case0803a':{web:'../downloads/case_20260803a.html'},'law0804a':{web:'../downloads/law_20260804a.html'},'case0804a':{web:'../downloads/case_20260804a.html'},'law0806a':{web:'../downloads/law_20260806a.html'},'case0806a':{web:'../downloads/case_20260806a.html'},'law0807a':{web:'../downloads/law_20260807a.html'},'case0807a':{web:'../downloads/case_20260807a.html'},'law0809a':{web:'../downloads/law_20260809a.html'},'case0809a':{web:'../downloads/case_20260809a.html'},'form0809a':{web:'../downloads/form_20260809a.html'},'form0809b':{web:'../downloads/form_20260809b.html'},'form0809c':{web:'../downloads/form_20260809c.html'},'guide0809a':{web:'../downloads/guide_20260809a.html'},'guide0809b':{web:'../downloads/guide_20260809b.html'},'guide0809c':{web:'../downloads/guide_20260809c.html'},'law0810a':{web:'../downloads/law_20260810a.html'},'case0810a':{web:'../downloads/case_20260810a.html'},'law0811a':{web:'../downloads/law_20260811a.html'},'case0811a':{web:'../downloads/case_20260811a.html'},'law0812a':{web:'../downloads/law_20260812a.html'},'case0812a':{web:'../downloads/case_20260812a.html'},'law0813a':{web:'../downloads/law_20260813a.html'},'case0813a':{web:'../downloads/case_20260813a.html'},'law0814a':{web:'../downloads/law_20260814a.html'},'case0814a':{web:'../downloads/case_20260814a.html'},'form0816a':{web:'../downloads/form_20260816a.html'},'form0816b':{web:'../downloads/form_20260816b.html'},'form0816c':{web:'../downloads/form_20260816c.html'},'guide0816a':{web:'../downloads/guide_20260816a.html'},'guide0816b':{web:'../downloads/guide_20260816b.html'},'guide0816c':{web:'../downloads/guide_20260816c.html'},'news0817a':{web:'../downloads/news_20260817a.html'},'news0817b':{web:'../downloads/news_20260817b.html'},'news0817c':{web:'../downloads/news_20260817c.html'},'news0817d':{web:'../downloads/news_20260817d.html'},'news0817e':{web:'../downloads/news_20260817e.html'},'news0817f':{web:'../downloads/news_20260817f.html'},'news0817g':{web:'../downloads/news_20260817g.html'},'news0817h':{web:'../downloads/news_20260817h.html'},'news0817i':{web:'../downloads/news_20260817i.html'},'law0817a':{web:'../downloads/law_20260817a.html'},'case0817a':{web:'../downloads/case_20260817a.html'},'law0816a':{web:'../downloads/law_20260816a.html'},'news0818a':{web:'../downloads/news_20260818a.html'},'news0818b':{web:'../downloads/news_20260818b.html'},'news0818c':{web:'../downloads/news_20260818c.html'},'news0818d':{web:'../downloads/news_20260818d.html'},'news0818e':{web:'../downloads/news_20260818e.html'},'news0818f':{web:'../downloads/news_20260818f.html'},'news0818g':{web:'../downloads/news_20260818g.html'},'news0818h':{web:'../downloads/news_20260818h.html'},'news0818i':{web:'../downloads/news_20260818i.html'},'news0818j':{web:'../downloads/news_20260818j.html'},'news0818k':{web:'../downloads/news_20260818k.html'},'law0818a':{web:'../downloads/law_20260818a.html'},'case0818a':{web:'../downloads/case_20260818a.html'},'news0819a':{web:'../downloads/news_20260819a.html'},'news0819b':{web:'../downloads/news_20260819b.html'},'news0819c':{web:'../downloads/news_20260819c.html'},'news0819d':{web:'../downloads/news_20260819d.html'},'news0819e':{web:'../downloads/news_20260819e.html'},'news0819f':{web:'../downloads/news_20260819f.html'},'news0819g':{web:'../downloads/news_20260819g.html'},'law0819a':{web:'../downloads/law_20260819a.html'},'case0819a':{web:'../downloads/case_20260819a.html'},'news0820a':{web:'../downloads/news_20260820a.html'},'news0820b':{web:'../downloads/news_20260820b.html'},'news0820c':{web:'../downloads/news_20260820c.html'},'news0820d':{web:'../downloads/news_20260820d.html'},'news0820e':{web:'../downloads/news_20260820e.html'},'news0820f':{web:'../downloads/news_20260820f.html'},'news0820g':{web:'../downloads/news_20260820g.html'},'news0820h':{web:'../downloads/news_20260820h.html'},'news0820i':{web:'../downloads/news_20260820i.html'},'news0820j':{web:'../downloads/news_20260820j.html'},'law0820a':{web:'../downloads/law_20260820a.html'},'case0820a':{web:'../downloads/case_20260820a.html'},'news0821a':{web:'../downloads/news_20260821a.html'},'news0821b':{web:'../downloads/news_20260821b.html'},'news0821c':{web:'../downloads/news_20260821c.html'},'news0821d':{web:'../downloads/news_20260821d.html'},'news0821e':{web:'../downloads/news_20260821e.html'},'news0821f':{web:'../downloads/news_20260821f.html'},'news0821g':{web:'../downloads/news_20260821g.html'},'news0821h':{web:'../downloads/news_20260821h.html'},'news0821i':{web:'../downloads/news_20260821i.html'},'news0822a':{web:'../downloads/news_20260822a.html'},'news0822b':{web:'../downloads/news_20260822b.html'},'news0822c':{web:'../downloads/news_20260822c.html'},'news0822d':{web:'../downloads/news_20260822d.html'},'news0822e':{web:'../downloads/news_20260822e.html'},'news0823a':{web:'../downloads/news_20260823a.html'},'news0823b':{web:'../downloads/news_20260823b.html'},'news0823c':{web:'../downloads/news_20260823c.html'},'news0823d':{web:'../downloads/news_20260823d.html'},'news0823e':{web:'../downloads/news_20260823e.html'},'news0823f':{web:'../downloads/news_20260823f.html'},'news0823g':{web:'../downloads/news_20260823g.html'},'news0823h':{web:'../downloads/news_20260823h.html'},'news0824a':{web:'../downloads/news_20260824a.html'},'news0824b':{web:'../downloads/news_20260824b.html'},'news0824c':{web:'../downloads/news_20260824c.html'},'news0824d':{web:'../downloads/news_20260824d.html'},'news0824e':{web:'../downloads/news_20260824e.html'},'news0824f':{web:'../downloads/news_20260824f.html'},'news0824g':{web:'../downloads/news_20260824g.html'},'news0824h':{web:'../downloads/news_20260824h.html'},'news0824i':{web:'../downloads/news_20260824i.html'},'news0824j':{web:'../downloads/news_20260824j.html'},'law0823a':{web:'../downloads/law_20260823a.html'},'case0823a':{web:'../downloads/case_20260823a.html'},'form0823a':{web:'../downloads/form_20260823a.html'},'form0823b':{web:'../downloads/form_20260823b.html'},'form0823c':{web:'../downloads/form_20260823c.html'},'guide0823a':{web:'../downloads/guide_20260823a.html'},'guide0823b':{web:'../downloads/guide_20260823b.html'},'guide0823c':{web:'../downloads/guide_20260823c.html'},
+'col0503a':{web:'../downloads/col_20260503a.html'},'col0418a':{web:'../downloads/col_20260418a.html'},'col0418b':{web:'../downloads/col_20260418b.html'},'col0411e':{web:'../downloads/col_20260411e.html'},'col0411d':{web:'../downloads/col_20260411d.html'},'col0411c':{web:'../downloads/col_20260411c.html'},'col0411b':{web:'../downloads/col_20260411b.html'},'col0411a':{web:'../downloads/col_20260411a.html'},'col0410e':{web:'../downloads/col_20260410e.html'},'col0410d':{web:'../downloads/col_20260410d.html'},'col0410c':{web:'../downloads/col_20260410c.html'},'col0410b':{web:'../downloads/col_20260410b.html'},'col0410a':{web:'../downloads/col_20260410a.html'},'lib_mo1h3234':{web:'../downloads/form_mo1h3234.html'},'law0711a':{web:'../downloads/law_20260711a.html'},'case0711a':{web:'../downloads/case_20260711a.html'},'law0707a':{web:'../downloads/law_20260707a.html'},'law0707b':{web:'../downloads/law_20260707b.html'},'case0707a':{web:'../downloads/case_20260707a.html'},'law0703a':{web:'../downloads/law_20260703a.html'},'case0703a':{web:'../downloads/case_20260703a.html'},'law0621a':{web:'../downloads/law_20260621a.html'},'law0621b':{web:'../downloads/law_20260621b.html'},'case0621a':{web:'../downloads/case_20260621a.html'},'case0621b':{web:'../downloads/case_20260621b.html'},'law0630a':{web:'../downloads/law_20260630a.html'},'case0630a':{web:'../downloads/case_20260630a.html'},'law0716a':{web:'../downloads/law_20260716a.html'},'case0716a':{web:'../downloads/case_20260716a.html'},'law0720a':{web:'../downloads/law_20260720a.html'},'law0802a':{web:'../downloads/law_20260802a.html'},'case0802a':{web:'../downloads/case_20260802a.html'},'law0731a':{web:'../downloads/law_20260731a.html'},'case0731a':{web:'../downloads/case_20260731a.html'},'law0722a':{web:'../downloads/law_20260722a.html'},'law0725a':{web:'../downloads/law_20260725a.html'},'case0725a':{web:'../downloads/case_20260725a.html'},'law0815a':{web:'../downloads/law_20260815a.html'},'case0815a':{web:'../downloads/case_20260815a.html'},'case0815b':{web:'../downloads/case_20260815b.html'},'law0821a':{web:'../downloads/law_20260821a.html'},'case0821a':{web:'../downloads/case_20260821a.html'},'law0824a':{web:'../downloads/law_20260824a.html'},'case0824a':{web:'../downloads/case_20260824a.html'},
+};;
 
 function handleDownload(id){
 addNewsView(id);
@@ -625,27 +622,6 @@ var item=allItems.find(function(i){return i.id===id});if(item){item.downloads=(i
 
 window.handleDownload=handleDownload;window.openNewsPopup=openNewsPopup;
 window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.querySelector('.ctrl-bar').offsetTop-80,behavior:'smooth'})}};
-
-/* 우측 퀵네비 — 스크롤 추종 + 상단/하단 리밋 */
-(function(){
-  var nav=document.getElementById('libQuicknav');if(!nav)return;
-  function upd(){
-    var pb=document.querySelector('.page-body');if(!pb)return;
-    var y=window.scrollY||window.pageYOffset||0;var vh=window.innerHeight;
-    var pbTop=pb.offsetTop,pbBottom=pbTop+pb.offsetHeight;
-    var navH=nav.offsetHeight||300;
-    var center=vh/2-navH/2;
-    var minTop=(pbTop-y)+10;       /* 상단: 시작글에서 멈춤 */
-    var maxTop=(pbBottom-y)-navH-10;/* 하단: 끝글에서 멈춤 */
-    /* 본문을 따라 내려오다 시작글/끝글 경계에서 멈춤(사라지지 않음) */
-    nav.style.top=Math.max(minTop,Math.min(center,maxTop))+'px';
-  }
-  window.addEventListener('scroll',upd,{passive:true});
-  window.addEventListener('resize',upd);
-  /* 카테고리 전환 등으로 본문 높이가 바뀐 직후에도 재판정 */
-  window.LIB_REFRESH_QUICKNAV=upd;
-  upd();setTimeout(upd,300);
-})();
 
 renderTabs();render();
 var urlId=new URLSearchParams(location.search).get('id');

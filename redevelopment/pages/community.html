@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#FFFFFF">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>커뮤니티 — (주)빛세움</title>
-    <meta name="description" content="재개발·재건축 커뮤니티에서 질문, 후기를 공유하세요.">
+    <meta name="description" content="재개발·재건축 커뮤니티 — 현장 갤러리에서 사진과 이야기를 공유하세요.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
@@ -72,13 +72,19 @@
     .cm-post:hover{border-color:rgba(184,134,11,.3);box-shadow:0 4px 16px rgba(0,0,0,.04);transform:translateY(-1px)}
     .cm-post.is-hot{border-left:3px solid var(--gold);background:linear-gradient(90deg,rgba(184,134,11,.015),#fff 40%)}
 
+    /* 갤러리 — 대표사진 카드형 */
+    .cm-list.is-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .cm-gallery-card{background:#fff;border:1.5px solid var(--gray-150,#eaedf0);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .25s}
+    .cm-gallery-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.08);border-color:rgba(184,134,11,.3)}
+    .cm-gallery-thumb{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--gray-100,#f3f4f6)}
+    .cm-gallery-thumb-empty{width:100%;aspect-ratio:4/3;background:var(--gray-100,#f3f4f6);display:flex;align-items:center;justify-content:center;color:var(--gray-300,#d1d5db);font-size:26px}
+    .cm-gallery-body{padding:12px 14px}
+    .cm-gallery-title{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .cm-gallery-meta{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;color:var(--gray-500)}
+
     /* Category badge */
     .cb{display:inline-flex;align-items:center;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;flex-shrink:0}
-    .cb-질문{background:rgba(245,166,35,.08);color:#D48806;border:1px solid rgba(245,166,35,.12)}
-    .cb-정보{background:rgba(59,130,246,.06);color:#2563EB;border:1px solid rgba(59,130,246,.1)}
-    .cb-후기{background:rgba(16,185,129,.06);color:#059669;border:1px solid rgba(16,185,129,.1)}
-    .cb-분석{background:rgba(139,92,246,.06);color:#7C3AED;border:1px solid rgba(139,92,246,.1)}
-    .cb-칼럼{background:rgba(255,255,255,.04);color:var(--gray-600);border:1px solid rgba(10,15,28,.06)}
+    .cb-갤러리{background:rgba(245,166,35,.08);color:#D48806;border:1px solid rgba(245,166,35,.12)}
 
     /* Post content */
     .cm-post-body{flex:1;min-width:0}
@@ -172,24 +178,15 @@
     .uni-hero .uh-visual { flex-shrink: 0; width: 360px; position: relative; z-index: 2; }
     .uni-hero .uh-photo { display: none; }
     .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .uni-hero .uh-card { background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 20px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); position: relative; z-index: 5; }
+    .uni-hero .uh-card { width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); display: block; text-decoration: none; color: inherit; cursor: pointer; position: relative; z-index: 5; }
     .uni-hero .uh-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
-    .uni-hero .uh-ci { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,196,0,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .uni-hero .uh-ci { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,196,0,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
     .uni-hero .uh-ci i { font-size: 15px; color: #FFC400; }
-    .uni-hero .uh-card h4 { font-size: 15px; font-weight: 800; color: #FFFFFF; margin-bottom: 3px; }
-    .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,.65); font-weight: 500; line-height: 1.5; }
+    .uni-hero .uh-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
+    .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,.65); line-height: 1.5; }
     @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
     @media (max-width: 600px) { .uni-hero { padding: 28px 0 28px; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
-    /* === 본문 우측 바로가기 퀵네비 (스크롤 추종 + 상단/하단 리밋) === */
-    .lib-quicknav{position:fixed;top:0;right:calc((100vw - 1280px)/2 - 148px);width:132px;z-index:40;display:flex;flex-direction:column;gap:8px}
-    .lib-quicknav.show{opacity:1;pointer-events:auto}
-    .lqn-title{font-size:11px;font-weight:800;color:var(--gray-400);letter-spacing:1px;margin-bottom:3px;padding-left:3px}
-    .lqn-card{display:flex;align-items:center;gap:9px;padding:11px 12px;background:#fff;border:1px solid var(--gray-200);border-radius:10px;cursor:pointer;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:all .2s}
-    .lqn-card:hover{border-color:var(--gold);transform:translateX(-3px);box-shadow:0 6px 18px rgba(184,134,11,.14)}
-    .lqn-ic{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#FFFFFF,#FFF3C4);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--gold);flex-shrink:0}
-    .lqn-card .lqn-tx{font-size:12.5px;font-weight:700;color:var(--gray-800)}
-    @media(max-width:1600px){.lib-quicknav{display:none}}
     </style>
 </head>
 <body>
@@ -204,17 +201,17 @@
         <span class="wave-line"></span>
         <span class="wave-line"></span>
     </div>
-    <div class="hero-bg-photo"><img src="../jpg/hero_community.png" alt="빛세움 커뮤니티"></div>
+    <div class="hero-bg-photo"><img src="../jpg/hero_library.jpg?v=20260825a" alt="빛세움 자료실"></div>
     <div class="inner">
         <div class="uh-text">
-            <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><a href="library.html">자료실</a><i class="fa-solid fa-chevron-right"></i><span>커뮤니티</span></div>
-            <div class="uh-label">COMMUNITY</div>
-            <h1>정비사업 <em>전문 커뮤니티</em></h1>
-            <p class="uh-sub">재개발·재건축·소규모정비사업 관련<br>실무 질의, 현장 경험을 공유하는 공간</p>
+            <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>자료실</span></div>
+            <div class="uh-label">PROFESSIONAL ARCHIVE</div>
+            <h1>정비사업 <em>실무 자료</em>를<br>한곳에 모았습니다</h1>
+            <p class="uh-sub">관계법령부터 서식·매뉴얼, 주요뉴스, 커뮤니티까지<br>정비사업 실무에 필요한 자료를 체계적으로 제공합니다</p>
         </div>
         <div class="uh-visual">
-            <div class="uh-photo"><img src="../jpg/hero_community.png" alt="빛세움 커뮤니티"></div>
-            <div class="uh-cards"><a class="uh-card" href="library.html?cat=주요뉴스"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></a><a class="uh-card" href="library.html?cat=법령"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>도시정비법·고시·공고·판례·질의회신 및 지침·규정</p></a><a class="uh-card" href="library.html?cat=서식가이드"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></a><a class="uh-card" href="community.html"><div class="uh-ci"><i class="fa-solid fa-comments"></i></div><h4>커뮤니티</h4><p>정비사업 정보 공유·소통 공간</p></a></div>
+            <div class="uh-photo"><img src="../jpg/hero_library.jpg?v=20260825a" alt="빛세움 자료실"></div>
+            <div class="uh-cards"><a class="uh-card" href="javascript:void(0)" onclick="cmSwitch('갤러리')"><div class="uh-ci"><i class="fa-solid fa-images"></i></div><h4>갤러리</h4><p>현장 사진·소식</p></a><a class="uh-card" href="library.html?cat=주요뉴스"><div class="uh-ci"><i class="fa-solid fa-feather"></i></div><h4>칼럼</h4><p>자료실에서 모아보기</p></a><a class="uh-card" href="library.html"><div class="uh-ci"><i class="fa-solid fa-folder-open"></i></div><h4>자료실</h4><p>법령·서식·뉴스 모음</p></a></div>
         </div>
     </div>
 </div>
@@ -222,18 +219,9 @@
 <div class="cm-toolbar" id="cmToolbar">
     <div class="inner">
         <div class="cm-tabs" id="cmTabs"></div>
-        <button class="cm-write-btn" id="writeBtn"><i class="fa-solid fa-pen"></i> 글쓰기</button>
     </div>
 </div>
 
-<div class="lib-quicknav" id="libQuicknav">
-    <div class="lqn-title">바로가기</div>
-    <a class="lqn-card" href="library.html?cat=주요뉴스"><span class="lqn-ic"><i class="fa-solid fa-newspaper"></i></span><span class="lqn-tx">주요뉴스</span></a>
-    <a class="lqn-card" href="library.html?cat=법령"><span class="lqn-ic"><i class="fa-solid fa-scale-balanced"></i></span><span class="lqn-tx">관계법령</span></a>
-    <a class="lqn-card" href="library.html?cat=서식가이드"><span class="lqn-ic"><i class="fa-solid fa-file-pen"></i></span><span class="lqn-tx">서식·매뉴얼</span></a>
-    <a class="lqn-card" href="community.html"><span class="lqn-ic"><i class="fa-solid fa-comments"></i></span><span class="lqn-tx">커뮤니티</span></a>
-    <a class="lqn-card" href="alimtalk.html"><span class="lqn-ic" style="background:linear-gradient(135deg,#FAE100,#FFCD00);color:#3C1E1E"><i class="fa-solid fa-comment"></i></span><span class="lqn-tx">카카오톡 소식받기</span></a>
-</div>
 <div class="page-body"><div class="inner">
     <div class="cm-featured" id="cmFeatured"></div>
     <div class="cm-list-head"><div class="count" id="cmCount"></div></div>
@@ -253,8 +241,8 @@
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.community){var s=JSON.parse(localStorage.getItem('rdc_community')||'[]');if(s.length!==MOCK.community.length)localStorage.setItem('rdc_community',JSON.stringify(MOCK.community))}
 var PER=10,curPage=1,curCat='전체';
-var catIcons={'질문':'fa-circle-question','정보':'fa-circle-info','후기':'fa-comment-dots','분석':'fa-chart-line','칼럼':'fa-feather'};
-var catDefs=[{key:'전체',label:'전체'},{key:'질문',label:'질문'},{key:'후기',label:'후기'},{key:'칼럼',label:'칼럼'}];
+var catIcons={'갤러리':'fa-images'};
+var catDefs=[{key:'전체',label:'전체'},{key:'갤러리',label:'갤러리'}];
 
 function getAllPosts(){
     var r=DataService.query('community',{sort:'date:desc',page:1,pageSize:999});
@@ -322,6 +310,24 @@ function render(){
     empty.style.display='none';
 
     var now=new Date();
+    var isGalleryView=curCat==='갤러리';
+    list.classList.toggle('is-gallery',isGalleryView);
+
+    if(isGalleryView){
+        list.innerHTML=slice.map(function(p){
+            var cover=(p.images&&p.images[0])?'<img class="cm-gallery-thumb" src="'+p.images[0]+'" alt="'+p.title+'" loading="lazy">':'<div class="cm-gallery-thumb-empty"><i class="fa-solid fa-image"></i></div>';
+            return'<div class="cm-gallery-card" onclick="location.href=\'community-detail.html?id='+p.id+'\'">'+
+                cover+
+                '<div class="cm-gallery-body">'+
+                    '<div class="cm-gallery-title">'+p.title+'</div>'+
+                    '<div class="cm-gallery-meta">'+
+                        '<span>'+p.author+'</span>'+
+                        '<span><i class="fa-solid fa-eye"></i> '+App.comma(p.views)+' &nbsp;<i class="fa-solid fa-heart" style="color:var(--gold)"></i> '+(p.likes||0)+'</span>'+
+                    '</div>'+
+                '</div>'+
+            '</div>';
+        }).join('');
+    }else{
     list.innerHTML=slice.map(function(p){
         var isNew=(now-new Date(p.date))<2*864e5;
         var isHot=(p.likes||0)>=50;
@@ -347,6 +353,7 @@ function render(){
             '</div>'+
         '</div>';
     }).join('');
+    }
 
     /* Pager */
     var pg=document.getElementById('cmPagerBtns');
@@ -360,32 +367,10 @@ function render(){
 /* Events */
 window.cmSwitch=function(cat){curCat=cat;curPage=1;renderTabs();render();var t=document.getElementById('cmTabs');if(t)window.scrollTo({top:t.offsetTop-80,behavior:'smooth'})};
 
-/* 우측 퀵네비 — 스크롤 추종 + 화면 중앙 기준 리밋 (히어로/푸터 침범 방지) */
-(function(){
-  var nav=document.getElementById('libQuicknav');if(!nav)return;
-  function upd(){
-    var pb=document.querySelector('.page-body');if(!pb)return;
-    var y=window.scrollY||window.pageYOffset||0;var vh=window.innerHeight;
-    var pbTop=pb.offsetTop,pbBottom=pbTop+pb.offsetHeight;
-    var navH=nav.offsetHeight||300;
-    var center=vh/2-navH/2;
-    var minTop=(pbTop-y)+10;
-    var maxTop=(pbBottom-y)-navH-10;
-    nav.style.top=Math.max(minTop,Math.min(center,maxTop))+'px';
-  }
-  window.addEventListener('scroll',upd,{passive:true});
-  window.addEventListener('resize',upd);
-  upd();setTimeout(upd,300);
-})();
 document.getElementById('cmTabs').addEventListener('click',function(e){
     var btn=e.target.closest('.cm-tab');if(!btn)return;
     curCat=btn.dataset.cat;curPage=1;renderTabs();render();
 });
-document.getElementById('writeBtn').addEventListener('click',function(){
-    if(!DataService.isUserLoggedIn()){App.toast('로그인이 필요합니다.','info');setTimeout(function(){location.href='login.html'},1000);return}
-    location.href='community-write.html';
-});
-
 document.getElementById('cmPerSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;render()});
 
 /* Sticky shadow */

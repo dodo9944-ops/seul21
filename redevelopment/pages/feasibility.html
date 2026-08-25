@@ -23,27 +23,24 @@
     .fh .hero-bg-photo{position:absolute;top:0;right:0;width:58%;height:100%;z-index:0}
     .fh .hero-bg-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;filter:contrast(1.03) saturate(0.95)}
     .fh .hero-bg-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,253,247,1.00) 0%,rgba(255,253,247,0.99) 18%,rgba(255,249,232,0.96) 28%,rgba(255,247,225,0.88) 36%,rgba(255,247,225,0.70) 43%,rgba(255,247,225,0.48) 49%,rgba(255,247,225,0.28) 55%,rgba(255,247,225,0.12) 61%,rgba(255,247,225,0.04) 66%,rgba(255,247,225,0.00) 72%);z-index:1}
-    /* Golden Energy Flow — SVG 기반 다중 라인 라이트 트레일 */
-    .fh .hero-energy-core{position:absolute;left:-8%;bottom:-28%;width:62%;height:75%;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 28% 65%,rgba(255,196,0,.32) 0%,rgba(255,213,74,.18) 25%,rgba(255,230,140,.08) 45%,transparent 72%);filter:blur(5px)}
-    .fh .hero-energy-lines{position:absolute;left:0;bottom:-2%;width:100%;height:54%;z-index:3;pointer-events:none;overflow:visible;-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 58%,rgba(0,0,0,.85) 70%,rgba(0,0,0,.45) 82%,transparent 100%);mask-image:linear-gradient(90deg,#000 0%,#000 58%,rgba(0,0,0,.85) 70%,rgba(0,0,0,.45) 82%,transparent 100%)}
-    .fh .energy-dot{position:absolute;border-radius:50%;background:#FFD95A;box-shadow:0 0 5px rgba(255,196,0,.75),0 0 12px rgba(255,196,0,.28)}
-    .fh .ed-1{left:6%;bottom:16%;width:3px;height:3px;background:#FFD95A;opacity:.65}
-    .fh .ed-2{left:13%;bottom:26%;width:2px;height:2px;background:#FFFFFF;opacity:.42;filter:blur(.3px)}
-    .fh .ed-3{left:19%;bottom:10%;width:3px;height:3px;background:#FFF3C2;opacity:.55}
-    .fh .ed-4{left:24%;bottom:31%;width:2px;height:2px;background:#FFD95A;opacity:.38;filter:blur(.4px)}
-    .fh .ed-5{left:29%;bottom:19%;width:4px;height:4px;background:#FFD95A;opacity:.48;filter:blur(.5px)}
-    .fh .ed-6{left:33%;bottom:8%;width:2px;height:2px;background:#FFFFFF;opacity:.50}
-    .fh .ed-7{left:20%;bottom:22%;width:3px;height:3px;background:#FFF3C2;opacity:.40;filter:blur(.4px)}
-    .fh .ed-8{left:9%;bottom:33%;width:2px;height:2px;background:#FFD95A;opacity:.60}
-    @keyframes fhEnergyFlow{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-160}}
-    .fh .energy-flow-anim{stroke-dasharray:420 24 120 18;animation:fhEnergyFlow 12s linear infinite}
-    @media(prefers-reduced-motion:reduce){.fh .energy-flow-anim{animation:none}}
-    @media(max-width:1024px){.fh .hero-energy-lines path:nth-of-type(n+11){display:none}.fh .energy-dot:nth-of-type(n+6){display:none}}
-    @media(max-width:600px){.fh .hero-energy-lines{opacity:.55;height:38%;bottom:0}.fh .hero-energy-lines path:nth-of-type(n+8){display:none}.fh .energy-dot{display:none}}
+    /* 골드 라이트 웨이브 — 사업분야(services) 시안과 색상·패턴 동일 */
+    .fh .hero-light-wave{position:absolute;left:0;bottom:-9%;width:55%;height:53%;overflow:hidden;pointer-events:none;z-index:1;opacity:1;-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 67%,transparent 100%);mask-image:linear-gradient(90deg,#000 0%,#000 67%,transparent 100%)}
+    .fh .hero-light-wave::before{content:'';position:absolute;left:0;bottom:0;width:73%;height:73%;background:radial-gradient(ellipse at 17% 100%,rgba(255,196,0,.41) 0%,rgba(255,196,0,.19) 28%,rgba(255,196,0,.07) 50%,transparent 72%);filter:blur(2px)}
+    .fh .hero-light-wave .wave-line{position:absolute;border-radius:50%;border-top:1.2px solid transparent;transform-origin:center;filter:drop-shadow(0 0 5px rgba(255,196,0,.5)) drop-shadow(0 0 14px rgba(255,196,0,.26));-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 10%,#000 28%,rgba(0,0,0,.55) 46%,#000 62%,rgba(0,0,0,.30) 82%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 10%,#000 28%,rgba(0,0,0,.55) 46%,#000 62%,rgba(0,0,0,.30) 82%,transparent 100%)}
+    .fh .hero-light-wave .wave-line:nth-child(1){left:-12%;bottom:-8%;width:900px;height:235px;transform:rotate(-7deg);border-top-width:1.55px;border-top-color:rgba(255,196,0,.63)}
+    .fh .hero-light-wave .wave-line:nth-child(2){left:-9%;bottom:-2%;width:820px;height:214px;transform:rotate(-5.5deg);border-top-width:1.35px;border-top-color:rgba(255,208,50,.55)}
+    .fh .hero-light-wave .wave-line:nth-child(3){left:-16%;bottom:-12%;width:740px;height:193px;transform:rotate(-4deg);border-top-width:1.2px;border-top-color:rgba(255,218,80,.47)}
+    .fh .hero-light-wave .wave-line:nth-child(4){left:-6%;bottom:5%;width:660px;height:172px;transform:rotate(-10deg) scaleY(.94);border-top-width:1.05px;border-top-color:rgba(255,196,0,.39)}
+    .fh .hero-light-wave .wave-line:nth-child(5){left:-19%;bottom:-16%;width:580px;height:151px;transform:rotate(-2.5deg);border-top-width:.95px;border-top-color:rgba(255,230,120,.31)}
+    .fh .hero-light-wave .wave-line:nth-child(6){left:-4%;bottom:1%;width:500px;height:130px;transform:rotate(-12deg);border-top-width:.85px;border-top-color:rgba(255,239,155,.23)}
+    .fh .hero-light-wave .wave-line:nth-child(7){left:-14%;bottom:-5%;width:430px;height:112px;transform:rotate(-1deg);border-top-width:.8px;border-top-color:rgba(255,247,185,.16)}
+    @media(max-width:1024px){.fh .hero-light-wave .wave-line:nth-child(n+6){display:none}}
+    @media(max-width:600px){.fh .hero-light-wave{opacity:.40}.fh .hero-light-wave .wave-line:nth-child(n+4){display:none}}
     .fh .hero-bg-photo::before{content:'';position:absolute;top:0;bottom:0;left:22%;width:56%;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.06) 25%,rgba(255,255,255,0.16) 52%,rgba(255,255,255,0.18) 62%,rgba(255,255,255,0.08) 80%,rgba(255,255,255,0) 100%);filter:blur(28px);z-index:2}
     .fh .inner{position:relative;z-index:10;display:flex;align-items:flex-start;gap:48px}
     .fh .hero-text{flex:1;min-width:0}
     .fh h1{font-size:34px;font-weight:900;color:#171C26;margin-bottom:8px}
+    .fh h1 em{font-style:normal;color:#C58B00}
     .fh .fh-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:#B8860B;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
     .fh .fh-label::before{content:'';width:24px;height:1px;background:#B8860B}
     .fh .fh-sub{font-size:15px;color:#565C66;line-height:1.7;max-width:650px;margin-bottom:0}
@@ -82,12 +79,14 @@
     .hero-opt:hover .ho-arrow{opacity:1}
     .hero-opt .ho-arrow i{font-size:10px;transition:transform .2s}
     .hero-opt:hover .ho-arrow i{transform:translateX(3px)}
-    /* 상단 2개 카드 — 상하폭 절반 압축(개별/종합) */
-    .hero-selector .hero-opt:not(.full){padding:9px 14px}
-    .hero-selector .hero-opt:not(.full) .ho-top{margin-bottom:0}
-    .hero-selector .hero-opt:not(.full) .ho-icon{width:34px;height:34px;border-radius:9px;font-size:15px}
-    .hero-selector .hero-opt:not(.full) .ho-desc{display:none}
-    .hero-selector .hero-opt:not(.full) .ho-bottom{margin-top:9px}
+    /* 상단 2개 카드 — 자료실 서브박스와 동일한 형식(아이콘→제목→설명, 174×130) */
+    .hero-selector .hero-opt:not(.full){width:174px;height:130px;box-sizing:border-box;overflow:hidden;padding:22px 18px}
+    .hero-selector .hero-opt:not(.full) .ho-top{display:block;margin-bottom:0}
+    .hero-selector .hero-opt:not(.full) .ho-icon{width:36px;height:36px;border-radius:8px;font-size:15px;margin-bottom:12px}
+    .hero-selector .hero-opt:not(.full) .ho-title{display:block;font-size:14px;margin-bottom:4px}
+    .hero-selector .hero-opt:not(.full) .ho-badge{display:none}
+    .hero-selector .hero-opt:not(.full) .ho-desc{display:block;font-size:11.5px;margin-bottom:0}
+    .hero-selector .hero-opt:not(.full) .ho-bottom{display:none}
     /* 전체폭 카드 — 사업타당성 분석(REB 실시간 분석기) */
     .hero-opt.full{grid-column:1/-1;padding-top:10px;padding-bottom:1px;background:rgba(10,16,30,0.80);border-color:rgba(10,15,28,0.14)}
     .hero-opt.full .ho-top{margin-bottom:6px}
@@ -279,61 +278,22 @@
 <div id="site-header"></div>
 
 <div class="fh">
-    <div class="hero-energy-core" aria-hidden="true"></div>
-    <svg class="hero-energy-lines" viewBox="0 0 1600 520" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-            <linearGradient id="fhEnergyGold" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#FFC400" stop-opacity="0.85"/>
-                <stop offset="35%" stop-color="#FFD95A" stop-opacity="0.92"/>
-                <stop offset="58%" stop-color="#FFF3C2" stop-opacity="0.72"/>
-                <stop offset="78%" stop-color="#FFD95A" stop-opacity="0.38"/>
-                <stop offset="100%" stop-color="#FFC400" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="fhEnergySoft" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#FFE9A3" stop-opacity="0.55"/>
-                <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.60"/>
-                <stop offset="100%" stop-color="#FFC400" stop-opacity="0"/>
-            </linearGradient>
-            <filter id="fhEnergyGlow" x="-20%" y="-30%" width="150%" height="160%">
-                <feGaussianBlur stdDeviation="3" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-        </defs>
-        <!-- Main (3) -->
-        <path class="energy-flow-anim" d="M -120 420 C 180 500, 360 500, 610 400 C 820 315, 960 210, 1160 245 C 1330 275, 1450 255, 1700 205" fill="none" stroke="url(#fhEnergyGold)" stroke-width="2" opacity="0.82" filter="url(#fhEnergyGlow)"/>
-        <path d="M -100 455 C 240 520, 430 465, 670 350 C 860 260, 1010 195, 1190 230 C 1380 265, 1490 235, 1700 185" fill="none" stroke="url(#fhEnergyGold)" stroke-width="1.7" opacity="0.68" filter="url(#fhEnergyGlow)"/>
-        <path d="M -120 385 C 210 430, 390 425, 625 345 C 835 275, 990 235, 1175 270 C 1340 300, 1500 275, 1690 230" fill="none" stroke="url(#fhEnergySoft)" stroke-width="1.5" opacity="0.58"/>
-        <!-- Secondary (7) -->
-        <path d="M -80 400 C 200 460, 380 440, 600 370 C 780 315, 900 260, 1080 280 C 1220 295, 1350 270, 1550 230" fill="none" stroke="url(#fhEnergyGold)" stroke-width="1.3" opacity="0.52"/>
-        <path d="M -90 440 C 220 490, 400 460, 630 390 C 800 340, 940 290, 1100 310 C 1260 330, 1400 300, 1580 250" fill="none" stroke="url(#fhEnergySoft)" stroke-width="1.2" opacity="0.48"/>
-        <path d="M -70 360 C 190 400, 350 395, 560 330 C 740 280, 880 245, 1050 270 C 1200 290, 1330 265, 1500 220" fill="none" stroke="url(#fhEnergyGold)" stroke-width="1.1" opacity="0.44"/>
-        <path d="M -100 470 C 240 510, 420 480, 650 420 C 830 370, 970 320, 1140 335 C 1300 350, 1440 320, 1620 270" fill="none" stroke="url(#fhEnergySoft)" stroke-width="1.0" opacity="0.40"/>
-        <path d="M -60 330 C 170 370, 330 365, 520 305 C 700 255, 830 220, 1000 250 C 1150 275, 1280 255, 1450 210" fill="none" stroke="url(#fhEnergyGold)" stroke-width="0.9" opacity="0.36"/>
-        <path d="M -110 500 C 260 540, 450 505, 690 450 C 860 405, 1000 360, 1160 375 C 1310 390, 1440 365, 1610 320" fill="none" stroke="url(#fhEnergySoft)" stroke-width="0.85" opacity="0.32"/>
-        <path d="M -50 295 C 150 330, 300 325, 480 270 C 650 225, 780 195, 940 220 C 1080 240, 1200 220, 1360 180" fill="none" stroke="url(#fhEnergyGold)" stroke-width="0.8" opacity="0.30"/>
-        <!-- Fine (6) -->
-        <path d="M -40 260 C 140 290, 270 285, 430 235 C 580 195, 700 170, 850 190 C 980 205, 1090 190, 1230 155" fill="none" stroke="url(#fhEnergySoft)" stroke-width="0.6" opacity="0.24"/>
-        <path d="M -95 515 C 270 550, 460 520, 700 470 C 870 430, 1010 390, 1170 400 C 1320 410, 1450 390, 1610 350" fill="none" stroke="url(#fhEnergyGold)" stroke-width="0.55" opacity="0.20"/>
-        <path d="M -30 225 C 130 250, 250 245, 390 200 C 520 165, 630 145, 760 165 C 880 180, 980 165, 1110 130" fill="none" stroke="url(#fhEnergySoft)" stroke-width="0.5" opacity="0.18"/>
-        <path d="M -105 200 C 100 225, 210 220, 340 180 C 460 145, 560 128, 680 145 C 790 158, 880 145, 1000 112" fill="none" stroke="url(#fhEnergyGold)" stroke-width="0.45" opacity="0.15"/>
-        <path d="M -20 540 C 220 570, 400 545, 620 500 C 780 465, 910 430, 1060 440 C 1200 450, 1320 430, 1470 395" fill="none" stroke="url(#fhEnergySoft)" stroke-width="0.4" opacity="0.13"/>
-        <path d="M -115 170 C 60 190, 160 187, 270 155 C 370 128, 460 113, 560 128 C 655 140, 735 128, 840 100" fill="none" stroke="url(#fhEnergyGold)" stroke-width="0.4" opacity="0.12"/>
-    </svg>
-    <span class="energy-dot ed-1" aria-hidden="true"></span>
-    <span class="energy-dot ed-2" aria-hidden="true"></span>
-    <span class="energy-dot ed-3" aria-hidden="true"></span>
-    <span class="energy-dot ed-4" aria-hidden="true"></span>
-    <span class="energy-dot ed-5" aria-hidden="true"></span>
-    <span class="energy-dot ed-6" aria-hidden="true"></span>
-    <span class="energy-dot ed-7" aria-hidden="true"></span>
-    <span class="energy-dot ed-8" aria-hidden="true"></span>
-    <div class="hero-bg-photo"><img src="../jpg/hero_feasibility.png" alt="사업성 검토"></div>
+    <div class="hero-light-wave" aria-hidden="true">
+        <span class="wave-line"></span>
+        <span class="wave-line"></span>
+        <span class="wave-line"></span>
+        <span class="wave-line"></span>
+        <span class="wave-line"></span>
+        <span class="wave-line"></span>
+        <span class="wave-line"></span>
+    </div>
+    <div class="hero-bg-photo"><img src="../jpg/hero_feasibility.jpg?v=20260825a" alt="사업성 검토"></div>
     <div class="inner">
         <div class="hero-text">
         <div class="breadcrumb"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>사업성 검토</span></div>
         <div class="fh-label">Project Feasibility Analysis</div>
-        <h1>사업성 검토의 기준, 빛세움</h1>
-        <p class="fh-sub">정비사업의 사업성을 쉽고 빠르게 검토할 수 있습니다.<br>비례율, 분담금, 총사업비 등 핵심 수치를 한눈에 확인합니다.</p>
+        <h1>사업성 검토의 <em>기준</em>을<br>세우는 빛세움</h1>
+        <p class="fh-sub">정비사업의 사업성을 쉽고 빠르게 검토하고,<br>비례율·분담금·총사업비 등 핵심 수치를<br>한눈에 확인할 수 있습니다.</p>
         </div>
 
         <!-- 히어로 우측 서비스 선택 -->
@@ -343,7 +303,7 @@
                     <div class="ho-icon"><i class="fa-solid fa-calculator"></i></div>
                     <div><span class="ho-title">개별 분석</span><span class="ho-badge quick">간편</span></div>
                 </div>
-                <p class="ho-desc">필요한 항목을 빠르게 확인하는 간편형 서비스입니다.</p>
+                <p class="ho-desc">필요 항목만 빠르게 확인</p>
                 <div class="ho-bottom">
                     <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 개별 계산 시작</div>
                     <div class="ho-mini"><i class="fa-solid fa-percent" title="비례율"></i><i class="fa-solid fa-coins" title="분담금"></i><i class="fa-solid fa-wave-square" title="시뮬레이션"></i></div>
@@ -354,7 +314,7 @@
                     <div class="ho-icon"><i class="fa-solid fa-chart-pie"></i></div>
                     <div><span class="ho-title">종합 분석</span><span class="ho-badge pro">전문가용</span></div>
                 </div>
-                <p class="ho-desc">전체 사업성을 단계별로 검토하는 전문형 서비스입니다.</p>
+                <p class="ho-desc">단계별 전문 사업성 검토</p>
                 <div class="ho-bottom">
                     <div class="ho-arrow"><i class="fa-solid fa-arrow-right"></i> 종합 분석 시작</div>
                     <div class="ho-mini"><i class="fa-solid fa-layer-group" title="6단계 분석"></i><i class="fa-solid fa-shuffle" title="시나리오 비교"></i><i class="fa-solid fa-wand-magic-sparkles" title="자동 해석"></i></div>

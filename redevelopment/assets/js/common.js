@@ -34,12 +34,7 @@ const App = (() => {
       { href: `${B}/pages/faq.html`, label: '자주 묻는 질문', icon: 'fa-solid fa-circle-question' },
     ];
 
-    const isLoggedIn = DataService.isUserLoggedIn();
-    const user = DataService.getCurrentUser();
-
-    const utilRight = isLoggedIn
-      ? `<a href="${B}/pages/mypage.html">${user.name}님</a><a href="#" id="logoutBtn">로그아웃</a><a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>`
-      : `<a href="${B}/pages/login.html">로그인</a><a href="${B}/pages/register.html">회원가입</a><a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>`;
+    const utilRight = `<a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>`;
 
     return `
     <div class="header-wrap" id="headerWrap">
@@ -124,9 +119,7 @@ const App = (() => {
         ).join('')}
       </nav>
       <div class="drawer-footer">
-        ${isLoggedIn
-          ? `<a href="${B}/pages/mypage.html" class="btn btn-outline btn-md">마이페이지</a><a href="#" class="btn btn-primary btn-md" id="drawerLogout">로그아웃</a>`
-          : `<a href="${B}/pages/login.html" class="btn btn-outline btn-md">로그인</a><a href="${B}/pages/register.html" class="btn btn-primary btn-md">회원가입</a>`}
+        <a href="${B}/pages/feasibility-check.html" class="btn btn-primary btn-md">사업타당성 분석</a>
       </div>
     </aside>
 
@@ -391,12 +384,6 @@ const App = (() => {
         scrollBtn.classList.toggle('visible', window.scrollY > 400);
       }, { passive: true });
     }
-
-    // Logout
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) logoutBtn.addEventListener('click', e => { e.preventDefault(); DataService.userLogout(); location.reload(); });
-    const drawerLogout = document.getElementById('drawerLogout');
-    if (drawerLogout) drawerLogout.addEventListener('click', e => { e.preventDefault(); DataService.userLogout(); location.reload(); });
 
     /* ── 모바일 페이지 스와이프 네비게이션 ── */
     (function initPageSwipe() {

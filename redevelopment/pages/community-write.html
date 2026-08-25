@@ -150,7 +150,7 @@
         <div class="write-wrap">
             <div class="breadcrumb">
                 <a href="../index.html">홈</a> <i class="fa-solid fa-chevron-right"></i>
-                <a href="community.html">커뮤니티</a> <i class="fa-solid fa-chevron-right"></i>
+                <a href="library.html?cat=갤러리">커뮤니티</a> <i class="fa-solid fa-chevron-right"></i>
                 <span>글쓰기</span>
             </div>
             <div class="write-card">
@@ -160,11 +160,7 @@
                         <label class="form-label">카테고리 <span class="required">*</span></label>
                         <select class="form-select" id="postCategory" required>
                             <option value="">카테고리를 선택해주세요</option>
-                            <option value="질문">질문</option>
-                            <option value="정보">정보</option>
-                            <option value="후기">후기</option>
-                            <option value="분석">분석</option>
-                            <option value="칼럼">칼럼</option>
+                            <option value="갤러리">갤러리</option>
                         </select>
                         <div class="validation-msg" id="catError">카테고리를 선택해주세요.</div>
                     </div>
@@ -174,7 +170,7 @@
                         <div class="validation-msg" id="titleError">제목을 입력해주세요.</div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">이미지 첨부</label>
+                        <label class="form-label">이미지 첨부 <span class="required" id="imgRequiredMark" style="display:none">*</span></label>
                         <div class="img-upload-area" id="imgUploadArea">
                             <i class="fa-solid fa-image"></i>
                             <div class="up-text">이미지를 드래그하거나 클릭하여 첨부</div>
@@ -182,6 +178,7 @@
                             <input type="file" id="imgInput" multiple accept="image/*" style="display:none">
                         </div>
                         <div class="img-preview-list" id="imgPreviewList"></div>
+                        <div class="validation-msg" id="imgError">갤러리는 대표사진을 반드시 1장 이상 첨부해야 합니다.</div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">첨부파일</label>
@@ -216,13 +213,6 @@
 <script>
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
-        // 로그인 체크
-        if (!DataService.isUserLoggedIn()) {
-            App.toast('로그인이 필요합니다.', 'info');
-            setTimeout(function() { location.href = 'login.html'; }, 1000);
-            return;
-        }
-
         const form = document.getElementById('writeForm');
         const categoryEl = document.getElementById('postCategory');
         const titleEl = document.getElementById('postTitle');
@@ -230,6 +220,10 @@
         const charCount = document.getElementById('charCount');
         const headingEl = document.getElementById('writeHeading');
         const submitBtn = document.getElementById('submitBtn');
+
+        categoryEl.addEventListener('change', function() {
+            document.getElementById('imgRequiredMark').style.display = (categoryEl.value === '갤러리') ? '' : 'none';
+        });
 
         // 수정 모드: ?id=xxx 가 있으면 기존 글 로드
         const editId = App.getParam('id');
@@ -243,7 +237,7 @@
 
         // 취소
         document.getElementById('cancelBtn').addEventListener('click', function() {
-            location.href = 'community.html';
+            location.href = 'library.html?cat=갤러리';
         });
 
         /* ── 이미지 업로드 ── */
@@ -398,6 +392,7 @@
             headingEl.textContent = '글 수정';
             submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> 수정';
             categoryEl.value = post.category || '';
+            document.getElementById('imgRequiredMark').style.display = (categoryEl.value === '갤러리') ? '' : 'none';
             titleEl.value = post.title || '';
             contentEl.value = post.content || '';
             charCount.textContent = (post.content || '').length;
@@ -428,11 +423,11 @@
                         applyEditPrefill(found);
                     } else {
                         App.toast('수정 권한이 없거나 게시글을 찾을 수 없습니다.', 'error');
-                        setTimeout(function(){ location.href = 'community.html'; }, 1000);
+                        setTimeout(function(){ location.href = 'library.html?cat=갤러리'; }, 1000);
                     }
                 }).catch(function(){
                     App.toast('게시글을 불러올 수 없습니다.', 'error');
-                    setTimeout(function(){ location.href = 'community.html'; }, 1000);
+                    setTimeout(function(){ location.href = 'library.html?cat=갤러리'; }, 1000);
                 });
             }
         }
@@ -464,6 +459,15 @@
                 valid = false;
             } else {
                 contentError.classList.remove('show');
+            }
+
+            const imgError = document.getElementById('imgError');
+            var doneImages = uploadedImages.filter(function(img) { return img.status === 'done' && img.url; });
+            if (categoryEl.value === '갤러리' && doneImages.length === 0) {
+                imgError.classList.add('show');
+                valid = false;
+            } else {
+                imgError.classList.remove('show');
             }
 
             return valid;
@@ -534,7 +538,7 @@
                 content: contentEl.value.trim(),
                 images: images,
                 attachments: attachments,
-                author: user.name,
+                author: (user && user.name) ? user.name : '방문자',
                 ownerId: user && user.id ? user.id : '',
                 ownerEmail: user && user.email ? user.email : '',
                 date: dateStr,
@@ -559,7 +563,7 @@
                 newPost.id = res.id || Date.now().toString(36);
                 DataService.create('community', newPost);
                 App.toast('게시글이 등록되었습니다.', 'success');
-                setTimeout(function() { location.href = 'community.html'; }, 800);
+                setTimeout(function() { location.href = 'library.html?cat=갤러리'; }, 800);
             })
             .catch(function() {
                 submitBtn.disabled = false;
@@ -567,7 +571,7 @@
                 newPost.id = Date.now().toString(36);
                 DataService.create('community', newPost);
                 App.toast('게시글이 등록되었습니다.', 'success');
-                setTimeout(function() { location.href = 'community.html'; }, 800);
+                setTimeout(function() { location.href = 'library.html?cat=갤러리'; }, 800);
             });
         });
 

@@ -75,17 +75,28 @@
         }
         .splash-content {
             position: relative; z-index: 1;
-            display: flex; flex-direction: column; align-items: center; gap: 32px;
+            display: flex; flex-direction: column; align-items: center; gap: 0;
+            margin-bottom: -30px;
         }
         .splash-logo img {
-            width: 130px; height: 130px; object-fit: contain;
-            opacity: 0; transform: scale(.82);
-            animation: logoReveal .7s cubic-bezier(.2,.9,.3,1.1) 0.2s forwards;
+            width: 135px; height: 135px; object-fit: contain;
+            opacity: 0; transform: translateY(50px) scale(.85);
+            animation: logoRise 1s cubic-bezier(.16,.8,.24,1) 0.2s forwards;
+            filter: drop-shadow(0 10px 26px rgba(184,134,11,.28));
         }
-        @keyframes logoReveal { to { opacity: 1; transform: scale(1); } }
+        @keyframes logoRise {
+            0% { opacity: 0; transform: translateY(50px) scale(.85); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
         .splash-text {
-            text-align: center; opacity: 0;
-            animation: splFadeUp .67s ease-out 1.34s forwards;
+            text-align: center;
+            margin-top: 16px;
+            opacity: 0; transform: translateY(30px);
+            animation: textRise .7s cubic-bezier(.16,.8,.24,1) 0.5s forwards;
+        }
+        @keyframes textRise {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
         .splash-company {
             font-size: 26px; font-weight: 800; letter-spacing: -.5px;
@@ -95,25 +106,31 @@
             font-size: 11px; font-weight: 500; letter-spacing: 4px;
             color: rgba(184,134,11,.85); text-transform: uppercase;
         }
+        .splash-underline {
+            width: 0; height: 2px; margin: 10px auto 0;
+            background: linear-gradient(90deg, transparent, #B8860B 20%, #D6A419 50%, #B8860B 80%, transparent);
+            animation: underlineGrow .45s cubic-bezier(.4,0,.2,1) 1.2s forwards;
+        }
+        @keyframes underlineGrow { to { width: 90px; } }
         .splash-loader {
             position: absolute; bottom: 80px;
             width: 200px; height: 2px; background: rgba(184,134,11,.15);
             border-radius: 2px; overflow: hidden;
-            opacity: 0; animation: splFadeUp .6s ease .4s forwards;
+            opacity: 0; animation: splFadeUp .86s ease .58s forwards;
         }
         .splash-loader-bar {
             width: 0; height: 100%;
             background: linear-gradient(90deg, transparent, #B8860B 30%, #D6A419 70%, transparent);
             border-radius: 2px;
-            animation: loaderFill 2.4s cubic-bezier(.4,0,.2,1) .6s forwards;
+            animation: loaderFill 3.46s cubic-bezier(.4,0,.2,1) .86s forwards;
         }
         @keyframes loaderFill { 0%{width:0;opacity:.3} 40%{opacity:1} 80%{width:90%;opacity:1} 100%{width:100%;opacity:0} }
         @keyframes splFadeUp {
-            from { opacity: 0; transform: translateY(12px); }
+            from { opacity: 0; transform: translateY(32px); }
             to { opacity: 1; transform: translateY(0); }
         }
         @media (max-width: 768px) {
-            .splash-logo img { width: 100px; height: 100px; }
+            .splash-logo img { width: 150px; height: 150px; }
             .splash-company { font-size: 20px; }
             .splash-sub { font-size: 9px; letter-spacing: 3px; }
         }
@@ -127,7 +144,7 @@
             position: relative;
             overflow: hidden;
             background: #FFFFFF;
-            padding: 40px 0;
+            padding: 56px 0;
             min-height: 400px;
             display: flex;
             align-items: center;
@@ -282,7 +299,7 @@
 
         /* 헤드라인 */
         .hero-section h1 {
-            font-size: 46px; font-weight: 900; letter-spacing: -1.2px;
+            font-size: 46px; font-weight: 700; letter-spacing: -1.2px;
             color: #171C26; line-height: 1.3; margin-bottom: 12px;
             max-width: 560px;
         }
@@ -293,7 +310,7 @@
 
         /* 서브카피 */
         .hero-subtitle {
-            font-size: 17px; font-weight: 400; color: #565C66;
+            font-size: 15.5px; font-weight: 400; color: #565C66;
             line-height: 1.72; margin-bottom: 12px; max-width: 620px;
             word-break: keep-all;
         }
@@ -639,14 +656,14 @@
     <div class="splash-glow"></div>
     <div class="splash-content">
         <div class="splash-logo">
-            <img src="jpg/visseum_logo.jpg" alt="빛세움 로고">
+            <img src="jpg/visseum_logo_transparent.png" alt="빛세움 로고">
         </div>
         <div class="splash-text">
             <div class="splash-company">(주)빛세움</div>
             <div class="splash-sub">VISSEUM</div>
+            <div class="splash-underline"></div>
         </div>
     </div>
-    <div class="splash-loader"><div class="splash-loader-bar"></div></div>
 </div>
 
 <!-- 공통 헤더 -->
@@ -681,10 +698,10 @@
         <div class="inner">
             <div class="hero-label"><i class="fa-solid fa-shield-halved"></i> 빛세움 | 정비사업 통합 엔지니어링 플랫폼</div>
             <h1><em>사람을 위한</em> 도시개발<br>사람을 위한 <em>가치창조</em></h1>
-            <p class="hero-subtitle">재개발·재건축·소규모정비사업 전 과정에서 사업성 검토, 인허가 대응, 조합 운영지원, 이해관계 조율까지 체계적으로 수행합니다.</p>
+            <p class="hero-subtitle">재개발·재건축·소규모정비사업 전 과정에서<br>사업성 검토, 인허가 대응, 조합 운영지원, 이해관계 조율까지 체계적으로 수행합니다.</p>
 
             <div class="hero-actions">
-                <a href="pages/contact.html" class="btn-hero-primary" onclick="if(typeof DataService!=='undefined'&&!DataService.isUserLoggedIn()){event.preventDefault();location.href='pages/login.html';return false}"><i class="fa-solid fa-paper-plane"></i> 상담 문의</a>
+                <a href="pages/contact.html" class="btn-hero-primary"><i class="fa-solid fa-paper-plane"></i> 상담 문의</a>
                 <a href="pages/feasibility.html" class="btn-hero-outline"><i class="fa-solid fa-chart-line"></i> 사업성 검토</a>
             </div>
         </div>
@@ -888,8 +905,8 @@
             <!-- 커뮤니티 (동적) -->
             <div class="panel">
                 <div class="panel-head">
-                    <h3 class="panel-title">커뮤니티</h3>
-                    <a href="pages/community.html" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+                    <h3 class="panel-title">갤러리</h3>
+                    <a href="pages/library.html?cat=갤러리" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
                 </div>
                 <div id="mainCommunity"></div>
             </div>
@@ -1109,17 +1126,17 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         document.body.classList.remove('splash-active');
         document.body.style.overflow = '';
     } else {
-        // ★ 첫 접속: 로고+글자 다 보여준 후(2.24초) 페이드아웃
+        // ★ 첫 접속: 로고+글자+밑줄 다 보여준 후 짧은 정지 → 짧게 페이드아웃 후 제거
         sessionStorage.setItem('seul_splash', '1');
         setTimeout(function(){
-            sp.style.transition = 'opacity 0.76s ease';
+            sp.style.transition = 'opacity 0.4s ease';
             sp.style.opacity = '0';
             document.body.classList.remove('splash-active');
             document.body.style.overflow = '';
             setTimeout(function(){
                 if(sp.parentNode) sp.parentNode.removeChild(sp);
-            }, 760);
-        }, 2240);
+            }, 400);
+        }, 2650);
     }
 
     // 뒤로가기 시 잔상 방지
@@ -1176,7 +1193,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var today=new Date(); today.setHours(0,0,0,0);
         var cutoff=new Date(today); cutoff.setDate(cutoff.getDate()-7);
         var cutStr=cutoff.toISOString().slice(0,10);
-        var newsFileMap={'news0403':'downloads/news_20260403.html','news0404':'downloads/news_20260404.html','news0407a':'downloads/news_20260407a.html','news0407b':'downloads/news_20260407b.html','news0407c':'downloads/news_20260407c.html','news0407d':'downloads/news_20260407d.html',
+        var newsFileMap={
 'news0817a':'downloads/news_20260817a.html','news0817b':'downloads/news_20260817b.html','news0817c':'downloads/news_20260817c.html','news0817d':'downloads/news_20260817d.html','news0817e':'downloads/news_20260817e.html','news0817f':'downloads/news_20260817f.html','news0817g':'downloads/news_20260817g.html','news0817h':'downloads/news_20260817h.html','news0817i':'downloads/news_20260817i.html','news0818a':'downloads/news_20260818a.html','news0818b':'downloads/news_20260818b.html','news0818c':'downloads/news_20260818c.html','news0818d':'downloads/news_20260818d.html','news0818e':'downloads/news_20260818e.html','news0818f':'downloads/news_20260818f.html','news0818g':'downloads/news_20260818g.html','news0818h':'downloads/news_20260818h.html','news0818i':'downloads/news_20260818i.html','news0818j':'downloads/news_20260818j.html','news0818k':'downloads/news_20260818k.html','news0819a':'downloads/news_20260819a.html','news0819b':'downloads/news_20260819b.html','news0819c':'downloads/news_20260819c.html','news0819d':'downloads/news_20260819d.html','news0819e':'downloads/news_20260819e.html','news0819f':'downloads/news_20260819f.html','news0819g':'downloads/news_20260819g.html','news0820a':'downloads/news_20260820a.html','news0820b':'downloads/news_20260820b.html','news0820c':'downloads/news_20260820c.html','news0820d':'downloads/news_20260820d.html','news0820e':'downloads/news_20260820e.html','news0820f':'downloads/news_20260820f.html','news0820g':'downloads/news_20260820g.html','news0820h':'downloads/news_20260820h.html','news0820i':'downloads/news_20260820i.html','news0820j':'downloads/news_20260820j.html','news0821a':'downloads/news_20260821a.html','news0821b':'downloads/news_20260821b.html','news0821c':'downloads/news_20260821c.html','news0821d':'downloads/news_20260821d.html','news0821e':'downloads/news_20260821e.html','news0821f':'downloads/news_20260821f.html','news0821g':'downloads/news_20260821g.html','news0821h':'downloads/news_20260821h.html','news0821i':'downloads/news_20260821i.html','news0822a':'downloads/news_20260822a.html','news0822b':'downloads/news_20260822b.html','news0822c':'downloads/news_20260822c.html','news0822d':'downloads/news_20260822d.html','news0822e':'downloads/news_20260822e.html','news0823a':'downloads/news_20260823a.html','news0823b':'downloads/news_20260823b.html','news0823c':'downloads/news_20260823c.html','news0823d':'downloads/news_20260823d.html','news0823e':'downloads/news_20260823e.html','news0823f':'downloads/news_20260823f.html','news0823g':'downloads/news_20260823g.html','news0823h':'downloads/news_20260823h.html','news0824a':'downloads/news_20260824a.html','news0824b':'downloads/news_20260824b.html','news0824c':'downloads/news_20260824c.html','news0824d':'downloads/news_20260824d.html','news0824e':'downloads/news_20260824e.html','news0824f':'downloads/news_20260824f.html','news0824g':'downloads/news_20260824g.html','news0824h':'downloads/news_20260824h.html','news0824i':'downloads/news_20260824i.html','news0824j':'downloads/news_20260824j.html',};
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);

@@ -146,11 +146,7 @@
             padding: 4px 10px; border-radius: 6px;
             font-size: 11px; font-weight: 700;
         }
-        .cat-질문 { background: #FFF4E5; color: var(--orange); }
-        .cat-정보 { background: var(--accent-light); color: var(--accent); }
-        .cat-후기 { background: #E6F9F0; color: var(--green); }
-        .cat-분석 { background: #F3E8FF; color: #7C3AED; }
-        .cat-칼럼 { background: var(--gray-100); color: var(--gray-600); }
+        .cat-갤러리 { background: #FFF4E5; color: var(--orange); }
 
         /* 작성자 액션 (수정/삭제) */
         .owner-actions { display: flex; gap: 8px; margin-top: 14px; }
@@ -190,7 +186,7 @@
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
         const id = App.getParam('id');
-        if (!id) { location.href = 'community.html'; return; }
+        if (!id) { location.href = 'library.html?cat=갤러리'; return; }
 
         var post = DataService.getById('community', id);
 
@@ -253,7 +249,7 @@
         document.getElementById('detailWrap').innerHTML = `
             <div class="breadcrumb">
                 <a href="../index.html">홈</a> <i class="fa-solid fa-chevron-right"></i>
-                <a href="community.html">커뮤니티</a> <i class="fa-solid fa-chevron-right"></i>
+                <a href="library.html?cat=갤러리">갤러리</a> <i class="fa-solid fa-chevron-right"></i>
                 <span>${post.title}</span>
             </div>
             <div class="detail-header">
@@ -291,7 +287,7 @@
                 </div>
             </div>
             <div class="back-btn-area">
-                <a href="community.html" class="btn btn-outline btn-md"><i class="fa-solid fa-list"></i> 목록으로 돌아가기</a>
+                <a href="library.html?cat=갤러리" class="btn btn-outline btn-md"><i class="fa-solid fa-list"></i> 목록으로 돌아가기</a>
             </div>
         `;
 
@@ -327,7 +323,7 @@
                     }
                     DataService.remove('community', id);
                     App.toast('게시글이 삭제되었습니다.', 'success');
-                    setTimeout(function() { location.href = 'community.html'; }, 700);
+                    setTimeout(function() { location.href = 'library.html?cat=갤러리'; }, 700);
                 })
                 .catch(function() {
                     btn.disabled = false;
@@ -337,12 +333,8 @@
             });
         }
 
-        // 좋아요: 로그인 필수 + 1회 제한
+        // 좋아요: 1회 제한
         document.getElementById('likeBtn').addEventListener('click', function() {
-            if (!DataService.isUserLoggedIn()) {
-                App.toast('로그인 후 이용 가능합니다.', 'info');
-                return;
-            }
             if (liked) {
                 App.toast('이미 좋아요를 누르셨습니다.', 'info');
                 return;
@@ -365,17 +357,14 @@
                 App.toast('댓글 내용을 입력해주세요.', 'error');
                 return;
             }
-            if (!DataService.isUserLoggedIn()) {
-                App.toast('로그인이 필요합니다.', 'info');
-                return;
-            }
             const user = DataService.getCurrentUser();
+            const authorName = (user && user.name) ? user.name : '방문자';
             const commentEl = document.createElement('div');
             commentEl.className = 'comment-item';
             commentEl.innerHTML = `
                 <div class="comment-header">
                     <div class="comment-avatar"><i class="fa-solid fa-user"></i></div>
-                    <span class="comment-author">${user.name}</span>
+                    <span class="comment-author">${authorName}</span>
                     <span class="comment-date">방금 전</span>
                 </div>
                 <div class="comment-body">${text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
@@ -395,9 +384,9 @@
                     var found=res.posts.find(function(p){return p.id===id});
                     if(found){DataService.create('community',found);renderPost(found);return}
                 }
-                document.getElementById('detailWrap').innerHTML='<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>게시글을 찾을 수 없습니다</h3><p>삭제되었거나 존재하지 않는 게시글입니다.</p><a href="community.html" class="btn btn-outline btn-sm">목록으로 돌아가기</a></div>';
+                document.getElementById('detailWrap').innerHTML='<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>게시글을 찾을 수 없습니다</h3><p>삭제되었거나 존재하지 않는 게시글입니다.</p><a href="library.html?cat=갤러리" class="btn btn-outline btn-sm">목록으로 돌아가기</a></div>';
             }).catch(function(){
-                document.getElementById('detailWrap').innerHTML='<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>게시글을 찾을 수 없습니다</h3><p>삭제되었거나 존재하지 않는 게시글입니다.</p><a href="community.html" class="btn btn-outline btn-sm">목록으로 돌아가기</a></div>';
+                document.getElementById('detailWrap').innerHTML='<div class="empty-state"><i class="fa-solid fa-exclamation-circle"></i><h3>게시글을 찾을 수 없습니다</h3><p>삭제되었거나 존재하지 않는 게시글입니다.</p><a href="library.html?cat=갤러리" class="btn btn-outline btn-sm">목록으로 돌아가기</a></div>';
             });
         }
     });
