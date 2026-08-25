@@ -26,8 +26,7 @@
         background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
         position: relative;
         overflow: hidden;
-        padding-top: clamp(45px, 4vw, 60px);
-        padding-bottom: clamp(40px, 3.5vw, 55px);
+        padding: 32px 0 12px;
         min-height: 360px;
     }
     .hero-bg-photo {
@@ -42,7 +41,7 @@
         object-fit: cover;
         object-position: center 30%;
         display: block;
-        filter: contrast(1.03) saturate(0.95);
+        filter: contrast(1.03) saturate(0.95) blur(0.7px);
     }
     /* 우측 하단 모서리를 살짝 흐리게 — 각진 경계 없이 자연스럽게 */
     .hero-bg-photo-corner-blur {
@@ -60,10 +59,11 @@
         background:
             linear-gradient(90deg,
                 rgba(255,220,100,0.52) 0%,
-                rgba(255,230,145,0.32) 18%,
-                rgba(255,242,200,0.14) 30%,
-                rgba(255,250,232,0.05) 38%,
-                transparent 46%
+                rgba(255,230,145,0.32) calc(18% + 10px),
+                rgba(255,242,200,0.14) calc(30% + 10px),
+                rgba(255,250,232,0.06) calc(38% + 10px),
+                rgba(255,255,255,0.02) calc(46% + 10px),
+                transparent calc(54% + 10px)
             );
         z-index: 1;
     }
