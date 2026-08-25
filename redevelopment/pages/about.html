@@ -42,9 +42,6 @@
         object-position: center 30%;
         display: block;
         filter: contrast(1.03) saturate(0.95);
-        /* 좌측은 투명하게 시작해 우측으로 자연스럽게 드러남 — 경계 없이 배경과 이어짐 */
-        -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 4%, rgba(0,0,0,.5) 22%, #000 46%, #000 100%);
-        mask-image: linear-gradient(90deg, transparent 0%, transparent 4%, rgba(0,0,0,.5) 22%, #000 46%, #000 100%);
     }
     /* 우측 하단 모서리를 살짝 흐리게 — 각진 경계 없이 자연스럽게 */
     .hero-bg-photo-corner-blur {
@@ -59,18 +56,21 @@
     .hero-bg-photo::after {
         content: '';
         position: absolute; inset: 0;
-        background: linear-gradient(90deg,
-            rgba(255,253,247,1.00) 0%,
-            rgba(255,253,247,0.99) 18%,
-            rgba(255,249,232,0.96) 28%,
-            rgba(255,247,225,0.88) 36%,
-            rgba(255,247,225,0.70) 43%,
-            rgba(255,247,225,0.48) 49%,
-            rgba(255,247,225,0.28) 55%,
-            rgba(255,247,225,0.12) 61%,
-            rgba(255,247,225,0.04) 66%,
-            rgba(255,247,225,0.00) 72%
-        );
+        background:
+            radial-gradient(ellipse at 32% 55%,
+                rgba(255,222,120,0.22) 0%,
+                rgba(255,245,215,0.12) 35%,
+                transparent 70%
+            ),
+            linear-gradient(90deg,
+                rgba(255,218,92,0.58) 0%,
+                rgba(255,229,140,0.48) 18%,
+                rgba(255,242,196,0.38) 32%,
+                rgba(255,249,230,0.28) 45%,
+                rgba(255,255,255,0.15) 58%,
+                rgba(255,255,255,0.05) 70%,
+                rgba(255,255,255,0) 82%
+            );
         z-index: 1;
     }
     .about-hero::after {
@@ -101,11 +101,11 @@
     /* 골든 라이트 웨이브 — 메인 히어로와 동일 기법 */
     .hero-golden-wave {
         position: absolute; left: 0; bottom: -10%;
-        width: 58%; height: 56%;
+        width: 72%; height: 56%;
         overflow: hidden; pointer-events: none;
         z-index: 2; opacity: 1;
-        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 68%, transparent 100%);
-        mask-image: linear-gradient(90deg, #000 0%, #000 68%, transparent 100%);
+        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 84%, transparent 100%);
+        mask-image: linear-gradient(90deg, #000 0%, #000 84%, transparent 100%);
     }
     .hero-golden-wave::before {
         content: ''; position: absolute; left: 0; bottom: 0;
