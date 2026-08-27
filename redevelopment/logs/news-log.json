@@ -31,13 +31,17 @@
     "posted_success_count": 2,
     "posted_fail_count": 0,
     "fail_reasons": [],
-    "commit_sha": "PENDING",
-    "deploy_url": "PENDING",
+    "commit_sha": "9eff3807d461b02b26655868d2380b42a492fcb7",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_status": "FAILED — Vercel MCP 403 Forbidden: 'Not authorized: Trying to access resource under scope \"dodo9944-ops-projects\". You must re-authenticate to this scope or use a token with access to this scope.' (team_4OL3ZwhAAZCMeH0YaWVu0cGw, project lcw-coordinator). list_teams/get_git_deployment_context returned empty teams — this session's Vercel connector has no authorized access to the target Vercel account/team. Production deployment could not be triggered.",
     "verification": {
-      "news0828a_http_status": "PENDING",
-      "news0828b_http_status": "PENDING",
-      "index_exposure_checked": "PENDING",
-      "library_exposure_checked": "PENDING"
-    }
+      "news0828a_http_status": "NOT_CHECKED — deploy blocked, no new deployment to verify against",
+      "news0828b_http_status": "NOT_CHECKED — deploy blocked, no new deployment to verify against",
+      "index_exposure_checked": "NOT_CHECKED — deploy blocked",
+      "library_exposure_checked": "NOT_CHECKED — deploy blocked"
+    },
+    "action_required": "사용자가 claude.ai Vercel 커넥터 재인증(재연결) 필요 — team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프 접근 권한 부여 후 재시도 요망. 코드 변경·커밋·푸시는 backup-bitseum-rebrand-20260824 브랜치에 정상 완료된 상태이며, Vercel 권한 복구 후 해당 브랜치를 production으로 배포하면 즉시 반영됨."
   }
 ]
