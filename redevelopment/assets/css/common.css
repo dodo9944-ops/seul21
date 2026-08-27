@@ -473,6 +473,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 @media (max-width: 767px) {
   .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; padding: 32px 0 44px; }
+  .footer .footer-col:not(.footer-contact) { display: none; }
   .footer-bottom-content { flex-direction: column; align-items: flex-start; gap: 12px; }
   .footer-bottom-left { flex-direction: column; align-items: flex-start; gap: 4px; }
   .footer-copy { padding-left: 0; border-left: none; }
@@ -482,6 +483,12 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   .footer-phone { font-size: 36px; }
   .footer-phone-icon { width: 28px; height: 28px; }
   .footer-phone-icon i { font-size: 11px; }
+  /* 모바일 하단 정보 — 글자 크기·짙기를 낮춰 톤 다운 */
+  .footer-brand p { font-size: 12px; color: #8A8F97; }
+  .footer-privacy-link { font-size: 12.5px; font-weight: 600; color: #6B7078; }
+  .footer-copy { font-size: 11.5px; color: #9AA0A8; }
+  .footer-contact .email-link { font-size: 12.5px; }
+  .footer-contact p { font-size: 12px; color: #8A8F97; }
 }
 @media (max-width: 540px) {
   .footer-grid { grid-template-columns: 1fr; gap: 24px; }
