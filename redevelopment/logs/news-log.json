@@ -43,5 +43,31 @@
       "library_exposure_checked": "NOT_CHECKED — deploy blocked"
     },
     "action_required": "사용자가 claude.ai Vercel 커넥터 재인증(재연결) 필요 — team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프 접근 권한 부여 후 재시도 요망. 코드 변경·커밋·푸시는 backup-bitseum-rebrand-20260824 브랜치에 정상 완료된 상태이며, Vercel 권한 복구 후 해당 브랜치를 production으로 배포하면 즉시 반영됨."
+  },
+  {
+    "run_datetime_kst": "2026-08-28T06:40:00+09:00",
+    "run_type": "retry_of_0630_run",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "note": "동일 KST 영업일(2026-08-28) 06:30 실행분이 이미 news0828a~b 2건을 mock-data.js/downloads/fileMap/newsFileMap에 정상 등록·커밋(9eff380)·푸시 완료한 상태를 확인. 중복 게시 방지 원칙에 따라 신규 뉴스 재검색·재게시는 수행하지 않음.",
+    "searched_articles_count": 0,
+    "candidate_articles_count": 0,
+    "selected_articles": [],
+    "posted_success_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [],
+    "commit_sha": "N/A — no new content commit this run",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "N/A",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_status": "FAILED (재시도) — mcp__Vercel__list_teams 결과 teams:[] (빈 배열), list_projects(teamId=team_4OL3ZwhAAZCMeH0YaWVu0cGw) 결과 'Failed to list projects.' 06:30 실행 시와 동일하게 이 세션의 Vercel 커넥터가 team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프에 대한 권한이 없어 production 배포 트리거 불가.",
+    "verification": {
+      "news0828a_http_status": "NOT_CHECKED — 이 세션 네트워크 egress 프록시가 www.seul24.cloud 도메인 접속을 차단(EGRESS_BLOCKED)하여 WebFetch/curl 모두 라이브 확인 불가",
+      "news0828b_http_status": "NOT_CHECKED — 상동",
+      "index_exposure_checked": "NOT_CHECKED — 상동",
+      "library_exposure_checked": "NOT_CHECKED — 상동"
+    },
+    "action_required": "① Vercel 커넥터 재인증 필요(위와 동일, team_4OL3ZwhAAZCMeH0YaWVu0cGw 스코프). ② 이 실행 환경은 www.seul24.cloud 아웃바운드 접속 자체가 프록시에서 차단되어 있어, 커넥터 인증이 복구되어도 이 세션에서는 라이브 200 검수를 직접 수행할 수 없음 — egress 허용 도메인 목록에 www.seul24.cloud 추가 검토 필요. 두 항목 모두 사용자 조치 필요, Claude 자체 해결 불가."
   }
 ]
