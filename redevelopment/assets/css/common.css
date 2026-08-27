@@ -405,31 +405,6 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 
 /* ── FOOTER ── */
 /* ══════════════════════════════════════════════════════════
-   PRE-FOOTER CTA
-   ══════════════════════════════════════════════════════════ */
-.pre-footer-cta { margin: 24px 0 40px; }
-.pre-footer-cta .inner {
-  display: flex; align-items: center; justify-content: space-between; gap: 24px;
-  background: linear-gradient(100deg, #FFFDF7 0%, #FFF4CB 100%);
-  border-radius: 12px; padding: 22px 32px;
-}
-.pre-footer-cta .pfc-text h3 { font-size: 16px; font-weight: 800; color: var(--visseum-ink, #171C26); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.pre-footer-cta .pfc-text p { display: none; }
-.pre-footer-cta .pfc-btn {
-  display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
-  background: linear-gradient(135deg, #C58B00, #FFC400);
-  color: #171C26; font-size: 13.5px; font-weight: 700;
-  padding: 11px 20px; border-radius: 8px; white-space: nowrap;
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-.pre-footer-cta .pfc-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(197,139,0,.18); }
-@media (max-width: 620px) {
-  .pre-footer-cta { margin: 24px 0 28px; }
-  .pre-footer-cta .inner { flex-direction: column; align-items: flex-start; padding: 20px 22px; }
-  .pre-footer-cta .pfc-btn { width: 100%; justify-content: center; }
-}
-
-/* ══════════════════════════════════════════════════════════
    FOOTER MAIN
    ══════════════════════════════════════════════════════════ */
 .footer {

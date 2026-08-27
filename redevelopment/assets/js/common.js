@@ -143,21 +143,7 @@ const App = (() => {
 
   /* ── 공통 푸터 HTML ── */
   function footerHTML() {
-    /* 페이지 자체에 이미 상담 CTA(.cta-banner 구버전 / .uni-cta 통일CTA)가 있거나 명시적으로 제외(data-no-precta)한 경우 중복 노출 방지 */
-    const hasOwnCta = !!document.querySelector('.cta-banner, .uni-cta, .cs-cta, .md-cta, .ps-cta') || document.body.hasAttribute('data-no-precta');
-    const preFooterCta = hasOwnCta ? '' : `
-    <div class="pre-footer-cta">
-      <div class="inner">
-        <div class="pfc-text">
-          <h3>정비사업, 어디서부터 시작해야 할지 막막하신가요?</h3>
-          <p>빛세움이 사업 초기 검토부터 함께합니다. 부담 없이 문의하세요.</p>
-        </div>
-        <a href="${B}/pages/contact.html" class="pfc-btn">상담 문의하기 <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-    </div>`;
     return `
-    ${preFooterCta}
-
     <footer class="footer"><div class="inner">
       <div class="footer-grid">
         <div class="footer-brand">
