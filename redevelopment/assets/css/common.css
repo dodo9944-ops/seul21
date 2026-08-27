@@ -221,7 +221,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 @media (max-width: 768px) {
   .logo-mark { width: 26px; height: 26px; }
-  .header .logo-mark { width: 80.25px; height: 33.75px; }
+  .header .logo-mark { width: 56.2px; height: 23.6px; }
   .logo-company { font-size: 13px; }
   .logo-sub { font-size: 7px; letter-spacing: 1.3px; margin-top: 1px; }
   .logo { gap: 8px; }
