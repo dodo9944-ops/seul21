@@ -267,7 +267,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 @media (max-width: 1024px) {
   .gnb { display: none; }
   .header-actions { display: none; }
-  .menu-toggle { display: flex; }
+  .menu-toggle { display: flex; margin-left: auto; transform: scale(0.7); }
   .header .inner { gap: 16px; }
 }
 
