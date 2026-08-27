@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260828d">
     <style>
     /* === Hero === */
@@ -105,6 +106,12 @@
     .ct-info-card .ic-highlight{font-size:22px;font-weight:800;color:var(--brand-dark);margin-bottom:2px;letter-spacing:-.5px}
     .ct-info-card p{font-size:12.5px;color:var(--gray-500);line-height:1.55}
     .ct-info-card .ic-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;background:rgba(184,134,11,.08);border-radius:5px;font-size:10.5px;font-weight:600;color:var(--gold);margin-top:6px}
+    .ct-map{margin:12px 0;height:190px;border-radius:10px;overflow:hidden;border:1.5px solid var(--gray-200);background:var(--gray-50)}
+    .ct-map .leaflet-popup-content-wrapper{border-radius:8px;box-shadow:0 6px 20px rgba(10,15,28,.14)}
+    .ct-map .leaflet-popup-content{margin:9px 12px;font-size:12px;font-weight:700;color:var(--gray-900);font-family:inherit}
+    .ct-map .leaflet-popup-tip{box-shadow:none}
+    .ct-map .vs-pin{width:30px;height:30px;border-radius:50% 50% 50% 0;background:linear-gradient(135deg,#C58B00,#FFC400);transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(10,15,28,.3);border:2px solid #fff}
+    .ct-map .vs-pin i{transform:rotate(45deg);color:#171C26;font-size:13px}
 
     /* Process (compact) */
     .ct-process{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:12px;padding:16px 18px;margin-top:12px}
@@ -199,7 +206,7 @@
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_contact.png?v=20260825a" alt="빛세움 고객센터"></div>
-            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="location.href='tel:024787114'"><div class="uh-ci"><i class="fa-solid fa-phone"></i></div><h4>전화 상담</h4><p>02-478-7114</p></div><div class="uh-card" style="cursor:pointer" onclick="location.href='mailto:visseum@visseum.co.kr'"><div class="uh-ci"><i class="fa-solid fa-envelope"></i></div><h4>이메일</h4><p>visseum@visseum.co.kr</p></div><div class="uh-card" style="cursor:pointer" onclick="document.getElementById('ctForm').scrollIntoView({behavior:'smooth',block:'start'})"><div class="uh-ci"><i class="fa-solid fa-paper-plane"></i></div><h4>문의 접수</h4><p>온라인 상담 신청</p></div><div class="uh-card" style="cursor:pointer" onclick="window.open('http://pf.kakao.com/_uNndX','_blank')"><div class="uh-ci"><i class="fa-solid fa-comment"></i></div><h4>카카오톡</h4><p>실시간 채팅 상담</p></div></div>
+            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="location.href='tel:024787114'"><div class="uh-ci"><i class="fa-solid fa-phone"></i></div><h4>전화 상담</h4><p>02-478-7114</p></div><div class="uh-card" style="cursor:pointer" onclick="location.href='mailto:visseum@visseum.co.kr'"><div class="uh-ci"><i class="fa-solid fa-envelope"></i></div><h4>이메일</h4><p>visseum@visseum.co.kr</p></div><div class="uh-card" style="cursor:pointer" onclick="document.getElementById('ctForm').scrollIntoView({behavior:'smooth',block:'start'})"><div class="uh-ci"><i class="fa-solid fa-paper-plane"></i></div><h4>문의 접수</h4><p>온라인 상담 신청</p></div><div class="uh-card" style="cursor:pointer" onclick="document.getElementById('ctVisit').scrollIntoView({behavior:'smooth',block:'start'})"><div class="uh-ci"><i class="fa-solid fa-location-dot"></i></div><h4>찾아오시는 길</h4><p>강동구 성내로6길 50</p></div></div>
         </div>
     </div>
 </div>
@@ -340,12 +347,13 @@
                 <p>대용량 파일, 도면, 사업 관련 서류를 함께 보내실 때 이메일을 이용해 주세요.</p>
                 <div class="ic-tag"><i class="fa-solid fa-clock"></i> 2~3영업일 이내 회신</div>
             </div>
-            <div class="ct-info-card">
+            <div class="ct-info-card" id="ctVisit">
                 <div class="ic-head">
                     <div class="ic-icon"><i class="fa-solid fa-building"></i></div>
-                    <div><h3>방문 상담</h3><span class="ic-sub">대면 상담 예약</span></div>
+                    <div><h3>방문 상담 · 찾아오시는 길</h3><span class="ic-sub">대면 상담 예약</span></div>
                 </div>
                 <p>서울특별시 강동구 성내로6길 50, 피스센터 5층<br>㈜빛세움 본사<br>TEL 02-478-7114 · FAX 02-478-6114<br><span style="font-size:11.5px;opacity:.75">영남·부산지사 — 부산시 부산진구 중앙대로 615, 평광빌딩 동관 1101호</span></p>
+                <div id="ctMap" class="ct-map"></div>
                 <div class="ic-tag"><i class="fa-solid fa-calendar-check"></i> 사전 예약 권장</div>
             </div>
 
@@ -475,6 +483,19 @@ form.addEventListener('submit',function(e){
 
 /* Global */
 window.CT={removeFile:function(i){uploadedFiles.splice(i,1);renderFiles()}};
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function(){
+    var el = document.getElementById('ctMap');
+    if(!el || typeof L === 'undefined') return;
+    var lat = 37.5283, lng = 127.1223;
+    var map = L.map('ctMap', {zoomControl:false, attributionControl:false, scrollWheelZoom:false}).setView([lat, lng], 16);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19}).addTo(map);
+    L.control.zoom({position:'bottomright'}).addTo(map);
+    var pin = L.divIcon({className:'', html:'<div class="vs-pin"><i class="fa-solid fa-building"></i></div>', iconSize:[30,30], iconAnchor:[15,28], popupAnchor:[0,-26]});
+    L.marker([lat, lng], {icon:pin}).addTo(map).bindPopup('㈜빛세움 본사<br>성내로6길 50, 피스센터 5층').openPopup();
 })();
 </script>
 </body>
