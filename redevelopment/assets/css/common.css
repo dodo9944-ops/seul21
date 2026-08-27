@@ -186,13 +186,13 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 .mobile-tab-bar .tab-item {
   flex: 1 1 0; min-width: 0; padding: 0 2px; height: 100%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 500; color: var(--gray-500);
+  font-size: 7.7px; font-weight: 500; color: var(--gray-500);
   text-decoration: none; white-space: nowrap; position: relative;
   letter-spacing: -0.4px;
   overflow: hidden; text-overflow: ellipsis;
 }
 @media (max-width: 380px) {
-  .mobile-tab-bar .tab-item { font-size: 10px; letter-spacing: -0.5px; }
+  .mobile-tab-bar .tab-item { font-size: 7px; letter-spacing: -0.5px; }
 }
 .mobile-tab-bar .tab-item.active { color: var(--gray-900); font-weight: 700; }
 .mobile-tab-bar .tab-item.active::after {
@@ -221,7 +221,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 @media (max-width: 768px) {
   .logo-mark { width: 26px; height: 26px; }
-  .header .logo-mark { width: 56.2px; height: 23.6px; }
+  .header .logo-mark { width: 73.1px; height: 30.7px; }
   .logo-company { font-size: 13px; }
   .logo-sub { font-size: 7px; letter-spacing: 1.3px; margin-top: 1px; }
   .logo { gap: 8px; }
