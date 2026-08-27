@@ -1,0 +1,43 @@
+[
+  {
+    "run_datetime_kst": "2026-08-28T06:30:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "searched_articles_count": 12,
+    "candidate_articles_count": 2,
+    "target_max": 3,
+    "shortfall_reason": "24~48시간 이내 정비사업 실무 중요도 기준(국토부·서울시 정책/제도, 도정법 개정, 인허가, 판결, 공사비·금융, 용적률·분담금) 충족 기사가 2건만 확인됨. 3건 채우기 위한 저품질/유사 기사 억지 게시는 지침에 따라 수행하지 않음.",
+    "selected_articles": [
+      {
+        "id": "news0828a",
+        "title": "서울시 \"이주비 대출규제에 정비사업 발목\" — 올해 이주대상 39개소·3.1만가구 차질",
+        "source": "데일리안·EBN·위클리한국주택경제신문",
+        "source_url": "https://www.dailian.co.kr/news/view/1603101",
+        "download_html": "redevelopment/downloads/news_20260828a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260828a.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0828b",
+        "title": "국토부·서울시, 정비사업 법적상한용적률 1.2배 완화 논의 — 국토부 \"정해진 바 없다\" 선긋기",
+        "source": "헤럴드경제",
+        "source_url": "https://biz.heraldcorp.com/article/10853830",
+        "download_html": "redevelopment/downloads/news_20260828b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260828b.html",
+        "status": "posted"
+      }
+    ],
+    "posted_success_count": 2,
+    "posted_fail_count": 0,
+    "fail_reasons": [],
+    "commit_sha": "PENDING",
+    "deploy_url": "PENDING",
+    "verification": {
+      "news0828a_http_status": "PENDING",
+      "news0828b_http_status": "PENDING",
+      "index_exposure_checked": "PENDING",
+      "library_exposure_checked": "PENDING"
+    }
+  }
+]
