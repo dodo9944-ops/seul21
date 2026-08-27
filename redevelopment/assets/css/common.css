@@ -186,13 +186,13 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 .mobile-tab-bar .tab-item {
   flex: 1 1 0; min-width: 0; padding: 0 2px; height: 100%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 7.7px; font-weight: 500; color: var(--gray-500);
+  font-size: 11px; font-weight: 500; color: var(--gray-500);
   text-decoration: none; white-space: nowrap; position: relative;
   letter-spacing: -0.4px;
   overflow: hidden; text-overflow: ellipsis;
 }
 @media (max-width: 380px) {
-  .mobile-tab-bar .tab-item { font-size: 7px; letter-spacing: -0.5px; }
+  .mobile-tab-bar .tab-item { font-size: 10px; letter-spacing: -0.5px; }
 }
 .mobile-tab-bar .tab-item.active { color: var(--gray-900); font-weight: 700; }
 .mobile-tab-bar .tab-item.active::after {
@@ -472,27 +472,29 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   .footer-phone-icon i { font-size: 12px; }
 }
 @media (max-width: 767px) {
-  .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; padding: 32px 0 44px; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; padding: 22px 0 26px; }
   .footer .footer-col:not(.footer-contact) { display: none; }
-  .footer-bottom-content { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .footer-bottom-left { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .footer-bottom-content { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .footer-bottom-left { flex-direction: column; align-items: flex-start; gap: 2px; }
   .footer-copy { padding-left: 0; border-left: none; }
   .footer-bottom-right { margin-left: 0; text-align: left; align-items: flex-start; }
   .footer-info { flex-direction: column; align-items: flex-start; gap: 2px; }
   .footer-representative { margin-left: 0; padding-left: 0; border-left: none; }
-  .footer-phone { font-size: 36px; }
+  .footer-phone { font-size: 24px; margin-bottom: 4px; }
   .footer-phone-icon { width: 28px; height: 28px; }
   .footer-phone-icon i { font-size: 11px; }
-  /* 모바일 하단 정보 — 글자 크기·짙기를 낮춰 톤 다운 */
-  .footer-brand p { font-size: 12px; color: #8A8F97; }
-  .footer-privacy-link { font-size: 12.5px; font-weight: 600; color: #6B7078; }
-  .footer-copy { font-size: 11.5px; color: #9AA0A8; }
-  .footer-contact .email-link { font-size: 12.5px; }
-  .footer-contact p { font-size: 12px; color: #8A8F97; }
+  /* 모바일 하단 정보 — 글자 크기·짙기·행간을 낮춰 톤 다운 + 컴팩트하게 */
+  .footer-brand .logo { margin-bottom: 4px; }
+  .footer-brand p { font-size: 11.5px; color: #8A8F97; line-height: 1.6; margin-top: 6px; }
+  .footer-privacy-link { font-size: 11.5px; font-weight: 600; color: #6B7078; }
+  .footer-copy { font-size: 10.5px; color: #9AA0A8; }
+  .footer-contact h5 { margin-bottom: 8px; }
+  .footer-contact .email-link { font-size: 11.5px; margin-bottom: 6px; }
+  .footer-contact p { font-size: 11.5px; color: #8A8F97; line-height: 1.6; }
 }
 @media (max-width: 540px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-  .footer-contact .phone { font-size: 24px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 16px; padding: 20px 0 24px; }
+  .footer-contact .phone { font-size: 22px; }
 }
 
 /* ── SCROLL TO TOP ── */
