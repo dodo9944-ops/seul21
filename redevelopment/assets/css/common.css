@@ -236,10 +236,10 @@ body { padding-top: 92.6px; } /* 25.6(util) + 72(header) − 5px(전체 콘텐�
   transition: color 0.25s ease;
 }
 .gnb a::after {
-  content: ''; position: absolute; bottom: -2px; left: 50%; width: 0; height: 2.5px;
+  content: ''; position: absolute; bottom: 2px; left: 50%; width: 0; height: 2.5px;
   background: var(--gold); transform: translateX(-50%); border-radius: 2px;
   transition: width 0.3s ease;
-}
+} /* 밑줄을 글자 바로 아래로 당겨 히어로 영역과 겹치지 않게 함 */
 .gnb a:hover { color: var(--gray-900); }
 .gnb a:hover::after { width: 28px; }
 .gnb a.active { color: var(--gray-900); font-weight: 600; }
