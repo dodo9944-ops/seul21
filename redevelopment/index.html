@@ -725,7 +725,7 @@
         <p class="notice-popup-body">
             현재 본 사이트는 <strong>임시 홈페이지</strong>로 운영 중이며,<br>
             게시된 내용은 어떠한 효력이 없고 법적 책임이 없습니다.<br>
-            (주)빛세움 정식 홈페이지는 <strong>10월 중순</strong> 오픈 예정입니다.
+            (주)빛세움 정식 홈페이지는 <strong>10월 1일</strong> 오픈 예정입니다.
         </p>
         <button class="notice-popup-confirm" id="noticePopupConfirm">확인</button>
     </div>
@@ -1057,7 +1057,7 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260829j"></script>
+<script src="assets/data/mock-data.js?v=20260829k"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
 <script src="assets/js/common.js?v=20260829h"></script>
 
@@ -1454,8 +1454,8 @@ window.MPF={open:openDetail,close:closeDetail};
 
 <!-- ==================== 금일 공지사항 팝업 ==================== -->
 <style>
-#noticePopupOverlay{position:fixed;inset:0;background:rgba(255,255,255,.65);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:99998;display:none;align-items:center;justify-content:center;padding:20px;animation:npFade .25s ease}
-#noticePopupOverlay.open{display:flex}
+#dailyNoticePopupOverlay{position:fixed;inset:0;background:rgba(255,255,255,.65);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:99998;display:none;align-items:center;justify-content:center;padding:20px;animation:npFade .25s ease}
+#dailyNoticePopupOverlay.open{display:flex}
 @keyframes npFade{from{opacity:0}to{opacity:1}}
 @keyframes npSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .np-card{background:#fff;border-radius:16px;width:100%;max-width:420px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4);animation:npSlide .3s ease}
@@ -1479,7 +1479,7 @@ window.MPF={open:openDetail,close:closeDetail};
 @media(max-width:480px){.np-card{max-width:100%;max-height:90vh}.np-head{padding:18px 20px}.np-head h3{font-size:15.5px}.np-body{padding:18px 20px;font-size:13px}.np-actions{padding:12px 18px 14px;flex-wrap:wrap}.np-dontshow{flex:1 1 100%;order:3;justify-content:center;padding-top:6px}}
 </style>
 
-<div id="noticePopupOverlay" role="dialog" aria-modal="true" aria-labelledby="npTitle">
+<div id="dailyNoticePopupOverlay" role="dialog" aria-modal="true" aria-labelledby="npTitle">
   <div class="np-card">
     <div class="np-head">
       <span class="np-tag"><i class="fa-solid fa-bullhorn"></i> 금일 공지사항</span>
@@ -1536,10 +1536,10 @@ window.MPF={open:openDetail,close:closeDetail};
     document.getElementById('npContent').textContent = c;
   }
 
-  function open(){document.getElementById('noticePopupOverlay').classList.add('open');document.body.style.overflow='hidden'}
+  function open(){document.getElementById('dailyNoticePopupOverlay').classList.add('open');document.body.style.overflow='hidden'}
   function close(noticeId){
     if(document.getElementById('npHideToday').checked && noticeId) setHideToday(noticeId);
-    document.getElementById('noticePopupOverlay').classList.remove('open');
+    document.getElementById('dailyNoticePopupOverlay').classList.remove('open');
     document.body.style.overflow='';
   }
 
@@ -1551,11 +1551,11 @@ window.MPF={open:openDetail,close:closeDetail};
     setTimeout(open, 700);
     document.getElementById('npCloseTop').addEventListener('click', function(){close(n.id)});
     document.getElementById('npConfirm').addEventListener('click', function(){close(n.id)});
-    document.getElementById('noticePopupOverlay').addEventListener('click', function(e){
-      if(e.target.id === 'noticePopupOverlay') close(n.id);
+    document.getElementById('dailyNoticePopupOverlay').addEventListener('click', function(e){
+      if(e.target.id === 'dailyNoticePopupOverlay') close(n.id);
     });
     document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape' && document.getElementById('noticePopupOverlay').classList.contains('open')) close(n.id);
+      if(e.key === 'Escape' && document.getElementById('dailyNoticePopupOverlay').classList.contains('open')) close(n.id);
     });
   }
 
