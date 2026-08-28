@@ -136,7 +136,7 @@ button, input, select, textarea { font-family: inherit; }
 /* ── UTILITY BAR ── */
 .util-bar {
   background: #FFFFFF;
-  font-size: 11px; color: rgba(10,15,28,0.55); height: 32px;
+  font-size: 11px; color: rgba(10,15,28,0.55); height: 25.6px; /* 사업성 검토-고객센터 간 여백 100→80 축소 */
 }
 .util-bar .inner { display: flex; align-items: center; justify-content: flex-end; height: 100%; gap: 20px; }
 .util-bar a { color: rgba(10,15,28,0.35); transition: color var(--transition); font-weight: 500; }
@@ -155,9 +155,9 @@ button, input, select, textarea { font-family: inherit; }
 }
 
 /* ── 헤더 아래 본문 여백 ── */
-body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
+body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC */
 @media (max-width: 1024px) and (min-width: 769px) {
-  body { padding-top: 136px; } /* 32(util) + 72(header) + 32(tab) */
+  body { padding-top: 129.6px; } /* 25.6(util) + 72(header) + 32(tab) */
 }
 @media (max-width: 768px) {
   .header .inner { height: 50px; }

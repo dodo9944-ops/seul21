@@ -26,7 +26,6 @@ const App = (() => {
       { href: `${B}/pages/services.html`, label: '사업분야', icon: 'fa-solid fa-diagram-project' },
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
-      { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-calculator' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
     ];
     const moreLinks = [
@@ -34,7 +33,7 @@ const App = (() => {
       { href: `${B}/pages/faq.html`, label: '자주 묻는 질문', icon: 'fa-solid fa-circle-question' },
     ];
 
-    const utilRight = `<a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>`;
+    const utilRight = `<a href="${B}/pages/feasibility.html">사업성 검토</a>`;
 
     return `
     <div class="header-wrap" id="headerWrap">
