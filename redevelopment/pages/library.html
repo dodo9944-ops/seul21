@@ -71,16 +71,6 @@
     .pop-card .pop-body{flex:1;min-width:0}
     .pop-card .pop-title{font-size:14px;font-weight:800;color:var(--gray-900);line-height:1.45;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
     .pop-card .pop-info{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--gray-500);font-weight:600}
-
-    /* === 갤러리 — 대표사진 카드형 (평시 사진 오픈 표시) === */
-    .cm-gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-    .cm-gallery-card{background:#fff;border:1.5px solid var(--gray-150,#eaedf0);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .25s}
-    .cm-gallery-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.08);border-color:rgba(184,134,11,.3)}
-    .cm-gallery-thumb{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--gray-100,#f3f4f6)}
-    .cm-gallery-thumb-empty{width:100%;aspect-ratio:4/3;background:var(--gray-100,#f3f4f6);display:flex;align-items:center;justify-content:center;color:var(--gray-300,#d1d5db);font-size:26px}
-    .cm-gallery-body{padding:12px 14px}
-    .cm-gallery-title{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .cm-gallery-meta{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;color:var(--gray-500)}
     .pop-card .pop-info i{font-size:10px;color:var(--gold)}
 
     /* === Document List === */
@@ -236,7 +226,7 @@
             <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>자료실</span></div>
             <div class="uh-label">PROFESSIONAL ARCHIVE</div>
             <h1>정비사업 <em>실무 자료</em>를<br>한곳에 모았습니다</h1>
-            <p class="uh-sub">관계법령부터 서식·매뉴얼, 주요뉴스, 갤러리까지<br>정비사업 실무에 필요한 자료를 체계적으로 제공합니다</p>
+            <p class="uh-sub">관계법령부터 서식·매뉴얼, 주요뉴스까지<br>정비사업 실무에 필요한 자료를 체계적으로 제공합니다</p>
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_library.jpg?v=20260825a" alt="빛세움 자료실"></div>
@@ -244,7 +234,6 @@
                 <div class="uh-card" data-cat="주요뉴스"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></div>
                 <div class="uh-card" data-cat="법령"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>도시정비법 등 각종 판례</p></div>
                 <div class="uh-card" data-cat="서식가이드"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div>
-                <div class="uh-card" data-cat="갤러리"><div class="uh-ci"><i class="fa-solid fa-images"></i></div><h4>갤러리</h4><p>현장 갤러리·소통공간</p></div>
             </div>
         </div>
     </div>
@@ -298,17 +287,6 @@ if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',J
 if(typeof MOCK!=='undefined'&&MOCK.community){var _cs=JSON.parse(localStorage.getItem('rdc_community')||'[]');if(_cs.length!==MOCK.community.length)localStorage.setItem('rdc_community',JSON.stringify(MOCK.community))}
 var now=new Date(),oneYearAgo=new Date(now.getTime()-365*864e5);
 var allItems=DataService.getAll('library').filter(function(i){if(i.category!=='주요뉴스')return true;return i.date&&new Date(i.date)>=oneYearAgo});
-var galleryItems=DataService.getAll('community').filter(function(i){return i.category==='갤러리'});
-fetch('/api/community').then(function(r){return r.json()}).then(function(res){
-    if(res.posts&&res.posts.length){
-        var localIds={};galleryItems.forEach(function(p){localIds[p.id]=true});
-        var merged=false;
-        res.posts.forEach(function(p){
-            if(p.category==='갤러리'&&!localIds[p.id]){galleryItems.unshift(p);merged=true;DataService.create('community',p)}
-        });
-        if(merged){galleryItems.sort(function(a,b){return new Date(b.date)-new Date(a.date)});renderTabs();render()}
-    }
-}).catch(function(){});
 
 var PER=10,curPage=1,curCat='주요뉴스',curSort='date',searchQ='';
 
@@ -333,10 +311,9 @@ function srcBadge(item){
 var catDefs=[
     {key:'주요뉴스',keys:['주요뉴스','칼럼','정책','일반','사례'],icon:'fa-newspaper',label:'주요뉴스'},
     {key:'법령',keys:['법령','법령·조례','관련판례','지침','판례·질의회신'],icon:'fa-scale-balanced',label:'관계법령'},
-    {key:'서식가이드',keys:['서식','가이드','절차·서류'],icon:'fa-file-pen',label:'서식·매뉴얼'},
-    {key:'갤러리',keys:['갤러리'],icon:'fa-images',label:'갤러리',gallery:true}
+    {key:'서식가이드',keys:['서식','가이드','절차·서류'],icon:'fa-file-pen',label:'서식·매뉴얼'}
 ];
-function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){catDefs.forEach(function(d){if(!d.gallery&&d.keys.indexOf(i.category)>=0)c[d.key]++})});c['갤러리']=galleryItems.length;return c}
+function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){catDefs.forEach(function(d){if(d.keys.indexOf(i.category)>=0)c[d.key]++})});return c}
 
 /* Tabs */
 function renderTabs(){
@@ -346,13 +323,11 @@ document.querySelectorAll('#heroCards .uh-card').forEach(function(el){el.classLi
 /* Popular section */
 /* Filter + Sort */
 function getFiltered(){
-var isGallery=curCat==='갤러리';
-var items=isGallery?galleryItems.slice():allItems;
-if(!isGallery){var curDef=catDefs.find(function(d){return d.key===curCat});var curKeys=curDef?curDef.keys:[curCat];items=items.filter(function(i){return curKeys.indexOf(i.category)>=0});}
+var items=allItems;
+var curDef=catDefs.find(function(d){return d.key===curCat});var curKeys=curDef?curDef.keys:[curCat];items=items.filter(function(i){return curKeys.indexOf(i.category)>=0});
 if(searchQ){var q=searchQ.toLowerCase();items=items.filter(function(i){
 return(i.title||'').toLowerCase().indexOf(q)>=0||(i.description||'').toLowerCase().indexOf(q)>=0||
 (i.tags||[]).some(function(t){return t.toLowerCase().indexOf(q)>=0})})}
-if(isGallery){items.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});return items}
 items.sort(function(a,b){
 if(curSort==='downloads')return(b.downloads||0)-(a.downloads||0);
 if(curSort==='title')return(a.title||'').localeCompare(b.title||'');
@@ -369,21 +344,6 @@ function openNewsPopup(id){var url=libItemUrl(id);if(url){addNewsView(id);window
 /* 인기 자료 — 카테고리별 (커뮤니티 인기글과 동일 컨셉) */
 function renderFeatured(){
   var fb=document.getElementById('libFeatured');if(!fb)return;
-  if(curCat==='갤러리'){
-    var gitems=galleryItems.slice();
-    gitems.sort(function(a,b){var va=(a.views||0),vb=(b.views||0);if(vb!==va)return vb-va;return(b.date||'').localeCompare(a.date||'')});
-    var gtop=gitems.slice(0,3);
-    if(!gtop.length){fb.style.display='none';return}
-    fb.style.display='';
-    var ghtml='<div class="pop-head"><div class="ph-icon news"><i class="fa-solid fa-images"></i></div><h3>갤러리</h3><span>열람순 · 인기순</span></div><div class="cm-gallery-grid">';
-    gtop.forEach(function(p){
-      var cover=(p.images&&p.images[0])?'<img class="cm-gallery-thumb" src="'+p.images[0]+'" alt="'+p.title+'" loading="lazy">':'<div class="cm-gallery-thumb-empty"><i class="fa-solid fa-image"></i></div>';
-      ghtml+='<div class="cm-gallery-card" onclick="location.href=\'community-detail.html?id='+p.id+'\'">'+cover+'<div class="cm-gallery-body"><div class="cm-gallery-title">'+p.title+'</div><div class="cm-gallery-meta"><span>'+(p.author||'')+'</span><span><i class="fa-solid fa-eye"></i> '+(p.views||0)+'</span></div></div></div>';
-    });
-    ghtml+='</div>';
-    fb.innerHTML=ghtml;
-    return;
-  }
   var items=allItems.slice();
   var d=catDefs.find(function(x){return x.key===curCat});var ks=d?d.keys:[curCat];items=items.filter(function(i){return ks.indexOf(i.category)>=0});
   var vmap=getNewsViews();
@@ -408,22 +368,14 @@ function renderFeatured(){
 /* Render list */
 function render(){
 renderFeatured();
-var isGallery=curCat==='갤러리';
 var items=getFiltered(),total=items.length,pages=Math.ceil(total/PER);
 if(curPage>pages)curPage=1;
 var start=(curPage-1)*PER,slice=items.slice(start,start+PER);
 document.getElementById('resultCount').innerHTML='총 <strong>'+total+'</strong>건';
 var list=document.getElementById('libList'),empty=document.getElementById('emptyState');
-list.classList.toggle('cm-gallery-grid',isGallery);
 if(!slice.length){list.innerHTML='';empty.style.display='flex';document.getElementById('pagerWrap').style.display='none';return}
 empty.style.display='none';document.getElementById('pagerWrap').style.display='';
 
-if(isGallery){
-list.innerHTML=slice.map(function(p){
-var cover=(p.images&&p.images[0])?'<img class="cm-gallery-thumb" src="'+p.images[0]+'" alt="'+p.title+'" loading="lazy">':'<div class="cm-gallery-thumb-empty"><i class="fa-solid fa-image"></i></div>';
-return'<div class="cm-gallery-card" onclick="location.href=\'community-detail.html?id='+p.id+'\'">'+cover+'<div class="cm-gallery-body"><div class="cm-gallery-title">'+p.title+'</div><div class="cm-gallery-meta"><span>'+(p.author||'')+'</span><span><i class="fa-solid fa-eye"></i> '+(p.views||0)+'</span></div></div></div>';
-}).join('');
-}else{
 list.innerHTML=slice.map(function(item){
 var fi=getIcon(item.fileType),src=srcBadge(item);
 var badges='<span class="lb lb-cat">'+item.category+'</span>';
@@ -440,7 +392,6 @@ var btnIcon=isWeb?'fa-newspaper':'fa-arrow-down';
 var btnText=isWeb?'뉴스보기':ftLabel+' 다운로드';
 
 return'<div class="lib-item'+pinCls+'">'+'<div class="lib-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i><span class="ft-label">'+(isWeb?'NEWS':ftLabel)+'</span></div>'+'<div class="lib-content">'+'    <div class="lib-title" data-id="'+item.id+'">'+item.title+'</div>'+'    <div class="lib-desc">'+item.description+'</div>'+'    <div class="lib-meta-row">'+badges+'</div>'+'</div>'+'<div class="lib-action">'+'    <span class="lib-size">'+item.fileSize+'</span>'+'    <button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid '+btnIcon+'"></i> '+btnText+'</button>'+'</div></div>'}).join('');
-}
 
 /* Pager */
 var pg=document.getElementById('pager');
