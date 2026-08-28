@@ -155,16 +155,16 @@ button, input, select, textarea { font-family: inherit; }
 }
 
 /* ── 헤더 아래 본문 여백 ── */
-body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC */
+body { padding-top: 92.6px; } /* 25.6(util) + 72(header) − 5px(전체 콘텐츠 상향) — PC */
 @media (max-width: 1024px) and (min-width: 769px) {
-  body { padding-top: 129.6px; } /* 25.6(util) + 72(header) + 32(tab) */
+  body { padding-top: 124.6px; } /* 25.6(util) + 72(header) + 32(tab) − 5px */
 }
 @media (max-width: 768px) {
   .header .inner { height: 50px; }
   body {
-    padding-top: 82px;
-    padding-top: calc(82px + env(safe-area-inset-top, 0));
-    padding-top: calc(82px + constant(safe-area-inset-top, 0));
+    padding-top: 77px;
+    padding-top: calc(77px + env(safe-area-inset-top, 0));
+    padding-top: calc(77px + constant(safe-area-inset-top, 0));
   }
 }
 
