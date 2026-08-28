@@ -40,6 +40,7 @@ const App = (() => {
     <div class="util-bar"><div class="inner">
       <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링그룹</span>
       ${utilRight}
+      <a href="${B}/pages/gallery.html">갤러리</a>
       <a href="${B}/pages/notice.html">공지사항</a>
     </div></div>
     <header class="header"><div class="inner">

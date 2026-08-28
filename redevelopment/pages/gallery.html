@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#FFFFFF">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>갤러리 — (주)빛세움</title>
+    <meta name="description" content="(주)빛세움이 수행한 정비사업 현장의 조감도·배치도·준공 사진을 확인하세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260829e">
+    <style>
+    .gl-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .gl-card{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--gray-200);background:#FFFFFF;cursor:zoom-in}
+    .gl-card img{width:100%;height:100%;display:block;object-fit:cover;aspect-ratio:4/3;transition:transform .4s ease}
+    .gl-card:hover img{transform:scale(1.04)}
+    .gl-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0) 55%,rgba(255,255,255,.7) 100%);pointer-events:none}
+    .gl-cap{position:absolute;left:14px;right:14px;bottom:12px;z-index:2;color:#0A0F1C;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+    .gl-cap-name{font-size:12.5px;font-weight:800;line-height:1.4;letter-spacing:.2px}
+    .gl-cap-desc{font-size:11.5px;font-weight:600;line-height:1.4;opacity:.85;margin-top:2px}
+    .gl-empty{padding:60px 0;text-align:center;color:var(--gray-400);font-size:14px}
+    .gl-result{font-size:14px;color:var(--gray-400);margin-bottom:16px}
+    .gl-result strong{color:var(--gray-900)}
+    @media(max-width:600px){.gl-gallery{grid-template-columns:1fr 1fr;gap:10px}.gl-card img{aspect-ratio:4/3}}
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>갤러리</span>
+        </div>
+        <h1>갤러리</h1>
+        <p>(주)빛세움이 수행한 정비사업 현장의 조감도·배치도·준공 사진을 만나보세요</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="tabs" id="glTabs" style="margin-bottom:24px;">
+            <button class="on" data-type="전체">전체</button>
+            <button data-type="재개발">재개발</button>
+            <button data-type="재건축">재건축</button>
+            <button data-type="소규모정비">소규모정비</button>
+        </div>
+
+        <div class="gl-result" id="glResult"></div>
+        <div class="gl-gallery" id="glGallery"></div>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=20260829d"></script>
+<script src="../assets/js/data-service.js?v=20260418q"></script>
+<script src="../assets/js/common.js?v=20260829h"></script>
+<script>
+(function(){
+    var items=[];
+    (MOCK.portfolio||[]).forEach(function(p){
+        (p.gallery||[]).forEach(function(g){
+            items.push({ type:p.type, name:p.name, src:g.src, alt:g.alt||p.name, cap:g.cap||'' });
+        });
+    });
+
+    var curType='전체';
+
+    function render(){
+        var list=curType==='전체'?items:items.filter(function(it){return it.type===curType});
+        var el=document.getElementById('glGallery');
+        var resultEl=document.getElementById('glResult');
+        resultEl.innerHTML='총 <strong>'+list.length+'</strong>장';
+        el.innerHTML=list.length?list.map(function(it){
+            return '<a class="gl-card" href="'+it.src+'" target="_blank" rel="noopener" title="원본 보기">'+
+                   '<img src="'+it.src+'" alt="'+it.alt+'" loading="lazy" onerror="this.closest(\'.gl-card\').style.display=\'none\'">'+
+                   '<div class="gl-cap"><div class="gl-cap-name">'+it.name+'</div>'+(it.cap?'<div class="gl-cap-desc">'+it.cap+'</div>':'')+'</div>'+
+                   '</a>';
+        }).join(''):'<div class="gl-empty">등록된 사진이 없습니다.</div>';
+    }
+
+    document.getElementById('glTabs').addEventListener('click', function(e){
+        var btn=e.target.closest('button');
+        if(!btn) return;
+        document.querySelectorAll('#glTabs button').forEach(function(b){b.classList.remove('on')});
+        btn.classList.add('on');
+        curType=btn.dataset.type;
+        render();
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>
