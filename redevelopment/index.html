@@ -144,7 +144,7 @@
             position: relative;
             overflow: hidden;
             background: #FFFFFF;
-            padding: 56px 0;
+            padding: 44.8px 0 56px; /* 상단여백 0.8배 축소(56→44.8), 하단은 유지 */
             min-height: 400px;
             display: flex;
             align-items: center;
@@ -264,11 +264,11 @@
         .hero-light-wave .spark-6 { left: 60%; bottom: 40%; opacity: .28; }
 
         @media (max-width: 1024px) {
-            .hero-banner { min-height: auto; padding: 48px 0 0; }
+            .hero-banner { min-height: auto; padding: 38.4px 0 0; } /* 상단여백 0.8배 축소(48→38.4) */
             .hero-light-wave .wave-line:nth-child(n+7) { display: none; }
         }
         @media (max-width: 768px) {
-            .hero-banner { padding: 36px 0 0; }
+            .hero-banner { padding: 28.8px 0 0; } /* 상단여백 0.8배 축소(36→28.8) */
             .hero-light-wave { opacity: .40; }
             .hero-light-wave .wave-line:nth-child(n+4) { display: none; }
             .hero-light-wave .spark { display: none; }
@@ -346,7 +346,7 @@
 
         /* ── 반응형 ── */
         @media (max-width: 768px) {
-            .hero-banner { padding: 32px 0 0; }
+            .hero-banner { padding: 25.6px 0 0; } /* 상단여백 0.8배 축소(32→25.6, 실제 적용값 기준) */
             .hero-banner .inner { padding: 0 22px 30px; }
             .hero-bg-photo::before { height: 40px; }
             .hero-label { font-size: 8.5px; letter-spacing: 1.5px; padding: 4px 10px; margin-bottom: 14px; }
