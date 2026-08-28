@@ -71,10 +71,23 @@
     .gl-detail-photo{width:100%;border-radius:12px;overflow:hidden;margin-bottom:20px;background:var(--gray-50)}
     .gl-detail-photo img{width:100%;display:block;max-height:520px;object-fit:cover}
     .gl-detail-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-    .gl-detail-photos a{display:block;border-radius:10px;overflow:hidden;aspect-ratio:4/3;cursor:zoom-in}
+    .gl-detail-photos button{display:block;width:100%;border:none;padding:0;background:none;border-radius:10px;overflow:hidden;aspect-ratio:4/3;cursor:zoom-in;font:inherit}
     .gl-detail-photos img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
-    .gl-detail-photos a:hover img{transform:scale(1.04)}
+    .gl-detail-photos button:hover img{transform:scale(1.04)}
     .gl-detail-content{font-size:14.5px;line-height:1.85;color:var(--gray-700);white-space:pre-line}
+
+    /* 사진 확대창 (라이트박스) */
+    .gl-lightbox{position:fixed;inset:0;background:rgba(10,15,28,.92);z-index:99999;display:none;align-items:center;justify-content:center;flex-direction:column;padding:60px 20px 30px}
+    .gl-lightbox.show{display:flex}
+    .gl-lb-close{position:fixed;top:20px;right:24px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}
+    .gl-lb-close:hover{background:rgba(255,255,255,.24)}
+    .gl-lb-stage{max-width:min(92vw,1200px);max-height:72vh;display:flex;align-items:center;justify-content:center;overflow:auto}
+    .gl-lb-stage img{max-width:100%;max-height:72vh;object-fit:contain;border-radius:8px;transition:transform .25s ease}
+    .gl-lb-toolbar{display:flex;align-items:center;gap:10px;margin-top:22px;flex-wrap:wrap;justify-content:center}
+    .gl-lb-toolbar button{height:40px;padding:0 18px;border-radius:10px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s;font-family:inherit}
+    .gl-lb-toolbar button:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.45)}
+    .gl-lb-toolbar .gl-lb-closebtn{background:#fff;color:#0A0F1C;border-color:transparent}
+    .gl-lb-toolbar .gl-lb-closebtn:hover{background:rgba(255,255,255,.85)}
     </style>
 </head>
 <body>
@@ -141,6 +154,17 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<!-- 사진 확대창 (라이트박스) -->
+<div class="gl-lightbox" id="glLightbox">
+    <button class="gl-lb-close" id="glLbClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+    <div class="gl-lb-stage"><img id="glLbImg" src="" alt=""></div>
+    <div class="gl-lb-toolbar">
+        <button type="button" id="glLbZoomOut"><i class="fa-solid fa-magnifying-glass-minus"></i> 작게 보기</button>
+        <button type="button" id="glLbZoomIn"><i class="fa-solid fa-magnifying-glass-plus"></i> 크게 보기</button>
+        <button type="button" class="gl-lb-closebtn" id="glLbCloseBtn">닫기</button>
     </div>
 </div>
 
@@ -225,11 +249,11 @@
         var photoEl=document.getElementById('glDPhoto');
         if(it.images&&it.images.length){
             photoEl.innerHTML='<div class="gl-detail-photos">'+it.images.map(function(im){
-                return '<a href="'+im.src+'" target="_blank" rel="noopener" title="원본 보기"><img src="'+im.src+'" alt="'+(im.alt||it.title||'')+'"></a>';
+                return '<button type="button" class="gl-lb-trigger" data-src="'+im.src+'" data-alt="'+(im.alt||it.title||'')+'" title="확대 보기"><img src="'+im.src+'" alt="'+(im.alt||it.title||'')+'"></button>';
             }).join('')+'</div>';
             photoEl.style.display='';
         }else if(it.src){
-            photoEl.innerHTML='<img src="'+it.src+'" alt="'+(it.alt||it.title||'')+'">';
+            photoEl.innerHTML='<button type="button" class="gl-lb-trigger" data-src="'+it.src+'" data-alt="'+(it.alt||it.title||'')+'" title="확대 보기" style="border:none;padding:0;background:none;width:100%;cursor:zoom-in"><img src="'+it.src+'" alt="'+(it.alt||it.title||'')+'" style="width:100%;display:block"></button>';
             photoEl.style.display='';
         }else{
             photoEl.innerHTML=''; photoEl.style.display='none';
@@ -245,6 +269,36 @@
     function closeDetail(){
         document.getElementById('glDetail').classList.remove('show');
     }
+
+    /* 사진 확대창 (라이트박스) */
+    var lbScale=1;
+    function openLightbox(src,alt){
+        var img=document.getElementById('glLbImg');
+        img.src=src; img.alt=alt||'';
+        lbScale=1; img.style.transform='scale(1)';
+        document.getElementById('glLightbox').classList.add('show');
+        document.body.style.overflow='hidden';
+    }
+    function closeLightbox(){
+        document.getElementById('glLightbox').classList.remove('show');
+        document.body.style.overflow='';
+    }
+    document.getElementById('glDetail').addEventListener('click', function(e){
+        var trig=e.target.closest('.gl-lb-trigger'); if(!trig) return;
+        openLightbox(trig.dataset.src, trig.dataset.alt);
+    });
+    document.getElementById('glLbClose').addEventListener('click', closeLightbox);
+    document.getElementById('glLbCloseBtn').addEventListener('click', closeLightbox);
+    document.getElementById('glLightbox').addEventListener('click', function(e){ if(e.target.id==='glLightbox') closeLightbox(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLightbox(); });
+    document.getElementById('glLbZoomIn').addEventListener('click', function(){
+        lbScale=Math.min(lbScale+0.25,3);
+        document.getElementById('glLbImg').style.transform='scale('+lbScale+')';
+    });
+    document.getElementById('glLbZoomOut').addEventListener('click', function(){
+        lbScale=Math.max(lbScale-0.25,0.5);
+        document.getElementById('glLbImg').style.transform='scale('+lbScale+')';
+    });
 
     document.getElementById('glTabs').addEventListener('click', function(e){
         var btn=e.target.closest('button'); if(!btn) return;
