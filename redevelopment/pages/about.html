@@ -589,25 +589,43 @@
     }
 
     /* ── 5. ORGANIZATION CHART ── */
-    .org-chart { display: flex; flex-direction: column; align-items: center; gap: 36px; }
+    .org-chart { display: flex; flex-direction: column; align-items: center; }
     .org-ceo-box {
-        background: linear-gradient(135deg, #FFFDF7, #FFF3C4);
-        color: var(--visseum-ink); border-radius: 12px;
-        padding: 20px 56px; text-align: center;
-        border: 1px solid rgba(197,139,0,.2);
-        box-shadow: 0 8px 24px rgba(20,28,38,.08);
+        background: linear-gradient(135deg, #171C26, #2A3242);
+        color: #FFFFFF; border-radius: 999px;
+        padding: 22px 64px; text-align: center;
+        border: 1px solid rgba(197,139,0,.35);
+        box-shadow: 0 14px 36px rgba(23,28,38,.28);
+        position: relative;
     }
     .org-ceo-box .org-role {
         font-size: 11px; font-weight: 700; color: var(--visseum-gold);
-        letter-spacing: 2px; text-transform: uppercase;
+        letter-spacing: 2.5px; text-transform: uppercase;
         margin-bottom: 4px;
     }
     .org-ceo-box .org-name {
-        font-size: 18px; font-weight: 900;
+        font-size: 19px; font-weight: 900; letter-spacing: -0.2px;
+    }
+    .org-line-v { width: 1px; height: 30px; background: linear-gradient(180deg, rgba(197,139,0,.55), rgba(197,139,0,.15)); }
+    .org-aux-row { display: flex; gap: 24px; margin-bottom: 30px; }
+    .org-aux-box {
+        background: var(--white);
+        border: 1px solid rgba(197,139,0,.25);
+        border-radius: 12px; padding: 12px 26px; text-align: center;
+        box-shadow: 0 4px 14px rgba(20,28,38,.05);
+    }
+    .org-aux-box .org-aux-title { font-size: 13.5px; font-weight: 800; color: var(--visseum-ink); }
+    .org-aux-box .org-aux-desc { font-size: 11.5px; color: var(--visseum-muted); font-weight: 600; margin-top: 3px; }
+    .org-branch { width: 100%; display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; }
+    .org-branch-h { position: relative; width: min(760px, 92%); height: 1px; background: linear-gradient(90deg, transparent, rgba(197,139,0,.45) 8%, rgba(197,139,0,.45) 92%, transparent); }
+    .org-branch-h::before {
+        content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+        width: 7px; height: 7px; border-radius: 50%; background: var(--visseum-gold);
+        box-shadow: 0 0 0 4px rgba(197,139,0,.15);
     }
     .org-dept-grid {
-        display: grid; grid-template-columns: repeat(4, 1fr);
-        gap: 20px; width: 100%;
+        display: grid; grid-template-columns: repeat(5, 1fr);
+        gap: 18px; width: 100%;
     }
     .org-dept-card {
         background: var(--white);
@@ -621,6 +639,7 @@
     .org-dept-card:nth-child(2) { border-top-color: var(--visseum-green); }
     .org-dept-card:nth-child(3) { border-top-color: var(--visseum-blue); }
     .org-dept-card:nth-child(4) { border-top-color: var(--visseum-gold); }
+    .org-dept-card:nth-child(5) { border-top-color: #B98500; }
     .org-dept-card:hover {
         border-color: var(--gray-200);
         box-shadow: 0 12px 28px rgba(20,28,38,.09);
@@ -628,26 +647,23 @@
     }
     .org-dept-header {
         background: var(--gray-50);
-        color: var(--visseum-ink); padding: 16px 20px; text-align: center;
+        color: var(--visseum-ink); padding: 16px 16px; text-align: center;
         border-bottom: 1px solid var(--gray-100);
     }
     .org-dept-header h4 {
-        font-size: 14px; font-weight: 800; margin-bottom: 4px;
+        font-size: 13.5px; font-weight: 800;
     }
-    .org-dept-header .dept-desc {
-        font-size: 13px; color: var(--visseum-text);
-        font-weight: 500;
-    }
-    .org-dept-body { padding: 16px 20px; }
+    .org-dept-body { padding: 14px 18px; }
     .org-dept-body ul { list-style: none; }
     .org-dept-body ul li {
-        font-size: 13px; color: var(--gray-600); line-height: 1.6;
+        font-size: 12.5px; color: var(--gray-600); line-height: 1.6;
         padding: 7px 0;
         border-bottom: 1px solid var(--gray-100);
     }
     .org-dept-body ul li:last-child { border-bottom: none; }
-    @media (max-width: 1024px) { .org-dept-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .org-dept-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1024px) { .org-dept-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+    @media (max-width: 700px) { .org-dept-grid { grid-template-columns: repeat(2, 1fr); } .org-aux-row { flex-direction: column; gap: 12px; } }
+    @media (max-width: 460px) { .org-dept-grid { grid-template-columns: 1fr; } }
 
     /* ── 6. PROFESSIONAL AREAS ── */
     .pro-grid {
@@ -913,7 +929,7 @@
             <a class="hero-card" href="#organization">
                 <div class="hero-card-icon"><i class="fa-solid fa-sitemap"></i></div>
                 <h4>조직도</h4>
-                <p>전문 본부·팀 구성 체계</p>
+                <p>전문 그룹·팀 구성 체계</p>
             </a>
             <a class="hero-card" href="#business">
                 <div class="hero-card-icon"><i class="fa-solid fa-diagram-project"></i></div>
@@ -1045,55 +1061,70 @@
                     <div class="org-role">CEO</div>
                     <div class="org-name">대표이사</div>
                 </div>
+                <div class="org-line-v"></div>
+                <div class="org-aux-row">
+                    <div class="org-aux-box">
+                        <div class="org-aux-title">감사</div>
+                    </div>
+                    <div class="org-aux-box">
+                        <div class="org-aux-title">관리팀</div>
+                        <div class="org-aux-desc">총무·인사 · 회계·재무</div>
+                    </div>
+                </div>
+                <div class="org-branch">
+                    <div class="org-line-v"></div>
+                    <div class="org-branch-h"></div>
+                </div>
                 <div class="org-dept-grid">
                     <div class="org-dept-card">
-                        <div class="org-dept-header">
-                            <h4>경영 · 법무실</h4>
-                            <div class="dept-desc">인사·총무, 재무·회계, 행정지원</div>
-                        </div>
+                        <div class="org-dept-header"><h4>수주그룹</h4></div>
                         <div class="org-dept-body">
                             <ul>
-                                <li>인사 · 총무팀</li>
-                                <li>재무 · 회계팀</li>
-                                <li>대외협력 · 홍보팀</li>
+                                <li>사업기획 관리</li>
+                                <li>신규사업</li>
+                                <li>수주전략</li>
                             </ul>
                         </div>
                     </div>
                     <div class="org-dept-card">
-                        <div class="org-dept-header">
-                            <h4>정비사업본부</h4>
-                            <div class="dept-desc">재개발·재건축·소규모정비사업 추진 지원</div>
-                        </div>
+                        <div class="org-dept-header"><h4>정비사업 그룹</h4></div>
                         <div class="org-dept-body">
                             <ul>
-                                <li>주택재개발사업팀</li>
-                                <li>주택재건축사업팀</li>
-                                <li>소규모정비사업팀</li>
+                                <li>서울지역</li>
+                                <li>경기지역</li>
+                                <li>인천지역</li>
                             </ul>
                         </div>
                     </div>
                     <div class="org-dept-card">
-                        <div class="org-dept-header">
-                            <h4>도시계획본부</h4>
-                            <div class="dept-desc">사업성 분석, 도시계획 검토, 인허가 지원</div>
-                        </div>
+                        <div class="org-dept-header"><h4>개발/분양 사업그룹</h4></div>
                         <div class="org-dept-body">
                             <ul>
-                                <li>도시계획팀</li>
-                                <li>인허가지원팀</li>
-                                <li>사업성검토팀</li>
+                                <li>개발사업</li>
+                                <li>지역주택조합사업</li>
+                                <li>분양사업</li>
                             </ul>
                         </div>
                     </div>
                     <div class="org-dept-card">
-                        <div class="org-dept-header">
-                            <h4>CM · PM본부</h4>
-                            <div class="dept-desc">사업관리, 일정·리스크 관리, 추진체계 지원</div>
-                        </div>
+                        <div class="org-dept-header"><h4>경영지원 그룹</h4></div>
                         <div class="org-dept-body">
                             <ul>
-                                <li>CM사업관리팀</li>
-                                <li>PM사업관리팀</li>
+                                <li>정비사업 총회·컨설팅</li>
+                                <li>토지수용</li>
+                                <li>택지가산 항목산출</li>
+                                <li>정비기반 시설</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="org-dept-card">
+                        <div class="org-dept-header"><h4>협력업체</h4></div>
+                        <div class="org-dept-body">
+                            <ul>
+                                <li>법무법인</li>
+                                <li>감정평가법인</li>
+                                <li>O/S외부용역</li>
+                                <li>수주업무 지원</li>
                             </ul>
                         </div>
                     </div>
