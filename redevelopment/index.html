@@ -195,7 +195,7 @@
         /* 골드 수평선 */
         .hero-hline {
             position: absolute; left: 0; right: 0; height: 1px; z-index: 3;
-            background: linear-gradient(90deg, transparent, rgba(184,134,11,.08) 30%, rgba(184,134,11,.08) 70%, transparent);
+            background: rgba(184,134,11,.08); /* 우측(30~70%)에서 보이던 색상·두께·투명도를 좌우 끝까지 동일하게 확장, 양끝 페이드 제거 */
         }
         .hero-hline-top { top: 0; }
         .hero-hline-bottom { bottom: 0; }
