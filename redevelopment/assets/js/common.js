@@ -182,10 +182,16 @@ const App = (() => {
           <h5>고객센터</h5>
           <a href="tel:024787114" class="footer-phone" aria-label="빛세움 대표전화 02-478-7114로 전화하기">02-478-7114</a>
           <a href="mailto:visseum@visseum.co.kr" class="email-link"><i class="fa-solid fa-envelope" style="font-size:11px"></i> visseum@visseum.co.kr</a>
-          <p>FAX 02-478-6114<br>서울특별시 강동구 성내로6길 50, 피스센터 5층</p>
+          <p>FAX 02-478-6114<br><span class="footer-address-link" id="footerAddressLink">서울특별시 강동구 성내로6길 50, 피스센터 5층</span></p>
         </div>
       </div>
     </div></footer>
+    <div class="location-modal-overlay" id="locationModalOverlay">
+      <div class="location-modal">
+        <button class="location-modal-close" id="locationModalClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+        <img src="${B}/jpg/visseum_location_map.png" alt="(주)빛세움 오시는 길 약도 — 서울특별시 강동구 성내로6길 50 피스센터 5층">
+      </div>
+    </div>
     <button class="scroll-top" id="scrollTop" aria-label="맨 위로"><i class="fa-solid fa-chevron-up"></i></button>
     <div class="toast-container" id="toastContainer"></div>
     <nav class="mobile-bottom-nav" id="mobileBottomNav">
@@ -350,11 +356,31 @@ const App = (() => {
       }
     });
 
+    // Location modal (footer address)
+    const locationModalOverlay = document.getElementById('locationModalOverlay');
+    const footerAddressLink = document.getElementById('footerAddressLink');
+    const locationModalClose = document.getElementById('locationModalClose');
+    if (footerAddressLink) footerAddressLink.addEventListener('click', () => {
+      locationModalOverlay.classList.add('open');
+      lockScroll();
+    });
+    if (locationModalClose) locationModalClose.addEventListener('click', () => {
+      locationModalOverlay.classList.remove('open');
+      unlockScroll();
+    });
+    if (locationModalOverlay) locationModalOverlay.addEventListener('click', e => {
+      if (e.target === locationModalOverlay) {
+        locationModalOverlay.classList.remove('open');
+        unlockScroll();
+      }
+    });
+
     // ESC
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
         closeDrawer();
         if (searchOverlay) { searchOverlay.classList.remove('open'); unlockScroll(); }
+        if (locationModalOverlay) { locationModalOverlay.classList.remove('open'); unlockScroll(); }
       }
     });
 
