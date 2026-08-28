@@ -191,7 +191,7 @@
     .uni-hero .uh-visual { flex-shrink: 0; align-self: center; width: 360px; position: relative; z-index: 2; }
     .uni-hero .uh-photo { display: none; }
     .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .uni-hero .uh-card { width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); cursor: pointer; position: relative; z-index: 5; }
+    .uni-hero .uh-card { display: block; width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); cursor: pointer; position: relative; z-index: 5; text-decoration: none; color: inherit; }
     .uni-hero .uh-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
     .uni-hero .uh-card.on { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(184,134,11,.5), 0 12px 30px rgba(0,0,0,.16); }
     .uni-hero .uh-ci { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,196,0,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
@@ -231,6 +231,7 @@
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_library.jpg?v=20260825a" alt="빛세움 자료실"></div>
             <div class="uh-cards" id="heroCards">
+                <a class="uh-card" href="gallery.html"><div class="uh-ci"><i class="fa-solid fa-images"></i></div><h4>갤러리</h4><p>현장 갤러리·소통공간</p></a>
                 <div class="uh-card" data-cat="주요뉴스"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></div>
                 <div class="uh-card" data-cat="법령"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>도시정비법 등 각종 판례</p></div>
                 <div class="uh-card" data-cat="서식가이드"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div>
@@ -413,7 +414,7 @@ window.switchCat=function(cat){
 };
 
 /* Events */
-document.getElementById('heroCards').addEventListener('click',function(e){var btn=e.target.closest('.uh-card');if(!btn)return;switchCat(btn.dataset.cat)});
+document.getElementById('heroCards').addEventListener('click',function(e){var btn=e.target.closest('.uh-card');if(!btn||!btn.dataset.cat)return;switchCat(btn.dataset.cat)});
 document.getElementById('searchInput').addEventListener('input',function(){searchQ=this.value.trim();curPage=1;render()});
 document.getElementById('sortSelect').addEventListener('change',function(){curSort=this.value;curPage=1;render()});
 document.getElementById('perSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;render()});
