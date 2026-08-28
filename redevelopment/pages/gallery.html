@@ -70,6 +70,10 @@
     .gl-detail-meta span{display:flex;align-items:center;gap:5px}
     .gl-detail-photo{width:100%;border-radius:12px;overflow:hidden;margin-bottom:20px;background:var(--gray-50)}
     .gl-detail-photo img{width:100%;display:block;max-height:520px;object-fit:cover}
+    .gl-detail-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+    .gl-detail-photos a{display:block;border-radius:10px;overflow:hidden;aspect-ratio:4/3;cursor:zoom-in}
+    .gl-detail-photos img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
+    .gl-detail-photos a:hover img{transform:scale(1.04)}
     .gl-detail-content{font-size:14.5px;line-height:1.85;color:var(--gray-700);white-space:pre-line}
     </style>
 </head>
@@ -141,7 +145,7 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260829e"></script>
+<script src="../assets/data/mock-data.js?v=20260829f"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260829h"></script>
 <script>
@@ -161,10 +165,13 @@
 
     function listOf(cat){ return cat==='전체' ? items : items.filter(function(it){ return it.category===cat }); }
 
+    function coverOf(it){ return (it.images&&it.images.length) ? it.images[0] : (it.src?{src:it.src,alt:it.alt}:null); }
+
     function cardHTML(it){
         var icon=ICONS[it.category]||'fa-solid fa-image';
+        var cover=coverOf(it);
         return '<button class="gp-card" data-id="'+it.id+'">'+
-               '<div class="gp-img">'+(it.src?'<img src="'+it.src+'" alt="'+(it.alt||it.title||'')+'" loading="lazy">':'<i class="'+icon+'"></i>')+'</div>'+
+               '<div class="gp-img">'+(cover?'<img src="'+cover.src+'" alt="'+(cover.alt||it.title||'')+'" loading="lazy">':'<i class="'+icon+'"></i>')+'</div>'+
                '<div class="gp-body">'+
                '<div class="gp-cat">'+it.category+'</div>'+
                '<div class="gp-title">'+(it.title||'')+'</div>'+
@@ -216,8 +223,17 @@
         document.getElementById('glDDate').textContent=it.date||'';
         document.getElementById('glDViews').textContent='조회 '+viewsOf(it);
         var photoEl=document.getElementById('glDPhoto');
-        photoEl.innerHTML=it.src?'<img src="'+it.src+'" alt="'+(it.alt||it.title||'')+'">':'';
-        photoEl.style.display=it.src?'':'none';
+        if(it.images&&it.images.length){
+            photoEl.innerHTML='<div class="gl-detail-photos">'+it.images.map(function(im){
+                return '<a href="'+im.src+'" target="_blank" rel="noopener" title="원본 보기"><img src="'+im.src+'" alt="'+(im.alt||it.title||'')+'"></a>';
+            }).join('')+'</div>';
+            photoEl.style.display='';
+        }else if(it.src){
+            photoEl.innerHTML='<img src="'+it.src+'" alt="'+(it.alt||it.title||'')+'">';
+            photoEl.style.display='';
+        }else{
+            photoEl.innerHTML=''; photoEl.style.display='none';
+        }
         document.getElementById('glDContent').textContent=it.content||'';
         var detail=document.getElementById('glDetail');
         detail.classList.add('show');

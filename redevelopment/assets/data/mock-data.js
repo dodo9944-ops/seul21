@@ -1275,11 +1275,19 @@ const MOCK = {
 
   /* ──────────────────────────── 갤러리 ────────────────────────────
      category: '주민총회' | '봉사활동' | '워크숍' | '현장스케치' | '기타행사'
-     각 항목: { id, category, title, content, src, alt, date, views }
+     각 항목: { id, category, title, content, src, alt, date, views, images }
      - content: 상세 패널에 표시되는 본문 텍스트
+     - images: [{src,alt}, ...] 여러 장인 경우 사용 (없으면 src/alt 단일 이미지로 표시)
      - views: 초기 조회수(선택, 미입력 시 0) — 실제 조회수는 브라우저 localStorage(seul_gallery_views) 누적분을 더해 표시 */
   gallery: [
-
+    { id:'ws2024_halong', category:'워크숍', title:'2024 빛세움 워크숍 in 베트남 하롱베이', date:'2024-08-22',
+      content:'잠시 업무는 내려놓고, 사람과 사람 사이의 거리는 조금 더 가까이.\n\n2024년 빛세움 임직원들은 베트남 하롱베이로 워크숍을 다녀왔습니다.\n멋진 풍경을 함께 보고, 배를 타고, 맛있는 음식을 나누며 사무실에서는 미처 하지 못했던 이야기들도 편하게 나눴습니다.\n\n계획대로 움직인 일정도 있었고, 계획 없이 웃었던 순간도 많았습니다.\n함께 시간을 보내다 보니 서로를 조금 더 알게 되고, 자연스럽게 팀도 한층 가까워졌습니다.\n\n일할 땐 집중하고, 쉴 땐 제대로 즐기는 것.\n그렇게 또 하나의 좋은 추억을 만들고 돌아왔습니다.\n\n2024 빛세움 하롱베이 워크숍,\n사진 속 웃음만큼 즐거웠던 며칠의 기록입니다.',
+      images:[
+        { src:'../jpg/gallery/workshop2024_halongbay_boat.jpg', alt:'베트남 하롱베이 유람선 투어 — 임직원 단체 사진' },
+        { src:'../jpg/gallery/workshop2024_dinner.jpg', alt:'2024 빛세움 워크숍 환영 만찬 단체 사진' },
+        { src:'../jpg/gallery/workshop2024_airport.jpg', alt:'출국 전 공항 단체 사진' },
+        { src:'../jpg/gallery/workshop2024_restaurant.jpg', alt:'현지 전통 레스토랑에서의 식사 시간' }
+      ] },
   ],
 
   /* ──────────────────────────── 자료실 ──────────────────────────── */
