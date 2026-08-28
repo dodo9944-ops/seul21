@@ -401,21 +401,22 @@
     }
     .cert-stacked .cert-photo {
         flex: none; width: 100%; box-sizing: border-box;
-        flex-direction: row; justify-content: center; align-items: center; gap: 36px;
+        flex-direction: row; justify-content: center; align-items: center; gap: 20px;
         border-right: none; border-bottom: 1px solid rgba(184,134,11,0.15);
-        padding: 40px 6%;
+        padding: 40px 15px;
     }
     .cert-stacked .cert-photo a {
-        flex: 1 1 0; min-width: 0; max-width: 480px;
+        flex: 1 1 0; min-width: 0; max-width: 600px;
         display: flex; justify-content: center;
     }
     .cert-stacked .cert-photo img {
-        width: 100%; max-width: 100%; height: 420px;
+        width: 100%; max-width: 100%; height: 480px;
         object-fit: contain;
+        box-shadow: none; border-radius: 0;
     }
     @media (max-width: 1024px) {
-        .cert-stacked .cert-photo { gap: 32px; padding: 36px 6%; }
-        .cert-stacked .cert-photo img { height: 340px; }
+        .cert-stacked .cert-photo { gap: 18px; padding: 36px 15px; }
+        .cert-stacked .cert-photo img { height: 380px; }
     }
     @media (max-width: 768px) {
         .cert-stacked .cert-photo { flex-direction: column; padding: 32px 20px; gap: 24px; }
