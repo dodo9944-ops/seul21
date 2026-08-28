@@ -1236,11 +1236,11 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">등록된 공지사항이 없습니다.</p>';
     }
 
-    /* 자료실: 최신 4건 (주요뉴스 제외) */
+    /* 자료실: 최신 3건 (주요뉴스 제외) */
     var libEl=document.getElementById('mainLibrary');
     if(libEl && MOCK.library){
         var libs=MOCK.library.filter(function(i){return i.category!=='주요뉴스'})
-            .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,4);
+            .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         /* 파일 맵 (library.html과 동일) */
         window._libFileMap={
             'lib1':{ext:'downloads/files/lib1_조합설립인가_신청서.pdf',web:'downloads/form_association.html'},
@@ -1293,12 +1293,12 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         }).join('');
     }
 
-    /* 커뮤니티: 최신 5건 */
+    /* 갤러리: 최신 3건 */
     var cmEl=document.getElementById('mainCommunity');
     function renderCommunity(posts){
         if(!cmEl||!posts||!posts.length)return;
         posts.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});
-        cmEl.innerHTML=posts.slice(0,5).map(function(p){
+        cmEl.innerHTML=posts.slice(0,3).map(function(p){
             var ago='';
             if(p.date){var diff=Date.now()-new Date(p.date).getTime();var h=Math.floor(diff/36e5);ago=h<1?'방금':h<24?h+'시간 전':Math.floor(h/24)+'일 전'}
             return'<div class="comm-item">'+
