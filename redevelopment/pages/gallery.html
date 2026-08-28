@@ -28,7 +28,7 @@
     /* 탭 메뉴 — 히어로 바로 아래 */
     .gl-tabs-wrap{padding-top:4px;margin-bottom:32px}
 
-    /* 게시물 카드 (인기 5개 / 전체 그리드 공용) */
+    /* 게시물 카드 */
     .gl-row5{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
     @media(max-width:1024px){.gl-row5{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:600px){.gl-row5{grid-template-columns:repeat(2,1fr);gap:10px}}
@@ -107,15 +107,6 @@
             </div>
         </div>
 
-        <!-- 인기 게시물 (조회수 TOP5, 상시 노출) -->
-        <div class="gl-section" id="glPopularSection">
-            <div class="gl-section-head">
-                <h2><i class="fa-solid fa-fire"></i> 인기 게시물</h2>
-                <span class="gl-section-sub">조회수 TOP 5</span>
-            </div>
-            <div class="gl-row5" id="glPopular"></div>
-        </div>
-
         <!-- 전체 게시물 (5×3 그리드 + 페이지네이션) -->
         <div class="gl-section">
             <div class="gl-section-head">
@@ -179,14 +170,6 @@
                '</div></button>';
     }
 
-    function renderPopular(){
-        var section=document.getElementById('glPopularSection');
-        if(!items.length){ section.style.display='none'; return; }
-        section.style.display='';
-        var top5=items.slice().sort(function(a,b){ return viewsOf(b)-viewsOf(a) }).slice(0,5);
-        document.getElementById('glPopular').innerHTML=top5.map(cardHTML).join('');
-    }
-
     function renderPager(totalPages){
         var el=document.getElementById('glPager');
         if(totalPages<=1){ el.innerHTML=''; return; }
@@ -237,7 +220,6 @@
         document.getElementById('glDContent').textContent=it.content||'';
         var detail=document.getElementById('glDetail');
         detail.classList.add('show');
-        renderPopular();
         renderGrid();
         detail.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
@@ -289,10 +271,6 @@
         renderGrid();
     });
 
-    document.getElementById('glPopular').addEventListener('click', function(e){
-        var btn=e.target.closest('.gp-card'); if(!btn) return;
-        openDetail(btn.dataset.id);
-    });
     document.getElementById('glGrid').addEventListener('click', function(e){
         var btn=e.target.closest('.gp-card'); if(!btn) return;
         openDetail(btn.dataset.id);
@@ -305,7 +283,6 @@
     });
     document.getElementById('glDetailClose').addEventListener('click', closeDetail);
 
-    renderPopular();
     renderGrid();
 })();
 </script>
