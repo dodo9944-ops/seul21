@@ -714,6 +714,10 @@
     }
     @media (max-width: 1024px) { .pro-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) { .pro-grid { grid-template-columns: 1fr; } }
+    .group-grid { grid-template-columns: repeat(2, 1fr); max-width: 900px; margin: 0 auto; }
+    .group-card-logo { height: 44px; display: flex; align-items: center; margin-bottom: 20px; }
+    .group-card-logo img { max-height: 100%; max-width: 100%; object-fit: contain; }
+    @media (max-width: 600px) { .group-grid { grid-template-columns: 1fr; } }
 
     /* ── 7. CORPORATE IDENTITY ── */
     .ci-layout {
@@ -1103,44 +1107,20 @@
          ============================================================ -->
     <div class="about-section" id="business">
         <div class="inner">
-            <div class="section-label">Professional Areas</div>
+            <div class="section-label">Group Companies</div>
             <h2 class="section-title">그룹사</h2>
-            <div class="pro-grid" id="proGrid">
-                <a class="pro-card" href="redevelopment-service.html">
-                    <div class="pro-card-icon"><i class="fa-solid fa-building"></i></div>
-                    <h4>주택재개발 정비사업</h4>
-                    <p>일반절차(12단계)와 서울시 신속통합기획을 구분하여 기본계획 수립부터 준공·조합 해산까지 전 과정을 관리합니다. HUG 보증 업무 원스톱 지원.</p>
-                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+            <div class="pro-grid group-grid" id="proGrid">
+                <a class="pro-card" href="http://www.comwayblue.co.kr/" target="_blank" rel="noopener">
+                    <div class="group-card-logo"><img src="../jpg/group_comwayblue_logo.png" alt="컴웨이블루 로고"></div>
+                    <h4>컴웨이블루 <span style="font-weight:500;color:var(--visseum-muted);font-size:12.5px">COMWAYBLUE</span></h4>
+                    <p>분양광고·정비사업광고·영상제작에 특화된 광고기획사입니다. 시장조사부터 기획·카피·디자인·제작까지 온·오프라인 광고를 종합적으로 수행합니다.</p>
+                    <span class="pro-card-more">홈페이지 바로가기 <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
                 </a>
-                <a class="pro-card" href="reconstruction-service.html">
-                    <div class="pro-card-icon"><i class="fa-solid fa-city"></i></div>
-                    <h4>주택재건축 정비사업</h4>
-                    <p>일반절차(12단계)와 서울시 신속통합기획을 구분하여 안전진단부터 준공까지 전 과정을 관리합니다. HUG 보증 업무 원스톱 지원.</p>
-                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
-                </a>
-                <a class="pro-card" href="small-reconstruction-service.html">
-                    <div class="pro-card-icon"><i class="fa-solid fa-house-chimney"></i></div>
-                    <h4>소규모 정비사업</h4>
-                    <p>소규모재건축과 가로주택정비를 포괄. 정비구역 지정 없이 200세대 미만 노후 주거지를 신속하게 정비합니다.</p>
-                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
-                </a>
-                <a class="pro-card" href="garoju-service.html">
-                    <div class="pro-card-icon"><i class="fa-solid fa-layer-group"></i></div>
-                    <h4>도심복합개발</h4>
-                    <p>통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등 복합적 사업구조와 고밀 개발방식을 종합 검토합니다.</p>
-                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
-                </a>
-                <a class="pro-card" href="urbanplanning-service.html">
-                    <div class="pro-card-icon"><i class="fa-solid fa-drafting-compass"></i></div>
-                    <h4>도시계획(엔지니어링)</h4>
-                    <p>정비계획, 지구단위계획, 인허가 협의자료 작성, 서울시 신속통합기획 대응 업무를 수행합니다.</p>
-                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
-                </a>
-                <a class="pro-card" href="pmcm-service.html">
-                    <div class="pro-card-icon"><i class="fa-solid fa-diagram-project"></i></div>
-                    <h4>도시정비 PM/CM</h4>
-                    <p>일정·원가·품질·리스크 통합 관리. 조합·시공사·설계·감리·행정기관 간 실무 조정을 수행합니다.</p>
-                    <span class="pro-card-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
+                <a class="pro-card" href="http://www.hanwoorired.co.kr/" target="_blank" rel="noopener">
+                    <div class="group-card-logo"><img src="../jpg/group_hanwoorired_logo.png" alt="한우리레드 로고"></div>
+                    <h4>한우리레드 <span style="font-weight:500;color:var(--visseum-muted);font-size:12.5px">HANWOORIRED</span></h4>
+                    <p>고객제일주의 경영을 실현하는 완벽한 파트너. 동감(同感)·동행(同行)·동승(同乘) 3동의 파트너십으로 고객과 함께 동반성장을 실현하며, 윤리경영·상생경영을 바탕으로 사회적 책임을 다하는 기업입니다.</p>
+                    <span class="pro-card-more">홈페이지 바로가기 <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
                 </a>
             </div>
         </div>
