@@ -69,5 +69,50 @@
       "library_exposure_checked": "NOT_CHECKED — 상동"
     },
     "action_required": "① Vercel 커넥터 재인증 필요(위와 동일, team_4OL3ZwhAAZCMeH0YaWVu0cGw 스코프). ② 이 실행 환경은 www.seul24.cloud 아웃바운드 접속 자체가 프록시에서 차단되어 있어, 커넥터 인증이 복구되어도 이 세션에서는 라이브 200 검수를 직접 수행할 수 없음 — egress 허용 도메인 목록에 www.seul24.cloud 추가 검토 필요. 두 항목 모두 사용자 조치 필요, Claude 자체 해결 불가."
+  },
+  {
+    "run_datetime_kst": "2026-08-29T06:37:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "searched_articles_count": 14,
+    "candidate_articles_count": 2,
+    "target_max": 3,
+    "shortfall_reason": "24~48시간 이내 정비사업 실무 중요도 기준 충족 기사 다수 검색 시도(WebSearch 14회: 정책·법령, 조합설립, 공사비, 판결, 용적률, 국토부 보도자료 등)했으나, 기존 mock-data.js에 이미 등록된 주제(이주비 대출 HUG/HF 보증, 법정상한용적률 1.2배 완화 등)와 중복되거나 발행일이 24~48시간을 초과하는 기사가 대부분이어서 신규·비중복 기사 2건만 확정. 중복 게시 방지 원칙에 따라 3건 강제 채움 없이 2건만 게시.",
+    "selected_articles": [
+      {
+        "id": "news0829a",
+        "title": "서울시 제11차 정비사업 통합심의위원회 4건 동시 통과 — 남영동 업무2구역·금천 무지개아파트 재건축 등",
+        "source": "서울특별시 보도자료",
+        "source_url": "https://www.seoul.go.kr/news/news_report.do?bbsNo=158&nttNo=459159&cntPerPage=10&curPage=1",
+        "download_html": "redevelopment/downloads/news_20260829a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260829a.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0829b",
+        "title": "신속통합기획 재개발 후보지 8곳 추가선정 — 누적 130곳으로 확대",
+        "source": "서울특별시 보도자료",
+        "source_url": "https://news.seoul.go.kr/citybuild/archives/531065",
+        "download_html": "redevelopment/downloads/news_20260829b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260829b.html",
+        "status": "posted"
+      }
+    ],
+    "posted_success_count": 2,
+    "posted_fail_count": 0,
+    "fail_reasons": [],
+    "commit_sha": "9c2575d67c2fb2e10f5e279244117a234b816be0",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_status": "FAILED — mcp__Vercel__list_teams 결과 teams:[] (빈 배열), mcp__Vercel__list_projects(teamId=team_4OL3ZwhAAZCMeH0YaWVu0cGw) 결과 'Failed to list projects.' 2026-08-28 06:30/06:40 실행과 동일한 증상 3회 연속 재현 — 이 세션의 Vercel 커넥터가 team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프에 대한 권한이 없어 production 배포 트리거 불가. 전날 보고에도 불구하고 미해결 상태로 확인됨.",
+    "verification": {
+      "news0829a_http_status": "NOT_CHECKED — 이 세션 네트워크 egress 프록시가 www.seul24.cloud 도메인 접속을 차단(EGRESS_BLOCKED)하여 WebFetch로 라이브 확인 불가 (2026-08-28 동일 증상 재현)",
+      "news0829b_http_status": "NOT_CHECKED — 상동",
+      "index_exposure_checked": "NOT_CHECKED — 상동",
+      "library_exposure_checked": "NOT_CHECKED — 상동"
+    },
+    "action_required": "① [반복 미해결] Vercel 커넥터 재인증 필요 — team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프 접근 권한을 claude.ai Vercel 커넥터 설정에서 재부여해야 함. 2026-08-28 06:30·06:40에 이어 2026-08-29 06:37까지 3회 연속 동일 오류. ② [반복 미해결] 이 세션 환경의 아웃바운드 egress 프록시가 www.seul24.cloud를 계속 차단 중 — egress 허용 도메인 목록에 www.seul24.cloud 추가 필요. 코드 변경·커밋·푸시는 backup-bitseum-rebrand-20260824 브랜치에 정상 완료되었으며(커밋 9c2575d), 두 문제가 해결되면 별도 재작업 없이 해당 브랜치를 production으로 배포하고 라이브 검수를 즉시 진행 가능. Claude가 자체적으로 해결할 수 없는 계정/네트워크 설정 문제로, 사용자 조치가 반드시 필요."
   }
 ]
