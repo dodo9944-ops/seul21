@@ -228,7 +228,7 @@ body { padding-top: 92.6px; } /* 25.6(util) + 72(header) − 5px(전체 콘텐�
 }
 
 /* ── GNB ── */
-.gnb { display: flex; align-items: center; gap: 18px; flex: 1; justify-content: flex-end; transform: translate(7px, -5px); } /* 우측 7px, 위로 5px 이동 */
+.gnb { display: flex; align-items: center; gap: 18px; flex: 1; justify-content: flex-end; transform: translate(7px, 0px); } /* 우측 7px 이동, 세로는 5px 아래로 내려 원위치 */
 .gnb a {
   position: relative;
   padding: 8px 0; font-size: 14px; font-weight: 500;
