@@ -75,34 +75,6 @@
     .gl-detail-photos img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
     .gl-detail-photos button:hover img{transform:scale(1.04)}
     .gl-detail-content{font-size:14.5px;line-height:1.85;color:var(--gray-700);white-space:pre-line}
-
-    /* 사진 확대창 — 자유 이동/전방향 리사이즈 가능한 별도 창(윈도우), CI 짙은 블루 타이틀바 */
-    .gl-lightbox{position:fixed;inset:0;background:rgba(10,15,28,.55);z-index:2147483000;display:none;pointer-events:auto}
-    .gl-lightbox.show{display:block}
-    .gl-win{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:640px;height:480px;min-width:280px;min-height:220px;background:#fff;border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.4);overflow:hidden;display:flex;flex-direction:column;pointer-events:auto}
-    .gl-win.maximized{top:0!important;left:0!important;width:100vw!important;height:100vh!important;transform:none!important;border-radius:0}
-    .gl-win.minimized{height:44px!important;min-height:44px}
-    .gl-win.minimized .gl-win-body{display:none}
-    .gl-win-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;height:44px;padding:0 6px 0 16px;background:linear-gradient(135deg,#0B4C8C,#041F3D);flex-shrink:0;cursor:move;user-select:none}
-    .gl-win-title{display:flex;align-items:center;gap:8px;color:#fff;font-size:13.5px;font-weight:700;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-    .gl-win-title i{font-size:12.5px;opacity:.9}
-    .gl-win-ctrl{display:flex;align-items:center;gap:2px;flex-shrink:0}
-    .gl-win-ctrl button{width:36px;height:32px;border:none;background:transparent;color:#fff;font-size:12.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:background .15s}
-    .gl-win-ctrl button:hover{background:rgba(255,255,255,.25)}
-    .gl-win-body{flex:1;overflow:hidden;background:#0A0F1C;padding:0}
-    .gl-win-body img{width:100%;height:100%;object-fit:cover;display:block}
-    /* 전방향 리사이즈 핸들 */
-    .gl-rz{position:absolute}
-    .gl-win.maximized .gl-rz{display:none}
-    .gl-rz-n{top:0;left:10px;right:10px;height:6px;cursor:n-resize}
-    .gl-rz-s{bottom:0;left:10px;right:10px;height:6px;cursor:s-resize}
-    .gl-rz-e{top:10px;right:0;bottom:10px;width:6px;cursor:e-resize}
-    .gl-rz-w{top:10px;left:0;bottom:10px;width:6px;cursor:w-resize}
-    .gl-rz-ne{top:0;right:0;width:14px;height:14px;cursor:ne-resize}
-    .gl-rz-nw{top:0;left:0;width:14px;height:14px;cursor:nw-resize}
-    .gl-rz-se{bottom:0;right:0;width:14px;height:14px;cursor:se-resize}
-    .gl-rz-sw{bottom:0;left:0;width:14px;height:14px;cursor:sw-resize}
-    @media(max-width:640px){.gl-win{width:92vw;height:70vh}}
     </style>
 </head>
 <body>
@@ -169,29 +141,6 @@
             </div>
         </div>
 
-    </div>
-</div>
-
-<!-- 사진 확대창 — 자유 이동/전방향 리사이즈 가능한 별도 창(윈도우) -->
-<div class="gl-lightbox" id="glLightbox">
-    <div class="gl-win" id="glWin">
-        <div class="gl-win-bar" id="glWinBar">
-            <div class="gl-win-title"><i class="fa-regular fa-image"></i> <span id="glWinTitle">사진 보기</span></div>
-            <div class="gl-win-ctrl">
-                <button type="button" id="glWinMin" title="최소화"><i class="fa-solid fa-window-minimize"></i></button>
-                <button type="button" id="glWinMax" title="최대화"><i class="fa-regular fa-square"></i></button>
-                <button type="button" id="glWinClose" title="닫기" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-        </div>
-        <div class="gl-win-body" id="glWinBody"><img id="glLbImg" src="" alt=""></div>
-        <div class="gl-rz gl-rz-n" data-dir="n"></div>
-        <div class="gl-rz gl-rz-s" data-dir="s"></div>
-        <div class="gl-rz gl-rz-e" data-dir="e"></div>
-        <div class="gl-rz gl-rz-w" data-dir="w"></div>
-        <div class="gl-rz gl-rz-ne" data-dir="ne"></div>
-        <div class="gl-rz gl-rz-nw" data-dir="nw"></div>
-        <div class="gl-rz gl-rz-se" data-dir="se"></div>
-        <div class="gl-rz gl-rz-sw" data-dir="sw"></div>
     </div>
 </div>
 
@@ -297,97 +246,39 @@
         document.getElementById('glDetail').classList.remove('show');
     }
 
-    /* 사진 확대창 — 자유 이동/전방향 리사이즈 가능한 별도 창(윈도우) */
-    var winEl=document.getElementById('glWin'), lbOverlay=document.getElementById('glLightbox');
+    /* 사진 확대창 — 페이지에 갇힌 오버레이가 아닌 진짜 별도 브라우저 창(window.open)으로 분리 */
+    function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-    function openLightbox(src,alt){
-        var img=document.getElementById('glLbImg');
-        img.src=src; img.alt=alt||'';
-        document.getElementById('glWinTitle').textContent=alt||'사진 보기';
-        winEl.classList.remove('maximized','minimized');
-        lbOverlay.classList.add('show');
-        document.body.style.overflow='hidden';
-
-        /* 클릭 시 사진의 기본(원본) 크기로 창을 연다 — 뷰포트를 넘지 않도록 상한만 둠 */
+    function openPhotoWindow(src,alt){
+        var title=alt||'사진 보기';
         var probe=new Image();
         probe.onload=function(){
-            var barH=44;
-            var maxW=window.innerWidth-40, maxH=window.innerHeight-40;
-            var w=Math.min(probe.naturalWidth, maxW);
-            var h=Math.min(probe.naturalHeight+barH, maxH);
-            if(w<280) w=280; if(h<220) h=220;
-            winEl.style.width=w+'px';
-            winEl.style.height=h+'px';
-            winEl.style.left=((window.innerWidth-w)/2)+'px';
-            winEl.style.top=((window.innerHeight-h)/2)+'px';
-            winEl.style.transform='none';
+            var availW=screen.availWidth||window.innerWidth, availH=screen.availHeight||window.innerHeight;
+            var w=Math.min(probe.naturalWidth, availW-80);
+            var h=Math.min(probe.naturalHeight, availH-140);
+            if(w<360) w=360; if(h<280) h=280;
+            var left=Math.max(0, Math.round((availW-w)/2));
+            var top=Math.max(0, Math.round((availH-h)/2));
+            var features='width='+Math.round(w)+',height='+Math.round(h)+',left='+left+',top='+top+
+                ',resizable=yes,scrollbars=no,status=no,toolbar=no,menubar=no,location=no';
+            var win=window.open('','glPhotoWin',features);
+            if(!win){ window.open(src,'_blank'); return; }
+            win.document.open();
+            win.document.write(
+                '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+escapeHtml(title)+'</title>'+
+                '<style>html,body{margin:0;padding:0;width:100%;height:100%;background:#0A0F1C;overflow:hidden}'+
+                'img{width:100%;height:100%;object-fit:cover;display:block}</style></head><body>'+
+                '<img src="'+src+'" alt="'+escapeHtml(alt||'')+'"></body></html>'
+            );
+            win.document.close();
+            win.focus();
         };
         probe.src=src;
     }
-    function closeLightbox(){
-        lbOverlay.classList.remove('show');
-        document.body.style.overflow='';
-    }
     document.getElementById('glDetail').addEventListener('click', function(e){
         var trig=e.target.closest('.gl-lb-trigger'); if(!trig) return;
-        openLightbox(trig.dataset.src, trig.dataset.alt);
+        openPhotoWindow(trig.dataset.src, trig.dataset.alt);
     });
-    document.getElementById('glWinClose').addEventListener('click', closeLightbox);
-    lbOverlay.addEventListener('click', function(e){ if(e.target.id==='glLightbox') closeLightbox(); });
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLightbox(); });
-
-    /* 최대화 / 최소화 */
-    document.getElementById('glWinMax').addEventListener('click', function(){
-        winEl.classList.remove('minimized');
-        winEl.classList.toggle('maximized');
-    });
-    document.getElementById('glWinMin').addEventListener('click', function(){
-        winEl.classList.remove('maximized');
-        winEl.classList.toggle('minimized');
-    });
-
-    /* 타이틀바 드래그 — 뷰포트 경계에 갇히지 않고 자유롭게 이동 */
-    var dragging=false, dragOffX=0, dragOffY=0;
-    document.getElementById('glWinBar').addEventListener('mousedown', function(e){
-        if(e.target.closest('.gl-win-ctrl') || winEl.classList.contains('maximized')) return;
-        var rect=winEl.getBoundingClientRect();
-        winEl.style.left=rect.left+'px'; winEl.style.top=rect.top+'px'; winEl.style.transform='none';
-        dragOffX=e.clientX-rect.left; dragOffY=e.clientY-rect.top;
-        dragging=true; document.body.style.userSelect='none';
-    });
-    document.addEventListener('mousemove', function(e){
-        if(dragging){
-            winEl.style.left=(e.clientX-dragOffX)+'px';
-            winEl.style.top=(e.clientY-dragOffY)+'px';
-        }
-    });
-    document.addEventListener('mouseup', function(){ dragging=false; document.body.style.userSelect=''; });
-
-    /* 상하좌우/모서리 자유 리사이즈 */
-    var resizing=false, rzDir='', rzStartX=0, rzStartY=0, rzStartW=0, rzStartH=0, rzStartTop=0, rzStartLeft=0;
-    document.querySelectorAll('.gl-rz').forEach(function(h){
-        h.addEventListener('mousedown', function(e){
-            if(winEl.classList.contains('maximized')) return;
-            e.preventDefault(); e.stopPropagation();
-            var rect=winEl.getBoundingClientRect();
-            winEl.style.left=rect.left+'px'; winEl.style.top=rect.top+'px'; winEl.style.transform='none';
-            rzDir=h.dataset.dir; rzStartX=e.clientX; rzStartY=e.clientY;
-            rzStartW=rect.width; rzStartH=rect.height; rzStartTop=rect.top; rzStartLeft=rect.left;
-            resizing=true; document.body.style.userSelect='none';
-        });
-    });
-    document.addEventListener('mousemove', function(e){
-        if(!resizing) return;
-        var dx=e.clientX-rzStartX, dy=e.clientY-rzStartY;
-        var w=rzStartW, h=rzStartH, top=rzStartTop, left=rzStartLeft;
-        if(rzDir.indexOf('e')>-1) w=Math.max(280,rzStartW+dx);
-        if(rzDir.indexOf('s')>-1) h=Math.max(220,rzStartH+dy);
-        if(rzDir.indexOf('w')>-1){ w=Math.max(280,rzStartW-dx); left=rzStartLeft+(rzStartW-w); }
-        if(rzDir.indexOf('n')>-1){ h=Math.max(220,rzStartH-dy); top=rzStartTop+(rzStartH-h); }
-        winEl.style.width=w+'px'; winEl.style.height=h+'px';
-        winEl.style.left=left+'px'; winEl.style.top=top+'px';
-    });
-    document.addEventListener('mouseup', function(){ resizing=false; document.body.style.userSelect=''; });
 
     document.getElementById('glTabs').addEventListener('click', function(e){
         var btn=e.target.closest('button'); if(!btn) return;
