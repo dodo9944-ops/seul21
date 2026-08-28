@@ -17,7 +17,29 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260829e">
     <style>
-    .gl-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    /* 갤러리방 (카테고리 카드) — 한 줄 5개 */
+    .gl-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .gl-section-head h2{font-size:18px;font-weight:800;color:var(--gray-900)}
+    .gl-viewall{font-size:13px;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:4px;cursor:pointer;background:none;border:none;font-family:inherit;padding:0}
+    .gl-rooms{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:40px}
+    .gl-room{display:flex;flex-direction:column;text-align:left;background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .25s;padding:0;font-family:inherit}
+    .gl-room:hover{border-color:var(--gold);box-shadow:0 8px 20px rgba(0,0,0,.08);transform:translateY(-2px)}
+    .gl-room-cover{aspect-ratio:4/3;background:linear-gradient(135deg,#FFF7DF,#FFFDF7);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:30px;overflow:hidden}
+    .gl-room-cover img{width:100%;height:100%;object-fit:cover;display:block}
+    .gl-room-info{padding:14px 14px 16px}
+    .gl-room-title{font-size:14.5px;font-weight:800;color:var(--gray-900);margin-bottom:4px}
+    .gl-room-count{font-size:12px;color:var(--gray-400)}
+    @media(max-width:960px){.gl-rooms{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.gl-rooms{grid-template-columns:repeat(2,1fr);gap:10px}.gl-room-info{padding:10px 10px 12px}.gl-room-title{font-size:13px}}
+
+    /* 갤러리방 상세 (사진 목록) */
+    .gl-detail{display:none;padding-top:24px;border-top:1px solid var(--gray-100)}
+    .gl-detail.show{display:block}
+    .gl-detail-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .gl-detail-title{font-size:17px;font-weight:800;color:var(--gray-900)}
+    .gl-back{font-size:12.5px;color:var(--gray-500);cursor:pointer;background:none;border:none;display:inline-flex;align-items:center;gap:4px;font-family:inherit;padding:0}
+    .gl-back:hover{color:var(--gold)}
+    .gl-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
     .gl-card{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--gray-200);background:#FFFFFF;cursor:zoom-in}
     .gl-card img{width:100%;height:100%;display:block;object-fit:cover;aspect-ratio:4/3;transition:transform .4s ease}
     .gl-card:hover img{transform:scale(1.04)}
@@ -48,17 +70,20 @@
 
 <div class="page-body">
     <div class="inner">
-        <div class="tabs" id="glTabs" style="margin-bottom:24px;">
-            <button class="on" data-cat="전체">전체</button>
-            <button data-cat="주민총회">주민총회</button>
-            <button data-cat="봉사활동">봉사활동</button>
-            <button data-cat="워크숍">워크숍</button>
-            <button data-cat="현장스케치">현장스케치</button>
-            <button data-cat="기타행사">기타행사</button>
+        <div class="gl-section-head">
+            <h2>갤러리방</h2>
+            <button class="gl-viewall" id="glViewAll">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></button>
         </div>
+        <div class="gl-rooms" id="glRooms"></div>
 
-        <div class="gl-result" id="glResult"></div>
-        <div class="gl-gallery" id="glGallery"></div>
+        <div class="gl-detail" id="glDetail">
+            <div class="gl-detail-head">
+                <div class="gl-detail-title" id="glDetailTitle"></div>
+                <button class="gl-back" id="glBack"><i class="fa-solid fa-chevron-left" style="font-size:10px"></i> 갤러리방으로</button>
+            </div>
+            <div class="gl-result" id="glResult"></div>
+            <div class="gl-gallery" id="glGallery"></div>
+        </div>
     </div>
 </div>
 
@@ -69,31 +94,56 @@
 <script>
 (function(){
     var items=MOCK.gallery||[];
-    var curCat='전체';
+    var CATS=[
+        { cat:'주민총회', icon:'fa-solid fa-people-group' },
+        { cat:'봉사활동', icon:'fa-solid fa-hand-holding-heart' },
+        { cat:'워크숍', icon:'fa-solid fa-chalkboard-user' },
+        { cat:'현장스케치', icon:'fa-solid fa-camera-retro' },
+        { cat:'기타행사', icon:'fa-solid fa-calendar-days' }
+    ];
 
-    function render(){
-        var list=curCat==='전체'?items:items.filter(function(it){return it.category===curCat});
-        var el=document.getElementById('glGallery');
-        var resultEl=document.getElementById('glResult');
-        resultEl.innerHTML='총 <strong>'+list.length+'</strong>장';
-        el.innerHTML=list.length?list.map(function(it){
+    function listOf(cat){
+        return cat==='전체'?items:items.filter(function(it){return it.category===cat});
+    }
+
+    function renderRooms(){
+        document.getElementById('glRooms').innerHTML=CATS.map(function(c){
+            var list=listOf(c.cat);
+            var cover=list[0];
+            return '<button class="gl-room" data-cat="'+c.cat+'">'+
+                   '<div class="gl-room-cover">'+(cover?'<img src="'+cover.src+'" alt="'+(cover.alt||c.cat)+'">':'<i class="'+c.icon+'"></i>')+'</div>'+
+                   '<div class="gl-room-info"><div class="gl-room-title">'+c.cat+'</div><div class="gl-room-count">사진 '+list.length+'장</div></div>'+
+                   '</button>';
+        }).join('');
+    }
+
+    function openDetail(cat){
+        var list=listOf(cat);
+        document.getElementById('glDetailTitle').textContent=cat==='전체'?'전체 사진':cat;
+        document.getElementById('glResult').innerHTML='총 <strong>'+list.length+'</strong>장';
+        document.getElementById('glGallery').innerHTML=list.length?list.map(function(it){
             return '<a class="gl-card" href="'+it.src+'" target="_blank" rel="noopener" title="원본 보기">'+
                    '<img src="'+it.src+'" alt="'+(it.alt||it.title||'')+'" loading="lazy" onerror="this.closest(\'.gl-card\').style.display=\'none\'">'+
                    '<div class="gl-cap"><div class="gl-cap-name">'+(it.title||'')+'</div>'+(it.cap?'<div class="gl-cap-desc">'+it.cap+'</div>':'')+'</div>'+
                    '</a>';
         }).join(''):'<div class="gl-empty">등록된 사진이 없습니다.</div>';
+        var detail=document.getElementById('glDetail');
+        detail.classList.add('show');
+        detail.scrollIntoView({behavior:'smooth',block:'start'});
     }
 
-    document.getElementById('glTabs').addEventListener('click', function(e){
-        var btn=e.target.closest('button');
+    document.getElementById('glRooms').addEventListener('click', function(e){
+        var btn=e.target.closest('.gl-room');
         if(!btn) return;
-        document.querySelectorAll('#glTabs button').forEach(function(b){b.classList.remove('on')});
-        btn.classList.add('on');
-        curCat=btn.dataset.cat;
-        render();
+        openDetail(btn.dataset.cat);
+    });
+    document.getElementById('glViewAll').addEventListener('click', function(){ openDetail('전체') });
+    document.getElementById('glBack').addEventListener('click', function(){
+        document.getElementById('glDetail').classList.remove('show');
+        document.getElementById('glRooms').scrollIntoView({behavior:'smooth',block:'start'});
     });
 
-    render();
+    renderRooms();
 })();
 </script>
 </body>
