@@ -10,47 +10,67 @@
     <meta name="theme-color" content="#FFFFFF">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>갤러리 — (주)빛세움</title>
-    <meta name="description" content="(주)빛세움 주민총회·봉사활동·워크숍·현장스케치·기타행사 사진을 확인하세요.">
+    <meta name="description" content="(주)빛세움 주민총회·봉사활동·워크숍·현장스케치·기타행사 소식과 사진을 확인하세요.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260829e">
     <style>
-    /* 갤러리방 (카테고리 카드) — 한 줄 5개 */
-    .gl-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-    .gl-section-head h2{font-size:18px;font-weight:800;color:var(--gray-900)}
-    .gl-viewall{font-size:13px;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:4px;cursor:pointer;background:none;border:none;font-family:inherit;padding:0}
-    .gl-rooms{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:40px}
-    .gl-room{display:flex;flex-direction:column;text-align:left;background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .25s;padding:0;font-family:inherit}
-    .gl-room:hover{border-color:var(--gold);box-shadow:0 8px 20px rgba(0,0,0,.08);transform:translateY(-2px)}
-    .gl-room-cover{aspect-ratio:4/3;background:linear-gradient(135deg,#FFF7DF,#FFFDF7);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:30px;overflow:hidden}
-    .gl-room-cover img{width:100%;height:100%;object-fit:cover;display:block}
-    .gl-room-info{padding:14px 14px 16px}
-    .gl-room-title{font-size:14.5px;font-weight:800;color:var(--gray-900);margin-bottom:4px}
-    .gl-room-count{font-size:12px;color:var(--gray-400)}
-    @media(max-width:960px){.gl-rooms{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:600px){.gl-rooms{grid-template-columns:repeat(2,1fr);gap:10px}.gl-room-info{padding:10px 10px 12px}.gl-room-title{font-size:13px}}
-
-    /* 갤러리방 상세 (사진 목록) */
-    .gl-detail{display:none;padding-top:24px;border-top:1px solid var(--gray-100)}
-    .gl-detail.show{display:block}
-    .gl-detail-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-    .gl-detail-title{font-size:17px;font-weight:800;color:var(--gray-900)}
-    .gl-back{font-size:12.5px;color:var(--gray-500);cursor:pointer;background:none;border:none;display:inline-flex;align-items:center;gap:4px;font-family:inherit;padding:0}
-    .gl-back:hover{color:var(--gold)}
-    .gl-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-    .gl-card{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--gray-200);background:#FFFFFF;cursor:zoom-in}
-    .gl-card img{width:100%;height:100%;display:block;object-fit:cover;aspect-ratio:4/3;transition:transform .4s ease}
-    .gl-card:hover img{transform:scale(1.04)}
-    .gl-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0) 55%,rgba(255,255,255,.7) 100%);pointer-events:none}
-    .gl-cap{position:absolute;left:14px;right:14px;bottom:12px;z-index:2;color:#0A0F1C;text-shadow:0 1px 4px rgba(0,0,0,.6)}
-    .gl-cap-name{font-size:12.5px;font-weight:800;line-height:1.4;letter-spacing:.2px}
-    .gl-cap-desc{font-size:11.5px;font-weight:600;line-height:1.4;opacity:.85;margin-top:2px}
-    .gl-empty{padding:60px 0;text-align:center;color:var(--gray-400);font-size:14px}
-    .gl-result{font-size:14px;color:var(--gray-400);margin-bottom:16px}
+    .gl-section{margin-bottom:40px}
+    .gl-section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px}
+    .gl-section-head h2{font-size:17px;font-weight:800;color:var(--gray-900);display:flex;align-items:center;gap:8px}
+    .gl-section-head h2 i{color:var(--gold);font-size:15px}
+    .gl-section-sub{font-size:12px;color:var(--gray-400);font-weight:500}
+    .gl-result{font-size:13px;color:var(--gray-400)}
     .gl-result strong{color:var(--gray-900)}
-    @media(max-width:600px){.gl-gallery{grid-template-columns:1fr 1fr;gap:10px}.gl-card img{aspect-ratio:4/3}}
+
+    /* 탭 메뉴 — 히어로 바로 아래 */
+    .gl-tabs-wrap{padding-top:4px;margin-bottom:32px}
+
+    /* 게시물 카드 (인기 5개 / 전체 그리드 공용) */
+    .gl-row5{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+    @media(max-width:1024px){.gl-row5{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.gl-row5{grid-template-columns:repeat(2,1fr);gap:10px}}
+
+    .gp-card{display:flex;flex-direction:column;text-align:left;background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .25s;padding:0;font-family:inherit}
+    .gp-card:hover{border-color:var(--gold);box-shadow:0 8px 20px rgba(0,0,0,.08);transform:translateY(-2px)}
+    .gp-card.active{border-color:var(--gold);box-shadow:0 0 0 2px rgba(184,134,11,.25)}
+    .gp-img{aspect-ratio:4/3;background:linear-gradient(135deg,#FFF7DF,#FFFDF7);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:26px;overflow:hidden}
+    .gp-img img{width:100%;height:100%;object-fit:cover;display:block}
+    .gp-body{padding:12px 13px 14px}
+    .gp-cat{font-size:10.5px;font-weight:700;color:var(--gold);margin-bottom:4px}
+    .gp-title{font-size:13.5px;font-weight:800;color:var(--gray-900);line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .gp-meta{display:flex;align-items:center;justify-content:space-between;font-size:10.5px;color:var(--gray-400)}
+    .gp-meta .views{display:flex;align-items:center;gap:3px}
+    @media(max-width:600px){.gp-body{padding:9px 10px 11px}.gp-title{font-size:12.5px}}
+
+    .gl-empty{padding:56px 20px;text-align:center;color:var(--gray-400);grid-column:1/-1}
+    .gl-empty i{font-size:36px;color:var(--gray-300);margin-bottom:12px;display:block}
+    .gl-empty p{font-size:13.5px}
+
+    /* 페이지네이션 */
+    .pager-wrap{display:flex;align-items:center;justify-content:center;margin-top:32px}
+    .pager{display:flex;align-items:center;gap:4px}
+    .pager button{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--gray-200);border-radius:9px;background:#fff;color:var(--gray-600);font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
+    .pager button:hover{border-color:var(--gold);color:var(--brand-dark);background:rgba(184,134,11,.04)}
+    .pager button.active{color:var(--gold);border-color:var(--brand-dark);box-shadow:0 2px 8px rgba(10,15,28,.12)}
+    .pager button.arr{color:var(--gray-400);font-size:12px}
+    .pager button:disabled{opacity:.25;cursor:default;pointer-events:none}
+
+    /* 상세 보기 패널 — 클릭 시 아래에 자연스럽게 펼쳐짐 */
+    .gl-detail{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,opacity .3s ease;margin-top:0}
+    .gl-detail.show{max-height:2400px;opacity:1;margin-top:32px}
+    .gl-detail-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:16px;padding:28px;position:relative}
+    .gl-detail-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:9px;border:1.5px solid var(--gray-200);background:#fff;color:var(--gray-500);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .gl-detail-close:hover{border-color:var(--gold);color:var(--gold)}
+    .gl-detail-cat{font-size:12px;font-weight:700;color:var(--gold);margin-bottom:8px}
+    .gl-detail-title{font-size:20px;font-weight:800;color:var(--gray-900);line-height:1.4;margin-bottom:10px;padding-right:40px}
+    .gl-detail-meta{display:flex;gap:14px;font-size:12.5px;color:var(--gray-400);margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--gray-100)}
+    .gl-detail-meta span{display:flex;align-items:center;gap:5px}
+    .gl-detail-photo{width:100%;border-radius:12px;overflow:hidden;margin-bottom:20px;background:var(--gray-50)}
+    .gl-detail-photo img{width:100%;display:block;max-height:520px;object-fit:cover}
+    .gl-detail-content{font-size:14.5px;line-height:1.85;color:var(--gray-700);white-space:pre-line}
     </style>
 </head>
 <body>
@@ -70,20 +90,53 @@
 
 <div class="page-body">
     <div class="inner">
-        <div class="gl-section-head">
-            <h2>갤러리방</h2>
-            <button class="gl-viewall" id="glViewAll">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></button>
-        </div>
-        <div class="gl-rooms" id="glRooms"></div>
 
-        <div class="gl-detail" id="glDetail">
-            <div class="gl-detail-head">
-                <div class="gl-detail-title" id="glDetailTitle"></div>
-                <button class="gl-back" id="glBack"><i class="fa-solid fa-chevron-left" style="font-size:10px"></i> 갤러리방으로</button>
+        <!-- 탭 메뉴 (히어로 바로 아래) -->
+        <div class="gl-tabs-wrap">
+            <div class="tabs" id="glTabs">
+                <button class="on" data-cat="전체">전체</button>
+                <button data-cat="주민총회">주민총회</button>
+                <button data-cat="봉사활동">봉사활동</button>
+                <button data-cat="워크숍">워크숍</button>
+                <button data-cat="현장스케치">현장스케치</button>
+                <button data-cat="기타행사">기타행사</button>
             </div>
-            <div class="gl-result" id="glResult"></div>
-            <div class="gl-gallery" id="glGallery"></div>
         </div>
+
+        <!-- 인기 게시물 (조회수 TOP5, 상시 노출) -->
+        <div class="gl-section" id="glPopularSection">
+            <div class="gl-section-head">
+                <h2><i class="fa-solid fa-fire"></i> 인기 게시물</h2>
+                <span class="gl-section-sub">조회수 TOP 5</span>
+            </div>
+            <div class="gl-row5" id="glPopular"></div>
+        </div>
+
+        <!-- 전체 게시물 (5×3 그리드 + 페이지네이션) -->
+        <div class="gl-section">
+            <div class="gl-section-head">
+                <h2 id="glGridTitle">전체 게시물</h2>
+                <div class="gl-result" id="glResult"></div>
+            </div>
+            <div class="gl-row5" id="glGrid"></div>
+            <div class="pager-wrap"><div class="pager" id="glPager"></div></div>
+        </div>
+
+        <!-- 상세 보기 -->
+        <div class="gl-detail" id="glDetail">
+            <div class="gl-detail-card">
+                <button class="gl-detail-close" id="glDetailClose"><i class="fa-solid fa-xmark"></i></button>
+                <div class="gl-detail-cat" id="glDCat"></div>
+                <div class="gl-detail-title" id="glDTitle"></div>
+                <div class="gl-detail-meta">
+                    <span><i class="fa-regular fa-calendar"></i> <span id="glDDate"></span></span>
+                    <span><i class="fa-regular fa-eye"></i> <span id="glDViews"></span></span>
+                </div>
+                <div class="gl-detail-photo" id="glDPhoto"></div>
+                <div class="gl-detail-content" id="glDContent"></div>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -93,57 +146,117 @@
 <script src="../assets/js/common.js?v=20260829h"></script>
 <script>
 (function(){
-    var items=MOCK.gallery||[];
-    var CATS=[
-        { cat:'주민총회', icon:'fa-solid fa-people-group' },
-        { cat:'봉사활동', icon:'fa-solid fa-hand-holding-heart' },
-        { cat:'워크숍', icon:'fa-solid fa-chalkboard-user' },
-        { cat:'현장스케치', icon:'fa-solid fa-camera-retro' },
-        { cat:'기타행사', icon:'fa-solid fa-calendar-days' }
-    ];
+    var ICONS={ '주민총회':'fa-solid fa-people-group', '봉사활동':'fa-solid fa-hand-holding-heart',
+                '워크숍':'fa-solid fa-chalkboard-user', '현장스케치':'fa-solid fa-camera-retro', '기타행사':'fa-solid fa-calendar-days' };
+    var items=(MOCK.gallery||[]).slice();
+    var curCat='전체';
+    var curPage=1;
+    var PER=15; /* 가로 5 × 세로 3 */
+    var PAGE_WIN=8;
 
-    function listOf(cat){
-        return cat==='전체'?items:items.filter(function(it){return it.category===cat});
+    /* 브라우저 로컬 조회수 (자료실과 동일 방식) */
+    function getViews(){ try{ return JSON.parse(localStorage.getItem('seul_gallery_views')||'{}') }catch(e){ return {} } }
+    function addView(id){ var v=getViews(); v[id]=(v[id]||0)+1; try{ localStorage.setItem('seul_gallery_views',JSON.stringify(v)) }catch(e){} return v[id]; }
+    function viewsOf(it){ return (it.views||0) + (getViews()[it.id]||0); }
+
+    function listOf(cat){ return cat==='전체' ? items : items.filter(function(it){ return it.category===cat }); }
+
+    function cardHTML(it){
+        var icon=ICONS[it.category]||'fa-solid fa-image';
+        return '<button class="gp-card" data-id="'+it.id+'">'+
+               '<div class="gp-img">'+(it.src?'<img src="'+it.src+'" alt="'+(it.alt||it.title||'')+'" loading="lazy">':'<i class="'+icon+'"></i>')+'</div>'+
+               '<div class="gp-body">'+
+               '<div class="gp-cat">'+it.category+'</div>'+
+               '<div class="gp-title">'+(it.title||'')+'</div>'+
+               '<div class="gp-meta"><span>'+(it.date||'')+'</span><span class="views"><i class="fa-regular fa-eye"></i> '+viewsOf(it)+'</span></div>'+
+               '</div></button>';
     }
 
-    function renderRooms(){
-        document.getElementById('glRooms').innerHTML=CATS.map(function(c){
-            var list=listOf(c.cat);
-            var cover=list[0];
-            return '<button class="gl-room" data-cat="'+c.cat+'">'+
-                   '<div class="gl-room-cover">'+(cover?'<img src="'+cover.src+'" alt="'+(cover.alt||c.cat)+'">':'<i class="'+c.icon+'"></i>')+'</div>'+
-                   '<div class="gl-room-info"><div class="gl-room-title">'+c.cat+'</div><div class="gl-room-count">사진 '+list.length+'장</div></div>'+
-                   '</button>';
-        }).join('');
+    function renderPopular(){
+        var section=document.getElementById('glPopularSection');
+        if(!items.length){ section.style.display='none'; return; }
+        section.style.display='';
+        var top5=items.slice().sort(function(a,b){ return viewsOf(b)-viewsOf(a) }).slice(0,5);
+        document.getElementById('glPopular').innerHTML=top5.map(cardHTML).join('');
     }
 
-    function openDetail(cat){
-        var list=listOf(cat);
-        document.getElementById('glDetailTitle').textContent=cat==='전체'?'전체 사진':cat;
-        document.getElementById('glResult').innerHTML='총 <strong>'+list.length+'</strong>장';
-        document.getElementById('glGallery').innerHTML=list.length?list.map(function(it){
-            return '<a class="gl-card" href="'+it.src+'" target="_blank" rel="noopener" title="원본 보기">'+
-                   '<img src="'+it.src+'" alt="'+(it.alt||it.title||'')+'" loading="lazy" onerror="this.closest(\'.gl-card\').style.display=\'none\'">'+
-                   '<div class="gl-cap"><div class="gl-cap-name">'+(it.title||'')+'</div>'+(it.cap?'<div class="gl-cap-desc">'+it.cap+'</div>':'')+'</div>'+
-                   '</a>';
-        }).join(''):'<div class="gl-empty">등록된 사진이 없습니다.</div>';
+    function renderPager(totalPages){
+        var el=document.getElementById('glPager');
+        if(totalPages<=1){ el.innerHTML=''; return; }
+        var winStart=Math.floor((curPage-1)/PAGE_WIN)*PAGE_WIN+1;
+        var winEnd=Math.min(winStart+PAGE_WIN-1, totalPages);
+        var h='<button class="arr" data-p="'+(curPage-1)+'" '+(curPage===1?'disabled':'')+'><i class="fa-solid fa-chevron-left"></i></button>';
+        for(var i=winStart;i<=winEnd;i++){ h+='<button'+(i===curPage?' class="active"':'')+' data-p="'+i+'">'+i+'</button>'; }
+        h+='<button class="arr" data-p="'+(curPage+1)+'" '+(curPage===totalPages?'disabled':'')+'><i class="fa-solid fa-chevron-right"></i></button>';
+        el.innerHTML=h;
+    }
+
+    function renderGrid(){
+        document.getElementById('glGridTitle').textContent=curCat==='전체'?'전체 게시물':curCat;
+        var list=listOf(curCat);
+        var totalPages=Math.max(1, Math.ceil(list.length/PER));
+        if(curPage>totalPages) curPage=totalPages;
+        document.getElementById('glResult').innerHTML='총 <strong>'+list.length+'</strong>건';
+        var gridEl=document.getElementById('glGrid');
+        if(!list.length){
+            gridEl.innerHTML='<div class="gl-empty"><i class="fa-regular fa-images"></i><p>등록된 게시물이 없습니다.</p></div>';
+        }else{
+            var start=(curPage-1)*PER;
+            gridEl.innerHTML=list.slice(start,start+PER).map(cardHTML).join('');
+        }
+        renderPager(totalPages);
+    }
+
+    function openDetail(id){
+        var it=items.find(function(x){ return x.id===id });
+        if(!it) return;
+        addView(id);
+        document.getElementById('glDCat').textContent=it.category;
+        document.getElementById('glDTitle').textContent=it.title||'';
+        document.getElementById('glDDate').textContent=it.date||'';
+        document.getElementById('glDViews').textContent='조회 '+viewsOf(it);
+        var photoEl=document.getElementById('glDPhoto');
+        photoEl.innerHTML=it.src?'<img src="'+it.src+'" alt="'+(it.alt||it.title||'')+'">':'';
+        photoEl.style.display=it.src?'':'none';
+        document.getElementById('glDContent').textContent=it.content||'';
         var detail=document.getElementById('glDetail');
         detail.classList.add('show');
-        detail.scrollIntoView({behavior:'smooth',block:'start'});
+        renderPopular();
+        renderGrid();
+        detail.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
 
-    document.getElementById('glRooms').addEventListener('click', function(e){
-        var btn=e.target.closest('.gl-room');
-        if(!btn) return;
-        openDetail(btn.dataset.cat);
-    });
-    document.getElementById('glViewAll').addEventListener('click', function(){ openDetail('전체') });
-    document.getElementById('glBack').addEventListener('click', function(){
+    function closeDetail(){
         document.getElementById('glDetail').classList.remove('show');
-        document.getElementById('glRooms').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    document.getElementById('glTabs').addEventListener('click', function(e){
+        var btn=e.target.closest('button'); if(!btn) return;
+        document.querySelectorAll('#glTabs button').forEach(function(b){ b.classList.remove('on') });
+        btn.classList.add('on');
+        curCat=btn.dataset.cat; curPage=1;
+        closeDetail();
+        renderGrid();
     });
 
-    renderRooms();
+    document.getElementById('glPopular').addEventListener('click', function(e){
+        var btn=e.target.closest('.gp-card'); if(!btn) return;
+        openDetail(btn.dataset.id);
+    });
+    document.getElementById('glGrid').addEventListener('click', function(e){
+        var btn=e.target.closest('.gp-card'); if(!btn) return;
+        openDetail(btn.dataset.id);
+    });
+    document.getElementById('glPager').addEventListener('click', function(e){
+        var btn=e.target.closest('button[data-p]'); if(!btn || btn.disabled) return;
+        curPage=parseInt(btn.dataset.p,10);
+        renderGrid();
+        document.getElementById('glGridTitle').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    document.getElementById('glDetailClose').addEventListener('click', closeDetail);
+
+    renderPopular();
+    renderGrid();
 })();
 </script>
 </body>

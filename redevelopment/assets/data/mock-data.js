@@ -1275,7 +1275,9 @@ const MOCK = {
 
   /* ──────────────────────────── 갤러리 ────────────────────────────
      category: '주민총회' | '봉사활동' | '워크숍' | '현장스케치' | '기타행사'
-     각 항목: { id, category, title, src, alt, cap, date } */
+     각 항목: { id, category, title, content, src, alt, date, views }
+     - content: 상세 패널에 표시되는 본문 텍스트
+     - views: 초기 조회수(선택, 미입력 시 0) — 실제 조회수는 브라우저 localStorage(seul_gallery_views) 누적분을 더해 표시 */
   gallery: [
 
   ],
