@@ -208,8 +208,8 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
 }
 .logo-mark { flex-shrink: 0; width: 36px; height: 36px; }
 .logo-mark svg { width: 100%; height: 100%; }
-.header .logo-mark { width: 99.9px; height: 41.85px; } /* 상단 헤더 로고 — 1.5배 확대 */
-.header .logo { margin-left: -4px; } /* 로고를 안쪽으로 약간 이동 */
+.header .logo-mark { width: 119.88px; height: 50.22px; } /* 상단 헤더 로고 — 1.5배 확대 후 1.2배 추가 확대 */
+.header .logo { margin-left: -2px; } /* 로고를 안쪽으로 약간 이동, +2px 우측 이동 */
 .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
 .logo-company {
   font-size: 16px; font-weight: 800; letter-spacing: -0.3px;
