@@ -49,7 +49,8 @@
 <div class="page-body">
     <div class="inner">
         <div class="tabs" id="glTabs" style="margin-bottom:24px;">
-            <button class="on" data-cat="주민총회">주민총회</button>
+            <button class="on" data-cat="전체">전체</button>
+            <button data-cat="주민총회">주민총회</button>
             <button data-cat="봉사활동">봉사활동</button>
             <button data-cat="워크숍">워크숍</button>
             <button data-cat="현장스케치">현장스케치</button>
@@ -68,10 +69,10 @@
 <script>
 (function(){
     var items=MOCK.gallery||[];
-    var curCat='주민총회';
+    var curCat='전체';
 
     function render(){
-        var list=items.filter(function(it){return it.category===curCat});
+        var list=curCat==='전체'?items:items.filter(function(it){return it.category===curCat});
         var el=document.getElementById('glGallery');
         var resultEl=document.getElementById('glResult');
         resultEl.innerHTML='총 <strong>'+list.length+'</strong>장';
