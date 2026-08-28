@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#FFFFFF">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>갤러리 — (주)빛세움</title>
-    <meta name="description" content="(주)빛세움이 수행한 정비사업 현장의 조감도·배치도·준공 사진을 확인하세요.">
+    <meta name="description" content="(주)빛세움 주민총회·봉사활동·워크숍·현장스케치·기타행사 사진을 확인하세요.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
@@ -42,17 +42,18 @@
             <span>갤러리</span>
         </div>
         <h1>갤러리</h1>
-        <p>(주)빛세움이 수행한 정비사업 현장의 조감도·배치도·준공 사진을 만나보세요</p>
+        <p>(주)빛세움의 주민총회·봉사활동·워크숍·현장스케치·기타행사 소식을 만나보세요</p>
     </div>
 </div>
 
 <div class="page-body">
     <div class="inner">
         <div class="tabs" id="glTabs" style="margin-bottom:24px;">
-            <button class="on" data-type="전체">전체</button>
-            <button data-type="재개발">재개발</button>
-            <button data-type="재건축">재건축</button>
-            <button data-type="소규모정비">소규모정비</button>
+            <button class="on" data-cat="주민총회">주민총회</button>
+            <button data-cat="봉사활동">봉사활동</button>
+            <button data-cat="워크숍">워크숍</button>
+            <button data-cat="현장스케치">현장스케치</button>
+            <button data-cat="기타행사">기타행사</button>
         </div>
 
         <div class="gl-result" id="glResult"></div>
@@ -61,29 +62,23 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260829d"></script>
+<script src="../assets/data/mock-data.js?v=20260829e"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260829h"></script>
 <script>
 (function(){
-    var items=[];
-    (MOCK.portfolio||[]).forEach(function(p){
-        (p.gallery||[]).forEach(function(g){
-            items.push({ type:p.type, name:p.name, src:g.src, alt:g.alt||p.name, cap:g.cap||'' });
-        });
-    });
-
-    var curType='전체';
+    var items=MOCK.gallery||[];
+    var curCat='주민총회';
 
     function render(){
-        var list=curType==='전체'?items:items.filter(function(it){return it.type===curType});
+        var list=items.filter(function(it){return it.category===curCat});
         var el=document.getElementById('glGallery');
         var resultEl=document.getElementById('glResult');
         resultEl.innerHTML='총 <strong>'+list.length+'</strong>장';
         el.innerHTML=list.length?list.map(function(it){
             return '<a class="gl-card" href="'+it.src+'" target="_blank" rel="noopener" title="원본 보기">'+
-                   '<img src="'+it.src+'" alt="'+it.alt+'" loading="lazy" onerror="this.closest(\'.gl-card\').style.display=\'none\'">'+
-                   '<div class="gl-cap"><div class="gl-cap-name">'+it.name+'</div>'+(it.cap?'<div class="gl-cap-desc">'+it.cap+'</div>':'')+'</div>'+
+                   '<img src="'+it.src+'" alt="'+(it.alt||it.title||'')+'" loading="lazy" onerror="this.closest(\'.gl-card\').style.display=\'none\'">'+
+                   '<div class="gl-cap"><div class="gl-cap-name">'+(it.title||'')+'</div>'+(it.cap?'<div class="gl-cap-desc">'+it.cap+'</div>':'')+'</div>'+
                    '</a>';
         }).join(''):'<div class="gl-empty">등록된 사진이 없습니다.</div>';
     }
@@ -93,7 +88,7 @@
         if(!btn) return;
         document.querySelectorAll('#glTabs button').forEach(function(b){b.classList.remove('on')});
         btn.classList.add('on');
-        curType=btn.dataset.type;
+        curCat=btn.dataset.cat;
         render();
     });
 
