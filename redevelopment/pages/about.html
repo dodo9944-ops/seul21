@@ -607,9 +607,13 @@
         font-size: 18px; font-weight: 900; letter-spacing: -0.2px;
     }
     .org-line-v { width: 1px; height: 30px; background: linear-gradient(180deg, rgba(197,139,0,.55), rgba(197,139,0,.15)); }
-    .org-aux-branch { width: 100%; display: flex; flex-direction: column; align-items: center; }
-    .org-aux-branch-h { width: calc(min(640px, 88%) - 250px); height: 1px; background: rgba(197,139,0,.5); }
-    .org-aux-row { display: flex; justify-content: space-between; width: min(640px, 88%); margin-top: 22px; margin-bottom: 30px; }
+    .org-aux-branch { width: 100%; display: flex; flex-direction: column; align-items: center; position: relative; }
+    .org-aux-branch::after {
+        content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+        background: rgba(197,139,0,.5); transform: translateX(-50%); z-index: 0;
+    }
+    .org-aux-branch-h { width: calc(min(640px, 88%) - 250px); height: 1px; background: rgba(197,139,0,.5); position: relative; z-index: 1; }
+    .org-aux-row { display: flex; justify-content: space-between; width: min(640px, 88%); margin-top: 22px; margin-bottom: 30px; position: relative; z-index: 1; }
     .org-aux-box {
         background: var(--white);
         border: 1px solid var(--gray-200);
