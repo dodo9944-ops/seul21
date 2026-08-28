@@ -408,6 +408,7 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
    FOOTER MAIN
    ══════════════════════════════════════════════════════════ */
 .footer {
+  border-top: 1px solid var(--gray-200);
   background:
     radial-gradient(
       ellipse at 50% 60%,
