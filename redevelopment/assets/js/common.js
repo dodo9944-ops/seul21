@@ -157,7 +157,6 @@ const App = (() => {
             </span>
           </div>
           <p>재개발·재건축·소규모정비사업<br>도시정비 종합 엔지니어링 전문그룹</p>
-          <p>평일 09:00 – 18:00<br>(토·일·공휴일 휴무)</p>
           <div class="footer-bottom-left" style="margin-top:8px;margin-bottom:0">
             <a href="${B}/pages/privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
             <div class="footer-copy">&copy; 2026 (주)빛세움. All rights reserved.</div>
