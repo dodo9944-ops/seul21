@@ -618,11 +618,6 @@ const App = (() => {
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
   if (!location.pathname.includes('/admin/') && !location.pathname.includes('/intranet/')) {
-    const b = App.basePath();
-    const s = document.createElement('script');
-    s.src = b + '/assets/js/chatbot.js?v=20260418nq1';
-    document.body.appendChild(s);
-
     /* 텍스트 복사 금지 + 이미지 다운로드 금지 — 임시 해제 (2026-04-19) */
     // document.addEventListener('copy', e => e.preventDefault());
     // document.addEventListener('selectstart', e => { if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault(); });
