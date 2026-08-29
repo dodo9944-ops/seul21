@@ -306,7 +306,15 @@
     renderGrid();
 
     var qid=new URLSearchParams(location.search).get('id');
-    if(qid && items.some(function(it){ return it.id===qid })) openDetail(qid);
+    if(qid && items.some(function(it){ return it.id===qid })){
+        openDetail(qid);
+        /* 메인화면 등 외부에서 특정 게시물로 바로 들어온 경우, 목록이 먼저 보이지 않도록
+           펼침 애니메이션을 건너뛰고 즉시 해당 게시물 위치로 스크롤 */
+        var dEl=document.getElementById('glDetail');
+        dEl.style.transition='none';
+        dEl.scrollIntoView({block:'start'});
+        requestAnimationFrame(function(){ requestAnimationFrame(function(){ dEl.style.transition=''; }); });
+    }
 })();
 </script>
 </body>
