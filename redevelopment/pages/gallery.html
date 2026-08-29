@@ -288,6 +288,9 @@
     document.getElementById('glDetailClose').addEventListener('click', closeDetail);
 
     renderGrid();
+
+    var qid=new URLSearchParams(location.search).get('id');
+    if(qid && items.some(function(it){ return it.id===qid })) openDetail(qid);
 })();
 </script>
 </body>

@@ -422,7 +422,8 @@
         }
         .news-item:last-child { border-bottom: none; }
         .news-item:hover { background: rgba(255,196,0,.025); }
-        .news-thumb { width: 72px; height: 52px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #C58B00; background: #FFFFFF; }
+        .news-thumb { width: 72px; height: 52px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #C58B00; background: #FFFFFF; overflow: hidden; }
+        .news-thumb img { width: 100%; height: 100%; object-fit: cover; }
         .news-body { min-width: 0; }
         .news-body h4 {
             font-size: 15px;
@@ -437,26 +438,6 @@
         }
         .news-body h4:hover { color: #C58B00; }
         .news-date { font-size: 13px; color: #9A9DA2; }
-
-        /* ── COMMUNITY ITEMS (메인 전용 인라인) ── */
-        .comm-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 24px;
-            border-bottom: 1px solid var(--gray-100);
-            transition: background var(--transition);
-        }
-        .comm-item:last-child { border-bottom: none; }
-        .comm-item:hover { background: var(--gray-50); }
-        .comm-title {
-            flex: 1;
-            font-size: 15px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .comm-cat { font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 4px; background: rgba(197,139,0,0.1); color: #C58B00; flex-shrink: 0; }
 
         /* ── PROCESS STEPS ── */
         .process-bar {
@@ -977,7 +958,7 @@
             <div class="panel">
                 <div class="panel-head">
                     <h3 class="panel-title">갤러리</h3>
-                    <a href="pages/library.html?cat=갤러리" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+                    <a href="pages/gallery.html" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
                 </div>
                 <div id="mainCommunity"></div>
             </div>
@@ -1368,24 +1349,27 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         }).join('');
     }
 
-    /* 갤러리: 최신 3건 */
-    var cmEl=document.getElementById('mainCommunity');
-    function renderCommunity(posts){
-        if(!cmEl||!posts||!posts.length)return;
-        posts.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')});
-        cmEl.innerHTML=posts.slice(0,3).map(function(p){
-            var ago='';
-            if(p.date){var diff=Date.now()-new Date(p.date).getTime();var h=Math.floor(diff/36e5);ago=h<1?'방금':h<24?h+'시간 전':Math.floor(h/24)+'일 전'}
-            return'<div class="comm-item">'+
-                '<span class="comm-cat">'+p.category+'</span>'+
-                '<a href="pages/community-detail.html?id='+p.id+'" class="comm-title">'+p.title+'</a>'+
-                (p.comments>0?'<span class="comm-cnt">['+p.comments+']</span>':'')+
-                '<span class="comm-time">'+ago+'</span></div>';
+    /* 갤러리: 자료실 갤러리(MOCK.gallery) 연동 — 최신 3건 */
+    var galEl=document.getElementById('mainCommunity');
+    if(galEl && MOCK.gallery){
+        window.mainGalleryOpen=function(id){
+            location.href='pages/gallery.html?id='+encodeURIComponent(id);
+        };
+        function galSummary(t){
+            t=(t||'').replace(/\s+/g,' ').trim();
+            return t.length>44?t.slice(0,44)+'…':t;
+        }
+        var gals=MOCK.gallery.slice().sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
+        galEl.innerHTML=gals.map(function(g){
+            var cover=(g.images&&g.images.length)?g.images[0]:null;
+            var coverSrc=cover?cover.src.replace(/^\.\.\//,''):'';
+            var thumb=cover?'<img src="'+coverSrc+'" alt="'+(cover.alt||g.title||'')+'" loading="lazy">':'<i class="fa-solid fa-image"></i>';
+            return'<div class="news-item" style="cursor:pointer" onclick="mainGalleryOpen(\''+g.id+'\')">'+
+                '<div class="news-thumb">'+thumb+'</div>'+
+                '<div class="news-body"><h4>'+g.title+'</h4>'+
+                '<div class="news-date">'+galSummary(g.content)+'</div></div></div>';
         }).join('');
     }
-    if(cmEl && MOCK.community) renderCommunity(MOCK.community);
-    /* API에서 최신 커뮤니티 글 가져오기 */
-    if(cmEl){fetch('/api/community').then(function(r){return r.json()}).then(function(res){if(res.posts&&res.posts.length)renderCommunity(res.posts)}).catch(function(){})}
 })();
 </script>
 <!-- 메인 포트폴리오 상세 모달 JS -->
