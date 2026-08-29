@@ -75,10 +75,9 @@
     <div class="inner">
         <div class="tabs" id="noticeTabs" style="margin-bottom:24px;">
             <button data-cat="전체">전체</button>
-            <button data-cat="수주">수주</button>
-            <button data-cat="외부">외부</button>
-            <button data-cat="내부">내부</button>
-            <button data-cat="기타">기타</button>
+            <button data-cat="수주소식">수주소식</button>
+            <button data-cat="회사소식">회사소식</button>
+            <button data-cat="기타소식">기타소식</button>
         </div>
         <div class="tbl-wrap">
             <table class="tbl">
@@ -97,7 +96,7 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260829v"></script>
+<script src="../assets/data/mock-data.js?v=20260829x"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260829s"></script>
 <script>
@@ -105,13 +104,13 @@
     const notices = DataService.getAll('notices');
     let openId = null;
 
-    const validCats = ['수주', '외부', '내부', '기타'];
+    const validCats = ['수주소식', '회사소식', '기타소식'];
     const params = new URLSearchParams(location.search);
     const catParam = params.get('cat');
     let currentCat = validCats.includes(catParam) ? catParam : '전체';
 
     function noticeCat(n) {
-        return validCats.includes(n.category) ? n.category : '기타';
+        return validCats.includes(n.category) ? n.category : '기타소식';
     }
 
     function render() {
