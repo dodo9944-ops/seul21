@@ -550,7 +550,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 
 /* ── SCROLL TO TOP ── */
 .scroll-top {
-  position: fixed; bottom: 100px; right: 32px;
+  position: fixed; bottom: 100px; right: 48px;
   width: 48px; height: 48px; border-radius: 50%;
   background: var(--white); border: 1px solid var(--gray-200);
   color: var(--gray-700); font-size: 18px;
@@ -561,7 +561,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .scroll-top.visible { opacity: 1; pointer-events: auto; }
 .scroll-top:hover { background: #FFFFFF; color: var(--gold); border-color: var(--brand-dark); }
 @media (max-width: 768px) {
-  .scroll-top { width: 40px; height: 40px; font-size: 15px; bottom: 64px; right: 16px; }
+  .scroll-top { width: 40px; height: 40px; font-size: 15px; bottom: 64px; right: 32px; }
 }
 
 /* ── PAGE LAYOUT ── */
@@ -1115,7 +1115,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   .mobile-bottom-nav { display: block; }
   .page-body { padding-bottom: calc(52px + env(safe-area-inset-bottom, 0px)) !important; }
   .footer { padding-bottom: calc(46px + env(safe-area-inset-bottom, 0px)); }
-  .scroll-top { bottom: calc(96px + env(safe-area-inset-bottom, 0px)); right: 16px; background: rgba(255,255,255,0.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .scroll-top { bottom: calc(96px + env(safe-area-inset-bottom, 0px)); right: 32px; background: rgba(255,255,255,0.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 }
 @media (min-width: 769px) {
   .mobile-bottom-nav { display: none !important; }
