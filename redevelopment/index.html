@@ -658,44 +658,22 @@
             .search-section { display: block; }
         }
         /* ══════════════════════════════════════
-           임시 홈페이지 안내 팝업
+           임시 홈페이지 운영 안내 (상시 노출 배너, 팝업 아님)
            ══════════════════════════════════════ */
-        .notice-popup-overlay {
-            position: fixed; inset: 0; z-index: 9998;
-            background: rgba(23,28,38,.55);
-            display: flex; align-items: center; justify-content: center;
-            padding: 20px;
-            opacity: 0; pointer-events: none;
-            transition: opacity .3s ease;
+        .notice-bar {
+            position: relative; z-index: 500;
+            background: #FFFDF7; border-bottom: 3px solid #C58B00;
+            padding: 10px 16px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            text-align: center; flex-wrap: wrap;
         }
-        .notice-popup-overlay.show { opacity: 1; pointer-events: auto; }
-        .notice-popup {
-            position: relative; max-width: 420px; width: 100%;
-            background: #FFFDF7; border-radius: 14px;
-            padding: 36px 30px 28px;
-            box-shadow: 0 24px 60px rgba(23,28,38,.28);
-            border-top: 4px solid #C58B00;
-            text-align: center;
-        }
-        .notice-popup-close {
-            position: absolute; top: 10px; right: 12px;
-            background: none; border: none; font-size: 24px; line-height: 1;
-            color: #92969C; cursor: pointer; padding: 6px;
-        }
-        .notice-popup-close:hover { color: #171C26; }
-        .notice-popup-badge {
-            display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .05em;
+        .notice-bar-badge {
+            display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .05em;
             color: #C58B00; background: #FFF7DF; border-radius: 20px;
-            padding: 4px 14px; margin-bottom: 14px;
+            padding: 3px 12px; flex-shrink: 0;
         }
-        .notice-popup-title { font-size: 19px; font-weight: 800; color: #171C26; margin: 0 0 14px; }
-        .notice-popup-body { font-size: 14.5px; line-height: 1.75; color: #5F646C; margin: 0 0 24px; }
-        .notice-popup-confirm {
-            width: 100%; padding: 13px; border: none; border-radius: 8px;
-            background: #171C26; color: #FFFDF7; font-size: 15px; font-weight: 700;
-            cursor: pointer; transition: background .2s ease;
-        }
-        .notice-popup-confirm:hover { background: #C58B00; }
+        .notice-bar-text { font-size: 13px; line-height: 1.6; color: #5F646C; }
+        .notice-bar-text strong { color: #171C26; }
     </style>
 </head>
 <body class="splash-active is-home">
@@ -716,19 +694,13 @@
     </div>
 </div>
 
-<!-- ═══════════ 임시 홈페이지 안내 팝업 ═══════════ -->
-<div class="notice-popup-overlay" id="noticePopupOverlay">
-    <div class="notice-popup" role="dialog" aria-modal="true" aria-labelledby="noticePopupTitle">
-        <button class="notice-popup-close" id="noticePopupClose" aria-label="닫기">&times;</button>
-        <div class="notice-popup-badge">안내</div>
-        <h3 id="noticePopupTitle" class="notice-popup-title">임시 홈페이지 운영 안내</h3>
-        <p class="notice-popup-body">
-            현재 본 사이트는 <strong>임시 홈페이지</strong>로 운영 중이며,<br>
-            게시된 내용은 어떠한 효력이 없고 법적 책임이 없습니다.<br>
-            (주)빛세움 정식 홈페이지는 <strong>10월 1일</strong> 오픈 예정입니다.
-        </p>
-        <button class="notice-popup-confirm" id="noticePopupConfirm">확인</button>
-    </div>
+<!-- ═══════════ 임시 홈페이지 운영 안내 (상시 노출 배너) ═══════════ -->
+<div class="notice-bar">
+    <span class="notice-bar-badge">안내</span>
+    <span class="notice-bar-text">
+        현재 본 사이트는 <strong>임시 홈페이지</strong>로 운영 중이며, 게시된 내용은 어떠한 효력이 없고 법적 책임이 없습니다.
+        (주)빛세움 정식 홈페이지는 <strong>10월 1일</strong> 오픈 예정입니다.
+    </span>
 </div>
 
 <!-- 공통 헤더 -->
@@ -1220,26 +1192,6 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             document.body.style.overflow = '';
         }
     });
-})();
-</script>
-<script>
-(function(){
-    var ov = document.getElementById('noticePopupOverlay');
-    if(!ov) return;
-    var KEY = 'bitseum_temp_notice_20260829';
-    if(sessionStorage.getItem(KEY)){
-        ov.parentNode.removeChild(ov);
-        return;
-    }
-    function hide(){
-        ov.classList.remove('show');
-        sessionStorage.setItem(KEY, '1');
-    }
-    setTimeout(function(){ ov.classList.add('show'); }, 2400);
-    document.getElementById('noticePopupClose').addEventListener('click', hide);
-    document.getElementById('noticePopupConfirm').addEventListener('click', hide);
-    ov.addEventListener('click', function(e){ if(e.target === ov) hide(); });
-    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hide(); });
 })();
 </script>
 <script>
