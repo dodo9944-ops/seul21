@@ -1054,7 +1054,7 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260829q"></script>
+<script src="assets/data/mock-data.js?v=20260829r"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
 <script src="assets/js/common.js?v=20260829n"></script>
 
@@ -1379,8 +1379,9 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         window.mainGalleryOpen=function(id){
             location.href='pages/gallery.html?id='+encodeURIComponent(id);
         };
-        function galSummary(t){
-            t=(t||'').replace(/\s+/g,' ').trim();
+        function galSummary(g){
+            if(g.excerpt) return g.excerpt;
+            var t=(g.content||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
             return t.length>90?t.slice(0,90)+'…':t;
         }
         var gals=MOCK.gallery.slice().sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
@@ -1391,7 +1392,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             return'<div class="news-item" style="cursor:pointer" onclick="mainGalleryOpen(\''+g.id+'\')">'+
                 '<div class="news-thumb-photo">'+thumb+'</div>'+
                 '<div class="news-body"><h4>'+g.title+'</h4>'+
-                '<div class="news-desc">'+galSummary(g.content)+'</div>'+
+                '<div class="news-desc">'+galSummary(g)+'</div>'+
                 '<div class="news-date">'+g.category+' · '+g.date+'</div></div></div>';
         }).join('');
     }

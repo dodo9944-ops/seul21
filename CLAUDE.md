@@ -888,6 +888,60 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 
 ---
 
+## 🖼 갤러리(활동 소식) 게시물 디자인 지침 (2026-08-29 신설 · 별도 지시 없이 항상 적용)
+
+> **본 지침은 대장의 명시 지시(2026-08-29)로 신설되었으며, 이후 갤러리 게시물을 작성·수정할 때는 별도 지시가 없어도 항상 본 형식을 기본값으로 따른다. 본 지침 신설 시점에 기존 게시물 4건(ws2024_halong, ws2025_taiwan, vol_lottetower, vol_pungnap_orange)도 함께 이 형식으로 전면 재작성했다.**
+
+### 1. 적용 대상
+
+- `redevelopment/assets/data/mock-data.js` → `MOCK.gallery` 배열의 `content` 필드 (봉사활동·워크숍·주민총회·현장스케치·기타행사 등 모든 카테고리)
+- 표시 페이지: `pages/gallery.html` 상세보기(`#glDetail`), 메인화면(`index.html`) 갤러리 미리보기 위젯
+
+### 2. 디자인 근거 — 공지사항 `nt-*` 디자인 시스템 재사용
+
+2026-08-29 "㈜빛세움, 정비업체 5년 매출성장률 8위 기록" 공지(`pages/notice.html`)에서 스크린샷 임베드 대신 도입한 네이티브 통계카드+본문 디자인 시스템(`nt-lead`, `nt-stats`/`nt-stat-card`, `nt-divider`, `nt-source-gallery`/`nt-source-card`/`nt-source-cap`)을 갤러리 게시물에도 동일하게 재사용한다. **클래스명을 그대로 재사용**하여 두 콘텐츠 영역의 디자인이 항상 동일하게 유지되도록 한다(`pages/gallery.html`의 `<style>`에 동일 클래스 정의 보유).
+
+### 3. `content` 필드 작성 구조 (필수 순서)
+
+```html
+<div class="nt-lead">[카테고리] · [한 줄 성격 요약]</div>
+<p>[리드 문단 — 무엇을, 누구와, 왜 했는지 1~2문장]</p>
+<div class="nt-stats">
+  <div class="nt-stat-card"><div class="nt-stat-num">[짧은 값 2~5자]</div><div class="nt-stat-label">[설명 문구]</div></div>
+  <!-- 카드 2~3개, 실제 확인 가능한 사실만 기재 -->
+</div>
+<p>[본문 — 현장감 있는 서술, 핵심 문장은 &lt;strong&gt;으로 강조]</p>
+<div class="nt-divider"></div>
+<p>[마무리 문단 — 회사 다짐·소감 한 문장]</p>
+```
+
+- `nt-lead`: 워크숍은 `"WORKSHOP · ○○○"`, 봉사활동 등 사회공헌은 `"CSR · 사회공헌 활동"` 형식 권장. 다른 카테고리는 카테고리명 그대로 대문자/한글 혼용 가능
+- `nt-stats` 카드는 **2~3개**, `nt-stat-num`은 짧게(2~5자, 예: "2024", "잠실", "새우낚시") — 공지사항의 "8위/29.7%/10위"처럼 임팩트 있게, 긴 고유명사는 `nt-stat-label`(작은 설명줄)에 풀어 쓴다
+- **절대 금지: 확인되지 않은 통계·숫자 조작·과장 기재.** 참가인원·정확한 일정 등 근거 없는 수치를 임의로 만들어내지 않는다. 사진 alt·기존 문구·실제 확인된 사실만 기반으로 작성
+- 문단은 `<p>`로 구분(과거처럼 `\n\n` 평문 사용 금지), 핵심 문장은 `<strong>`으로 강조해 가독성 확보
+
+### 4. `excerpt` 필드 필수 (메인화면 미리보기 연동)
+
+- `content`가 HTML 구조로 바뀌면서 원문 그대로 미리보기에 쓰면 태그가 깨져 보일 수 있음 → **모든 갤러리 항목에 `excerpt`(평문, 40~70자 내외) 필드를 별도로 반드시 추가**한다
+- `index.html`의 메인화면 갤러리 위젯(`galSummary` 함수)은 `excerpt`를 우선 사용하고, 없을 경우에만 `content`에서 HTML 태그를 제거한 평문으로 대체 표시(안전장치이지 기본 작성 방식이 아님 — 항상 `excerpt`를 명시적으로 작성할 것)
+
+### 5. 사진 배치 — `nt-source-gallery` 카드형 그리드
+
+- `pages/gallery.html`의 다중 이미지 렌더링은 `images:[]` 배열을 `nt-source-gallery` > `nt-source-card`(테두리+그림자+라운드) 구조로 표시하며, 각 카드 하단에 `images[].alt` 텍스트를 `nt-source-cap`(캡션)으로 노출한다
+- 클릭 시 별도 브라우저 창(`window.open`)으로 원본 확대 보기(라이트박스)하는 기존 인터랙션(`gl-lb-trigger`)은 그대로 유지 — 디자인만 카드형으로 고급화, 기능은 보존
+- 새 게시물 등록 시 `images[]` 배열의 `alt`를 캡션으로도 쓰이므로, alt 텍스트를 "무엇을 찍은 사진인지" 명확한 한 문장으로 작성
+
+### 6. 목록/미리보기 화면은 변경 없음
+
+- `pages/gallery.html`의 카드 그리드(`cardHTML`, `.gp-card`)와 메인화면 위젯의 썸네일·제목·날짜 구조는 `content` 포맷 변경과 무관하게 기존 그대로 유지 — `content`/`excerpt`만 이 지침에 맞춰 작성하면 자동으로 연동되어 표시된다
+
+### 7. 참고 커밋
+
+- `content`를 `.textContent` → `.innerHTML`로 전환(HTML 렌더링 지원): `pages/gallery.html`
+- 기존 4건 전면 재작성 + `excerpt` 필드 추가: `redevelopment/assets/data/mock-data.js`
+
+---
+
 ## 지침 변경 이력 — 신구대비 (2026-04-10)
 
 ### 1. 상단 운영 규칙 추가

@@ -79,6 +79,22 @@
     .gl-detail-photos img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
     .gl-detail-photos button:hover img{transform:scale(1.04)}
     .gl-detail-content{font-size:14.5px;line-height:1.85;color:var(--gray-700);white-space:pre-line}
+    .gl-detail-content p{margin:0 0 14px}
+    .gl-detail-content p:last-child{margin-bottom:0}
+
+    /* === 게시물 본문 — 공지사항(nt-*)과 동일한 디자인 시스템 재사용 === */
+    .nt-lead{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+    .nt-stats{display:flex;gap:12px;margin:4px 0 22px;flex-wrap:wrap}
+    .nt-stat-card{flex:1;min-width:130px;background:linear-gradient(160deg,#FFFFFF,#FFF6D6);border:1px solid rgba(184,134,11,.22);border-radius:14px;padding:18px 16px;text-align:center}
+    .nt-stat-num{font-size:22px;font-weight:800;color:var(--brand-dark);line-height:1.25}
+    .nt-stat-label{font-size:11.5px;color:var(--gray-500);margin-top:6px;font-weight:600}
+    .nt-divider{height:1px;background:var(--gray-100);margin:26px 0}
+    .nt-source-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+    .nt-source-card{border:1px solid var(--gray-150,#eaedf0);border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+    .nt-source-card .gl-lb-trigger{display:block;width:100%;border:none;padding:0;background:none;cursor:zoom-in;font:inherit}
+    .nt-source-card .gl-lb-trigger img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .3s ease}
+    .nt-source-card .gl-lb-trigger:hover img{transform:scale(1.04)}
+    .nt-source-cap{padding:10px 14px;font-size:11.5px;color:var(--gray-500);line-height:1.5;border-top:1px solid var(--gray-100)}
     </style>
 </head>
 <body>
@@ -140,7 +156,7 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260829q"></script>
+<script src="../assets/data/mock-data.js?v=20260829r"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260829n"></script>
 <script>
@@ -211,8 +227,8 @@
         document.getElementById('glDViews').textContent='조회 '+viewsOf(it);
         var photoEl=document.getElementById('glDPhoto');
         if(it.images&&it.images.length){
-            photoEl.innerHTML='<div class="gl-detail-photos">'+it.images.map(function(im){
-                return '<button type="button" class="gl-lb-trigger" data-src="'+im.src+'" data-alt="'+(im.alt||it.title||'')+'" title="확대 보기"><img src="'+im.src+'" alt="'+(im.alt||it.title||'')+'"></button>';
+            photoEl.innerHTML='<div class="nt-source-gallery">'+it.images.map(function(im){
+                return '<div class="nt-source-card"><button type="button" class="gl-lb-trigger" data-src="'+im.src+'" data-alt="'+(im.alt||it.title||'')+'" title="확대 보기"><img src="'+im.src+'" alt="'+(im.alt||it.title||'')+'"></button>'+(im.alt?'<div class="nt-source-cap">'+im.alt+'</div>':'')+'</div>';
             }).join('')+'</div>';
             photoEl.style.display='';
         }else if(it.src){
@@ -221,7 +237,7 @@
         }else{
             photoEl.innerHTML=''; photoEl.style.display='none';
         }
-        document.getElementById('glDContent').textContent=it.content||'';
+        document.getElementById('glDContent').innerHTML=it.content||'';
         var detail=document.getElementById('glDetail');
         detail.classList.add('show');
         renderGrid();

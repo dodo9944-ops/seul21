@@ -1288,7 +1288,8 @@ const MOCK = {
      - views: 초기 조회수(선택, 미입력 시 0) — 실제 조회수는 브라우저 localStorage(seul_gallery_views) 누적분을 더해 표시 */
   gallery: [
     { id:'ws2024_halong', category:'워크숍', title:'2024 빛세움 워크숍 in 베트남 하롱베이', date:'2024-08-22',
-      content:'잠시 업무는 내려놓고, 사람과 사람 사이의 거리는 조금 더 가까이.\n\n2024년 빛세움 임직원들은 베트남 하롱베이로 워크숍을 다녀왔습니다.\n멋진 풍경을 함께 보고, 배를 타고, 맛있는 음식을 나누며 사무실에서는 미처 하지 못했던 이야기들도 편하게 나눴습니다.\n\n계획대로 움직인 일정도 있었고, 계획 없이 웃었던 순간도 많았습니다.\n함께 시간을 보내다 보니 서로를 조금 더 알게 되고, 자연스럽게 팀도 한층 가까워졌습니다.\n\n일할 땐 집중하고, 쉴 땐 제대로 즐기는 것.\n그렇게 또 하나의 좋은 추억을 만들고 돌아왔습니다.\n\n2024 빛세움 하롱베이 워크숍,\n사진 속 웃음만큼 즐거웠던 며칠의 기록입니다.',
+      excerpt:'베트남 하롱베이에서 보낸 2024 빛세움 워크숍 — 유람선 투어와 만찬으로 다진 팀워크',
+      content:'<div class="nt-lead">WORKSHOP · 2024 임직원 워크숍</div><p>업무를 잠시 내려놓고 서로의 거리를 좁힌 시간, 2024년 빛세움 임직원들은 베트남 하롱베이로 함께 떠났습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2024</div><div class="nt-stat-label">워크숍 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">하롱베이</div><div class="nt-stat-label">개최지 · 베트남</div></div><div class="nt-stat-card"><div class="nt-stat-num">전 직원</div><div class="nt-stat-label">참가 대상</div></div></div><p>유람선을 타고 세계자연유산으로 지정된 하롱베이의 절경을 함께 감상하고, 현지 전통 레스토랑에서 정을 나누는 환영 만찬 시간을 가졌습니다. 사무실에서는 미처 나누지 못했던 이야기들도 편안하게 오갔습니다.</p><p>계획대로 움직인 일정도 있었고, 계획 없이 웃었던 순간도 많았습니다. 함께 시간을 보내며 서로를 더 깊이 알게 되었고, 팀워크는 한층 단단해졌습니다.</p><div class="nt-divider"></div><p><strong>일할 땐 집중하고, 쉴 땐 제대로 즐긴다.</strong> 2024 빛세움 하롱베이 워크숍은 그렇게 또 하나의 좋은 추억으로 남았습니다.</p>',
       images:[
         { src:'../jpg/gallery/workshop2024_halongbay_boat.jpg', alt:'베트남 하롱베이 유람선 투어 — 임직원 단체 사진' },
         { src:'../jpg/gallery/workshop2024_dinner.jpg', alt:'2024 빛세움 워크숍 환영 만찬 단체 사진' },
@@ -1296,18 +1297,21 @@ const MOCK = {
         { src:'../jpg/gallery/workshop2024_restaurant.jpg', alt:'현지 전통 레스토랑에서의 식사 시간' }
       ] },
     { id:'ws2025_taiwan', category:'워크숍', title:'2025 빛세움 워크숍 in 대만', date:'2025',
-      content:'2025년, 빛세움은 대만에서 또 하나의 추억을 만들었습니다.\n\n익숙한 업무 공간을 벗어나 함께 걷고, 맛보고, 웃으며 여유로운 시간을 보냈습니다. 비가 내려도 일정은 계속됐고, 예상하지 못한 순간들이 오히려 더 오래 기억에 남았습니다.\n\n직접 즐긴 새우잡이는 생각보다 더 재미있었고, 잡은 새우의 맛은 그보다 더 좋았습니다.\n함께 여행하면 평소에는 보이지 않던 모습도 자연스럽게 보이고, 조금 더 편하게 이야기하며 더 많이 웃게 됩니다.\n\n2025 빛세움 대만 워크숍,\n일상에서 잠시 벗어나 함께 즐긴 우리의 기록입니다.',
+      excerpt:'대만에서 함께한 2025 빛세움 워크숍 — 지우펀 옛거리 산책과 새우낚시 체험',
+      content:'<div class="nt-lead">WORKSHOP · 2025 임직원 워크숍</div><p>2025년, 빛세움은 대만에서 또 하나의 특별한 추억을 만들었습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2025</div><div class="nt-stat-label">워크숍 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">대만</div><div class="nt-stat-label">개최지 · 지우펀 일대</div></div><div class="nt-stat-card"><div class="nt-stat-num">새우낚시</div><div class="nt-stat-label">현지 체험 프로그램</div></div></div><p>익숙한 업무 공간을 벗어나 함께 걷고, 맛보고, 웃으며 여유로운 시간을 보냈습니다. 비가 내려도 일정은 계속됐고, 예상하지 못한 순간들이 오히려 더 오래 기억에 남았습니다.</p><p>지우펀 옛거리를 함께 거닐고, 실내 새우낚시 체험에도 도전했습니다. <strong>직접 잡은 새우의 맛은 기대보다 훨씬 좋았습니다.</strong> 함께 여행하면 평소엔 보이지 않던 서로의 모습도 자연스럽게 드러나고, 조금 더 편하게 이야기하며 더 많이 웃게 됩니다.</p><div class="nt-divider"></div><p>2025 빛세움 대만 워크숍, 일상에서 잠시 벗어나 함께 즐긴 우리의 기록입니다.</p>',
       images:[
         { src:'../jpg/gallery/workshop2025_taipei_group.jpg', alt:'2025 빛세움 워크숍 in Taipei — 지우펀 옛거리 단체 사진' },
         { src:'../jpg/gallery/workshop2025_shrimp_fishing.jpg', alt:'대만 실내 새우낚시 체험 현장' }
       ] },
     { id:'vol_lottetower', category:'봉사활동', title:'빛세움 봉사활동 · 어르신과 함께한 롯데월드타워 나들이', date:'2026-08-29',
-      content:'거동이 불편해 외출이 쉽지 않은 어르신들을 모시고 잠실 롯데월드타워 나들이를 함께했습니다.\n\n높은 전망대에서 서울을 바라보고, 도란도란 이야기를 나누며 평소와는 다른 하루를 보냈습니다. 짧은 외출이지만 어르신들의 환한 웃음 덕분에 함께한 우리에게도 오래 기억될 따뜻한 시간이었습니다.\n\n함께 걷는 하루, 함께 웃는 순간.\n빛세움은 가까운 곳에서 작은 나눔을 이어가겠습니다.',
+      excerpt:'거동이 불편한 어르신들과 함께한 롯데월드타워 전망대 나들이 봉사활동',
+      content:'<div class="nt-lead">CSR · 사회공헌 활동</div><p>거동이 불편해 외출이 쉽지 않은 어르신들을 모시고, ㈜빛세움 임직원들이 잠실 롯데월드타워 나들이를 함께했습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">잠실</div><div class="nt-stat-label">롯데월드타워 전망대</div></div><div class="nt-stat-card"><div class="nt-stat-num">어르신</div><div class="nt-stat-label">동행 나들이 봉사</div></div><div class="nt-stat-card"><div class="nt-stat-num">08.29</div><div class="nt-stat-label">2026년 활동 일자</div></div></div><p>높은 전망대에서 함께 서울 전경을 내려다보고, 도란도란 이야기를 나누며 평소와는 다른 특별한 하루를 보냈습니다. <strong>짧은 외출이었지만 어르신들의 환한 웃음</strong> 덕분에 함께한 임직원들에게도 오래도록 기억될 따뜻한 시간이었습니다.</p><div class="nt-divider"></div><p>함께 걷는 하루, 함께 웃는 순간. ㈜빛세움은 가까운 곳에서부터 작은 나눔을 꾸준히 이어가겠습니다.</p>',
       images:[
         { src:'../jpg/gallery/volunteer_lottetower_seniors.jpg', alt:'빛세움 봉사활동 — 롯데월드타워 전망대에서 어르신들과 함께한 단체 사진' }
       ] },
     { id:'vol_pungnap_orange', category:'봉사활동', title:'빛세움 나눔 봉사활동 · 건강한 한 주를 선물합니다', date:'2026-08-29',
-      content:'㈜빛세움은 풍납종합사회복지관과 함께 지역 어르신과 이웃들을 위한 나눔 봉사활동을 진행했습니다.\n\n이번에는 비타민이 풍부한 카라카라 오렌지를 후원해 작은 정성을 전했습니다. 크지 않은 나눔이지만 받으시는 분들께 기분 좋은 하루와 건강한 한 주가 되기를 바라는 마음을 담았습니다.\n\n가까운 이웃과 나누는 작은 마음,\n빛세움은 일상 속 따뜻한 나눔을 꾸준히 이어가겠습니다.',
+      excerpt:'풍납종합사회복지관과 함께한 나눔 봉사활동 — 카라카라 오렌지 후원',
+      content:'<div class="nt-lead">CSR · 사회공헌 활동</div><p>㈜빛세움이 풍납종합사회복지관과 함께 지역 어르신과 이웃들을 위한 나눔 봉사활동을 진행했습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">복지관</div><div class="nt-stat-label">풍납종합사회복지관 협력</div></div><div class="nt-stat-card"><div class="nt-stat-num">오렌지</div><div class="nt-stat-label">카라카라 비타민 오렌지 후원</div></div><div class="nt-stat-card"><div class="nt-stat-num">08.29</div><div class="nt-stat-label">2026년 활동 일자</div></div></div><p>이번에는 비타민이 풍부한 카라카라 오렌지를 후원해 작은 정성을 전했습니다. <strong>크지 않은 나눔이지만, 받으시는 분들께 기분 좋은 하루와 건강한 한 주가 되기를 바라는 마음</strong>을 담았습니다.</p><div class="nt-divider"></div><p>가까운 이웃과 나누는 작은 마음, ㈜빛세움은 일상 속 따뜻한 나눔을 꾸준히 이어가겠습니다.</p>',
       images:[
         { src:'../jpg/gallery/volunteer_pungnap_orange.jpg', alt:'빛세움 나눔 봉사활동 — 풍납종합사회복지관 카라카라 오렌지 후원' }
       ] },
