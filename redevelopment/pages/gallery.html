@@ -309,11 +309,20 @@
     if(qid && items.some(function(it){ return it.id===qid })){
         openDetail(qid);
         /* 메인화면 등 외부에서 특정 게시물로 바로 들어온 경우, 목록이 먼저 보이지 않도록
-           펼침 애니메이션을 건너뛰고 즉시 해당 게시물 위치로 스크롤 */
+           펼침 애니메이션 + 전역 scroll-behavior:smooth 를 모두 일시적으로 끄고
+           즉시(behavior:auto) 해당 게시물 위치로 점프한 뒤 원상 복구 */
         var dEl=document.getElementById('glDetail');
+        var htmlEl=document.documentElement;
+        var prevScrollBehavior=htmlEl.style.scrollBehavior;
+        var prevTransition=dEl.style.transition;
+        htmlEl.style.scrollBehavior='auto';
         dEl.style.transition='none';
-        dEl.scrollIntoView({block:'start'});
-        requestAnimationFrame(function(){ requestAnimationFrame(function(){ dEl.style.transition=''; }); });
+        void dEl.offsetHeight; /* 강제 리플로우 — max-height 즉시 반영 */
+        dEl.scrollIntoView({block:'start', behavior:'auto'});
+        requestAnimationFrame(function(){
+            htmlEl.style.scrollBehavior=prevScrollBehavior;
+            dEl.style.transition=prevTransition;
+        });
     }
 })();
 </script>
