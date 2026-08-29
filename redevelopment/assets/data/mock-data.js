@@ -1299,7 +1299,7 @@ const MOCK = {
         { src:'../jpg/gallery/workshop2024_airport.jpg', alt:'출국 전 공항 단체 사진' },
         { src:'../jpg/gallery/workshop2024_restaurant.jpg', alt:'현지 전통 레스토랑에서의 식사 시간' }
       ] },
-    { id:'ws2025_taiwan', category:'워크숍', title:'2025 빛세움 워크숍 in 대만', date:'2025',
+    { id:'ws2025_taiwan', category:'워크숍', title:'2025 빛세움 워크숍 in 대만', date:'2025-09-15',
       excerpt:'대만에서 함께한 2025 빛세움 워크숍 — 지우펀 옛거리 산책과 새우낚시 체험',
       content:'<div class="nt-lead">WORKSHOP · 2025 임직원 워크숍</div><p>2025년, 빛세움은 대만에서 또 하나의 특별한 추억을 만들었습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2025</div><div class="nt-stat-label">워크숍 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">대만</div><div class="nt-stat-label">개최지 · 지우펀 일대</div></div><div class="nt-stat-card"><div class="nt-stat-num">새우낚시</div><div class="nt-stat-label">현지 체험 프로그램</div></div></div><p>익숙한 업무 공간을 벗어나 함께 걷고, 맛보고, 웃으며 여유로운 시간을 보냈습니다. 비가 내려도 일정은 계속됐고, 예상하지 못한 순간들이 오히려 더 오래 기억에 남았습니다.</p><p>지우펀 옛거리를 함께 거닐고, 실내 새우낚시 체험에도 도전했습니다. <strong>직접 잡은 새우의 맛은 기대보다 훨씬 좋았습니다.</strong> 함께 여행하면 평소엔 보이지 않던 서로의 모습도 자연스럽게 드러나고, 조금 더 편하게 이야기하며 더 많이 웃게 됩니다.</p><div class="nt-divider"></div><p>2025 빛세움 대만 워크숍, 일상에서 잠시 벗어나 함께 즐긴 우리의 기록입니다.</p>',
       images:[
