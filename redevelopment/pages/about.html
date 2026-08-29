@@ -513,6 +513,47 @@
         .cert-desc { font-size: 13px; }
     }
 
+    /* ── 3-1. 서울시 코디네이터 전문인력 ── */
+    .coord2-head { margin-bottom: 24px; }
+    .coord2-badge-count { font-size: 13px; font-weight: 600; color: var(--gold); margin-left: 8px; }
+    .coord2-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 28px; }
+    @media (max-width: 860px) { .coord2-grid { grid-template-columns: 1fr; } }
+    .coord2-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; overflow: hidden; }
+    .coord2-card-top { background: linear-gradient(135deg, #0A0F1C, #1a2238); padding: 20px; position: relative; display: flex; align-items: center; gap: 14px; }
+    .coord2-top-badge { position: absolute; top: 14px; right: 16px; font-size: 9.5px; font-weight: 700; letter-spacing: .8px; color: var(--visseum-gold); display: flex; align-items: center; gap: 4px; }
+    .coord2-top-badge i { font-size: 9px; }
+    .coord2-photo { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid rgba(197,139,0,.5); background: rgba(255,255,255,.08); }
+    .coord2-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .coord2-photo.empty { display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.25); font-size: 24px; }
+    .coord2-id { padding-top: 12px; }
+    .coord2-name { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+    .coord2-role { font-size: 11.5px; color: rgba(255,255,255,.55); }
+    .coord2-card-body { padding: 20px; }
+    .coord2-list { list-style: none; margin-bottom: 16px; }
+    .coord2-list li { position: relative; padding-left: 14px; font-size: 12.5px; color: var(--visseum-text); line-height: 1.9; }
+    .coord2-list li::before { content: '·'; position: absolute; left: 0; color: var(--visseum-muted); font-weight: 800; }
+    .coord2-empty-note { font-size: 12.5px; color: var(--gray-400); margin-bottom: 16px; padding: 8px 0; }
+    .coord2-more-btn { width: 100%; height: 38px; border-radius: 8px; border: 1.5px solid rgba(197,139,0,.4); background: transparent; color: var(--visseum-gold); font-size: 12.5px; font-weight: 700; font-family: var(--font); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all .2s; }
+    .coord2-more-btn:hover:not(:disabled) { background: rgba(197,139,0,.06); }
+    .coord2-more-btn:disabled { opacity: .4; cursor: not-allowed; }
+    .coord2-more-btn i { font-size: 10px; transition: transform .2s; }
+    .coord2-more-btn.open i { transform: rotate(90deg); }
+    .coord2-detail { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--gray-100); }
+    .coord2-detail.open { display: block; }
+    .coord2-detail .cr-row { display: flex; gap: 8px; font-size: 12px; color: var(--visseum-text); line-height: 1.7; margin-bottom: 8px; }
+    .coord2-detail .cr-row:last-child { margin-bottom: 0; }
+    .coord2-detail .cr-label { flex-shrink: 0; width: 52px; font-weight: 700; color: var(--visseum-ink); }
+    .coord2-banner { display: flex; align-items: center; justify-content: space-between; gap: 32px; background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: 14px; padding: 24px 32px; flex-wrap: wrap; }
+    .coord2-banner-left { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px; }
+    .coord2-banner-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--brand-dark); color: var(--visseum-gold); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .coord2-banner-left p { font-size: 13.5px; color: var(--visseum-text); line-height: 1.7; font-weight: 600; }
+    .coord2-banner-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+    .cb-stat { text-align: center; }
+    .cb-num { font-size: 24px; font-weight: 800; color: var(--brand-dark); }
+    .cb-num span { font-size: 14px; color: var(--visseum-gold); }
+    .cb-label { font-size: 10.5px; color: var(--gray-500); line-height: 1.4; margin-top: 2px; }
+    @media (max-width: 768px) { .coord2-banner { flex-direction: column; align-items: flex-start; } .coord2-banner-stats { width: 100%; justify-content: space-between; gap: 12px; } }
+
     /* ── 4. COMPANY HISTORY ── */
     .timeline-center {
         position: relative;
@@ -979,6 +1020,83 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <!-- ============================================================
+         3-1. 서울시 정비사업 코디네이터 전문인력
+         ============================================================ -->
+    <div class="about-section">
+        <div class="inner">
+            <div class="coord2-head">
+                <h2 class="section-title">서울시 정비사업 코디네이터 전문인력 <span class="coord2-badge-count">3인 소개</span></h2>
+            </div>
+            <div class="coord2-grid">
+                <div class="coord2-card">
+                    <div class="coord2-card-top">
+                        <div class="coord2-top-badge"><i class="fa-solid fa-circle-check"></i> Seoul City Coordinator</div>
+                        <div class="coord2-photo empty"><i class="fa-solid fa-user"></i></div>
+                        <div class="coord2-id">
+                            <div class="coord2-name">조구형</div>
+                            <div class="coord2-role">대표이사</div>
+                        </div>
+                    </div>
+                    <div class="coord2-card-body">
+                        <div class="coord2-empty-note">약력 추후 기재 예정</div>
+                        <button class="coord2-more-btn" disabled title="추후 업데이트 예정">주요 자문 및 수행 실적 <i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="coord2-card">
+                    <div class="coord2-card-top">
+                        <div class="coord2-top-badge"><i class="fa-solid fa-circle-check"></i> Seoul City Coordinator</div>
+                        <div class="coord2-photo empty"><i class="fa-solid fa-user"></i></div>
+                        <div class="coord2-id">
+                            <div class="coord2-name">최현태</div>
+                            <div class="coord2-role">정비사업 코디네이터</div>
+                        </div>
+                    </div>
+                    <div class="coord2-card-body">
+                        <div class="coord2-empty-note">약력 추후 기재 예정</div>
+                        <button class="coord2-more-btn" disabled title="추후 업데이트 예정">주요 자문 및 수행 실적 <i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="coord2-card">
+                    <div class="coord2-card-top">
+                        <div class="coord2-top-badge"><i class="fa-solid fa-circle-check"></i> Seoul City Coordinator</div>
+                        <div class="coord2-photo"><img src="../jpg/이창우.jpg" alt="이창우 코디네이터"></div>
+                        <div class="coord2-id">
+                            <div class="coord2-name">이창우</div>
+                            <div class="coord2-role">서울시 정비사업 코디네이터</div>
+                        </div>
+                    </div>
+                    <div class="coord2-card-body">
+                        <ul class="coord2-list">
+                            <li>서울시 정비사업 코디네이터</li>
+                            <li>정비업계 경력 23년</li>
+                            <li>송파구, 은평구 등 코디네이터 수행</li>
+                        </ul>
+                        <button class="coord2-more-btn" id="coordLcwBtn" onclick="(function(btn){btn.classList.toggle('open');document.getElementById('coordLcwDetail').classList.toggle('open')})(this)">주요 자문 및 수행 실적 <i class="fa-solid fa-chevron-right"></i></button>
+                        <div class="coord2-detail" id="coordLcwDetail">
+                            <div class="cr-row"><span class="cr-label">담당구역</span><span>서울시, 송파구, 은평구</span></div>
+                            <div class="cr-row"><span class="cr-label">직위</span><span>송파구 한양2차·한양3차 갈등관리책임관<br>불광동 359-1 신속통합기획 자문위원</span></div>
+                            <div class="cr-row"><span class="cr-label">위촉기간</span><span>2025.02.20 ~ 2027.02.19</span></div>
+                            <div class="cr-row"><span class="cr-label">주요실적</span><span>가락현대5차아파트 소규모재건축정비사업(THE SHARP) 서울특별시 정비사업 코디네이터 수행</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="coord2-banner">
+                <div class="coord2-banner-left">
+                    <div class="coord2-banner-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <p>빛세움은 전문성과 신뢰를 갖춘 코디네이터 전문인력과 함께<br>조합의 성공적인 정비사업을 든든하게 지원합니다.</p>
+                </div>
+                <div class="coord2-banner-stats">
+                    <div class="cb-stat"><div class="cb-num">3<span>인</span></div><div class="cb-label">서울시 코디네이터<br>전문인력 보유</div></div>
+                    <div class="cb-stat"><div class="cb-num">23<span>년+</span></div><div class="cb-label">평균 정비사업<br>실무경력</div></div>
+                    <div class="cb-stat"><div class="cb-num">다수</div><div class="cb-label">공공지원 정비사업<br>코디네이터 수행</div></div>
+                    <div class="cb-stat"><div class="cb-num">전국</div><div class="cb-label">서울 전역 조합<br>자문 및 지원</div></div>
+                </div>
+            </div>
         </div>
     </div>
 
