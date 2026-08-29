@@ -20,10 +20,10 @@
 
 /* category badge (상단 카테고리 라벨) */
 .dv-category-badge{display:inline-block;font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;margin-bottom:16px;color:#0A0F1C;background:#FFF3C4;letter-spacing:.02em}
-.dv-category-badge.badge-news{background:#1a3a6b}
-.dv-category-badge.badge-law{background:#5b3a8e}
-.dv-category-badge.badge-case{background:#1f7a5a}
-.dv-category-badge.badge-lease{background:#0f6e8c}
+.dv-category-badge.badge-news{background:#1a3a6b;color:#fff}
+.dv-category-badge.badge-law{background:#5b3a8e;color:#fff}
+.dv-category-badge.badge-case{background:#1f7a5a;color:#fff}
+.dv-category-badge.badge-lease{background:#0f6e8c;color:#fff}
 .dv-category-badge.badge-sell{background:#c2671a}
 
 /* title */
