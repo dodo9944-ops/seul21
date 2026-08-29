@@ -66,15 +66,6 @@
             <input type="text" class="form-input" id="faqSearch" placeholder="질문을 검색해보세요">
         </div>
 
-        <!-- 카테고리 탭 -->
-        <div class="tabs" id="faqTabs" style="margin-bottom:24px;">
-            <button class="on" data-cat="전체">전체</button>
-            <button data-cat="일반">일반</button>
-            <button data-cat="계정">계정</button>
-            <button data-cat="시세">시세</button>
-            <button data-cat="투자">투자</button>
-        </div>
-
         <div id="resultInfo" class="result-info" style="display:none;"></div>
 
         <!-- FAQ 목록 -->
@@ -95,17 +86,11 @@
 <script>
 (function() {
     const allFaq = DataService.getAll('faq');
-    let currentCat = '전체';
     let searchQuery = '';
     let openId = null;
 
     function render() {
         let list = allFaq;
-
-        // 카테고리 필터
-        if (currentCat !== '전체') {
-            list = list.filter(f => f.category === currentCat);
-        }
 
         // 검색 필터
         if (searchQuery) {
@@ -161,17 +146,6 @@
             });
         });
     }
-
-    // 탭 이벤트
-    document.getElementById('faqTabs').addEventListener('click', e => {
-        const btn = e.target.closest('button');
-        if (!btn) return;
-        document.querySelectorAll('#faqTabs button').forEach(b => b.classList.remove('on'));
-        btn.classList.add('on');
-        currentCat = btn.dataset.cat;
-        openId = null;
-        render();
-    });
 
     // 검색 이벤트
     let timer;
