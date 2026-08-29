@@ -125,7 +125,7 @@ const App = (() => {
         ).join('')}
       </nav>
       <div class="drawer-footer">
-        <a href="${B}/pages/about.html#business" class="btn btn-primary btn-md">그룹사</a>
+        <a href="${B}/pages/about.html#business" class="btn btn-group-cta btn-md">그룹사</a>
       </div>
     </aside>
 

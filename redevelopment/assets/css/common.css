@@ -315,6 +315,19 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   display: flex; gap: 8px;
 }
 .drawer-footer .btn { flex: 1; }
+.drawer-footer .btn-group-cta {
+  background: linear-gradient(135deg, #D6A419, #B8860B);
+  color: #FFFFFF;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(184,134,11,.32);
+  transition: all var(--transition);
+}
+.drawer-footer .btn-group-cta:hover {
+  background: linear-gradient(135deg, #C99A1F, #A67809);
+  box-shadow: 0 6px 18px rgba(184,134,11,.42);
+  transform: translateY(-1px);
+}
 
 /* === 모바일 한정 — 우측 drawer 메뉴: 화면 넘침 방지 + footer 세로 축소 === */
 @media (max-width: 768px) {
