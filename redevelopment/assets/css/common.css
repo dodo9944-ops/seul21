@@ -315,40 +315,6 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   display: flex; gap: 8px;
 }
 .drawer-footer .btn { flex: 1; }
-.drawer-footer .btn-group-cta {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #D6A419, #B8860B);
-  color: #FFFFFF;
-  letter-spacing: 1.5px;
-  font-weight: 700;
-  box-shadow: 0 4px 14px rgba(184,134,11,.32);
-  transition: all var(--transition);
-  animation: ctaGlowPulse 2.8s ease-in-out infinite;
-}
-.drawer-footer .btn-group-cta::before {
-  content: '';
-  position: absolute; top: 0; left: -60%;
-  width: 40%; height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,.5), transparent);
-  transform: skewX(-20deg);
-  transition: left .6s ease;
-}
-.drawer-footer .btn-group-cta:hover {
-  background: linear-gradient(135deg, #C99A1F, #A67809);
-  box-shadow: 0 6px 18px rgba(184,134,11,.42);
-  transform: translateY(-1px);
-  animation: none;
-}
-.drawer-footer .btn-group-cta:hover::before { left: 130%; }
-@keyframes ctaGlowPulse {
-  0%, 100% { box-shadow: 0 4px 14px rgba(184,134,11,.32); }
-  50% { box-shadow: 0 4px 20px rgba(184,134,11,.52); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .drawer-footer .btn-group-cta { animation: none; }
-  .drawer-footer .btn-group-cta::before { transition: none; }
-}
 
 /* === 모바일 한정 — 우측 drawer 메뉴: 화면 넘침 방지 + footer 세로 축소 === */
 @media (max-width: 768px) {
