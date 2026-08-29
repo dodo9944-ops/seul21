@@ -157,7 +157,7 @@ const App = (() => {
             </span>
           </div>
           <p>재개발·재건축·소규모정비사업<br>도시정비 종합 엔지니어링 전문그룹</p>
-          <div class="footer-bottom-left" style="margin-top:18px;margin-bottom:0">
+          <div class="footer-bottom-left" style="margin-top:23px;margin-bottom:0">
             <a href="${B}/pages/privacy.html" class="footer-privacy-link">개인정보 처리방침</a>
             <div class="footer-copy">&copy; 2026 (주)빛세움. All rights reserved.</div>
           </div>
