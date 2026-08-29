@@ -116,6 +116,15 @@
         return validCats.includes(n.category) ? n.category : '기타소식';
     }
 
+    const idParam = params.get('id');
+    if (idParam) {
+        const target = notices.find(n => n.id === idParam);
+        if (target) {
+            currentCat = validCats.includes(catParam) ? catParam : noticeCat(target);
+            openId = idParam;
+        }
+    }
+
     function render() {
         const filtered = currentCat === '전체' ? notices : notices.filter(n => noticeCat(n) === currentCat);
         const tbody = document.getElementById('noticeBody');
@@ -170,6 +179,10 @@
     });
 
     render();
+    if (openId) {
+        const targetRow = document.querySelector('.notice-row[data-id="' + openId + '"]');
+        if (targetRow) targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 })();
 </script>
 </body>

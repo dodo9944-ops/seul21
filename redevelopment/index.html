@@ -1306,7 +1306,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         }
         noticeEl.innerHTML=notices.length?notices.map(function(n){
             var badge=n.important?'<span style="color:#C58B00;font-weight:700;font-size:11px;margin-right:6px;">[중요]</span>':'';
-            return'<a href="pages/notice.html" class="news-item" style="gap:10px;padding:16px 20px;">'+
+            return'<a href="pages/notice.html?id='+encodeURIComponent(n.id)+'" class="news-item" style="gap:10px;padding:16px 20px;">'+
                 '<span style="color:#C58B00;font-size:11px;flex-shrink:0;margin-top:4px;">●</span>'+
                 '<div class="news-body" style="display:flex;flex-direction:column;gap:5px;">'+
                 '<h4 style="height:auto;display:block;-webkit-line-clamp:unset;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:0;">'+
