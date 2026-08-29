@@ -972,11 +972,13 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 </div>
 <div class="nt-source-title"><i class="fa-regular fa-newspaper"></i> 원문 기사 보기</div>
 <div class="nt-source-gallery"> <!-- 대장이 제공한 보도자료·기사 스크린샷 -->
-  <div class="nt-source-card"><img src="../jpg/notice/[파일명]" alt="[기사 제목/내용 설명]"><div class="nt-source-cap">[매체명] 「[기사 제목]」 ([기자명])</div></div>
+  <a class="nt-source-card" href="[기사 원문 URL]" target="_blank" rel="noopener noreferrer"><img src="../jpg/notice/[파일명]" alt="[기사 제목/내용 설명]"><div class="nt-source-cap">[매체명] 「[기사 제목]」 ([기자명], [발행일]) <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px;margin-left:2px;"></i></div></a>
 </div>
 ```
 
 - **"현장 스케치"(자체 촬영 사진)와 "원문 기사 보기"(언론 보도 스크린샷)는 출처 성격이 다르므로 `nt-source-title`+`nt-source-gallery` 블록을 분리**한다 (하나의 갤러리에 섞지 않음)
+- **[2026-08-29 대장 명시 지시] "원문 기사 보기" 카드는 항상 실제 기사 URL로 이어지는 링크를 건다.** 스크린샷만 올리고 링크를 생략하지 않는다. 카드 전체를 `<div class="nt-source-card">`가 아닌 `<a class="nt-source-card" href="[기사 URL]" target="_blank" rel="noopener noreferrer">`로 감싼다 (현장 스케치 등 자체 촬영 사진 카드는 외부 링크가 없으므로 기존대로 `<div>` 유지)
+- URL을 대장이 알려주지 않은 경우, 기사 제목·매체명·기자명·스크린샷 속 날짜를 단서로 **먼저 검색해서 원문 URL을 직접 찾아 연결**한다 (매번 되묻지 않는다). 검색으로도 원문을 특정하지 못한 경우에만 대장에게 URL을 문의한다
 - `nt-stats` 카드는 2~3개, 세대수·면적·참여인원 등 텍스트에 실제 등장하는 수치만 사용. **확인되지 않은 숫자·과장·추정치 임의 생성 금지**([[갤러리 게시물 디자인 지침]]과 동일 원칙)
 - 문단은 `<p>`로 구분(`\n\n` 평문 금지), 핵심 문장은 `<strong>`으로 강조
 
@@ -984,8 +986,9 @@ var _catKeyMap={'법령':'법령','법령·조례':'법령','판례·질의회�
 
 1. 대장이 바탕화면 등 로컬 경로로 제공한 사진·스크린샷 파일을 **그대로 사용** — 외부 URL 직접 다운로드가 아닌, 대장이 직접 제공한 파일이므로 [[외부 자산 수집 금지 정책]]에 저촉되지 않음
 2. `redevelopment/jpg/notice/` 폴더에 의미를 알 수 있는 영문 파일명으로 복사 (예: `news_[매체명]_[사업명]_headline.png`, `[사업명]_juminchonghoe_hall.jpg`)
-3. 언론 기사 스크린샷은 **출처(매체명·기자명·기사 제목)를 캡션에 반드시 명시**
+3. 언론 기사 스크린샷은 **출처(매체명·기자명·기사 제목)를 캡션에 반드시 명시하고, 카드에 원문 기사 링크를 반드시 연결**(본 섹션 §2 참조)
 4. 자체 촬영 사진은 촬영 일자·장소를 캡션에 명시 (허위 정보 생성 금지, 사진 안에 보이는 정보 또는 대장이 알려준 사실만 사용)
+5. `pages/notice.html` `<style>`에 `a.nt-source-card` 앵커 스타일(`display:block; text-decoration:none; color:inherit;` + hover 강조)이 정의되어 있어야 카드형 링크가 `<div>` 버전과 동일하게 보인다. 없으면 추가한다
 
 ### 4. `excerpt` 필드 필수
 
