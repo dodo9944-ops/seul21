@@ -288,27 +288,29 @@
     .services-hero .hero-card {
         width: 174px; height: 130px; box-sizing: border-box;
         overflow: hidden;
-        background: #FFFFFF;
-        border: 1px solid var(--gray-200);
+        background: rgba(24,28,34,.78);
+        border: 1px solid rgba(255,255,255,.08);
         border-radius: 12px; padding: 22px 18px;
         transition: all 0.3s;
+        backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 8px 24px rgba(0,0,0,.10);
         display: block; text-decoration: none; color: inherit;
         cursor: pointer;
         position: relative; z-index: 5;
     }
     .services-hero .hero-card:hover {
         transform: translateY(-2px);
-        border-color: var(--gold);
+        box-shadow: 0 12px 30px rgba(0,0,0,.16);
     }
     .services-hero .hero-card-icon {
         width: 36px; height: 36px; border-radius: 8px;
-        background: rgba(184,134,11,.15);
+        background: rgba(255,196,0,.15);
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 12px;
     }
-    .services-hero .hero-card-icon i { font-size: 15px; color: var(--gold); }
-    .services-hero .hero-card h4 { font-size: 14px; font-weight: 800; color: #0A0F1C; margin-bottom: 4px; }
-    .services-hero .hero-card p { font-size: 11.5px; color: var(--gray-600); line-height: 1.5; }
+    .services-hero .hero-card-icon i { font-size: 15px; color: #FFC400; }
+    .services-hero .hero-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
+    .services-hero .hero-card p { font-size: 11.5px; color: rgba(255,255,255,.65); line-height: 1.5; }
     @media (max-width: 1024px) {
         .services-hero .inner { flex-direction: column; gap: 16px; }
         .services-hero .hero-cards-float { width: 100%; max-width: 420px; }
