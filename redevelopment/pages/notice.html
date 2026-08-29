@@ -24,7 +24,30 @@
     .notice-detail.open { display: table-row; }
     .notice-detail td { background: var(--gray-50); padding: 24px 20px !important; }
     .notice-detail-content { font-size: 14px; line-height: 1.85; color: var(--gray-700); white-space: pre-line; }
+    .notice-detail-content p { margin: 0 0 14px; }
+    .notice-detail-content p:last-child { margin-bottom: 0; }
     .badge-important { background: var(--red); color: var(--white); }
+
+    /* === 공지 본문 — 통계 강조 / 표 디자인 === */
+    .nt-lead { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+    .nt-stats { display: flex; gap: 12px; margin: 4px 0 22px; flex-wrap: wrap; }
+    .nt-stat-card { flex: 1; min-width: 130px; background: linear-gradient(160deg, #FFFFFF, #FFF6D6); border: 1px solid rgba(184,134,11,.22); border-radius: 14px; padding: 18px 16px; text-align: center; }
+    .nt-stat-num { font-size: 28px; font-weight: 800; color: var(--brand-dark); line-height: 1.1; }
+    .nt-stat-num span { font-size: 14px; font-weight: 700; color: var(--gold); margin-left: 2px; }
+    .nt-stat-label { font-size: 11.5px; color: var(--gray-500); margin-top: 6px; font-weight: 600; }
+    .nt-divider { height: 1px; background: var(--gray-100); margin: 26px 0; }
+    .nt-table-title { font-size: 14px; font-weight: 800; color: var(--gray-900); margin: 22px 0 10px; display: flex; align-items: center; gap: 8px; }
+    .nt-table-title i { color: var(--gold); font-size: 12px; }
+    .nt-table-wrap { overflow-x: auto; border: 1px solid var(--gray-150,#eaedf0); border-radius: 12px; margin-bottom: 8px; }
+    .nt-table { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 380px; }
+    .nt-table th { background: var(--gray-900); color: #fff; font-weight: 700; padding: 10px 12px; text-align: left; white-space: nowrap; }
+    .nt-table th:first-child, .nt-table td:first-child { text-align: center; width: 44px; }
+    .nt-table th:last-child, .nt-table td:last-child { text-align: right; }
+    .nt-table td { padding: 9px 12px; border-top: 1px solid var(--gray-100); color: var(--gray-600); }
+    .nt-table tr.hl td { background: rgba(184,134,11,.09); color: var(--brand-dark); font-weight: 800; }
+    .nt-table tr.hl td:first-child { color: var(--gold); }
+    .nt-source { display: flex; align-items: flex-start; gap: 6px; font-size: 11.5px; color: var(--gray-400); line-height: 1.5; margin: 6px 0 4px; }
+    .nt-source i { color: var(--gray-300); margin-top: 2px; }
     </style>
 </head>
 <body>
@@ -61,7 +84,7 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260829n"></script>
+<script src="../assets/data/mock-data.js?v=20260829o"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260829m"></script>
 <script>
