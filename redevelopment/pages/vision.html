@@ -517,81 +517,6 @@
         .vision-hero .hero-bg-photo { opacity: 0.15; }
     }
 
-    /* ── 회사연혁 ── */
-    .timeline-center {
-        position: relative;
-        max-width: 800px; margin: 0 auto;
-        padding: 0;
-    }
-    .timeline-center::before {
-        content: ''; position: absolute;
-        left: 50%; top: 0; bottom: 0;
-        width: 2px; background: var(--gray-200);
-        transform: translateX(-50%);
-    }
-    .tl-item {
-        display: flex; align-items: flex-start;
-        position: relative; margin-bottom: 28px;
-    }
-    .tl-item:last-child { margin-bottom: 0; }
-    .tl-left {
-        width: calc(50% - 28px); text-align: right;
-        padding-right: 0;
-    }
-    .tl-right {
-        width: calc(50% - 28px); text-align: left;
-        padding-left: 0;
-    }
-    .tl-dot {
-        position: absolute; left: 50%; top: 4px;
-        width: 14px; height: 14px; border-radius: 50%;
-        background: var(--visseum-gold); border: 3px solid #fff;
-        box-shadow: 0 0 0 1px var(--visseum-border), 0 2px 6px rgba(20,28,38,.12);
-        transform: translateX(-50%);
-        z-index: 2;
-    }
-    .tl-item.tl-recent .tl-dot {
-        width: 18px; height: 18px; top: 2px;
-        background: var(--visseum-yellow);
-        box-shadow: 0 0 0 5px rgba(255,196,0,.14), 0 2px 8px rgba(20,28,38,.16);
-    }
-    .tl-year {
-        font-size: 26px; font-weight: 900; color: #B8860B;
-        margin-bottom: 8px;
-    }
-    .tl-item.tl-recent .tl-year {
-        font-size: 26px;
-    }
-    .tl-item:nth-child(-n+3) .tl-year { font-weight: 900; }
-    .tl-events { list-style: none; }
-    .tl-events li {
-        font-size: 14px; color: var(--gray-600); line-height: 1.9;
-        position: relative;
-    }
-    .tl-item.tl-recent .tl-events li {
-        font-weight: 700; color: var(--gray-900);
-    }
-    .tl-item.tl-recent .tl-events li::before {
-        background: var(--gold);
-    }
-    .tl-item:nth-child(odd) { justify-content: flex-start; }
-    .tl-item:nth-child(odd) .tl-content { margin-left: calc(50% + 28px); }
-    .tl-item:nth-child(even) .tl-content {
-        margin-right: calc(50% + 28px);
-        text-align: right;
-    }
-    .tl-content { width: calc(50% - 28px); }
-    @media (max-width: 768px) {
-        .timeline-center::before { left: 16px; }
-        .tl-dot { left: 16px; }
-        .tl-item:nth-child(odd) .tl-content,
-        .tl-item:nth-child(even) .tl-content {
-            margin-left: 48px; margin-right: 0;
-            text-align: left; width: auto;
-        }
-    }
-    #history { scroll-margin-top: 88px; }
-
     </style>
 </head>
 <body>
@@ -697,13 +622,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- ══════ 회사연혁 ══════ -->
-        <div class="vs" id="history" style="margin-bottom:52px">
-            <div class="section-label">History</div>
-            <h2 class="section-title">회사연혁</h2>
-            <div class="timeline-center" id="timeline"></div>
         </div>
 
         <!-- ══════ 우리가 지키는 원칙 ══════ -->
@@ -814,28 +732,8 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260829u"></script>
+<script src="../assets/data/mock-data.js?v=20260829s"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260829r"></script>
-<script>
-(function() {
-    var info = MOCK.companyInfo;
-
-    /* ── 회사연혁 — center timeline ── */
-    var recentYears = ['2026','2025','2024'];
-    document.getElementById('timeline').innerHTML = info.history.map(function(h, i) {
-        var isRecent = recentYears.indexOf(h.year) !== -1;
-        return '<div class="tl-item' + (isRecent ? ' tl-recent' : '') + '">' +
-            '<div class="tl-dot"></div>' +
-            '<div class="tl-content">' +
-                '<div class="tl-year">' + h.year + '</div>' +
-                '<ul class="tl-events">' +
-                    h.items.map(function(item) { return '<li>' + item + '</li>'; }).join('') +
-                '</ul>' +
-            '</div>' +
-        '</div>';
-    }).join('');
-})();
-</script>
+<script src="../assets/js/common.js?v=20260829q"></script>
 </body>
 </html>
