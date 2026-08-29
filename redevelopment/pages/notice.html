@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260829i">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260829j">
     <style>
     .notice-row { cursor: pointer; }
     .notice-row:hover td:nth-child(2) { color: var(--accent); }
@@ -73,6 +73,13 @@
 
 <div class="page-body">
     <div class="inner">
+        <div class="tabs" id="noticeTabs" style="margin-bottom:24px;">
+            <button data-cat="전체">전체</button>
+            <button data-cat="수주">수주</button>
+            <button data-cat="외부">외부</button>
+            <button data-cat="내부">내부</button>
+            <button data-cat="기타">기타</button>
+        </div>
         <div class="tbl-wrap">
             <table class="tbl">
                 <thead>
@@ -90,18 +97,32 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260829s"></script>
+<script src="../assets/data/mock-data.js?v=20260829v"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260829q"></script>
+<script src="../assets/js/common.js?v=20260829s"></script>
 <script>
 (function() {
     const notices = DataService.getAll('notices');
     let openId = null;
 
+    const validCats = ['수주', '외부', '내부', '기타'];
+    const params = new URLSearchParams(location.search);
+    const catParam = params.get('cat');
+    let currentCat = validCats.includes(catParam) ? catParam : '전체';
+
+    function noticeCat(n) {
+        return validCats.includes(n.category) ? n.category : '기타';
+    }
+
     function render() {
+        const filtered = currentCat === '전체' ? notices : notices.filter(n => noticeCat(n) === currentCat);
         const tbody = document.getElementById('noticeBody');
-        tbody.innerHTML = notices.map((n, i) => {
-            const num = notices.length - i;
+        if (!filtered.length) {
+            tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--gray-400);padding:40px 0;">등록된 공지사항이 없습니다.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = filtered.map((n, i) => {
+            const num = filtered.length - i;
             const importantBadge = n.important ? '<span class="badge badge-important" style="margin-right:8px;">중요</span>' : '';
             const isOpen = openId === n.id;
             return `
@@ -133,6 +154,18 @@
             });
         });
     }
+
+    const tabsEl = document.getElementById('noticeTabs');
+    tabsEl.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.cat === currentCat));
+    tabsEl.addEventListener('click', e => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        tabsEl.querySelectorAll('button').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        currentCat = btn.dataset.cat;
+        openId = null;
+        render();
+    });
 
     render();
 })();

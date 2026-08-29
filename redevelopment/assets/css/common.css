@@ -145,6 +145,22 @@ button, input, select, textarea { font-family: inherit; }
 .util-bar .inner > a:first-of-type { margin-left: -8px; }
 @media (max-width: 768px) { .util-bar { display: none; } }
 
+/* ── UTILITY BAR — 공지사항 서브메뉴 ── */
+.util-item-drop { position: relative; }
+.util-drop-menu {
+  position: absolute; top: 100%; right: 0; margin-top: 4px; min-width: 88px;
+  background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(10,15,28,0.12);
+  padding: 6px; display: flex; flex-direction: column; gap: 2px;
+  opacity: 0; visibility: hidden; transform: translateY(-4px);
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  z-index: 10001;
+}
+.util-item-drop:hover .util-drop-menu,
+.util-item-drop:focus-within .util-drop-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.util-drop-menu a { padding: 7px 12px; border-radius: 6px; font-size: 11px; text-align: center; color: var(--gray-900); }
+.util-drop-menu a:hover { background: var(--gold-light); color: var(--gold); }
+
 /* ── HEADER ── */
 .header {
   background: #fff;

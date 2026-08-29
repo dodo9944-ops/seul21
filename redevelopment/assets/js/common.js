@@ -41,7 +41,16 @@ const App = (() => {
       <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링그룹</span>
       ${utilRight}
       <a href="${B}/pages/gallery.html">갤러리</a>
-      <a href="${B}/pages/notice.html">공지사항</a>
+      <div class="util-item-drop">
+        <a href="${B}/pages/notice.html">공지사항</a>
+        <div class="util-drop-menu">
+          <a href="${B}/pages/notice.html">전체</a>
+          <a href="${B}/pages/notice.html?cat=수주">수주</a>
+          <a href="${B}/pages/notice.html?cat=외부">외부</a>
+          <a href="${B}/pages/notice.html?cat=내부">내부</a>
+          <a href="${B}/pages/notice.html?cat=기타">기타</a>
+        </div>
+      </div>
     </div></div>
     <header class="header"><div class="inner">
       <a href="${B}/index.html" class="logo">
