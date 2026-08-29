@@ -446,8 +446,11 @@ return'<div class="pc" onclick="PF.open(\''+p.id+'\')">'+img+
 /* Pager */
 var pg=document.getElementById('pager');
 if(pages<=1){pg.innerHTML='';return}
+var PAGE_WIN=10;
+var winStart=Math.floor((curPage-1)/PAGE_WIN)*PAGE_WIN+1;
+var winEnd=Math.min(winStart+PAGE_WIN-1,pages);
 var h='<button class="arr" '+(curPage===1?'disabled':'')+' onclick="PF.page('+(curPage-1)+')"><i class="fa-solid fa-chevron-left"></i></button>';
-for(var i=1;i<=pages;i++)h+='<button'+(i===curPage?' class="active"':'')+' onclick="PF.page('+i+')">'+i+'</button>';
+for(var i=winStart;i<=winEnd;i++)h+='<button'+(i===curPage?' class="active"':'')+' onclick="PF.page('+i+')">'+i+'</button>';
 h+='<button class="arr" '+(curPage===pages?'disabled':'')+' onclick="PF.page('+(curPage+1)+')"><i class="fa-solid fa-chevron-right"></i></button>';
 pg.innerHTML=h;}
 
