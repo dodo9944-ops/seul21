@@ -78,12 +78,12 @@ const App = (() => {
         ${[
           { href:`${B}/pages/about.html`, label:'회사소개', icon:'fa-solid fa-building-columns', sub:[
             { href:`${B}/pages/about.html#ceo`, label:'CEO 인사말' },
-            { href:`${B}/pages/about.html#history`, label:'회사연혁' },
             { href:`${B}/pages/about.html#organization`, label:'조직도' },
             { href:`${B}/pages/about.html#ci`, label:'CI 소개' },
           ]},
           { href:`${B}/pages/vision.html`, label:'빛세움의 길', icon:'fa-solid fa-road', sub:[
             { href:`${B}/pages/vision.html#philosophy`, label:'빛세움 철학' },
+            { href:`${B}/pages/vision.html#history`, label:'회사연혁' },
             { href:`${B}/pages/vision.html#principles`, label:'우리가 지키는 원칙' },
             { href:`${B}/pages/vision.html#method`, label:'빛세움의 방식' },
             { href:`${B}/pages/vision.html#visual`, label:'공간으로 증명하는 신뢰' },
