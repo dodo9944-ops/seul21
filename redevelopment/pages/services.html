@@ -97,30 +97,17 @@
 
     /* 서울시 코디네이터 신뢰 바 */
     .coord-highlight {
-        display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
-        background: rgba(24,28,34,.88); border: 1px solid rgba(255,255,255,.08); border-radius: 16px;
-        padding: 17.6px 36px; margin-top: 10px;
+        display: flex; flex-wrap: wrap;
+        background: #FDF8EE; border: 1px solid rgba(197,139,0,.16); border-radius: 20px;
+        padding: 34px 12px; margin-top: 22px;
     }
-    .coord-highlight-lead { display: flex; align-items: center; gap: 20px; flex: 1 1 320px; min-width: 280px; }
-    .coord-highlight-icon {
-        width: 56px; height: 56px; border-radius: 12px; flex-shrink: 0;
-        background: #fff; border: 1.5px solid rgba(197,139,0,.5); color: var(--visseum-gold);
-        display: flex; align-items: center; justify-content: center; font-size: 22px;
-        padding: 9px; overflow: hidden;
-    }
-    .coord-highlight-icon img { width: 100%; height: 100%; object-fit: contain; display: block;
-    }
-    .coord-highlight-lead p { font-size: 14px; line-height: 1.6; color: #fff; font-weight: 600; }
-    .coord-highlight-stats { display: flex; gap: 0; flex: 2 1 480px; }
-    .coord-hl-item { flex: 1; text-align: center; padding: 0 16px; border-left: 1px solid rgba(255,255,255,.16); }
+    .coord-hl-item { flex: 1; min-width: 200px; text-align: center; padding: 0 20px; border-left: 1px solid rgba(10,15,28,.08); }
     .coord-hl-item:first-child { border-left: none; }
-    .coord-hl-num { font-size: 26px; font-weight: 800; color: var(--visseum-gold); margin-bottom: 6px; }
-    .coord-hl-num span { font-size: 15px; font-weight: 700; }
-    .coord-hl-desc { font-size: 11.5px; color: rgba(255,255,255,.78); line-height: 1.5; }
+    .coord-hl-num { font-size: 27px; font-weight: 800; color: #16181D; margin-bottom: 10px; letter-spacing: -.2px; }
+    .coord-hl-num .hl-gold { color: var(--visseum-gold); }
+    .coord-hl-desc { font-size: 13.5px; color: #6b6f76; }
     @media (max-width: 900px) {
-        .coord-highlight { flex-direction: column; align-items: stretch; }
-        .coord-highlight-stats { flex-wrap: wrap; }
-        .coord-hl-item { flex: 1 1 50%; border-left: none; border-top: 1px solid rgba(255,255,255,.16); padding: 16px 8px 0; margin-top: 16px; }
+        .coord-hl-item { flex: 1 1 50%; border-left: none; border-top: 1px solid rgba(10,15,28,.08); padding: 16px 8px 0; margin-top: 16px; }
         .coord-hl-item:nth-child(-n+2) { border-top: none; margin-top: 0; padding-top: 0; }
     }
 
@@ -707,16 +694,10 @@
             </div>
 
             <div class="coord-highlight">
-                <div class="coord-highlight-lead">
-                    <div class="coord-highlight-icon"><img src="../jpg/seoul-city-mark.jpg" alt="서울특별시 상징 마크"></div>
-                    <p>정비사업전문관리업계 최대 수준의<br>서울시 정비사업 코디네이터 전문인력 3인 체계</p>
-                </div>
-                <div class="coord-highlight-stats">
-                    <div class="coord-hl-item"><div class="coord-hl-num">3<span>인</span></div><div class="coord-hl-desc">서울시 코디네이터<br>전문인력 보유<br>(갈등책임관리관)</div></div>
-                    <div class="coord-hl-item"><div class="coord-hl-num">20<span>년+</span></div><div class="coord-hl-desc">평균 정비사업<br>실무경력</div></div>
-                    <div class="coord-hl-item"><div class="coord-hl-num">다수</div><div class="coord-hl-desc">공공지원 정비사업<br>코디네이터 수행</div></div>
-                    <div class="coord-hl-item"><div class="coord-hl-num">서울 전역</div><div class="coord-hl-desc">서울 전역 조합<br>자문 및 지원<br>(공사비 분쟁 협상 등)</div></div>
-                </div>
+                <div class="coord-hl-item"><div class="coord-hl-num">업계 <span class="hl-gold">최대</span></div><div class="coord-hl-desc">서울시 코디네이터 전문인력 3인</div></div>
+                <div class="coord-hl-item"><div class="coord-hl-num"><span class="hl-gold">20년+</span> 실무경험</div><div class="coord-hl-desc">정비사업 현장 경험 기반</div></div>
+                <div class="coord-hl-item"><div class="coord-hl-num">갈등 <span class="hl-gold">조정</span></div><div class="coord-hl-desc">이해관계 조율·공사비 협상 지원</div></div>
+                <div class="coord-hl-item"><div class="coord-hl-num">대관·조합 <span class="hl-gold">지원</span></div><div class="coord-hl-desc">행정기관 협의부터 사업 추진까지</div></div>
             </div>
         </div>
 
