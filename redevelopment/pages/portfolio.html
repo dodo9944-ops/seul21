@@ -112,20 +112,20 @@
     .pf-tabs-wrap .tabs button{display:inline-flex;align-items:center;gap:6px}
     .pf-tab-count{font-size:11px;font-weight:600;color:#111}
     .pf-tabs-wrap .tabs button.on .pf-tab-count{color:#fff}
+    /* 기존 중간 필터박스(유형/상태/총건수)를 상단 sticky 바 우측으로 이동 — 디자인 값 그대로 재사용 */
+    .pf-tabs-extra{display:flex;align-items:center;gap:14px;margin-left:auto;flex-wrap:wrap}
+    .pf-tabs-extra select{height:40px;padding:0 32px 0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13.5px;font-weight:500;color:var(--gray-800);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s;min-width:130px}
+    .pf-tabs-extra select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,.1)}
+    .pf-tabs-extra .rc{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap}
+    .pf-tabs-extra .rc strong{color:var(--brand-dark);font-weight:700}
     @media(max-width:640px){
       .pf-tabs-wrap{padding:14px 16px}
       .pf-tabs-wrap .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
       .pf-tabs-wrap .tabs::-webkit-scrollbar{display:none}
       .pf-tabs-wrap .tabs button{flex-shrink:0}
+      .pf-tabs-extra{width:100%;margin-left:0;justify-content:space-between}
+      .pf-tabs-extra select{flex:1;min-width:0}
     }
-
-    /* === Filter Bar (원래 레이아웃 원복 — 상단 키맵 탭과는 curType으로 연동) === */
-    .filter-bar{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding:16px 20px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100);flex-wrap:wrap}
-    .filter-bar select{height:40px;padding:0 32px 0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13.5px;font-weight:500;color:var(--gray-800);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s;min-width:130px}
-    .filter-bar select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,.1)}
-    .filter-bar .rc{margin-left:auto;font-size:14px;color:var(--gray-500);font-weight:500}
-    .filter-bar .rc strong{color:var(--brand-dark);font-weight:700}
-    @media(max-width:540px){.filter-bar{flex-direction:column;align-items:stretch;gap:10px}.filter-bar select{width:100%;min-width:unset}.filter-bar .rc{margin-left:0;text-align:center}}
 
     /* === All Cards Grid === */
     .pg-grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:24px;row-gap:36px}
@@ -284,6 +284,11 @@
             <button data-cat="코디네이터"><span class="pf-tab-label">서울시 코디네이터 등</span><span class="pf-tab-count"></span></button>
             <button data-cat="기타"><span class="pf-tab-label">기타사업</span><span class="pf-tab-count"></span></button>
         </div>
+        <div class="pf-tabs-extra">
+            <select id="fType"><option value="전체">유형 전체</option><option value="재개발">재개발사업</option><option value="재건축">재건축사업</option><option value="소규모정비">소규모정비사업</option><option value="리모델링">리모델링사업</option><option value="코디네이터">서울시 코디네이터 등</option><option value="기타">기타사업</option></select>
+            <select id="fStatus"><option value="전체">상태 전체</option><option value="진행중">진행중</option><option value="완료">완료</option></select>
+            <div class="rc" id="rc"></div>
+        </div>
     </div>
     <div id="pfTabsPlaceholder" style="display:none"></div>
     <div class="kpi-grid" id="kpiGrid"></div>
@@ -292,11 +297,6 @@
     <div class="feat-grid" id="featGrid"></div>
 
     <div class="sec-head"><h2 class="sec-title">전체 수행실적</h2></div>
-    <div class="filter-bar">
-        <select id="fType"><option value="전체">유형 전체</option><option value="재개발">재개발사업</option><option value="재건축">재건축사업</option><option value="소규모정비">소규모정비사업</option><option value="리모델링">리모델링사업</option><option value="코디네이터">서울시 코디네이터 등</option><option value="기타">기타사업</option></select>
-        <select id="fStatus"><option value="전체">상태 전체</option><option value="진행중">진행중</option><option value="완료">완료</option></select>
-        <div class="rc" id="rc"></div>
-    </div>
     <div class="pg-grid" id="pgGrid"></div>
     <div class="pager-wrap" id="pagerWrap">
         <div class="pager" id="pager"></div>
@@ -549,7 +549,7 @@ measure();apply(false);
 })();
 
 /* Events */
-document.getElementById('pfTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;setType(b.dataset.cat);window.scrollTo({top:document.querySelector('.filter-bar').offsetTop-80,behavior:'smooth'})});
+document.getElementById('pfTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;setType(b.dataset.cat);window.scrollTo({top:document.querySelector('.pg-grid').offsetTop-80,behavior:'smooth'})});
 document.getElementById('fType').addEventListener('change',function(){setType(this.value)});
 document.getElementById('fStatus').addEventListener('change',function(){curPage=1;renderAll()});
 document.getElementById('pfPerSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;renderAll()});
@@ -559,11 +559,11 @@ document.getElementById('dOverlay').addEventListener('click',function(e){if(e.ta
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDetail()});
 
 /* Global */
-window.PF={open:openDetail,close:closeDetail,page:function(n){curPage=n;renderAll();window.scrollTo({top:document.querySelector('.filter-bar').offsetTop-80,behavior:'smooth'})},filter:function(t){setType(t);window.scrollTo({top:document.querySelector('.filter-bar').offsetTop-80,behavior:'smooth'})}};
+window.PF={open:openDetail,close:closeDetail,page:function(n){curPage=n;renderAll();window.scrollTo({top:document.querySelector('.pg-grid').offsetTop-80,behavior:'smooth'})},filter:function(t){setType(t);window.scrollTo({top:document.querySelector('.pg-grid').offsetTop-80,behavior:'smooth'})}};
 
 renderTabCounts();renderTypeTabs();renderFeat();renderAll();
 // URL param ?type= 지원
-(function(){var p=new URLSearchParams(location.search).get('type');if(p){setType(p);document.querySelector('.filter-bar').scrollIntoView({behavior:'smooth',block:'start'});}})();
+(function(){var p=new URLSearchParams(location.search).get('type');if(p){setType(p);document.querySelector('.pg-grid').scrollIntoView({behavior:'smooth',block:'start'});}})();
 })();
 </script>
 </body>
