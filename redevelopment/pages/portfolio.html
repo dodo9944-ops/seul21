@@ -46,17 +46,16 @@
     .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
     .sec-title{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;position:relative}
     .sec-title::before{content:'';position:absolute;left:0;top:4px;width:3px;height:22px;border-radius:2px;background:linear-gradient(to bottom,var(--gold),rgba(184,134,11,.3))}
-    .sec-divider{margin:64px 0;border:none;border-top:1px solid var(--gray-200)}
 
     /* === Badges === */
     .pb{display:inline-flex;align-items:center;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;line-height:1}
     .pb-type{background:rgba(255,255,255,.85);color:#0A0F1C}
-    .pb-type.pb-r{background:rgba(23,28,38,.10);color:#171C26}
-    .pb-type.pb-c{background:rgba(0,154,68,.14);color:#00793A}
-    .pb-type.pb-s{background:rgba(0,104,183,.14);color:#00568F}
-    .pb-type.pb-m{background:rgba(14,124,134,.14);color:#0E7C86}
-    .pb-type.pb-k{background:rgba(107,63,160,.14);color:#6B3FA0}
-    .pb-type.pb-e{background:rgba(184,134,11,.14);color:#8a6508}
+    .pb-type.pb-r{background:rgba(23,28,38,.10);color:#0A0F1C}
+    .pb-type.pb-c{background:rgba(0,154,68,.14);color:#0A0F1C}
+    .pb-type.pb-s{background:rgba(0,104,183,.14);color:#0A0F1C}
+    .pb-type.pb-m{background:rgba(14,124,134,.14);color:#0A0F1C}
+    .pb-type.pb-k{background:rgba(107,63,160,.14);color:#0A0F1C}
+    .pb-type.pb-e{background:rgba(184,134,11,.14);color:#0A0F1C}
     .pb-ing{background:rgba(184,134,11,.9);color:#0A0F1C}
     .pb-done{background:rgba(255,255,255,.9);color:#0A0F1C}
 
@@ -104,18 +103,19 @@
     .fc.fc-primary{border-color:rgba(184,134,11,.2);box-shadow:0 6px 20px rgba(184,134,11,.08)}
     .fc.fc-primary .fc-img::after{content:'대표 실적';position:absolute;bottom:14px;right:14px;padding:4px 12px;background:rgba(184,134,11,.9);color:#0A0F1C;font-size:10px;font-weight:700;border-radius:5px;z-index:3;letter-spacing:.3px}
 
-    /* === Top Key-map Tabs (히어로 바로 아래) === */
-    .pf-tabs-wrap{padding-top:4px;margin-bottom:32px}
-    .pf-tabs-wrap .tabs{flex-wrap:wrap}
+    /* === Top Key-map Tabs (히어로 바로 아래) — 자료실 .ctrl-bar와 크기·외곽선 통일 === */
+    .page-body{padding-top:20px}
+    .pf-tabs-wrap{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap}
+    @media(max-width:640px){.pf-tabs-wrap{flex-direction:column;align-items:stretch;gap:12px;padding:16px}}
 
-    /* === Filter Bar === */
-    .filter-bar{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding:16px 20px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100);flex-wrap:wrap}
+    /* === Filter Bar (자료실 .ctrl-bar와 동일 규격) === */
+    .filter-bar{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap}
     .filter-bar select{height:40px;padding:0 32px 0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13.5px;font-weight:500;color:var(--gray-800);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s;min-width:130px}
     .filter-bar select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,.1)}
     .filter-bar .tabs{flex-wrap:wrap}
     .filter-bar .rc{margin-left:auto;font-size:14px;color:var(--gray-500);font-weight:500}
     .filter-bar .rc strong{color:var(--brand-dark);font-weight:700}
-    @media(max-width:540px){.filter-bar{flex-direction:column;align-items:stretch;gap:10px}.filter-bar select{width:100%;min-width:unset}.filter-bar .rc{margin-left:0;text-align:center}}
+    @media(max-width:640px){.filter-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.filter-bar select{width:100%;min-width:unset}.filter-bar .rc{margin-left:0;text-align:center}}
 
     /* === All Cards Grid === */
     .pg-grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:24px;row-gap:36px}
@@ -279,8 +279,6 @@
 
     <div class="sec-head"><h2 class="sec-title">주요 수행실적</h2></div>
     <div class="feat-grid" id="featGrid"></div>
-
-    <hr class="sec-divider">
 
     <div class="sec-head"><h2 class="sec-title">전체 수행실적</h2></div>
     <div class="filter-bar">
