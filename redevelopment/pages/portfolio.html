@@ -114,7 +114,7 @@
     .pf-tabs-wrap .tabs button.on .pf-tab-count{color:#fff}
     /* 기존 중간 필터박스(유형/상태/총건수)를 상단 sticky 바 우측으로 이동 — 디자인 값 그대로 재사용 */
     .pf-tabs-extra{display:flex;align-items:center;gap:14px;margin-left:auto;flex-wrap:wrap}
-    .pf-tabs-extra select{height:40px;padding:0 32px 0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13.5px;font-weight:500;color:var(--gray-800);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s;min-width:130px}
+    .pf-tabs-extra select{height:40px;padding:0 30px 0 12px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;font-weight:500;color:var(--gray-700);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s}
     .pf-tabs-extra select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,.1)}
     .pf-tabs-extra .rc{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap}
     .pf-tabs-extra .rc strong{color:var(--brand-dark);font-weight:700}
@@ -277,16 +277,16 @@
     <div class="pf-tabs-wrap" id="pfTabsWrap">
         <div class="tabs" id="pfTabs">
             <button data-cat="전체"><span class="pf-tab-label">전체보기</span><span class="pf-tab-count"></span></button>
-            <button data-cat="재개발"><span class="pf-tab-label">재개발사업</span><span class="pf-tab-count"></span></button>
-            <button data-cat="재건축"><span class="pf-tab-label">재건축사업</span><span class="pf-tab-count"></span></button>
-            <button data-cat="소규모정비"><span class="pf-tab-label">소규모정비사업</span><span class="pf-tab-count"></span></button>
-            <button data-cat="리모델링"><span class="pf-tab-label">리모델링사업</span><span class="pf-tab-count"></span></button>
+            <button data-cat="재개발"><span class="pf-tab-label">재개발</span><span class="pf-tab-count"></span></button>
+            <button data-cat="재건축"><span class="pf-tab-label">재건축</span><span class="pf-tab-count"></span></button>
+            <button data-cat="소규모정비"><span class="pf-tab-label">소규모정비</span><span class="pf-tab-count"></span></button>
+            <button data-cat="리모델링"><span class="pf-tab-label">리모델링</span><span class="pf-tab-count"></span></button>
             <button data-cat="코디네이터"><span class="pf-tab-label">서울시 코디네이터 등</span><span class="pf-tab-count"></span></button>
-            <button data-cat="기타"><span class="pf-tab-label">기타사업</span><span class="pf-tab-count"></span></button>
+            <button data-cat="기타"><span class="pf-tab-label">기타</span><span class="pf-tab-count"></span></button>
         </div>
         <div class="pf-tabs-extra">
-            <select id="fType"><option value="전체">유형 전체</option><option value="재개발">재개발사업</option><option value="재건축">재건축사업</option><option value="소규모정비">소규모정비사업</option><option value="리모델링">리모델링사업</option><option value="코디네이터">서울시 코디네이터 등</option><option value="기타">기타사업</option></select>
-            <select id="fStatus"><option value="전체">상태 전체</option><option value="진행중">진행중</option><option value="완료">완료</option></select>
+            <select id="fType"><option value="전체">유형</option><option value="재개발">재개발</option><option value="재건축">재건축</option><option value="소규모정비">소규모정비</option><option value="리모델링">리모델링</option><option value="코디네이터">서울시 코디네이터 등</option><option value="기타">기타</option></select>
+            <select id="fStatus"><option value="전체">상태</option><option value="진행중">진행중</option><option value="완료">완료</option></select>
             <div class="rc" id="rc"></div>
         </div>
     </div>
