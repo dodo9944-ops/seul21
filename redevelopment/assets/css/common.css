@@ -1145,9 +1145,6 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .d-hero-fb[data-t=r]{background:linear-gradient(135deg,#F5F5F6,#DADBDD)}
 .d-hero-fb[data-t=c]{background:linear-gradient(135deg,#F2FBF6,#DCF3E4)}
 .d-hero-fb[data-t=s]{background:linear-gradient(135deg,#F0F7FC,#DCEBF7)}
-.d-hero-fb[data-t=m]{background:linear-gradient(135deg,#EFFCFF,#CFF3F8)}
-.d-hero-fb[data-t=k]{background:linear-gradient(135deg,#F5F0FF,#E4D4FA)}
-.d-hero-fb[data-t=e]{background:linear-gradient(135deg,#FFFBEE,#FFF3C4)}
 .d-hero-fb[data-t=news]{background:linear-gradient(135deg,#FFFDF7,#FFF3C4)}
 .d-hero-fb .d-title-area{position:absolute;bottom:0;left:0;right:0;padding:24px 32px;z-index:2;background:linear-gradient(to top,rgba(255,255,255,.6),transparent)}
 .d-hero-fb .d-title-area .badges{display:flex;gap:6px;margin-bottom:10px}
