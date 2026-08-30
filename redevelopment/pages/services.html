@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260830g">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260830j">
     <style>
     .sv-section { margin-bottom:35px; }
     .sv-section:last-child { margin-bottom:0; }
@@ -97,30 +97,17 @@
 
     /* 서울시 코디네이터 신뢰 바 */
     .coord-highlight {
-        display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
-        background: rgba(24,28,34,.88); border: 1px solid rgba(255,255,255,.08); border-radius: 16px;
-        padding: 17.6px 36px; margin-top: 10px;
+        display: flex; flex-wrap: wrap;
+        background: transparent; border: 1px solid rgba(0,0,0,.15); border-radius: 20px;
+        padding: 0 12px; margin-top: 22px;
     }
-    .coord-highlight-lead { display: flex; align-items: center; gap: 20px; flex: 1 1 320px; min-width: 280px; }
-    .coord-highlight-icon {
-        width: 56px; height: 56px; border-radius: 12px; flex-shrink: 0;
-        background: #fff; border: 1.5px solid rgba(197,139,0,.5); color: var(--visseum-gold);
-        display: flex; align-items: center; justify-content: center; font-size: 22px;
-        padding: 9px; overflow: hidden;
-    }
-    .coord-highlight-icon img { width: 100%; height: 100%; object-fit: contain; display: block;
-    }
-    .coord-highlight-lead p { font-size: 14px; line-height: 1.6; color: #fff; font-weight: 600; }
-    .coord-highlight-stats { display: flex; gap: 0; flex: 2 1 480px; }
-    .coord-hl-item { flex: 1; text-align: center; padding: 0 16px; border-left: 1px solid rgba(255,255,255,.16); }
+    .coord-hl-item { flex: 1; min-width: 200px; text-align: center; padding: 24px 20px; border-left: 1px solid rgba(0,0,0,.15); display: flex; flex-direction: column; justify-content: center; }
     .coord-hl-item:first-child { border-left: none; }
-    .coord-hl-num { font-size: 26px; font-weight: 800; color: var(--visseum-gold); margin-bottom: 6px; }
-    .coord-hl-num span { font-size: 15px; font-weight: 700; }
-    .coord-hl-desc { font-size: 11.5px; color: rgba(255,255,255,.78); line-height: 1.5; }
+    .coord-hl-num { font-size: 22px; font-weight: 800; color: #16181D; margin-bottom: 4px; }
+    .coord-hl-num .hl-gold { color: var(--visseum-gold); }
+    .coord-hl-desc { font-size: 13px; color: #6b6f76; }
     @media (max-width: 900px) {
-        .coord-highlight { flex-direction: column; align-items: stretch; }
-        .coord-highlight-stats { flex-wrap: wrap; }
-        .coord-hl-item { flex: 1 1 50%; border-left: none; border-top: 1px solid rgba(255,255,255,.16); padding: 16px 8px 0; margin-top: 16px; }
+        .coord-hl-item { flex: 1 1 50%; border-left: none; border-top: 1px solid rgba(0,0,0,.15); padding: 16px 8px 0; margin-top: 16px; }
         .coord-hl-item:nth-child(-n+2) { border-top: none; margin-top: 0; padding-top: 0; }
     }
 
@@ -435,6 +422,7 @@
 
         <!-- 개요 -->
         <div class="sv-section" id="overview">
+            <div class="section-label">Business Overview</div>
             <h2 class="section-title">사업분야 개요</h2>
             <p class="sv-intro">
                 빛세움은 재개발·재건축·소규모정비사업을 중심으로, 도시정비사업의 실제 추진을 지원하는 전문조직입니다. 사업성 검토, 인허가 대응, 문서체계화, 이해관계 조율, 추진관리까지 분리하지 않고 하나의 흐름으로 통합 지원합니다.
@@ -451,6 +439,7 @@
 
         <!-- 정비사업 -->
         <div class="sv-section" id="urban-renewal">
+            <div class="section-label">Urban Renewal</div>
             <h2 class="section-title">정비사업</h2>
             <div class="sv-card-grid">
 
@@ -567,6 +556,7 @@
 
         <!-- 특화사업 -->
         <div class="sv-section" id="engineering" style="margin-top:64px">
+            <div class="section-label">Engineering Services</div>
             <h2 class="section-title">엔지니어링사업</h2>
             <div class="sv-card-grid">
 
@@ -627,6 +617,7 @@
 
         <!-- 그룹사 -->
         <div class="sv-section" id="business" style="margin-top:64px">
+            <div class="section-label">Group Companies</div>
             <h2 class="section-title">도시정비광고 등</h2>
             <div class="pro-grid group-grid" id="proGrid">
                 <a class="pro-card pro-card-blue" href="http://www.comwayblue.co.kr/" target="_blank" rel="noopener">
@@ -646,6 +637,7 @@
 
         <!-- 서울시 정비사업 코디네이터 -->
         <div class="sv-section" id="coordinator" style="margin-top:64px">
+            <div class="section-label">Public Advisory Service</div>
             <h2 class="section-title">서울시 정비사업 코디네이터·공공자문 업무</h2>
             <div class="coord-grid">
 
@@ -670,7 +662,7 @@
                     <div class="coord-card-head">
                         <div class="coord-badge">Seoul City Coordinator</div>
                         <div class="coord-head-row">
-                            <div class="coord-photo empty"><i class="fa-solid fa-user"></i></div>
+                            <div class="coord-photo"><img src="../jpg/최현태.png" alt="최현태 서울시 정비사업 코디네이터"></div>
                             <div class="coord-id">
                                 <div class="coord-name">최현태</div>
                                 <div class="coord-role">현 서울시 정비사업 코디네이터</div>
@@ -707,16 +699,10 @@
             </div>
 
             <div class="coord-highlight">
-                <div class="coord-highlight-lead">
-                    <div class="coord-highlight-icon"><img src="../jpg/seoul-city-mark.jpg" alt="서울특별시 상징 마크"></div>
-                    <p>정비사업전문관리업계 최대 수준의<br>서울시 정비사업 코디네이터 전문인력 3인 체계</p>
-                </div>
-                <div class="coord-highlight-stats">
-                    <div class="coord-hl-item"><div class="coord-hl-num">3<span>인</span></div><div class="coord-hl-desc">서울시 코디네이터<br>전문인력 보유<br>(갈등책임관리관)</div></div>
-                    <div class="coord-hl-item"><div class="coord-hl-num">20<span>년+</span></div><div class="coord-hl-desc">평균 정비사업<br>실무경력</div></div>
-                    <div class="coord-hl-item"><div class="coord-hl-num">다수</div><div class="coord-hl-desc">공공지원 정비사업<br>코디네이터 수행</div></div>
-                    <div class="coord-hl-item"><div class="coord-hl-num">서울 전역</div><div class="coord-hl-desc">서울 전역 조합<br>자문 및 지원<br>(공사비 분쟁 협상 등)</div></div>
-                </div>
+                <div class="coord-hl-item"><div class="coord-hl-num">업계 <span class="hl-gold">최대</span></div><div class="coord-hl-desc">서울시 코디네이터 전문인력 3인</div></div>
+                <div class="coord-hl-item"><div class="coord-hl-num"><span class="hl-gold">20년+</span> 실무경험</div><div class="coord-hl-desc">정비사업 현장 경험 기반</div></div>
+                <div class="coord-hl-item"><div class="coord-hl-num">갈등 <span class="hl-gold">조정</span></div><div class="coord-hl-desc">이해관계 조율·공사비 협상 지원</div></div>
+                <div class="coord-hl-item"><div class="coord-hl-num">대관·조합 <span class="hl-gold">지원</span></div><div class="coord-hl-desc">행정기관 협의부터 사업 추진까지</div></div>
             </div>
         </div>
 
@@ -726,6 +712,6 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260830b"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260830e"></script>
+<script src="../assets/js/common.js?v=20260830h"></script>
 </body>
 </html>
