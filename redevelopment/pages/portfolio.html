@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260830e">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260830g">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260830b">
     <style>
     /* === Hero === */
@@ -54,6 +54,9 @@
     .pb-type.pb-r{background:rgba(23,28,38,.10);color:#171C26}
     .pb-type.pb-c{background:rgba(0,154,68,.14);color:#00793A}
     .pb-type.pb-s{background:rgba(0,104,183,.14);color:#00568F}
+    .pb-type.pb-m{background:rgba(14,124,134,.14);color:#0E7C86}
+    .pb-type.pb-k{background:rgba(107,63,160,.14);color:#6B3FA0}
+    .pb-type.pb-e{background:rgba(184,134,11,.14);color:#8a6508}
     .pb-ing{background:rgba(184,134,11,.9);color:#0A0F1C}
     .pb-done{background:rgba(255,255,255,.9);color:#0A0F1C}
 
@@ -71,11 +74,17 @@
     .fc-fb[data-t=r]{background:linear-gradient(135deg,#F5F5F6,#DADBDD)}
     .fc-fb[data-t=c]{background:linear-gradient(135deg,#F2FBF6,#DCF3E4)}
     .fc-fb[data-t=s]{background:linear-gradient(135deg,#F0F7FC,#DCEBF7)}
+    .fc-fb[data-t=m]{background:linear-gradient(135deg,#EFFCFF,#CFF3F8)}
+    .fc-fb[data-t=k]{background:linear-gradient(135deg,#F5F0FF,#E4D4FA)}
+    .fc-fb[data-t=e]{background:linear-gradient(135deg,#FFFBEE,#FFF3C4)}
     .fc-fb .fbi{width:64px;height:64px;border-radius:50%;background:rgba(20,28,38,.05);border:1px solid rgba(20,28,38,.08);display:flex;align-items:center;justify-content:center}
     .fc-fb .fbi i{font-size:28px;color:var(--visseum-gold)}
     .fc-fb[data-t=r] .fbi i{color:#171C26}
     .fc-fb[data-t=c] .fbi i{color:#009A44}
     .fc-fb[data-t=s] .fbi i{color:#0068B7}
+    .fc-fb[data-t=m] .fbi i{color:#0E7C86}
+    .fc-fb[data-t=k] .fbi i{color:#6B3FA0}
+    .fc-fb[data-t=e] .fbi i{color:#8a6508}
     .fc-fb .fbl{font-size:13px;font-weight:600;color:var(--visseum-text)}
     .fc-fb .badges{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
     .fc-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
@@ -95,10 +104,15 @@
     .fc.fc-primary{border-color:rgba(184,134,11,.2);box-shadow:0 6px 20px rgba(184,134,11,.08)}
     .fc.fc-primary .fc-img::after{content:'대표 실적';position:absolute;bottom:14px;right:14px;padding:4px 12px;background:rgba(184,134,11,.9);color:#0A0F1C;font-size:10px;font-weight:700;border-radius:5px;z-index:3;letter-spacing:.3px}
 
+    /* === Top Key-map Tabs (히어로 바로 아래) === */
+    .pf-tabs-wrap{padding-top:4px;margin-bottom:32px}
+    .pf-tabs-wrap .tabs{flex-wrap:wrap}
+
     /* === Filter Bar === */
     .filter-bar{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding:16px 20px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100);flex-wrap:wrap}
     .filter-bar select{height:40px;padding:0 32px 0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13.5px;font-weight:500;color:var(--gray-800);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s;min-width:130px}
     .filter-bar select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,.1)}
+    .filter-bar .tabs{flex-wrap:wrap}
     .filter-bar .rc{margin-left:auto;font-size:14px;color:var(--gray-500);font-weight:500}
     .filter-bar .rc strong{color:var(--brand-dark);font-weight:700}
     @media(max-width:540px){.filter-bar{flex-direction:column;align-items:stretch;gap:10px}.filter-bar select{width:100%;min-width:unset}.filter-bar .rc{margin-left:0;text-align:center}}
@@ -118,11 +132,17 @@
     .pc-fb[data-t=r]{background:linear-gradient(135deg,#F5F5F6,#DADBDD)}
     .pc-fb[data-t=c]{background:linear-gradient(135deg,#F2FBF6,#DCF3E4)}
     .pc-fb[data-t=s]{background:linear-gradient(135deg,#F0F7FC,#DCEBF7)}
+    .pc-fb[data-t=m]{background:linear-gradient(135deg,#EFFCFF,#CFF3F8)}
+    .pc-fb[data-t=k]{background:linear-gradient(135deg,#F5F0FF,#E4D4FA)}
+    .pc-fb[data-t=e]{background:linear-gradient(135deg,#FFFBEE,#FFF3C4)}
     .pc-fb .fbi{width:48px;height:48px;border-radius:50%;background:rgba(20,28,38,.05);border:1px solid rgba(20,28,38,.08);display:flex;align-items:center;justify-content:center}
     .pc-fb .fbi i{font-size:20px;color:var(--visseum-gold)}
     .pc-fb[data-t=r] .fbi i{color:#171C26}
     .pc-fb[data-t=c] .fbi i{color:#009A44}
     .pc-fb[data-t=s] .fbi i{color:#0068B7}
+    .pc-fb[data-t=m] .fbi i{color:#0E7C86}
+    .pc-fb[data-t=k] .fbi i{color:#6B3FA0}
+    .pc-fb[data-t=e] .fbi i{color:#8a6508}
     .pc-fb .badges{position:absolute;top:10px;left:10px;display:flex;gap:5px;z-index:2}
     .pc-body{padding:18px 20px 22px;display:flex;flex-direction:column;flex:1}
     .pc-body .pn{font-size:15px;font-weight:700;color:var(--gray-900);margin-bottom:10px;line-height:1.4}
@@ -244,6 +264,17 @@
 </div>
 
 <div class="page-body"><div class="inner">
+    <div class="pf-tabs-wrap">
+        <div class="tabs" id="pfTabs">
+            <button data-cat="전체">전체보기</button>
+            <button data-cat="재개발">재개발사업</button>
+            <button data-cat="재건축">재건축사업</button>
+            <button data-cat="소규모정비">소규모정비사업</button>
+            <button data-cat="리모델링">리모델링사업</button>
+            <button data-cat="코디네이터">서울시 코디네이터 등</button>
+            <button data-cat="기타">기타사업</button>
+        </div>
+    </div>
     <div class="kpi-grid" id="kpiGrid"></div>
 
     <div class="sec-head"><h2 class="sec-title">주요 수행실적</h2></div>
@@ -253,7 +284,15 @@
 
     <div class="sec-head"><h2 class="sec-title">전체 수행실적</h2></div>
     <div class="filter-bar">
-        <select id="fType"><option value="전체">유형 전체</option><option value="재개발">재개발</option><option value="재건축">재건축</option><option value="소규모정비">소규모정비</option></select>
+        <div class="tabs" id="fTypeTabs">
+            <button data-cat="전체">전체보기</button>
+            <button data-cat="재개발">재개발사업</button>
+            <button data-cat="재건축">재건축사업</button>
+            <button data-cat="소규모정비">소규모정비사업</button>
+            <button data-cat="리모델링">리모델링사업</button>
+            <button data-cat="코디네이터">서울시 코디네이터 등</button>
+            <button data-cat="기타">기타사업</button>
+        </div>
         <select id="fStatus"><option value="전체">상태 전체</option><option value="진행중">진행중</option><option value="완료">완료</option></select>
         <div class="rc" id="rc"></div>
     </div>
@@ -282,12 +321,12 @@
 <script src="../assets/js/common.js?v=20260830e"></script>
 <script>
 (function(){
-var D=MOCK.portfolio, PER=6, curPage=1;
+var D=MOCK.portfolio, PER=6, curPage=1, curType='전체';
 
 /* helpers */
-function ti(t){return{'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney'}[t]||'fa-building-columns'}
-function dt(t){return t==='재건축'?'c':t==='소규모정비'?'s':'r'}
-function tc(t){return t==='c'?'#009A44':t==='s'?'#0068B7':'#171C26'}
+function ti(t){return{'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney','리모델링':'fa-arrows-rotate','코디네이터':'fa-user-tie','기타':'fa-ellipsis'}[t]||'fa-building-columns'}
+function dt(t){return{'재건축':'c','소규모정비':'s','리모델링':'m','코디네이터':'k','기타':'e'}[t]||'r'}
+function tc(t){return{c:'#009A44',s:'#0068B7',m:'#0E7C86',k:'#6B3FA0',e:'#8a6508'}[t]||'#171C26'}
 function sb(s){return s==='완료'?'pb-done':'pb-ing'}
 function bg(p){return'<span class="pb pb-type pb-'+dt(p.type)+'">'+p.type+'</span><span class="pb '+sb(p.status)+'">'+p.status+'</span>'}
 function safe(v){return v||'정보 확인중'}
@@ -325,7 +364,7 @@ return'<div class="fc'+primary+'" onclick="PF.open(\''+p.id+'\')">'+img+
 
 /* Filtered items — 진행중 최신순 → 완료 최신순 */
 function getFiltered(){
-var ft=document.getElementById('fType').value,fs=document.getElementById('fStatus').value;
+var ft=curType,fs=document.getElementById('fStatus').value;
 var items=D.filter(function(p){
 if(ft!=='전체'&&p.type!==ft)return false;
 if(fs!=='전체'&&p.status!==fs)return false;
@@ -446,8 +485,15 @@ function closeDetail(){
 document.getElementById('dOverlay').classList.remove('open');
 document.body.style.overflow='';document.body.style.paddingRight=''}
 
+/* Type tabs (히어로 아래 키맵 메뉴 + 필터바, 동일 카테고리 공유) */
+function renderTypeTabs(){
+document.querySelectorAll('#pfTabs button, #fTypeTabs button').forEach(function(b){b.classList.toggle('on',b.dataset.cat===curType)});
+}
+function setType(t){curType=t;curPage=1;renderTypeTabs();renderAll()}
+
 /* Events */
-document.getElementById('fType').addEventListener('change',function(){curPage=1;renderAll()});
+document.getElementById('pfTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;setType(b.dataset.cat);window.scrollTo({top:document.querySelector('.filter-bar').offsetTop-80,behavior:'smooth'})});
+document.getElementById('fTypeTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;setType(b.dataset.cat)});
 document.getElementById('fStatus').addEventListener('change',function(){curPage=1;renderAll()});
 document.getElementById('pfPerSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;renderAll()});
 document.getElementById('dCloseTop').addEventListener('click',closeDetail);
@@ -456,11 +502,11 @@ document.getElementById('dOverlay').addEventListener('click',function(e){if(e.ta
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDetail()});
 
 /* Global */
-window.PF={open:openDetail,close:closeDetail,page:function(n){curPage=n;renderAll();window.scrollTo({top:document.querySelector('.filter-bar').offsetTop-80,behavior:'smooth'})},filter:function(t){document.getElementById('fType').value=t;curPage=1;renderAll();window.scrollTo({top:document.querySelector('.filter-bar').offsetTop-80,behavior:'smooth'})}};
+window.PF={open:openDetail,close:closeDetail,page:function(n){curPage=n;renderAll();window.scrollTo({top:document.querySelector('.filter-bar').offsetTop-80,behavior:'smooth'})},filter:function(t){setType(t);window.scrollTo({top:document.querySelector('.filter-bar').offsetTop-80,behavior:'smooth'})}};
 
-renderFeat();renderAll();
+renderTypeTabs();renderFeat();renderAll();
 // URL param ?type= 지원
-(function(){var p=new URLSearchParams(location.search).get('type');if(p){var s=document.getElementById('fType');if(s){s.value=p;renderAll();document.querySelector('.filter-bar').scrollIntoView({behavior:'smooth',block:'start'});}}})();
+(function(){var p=new URLSearchParams(location.search).get('type');if(p){setType(p);document.querySelector('.filter-bar').scrollIntoView({behavior:'smooth',block:'start'});}})();
 })();
 </script>
 </body>
