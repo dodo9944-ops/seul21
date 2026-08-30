@@ -23,6 +23,17 @@
     .notice-row td:nth-child(2) { font-weight: 500; transition: color var(--transition); }
     /* 상세 본문(.notice-detail-content, .nt-*) 및 .badge-important 스타일은
        common.css로 이동 — NoticeDetailModal(팝업)과 공유 */
+
+    /* 카테고리 탭바 — 업무실적/갤러리 탭바와 동일한 규격으로 통일 */
+    #noticeTabs{display:flex;align-items:center;gap:0;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
+    #noticeTabs button{padding:6px 14px;border-right:1px solid var(--gray-200)}
+    #noticeTabs button:first-child{padding-left:0}
+    #noticeTabs button:last-child{border-right:none}
+    @media(max-width:640px){
+      #noticeTabs{padding:14px 16px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+      #noticeTabs::-webkit-scrollbar{display:none}
+      #noticeTabs button{flex-shrink:0}
+    }
     </style>
 </head>
 <body>
@@ -42,7 +53,7 @@
 
 <div class="page-body">
     <div class="inner">
-        <div class="tabs" id="noticeTabs" style="margin-bottom:24px;">
+        <div class="tabs" id="noticeTabs">
             <button data-cat="전체">전체</button>
             <button data-cat="수주소식">수주소식</button>
             <button data-cat="회사소식">회사소식</button>

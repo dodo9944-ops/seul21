@@ -26,6 +26,17 @@
     .modal .guide-content strong,
     .modal .guide-content b { color: var(--gray-900); }
     .modal { max-width: 640px; }
+
+    /* 카테고리 탭바 — 업무실적/자료실/갤러리/공지사항 탭바와 동일한 규격으로 통일 */
+    #categoryTabs{display:flex;align-items:center;gap:0;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
+    #categoryTabs button{padding:6px 14px;border-right:1px solid var(--gray-200)}
+    #categoryTabs button:first-child{padding-left:0}
+    #categoryTabs button:last-child{border-right:none}
+    @media(max-width:640px){
+      #categoryTabs{padding:14px 16px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+      #categoryTabs::-webkit-scrollbar{display:none}
+      #categoryTabs button{flex-shrink:0}
+    }
     </style>
 </head>
 <body>
@@ -49,7 +60,7 @@
 
 <div class="page-body">
     <div class="inner">
-        <div class="tabs" id="categoryTabs" style="margin-bottom:24px;">
+        <div class="tabs" id="categoryTabs">
             <button class="on" data-cat="전체">전체</button>
             <button data-cat="양도소득세">양도소득세</button>
             <button data-cat="취득세">취득세</button>

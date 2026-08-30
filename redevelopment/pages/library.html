@@ -38,8 +38,10 @@
     .page-body.lib-page > .inner{overflow:hidden}
     .lib-item{min-width:0;max-width:100%}
 
-    /* === 전체자료 타이틀 (홈페이지 .section-title 재사용) === */
-    .lib-all-title{margin-bottom:28px}
+    /* === 전체자료 타이틀 — 바로 위 '주요뉴스'(.pop-head h3)와 완전히 동일한 규격으로 통일 === */
+    .lib-all-title{margin-bottom:32px}
+    .lib-all-title .section-title{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;letter-spacing:normal;font-family:var(--font)}
+    .lib-all-title .section-title::before{left:0;top:4px;width:3px;height:22px;border-radius:2px}
 
     /* === Control Bar === */
     .ctrl-bar{display:flex;align-items:center;gap:16px;margin-bottom:48px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
@@ -252,8 +254,6 @@
 
 <div class="page-body lib-page"><div class="inner" id="libContent">
 
-    <div class="section-head lib-all-title"><h2 class="section-title">전체자료</h2></div>
-
     <div class="ctrl-bar" id="ctrlBarWrap">
         <div class="tabs" id="ctrlNav">
             <button data-cat="전체">전체</button>
@@ -275,6 +275,8 @@
     <div id="ctrlBarPlaceholder" style="display:none"></div>
 
     <div class="pop-sec" id="libFeatured"></div>
+
+    <div class="section-head lib-all-title"><h2 class="section-title">전체자료</h2></div>
 
     <div class="lib-list" id="libList"></div>
 
