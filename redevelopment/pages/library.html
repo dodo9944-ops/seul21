@@ -63,6 +63,9 @@
     #ctrlNav button:hover,#ctrlNav a:hover{background:none;color:var(--gray-900)}
     #ctrlNav button.on{color:var(--gold);font-weight:700}
     #ctrlNav button.on::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:20px;height:2px;border-radius:1px;background:var(--gold)}
+    /* 탭별 자료 건수 — 업무실적(.pf-tab-count)과 동일한 표기 */
+    .ctrl-nav-count{font-size:11px;font-weight:600;color:#111;margin-left:6px}
+    #ctrlNav button.on .ctrl-nav-count{color:var(--gold)}
     @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ctrl-sort{margin-left:0;justify-content:flex-end}#ctrlNav{flex-wrap:wrap;row-gap:10px}}
 
     /* === Popular Section === */
@@ -270,10 +273,10 @@
 
     <div class="ctrl-bar" id="ctrlBarWrap">
         <div class="tabs" id="ctrlNav">
-            <button data-cat="전체">전체</button>
-            <button data-cat="주요뉴스">주요뉴스</button>
-            <button data-cat="법령">관계법령</button>
-            <button data-cat="서식가이드">서식·매뉴얼</button>
+            <button data-cat="전체">전체<span class="ctrl-nav-count"></span></button>
+            <button data-cat="주요뉴스">주요뉴스<span class="ctrl-nav-count"></span></button>
+            <button data-cat="법령">관계법령<span class="ctrl-nav-count"></span></button>
+            <button data-cat="서식가이드">서식·매뉴얼<span class="ctrl-nav-count"></span></button>
             <a href="gallery.html">갤러리</a>
         </div>
         <div class="ctrl-sort">
@@ -359,6 +362,15 @@ var catDefs=[
     {key:'서식가이드',keys:['서식','가이드','절차·서류'],icon:'fa-file-pen',label:'서식·매뉴얼'}
 ];
 function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allItems.forEach(function(i){catDefs.forEach(function(d){if(d.keys.indexOf(i.category)>=0)c[d.key]++})});return c}
+function renderCtrlNavCounts(){
+    var counts=getCatCounts();
+    document.querySelectorAll('#ctrlNav button[data-cat]').forEach(function(b){
+        var cat=b.dataset.cat;
+        var n=cat==='전체'?allItems.length:(counts[cat]||0);
+        var span=b.querySelector('.ctrl-nav-count');
+        if(span)span.textContent=n+'건';
+    });
+}
 
 /* Tabs */
 function renderTabs(){
@@ -665,7 +677,7 @@ if(item){item.downloads=(item.downloads||0)+1}render()}
 window.handleDownload=handleDownload;window.openNewsPopup=openNewsPopup;
 window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.querySelector('.ctrl-bar').offsetTop-80,behavior:'smooth'})}};
 
-renderTabs();render();
+renderTabs();renderCtrlNavCounts();render();
 var urlId=new URLSearchParams(location.search).get('id');
 if(urlId){handleDownload(urlId)}
 })();
