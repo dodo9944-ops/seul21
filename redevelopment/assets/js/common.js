@@ -194,7 +194,7 @@ const App = (() => {
           <h5>고객센터</h5>
           <a href="tel:024787114" class="footer-phone" aria-label="빛세움 대표전화 02-478-7114로 전화하기">02-478-7114</a>
           <a href="mailto:visseum@visseum.co.kr" class="email-link"><i class="fa-solid fa-envelope" style="font-size:11px"></i> visseum@visseum.co.kr</a>
-          <p>FAX 02-478-6114<br><span class="footer-address-link" id="footerAddressLink">서울특별시 강동구 성내로6길 50, 피스센터 5층</span></p>
+          <p>FAX 02-478-6114<br><span class="footer-address-link" id="footerAddressLink">서울시 강동구 성내로6길 50, 피스센터 5층</span></p>
         </div>
       </div>
     </div></footer>
