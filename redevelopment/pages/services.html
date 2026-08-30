@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260830j">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260831a">
     <style>
     .sv-section { margin-bottom:35px; }
     .sv-section:last-child { margin-bottom:0; }
@@ -205,6 +205,11 @@
     }
 
     
+    /* 히어로 밑 여백 = services-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 본문 상단 보정(48px) = 총 60px */
+    @media (min-width: 601px) {
+        .page-body { padding-top: 48px; }
+    }
+
     /* === Services Hero (about-hero 3안 패밀리) === */
     .services-hero {
         background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
@@ -423,7 +428,7 @@
         <!-- 개요 -->
         <div class="sv-section" id="overview">
             <div class="section-label">Business Overview</div>
-            <h2 class="section-title">사업분야 개요</h2>
+            <h2 class="section-title">사업개요</h2>
             <p class="sv-intro">
                 빛세움은 재개발·재건축·소규모정비사업을 중심으로, 도시정비사업의 실제 추진을 지원하는 전문조직입니다. 사업성 검토, 인허가 대응, 문서체계화, 이해관계 조율, 추진관리까지 분리하지 않고 하나의 흐름으로 통합 지원합니다.
             </p>
@@ -710,8 +715,8 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260830b"></script>
+<script src="../assets/data/mock-data.js?v=20260831"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260830h"></script>
+<script src="../assets/js/common.js?v=20260831a"></script>
 </body>
 </html>

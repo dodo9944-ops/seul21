@@ -262,6 +262,25 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .gnb a.active::after { width: 32px; }
 .gnb a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px; }
 
+/* ── GNB — 드롭다운 서브메뉴 ── */
+.gnb-item { position: relative; }
+.gnb-caret { font-size: 9px; margin-left: 4px; opacity: 0.55; transition: transform var(--transition); }
+.gnb-item:hover .gnb-caret, .gnb-item:focus-within .gnb-caret { transform: rotate(180deg); }
+.gnb-drop {
+  position: absolute; top: 100%; left: 50%; margin-top: 14px; min-width: 168px;
+  background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(10,15,28,0.12);
+  padding: 8px; display: flex; flex-direction: column; gap: 2px;
+  opacity: 0; visibility: hidden; transform: translate(-50%, -4px);
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  z-index: 10001;
+}
+.gnb-item:hover .gnb-drop,
+.gnb-item:focus-within .gnb-drop { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.gnb-drop a { padding: 9px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--gray-800); text-align: left; white-space: nowrap; }
+.gnb-drop a::after { content: none; }
+.gnb-drop a:hover { background: var(--gold-light); color: var(--gold); }
+
 /* ── HEADER ACTIONS ── */
 .header-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; margin-left: 4px; }
 .header-actions .icon-btn {
