@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260830g">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260830h">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260830b">
     <style>
     /* ================================================================
@@ -46,7 +46,16 @@
     .ctrl-sort select:focus{border-color:var(--gold);outline:none}
     .ctrl-count{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap}
     .ctrl-count strong{color:var(--brand-dark);font-weight:700}
-    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ctrl-sort{margin-left:0;justify-content:flex-end}}
+    /* 모바일: .tabs 가로 스크롤은 common.css 공통 규칙 사용.
+       탭 줄이 화면폭을 밀어내며 '갤러리' 탭·정렬 셀렉트가 잘리던 문제 →
+       탭(1행) / 건수·정렬(1행) 2단 그리드로 고정 */
+    @media(max-width:640px){
+      .ctrl-bar{display:grid;grid-template-columns:1fr auto;grid-template-areas:'tabs tabs' 'count sort';align-items:center;gap:10px 12px;padding:12px 14px;border-radius:12px}
+      .ctrl-bar .tabs{grid-area:tabs;min-width:0}
+      .ctrl-count{grid-area:count;font-size:13px}
+      .ctrl-sort{grid-area:sort;margin-left:0;justify-content:flex-end;gap:6px}
+      .ctrl-sort select{height:38px;padding:0 26px 0 10px;font-size:12.5px}
+    }
 
     /* === Popular Section === */
     .pop-sec{margin-bottom:36px}

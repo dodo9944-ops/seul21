@@ -748,6 +748,20 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 }
 .tabs a:hover, .tabs button:hover { color: var(--gray-900); background: var(--gray-50); }
 .tabs a.on, .tabs button.on { background: var(--gray-900); color: var(--white); font-weight: 600; }
+/* 모바일: 탭이 화면폭을 넘칠 때 잘려서 접근 불가해지는 문제 방지 — 가로 스크롤로 전환
+   (자료실 '서식·매뉴얼'/'갤러리' 탭 및 정렬 셀렉트 잘림, 업무실적 탭 잘림 공통 원인) */
+@media (max-width: 640px) {
+  .tabs {
+    flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    scroll-snap-type: x proximity; padding-bottom: 2px; min-width: 0;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs a, .tabs button {
+    flex: 0 0 auto; white-space: nowrap; scroll-snap-align: start;
+    padding: 7px 12px;
+  }
+}
 
 /* ── FILTER BAR ── */
 .filter-bar {

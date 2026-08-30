@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260830g">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260830h">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260830b">
     <style>
     /* === Hero === */
@@ -30,7 +30,6 @@
     /* === KPI (좌측 아이콘 + 우측 텍스트, 가로형 카드) === */
     .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:64px}
     @media(max-width:1024px){.kpi-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
-    @media(max-width:420px){.kpi-grid{grid-template-columns:1fr}}
     .kpi-card{background:#FFFFFF;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px;text-align:left;position:relative;overflow:hidden;transition:transform .25s,border-color .25s;border:1px solid var(--gray-200);box-shadow:0 1px 4px rgba(10,15,28,.05)}
     .kpi-card:hover{transform:translateY(-3px);border-color:var(--gold)}
     .kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3}
@@ -46,7 +45,17 @@
     .kpi-card.kpi-highlight{background:#FFF9E8;border-color:rgba(184,134,11,.25)}
     .kpi-card.kpi-highlight::after{opacity:.6}
     .kpi-card.kpi-highlight .kv{color:var(--gold)}
-    @media(max-width:480px){.kpi-card{padding:12px 14px}.kpi-card .kv{font-size:18px}}
+    /* 모바일: 4개 카드가 세로로 길게 쌓여 스크롤이 과도해지는 문제 → 2열 압축 배치 */
+    @media(max-width:640px){
+      .kpi-grid{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:36px}
+      .kpi-card{padding:12px 12px;gap:10px;border-radius:12px}
+      .kpi-card .ki{width:32px;height:32px;font-size:14px}
+      .kpi-card .ki-bar{width:12px}
+      .kpi-card .kv{font-size:17px}
+      .kpi-card .kl{font-size:12px;margin-bottom:0}
+      .kpi-card .ks{display:none}
+    }
+    @media(max-width:340px){.kpi-grid{grid-template-columns:1fr}}
 
     /* === Section === */
     .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
@@ -124,13 +133,16 @@
     .pf-tabs-extra select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,.1)}
     .pf-tabs-extra .rc{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap}
     .pf-tabs-extra .rc strong{color:var(--brand-dark);font-weight:700}
+    /* 모바일: .tabs 가로 스크롤은 common.css 공통 규칙 사용(페이지 override 금지) */
     @media(max-width:640px){
-      .pf-tabs-wrap{padding:14px 16px}
-      .pf-tabs-wrap .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-      .pf-tabs-wrap .tabs::-webkit-scrollbar{display:none}
-      .pf-tabs-wrap .tabs button{flex-shrink:0}
-      .pf-tabs-extra{width:100%;margin-left:0;justify-content:space-between}
-      .pf-tabs-extra select{flex:1;min-width:0}
+      .pf-tabs-wrap{padding:12px 14px;gap:10px;border-radius:12px}
+      .pf-tabs-wrap .tabs{width:100%;gap:6px}
+      .pf-tabs-wrap .tabs button{gap:5px;font-size:12.5px}
+      .pf-tab-count{font-size:10.5px}
+      /* 유형·상태 셀렉트가 눌려 라벨이 잘리던 문제 → 고정 2열 + 건수는 auto 폭 */
+      .pf-tabs-extra{display:grid;grid-template-columns:1fr 1fr auto;align-items:center;gap:8px;width:100%;margin-left:0}
+      .pf-tabs-extra select{width:100%;min-width:0;height:38px;padding:0 26px 0 10px;font-size:12.5px}
+      .pf-tabs-extra .rc{font-size:12.5px;justify-self:end}
     }
 
     /* === All Cards Grid === */
