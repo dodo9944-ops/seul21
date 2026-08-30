@@ -186,8 +186,8 @@ const App = (() => {
         </div>
         <div class="footer-col">
           <h5>문의·지원</h5>
-          <a href="${B}/pages/contact.html">고객센터</a>
-          <a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>
+          <a href="${B}/pages/contact.html">전화상담</a>
+          <a href="${B}/pages/feasibility-check.html">찾아오시는길</a>
           <a href="${B}/pages/faq.html">자주 묻는 질문</a>
         </div>
         <div class="footer-col footer-contact">
