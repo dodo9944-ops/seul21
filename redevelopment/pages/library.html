@@ -68,14 +68,14 @@
     #ctrlNav button.on .ctrl-nav-count{color:var(--gold)}
     /* 모바일 상단 카테고리 탭 — 업무실적(.pf-tabs-wrap .tabs)과 동일하게 한 줄 가로스크롤 + 글자 축소,
        정렬·총건수는 우측 정렬 (2026-08-30 대장 지시: "업무실적처럼 자료실 상단메뉴 글자를 작게해서 표시, 우측으로 이동") */
-    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
-      .ctrl-sort{margin-left:auto;justify-content:flex-end}
-      #ctrlNav{flex-wrap:nowrap;row-gap:0;min-width:0;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:8px}
+    @media(max-width:640px){.ctrl-bar{flex-direction:row;flex-wrap:wrap;align-items:center;gap:12px;padding:16px}
+      .ctrl-sort{margin-left:0;justify-content:flex-end}
+      #ctrlNav{width:100%;flex-wrap:nowrap;row-gap:0;min-width:0;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:8px}
       #ctrlNav::-webkit-scrollbar{display:none}
       #ctrlNav button,#ctrlNav a{flex-shrink:0;font-size:12px;padding:4px 12px}
       .ctrl-nav-count{font-size:10px;margin-left:4px}
       .ctrl-sort label{font-size:11px}.ctrl-sort select{font-size:12px}
-      .ctrl-count{width:100%;text-align:right;margin-left:auto}}
+      .ctrl-count{width:auto;text-align:right;margin-left:auto}}
 
     /* === Popular Section === */
     .pop-sec{margin-bottom:36px}
