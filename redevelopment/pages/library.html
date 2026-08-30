@@ -33,7 +33,7 @@
     @media(max-width:600px){.lib-alimtalk-wrap{margin-top:20px}.lib-alimtalk-btn{font-size:11px;padding:6px 14px;gap:5px}.lib-alimtalk-btn i{font-size:11px}}
 
     /* === Page Body (히어로 바로 아래 시작) === */
-    .page-body.lib-page{padding-top:20px}
+    .page-body.lib-page{padding-top:40px}
     .page-body.lib-page,
     .page-body.lib-page > .inner{overflow:hidden}
     .lib-item{min-width:0;max-width:100%}
@@ -59,10 +59,9 @@
 
     /* === Popular Section === */
     .pop-sec{margin-bottom:36px}
-    .pop-sec .pop-head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
-    .pop-sec .pop-head .ph-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#FFFFFF,#FFF3C4);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold)}
-    .pop-sec .pop-head .ph-icon.news{width:46px;height:46px;font-size:22px}
-    .pop-sec .pop-head h3{font-size:16px;font-weight:800;color:var(--gray-900);letter-spacing:-.3px}
+    .pop-sec .pop-head{display:flex;align-items:center;gap:24px;margin-bottom:32px}
+    .pop-sec .pop-head h3{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;position:relative}
+    .pop-sec .pop-head h3::before{content:'';position:absolute;left:0;top:4px;width:3px;height:22px;border-radius:2px;background:linear-gradient(to bottom,var(--gold),rgba(184,134,11,.3))}
     .pop-sec .pop-head span{font-size:12px;color:var(--gray-400);font-weight:500}
     .pop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
     @media(max-width:900px){.pop-grid{grid-template-columns:repeat(2,1fr)}}
@@ -367,11 +366,9 @@ function renderFeatured(){
   if(!top.length){fb.style.display='none';return}
   fb.style.display='';
   var nameMap={'주요뉴스':'주요뉴스','법령':'관계법령','서식가이드':'서식 매뉴얼'};
-  var icMap={'주요뉴스':'fa-newspaper','법령':'fa-scale-balanced','서식가이드':'fa-file-pen'};
   var title=nameMap[curCat]||'인기 자료';
   var sub='열람순 · 인기순';
-  var icCls='ph-icon news';var icSym=icMap[curCat]||'fa-fire';
-  var html='<div class="pop-head"><div class="'+icCls+'"><i class="fa-solid '+icSym+'"></i></div><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
+  var html='<div class="pop-head"><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
   top.forEach(function(item,idx){
     var fi=getIcon(item.fileType);var vc=vmap[item.id]||0;
     html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-eye"></i> '+vc+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
