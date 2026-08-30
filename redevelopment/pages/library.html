@@ -40,17 +40,13 @@
 
     /* === Control Bar === */
     .ctrl-bar{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap}
-    .ctrl-search{position:relative;flex:1;min-width:240px;max-width:520px}
-    .ctrl-search i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:15px;pointer-events:none}
-    .ctrl-search input{width:100%;height:34px;padding:0 16px 0 44px;border:2px solid var(--gray-300);border-radius:10px;font-size:14.5px;font-weight:600;color:var(--gray-800);background:#fff;font-family:var(--font);transition:all .25s}
-    .ctrl-search input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(184,134,11,.1);background:#fff}
     .ctrl-sort{display:flex;align-items:center;gap:8px;margin-left:auto}
     .ctrl-sort label{font-size:12px;font-weight:600;color:var(--gray-400);white-space:nowrap}
     .ctrl-sort select{height:40px;padding:0 30px 0 12px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;font-weight:500;color:var(--gray-700);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s}
     .ctrl-sort select:focus{border-color:var(--gold);outline:none}
     .ctrl-count{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap}
     .ctrl-count strong{color:var(--brand-dark);font-weight:700}
-    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ctrl-search{min-width:0;max-width:100%}.ctrl-sort{margin-left:0;justify-content:flex-end}}
+    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ctrl-sort{margin-left:0;justify-content:flex-end}}
 
     /* === Popular Section === */
     .pop-sec{margin-bottom:36px}
@@ -244,9 +240,12 @@
 <div class="page-body lib-page"><div class="inner" id="libContent">
 
     <div class="ctrl-bar">
-        <div class="ctrl-search">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="자료명으로 검색하세요">
+        <div class="tabs" id="ctrlNav">
+            <button data-cat="전체">전체</button>
+            <button data-cat="주요뉴스">주요뉴스</button>
+            <button data-cat="법령">관계법령</button>
+            <button data-cat="서식가이드">서식·매뉴얼</button>
+            <a href="gallery.html">갤러리</a>
         </div>
         <div class="ctrl-sort">
             <label>정렬</label>
@@ -320,13 +319,16 @@ function getCatCounts(){var c={};catDefs.forEach(function(d){c[d.key]=0});allIte
 /* Tabs */
 function renderTabs(){
 document.querySelectorAll('#heroCards .uh-card').forEach(function(el){el.classList.toggle('on',el.dataset.cat===curCat)});
+document.querySelectorAll('#ctrlNav button').forEach(function(el){el.classList.toggle('on',el.dataset.cat===curCat)});
 }
 
 /* Popular section */
 /* Filter + Sort */
 function getFiltered(){
 var items=allItems;
+if(curCat!=='전체'){
 var curDef=catDefs.find(function(d){return d.key===curCat});var curKeys=curDef?curDef.keys:[curCat];items=items.filter(function(i){return curKeys.indexOf(i.category)>=0});
+}
 if(searchQ){var q=searchQ.toLowerCase();items=items.filter(function(i){
 return(i.title||'').toLowerCase().indexOf(q)>=0||(i.description||'').toLowerCase().indexOf(q)>=0||
 (i.tags||[]).some(function(t){return t.toLowerCase().indexOf(q)>=0})})}
@@ -347,7 +349,9 @@ function openNewsPopup(id){var url=libItemUrl(id);if(url){addNewsView(id);window
 function renderFeatured(){
   var fb=document.getElementById('libFeatured');if(!fb)return;
   var items=allItems.slice();
+  if(curCat!=='전체'){
   var d=catDefs.find(function(x){return x.key===curCat});var ks=d?d.keys:[curCat];items=items.filter(function(i){return ks.indexOf(i.category)>=0});
+  }
   var vmap=getNewsViews();
   items.sort(function(a,b){var va=vmap[a.id]||0,vb=vmap[b.id]||0;if(vb!==va)return vb-va;return(a.date||'').localeCompare(b.date||'')});
   var top=items.slice(0,3);
@@ -416,12 +420,12 @@ window.switchCat=function(cat){
 
 /* Events */
 document.getElementById('heroCards').addEventListener('click',function(e){var btn=e.target.closest('.uh-card');if(!btn||!btn.dataset.cat)return;switchCat(btn.dataset.cat)});
-document.getElementById('searchInput').addEventListener('input',function(){searchQ=this.value.trim();curPage=1;render()});
+document.getElementById('ctrlNav').addEventListener('click',function(e){var btn=e.target.closest('button');if(!btn||!btn.dataset.cat)return;switchCat(btn.dataset.cat)});
 document.getElementById('sortSelect').addEventListener('change',function(){curSort=this.value;curPage=1;render()});
 document.getElementById('perSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;render()});
 document.getElementById('libList').addEventListener('click',function(e){var btn=e.target.closest('.btn-dl')||e.target.closest('.lib-title');if(btn)handleDownload(btn.dataset.id)});
 
-var validCats=catDefs.map(function(d){return d.key});
+var validCats=catDefs.map(function(d){return d.key}).concat('전체');
 var urlCat=new URLSearchParams(location.search).get('cat');
 if(urlCat&&validCats.indexOf(urlCat)>=0){curCat=urlCat}
 window.addEventListener('popstate',function(){var c=new URLSearchParams(location.search).get('cat');if(!c||validCats.indexOf(c)<0)c='주요뉴스';curCat=c;curPage=1;renderTabs();render();});
