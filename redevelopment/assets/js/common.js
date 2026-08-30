@@ -698,7 +698,7 @@ const NewsDetailModal = (() => {
           const secTitle = h2 ? h2.textContent : '';
           const clone = sec.cloneNode(true);
           const h2c = clone.querySelector('h2');
-          if (h2c) clone.removeChild(h2c);
+          if (h2c) h2c.remove();
           html2 += '<div class="d-sec"><div class="d-sec-title">' + esc(secTitle) + '</div><div class="d-desc">' + clone.innerHTML + '</div></div>';
         });
         bodyEl.innerHTML = html2 || '<div class="d-desc">내용을 불러올 수 없습니다.</div>';

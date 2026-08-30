@@ -69,10 +69,10 @@
 .dv-back-btn-wrap a:hover,.dv-back-btn-wrap button:hover{background:#FFFFFF}
 
 /* inline 강조 배지 (본문 표/문장 내) */
-.badge-hot,.badge-new,.badge-ok,.badge-no,.badge-warning,.badge-blue,.badge-gold,.badge-red,.badge-purple,.badge-posco{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;color:#0A0F1C;line-height:1.6;white-space:nowrap}
+.badge-hot,.badge-new,.badge-ok,.badge-no,.badge-warning,.badge-warn,.badge-blue,.badge-gold,.badge-red,.badge-purple,.badge-posco{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;color:#0A0F1C;line-height:1.6;white-space:nowrap}
 .badge-hot,.badge-red,.badge-no{background:#c0392b}
 .badge-new,.badge-ok{background:#1f7a5a}
-.badge-warning,.badge-gold{background:#B8860B}
+.badge-warning,.badge-gold,.badge-warn{background:#B8860B}
 .badge-blue,.badge-posco{background:#1a3a6b}
 .badge-purple{background:#5b3a8e}
 .badge-lease{background:#0f6e8c}
