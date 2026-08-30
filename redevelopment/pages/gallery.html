@@ -195,9 +195,10 @@
         if(totalPages<=1){ el.innerHTML=''; return; }
         var winStart=Math.floor((curPage-1)/PAGE_WIN)*PAGE_WIN+1;
         var winEnd=Math.min(winStart+PAGE_WIN-1, totalPages);
-        var h='<button class="arr" data-p="'+(curPage-1)+'" '+(curPage===1?'disabled':'')+'><i class="fa-solid fa-chevron-left"></i></button>';
+        var winPrev=Math.max(1,winStart-PAGE_WIN),winNext=winEnd+1;
+        var h='<button class="arr" data-p="'+winPrev+'" '+(winStart===1?'disabled':'')+'><i class="fa-solid fa-chevron-left"></i></button>';
         for(var i=winStart;i<=winEnd;i++){ h+='<button'+(i===curPage?' class="active"':'')+' data-p="'+i+'">'+i+'</button>'; }
-        h+='<button class="arr" data-p="'+(curPage+1)+'" '+(curPage===totalPages?'disabled':'')+'><i class="fa-solid fa-chevron-right"></i></button>';
+        h+='<button class="arr" data-p="'+winNext+'" '+(winEnd===totalPages?'disabled':'')+'><i class="fa-solid fa-chevron-right"></i></button>';
         el.innerHTML=h;
     }
 

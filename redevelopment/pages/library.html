@@ -402,10 +402,11 @@ return'<div class="lib-item'+pinCls+'">'+'<div class="lib-icon '+fi.cls+'"><i cl
 /* Pager */
 var pg=document.getElementById('pager');
 if(pages<=1){pg.innerHTML='';return}
-var h='<button class="arr" '+(curPage===1?'disabled':'')+' onclick="LIB.page('+(curPage-1)+')"><i class="fa-solid fa-chevron-left"></i></button>';
 var blk=10,bStart=Math.floor((curPage-1)/blk)*blk+1,bEnd=Math.min(bStart+blk-1,pages);
+var bPrev=Math.max(1,bStart-blk),bNext=bEnd+1;
+var h='<button class="arr" '+(bStart===1?'disabled':'')+' onclick="LIB.page('+bPrev+')"><i class="fa-solid fa-chevron-left"></i></button>';
 for(var i=bStart;i<=bEnd;i++)h+='<button'+(i===curPage?' class="active"':'')+' onclick="LIB.page('+i+')">'+i+'</button>';
-h+='<button class="arr" '+(curPage===pages?'disabled':'')+' onclick="LIB.page('+(curPage+1)+')"><i class="fa-solid fa-chevron-right"></i></button>';
+h+='<button class="arr" '+(bEnd===pages?'disabled':'')+' onclick="LIB.page('+bNext+')"><i class="fa-solid fa-chevron-right"></i></button>';
 pg.innerHTML=h}
 
 /* URL 동기화 (히어로는 절대 변경하지 않음) */
