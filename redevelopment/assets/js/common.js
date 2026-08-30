@@ -40,7 +40,7 @@ const App = (() => {
     <div class="util-bar"><div class="inner">
       <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링그룹</span>
       ${utilRight}
-      <a href="${B}/pages/gallery.html">갤러리</a>
+      <a href="${B}/pages/community.html">커뮤니티</a>
       <div class="util-item-drop">
         <a href="${B}/pages/notice.html">공지사항</a>
         <div class="util-drop-menu">
@@ -113,7 +113,7 @@ const App = (() => {
             { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
             { href:`${B}/pages/library.html?cat=법령`, label:'관계법령' },
             { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
-            { href:`${B}/pages/gallery.html`, label:'갤러리' },
+            { href:`${B}/pages/community.html`, label:'커뮤니티' },
           ]},
           { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
             { href:`${B}/pages/contact.html`, label:'문의하기' },
@@ -220,9 +220,9 @@ const App = (() => {
           <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
           <span>사업성분석</span>
         </a>
-        <a href="${B}/pages/gallery.html" class="${navActive('gallery.html')?'active':''}">
+        <a href="${B}/pages/community.html" class="${navActive('community.html')?'active':''}">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>갤러리</span>
+          <span>커뮤니티</span>
         </a>
         <a href="${B}/pages/contact.html" class="${navActive('contact.html')?'active':''}">
           <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
