@@ -60,7 +60,7 @@
     .pb-done{background:rgba(255,255,255,.9);color:#0A0F1C}
 
     /* === Featured Cards === */
-    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:64px}
     @media(max-width:1024px){.feat-grid{grid-template-columns:1fr;gap:20px}}
     .fc{background:#fff;border:2px solid var(--gray-300);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.08)}
     .fc:hover{border-color:var(--gold);box-shadow:0 20px 48px rgba(184,134,11,.18);transform:translateY(-8px)}
@@ -108,14 +108,13 @@
     .pf-tabs-wrap{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap}
     @media(max-width:640px){.pf-tabs-wrap{flex-direction:column;align-items:stretch;gap:12px;padding:16px}}
 
-    /* === Filter Bar (자료실 .ctrl-bar와 동일 규격) === */
-    .filter-bar{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap}
+    /* === Filter Bar (원래 레이아웃 원복 — 상단 키맵 탭과는 curType으로 연동) === */
+    .filter-bar{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding:16px 20px;background:var(--gray-50);border-radius:14px;border:1px solid var(--gray-100);flex-wrap:wrap}
     .filter-bar select{height:40px;padding:0 32px 0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13.5px;font-weight:500;color:var(--gray-800);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s;min-width:130px}
     .filter-bar select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,.1)}
-    .filter-bar .tabs{flex-wrap:wrap}
     .filter-bar .rc{margin-left:auto;font-size:14px;color:var(--gray-500);font-weight:500}
     .filter-bar .rc strong{color:var(--brand-dark);font-weight:700}
-    @media(max-width:640px){.filter-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.filter-bar select{width:100%;min-width:unset}.filter-bar .rc{margin-left:0;text-align:center}}
+    @media(max-width:540px){.filter-bar{flex-direction:column;align-items:stretch;gap:10px}.filter-bar select{width:100%;min-width:unset}.filter-bar .rc{margin-left:0;text-align:center}}
 
     /* === All Cards Grid === */
     .pg-grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:24px;row-gap:36px}
@@ -282,15 +281,7 @@
 
     <div class="sec-head"><h2 class="sec-title">전체 수행실적</h2></div>
     <div class="filter-bar">
-        <div class="tabs" id="fTypeTabs">
-            <button data-cat="전체">전체보기</button>
-            <button data-cat="재개발">재개발사업</button>
-            <button data-cat="재건축">재건축사업</button>
-            <button data-cat="소규모정비">소규모정비사업</button>
-            <button data-cat="리모델링">리모델링사업</button>
-            <button data-cat="코디네이터">서울시 코디네이터 등</button>
-            <button data-cat="기타">기타사업</button>
-        </div>
+        <select id="fType"><option value="전체">유형 전체</option><option value="재개발">재개발사업</option><option value="재건축">재건축사업</option><option value="소규모정비">소규모정비사업</option><option value="리모델링">리모델링사업</option><option value="코디네이터">서울시 코디네이터 등</option><option value="기타">기타사업</option></select>
         <select id="fStatus"><option value="전체">상태 전체</option><option value="진행중">진행중</option><option value="완료">완료</option></select>
         <div class="rc" id="rc"></div>
     </div>
@@ -483,15 +474,16 @@ function closeDetail(){
 document.getElementById('dOverlay').classList.remove('open');
 document.body.style.overflow='';document.body.style.paddingRight=''}
 
-/* Type tabs (히어로 아래 키맵 메뉴 + 필터바, 동일 카테고리 공유) */
+/* Type tabs (히어로 아래 키맵 메뉴) — 하단 필터바 select#fType과 curType으로 연동 */
 function renderTypeTabs(){
-document.querySelectorAll('#pfTabs button, #fTypeTabs button').forEach(function(b){b.classList.toggle('on',b.dataset.cat===curType)});
+document.querySelectorAll('#pfTabs button').forEach(function(b){b.classList.toggle('on',b.dataset.cat===curType)});
+document.getElementById('fType').value=curType;
 }
 function setType(t){curType=t;curPage=1;renderTypeTabs();renderAll()}
 
 /* Events */
 document.getElementById('pfTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;setType(b.dataset.cat);window.scrollTo({top:document.querySelector('.filter-bar').offsetTop-80,behavior:'smooth'})});
-document.getElementById('fTypeTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;setType(b.dataset.cat)});
+document.getElementById('fType').addEventListener('change',function(){setType(this.value)});
 document.getElementById('fStatus').addEventListener('change',function(){curPage=1;renderAll()});
 document.getElementById('pfPerSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;renderAll()});
 document.getElementById('dCloseTop').addEventListener('click',closeDetail);
