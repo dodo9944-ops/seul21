@@ -623,6 +623,94 @@ const App = (() => {
   return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, heroDetail, basePath: () => B };
 })();
 
+/**
+ * 주요뉴스 상세 모달 — 업무실적 상세 모달(.d-overlay/.d-modal/.d-hero-fb/.d-body/.d-sec 등)과
+ * 동일한 DOM/CSS를 재사용해 downloads/news_*.html 문서를 팝업으로 표시한다.
+ */
+const NewsDetailModal = (() => {
+  let ov = null, heroEl = null, bodyEl = null;
+
+  function ensure() {
+    if (ov) return;
+    ov = document.createElement('div');
+    ov.className = 'd-overlay';
+    ov.innerHTML =
+      '<div class="d-modal">' +
+        '<div class="nd-hero"></div>' +
+        '<button class="d-close" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>' +
+        '<div class="d-body nd-body"></div>' +
+        '<div class="d-footer"><button type="button"><i class="fa-solid fa-xmark"></i> 닫기</button></div>' +
+      '</div>';
+    document.body.appendChild(ov);
+    heroEl = ov.querySelector('.nd-hero');
+    bodyEl = ov.querySelector('.nd-body');
+    ov.querySelectorAll('.d-close, .d-footer button').forEach(b => b.addEventListener('click', close));
+    ov.addEventListener('click', e => { if (e.target === ov) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && ov.classList.contains('open')) close(); });
+  }
+
+  function close() {
+    if (!ov) return;
+    ov.classList.remove('open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+
+  function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function open(url, meta) {
+    ensure();
+    meta = meta || {};
+    heroEl.innerHTML =
+      '<div class="d-hero-fb" data-t="news"><div class="d-title-area">' +
+        '<div class="badges"><span class="d-newsbadge">' + esc(meta.category || '주요뉴스') + '</span></div>' +
+        '<h2>' + esc(meta.title || '') + '</h2>' +
+      '</div></div>';
+    bodyEl.innerHTML = '<div style="text-align:center;padding:60px 0;color:var(--gray-400)"><i class="fa-solid fa-spinner fa-spin" style="font-size:22px"></i></div>';
+    ov.scrollTop = 0;
+    ov.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = (window.innerWidth - document.documentElement.clientWidth) + 'px';
+
+    fetch(url).then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
+      .then(html => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const article = doc.querySelector('.dv-article');
+        if (!article) throw new Error('no article');
+
+        const badge = article.querySelector('.dv-category-badge');
+        const title = article.querySelector('.dv-title');
+        const source = article.querySelector('.dv-source');
+        const date = article.querySelector('.dv-date');
+        const phase = [source ? source.textContent : '', date ? date.textContent : ''].filter(Boolean).join(' · ');
+
+        heroEl.innerHTML =
+          '<div class="d-hero-fb" data-t="news"><div class="d-title-area">' +
+            '<div class="badges"><span class="d-newsbadge">' + esc(badge ? badge.textContent : (meta.category || '주요뉴스')) + '</span></div>' +
+            '<h2>' + (title ? title.innerHTML : esc(meta.title || '')) + '</h2>' +
+            (phase ? '<div class="d-phase"><i class="fa-solid fa-newspaper"></i> ' + esc(phase) + '</div>' : '') +
+          '</div></div>';
+
+        const sections = article.querySelectorAll('.dv-section');
+        let html2 = '';
+        sections.forEach(sec => {
+          const h2 = sec.querySelector('h2');
+          const secTitle = h2 ? h2.textContent : '';
+          const clone = sec.cloneNode(true);
+          const h2c = clone.querySelector('h2');
+          if (h2c) clone.removeChild(h2c);
+          html2 += '<div class="d-sec"><div class="d-sec-title">' + esc(secTitle) + '</div><div class="d-desc">' + clone.innerHTML + '</div></div>';
+        });
+        bodyEl.innerHTML = html2 || '<div class="d-desc">내용을 불러올 수 없습니다.</div>';
+        ov.scrollTop = 0;
+      })
+      .catch(() => { location.href = url; });
+  }
+
+  return { open, close };
+})();
+window.NewsDetailModal = NewsDetailModal;
+
 /* DOM Ready */
 document.addEventListener('DOMContentLoaded', () => {
   App.init();

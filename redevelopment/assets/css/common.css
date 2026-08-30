@@ -1121,3 +1121,98 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   .mobile-bottom-nav { display: none !important; }
 }
 
+/* ========================================
+   DETAIL MODAL — 공용 (업무실적 상세 / 주요뉴스 상세)
+   pages/portfolio.html에서 이동 — 두 상세보기가 동일한 팝업 구조를 공유
+   ======================================== */
+.d-overlay{position:fixed;inset:0;background:rgba(255,255,255,.65);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
+.d-overlay.open{opacity:1;pointer-events:auto}
+.d-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
+.d-overlay.open .d-modal{transform:translateY(0) scale(1)}
+.d-close{position:absolute;top:60px;right:14px;z-index:20;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.6);border:1.5px solid rgba(10,15,28,.3);border-radius:50%;cursor:pointer;font-size:15px;color:#0A0F1C;transition:all .2s;backdrop-filter:blur(4px)}
+.d-close:hover{background:rgba(255,255,255,.9);transform:scale(1.1)}
+@media(max-width:540px){.d-close{top:50px;right:10px;width:32px;height:32px;font-size:13px}}
+
+/* Detail Hero Image */
+.d-hero{width:100%;height:300px;position:relative;overflow:hidden;flex-shrink:0;border-radius:18px 18px 0 0}
+.d-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.d-hero .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(255,255,255,.75) 0%,rgba(255,255,255,.15) 50%,transparent 100%);pointer-events:none}
+.d-hero .d-title-area{position:absolute;bottom:0;left:0;right:0;padding:24px 32px;z-index:2}
+.d-hero .d-title-area .badges{display:flex;gap:6px;margin-bottom:10px}
+.d-hero .d-title-area h2{font-size:22px;font-weight:800;color:#0A0F1C;line-height:1.35;margin-bottom:8px}
+.d-hero .d-title-area .d-phase{font-size:13px;font-weight:600;color:var(--gold);display:flex;align-items:center;gap:6px}
+.d-hero-fb{width:100%;height:240px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+.d-hero-fb[data-t=r]{background:linear-gradient(135deg,#F5F5F6,#DADBDD)}
+.d-hero-fb[data-t=c]{background:linear-gradient(135deg,#F2FBF6,#DCF3E4)}
+.d-hero-fb[data-t=s]{background:linear-gradient(135deg,#F0F7FC,#DCEBF7)}
+.d-hero-fb[data-t=news]{background:linear-gradient(135deg,#FFFDF7,#FFF3C4)}
+.d-hero-fb .d-title-area{position:absolute;bottom:0;left:0;right:0;padding:24px 32px;z-index:2;background:linear-gradient(to top,rgba(255,255,255,.6),transparent)}
+.d-hero-fb .d-title-area .badges{display:flex;gap:6px;margin-bottom:10px}
+.d-hero-fb .d-title-area h2{font-size:22px;font-weight:800;color:#0A0F1C;line-height:1.35;margin-bottom:8px}
+.d-hero-fb .d-title-area .d-phase{font-size:13px;font-weight:600;color:var(--gold)}
+@media(max-width:540px){.d-hero,.d-hero-fb{height:200px}.d-hero .d-title-area h2,.d-hero-fb .d-title-area h2{font-size:18px}}
+
+/* Detail Body */
+.d-body{padding:32px}
+@media(max-width:540px){.d-body{padding:20px}}
+
+/* Section labels in detail */
+.d-sec{margin-bottom:28px}
+.d-sec:last-child{margin-bottom:0}
+.d-sec-title{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.d-sec-title::after{content:'';flex:1;height:1px;background:var(--gray-100)}
+
+/* Info Grid — 핵심 사업 정보 */
+.d-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--gray-100);border-radius:12px;overflow:hidden}
+.d-info-item{display:flex;flex-direction:column;padding:13px 16px;border-bottom:1px solid var(--gray-100)}
+.d-info-item:nth-child(odd){border-right:1px solid var(--gray-100)}
+.d-info-item:nth-last-child(-n+2){border-bottom:none}
+.d-info-item .il{font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:.3px;margin-bottom:4px}
+.d-info-item .iv{font-size:14.5px;font-weight:600;color:var(--gray-900)}
+@media(max-width:540px){.d-info-grid{grid-template-columns:1fr}.d-info-item:nth-child(odd){border-right:none}.d-info-item{border-bottom:1px solid var(--gray-100)}.d-info-item:last-child{border-bottom:none}}
+
+/* Spec Grid — 건축·사업 스펙 (3열) */
+.d-spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--gray-100);border-radius:12px;overflow:hidden}
+.d-spec-item{display:flex;flex-direction:column;padding:12px 14px;border-bottom:1px solid var(--gray-100);border-right:1px solid var(--gray-100)}
+.d-spec-item:nth-child(3n){border-right:none}
+.d-spec-item:nth-last-child(-n+3){border-bottom:none}
+.d-spec-item .sl{font-size:10.5px;font-weight:600;color:var(--gray-400);letter-spacing:.2px;margin-bottom:3px}
+.d-spec-item .sv{font-size:13.5px;font-weight:700;color:var(--gray-900)}
+@media(max-width:540px){.d-spec-grid{grid-template-columns:1fr 1fr}.d-spec-item:nth-child(3n){border-right:1px solid var(--gray-100)}.d-spec-item:nth-child(2n){border-right:none}}
+
+/* Tasks list */
+.d-tasks{display:flex;flex-wrap:wrap;gap:8px}
+.d-task{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:8px;font-size:13px;font-weight:500;color:var(--gray-700)}
+.d-task i{font-size:10px;color:var(--gold)}
+
+/* Description */
+.d-desc{font-size:14.5px;color:var(--gray-700);line-height:1.8;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:12px;padding:20px;white-space:pre-line;word-break:keep-all}
+.d-desc p{margin:0 0 14px}
+.d-desc p:last-child{margin-bottom:0}
+.d-desc ul{margin:0;padding-left:20px}
+.d-desc li{margin-bottom:8px}
+.d-desc li:last-child{margin-bottom:0}
+.d-desc a{color:var(--gold);text-decoration:underline}
+/* 갤러리 — 사진(야경·머릿돌 등) */
+.d-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.d-gallery-card{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--gray-200);background:#FFFFFF;cursor:zoom-in}
+.d-gallery-card img{width:100%;height:100%;display:block;object-fit:cover;aspect-ratio:4/3;transition:transform .4s ease}
+.d-gallery-card:hover img{transform:scale(1.04)}
+.d-gallery-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0) 55%,rgba(255,255,255,.65) 100%);pointer-events:none}
+.d-gallery-cap{position:absolute;left:14px;right:14px;bottom:12px;z-index:2;color:#0A0F1C;font-size:12.5px;font-weight:700;line-height:1.4;letter-spacing:.2px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+@media(max-width:600px){.d-gallery{grid-template-columns:1fr;gap:12px}.d-gallery-card img{aspect-ratio:16/10}}
+
+/* Issues */
+.d-issues{list-style:none;padding:0;margin:0}
+.d-issues li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;font-size:13.5px;color:var(--gray-700);line-height:1.6;border-bottom:1px solid var(--gray-50)}
+.d-issues li:last-child{border-bottom:none}
+.d-issues li::before{content:'\f06a';font-family:'Font Awesome 6 Free';font-weight:900;font-size:11px;color:var(--gold);margin-top:4px;flex-shrink:0}
+
+/* Detail Footer */
+.d-footer{padding:16px 32px;border-top:1px solid var(--gray-100);display:flex;justify-content:flex-end}
+.d-footer button{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;background:#FFFFFF;color:#0A0F1C;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
+.d-footer button:hover{background:#FFF3C4}
+
+/* 주요뉴스 상세 모달 전용 배지 */
+.d-newsbadge{display:inline-flex;align-items:center;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;line-height:1;background:rgba(184,134,11,.16);color:#8a6508}
+

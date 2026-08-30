@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260829k">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260830c">
     <style>
         /* ============================================================
            INDEX PAGE — 고유 스타일
@@ -1056,7 +1056,7 @@
 <!-- 공통 JS -->
 <script src="assets/data/mock-data.js?v=20260830b"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260829s"></script>
+<script src="assets/js/common.js?v=20260830c"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1288,11 +1288,18 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
             var href=newsFileMap[i.id]||'pages/library.html?cat=주요뉴스';
-            return'<a href="'+href+'" class="news-item" style="gap:10px;padding:12px 20px;">'+
+            return'<a href="'+href+'" class="news-item" data-news-id="'+i.id+'" style="gap:10px;padding:12px 20px;">'+
                 '<span style="color:#C58B00;font-size:11px;flex-shrink:0;">●</span>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
                 '<div class="news-date">'+i.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">최근 7일간 등록된 주요뉴스가 없습니다.</p>';
+        newsEl.addEventListener('click',function(e){
+            var a=e.target.closest('a[data-news-id]');if(!a)return;
+            var url=newsFileMap[a.dataset.newsId];if(!url)return;
+            e.preventDefault();
+            var item=news.find(function(n){return n.id===a.dataset.newsId});
+            NewsDetailModal.open(url,{category:'주요뉴스',title:item?item.title:''});
+        });
     }
 
     /* 공지사항: 최신 3건 */
