@@ -33,7 +33,7 @@ const App = (() => {
       { href: `${B}/pages/faq.html`, label: '자주 묻는 질문', icon: 'fa-solid fa-circle-question' },
     ];
 
-    const utilRight = `<a href="${B}/pages/feasibility.html">사업성 검토</a>`;
+    const utilRight = `<a href="${B}/pages/feasibility.html">사업성 검토</a><a href="${B}/pages/site-analyzer.html">AI 부지분석</a>`;
 
     return `
     <div class="header-wrap" id="headerWrap">
@@ -183,6 +183,7 @@ const App = (() => {
           <a href="${B}/pages/library.html?cat=주요뉴스">주요뉴스</a>
           <a href="${B}/pages/library.html">자료실</a>
           <a href="${B}/pages/feasibility.html">사업성 검토</a>
+          <a href="${B}/pages/site-analyzer.html">AI 부지분석</a>
         </div>
         <div class="footer-col">
           <h5>문의·지원</h5>
