@@ -32,9 +32,12 @@
     /* 탭 메뉴 — 히어로 바로 아래 (업무실적 .pf-tabs-wrap과 동일한 규격으로 통일) */
     .gl-tabs-wrap{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
     #glTabs{gap:0}
-    #glTabs button{padding:6px 14px;border-right:1px solid var(--gray-200)}
+    #glTabs button{padding:6px 14px;border-right:1px solid var(--gray-200);position:relative}
     #glTabs button:first-child{padding-left:0}
     #glTabs button:last-child{border-right:none}
+    /* 자료실(#ctrlNav)과 동일한 언더바 인디케이터로 통일 */
+    #glTabs button.on{background:none;color:var(--gold);font-weight:700}
+    #glTabs button.on::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:20px;height:2px;border-radius:1px;background:var(--gold)}
     @media(max-width:640px){
       .gl-tabs-wrap{padding:14px 16px}
       #glTabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}

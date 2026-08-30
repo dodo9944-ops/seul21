@@ -119,11 +119,14 @@
     .pf-tabs-wrap .tabs button{display:inline-flex;align-items:center;gap:6px}
     /* 자료실 ctrl-bar 탭과 동일하게 항목 사이 연회색 세로 구분선 (패딩은 기존값 유지 — 폭 증가로 인한 우측 필터 잘림 방지) */
     #pfTabs{gap:0}
-    #pfTabs button{padding:6px 14px;border-right:1px solid var(--gray-200)}
+    #pfTabs button{padding:6px 14px;border-right:1px solid var(--gray-200);position:relative}
     #pfTabs button:first-child{padding-left:0}
     #pfTabs button:last-child{border-right:none}
+    /* 자료실(#ctrlNav)과 동일한 언더바 인디케이터로 통일 */
+    #pfTabs button.on{background:none;color:var(--gold);font-weight:700}
+    #pfTabs button.on::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:20px;height:2px;border-radius:1px;background:var(--gold)}
     .pf-tab-count{font-size:11px;font-weight:600;color:#111}
-    .pf-tabs-wrap .tabs button.on .pf-tab-count{color:#fff}
+    .pf-tabs-wrap .tabs button.on .pf-tab-count{color:var(--gold)}
     /* 기존 중간 필터박스(유형/상태/총건수)를 상단 sticky 바 우측으로 이동 — 디자인 값 그대로 재사용 */
     .pf-tabs-extra{display:flex;align-items:center;gap:14px;margin-left:auto;flex-wrap:wrap}
     .pf-tabs-extra select{height:40px;padding:0 30px 0 12px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;font-weight:500;color:var(--gray-700);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s}

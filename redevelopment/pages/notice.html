@@ -29,9 +29,12 @@
 
     /* 카테고리 탭바 — 업무실적/갤러리 탭바와 동일한 규격으로 통일 */
     #noticeTabs{display:flex;align-items:center;gap:0;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
-    #noticeTabs button{padding:6px 14px;border-right:1px solid var(--gray-200)}
+    #noticeTabs button{padding:6px 14px;border-right:1px solid var(--gray-200);position:relative}
     #noticeTabs button:first-child{padding-left:0}
     #noticeTabs button:last-child{border-right:none}
+    /* 자료실(#ctrlNav)과 동일한 언더바 인디케이터로 통일 */
+    #noticeTabs button.on{background:none;color:var(--gold);font-weight:700}
+    #noticeTabs button.on::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:20px;height:2px;border-radius:1px;background:var(--gold)}
     @media(max-width:640px){
       #noticeTabs{padding:14px 16px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
       #noticeTabs::-webkit-scrollbar{display:none}
