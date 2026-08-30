@@ -38,24 +38,29 @@
     .page-body.lib-page > .inner{overflow:hidden}
     .lib-item{min-width:0;max-width:100%}
 
+    /* === 전체자료 타이틀 (홈페이지 .section-title 재사용) === */
+    .lib-all-title{margin-bottom:28px}
+
     /* === Control Bar === */
-    .ctrl-bar{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap}
+    .ctrl-bar{display:flex;align-items:center;gap:16px;margin-bottom:48px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
+    /* html,body{overflow-x:hidden}(전역) 때문에 position:sticky가 무효화되어
+       업무실적(portfolio.html)과 동일하게 스크롤 감지 후 position:fixed로 전환하는 방식 사용 */
+    .ctrl-bar.lib-stuck{position:fixed;z-index:50;margin-bottom:0}
     .ctrl-sort{display:flex;align-items:center;gap:8px;margin-left:auto}
     .ctrl-sort label{font-size:12px;font-weight:600;color:var(--gray-400);white-space:nowrap}
     .ctrl-sort select{height:40px;padding:0 30px 0 12px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;font-weight:500;color:var(--gray-700);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s}
     .ctrl-sort select:focus{border-color:var(--gold);outline:none}
     .ctrl-count{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap}
     .ctrl-count strong{color:var(--brand-dark);font-weight:700}
-    /* 모바일: .tabs 가로 스크롤은 common.css 공통 규칙 사용.
-       탭 줄이 화면폭을 밀어내며 '갤러리' 탭·정렬 셀렉트가 잘리던 문제 →
-       탭(1행) / 건수·정렬(1행) 2단 그리드로 고정 */
-    @media(max-width:640px){
-      .ctrl-bar{display:grid;grid-template-columns:1fr auto;grid-template-areas:'tabs tabs' 'count sort';align-items:center;gap:10px 12px;padding:12px 14px;border-radius:12px}
-      .ctrl-bar .tabs{grid-area:tabs;min-width:0}
-      .ctrl-count{grid-area:count;font-size:13px}
-      .ctrl-sort{grid-area:sort;margin-left:0;justify-content:flex-end;gap:6px}
-      .ctrl-sort select{height:38px;padding:0 26px 0 10px;font-size:12.5px}
-    }
+    /* 카테고리 탭 — 언더라인 강조 스타일 (전체자료 디자인 통일, #ctrlNav 범위로만 한정) */
+    #ctrlNav{gap:0}
+    #ctrlNav button,#ctrlNav a{padding:4px 20px;font-size:14px;font-weight:500;color:var(--gray-700,#444);background:none;border:none;border-radius:0;position:relative}
+    #ctrlNav button:first-child,#ctrlNav a:first-child{padding-left:0}
+    #ctrlNav button:not(:last-child),#ctrlNav a:not(:last-child){border-right:1px solid var(--gray-200)}
+    #ctrlNav button:hover,#ctrlNav a:hover{background:none;color:var(--gray-900)}
+    #ctrlNav button.on{color:var(--gold);font-weight:700}
+    #ctrlNav button.on::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:20px;height:2px;border-radius:1px;background:var(--gold)}
+    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ctrl-sort{margin-left:0;justify-content:flex-end}#ctrlNav{flex-wrap:wrap;row-gap:10px}}
 
     /* === Popular Section === */
     .pop-sec{margin-bottom:36px}
@@ -247,7 +252,9 @@
 
 <div class="page-body lib-page"><div class="inner" id="libContent">
 
-    <div class="ctrl-bar">
+    <div class="section-head lib-all-title"><h2 class="section-title">전체자료</h2></div>
+
+    <div class="ctrl-bar" id="ctrlBarWrap">
         <div class="tabs" id="ctrlNav">
             <button data-cat="전체">전체</button>
             <button data-cat="주요뉴스">주요뉴스</button>
@@ -265,6 +272,7 @@
         </div>
         <div class="ctrl-count" id="resultCount"></div>
     </div>
+    <div id="ctrlBarPlaceholder" style="display:none"></div>
 
     <div class="pop-sec" id="libFeatured"></div>
 
@@ -436,6 +444,47 @@ var validCats=catDefs.map(function(d){return d.key}).concat('전체');
 var urlCat=new URLSearchParams(location.search).get('cat');
 if(urlCat&&validCats.indexOf(urlCat)>=0){curCat=urlCat}
 window.addEventListener('popstate',function(){var c=new URLSearchParams(location.search).get('cat');if(!c||validCats.indexOf(c)<0)c='주요뉴스';curCat=c;curPage=1;renderTabs();render();});
+
+/* 상단 카테고리 메뉴바 스크롤 고정 — portfolio.html 상단 키맵 메뉴와 동일 방식 (position:fixed 전환) */
+(function(){
+var ctrlWrap=document.getElementById('ctrlBarWrap'),ctrlPh=document.getElementById('ctrlBarPlaceholder');
+if(!ctrlWrap||!ctrlPh)return;
+var naturalTop=0,leftPx=0,widthPx=0,ticking=false;
+function headerHeight(){var hw=document.querySelector('.header-wrap');return hw?hw.offsetHeight:0}
+function measure(){
+var wasStuck=ctrlWrap.classList.contains('lib-stuck');
+if(wasStuck){ctrlWrap.classList.remove('lib-stuck');ctrlWrap.style.top='';ctrlWrap.style.left='';ctrlWrap.style.width='';ctrlPh.style.display='none'}
+var rect=ctrlWrap.getBoundingClientRect();
+naturalTop=rect.top+window.scrollY;leftPx=rect.left;widthPx=rect.width;
+if(wasStuck)apply(true);
+}
+function apply(force){
+var stick=force||window.scrollY>=naturalTop-headerHeight();
+if(stick&&!ctrlWrap.classList.contains('lib-stuck')){
+ctrlPh.style.height=ctrlWrap.offsetHeight+'px';
+ctrlPh.style.marginBottom=getComputedStyle(ctrlWrap).marginBottom;
+ctrlPh.style.display='block';
+ctrlWrap.classList.add('lib-stuck');
+ctrlWrap.style.top=headerHeight()+'px';
+ctrlWrap.style.left=leftPx+'px';
+ctrlWrap.style.width=widthPx+'px';
+}else if(!stick&&ctrlWrap.classList.contains('lib-stuck')){
+ctrlWrap.classList.remove('lib-stuck');
+ctrlWrap.style.top='';ctrlWrap.style.left='';ctrlWrap.style.width='';
+ctrlPh.style.display='none';
+}else if(stick){
+ctrlWrap.style.top=headerHeight()+'px';
+ctrlWrap.style.left=leftPx+'px';
+ctrlWrap.style.width=widthPx+'px';
+}
+}
+function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){apply(false);ticking=false})}
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',function(){measure();apply(false)});
+document.addEventListener('DOMContentLoaded',function(){measure();apply(false)});
+window.addEventListener('load',function(){measure();apply(false)});
+measure();apply(false);
+})();
 
 
 /* Download handler */
