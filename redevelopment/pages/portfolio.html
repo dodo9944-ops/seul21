@@ -27,20 +27,26 @@
     .pf-hero .hero-sub{font-size:14px;color:rgba(10,15,28,.5)}
     @media(max-width:768px){.pf-hero{padding:40px 0 32px}.pf-hero h1{font-size:26px}}
 
-    /* === KPI (차등 강조) === */
+    /* === KPI (좌측 아이콘 + 우측 텍스트, 가로형 카드) === */
     .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:64px}
     @media(max-width:1024px){.kpi-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
-    .kpi-card{background:#FFFFFF;border-radius:14px;padding:14px 20px;text-align:center;position:relative;overflow:hidden;transition:transform .25s,border-color .25s;border:1px solid var(--gray-200)}
+    @media(max-width:420px){.kpi-grid{grid-template-columns:1fr}}
+    .kpi-card{background:#FFFFFF;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px;text-align:left;position:relative;overflow:hidden;transition:transform .25s,border-color .25s;border:1px solid var(--gray-200);box-shadow:0 1px 4px rgba(10,15,28,.05)}
     .kpi-card:hover{transform:translateY(-3px);border-color:var(--gold)}
     .kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3}
-    .kpi-card .kv{font-size:26px;font-weight:800;color:var(--gold);margin:6px 0 3px}
-    .kpi-card .kl{font-size:12px;font-weight:500;color:rgba(10,15,28,.5)}
-    .kpi-card .ki{font-size:18px;color:var(--gold);opacity:.7}
-    /* 마지막 카드(총 관리세대) 강조 */
-    .kpi-card.kpi-highlight{background:linear-gradient(135deg,#FFFFFF,#FFF3C4);border-color:rgba(184,134,11,.2)}
+    .kpi-card .ki-wrap{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px}
+    .kpi-card .ki{width:40px;height:40px;border-radius:50%;background:#FFFFFF;box-shadow:0 2px 6px rgba(10,15,28,.1);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gold);flex:none}
+    .kpi-card .ki.ki-solid{background:var(--gold);color:#FFFFFF;box-shadow:0 2px 6px rgba(184,134,11,.3)}
+    .kpi-card .ki-bar{width:16px;height:2px;border-radius:1px;background:var(--gold);opacity:.55}
+    .kpi-card .kpi-text{flex:1;min-width:0}
+    .kpi-card .kv{font-size:20px;font-weight:800;color:#171C26;margin:0 0 2px;line-height:1.2}
+    .kpi-card .kl{font-size:13px;font-weight:600;color:#171C26;margin-bottom:2px}
+    .kpi-card .ks{font-size:11px;font-weight:500;color:rgba(10,15,28,.45)}
+    /* 카드 3·4(완료 사업·총 관리세대) 골드 크림 강조 */
+    .kpi-card.kpi-highlight{background:#FFF9E8;border-color:rgba(184,134,11,.25)}
     .kpi-card.kpi-highlight::after{opacity:.6}
-    .kpi-card.kpi-highlight .kv{font-size:26px}
-    .kpi-card.kpi-highlight .ki{opacity:1}
+    .kpi-card.kpi-highlight .kv{color:var(--gold)}
+    @media(max-width:480px){.kpi-card{padding:12px 14px}.kpi-card .kv{font-size:18px}}
 
     /* === Section === */
     .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
@@ -335,11 +341,12 @@ function dn(p){return p.name}
 
 /* KPI */
 !function(){var t=D.length,i=0,d=0,u=0;D.forEach(function(p){if(p.status==='진행중')i++;else d++;u+=parseInt(p.scale.replace(/[^0-9]/g,''))||0});
+function kpi(icon,val,label,sub,cardCls,iconCls){return '<div class="kpi-card'+(cardCls?' '+cardCls:'')+'"><div class="ki-wrap"><div class="ki'+(iconCls?' '+iconCls:'')+'"><i class="fa-solid '+icon+'"></i></div><div class="ki-bar"></div></div><div class="kpi-text"><div class="kv">'+val+'</div><div class="kl">'+label+'</div><div class="ks">'+sub+'</div></div></div>'}
 document.getElementById('kpiGrid').innerHTML=
-'<div class="kpi-card"><div class="ki"><i class="fa-solid fa-building"></i></div><div class="kv">'+t+'건</div><div class="kl">총 수행실적</div></div>'+
-'<div class="kpi-card"><div class="ki"><i class="fa-solid fa-spinner"></i></div><div class="kv">'+i+'건</div><div class="kl">진행중 사업</div></div>'+
-'<div class="kpi-card kpi-highlight"><div class="ki"><i class="fa-solid fa-circle-check"></i></div><div class="kv">'+d+'건</div><div class="kl">완료 사업</div></div>'+
-'<div class="kpi-card kpi-highlight"><div class="ki"><i class="fa-solid fa-house-chimney"></i></div><div class="kv">약 '+u.toLocaleString()+'세대</div><div class="kl">총 관리세대</div></div>'}();
+kpi('fa-building',t+'건','총 수행실적','축적된 수행 경험')+
+kpi('fa-spinner',i+'건','진행중 사업','현재 수행 중인 현장')+
+kpi('fa-circle-check',d+'건','완료 사업','성공적으로 완료한 사업','kpi-highlight','ki-solid')+
+kpi('fa-house-chimney','약 '+u.toLocaleString()+'세대','총 관리세대','축적된 사업관리 규모','kpi-highlight')}();
 
 /* Featured */
 function renderFeat(){
