@@ -22,37 +22,39 @@
     .sv-section .section-title { margin-bottom:28px; }
 
     /* 그룹사 */
-    .pro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .pro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .pro-card {
         background: var(--white);
         border: 1px solid var(--gray-200);
-        border-top: 3px solid var(--visseum-gold);
-        border-radius: 14px;
-        padding: 28px 24px;
+        border-top: 4px solid var(--visseum-gold);
+        border-radius: 20px;
+        padding: 40px 44px;
         transition: all 0.25s;
         display: flex; flex-direction: column;
         text-decoration: none; color: inherit;
         position: relative;
         box-shadow: 0 4px 16px rgba(20,28,38,.045);
     }
+    .pro-card.pro-card-blue { border-top-color: var(--visseum-blue); }
+    .pro-card.pro-card-red { border-top-color: var(--visseum-red); }
     .pro-card:hover {
         box-shadow: 0 12px 30px rgba(20,28,38,.09);
         transform: translateY(-4px);
     }
     .pro-card-more {
-        margin-top: 14px;
-        font-size: 12.5px; font-weight: 600;
+        margin-top: 28px;
+        font-size: 14px; font-weight: 700;
         color: var(--visseum-gold);
-        display: inline-flex; align-items: center; gap: 6px;
-        opacity: 0.85; transition: opacity 0.2s, transform 0.2s;
+        display: inline-flex; align-items: center; gap: 8px;
+        opacity: 0.9; transition: opacity 0.2s, transform 0.2s;
     }
     .pro-card:hover .pro-card-more { opacity: 1; transform: translateX(2px); color: #9F7000; }
-    .pro-card h4 { font-size: 16px; font-weight: 700; color: var(--visseum-ink); margin-bottom: 8px; }
-    .pro-card p { font-size: 13.5px; color: var(--visseum-text); line-height: 1.7; font-weight: 500; flex: 1; }
+    .pro-card h4 { font-size: 21px; font-weight: 800; color: var(--visseum-ink); margin-bottom: 14px; }
+    .pro-card p { font-size: 15.5px; color: var(--visseum-text); line-height: 1.85; font-weight: 500; flex: 1; }
     @media (max-width: 1024px) { .pro-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) { .pro-grid { grid-template-columns: 1fr; } }
     .group-grid { grid-template-columns: repeat(2, 1fr); }
-    .group-card-logo { height: 44px; display: flex; align-items: center; margin-bottom: 20px; }
+    .group-card-logo { height: 56px; display: flex; align-items: center; margin-bottom: 26px; }
     .group-card-logo img { max-height: 100%; max-width: 100%; object-fit: contain; }
     @media (max-width: 600px) { .group-grid { grid-template-columns: 1fr; } }
 
@@ -61,7 +63,10 @@
     @media (max-width: 860px) { .coord-grid { grid-template-columns: 1fr; } }
     .coord-card { background: var(--white); border: 1px solid var(--gray-200); border-top: 3px solid var(--visseum-gold); border-radius: 16px; overflow: hidden; transition: all 0.25s; display: flex; flex-direction: column; height: 100%; }
     .coord-card:hover { box-shadow: 0 12px 30px rgba(20,28,38,.08); transform: translateY(-3px); }
-    .coord-card-head { background: linear-gradient(135deg, var(--visseum-cream), #FFF3C4); border-bottom: 1px solid rgba(197,139,0,.18); padding: 22px 24px; }
+    .coord-card-blue { border-top-color: #0068B7; }
+    .coord-card-green { border-top-color: #009A44; }
+    .coord-card-yellow { border-top-color: #FFC400; }
+    .coord-card-head { background: linear-gradient(135deg, #FFF8E6, #FFF6D1); border-bottom: 1px solid rgba(197,139,0,.18); padding: 22px 24px; }
     .coord-badge { text-align: center; font-size: 9px; font-weight: 700; letter-spacing: 2px; color: var(--visseum-gold); text-transform: uppercase; margin-bottom: 18px; }
     .coord-head-row { display: flex; align-items: center; gap: 16px; }
     .coord-photo { width: 78px; height: 78px; border-radius: 50%; overflow: hidden; margin: 0; border: 2px solid rgba(197,139,0,.45); background: #fff; flex-shrink: 0; }
@@ -93,14 +98,17 @@
     /* 서울시 코디네이터 신뢰 바 */
     .coord-highlight {
         display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
-        background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,.08); border-radius: 16px;
-        padding: 29px 36px; margin-top: 32px;
+        background: rgba(24,28,34,.88); border: 1px solid rgba(255,255,255,.08); border-radius: 16px;
+        padding: 17.6px 36px; margin-top: 10px;
     }
     .coord-highlight-lead { display: flex; align-items: center; gap: 20px; flex: 1 1 320px; min-width: 280px; }
     .coord-highlight-icon {
         width: 56px; height: 56px; border-radius: 12px; flex-shrink: 0;
-        background: rgba(197,139,0,.12); border: 1.5px solid rgba(197,139,0,.5); color: var(--visseum-gold);
+        background: #fff; border: 1.5px solid rgba(197,139,0,.5); color: var(--visseum-gold);
         display: flex; align-items: center; justify-content: center; font-size: 22px;
+        padding: 9px; overflow: hidden;
+    }
+    .coord-highlight-icon img { width: 100%; height: 100%; object-fit: contain; display: block;
     }
     .coord-highlight-lead p { font-size: 14px; line-height: 1.6; color: #fff; font-weight: 600; }
     .coord-highlight-stats { display: flex; gap: 0; flex: 2 1 480px; }
@@ -621,13 +629,13 @@
         <div class="sv-section" id="business" style="margin-top:64px">
             <h2 class="section-title">도시정비광고 등</h2>
             <div class="pro-grid group-grid" id="proGrid">
-                <a class="pro-card" href="http://www.comwayblue.co.kr/" target="_blank" rel="noopener">
+                <a class="pro-card pro-card-blue" href="http://www.comwayblue.co.kr/" target="_blank" rel="noopener">
                     <div class="group-card-logo"><img src="../jpg/group_comwayblue_logo.png" alt="컴웨이블루 로고"></div>
                     <h4>컴웨이블루 <span style="font-weight:500;color:var(--visseum-muted);font-size:12.5px">COMWAYBLUE</span></h4>
                     <p>분양광고·정비사업광고·영상제작에 특화된 광고기획사입니다. 시장조사부터 기획·카피·디자인·제작까지 온·오프라인 광고를 종합적으로 수행합니다.</p>
                     <span class="pro-card-more">홈페이지 바로가기 <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
                 </a>
-                <a class="pro-card" href="http://www.hanwoorired.co.kr/" target="_blank" rel="noopener">
+                <a class="pro-card pro-card-red" href="http://www.hanwoorired.co.kr/" target="_blank" rel="noopener">
                     <div class="group-card-logo"><img src="../jpg/group_hanwoorired_logo.png" alt="한우리레드 로고"></div>
                     <h4>한우리레드 <span style="font-weight:500;color:var(--visseum-muted);font-size:12.5px">HANWOORIRED</span></h4>
                     <p>고객제일주의 경영을 실현하는 완벽한 파트너. 동감(同感)·동행(同行)·동승(同乘) 3동의 파트너십으로 고객과 함께 동반성장을 실현하며, 윤리경영·상생경영을 바탕으로 사회적 책임을 다하는 기업입니다.</p>
@@ -641,14 +649,14 @@
             <h2 class="section-title">서울시 정비사업 코디네이터·공공자문 업무</h2>
             <div class="coord-grid">
 
-                <div class="coord-card">
+                <div class="coord-card coord-card-blue">
                     <div class="coord-card-head">
                         <div class="coord-badge">Seoul City Coordinator</div>
                         <div class="coord-head-row">
                             <div class="coord-photo empty"><i class="fa-solid fa-user"></i></div>
                             <div class="coord-id">
                                 <div class="coord-name">조구형</div>
-                                <div class="coord-role">서울시 정비사업 코디네이터</div>
+                                <div class="coord-role">현 서울시 정비사업 코디네이터</div>
                             </div>
                         </div>
                     </div>
@@ -658,14 +666,14 @@
                     </div>
                 </div>
 
-                <div class="coord-card">
+                <div class="coord-card coord-card-green">
                     <div class="coord-card-head">
                         <div class="coord-badge">Seoul City Coordinator</div>
                         <div class="coord-head-row">
                             <div class="coord-photo empty"><i class="fa-solid fa-user"></i></div>
                             <div class="coord-id">
                                 <div class="coord-name">최현태</div>
-                                <div class="coord-role">서울시 정비사업 코디네이터</div>
+                                <div class="coord-role">현 서울시 정비사업 코디네이터</div>
                             </div>
                         </div>
                     </div>
@@ -675,14 +683,14 @@
                     </div>
                 </div>
 
-                <div class="coord-card">
+                <div class="coord-card coord-card-yellow">
                     <div class="coord-card-head">
                         <div class="coord-badge">Seoul City Coordinator</div>
                         <div class="coord-head-row">
                             <div class="coord-photo"><img src="../jpg/이창우.jpg" alt="이창우 서울시 정비사업 코디네이터"></div>
                             <div class="coord-id">
                                 <div class="coord-name">이창우</div>
-                                <div class="coord-role">서울시 정비사업 코디네이터</div>
+                                <div class="coord-role">현 서울시 정비사업 코디네이터</div>
                             </div>
                         </div>
                     </div>
@@ -700,14 +708,14 @@
 
             <div class="coord-highlight">
                 <div class="coord-highlight-lead">
-                    <div class="coord-highlight-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="coord-highlight-icon"><img src="../jpg/seoul-city-mark.jpg" alt="서울특별시 상징 마크"></div>
                     <p>정비사업전문관리업계 최대 수준의<br>서울시 정비사업 코디네이터 전문인력 3인 체계</p>
                 </div>
                 <div class="coord-highlight-stats">
                     <div class="coord-hl-item"><div class="coord-hl-num">3<span>인</span></div><div class="coord-hl-desc">서울시 코디네이터<br>전문인력 보유<br>(갈등책임관리관)</div></div>
                     <div class="coord-hl-item"><div class="coord-hl-num">20<span>년+</span></div><div class="coord-hl-desc">평균 정비사업<br>실무경력</div></div>
                     <div class="coord-hl-item"><div class="coord-hl-num">다수</div><div class="coord-hl-desc">공공지원 정비사업<br>코디네이터 수행</div></div>
-                    <div class="coord-hl-item"><div class="coord-hl-num">서울권역</div><div class="coord-hl-desc">서울 전역 조합<br>자문 및 지원<br>(공사비 분쟁 협상 등)</div></div>
+                    <div class="coord-hl-item"><div class="coord-hl-num">서울 전역</div><div class="coord-hl-desc">서울 전역 조합<br>자문 및 지원<br>(공사비 분쟁 협상 등)</div></div>
                 </div>
             </div>
         </div>
