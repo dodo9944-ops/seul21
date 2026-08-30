@@ -422,8 +422,18 @@
         }
         .news-item:last-child { border-bottom: none; }
         .news-item:hover { background: rgba(255,196,0,.025); }
-        .news-thumb { width: 72px; height: 52px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #C58B00; background: #FFFFFF; overflow: hidden; }
+        .news-thumb { width: 72px; height: 52px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #C58B00; background: #FFFFFF; overflow: hidden; position: relative; }
         .news-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        /* 자료실(library.html)과 동일한 카테고리별 아이콘·배경색 — 뉴스/관계법령/서식/가이드 */
+        .news-thumb::before { content:''; position:absolute; inset:0; border-radius:inherit; background:linear-gradient(135deg,rgba(255,255,255,.65) 0%,rgba(255,255,255,.15) 45%,rgba(255,255,255,0) 68%); pointer-events:none; }
+        .news-thumb i { position:relative; }
+        .news-thumb.news { background:linear-gradient(135deg,#FFFFFF,#FFF3C4); color:#0A0F1C; }
+        .news-thumb.law { background:linear-gradient(135deg,#5CB2F0,#0068B7); color:#fff; }
+        .news-thumb.form { background:linear-gradient(135deg,#8A96A6,#2D3748); color:#fff; }
+        .news-thumb.guide { background:linear-gradient(135deg,#4FE0A0,#009A44); color:#fff; }
+        .news-thumb.hwp { background:linear-gradient(135deg,#2A7DE1,#1B5FBF); color:#fff; }
+        .news-thumb.pdf { background:linear-gradient(135deg,#D6423A,#B5332B); color:#fff; }
+        .news-thumb.xlsx { background:linear-gradient(135deg,#1E8C5E,#166B48); color:#fff; }
         .news-body { min-width: 0; overflow: hidden; }
         .news-body h4 {
             font-size: 15px;
@@ -1283,6 +1293,17 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     }
 
     var iconMap={hwp:'fa-file-lines',pdf:'fa-file-pdf',xlsx:'fa-file-excel'};
+    /* 자료실(library.html)의 카테고리별 아이콘·배지 로직과 동기화 */
+    var contentVisualMap=[
+        {keys:['주요뉴스','칼럼','정책','일반','사례'],icon:'fa-newspaper',cls:'news'},
+        {keys:['법령','법령·조례','관련판례','지침','판례·질의회신'],icon:'fa-gavel',cls:'law'},
+        {keys:['서식','절차·서류'],icon:'fa-file-pen',cls:'form'},
+        {keys:['가이드'],icon:'fa-book',cls:'guide'}
+    ];
+    function getContentVisual(category){
+        var m=contentVisualMap.find(function(v){return v.keys.indexOf(category)>=0});
+        return m||{icon:'fa-newspaper',cls:'news'};
+    }
 
     /* 주요뉴스: 최근 7일치 */
     var newsEl=document.getElementById('mainNews');
@@ -1386,9 +1407,10 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             location.href='pages/library.html?id='+encodeURIComponent(id);
         };
         libEl.innerHTML=libs.map(function(i){
-            var ic=iconMap[i.fileType]||'fa-file';
+            var isWeb=i.fileType==='web';
+            var v=isWeb?getContentVisual(i.category):{icon:iconMap[i.fileType]||'fa-file',cls:i.fileType};
             return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
-                '<div class="news-thumb"><i class="fa-solid '+ic+'"></i></div>'+
+                '<div class="news-thumb '+v.cls+'"><i class="fa-solid '+v.icon+'"></i></div>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
                 '<div class="news-date">'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></div></div></div>';
         }).join('');
