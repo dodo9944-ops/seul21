@@ -387,6 +387,11 @@
             .section-title { font-size: 19px; font-weight: 800; letter-spacing: -.3px; padding-left: 11px; }
             .section-title::before { width: 3px; height: 16px; top: 3px; }
         }
+        /* 마지막 섹션(자료실+갤러리) 하단여백을 사업분야 등 서브페이지 하단여백(page-body 80px/60px)과 동일하게 통일 */
+        #mainLastSection { padding-bottom: 80px; }
+        @media (max-width: 768px) {
+            #mainLastSection { padding-bottom: 60px; }
+        }
         /* ── CARD VISUAL (메인 전용) ── */
         .card-visual { display: flex; align-items: center; justify-content: center; border-radius: 12px; background: linear-gradient(135deg, #FFFFFF, #FFF3C4); }
         .card-visual i { color: rgba(184,134,11,0.4); }
@@ -968,7 +973,7 @@
 
 
 <!-- ===== 자료실 + 커뮤니티 ===== -->
-<section class="section">
+<section class="section" id="mainLastSection">
     <div class="inner">
         <div class="section-label">Resources</div>
         <div class="section-head">
