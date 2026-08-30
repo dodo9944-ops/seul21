@@ -628,17 +628,12 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   font-family: var(--font);
   font-size: 24px; font-weight: 800; color: #111;
   letter-spacing: normal; line-height: 1.75; position: relative;
-  padding-left: 14px; margin-bottom: 40px;
+  padding-left: 14px;
 }
 .section-title::before {
   content: ''; position: absolute; left: 0; top: 4px;
   width: 3px; height: 20px; border-radius: 2px;
   background: linear-gradient(to bottom, var(--gold), rgba(184,134,11,0.3));
-}
-.section-head .section-title {
-  /* .section-head(flex row, title+링크 배치)는 자체 margin-bottom으로 하단 여백을 관리하므로
-     .section-title의 여백을 중복 적용하지 않는다(정렬 밀림 방지) */
-  margin-bottom: 0;
 }
 
 /* ── CARDS ── */
