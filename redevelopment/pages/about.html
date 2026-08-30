@@ -240,6 +240,10 @@
         padding: 25px 0;
     }
     .about-section:last-child { padding-bottom: 0; }
+    /* 히어로 밑 여백 = about-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 첫 섹션 상단 보정(88px) = 총 100px */
+    @media (min-width: 601px) {
+        #aboutFirstSection { padding-top: 88px; }
+    }
     .about-section.bg-light { background: #FFFFFF; }
     .about-section.bg-dark {
         background: linear-gradient(160deg, #FFFFFF, #FFF3C4);
@@ -894,7 +898,7 @@
     <!-- ============================================================
          2. TRUST POSITION
          ============================================================ -->
-    <div class="about-section">
+    <div class="about-section" id="aboutFirstSection">
         <div class="inner">
             <div class="section-label">Trust Position</div>
             <h2 class="section-title">(주)빛세움</h2>
