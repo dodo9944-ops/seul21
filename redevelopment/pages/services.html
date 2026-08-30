@@ -96,13 +96,16 @@
     .coord-highlight {
         display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
         background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,.08); border-radius: 16px;
-        padding: 29px 36px; margin-top: 32px;
+        padding: 22px 36px; margin-top: 32px;
     }
     .coord-highlight-lead { display: flex; align-items: center; gap: 20px; flex: 1 1 320px; min-width: 280px; }
     .coord-highlight-icon {
         width: 56px; height: 56px; border-radius: 12px; flex-shrink: 0;
-        background: rgba(197,139,0,.12); border: 1.5px solid rgba(197,139,0,.5); color: var(--visseum-gold);
+        background: #fff; border: 1.5px solid rgba(197,139,0,.5); color: var(--visseum-gold);
         display: flex; align-items: center; justify-content: center; font-size: 22px;
+        padding: 9px; overflow: hidden;
+    }
+    .coord-highlight-icon img { width: 100%; height: 100%; object-fit: contain; display: block;
     }
     .coord-highlight-lead p { font-size: 14px; line-height: 1.6; color: #fff; font-weight: 600; }
     .coord-highlight-stats { display: flex; gap: 0; flex: 2 1 480px; }
@@ -169,6 +172,10 @@
         background:rgba(184,134,11,0.15); display:flex; align-items:center; justify-content:center;
         font-size:15px; font-weight:800; color:var(--gold); flex-shrink:0;
     }
+    /* 정비사업 4종 카드 넘버 배지 — 빛세움 CI 4색 순환(01 블루/02 그린/03 레드/04 골드) */
+    #urban-renewal .sv-card:nth-child(1) .sv-card-num { background:rgba(0,104,183,.14); color:var(--visseum-blue); }
+    #urban-renewal .sv-card:nth-child(2) .sv-card-num { background:rgba(0,154,68,.14); color:var(--visseum-green); }
+    #urban-renewal .sv-card:nth-child(3) .sv-card-num { background:rgba(230,0,18,.12); color:var(--visseum-red); }
     .sv-card-header h3 { font-size:22px; font-weight:800; color:#0A0F1C; letter-spacing:-0.4px; line-height:1.25; }
     .sv-card-header .sv-sub { font-size:10px; color:rgba(10,15,28,0.35); margin-top:5px; }
     @media(max-width:860px){ .sv-card-header h3 { font-size:20px; } }
@@ -702,7 +709,7 @@
 
             <div class="coord-highlight">
                 <div class="coord-highlight-lead">
-                    <div class="coord-highlight-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="coord-highlight-icon"><img src="../jpg/seoul-city-mark.jpg" alt="서울특별시 상징 마크"></div>
                     <p>정비사업전문관리업계 최대 수준의<br>서울시 정비사업 코디네이터 전문인력 3인 체계</p>
                 </div>
                 <div class="coord-highlight-stats">
