@@ -80,6 +80,10 @@
     .pop-card .pop-icon.pdf{background:#D6423A}
     .pop-card .pop-icon.hwp{background:#2A7DE1}
     .pop-card .pop-icon.web{background:#FFFFFF}
+    .pop-card .pop-icon.news{background:#FFFFFF}
+    .pop-card .pop-icon.law{background:#0068B7;color:#fff}
+    .pop-card .pop-icon.form{background:#4A5568;color:#fff}
+    .pop-card .pop-icon.guide{background:#009A44;color:#fff}
     .pop-card .pop-body{flex:1;min-width:0}
     .pop-card .pop-title{font-size:14px;font-weight:800;color:var(--gray-900);line-height:1.45;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
     .pop-card .pop-info{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--gray-500);font-weight:600}
@@ -97,6 +101,11 @@
     .lib-icon.pdf{background:linear-gradient(135deg,#D6423A,#B5332B);color:#fff}
     .lib-icon.xlsx{background:linear-gradient(135deg,#1E8C5E,#166B48);color:#fff}
     .lib-icon.web{background:linear-gradient(135deg,#FFFFFF,#FFF3C4)}
+    /* 자료 유형별(뉴스/관계법령/서식/가이드) 아이콘·배경색 구분 */
+    .lib-icon.news{background:linear-gradient(135deg,#FFFFFF,#FFF3C4);color:#0A0F1C}
+    .lib-icon.law{background:linear-gradient(135deg,#2E86D6,#0068B7);color:#fff}
+    .lib-icon.form{background:linear-gradient(135deg,#4A5568,#2D3748);color:#fff}
+    .lib-icon.guide{background:linear-gradient(135deg,#00B368,#009A44);color:#fff}
     .lib-icon .ft-label{position:absolute;bottom:-3px;right:-3px;background:#fff;border:1px solid var(--gray-200);border-radius:4px;font-size:8px;font-weight:800;color:var(--gray-600);padding:1px 4px;text-transform:uppercase;line-height:1}
 
     /* Content */
@@ -312,6 +321,17 @@ var PER=10,curPage=1,curCat='주요뉴스',curSort='date',searchQ='';
 
 var iconMap={hwp:{icon:'fa-file-lines',cls:'hwp'},pdf:{icon:'fa-file-pdf',cls:'pdf'},xlsx:{icon:'fa-file-excel',cls:'xlsx'}};
 function getIcon(ft){return iconMap[ft]||{icon:'fa-file',cls:'web'}}
+/* 자료실 웹 상세형(web) 콘텐츠의 실제 카테고리별 아이콘·배지·색상 구분 */
+var contentVisualMap=[
+    {keys:['주요뉴스','칼럼','정책','일반','사례'],icon:'fa-newspaper',cls:'news',badge:'NEWS'},
+    {keys:['법령','법령·조례','관련판례','지침','판례·질의회신'],icon:'fa-gavel',cls:'law',badge:'LAW'},
+    {keys:['서식','절차·서류'],icon:'fa-file-pen',cls:'form',badge:'FORM'},
+    {keys:['가이드'],icon:'fa-book',cls:'guide',badge:'GUIDE'}
+];
+function getContentVisual(category){
+    var m=contentVisualMap.find(function(v){return v.keys.indexOf(category)>=0});
+    return m||{icon:'fa-newspaper',cls:'news',badge:'NEWS'};
+}
 function isNew(d){return d&&(now-new Date(d))<7*864e5}
 function isHot(dl){return dl>=200}
 
@@ -381,7 +401,7 @@ function renderFeatured(){
   var sub='열람순 · 인기순';
   var html='<div class="pop-head"><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
   top.forEach(function(item,idx){
-    var fi=getIcon(item.fileType);var vc=vmap[item.id]||0;
+    var isWeb=item.fileType==='web';var fi=isWeb?getContentVisual(item.category):getIcon(item.fileType);var vc=vmap[item.id]||0;
     html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-eye"></i> '+vc+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
   });
   html+='</div>';
@@ -411,10 +431,14 @@ badges+='<span class="lb-dl"><i class="fa-solid fa-download"></i>'+(item.downloa
 var pinCls=isHot(item.downloads)?' pinned':'';
 var isWeb=item.fileType==='web';
 var ftLabel=item.fileType==='pdf'?'PDF':item.fileType==='hwp'?'HWP':item.fileType==='xlsx'?'XLS':'WEB';
-var btnIcon=isWeb?'fa-newspaper':'fa-arrow-down';
-var btnText=isWeb?'뉴스보기':ftLabel+' 다운로드';
+var cv=isWeb?getContentVisual(item.category):null;
+var iconCls=isWeb?cv.cls:fi.cls;
+var iconIcon=isWeb?cv.icon:fi.icon;
+var ftBadge=isWeb?cv.badge:ftLabel;
+var btnIcon=isWeb?cv.icon:'fa-arrow-down';
+var btnText=isWeb?'문서보기':ftLabel+' 다운로드';
 
-return'<div class="lib-item'+pinCls+'">'+'<div class="lib-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i><span class="ft-label">'+(isWeb?'NEWS':ftLabel)+'</span></div>'+'<div class="lib-content">'+'    <div class="lib-title" data-id="'+item.id+'">'+item.title+'</div>'+'    <div class="lib-desc">'+item.description+'</div>'+'    <div class="lib-meta-row">'+badges+'</div>'+'</div>'+'<div class="lib-action">'+'    <span class="lib-size">'+item.fileSize+'</span>'+'    <button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid '+btnIcon+'"></i> '+btnText+'</button>'+'</div></div>'}).join('');
+return'<div class="lib-item'+pinCls+'">'+'<div class="lib-icon '+iconCls+'"><i class="fa-solid '+iconIcon+'"></i><span class="ft-label">'+ftBadge+'</span></div>'+'<div class="lib-content">'+'    <div class="lib-title" data-id="'+item.id+'">'+item.title+'</div>'+'    <div class="lib-desc">'+item.description+'</div>'+'    <div class="lib-meta-row">'+badges+'</div>'+'</div>'+'<div class="lib-action">'+'    <span class="lib-size">'+item.fileSize+'</span>'+'    <button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid '+btnIcon+'"></i> '+btnText+'</button>'+'</div></div>'}).join('');
 
 /* Pager */
 var pg=document.getElementById('pager');
