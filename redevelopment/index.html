@@ -387,6 +387,10 @@
             .section-title { font-size: 19px; font-weight: 800; letter-spacing: -.3px; padding-left: 11px; }
             .section-title::before { width: 3px; height: 16px; top: 3px; }
         }
+        /* 히어로(hero-banner)는 그대로 두고, 히어로 직후 첫 섹션의 중복 상단여백과
+           마지막 섹션의 하단여백만 다른 페이지(page-body 25px/0 기준)에 맞춰 축소 */
+        #mainFirstSection { padding-top: 0; }
+        #mainLastSection { padding-bottom: 0; }
 
         /* ── CARD VISUAL (메인 전용) ── */
         .card-visual { display: flex; align-items: center; justify-content: center; border-radius: 12px; background: linear-gradient(135deg, #FFFFFF, #FFF3C4); }
@@ -773,7 +777,7 @@
 
 
 <!-- ===== 주요뉴스 ===== -->
-<section class="section">
+<section class="section" id="mainFirstSection">
     <div class="inner">
         <div class="section-label">Latest News</div>
         <div class="section-head">
@@ -959,7 +963,7 @@
 
 
 <!-- ===== 자료실 + 커뮤니티 ===== -->
-<section class="section">
+<section class="section" id="mainLastSection">
     <div class="inner">
         <div class="section-label">Resources</div>
         <div class="section-head">
