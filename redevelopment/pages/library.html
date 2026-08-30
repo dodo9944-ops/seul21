@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260830c">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260830d">
     <style>
     /* ================================================================
        자료실 — 정비사업 전문 아카이브 (Premium Redesign)
@@ -281,7 +281,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260830b"></script>
 <script src="../assets/js/data-service.js?v=20260418k"></script>
-<script src="../assets/js/common.js?v=20260830c"></script>
+<script src="../assets/js/common.js?v=20260830d"></script>
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}
@@ -557,17 +557,15 @@ var fileMap={
 function handleDownload(id){
 addNewsView(id);
 var item=allItems.find(function(i){return i.id===id});
-if(item&&item.category==='주요뉴스'){
-var nm=fileMap[id];var suffix=id.replace(/^news/,'');
-var nurl=(nm&&nm.web)?nm.web:('../downloads/news_'+(item.date||'').replace(/-/g,'')+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html');
-NewsDetailModal.open(nurl,{category:item.category,title:item.title});
-item.downloads=(item.downloads||0)+1;render();return}
 var m=fileMap[id];
+if(m&&m.web){
+NewsDetailModal.open(m.web,{category:item?item.category:'',title:item?item.title:''});
+if(item)item.downloads=(item.downloads||0)+1;render();return}
 if(!m){
+if(item&&item.category==='주요뉴스'){var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');var tryUrl='../downloads/news_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html';NewsDetailModal.open(tryUrl,{category:item.category,title:item.title});item.downloads=(item.downloads||0)+1;render();return}
 if(item&&item.category==='칼럼'){var dateStr=(item.date||'').replace(/-/g,'').substring(0,8);var suffix=id.replace(/^col/,'');var tryUrl='../downloads/col_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html';location.href=tryUrl;return}
 App.toast('파일 준비 중입니다.','정보');return}
 if(m.ext){var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();document.body.appendChild(a);a.click();document.body.removeChild(a);App.toast('파일 다운로드 시작','success')}
-else if(m.web){location.href=m.web}
 else if(m.gov){window.open(m.gov,'_blank');App.toast((m.label||'공식 사이트')+'로 이동합니다','info')}
 if(item){item.downloads=(item.downloads||0)+1}render()}
 

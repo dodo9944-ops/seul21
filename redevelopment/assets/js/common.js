@@ -711,6 +711,61 @@ const NewsDetailModal = (() => {
 })();
 window.NewsDetailModal = NewsDetailModal;
 
+/**
+ * 공지사항 상세 모달 — 업무실적/주요뉴스 상세 모달과 동일한 DOM/CSS를 재사용한다.
+ * 공지 데이터는 MOCK.notices에 이미 로드돼 있으므로 fetch 없이 즉시 렌더링한다.
+ */
+const NoticeDetailModal = (() => {
+  let ov = null, heroEl = null, bodyEl = null;
+
+  function ensure() {
+    if (ov) return;
+    ov = document.createElement('div');
+    ov.className = 'd-overlay';
+    ov.innerHTML =
+      '<div class="d-modal">' +
+        '<div class="nd-hero"></div>' +
+        '<button class="d-close" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>' +
+        '<div class="d-body nd-body"></div>' +
+        '<div class="d-footer"><button type="button"><i class="fa-solid fa-xmark"></i> 닫기</button></div>' +
+      '</div>';
+    document.body.appendChild(ov);
+    heroEl = ov.querySelector('.nd-hero');
+    bodyEl = ov.querySelector('.nd-body');
+    ov.querySelectorAll('.d-close, .d-footer button').forEach(b => b.addEventListener('click', close));
+    ov.addEventListener('click', e => { if (e.target === ov) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && ov.classList.contains('open')) close(); });
+  }
+
+  function close() {
+    if (!ov) return;
+    ov.classList.remove('open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+
+  function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function open(notice) {
+    ensure();
+    const important = notice.important ? '<span class="badge badge-important" style="margin-left:6px">중요</span>' : '';
+    heroEl.innerHTML =
+      '<div class="d-hero-fb" data-t="news"><div class="d-title-area">' +
+        '<div class="badges"><span class="d-newsbadge">' + esc(notice.category || '공지사항') + '</span>' + important + '</div>' +
+        '<h2>' + esc(notice.title || '') + '</h2>' +
+        '<div class="d-phase"><i class="fa-solid fa-calendar"></i> ' + esc(notice.date || '') + '</div>' +
+      '</div></div>';
+    bodyEl.innerHTML = '<div class="d-sec"><div class="notice-detail-content">' + (notice.content || '') + '</div></div>';
+    ov.scrollTop = 0;
+    ov.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = (window.innerWidth - document.documentElement.clientWidth) + 'px';
+  }
+
+  return { open, close };
+})();
+window.NoticeDetailModal = NoticeDetailModal;
+
 /* DOM Ready */
 document.addEventListener('DOMContentLoaded', () => {
   App.init();

@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260830c">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260830d">
     <style>
         /* ============================================================
            INDEX PAGE — 고유 스타일
@@ -1056,7 +1056,7 @@
 <!-- 공통 JS -->
 <script src="assets/data/mock-data.js?v=20260830b"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260830c"></script>
+<script src="assets/js/common.js?v=20260830d"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1313,7 +1313,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         }
         noticeEl.innerHTML=notices.length?notices.map(function(n){
             var badge=n.important?'<span style="color:#C58B00;font-weight:700;font-size:11px;margin-right:6px;">[중요]</span>':'';
-            return'<a href="pages/notice.html?id='+encodeURIComponent(n.id)+'" class="news-item" style="gap:10px;padding:16px 20px;">'+
+            return'<a href="pages/notice.html?id='+encodeURIComponent(n.id)+'" class="news-item" data-notice-id="'+n.id+'" style="gap:10px;padding:16px 20px;">'+
                 '<span style="color:#C58B00;font-size:11px;flex-shrink:0;margin-top:4px;">●</span>'+
                 '<div class="news-body" style="display:flex;flex-direction:column;gap:5px;">'+
                 '<h4 style="height:auto;display:block;-webkit-line-clamp:unset;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:0;">'+
@@ -1321,6 +1321,12 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
                     '<span style="font-weight:400;color:#9A9DA2;font-size:13px;margin-left:8px;">'+noticeSummary(n)+'</span></h4>'+
                 '<div class="news-date">'+n.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">등록된 공지사항이 없습니다.</p>';
+        noticeEl.addEventListener('click',function(e){
+            var a=e.target.closest('a[data-notice-id]');if(!a)return;
+            var n=notices.find(function(x){return x.id===a.dataset.noticeId});if(!n)return;
+            e.preventDefault();
+            NoticeDetailModal.open(n);
+        });
     }
 
     /* 자료실: 최신 3건 (주요뉴스 제외) */
