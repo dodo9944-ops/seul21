@@ -38,15 +38,26 @@
     .page-body.lib-page > .inner{overflow:hidden}
     .lib-item{min-width:0;max-width:100%}
 
+    /* === 전체자료 타이틀 (홈페이지 .section-title 재사용) === */
+    .lib-all-title{margin-bottom:28px}
+
     /* === Control Bar === */
-    .ctrl-bar{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap}
+    .ctrl-bar{display:flex;align-items:center;gap:16px;margin-bottom:48px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap}
     .ctrl-sort{display:flex;align-items:center;gap:8px;margin-left:auto}
     .ctrl-sort label{font-size:12px;font-weight:600;color:var(--gray-400);white-space:nowrap}
     .ctrl-sort select{height:40px;padding:0 30px 0 12px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;font-weight:500;color:var(--gray-700);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s}
     .ctrl-sort select:focus{border-color:var(--gold);outline:none}
     .ctrl-count{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap}
     .ctrl-count strong{color:var(--brand-dark);font-weight:700}
-    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ctrl-sort{margin-left:0;justify-content:flex-end}}
+    /* 카테고리 탭 — 언더라인 강조 스타일 (전체자료 디자인 통일, #ctrlNav 범위로만 한정) */
+    #ctrlNav{gap:0}
+    #ctrlNav button,#ctrlNav a{padding:4px 20px;font-size:14px;font-weight:500;color:var(--gray-700,#444);background:none;border:none;border-radius:0;position:relative}
+    #ctrlNav button:first-child,#ctrlNav a:first-child{padding-left:0}
+    #ctrlNav button:not(:last-child),#ctrlNav a:not(:last-child){border-right:1px solid var(--gray-200)}
+    #ctrlNav button:hover,#ctrlNav a:hover{background:none;color:var(--gray-900)}
+    #ctrlNav button.on{color:var(--gold);font-weight:700}
+    #ctrlNav button.on::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:20px;height:2px;border-radius:1px;background:var(--gold)}
+    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ctrl-sort{margin-left:0;justify-content:flex-end}#ctrlNav{flex-wrap:wrap;row-gap:10px}}
 
     /* === Popular Section === */
     .pop-sec{margin-bottom:36px}
@@ -237,6 +248,8 @@
 </div>
 
 <div class="page-body lib-page"><div class="inner" id="libContent">
+
+    <div class="section-head lib-all-title"><h2 class="section-title">전체자료</h2></div>
 
     <div class="ctrl-bar">
         <div class="tabs" id="ctrlNav">
