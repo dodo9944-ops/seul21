@@ -174,7 +174,6 @@ const App = (() => {
         <div class="footer-col">
           <h5>회사</h5>
           <a href="${B}/pages/about.html">회사소개</a>
-          <a href="${B}/pages/vision.html">빛세움의 길</a>
           <a href="${B}/pages/services.html">사업분야</a>
           <a href="${B}/pages/portfolio.html">업무실적</a>
         </div>
