@@ -76,7 +76,9 @@
     .pop-card{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:#fff;border:1px solid var(--gray-200);border-radius:12px;cursor:pointer;transition:all .25s;position:relative}
     .pop-card:hover{border-color:var(--gold);box-shadow:0 6px 20px rgba(184,134,11,.1);transform:translateY(-2px)}
     .pop-card .pop-rank{position:absolute;top:10px;right:12px;width:24px;height:24px;border-radius:6px;background:#FFFFFF;color:var(--gold);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.15)}
-    .pop-card .pop-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;color:#0A0F1C}
+    .pop-card .pop-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;color:#0A0F1C;position:relative}
+    .pop-card .pop-icon::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,rgba(255,255,255,.65) 0%,rgba(255,255,255,.15) 45%,rgba(255,255,255,0) 68%);pointer-events:none}
+    .pop-card .pop-icon i{position:relative}
     .pop-card .pop-icon.pdf{background:linear-gradient(135deg,#D6423A,#B5332B);color:#fff}
     .pop-card .pop-icon.hwp{background:linear-gradient(135deg,#2A7DE1,#1B5FBF);color:#fff}
     .pop-card .pop-icon.web{background:linear-gradient(135deg,#FFFFFF,#FFF3C4)}
@@ -97,6 +99,8 @@
 
     /* File icon */
     .lib-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;color:#0A0F1C;position:relative}
+    .lib-icon::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,rgba(255,255,255,.65) 0%,rgba(255,255,255,.15) 45%,rgba(255,255,255,0) 68%);pointer-events:none}
+    .lib-icon i,.lib-icon .ft-label{position:relative}
     .lib-icon.hwp{background:linear-gradient(135deg,#2A7DE1,#1B5FBF);color:#fff}
     .lib-icon.pdf{background:linear-gradient(135deg,#D6423A,#B5332B);color:#fff}
     .lib-icon.xlsx{background:linear-gradient(135deg,#1E8C5E,#166B48);color:#fff}
