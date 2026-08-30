@@ -29,7 +29,8 @@
     @media(max-width:768px){.ct-hero{padding:40px 0 32px}.ct-hero h1{font-size:26px}}
 
     /* === Layout === */
-    .uni-hero + .page-body { padding-top: 28px; }
+    /* 히어로 밑 여백 = uni-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 본문 상단 보정(33px) = 총 45px */
+    .uni-hero + .page-body { padding-top: 33px; }
     .ct-layout{display:grid;grid-template-columns:1fr 340px;gap:36px}
     @media(max-width:1024px){.ct-layout{grid-template-columns:1fr}}
 
