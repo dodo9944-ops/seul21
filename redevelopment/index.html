@@ -387,7 +387,11 @@
             .section-title { font-size: 19px; font-weight: 800; letter-spacing: -.3px; padding-left: 11px; }
             .section-title::before { width: 3px; height: 16px; top: 3px; }
         }
-
+        /* 마지막 섹션(자료실+갤러리) 하단여백을 사업분야 등 서브페이지 하단여백(page-body 80px/60px)과 동일하게 통일 */
+        #mainLastSection { padding-bottom: 80px; }
+        @media (max-width: 768px) {
+            #mainLastSection { padding-bottom: 60px; }
+        }
         /* ── CARD VISUAL (메인 전용) ── */
         .card-visual { display: flex; align-items: center; justify-content: center; border-radius: 12px; background: linear-gradient(135deg, #FFFFFF, #FFF3C4); }
         .card-visual i { color: rgba(184,134,11,0.4); }
@@ -423,8 +427,19 @@
         }
         .news-item:last-child { border-bottom: none; }
         .news-item:hover { background: rgba(255,196,0,.025); }
-        .news-thumb { width: 72px; height: 52px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #C58B00; background: #FFFFFF; overflow: hidden; }
+        /* 자료실(library.html)의 .lib-icon과 완전히 동일한 크기·비율·배지로 통일 */
+        .news-thumb { width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #0A0F1C; background: #FFFFFF; overflow: hidden; position: relative; }
         .news-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .news-thumb::before { content:''; position:absolute; inset:0; border-radius:inherit; background:linear-gradient(135deg,rgba(255,255,255,.65) 0%,rgba(255,255,255,.15) 45%,rgba(255,255,255,0) 68%); pointer-events:none; }
+        .news-thumb i, .news-thumb .ft-label { position:relative; }
+        .news-thumb .ft-label { position:absolute; bottom:-3px; right:-3px; background:#fff; border:1px solid var(--gray-200); border-radius:4px; font-size:8px; font-weight:800; color:var(--gray-600); padding:1px 4px; text-transform:uppercase; line-height:1; }
+        .news-thumb.news { background:linear-gradient(135deg,#FFFFFF,#FFF3C4); color:#0A0F1C; }
+        .news-thumb.law { background:linear-gradient(135deg,#5CB2F0,#0068B7); color:#fff; }
+        .news-thumb.form { background:linear-gradient(135deg,#8A96A6,#2D3748); color:#fff; }
+        .news-thumb.guide { background:linear-gradient(135deg,#4FE0A0,#009A44); color:#fff; }
+        .news-thumb.hwp { background:linear-gradient(135deg,#2A7DE1,#1B5FBF); color:#fff; }
+        .news-thumb.pdf { background:linear-gradient(135deg,#D6423A,#B5332B); color:#fff; }
+        .news-thumb.xlsx { background:linear-gradient(135deg,#1E8C5E,#166B48); color:#fff; }
         .news-body { min-width: 0; overflow: hidden; }
         .news-body h4 {
             font-size: 15px;
@@ -445,7 +460,7 @@
            (최신자료 콘텐츠 기준 스냅 높이 — 상단 여백만큼 하단 여백도 동일하게 확보,
             콘텐츠 길이와 무관하게 절대 어긋나지 않음) */
         .two-col-grid .news-item { height: 119px; align-items: stretch; }
-        .news-thumb-photo { width: 89px; border-radius: 8px; flex-shrink: 0; overflow: hidden; background: #FFFFFF; align-self: stretch; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #C58B00; }
+        .news-thumb-photo { width: 118px; border-radius: 8px; flex-shrink: 0; overflow: hidden; background: #FFFFFF; align-self: stretch; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #C58B00; }
         .news-thumb-photo img { width: 96%; height: 96%; object-fit: cover; border-radius: 6px; display: block; margin-left: 2px; }
         .news-desc {
             font-size: 13px; line-height: 1.6; color: #9A9DA2;
@@ -959,7 +974,7 @@
 
 
 <!-- ===== 자료실 + 커뮤니티 ===== -->
-<section class="section">
+<section class="section" id="mainLastSection">
     <div class="inner">
         <div class="section-label">Resources</div>
         <div class="section-head">
@@ -1284,6 +1299,17 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     }
 
     var iconMap={hwp:'fa-file-lines',pdf:'fa-file-pdf',xlsx:'fa-file-excel'};
+    /* 자료실(library.html)의 카테고리별 아이콘·배지 로직과 동기화 */
+    var contentVisualMap=[
+        {keys:['주요뉴스','칼럼','정책','일반','사례'],icon:'fa-newspaper',cls:'news',badge:'NEWS'},
+        {keys:['법령','법령·조례','관련판례','지침','판례·질의회신'],icon:'fa-gavel',cls:'law',badge:'LAW'},
+        {keys:['서식','절차·서류'],icon:'fa-file-pen',cls:'form',badge:'FORM'},
+        {keys:['가이드'],icon:'fa-book',cls:'guide',badge:'GUIDE'}
+    ];
+    function getContentVisual(category){
+        var m=contentVisualMap.find(function(v){return v.keys.indexOf(category)>=0});
+        return m||{icon:'fa-newspaper',cls:'news',badge:'NEWS'};
+    }
 
     /* 주요뉴스: 최근 7일치 */
     var newsEl=document.getElementById('mainNews');
@@ -1387,9 +1413,11 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             location.href='pages/library.html?id='+encodeURIComponent(id);
         };
         libEl.innerHTML=libs.map(function(i){
-            var ic=iconMap[i.fileType]||'fa-file';
+            var isWeb=i.fileType==='web';
+            var ftLabel=i.fileType==='pdf'?'PDF':i.fileType==='hwp'?'HWP':i.fileType==='xlsx'?'XLS':'WEB';
+            var v=isWeb?getContentVisual(i.category):{icon:iconMap[i.fileType]||'fa-file',cls:i.fileType,badge:ftLabel};
             return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
-                '<div class="news-thumb"><i class="fa-solid '+ic+'"></i></div>'+
+                '<div class="news-thumb '+v.cls+'"><i class="fa-solid '+v.icon+'"></i><span class="ft-label">'+v.badge+'</span></div>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
                 '<div class="news-date">'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></div></div></div>';
         }).join('');

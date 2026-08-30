@@ -626,8 +626,8 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 }
 .section-title {
   font-family: var(--font);
-  font-size: 24px; font-weight: 900; color: #111;
-  letter-spacing: -0.5px; position: relative;
+  font-size: 24px; font-weight: 800; color: #111;
+  letter-spacing: normal; line-height: 1.75; position: relative;
   padding-left: 14px;
 }
 .section-title::before {
