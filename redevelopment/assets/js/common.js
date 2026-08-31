@@ -65,6 +65,12 @@ const App = (() => {
         { href:`${B}/pages/notice.html`, label:'공지사항' },
         { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
       ]},
+      { href:`${B}/pages/feasibility.html`, label:'사업성 검토', icon:'fa-solid fa-calculator', sub:[
+        { href:`${B}/pages/feasibility.html`, label:'개별 분석' },
+        { href:`${B}/pages/feasibility.html?tab=comprehensive`, label:'종합 분석' },
+        { href:`${B}/pages/feasibility-check.html`, label:'사업타당성 분석' },
+      ]},
+      { href:`${B}/pages/notice.html`, label:'공지사항', icon:'fa-solid fa-bullhorn' },
     ];
     const moreLinks = [
       { href: `${B}/pages/notice.html`, label: '공지사항', icon: 'fa-solid fa-bullhorn' },
