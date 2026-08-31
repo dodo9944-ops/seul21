@@ -39,6 +39,9 @@
     /* 자료실(#ctrlNav)과 동일한 언더바 인디케이터로 통일 */
     #glTabs button.on{background:none;color:var(--gold);font-weight:700}
     #glTabs button.on::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:20px;height:2px;border-radius:1px;background:var(--gold)}
+    /* 우측 건수 표시 — 공지사항(.notice-result)과 동일하게 탭바 우측에 배치 */
+    .gl-result{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap;margin-left:auto}
+    .gl-result strong{color:var(--brand-dark);font-weight:700}
     @media(max-width:640px){
       .gl-tabs-wrap{padding:14px 16px}
       #glTabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
@@ -141,6 +144,7 @@
                 <button data-cat="현장스케치">현장스케치<span class="gl-tab-count"></span></button>
                 <button data-cat="기타행사">기타행사<span class="gl-tab-count"></span></button>
             </div>
+            <div class="gl-result" id="glResult"></div>
         </div>
 
         <!-- 전체 게시물 (5×3 그리드 + 페이지네이션) -->
@@ -230,6 +234,7 @@
     function renderGrid(){
         document.getElementById('glGridTitle').textContent=curCat==='전체'?'전체 게시물':curCat;
         var list=listOf(curCat);
+        document.getElementById('glResult').innerHTML='총 <strong>'+list.length+'</strong>건';
         var totalPages=Math.max(1, Math.ceil(list.length/PER));
         if(curPage>totalPages) curPage=totalPages;
         var gridEl=document.getElementById('glGrid');
