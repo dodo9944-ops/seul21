@@ -71,6 +71,13 @@ const App = (() => {
       { href: `${B}/pages/faq.html`, label: '자주 묻는 질문', icon: 'fa-solid fa-circle-question' },
     ];
 
+    /* 우측 드로어 메뉴 전용 추가 항목 — 상단 유틸바(갤러리·사업성 검토)가 768px 이하에서 숨겨져
+       모바일에서 접근 경로가 없어 드로어에 노출 (2026-08-31 대장 지시: "우측 메뉴바에 갤러리, 사업성검토 메뉴추가") */
+    const drawerExtra = [
+      { href: `${B}/pages/gallery.html`, label: '갤러리', icon: 'fa-solid fa-images' },
+      { href: `${B}/pages/feasibility.html`, label: '사업성 검토', icon: 'fa-solid fa-chart-line' },
+    ];
+
     const utilRight = `<a href="${B}/pages/feasibility.html">사업성 검토</a>`;
 
     return `
@@ -136,6 +143,9 @@ const App = (() => {
               <a href="${g.href}"${g.target?' target="'+g.target+'"':''} class="drawer-group-btn solo"><i class="${g.icon} dg-icon"></i>${g.label}</a>
             </div>`
         ).join('')}
+        ${drawerExtra.map(l => `<div class="drawer-group">
+              <a href="${l.href}" class="drawer-group-btn solo"><i class="${l.icon} dg-icon"></i>${l.label}</a>
+            </div>`).join('')}
       </nav>
     </aside>
 
