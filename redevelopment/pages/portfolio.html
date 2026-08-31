@@ -134,7 +134,12 @@
     .pf-tabs-extra .rc{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap}
     .pf-tabs-extra .rc strong{color:var(--brand-dark);font-weight:700}
     @media(max-width:640px){
-      .pf-tabs-wrap{display:none}
+      .pf-tabs-wrap{padding:14px 16px}
+      .pf-tabs-wrap .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+      .pf-tabs-wrap .tabs::-webkit-scrollbar{display:none}
+      .pf-tabs-wrap .tabs button{flex-shrink:0}
+      .pf-tabs-extra{width:100%;margin-left:0;justify-content:space-between}
+      .pf-tabs-extra select{flex:1;min-width:0}
     }
 
     /* === All Cards Grid === */
@@ -251,15 +256,7 @@
     .uni-hero .uh-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
     .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,.65); line-height: 1.5; }
     @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
-    @media (max-width: 600px) {
-      .uni-hero { padding: 28px 0 40px; min-height: auto; }
-      .uni-hero .uh-text h1 { font-size: 28px; }
-      .uni-hero .uh-sub { font-size: 13px; }
-      .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; gap: 10px; }
-      .uni-hero .hero-bg-photo { opacity: 0.15; }
-      /* 히어로 서브박스 — 정돈된 직사각형 카드형으로 통일 (대장 지시, 색상/텍스트/아이콘/순서 무변경) */
-      .uni-hero .uh-card { width: 100%; height: auto; min-height: 92px; border-radius: 10px; padding: 18px 20px; background: rgba(24,28,34,.78); }
-    }
+    @media (max-width: 600px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 28px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     </style>
 </head>
@@ -339,7 +336,7 @@
 <script src="../assets/data/mock-data.js?v=20260831l"></script>
 <script src="../assets/data/areas-data.js?v=20260411"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260901f"></script>
+<script src="../assets/js/common.js?v=20260831m"></script>
 <script>
 (function(){
 var D=MOCK.portfolio, PER=6, curPage=1, curType='전체';
