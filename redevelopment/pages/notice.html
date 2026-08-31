@@ -61,18 +61,26 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260828a"></script>
+<script src="../assets/data/mock-data.js?v=20260831f"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260614f"></script>
 <script>
 (function() {
     const notices = DataService.getAll('notices');
+    const PER = 10;
     let openId = null;
+    let curPage = 1;
 
     function render() {
+        const total = notices.length;
+        const pages = Math.max(1, Math.ceil(total / PER));
+        if (curPage > pages) curPage = pages;
+        const start = (curPage - 1) * PER;
+        const slice = notices.slice(start, start + PER);
+
         const tbody = document.getElementById('noticeBody');
-        tbody.innerHTML = notices.map((n, i) => {
-            const num = notices.length - i;
+        tbody.innerHTML = slice.map((n, i) => {
+            const num = total - (start + i);
             const importantBadge = n.important ? '<span class="badge badge-important" style="margin-right:8px;">중요</span>' : '';
             const isOpen = openId === n.id;
             return `
@@ -103,7 +111,31 @@
                 }
             });
         });
+
+        renderPager(pages);
     }
+
+    function renderPager(pages) {
+        const pg = document.getElementById('pagination');
+        if (pages <= 1) { pg.innerHTML = ''; return; }
+        const groupStart = Math.floor((curPage - 1) / 10) * 10 + 1;
+        const groupEnd = Math.min(groupStart + 9, pages);
+        let h = `<button class="arr" ${curPage === 1 ? 'disabled' : ''} onclick="NoticePage.go(${curPage - 1})"><i class="fa-solid fa-chevron-left"></i></button>`;
+        for (let i = groupStart; i <= groupEnd; i++) {
+            h += `<button${i === curPage ? ' class="active"' : ''} onclick="NoticePage.go(${i})">${i}</button>`;
+        }
+        h += `<button class="arr" ${curPage === pages ? 'disabled' : ''} onclick="NoticePage.go(${curPage + 1})"><i class="fa-solid fa-chevron-right"></i></button>`;
+        pg.innerHTML = h;
+    }
+
+    window.NoticePage = {
+        go(p) {
+            curPage = p;
+            openId = null;
+            render();
+            window.scrollTo({ top: document.querySelector('.tbl-wrap').offsetTop - 100, behavior: 'smooth' });
+        }
+    };
 
     render();
 })();
