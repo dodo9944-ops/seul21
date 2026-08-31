@@ -396,6 +396,10 @@
         @media (min-width: 1025px) {
             #mainFirstSection { padding-top: 44px; }
         }
+        /* 주요뉴스↔공지사항 간격 20px 축소 지시 (2026-09-01) — 주요뉴스 섹션 하단만 축소, 다른 섹션 간격은 무변경 */
+        @media (max-width: 768px) {
+            #mainFirstSection { padding-bottom: 6px; }
+        }
         /* ── CARD VISUAL (메인 전용) ── */
         .card-visual { display: flex; align-items: center; justify-content: center; border-radius: 12px; background: linear-gradient(135deg, #FFFFFF, #FFF3C4); }
         .card-visual i { color: rgba(184,134,11,0.4); }
