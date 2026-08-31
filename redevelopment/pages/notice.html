@@ -99,7 +99,11 @@
 <script src="../assets/js/common.js?v=20260831m"></script>
 <script>
 (function() {
-    const notices = DataService.getAll('notices');
+    /* 게시순서(날짜 오름차순 — 먼저 게시된 글이 위, 번호도 1,2,3... 순으로 부여)를
+       항상 보장하기 위해 원본 데이터 배열의 실제 삽입 위치와 무관하게 정렬한다. */
+    const notices = DataService.getAll('notices').slice().sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+    const PER_PAGE = 8;
+    let curPage = 1;
 
     const validCats = ['수주소식', '회사소식', '기타소식'];
     const params = new URLSearchParams(location.search);
@@ -131,16 +135,50 @@
         });
     }
 
+    /* 페이지 번호(하단) 렌더링 — 최대 10개씩 블록으로 표시, 블록을 넘어가면
+       화살표로 다음 10개(예: 11~20)로 이동. 게시글 번호(표 안의 순번)와는 별개다. */
+    function renderNoticePagination(totalPages) {
+        const el = document.getElementById('pagination');
+        if (!el) return;
+        if (totalPages <= 1) { el.innerHTML = ''; return; }
+        const blockSize = 10;
+        const blockStart = Math.floor((curPage - 1) / blockSize) * blockSize + 1;
+        const blockEnd = Math.min(blockStart + blockSize - 1, totalPages);
+        let html = '';
+        if (blockStart > 1) {
+            html += `<button class="pg-arrow" data-page="${blockStart - 1}" aria-label="이전 10개"><i class="fa-solid fa-chevron-left"></i></button>`;
+        }
+        for (let p = blockStart; p <= blockEnd; p++) {
+            html += `<button class="${p === curPage ? 'active' : ''}" data-page="${p}">${p}</button>`;
+        }
+        if (blockEnd < totalPages) {
+            html += `<button class="pg-arrow" data-page="${blockEnd + 1}" aria-label="다음 10개"><i class="fa-solid fa-chevron-right"></i></button>`;
+        }
+        el.innerHTML = html;
+        el.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                curPage = parseInt(btn.dataset.page, 10);
+                render();
+                document.getElementById('noticeTabs').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    }
+
     function render() {
         const filtered = currentCat === '전체' ? notices : notices.filter(n => noticeCat(n) === currentCat);
         document.getElementById('noticeResult').innerHTML = '총 <strong>' + filtered.length + '</strong>건';
         const tbody = document.getElementById('noticeBody');
         if (!filtered.length) {
             tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--gray-400);padding:40px 0;">등록된 공지사항이 없습니다.</td></tr>';
+            renderNoticePagination(0);
             return;
         }
-        tbody.innerHTML = filtered.map((n, i) => {
-            const num = filtered.length - i;
+        const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+        if (curPage > totalPages) curPage = totalPages;
+        const start = (curPage - 1) * PER_PAGE;
+        const pageItems = filtered.slice(start, start + PER_PAGE);
+        tbody.innerHTML = pageItems.map((n, i) => {
+            const num = start + i + 1; /* 게시순서(날짜 오름차순) 기준 1,2,3... 순번 — 페이지가 바뀌어도 전체 기준으로 이어진다 */
             const cat = noticeCat(n);
             const catBadge = `<span class="badge ${catBadgeCls[cat]}" style="margin-right:6px;">${cat}</span>`;
             const importantBadge = n.important ? '<span class="badge badge-important" style="margin-right:8px;">중요</span>' : '';
@@ -158,6 +196,8 @@
                 if (n) NoticeDetailModal.open(n);
             });
         });
+
+        renderNoticePagination(totalPages);
     }
 
     const tabsEl = document.getElementById('noticeTabs');
@@ -168,6 +208,7 @@
         tabsEl.querySelectorAll('button').forEach(b => b.classList.remove('on'));
         btn.classList.add('on');
         currentCat = btn.dataset.cat;
+        curPage = 1;
         render();
     });
 
