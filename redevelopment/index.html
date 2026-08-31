@@ -1599,7 +1599,8 @@ window.MPF={open:openDetail,close:closeDetail};
     document.getElementById('npTitle').textContent = n.title;
     document.getElementById('npDate').textContent = n.date;
     document.getElementById('npImp').style.display = n.important ? 'inline-block' : 'none';
-    var c = (n.content||'').length>520 ? (n.content.slice(0,520)+'…') : (n.content||'');
+    var raw = n.excerpt || (n.content||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+    var c = raw.length>200 ? (raw.slice(0,200)+'…') : raw;
     document.getElementById('npContent').textContent = c;
   }
 
