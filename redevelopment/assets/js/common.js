@@ -65,12 +65,6 @@ const App = (() => {
         { href:`${B}/pages/notice.html`, label:'공지사항' },
         { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
       ]},
-      { href:`${B}/pages/feasibility.html`, label:'사업성 검토', icon:'fa-solid fa-calculator', sub:[
-        { href:`${B}/pages/feasibility.html`, label:'개별 분석' },
-        { href:`${B}/pages/feasibility.html?tab=comprehensive`, label:'종합 분석' },
-        { href:`${B}/pages/feasibility-check.html`, label:'사업타당성 분석' },
-      ]},
-      { href:`${B}/pages/notice.html`, label:'공지사항', icon:'fa-solid fa-bullhorn' },
     ];
     const moreLinks = [
       { href: `${B}/pages/notice.html`, label: '공지사항', icon: 'fa-solid fa-bullhorn' },
@@ -305,16 +299,7 @@ const App = (() => {
     }
     var tabScroll = document.getElementById('tabScroll');
     if (tabScroll && window.innerWidth <= 1024) {
-      setTimeout(function() {
-        var activeTab = tabScroll.querySelector('.tab-item.active');
-        if (activeTab) {
-          var barW = tabScroll.clientWidth;
-          var target = activeTab.offsetLeft - (barW / 2) + (activeTab.offsetWidth / 2);
-          tabScroll.scrollLeft = Math.max(0, target);
-        } else {
-          tabScroll.scrollLeft = 0;
-        }
-      }, 50);
+      setTimeout(function() { tabScroll.scrollLeft = 0; }, 50);
     }
 
     /* ── 우측 드로어 스와이프 열기/닫기 ── */

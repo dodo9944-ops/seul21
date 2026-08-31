@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260901a">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260831m">
     <style>
     .sv-section { margin-bottom:35px; }
     .sv-section:last-child { margin-bottom:0; }
@@ -205,9 +205,8 @@
     }
 
     
-    /* 히어로 밑 여백 통일 (2026-09-01) — about/vision과 동일 규칙: 모바일 80px(공통 40+40) / 데스크톱 60px
-       데스크톱: services-hero 하단(12px) + 본문 상단 보정(48px) = 60px */
-    @media (min-width: 769px) {
+    /* 히어로 밑 여백 = services-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 본문 상단 보정(48px) = 총 60px */
+    @media (min-width: 601px) {
         .page-body { padding-top: 48px; }
     }
 
@@ -266,7 +265,7 @@
     .services-hero .hero-light-wave .wave-line:nth-child(6) { left:-4%;  bottom:1%;   width:500px; height:130px; transform:rotate(-12deg);             border-top-width: .85px;  border-top-color: rgba(255,239,155,.23); }
     .services-hero .hero-light-wave .wave-line:nth-child(7) { left:-14%; bottom:-5%;  width:430px; height:112px; transform:rotate(-1deg);              border-top-width: .8px;   border-top-color: rgba(255,247,185,.16); }
     @media (max-width: 1024px) { .services-hero .hero-light-wave .wave-line:nth-child(n+6) { display: none; } }
-    @media (max-width: 768px) { .services-hero .hero-light-wave { opacity: .40; } .services-hero .hero-light-wave .wave-line:nth-child(n+4) { display: none; } }
+    @media (max-width: 600px) { .services-hero .hero-light-wave { opacity: .40; } .services-hero .hero-light-wave .wave-line:nth-child(n+4) { display: none; } }
     .services-hero .hero-bg-photo::before {
         content: ''; position: absolute;
         top: 0; bottom: 0; left: 22%; width: 56%;
@@ -361,14 +360,12 @@
             background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%);
         }
     }
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
         .services-hero { padding: 28px 0 40px; min-height: auto; }
         .services-hero .hero-text h1 { font-size: 28px; }
         .services-hero .hero-sub { font-size: 14px; }
         .services-hero .hero-cards-float { grid-template-columns: 1fr; gap: 10px; }
         .services-hero .hero-bg-photo { opacity: 0.15; }
-        .coord-badge { letter-spacing: 1px; }
-        .services-hero .hero-label { letter-spacing: 1px; }
     }
 
     </style>
@@ -723,6 +720,6 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260831l"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260901c"></script>
+<script src="../assets/js/common.js?v=20260831m"></script>
 </body>
 </html>

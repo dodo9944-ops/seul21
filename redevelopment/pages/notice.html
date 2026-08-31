@@ -15,10 +15,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260901a">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260831m">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260830b">
     <style>
-    /* 히어로~본문 간격 통일 (2026-09-01) — 자료실(library.html) 등과 동일하게 공통 .page-body 기본값 사용 */
+    /* 히어로 바로 아래 탭 메뉴와의 여백 — 갤러리(gallery.html) 페이지와 동일하게 통일 */
+    .page-body{padding-top:28px}
+    @media(max-width:768px){.page-body{padding-top:20px}}
     .notice-row { cursor: pointer; }
     .notice-row:hover td:nth-child(2) { color: var(--accent); }
     .notice-row td:nth-child(2) { font-weight: 500; transition: color var(--transition); }
@@ -94,7 +96,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260831l"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260901c"></script>
+<script src="../assets/js/common.js?v=20260831m"></script>
 <script>
 (function() {
     /* 게시순서(날짜 오름차순 — 먼저 게시된 글이 위, 번호도 1,2,3... 순으로 부여)를

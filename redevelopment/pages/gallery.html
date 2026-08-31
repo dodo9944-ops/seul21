@@ -15,10 +15,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260901a">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260831m">
     <style>
-    /* 히어로~본문 간격 통일 (2026-09-01) — 자료실(library.html) 등 다른 탭형 페이지와 동일하게
-       공통 .page-body 기본값(데스크톱 64px/모바일 40px)을 그대로 사용 (페이지 한정 축소 제거) */
+    /* 히어로 바로 아래 탭 메뉴와의 여백 축소 (공통 .page-body 상단 여백 갤러리 페이지 한정 축소) */
+    .page-body{padding-top:28px}
+    @media(max-width:768px){.page-body{padding-top:20px}}
 
     .gl-section{margin-bottom:40px}
     .gl-section-head{margin-bottom:16px}
@@ -176,7 +177,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260831l"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260901c"></script>
+<script src="../assets/js/common.js?v=20260831m"></script>
 <script>
 (function(){
     var ICONS={ '주민총회':'fa-solid fa-people-group', '봉사활동':'fa-solid fa-hand-holding-heart',

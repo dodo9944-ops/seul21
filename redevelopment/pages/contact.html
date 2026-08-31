@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260901a">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260831m">
     <style>
     /* === Hero === */
     .ct-hero{padding:56px 0 48px;background:linear-gradient(135deg,#FFFFFF 0%,#FFFFFF 40%,#FFF3C4 100%);position:relative;overflow:hidden}
@@ -29,9 +29,8 @@
     @media(max-width:768px){.ct-hero{padding:40px 0 32px}.ct-hero h1{font-size:26px}}
 
     /* === Layout === */
-    /* 히어로 밑 여백 통일 (2026-09-01) — about/vision/services 패밀리와 동일: 모바일 80px / 데스크톱 60px */
-    @media (min-width: 769px) { .uni-hero + .page-body { padding-top: 48px; } }
-    @media (max-width: 768px) { .uni-hero + .page-body { padding-top: 40px; } }
+    /* 히어로 밑 여백 = uni-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 본문 상단 보정(33px) = 총 45px */
+    .uni-hero + .page-body { padding-top: 33px; }
     .ct-layout{display:grid;grid-template-columns:1fr 340px;gap:36px}
     @media(max-width:1024px){.ct-layout{grid-template-columns:1fr}}
 
@@ -144,7 +143,7 @@
     .uni-hero .hero-light-wave .wave-line:nth-child(6) { left:-4%;  bottom:1%;   width:500px; height:130px; transform:rotate(-12deg);             border-top-width: .85px;  border-top-color: rgba(255,239,155,.23); }
     .uni-hero .hero-light-wave .wave-line:nth-child(7) { left:-14%; bottom:-5%;  width:430px; height:112px; transform:rotate(-1deg);              border-top-width: .8px;   border-top-color: rgba(255,247,185,.16); }
     @media (max-width: 1024px) { .uni-hero .hero-light-wave .wave-line:nth-child(n+6) { display: none; } }
-    @media (max-width: 768px) { .uni-hero .hero-light-wave { opacity: .40; } .uni-hero .hero-light-wave .wave-line:nth-child(n+4) { display: none; } }
+    @media (max-width: 600px) { .uni-hero .hero-light-wave { opacity: .40; } .uni-hero .hero-light-wave .wave-line:nth-child(n+4) { display: none; } }
     .uni-hero .hero-bg-photo::before { content: ''; position: absolute; top: 0; bottom: 0; left: 22%; width: 56%; pointer-events: none; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.16) 52%, rgba(255,255,255,0.18) 62%, rgba(255,255,255,0.08) 80%, rgba(255,255,255,0) 100%); filter: blur(28px); z-index: 2; }
     .uni-hero::before {
         content: ''; position: absolute; inset: 0;
@@ -183,7 +182,7 @@
     .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,.65); font-weight: 500; line-height: 1.5; }
     .uni-hero .uh-cards .uh-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
     @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
-    @media (max-width: 768px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 28px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } .uni-hero .uh-label { letter-spacing: 1px; } }
+    @media (max-width: 600px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 28px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     </style>
 </head>
@@ -374,7 +373,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260831l"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260901c"></script>
+<script src="../assets/js/common.js?v=20260831m"></script>
 <script>
 (function(){
 /* 로그인 상태: 이름·이메일 자동 채움 (비회원도 문의 가능) */
