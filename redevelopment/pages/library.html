@@ -220,7 +220,7 @@
     .uni-hero .uh-visual { flex-shrink: 0; align-self: center; width: 360px; position: relative; z-index: 2; }
     .uni-hero .uh-photo { display: none; }
     .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .uni-hero .uh-card { display: block; width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); cursor: pointer; position: relative; z-index: 5; text-decoration: none; color: inherit; }
+    .uni-hero .uh-card { display: block; width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.4); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); cursor: pointer; position: relative; z-index: 5; text-decoration: none; color: inherit; }
     .uni-hero .uh-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
     .uni-hero .uh-card.on { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(184,134,11,.5), 0 12px 30px rgba(0,0,0,.16); }
     .uni-hero .uh-ci { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,196,0,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
@@ -232,7 +232,14 @@
     html { scroll-behavior: smooth; }
     #libContent { scroll-margin-top: 88px; }
     @media (max-width: 1024px) { .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
-    @media (max-width: 600px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 26px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
+    @media (max-width: 600px) {
+      .uni-hero { padding: 28px 0 40px; min-height: auto; }
+      .uni-hero .uh-text h1 { font-size: 26px; }
+      .uni-hero .uh-sub { font-size: 13px; }
+      .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; gap: 10px; }
+      .uni-hero .hero-bg-photo { opacity: 0.15; }
+      .uni-hero .uh-card { width: 100%; height: auto; min-height: 92px; border-radius: 10px; padding: 18px 20px; }
+    }
 
     </style>
 </head>
