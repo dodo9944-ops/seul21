@@ -142,7 +142,8 @@ button, input, select, textarea { font-family: inherit; }
 .util-bar a { color: rgba(10,15,28,0.35); transition: color var(--transition); font-weight: 500; }
 .util-bar a:hover { color: var(--gold); }
 .util-bar .util-left { flex:1; color: rgba(10,15,28,0.35); font-size:10px; letter-spacing:0.5px; }
-.util-bar .inner > a:first-of-type { margin-left: -8px; }
+.util-bar .inner > a:first-of-type,
+.util-bar .inner > .util-item-drop:first-of-type > a:first-child { margin-left: -8px; }
 @media (max-width: 768px) { .util-bar { display: none; } }
 
 /* ── UTILITY BAR — 공지사항 서브메뉴 ── */
