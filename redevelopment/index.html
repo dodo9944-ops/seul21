@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260831m">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260901a">
     <link rel="stylesheet" href="assets/css/download-view.css?v=20260830b">
     <style>
         /* ============================================================
@@ -396,6 +396,10 @@
         @media (min-width: 1025px) {
             #mainFirstSection { padding-top: 44px; }
         }
+        /* 주요뉴스↔공지사항 간격 20px 축소 지시 (2026-09-01) — 주요뉴스 섹션 하단만 축소, 다른 섹션 간격은 무변경 */
+        @media (max-width: 768px) {
+            #mainFirstSection { padding-bottom: 6px; }
+        }
         /* ── CARD VISUAL (메인 전용) ── */
         .card-visual { display: flex; align-items: center; justify-content: center; border-radius: 12px; background: linear-gradient(135deg, #FFFFFF, #FFF3C4); }
         .card-visual i { color: rgba(184,134,11,0.4); }
@@ -408,7 +412,7 @@
             gap: 32px;
         }
         @media (max-width: 768px) {
-            .two-col-grid { grid-template-columns: 1fr; gap: 0; }
+            .two-col-grid { grid-template-columns: 1fr; gap: 20px; }
         }
 
         .panel-more {

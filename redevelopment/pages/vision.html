@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260831m">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260901a">
     <style>
     /* ══════════════════════════════════════
        빛세움의 길 — 프리미엄 브랜드 스토리
@@ -360,6 +360,12 @@
         background: linear-gradient(to bottom, var(--gold), rgba(184,134,11,0.3));
     }
 
+
+    /* 히어로 밑 여백 통일 (2026-09-01) — about/services와 동일 규칙: 데스크톱 60px
+       vision-hero 하단(12px) + 본문 상단 보정(48px) = 60px. 모바일은 hero(40)+page-body 기본(40)=80으로 이미 about/services와 동일 */
+    @media (min-width: 769px) {
+        .page-body { padding-top: 48px; }
+    }
 
     /* === Vision Hero (about-hero 3안 패밀리) === */
     .vision-hero {

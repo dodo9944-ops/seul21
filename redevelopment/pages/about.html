@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260831m">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260901a">
     <style>
     /* ================================================================
        ABOUT PAGE — Premium Company Introduction
@@ -135,7 +135,7 @@
     .hero-light-wave .wave-line:nth-child(6) { left:-4%;  bottom:1%;   width:575px;  height:150px; transform:rotate(-12deg);             border-top-width: .95px;  border-top-color: rgba(255,239,155,.27); }
     .hero-light-wave .wave-line:nth-child(7) { left:-14%; bottom:-5%;  width:495px;  height:129px; transform:rotate(-1deg);              border-top-width: .9px;   border-top-color: rgba(255,247,185,.19); }
     @media (max-width: 1024px) { .hero-light-wave .wave-line:nth-child(n+6) { display: none; } }
-    @media (max-width: 600px) { .hero-light-wave { opacity: .40; } .hero-light-wave .wave-line:nth-child(n+4) { display: none; } }
+    @media (max-width: 768px) { .hero-light-wave { opacity: .40; } .hero-light-wave .wave-line:nth-child(n+4) { display: none; } }
     .about-hero .inner {
         position: relative; z-index: 6;
         display: flex; align-items: flex-start; gap: 48px;
@@ -240,9 +240,15 @@
         padding: 25px 0;
     }
     .about-section:last-child { padding-bottom: 0; }
-    /* 히어로 밑 여백 = about-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 첫 섹션 상단 보정(48px) = 총 60px */
-    @media (min-width: 601px) {
+    /* 히어로 밑 여백 통일 (2026-09-01) — vision/services와 동일 규칙: 모바일 80px / 데스크톱 60px
+       데스크톱: about-hero 하단(12px) + 첫 섹션 상단 보정(48px) = 60px
+       모바일: about-hero 하단(40px) + 첫 섹션 상단 보정(40px) = 80px */
+    @media (min-width: 769px) {
         #aboutFirstSection { padding-top: 48px; }
+    }
+    @media (max-width: 768px) {
+        #aboutFirstSection { padding-top: 40px; }
+        .section-label { letter-spacing: 0.8px; }
     }
     .about-section.bg-light { background: #FFFFFF; }
     .about-section.bg-dark {

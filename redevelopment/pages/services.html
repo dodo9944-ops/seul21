@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260831m">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260901a">
     <style>
     .sv-section { margin-bottom:35px; }
     .sv-section:last-child { margin-bottom:0; }
@@ -205,8 +205,9 @@
     }
 
     
-    /* 히어로 밑 여백 = services-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 본문 상단 보정(48px) = 총 60px */
-    @media (min-width: 601px) {
+    /* 히어로 밑 여백 통일 (2026-09-01) — about/vision과 동일 규칙: 모바일 80px(공통 40+40) / 데스크톱 60px
+       데스크톱: services-hero 하단(12px) + 본문 상단 보정(48px) = 60px */
+    @media (min-width: 769px) {
         .page-body { padding-top: 48px; }
     }
 
