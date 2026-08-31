@@ -175,14 +175,14 @@ button, input, select, textarea { font-family: inherit; }
 /* ── 헤더 아래 본문 여백 ── */
 body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 높이와 정합 */
 @media (max-width: 1024px) and (min-width: 769px) {
-  body { padding-top: 137.6px; } /* 25.6(util) + 72(header) + 40(tab) */
+  body { padding-top: 129.6px; } /* 25.6(util) + 72(header) + 32(tab) */
 }
 @media (max-width: 768px) {
   .header .inner { height: 50px; }
   body {
-    padding-top: 90px; /* 50(header) + 40(tab) */
-    padding-top: calc(90px + env(safe-area-inset-top, 0));
-    padding-top: calc(90px + constant(safe-area-inset-top, 0));
+    padding-top: 82px;
+    padding-top: calc(82px + env(safe-area-inset-top, 0));
+    padding-top: calc(82px + constant(safe-area-inset-top, 0));
   }
 }
 
@@ -191,34 +191,26 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   display: none;
   background: #fff;
   border-bottom: 1px solid var(--gray-200);
-  height: 40px;
+  height: 32px;
 }
-/* 모바일 상단 메뉴: 폭이 좁아도 글자를 줄이거나 말줄임 하지 않고 1줄 가로 스와이프로 처리.
-   (기존: overflow:hidden + flex:1 1 0 + ellipsis 로 강제 축소·잘림 발생) */
 .mobile-tab-bar .tab-scroll {
-  display: flex; align-items: stretch;
-  overflow-x: auto; overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-  scroll-behavior: smooth;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none; -ms-overflow-style: none;
+  display: flex; align-items: center;
+  overflow: hidden;
   width: 100%; max-width: 100%;
-  height: 100%; padding: 0 6px; gap: 0;
+  height: 100%; padding: 0 2px; gap: 0;
   box-sizing: border-box;
 }
-.mobile-tab-bar .tab-scroll::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.mobile-tab-bar .tab-scroll::-webkit-scrollbar { display: none; }
 .mobile-tab-bar .tab-item {
-  flex: 0 0 auto; min-width: 0; padding: 0 13px; height: 100%;
+  flex: 1 1 0; min-width: 0; padding: 0 2px; height: 100%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 500; color: var(--gray-500);
+  font-size: 11px; font-weight: 500; color: var(--gray-500);
   text-decoration: none; white-space: nowrap; position: relative;
-  letter-spacing: -0.2px;
-  scroll-snap-align: center;
-  -webkit-tap-highlight-color: transparent;
+  letter-spacing: -0.4px;
+  overflow: hidden; text-overflow: ellipsis;
 }
-@media (max-width: 360px) {
-  .mobile-tab-bar .tab-item { padding: 0 11px; font-size: 12.5px; }
+@media (max-width: 380px) {
+  .mobile-tab-bar .tab-item { font-size: 10px; letter-spacing: -0.5px; }
 }
 .mobile-tab-bar .tab-item.active { color: var(--gray-900); font-weight: 700; }
 .mobile-tab-bar .tab-item.active::after {
@@ -469,15 +461,9 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 }
 .search-big i { font-size: 20px; color: var(--gray-400); }
 .search-big input {
-  flex: 1; min-width: 0; /* flex 기본 min-width:auto 로 인해 좁은 화면에서 넘치던 문제 방지 */
-  border: none; outline: none;
+  flex: 1; border: none; outline: none;
   font-size: 22px; font-weight: 500; font-family: var(--font);
   color: var(--gray-900); background: transparent;
-}
-@media (max-width: 480px) {
-  .search-big { gap: 8px; }
-  .search-big input { font-size: 17px; }
-  .search-overlay-inner { padding: 0 16px; }
 }
 .search-big input::placeholder { color: var(--gray-300); }
 .search-keywords h4 { font-size: 13px; font-weight: 700; color: var(--gray-500); margin-bottom: 12px; letter-spacing: 0.5px; }
@@ -798,20 +784,6 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 }
 .tabs a:hover, .tabs button:hover { color: var(--gray-900); background: var(--gray-50); }
 .tabs a.on, .tabs button.on { background: var(--gray-900); color: var(--white); font-weight: 600; }
-
-/* ── MOBILE: 표 가로 스크롤 ──
-   좁은 화면에서 표의 min-content 폭이 컨테이너를 넘어 페이지가 밀리는 것을 방지.
-   표 자체를 스크롤 박스로 만들어 표 안에서만 가로 이동하게 한다. */
-@media (max-width: 768px) {
-  table {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-  }
-}
 
 /* ── FILTER BAR ── */
 .filter-bar {
