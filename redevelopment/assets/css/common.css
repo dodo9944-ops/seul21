@@ -652,6 +652,12 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .vision-section:last-child,
 .services-section:last-child,
 .featured-section:last-child { margin-bottom: 0; }
+@media (max-width: 767px) {
+  .about-section,
+  .vision-section,
+  .services-section,
+  .featured-section { margin-bottom: var(--sp-section-y); }
+}
 
 /* ── BREADCRUMB ── */
 .breadcrumb {
@@ -668,6 +674,9 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .section-head {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 36px;
+}
+@media (max-width: 767px) {
+  .section-head { margin-bottom: 22px; }
 }
 
 /* 탭바 스크롤 고정 공통 클래스 — App.stickyTabBar()가 토글. 위치·폭은 JS가 인라인 스타일로
