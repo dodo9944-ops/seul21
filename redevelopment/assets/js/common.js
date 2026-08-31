@@ -251,9 +251,9 @@ const App = (() => {
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
           <span>갤러리</span>
         </a>
-        <a href="${B}/pages/contact.html" class="${navActive('contact.html')?'active':''}">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
-          <span>사업문의</span>
+        <a href="${B}/pages/notice.html" class="${navActive('notice.html')?'active':''}">
+          <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span>공지사항</span>
         </a>
       </div>
     </nav>`;
@@ -647,7 +647,52 @@ const App = (() => {
     ov.addEventListener('click',function(e){if(e.target===ov)closeModal()});
   }
 
-  return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, heroDetail, basePath: () => B };
+  /* ── 탭바 스크롤 고정(sticky→fixed) 공통 함수 ──
+     업무실적(portfolio.html) .pf-tabs-wrap에서 처음 구현된 로직을 공통화한 것.
+     전역 html,body{overflow-x:hidden} 때문에 position:sticky가 무효화되어(Chrome 특성)
+     position:fixed 전환 방식으로 구현. 실제 헤더 높이(.header-wrap)를 측정해 top을 맞추고,
+     플레이스홀더로 layout shift를 방지한다.
+     사용법: App.stickyTabBar('wrapElementId', 'placeholderElementId') */
+  function stickyTabBar(wrapId, phId){
+    var wrap=document.getElementById(wrapId), ph=document.getElementById(phId);
+    if(!wrap||!ph) return;
+    var naturalTop=0, leftPx=0, widthPx=0, ticking=false;
+    function headerHeight(){var hw=document.querySelector('.header-wrap');return hw?hw.offsetHeight:0}
+    function measure(){
+      var wasStuck=wrap.classList.contains('is-fixed');
+      if(wasStuck){wrap.classList.remove('is-fixed');wrap.style.top='';wrap.style.left='';wrap.style.width='';ph.style.display='none'}
+      var rect=wrap.getBoundingClientRect();
+      naturalTop=rect.top+window.scrollY; leftPx=rect.left; widthPx=rect.width;
+      if(wasStuck) apply(true);
+    }
+    function apply(force){
+      var stick=force||window.scrollY>=naturalTop-headerHeight();
+      if(stick&&!wrap.classList.contains('is-fixed')){
+        ph.style.height=wrap.offsetHeight+'px';
+        ph.style.marginBottom=getComputedStyle(wrap).marginBottom;
+        ph.style.display='block';
+        wrap.classList.add('is-fixed');
+        wrap.style.top=headerHeight()+'px';
+        wrap.style.left=leftPx+'px';
+        wrap.style.width=widthPx+'px';
+      }else if(!stick&&wrap.classList.contains('is-fixed')){
+        wrap.classList.remove('is-fixed');
+        wrap.style.top='';wrap.style.left='';wrap.style.width='';
+        ph.style.display='none';
+      }else if(stick){
+        wrap.style.top=headerHeight()+'px';
+        wrap.style.left=leftPx+'px';
+        wrap.style.width=widthPx+'px';
+      }
+    }
+    function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){apply(false);ticking=false})}
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', function(){measure();apply(false)});
+    window.addEventListener('load', function(){measure();apply(false)});
+    measure(); apply(false);
+  }
+
+  return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, heroDetail, stickyTabBar, basePath: () => B };
 })();
 
 /**
