@@ -66,7 +66,24 @@
     /* 탭별 자료 건수 — 업무실적(.pf-tab-count)과 동일한 표기 */
     .ctrl-nav-count{font-size:11px;font-weight:600;color:#111;margin-left:6px}
     #ctrlNav button.on .ctrl-nav-count{color:var(--gold)}
-    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ctrl-sort{margin-left:0;justify-content:flex-end}#ctrlNav{flex-wrap:wrap;row-gap:10px}}
+    /* 모바일: 카테고리 탭을 정확히 2줄(3+2) 균등 그리드로 압축.
+       (기존 flex-wrap 은 항목 폭이 제각각이라 390px 3줄·320px 4줄로 흘러내림) */
+    @media(max-width:640px){
+      .ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}
+      .ctrl-sort{margin-left:0;justify-content:flex-end}
+      #ctrlNav{display:grid;grid-template-columns:repeat(3,1fr);column-gap:0;row-gap:12px;width:100%;min-width:0}
+      #ctrlNav button,#ctrlNav a{padding:5px 6px;font-size:13px;text-align:center;justify-content:center;min-width:0;white-space:nowrap}
+      #ctrlNav button:first-child,#ctrlNav a:first-child{padding-left:6px}
+      /* 각 줄 끝 항목은 구분선 제거 — 줄 끝에 선이 매달려 보이는 것 방지 */
+      #ctrlNav button:nth-child(3n),#ctrlNav a:nth-child(3n),
+      #ctrlNav button:last-child,#ctrlNav a:last-child{border-right:none}
+      #ctrlNav button:not(:nth-child(3n)):not(:last-child),
+      #ctrlNav a:not(:nth-child(3n)):not(:last-child){border-right:1px solid var(--gray-200)}
+      #ctrlNav .ctrl-nav-count{margin-left:3px}
+    }
+    @media(max-width:340px){
+      #ctrlNav button,#ctrlNav a{font-size:12px;padding:5px 4px}
+    }
 
     /* === Popular Section === */
     .pop-sec{margin-bottom:36px}

@@ -297,9 +297,25 @@ const App = (() => {
       document.documentElement.scrollLeft = 0;
       document.body.scrollLeft = 0;
     }
+    /* 모바일 상단 메뉴(1줄 가로 스와이프): 현재 선택된 메뉴를 가시영역 중앙으로 이동.
+       (기존에는 scrollLeft=0 으로 고정해 우측 메뉴가 보이지 않았음) */
     var tabScroll = document.getElementById('tabScroll');
     if (tabScroll && window.innerWidth <= 1024) {
-      setTimeout(function() { tabScroll.scrollLeft = 0; }, 50);
+      var centerActiveTab = function (smooth) {
+        var act = tabScroll.querySelector('.tab-item.active');
+        if (!act) { tabScroll.scrollLeft = 0; return; }
+        var target = act.offsetLeft - (tabScroll.clientWidth - act.offsetWidth) / 2;
+        var max = tabScroll.scrollWidth - tabScroll.clientWidth;
+        target = Math.max(0, Math.min(target, max));
+        if (smooth && typeof tabScroll.scrollTo === 'function') {
+          tabScroll.scrollTo({ left: target, behavior: 'smooth' });
+        } else {
+          tabScroll.scrollLeft = target;
+        }
+      };
+      setTimeout(function () { centerActiveTab(false); }, 50);
+      window.addEventListener('load', function () { centerActiveTab(false); });
+      window.addEventListener('resize', function () { centerActiveTab(false); });
     }
 
     /* ── 우측 드로어 스와이프 열기/닫기 ── */
