@@ -178,7 +178,7 @@ const App = (() => {
     <footer class="footer"><div class="inner">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="logo footer-logo-text-only">
+          <div class="logo footer-logo-text-only" style="cursor:pointer" onclick="window.scrollTo({top:0,behavior:'smooth'})" role="button" aria-label="맨 위로 이동">
             <span class="logo-text">
               <span class="logo-company">(주)빛세움</span>
               <span class="logo-sub">VISSEUM</span>
