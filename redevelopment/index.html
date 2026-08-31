@@ -420,7 +420,6 @@
             transition: color var(--transition);
         }
         .panel-more:hover { color: #9F7000; }
-        .panel-count { font-size: 11px; font-weight: 700; color: var(--gold); background: rgba(184,134,11,0.08); padding: 2px 8px; border-radius: 10px; margin-left: 8px; vertical-align: middle; }
 
         /* ── NEWS ITEMS ── */
         .news-item {
@@ -1004,7 +1003,7 @@
             <div class="panel">
                 <div class="section-label" style="padding:16px 24px 0">Gallery</div>
                 <div class="panel-head">
-                    <h3 class="panel-title">갤러리<span class="panel-count" id="galTotalCount"></span></h3>
+                    <h3 class="panel-title">갤러리</h3>
                     <a href="pages/gallery.html" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
                 </div>
                 <div id="mainCommunity"></div>
@@ -1433,8 +1432,6 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     /* 갤러리: 자료실 갤러리(MOCK.gallery) 연동 — 최신 3건 */
     var galEl=document.getElementById('mainCommunity');
     if(galEl && MOCK.gallery){
-        var galCountEl=document.getElementById('galTotalCount');
-        if(galCountEl) galCountEl.textContent=MOCK.gallery.length+'건';
         window.mainGalleryOpen=function(id){
             location.href='pages/gallery.html?id='+encodeURIComponent(id);
         };
