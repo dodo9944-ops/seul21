@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260831a">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260831c">
     <link rel="stylesheet" href="assets/css/download-view.css?v=20260830b">
     <style>
         /* ============================================================
@@ -474,6 +474,8 @@
         /* 갤러리 카드는 행 높이가 최신자료 기준으로 줄어든 만큼 제목 1줄+요약 1줄로 압축해
            날짜 줄까지 항상 행 안에 온전히 들어오도록 함(잘림 방지) */
         #mainCommunity .news-body h4 { max-height: 24px; -webkit-line-clamp: 1; }
+        /* 갤러리 썸네일 3건 — 밝은 배경과 경계가 흐려 보이는 사진 가독성 보완을 위한 자연스러운 외곽선 */
+        #mainCommunity .news-thumb-photo img { border: 1px solid rgba(10,15,28,0.12); box-shadow: 0 0 0 1px rgba(255,255,255,0.4) inset; }
 
         /* ── PROCESS STEPS ── */
         .process-bar {
@@ -1082,9 +1084,9 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260831b"></script>
+<script src="assets/data/mock-data.js?v=20260831c"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260831b"></script>
+<script src="assets/js/common.js?v=20260831d"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>

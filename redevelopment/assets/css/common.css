@@ -142,14 +142,16 @@ button, input, select, textarea { font-family: inherit; }
 .util-bar a { color: rgba(10,15,28,0.35); transition: color var(--transition); font-weight: 500; }
 .util-bar a:hover { color: var(--gold); }
 .util-bar .util-left { flex:1; color: rgba(10,15,28,0.35); font-size:10px; letter-spacing:0.5px; }
-.util-bar .inner > a:first-of-type { margin-left: -8px; }
+.util-bar .inner > a:first-of-type,
+.util-bar .inner > .util-item-drop:first-of-type > a:first-child { margin-left: -8px; }
 @media (max-width: 768px) { .util-bar { display: none; } }
 
 /* ── UTILITY BAR — 공지사항 서브메뉴 ── */
 .util-item-drop { position: relative; }
 .util-drop-menu {
   position: absolute; top: 100%; right: 0; margin-top: 4px; min-width: 88px;
-  background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px;
+  background: rgba(255,255,255,0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--gray-200); border-radius: 8px;
   box-shadow: 0 8px 24px rgba(10,15,28,0.12);
   padding: 6px; display: flex; flex-direction: column; gap: 2px;
   opacity: 0; visibility: hidden; transform: translateY(-4px);
@@ -268,7 +270,8 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .gnb-item:hover .gnb-caret, .gnb-item:focus-within .gnb-caret { transform: rotate(180deg); }
 .gnb-drop {
   position: absolute; top: 100%; left: 50%; margin-top: 14px; min-width: 168px;
-  background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px;
+  background: rgba(255,255,255,0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--gray-200); border-radius: 10px;
   box-shadow: 0 8px 24px rgba(10,15,28,0.12);
   padding: 8px; display: flex; flex-direction: column; gap: 2px;
   opacity: 0; visibility: hidden; transform: translate(-50%, -4px);
