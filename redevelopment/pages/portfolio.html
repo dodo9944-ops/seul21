@@ -212,7 +212,16 @@
     .pager button:disabled{opacity:.25;cursor:default;pointer-events:none}
     .pager-per{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-400)}
     .pager-per select{height:32px;padding:0 24px 0 8px;border:1px solid var(--gray-200);border-radius:6px;font-size:12px;font-family:var(--font);color:var(--gray-600);cursor:pointer;appearance:auto}
-    @media(max-width:768px){.pager-wrap{flex-direction:column;gap:12px}}
+    /* 모바일: 페이지 번호 12개가 nowrap 으로 한 줄에 늘어서 320px 기준 +90px 넘침 → 줄바꿈 허용 + 버튼 축소 */
+    @media(max-width:768px){
+      .pager-wrap{flex-direction:column;gap:12px}
+      .pager{flex-wrap:wrap;justify-content:center;max-width:100%}
+      .pager button{width:34px;height:34px;font-size:13px}
+    }
+    @media(max-width:360px){
+      .pager{gap:3px}
+      .pager button{width:30px;height:30px;font-size:12px;border-radius:8px}
+    }
 
     /* DETAIL MODAL(d-overlay, d-modal, d-close, d-hero, d-body, d-sec, d-footer 등)는
        common.css로 이동 — 주요뉴스 상세 모달(NewsDetailModal)과 공유 */

@@ -469,9 +469,15 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 }
 .search-big i { font-size: 20px; color: var(--gray-400); }
 .search-big input {
-  flex: 1; border: none; outline: none;
+  flex: 1; min-width: 0; /* flex 기본 min-width:auto 로 인해 좁은 화면에서 넘치던 문제 방지 */
+  border: none; outline: none;
   font-size: 22px; font-weight: 500; font-family: var(--font);
   color: var(--gray-900); background: transparent;
+}
+@media (max-width: 480px) {
+  .search-big { gap: 8px; }
+  .search-big input { font-size: 17px; }
+  .search-overlay-inner { padding: 0 16px; }
 }
 .search-big input::placeholder { color: var(--gray-300); }
 .search-keywords h4 { font-size: 13px; font-weight: 700; color: var(--gray-500); margin-bottom: 12px; letter-spacing: 0.5px; }
@@ -792,6 +798,20 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 }
 .tabs a:hover, .tabs button:hover { color: var(--gray-900); background: var(--gray-50); }
 .tabs a.on, .tabs button.on { background: var(--gray-900); color: var(--white); font-weight: 600; }
+
+/* ── MOBILE: 표 가로 스크롤 ──
+   좁은 화면에서 표의 min-content 폭이 컨테이너를 넘어 페이지가 밀리는 것을 방지.
+   표 자체를 스크롤 박스로 만들어 표 안에서만 가로 이동하게 한다. */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+}
 
 /* ── FILTER BAR ── */
 .filter-bar {
