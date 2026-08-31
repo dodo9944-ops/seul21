@@ -277,7 +277,7 @@
             <button data-cat="주요뉴스">주요뉴스<span class="ctrl-nav-count"></span></button>
             <button data-cat="법령">관계법령<span class="ctrl-nav-count"></span></button>
             <button data-cat="서식가이드">서식·매뉴얼<span class="ctrl-nav-count"></span></button>
-            <a href="gallery.html">갤러리</a>
+            <a href="gallery.html">갤러리<span class="ctrl-nav-count" id="galCtrlCount"></span></a>
         </div>
         <div class="ctrl-sort">
             <label>정렬</label>
@@ -370,6 +370,8 @@ function renderCtrlNavCounts(){
         var span=b.querySelector('.ctrl-nav-count');
         if(span)span.textContent=n+'건';
     });
+    var galEl=document.getElementById('galCtrlCount');
+    if(galEl&&window.MOCK&&MOCK.gallery)galEl.textContent=MOCK.gallery.length+'건';
 }
 
 /* Tabs */
@@ -414,9 +416,11 @@ function renderFeatured(){
   if(!top.length){fb.style.display='none';return}
   fb.style.display='';
   var nameMap={'주요뉴스':'주요뉴스','법령':'관계법령','서식가이드':'서식 매뉴얼'};
+  var labelMap={'주요뉴스':'LATEST NEWS','법령':'LAWS & REGULATIONS','서식가이드':'FORMS & GUIDES'};
   var title=nameMap[curCat]||'인기 자료';
+  var enLabel=labelMap[curCat]||'POPULAR';
   var sub='열람순 · 인기순';
-  var html='<div class="pop-head"><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
+  var html='<div class="section-label">'+enLabel+'</div><div class="pop-head"><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
   top.forEach(function(item,idx){
     var isWeb=item.fileType==='web';var fi=isWeb?getContentVisual(item.category):getIcon(item.fileType);var vc=vmap[item.id]||0;
     html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-eye"></i> '+vc+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
