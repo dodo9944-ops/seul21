@@ -539,7 +539,7 @@ naturalTop=rect.top+window.scrollY;leftPx=rect.left;widthPx=rect.width;
 if(wasStuck)apply(true);
 }
 function apply(force){
-var stick=force||window.scrollY>=naturalTop-headerHeight();
+var stick=false;
 if(stick&&!pfWrap.classList.contains('pf-stuck')){
 pfPh.style.height=pfWrap.offsetHeight+'px';
 pfPh.style.marginBottom=getComputedStyle(pfWrap).marginBottom;
