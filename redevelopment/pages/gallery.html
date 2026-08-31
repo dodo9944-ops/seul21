@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260831c">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260831m">
     <style>
     /* 히어로 바로 아래 탭 메뉴와의 여백 축소 (공통 .page-body 상단 여백 갤러리 페이지 한정 축소) */
     .page-body{padding-top:28px}
@@ -133,7 +133,7 @@
     <div class="inner">
 
         <!-- 탭 메뉴 (히어로 바로 아래) -->
-        <div class="gl-tabs-wrap">
+        <div class="gl-tabs-wrap" id="glTabsWrap">
             <div class="tabs" id="glTabs">
                 <button class="on" data-cat="전체">전체<span class="gl-tab-count"></span></button>
                 <button data-cat="주민총회">주민총회<span class="gl-tab-count"></span></button>
@@ -144,6 +144,7 @@
             </div>
             <div class="gl-result" id="glResult"></div>
         </div>
+        <div id="glTabsPlaceholder" style="display:none"></div>
 
         <!-- 전체 게시물 (5×3 그리드 + 페이지네이션) -->
         <div class="gl-section">
@@ -174,9 +175,9 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260831c"></script>
+<script src="../assets/data/mock-data.js?v=20260831l"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260831c"></script>
+<script src="../assets/js/common.js?v=20260831m"></script>
 <script>
 (function(){
     var ICONS={ '주민총회':'fa-solid fa-people-group', '봉사활동':'fa-solid fa-hand-holding-heart',
@@ -333,6 +334,7 @@
 
     renderTabCounts();
     renderGrid();
+    if(typeof App !== 'undefined' && App.stickyTabBar) App.stickyTabBar('glTabsWrap', 'glTabsPlaceholder');
 
     var qcat=new URLSearchParams(location.search).get('cat');
     if(qcat){
