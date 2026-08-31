@@ -299,7 +299,16 @@ const App = (() => {
     }
     var tabScroll = document.getElementById('tabScroll');
     if (tabScroll && window.innerWidth <= 1024) {
-      setTimeout(function() { tabScroll.scrollLeft = 0; }, 50);
+      setTimeout(function() {
+        var activeTab = tabScroll.querySelector('.tab-item.active');
+        if (activeTab) {
+          var barW = tabScroll.clientWidth;
+          var target = activeTab.offsetLeft - (barW / 2) + (activeTab.offsetWidth / 2);
+          tabScroll.scrollLeft = Math.max(0, target);
+        } else {
+          tabScroll.scrollLeft = 0;
+        }
+      }, 50);
     }
 
     /* ── 우측 드로어 스와이프 열기/닫기 ── */
