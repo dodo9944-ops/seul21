@@ -643,18 +643,6 @@ const MOCK = {
       issues:['정비구역 명칭 — 효창제5구역 (용산구 효창동 일대 주택재개발)','시공자 선정·계약 — 2006~2009년 이력 확인','준공 후 조합 청산종결등기 완료 — 모든 절차 마감 사업장'] },
     /* ===== 재건축 ===== */
     /* ===== 소규모정비 ===== */
-    { id:'pf12', name:'가락현대6차아파트 가로주택정비사업', type:'소규모정비', district:'송파구', status:'진행중', year:'2025', scale:'191세대', role:'사업시행·관리처분 수행',
-      description:'서울 송파구 가락동 55번지 일대 가락현대6차아파트 가로주택정비사업. 기존 1~10층, 2개동, 160세대(1991년 준공, 34년차)를 지하3층~지상25층, 2개동, 191세대로 신축. 현대엔지니어링이 2023.11 시공권 단독 확보, 총 사업규모 1,017억원.',
-      featured:false,
-      thumbnail:'../assets/images/portfolio/garak6.jpg', featuredImage:'../assets/images/portfolio/garak6.jpg',
-      detailImage:'../assets/images/portfolio/garak6.jpg', imageAlt:'가락현대6차 가로주택정비사업 조감도',
-      floorInfo:'지하3층 / 지상25층', floorAbove:25, floorBelow:3,
-      grossFloorArea:'38,325.77㎡', floorAreaRatio:'-',
-      members:'-', memberCount:0,
-      siteArea:'7,549.6㎡', buildingArea:'-', constructor:'현대엔지니어링', client:'가락현대6차 가로주택정비사업조합',
-      phase:'사업시행인가 추진', totalCost:'약 1,017억원', proportionalRate:null,
-      tasks:['사업시행계획 수립 수행','관리처분계획 수행','시공사 선정 수행','조합 운영 수행','사업성 분석 수행'],
-      issues:['가로주택정비사업 — 빈집법 적용','현대엔지니어링 단독 시공권 확보','인근 가락현대5차와 다른 사업유형으로 추진'] },
     { id:'pf16', name:'공덕현대아파트 소규모재건축정비사업', type:'소규모정비', district:'마포구', status:'진행중', year:'2025', scale:'232세대', role:'조합설립·사업시행 수행',
       description:'서울 마포구 공덕동 370-9번지(마포대로11길 73) 일대 공덕현대아파트 소규모재건축정비사업. 구역면적 8,259㎡. 건폐율 22.62%, 용적률 273.64%, 지하2층~지상20층, 2개동, 총 232세대(토지등소유자 182, 일반분양 46, 보류지 4). 한화 건설부문 시공.',
       featured:false,
