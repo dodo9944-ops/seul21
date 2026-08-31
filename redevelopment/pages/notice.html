@@ -173,7 +173,7 @@
 
     renderTabCounts();
     render();
-    if (window.App && App.stickyTabBar) App.stickyTabBar('noticeTabs', 'noticeTabsPlaceholder');
+    if (typeof App !== 'undefined' && App.stickyTabBar) App.stickyTabBar('noticeTabs', 'noticeTabsPlaceholder');
     if (openId) {
         const target = notices.find(n => n.id === openId);
         if (target) NoticeDetailModal.open(target);

@@ -334,7 +334,7 @@
 
     renderTabCounts();
     renderGrid();
-    if(window.App && App.stickyTabBar) App.stickyTabBar('glTabsWrap', 'glTabsPlaceholder');
+    if(typeof App !== 'undefined' && App.stickyTabBar) App.stickyTabBar('glTabsWrap', 'glTabsPlaceholder');
 
     var qcat=new URLSearchParams(location.search).get('cat');
     if(qcat){
