@@ -66,8 +66,35 @@
     /* 탭별 자료 건수 — 업무실적(.pf-tab-count)과 동일한 표기 */
     .ctrl-nav-count{font-size:11px;font-weight:600;color:#111;margin-left:6px}
     #ctrlNav button.on .ctrl-nav-count{color:var(--gold)}
-    @media(max-width:640px){.ctrl-bar{flex-direction:column;align-items:stretch;gap:12px;padding:16px}.ctrl-sort{margin-left:0;justify-content:flex-end}#ctrlNav{flex-wrap:wrap;row-gap:8px;column-gap:2px}#ctrlNav button,#ctrlNav a{padding:6px 12px;font-size:13px}#ctrlNav button:first-child,#ctrlNav a:first-child{padding-left:0}.ctrl-nav-count{font-size:10px;margin-left:4px}}
-    @media(max-width:374px){#ctrlNav button,#ctrlNav a{padding:6px 8px;font-size:12px}}
+    /* 모바일 전용 얇은 반투명 2단 컨트롤바 (2026-09-01 대장 지시) — PC 레이아웃은 위 규칙 그대로 유지 */
+    @media(max-width:768px){
+      .ctrl-bar{
+        display:grid; grid-template-columns:1fr auto; grid-template-areas:"nav nav" "sort count";
+        gap:0; row-gap:4px; padding:8px 0; margin-bottom:20px;
+        background:rgba(255,255,255,0.78);
+        -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+        border:1px solid rgba(184,134,11,0.14); box-shadow:none; border-radius:10px;
+      }
+      #ctrlNav{
+        grid-area:nav; min-width:0; max-width:100%;
+        display:flex; flex-wrap:nowrap; align-items:center;
+        overflow-x:auto; overflow-y:hidden;
+        -webkit-overflow-scrolling:touch; scroll-behavior:smooth;
+        scrollbar-width:none; -ms-overflow-style:none;
+        padding:0 12px; gap:0;
+      }
+      #ctrlNav::-webkit-scrollbar{display:none;width:0;height:0}
+      #ctrlNav button,#ctrlNav a{flex:0 0 auto; padding:5px 10px; font-size:12.5px; white-space:nowrap}
+      #ctrlNav button:first-child,#ctrlNav a:first-child{padding-left:0}
+      #ctrlNav button:not(:last-child),#ctrlNav a:not(:last-child){border-right:1px solid rgba(10,15,28,.08)}
+      .ctrl-nav-count{font-size:10px;margin-left:3px}
+      .ctrl-sort{grid-area:sort; margin-left:12px; gap:5px}
+      .ctrl-sort label{font-size:11px}
+      .ctrl-sort select{height:26px;padding:0 20px 0 8px;font-size:11.5px;border-radius:6px;border-width:1px}
+      .ctrl-count{grid-area:count; margin-right:12px; font-size:11.5px}
+      .ctrl-count strong{font-size:12.5px}
+    }
+    @media(max-width:374px){#ctrlNav button,#ctrlNav a{padding:5px 8px;font-size:12px}}
 
     /* === Popular Section === */
     .pop-sec{margin-bottom:36px}
@@ -379,6 +406,18 @@ function renderCtrlNavCounts(){
 function renderTabs(){
 document.querySelectorAll('#heroCards .uh-card').forEach(function(el){el.classList.toggle('on',el.dataset.cat===curCat)});
 document.querySelectorAll('#ctrlNav button').forEach(function(el){el.classList.toggle('on',el.dataset.cat===curCat)});
+setTimeout(scrollActiveCatIntoView,420);
+}
+/* 모바일 가로 스크롤 카테고리 메뉴 — 선택된 항목이 화면 밖이면 가시영역 중앙으로 자동 스크롤
+   switchCat()의 window.scrollTo(smooth) 및 상단 sticky 재측정과 경합하지 않도록 지연 실행 */
+function scrollActiveCatIntoView(){
+var nav=document.getElementById('ctrlNav');
+if(!nav||window.innerWidth>1024)return;
+var on=nav.querySelector('button.on');
+if(!on)return;
+var barW=nav.clientWidth;
+var target=on.offsetLeft-(barW/2)+(on.offsetWidth/2);
+nav.scrollLeft=Math.max(0,target);
 }
 
 /* Popular section */
