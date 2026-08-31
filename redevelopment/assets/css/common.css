@@ -57,39 +57,6 @@
   --transition: 0.2s ease;
 }
 
-/* ── MOBILE SPACING & TYPOGRAPHY SYSTEM (2026-09-01 모바일 최적화 지침 §4·§5·§14) ──
-   PC(:root) 값은 절대 변경하지 않고, 767px 이하에서만 재정의한다.
-   Phase 2에서 페이지별 실제 요소에 이 변수를 순차 적용한다. */
-@media (max-width: 767px) {
-  :root {
-    /* spacing scale */
-    --sp-section-y: 48px;      /* Section 상·하 여백 */
-    --sp-hero-gap: 24px;       /* Hero 하단 ~ 첫 콘텐츠 간격 */
-    --sp-title-body-gap: 14px; /* 제목 ~ 본문 간격 */
-    --sp-card-gap: 14px;       /* 카드-카드 간격 */
-    --sp-box-pad: 18px;        /* 박스 내부 padding */
-    --sp-img-text-gap: 12px;   /* 이미지 ~ 텍스트 간격 */
-    --sp-footer-gap: 40px;     /* 콘텐츠 ~ Footer 여백 */
-
-    /* typography scale */
-    --fs-hero-title: 26px;
-    --fs-section-title: 20px;
-    --fs-sub-title: 16px;
-    --fs-body: 15px;
-    --fs-card-title: 15px;
-    --fs-desc: 13.5px;
-    --fs-caption: 12px;
-    --fs-button: 14px;
-    --fs-menu: 13px;
-  }
-}
-@media (max-width: 374px) {
-  :root {
-    --fs-hero-title: 23px;
-    --fs-section-title: 18px;
-  }
-}
-
 /* ── RESET & BASE ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -589,14 +556,14 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   .footer-phone { font-size: 19.2px; margin-bottom: 4px; }
   .footer-phone-icon { width: 22.4px; height: 22.4px; }
   .footer-phone-icon i { font-size: 8.8px; }
-  /* 모바일 하단 정보 — 톤은 유지하되 가독성 최저선(11px) 확보 (2026-09-01 모바일 최적화 지침 §5) */
+  /* 모바일 하단 정보 — 글자 크기·짙기·행간을 낮춰 톤 다운 + 컴팩트하게 */
   .footer-brand .logo { margin-bottom: 4px; }
-  .footer-brand p { font-size: 11px; color: #8A8F97; line-height: 1.7; margin-top: 6px; }
-  .footer-privacy-link { font-size: 11px; font-weight: normal; color: #6B7078; }
-  .footer-copy { font-size: 11px; line-height: 1.7; color: #9AA0A8; }
+  .footer-brand p { font-size: 9.2px; color: #8A8F97; line-height: 1.6; margin-top: 6px; }
+  .footer-privacy-link { font-size: 7.36px; font-weight: normal; color: #6B7078; } /* 전체 80% 축소 반영 */
+  .footer-copy { font-size: 6.72px; color: #9AA0A8; } /* 전체 80% 축소 반영 */
   .footer-contact h5 { margin-bottom: 8px; }
-  .footer-contact .email-link { font-size: 11px; margin-bottom: 6px; }
-  .footer-contact p { font-size: 11px; color: #8A8F97; line-height: 1.7; }
+  .footer-contact .email-link { font-size: 9.2px; margin-bottom: 6px; }
+  .footer-contact p { font-size: 9.2px; color: #8A8F97; line-height: 1.6; }
 }
 @media (max-width: 540px) {
   .footer-grid { grid-template-columns: 1fr; gap: 16px; padding: 20px 0 24px; }
@@ -652,12 +619,6 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .vision-section:last-child,
 .services-section:last-child,
 .featured-section:last-child { margin-bottom: 0; }
-@media (max-width: 767px) {
-  .about-section,
-  .vision-section,
-  .services-section,
-  .featured-section { margin-bottom: var(--sp-section-y); }
-}
 
 /* ── BREADCRUMB ── */
 .breadcrumb {
@@ -674,9 +635,6 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .section-head {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 36px;
-}
-@media (max-width: 767px) {
-  .section-head { margin-bottom: 22px; }
 }
 
 /* 탭바 스크롤 고정 공통 클래스 — App.stickyTabBar()가 토글. 위치·폭은 JS가 인라인 스타일로
