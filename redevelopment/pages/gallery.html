@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260831a">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260831c">
     <style>
     /* 히어로 바로 아래 탭 메뉴와의 여백 축소 (공통 .page-body 상단 여백 갤러리 페이지 한정 축소) */
     .page-body{padding-top:28px}
@@ -39,6 +39,9 @@
     /* 자료실(#ctrlNav)과 동일한 언더바 인디케이터로 통일 */
     #glTabs button.on{background:none;color:var(--gold);font-weight:700}
     #glTabs button.on::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:20px;height:2px;border-radius:1px;background:var(--gold)}
+    /* 우측 건수 표시 — 공지사항(.notice-result)과 동일하게 탭바 우측에 배치 */
+    .gl-result{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap;margin-left:auto}
+    .gl-result strong{color:var(--brand-dark);font-weight:700}
     @media(max-width:640px){
       .gl-tabs-wrap{padding:14px 16px}
       #glTabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
@@ -56,8 +59,6 @@
     .gp-card.active{border-color:var(--gold);box-shadow:0 0 0 2px rgba(184,134,11,.25)}
     .gp-img{aspect-ratio:4/3;background:linear-gradient(135deg,#FFF7DF,#FFFDF7);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:26px;overflow:hidden;position:relative}
     .gp-img img{width:100%;height:100%;object-fit:cover;display:block}
-    /* 게시물 번호 — 향후 게시물 검색·참조 용도 */
-    .gp-num{position:absolute;top:8px;left:8px;background:rgba(10,15,28,.62);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;letter-spacing:.2px;z-index:2}
     .gp-body{padding:12px 13px 14px}
     .gp-cat{font-size:10.5px;font-weight:700;color:var(--gold);margin-bottom:4px}
     .gp-title{font-size:13.5px;font-weight:800;color:var(--gray-900);line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -141,6 +142,7 @@
                 <button data-cat="현장스케치">현장스케치<span class="gl-tab-count"></span></button>
                 <button data-cat="기타행사">기타행사<span class="gl-tab-count"></span></button>
             </div>
+            <div class="gl-result" id="glResult"></div>
         </div>
 
         <!-- 전체 게시물 (5×3 그리드 + 페이지네이션) -->
@@ -172,9 +174,9 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260831b"></script>
+<script src="../assets/data/mock-data.js?v=20260831c"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260831a"></script>
+<script src="../assets/js/common.js?v=20260831c"></script>
 <script>
 (function(){
     var ICONS={ '주민총회':'fa-solid fa-people-group', '봉사활동':'fa-solid fa-hand-holding-heart',
@@ -198,7 +200,7 @@
         var icon=ICONS[it.category]||'fa-solid fa-image';
         var cover=coverOf(it);
         return '<button class="gp-card" data-id="'+it.id+'">'+
-               '<div class="gp-img"><span class="gp-num">No.'+num+'</span>'+(cover?'<img src="'+cover.src+'" alt="'+(cover.alt||it.title||'')+'" loading="lazy">':'<i class="'+icon+'"></i>')+'</div>'+
+               '<div class="gp-img">'+(cover?'<img src="'+cover.src+'" alt="'+(cover.alt||it.title||'')+'" loading="lazy">':'<i class="'+icon+'"></i>')+'</div>'+
                '<div class="gp-body">'+
                '<div class="gp-cat">'+it.category+'</div>'+
                '<div class="gp-title">'+(it.title||'')+'</div>'+
@@ -230,6 +232,7 @@
     function renderGrid(){
         document.getElementById('glGridTitle').textContent=curCat==='전체'?'전체 게시물':curCat;
         var list=listOf(curCat);
+        document.getElementById('glResult').innerHTML='총 <strong>'+list.length+'</strong>건';
         var totalPages=Math.max(1, Math.ceil(list.length/PER));
         if(curPage>totalPages) curPage=totalPages;
         var gridEl=document.getElementById('glGrid');
@@ -330,6 +333,17 @@
 
     renderTabCounts();
     renderGrid();
+
+    var qcat=new URLSearchParams(location.search).get('cat');
+    if(qcat){
+        var qtab=document.querySelector('#glTabs button[data-cat="'+qcat+'"]');
+        if(qtab){
+            document.querySelectorAll('#glTabs button').forEach(function(b){ b.classList.remove('on') });
+            qtab.classList.add('on');
+            curCat=qcat; curPage=1;
+            renderGrid();
+        }
+    }
 
     var qid=new URLSearchParams(location.search).get('id');
     if(qid && items.some(function(it){ return it.id===qid })){

@@ -71,14 +71,29 @@ const App = (() => {
       { href: `${B}/pages/faq.html`, label: '자주 묻는 질문', icon: 'fa-solid fa-circle-question' },
     ];
 
-    const utilRight = `<a href="${B}/pages/feasibility.html">사업성 검토</a>`;
-
     return `
     <div class="header-wrap" id="headerWrap">
     <div class="util-bar"><div class="inner">
       <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링그룹</span>
-      ${utilRight}
-      <a href="${B}/pages/gallery.html">갤러리</a>
+      <div class="util-item-drop">
+        <a href="${B}/pages/feasibility.html">사업성 검토</a>
+        <div class="util-drop-menu">
+          <a href="${B}/pages/feasibility.html">사업성 검토 소개</a>
+          <a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>
+          <a href="${B}/pages/calculator.html">비례율 계산기</a>
+        </div>
+      </div>
+      <div class="util-item-drop">
+        <a href="${B}/pages/gallery.html">갤러리</a>
+        <div class="util-drop-menu">
+          <a href="${B}/pages/gallery.html">전체</a>
+          <a href="${B}/pages/gallery.html?cat=주민총회">주민총회</a>
+          <a href="${B}/pages/gallery.html?cat=봉사활동">봉사활동</a>
+          <a href="${B}/pages/gallery.html?cat=워크숍">워크숍</a>
+          <a href="${B}/pages/gallery.html?cat=현장스케치">현장스케치</a>
+          <a href="${B}/pages/gallery.html?cat=기타행사">기타행사</a>
+        </div>
+      </div>
       <div class="util-item-drop">
         <a href="${B}/pages/notice.html">공지사항</a>
         <div class="util-drop-menu">
@@ -163,7 +178,7 @@ const App = (() => {
     <footer class="footer"><div class="inner">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="logo footer-logo-text-only">
+          <div class="logo footer-logo-text-only" style="cursor:pointer" onclick="window.scrollTo({top:0,behavior:'smooth'})" role="button" aria-label="맨 위로 이동">
             <span class="logo-text">
               <span class="logo-company">(주)빛세움</span>
               <span class="logo-sub">VISSEUM</span>
