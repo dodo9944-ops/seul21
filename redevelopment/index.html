@@ -1388,19 +1388,11 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     var noticeEl=document.getElementById('mainNotice');
     if(noticeEl && MOCK.notices){
         var notices=MOCK.notices.slice().sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
-        function noticeSummary(n){
-            if(n.excerpt) return n.excerpt;
-            var t=(n.content||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
-            return t.length>90?t.slice(0,90)+'…':t;
-        }
         noticeEl.innerHTML=notices.length?notices.map(function(n){
             var badge=n.important?'<span style="color:#C58B00;font-weight:700;font-size:11px;margin-right:6px;">[중요]</span>':'';
-            return'<a href="pages/notice.html?id='+encodeURIComponent(n.id)+'" class="news-item" data-notice-id="'+n.id+'" style="gap:10px;padding:16px 20px;">'+
-                '<span style="color:#C58B00;font-size:11px;flex-shrink:0;margin-top:4px;">●</span>'+
-                '<div class="news-body" style="display:flex;flex-direction:column;gap:5px;">'+
-                '<h4 style="height:auto;display:block;-webkit-line-clamp:unset;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:0;">'+
-                    badge+n.title+
-                    '<span style="font-weight:400;color:#9A9DA2;font-size:13px;margin-left:8px;">'+noticeSummary(n)+'</span></h4>'+
+            return'<a href="pages/notice.html?id='+encodeURIComponent(n.id)+'" class="news-item" data-notice-id="'+n.id+'" style="gap:10px;padding:12px 20px;">'+
+                '<span style="color:#C58B00;font-size:11px;flex-shrink:0;">●</span>'+
+                '<div class="news-body"><h4>'+badge+n.title+'</h4>'+
                 '<div class="news-date">'+n.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">등록된 공지사항이 없습니다.</p>';
         noticeEl.addEventListener('click',function(e){
