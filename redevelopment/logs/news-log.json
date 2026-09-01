@@ -114,5 +114,62 @@
       "library_exposure_checked": "NOT_CHECKED — 상동"
     },
     "action_required": "① [반복 미해결] Vercel 커넥터 재인증 필요 — team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프 접근 권한을 claude.ai Vercel 커넥터 설정에서 재부여해야 함. 2026-08-28 06:30·06:40에 이어 2026-08-29 06:37까지 3회 연속 동일 오류. ② [반복 미해결] 이 세션 환경의 아웃바운드 egress 프록시가 www.seul24.cloud를 계속 차단 중 — egress 허용 도메인 목록에 www.seul24.cloud 추가 필요. 코드 변경·커밋·푸시는 backup-bitseum-rebrand-20260824 브랜치에 정상 완료되었으며(커밋 9c2575d), 두 문제가 해결되면 별도 재작업 없이 해당 브랜치를 production으로 배포하고 라이브 검수를 즉시 진행 가능. Claude가 자체적으로 해결할 수 없는 계정/네트워크 설정 문제로, 사용자 조치가 반드시 필요."
+  },
+  {
+    "run_datetime_kst": "2026-08-31T06:38:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "note": "2026-08-30에는 이 로그에 실행 기록이 없음(자동수집 미실행 또는 뉴스 게시 없이 디자인·레이아웃 커밋만 발생한 것으로 추정, 원인 불명 — 다음 실행 시 스케줄 트리거 상태 확인 필요).",
+    "searched_articles_count": 3,
+    "candidate_articles_count": 3,
+    "target_max": 3,
+    "shortfall_reason": "N/A — 목표 3건 충족",
+    "selected_articles": [
+      {
+        "id": "news0831a",
+        "title": "박홍근 국토부 장관, 오세훈 시장에 \"500세대 이하 정비구역 지정권 자치구 이양하라\" 재차 압박",
+        "source": "아시아경제",
+        "source_url": "https://view.asiae.co.kr/article/2026083019300359906",
+        "download_html": "redevelopment/downloads/news_20260831a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260831a.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0831b",
+        "title": "서울 상일동 5개 노후빌라단지 통합재건축 정비구역 지정·정비계획 결정 — 1492가구 최고 29층",
+        "source": "한국경제",
+        "source_url": "https://www.hankyung.com/article/2026083015267",
+        "download_html": "redevelopment/downloads/news_20260831b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260831b.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0831c",
+        "title": "신탁방식 정비사업 채무상환특약 시공순위요건 완화 — 신탁사, 정비사업 주도권 확대 전망",
+        "source": "파이낸셜뉴스",
+        "source_url": "https://www.fnnews.com/news/202608301809199108",
+        "download_html": "redevelopment/downloads/news_20260831c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260831c.html",
+        "status": "posted"
+      }
+    ],
+    "posted_success_count": 3,
+    "posted_fail_count": 0,
+    "fail_reasons": [],
+    "dedup_check": "MOCK.library 전수 대조 완료 — '상일동'·'박홍근'·'500세대 자치구 이양'·'대출보증'·'채무상환 특약' 키워드 기존 0건 확인 후 게시. '재개발 동의율 75%→70%' 주제는 이미 다수 게시(news0817e·news0818a·news0819b·news0820g·law0823a 등)되어 있어 해당 주제의 신규 기사(아주경제 8/30 건산연 논평 등)는 중복으로 판단, 게시 대상에서 제외.",
+    "commit_sha": "da7889db",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_status": "FAILED — mcp__Vercel__list_teams 결과 teams:[] (빈 배열), mcp__Vercel__get_git_deployment_context 결과 teams:[] 동일, mcp__Vercel__list_projects(teamId=team_4OL3ZwhAAZCMeH0YaWVu0cGw) 결과 'Failed to list projects.' 2026-08-28(2회)·2026-08-29에 이어 2026-08-31까지 4회 연속(2026-08-30 실행기록 없음) 동일 오류 재현 — 이 세션의 Vercel 커넥터가 team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프에 대한 권한을 여전히 보유하지 못함. production 배포 트리거 불가.",
+    "verification": {
+      "news0831a_http_status": "NOT_CHECKED — 이 세션 네트워크 egress 프록시가 www.seul24.cloud 도메인 접속을 계속 차단(EGRESS_BLOCKED)하여 WebFetch로 라이브 확인 불가 (2026-08-28·08-29와 동일 증상 재현)",
+      "news0831b_http_status": "NOT_CHECKED — 상동",
+      "news0831c_http_status": "NOT_CHECKED — 상동",
+      "index_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(newsFileMap·fileMap·MOCK.library 등록)만 확인 완료",
+      "library_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(catDefs 기존 매핑 확인, 신규 등록 반영)만 확인 완료"
+    },
+    "action_required": "① [4회 연속 미해결] Vercel 커넥터 재인증 필요 — team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프 접근 권한을 claude.ai Vercel 커넥터 설정에서 재부여해야 함. ② [반복 미해결] 이 세션 환경의 아웃바운드 egress 프록시가 www.seul24.cloud를 계속 차단 중 — egress 허용 도메인 목록에 www.seul24.cloud 추가 필요. ③ 2026-08-30 실행 기록 누락 — 스케줄 트리거가 정상 작동했는지 확인 필요. 코드 변경·커밋·푸시는 backup-bitseum-rebrand-20260824 브랜치에 정상 완료되었으며(커밋 da7889db), ①·②가 해결되면 별도 재작업 없이 해당 브랜치를 production으로 배포하고 라이브 검수를 즉시 진행 가능. Claude가 자체적으로 해결할 수 없는 계정/네트워크 설정 문제로, 사용자 조치가 반드시 필요."
   }
 ]

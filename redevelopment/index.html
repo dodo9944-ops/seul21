@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260830j">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260831m">
     <link rel="stylesheet" href="assets/css/download-view.css?v=20260830b">
     <style>
         /* ============================================================
@@ -387,7 +387,15 @@
             .section-title { font-size: 19px; font-weight: 800; letter-spacing: -.3px; padding-left: 11px; }
             .section-title::before { width: 3px; height: 16px; top: 3px; }
         }
-
+        /* 마지막 섹션(자료실+갤러리) 하단여백 */
+        #mainLastSection { padding-bottom: 70px; }
+        @media (max-width: 768px) {
+            #mainLastSection { padding-bottom: 60px; }
+        }
+        /* 히어로 밑 여백 = hero-banner 자체 하단(56px, 히어로 레이아웃이라 유지) + 첫 섹션 상단 보정(44px) = 총 100px */
+        @media (min-width: 1025px) {
+            #mainFirstSection { padding-top: 44px; }
+        }
         /* ── CARD VISUAL (메인 전용) ── */
         .card-visual { display: flex; align-items: center; justify-content: center; border-radius: 12px; background: linear-gradient(135deg, #FFFFFF, #FFF3C4); }
         .card-visual i { color: rgba(184,134,11,0.4); }
@@ -423,8 +431,19 @@
         }
         .news-item:last-child { border-bottom: none; }
         .news-item:hover { background: rgba(255,196,0,.025); }
-        .news-thumb { width: 72px; height: 52px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #C58B00; background: #FFFFFF; overflow: hidden; }
+        /* 자료실(library.html)의 .lib-icon과 완전히 동일한 크기·비율·배지로 통일 */
+        .news-thumb { width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #0A0F1C; background: #FFFFFF; overflow: hidden; position: relative; }
         .news-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .news-thumb::before { content:''; position:absolute; inset:0; border-radius:inherit; background:linear-gradient(135deg,rgba(255,255,255,.65) 0%,rgba(255,255,255,.15) 45%,rgba(255,255,255,0) 68%); pointer-events:none; }
+        .news-thumb i, .news-thumb .ft-label { position:relative; }
+        .news-thumb .ft-label { position:absolute; bottom:-3px; right:-3px; background:#fff; border:1px solid var(--gray-200); border-radius:4px; font-size:8px; font-weight:800; color:var(--gray-600); padding:1px 4px; text-transform:uppercase; line-height:1; }
+        .news-thumb.news { background:linear-gradient(135deg,#FFFFFF,#FFF3C4); color:#0A0F1C; }
+        .news-thumb.law { background:linear-gradient(135deg,#5CB2F0,#0068B7); color:#fff; }
+        .news-thumb.form { background:linear-gradient(135deg,#8A96A6,#2D3748); color:#fff; }
+        .news-thumb.guide { background:linear-gradient(135deg,#4FE0A0,#009A44); color:#fff; }
+        .news-thumb.hwp { background:linear-gradient(135deg,#2A7DE1,#1B5FBF); color:#fff; }
+        .news-thumb.pdf { background:linear-gradient(135deg,#D6423A,#B5332B); color:#fff; }
+        .news-thumb.xlsx { background:linear-gradient(135deg,#1E8C5E,#166B48); color:#fff; }
         .news-body { min-width: 0; overflow: hidden; }
         .news-body h4 {
             font-size: 15px;
@@ -445,7 +464,7 @@
            (최신자료 콘텐츠 기준 스냅 높이 — 상단 여백만큼 하단 여백도 동일하게 확보,
             콘텐츠 길이와 무관하게 절대 어긋나지 않음) */
         .two-col-grid .news-item { height: 119px; align-items: stretch; }
-        .news-thumb-photo { width: 89px; border-radius: 8px; flex-shrink: 0; overflow: hidden; background: #FFFFFF; align-self: stretch; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #C58B00; }
+        .news-thumb-photo { width: 118px; border-radius: 8px; flex-shrink: 0; overflow: hidden; background: #FFFFFF; align-self: stretch; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #C58B00; }
         .news-thumb-photo img { width: 96%; height: 96%; object-fit: cover; border-radius: 6px; display: block; margin-left: 2px; }
         .news-desc {
             font-size: 13px; line-height: 1.6; color: #9A9DA2;
@@ -455,6 +474,8 @@
         /* 갤러리 카드는 행 높이가 최신자료 기준으로 줄어든 만큼 제목 1줄+요약 1줄로 압축해
            날짜 줄까지 항상 행 안에 온전히 들어오도록 함(잘림 방지) */
         #mainCommunity .news-body h4 { max-height: 24px; -webkit-line-clamp: 1; }
+        /* 갤러리 썸네일 3건 — 밝은 배경과 경계가 흐려 보이는 사진 가독성 보완을 위한 자연스러운 외곽선 */
+        #mainCommunity .news-thumb-photo img { border: 1px solid rgba(10,15,28,0.12); box-shadow: 0 0 0 1px rgba(255,255,255,0.4) inset; }
 
         /* ── PROCESS STEPS ── */
         .process-bar {
@@ -773,7 +794,7 @@
 
 
 <!-- ===== 주요뉴스 ===== -->
-<section class="section">
+<section class="section" id="mainFirstSection">
     <div class="inner">
         <div class="section-label">Latest News</div>
         <div class="section-head">
@@ -959,7 +980,7 @@
 
 
 <!-- ===== 자료실 + 커뮤니티 ===== -->
-<section class="section">
+<section class="section" id="mainLastSection">
     <div class="inner">
         <div class="section-label">Resources</div>
         <div class="section-head">
@@ -1063,9 +1084,9 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260830b"></script>
+<script src="assets/data/mock-data.js?v=20260831l"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260830h"></script>
+<script src="assets/js/common.js?v=20260831m"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1284,6 +1305,17 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     }
 
     var iconMap={hwp:'fa-file-lines',pdf:'fa-file-pdf',xlsx:'fa-file-excel'};
+    /* 자료실(library.html)의 카테고리별 아이콘·배지 로직과 동기화 */
+    var contentVisualMap=[
+        {keys:['주요뉴스','칼럼','정책','일반','사례'],icon:'fa-newspaper',cls:'news',badge:'NEWS'},
+        {keys:['법령','법령·조례','관련판례','지침','판례·질의회신'],icon:'fa-gavel',cls:'law',badge:'LAW'},
+        {keys:['서식','절차·서류'],icon:'fa-file-pen',cls:'form',badge:'FORM'},
+        {keys:['가이드'],icon:'fa-book',cls:'guide',badge:'GUIDE'}
+    ];
+    function getContentVisual(category){
+        var m=contentVisualMap.find(function(v){return v.keys.indexOf(category)>=0});
+        return m||{icon:'fa-newspaper',cls:'news',badge:'NEWS'};
+    }
 
     /* 주요뉴스: 최근 7일치 */
     var newsEl=document.getElementById('mainNews');
@@ -1292,7 +1324,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var cutoff=new Date(today); cutoff.setDate(cutoff.getDate()-7);
         var cutStr=cutoff.toISOString().slice(0,10);
         var newsFileMap={
-'news0817a':'downloads/news_20260817a.html','news0817b':'downloads/news_20260817b.html','news0817c':'downloads/news_20260817c.html','news0817d':'downloads/news_20260817d.html','news0817e':'downloads/news_20260817e.html','news0817f':'downloads/news_20260817f.html','news0817g':'downloads/news_20260817g.html','news0817h':'downloads/news_20260817h.html','news0817i':'downloads/news_20260817i.html','news0818a':'downloads/news_20260818a.html','news0818b':'downloads/news_20260818b.html','news0818c':'downloads/news_20260818c.html','news0818d':'downloads/news_20260818d.html','news0818e':'downloads/news_20260818e.html','news0818f':'downloads/news_20260818f.html','news0818g':'downloads/news_20260818g.html','news0818h':'downloads/news_20260818h.html','news0818i':'downloads/news_20260818i.html','news0818j':'downloads/news_20260818j.html','news0818k':'downloads/news_20260818k.html','news0819a':'downloads/news_20260819a.html','news0819b':'downloads/news_20260819b.html','news0819c':'downloads/news_20260819c.html','news0819d':'downloads/news_20260819d.html','news0819e':'downloads/news_20260819e.html','news0819f':'downloads/news_20260819f.html','news0819g':'downloads/news_20260819g.html','news0820a':'downloads/news_20260820a.html','news0820b':'downloads/news_20260820b.html','news0820c':'downloads/news_20260820c.html','news0820d':'downloads/news_20260820d.html','news0820e':'downloads/news_20260820e.html','news0820f':'downloads/news_20260820f.html','news0820g':'downloads/news_20260820g.html','news0820h':'downloads/news_20260820h.html','news0820i':'downloads/news_20260820i.html','news0820j':'downloads/news_20260820j.html','news0821a':'downloads/news_20260821a.html','news0821b':'downloads/news_20260821b.html','news0821c':'downloads/news_20260821c.html','news0821d':'downloads/news_20260821d.html','news0821e':'downloads/news_20260821e.html','news0821f':'downloads/news_20260821f.html','news0821g':'downloads/news_20260821g.html','news0821h':'downloads/news_20260821h.html','news0821i':'downloads/news_20260821i.html','news0822a':'downloads/news_20260822a.html','news0822b':'downloads/news_20260822b.html','news0822c':'downloads/news_20260822c.html','news0822d':'downloads/news_20260822d.html','news0822e':'downloads/news_20260822e.html','news0823a':'downloads/news_20260823a.html','news0823b':'downloads/news_20260823b.html','news0823c':'downloads/news_20260823c.html','news0823d':'downloads/news_20260823d.html','news0823e':'downloads/news_20260823e.html','news0823f':'downloads/news_20260823f.html','news0823g':'downloads/news_20260823g.html','news0823h':'downloads/news_20260823h.html','news0824a':'downloads/news_20260824a.html','news0824b':'downloads/news_20260824b.html','news0824c':'downloads/news_20260824c.html','news0824d':'downloads/news_20260824d.html','news0824e':'downloads/news_20260824e.html','news0824f':'downloads/news_20260824f.html','news0824g':'downloads/news_20260824g.html','news0824h':'downloads/news_20260824h.html','news0824i':'downloads/news_20260824i.html','news0824j':'downloads/news_20260824j.html','news0828a':'downloads/news_20260828a.html','news0828b':'downloads/news_20260828b.html','news0829a':'downloads/news_20260829a.html','news0829b':'downloads/news_20260829b.html',};
+'news0817a':'downloads/news_20260817a.html','news0817b':'downloads/news_20260817b.html','news0817c':'downloads/news_20260817c.html','news0817d':'downloads/news_20260817d.html','news0817e':'downloads/news_20260817e.html','news0817f':'downloads/news_20260817f.html','news0817g':'downloads/news_20260817g.html','news0817h':'downloads/news_20260817h.html','news0817i':'downloads/news_20260817i.html','news0818a':'downloads/news_20260818a.html','news0818b':'downloads/news_20260818b.html','news0818c':'downloads/news_20260818c.html','news0818d':'downloads/news_20260818d.html','news0818e':'downloads/news_20260818e.html','news0818f':'downloads/news_20260818f.html','news0818g':'downloads/news_20260818g.html','news0818h':'downloads/news_20260818h.html','news0818i':'downloads/news_20260818i.html','news0818j':'downloads/news_20260818j.html','news0818k':'downloads/news_20260818k.html','news0819a':'downloads/news_20260819a.html','news0819b':'downloads/news_20260819b.html','news0819c':'downloads/news_20260819c.html','news0819d':'downloads/news_20260819d.html','news0819e':'downloads/news_20260819e.html','news0819f':'downloads/news_20260819f.html','news0819g':'downloads/news_20260819g.html','news0820a':'downloads/news_20260820a.html','news0820b':'downloads/news_20260820b.html','news0820c':'downloads/news_20260820c.html','news0820d':'downloads/news_20260820d.html','news0820e':'downloads/news_20260820e.html','news0820f':'downloads/news_20260820f.html','news0820g':'downloads/news_20260820g.html','news0820h':'downloads/news_20260820h.html','news0820i':'downloads/news_20260820i.html','news0820j':'downloads/news_20260820j.html','news0821a':'downloads/news_20260821a.html','news0821b':'downloads/news_20260821b.html','news0821c':'downloads/news_20260821c.html','news0821d':'downloads/news_20260821d.html','news0821e':'downloads/news_20260821e.html','news0821f':'downloads/news_20260821f.html','news0821g':'downloads/news_20260821g.html','news0821h':'downloads/news_20260821h.html','news0821i':'downloads/news_20260821i.html','news0822a':'downloads/news_20260822a.html','news0822b':'downloads/news_20260822b.html','news0822c':'downloads/news_20260822c.html','news0822d':'downloads/news_20260822d.html','news0822e':'downloads/news_20260822e.html','news0823a':'downloads/news_20260823a.html','news0823b':'downloads/news_20260823b.html','news0823c':'downloads/news_20260823c.html','news0823d':'downloads/news_20260823d.html','news0823e':'downloads/news_20260823e.html','news0823f':'downloads/news_20260823f.html','news0823g':'downloads/news_20260823g.html','news0823h':'downloads/news_20260823h.html','news0824a':'downloads/news_20260824a.html','news0824b':'downloads/news_20260824b.html','news0824c':'downloads/news_20260824c.html','news0824d':'downloads/news_20260824d.html','news0824e':'downloads/news_20260824e.html','news0824f':'downloads/news_20260824f.html','news0824g':'downloads/news_20260824g.html','news0824h':'downloads/news_20260824h.html','news0824i':'downloads/news_20260824i.html','news0824j':'downloads/news_20260824j.html','news0828a':'downloads/news_20260828a.html','news0828b':'downloads/news_20260828b.html','news0829a':'downloads/news_20260829a.html','news0829b':'downloads/news_20260829b.html','news0831a':'downloads/news_20260831a.html','news0831b':'downloads/news_20260831b.html','news0831c':'downloads/news_20260831c.html',};
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
@@ -1387,9 +1419,11 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             location.href='pages/library.html?id='+encodeURIComponent(id);
         };
         libEl.innerHTML=libs.map(function(i){
-            var ic=iconMap[i.fileType]||'fa-file';
+            var isWeb=i.fileType==='web';
+            var ftLabel=i.fileType==='pdf'?'PDF':i.fileType==='hwp'?'HWP':i.fileType==='xlsx'?'XLS':'WEB';
+            var v=isWeb?getContentVisual(i.category):{icon:iconMap[i.fileType]||'fa-file',cls:i.fileType,badge:ftLabel};
             return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
-                '<div class="news-thumb"><i class="fa-solid '+ic+'"></i></div>'+
+                '<div class="news-thumb '+v.cls+'"><i class="fa-solid '+v.icon+'"></i><span class="ft-label">'+v.badge+'</span></div>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
                 '<div class="news-date">'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></div></div></div>';
         }).join('');
@@ -1565,7 +1599,8 @@ window.MPF={open:openDetail,close:closeDetail};
     document.getElementById('npTitle').textContent = n.title;
     document.getElementById('npDate').textContent = n.date;
     document.getElementById('npImp').style.display = n.important ? 'inline-block' : 'none';
-    var c = (n.content||'').length>520 ? (n.content.slice(0,520)+'…') : (n.content||'');
+    var raw = n.excerpt || (n.content||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+    var c = raw.length>200 ? (raw.slice(0,200)+'…') : raw;
     document.getElementById('npContent').textContent = c;
   }
 
