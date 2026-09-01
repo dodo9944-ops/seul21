@@ -501,6 +501,20 @@
         }
         .news-body h4:hover { color: #C58B00; }
         .news-date { font-size: 13px; color: #9A9DA2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* 주요뉴스·공지사항 위젯 전용 — 제목 한 줄 표시(짧으면 그대로, 길면 말줄임), 골드 점과 글자 정렬, 자간 확대 (대장 지시) */
+        #mainNews .news-item, #mainNotice .news-item { align-items: flex-start; }
+        #mainNews .news-item > span, #mainNotice .news-item > span { margin-top: -1px; }
+        #mainNews .news-body h4, #mainNotice .news-body h4 {
+            display: block;
+            -webkit-line-clamp: unset;
+            max-height: none;
+            margin-top: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            letter-spacing: 0.3px;
+        }
         /* 자료실 좌우 패널(최신자료·갤러리) 행 높이를 고정값으로 통일해 구분선을 맞춤
            (최신자료 콘텐츠 기준 스냅 높이 — 상단 여백만큼 하단 여백도 동일하게 확보,
             콘텐츠 길이와 무관하게 절대 어긋나지 않음) */
@@ -1382,10 +1396,9 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     if(noticeEl && MOCK.notices){
         var notices=MOCK.notices.slice().sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         noticeEl.innerHTML=notices.length?notices.map(function(n){
-            var badge=n.important?'<span style="color:#C58B00;font-weight:700;font-size:11px;margin-right:6px;">[중요]</span>':'';
             return'<a href="pages/notice.html" class="news-item" style="gap:10px;padding:12px 20px;">'+
                 '<span style="color:#C58B00;font-size:11px;flex-shrink:0;">●</span>'+
-                '<div class="news-body"><h4>'+badge+n.title+'</h4>'+
+                '<div class="news-body"><h4>'+n.title+'</h4>'+
                 '<div class="news-date">'+n.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">등록된 공지사항이 없습니다.</p>';
     }
