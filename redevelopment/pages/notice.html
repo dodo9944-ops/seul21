@@ -15,12 +15,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260831m">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260830j">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260830b">
     <style>
-    /* 히어로 바로 아래 탭 메뉴와의 여백 — 갤러리(gallery.html) 페이지와 동일하게 통일 */
-    .page-body{padding-top:28px}
-    @media(max-width:768px){.page-body{padding-top:20px}}
     .notice-row { cursor: pointer; }
     .notice-row:hover td:nth-child(2) { color: var(--accent); }
     .notice-row td:nth-child(2) { font-weight: 500; transition: color var(--transition); }
@@ -29,22 +26,9 @@
 
     /* 카테고리 탭바 — 업무실적/갤러리 탭바와 동일한 규격으로 통일 */
     #noticeTabs{display:flex;align-items:center;gap:0;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
-    #noticeTabs button{padding:6px 14px;border-right:1px solid var(--gray-200);position:relative}
-    #noticeTabs button:first-of-type{padding-left:0}
-    #noticeTabs button:last-of-type{border-right:none}
-    /* 자료실(#ctrlNav)과 동일한 언더바 인디케이터로 통일 */
-    #noticeTabs button.on{background:none;color:var(--gold);font-weight:700}
-    #noticeTabs button.on::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:20px;height:2px;border-radius:1px;background:var(--gold)}
-    /* 우측 건수 표시 — 자료실 .ctrl-count와 동일하게 탭바 우측에 배치 */
-    .notice-result{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap;margin-left:auto}
-    .notice-result strong{color:var(--brand-dark);font-weight:700}
-    /* 탭별 공지 건수 — 업무실적(.pf-tab-count)과 동일한 표기 */
-    .notice-tab-count{font-size:11px;font-weight:600;color:#111;margin-left:6px}
-    #noticeTabs button.on .notice-tab-count{color:var(--gold)}
-    /* 공지 유형 배지 — 수주소식/회사소식/기타소식 구분 (레드 미사용) */
-    .badge-order{background:rgba(0,104,183,.12);color:#0068B7}
-    .badge-company{background:rgba(0,154,68,.12);color:#009A44}
-    .badge-etc{background:var(--gray-100);color:var(--gray-600)}
+    #noticeTabs button{padding:6px 14px;border-right:1px solid var(--gray-200)}
+    #noticeTabs button:first-child{padding-left:0}
+    #noticeTabs button:last-child{border-right:none}
     @media(max-width:640px){
       #noticeTabs{padding:14px 16px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
       #noticeTabs::-webkit-scrollbar{display:none}
@@ -70,13 +54,11 @@
 <div class="page-body">
     <div class="inner">
         <div class="tabs" id="noticeTabs">
-            <button data-cat="전체">전체<span class="notice-tab-count"></span></button>
-            <button data-cat="수주소식">수주소식<span class="notice-tab-count"></span></button>
-            <button data-cat="회사소식">회사소식<span class="notice-tab-count"></span></button>
-            <button data-cat="기타소식">기타소식<span class="notice-tab-count"></span></button>
-            <div class="notice-result" id="noticeResult"></div>
+            <button data-cat="전체">전체</button>
+            <button data-cat="수주소식">수주소식</button>
+            <button data-cat="회사소식">회사소식</button>
+            <button data-cat="기타소식">기타소식</button>
         </div>
-        <div id="noticeTabsPlaceholder" style="display:none"></div>
         <div class="tbl-wrap">
             <table class="tbl">
                 <thead>
@@ -94,16 +76,12 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260831l"></script>
+<script src="../assets/data/mock-data.js?v=20260830b"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260831m"></script>
+<script src="../assets/js/common.js?v=20260830h"></script>
 <script>
 (function() {
-    /* 게시순서(날짜 오름차순 — 먼저 게시된 글이 위, 번호도 1,2,3... 순으로 부여)를
-       항상 보장하기 위해 원본 데이터 배열의 실제 삽입 위치와 무관하게 정렬한다. */
-    const notices = DataService.getAll('notices').slice().sort((a, b) => (a.date || '').localeCompare(b.date || ''));
-    const PER_PAGE = 8;
-    let curPage = 1;
+    const notices = DataService.getAll('notices');
 
     const validCats = ['수주소식', '회사소식', '기타소식'];
     const params = new URLSearchParams(location.search);
@@ -124,68 +102,20 @@
         }
     }
 
-    const catBadgeCls = { '수주소식': 'badge-order', '회사소식': 'badge-company', '기타소식': 'badge-etc' };
-
-    function renderTabCounts() {
-        document.querySelectorAll('#noticeTabs button[data-cat]').forEach(b => {
-            const cat = b.dataset.cat;
-            const count = cat === '전체' ? notices.length : notices.filter(x => noticeCat(x) === cat).length;
-            const span = b.querySelector('.notice-tab-count');
-            if (span) span.textContent = count + '건';
-        });
-    }
-
-    /* 페이지 번호(하단) 렌더링 — 최대 10개씩 블록으로 표시, 블록을 넘어가면
-       화살표로 다음 10개(예: 11~20)로 이동. 게시글 번호(표 안의 순번)와는 별개다. */
-    function renderNoticePagination(totalPages) {
-        const el = document.getElementById('pagination');
-        if (!el) return;
-        if (totalPages <= 1) { el.innerHTML = ''; return; }
-        const blockSize = 10;
-        const blockStart = Math.floor((curPage - 1) / blockSize) * blockSize + 1;
-        const blockEnd = Math.min(blockStart + blockSize - 1, totalPages);
-        let html = '';
-        if (blockStart > 1) {
-            html += `<button class="pg-arrow" data-page="${blockStart - 1}" aria-label="이전 10개"><i class="fa-solid fa-chevron-left"></i></button>`;
-        }
-        for (let p = blockStart; p <= blockEnd; p++) {
-            html += `<button class="${p === curPage ? 'active' : ''}" data-page="${p}">${p}</button>`;
-        }
-        if (blockEnd < totalPages) {
-            html += `<button class="pg-arrow" data-page="${blockEnd + 1}" aria-label="다음 10개"><i class="fa-solid fa-chevron-right"></i></button>`;
-        }
-        el.innerHTML = html;
-        el.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                curPage = parseInt(btn.dataset.page, 10);
-                render();
-                document.getElementById('noticeTabs').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-    }
-
     function render() {
         const filtered = currentCat === '전체' ? notices : notices.filter(n => noticeCat(n) === currentCat);
-        document.getElementById('noticeResult').innerHTML = '총 <strong>' + filtered.length + '</strong>건';
         const tbody = document.getElementById('noticeBody');
         if (!filtered.length) {
             tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--gray-400);padding:40px 0;">등록된 공지사항이 없습니다.</td></tr>';
-            renderNoticePagination(0);
             return;
         }
-        const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
-        if (curPage > totalPages) curPage = totalPages;
-        const start = (curPage - 1) * PER_PAGE;
-        const pageItems = filtered.slice(start, start + PER_PAGE);
-        tbody.innerHTML = pageItems.map((n, i) => {
-            const num = start + i + 1; /* 게시순서(날짜 오름차순) 기준 1,2,3... 순번 — 페이지가 바뀌어도 전체 기준으로 이어진다 */
-            const cat = noticeCat(n);
-            const catBadge = `<span class="badge ${catBadgeCls[cat]}" style="margin-right:6px;">${cat}</span>`;
+        tbody.innerHTML = filtered.map((n, i) => {
+            const num = filtered.length - i;
             const importantBadge = n.important ? '<span class="badge badge-important" style="margin-right:8px;">중요</span>' : '';
             return `
                 <tr class="notice-row" data-id="${n.id}">
                     <td style="text-align:center;color:var(--gray-400);font-size:13px;">${num}</td>
-                    <td>${catBadge}${importantBadge}${n.title}</td>
+                    <td>${importantBadge}${n.title}</td>
                     <td style="color:var(--gray-400);font-size:13px;">${n.date}</td>
                 </tr>`;
         }).join('');
@@ -196,8 +126,6 @@
                 if (n) NoticeDetailModal.open(n);
             });
         });
-
-        renderNoticePagination(totalPages);
     }
 
     const tabsEl = document.getElementById('noticeTabs');
@@ -208,13 +136,10 @@
         tabsEl.querySelectorAll('button').forEach(b => b.classList.remove('on'));
         btn.classList.add('on');
         currentCat = btn.dataset.cat;
-        curPage = 1;
         render();
     });
 
-    renderTabCounts();
     render();
-    if (typeof App !== 'undefined' && App.stickyTabBar) App.stickyTabBar('noticeTabs', 'noticeTabsPlaceholder');
     if (openId) {
         const target = notices.find(n => n.id === openId);
         if (target) NoticeDetailModal.open(target);

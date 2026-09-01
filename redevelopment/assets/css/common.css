@@ -142,16 +142,14 @@ button, input, select, textarea { font-family: inherit; }
 .util-bar a { color: rgba(10,15,28,0.35); transition: color var(--transition); font-weight: 500; }
 .util-bar a:hover { color: var(--gold); }
 .util-bar .util-left { flex:1; color: rgba(10,15,28,0.35); font-size:10px; letter-spacing:0.5px; }
-.util-bar .inner > a:first-of-type,
-.util-bar .inner > .util-item-drop:first-of-type > a:first-child { margin-left: -8px; }
+.util-bar .inner > a:first-of-type { margin-left: -8px; }
 @media (max-width: 768px) { .util-bar { display: none; } }
 
 /* ── UTILITY BAR — 공지사항 서브메뉴 ── */
 .util-item-drop { position: relative; }
 .util-drop-menu {
   position: absolute; top: 100%; right: 0; margin-top: 4px; min-width: 88px;
-  background: rgba(255,255,255,0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--gray-200); border-radius: 8px;
+  background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px;
   box-shadow: 0 8px 24px rgba(10,15,28,0.12);
   padding: 6px; display: flex; flex-direction: column; gap: 2px;
   opacity: 0; visibility: hidden; transform: translateY(-4px);
@@ -263,26 +261,6 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .gnb a.active { color: var(--gray-900); font-weight: 600; }
 .gnb a.active::after { width: 32px; }
 .gnb a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px; }
-
-/* ── GNB — 드롭다운 서브메뉴 ── */
-.gnb-item { position: relative; }
-.gnb-caret { font-size: 9px; margin-left: 4px; opacity: 0.55; transition: transform var(--transition); }
-.gnb-item:hover .gnb-caret, .gnb-item:focus-within .gnb-caret { transform: rotate(180deg); }
-.gnb-drop {
-  position: absolute; top: 100%; left: 50%; margin-top: 14px; min-width: 168px;
-  background: rgba(255,255,255,0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--gray-200); border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(10,15,28,0.12);
-  padding: 8px; display: flex; flex-direction: column; gap: 2px;
-  opacity: 0; visibility: hidden; transform: translate(-50%, -4px);
-  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
-  z-index: 10001;
-}
-.gnb-item:hover .gnb-drop,
-.gnb-item:focus-within .gnb-drop { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
-.gnb-drop a { padding: 9px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--gray-800); text-align: left; white-space: nowrap; }
-.gnb-drop a::after { content: none; }
-.gnb-drop a:hover { background: var(--gold-light); color: var(--gold); }
 
 /* ── HEADER ACTIONS ── */
 .header-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; margin-left: 4px; }
@@ -636,10 +614,6 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 36px;
 }
-
-/* 탭바 스크롤 고정 공통 클래스 — App.stickyTabBar()가 토글. 위치·폭은 JS가 인라인 스타일로
-   지정하므로 여기서는 position/z-index/margin만 정의(각 페이지 배경·테두리·패딩은 유지). */
-.is-fixed { position: fixed; z-index: 50; margin-bottom: 0; }
 .section-label {
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 9px; font-weight: 600; color: #BF8D18;
@@ -652,8 +626,8 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 }
 .section-title {
   font-family: var(--font);
-  font-size: 24px; font-weight: 800; color: #111;
-  letter-spacing: normal; line-height: 1.75; position: relative;
+  font-size: 24px; font-weight: 900; color: #111;
+  letter-spacing: -0.5px; position: relative;
   padding-left: 14px;
 }
 .section-title::before {

@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260831m">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260830j">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260830b">
     <style>
     /* === Hero === */
@@ -50,7 +50,7 @@
 
     /* === Section === */
     .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
-    .sec-title{font-size:24px;font-weight:800;color:var(--gray-900);letter-spacing:normal;line-height:1.75;padding-left:16px;position:relative}
+    .sec-title{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;position:relative}
     .sec-title::before{content:'';position:absolute;left:0;top:4px;width:3px;height:22px;border-radius:2px;background:linear-gradient(to bottom,var(--gold),rgba(184,134,11,.3))}
 
     /* === Badges === */
@@ -110,8 +110,7 @@
     .fc.fc-primary .fc-img::after{content:'대표 실적';position:absolute;bottom:14px;right:14px;padding:4px 12px;background:rgba(184,134,11,.9);color:#0A0F1C;font-size:10px;font-weight:700;border-radius:5px;z-index:3;letter-spacing:.3px}
 
     /* === Top Key-map Tabs (히어로 바로 아래) — 자료실 .ctrl-bar와 크기·외곽선 통일 === */
-    /* 히어로 밑 여백 = uni-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 본문 상단 보정(33px) = 총 45px */
-    .page-body{padding-top:33px}
+    .page-body{padding-top:20px}
     .pf-tabs-wrap{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
     /* html,body{overflow-x:hidden}(전역) 때문에 position:sticky가 무효화되어
        스크롤 감지 후 position:fixed로 직접 전환하는 방식 사용 — 폭/좌표는 JS로 고정 */
@@ -119,14 +118,11 @@
     .pf-tabs-wrap .tabs button{display:inline-flex;align-items:center;gap:6px}
     /* 자료실 ctrl-bar 탭과 동일하게 항목 사이 연회색 세로 구분선 (패딩은 기존값 유지 — 폭 증가로 인한 우측 필터 잘림 방지) */
     #pfTabs{gap:0}
-    #pfTabs button{padding:6px 14px;border-right:1px solid var(--gray-200);position:relative}
+    #pfTabs button{padding:6px 14px;border-right:1px solid var(--gray-200)}
     #pfTabs button:first-child{padding-left:0}
     #pfTabs button:last-child{border-right:none}
-    /* 자료실(#ctrlNav)과 동일한 언더바 인디케이터로 통일 */
-    #pfTabs button.on{background:none;color:var(--gold);font-weight:700}
-    #pfTabs button.on::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:20px;height:2px;border-radius:1px;background:var(--gold)}
     .pf-tab-count{font-size:11px;font-weight:600;color:#111}
-    .pf-tabs-wrap .tabs button.on .pf-tab-count{color:var(--gold)}
+    .pf-tabs-wrap .tabs button.on .pf-tab-count{color:#fff}
     /* 기존 중간 필터박스(유형/상태/총건수)를 상단 sticky 바 우측으로 이동 — 디자인 값 그대로 재사용 */
     .pf-tabs-extra{display:flex;align-items:center;gap:14px;margin-left:auto;flex-wrap:wrap}
     .pf-tabs-extra select{height:40px;padding:0 30px 0 12px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;font-weight:500;color:var(--gray-700);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s}
@@ -283,7 +279,7 @@
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_portfolio.png" alt="빛세움 업무실적"></div>
-            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="PF.filter('전체')"><div class="uh-ci"><i class="fa-solid fa-list"></i></div><h4>전체보기</h4><p>모든 수행실적</p></div><div class="uh-card" style="cursor:pointer" onclick="PF.filter('재개발')"><div class="uh-ci"><i class="fa-solid fa-building"></i></div><h4>재개발</h4><p>주택재개발 정비사업 수행</p></div><div class="uh-card" style="cursor:pointer" onclick="PF.filter('재건축')"><div class="uh-ci"><i class="fa-solid fa-city"></i></div><h4>재건축</h4><p>주택재건축 정비사업 수행</p></div><div class="uh-card" style="cursor:pointer" onclick="PF.filter('소규모정비')"><div class="uh-ci"><i class="fa-solid fa-house-chimney"></i></div><h4>소규모정비</h4><p>소규모정비사업 수행</p></div></div>
+            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="PF.filter('전체')"><div class="uh-ci"><i class="fa-solid fa-list"></i></div><h4>전체보기</h4><p>모든 수행실적</p></div><div class="uh-card" style="cursor:pointer" onclick="PF.filter('재개발')"><div class="uh-ci"><i class="fa-solid fa-building"></i></div><h4>재개발</h4><p>주택재개발 정비사업 자문</p></div><div class="uh-card" style="cursor:pointer" onclick="PF.filter('재건축')"><div class="uh-ci"><i class="fa-solid fa-city"></i></div><h4>재건축</h4><p>주택재건축 정비사업 자문</p></div><div class="uh-card" style="cursor:pointer" onclick="PF.filter('소규모정비')"><div class="uh-ci"><i class="fa-solid fa-house-chimney"></i></div><h4>소규모정비</h4><p>소규모재건축·가로주택</p></div></div>
         </div>
     </div>
 </div>
@@ -333,10 +329,10 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260831l"></script>
+<script src="../assets/data/mock-data.js?v=20260830b"></script>
 <script src="../assets/data/areas-data.js?v=20260411"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260831m"></script>
+<script src="../assets/js/common.js?v=20260830h"></script>
 <script>
 (function(){
 var D=MOCK.portfolio, PER=6, curPage=1, curType='전체';

@@ -28,72 +28,19 @@ const App = (() => {
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
     ];
-    const navGroups = [
-      { href:`${B}/pages/about.html`, label:'회사소개', icon:'fa-solid fa-building-columns', sub:[
-        { href:`${B}/pages/about.html#ceo`, label:'CEO 인사말' },
-        { href:`${B}/pages/about.html#history`, label:'회사연혁' },
-        { href:`${B}/pages/about.html#organization`, label:'조직도' },
-        { href:`${B}/pages/about.html#ci`, label:'CI 소개' },
-      ]},
-      { href:`${B}/pages/vision.html`, label:'빛세움의 길', icon:'fa-solid fa-road', sub:[
-        { href:`${B}/pages/vision.html#philosophy`, label:'빛세움 철학' },
-        { href:`${B}/pages/vision.html#principles`, label:'우리가 지키는 원칙' },
-        { href:`${B}/pages/vision.html#method`, label:'빛세움의 방식' },
-        { href:`${B}/pages/vision.html#visual`, label:'공간으로 증명하는 신뢰' },
-      ]},
-      { href:`${B}/pages/services.html`, label:'사업분야', icon:'fa-solid fa-diagram-project', sub:[
-        { href:`${B}/pages/services.html`, label:'사업분야 전체' },
-        { href:`${B}/pages/redevelopment-service.html`, label:'주택재개발 정비사업' },
-        { href:`${B}/pages/reconstruction-service.html`, label:'주택재건축 정비사업' },
-        { href:`${B}/pages/small-reconstruction-service.html`, label:'소규모 정비사업' },
-      ]},
-      { href:`${B}/pages/portfolio.html`, label:'업무실적', icon:'fa-solid fa-briefcase', sub:[
-        { href:`${B}/pages/portfolio.html`, label:'수행실적 전체' },
-        { href:`${B}/pages/portfolio.html?type=재개발`, label:'재개발 실적' },
-        { href:`${B}/pages/portfolio.html?type=재건축`, label:'재건축 실적' },
-        { href:`${B}/pages/portfolio.html?type=소규모정비`, label:'소규모정비 실적' },
-      ]},
-      { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open', sub:[
-        { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
-        { href:`${B}/pages/library.html?cat=법령`, label:'관계법령' },
-        { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
-        { href:`${B}/pages/gallery.html`, label:'갤러리' },
-      ]},
-      { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
-        { href:`${B}/pages/contact.html`, label:'문의하기' },
-        { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
-        { href:`${B}/pages/notice.html`, label:'공지사항' },
-        { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
-      ]},
-    ];
     const moreLinks = [
       { href: `${B}/pages/notice.html`, label: '공지사항', icon: 'fa-solid fa-bullhorn' },
       { href: `${B}/pages/faq.html`, label: '자주 묻는 질문', icon: 'fa-solid fa-circle-question' },
     ];
 
+    const utilRight = `<a href="${B}/pages/feasibility.html">사업성 검토</a>`;
+
     return `
     <div class="header-wrap" id="headerWrap">
     <div class="util-bar"><div class="inner">
       <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링그룹</span>
-      <div class="util-item-drop">
-        <a href="${B}/pages/feasibility.html">사업성 검토</a>
-        <div class="util-drop-menu">
-          <a href="${B}/pages/feasibility.html">사업성 검토 소개</a>
-          <a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>
-          <a href="${B}/pages/calculator.html">비례율 계산기</a>
-        </div>
-      </div>
-      <div class="util-item-drop">
-        <a href="${B}/pages/gallery.html">갤러리</a>
-        <div class="util-drop-menu">
-          <a href="${B}/pages/gallery.html">전체</a>
-          <a href="${B}/pages/gallery.html?cat=주민총회">주민총회</a>
-          <a href="${B}/pages/gallery.html?cat=봉사활동">봉사활동</a>
-          <a href="${B}/pages/gallery.html?cat=워크숍">워크숍</a>
-          <a href="${B}/pages/gallery.html?cat=현장스케치">현장스케치</a>
-          <a href="${B}/pages/gallery.html?cat=기타행사">기타행사</a>
-        </div>
-      </div>
+      ${utilRight}
+      <a href="${B}/pages/gallery.html">갤러리</a>
       <div class="util-item-drop">
         <a href="${B}/pages/notice.html">공지사항</a>
         <div class="util-drop-menu">
@@ -110,10 +57,7 @@ const App = (() => {
         <span class="logo-mark"><img src="${B}/jpg/visseum_logo2.png" alt="(주)빛세움 VISSEUM" style="width:100%;height:100%;object-fit:contain"></span>
       </a>
       <nav class="gnb">
-        ${navGroups.map(g => `<div class="gnb-item">
-          <a href="${g.href}"${navActive(g.href)?' class="active"':''}>${g.label}${g.sub?' <i class="fa-solid fa-chevron-down gnb-caret"></i>':''}</a>
-          ${g.sub ? `<div class="gnb-drop">${g.sub.map(s=>`<a href="${s.href}">${s.label}</a>`).join('')}</div>` : ''}
-        </div>`).join('')}
+        ${links.map(l => `<a href="${l.href}"${l.target?' target="'+l.target+'"':''}${navActive(l.href)?' class="active"':''}>${l.label}</a>`).join('')}
       </nav>
       <div class="header-actions">
         <button class="icon-btn" aria-label="검색" id="openSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -140,7 +84,44 @@ const App = (() => {
         <button class="drawer-close" id="drawerClose"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <nav class="drawer-nav" id="drawerNav">
-        ${navGroups.map(g => g.sub
+        ${[
+          { href:`${B}/pages/about.html`, label:'회사소개', icon:'fa-solid fa-building-columns', sub:[
+            { href:`${B}/pages/about.html#ceo`, label:'CEO 인사말' },
+            { href:`${B}/pages/about.html#history`, label:'회사연혁' },
+            { href:`${B}/pages/about.html#organization`, label:'조직도' },
+            { href:`${B}/pages/about.html#ci`, label:'CI 소개' },
+          ]},
+          { href:`${B}/pages/vision.html`, label:'빛세움의 길', icon:'fa-solid fa-road', sub:[
+            { href:`${B}/pages/vision.html#philosophy`, label:'빛세움 철학' },
+            { href:`${B}/pages/vision.html#principles`, label:'우리가 지키는 원칙' },
+            { href:`${B}/pages/vision.html#method`, label:'빛세움의 방식' },
+            { href:`${B}/pages/vision.html#visual`, label:'공간으로 증명하는 신뢰' },
+          ]},
+          { href:`${B}/pages/services.html`, label:'사업분야', icon:'fa-solid fa-diagram-project', sub:[
+            { href:`${B}/pages/services.html`, label:'사업분야 전체' },
+            { href:`${B}/pages/redevelopment-service.html`, label:'주택재개발 정비사업' },
+            { href:`${B}/pages/reconstruction-service.html`, label:'주택재건축 정비사업' },
+            { href:`${B}/pages/small-reconstruction-service.html`, label:'소규모 정비사업' },
+          ]},
+          { href:`${B}/pages/portfolio.html`, label:'업무실적', icon:'fa-solid fa-briefcase', sub:[
+            { href:`${B}/pages/portfolio.html`, label:'수행실적 전체' },
+            { href:`${B}/pages/portfolio.html?type=재개발`, label:'재개발 실적' },
+            { href:`${B}/pages/portfolio.html?type=재건축`, label:'재건축 실적' },
+            { href:`${B}/pages/portfolio.html?type=소규모정비`, label:'소규모정비 실적' },
+          ]},
+          { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open', sub:[
+            { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
+            { href:`${B}/pages/library.html?cat=법령`, label:'관계법령' },
+            { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
+            { href:`${B}/pages/gallery.html`, label:'갤러리' },
+          ]},
+          { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
+            { href:`${B}/pages/contact.html`, label:'문의하기' },
+            { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
+            { href:`${B}/pages/notice.html`, label:'공지사항' },
+            { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
+          ]},
+        ].map(g => g.sub
           ? `<div class="drawer-group">
               <button class="drawer-group-btn" onclick="(function(btn){var g=btn.closest('.drawer-group');g.classList.toggle('open');})(this)">
                 <i class="${g.icon} dg-icon"></i>${g.label}<i class="fa-solid fa-chevron-down dg-arrow"></i>
@@ -178,7 +159,7 @@ const App = (() => {
     <footer class="footer"><div class="inner">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="logo footer-logo-text-only" style="cursor:pointer" onclick="window.scrollTo({top:0,behavior:'smooth'})" role="button" aria-label="맨 위로 이동">
+          <div class="logo footer-logo-text-only">
             <span class="logo-text">
               <span class="logo-company">(주)빛세움</span>
               <span class="logo-sub">VISSEUM</span>
@@ -242,9 +223,9 @@ const App = (() => {
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
           <span>갤러리</span>
         </a>
-        <a href="${B}/pages/notice.html" class="${navActive('notice.html')?'active':''}">
-          <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span>공지사항</span>
+        <a href="${B}/pages/contact.html" class="${navActive('contact.html')?'active':''}">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
+          <span>사업문의</span>
         </a>
       </div>
     </nav>`;
@@ -638,52 +619,7 @@ const App = (() => {
     ov.addEventListener('click',function(e){if(e.target===ov)closeModal()});
   }
 
-  /* ── 탭바 스크롤 고정(sticky→fixed) 공통 함수 ──
-     업무실적(portfolio.html) .pf-tabs-wrap에서 처음 구현된 로직을 공통화한 것.
-     전역 html,body{overflow-x:hidden} 때문에 position:sticky가 무효화되어(Chrome 특성)
-     position:fixed 전환 방식으로 구현. 실제 헤더 높이(.header-wrap)를 측정해 top을 맞추고,
-     플레이스홀더로 layout shift를 방지한다.
-     사용법: App.stickyTabBar('wrapElementId', 'placeholderElementId') */
-  function stickyTabBar(wrapId, phId){
-    var wrap=document.getElementById(wrapId), ph=document.getElementById(phId);
-    if(!wrap||!ph) return;
-    var naturalTop=0, leftPx=0, widthPx=0, ticking=false;
-    function headerHeight(){var hw=document.querySelector('.header-wrap');return hw?hw.offsetHeight:0}
-    function measure(){
-      var wasStuck=wrap.classList.contains('is-fixed');
-      if(wasStuck){wrap.classList.remove('is-fixed');wrap.style.top='';wrap.style.left='';wrap.style.width='';ph.style.display='none'}
-      var rect=wrap.getBoundingClientRect();
-      naturalTop=rect.top+window.scrollY; leftPx=rect.left; widthPx=rect.width;
-      if(wasStuck) apply(true);
-    }
-    function apply(force){
-      var stick=force||window.scrollY>=naturalTop-headerHeight();
-      if(stick&&!wrap.classList.contains('is-fixed')){
-        ph.style.height=wrap.offsetHeight+'px';
-        ph.style.marginBottom=getComputedStyle(wrap).marginBottom;
-        ph.style.display='block';
-        wrap.classList.add('is-fixed');
-        wrap.style.top=headerHeight()+'px';
-        wrap.style.left=leftPx+'px';
-        wrap.style.width=widthPx+'px';
-      }else if(!stick&&wrap.classList.contains('is-fixed')){
-        wrap.classList.remove('is-fixed');
-        wrap.style.top='';wrap.style.left='';wrap.style.width='';
-        ph.style.display='none';
-      }else if(stick){
-        wrap.style.top=headerHeight()+'px';
-        wrap.style.left=leftPx+'px';
-        wrap.style.width=widthPx+'px';
-      }
-    }
-    function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){apply(false);ticking=false})}
-    window.addEventListener('scroll', onScroll, {passive:true});
-    window.addEventListener('resize', function(){measure();apply(false)});
-    window.addEventListener('load', function(){measure();apply(false)});
-    measure(); apply(false);
-  }
-
-  return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, heroDetail, stickyTabBar, basePath: () => B };
+  return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, heroDetail, basePath: () => B };
 })();
 
 /**

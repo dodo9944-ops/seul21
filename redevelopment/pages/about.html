@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260831m">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260830j">
     <style>
     /* ================================================================
        ABOUT PAGE — Premium Company Introduction
@@ -240,10 +240,6 @@
         padding: 25px 0;
     }
     .about-section:last-child { padding-bottom: 0; }
-    /* 히어로 밑 여백 = about-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 첫 섹션 상단 보정(48px) = 총 60px */
-    @media (min-width: 601px) {
-        #aboutFirstSection { padding-top: 48px; }
-    }
     .about-section.bg-light { background: #FFFFFF; }
     .about-section.bg-dark {
         background: linear-gradient(160deg, #FFFFFF, #FFF3C4);
@@ -877,7 +873,7 @@
             <a class="hero-card" href="#history">
                 <div class="hero-card-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
                 <h4>회사연혁</h4>
-                <p>18년 정비사업 수행 발자취</p>
+                <p>23년 정비사업 수행 발자취</p>
             </a>
             <a class="hero-card" href="#organization">
                 <div class="hero-card-icon"><i class="fa-solid fa-sitemap"></i></div>
@@ -898,7 +894,7 @@
     <!-- ============================================================
          2. TRUST POSITION
          ============================================================ -->
-    <div class="about-section" id="aboutFirstSection">
+    <div class="about-section">
         <div class="inner">
             <div class="section-label">Trust Position</div>
             <h2 class="section-title">(주)빛세움</h2>
@@ -1167,9 +1163,9 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260831l"></script>
+<script src="../assets/data/mock-data.js?v=20260830b"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260831m"></script>
+<script src="../assets/js/common.js?v=20260830h"></script>
 <script>
 (function() {
     var info = MOCK.companyInfo;
@@ -1198,7 +1194,7 @@
         '</div>';
     }).join('');
 
-    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260831m
+    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260830h
        mock-data.businessAreas 는 다른 영역(services.html 등)에서 사용되므로 본 섹션은 override 하지 않는다. */
 })();
 </script>
