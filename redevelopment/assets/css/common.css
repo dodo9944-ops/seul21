@@ -178,11 +178,11 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   body { padding-top: 129.6px; } /* 25.6(util) + 72(header) + 32(tab) */
 }
 @media (max-width: 768px) {
-  .header .inner { height: 50px; }
+  .header .inner { height: 40px; }
   body {
-    padding-top: 82px;
-    padding-top: calc(82px + env(safe-area-inset-top, 0));
-    padding-top: calc(82px + constant(safe-area-inset-top, 0));
+    padding-top: 72px;
+    padding-top: calc(72px + env(safe-area-inset-top, 0));
+    padding-top: calc(72px + constant(safe-area-inset-top, 0));
   }
 }
 
