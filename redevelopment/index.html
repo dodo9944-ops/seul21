@@ -567,6 +567,121 @@
         @media (max-width: 1024px) {
             .search-section { display: block; }
         }
+
+        /* ══════════════════════════════════════════════════════════
+           모바일 전용 — 메인 히어로 개선 (2026-09-01 · 대장 지시)
+           적용 범위: max-width 767px 한정.
+           768px 이상(태블릿·데스크탑)에는 어떤 규칙도 적용되지 않는다.
+           ══════════════════════════════════════════════════════════ */
+
+        /* 모바일 전용 설명문 — 데스크탑·태블릿에서는 존재하되 렌더되지 않음 */
+        .hero-subtitle-m { display: none; }
+
+        @media (max-width: 767px) {
+
+            /* ── 배경: 이미지 자체는 유지, overlay 로만 보정 ── */
+            .hero-banner {
+                background: #FAF9F6;
+                padding: 26px 0 0;
+                margin-bottom: 0;
+                min-height: 500px;
+            }
+            /* 원본 대비 시각적 강도만 낮춤 — 블러·과도한 opacity 미사용 */
+            .hero-bg-photo img {
+                filter: brightness(1.02) contrast(0.96) saturate(0.72);
+                object-position: center 30%;
+            }
+            /* 상단 문구 영역은 아이보리로 보호, 하단으로 갈수록 건축물 노출 */
+            .hero-bg-photo::after {
+                background:
+                    linear-gradient(180deg, rgba(25,33,43,.07) 0%, rgba(25,33,43,.03) 55%, rgba(25,33,43,0) 100%),
+                    linear-gradient(168deg,
+                        rgba(250,249,246,.93) 0%,
+                        rgba(250,249,246,.92) 32%,
+                        rgba(250,249,246,.86) 54%,
+                        rgba(250,249,246,.56) 70%,
+                        rgba(250,249,246,.22) 86%,
+                        rgba(250,249,246,.06) 100%
+                    );
+            }
+            /* 하단 페이드 — 본문(흰 배경)으로 자연 연결 */
+            .hero-bg-photo::before {
+                height: 96px;
+                background: linear-gradient(to top, #FFFFFF 0%, rgba(255,255,255,.80) 44%, rgba(255,255,255,0) 100%);
+            }
+            .hero-bg-grid { display: none; }
+            .hero-hline-top {
+                background: linear-gradient(90deg, transparent, rgba(23,32,42,.10) 18%, rgba(23,32,42,.10) 82%, transparent);
+            }
+            .hero-hline-bottom { background: none; }
+
+            .hero-banner .inner { padding: 0 20px 30px; }
+
+            /* ── 브랜드 배지 — 메인 제목보다 한 단계 낮은 정보 계층 ── */
+            .hero-label {
+                gap: 7px;
+                padding: 5px 11px;
+                font-size: 9.5px;
+                font-weight: 700;
+                letter-spacing: 1.6px;
+                line-height: 1;
+                color: #7A5A0E;
+                background: rgba(255,252,245,.55);
+                border: 1px solid rgba(168,116,16,.34);
+                border-radius: 6px;
+                margin-bottom: 18px;
+            }
+            .hero-label i { font-size: 9.5px; color: #A87410; line-height: 1; }
+
+            /* ── 메인 카피 ── */
+            .hero-section h1 {
+                font-size: clamp(26px, 7.2vw, 34px);
+                font-weight: 800;
+                line-height: 1.28;
+                letter-spacing: -1.1px;
+                color: #17202A;
+                text-shadow: none;
+                max-width: 100%;
+                margin: 0 0 20px;
+                word-break: keep-all;
+            }
+            .hero-section h1 em {
+                color: #A87410;
+                -webkit-text-fill-color: #A87410;
+            }
+
+            /* ── 설명문 ── */
+            .hero-subtitle-d { display: none; }
+            .hero-subtitle-m {
+                display: block;
+                font-size: clamp(15px, 4.35vw, 17.5px);
+                font-weight: 400;
+                line-height: 1.7;
+                letter-spacing: -0.4px;
+                color: #343B45;
+                text-shadow: none;
+                max-width: 100%;
+                margin: 0 0 26px;
+            }
+
+            /* ── CTA ── */
+            .hero-actions { flex-direction: column; gap: 9px; width: 100%; }
+            .hero-actions .btn-hero-primary {
+                width: 100%; justify-content: center;
+                height: 48px; font-size: 14.5px; font-weight: 700;
+                border-radius: 6px;
+                background: linear-gradient(135deg, #BC9A5C, #CDAF77);
+                color: #12172A;
+            }
+            .hero-actions .btn-hero-outline {
+                width: 100%; justify-content: center;
+                height: 46px; font-size: 14px; font-weight: 600;
+                border-radius: 6px;
+                background: rgba(255,255,255,.86);
+                color: #19212B;
+                border: 1px solid rgba(23,32,42,.18);
+            }
+        }
     </style>
 </head>
 <body class="splash-active">
@@ -613,7 +728,8 @@
         <div class="inner">
             <div class="hero-label"><i class="fa-solid fa-shield-halved"></i> 정비사업 전문 엔지니어링</div>
             <h1>도시의 가치를 <em>다시 세우는</em><br>정비사업 파트너</h1>
-            <p class="hero-subtitle">재개발·재건축·소규모정비사업 전 과정에서 사업성 검토, 인허가 대응, 조합 운영지원, 이해관계 조율까지 체계적으로 수행합니다.</p>
+            <p class="hero-subtitle hero-subtitle-d">재개발·재건축·소규모정비사업 전 과정에서 사업성 검토, 인허가 대응, 조합 운영지원, 이해관계 조율까지 체계적으로 수행합니다.</p>
+            <p class="hero-subtitle hero-subtitle-m">재개발·재건축·소규모정비사업 전 과정에서<br>사업성 검토부터 인허가 대응, 조합 운영까지<br>전문적인 통합 서비스를 제공합니다.</p>
 
             <div class="hero-actions">
                 <a href="pages/contact.html" class="btn-hero-primary" onclick="if(typeof DataService!=='undefined'&&!DataService.isUserLoggedIn()){event.preventDefault();location.href='pages/login.html';return false}"><i class="fa-solid fa-paper-plane"></i> 상담 문의</a>
