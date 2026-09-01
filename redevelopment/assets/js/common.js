@@ -430,59 +430,40 @@ const App = (() => {
     /* ── 모바일 페이지 스와이프 네비게이션 ── */
     (function initPageSwipe() {
       if (!('ontouchstart' in window)) return;
+      var gnbLinks = document.querySelectorAll('.gnb-item > a');
+      if (!gnbLinks.length) return;
+      var menuList = [ B + '/index.html' ]; /* 0번 = 로고(홈) — 7개 메뉴 왕복 스와이프 */
+      gnbLinks.forEach(function(a) {
+        if (a.getAttribute('target') === '_blank') return;
+        var h = a.getAttribute('href');
+        if (!h || h.indexOf('intranet') !== -1) return;
+        menuList.push(h);
+      });
+      if (menuList.length < 2) return;
 
-      function buildList(sel, prependHome) {
-        var els = document.querySelectorAll(sel);
-        var list = prependHome ? [ B + '/index.html' ] : [];
-        els.forEach(function(a) {
-          if (a.getAttribute('target') === '_blank') return;
-          var h = a.getAttribute('href');
-          if (!h || h.indexOf('intranet') !== -1) return;
-          list.push(h);
-        });
-        return list;
-      }
+      /* 현재 페이지 위치 판별 */
+      var curPath = location.pathname;
+      var isMain = (curPath === '/' || curPath.endsWith('/index.html') || curPath.endsWith('/redevelopment/'));
+      var curIdx = -99;
 
-      /* 목록 안에서 현재 페이지 위치(index) 판별 — 없으면 -99 */
-      function findIdx(list) {
-        var curPath = location.pathname;
-        var isMain = (curPath === '/' || curPath.endsWith('/index.html') || curPath.endsWith('/redevelopment/'));
-        var mi, mp, fn;
-        if (isMain) {
-          for (mi = 0; mi < list.length; mi++) {
-            mp = list[mi];
-            try { mp = new URL(mp, location.href).pathname; } catch(e) {}
-            if (mp === '/' || mp.endsWith('/index.html')) return mi;
-          }
-          return -99;
-        }
-        for (mi = 0; mi < list.length; mi++) {
-          mp = list[mi];
+      if (isMain) {
+        curIdx = 0; /* 메인 = 로고(홈) 자신 */
+      } else {
+        for (var mi = 0; mi < menuList.length; mi++) {
+          var mp = menuList[mi];
           try { mp = new URL(mp, location.href).pathname; } catch(e) {}
-          if (curPath === mp || curPath.endsWith(mp.replace('..', ''))) return mi;
+          if (curPath === mp || curPath.endsWith(mp.replace('..', ''))) { curIdx = mi; break; }
         }
-        for (mi = 0; mi < list.length; mi++) {
-          fn = list[mi].split('/').pop();
-          if (fn && curPath.indexOf(fn) !== -1) return mi;
+        if (curIdx === -99) {
+          for (var mi2 = 0; mi2 < menuList.length; mi2++) {
+            var fn = menuList[mi2].split('/').pop();
+            if (fn && curPath.indexOf(fn) !== -1) { curIdx = mi2; break; }
+          }
         }
-        return -99;
+        if (curIdx === -99) return;
       }
 
-      /* 상단메뉴(로고+회사소개~고객센터 7개) 우선, 매칭 안 되면 하단메뉴(홈·그룹사·사업성분석·갤러리·공지사항 5개)로 폴백 */
-      var topList = buildList('.gnb-item > a', true);
-      var bottomList = buildList('.mobile-bottom-nav-inner > a', false);
-
-      var menuList, curIdx = -99;
-      if (topList.length >= 2) curIdx = findIdx(topList);
-      if (curIdx !== -99) {
-        menuList = topList;
-      } else if (bottomList.length >= 2) {
-        curIdx = findIdx(bottomList);
-        menuList = bottomList;
-      }
-      if (!menuList || curIdx === -99) return;
-
-      var lastIdx = menuList.length - 1;
+      var lastIdx = menuList.length - 1; /* 고객센터 (0:로고 1:회사소개 2:빛세움의길 3:사업분야 4:업무실적 5:자료실 6:고객센터) */
       var ps = { x0: 0, y0: 0, active: false };
       var skipSel = 'input,textarea,select,button,a,iframe,.leaflet-container,.swiper-container,.swiper,.slider,.carousel,.process-bar,.tab-scroll';
 
