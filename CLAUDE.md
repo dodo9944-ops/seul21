@@ -163,6 +163,45 @@
 - **존속**: 대장 명시 폐지·변경 지시 전까지 영구
 - **우선순위**: 강력 제2조와 동순위(1순위)로 병행 점검
 
+### 7. 구현 이력 — 모바일 스와이프 네비게이션 (2026-09-01)
+
+대장 지시 12개 항목에 따라 `assets/js/common.js` 의 `initPageSwipe` 를 개선하고
+`assets/css/common.css` 에 모바일 전용 규칙을 추가하였다.
+
+| 항목 | 구현 위치 | 사양 |
+|------|-----------|------|
+| 적용 범위 | `common.js` `isMobile()` | `matchMedia('(max-width: 1024px)')` — 데스크탑 미개입 |
+| 이동 방향 | `touchend` | 좌 스와이프 = 다음 상단 메뉴 / 우 스와이프 = 이전 상단 메뉴 |
+| 판정 임계값 | `MIN_DIST` 64px · `RATIO` 1.8 · `MAX_TIME` 800ms | 가로 이동이 세로의 1.8배 초과 + 64px 이상 + 0.8초 이내 |
+| 세로 스크롤 보호 | `touchmove` (passive:true) | 세로 우세 감지 즉시 포기. `preventDefault` 미사용 — 스크롤을 한 순간도 막지 않음 |
+| 예외 요소 | `SKIP_SEL` | input·textarea·select·button·label·iframe·video·canvas·지도·캐러셀(`.process-bar`)·`.tab-scroll`·`.tbl-wrap`·`.drawer`·`.no-swipe` |
+| 가로 스크롤 영역 | `inScrollableX()` | `overflow-x: auto/scroll` 조상이 있으면 해당 영역 제스처 우선 |
+| 가장자리 | `EDGE` 30px | 좌우 30px 은 드로어·브라우저 제스처 영역으로 양보 |
+| 경계 정지 | `touchend` | 메인에서 우 스와이프 정지 / 고객센터(마지막)에서 좌 스와이프 정지 |
+| 활성 메뉴 | `markActive()` + `common.css` | 이동 즉시 상단 탭바 갱신, **CI 골드(`--gold` #C3A569)** 강조 |
+| 전환 효과 | `.pg-swipe-veil` | 170ms 슬라이드 인 → 이동 → 200ms 슬라이드 아웃. `prefers-reduced-motion` 시 미적용 |
+| 모달 중 비활성 | `touchstart` 가드 | 드로어 열림 또는 `body.style.overflow === 'hidden'` 이면 스와이프 미판정 |
+
+#### 7-1. 필수 전제 — `overscroll-behavior-x: contain`
+
+`common.css` 모바일 미디어쿼리에 `html, body { overscroll-behavior-x: contain; }` 를
+**반드시 유지**한다. 이 선언이 없으면 브라우저의 가로 overscroll 히스토리 탐색이
+좌·우 스와이프를 전부 가로채어 메뉴 이동이 동작하지 않는다.
+(2026-09-01 검수에서 라이브 현재본 8개 시나리오 중 6개 실패의 직접 원인)
+
+#### 7-2. 상단 메뉴 판별 — 파일명 완전 일치
+
+현재 페이지가 어느 상단 메뉴인지 판별할 때 **파일명 완전 일치만 인정**한다.
+부분 일치(`indexOf`)를 쓰면 `method-feasibility.html` 이 `feasibility.html` 로
+오인식되어 상단 메뉴가 아닌 페이지에서 스와이프가 동작한다.
+
+#### 7-3. 검수 결과 (2026-09-01)
+
+- 기능 시나리오 23건 전항목 통과 (이동·경계·세로스크롤·예외요소·링크탭·활성메뉴·드로어 비충돌)
+- 모바일 41개 페이지 전수 점검 — 가로 넘침 0건, 상단 메뉴 7개 페이지 스와이프·활성 골드 정상
+- **데스크탑 1280px 41개 페이지 전수 스크린샷 대조 — 픽셀 단위 100% 동일 (회귀 0건)**
+- 라이브(seul21.com) 현재본 대조: 2/8 → 수정본 8/8
+
 ---
 
 ## 🚨 [강력 제1조] 실수 재발 시 시말서 자동 제출 원칙 (2026-04-19 신설 · 최우선)

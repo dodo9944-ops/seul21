@@ -1037,3 +1037,26 @@ body { padding-top: 104px; } /* 32(util) + 72(header) — PC */
   .uni-cta h3 { font-size: 13px; }
   .uni-cta a.uc-primary { padding: 9px 14px; font-size: 12.5px; }
 }
+
+/* ============================================================
+   모바일 스와이프 네비게이션 (2026-09-01 · 대장 지시)
+   — 모바일/태블릿(≤1024px) 전용. 데스크탑 렌더에 영향 없음.
+   ============================================================ */
+@media (max-width: 1024px) {
+  /* 브라우저 가로 overscroll 뒤로가기가 우측 스와이프를 가로채지 않도록 차단.
+     (미차단 시 우 스와이프가 항상 history.back 으로 소비되어 이전 메뉴 이동 불가) */
+  html, body { overscroll-behavior-x: contain; }
+
+  /* 활성 상단 메뉴 — CI 골드 강조 */
+  .mobile-tab-bar .tab-item.active { color: var(--gold); font-weight: 700; }
+
+  /* 페이지 전환 슬라이드 레이어 — JS가 전환 중에만 생성/제거 */
+  .pg-swipe-veil {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 2147483000;
+    pointer-events: none;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+}
