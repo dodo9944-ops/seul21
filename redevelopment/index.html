@@ -343,6 +343,9 @@
         }
         .news-body h4:hover { color: #C3A569; }
         .news-date { font-size: 13px; color: var(--gray-400); }
+        /* 주요뉴스 렌더의 기존 인라인 스타일을 클래스로 이관 — 값 동일, 렌더 불변 */
+        .news-item.mn-item { gap: 10px; padding: 12px 20px; }
+        .mn-dot { color: #C3A569; font-size: 11px; flex-shrink: 0; }
 
         /* ── COMMUNITY ITEMS (메인 전용 인라인) ── */
         .comm-item {
@@ -685,6 +688,40 @@
                 border: 1px solid rgba(23,32,42,.18);
             }
         }
+
+        /* ══════════════════════════════════════════════════════════
+           모바일 전용 — 주요뉴스 타이포그래피·세로밀도 미세조정
+           (2026-09-01 · 대장 지시) max-width 767px 한정.
+           .news-section 스코프 — 타 섹션 및 41개 페이지 공유 스타일 미개입.
+           ══════════════════════════════════════════════════════════ */
+        @media (max-width: 767px) {
+            /* 전체보기 — 크기 유지, 굵기만 상향 (제목과 수직 중앙 정렬은 기존 유지) */
+            .news-section .panel-more { font-weight: 500; letter-spacing: -0.3px; }
+
+            /* 기사 항목 — 상하 여백 축소, bullet 간격 확보 */
+            .news-section .news-item.mn-item { padding: 11px 20px; gap: 14px; }
+            .news-section .mn-dot { font-size: 10px; }
+
+            /* 기사 제목 — 소폭 축소, 행간 압축, 한글 줄바꿈 보호 */
+            .news-section .news-body h4 {
+                font-size: 14.4px;
+                font-weight: 700;
+                line-height: 1.42;
+                letter-spacing: -0.6px;
+                word-break: keep-all;
+                overflow-wrap: break-word;
+                margin-bottom: 8px;
+            }
+
+            /* 날짜 */
+            .news-section .news-date {
+                font-size: 13px;
+                font-weight: 400;
+                line-height: 1.4;
+                letter-spacing: -0.2px;
+                color: #A0A0A0;
+            }
+        }
     </style>
 </head>
 <body class="splash-active">
@@ -744,7 +781,7 @@
 
 
 <!-- ===== 주요뉴스 ===== -->
-<section class="section">
+<section class="section news-section">
     <div class="inner">
         <div class="section-head">
             <h2 class="section-title">주요뉴스</h2>
@@ -1228,8 +1265,8 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
             var href=newsFileMap[i.id]||'pages/library.html?cat=주요뉴스';
-            return'<a href="'+href+'" class="news-item" style="gap:10px;padding:12px 20px;">'+
-                '<span style="color:#C3A569;font-size:11px;flex-shrink:0;">●</span>'+
+            return'<a href="'+href+'" class="news-item mn-item">'+
+                '<span class="mn-dot">●</span>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
                 '<div class="news-date">'+i.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">최근 7일간 등록된 주요뉴스가 없습니다.</p>';
