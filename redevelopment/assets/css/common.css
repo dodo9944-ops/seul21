@@ -239,7 +239,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 }
 @media (max-width: 768px) {
   .logo-mark { width: 26px; height: 26px; }
-  .header .logo-mark { width: 84.91px; height: 35.66px; }
+  .header .logo-mark { width: 84.91px; height: 35.66px; position: relative; top: 1.5px; }
   .logo-company { font-size: 13px; }
   .logo-sub { font-size: 7px; letter-spacing: 1.3px; margin-top: 1px; }
   .logo { gap: 8px; }
