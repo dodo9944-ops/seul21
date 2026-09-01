@@ -430,7 +430,7 @@ const App = (() => {
     /* ── 모바일 페이지 스와이프 네비게이션 ── */
     (function initPageSwipe() {
       if (!('ontouchstart' in window)) return;
-      var gnbLinks = document.querySelectorAll('.gnb > a');
+      var gnbLinks = document.querySelectorAll('.gnb-item > a');
       if (!gnbLinks.length) return;
       var menuList = [ B + '/index.html' ]; /* 0번 = 로고(홈) — 7개 메뉴 왕복 스와이프 */
       gnbLinks.forEach(function(a) {
