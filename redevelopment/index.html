@@ -353,7 +353,15 @@
 
         /* ── 반응형 (데스크탑 전용 1024px+ — 히어로 높이 약 20% 축소·고급화, 2026-09-01 대장 지시 1·2차. 태블릿(≤1024px)·모바일 값은 그대로 유지) ── */
         @media (min-width: 1024px) {
-            .hero-banner { min-height: 300px; padding: 20px 0 26px; }
+            .hero-banner { min-height: 324px; padding: 21.6px 0 28.1px; } /* 상하폭 8% 증가 */
+
+            /* 하단 골드 글로우 — 약 10% 짙게(rgba 255,196,0 → 230,176,0), 불투명도는 원본 유지 */
+            .hero-banner::after {
+                background: radial-gradient(ellipse at 20% 70%,
+                    rgba(230,176,0,.22) 0%, rgba(230,176,0,.10) 28%,
+                    rgba(230,176,0,.04) 48%, transparent 72%
+                );
+            }
 
             /* 배경 이미지 — 건축물 존재감 강화(선명도·채도 상향) */
             .hero-bg-photo img { filter: contrast(1.10) saturate(1.04); }
@@ -381,8 +389,8 @@
             /* 골드 상하 헤어라인 — 존재감 강화 */
             .hero-hline { background: rgba(184,134,11,.16); }
 
-            /* 메인 제목 — 더 단단하게(line-height 축소), 딥네이비 대비 강화, 설명문과의 간격 약 12% 축소 */
-            .hero-section h1 { line-height: 1.16; color: #151B26; margin-bottom: 10.5px; }
+            /* 메인 제목 — 더 단단하게(line-height 축소), 딥네이비 대비 강화, 설명문과의 간격 약 12% 축소. 두 줄 사이 간격 1px 추가(53.36px→54.36px) */
+            .hero-section h1 { line-height: 54.36px; color: #151B26; margin-bottom: 10.5px; }
 
             /* 서브카피 — 색상 소폭 진하게, CTA와의 간격 약 10% 축소 */
             .hero-subtitle { color: #4A505C; margin-bottom: 10.8px; }
