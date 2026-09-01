@@ -228,6 +228,10 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .mobile-tab-bar .tab-item:nth-child(5).active::after { width: 24px; } /* 자료실 */
 .mobile-tab-bar .tab-item:nth-child(6).active::after { width: 30px; } /* 고객센터 */
 @media (max-width: 1024px) { .mobile-tab-bar { display: block; } }
+/* 모바일 전용 — 상단 탭 좌우 간격만 소폭 확보(글자 답답함 완화, 2026-09-01 대장 지시) */
+@media (max-width: 768px) {
+  .mobile-tab-bar .tab-item { padding: 0 2px; }
+}
 
 /* ── LOGO ── */
 .logo {
