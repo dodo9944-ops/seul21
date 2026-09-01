@@ -178,11 +178,11 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   body { padding-top: 129.6px; } /* 25.6(util) + 72(header) + 32(tab) */
 }
 @media (max-width: 768px) {
-  .header .inner { height: 45px; }
+  .header .inner { height: 39px; }
   body {
-    padding-top: 77px;
-    padding-top: calc(77px + env(safe-area-inset-top, 0));
-    padding-top: calc(77px + constant(safe-area-inset-top, 0));
+    padding-top: 71px;
+    padding-top: calc(71px + env(safe-area-inset-top, 0));
+    padding-top: calc(71px + constant(safe-area-inset-top, 0));
   }
 }
 
@@ -239,7 +239,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 }
 @media (max-width: 768px) {
   .logo-mark { width: 26px; height: 26px; }
-  .header .logo-mark { width: 88.45px; height: 37.15px; }
+  .header .logo-mark { width: 84.91px; height: 35.66px; }
   .logo-company { font-size: 13px; }
   .logo-sub { font-size: 7px; letter-spacing: 1.3px; margin-top: 1px; }
   .logo { gap: 8px; }
