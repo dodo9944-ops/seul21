@@ -26,6 +26,7 @@ const App = (() => {
       { href: `${B}/pages/services.html`, label: '사업분야', icon: 'fa-solid fa-diagram-project' },
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
+      { href: `${B}/pages/community.html`, label: '커뮤니티', icon: 'fa-solid fa-comments' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
     ];
     const navGroups = [
@@ -59,6 +60,7 @@ const App = (() => {
         { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
         { href:`${B}/pages/gallery.html`, label:'갤러리' },
       ]},
+      { href:`${B}/pages/community.html`, label:'커뮤니티', icon:'fa-solid fa-comments' },
       { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
         { href:`${B}/pages/contact.html`, label:'문의하기' },
         { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
