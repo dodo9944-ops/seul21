@@ -432,7 +432,7 @@ const App = (() => {
       if (!('ontouchstart' in window)) return;
       var gnbLinks = document.querySelectorAll('.gnb > a');
       if (!gnbLinks.length) return;
-      var menuList = [];
+      var menuList = [ B + '/index.html' ]; /* 0번 = 로고(홈) — 7개 메뉴 왕복 스와이프 */
       gnbLinks.forEach(function(a) {
         if (a.getAttribute('target') === '_blank') return;
         var h = a.getAttribute('href');
@@ -447,7 +447,7 @@ const App = (() => {
       var curIdx = -99;
 
       if (isMain) {
-        curIdx = -1; /* 메인 = 회사소개(0) 직전 */
+        curIdx = 0; /* 메인 = 로고(홈) 자신 */
       } else {
         for (var mi = 0; mi < menuList.length; mi++) {
           var mp = menuList[mi];
@@ -463,7 +463,7 @@ const App = (() => {
         if (curIdx === -99) return;
       }
 
-      var lastIdx = menuList.length - 1; /* 고객센터 */
+      var lastIdx = menuList.length - 1; /* 고객센터 (0:로고 1:회사소개 2:빛세움의길 3:사업분야 4:업무실적 5:자료실 6:고객센터) */
       var ps = { x0: 0, y0: 0, active: false };
       var skipSel = 'input,textarea,select,button,a,iframe,.leaflet-container,.swiper-container,.swiper,.slider,.carousel,.process-bar,.tab-scroll';
 
@@ -487,11 +487,10 @@ const App = (() => {
 
         var newIdx;
         if (dx < 0) {
-          /* 우→좌: 다음 메뉴 (메인→회사소개, 회사소개→빛세움의길, ...→고객센터) */
+          /* 우→좌: 다음 메뉴 (로고→회사소개→빛세움의길→...→고객센터) */
           newIdx = curIdx + 1;
         } else {
-          /* 좌→우: 이전 메뉴 (빛세움의길→회사소개, ...) 메인에서는 이동 없음 */
-          if (isMain) return;
+          /* 좌→우: 이전 메뉴 (회사소개→로고, 빛세움의길→회사소개, ...) 로고에서는 더 이상 이동 없음 */
           newIdx = curIdx - 1;
         }
         if (newIdx < 0 || newIdx > lastIdx) return;
