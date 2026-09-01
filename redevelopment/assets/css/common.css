@@ -178,11 +178,11 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   body { padding-top: 129.6px; } /* 25.6(util) + 72(header) + 32(tab) */
 }
 @media (max-width: 768px) {
-  .header .inner { height: 50px; }
+  .header .inner { height: 39px; }
   body {
-    padding-top: 82px;
-    padding-top: calc(82px + env(safe-area-inset-top, 0));
-    padding-top: calc(82px + constant(safe-area-inset-top, 0));
+    padding-top: 66px;
+    padding-top: calc(66px + env(safe-area-inset-top, 0));
+    padding-top: calc(66px + constant(safe-area-inset-top, 0));
   }
 }
 
@@ -191,33 +191,47 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   display: none;
   background: #fff;
   border-bottom: 1px solid var(--gray-200);
-  height: 32px;
+  height: 27px;
 }
 .mobile-tab-bar .tab-scroll {
   display: flex; align-items: center;
   overflow: hidden;
   width: 100%; max-width: 100%;
-  height: 100%; padding: 0 2px; gap: 0;
+  height: 100%; padding: 0 8px; gap: 0;
   box-sizing: border-box;
 }
 .mobile-tab-bar .tab-scroll::-webkit-scrollbar { display: none; }
 .mobile-tab-bar .tab-item {
-  flex: 1 1 0; min-width: 0; padding: 0 2px; height: 100%;
+  flex: 1 1 0; min-width: 0; padding: 0 1px; height: 100%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 500; color: var(--gray-500);
+  font-size: 10.5px; font-weight: 500; color: var(--gray-500);
   text-decoration: none; white-space: nowrap; position: relative;
   letter-spacing: -0.4px;
   overflow: hidden; text-overflow: ellipsis;
+  transition: color .2s ease;
 }
 @media (max-width: 380px) {
-  .mobile-tab-bar .tab-item { font-size: 10px; letter-spacing: -0.5px; }
+  .mobile-tab-bar .tab-item { font-size: 9.6px; letter-spacing: -0.5px; }
 }
-.mobile-tab-bar .tab-item.active { color: var(--gray-900); font-weight: 700; }
+.mobile-tab-bar .tab-item.active { color: #B88A22; font-weight: 700; }
 .mobile-tab-bar .tab-item.active::after {
-  content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 14px; height: 2px; border-radius: 1px; background: var(--gold);
+  content: ''; position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  height: 3px; border-radius: 2px; background: #B88A22;
+  transition: width .25s ease, background-color .25s ease;
 }
+/* 활성 인디케이터 폭 — 각 메뉴 글자폭의 약 70% (라벨 길이별 개별 지정) */
+.mobile-tab-bar .tab-item:nth-child(1).active::after { width: 30px; } /* 회사소개 */
+.mobile-tab-bar .tab-item:nth-child(2).active::after { width: 42px; } /* 빛세움의 길 */
+.mobile-tab-bar .tab-item:nth-child(3).active::after { width: 30px; } /* 사업분야 */
+.mobile-tab-bar .tab-item:nth-child(4).active::after { width: 30px; } /* 업무실적 */
+.mobile-tab-bar .tab-item:nth-child(5).active::after { width: 24px; } /* 자료실 */
+.mobile-tab-bar .tab-item:nth-child(6).active::after { width: 30px; } /* 고객센터 */
 @media (max-width: 1024px) { .mobile-tab-bar { display: block; } }
+/* 모바일 전용 — 상단 탭 좌우 간격만 소폭 확보(글자 답답함 완화, 2026-09-01 대장 지시) */
+@media (max-width: 768px) {
+  .mobile-tab-bar .tab-item { padding: 0 2px; }
+}
 
 /* ── LOGO ── */
 .logo {
@@ -239,7 +253,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 }
 @media (max-width: 768px) {
   .logo-mark { width: 26px; height: 26px; }
-  .header .logo-mark { width: 73.1px; height: 30.7px; }
+  .header .logo-mark { width: 84.91px; height: 35.66px; }
   .logo-company { font-size: 13px; }
   .logo-sub { font-size: 7px; letter-spacing: 1.3px; margin-top: 1px; }
   .logo { gap: 8px; }
@@ -305,7 +319,20 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 @media (max-width: 1024px) {
   .gnb { display: none; }
   .header-actions { display: none; }
-  .menu-toggle { display: flex; margin-left: auto; transform: scale(0.7); }
+  .menu-toggle {
+    display: flex; margin-left: auto;
+    width: 44px; height: 36px;
+    position: relative;
+  }
+  .menu-toggle i { display: none; }
+  .menu-toggle::before {
+    content: '';
+    position: absolute; left: 50%; top: 50%;
+    width: 18.86px; height: 1.55px;
+    background: #1A1A1A; border-radius: 1px;
+    transform: translate(-50%, calc(-50% + 1.5px));
+    box-shadow: 0 -5.38px 0 0 #1A1A1A, 0 5.38px 0 0 #1A1A1A;
+  }
   .header .inner { gap: 16px; }
 }
 
@@ -636,10 +663,6 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 36px;
 }
-
-/* 탭바 스크롤 고정 공통 클래스 — App.stickyTabBar()가 토글. 위치·폭은 JS가 인라인 스타일로
-   지정하므로 여기서는 position/z-index/margin만 정의(각 페이지 배경·테두리·패딩은 유지). */
-.is-fixed { position: fixed; z-index: 50; margin-bottom: 0; }
 .section-label {
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 9px; font-weight: 600; color: #BF8D18;
