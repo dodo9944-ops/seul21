@@ -392,28 +392,9 @@ const App = (() => {
     const drawerLogout = document.getElementById('drawerLogout');
     if (drawerLogout) drawerLogout.addEventListener('click', e => { e.preventDefault(); DataService.userLogout(); location.reload(); });
 
-    /* ── 모바일 페이지 스와이프 네비게이션 (2026-09-01 개선 · 대장 지시) ──
-       ① 모바일/태블릿(≤1024px) 한정 — 데스크탑 미개입
-       ② 좌 스와이프 = 다음 상단 메뉴 / 우 스와이프 = 이전 상단 메뉴
-       ③ 가로 이동이 명확할 때만 판정 (세로 스크롤 보호)
-       ④ 입력창·버튼·캐러셀·가로스크롤 영역 예외 처리
-       ⑤ 첫/마지막 메뉴 경계 정지
-       ⑥ 짧은 슬라이드 전환 — 동작 최소화 설정 시 미적용
-       ⑦ 이동 시 상단 탭바 활성 메뉴 즉시 표시 */
+    /* ── 모바일 페이지 스와이프 네비게이션 ── */
     (function initPageSwipe() {
-      var hasTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-      if (!hasTouch) return;
-
-      function isMobile() {
-        return window.matchMedia
-          ? window.matchMedia('(max-width: 1024px)').matches
-          : window.innerWidth <= 1024;
-      }
-      function reduceMotion() {
-        return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-      }
-
-      /* ── 상단 메뉴 순서 = GNB 순서 (모바일 탭바와 동일 소스) ── */
+      if (!('ontouchstart' in window)) return;
       var gnbLinks = document.querySelectorAll('.gnb > a');
       if (!gnbLinks.length) return;
       var menuList = [];
@@ -424,9 +405,8 @@ const App = (() => {
         menuList.push(h);
       });
       if (menuList.length < 2) return;
-      var lastIdx = menuList.length - 1; /* 고객센터 */
 
-      /* ── 현재 페이지 위치 판별 ── */
+      /* 현재 페이지 위치 판별 */
       var curPath = location.pathname;
       var isMain = (curPath === '/' || curPath.endsWith('/index.html') || curPath.endsWith('/redevelopment/'));
       var curIdx = -99;
@@ -440,169 +420,48 @@ const App = (() => {
           if (curPath === mp || curPath.endsWith(mp.replace('..', ''))) { curIdx = mi; break; }
         }
         if (curIdx === -99) {
-          /* 파일명 완전 일치만 인정 — 부분 일치 시 하위 페이지가 상단 메뉴로 오인식된다
-             (예: method-feasibility.html 이 feasibility.html 로 잡히는 문제) */
-          var curFile = curPath.split('/').pop();
           for (var mi2 = 0; mi2 < menuList.length; mi2++) {
             var fn = menuList[mi2].split('/').pop();
-            if (fn && curFile === fn) { curIdx = mi2; break; }
+            if (fn && curPath.indexOf(fn) !== -1) { curIdx = mi2; break; }
           }
         }
+        if (curIdx === -99) return;
       }
 
-      /* ── 페이지 전환 슬라이드 레이어 ── */
-      var VEIL_CLASS = 'pg-swipe-veil';
-      var DIR_KEY = 'seulSwipeDir';
-
-      function veilColor() {
-        try {
-          var bg = window.getComputedStyle(document.body).backgroundColor;
-          if (bg && bg !== 'transparent' && bg.indexOf('rgba(0, 0, 0, 0)') === -1) return bg;
-        } catch (e) {}
-        return '#ffffff';
-      }
-      function dropVeil() {
-        var old = document.querySelectorAll('.' + VEIL_CLASS);
-        for (var i = 0; i < old.length; i++) {
-          if (old[i].parentNode) old[i].parentNode.removeChild(old[i]);
-        }
-      }
-      function makeVeil(from) {
-        dropVeil();
-        var v = document.createElement('div');
-        v.className = VEIL_CLASS;
-        v.setAttribute('aria-hidden', 'true');
-        v.style.background = veilColor();
-        v.style.transform = 'translate3d(' + from + ',0,0)';
-        document.body.appendChild(v);
-        void v.offsetWidth; /* 시작 위치 확정 */
-        return v;
-      }
-
-      /* 이동 직후 상단 탭바 활성 메뉴 즉시 반영 */
-      function markActive(idx) {
-        var target = menuList[idx];
-        if (!target) return;
-        var fname = String(target).split('/').pop();
-        var items = document.querySelectorAll('.mobile-tab-bar .tab-item');
-        for (var i = 0; i < items.length; i++) {
-          var h = items[i].getAttribute('href') || '';
-          if (h.split('/').pop() === fname) items[i].classList.add('active');
-          else items[i].classList.remove('active');
-        }
-      }
-
-      /* 스와이프로 판정된 제스처가 링크 클릭으로 이어지지 않도록 차단 */
-      function suppressNextClick() {
-        var kill = function(ev) { ev.stopPropagation(); ev.preventDefault(); };
-        document.addEventListener('click', kill, true);
-        setTimeout(function() { document.removeEventListener('click', kill, true); }, 500);
-      }
-
-      function go(newIdx, dir) {
-        var href = menuList[newIdx];
-        markActive(newIdx);
-        try { sessionStorage.setItem(DIR_KEY, dir); } catch (e) {}
-        if (reduceMotion()) { location.href = href; return; }
-        var v = makeVeil(dir === 'next' ? '100%' : '-100%');
-        v.style.transition = 'transform 170ms cubic-bezier(.4,0,.2,1)';
-        v.style.transform = 'translate3d(0,0,0)';
-        var done = false;
-        var nav = function() { if (done) return; done = true; location.href = href; };
-        v.addEventListener('transitionend', nav);
-        setTimeout(nav, 280); /* 전환 이벤트 유실 대비 안전망 */
-      }
-
-      /* 진입 애니메이션 — 직전 스와이프 방향으로 이어서 슬라이드 아웃 */
-      (function playEnter() {
-        var dir = null;
-        try { dir = sessionStorage.getItem(DIR_KEY); sessionStorage.removeItem(DIR_KEY); } catch (e) {}
-        if (!dir || !isMobile() || reduceMotion()) return;
-        var v = makeVeil('0');
-        v.style.transition = 'transform 200ms cubic-bezier(.4,0,.2,1)';
-        v.style.transform = 'translate3d(' + (dir === 'next' ? '-100%' : '100%') + ',0,0)';
-        v.addEventListener('transitionend', dropVeil);
-        setTimeout(dropVeil, 420);
-      })();
-
-      window.addEventListener('pageshow', dropVeil);
-      window.addEventListener('resize', function() { if (!isMobile()) dropVeil(); });
-
-      if (curIdx === -99) return; /* 상단 메뉴에 속하지 않는 페이지 — 스와이프 비활성 */
-
-      /* ── 예외 대상: 가로 제스처를 자체 소비하는 요소 ── */
-      var SKIP_SEL = [
-        'input', 'textarea', 'select', 'button', 'label',
-        '[contenteditable="true"]', 'iframe', 'video', 'canvas',
-        '.leaflet-container', '.swiper', '.swiper-container',
-        '.slider', '.slider-wrap', '.carousel', '.process-bar',
-        '.tab-scroll', '.mobile-tab-bar', '.mobile-bottom-nav',
-        '.drawer', '.tbl-wrap', '.no-swipe'
-      ].join(',');
-
-      /* 가로로 스크롤되는 조상이 있으면 그 영역의 제스처를 우선한다 */
-      function inScrollableX(el) {
-        for (var n = el; n && n !== document.body; n = n.parentElement) {
-          if (n.scrollWidth - n.clientWidth > 4) {
-            var ox = '';
-            try { ox = window.getComputedStyle(n).overflowX; } catch (e) {}
-            if (ox === 'auto' || ox === 'scroll') return true;
-          }
-        }
-        return false;
-      }
-
-      var MIN_DIST = 64;   /* 최소 가로 이동량(px) */
-      var RATIO    = 1.8;  /* 가로가 세로보다 이만큼 커야 스와이프로 인정 */
-      var MAX_TIME = 800;  /* 느린 드래그는 스와이프로 보지 않음(ms) */
-      var EDGE     = 30;   /* 좌우 가장자리 — 드로어·브라우저 뒤로가기 제스처 영역 */
-      var g = { active: false, decided: false, x0: 0, y0: 0, t0: 0 };
+      var lastIdx = menuList.length - 1; /* 고객센터 */
+      var ps = { x0: 0, y0: 0, active: false };
+      var skipSel = 'input,textarea,select,button,a,iframe,.leaflet-container,.swiper-container,.swiper,.slider,.carousel,.process-bar,.tab-scroll';
 
       document.addEventListener('touchstart', function(e) {
-        g.active = false; g.decided = false;
-        if (!isMobile()) return;
-        if (e.touches.length !== 1) return;                      /* 핀치 줌 등 멀티터치 제외 */
-        if (drawer && drawer.classList.contains('open')) return;  /* 드로어 제스처 우선 */
-        if (document.body.style.overflow === 'hidden') return;    /* 모달·검색 열림 상태 */
-        var tgt = e.target;
-        if (tgt && tgt.closest && tgt.closest(SKIP_SEL)) return;
-        if (tgt && tgt.nodeType === 1 && inScrollableX(tgt)) return;
+        if (window.innerWidth > 1024) return;
+        if (e.target.closest && e.target.closest(skipSel)) { ps.active = false; return; }
+        if (drawer && drawer.classList.contains('open')) { ps.active = false; return; }
         var t = e.touches[0];
-        if (t.clientX < EDGE || t.clientX > window.innerWidth - EDGE) return;
-        g.x0 = t.clientX; g.y0 = t.clientY; g.t0 = Date.now(); g.active = true;
-      }, { passive: true });
-
-      /* passive:true — 세로 스크롤을 한 순간도 막지 않는다 */
-      document.addEventListener('touchmove', function(e) {
-        if (!g.active || g.decided) return;
-        if (e.touches.length !== 1) { g.active = false; return; }
-        var t = e.touches[0];
-        var dx = t.clientX - g.x0, dy = t.clientY - g.y0;
-        if (Math.abs(dx) < 12 && Math.abs(dy) < 12) return;       /* 아직 방향 미확정 */
-        if (Math.abs(dy) * RATIO >= Math.abs(dx)) { g.active = false; return; } /* 세로 우세 → 포기 */
-        g.decided = true;
+        if (t.clientX < 30 || t.clientX > window.innerWidth - 30) { ps.active = false; return; }
+        ps.x0 = t.clientX; ps.y0 = t.clientY; ps.active = true;
       }, { passive: true });
 
       document.addEventListener('touchend', function(e) {
-        if (!g.active) return;
-        g.active = false;
-        if (!g.decided || !isMobile()) return;
+        if (!ps.active) return;
+        ps.active = false;
         var t = e.changedTouches[0];
-        var dx = t.clientX - g.x0, dy = t.clientY - g.y0;
-        if (Date.now() - g.t0 > MAX_TIME) return;
-        if (Math.abs(dx) < MIN_DIST) return;
-        if (Math.abs(dx) < Math.abs(dy) * RATIO) return;
+        var dx = t.clientX - ps.x0;
+        var dy = t.clientY - ps.y0;
+        if (Math.abs(dx) < 60) return;
+        if (Math.abs(dy) >= Math.abs(dx)) return;
 
-        var next = dx < 0;                       /* 좌 스와이프 → 다음 메뉴 */
-        if (!next && isMain) return;             /* 메인은 첫 메뉴 이전 — 정지 */
-        var newIdx = next ? curIdx + 1 : curIdx - 1;
-        if (newIdx < 0 || newIdx > lastIdx) return; /* 첫·마지막 메뉴 경계 정지 */
-
-        suppressNextClick();
-        go(newIdx, next ? 'next' : 'prev');
+        var newIdx;
+        if (dx < 0) {
+          /* 우→좌: 다음 메뉴 (메인→회사소개, 회사소개→세울의길, ...→고객센터) */
+          newIdx = curIdx + 1;
+        } else {
+          /* 좌→우: 이전 메뉴 (세울의길→회사소개, ...) 메인에서는 이동 없음 */
+          if (isMain) return;
+          newIdx = curIdx - 1;
+        }
+        if (newIdx < 0 || newIdx > lastIdx) return;
+        location.href = menuList[newIdx];
       }, { passive: true });
-
-      document.addEventListener('touchcancel', function() { g.active = false; }, { passive: true });
     })();
   }
 
