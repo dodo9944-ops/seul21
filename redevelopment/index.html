@@ -575,7 +575,8 @@
            ══════════════════════════════════════════════════════════ */
 
         /* 모바일 전용 설명문 — 데스크탑·태블릿에서는 존재하되 렌더되지 않음 */
-        .hero-subtitle-m { display: none; }
+        .hero-subtitle-m,
+        .hero-section h1 .h1-m { display: none; }
 
         @media (max-width: 767px) {
 
@@ -634,8 +635,10 @@
             .hero-label i { font-size: 9.5px; color: #A87410; line-height: 1; }
 
             /* ── 메인 카피 ── */
+            .hero-section h1 .h1-d { display: none; }
+            .hero-section h1 .h1-m { display: inline; }
             .hero-section h1 {
-                font-size: clamp(26px, 7.2vw, 34px);
+                font-size: clamp(34px, 9vw, 42px);
                 font-weight: 800;
                 line-height: 1.28;
                 letter-spacing: -1.1px;
@@ -727,7 +730,7 @@
 
         <div class="inner">
             <div class="hero-label"><i class="fa-solid fa-shield-halved"></i> 정비사업 전문 엔지니어링</div>
-            <h1>도시의 가치를 <em>다시 세우는</em><br>정비사업 파트너</h1>
+            <h1><span class="h1-d">도시의 가치를 <em>다시 세우는</em><br>정비사업 파트너</span><span class="h1-m"><em>사람을 위한</em> 도시개발<br><em>사람을 위한</em> <em>가치창조</em></span></h1>
             <p class="hero-subtitle hero-subtitle-d">재개발·재건축·소규모정비사업 전 과정에서 사업성 검토, 인허가 대응, 조합 운영지원, 이해관계 조율까지 체계적으로 수행합니다.</p>
             <p class="hero-subtitle hero-subtitle-m">재개발·재건축·소규모정비사업 전 과정에서<br>사업성 검토부터 인허가 대응, 조합 운영까지<br>전문적인 통합 서비스를 제공합니다.</p>
 
