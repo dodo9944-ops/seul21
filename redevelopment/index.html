@@ -351,6 +351,43 @@
             background: rgba(184,134,11,.06);
         }
 
+        /* ── 반응형 (데스크탑 전용 1024px+ — 히어로 높이 약 20% 축소·고급화, 2026-09-01 대장 지시. 태블릿(≤1024px)·모바일 값은 그대로 유지) ── */
+        @media (min-width: 1024px) {
+            .hero-banner { min-height: 300px; padding: 20px 0 26px; }
+
+            /* 배경 이미지 — 우측 건축물 선명도 소폭 강화 */
+            .hero-bg-photo img { filter: contrast(1.05) saturate(0.98); }
+            /* 좌측 아이보리/화이트 오버레이 소폭 강화 — 가독성 보강, 위치(stop %)는 그대로 */
+            .hero-bg-photo::after {
+                background: linear-gradient(90deg,
+                    rgba(255,253,247,1.00) 0%,
+                    rgba(255,253,247,0.99) 18%,
+                    rgba(255,249,232,0.97) 28%,
+                    rgba(255,247,225,0.93) 36%,
+                    rgba(255,247,225,0.78) 43%,
+                    rgba(255,247,225,0.56) 49%,
+                    rgba(255,247,225,0.34) 55%,
+                    rgba(255,247,225,0.16) 61%,
+                    rgba(255,247,225,0.05) 66%,
+                    rgba(255,247,225,0.00) 72%
+                );
+            }
+            /* 하단 페이드 약 25% 축소 */
+            .hero-bg-photo::before { height: 75px; }
+
+            /* 상단 브랜드 배지 — padding 약 10% 축소, 제목과의 간격 소폭 축소 */
+            .hero-label { padding: 6.3px 16.2px; margin-bottom: 11px; }
+
+            /* 메인 제목 — 더 단단하게(line-height 축소), 딥네이비 대비 강화, 설명문과의 간격 약 12% 축소 */
+            .hero-section h1 { line-height: 1.16; color: #151B26; margin-bottom: 10.5px; }
+
+            /* 서브카피 — 색상 소폭 진하게, CTA와의 간격 약 10% 축소 */
+            .hero-subtitle { color: #4A505C; margin-bottom: 10.8px; }
+
+            /* CTA 버튼 — 높이 약 8% 축소 */
+            .hero-actions .btn-hero-primary,
+            .hero-actions .btn-hero-outline { height: 46px; }
+        }
 
         /* ── 반응형 (모바일 전용 — 2026-09-01 대장 지시, 데스크탑 기본값은 위 원본 그대로) ── */
         @media (max-width: 768px) {
