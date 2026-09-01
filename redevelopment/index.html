@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260831m">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260901a">
     <link rel="stylesheet" href="assets/css/download-view.css?v=20260830b">
     <style>
         /* ============================================================
@@ -131,7 +131,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         @media (max-width: 768px) {
-            .splash-logo img { width: 150px; height: 150px; }
+            .splash-logo img { width: 96px; height: 96px; }
             .splash-company { font-size: 20px; }
             .splash-sub { font-size: 9px; letter-spacing: 3px; }
         }
@@ -273,6 +273,13 @@
             .hero-light-wave { opacity: .40; }
             .hero-light-wave .wave-line:nth-child(n+4) { display: none; }
             .hero-light-wave .spark { display: none; }
+            /* 모바일 전용 — 하단 골드 글로우 오버레이 강도 약 25% 완화(2026-09-01 대장 지시) */
+            .hero-banner::after {
+                background: radial-gradient(ellipse at 20% 70%,
+                    rgba(255,196,0,.165) 0%, rgba(255,196,0,.075) 28%,
+                    rgba(255,196,0,.03) 48%, transparent 72%
+                );
+            }
         }
 
         /* ── 히어로 콘텐츠 좌측 정렬 ── */
@@ -345,17 +352,47 @@
         }
 
 
-        /* ── 반응형 ── */
+        /* ── 반응형 (모바일 전용 — 2026-09-01 대장 지시, 데스크탑 기본값은 위 원본 그대로) ── */
         @media (max-width: 768px) {
             .hero-banner { padding: 25.6px 0 0; } /* 상단여백 0.8배 축소(32→25.6, 실제 적용값 기준) */
-            .hero-banner .inner { padding: 0 22px 30px; }
-            .hero-bg-photo::before { height: 40px; }
-            .hero-label { font-size: 8.5px; letter-spacing: 1.5px; padding: 4px 10px; margin-bottom: 14px; }
-            .hero-section h1 { font-size: 27px; letter-spacing: -.6px; line-height: 1.36; max-width: 100%; margin-bottom: 13px; word-break: keep-all; }
-            .hero-subtitle { font-size: 14px; line-height: 1.68; margin-bottom: 20px; max-width: 96%; color: rgba(10,15,28,0.7); }
+            /* 히어로 콘텐츠 하단 여백 축소 + 텍스트 영역 뒤 은은한 밝은 그라데이션(가독성 보강) */
+            .hero-banner .inner {
+                padding: 0 22px 24px;
+                background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.26) 58%, rgba(255,255,255,.42) 100%);
+            }
+            .hero-bg-photo::before { height: 20px; } /* 하단 페이드 40px→20px, 약 50% 축소 */
+            /* 좌측 텍스트 보호 — 부드러운 white→transparent 그라데이션 */
+            .hero-bg-photo::after {
+                background: linear-gradient(90deg,
+                    rgba(255,255,255,.97) 0%, rgba(255,255,255,.93) 20%,
+                    rgba(255,255,255,.80) 32%, rgba(255,255,255,.58) 42%,
+                    rgba(255,255,255,.36) 52%, rgba(255,255,255,.16) 62%,
+                    rgba(255,255,255,.05) 72%, rgba(255,255,255,0) 82%
+                );
+            }
+            /* 우측 건축 이미지 — 선명도 강화 + 핵심 건물이 잘리지 않도록 프레이밍 보정 */
+            .hero-bg-photo img { filter: contrast(1.08) saturate(1.06); object-position: center 20%; }
+
+            .hero-label { font-size: 8px; letter-spacing: 1.4px; padding: 3.5px 9px; margin-bottom: 12px; border-color: rgba(184,134,11,.18); }
+            .hero-section h1 { font-size: clamp(22px, 6.8vw, 28px); letter-spacing: -.5px; line-height: 1.2; max-width: 100%; margin-bottom: 12px; word-break: keep-all; }
+            /* 골드 포인트를 핵심 단어("가치창조") 1개로 제한 — 첫 <em>("사람을 위한")은 본문 색으로 */
+            .hero-section h1 em:first-of-type { color: #171C26; -webkit-text-fill-color: #171C26; }
+
+            .hero-subtitle { font-size: 13.5px; line-height: 1.7; margin-bottom: 16px; max-width: 94%; color: rgba(10,15,28,.82); }
+
             .hero-actions { flex-direction: column; gap: 8px; width: 100%; }
-            .hero-actions .btn-hero-primary { width: 100%; justify-content: center; height: 46px; font-size: 14.5px; }
-            .hero-actions .btn-hero-outline { width: 100%; justify-content: center; height: 44px; font-size: 14px; }
+            /* 상담 문의 — 채도 낮춘 고급 CI 골드톤, 높이 축소(46→42px, 약 9%) */
+            .hero-actions .btn-hero-primary {
+                width: 100%; justify-content: center; height: 42px; font-size: 14.5px;
+                background: linear-gradient(135deg, #C99A32 0%, #D1AA58 100%);
+                box-shadow: 0 2px 10px rgba(197,154,50,.20);
+            }
+            /* 사업성 검토 — 상담문의보다 낮은 위계의 Secondary CTA */
+            .hero-actions .btn-hero-outline {
+                width: 100%; justify-content: center; height: 40px; font-size: 14px;
+                background: rgba(255,255,255,.64); color: rgba(10,15,28,.8);
+                border: 1px solid rgba(184,134,11,.4);
+            }
 
             .category-section { display: none; }
             .process-bar { padding: 20px 0 8px; }
@@ -386,6 +423,10 @@
             .section-head { margin-bottom: 18px; }
             .section-title { font-size: 19px; font-weight: 800; letter-spacing: -.3px; padding-left: 11px; }
             .section-title::before { width: 3px; height: 16px; top: 3px; }
+            /* LATEST NEWS 라벨과 주요뉴스 제목의 좌측 정렬 기준을 맞춤(라벨 텍스트 시작 위치 = 타이틀 텍스트 시작 위치 11px) */
+            .section-label::before { width: 3px; }
+            /* 히어로→주요뉴스 상단 공백 축소 (26px→18px, 약 31%) */
+            #mainFirstSection { padding-top: 18px; }
         }
         /* 마지막 섹션(자료실+갤러리) 하단여백 */
         #mainLastSection { padding-bottom: 70px; }
@@ -1086,7 +1127,7 @@
 <!-- 공통 JS -->
 <script src="assets/data/mock-data.js?v=20260901a"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260831m"></script>
+<script src="assets/js/common.js?v=20260901b"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1599,8 +1640,7 @@ window.MPF={open:openDetail,close:closeDetail};
     document.getElementById('npTitle').textContent = n.title;
     document.getElementById('npDate').textContent = n.date;
     document.getElementById('npImp').style.display = n.important ? 'inline-block' : 'none';
-    var raw = n.excerpt || (n.content||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
-    var c = raw.length>200 ? (raw.slice(0,200)+'…') : raw;
+    var c = (n.content||'').length>520 ? (n.content.slice(0,520)+'…') : (n.content||'');
     document.getElementById('npContent').textContent = c;
   }
 

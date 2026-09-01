@@ -430,9 +430,9 @@ const App = (() => {
     /* ── 모바일 페이지 스와이프 네비게이션 ── */
     (function initPageSwipe() {
       if (!('ontouchstart' in window)) return;
-      var gnbLinks = document.querySelectorAll('.gnb > a');
+      var gnbLinks = document.querySelectorAll('.gnb-item > a');
       if (!gnbLinks.length) return;
-      var menuList = [];
+      var menuList = [ B + '/index.html' ]; /* 0번 = 로고(홈) — 7개 메뉴 왕복 스와이프 */
       gnbLinks.forEach(function(a) {
         if (a.getAttribute('target') === '_blank') return;
         var h = a.getAttribute('href');
@@ -447,7 +447,7 @@ const App = (() => {
       var curIdx = -99;
 
       if (isMain) {
-        curIdx = -1; /* 메인 = 회사소개(0) 직전 */
+        curIdx = 0; /* 메인 = 로고(홈) 자신 */
       } else {
         for (var mi = 0; mi < menuList.length; mi++) {
           var mp = menuList[mi];
@@ -463,7 +463,7 @@ const App = (() => {
         if (curIdx === -99) return;
       }
 
-      var lastIdx = menuList.length - 1; /* 고객센터 */
+      var lastIdx = menuList.length - 1; /* 고객센터 (0:로고 1:회사소개 2:빛세움의길 3:사업분야 4:업무실적 5:자료실 6:고객센터) */
       var ps = { x0: 0, y0: 0, active: false };
       var skipSel = 'input,textarea,select,button,a,iframe,.leaflet-container,.swiper-container,.swiper,.slider,.carousel,.process-bar,.tab-scroll';
 
@@ -487,11 +487,10 @@ const App = (() => {
 
         var newIdx;
         if (dx < 0) {
-          /* 우→좌: 다음 메뉴 (메인→회사소개, 회사소개→빛세움의길, ...→고객센터) */
+          /* 우→좌: 다음 메뉴 (로고→회사소개→빛세움의길→...→고객센터) */
           newIdx = curIdx + 1;
         } else {
-          /* 좌→우: 이전 메뉴 (빛세움의길→회사소개, ...) 메인에서는 이동 없음 */
-          if (isMain) return;
+          /* 좌→우: 이전 메뉴 (회사소개→로고, 빛세움의길→회사소개, ...) 로고에서는 더 이상 이동 없음 */
           newIdx = curIdx - 1;
         }
         if (newIdx < 0 || newIdx > lastIdx) return;
@@ -638,52 +637,7 @@ const App = (() => {
     ov.addEventListener('click',function(e){if(e.target===ov)closeModal()});
   }
 
-  /* ── 탭바 스크롤 고정(sticky→fixed) 공통 함수 ──
-     업무실적(portfolio.html) .pf-tabs-wrap에서 처음 구현된 로직을 공통화한 것.
-     전역 html,body{overflow-x:hidden} 때문에 position:sticky가 무효화되어(Chrome 특성)
-     position:fixed 전환 방식으로 구현. 실제 헤더 높이(.header-wrap)를 측정해 top을 맞추고,
-     플레이스홀더로 layout shift를 방지한다.
-     사용법: App.stickyTabBar('wrapElementId', 'placeholderElementId') */
-  function stickyTabBar(wrapId, phId){
-    var wrap=document.getElementById(wrapId), ph=document.getElementById(phId);
-    if(!wrap||!ph) return;
-    var naturalTop=0, leftPx=0, widthPx=0, ticking=false;
-    function headerHeight(){var hw=document.querySelector('.header-wrap');return hw?hw.offsetHeight:0}
-    function measure(){
-      var wasStuck=wrap.classList.contains('is-fixed');
-      if(wasStuck){wrap.classList.remove('is-fixed');wrap.style.top='';wrap.style.left='';wrap.style.width='';ph.style.display='none'}
-      var rect=wrap.getBoundingClientRect();
-      naturalTop=rect.top+window.scrollY; leftPx=rect.left; widthPx=rect.width;
-      if(wasStuck) apply(true);
-    }
-    function apply(force){
-      var stick=force||window.scrollY>=naturalTop-headerHeight();
-      if(stick&&!wrap.classList.contains('is-fixed')){
-        ph.style.height=wrap.offsetHeight+'px';
-        ph.style.marginBottom=getComputedStyle(wrap).marginBottom;
-        ph.style.display='block';
-        wrap.classList.add('is-fixed');
-        wrap.style.top=headerHeight()+'px';
-        wrap.style.left=leftPx+'px';
-        wrap.style.width=widthPx+'px';
-      }else if(!stick&&wrap.classList.contains('is-fixed')){
-        wrap.classList.remove('is-fixed');
-        wrap.style.top='';wrap.style.left='';wrap.style.width='';
-        ph.style.display='none';
-      }else if(stick){
-        wrap.style.top=headerHeight()+'px';
-        wrap.style.left=leftPx+'px';
-        wrap.style.width=widthPx+'px';
-      }
-    }
-    function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){apply(false);ticking=false})}
-    window.addEventListener('scroll', onScroll, {passive:true});
-    window.addEventListener('resize', function(){measure();apply(false)});
-    window.addEventListener('load', function(){measure();apply(false)});
-    measure(); apply(false);
-  }
-
-  return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, heroDetail, stickyTabBar, basePath: () => B };
+  return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, heroDetail, basePath: () => B };
 })();
 
 /**
