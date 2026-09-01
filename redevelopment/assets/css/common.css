@@ -180,9 +180,9 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 @media (max-width: 768px) {
   .header .inner { height: 39px; }
   body {
-    padding-top: 71px;
-    padding-top: calc(71px + env(safe-area-inset-top, 0));
-    padding-top: calc(71px + constant(safe-area-inset-top, 0));
+    padding-top: 69px;
+    padding-top: calc(69px + env(safe-area-inset-top, 0));
+    padding-top: calc(69px + constant(safe-area-inset-top, 0));
   }
 }
 
@@ -191,28 +191,28 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   display: none;
   background: #fff;
   border-bottom: 1px solid var(--gray-200);
-  height: 32px;
+  height: 30px;
 }
 .mobile-tab-bar .tab-scroll {
   display: flex; align-items: center;
   overflow: hidden;
   width: 100%; max-width: 100%;
-  height: 100%; padding: 0 2px; gap: 0;
+  height: 100%; padding: 0 8px; gap: 0;
   box-sizing: border-box;
 }
 .mobile-tab-bar .tab-scroll::-webkit-scrollbar { display: none; }
 .mobile-tab-bar .tab-item {
-  flex: 1 1 0; min-width: 0; padding: 0 2px; height: 100%;
+  flex: 1 1 0; min-width: 0; padding: 0 1px; height: 100%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 500; color: var(--gray-500);
+  font-size: 10.5px; font-weight: 500; color: var(--gray-500);
   text-decoration: none; white-space: nowrap; position: relative;
   letter-spacing: -0.4px;
   overflow: hidden; text-overflow: ellipsis;
 }
 @media (max-width: 380px) {
-  .mobile-tab-bar .tab-item { font-size: 10px; letter-spacing: -0.5px; }
+  .mobile-tab-bar .tab-item { font-size: 9.6px; letter-spacing: -0.5px; }
 }
-.mobile-tab-bar .tab-item.active { color: var(--gray-900); font-weight: 700; }
+.mobile-tab-bar .tab-item.active { color: var(--gold); font-weight: 600; }
 .mobile-tab-bar .tab-item.active::after {
   content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
   width: 14px; height: 2px; border-radius: 1px; background: var(--gold);
