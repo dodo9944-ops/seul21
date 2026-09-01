@@ -314,10 +314,10 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   .menu-toggle::before {
     content: '';
     position: absolute; left: 50%; top: 50%;
-    width: 27px; height: 2.2px;
+    width: 20.25px; height: 1.65px;
     background: #1A1A1A; border-radius: 1px;
     transform: translate(-50%, -50%);
-    box-shadow: 0 -7.7px 0 0 #1A1A1A, 0 7.7px 0 0 #1A1A1A;
+    box-shadow: 0 -5.78px 0 0 #1A1A1A, 0 5.78px 0 0 #1A1A1A;
   }
   .header .inner { gap: 16px; }
 }
