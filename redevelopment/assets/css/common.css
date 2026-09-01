@@ -212,10 +212,10 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 @media (max-width: 380px) {
   .mobile-tab-bar .tab-item { font-size: 9.6px; letter-spacing: -0.5px; }
 }
-.mobile-tab-bar .tab-item.active { color: var(--gold); font-weight: 600; }
+.mobile-tab-bar .tab-item.active { color: #D4A017; font-weight: 600; }
 .mobile-tab-bar .tab-item.active::after {
   content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 14px; height: 2px; border-radius: 1px; background: var(--gold);
+  width: 14px; height: 2px; border-radius: 1px; background: #D4A017;
 }
 @media (max-width: 1024px) { .mobile-tab-bar { display: block; } }
 
