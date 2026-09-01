@@ -180,9 +180,9 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 @media (max-width: 768px) {
   .header .inner { height: 39px; }
   body {
-    padding-top: 69px;
-    padding-top: calc(69px + env(safe-area-inset-top, 0));
-    padding-top: calc(69px + constant(safe-area-inset-top, 0));
+    padding-top: 66px;
+    padding-top: calc(66px + env(safe-area-inset-top, 0));
+    padding-top: calc(66px + constant(safe-area-inset-top, 0));
   }
 }
 
@@ -191,7 +191,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   display: none;
   background: #fff;
   border-bottom: 1px solid var(--gray-200);
-  height: 30px;
+  height: 27px;
 }
 .mobile-tab-bar .tab-scroll {
   display: flex; align-items: center;
@@ -208,15 +208,25 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   text-decoration: none; white-space: nowrap; position: relative;
   letter-spacing: -0.4px;
   overflow: hidden; text-overflow: ellipsis;
+  transition: color .2s ease;
 }
 @media (max-width: 380px) {
   .mobile-tab-bar .tab-item { font-size: 9.6px; letter-spacing: -0.5px; }
 }
-.mobile-tab-bar .tab-item.active { color: #D4A017; font-weight: 600; }
+.mobile-tab-bar .tab-item.active { color: #B88A22; font-weight: 700; }
 .mobile-tab-bar .tab-item.active::after {
-  content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 14px; height: 2px; border-radius: 1px; background: #D4A017;
+  content: ''; position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  height: 3px; border-radius: 2px; background: #B88A22;
+  transition: width .25s ease, background-color .25s ease;
 }
+/* 활성 인디케이터 폭 — 각 메뉴 글자폭의 약 70% (라벨 길이별 개별 지정) */
+.mobile-tab-bar .tab-item:nth-child(1).active::after { width: 30px; } /* 회사소개 */
+.mobile-tab-bar .tab-item:nth-child(2).active::after { width: 42px; } /* 빛세움의 길 */
+.mobile-tab-bar .tab-item:nth-child(3).active::after { width: 30px; } /* 사업분야 */
+.mobile-tab-bar .tab-item:nth-child(4).active::after { width: 30px; } /* 업무실적 */
+.mobile-tab-bar .tab-item:nth-child(5).active::after { width: 24px; } /* 자료실 */
+.mobile-tab-bar .tab-item:nth-child(6).active::after { width: 30px; } /* 고객센터 */
 @media (max-width: 1024px) { .mobile-tab-bar { display: block; } }
 
 /* ── LOGO ── */
