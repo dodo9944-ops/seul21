@@ -1077,8 +1077,8 @@ const MOCK = {
       excerpt:'베트남 하롱베이에서 보낸 2024 빛세움 워크숍 — 유람선 투어와 만찬으로 다진 팀워크',
       content:'<div class="nt-lead">WORKSHOP · 2024 임직원 워크숍</div><p>업무를 잠시 내려놓고 서로의 거리를 좁힌 시간, 2024년 빛세움 임직원들은 베트남 하롱베이로 함께 떠났습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2024</div><div class="nt-stat-label">워크숍 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">하롱베이</div><div class="nt-stat-label">개최지 · 베트남</div></div><div class="nt-stat-card"><div class="nt-stat-num">전 직원</div><div class="nt-stat-label">참가 대상</div></div></div><p>유람선을 타고 세계자연유산으로 지정된 하롱베이의 절경을 함께 감상하고, 현지 전통 레스토랑에서 정을 나누는 환영 만찬 시간을 가졌습니다. 사무실에서는 미처 나누지 못했던 이야기들도 편안하게 오갔습니다.</p><p>계획대로 움직인 일정도 있었고, 계획 없이 웃었던 순간도 많았습니다. 함께 시간을 보내며 서로를 더 깊이 알게 되었고, 팀워크는 한층 단단해졌습니다.</p><div class="nt-divider"></div><p><strong>일할 땐 집중하고, 쉴 땐 제대로 즐긴다.</strong> 2024 빛세움 하롱베이 워크숍은 그렇게 또 하나의 좋은 추억으로 남았습니다.</p>',
       images:[
-        { src:'../jpg/gallery/workshop2024_halongbay_boat.jpg', alt:'베트남 하롱베이 유람선 투어 — 임직원 단체 사진' },
         { src:'../jpg/gallery/workshop2024_dinner.jpg', alt:'2024 빛세움 워크숍 환영 만찬 단체 사진' },
+        { src:'../jpg/gallery/workshop2024_halongbay_boat.jpg', alt:'베트남 하롱베이 유람선 투어 — 임직원 단체 사진' },
         { src:'../jpg/gallery/workshop2024_airport.jpg', alt:'출국 전 공항 단체 사진' },
         { src:'../jpg/gallery/workshop2024_restaurant.jpg', alt:'현지 전통 레스토랑에서의 식사 시간' },
         { src:'../jpg/gallery/workshop2024_halongbay_boat_ride.jpg', alt:'하롱베이 소형 보트 체험 — 카르스트 지형을 배경으로 한 단체 사진' },
