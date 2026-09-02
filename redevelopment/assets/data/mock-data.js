@@ -1083,7 +1083,8 @@ const MOCK = {
         { src:'../jpg/gallery/workshop2024_restaurant.jpg', alt:'현지 전통 레스토랑에서의 식사 시간' },
         { src:'../jpg/gallery/workshop2024_halongbay_boat_ride.jpg', alt:'하롱베이 소형 보트 체험 — 카르스트 지형을 배경으로 한 단체 사진' },
         { src:'../jpg/gallery/workshop2024_local_lunch.jpg', alt:'현지 노천 식당에서의 점심식사 시간' },
-        { src:'../jpg/gallery/workshop2024_halongbay_memory.jpg', alt:'하롱베이 선착장에서 남긴 현장 기념사진' }
+        { src:'../jpg/gallery/workshop2024_halongbay_memory.jpg', alt:'하롱베이 선착장에서 남긴 현장 기념사진' },
+        { src:'../jpg/gallery/workshop2024_halongbay_cruise_toast.jpg', alt:'하롱베이 크루즈 선상에서의 건배 시간' }
       ] },
     { id:'ws2025_taiwan', category:'워크숍', title:'2025 빛세움 워크숍 in 대만', date:'2025-09-15',
       excerpt:'대만에서 함께한 2025 빛세움 워크숍 — 지우펀 옛거리 산책과 새우낚시 체험',
