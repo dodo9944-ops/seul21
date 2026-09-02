@@ -1097,8 +1097,7 @@ const MOCK = {
         { src:'../jpg/gallery/workshop2025_shrimp_fishing.jpg', alt:'대만 실내 새우낚시 체험 현장' },
         { src:'../jpg/gallery/workshop2025_taipei_ckshall.jpg', alt:'대만 중정기념당(國立中正紀念堂) 전경' },
         { src:'../jpg/gallery/workshop2025_taipei101_tower.jpg', alt:'대만 랜드마크 타이베이101 외관' },
-        { src:'../jpg/gallery/workshop2025_taipei101_ohtani_ball_night.jpg', alt:'타이베이101 오타니 쇼헤이 50호 홈런 기념구 전시' },
-        { src:'../jpg/gallery/workshop2025_taipei101_ohtani_ball_day.jpg', alt:'타이베이101 오타니 쇼헤이 50호 홈런 기념구 전시(다른 각도)' },
+        { src:'../jpg/gallery/workshop2025_taipei_ckshall_ceiling.jpg', alt:'중정기념당 내부 팔각 돔 천장 — 청천백일 문양' },
         { src:'../jpg/gallery/workshop2025_taiwan_teaegg.jpg', alt:'대만 현지 노점의 찻잎계란(茶葉蛋)' },
         { src:'../jpg/gallery/workshop2025_taipei101_yankees_exhibit.jpg', alt:'타이베이101 뉴욕 양키스·베이브 루스 기념품 전시' }
       ] },
