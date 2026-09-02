@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260902b">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260902c">
     <style>
     .sv-section { margin-bottom:35px; }
     .sv-section:last-child { margin-bottom:0; }
@@ -28,7 +28,7 @@
         border: 1px solid var(--gray-200);
         border-top: 4px solid var(--visseum-gold);
         border-radius: 20px;
-        padding: 40px 44px;
+        padding: 24px 44px;
         transition: all 0.25s;
         display: flex; flex-direction: column;
         text-decoration: none; color: inherit;
@@ -42,19 +42,19 @@
         transform: translateY(-4px);
     }
     .pro-card-more {
-        margin-top: 28px;
+        margin-top: 12px;
         font-size: 14px; font-weight: 700;
         color: var(--visseum-gold);
         display: inline-flex; align-items: center; gap: 8px;
         opacity: 0.9; transition: opacity 0.2s, transform 0.2s;
     }
     .pro-card:hover .pro-card-more { opacity: 1; transform: translateX(2px); color: #9F7000; }
-    .pro-card h4 { font-size: 21px; font-weight: 800; color: var(--visseum-ink); margin-bottom: 14px; }
-    .pro-card p { font-size: 15.5px; color: var(--visseum-text); line-height: 1.85; font-weight: 500; flex: 1; }
+    .pro-card h4 { font-size: 21px; font-weight: 800; color: var(--visseum-ink); margin-bottom: 8px; }
+    .pro-card p { font-size: 15.5px; color: var(--visseum-text); line-height: 1.5; font-weight: 500; flex: 1; }
     @media (max-width: 1024px) { .pro-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) { .pro-grid { grid-template-columns: 1fr; } }
     .group-grid { grid-template-columns: repeat(2, 1fr); }
-    .group-card-logo { height: 56px; display: flex; align-items: center; margin-bottom: 26px; }
+    .group-card-logo { height: 36px; display: flex; align-items: center; margin-bottom: 14px; }
     .group-card-logo img { max-height: 100%; max-width: 100%; object-fit: contain; }
     @media (max-width: 600px) { .group-grid { grid-template-columns: 1fr; } }
 
@@ -66,12 +66,12 @@
     .coord-card-blue { border-top-color: #0068B7; }
     .coord-card-green { border-top-color: #009A44; }
     .coord-card-yellow { border-top-color: #FFC400; }
-    .coord-card-head { background: linear-gradient(135deg, #FFF8E6, #FFF6D1); border-bottom: 1px solid rgba(197,139,0,.18); padding: 22px 24px; }
+    .coord-card-head { background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 22px 24px; }
     .coord-badge { text-align: center; font-size: 9px; font-weight: 700; letter-spacing: 2px; color: var(--visseum-gold); text-transform: uppercase; margin-bottom: 18px; }
     .coord-head-row { display: flex; align-items: center; gap: 16px; }
-    .coord-photo { width: 78px; height: 78px; border-radius: 50%; overflow: hidden; margin: 0; border: 2px solid rgba(197,139,0,.45); background: #fff; flex-shrink: 0; }
+    .coord-photo { width: 78px; height: 78px; border-radius: 50%; overflow: hidden; margin: 0; border: 2px solid var(--gray-200); background: #fff; flex-shrink: 0; }
     .coord-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .coord-photo.empty { display: flex; align-items: center; justify-content: center; color: rgba(197,139,0,.35); font-size: 26px; }
+    .coord-photo.empty { display: flex; align-items: center; justify-content: center; color: var(--gray-300); font-size: 26px; }
     .coord-id { min-width: 0; }
     .coord-name { font-size: 17px; font-weight: 800; color: var(--visseum-ink); margin-bottom: 3px; text-align: left; }
     .coord-role { font-size: 11.5px; color: var(--visseum-muted); text-align: left; }
@@ -687,7 +687,7 @@
                     <div class="coord-card-head">
                         <div class="coord-badge">Seoul City Coordinator</div>
                         <div class="coord-head-row">
-                            <div class="coord-photo"><img src="../jpg/이창우.jpg" alt="이창우 서울시 정비사업 코디네이터"></div>
+                            <div class="coord-photo"><img src="../jpg/이창우.jpg?v=20260902" alt="이창우 서울시 정비사업 코디네이터"></div>
                             <div class="coord-id">
                                 <div class="coord-name">이창우</div>
                                 <div class="coord-role">현 서울시 정비사업 코디네이터</div>
@@ -718,8 +718,8 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260902f"></script>
+<script src="../assets/data/mock-data.js?v=20260902t"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260902e"></script>
+<script src="../assets/js/common.js?v=20260902f"></script>
 </body>
 </html>

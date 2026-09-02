@@ -741,7 +741,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .badge-gray { background: var(--gray-100); color: var(--gray-600); }
 .badge-outline { background: transparent; color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
 .badge-success { background: #E6F9F0; color: var(--green); }
-.badge-danger { background: #FDECEA; color: var(--red); }
+.badge-danger { background: var(--gray-100); color: var(--visseum-ink); }
 .badge-info { background: var(--accent-light); color: var(--accent); }
 .badge-pending { background: #FFF4E5; color: var(--orange); }
 
@@ -1295,7 +1295,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 
 /* 주요뉴스 상세 모달 전용 배지 */
 .d-newsbadge{display:inline-flex;align-items:center;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;line-height:1;background:rgba(184,134,11,.16);color:#8a6508}
-.badge-important{background:var(--red);color:var(--white)}
+.badge-important{background:var(--visseum-ink);color:var(--white)}
 
 /* ========================================
    공지사항 상세 모달 본문 — pages/notice.html에서 이동(공용화)

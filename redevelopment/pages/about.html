@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260902b">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260902c">
     <style>
     /* ================================================================
        ABOUT PAGE — Premium Company Introduction
@@ -393,10 +393,10 @@
     /* ── 3-2. CEO CERTIFICATION (정비사업 코디네이터) ── */
     .cert-section {
         display: flex; align-items: stretch; gap: 32px;
-        background: linear-gradient(135deg, #FFFFFF 0%, #FFF6D6 60%, #FFFFFF 100%);
+        background: var(--white);
         border-radius: 18px;
         overflow: hidden;
-        border: 1px solid rgba(184,134,11,0.18);
+        border: 1px solid var(--gray-200);
         position: relative;
     }
     .cert-section.cert-stacked {
@@ -405,7 +405,8 @@
     .cert-stacked .cert-photo {
         flex: none; width: 100%; box-sizing: border-box;
         flex-direction: row; justify-content: space-evenly; align-items: center; gap: 20px;
-        border-right: none; border-bottom: 1px solid rgba(184,134,11,0.15);
+        background: var(--white);
+        border-right: none; border-bottom: 1px solid var(--gray-200);
         padding: 40px 15px;
     }
     .cert-stacked .cert-photo a {
@@ -427,22 +428,13 @@
         .cert-stacked .cert-photo img { height: auto; width: 100%; max-width: 554px; }
     }
     .cert-stacked .cert-text { transform: translateY(-22px); }
-    .cert-section::before {
-        content: ''; position: absolute; inset: 0;
-        background-image:
-            radial-gradient(circle at 80% 20%, rgba(184,134,11,0.06) 0%, transparent 50%),
-            linear-gradient(rgba(184,134,11,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(184,134,11,0.012) 1px, transparent 1px);
-        background-size: auto, 60px 60px, 60px 60px;
-        pointer-events: none;
-    }
     .cert-photo {
         flex: 0 0 320px;
         position: relative; z-index: 1;
         display: flex; align-items: center; justify-content: center;
-        background: rgba(255,255,255,0.06);
+        background: var(--white);
         padding: 28px;
-        border-right: 1px solid rgba(184,134,11,0.15);
+        border-right: 1px solid var(--gray-200);
     }
     .cert-photo img {
         width: 100%; max-width: 280px; height: auto;
@@ -453,6 +445,7 @@
     .cert-photo img:hover { transform: scale(1.02); }
     .cert-text {
         flex: 1; min-width: 0; position: relative; z-index: 1;
+        background: var(--visseum-cream);
         padding: 36px 40px;
         color: #0A0F1C;
         display: flex; flex-direction: column; justify-content: center;
@@ -486,8 +479,8 @@
     .cert-meta .cm-item {
         display: flex; flex-direction: column; gap: 2px;
         padding: 10px 14px;
-        background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(184,134,11,0.12);
+        background: var(--white);
+        border: 1px solid rgba(184,134,11,0.14);
         border-radius: 8px;
     }
     .cert-meta .cm-key {
@@ -1167,9 +1160,9 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260902f"></script>
+<script src="../assets/data/mock-data.js?v=20260902t"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260902e"></script>
+<script src="../assets/js/common.js?v=20260902f"></script>
 <script>
 (function() {
     var info = MOCK.companyInfo;
@@ -1198,7 +1191,7 @@
         '</div>';
     }).join('');
 
-    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260902e
+    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260902f
        mock-data.businessAreas 는 다른 영역(services.html 등)에서 사용되므로 본 섹션은 override 하지 않는다. */
 })();
 </script>

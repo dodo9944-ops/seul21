@@ -15,8 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260902b">
-    <link rel="stylesheet" href="../assets/css/download-view.css?v=20260830b">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260902c">
+    <link rel="stylesheet" href="../assets/css/download-view.css?v=20260830c">
     <style>
     /* 히어로 바로 아래 탭 메뉴와의 여백 — 갤러리(gallery.html) 페이지와 동일하게 통일 */
     .page-body{padding-top:28px}
@@ -45,6 +45,8 @@
     .badge-order{background:rgba(0,104,183,.12);color:#0068B7}
     .badge-company{background:rgba(0,154,68,.12);color:#009A44}
     .badge-etc{background:var(--gray-100);color:var(--gray-600)}
+    .badge-union{background:rgba(197,139,0,.12);color:#C58B00}
+    .badge-press{background:rgba(71,85,105,.12);color:#475569}
     @media(max-width:640px){
       #noticeTabs{padding:14px 16px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
       #noticeTabs::-webkit-scrollbar{display:none}
@@ -73,7 +75,8 @@
             <button data-cat="전체">전체<span class="notice-tab-count"></span></button>
             <button data-cat="수주소식">수주소식<span class="notice-tab-count"></span></button>
             <button data-cat="회사소식">회사소식<span class="notice-tab-count"></span></button>
-            <button data-cat="기타소식">기타소식<span class="notice-tab-count"></span></button>
+            <button data-cat="조합소식">조합소식<span class="notice-tab-count"></span></button>
+            <button data-cat="기사소식">기사소식<span class="notice-tab-count"></span></button>
             <div class="notice-result" id="noticeResult"></div>
         </div>
         <div class="tbl-wrap">
@@ -93,20 +96,20 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260902f"></script>
+<script src="../assets/data/mock-data.js?v=20260902t"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260902e"></script>
+<script src="../assets/js/common.js?v=20260902f"></script>
 <script>
 (function() {
     const notices = DataService.getAll('notices');
 
-    const validCats = ['수주소식', '회사소식', '기타소식'];
+    const validCats = ['수주소식', '회사소식', '조합소식', '기사소식'];
     const params = new URLSearchParams(location.search);
     const catParam = params.get('cat');
     let currentCat = validCats.includes(catParam) ? catParam : '전체';
 
     function noticeCat(n) {
-        return validCats.includes(n.category) ? n.category : '기타소식';
+        return validCats.includes(n.category) ? n.category : '기사소식';
     }
 
     const idParam = params.get('id');
@@ -119,7 +122,7 @@
         }
     }
 
-    const catBadgeCls = { '수주소식': 'badge-order', '회사소식': 'badge-company', '기타소식': 'badge-etc' };
+    const catBadgeCls = { '수주소식': 'badge-order', '회사소식': 'badge-company', '조합소식': 'badge-union', '기사소식': 'badge-press' };
 
     function renderTabCounts() {
         document.querySelectorAll('#noticeTabs button[data-cat]').forEach(b => {

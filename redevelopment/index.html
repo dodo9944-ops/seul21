@@ -20,8 +20,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260902b">
-    <link rel="stylesheet" href="assets/css/download-view.css?v=20260830b">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260902c">
+    <link rel="stylesheet" href="assets/css/download-view.css?v=20260830c">
     <style>
         /* ============================================================
            INDEX PAGE — 고유 스타일
@@ -531,6 +531,10 @@
         #mainCommunity .news-body h4 { max-height: 24px; -webkit-line-clamp: 1; }
         /* 갤러리 썸네일 3건 — 밝은 배경과 경계가 흐려 보이는 사진 가독성 보완을 위한 자연스러운 외곽선 */
         #mainCommunity .news-thumb-photo img { border: 1px solid rgba(10,15,28,0.12); box-shadow: 0 0 0 1px rgba(255,255,255,0.4) inset; }
+        /* 갤러리 카드 우측하단 조회수 표시 (대장 지시) */
+        #mainCommunity .news-date { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        #mainCommunity .news-date .views { display: flex; align-items: center; gap: 4px; flex-shrink: 0; color: #9A9DA2; }
+        #mainCommunity .news-date .views i { font-size: 11px; }
 
         /* ── PROCESS STEPS ── */
         .process-bar {
@@ -1141,9 +1145,9 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260902f"></script>
+<script src="assets/data/mock-data.js?v=20260902t"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260902e"></script>
+<script src="assets/js/common.js?v=20260902f"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1475,6 +1479,8 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             var t=(g.content||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
             return t.length>90?t.slice(0,90)+'…':t;
         }
+        function galViews(){ try{ return JSON.parse(localStorage.getItem('seul_gallery_views')||'{}') }catch(e){ return {} } }
+        function galViewsOf(g){ return (g.views||0) + (galViews()[g.id]||0); }
         var gals=MOCK.gallery.slice().sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         galEl.innerHTML=gals.map(function(g){
             var cover=(g.images&&g.images.length)?g.images[0]:null;
@@ -1484,7 +1490,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
                 '<div class="news-thumb-photo">'+thumb+'</div>'+
                 '<div class="news-body"><h4>'+g.title+'</h4>'+
                 '<div class="news-desc">'+galSummary(g)+'</div>'+
-                '<div class="news-date">'+g.category+' · '+g.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></div></div></div>';
+                '<div class="news-date"><span>'+g.category+' · '+g.date+'</span><span class="views"><i class="fa-regular fa-eye"></i> '+galViewsOf(g)+'</span></div></div></div>';
         }).join('');
     }
 })();
