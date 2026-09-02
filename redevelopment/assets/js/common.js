@@ -91,7 +91,7 @@ const App = (() => {
           <a href="${B}/pages/gallery.html">전체</a>
           <a href="${B}/pages/gallery.html?cat=주민총회">주민총회</a>
           <a href="${B}/pages/gallery.html?cat=봉사활동">봉사활동</a>
-          <a href="${B}/pages/gallery.html?cat=워크숍">워크숍</a>
+          <a href="${B}/pages/gallery.html?cat=워크샵">워크샵</a>
           <a href="${B}/pages/gallery.html?cat=현장스케치">현장스케치</a>
           <a href="${B}/pages/gallery.html?cat=기타행사">기타행사</a>
         </div>

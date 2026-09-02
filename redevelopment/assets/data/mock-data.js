@@ -1070,17 +1070,17 @@ const MOCK = {
   ],
 
   /* ──────────────────────────── 갤러리 ────────────────────────────
-     category: '주민총회' | '봉사활동' | '워크숍' | '현장스케치' | '기타행사'
+     category: '주민총회' | '봉사활동' | '워크샵' | '현장스케치' | '기타행사'
      각 항목: { id, category, title, content, src, alt, date, views, images }
      - content: 상세 패널에 표시되는 본문 텍스트
      - images: [{src,alt}, ...] 여러 장인 경우 사용 (없으면 src/alt 단일 이미지로 표시)
      - views: 초기 조회수(선택, 미입력 시 0) — 실제 조회수는 브라우저 localStorage(seul_gallery_views) 누적분을 더해 표시 */
   gallery: [
-    { id:'ws2024_halong', category:'워크숍', title:'2024 빛세움 워크숍 in 베트남 하롱베이', date:'2024-08-22',
-      excerpt:'베트남 하롱베이에서 보낸 2024 빛세움 워크숍 — 유람선 투어와 만찬으로 다진 팀워크',
-      content:'<div class="nt-lead">WORKSHOP · 2024 임직원 워크숍</div><p>업무를 잠시 내려놓고 서로의 거리를 좁힌 시간, 2024년 빛세움 임직원들은 베트남 하롱베이로 함께 떠났습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2024</div><div class="nt-stat-label">워크숍 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">하롱베이</div><div class="nt-stat-label">개최지 · 베트남</div></div><div class="nt-stat-card"><div class="nt-stat-num">전 직원</div><div class="nt-stat-label">참가 대상</div></div></div><p>유람선을 타고 세계자연유산으로 지정된 하롱베이의 절경을 함께 감상하고, 현지 전통 레스토랑에서 정을 나누는 환영 만찬 시간을 가졌습니다. 사무실에서는 미처 나누지 못했던 이야기들도 편안하게 오갔습니다.</p><p>계획대로 움직인 일정도 있었고, 계획 없이 웃었던 순간도 많았습니다. 함께 시간을 보내며 서로를 더 깊이 알게 되었고, 팀워크는 한층 단단해졌습니다.</p><div class="nt-divider"></div><p><strong>일할 땐 집중하고, 쉴 땐 제대로 즐긴다.</strong> 2024 빛세움 하롱베이 워크숍은 그렇게 또 하나의 좋은 추억으로 남았습니다.</p>',
+    { id:'ws2024_halong', category:'워크샵', title:'2024 빛세움 워크샵 in 베트남 하롱베이', date:'2024-08-22',
+      excerpt:'베트남 하롱베이에서 보낸 2024 빛세움 워크샵 — 유람선 투어와 만찬으로 다진 팀워크',
+      content:'<div class="nt-lead">WORKSHOP · 2024 임직원 워크샵</div><p>업무를 잠시 내려놓고 서로의 거리를 좁힌 시간, 2024년 빛세움 임직원들은 베트남 하롱베이로 함께 떠났습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2024</div><div class="nt-stat-label">워크샵 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">하롱베이</div><div class="nt-stat-label">개최지 · 베트남</div></div><div class="nt-stat-card"><div class="nt-stat-num">전 직원</div><div class="nt-stat-label">참가 대상</div></div></div><p>유람선을 타고 세계자연유산으로 지정된 하롱베이의 절경을 함께 감상하고, 현지 전통 레스토랑에서 정을 나누는 환영 만찬 시간을 가졌습니다. 사무실에서는 미처 나누지 못했던 이야기들도 편안하게 오갔습니다.</p><p>계획대로 움직인 일정도 있었고, 계획 없이 웃었던 순간도 많았습니다. 함께 시간을 보내며 서로를 더 깊이 알게 되었고, 팀워크는 한층 단단해졌습니다.</p><div class="nt-divider"></div><p><strong>일할 땐 집중하고, 쉴 땐 제대로 즐긴다.</strong> 2024 빛세움 하롱베이 워크샵은 그렇게 또 하나의 좋은 추억으로 남았습니다.</p>',
       images:[
-        { src:'../jpg/gallery/workshop2024_dinner.jpg', alt:'2024 빛세움 워크숍 환영 만찬 단체 사진' },
+        { src:'../jpg/gallery/workshop2024_dinner.jpg', alt:'2024 빛세움 워크샵 환영 만찬 단체 사진' },
         { src:'../jpg/gallery/workshop2024_halongbay_boat.jpg', alt:'베트남 하롱베이 유람선 투어 — 임직원 단체 사진' },
         { src:'../jpg/gallery/workshop2024_airport.jpg', alt:'출국 전 공항 단체 사진' },
         { src:'../jpg/gallery/workshop2024_restaurant.jpg', alt:'현지 전통 레스토랑에서의 식사 시간' },
@@ -1089,11 +1089,11 @@ const MOCK = {
         { src:'../jpg/gallery/workshop2024_halongbay_memory.jpg', alt:'하롱베이 선착장에서 남긴 현장 기념사진' },
         { src:'../jpg/gallery/workshop2024_halongbay_group_boat.jpg', alt:'하롱베이 소형 보트 위 임직원 단체 사진' }
       ] },
-    { id:'ws2025_taiwan', category:'워크숍', title:'2025 빛세움 워크숍 in 대만', date:'2025-09-15',
-      excerpt:'대만에서 함께한 2025 빛세움 워크숍 — 지우펀 옛거리 산책과 새우낚시 체험',
-      content:'<div class="nt-lead">WORKSHOP · 2025 임직원 워크숍</div><p>2025년, 빛세움은 대만에서 또 하나의 특별한 추억을 만들었습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2025</div><div class="nt-stat-label">워크숍 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">대만</div><div class="nt-stat-label">개최지 · 지우펀 일대</div></div><div class="nt-stat-card"><div class="nt-stat-num">새우낚시</div><div class="nt-stat-label">현지 체험 프로그램</div></div></div><p>익숙한 업무 공간을 벗어나 함께 걷고, 맛보고, 웃으며 여유로운 시간을 보냈습니다. 비가 내려도 일정은 계속됐고, 예상하지 못한 순간들이 오히려 더 오래 기억에 남았습니다.</p><p>지우펀 옛거리를 함께 거닐고, 실내 새우낚시 체험에도 도전했습니다. <strong>직접 잡은 새우의 맛은 기대보다 훨씬 좋았습니다.</strong> 함께 여행하면 평소엔 보이지 않던 서로의 모습도 자연스럽게 드러나고, 조금 더 편하게 이야기하며 더 많이 웃게 됩니다.</p><div class="nt-divider"></div><p>2025 빛세움 대만 워크숍, 일상에서 잠시 벗어나 함께 즐긴 우리의 기록입니다.</p>',
+    { id:'ws2025_taiwan', category:'워크샵', title:'2025 빛세움 워크샵 in 대만', date:'2025-09-15',
+      excerpt:'대만에서 함께한 2025 빛세움 워크샵 — 지우펀 옛거리 산책과 새우낚시 체험',
+      content:'<div class="nt-lead">WORKSHOP · 2025 임직원 워크샵</div><p>2025년, 빛세움은 대만에서 또 하나의 특별한 추억을 만들었습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2025</div><div class="nt-stat-label">워크샵 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">대만</div><div class="nt-stat-label">개최지 · 지우펀 일대</div></div><div class="nt-stat-card"><div class="nt-stat-num">새우낚시</div><div class="nt-stat-label">현지 체험 프로그램</div></div></div><p>익숙한 업무 공간을 벗어나 함께 걷고, 맛보고, 웃으며 여유로운 시간을 보냈습니다. 비가 내려도 일정은 계속됐고, 예상하지 못한 순간들이 오히려 더 오래 기억에 남았습니다.</p><p>지우펀 옛거리를 함께 거닐고, 실내 새우낚시 체험에도 도전했습니다. <strong>직접 잡은 새우의 맛은 기대보다 훨씬 좋았습니다.</strong> 함께 여행하면 평소엔 보이지 않던 서로의 모습도 자연스럽게 드러나고, 조금 더 편하게 이야기하며 더 많이 웃게 됩니다.</p><div class="nt-divider"></div><p>2025 빛세움 대만 워크샵, 일상에서 잠시 벗어나 함께 즐긴 우리의 기록입니다.</p>',
       images:[
-        { src:'../jpg/gallery/workshop2025_taipei_group.jpg', alt:'2025 빛세움 워크숍 in Taipei — 지우펀 옛거리 단체 사진' },
+        { src:'../jpg/gallery/workshop2025_taipei_group.jpg', alt:'2025 빛세움 워크샵 in Taipei — 지우펀 옛거리 단체 사진' },
         { src:'../jpg/gallery/workshop2025_shrimp_fishing.jpg', alt:'대만 실내 새우낚시 체험 현장' },
         { src:'../jpg/gallery/workshop2025_taipei_ckshall.jpg', alt:'대만 중정기념당(國立中正紀念堂) 전경' },
         { src:'../jpg/gallery/workshop2025_taipei101_tower.jpg', alt:'대만 랜드마크 타이베이101 외관' },
@@ -1101,12 +1101,12 @@ const MOCK = {
         { src:'../jpg/gallery/workshop2025_taiwan_teaegg.jpg', alt:'대만 현지 노점의 찻잎계란(茶葉蛋)' },
         { src:'../jpg/gallery/workshop2025_taipei101_yankees_exhibit.jpg', alt:'타이베이101 뉴욕 양키스·베이브 루스 기념품 전시' }
       ] },
-    { id:'ws2025_winter', category:'워크숍', title:'2025 빛세움 워크숍 — 함께 만든 성과, 함께 준비하는 도약', date:'2025-12-29',
-      excerpt:'한 해의 성과를 돌아보고 2026년 사업계획을 함께 나눈 ㈜빛세움 2025년 워크숍',
-      content:'<div class="nt-lead">WORKSHOP · 2025 임직원 워크숍</div><p>㈜빛세움은 임직원 간 소통과 화합을 다지고 새로운 도약을 준비하기 위해 <strong>‘2025년 워크숍’</strong>을 개최하였습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2025</div><div class="nt-stat-label">워크숍 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">2026</div><div class="nt-stat-label">사업계획 공유 대상연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">전 직원</div><div class="nt-stat-label">참가 대상</div></div></div><p>이번 워크숍은 바쁜 업무에서 잠시 벗어나 지난 한 해의 성과를 돌아보고, <strong>2026년 주요 사업계획과 부서별 목표를 공유</strong>하는 뜻깊은 자리로 마련되었습니다. 임직원들은 각 사업 현장의 추진 현황과 경험을 함께 나누며 앞으로의 업무 방향을 구체적으로 점검하였습니다.</p><p>특히 급변하는 정비사업 환경에 능동적으로 대응하고 더욱 전문적인 서비스를 제공하기 위해 사업관리 역량 강화, 현장 중심의 문제 해결, 부서 간 협업체계 구축 등에 관한 다양한 의견을 나누었습니다. 모든 임직원이 회사의 목표와 비전을 함께 공유하며 새로운 도약을 다짐하는 시간이었습니다.</p><p>업무계획을 논의하는 진지한 일정이 끝난 뒤에는 바다가 보이는 야외 공간에서 식사와 단체 활동을 함께하고, <strong>장기자랑과 레크리에이션</strong> 등 다채로운 프로그램을 진행하였습니다. 평소 업무 중에는 미처 나누지 못했던 이야기를 편안하게 주고받으며 서로를 이해하고 더욱 가까워질 수 있었습니다.</p><div class="nt-divider"></div><p>각자의 자리에서 맡은 업무는 달라도 하나의 목표를 향해 함께 나아가는 <strong>‘빛세움 원팀’</strong>의 힘을 다시 한번 확인한 소중한 시간이었습니다. 임직원들의 밝은 웃음과 적극적인 참여 덕분에 이번 워크숍은 즐거움과 의미를 모두 갖춘 특별한 추억으로 남았습니다.</p><p>㈜빛세움은 이번 워크숍에서 나눈 의견과 다짐을 바탕으로 임직원 간 소통과 협력을 더욱 강화하고, 축적된 경험과 전문성을 통해 고객과 조합원에게 신뢰받는 정비사업 전문관리기업으로 계속 성장해 나가겠습니다.</p><p><strong>함께 만든 오늘의 성과를 넘어, 더 큰 내일을 향해 도약하는 ㈜빛세움이 되겠습니다.</strong></p>',
+    { id:'ws2025_winter', category:'워크샵', title:'2025 빛세움 워크샵 — 함께 만든 성과, 함께 준비하는 도약', date:'2025-12-29',
+      excerpt:'한 해의 성과를 돌아보고 2026년 사업계획을 함께 나눈 ㈜빛세움 2025년 워크샵',
+      content:'<div class="nt-lead">WORKSHOP · 2025 임직원 워크샵</div><p>㈜빛세움은 임직원 간 소통과 화합을 다지고 새로운 도약을 준비하기 위해 <strong>‘2025년 워크샵’</strong>을 개최하였습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2025</div><div class="nt-stat-label">워크샵 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">2026</div><div class="nt-stat-label">사업계획 공유 대상연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">전 직원</div><div class="nt-stat-label">참가 대상</div></div></div><p>이번 워크샵은 바쁜 업무에서 잠시 벗어나 지난 한 해의 성과를 돌아보고, <strong>2026년 주요 사업계획과 부서별 목표를 공유</strong>하는 뜻깊은 자리로 마련되었습니다. 임직원들은 각 사업 현장의 추진 현황과 경험을 함께 나누며 앞으로의 업무 방향을 구체적으로 점검하였습니다.</p><p>특히 급변하는 정비사업 환경에 능동적으로 대응하고 더욱 전문적인 서비스를 제공하기 위해 사업관리 역량 강화, 현장 중심의 문제 해결, 부서 간 협업체계 구축 등에 관한 다양한 의견을 나누었습니다. 모든 임직원이 회사의 목표와 비전을 함께 공유하며 새로운 도약을 다짐하는 시간이었습니다.</p><p>업무계획을 논의하는 진지한 일정이 끝난 뒤에는 바다가 보이는 야외 공간에서 식사와 단체 활동을 함께하고, <strong>장기자랑과 레크리에이션</strong> 등 다채로운 프로그램을 진행하였습니다. 평소 업무 중에는 미처 나누지 못했던 이야기를 편안하게 주고받으며 서로를 이해하고 더욱 가까워질 수 있었습니다.</p><div class="nt-divider"></div><p>각자의 자리에서 맡은 업무는 달라도 하나의 목표를 향해 함께 나아가는 <strong>‘빛세움 원팀’</strong>의 힘을 다시 한번 확인한 소중한 시간이었습니다. 임직원들의 밝은 웃음과 적극적인 참여 덕분에 이번 워크샵은 즐거움과 의미를 모두 갖춘 특별한 추억으로 남았습니다.</p><p>㈜빛세움은 이번 워크샵에서 나눈 의견과 다짐을 바탕으로 임직원 간 소통과 협력을 더욱 강화하고, 축적된 경험과 전문성을 통해 고객과 조합원에게 신뢰받는 정비사업 전문관리기업으로 계속 성장해 나가겠습니다.</p><p><strong>함께 만든 오늘의 성과를 넘어, 더 큰 내일을 향해 도약하는 ㈜빛세움이 되겠습니다.</strong></p>',
       images:[
-        { src:'../jpg/gallery/workshop2025winter_beach_group.png', alt:'2025 빛세움 워크숍 해변 단체 사진 — 비에스그룹 2025 워크샵 현수막' },
-        { src:'../jpg/gallery/workshop2025winter_conference_2026plan.png', alt:'2026년 계획 종합의견을 발표하는 워크숍 세미나 현장' },
+        { src:'../jpg/gallery/workshop2025winter_beach_group.png', alt:'2025 빛세움 워크샵 해변 단체 사진 — 비에스그룹 2025 워크샵 현수막' },
+        { src:'../jpg/gallery/workshop2025winter_conference_2026plan.png', alt:'2026년 계획 종합의견을 발표하는 워크샵 세미나 현장' },
         { src:'../jpg/gallery/workshop2025winter_conference_break.png', alt:'세미나 휴식 시간 안내 화면과 참석 임직원' },
         { src:'../jpg/gallery/workshop2025winter_lawn_group.png', alt:'야외 잔디밭에서 촬영한 임직원 단체 사진(항공뷰)' },
         { src:'../jpg/gallery/workshop2025winter_beach_dining.png', alt:'해변 야외 테이블에서 함께 식사하는 임직원들(항공뷰)' },
@@ -1114,9 +1114,9 @@ const MOCK = {
         { src:'../jpg/gallery/workshop2025winter_karaoke_singing.jpg', alt:'장기자랑 코너 — 함께 노래를 부르는 임직원들' },
         { src:'../jpg/gallery/workshop2025winter_game_costume.jpg', alt:'레크리에이션 코너 — 코스튬을 착용하고 게임에 참여하는 임직원' }
       ] },
-    { id:'ws2026_zhangjiajie', category:'워크숍', title:'비와 함께한 특별한 추억, 2026년 중국 장가계 워크숍', date:'2026-05-17',
-      excerpt:'궂은 날씨 속에서도 웃음이 끊이지 않았던 2026년 중국 장가계 임직원 워크숍',
-      content:'<div class="nt-lead">WORKSHOP · 2026 임직원 워크숍</div><p>2026년 중국 장가계에서 임직원 워크숍을 진행했습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2026</div><div class="nt-stat-label">워크숍 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">장가계</div><div class="nt-stat-label">개최지 · 중국</div></div><div class="nt-stat-card"><div class="nt-stat-num">우천</div><div class="nt-stat-label">궂은 날씨 속 진행</div></div></div><p>워크숍 기간 동안 비가 많이 내려 다소 불편한 점도 있었지만, 안개와 구름에 둘러싸인 장가계의 신비로운 풍경은 평소 쉽게 접하기 어려운 <strong>특별한 장관</strong>을 선사했습니다.</p><p>임직원들은 아름다운 자연을 함께 둘러보며 바쁜 일상에서 벗어나 재충전하고, 서로를 배려하며 더욱 가까워지는 뜻깊은 시간을 보냈습니다. <strong>궂은 날씨 속에서도 웃음이 끊이지 않았던</strong> 즐겁고 소중한 워크숍이었습니다.</p><div class="nt-divider"></div><p>특히 매년 전 임직원이 함께할 수 있도록 해외 워크숍이라는 소중한 기회를 마련해 주시는 <strong>총괄대표님</strong>께 진심으로 감사드립니다. 직원들의 화합과 재충전을 위해 아낌없이 배려해 주시는 그 뜻을 잊지 않고, 더욱 단합된 모습과 성과로 보답하겠습니다.</p><p>이번 장가계 워크숍에서 쌓은 소중한 추억과 하나 된 마음을 바탕으로 앞으로도 더욱 발전하는 ㈜빛세움이 되겠습니다.</p>',
+    { id:'ws2026_zhangjiajie', category:'워크샵', title:'비와 함께한 특별한 추억, 2026년 중국 장가계 워크샵', date:'2026-05-17',
+      excerpt:'궂은 날씨 속에서도 웃음이 끊이지 않았던 2026년 중국 장가계 임직원 워크샵',
+      content:'<div class="nt-lead">WORKSHOP · 2026 임직원 워크샵</div><p>2026년 중국 장가계에서 임직원 워크샵을 진행했습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2026</div><div class="nt-stat-label">워크샵 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">장가계</div><div class="nt-stat-label">개최지 · 중국</div></div><div class="nt-stat-card"><div class="nt-stat-num">우천</div><div class="nt-stat-label">궂은 날씨 속 진행</div></div></div><p>워크샵 기간 동안 비가 많이 내려 다소 불편한 점도 있었지만, 안개와 구름에 둘러싸인 장가계의 신비로운 풍경은 평소 쉽게 접하기 어려운 <strong>특별한 장관</strong>을 선사했습니다.</p><p>임직원들은 아름다운 자연을 함께 둘러보며 바쁜 일상에서 벗어나 재충전하고, 서로를 배려하며 더욱 가까워지는 뜻깊은 시간을 보냈습니다. <strong>궂은 날씨 속에서도 웃음이 끊이지 않았던</strong> 즐겁고 소중한 워크샵이었습니다.</p><div class="nt-divider"></div><p>특히 매년 전 임직원이 함께할 수 있도록 해외 워크샵이라는 소중한 기회를 마련해 주시는 <strong>총괄대표님</strong>께 진심으로 감사드립니다. 직원들의 화합과 재충전을 위해 아낌없이 배려해 주시는 그 뜻을 잊지 않고, 더욱 단합된 모습과 성과로 보답하겠습니다.</p><p>이번 장가계 워크샵에서 쌓은 소중한 추억과 하나 된 마음을 바탕으로 앞으로도 더욱 발전하는 ㈜빛세움이 되겠습니다.</p>',
       images:[
         { src:'../jpg/gallery/workshop2026_zhangjiajie_group_bridge.jpg', alt:'안개 낀 장가계 전망대에서 촬영한 임직원 단체 사진' },
         { src:'../jpg/gallery/workshop2026_zhangjiajie_peaks_a.jpg', alt:'구름과 안개에 둘러싸인 장가계 봉우리 절경' },
