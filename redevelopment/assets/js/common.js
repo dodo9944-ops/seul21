@@ -78,7 +78,7 @@ const App = (() => {
     <div class="util-bar"><div class="inner">
       <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링그룹</span>
       <div class="util-item-drop">
-        <a href="${B}/pages/feasibility.html">사업성 검토</a>
+        <a href="${B}/pages/feasibility.html">사업타당성검토</a>
         <div class="util-drop-menu">
           <a href="${B}/pages/feasibility.html">사업성 검토 소개</a>
           <a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>
