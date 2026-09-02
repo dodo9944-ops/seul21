@@ -1096,6 +1096,19 @@ const MOCK = {
         { src:'../jpg/gallery/workshop2025_taipei_group.jpg', alt:'2025 빛세움 워크숍 in Taipei — 지우펀 옛거리 단체 사진' },
         { src:'../jpg/gallery/workshop2025_shrimp_fishing.jpg', alt:'대만 실내 새우낚시 체험 현장' }
       ] },
+    { id:'ws2025_winter', category:'워크숍', title:'2025 빛세움 워크숍 — 함께 만든 성과, 함께 준비하는 도약', date:'2025-12-29',
+      excerpt:'한 해의 성과를 돌아보고 2026년 사업계획을 함께 나눈 ㈜빛세움 2025년 워크숍',
+      content:'<div class="nt-lead">WORKSHOP · 2025 임직원 워크숍</div><p>㈜빛세움은 임직원 간 소통과 화합을 다지고 새로운 도약을 준비하기 위해 <strong>‘2025년 워크숍’</strong>을 개최하였습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2025</div><div class="nt-stat-label">워크숍 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">2026</div><div class="nt-stat-label">사업계획 공유 대상연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">전 직원</div><div class="nt-stat-label">참가 대상</div></div></div><p>이번 워크숍은 바쁜 업무에서 잠시 벗어나 지난 한 해의 성과를 돌아보고, <strong>2026년 주요 사업계획과 부서별 목표를 공유</strong>하는 뜻깊은 자리로 마련되었습니다. 임직원들은 각 사업 현장의 추진 현황과 경험을 함께 나누며 앞으로의 업무 방향을 구체적으로 점검하였습니다.</p><p>특히 급변하는 정비사업 환경에 능동적으로 대응하고 더욱 전문적인 서비스를 제공하기 위해 사업관리 역량 강화, 현장 중심의 문제 해결, 부서 간 협업체계 구축 등에 관한 다양한 의견을 나누었습니다. 모든 임직원이 회사의 목표와 비전을 함께 공유하며 새로운 도약을 다짐하는 시간이었습니다.</p><p>업무계획을 논의하는 진지한 일정이 끝난 뒤에는 바다가 보이는 야외 공간에서 식사와 단체 활동을 함께하고, <strong>장기자랑과 레크리에이션</strong> 등 다채로운 프로그램을 진행하였습니다. 평소 업무 중에는 미처 나누지 못했던 이야기를 편안하게 주고받으며 서로를 이해하고 더욱 가까워질 수 있었습니다.</p><div class="nt-divider"></div><p>각자의 자리에서 맡은 업무는 달라도 하나의 목표를 향해 함께 나아가는 <strong>‘빛세움 원팀’</strong>의 힘을 다시 한번 확인한 소중한 시간이었습니다. 임직원들의 밝은 웃음과 적극적인 참여 덕분에 이번 워크숍은 즐거움과 의미를 모두 갖춘 특별한 추억으로 남았습니다.</p><p>㈜빛세움은 이번 워크숍에서 나눈 의견과 다짐을 바탕으로 임직원 간 소통과 협력을 더욱 강화하고, 축적된 경험과 전문성을 통해 고객과 조합원에게 신뢰받는 정비사업 전문관리기업으로 계속 성장해 나가겠습니다.</p><p><strong>함께 만든 오늘의 성과를 넘어, 더 큰 내일을 향해 도약하는 ㈜빛세움이 되겠습니다.</strong></p>',
+      images:[
+        { src:'../jpg/gallery/workshop2025winter_beach_group.png', alt:'2025 빛세움 워크숍 해변 단체 사진 — 비에스그룹 2025 워크샵 현수막' },
+        { src:'../jpg/gallery/workshop2025winter_conference_2026plan.png', alt:'2026년 계획 종합의견을 발표하는 워크숍 세미나 현장' },
+        { src:'../jpg/gallery/workshop2025winter_conference_break.png', alt:'세미나 휴식 시간 안내 화면과 참석 임직원' },
+        { src:'../jpg/gallery/workshop2025winter_lawn_group.png', alt:'야외 잔디밭에서 촬영한 임직원 단체 사진(항공뷰)' },
+        { src:'../jpg/gallery/workshop2025winter_beach_dining.png', alt:'해변 야외 테이블에서 함께 식사하는 임직원들(항공뷰)' },
+        { src:'../jpg/gallery/workshop2025winter_karaoke_group.jpg', alt:'장기자랑 코너 — 노래방에서 포즈를 취한 임직원들' },
+        { src:'../jpg/gallery/workshop2025winter_karaoke_singing.jpg', alt:'장기자랑 코너 — 함께 노래를 부르는 임직원들' },
+        { src:'../jpg/gallery/workshop2025winter_game_costume.jpg', alt:'레크리에이션 코너 — 코스튬을 착용하고 게임에 참여하는 임직원' }
+      ] },
     { id:'vol_lottetower', category:'봉사활동', title:'빛세움 봉사활동 · 어르신과 함께한 롯데월드타워 나들이', date:'2026-08-29',
       excerpt:'거동이 불편한 어르신들과 함께한 롯데월드타워 전망대 나들이 봉사활동',
       content:'<div class="nt-lead">CSR · 사회공헌 활동</div><p>거동이 불편해 외출이 쉽지 않은 어르신들을 모시고, ㈜빛세움 임직원들이 잠실 롯데월드타워 나들이를 함께했습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">잠실</div><div class="nt-stat-label">롯데월드타워 전망대</div></div><div class="nt-stat-card"><div class="nt-stat-num">어르신</div><div class="nt-stat-label">동행 나들이 봉사</div></div><div class="nt-stat-card"><div class="nt-stat-num">08.29</div><div class="nt-stat-label">2026년 활동 일자</div></div></div><p>높은 전망대에서 함께 서울 전경을 내려다보고, 도란도란 이야기를 나누며 평소와는 다른 특별한 하루를 보냈습니다. <strong>짧은 외출이었지만 어르신들의 환한 웃음</strong> 덕분에 함께한 임직원들에게도 오래도록 기억될 따뜻한 시간이었습니다.</p><div class="nt-divider"></div><p>함께 걷는 하루, 함께 웃는 순간. ㈜빛세움은 가까운 곳에서부터 작은 나눔을 꾸준히 이어가겠습니다.</p>',
