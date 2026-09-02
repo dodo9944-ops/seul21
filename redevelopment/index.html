@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260901a">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260902b">
     <link rel="stylesheet" href="assets/css/download-view.css?v=20260830b">
     <style>
         /* ============================================================
@@ -501,6 +501,20 @@
         }
         .news-body h4:hover { color: #C58B00; }
         .news-date { font-size: 13px; color: #9A9DA2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* 주요뉴스·공지사항 위젯 전용 — 제목 한 줄 표시(짧으면 그대로, 길면 말줄임), 골드 점과 글자 정렬, 자간 확대 (대장 지시) */
+        #mainNews .news-item, #mainNotice .news-item { align-items: flex-start; }
+        #mainNews .news-item > span, #mainNotice .news-item > span { margin-top: -1px; }
+        #mainNews .news-body h4, #mainNotice .news-body h4 {
+            display: block;
+            -webkit-line-clamp: unset;
+            max-height: none;
+            margin-top: -3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            letter-spacing: 0.6px;
+        }
         /* 자료실 좌우 패널(최신자료·갤러리) 행 높이를 고정값으로 통일해 구분선을 맞춤
            (최신자료 콘텐츠 기준 스냅 높이 — 상단 여백만큼 하단 여백도 동일하게 확보,
             콘텐츠 길이와 무관하게 절대 어긋나지 않음) */
@@ -1125,9 +1139,9 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260901a"></script>
+<script src="assets/data/mock-data.js?v=20260902b"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260901b"></script>
+<script src="assets/js/common.js?v=20260902e"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1365,50 +1379,28 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var cutoff=new Date(today); cutoff.setDate(cutoff.getDate()-7);
         var cutStr=cutoff.toISOString().slice(0,10);
         var newsFileMap={
-'news0817a':'downloads/news_20260817a.html','news0817b':'downloads/news_20260817b.html','news0817c':'downloads/news_20260817c.html','news0817d':'downloads/news_20260817d.html','news0817e':'downloads/news_20260817e.html','news0817f':'downloads/news_20260817f.html','news0817g':'downloads/news_20260817g.html','news0817h':'downloads/news_20260817h.html','news0817i':'downloads/news_20260817i.html','news0818a':'downloads/news_20260818a.html','news0818b':'downloads/news_20260818b.html','news0818c':'downloads/news_20260818c.html','news0818d':'downloads/news_20260818d.html','news0818e':'downloads/news_20260818e.html','news0818f':'downloads/news_20260818f.html','news0818g':'downloads/news_20260818g.html','news0818h':'downloads/news_20260818h.html','news0818i':'downloads/news_20260818i.html','news0818j':'downloads/news_20260818j.html','news0818k':'downloads/news_20260818k.html','news0819a':'downloads/news_20260819a.html','news0819b':'downloads/news_20260819b.html','news0819c':'downloads/news_20260819c.html','news0819d':'downloads/news_20260819d.html','news0819e':'downloads/news_20260819e.html','news0819f':'downloads/news_20260819f.html','news0819g':'downloads/news_20260819g.html','news0820a':'downloads/news_20260820a.html','news0820b':'downloads/news_20260820b.html','news0820c':'downloads/news_20260820c.html','news0820d':'downloads/news_20260820d.html','news0820e':'downloads/news_20260820e.html','news0820f':'downloads/news_20260820f.html','news0820g':'downloads/news_20260820g.html','news0820h':'downloads/news_20260820h.html','news0820i':'downloads/news_20260820i.html','news0820j':'downloads/news_20260820j.html','news0821a':'downloads/news_20260821a.html','news0821b':'downloads/news_20260821b.html','news0821c':'downloads/news_20260821c.html','news0821d':'downloads/news_20260821d.html','news0821e':'downloads/news_20260821e.html','news0821f':'downloads/news_20260821f.html','news0821g':'downloads/news_20260821g.html','news0821h':'downloads/news_20260821h.html','news0821i':'downloads/news_20260821i.html','news0822a':'downloads/news_20260822a.html','news0822b':'downloads/news_20260822b.html','news0822c':'downloads/news_20260822c.html','news0822d':'downloads/news_20260822d.html','news0822e':'downloads/news_20260822e.html','news0823a':'downloads/news_20260823a.html','news0823b':'downloads/news_20260823b.html','news0823c':'downloads/news_20260823c.html','news0823d':'downloads/news_20260823d.html','news0823e':'downloads/news_20260823e.html','news0823f':'downloads/news_20260823f.html','news0823g':'downloads/news_20260823g.html','news0823h':'downloads/news_20260823h.html','news0824a':'downloads/news_20260824a.html','news0824b':'downloads/news_20260824b.html','news0824c':'downloads/news_20260824c.html','news0824d':'downloads/news_20260824d.html','news0824e':'downloads/news_20260824e.html','news0824f':'downloads/news_20260824f.html','news0824g':'downloads/news_20260824g.html','news0824h':'downloads/news_20260824h.html','news0824i':'downloads/news_20260824i.html','news0824j':'downloads/news_20260824j.html','news0828a':'downloads/news_20260828a.html','news0828b':'downloads/news_20260828b.html','news0829a':'downloads/news_20260829a.html','news0829b':'downloads/news_20260829b.html','news0831a':'downloads/news_20260831a.html','news0831b':'downloads/news_20260831b.html','news0831c':'downloads/news_20260831c.html','news0901a':'downloads/news_20260901a.html','news0901b':'downloads/news_20260901b.html','news0901c':'downloads/news_20260901c.html',};
+'news0817a':'downloads/news_20260817a.html','news0817b':'downloads/news_20260817b.html','news0817c':'downloads/news_20260817c.html','news0817d':'downloads/news_20260817d.html','news0817e':'downloads/news_20260817e.html','news0817f':'downloads/news_20260817f.html','news0817g':'downloads/news_20260817g.html','news0817h':'downloads/news_20260817h.html','news0817i':'downloads/news_20260817i.html','news0818a':'downloads/news_20260818a.html','news0818b':'downloads/news_20260818b.html','news0818c':'downloads/news_20260818c.html','news0818d':'downloads/news_20260818d.html','news0818e':'downloads/news_20260818e.html','news0818f':'downloads/news_20260818f.html','news0818g':'downloads/news_20260818g.html','news0818h':'downloads/news_20260818h.html','news0818i':'downloads/news_20260818i.html','news0818j':'downloads/news_20260818j.html','news0818k':'downloads/news_20260818k.html','news0819a':'downloads/news_20260819a.html','news0819b':'downloads/news_20260819b.html','news0819c':'downloads/news_20260819c.html','news0819d':'downloads/news_20260819d.html','news0819e':'downloads/news_20260819e.html','news0819f':'downloads/news_20260819f.html','news0819g':'downloads/news_20260819g.html','news0820a':'downloads/news_20260820a.html','news0820b':'downloads/news_20260820b.html','news0820c':'downloads/news_20260820c.html','news0820d':'downloads/news_20260820d.html','news0820e':'downloads/news_20260820e.html','news0820f':'downloads/news_20260820f.html','news0820g':'downloads/news_20260820g.html','news0820h':'downloads/news_20260820h.html','news0820i':'downloads/news_20260820i.html','news0820j':'downloads/news_20260820j.html','news0821a':'downloads/news_20260821a.html','news0821b':'downloads/news_20260821b.html','news0821c':'downloads/news_20260821c.html','news0821d':'downloads/news_20260821d.html','news0821e':'downloads/news_20260821e.html','news0821f':'downloads/news_20260821f.html','news0821g':'downloads/news_20260821g.html','news0821h':'downloads/news_20260821h.html','news0821i':'downloads/news_20260821i.html','news0822a':'downloads/news_20260822a.html','news0822b':'downloads/news_20260822b.html','news0822c':'downloads/news_20260822c.html','news0822d':'downloads/news_20260822d.html','news0822e':'downloads/news_20260822e.html','news0823a':'downloads/news_20260823a.html','news0823b':'downloads/news_20260823b.html','news0823c':'downloads/news_20260823c.html','news0823d':'downloads/news_20260823d.html','news0823e':'downloads/news_20260823e.html','news0823f':'downloads/news_20260823f.html','news0823g':'downloads/news_20260823g.html','news0823h':'downloads/news_20260823h.html','news0824a':'downloads/news_20260824a.html','news0824b':'downloads/news_20260824b.html','news0824c':'downloads/news_20260824c.html','news0824d':'downloads/news_20260824d.html','news0824e':'downloads/news_20260824e.html','news0824f':'downloads/news_20260824f.html','news0824g':'downloads/news_20260824g.html','news0824h':'downloads/news_20260824h.html','news0824i':'downloads/news_20260824i.html','news0824j':'downloads/news_20260824j.html','news0828a':'downloads/news_20260828a.html','news0828b':'downloads/news_20260828b.html','news0829a':'downloads/news_20260829a.html','news0829b':'downloads/news_20260829b.html','news0831a':'downloads/news_20260831a.html','news0831b':'downloads/news_20260831b.html','news0831c':'downloads/news_20260831c.html',};
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
             var href=newsFileMap[i.id]||'pages/library.html?cat=주요뉴스';
-            return'<a href="'+href+'" class="news-item" data-news-id="'+i.id+'" style="gap:10px;padding:12px 20px;">'+
+            return'<a href="'+href+'" class="news-item" style="gap:10px;padding:12px 20px;">'+
                 '<span style="color:#C58B00;font-size:11px;flex-shrink:0;">●</span>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
                 '<div class="news-date">'+i.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">최근 7일간 등록된 주요뉴스가 없습니다.</p>';
-        newsEl.addEventListener('click',function(e){
-            var a=e.target.closest('a[data-news-id]');if(!a)return;
-            var url=newsFileMap[a.dataset.newsId];if(!url)return;
-            e.preventDefault();
-            var item=news.find(function(n){return n.id===a.dataset.newsId});
-            NewsDetailModal.open(url,{category:'주요뉴스',title:item?item.title:''});
-        });
     }
 
     /* 공지사항: 최신 3건 */
     var noticeEl=document.getElementById('mainNotice');
     if(noticeEl && MOCK.notices){
         var notices=MOCK.notices.slice().sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
-        function noticeSummary(n){
-            if(n.excerpt) return n.excerpt;
-            var t=(n.content||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
-            return t.length>90?t.slice(0,90)+'…':t;
-        }
         noticeEl.innerHTML=notices.length?notices.map(function(n){
-            var badge=n.important?'<span style="color:#C58B00;font-weight:700;font-size:11px;margin-right:6px;">[중요]</span>':'';
-            return'<a href="pages/notice.html?id='+encodeURIComponent(n.id)+'" class="news-item" data-notice-id="'+n.id+'" style="gap:10px;padding:16px 20px;">'+
-                '<span style="color:#C58B00;font-size:11px;flex-shrink:0;margin-top:4px;">●</span>'+
-                '<div class="news-body" style="display:flex;flex-direction:column;gap:5px;">'+
-                '<h4 style="height:auto;display:block;-webkit-line-clamp:unset;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:0;">'+
-                    badge+n.title+
-                    '<span style="font-weight:400;color:#9A9DA2;font-size:13px;margin-left:8px;">'+noticeSummary(n)+'</span></h4>'+
+            return'<a href="pages/notice.html" class="news-item" style="gap:10px;padding:12px 20px;">'+
+                '<span style="color:#C58B00;font-size:11px;flex-shrink:0;">●</span>'+
+                '<div class="news-body"><h4>'+n.title+'</h4>'+
                 '<div class="news-date">'+n.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">등록된 공지사항이 없습니다.</p>';
-        noticeEl.addEventListener('click',function(e){
-            var a=e.target.closest('a[data-notice-id]');if(!a)return;
-            var n=notices.find(function(x){return x.id===a.dataset.noticeId});if(!n)return;
-            e.preventDefault();
-            NoticeDetailModal.open(n);
-        });
     }
 
     /* 자료실: 최신 3건 (주요뉴스 제외) */

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#FFFFFF">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홍보동영상 — (주)빛세움</title>
+    <meta name="description" content="(주)빛세움의 정비사업 이야기를 영상으로 만나보세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260902b">
+    <style>
+    .pv-frame {
+        max-width: 860px; margin: 0 auto; aspect-ratio: 16/9;
+        background: linear-gradient(135deg, #171C26 0%, #0A0F1C 100%);
+        border-radius: 16px; overflow: hidden; position: relative;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 20px 50px rgba(10,15,28,.18);
+    }
+    .pv-frame::before {
+        content: ''; position: absolute; inset: 0;
+        background-image: radial-gradient(circle at 25% 30%, rgba(255,196,0,.10) 0%, transparent 45%),
+                           radial-gradient(circle at 80% 75%, rgba(255,196,0,.06) 0%, transparent 40%);
+    }
+    .pv-play { position: relative; z-index: 1; text-align: center; color: #fff; }
+    .pv-play-btn {
+        width: 88px; height: 88px; border-radius: 50%;
+        background: rgba(255,196,0,.14); border: 1.5px solid rgba(255,196,0,.35);
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 20px; font-size: 30px; color: #FFC400;
+    }
+    .pv-play h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .pv-play p { font-size: 13.5px; color: rgba(255,255,255,.55); }
+    .pv-note { max-width: 860px; margin: 24px auto 0; text-align: center; font-size: 13px; color: var(--gray-400); line-height: 1.7; }
+    @media (max-width: 600px) { .pv-play-btn { width: 68px; height: 68px; font-size: 24px; } .pv-play h3 { font-size: 16px; } }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<div class="page-hero">
+    <div class="inner">
+        <div class="breadcrumb">
+            <a href="../index.html">홈</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="community.html">커뮤니티</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>홍보동영상</span>
+        </div>
+        <h1>홍보동영상</h1>
+        <p>(주)빛세움의 정비사업 이야기를 영상으로 준비하고 있습니다</p>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="inner">
+        <div class="pv-frame">
+            <div class="pv-play">
+                <div class="pv-play-btn"><i class="fa-solid fa-play"></i></div>
+                <h3>영상 콘텐츠 준비 중입니다</h3>
+                <p>회사 소개 및 주요 사업 소개 영상을 순차적으로 게시할 예정입니다</p>
+            </div>
+        </div>
+        <p class="pv-note">궁금한 점은 <a href="contact.html" style="color:var(--gold);font-weight:600">고객센터</a>로 문의해 주시면 자세히 안내드리겠습니다.</p>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="../assets/data/mock-data.js?v=20260902b"></script>
+<script src="../assets/js/data-service.js?v=20260418q"></script>
+<script src="../assets/js/common.js?v=20260902e"></script>
+</body>
+</html>

@@ -26,6 +26,7 @@ const App = (() => {
       { href: `${B}/pages/services.html`, label: '사업분야', icon: 'fa-solid fa-diagram-project' },
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
+      { href: `${B}/pages/community.html`, label: '커뮤니티', icon: 'fa-solid fa-comments' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
     ];
     const navGroups = [
@@ -59,6 +60,7 @@ const App = (() => {
         { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
         { href:`${B}/pages/gallery.html`, label:'갤러리' },
       ]},
+      { href:`${B}/pages/community.html`, label:'커뮤니티', icon:'fa-solid fa-comments' },
       { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
         { href:`${B}/pages/contact.html`, label:'문의하기' },
         { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
@@ -76,7 +78,7 @@ const App = (() => {
     <div class="util-bar"><div class="inner">
       <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링그룹</span>
       <div class="util-item-drop">
-        <a href="${B}/pages/feasibility.html">사업성 검토</a>
+        <a href="${B}/pages/feasibility.html">사업타당성검토</a>
         <div class="util-drop-menu">
           <a href="${B}/pages/feasibility.html">사업성 검토 소개</a>
           <a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>
@@ -161,13 +163,14 @@ const App = (() => {
           <i class="fa-solid fa-magnifying-glass"></i>
           <input type="text" id="searchField" placeholder="사업분야, 자료, 업무실적 검색" autocomplete="off">
         </div>
-        <div class="search-keywords">
+        <div class="search-keywords" id="searchKeywords">
           <h4>인기 검색어</h4>
           <div class="tags">
-            <a href="#" onclick="document.getElementById('searchField').value=this.textContent;return false;">조합설립</a><a href="#" onclick="document.getElementById('searchField').value=this.textContent;return false;">관리처분</a><a href="#" onclick="document.getElementById('searchField').value=this.textContent;return false;">도시계획</a>
-            <a href="#" onclick="document.getElementById('searchField').value=this.textContent;return false;">사업성분석</a><a href="#" onclick="document.getElementById('searchField').value=this.textContent;return false;">인허가</a><a href="#" onclick="document.getElementById('searchField').value=this.textContent;return false;">자료실</a>
+            <a href="#" onclick="document.getElementById('searchField').value=this.textContent;document.getElementById('searchField').dispatchEvent(new Event('input'));return false;">조합설립</a><a href="#" onclick="document.getElementById('searchField').value=this.textContent;document.getElementById('searchField').dispatchEvent(new Event('input'));return false;">관리처분</a><a href="#" onclick="document.getElementById('searchField').value=this.textContent;document.getElementById('searchField').dispatchEvent(new Event('input'));return false;">도시계획</a>
+            <a href="#" onclick="document.getElementById('searchField').value=this.textContent;document.getElementById('searchField').dispatchEvent(new Event('input'));return false;">사업성분석</a><a href="#" onclick="document.getElementById('searchField').value=this.textContent;document.getElementById('searchField').dispatchEvent(new Event('input'));return false;">인허가</a><a href="#" onclick="document.getElementById('searchField').value=this.textContent;document.getElementById('searchField').dispatchEvent(new Event('input'));return false;">자료실</a>
           </div>
         </div>
+        <div class="search-results" id="searchResults" style="display:none"></div>
       </div>
     </div>`;
   }
@@ -356,6 +359,8 @@ const App = (() => {
     const searchField = document.getElementById('searchField');
     const openSearch = document.getElementById('openSearch');
     const closeSearch = document.getElementById('searchClose');
+    const searchKeywords = document.getElementById('searchKeywords');
+    const searchResults = document.getElementById('searchResults');
     if (openSearch) openSearch.addEventListener('click', () => {
       searchOverlay.classList.add('open');
       lockScroll();
@@ -365,20 +370,56 @@ const App = (() => {
       searchOverlay.classList.remove('open');
       unlockScroll();
       searchField.value = '';
+      renderSiteSearch('');
     });
 
-    // Search keywords
-    document.querySelectorAll('.search-keywords .tags a').forEach(tag => {
-      tag.addEventListener('click', e => {
-        e.preventDefault();
-        searchField.value = tag.textContent;
-        searchField.focus();
-      });
-    });
+    // 사이트 전체 통합검색 — 자료실(법령·판례·서식·주요뉴스)·공지사항 대상, 1글자만 입력돼도 즉시 결과 표시
+    const _srCatLabel = { '주요뉴스':'주요뉴스', '법령':'법령', '법령·조례':'법령', '관련판례':'판례', '지침':'판례', '판례·질의회신':'판례', '서식':'서식', '가이드':'서식', '입찰공고':'입찰공고', '회사소식':'공지', '수주소식':'공지', '기타소식':'공지' };
+    function renderSiteSearch(qRaw) {
+      const q = (qRaw || '').trim().toLowerCase();
+      if (!q) {
+        if (searchKeywords) searchKeywords.style.display = '';
+        if (searchResults) { searchResults.style.display = 'none'; searchResults.innerHTML = ''; }
+        return;
+      }
+      if (searchKeywords) searchKeywords.style.display = 'none';
+      if (!searchResults) return;
+      searchResults.style.display = '';
 
-    // Search submit
+      let hits = [];
+      if (typeof MOCK !== 'undefined' && Array.isArray(MOCK.library)) {
+        MOCK.library.forEach(item => {
+          if ((item.title || '').toLowerCase().includes(q) || (item.description || '').toLowerCase().includes(q)) {
+            hits.push({ id: item.id, title: item.title, date: item.date, cat: _srCatLabel[item.category] || item.category, href: `${B}/pages/library.html?id=${encodeURIComponent(item.id)}` });
+          }
+        });
+      }
+      if (typeof MOCK !== 'undefined' && Array.isArray(MOCK.notices)) {
+        MOCK.notices.forEach(item => {
+          const plain = (item.content || '').replace(/<[^>]*>/g, ' ');
+          if ((item.title || '').toLowerCase().includes(q) || plain.toLowerCase().includes(q)) {
+            hits.push({ id: item.id, title: item.title, date: item.date, cat: '공지', href: `${B}/pages/notice.html?id=${encodeURIComponent(item.id)}` });
+          }
+        });
+      }
+      hits.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      hits = hits.slice(0, 30);
+
+      if (!hits.length) {
+        searchResults.innerHTML = `<div class="sr-empty">"${q}"에 대한 검색 결과가 없습니다</div>`;
+        return;
+      }
+      searchResults.innerHTML = `<div class="sr-count">총 <strong>${hits.length}</strong>건</div>` +
+        hits.map(h => `<a class="sr-item" href="${h.href}"><span class="sr-cat">${h.cat}</span><span class="sr-body"><span class="sr-title">${h.title}</span><span class="sr-date">${h.date || ''}</span></span></a>`).join('');
+    }
+
+    if (searchField) searchField.addEventListener('input', () => renderSiteSearch(searchField.value));
+
+    // Search submit (Enter = 첫 결과로 이동)
     if (searchField) searchField.addEventListener('keydown', e => {
       if (e.key === 'Enter' && searchField.value.trim()) {
+        const first = searchResults && searchResults.querySelector('.sr-item');
+        if (first) { location.href = first.getAttribute('href'); return; }
         const q = searchField.value.trim();
         searchOverlay.classList.remove('open');
         unlockScroll();
