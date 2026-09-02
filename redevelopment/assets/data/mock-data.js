@@ -1109,6 +1109,19 @@ const MOCK = {
         { src:'../jpg/gallery/workshop2025winter_karaoke_singing.jpg', alt:'장기자랑 코너 — 함께 노래를 부르는 임직원들' },
         { src:'../jpg/gallery/workshop2025winter_game_costume.jpg', alt:'레크리에이션 코너 — 코스튬을 착용하고 게임에 참여하는 임직원' }
       ] },
+    { id:'ws2026_zhangjiajie', category:'워크숍', title:'비와 함께한 특별한 추억, 2026년 중국 장가계 워크숍', date:'2026-05-17',
+      excerpt:'궂은 날씨 속에서도 웃음이 끊이지 않았던 2026년 중국 장가계 임직원 워크숍',
+      content:'<div class="nt-lead">WORKSHOP · 2026 임직원 워크숍</div><p>2026년 중국 장가계에서 임직원 워크숍을 진행했습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2026</div><div class="nt-stat-label">워크숍 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">장가계</div><div class="nt-stat-label">개최지 · 중국</div></div><div class="nt-stat-card"><div class="nt-stat-num">우천</div><div class="nt-stat-label">궂은 날씨 속 진행</div></div></div><p>워크숍 기간 동안 비가 많이 내려 다소 불편한 점도 있었지만, 안개와 구름에 둘러싸인 장가계의 신비로운 풍경은 평소 쉽게 접하기 어려운 <strong>특별한 장관</strong>을 선사했습니다.</p><p>임직원들은 아름다운 자연을 함께 둘러보며 바쁜 일상에서 벗어나 재충전하고, 서로를 배려하며 더욱 가까워지는 뜻깊은 시간을 보냈습니다. <strong>궂은 날씨 속에서도 웃음이 끊이지 않았던</strong> 즐겁고 소중한 워크숍이었습니다.</p><div class="nt-divider"></div><p>특히 매년 전 임직원이 함께할 수 있도록 해외 워크숍이라는 소중한 기회를 마련해 주시는 <strong>총괄대표님</strong>께 진심으로 감사드립니다. 직원들의 화합과 재충전을 위해 아낌없이 배려해 주시는 그 뜻을 잊지 않고, 더욱 단합된 모습과 성과로 보답하겠습니다.</p><p>이번 장가계 워크숍에서 쌓은 소중한 추억과 하나 된 마음을 바탕으로 앞으로도 더욱 발전하는 ㈜빛세움이 되겠습니다.</p>',
+      images:[
+        { src:'../jpg/gallery/workshop2026_zhangjiajie_group_bridge.jpg', alt:'안개 낀 장가계 전망대에서 촬영한 임직원 단체 사진' },
+        { src:'../jpg/gallery/workshop2026_zhangjiajie_peaks_a.jpg', alt:'구름과 안개에 둘러싸인 장가계 봉우리 절경' },
+        { src:'../jpg/gallery/workshop2026_zhangjiajie_peaks_b.jpg', alt:'장가계 카르스트 봉우리와 짙은 안개 풍경' },
+        { src:'../jpg/gallery/workshop2026_zhangjiajie_group_raincoat.jpg', alt:'우비를 입고 전망대에서 촬영한 임직원 기념 사진' },
+        { src:'../jpg/gallery/workshop2026_zhangjiajie_night_show.jpg', alt:'장가계 야간 민속공연 관람 현장' },
+        { src:'../jpg/gallery/workshop2026_zhangjiajie_night_selfie.jpg', alt:'공연 관람 후 인파 속에서 촬영한 임직원 단체 셀카' },
+        { src:'../jpg/gallery/workshop2026_zhangjiajie_korean_meal.jpg', alt:'현지 식당에서 함께한 임직원 단체 식사' },
+        { src:'../jpg/gallery/workshop2026_zhangjiajie_banquet.jpg', alt:'현지 연회장에서 진행된 임직원 단체 만찬' }
+      ] },
     { id:'jc_gongdeok2026', category:'주민총회', title:'공덕현대아파트 정기총회 — 이주비 규제 위기 속 긴급자금 조달, 2개월 만에 이주 완료', date:'2026-04-10',
       excerpt:'강화된 이주비 대출 규제 속 긴급 자금조달로 조합원 이주 2개월 만에 완료 — 공덕현대아파트 정기총회 현장',
       content:'<div class="nt-lead">GENERAL MEETING · 공덕현대아파트 소규모재건축정비사업조합</div><p>공덕현대아파트 소규모재건축정비사업조합은 정부의 <strong>강화된 이주비 대출 규제</strong>로 조합원들의 이주가 어려워질 것으로 예상됨에 따라, 긴급 이주비 조달을 주요 목적으로 하는 2026년 정기총회를 개최했습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2개월</div><div class="nt-stat-label">이주 개시~완료 소요기간</div></div><div class="nt-stat-card"><div class="nt-stat-num">04.10</div><div class="nt-stat-label">2026년 정기총회 개최일</div></div><div class="nt-stat-card"><div class="nt-stat-num">철거공사</div><div class="nt-stat-label">현재 진행 단계</div></div></div><p>총회에서는 <strong>긴급 이주비 조달과 시공사 도급계약 변경</strong> 등 사업 추진에 필요한 주요 안건을 의결했습니다. 이후 금융기관 및 시공사와의 긴밀한 협의를 통해 조합원에게 필요한 이주자금을 신속히 확보함으로써, 규제에 따른 사업 지연과 조합원의 경제적 부담을 최소화했습니다.</p><p>그 결과 공덕현대는 어려운 금융환경에도 불구하고 <strong>이주 개시 후 약 2개월 만에 조합원 이주를 성공적으로 완료</strong>했습니다. 현재는 철거공사를 진행하며 착공을 위한 후속 절차를 차질 없이 추진하고 있습니다.</p><div class="nt-divider"></div><p>㈜빛세움은 제도 변화와 금융규제에 선제적으로 대응하고, 사업장별 여건에 맞는 현실적인 자금조달 방안을 마련하여 공덕현대 소규모재건축사업이 안정적으로 추진될 수 있도록 끝까지 함께하겠습니다.</p>',
