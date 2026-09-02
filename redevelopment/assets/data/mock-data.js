@@ -1094,7 +1094,13 @@ const MOCK = {
       content:'<div class="nt-lead">WORKSHOP · 2025 임직원 워크숍</div><p>2025년, 빛세움은 대만에서 또 하나의 특별한 추억을 만들었습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2025</div><div class="nt-stat-label">워크숍 개최연도</div></div><div class="nt-stat-card"><div class="nt-stat-num">대만</div><div class="nt-stat-label">개최지 · 지우펀 일대</div></div><div class="nt-stat-card"><div class="nt-stat-num">새우낚시</div><div class="nt-stat-label">현지 체험 프로그램</div></div></div><p>익숙한 업무 공간을 벗어나 함께 걷고, 맛보고, 웃으며 여유로운 시간을 보냈습니다. 비가 내려도 일정은 계속됐고, 예상하지 못한 순간들이 오히려 더 오래 기억에 남았습니다.</p><p>지우펀 옛거리를 함께 거닐고, 실내 새우낚시 체험에도 도전했습니다. <strong>직접 잡은 새우의 맛은 기대보다 훨씬 좋았습니다.</strong> 함께 여행하면 평소엔 보이지 않던 서로의 모습도 자연스럽게 드러나고, 조금 더 편하게 이야기하며 더 많이 웃게 됩니다.</p><div class="nt-divider"></div><p>2025 빛세움 대만 워크숍, 일상에서 잠시 벗어나 함께 즐긴 우리의 기록입니다.</p>',
       images:[
         { src:'../jpg/gallery/workshop2025_taipei_group.jpg', alt:'2025 빛세움 워크숍 in Taipei — 지우펀 옛거리 단체 사진' },
-        { src:'../jpg/gallery/workshop2025_shrimp_fishing.jpg', alt:'대만 실내 새우낚시 체험 현장' }
+        { src:'../jpg/gallery/workshop2025_shrimp_fishing.jpg', alt:'대만 실내 새우낚시 체험 현장' },
+        { src:'../jpg/gallery/workshop2025_taipei_ckshall.jpg', alt:'대만 중정기념당(國立中正紀念堂) 전경' },
+        { src:'../jpg/gallery/workshop2025_taipei101_tower.jpg', alt:'대만 랜드마크 타이베이101 외관' },
+        { src:'../jpg/gallery/workshop2025_taipei101_ohtani_ball_night.jpg', alt:'타이베이101 오타니 쇼헤이 50호 홈런 기념구 전시' },
+        { src:'../jpg/gallery/workshop2025_taipei101_ohtani_ball_day.jpg', alt:'타이베이101 오타니 쇼헤이 50호 홈런 기념구 전시(다른 각도)' },
+        { src:'../jpg/gallery/workshop2025_taiwan_teaegg.jpg', alt:'대만 현지 노점의 찻잎계란(茶葉蛋)' },
+        { src:'../jpg/gallery/workshop2025_taipei101_yankees_exhibit.jpg', alt:'타이베이101 뉴욕 양키스·베이브 루스 기념품 전시' }
       ] },
     { id:'ws2025_winter', category:'워크숍', title:'2025 빛세움 워크숍 — 함께 만든 성과, 함께 준비하는 도약', date:'2025-12-29',
       excerpt:'한 해의 성과를 돌아보고 2026년 사업계획을 함께 나눈 ㈜빛세움 2025년 워크숍',
