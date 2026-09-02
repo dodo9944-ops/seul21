@@ -136,6 +136,7 @@ button, input, select, textarea { font-family: inherit; }
 /* ── UTILITY BAR ── */
 .util-bar {
   background: var(--visseum-ink);
+  border-bottom: 2px solid var(--gold);
   font-size: 11px; color: rgba(255,255,255,0.7); height: 25.6px; /* 사업성 검토-고객센터 간 여백 100→80 축소 */
 }
 .util-bar .inner { display: flex; align-items: center; justify-content: flex-end; height: 100%; gap: 20px; }
