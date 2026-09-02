@@ -1099,7 +1099,8 @@ const MOCK = {
         { src:'../jpg/gallery/workshop2025_taipei101_tower.jpg', alt:'대만 랜드마크 타이베이101 외관' },
         { src:'../jpg/gallery/workshop2025_taipei_ckshall_ceiling.jpg', alt:'중정기념당 내부 팔각 돔 천장 — 청천백일 문양' },
         { src:'../jpg/gallery/workshop2025_taiwan_teaegg.jpg', alt:'대만 현지 노점의 찻잎계란(茶葉蛋)' },
-        { src:'../jpg/gallery/workshop2025_taipei101_yankees_exhibit.jpg', alt:'타이베이101 뉴욕 양키스·베이브 루스 기념품 전시' }
+        { src:'../jpg/gallery/workshop2025_taipei101_yankees_exhibit.jpg', alt:'타이베이101 뉴욕 양키스·베이브 루스 기념품 전시' },
+        { src:'../jpg/gallery/workshop2025_taipei101_nightview.jpg', alt:'타이베이101 전망대에서 바라본 타이베이 시내 야경' }
       ] },
     { id:'ws2025_winter', category:'워크샵', title:'2025 빛세움 워크샵 — 함께 만든 성과, 함께 준비하는 도약', date:'2025-12-29',
       excerpt:'한 해의 성과를 돌아보고 2026년 사업계획을 함께 나눈 ㈜빛세움 2025년 워크샵',
