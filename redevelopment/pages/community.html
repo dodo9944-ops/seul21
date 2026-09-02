@@ -365,10 +365,11 @@ function render(){
 }
 
 /* Events */
-window.cmSwitch=function(cat){curCat=cat;curPage=1;renderTabs();render();var t=document.getElementById('cmTabs');if(t)window.scrollTo({top:t.offsetTop-80,behavior:'smooth'})};
+window.cmSwitch=function(cat){if(cat==='갤러리'){location.href='gallery.html';return}curCat=cat;curPage=1;renderTabs();render();var t=document.getElementById('cmTabs');if(t)window.scrollTo({top:t.offsetTop-80,behavior:'smooth'})};
 
 document.getElementById('cmTabs').addEventListener('click',function(e){
     var btn=e.target.closest('.cm-tab');if(!btn)return;
+    if(btn.dataset.cat==='갤러리'){location.href='gallery.html';return}
     curCat=btn.dataset.cat;curPage=1;renderTabs();render();
 });
 document.getElementById('cmPerSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;render()});
