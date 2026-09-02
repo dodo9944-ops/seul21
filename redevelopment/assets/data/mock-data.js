@@ -1109,6 +1109,15 @@ const MOCK = {
         { src:'../jpg/gallery/workshop2025winter_karaoke_singing.jpg', alt:'장기자랑 코너 — 함께 노래를 부르는 임직원들' },
         { src:'../jpg/gallery/workshop2025winter_game_costume.jpg', alt:'레크리에이션 코너 — 코스튬을 착용하고 게임에 참여하는 임직원' }
       ] },
+    { id:'jc_gongdeok2026', category:'주민총회', title:'공덕현대아파트 정기총회 — 이주비 규제 위기 속 긴급자금 조달, 2개월 만에 이주 완료', date:'2026-04-10',
+      excerpt:'강화된 이주비 대출 규제 속 긴급 자금조달로 조합원 이주 2개월 만에 완료 — 공덕현대아파트 정기총회 현장',
+      content:'<div class="nt-lead">GENERAL MEETING · 공덕현대아파트 소규모재건축정비사업조합</div><p>공덕현대아파트 소규모재건축정비사업조합은 정부의 <strong>강화된 이주비 대출 규제</strong>로 조합원들의 이주가 어려워질 것으로 예상됨에 따라, 긴급 이주비 조달을 주요 목적으로 하는 2026년 정기총회를 개최했습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">2개월</div><div class="nt-stat-label">이주 개시~완료 소요기간</div></div><div class="nt-stat-card"><div class="nt-stat-num">04.10</div><div class="nt-stat-label">2026년 정기총회 개최일</div></div><div class="nt-stat-card"><div class="nt-stat-num">철거공사</div><div class="nt-stat-label">현재 진행 단계</div></div></div><p>총회에서는 <strong>긴급 이주비 조달과 시공사 도급계약 변경</strong> 등 사업 추진에 필요한 주요 안건을 의결했습니다. 이후 금융기관 및 시공사와의 긴밀한 협의를 통해 조합원에게 필요한 이주자금을 신속히 확보함으로써, 규제에 따른 사업 지연과 조합원의 경제적 부담을 최소화했습니다.</p><p>그 결과 공덕현대는 어려운 금융환경에도 불구하고 <strong>이주 개시 후 약 2개월 만에 조합원 이주를 성공적으로 완료</strong>했습니다. 현재는 철거공사를 진행하며 착공을 위한 후속 절차를 차질 없이 추진하고 있습니다.</p><div class="nt-divider"></div><p>㈜빛세움은 제도 변화와 금융규제에 선제적으로 대응하고, 사업장별 여건에 맞는 현실적인 자금조달 방안을 마련하여 공덕현대 소규모재건축사업이 안정적으로 추진될 수 있도록 끝까지 함께하겠습니다.</p>',
+      images:[
+        { src:'../jpg/notice/gongdeok_hyundai_speaker_lcw.jpg', alt:'2026년 공덕현대아파트 정기총회에서 발언하는 ㈜빛세움 이창우' },
+        { src:'../jpg/notice/gongdeok_hyundai_jeonggichonghoe.jpg', alt:'2026년 공덕현대아파트 정기총회 현장 — 시공사 도급계약 변경 등을 위한 정기총회' },
+        { src:'../jpg/notice/gongdeok_hyundai_lobby_wreath.jpg', alt:'정기총회장 로비 — 시공사 임원 축하 화환과 접수 데스크' },
+        { src:'../jpg/notice/gongdeok_hyundai_stage_audience.jpg', alt:'정기총회 무대와 참석 조합원들' }
+      ] },
     { id:'vol_lottetower', category:'봉사활동', title:'빛세움 봉사활동 · 어르신과 함께한 롯데월드타워 나들이', date:'2026-08-29',
       excerpt:'거동이 불편한 어르신들과 함께한 롯데월드타워 전망대 나들이 봉사활동',
       content:'<div class="nt-lead">CSR · 사회공헌 활동</div><p>거동이 불편해 외출이 쉽지 않은 어르신들을 모시고, ㈜빛세움 임직원들이 잠실 롯데월드타워 나들이를 함께했습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">잠실</div><div class="nt-stat-label">롯데월드타워 전망대</div></div><div class="nt-stat-card"><div class="nt-stat-num">어르신</div><div class="nt-stat-label">동행 나들이 봉사</div></div><div class="nt-stat-card"><div class="nt-stat-num">08.29</div><div class="nt-stat-label">2026년 활동 일자</div></div></div><p>높은 전망대에서 함께 서울 전경을 내려다보고, 도란도란 이야기를 나누며 평소와는 다른 특별한 하루를 보냈습니다. <strong>짧은 외출이었지만 어르신들의 환한 웃음</strong> 덕분에 함께한 임직원들에게도 오래도록 기억될 따뜻한 시간이었습니다.</p><div class="nt-divider"></div><p>함께 걷는 하루, 함께 웃는 순간. ㈜빛세움은 가까운 곳에서부터 작은 나눔을 꾸준히 이어가겠습니다.</p>',
