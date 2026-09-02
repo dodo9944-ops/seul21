@@ -135,13 +135,13 @@ button, input, select, textarea { font-family: inherit; }
 
 /* ── UTILITY BAR ── */
 .util-bar {
-  background: #FFFFFF;
-  font-size: 11px; color: rgba(10,15,28,0.55); height: 25.6px; /* 사업성 검토-고객센터 간 여백 100→80 축소 */
+  background: var(--visseum-ink);
+  font-size: 11px; color: rgba(255,255,255,0.7); height: 25.6px; /* 사업성 검토-고객센터 간 여백 100→80 축소 */
 }
 .util-bar .inner { display: flex; align-items: center; justify-content: flex-end; height: 100%; gap: 20px; }
-.util-bar a { color: rgba(10,15,28,0.35); transition: color var(--transition); font-weight: 500; }
-.util-bar a:hover { color: var(--gold); }
-.util-bar .util-left { flex:1; color: rgba(10,15,28,0.35); font-size:10px; letter-spacing:0.5px; }
+.util-bar a { color: rgba(255,255,255,0.55); transition: color var(--transition); font-weight: 500; }
+.util-bar a:hover { color: var(--gold-hover); }
+.util-bar .util-left { flex:1; color: rgba(255,255,255,0.55); font-size:10px; letter-spacing:0.5px; }
 .util-bar .inner > a:first-of-type,
 .util-bar .inner > .util-item-drop:first-of-type > a:first-child { margin-left: -8px; }
 @media (max-width: 768px) { .util-bar { display: none; } }
