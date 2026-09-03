@@ -63,7 +63,7 @@
     }
     .vs-hero-kw {
         padding: 14px 28px; border-radius: 10px;
-        background: rgba(255,255,255,0.04); border: 1px solid rgba(184,134,11,0.15);
+        background: rgba(255,255,255,0.04); border: 1px solid rgba(184,134,11,0.165);
         font-size: 14px; font-weight: 600; color: rgba(10,15,28,0.7);
         letter-spacing: 0.3px;
     }
@@ -136,14 +136,14 @@
     }
     .vs-why-card {
         padding: 18px 20px 18px 18px; border-radius: 12px;
-        background: #ffffff; border: 1px solid #e2e5ea;
-        border-left: 3px solid rgba(184,134,11,0.35);
+        background: #ffffff; border: 1px solid #cbced3;
+        border-left: 3px solid rgba(184,134,11,0.385);
         box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         transition: border-color 0.2s, box-shadow 0.2s;
     }
     .vs-why-card:hover {
-        border-color: #e2e5ea;
-        border-left-color: #B8860B;
+        border-color: #cbced3;
+        border-left-color: #A6790A;
         box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     }
     .vs-why-card h4 {
@@ -165,12 +165,12 @@
         display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
     }
     .vs-prin-card {
-        background: #fff; border: 1px solid var(--gray-200); border-radius: 14px;
+        background: #fff; border: 1px solid #cecece; border-radius: 14px;
         padding: 32px 24px; transition: all 0.25s; min-height: 200px;
         display: flex; flex-direction: column;
     }
     .vs-prin-card:hover {
-        border-color: var(--gold); box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+        border-color: #a6790a; box-shadow: 0 8px 28px rgba(0,0,0,0.06);
         transform: translateY(-3px);
     }
     .vs-prin-icon {
@@ -189,7 +189,7 @@
     /* ── 빛세움의 방식 (Process) ── */
     .vs-process {
         background: linear-gradient(135deg, #FFFDF7, #FFF7DF 50%, #FFF3C4);
-        border: 1px solid rgba(197,139,0,.14);
+        border: 1px solid rgba(197,139,0,0.154);
         border-radius: 18px; padding: 56px 48px; position: relative; overflow: hidden;
     }
     .vs-process::after {
@@ -227,7 +227,7 @@
 
     /* Step card */
     .vs-step {
-        background: #fff; border: 1px solid var(--gray-200);
+        background: #fff; border: 1px solid #cecece;
         border-radius: 14px; padding: 28px 24px; transition: all 0.3s;
         position: relative; overflow: hidden;
         display: block; text-decoration: none; color: inherit;
@@ -246,16 +246,16 @@
         opacity: 0; transition: opacity 0.3s;
     }
     .vs-step:hover {
-        border-color: rgba(184,134,11,0.3);
+        border-color: rgba(184,134,11,0.33);
         transform: translateY(-4px); box-shadow: 0 12px 30px rgba(20,28,38,.09);
     }
     .vs-step:hover::before { opacity: 1; }
 
     /* First step accent */
-    .vs-step.step-first { border-color: rgba(184,134,11,0.2); }
+    .vs-step.step-first { border-color: rgba(184,134,11,0.22); }
     .vs-step.step-first::before { opacity: 0.5; }
     /* Last step accent */
-    .vs-step.step-last { border-color: rgba(184,134,11,0.2); }
+    .vs-step.step-last { border-color: rgba(184,134,11,0.22); }
     .vs-step.step-last::after {
         content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
         background: linear-gradient(90deg, rgba(184,134,11,0.2), var(--gold));
@@ -273,7 +273,7 @@
     .vs-step-badge {
         display: inline-flex; align-items: center; justify-content: center;
         width: 30px; height: 30px; border-radius: 8px;
-        background: rgba(197,139,0,.08); border: 1px solid rgba(197,139,0,.18);
+        background: rgba(197,139,0,.08); border: 1px solid rgba(197,139,0,0.198);
         font-size: 12px; font-weight: 800; color: var(--gold);
         margin-bottom: 12px;
     }
@@ -281,7 +281,7 @@
     .vs-step-icon {
         display: inline-flex; align-items: center; justify-content: center;
         width: 30px; height: 30px; border-radius: 8px;
-        background: rgba(184,134,11,0.10); border: 1px solid rgba(184,134,11,0.2);
+        background: rgba(184,134,11,0.10); border: 1px solid rgba(184,134,11,0.22);
         font-size: 13px; color: var(--gold);
         margin-left: 8px; margin-bottom: 12px;
     }
@@ -340,9 +340,9 @@
     }
     .vs-cta-primary:hover { filter: brightness(1.04); transform: translateY(-2px); }
     .vs-cta-outline {
-        background: #fff; color: var(--gray-700); border: 1.5px solid var(--gray-200);
+        background: #fff; color: var(--gray-700); border: 1.5px solid #cecece;
     }
-    .vs-cta-outline:hover { border-color: var(--gold); color: var(--brand-dark); }
+    .vs-cta-outline:hover { border-color: #a6790a; color: var(--brand-dark); }
     @media(max-width:768px) {
         .vs-cta { flex-direction: column; gap: 12px; }
     }
@@ -479,7 +479,7 @@
         width: 174px; height: 130px; box-sizing: border-box;
         overflow: hidden;
         background: rgba(23,28,38,0.82);
-        border: 1px solid rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.11);
         border-radius: 12px; padding: 22px 18px;
         transition: all 0.3s;
         backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -599,7 +599,7 @@
             <div class="vs-why">
                 <div class="vs-why-text">
                     <h2>왜 도시정비에<br>집중하는가</h2>
-                    <p style="font-size:20px;font-weight:800;color:var(--brand-dark);line-height:1.6;margin-bottom:24px;letter-spacing:-0.3px;border-left:3px solid var(--gold);padding-left:16px;">쉬운 길이 아니라 옳은 길을 택했고,<br>그 선택이 빛세움의 정체성이 되었습니다.</p>
+                    <p style="font-size:20px;font-weight:800;color:var(--brand-dark);line-height:1.6;margin-bottom:24px;letter-spacing:-0.3px;border-left:3px solid #a6790a;padding-left:16px;">쉬운 길이 아니라 옳은 길을 택했고,<br>그 선택이 빛세움의 정체성이 되었습니다.</p>
                     <p>도시정비사업은 단순한 건설 행위가 아닙니다. 수십 년간 삶의 터전이었던 공간을 허물고, 그 위에 새로운 공동체를 세우는 일입니다.</p>
                     <p>수백, 수천 명의 재산권이 걸려 있고, 행정기관의 인허가와 법률적 판단이 매 단계마다 뒤따릅니다. 하나의 절차가 어긋나면 수년간의 노력이 무너질 수 있는, 가장 엄밀함을 요구하는 분야입니다.</p>
                     <p>우리가 도시정비에 집중하는 이유는 명확합니다. 이 분야야말로 전문가의 양심과 역량이 가장 절실하게 필요한 영역이기 때문입니다.</p>

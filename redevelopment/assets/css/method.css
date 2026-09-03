@@ -13,7 +13,7 @@
 
 .md-step-badge {
     display:inline-flex; align-items:center; gap:10px;
-    background:rgba(184,134,11,0.1); border:1px solid rgba(184,134,11,0.3);
+    background:rgba(184,134,11,0.1); border:1px solid rgba(184,134,11,0.33);
     color:var(--gold); padding:8px 16px; border-radius:999px;
     font-size:12px; font-weight:700; letter-spacing:1px;
     margin-bottom:14px;
@@ -22,7 +22,7 @@
 
 .md-intro {
     background:linear-gradient(135deg,rgba(184,134,11,0.04),transparent 60%);
-    border-left:4px solid var(--gold); border-radius:0 var(--radius) var(--radius) 0;
+    border-left:4px solid #a6790a; border-radius:0 var(--radius) var(--radius) 0;
     padding:36px 40px 36px 36px;
 }
 .md-intro p { font-size:16px; line-height:2; color:var(--gray-800); }
@@ -46,7 +46,7 @@
 .md-strategy > p { font-size:15px; color:rgba(10,15,28,0.65); line-height:1.85; max-width:780px; margin-bottom:32px; }
 .md-strategy-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; position:relative; z-index:1; }
 .md-strategy-item {
-    background:#fff; border:1px solid rgba(20,28,38,.08);
+    background:#fff; border:1px solid rgba(20,28,38,0.088);
     border-radius:14px; padding:24px; box-shadow:0 4px 16px rgba(20,28,38,.045);
     transition:transform .2s,box-shadow .2s;
 }
@@ -58,10 +58,10 @@
 
 .md-service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
 .md-service-card {
-    background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius);
+    background:#fff; border:1px solid #cecece; border-radius:var(--radius);
     padding:32px 28px; transition:all 0.2s;
 }
-.md-service-card:hover { border-color:var(--gold); box-shadow:0 8px 24px rgba(0,0,0,0.06); }
+.md-service-card:hover { border-color:#a6790a; box-shadow:0 8px 24px rgba(0,0,0,0.06); }
 .md-service-card .md-icon {
     width:48px; height:48px; border-radius:12px; background:#FFFFFF;
     display:flex; align-items:center; justify-content:center; margin-bottom:18px;
@@ -79,7 +79,7 @@
     counter-increment:mdstep; content:counter(mdstep);
     display:flex; align-items:center; justify-content:center;
     width:44px; height:44px; border-radius:50%; margin:0 auto 14px;
-    background:#FFFFFF; color:var(--gold); border:1.5px solid rgba(184,134,11,.28);
+    background:#FFFFFF; color:var(--gold); border:1.5px solid rgba(184,134,11,0.308);
     box-shadow:0 2px 8px rgba(20,28,38,.06);
     font-size:16px; font-weight:800; position:relative; z-index:2;
 }
@@ -99,7 +99,7 @@
 
 .md-checklist { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
 .md-check-item {
-    background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius-sm);
+    background:#fff; border:1px solid #cecece; border-radius:var(--radius-sm);
     padding:20px; display:flex; align-items:flex-start; gap:12px;
     box-shadow:0 4px 16px rgba(20,28,38,.045); transition:box-shadow .2s;
 }
@@ -109,9 +109,9 @@
 .md-check-item div p { font-size:12px; color:var(--gray-500); line-height:1.6; }
 @media(max-width:768px){ .md-checklist{grid-template-columns:1fr;} }
 
-.md-nav { display:flex; justify-content:space-between; gap:16px; margin-top:48px; padding-top:32px; border-top:1px solid var(--gray-200); }
-.md-nav a { flex:1; padding:18px 22px; background:#fff; border:1px solid var(--gray-200); border-radius:12px; text-decoration:none; color:inherit; transition:all 0.2s; }
-.md-nav a:hover { border-color:var(--gold); }
+.md-nav { display:flex; justify-content:space-between; gap:16px; margin-top:48px; padding-top:32px; border-top:1px solid #cecece; }
+.md-nav a { flex:1; padding:18px 22px; background:#fff; border:1px solid #cecece; border-radius:12px; text-decoration:none; color:inherit; transition:all 0.2s; }
+.md-nav a:hover { border-color:#a6790a; }
 .md-nav .lbl { font-size:11px; color:var(--gray-500); font-weight:600; letter-spacing:1px; margin-bottom:6px; }
 .md-nav .ttl { font-size:14px; font-weight:700; color:var(--gray-900); }
 .md-nav .next { text-align:right; }

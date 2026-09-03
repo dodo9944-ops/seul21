@@ -16,7 +16,7 @@
 .dv-breadcrumb span{color:#c0c6d0}
 
 /* article card */
-.dv-article{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:34px 32px;box-shadow:0 2px 12px rgba(10,15,28,.04)}
+.dv-article{background:#fff;border:1px solid #ced0d4;border-radius:16px;padding:34px 32px;box-shadow:0 2px 12px rgba(10,15,28,.04)}
 
 /* category badge (상단 카테고리 라벨) */
 .dv-category-badge{display:inline-block;font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;margin-bottom:16px;color:#0A0F1C;background:#FFF3C4;letter-spacing:.02em}
@@ -38,7 +38,7 @@
 .dv-body{color:#2a2f3a;line-height:1.8;font-size:15px}
 .dv-section{margin-bottom:30px}
 .dv-section:last-child{margin-bottom:0}
-.dv-section h2{font-size:18px;font-weight:800;color:#0A0F1C;margin:0 0 16px;padding-bottom:10px;border-bottom:2px solid #B8860B}
+.dv-section h2{font-size:18px;font-weight:800;color:#0A0F1C;margin:0 0 16px;padding-bottom:10px;border-bottom:2px solid #A6790A}
 .dv-section h3{font-size:15.5px;font-weight:700;color:#142644;margin:20px 0 10px}
 .dv-section p{margin:0 0 12px;color:#3a414e}
 .dv-section p:last-child{margin-bottom:0}
