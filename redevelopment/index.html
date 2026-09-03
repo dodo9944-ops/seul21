@@ -896,7 +896,7 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260904a"></script>
+<script src="assets/data/mock-data.js?v=20260904b"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
 <script src="assets/js/common.js?v=20260614f"></script>
 
@@ -1257,116 +1257,5 @@ window.MPF={open:openDetail,close:closeDetail};
 })();
 </script>
 
-<!-- ==================== 금일 공지사항 팝업 ==================== -->
-<style>
-#noticePopupOverlay{position:fixed;inset:0;background:rgba(10,15,28,.65);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:99998;display:none;align-items:center;justify-content:center;padding:20px;animation:npFade .25s ease}
-#noticePopupOverlay.open{display:flex}
-@keyframes npFade{from{opacity:0}to{opacity:1}}
-@keyframes npSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.np-card{background:#fff;border-radius:16px;width:100%;max-width:420px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4);animation:npSlide .3s ease}
-.np-head{background:linear-gradient(135deg,#0A0F1C 0%,#1a2238 100%);color:#fff;padding:20px 22px;position:relative}
-.np-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;background:rgba(195,165,105,.18);color:#C3A569;font-size:11px;font-weight:700;letter-spacing:.5px;margin-bottom:10px}
-.np-tag i{font-size:9px}
-.np-head h3{font-size:17px;font-weight:800;line-height:1.45;letter-spacing:-.3px;padding-right:30px}
-.np-close{position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-size:13px}
-.np-close:hover{background:rgba(255,255,255,.2)}
-.np-body{padding:22px;overflow-y:auto;flex:1;font-size:13.5px;line-height:1.75;color:#3a4356;white-space:pre-line}
-.np-body strong{color:#0A0F1C;font-weight:700}
-.np-meta{display:flex;align-items:center;gap:8px;font-size:11.5px;color:#9aa3b3;margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed #e5e8ee}
-.np-meta i{color:#C3A569}
-.np-actions{padding:14px 22px 18px;border-top:1px solid #f0f2f6;display:flex;gap:10px;align-items:center;flex-shrink:0}
-.np-dontshow{flex:1;display:flex;align-items:center;gap:7px;font-size:12px;color:#6b7280;cursor:pointer;user-select:none}
-.np-dontshow input{width:14px;height:14px;cursor:pointer;accent-color:#C3A569}
-.np-more{padding:9px 16px;background:#0A0F1C;color:#C3A569;border-radius:8px;font-size:12.5px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:all .2s}
-.np-more:hover{background:#1a2238}
-.np-confirm{padding:9px 18px;background:#C3A569;color:#0A0F1C;border-radius:8px;font-size:12.5px;font-weight:700;border:none;cursor:pointer;transition:all .2s}
-.np-confirm:hover{background:#d4b577}
-@media(max-width:480px){.np-card{max-width:100%;max-height:90vh}.np-head{padding:18px 20px}.np-head h3{font-size:15.5px}.np-body{padding:18px 20px;font-size:13px}.np-actions{padding:12px 18px 14px;flex-wrap:wrap}.np-dontshow{flex:1 1 100%;order:3;justify-content:center;padding-top:6px}}
-</style>
-
-<div id="noticePopupOverlay" role="dialog" aria-modal="true" aria-labelledby="npTitle">
-  <div class="np-card">
-    <div class="np-head">
-      <span class="np-tag"><i class="fa-solid fa-bullhorn"></i> 금일 공지사항</span>
-      <h3 id="npTitle"></h3>
-      <button class="np-close" id="npCloseTop" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div class="np-body">
-      <div class="np-meta">
-        <i class="fa-regular fa-calendar"></i><span id="npDate"></span>
-        <span id="npImp" style="display:none;margin-left:auto;padding:2px 8px;border-radius:4px;background:#D6423A;color:#fff;font-size:10px;font-weight:700">중요</span>
-      </div>
-      <div id="npContent"></div>
-    </div>
-    <div class="np-actions">
-      <label class="np-dontshow"><input type="checkbox" id="npHideToday"> 오늘 하루 보지 않기</label>
-      <a href="pages/notice.html" class="np-more">전체 공지</a>
-      <button class="np-confirm" id="npConfirm">확인</button>
-    </div>
-  </div>
-</div>
-
-<script>
-(function(){
-  var STORAGE_KEY = 'seul21_notice_popup_hide_until';
-  function pad(n){return n<10?'0'+n:n}
-  function todayKey(){var d=new Date();return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())}
-  function shouldShow(noticeId){
-    try{
-      var v = localStorage.getItem(STORAGE_KEY);
-      if(!v) return true;
-      var data = JSON.parse(v);
-      if(data.id !== noticeId) return true;
-      return data.hideUntil < todayKey();
-    }catch(e){return true}
-  }
-  function setHideToday(noticeId){
-    var d = new Date(); d.setDate(d.getDate()+1);
-    var until = d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate());
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({id:noticeId, hideUntil:until}));
-  }
-
-  function pickNotice(){
-    if(typeof MOCK==='undefined' || !MOCK.notices || !MOCK.notices.length) return null;
-    var notices = MOCK.notices.slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'')});
-    var imp = notices.filter(function(n){return n.important});
-    return (imp[0] || notices[0]);
-  }
-
-  function render(n){
-    document.getElementById('npTitle').textContent = n.title;
-    document.getElementById('npDate').textContent = n.date;
-    document.getElementById('npImp').style.display = n.important ? 'inline-block' : 'none';
-    var c = (n.content||'').length>520 ? (n.content.slice(0,520)+'…') : (n.content||'');
-    document.getElementById('npContent').textContent = c;
-  }
-
-  function open(){document.getElementById('noticePopupOverlay').classList.add('open');document.body.style.overflow='hidden'}
-  function close(noticeId){
-    if(document.getElementById('npHideToday').checked && noticeId) setHideToday(noticeId);
-    document.getElementById('noticePopupOverlay').classList.remove('open');
-    document.body.style.overflow='';
-  }
-
-  function init(){
-    var n = pickNotice();
-    if(!n) return;
-    if(!shouldShow(n.id)) return;
-    render(n);
-    setTimeout(open, 700);
-    document.getElementById('npCloseTop').addEventListener('click', function(){close(n.id)});
-    document.getElementById('npConfirm').addEventListener('click', function(){close(n.id)});
-    document.getElementById('noticePopupOverlay').addEventListener('click', function(e){
-      if(e.target.id === 'noticePopupOverlay') close(n.id);
-    });
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape' && document.getElementById('noticePopupOverlay').classList.contains('open')) close(n.id);
-    });
-  }
-
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
-})();
-</script>
 </body>
 </html>
