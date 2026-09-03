@@ -393,7 +393,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
     flex: none; width: 100%;
     padding: 8px 10px; font-size: 12.5px; min-height: 0; line-height: 1.2;
   }
-  .drawer-nav a, .drawer-group-btn { padding: 11px 22px; font-size: 14px; }
+  .drawer-nav a, .drawer-group-btn { padding: 11px 15px; font-size: 14px; }
   .drawer-sub a { padding-top: 7px; padding-bottom: 7px; font-size: 13px; }
   .drawer-header { padding: 16px 22px; }
 }
@@ -401,7 +401,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .drawer-group { border-bottom: 1px solid var(--gray-100); }
 .drawer-group-btn {
   display: flex; align-items: center; gap: 12px;
-  width: 100%; padding: 14px 24px; font-size: 15px; font-weight: 600; color: var(--gray-700);
+  width: 100%; padding: 14px 15px; font-size: 15px; font-weight: 600; color: var(--gray-700);
   background: none; border: none; cursor: pointer; text-align: left;
   transition: all var(--transition);
 }
