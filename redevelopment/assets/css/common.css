@@ -344,7 +344,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 .drawer-overlay.open { opacity: 1; pointer-events: auto; }
 .drawer {
   position: fixed; top: 0; right: 0;
-  width: 160px; max-width: 42.5vw; height: 100%;
+  width: 100px; max-width: 42.5vw; height: 100%;
   background: var(--white); z-index: 201;
   transform: translateX(100%); transition: transform 0.3s ease;
   display: flex; flex-direction: column; overflow-y: auto;
@@ -383,7 +383,7 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
 
 /* === 모바일 한정 — 우측 drawer 메뉴: 화면 넘침 방지 + footer 세로 축소 === */
 @media (max-width: 768px) {
-  .drawer { width: 140px; max-width: 40vw; }
+  .drawer { width: 100px; max-width: 40vw; }
   .drawer-footer {
     flex-direction: column;
     gap: 6px;
