@@ -21,10 +21,10 @@
     /* === Hero === */
     .ct-hero{padding:56px 0 48px;background:linear-gradient(135deg,#FFFFFF 0%,#FFFFFF 40%,#FFF3C4 100%);position:relative;overflow:hidden}
     .ct-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,134,11,.3),transparent)}
-    .ct-hero h1{font-size:32px;font-weight:900;color:#0A0F1C;margin-bottom:10px;padding-left:18px;border-left:3px solid var(--gold)}
+    .ct-hero h1{font-size:32px;font-weight:900;color:#0A0F1C;margin-bottom:10px;padding-left:18px;border-left:3px solid #a6790a}
     .ct-hero .hero-sub{font-size:15px;color:rgba(10,15,28,.5);line-height:1.7}
     .ct-hero .hero-badges{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-    .ct-hero .hb{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(10,15,28,.08);border-radius:8px;font-size:12px;font-weight:600;color:rgba(10,15,28,.55)}
+    .ct-hero .hb{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(10,15,28,0.088);border-radius:8px;font-size:12px;font-weight:600;color:rgba(10,15,28,.55)}
     .ct-hero .hb i{color:var(--gold);font-size:11px}
     @media(max-width:768px){.ct-hero{padding:40px 0 32px}.ct-hero h1{font-size:26px}}
 
@@ -35,11 +35,11 @@
     @media(max-width:1024px){.ct-layout{grid-template-columns:1fr}}
 
     /* === Form Card === */
-    .ct-form-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:16px;padding:36px 32px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
-    .ct-form-card .cf-head{display:flex;align-items:center;gap:10px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--gray-100)}
+    .ct-form-card{background:#fff;border:1.5px solid #cecece;border-radius:16px;padding:36px 32px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+    .ct-form-card .cf-head{display:flex;align-items:center;gap:10px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #dbdbdb}
     .ct-form-card .cf-head .cf-icon{width:36px;height:36px;border-radius:10px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--gold)}
     .ct-form-card .cf-head h2{font-size:18px;font-weight:800;color:var(--gray-900)}
-    .ct-form-card .cf-notice{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;margin-bottom:24px;font-size:12.5px;color:var(--gray-500);line-height:1.65}
+    .ct-form-card .cf-notice{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--gray-50);border:1px solid #dbdbdb;border-radius:10px;margin-bottom:24px;font-size:12.5px;color:var(--gray-500);line-height:1.65}
     .ct-form-card .cf-notice i{color:var(--gold);margin-top:2px;flex-shrink:0}
 
     /* Form fields */
@@ -48,8 +48,8 @@
     .ct-group{margin-bottom:16px}
     .ct-label{display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px}
     .ct-label .req{color:#EF4444;margin-left:2px}
-    .ct-input,.ct-textarea{width:100%;height:44px;padding:0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:#fff;font-family:var(--font);transition:all .2s}
-    .ct-input:focus,.ct-textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,.1)}
+    .ct-input,.ct-textarea{width:100%;height:44px;padding:0 14px;border:1.5px solid #cecece;border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:#fff;font-family:var(--font);transition:all .2s}
+    .ct-input:focus,.ct-textarea:focus{outline:none;border-color:#a6790a;box-shadow:0 0 0 3px rgba(184,134,11,.1)}
     .ct-input.err,.ct-textarea.err{border-color:#EF4444}
     .ct-textarea{height:auto;padding:12px 14px;resize:vertical;min-height:120px;line-height:1.6}
     .ct-err{font-size:11.5px;color:#EF4444;margin-top:4px;display:none}
@@ -57,30 +57,30 @@
 
     /* Custom Select (강조형) */
     .ct-select-wrap{position:relative}
-    .ct-select-btn{width:100%;height:44px;padding:0 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:var(--gray-50);font-family:var(--font);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
+    .ct-select-btn{width:100%;height:44px;padding:0 14px;border:1.5px solid #cecece;border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:var(--gray-50);font-family:var(--font);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
     .ct-select-btn.placeholder{color:var(--gray-400);font-weight:400}
-    .ct-select-btn:focus,.ct-select-btn.open{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,.12);background:#fff}
-    .ct-select-btn.has-value{border-color:rgba(184,134,11,.35);background:#fff;font-weight:600;color:var(--brand-dark)}
+    .ct-select-btn:focus,.ct-select-btn.open{border-color:#a6790a;box-shadow:0 0 0 3px rgba(184,134,11,.12);background:#fff}
+    .ct-select-btn.has-value{border-color:rgba(184,134,11,0.385);background:#fff;font-weight:600;color:var(--brand-dark)}
     .ct-select-btn.err{border-color:#EF4444}
     .ct-select-btn i{font-size:11px;color:var(--gray-400);transition:transform .2s}
     .ct-select-btn.open i{transform:rotate(180deg);color:var(--gold)}
-    .ct-select-list{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.12);z-index:200;max-height:280px;overflow-y:auto;display:none;padding:6px}
+    .ct-select-list{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1.5px solid #cecece;border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.12);z-index:200;max-height:280px;overflow-y:auto;display:none;padding:6px}
     .ct-select-list.open{display:block}
     .ct-select-opt{padding:10px 14px;font-size:13px;font-weight:500;color:var(--gray-600);cursor:pointer;border-radius:8px;transition:all .15s;display:flex;align-items:center;gap:8px}
     .ct-select-opt:hover{background:var(--gray-50);color:var(--brand-dark)}
-    .ct-select-opt.selected{background:rgba(184,134,11,.06);color:var(--brand-dark);font-weight:700;border-left:2px solid var(--gold)}
+    .ct-select-opt.selected{background:rgba(184,134,11,.06);color:var(--brand-dark);font-weight:700;border-left:2px solid #a6790a}
 
     /* File Upload (강화형) */
-    .ct-upload{border:2px dashed var(--gray-200);border-radius:14px;padding:28px 24px;text-align:center;transition:all .25s;cursor:pointer;position:relative;background:var(--gray-50)}
-    .ct-upload:hover{border-color:var(--gold);background:rgba(184,134,11,.03)}
-    .ct-upload.dragover{border-color:var(--gold);background:rgba(184,134,11,.05);box-shadow:0 0 0 4px rgba(184,134,11,.08)}
+    .ct-upload{border:2px dashed #cecece;border-radius:14px;padding:28px 24px;text-align:center;transition:all .25s;cursor:pointer;position:relative;background:var(--gray-50)}
+    .ct-upload:hover{border-color:#a6790a;background:rgba(184,134,11,.03)}
+    .ct-upload.dragover{border-color:#a6790a;background:rgba(184,134,11,.05);box-shadow:0 0 0 4px rgba(184,134,11,.08)}
     .ct-upload .up-icon{font-size:36px;color:var(--gold);opacity:.4;margin-bottom:12px}
     .ct-upload .up-text{font-size:14px;font-weight:600;color:var(--gray-700);margin-bottom:6px}
     .ct-upload .up-formats{font-size:11px;color:var(--gray-400);margin-bottom:2px}
     .ct-upload .up-limit{font-size:10.5px;color:var(--gray-300)}
     .ct-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
     .ct-files{margin-top:10px;display:flex;flex-direction:column;gap:6px}
-    .ct-file{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:1.5px solid var(--gray-200);border-radius:10px;font-size:12.5px;color:var(--gray-700)}
+    .ct-file{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:1.5px solid #cecece;border-radius:10px;font-size:12.5px;color:var(--gray-700)}
     .ct-file .cf-icon{width:28px;height:28px;border-radius:7px;background:rgba(184,134,11,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .ct-file .cf-icon i{color:var(--gold);font-size:12px}
     .ct-file .cf-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
@@ -98,8 +98,8 @@
 
     /* === Info Cards (compact) === */
     .ct-info{display:flex;flex-direction:column;gap:12px}
-    .ct-info-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:18px 20px;transition:all .2s}
-    .ct-info-card:hover{border-color:var(--gold);box-shadow:0 4px 12px rgba(184,134,11,.08)}
+    .ct-info-card{background:#fff;border:1.5px solid #cecece;border-radius:12px;padding:18px 20px;transition:all .2s}
+    .ct-info-card:hover{border-color:#a6790a;box-shadow:0 4px 12px rgba(184,134,11,.08)}
     .ct-info-card .ic-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
     .ct-info-card .ic-icon{width:36px;height:36px;border-radius:9px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--gold);flex-shrink:0}
     .ct-info-card h3{font-size:14px;font-weight:700;color:var(--gray-900)}
@@ -107,17 +107,17 @@
     .ct-info-card .ic-highlight{font-size:22px;font-weight:800;color:var(--brand-dark);margin-bottom:2px;letter-spacing:-.5px}
     .ct-info-card p{font-size:12.5px;color:var(--gray-500);line-height:1.55}
     .ct-info-card .ic-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;background:rgba(184,134,11,.08);border-radius:5px;font-size:10.5px;font-weight:600;color:var(--gold);margin-top:6px}
-    .ic-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 12px;border:1.5px solid var(--gray-200);border-radius:7px;background:#fff;font-size:11.5px;font-weight:600;color:var(--gray-600);cursor:pointer;transition:all .2s;font-family:inherit}
-    .ic-copy-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(184,134,11,.06)}
-    .ct-map{margin:12px 0;height:190px;border-radius:10px;overflow:hidden;border:1.5px solid var(--gray-200);background:var(--gray-50)}
+    .ic-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 12px;border:1.5px solid #cecece;border-radius:7px;background:#fff;font-size:11.5px;font-weight:600;color:var(--gray-600);cursor:pointer;transition:all .2s;font-family:inherit}
+    .ic-copy-btn:hover{border-color:#a6790a;color:var(--gold);background:rgba(184,134,11,.06)}
+    .ct-map{margin:12px 0;height:190px;border-radius:10px;overflow:hidden;border:1.5px solid #cecece;background:var(--gray-50)}
     .ct-map .leaflet-popup-content-wrapper{border-radius:8px;box-shadow:0 6px 20px rgba(10,15,28,.14)}
     .ct-map .leaflet-popup-content{margin:9px 12px;font-size:12px;font-weight:700;color:var(--gray-900);font-family:inherit}
     .ct-map .leaflet-popup-tip{box-shadow:none}
-    .ct-map .vs-pin{width:30px;height:30px;border-radius:50% 50% 50% 0;background:linear-gradient(135deg,#C58B00,#FFC400);transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(10,15,28,.3);border:2px solid #fff}
+    .ct-map .vs-pin{width:30px;height:30px;border-radius:50% 50% 50% 0;background:linear-gradient(135deg,#C58B00,#FFC400);transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(10,15,28,.3);border:2px solid #e6e6e6}
     .ct-map .vs-pin i{transform:rotate(45deg);color:#171C26;font-size:13px}
 
     /* Process (compact) */
-    .ct-process{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:12px;padding:16px 18px;margin-top:12px}
+    .ct-process{background:var(--gray-50);border:1px solid #dbdbdb;border-radius:12px;padding:16px 18px;margin-top:12px}
     .ct-process h4{font-size:13px;font-weight:700;color:var(--gray-900);margin-bottom:10px;display:flex;align-items:center;gap:6px}
     .ct-process h4 i{color:var(--gold);font-size:12px}
     .ct-steps{display:flex;flex-direction:column;gap:7px}
@@ -174,7 +174,7 @@
     .uni-hero .uh-visual { flex-shrink: 0; align-self: center; width: 360px; position: relative; z-index: 2; }
     .uni-hero .uh-photo { display: none; }
     .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .uni-hero .uh-card { width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); position: relative; z-index: 5; }
+    .uni-hero .uh-card { width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,0.088); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); position: relative; z-index: 5; }
     .uni-hero .uh-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
     .uni-hero .uh-ci { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,196,0,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
     .uni-hero .uh-ci i { font-size: 15px; color: #FFC400; }
@@ -290,15 +290,15 @@
                 </div>
                 <!-- 개인정보 수집·이용 동의 -->
                 <div class="ct-group" style="margin-top:4px">
-                    <div style="padding:16px 18px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;font-size:12px;color:var(--gray-600);line-height:1.7">
+                    <div style="padding:16px 18px;background:var(--gray-50);border:1px solid #dbdbdb;border-radius:10px;font-size:12px;color:var(--gray-600);line-height:1.7">
                         <div style="font-weight:700;color:var(--gray-800);margin-bottom:8px;font-size:12.5px"><i class="fa-solid fa-shield-halved" style="color:var(--gold);margin-right:4px"></i> 개인정보 수집·이용 동의</div>
                         <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin-bottom:10px">
-                            <tr style="border-bottom:1px solid var(--gray-200)">
+                            <tr style="border-bottom:1px solid #cecece">
                                 <th style="text-align:left;padding:6px 8px;background:rgba(255,255,255,.03);font-weight:600;color:var(--gray-700);width:25%">구분</th>
                                 <th style="text-align:left;padding:6px 8px;background:rgba(255,255,255,.03);font-weight:600;color:var(--gray-700)">수집항목</th>
                                 <th style="text-align:left;padding:6px 8px;background:rgba(255,255,255,.03);font-weight:600;color:var(--gray-700);width:28%">목적</th>
                             </tr>
-                            <tr style="border-bottom:1px solid var(--gray-100)">
+                            <tr style="border-bottom:1px solid #dbdbdb">
                                 <td style="padding:6px 8px;font-weight:600;color:var(--brand-dark)">필수</td>
                                 <td style="padding:6px 8px">이름, 이메일, 문의유형, 제목, 내용</td>
                                 <td style="padding:6px 8px">문의 접수 및 회신</td>

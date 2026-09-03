@@ -22,7 +22,7 @@
     .pf-hero{padding:64px 0 56px;background:linear-gradient(135deg,#FFFFFF 0%,#FFFFFF 40%,#FFF3C4 100%);position:relative;overflow:hidden}
     .pf-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,134,11,0.3),transparent)}
     .pf-hero .breadcrumb{margin-bottom:20px}
-    .pf-hero h1{font-size:36px;font-weight:900;color:#0A0F1C;margin-bottom:14px;padding-left:18px;border-left:3px solid var(--gold)}
+    .pf-hero h1{font-size:36px;font-weight:900;color:#0A0F1C;margin-bottom:14px;padding-left:18px;border-left:3px solid #a6790a}
     .pf-hero .hero-tag{font-size:17px;font-weight:600;color:var(--gold);margin-bottom:8px}
     .pf-hero .hero-sub{font-size:14px;color:rgba(10,15,28,.5)}
     @media(max-width:768px){.pf-hero{padding:40px 0 32px}.pf-hero h1{font-size:26px}}
@@ -30,8 +30,8 @@
     /* === KPI (좌측 아이콘 + 우측 텍스트, 가로형 카드) === */
     .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:64px}
     @media(max-width:1024px){.kpi-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
-    .kpi-card{background:#FFFFFF;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;text-align:left;position:relative;overflow:hidden;transition:transform .25s,border-color .25s;border:1px solid var(--gray-200);box-shadow:0 1px 4px rgba(10,15,28,.05)}
-    .kpi-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+    .kpi-card{background:#FFFFFF;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;text-align:left;position:relative;overflow:hidden;transition:transform .25s,border-color .25s;border:1px solid #cecece;box-shadow:0 1px 4px rgba(10,15,28,.05)}
+    .kpi-card:hover{transform:translateY(-3px);border-color:#a6790a}
     .kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3}
     .kpi-card .ki-wrap{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px}
     .kpi-card .ki{width:40px;height:40px;border-radius:50%;background:#FFFFFF;box-shadow:0 2px 6px rgba(10,15,28,.1);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gold);flex:none}
@@ -42,7 +42,7 @@
     .kpi-card .kl{font-size:13px;font-weight:600;color:#171C26;margin-bottom:4px;line-height:1.3}
     .kpi-card .ks{font-size:11px;font-weight:500;color:rgba(10,15,28,.45);line-height:1.3}
     /* 카드 3·4(완료 사업·총 관리세대) 골드 크림 강조 */
-    .kpi-card.kpi-highlight{background:#FFF9E8;border-color:rgba(184,134,11,.25)}
+    .kpi-card.kpi-highlight{background:#FFF9E8;border-color:rgba(184,134,11,0.275)}
     .kpi-card.kpi-highlight::after{opacity:.6}
     .kpi-card.kpi-highlight .kv{color:var(--gold)}
     /* 모바일: 4개 카드가 세로로 길게 쌓여 스크롤이 과도해지는 문제 → 2열 압축 배치
@@ -86,8 +86,8 @@
     /* === Featured Cards === */
     .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:64px}
     @media(max-width:1024px){.feat-grid{grid-template-columns:1fr;gap:20px}}
-    .fc{background:#fff;border:2px solid var(--gray-300);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.08)}
-    .fc:hover{border-color:var(--gold);box-shadow:0 20px 48px rgba(184,134,11,.18);transform:translateY(-8px)}
+    .fc{background:#fff;border:2px solid #bcbcbc;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+    .fc:hover{border-color:#a6790a;box-shadow:0 20px 48px rgba(184,134,11,.18);transform:translateY(-8px)}
     .fc-img{width:100%;height:240px;position:relative;overflow:hidden;flex-shrink:0}
     .fc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
     .fc:hover .fc-img img{transform:scale(1.06)}
@@ -100,7 +100,7 @@
     .fc-fb[data-t=m]{background:linear-gradient(135deg,#EFFCFF,#CFF3F8)}
     .fc-fb[data-t=k]{background:linear-gradient(135deg,#F5F0FF,#E4D4FA)}
     .fc-fb[data-t=e]{background:linear-gradient(135deg,#FFFBEE,#FFF3C4)}
-    .fc-fb .fbi{width:64px;height:64px;border-radius:50%;background:rgba(20,28,38,.05);border:1px solid rgba(20,28,38,.08);display:flex;align-items:center;justify-content:center}
+    .fc-fb .fbi{width:64px;height:64px;border-radius:50%;background:rgba(20,28,38,.05);border:1px solid rgba(20,28,38,0.088);display:flex;align-items:center;justify-content:center}
     .fc-fb .fbi i{font-size:28px;color:var(--visseum-gold)}
     .fc-fb[data-t=r] .fbi i{color:#171C26}
     .fc-fb[data-t=c] .fbi i{color:#009A44}
@@ -118,26 +118,26 @@
     .fc-body .fsp strong{font-weight:600;color:var(--gray-800)}
     /* 핵심 3개만 강조, 나머지 보조 */
     .fc-body .fsp.secondary{color:var(--gray-400);font-size:11.5px}
-    .fc-body .fdesc{font-size:13px;color:var(--gray-500);line-height:1.6;margin-top:auto;padding-top:12px;border-top:1px solid var(--gray-100);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .fc-body .fdesc{font-size:13px;color:var(--gray-500);line-height:1.6;margin-top:auto;padding-top:12px;border-top:1px solid #dbdbdb;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
     .fc-body .fbtn{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:10px 20px;background:#FFFFFF;color:var(--gold);border:none;border-radius:9px;font-size:13.5px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .25s;align-self:flex-start}
     .fc-body .fbtn:hover{background:#FFF3C4;box-shadow:0 4px 12px rgba(10,15,28,.15);transform:translateX(3px)}
     .fc-body .fbtn i{font-size:12px;transition:transform .2s}
     .fc-body .fbtn:hover i{transform:translateX(2px)}
     /* 첫 카드 대표 프로젝트 강조 */
-    .fc.fc-primary{border-color:rgba(184,134,11,.2);box-shadow:0 6px 20px rgba(184,134,11,.08)}
+    .fc.fc-primary{border-color:rgba(184,134,11,0.22);box-shadow:0 6px 20px rgba(184,134,11,.08)}
     .fc.fc-primary .fc-img::after{content:'대표 실적';position:absolute;bottom:14px;right:14px;padding:4px 12px;background:rgba(184,134,11,.9);color:#0A0F1C;font-size:10px;font-weight:700;border-radius:5px;z-index:3;letter-spacing:.3px}
 
     /* === Top Key-map Tabs (히어로 바로 아래) — 자료실 .ctrl-bar와 크기·외곽선 통일 === */
     /* 히어로 밑 여백 = uni-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 본문 상단 보정(33px) = 총 45px */
     .page-body{padding-top:33px}
-    .pf-tabs-wrap{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
+    .pf-tabs-wrap{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid #cecece;box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
     /* html,body{overflow-x:hidden}(전역) 때문에 position:sticky가 무효화되어
        스크롤 감지 후 position:fixed로 직접 전환하는 방식 사용 — 폭/좌표는 JS로 고정 */
     .pf-tabs-wrap.pf-stuck{position:fixed;z-index:50;margin-bottom:0}
     .pf-tabs-wrap .tabs button{display:inline-flex;align-items:center;gap:6px}
     /* 자료실 ctrl-bar 탭과 동일하게 항목 사이 연회색 세로 구분선 (패딩은 기존값 유지 — 폭 증가로 인한 우측 필터 잘림 방지) */
     #pfTabs{gap:0}
-    #pfTabs button{padding:6px 14px;border-right:1px solid var(--gray-200);position:relative}
+    #pfTabs button{padding:6px 14px;border-right:1px solid #cecece;position:relative}
     #pfTabs button:first-child{padding-left:0}
     #pfTabs button:last-child{border-right:none}
     /* 자료실(#ctrlNav)과 동일한 언더바 인디케이터로 통일 */
@@ -147,8 +147,8 @@
     .pf-tabs-wrap .tabs button.on .pf-tab-count{color:var(--gold)}
     /* 기존 중간 필터박스(유형/상태/총건수)를 상단 sticky 바 우측으로 이동 — 디자인 값 그대로 재사용 */
     .pf-tabs-extra{display:flex;align-items:center;gap:14px;margin-left:auto;flex-wrap:wrap}
-    .pf-tabs-extra select{height:40px;padding:0 30px 0 12px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;font-weight:500;color:var(--gray-700);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s}
-    .pf-tabs-extra select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,.1)}
+    .pf-tabs-extra select{height:40px;padding:0 30px 0 12px;border:1.5px solid #cecece;border-radius:10px;font-size:13px;font-weight:500;color:var(--gray-700);background:#fff;cursor:pointer;appearance:auto;font-family:var(--font);transition:border-color .2s}
+    .pf-tabs-extra select:focus{outline:none;border-color:#a6790a;box-shadow:0 0 0 3px rgba(184,134,11,.1)}
     .pf-tabs-extra .rc{font-size:14px;color:var(--gray-500);font-weight:500;white-space:nowrap}
     .pf-tabs-extra .rc strong{color:var(--brand-dark);font-weight:700}
     @media(max-width:640px){
@@ -159,8 +159,8 @@
     .pg-grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:24px;row-gap:36px}
     @media(max-width:1024px){.pg-grid{grid-template-columns:repeat(2,1fr);gap:18px}}
     @media(max-width:540px){.pg-grid{grid-template-columns:1fr;gap:14px}}
-    .pc{background:#fff;border:2px solid var(--gray-300);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .25s;box-shadow:0 2px 10px rgba(0,0,0,.07)}
-    .pc:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(184,134,11,.12);transform:translateY(-4px)}
+    .pc{background:#fff;border:2px solid #bcbcbc;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .25s;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+    .pc:hover{border-color:#a6790a;box-shadow:0 8px 24px rgba(184,134,11,.12);transform:translateY(-4px)}
     .pc-img{width:100%;height:140px;position:relative;overflow:hidden;flex-shrink:0}
     .pc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
     .pc:hover .pc-img img{transform:scale(1.05)}
@@ -173,7 +173,7 @@
     .pc-fb[data-t=m]{background:linear-gradient(135deg,#EFFCFF,#CFF3F8)}
     .pc-fb[data-t=k]{background:linear-gradient(135deg,#F5F0FF,#E4D4FA)}
     .pc-fb[data-t=e]{background:linear-gradient(135deg,#FFFBEE,#FFF3C4)}
-    .pc-fb .fbi{width:48px;height:48px;border-radius:50%;background:rgba(20,28,38,.05);border:1px solid rgba(20,28,38,.08);display:flex;align-items:center;justify-content:center}
+    .pc-fb .fbi{width:48px;height:48px;border-radius:50%;background:rgba(20,28,38,.05);border:1px solid rgba(20,28,38,0.088);display:flex;align-items:center;justify-content:center}
     .pc-fb .fbi i{font-size:20px;color:var(--visseum-gold)}
     .pc-fb[data-t=r] .fbi i{color:#171C26}
     .pc-fb[data-t=c] .fbi i{color:#009A44}
@@ -185,11 +185,11 @@
     .pc-body{padding:18px 20px 22px;display:flex;flex-direction:column;flex:1}
     .pc-body .pn{font-size:15px;font-weight:700;color:var(--gray-900);margin-bottom:10px;line-height:1.4}
     .pc-body .pr{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--gray-600);padding:4px 0}
-    .pc-body .pr+.pr{border-top:1px solid var(--gray-50)}
+    .pc-body .pr+.pr{border-top:1px solid #e0e0e0}
     .pc-body .pr .pl{display:flex;align-items:center;gap:5px;font-weight:500;color:var(--gray-500)}
     .pc-body .pr .pl i{font-size:10px;color:var(--gold);width:13px;text-align:center}
     .pc-body .pr .pv{font-weight:600;color:var(--gray-800)}
-    .pc-body .pbtn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;width:100%;height:36px;background:transparent;color:var(--brand-dark);border:1.5px solid var(--gray-200);border-radius:10px;font-size:12.5px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
+    .pc-body .pbtn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;width:100%;height:36px;background:transparent;color:var(--brand-dark);border:1.5px solid #cecece;border-radius:10px;font-size:12.5px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
     .pc-body .pbtn:hover{background:#FFFFFF;color:var(--gold);border-color:var(--brand-dark)}
 
     /* === Empty === */
@@ -198,15 +198,15 @@
     .pg-empty h3{font-size:18px;font-weight:700;color:var(--gray-600);margin-bottom:8px}
 
     /* === Pagination === */
-    .pager-wrap{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:40px;padding-top:24px;border-top:1px solid var(--gray-100)}
+    .pager-wrap{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:40px;padding-top:24px;border-top:1px solid #dbdbdb}
     .pager{display:flex;align-items:center;gap:4px}
-    .pager button{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--gray-200);border-radius:10px;background:#fff;color:var(--gray-600);font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
-    .pager button:hover{border-color:var(--gold);color:var(--brand-dark);background:rgba(184,134,11,.04)}
+    .pager button{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1.5px solid #cecece;border-radius:10px;background:#fff;color:var(--gray-600);font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
+    .pager button:hover{border-color:#a6790a;color:var(--brand-dark);background:rgba(184,134,11,.04)}
     .pager button.active{background:#FFFFFF;color:var(--gold);border-color:var(--brand-dark);box-shadow:0 2px 8px rgba(10,15,28,.12)}
     .pager button.arr{color:var(--gray-400);font-size:13px}
     .pager button:disabled{opacity:.25;cursor:default;pointer-events:none}
     .pager-per{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-400)}
-    .pager-per select{height:32px;padding:0 24px 0 8px;border:1px solid var(--gray-200);border-radius:6px;font-size:12px;font-family:var(--font);color:var(--gray-600);cursor:pointer;appearance:auto}
+    .pager-per select{height:32px;padding:0 24px 0 8px;border:1px solid #cecece;border-radius:6px;font-size:12px;font-family:var(--font);color:var(--gray-600);cursor:pointer;appearance:auto}
     @media(max-width:768px){.pager-wrap{flex-direction:column;gap:12px}}
 
     /* DETAIL MODAL(d-overlay, d-modal, d-close, d-hero, d-body, d-sec, d-footer 등)는
@@ -262,7 +262,7 @@
     .uni-hero .uh-visual { flex-shrink: 0; align-self: center; width: 360px; position: relative; z-index: 2; }
     .uni-hero .uh-photo { display: none; }
     .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .uni-hero .uh-card { width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); position: relative; z-index: 5; }
+    .uni-hero .uh-card { width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,0.088); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); position: relative; z-index: 5; }
     .uni-hero .uh-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
     .uni-hero .uh-ci { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,196,0,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
     .uni-hero .uh-ci i { font-size: 15px; color: #FFC400; }

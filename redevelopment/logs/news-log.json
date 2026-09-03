@@ -283,5 +283,116 @@
       "library_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(catDefs 기존 '주요뉴스' 매핑 재사용, fileMap 신규 등록 확인)만 확인 완료"
     },
     "action_required": "① [6일·6회 연속 미해결] Vercel 커넥터 재인증 필요 — team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프 접근 권한을 claude.ai Vercel 커넥터 설정에서 재부여해야 함(재연결 또는 재인증). ② [6일 연속 미해결] 이 세션 환경의 아웃바운드 egress 프록시가 www.seul24.cloud를 계속 차단 중 — egress 허용 도메인 목록에 www.seul24.cloud 추가 필요. 코드 변경·커밋·푸시는 backup-bitseum-rebrand-20260824 브랜치에 정상 완료되었으며(커밋 36e470e7), ①·②가 해결되면 별도 재작업 없이 해당 브랜치를 production으로 배포하고 라이브 검수를 즉시 진행 가능. Claude가 자체적으로 해결할 수 없는 계정/네트워크 설정 문제로, 사용자의 직접 조치가 반드시 필요. 6일간 동일 미해결 상태가 지속 중이므로 이번에도 사용자에게 직접 알림(push notification) 발송."
+  },
+  {
+    "run_datetime_kst": "2026-09-03T06:37:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "searched_articles_count": 9,
+    "candidate_articles_count": 3,
+    "target_max": 3,
+    "shortfall_reason": "N/A — 목표 3건 충족",
+    "selected_articles": [
+      {
+        "id": "news0903a",
+        "title": "이주비대출 LTV 산정기준 조합원분양가로 개편…\"대출한도 30%↑\"",
+        "source": "비즈워치",
+        "source_url": "https://news.bizwatch.co.kr/article/real_estate/2026/09/02/0002",
+        "download_html": "redevelopment/downloads/news_20260903a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260903a.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0903b",
+        "title": "2조 성수·1.8조 목동도 단독 입찰… 서울 정비사업 수주전 실종",
+        "source": "조선비즈",
+        "source_url": "https://biz.chosun.com/real_estate/real_estate_general/2026/09/03/3C725K74YREDRF6ONP5VF4BBFI/",
+        "download_html": "redevelopment/downloads/news_20260903b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260903b.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0903c",
+        "title": "野, \"민간 정비사업 용적률 1.2배 완화\" 與 제안 사실상 거절…9월 3일 본회의 처리 불투명",
+        "source": "뉴스1",
+        "source_url": "https://www.news1.kr/politics/assembly/6277900",
+        "download_html": "redevelopment/downloads/news_20260903c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260903c.html",
+        "status": "posted"
+      }
+    ],
+    "posted_success_count": 3,
+    "posted_fail_count": 0,
+    "fail_reasons": [],
+    "dedup_check": "MOCK.library 전수 대조 완료(NaverSearch/WebSearch 기반 실시간 뉴스 검색, Grep: '이주비대출'·'성수전략정비구역'·'목동12단지'·'용적률 1.2배'). 이주비대출 LTV 개편·성수/목동 단독입찰은 기존 등록 이력 0건. '용적률 1.2배'는 news0902a(9/1, 여야 협의 개시·9/3 본회의 목표 보도)가 이미 등록되어 있으나, 이번 news0903c는 9/2 17:31 발생한 후속 사실(야당의 여당 제안 거절, 9/3 본회의 처리 불투명 전환)로 이전 기사와 사실관계가 달라 중복이 아닌 것으로 판단해 게시.",
+    "commit_sha": "45ea78ef",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_status": "FAILED — mcp__Vercel__list_teams 결과 teams:[] (빈 배열), mcp__Vercel__list_projects(teamId=team_4OL3ZwhAAZCMeH0YaWVu0cGw) 결과 'Failed to list projects.', mcp__Vercel__get_project(projectId=lcw-coordinator, teamId=team_4OL3ZwhAAZCMeH0YaWVu0cGw) 결과 403 Forbidden. 2026-08-28부터 2026-09-02까지 6회 연속에 이어 2026-09-03까지 7회 연속 동일 오류 재현 — 이 세션의 Vercel 커넥터가 team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프에 대한 권한을 전혀 보유하지 못한 상태가 최소 7일째 지속. production 배포 트리거 불가.",
+    "verification": {
+      "news0903a_http_status": "NOT_CHECKED — WebFetch(www.seul24.cloud) EGRESS_BLOCKED (7일 연속 동일 증상)",
+      "news0903b_http_status": "NOT_CHECKED — 상동",
+      "news0903c_http_status": "NOT_CHECKED — 상동",
+      "index_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(newsFileMap·fileMap·MOCK.library 등록, node --check 구문 검증)만 확인 완료",
+      "library_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(catDefs 기존 '주요뉴스' 매핑 재사용, fileMap 신규 등록 확인)만 확인 완료"
+    },
+    "action_required": "① [7일·7회 연속 미해결] Vercel 커넥터 재인증 필요 — team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프 접근 권한을 claude.ai Vercel 커넥터 설정에서 재부여해야 함(재연결 또는 재인증). ② [7일 연속 미해결] 이 세션 환경의 아웃바운드 egress 프록시가 www.seul24.cloud를 계속 차단 중 — egress 허용 도메인 목록에 www.seul24.cloud 추가 필요. 코드 변경·커밋·푸시는 backup-bitseum-rebrand-20260824 브랜치에 정상 완료되었으며(커밋 45ea78ef), ①·②가 해결되면 별도 재작업 없이 해당 브랜치를 production으로 배포하고 라이브 검수를 즉시 진행 가능. Claude가 자체적으로 해결할 수 없는 계정/네트워크 설정 문제로, 사용자의 직접 조치가 반드시 필요. 7일간 동일 미해결 상태가 지속 중이므로 이번에도 사용자에게 직접 알림(push notification) 발송."
+  },
+  {
+    "run_datetime_kst": "2026-09-04T06:30:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "searched_articles_count": 20,
+    "candidate_articles_count": 3,
+    "target_max": 3,
+    "selected_articles": [
+      {
+        "id": "news0904a",
+        "title": "재건축 공사비검증 안 하면 과태료…허영 의원 도시정비법 개정안 발의",
+        "source": "한국경제",
+        "source_url": "https://www.hankyung.com/article/2026090327681",
+        "download_html": "redevelopment/downloads/news_20260904a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260904a.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0904b",
+        "title": "노원구 \"재건축·재개발 규제 100개 개선한다\"…규제혁신 100 착수",
+        "source": "연합뉴스",
+        "source_url": "https://www.yna.co.kr/view/AKR20260903094700004?input=1195m",
+        "download_html": "redevelopment/downloads/news_20260904b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260904b.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0904c",
+        "title": "압구정 재건축 속도전…2구역 앞서고 3·4구역 추격",
+        "source": "머니투데이",
+        "source_url": "https://www.mt.co.kr/estate/2026/09/03/2026090114500995899",
+        "download_html": "redevelopment/downloads/news_20260904c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260904c.html",
+        "status": "posted"
+      }
+    ],
+    "posted_success_count": 3,
+    "posted_fail_count": 0,
+    "fail_reasons": [],
+    "dedup_check": "MOCK.library 전수 대조 완료(Grep: '허영'·'공사비 검증'·'과태료'·'정책설명회'·'8·13대책'·'압구정' 기존 등록 이력 확인). 허영 의원 발의안·노원구 규제혁신100·압구정 통합심의 속도전 3건 모두 기존 등록 이력 0건으로 신규 게시. 동일 사건 복수 매체 보도 중 신뢰도 높은 원출처(한국경제/연합뉴스/머니투데이) 1건씩만 선택.",
+    "commit_sha": "222e3c82",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_status": "FAILED — mcp__Vercel__list_teams 결과 teams:[] (빈 배열), mcp__Vercel__get_project(projectId=lcw-coordinator, teamId=team_4OL3ZwhAAZCMeH0YaWVu0cGw) 결과 403 Forbidden, mcp__Vercel__list_projects(teamId=team_4OL3ZwhAAZCMeH0YaWVu0cGw) 결과 'Failed to list projects.'. 2026-08-28부터 2026-09-03까지 7회 연속에 이어 2026-09-04까지 8회 연속 동일 오류 재현 — 이 세션의 Vercel 커넥터가 team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프에 대한 권한을 최소 8일째 보유하지 못한 상태. production 배포 트리거 불가.",
+    "verification": {
+      "news0904a_http_status": "NOT_CHECKED — WebFetch(www.seul24.cloud) EGRESS_BLOCKED (8일 연속 동일 증상)",
+      "news0904b_http_status": "NOT_CHECKED — 상동",
+      "news0904c_http_status": "NOT_CHECKED — 상동",
+      "index_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(newsFileMap 신규 등록 확인)만 확인 완료",
+      "library_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(catDefs 기존 '주요뉴스' 매핑 재사용, fileMap 신규 등록 확인, node --check 구문검사 통과)만 확인 완료"
+    },
+    "action_required": "① [8일·8회 연속 미해결] Vercel 커넥터 재인증 필요 — team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프 접근 권한을 claude.ai Vercel 커넥터 설정에서 재부여(재연결 또는 재인증) 해야 함. ② [8일 연속 미해결] 이 세션 환경의 아웃바운드 egress 프록시가 www.seul24.cloud를 계속 차단 중 — egress 허용 도메인 목록에 www.seul24.cloud 추가 필요. 코드 변경·커밋·푸시는 backup-bitseum-rebrand-20260824 브랜치에 정상 완료되었으며(커밋 222e3c82), ①·②가 해결되면 별도 재작업 없이 해당 브랜치를 production으로 배포하고 라이브 검수를 즉시 진행 가능. Claude가 자체적으로 해결할 수 없는 계정/네트워크 설정 문제로, 사용자의 직접 조치가 반드시 필요. 8일간 동일 미해결 상태가 지속 중이므로 이번에도 사용자에게 직접 알림(push notification) 발송."
   }
 ]

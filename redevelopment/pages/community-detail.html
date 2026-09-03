@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../assets/css/common.css?v=20260902g">
     <style>
         .detail-wrap { max-width: 800px; margin: 0 auto; }
-        .detail-header { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--gray-200); }
+        .detail-header { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid #cecece; }
         .detail-header .top-row {
             display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
         }
@@ -32,7 +32,7 @@
         }
         .detail-meta i { font-size: 12px; margin-right: 4px; color: var(--gray-400); }
 
-        .detail-body { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--gray-200); }
+        .detail-body { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid #cecece; }
         .detail-body p {
             font-size: 15px; line-height: 1.85; color: var(--gray-800);
             margin-bottom: 20px;
@@ -46,7 +46,7 @@
         .like-btn {
             display: flex; align-items: center; gap: 8px;
             padding: 12px 28px; border-radius: 24px;
-            border: 1.5px solid var(--gray-200); background: var(--white);
+            border: 1.5px solid #cecece; background: var(--white);
             font-size: 15px; font-weight: 600; color: var(--gray-600);
             cursor: pointer; transition: all var(--transition);
             font-family: var(--font);
@@ -63,7 +63,7 @@
         }
         .comment-list { display: flex; flex-direction: column; gap: 0; }
         .comment-item {
-            padding: 18px 0; border-bottom: 1px solid var(--gray-100);
+            padding: 18px 0; border-bottom: 1px solid #dbdbdb;
         }
         .comment-item:last-child { border-bottom: none; }
         .comment-header {
@@ -82,11 +82,11 @@
 
         .comment-form {
             margin-top: 24px; padding: 20px; background: var(--gray-50);
-            border-radius: var(--radius); border: 1px solid var(--gray-200);
+            border-radius: var(--radius); border: 1px solid #cecece;
         }
         .comment-form textarea {
             width: 100%; min-height: 80px; padding: 12px 16px;
-            border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
+            border: 1.5px solid #cecece; border-radius: var(--radius-sm);
             font-size: 14px; font-family: var(--font); color: var(--gray-900);
             outline: none; resize: vertical; background: var(--white);
             transition: border-color var(--transition);
@@ -101,7 +101,7 @@
         .attachments-section {
             margin-bottom: 24px; padding: 20px;
             background: var(--gray-50); border-radius: var(--radius);
-            border: 1px solid var(--gray-200);
+            border: 1px solid #cecece;
         }
         .attachments-section h3 {
             font-size: 14px; font-weight: 700; color: var(--gray-700);
@@ -112,7 +112,7 @@
         .attach-item {
             display: flex; align-items: center; gap: 12px;
             padding: 12px 16px; background: var(--white);
-            border-radius: 8px; border: 1px solid var(--gray-200);
+            border-radius: 8px; border: 1px solid #cecece;
             text-decoration: none; transition: all .2s; cursor: pointer;
         }
         .attach-item:hover { border-color: var(--accent); background: rgba(184,134,11,.03); }
@@ -153,7 +153,7 @@
         .owner-actions .btn-mini {
             display: inline-flex; align-items: center; gap: 5px;
             padding: 7px 14px; border-radius: 8px;
-            border: 1.5px solid var(--gray-200); background: var(--white);
+            border: 1.5px solid #cecece; background: var(--white);
             font-size: 12.5px; font-weight: 600; color: var(--gray-700);
             cursor: pointer; transition: all .2s; font-family: var(--font);
         }
@@ -229,7 +229,7 @@
 
         // 본문
         const paragraphs = post.content.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
-        const imagesHTML = (post.images && post.images.length) ? '<div class="post-images" style="display:flex;flex-wrap:wrap;gap:12px;margin:20px 0">' + post.images.map(u => '<a href="' + u + '" target="_blank" style="flex:0 0 auto"><img src="' + u + '" style="max-width:100%;max-height:400px;border-radius:10px;border:1px solid #e5e7eb;cursor:pointer" loading="lazy"></a>').join('') + '</div>' : '';
+        const imagesHTML = (post.images && post.images.length) ? '<div class="post-images" style="display:flex;flex-wrap:wrap;gap:12px;margin:20px 0">' + post.images.map(u => '<a href="' + u + '" target="_blank" style="flex:0 0 auto"><img src="' + u + '" style="max-width:100%;max-height:400px;border-radius:10px;border:1px solid #ced0d4;cursor:pointer" loading="lazy"></a>').join('') + '</div>' : '';
 
         // 첨부파일
         var attachHTML = '';
