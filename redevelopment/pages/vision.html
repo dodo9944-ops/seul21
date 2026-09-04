@@ -131,34 +131,42 @@
         margin-bottom: 16px; word-break: keep-all;
     }
     .vs-why-cards {
-        flex-shrink: 0; width: 300px;
-        display: flex; flex-direction: column; gap: 10px;
+        flex-shrink: 0; width: 620px;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
     }
     .vs-why-card {
-        padding: 18px 20px 18px 18px; border-radius: 12px;
-        background: #ffffff; border: 1px solid #cbced3;
-        border-left: 3px solid rgba(184,134,11,0.385);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        transition: border-color 0.2s, box-shadow 0.2s;
+        position: relative; padding: 26px 22px; border-radius: 14px;
+        background: #ffffff; border: 1px solid #cecece;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
     .vs-why-card:hover {
-        border-color: #cbced3;
-        border-left-color: #A6790A;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        border-color: #a6790a;
+        box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+        transform: translateY(-2px);
     }
+    .vs-why-num {
+        position: absolute; top: 24px; right: 22px;
+        font-size: 13px; font-weight: 700; color: #C9CDD3; letter-spacing: 0.5px;
+    }
+    .vs-why-icon {
+        width: 44px; height: 44px; border-radius: 12px;
+        background: linear-gradient(135deg, #FFF7DF, #FFE9A8);
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 18px;
+    }
+    .vs-why-icon i { color: #B8860B; font-size: 18px; }
     .vs-why-card h4 {
-        font-size: 14px; font-weight: 800; color: #0A0F1C;
-        margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
-        letter-spacing: -0.2px;
+        font-size: 15px; font-weight: 800; color: #0A0F1C;
+        margin-bottom: 8px; letter-spacing: -0.2px;
     }
-    .vs-why-card h4 i { color: #B8943F; font-size: 12px; flex-shrink: 0; }
-    .vs-why-card p { font-size: 12px; color: #5a6270; line-height: 1.65; }
+    .vs-why-card p { font-size: 12.5px; color: #5a6270; line-height: 1.6; margin-bottom: 16px; }
+    .vs-why-line { width: 20px; height: 2px; border-radius: 1px; background: #B8860B; }
     @media(max-width:860px) {
         .vs-why { flex-direction: column; gap: 32px; }
-        .vs-why-cards { width: 100%; flex-direction: row; flex-wrap: wrap; }
-        .vs-why-card { flex: 1; min-width: 200px; }
+        .vs-why-cards { width: 100%; }
     }
-    @media(max-width:480px) { .vs-why-card { min-width: 100%; } }
+    @media(max-width:480px) { .vs-why-cards { grid-template-columns: 1fr; } }
 
     /* ── 원칙 ── */
     .vs-principles {
@@ -698,20 +706,32 @@
                 </div>
                 <div class="vs-why-cards">
                     <div class="vs-why-card">
-                        <h4><i class="fa-solid fa-arrows-left-right"></i> 복잡한 이해관계 조율</h4>
+                        <span class="vs-why-num">01</span>
+                        <div class="vs-why-icon"><i class="fa-solid fa-arrows-left-right"></i></div>
+                        <h4>복잡한 이해관계 조율</h4>
                         <p>조합원·시행사·시공사·행정기관 사이의 균형점을 찾아냅니다</p>
+                        <div class="vs-why-line"></div>
                     </div>
                     <div class="vs-why-card">
-                        <h4><i class="fa-solid fa-scale-balanced"></i> 법적 정합성 확보</h4>
+                        <span class="vs-why-num">02</span>
+                        <div class="vs-why-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h4>법적 정합성 확보</h4>
                         <p>도시정비법을 비롯한 관련 법령에 기반한 정확한 절차 이행</p>
+                        <div class="vs-why-line"></div>
                     </div>
                     <div class="vs-why-card">
-                        <h4><i class="fa-solid fa-chart-line"></i> 사업성과 공공성의 균형</h4>
+                        <span class="vs-why-num">03</span>
+                        <div class="vs-why-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <h4>사업성과 공공성의 균형</h4>
                         <p>경제적 타당성과 공익적 가치를 동시에 실현하는 설계</p>
+                        <div class="vs-why-line"></div>
                     </div>
                     <div class="vs-why-card">
-                        <h4><i class="fa-solid fa-helmet-safety"></i> 현장 중심 실행력</h4>
+                        <span class="vs-why-num">04</span>
+                        <div class="vs-why-icon"><i class="fa-solid fa-helmet-safety"></i></div>
+                        <h4>현장 중심 실행력</h4>
                         <p>보고서 위의 전략이 아닌, 현장에서 결과를 만들어내는 역량</p>
+                        <div class="vs-why-line"></div>
                     </div>
                 </div>
             </div>
