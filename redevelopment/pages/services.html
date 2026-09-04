@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905n">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905o">
     <style>
     .sv-section { margin-bottom:35px; }
     .sv-section:last-child { margin-bottom:0; }
@@ -50,7 +50,7 @@
     }
     .pro-card:hover .pro-card-more { opacity: 1; transform: translateX(2px); color: #9F7000; }
     .pro-card h4 { font-size: 21px; font-weight: 800; color: var(--visseum-ink); margin-bottom: 8px; }
-    .pro-card p { font-size: 15.5px; color: var(--visseum-text); line-height: 1.5; font-weight: 500; flex: 1; }
+    .pro-card p { font-size: 15.5px; color: var(--visseum-text); line-height: 1.275; font-weight: 500; flex: 1; }
     @media (max-width: 1024px) { .pro-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) { .pro-grid { grid-template-columns: 1fr; } }
     .group-grid { grid-template-columns: repeat(2, 1fr); }
@@ -76,13 +76,13 @@
     .coord-name { font-size: 17px; font-weight: 800; color: var(--visseum-ink); margin-bottom: 3px; text-align: left; }
     .coord-role { font-size: 11.5px; color: var(--visseum-muted); text-align: left; }
     .coord-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
-    .coord-row { display: flex; gap: 10px; font-size: 12.5px; color: var(--visseum-text); line-height: 1.7; margin-bottom: 10px; }
+    .coord-row { display: flex; gap: 10px; font-size: 12.5px; color: var(--visseum-text); line-height: 1.445; margin-bottom: 8px; }
     .coord-row:last-child { margin-bottom: 0; }
     .coord-row .cr-label { flex-shrink: 0; width: 54px; font-weight: 700; color: var(--visseum-ink); }
     .coord-empty-state { flex: 1; display: flex; align-items: center; justify-content: center; padding: 10px; text-align: center; color: var(--visseum-text); font-size: 12.5px; }
     .coord-empty-state i { font-size: 24px; margin-bottom: 10px; display: block; color: var(--gray-300); }
     .coord-list { list-style: none; margin-bottom: 18px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
-    .coord-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--visseum-text); line-height: 1.75; margin-bottom: 10px; }
+    .coord-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--visseum-text); line-height: 1.4875; margin-bottom: 8px; }
     .coord-list li:last-child { margin-bottom: 0; }
     .coord-list li i { color: var(--visseum-gold); font-size: 11px; margin-top: 5px; flex-shrink: 0; }
     .coord-more-btn {
@@ -177,16 +177,16 @@
     @media(max-width:860px){ .sv-card-header h3 { font-size:20px; } }
     @media(max-width:480px){ .sv-card-header h3 { font-size:18px; } .sv-card-header { padding:14px 18px; } }
 
-    .sv-card-body { padding:32px 32px; flex:1; }
+    .sv-card-body { padding:26px 32px; flex:1; } /* 상하 여백 균일 조정(32→26px) (2026-09-05) */
     .sv-card-body .sv-desc {
-        font-size:14px; line-height:1.85; color:var(--gray-700); margin-bottom:20px;
-    }
+        font-size:14px; line-height:1.5725; color:var(--gray-700); margin-bottom:17px;
+    } /* 줄간격 15%↓(1.85→1.5725) */
 
-    .sv-strengths { list-style:none; margin-bottom:20px; }
+    .sv-strengths { list-style:none; margin-bottom:17px; }
     .sv-strengths li {
         display:flex; align-items:flex-start; gap:10px;
-        font-size:13px; color:var(--gray-700); line-height:1.7; margin-bottom:10px;
-    }
+        font-size:13px; color:var(--gray-700); line-height:1.445; margin-bottom:8px;
+    } /* 줄간격 15%↓(1.7→1.445) */
     .sv-strengths li:last-child { margin-bottom:0; }
     .sv-strengths li i { color:var(--gold); font-size:12px; margin-top:5px; flex-shrink:0; }
 

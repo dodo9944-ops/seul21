@@ -1276,7 +1276,7 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
 .d-task i{font-size:10px;color:var(--gold)}
 
 /* Description */
-.d-desc{font-size:14.5px;color:var(--gray-700);line-height:1.8;background:var(--gray-50);border:1px solid #dbdbdb;border-radius:12px;padding:20px;white-space:pre-line;word-break:keep-all}
+.d-desc{font-size:14.5px;color:var(--gray-700);line-height:1.53;background:var(--gray-50);border:1px solid #dbdbdb;border-radius:12px;padding:17px 20px;white-space:pre-line;word-break:keep-all}
 .d-desc p{margin:0 0 14px}
 .d-desc p:last-child{margin-bottom:0}
 .d-desc ul{margin:0;padding-left:20px}
@@ -1294,7 +1294,7 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
 
 /* Issues */
 .d-issues{list-style:none;padding:0;margin:0}
-.d-issues li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;font-size:13.5px;color:var(--gray-700);line-height:1.6;border-bottom:1px solid #e0e0e0}
+.d-issues li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:13.5px;color:var(--gray-700);line-height:1.36;border-bottom:1px solid #e0e0e0}
 .d-issues li:last-child{border-bottom:none}
 .d-issues li::before{content:'\f06a';font-family:'Font Awesome 6 Free';font-weight:900;font-size:11px;color:var(--gold);margin-top:4px;flex-shrink:0}
 
@@ -1356,7 +1356,7 @@ a.nt-source-card:hover .nt-source-cap{color:var(--gold)}
 .d-desc .meta{font-size:12px;color:var(--gray-500);margin-bottom:8px}
 .d-desc .meta a{color:var(--gold);text-decoration:none}
 .d-desc .meta a:hover{text-decoration:underline}
-.d-desc .summary{font-size:14.5px;color:var(--gray-700);margin-bottom:8px;line-height:1.75}
+.d-desc .summary{font-size:14.5px;color:var(--gray-700);margin-bottom:7px;line-height:1.4875}
 .d-desc .point{font-size:13.5px;color:#0A0F1C;background:rgba(184,134,11,.08);padding:10px 14px;border-radius:8px;border-left:3px solid #a6790a;margin-top:8px}
 .d-desc .highlight{color:#8a6508;font-weight:800}
 .d-desc .highlight-box{background:#FFFBEB;border-left:4px solid #a6790a;padding:14px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px;color:var(--gray-700)}
