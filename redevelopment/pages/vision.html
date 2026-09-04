@@ -334,16 +334,81 @@
     }
 
     /* ── 브랜드 비주얼 스트립 ── */
+    .vs-content-kicker {
+        display: flex; align-items: center; gap: 8px;
+        font-size: 11.5px; font-weight: 700; letter-spacing: 1.8px;
+        color: var(--gold); text-transform: uppercase; margin-bottom: 14px;
+    }
+    .vs-content-kicker i { font-size: 12px; }
     .vs-visual {
         border-radius: 16px; overflow: hidden;
     }
     .vs-visual img {
         width: 100%; height: auto; display: block; border-radius: 12px;
     }
-    .vs-video-wrap { margin-top: 20px; }
-    .vs-video-wrap video {
-        display: block; width: 100%; max-width: 100%; border-radius: 16px;
-        background: #0A0F1C; box-shadow: 0 20px 50px rgba(10,15,28,.14);
+
+    /* ── 브랜드 필름(영상) — 사진과 명확히 구분되는 전용 카드 ── */
+    .vs-film {
+        position: relative; margin-top: 44px; border-radius: 16px; overflow: hidden;
+        aspect-ratio: 16/9; background: #0A0F1C; cursor: pointer;
+        box-shadow: 0 20px 50px rgba(10,15,28,.16);
+    }
+    .vs-film-kicker { margin-bottom: 14px; }
+    .vs-film-poster {
+        position: absolute; inset: 0; width: 100%; height: 100%;
+        object-fit: cover; display: block; transition: transform .6s ease;
+    }
+    .vs-film:hover .vs-film-poster { transform: scale(1.035); }
+    .vs-film-scrim {
+        position: absolute; inset: 0; z-index: 1;
+        background: linear-gradient(180deg, rgba(10,15,28,.18) 0%, rgba(10,15,28,.08) 42%, rgba(10,15,28,.6) 100%);
+    }
+    .vs-film-tag {
+        position: absolute; top: 22px; left: 26px; z-index: 2;
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 11px; font-weight: 700; letter-spacing: 3px;
+        color: #FFC400; text-transform: uppercase;
+    }
+    .vs-film-tag i { font-size: 12px; }
+    .vs-film-center {
+        position: absolute; inset: 0; z-index: 2;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+        padding: 0 24px; text-align: center;
+    }
+    .vs-film-play {
+        width: 68px; height: 68px; border-radius: 50%; flex-shrink: 0;
+        background: radial-gradient(circle at 35% 30%, #FFC400, #B8860B);
+        border: 2px solid rgba(255,255,255,.5);
+        display: flex; align-items: center; justify-content: center;
+        color: #171C26; font-size: 20px;
+        box-shadow: 0 8px 24px rgba(184,134,11,.45);
+        transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .vs-film-play i { margin-left: 3px; }
+    .vs-film:hover .vs-film-play { transform: scale(1.08); box-shadow: 0 10px 30px rgba(184,134,11,.55); }
+    .vs-film-title { font-size: 17px; font-weight: 700; color: #fff; letter-spacing: -.2px; }
+    .vs-film-bottom {
+        position: absolute; bottom: 18px; left: 0; right: 0; z-index: 2;
+        text-align: center; font-size: 10px; font-weight: 600; letter-spacing: 2.5px;
+        color: rgba(255,255,255,.5); text-transform: uppercase;
+    }
+    .vs-film video {
+        position: absolute; inset: 0; width: 100%; height: 100%;
+        object-fit: cover; display: none; background: #000;
+    }
+    .vs-film.vs-film-playing .vs-film-poster,
+    .vs-film.vs-film-playing .vs-film-scrim,
+    .vs-film.vs-film-playing .vs-film-tag,
+    .vs-film.vs-film-playing .vs-film-center,
+    .vs-film.vs-film-playing .vs-film-bottom { display: none; }
+    .vs-film.vs-film-playing video { display: block; }
+    .vs-film.vs-film-playing { cursor: default; }
+    @media(max-width:600px) {
+        .vs-film { margin-top: 32px; }
+        .vs-film-play { width: 56px; height: 56px; font-size: 17px; }
+        .vs-film-title { font-size: 14.5px; }
+        .vs-film-tag { top: 16px; left: 18px; }
+        .vs-film-bottom { bottom: 14px; font-size: 9px; }
     }
 
     /* ── CTA ── */
@@ -792,11 +857,21 @@
         <div class="vs" id="visual">
             <div class="section-label">Brand Space</div>
             <h2 class="vs-title">공간으로 증명하는 신뢰</h2>
+            <div class="vs-content-kicker"><i class="fa-solid fa-images"></i> 회사 공간 사진 갤러리</div>
             <div class="vs-visual">
                 <img src="../jpg/vs_brandspace_poster.png" alt="㈜빛세움 브랜드 스페이스 — 사옥 외관 및 로비·휴게공간·회의실·업무공간">
             </div>
-            <div class="vs-video-wrap">
-                <video controls preload="metadata" poster="../jpg/visseum_office_exterior.png" playsinline>
+
+            <div class="vs-film" id="vsFilm" role="button" tabindex="0" aria-label="빛세움 브랜드 영상 재생">
+                <img class="vs-film-poster" src="../jpg/visseum_office_exterior.png" alt="㈜빛세움 브랜드 필름 썸네일">
+                <div class="vs-film-scrim"></div>
+                <span class="vs-film-tag"><i class="fa-solid fa-clapperboard"></i> BRAND FILM</span>
+                <div class="vs-film-center">
+                    <div class="vs-film-play"><i class="fa-solid fa-play"></i></div>
+                    <div class="vs-film-title">빛세움을 영상으로 만나보세요</div>
+                </div>
+                <div class="vs-film-bottom">VISSEUM COMPANY FILM</div>
+                <video id="vsFilmVideo" preload="metadata" playsinline controls>
                     <source src="../video/visseum_promo.mp4" type="video/mp4">
                     브라우저가 video 태그를 지원하지 않습니다.
                 </video>
@@ -810,5 +885,21 @@
 <script src="../assets/data/mock-data.js?v=20260905b"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260905c"></script>
+<script>
+(function () {
+    var film = document.getElementById('vsFilm');
+    if (!film) return;
+    var video = document.getElementById('vsFilmVideo');
+    function playFilm() {
+        if (film.classList.contains('vs-film-playing')) return;
+        film.classList.add('vs-film-playing');
+        video.play();
+    }
+    film.addEventListener('click', playFilm);
+    film.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playFilm(); }
+    });
+})();
+</script>
 </body>
 </html>
