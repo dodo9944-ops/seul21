@@ -95,6 +95,16 @@
     .coord-more-btn:hover { background: #FFF3C4; border-color: var(--visseum-gold); }
     .coord-more-btn i { font-size: 11px; color: var(--visseum-gold); }
 
+    /* 코디네이터 위촉장·주요실적 모달(주요이력) — 공용 .d-* 상세모달 스타일 재사용 */
+    .d-hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; background: rgba(255,255,255,.85); backdrop-filter: blur(4px); font-size: 10.5px; font-weight: 700; letter-spacing: 1px; color: var(--gold); text-transform: uppercase; }
+    .coord-history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .coord-history-item { border: 1px solid #dbdbdb; border-radius: 14px; overflow: hidden; background: #fff; }
+    .coord-history-item img { width: 100%; height: 220px; object-fit: cover; display: block; background: var(--gray-50); }
+    .ch-cap { padding: 14px 16px; }
+    .ch-title { font-size: 13.5px; font-weight: 800; color: var(--gray-900); line-height: 1.45; margin-bottom: 6px; }
+    .ch-desc { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
+    @media(max-width:540px) { .coord-history-grid { grid-template-columns: 1fr; } .coord-history-item img { height: 260px; } }
+
     /* 서울시 코디네이터 신뢰 바 */
     .coord-highlight {
         display: flex; flex-wrap: wrap;
@@ -761,7 +771,7 @@
                             <li><i class="fa-solid fa-check"></i>송파구 한양2차·한양3차 갈등관리책임관</li>
                             <li><i class="fa-solid fa-check"></i>불광동 359-1 신속통합기획 자문위원</li>
                         </ul>
-                        <button type="button" class="coord-more-btn" onclick="if(window.App&&App.toast)App.toast('상세 실적 페이지 준비 중입니다.');">위촉장 및 주요실적 <i class="fa-solid fa-chevron-right"></i></button>
+                        <button type="button" class="coord-more-btn" onclick="openCoordDetail()">위촉장 및 주요실적 <i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
 
@@ -778,9 +788,63 @@
     </div>
 </div>
 
+<!-- 코디네이터(이창우) 위촉장 및 주요실적 모달 -->
+<div class="d-overlay" id="coordDetailOverlay">
+    <div class="d-modal">
+        <button class="d-close" id="coordDetailClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+        <div class="d-hero">
+            <img src="../jpg/이창우.jpg?v=20260902" alt="이창우 서울시 정비사업 코디네이터">
+            <div class="ov"></div>
+            <div class="d-title-area">
+                <div class="badges"><span class="d-hero-badge"><i class="fa-solid fa-award"></i> Seoul City Coordinator</span></div>
+                <h2>이창우 — 위촉장 및 주요실적</h2>
+                <div class="d-phase"><i class="fa-solid fa-check"></i> 서울시·송파구·은평구 정비사업 코디네이터 위촉</div>
+            </div>
+        </div>
+        <div class="d-body">
+            <div class="d-sec">
+                <div class="d-sec-title">주요이력</div>
+                <div class="coord-history-grid">
+                    <div class="coord-history-item">
+                        <img src="../jpg/coord/leechangwoo_appointment.jpg" alt="서울특별시 정비사업 코디네이터 위촉장 — 이창우">
+                        <div class="ch-cap">
+                            <div class="ch-title">서울특별시 정비사업 코디네이터 위촉장</div>
+                            <div class="ch-desc">서울특별시장 위촉 (위촉기간 2025.02.20 ~ 2027.02.19)</div>
+                        </div>
+                    </div>
+                    <div class="coord-history-item">
+                        <img src="../jpg/coord/leechangwoo_headstone.jpg" alt="더샵송파루미스타 아파트 재건축사업 머릿돌 — 서울특별시 정비사업 코디네이터 이창우 등재">
+                        <div class="ch-cap">
+                            <div class="ch-title">더샵송파루미스타 아파트 재건축사업 머릿돌 등재</div>
+                            <div class="ch-desc">서울특별시 정비사업 코디네이터로 머릿돌에 등재</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260905c"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260905c"></script>
+<script>
+(function () {
+    var overlay = document.getElementById('coordDetailOverlay');
+    if (!overlay) return;
+    window.openCoordDetail = function () {
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    };
+    function close() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('coordDetailClose').addEventListener('click', close);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
+})();
+</script>
 </body>
 </html>
