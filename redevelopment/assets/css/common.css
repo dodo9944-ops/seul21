@@ -129,9 +129,9 @@ button, input, select, textarea { font-family: inherit; }
 .header-wrap {
   position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
   background: var(--white);
-  padding-top: env(safe-area-inset-top, 0);
-  padding-top: constant(safe-area-inset-top, 0);
-}
+  padding-top: calc(5px + env(safe-area-inset-top, 0));
+  padding-top: calc(5px + constant(safe-area-inset-top, 0));
+} /* 상단 컬러로고 위 여백 5px 추가 (2026-09-05 대장 지시) */
 
 /* ── UTILITY BAR ── */
 .util-bar {
@@ -173,16 +173,16 @@ button, input, select, textarea { font-family: inherit; }
 }
 
 /* ── 헤더 아래 본문 여백 ── */
-body { padding-top: 64px; } /* 64(header) — PC, 상단 util-bar 삭제로 여백 재정합 (2026-09-05) */
+body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) */
 @media (max-width: 1024px) and (min-width: 769px) {
-  body { padding-top: 96px; } /* 64(header) + 32(tab) */
+  body { padding-top: 101px; } /* 5(상단여백) + 64(header) + 32(tab) */
 }
 @media (max-width: 768px) {
   .header .inner { height: 39px; }
   body {
-    padding-top: 66px;
-    padding-top: calc(66px + env(safe-area-inset-top, 0));
-    padding-top: calc(66px + constant(safe-area-inset-top, 0));
+    padding-top: 71px;
+    padding-top: calc(71px + env(safe-area-inset-top, 0));
+    padding-top: calc(71px + constant(safe-area-inset-top, 0));
   }
 }
 
