@@ -47,14 +47,11 @@ const App = (() => {
       ]},
       { href:`${B}/pages/services.html`, label:'사업분야', icon:'fa-solid fa-diagram-project', sub:[
         { href:`${B}/pages/redevelopment-service.html`, label:'주택재개발' },
-        { href:`${B}/pages/redevelopment-service.html#land-transfer`, label:'국공유지 양도양수' },
         { href:`${B}/pages/reconstruction-service.html`, label:'주택재건축' },
         { href:`${B}/pages/small-reconstruction-service.html`, label:'소규모 정비사업' },
-        { href:`${B}/pages/garoju-service.html`, label:'도심복합개발' },
         { href:`${B}/pages/urbanplanning-service.html`, label:'도시계획/엔지니어링' },
         { href:`${B}/pages/pmcm-service.html`, label:'도시정비 PM/CM' },
-        { href:`${B}/pages/bunyang-service.html`, label:'분양사업' },
-        { href:`${B}/pages/gwanggo-service.html`, label:'광고사업' },
+        { href:`${B}/pages/services.html#sales-ad`, label:'분양 및 광고사업' },
       ]},
       { href:`${B}/pages/portfolio.html`, label:'업무실적', icon:'fa-solid fa-briefcase', sub:[
         { href:`${B}/pages/portfolio.html`, label:'전체 수행실적' },
