@@ -589,7 +589,7 @@
         .pm-modal {
             background: #fff; border-radius: 16px; width: 640px; max-width: 92vw;
             max-height: 85vh; overflow: hidden; display: flex; flex-direction: column;
-            position: relative;
+            position: relative; border: 1px solid #cecece;
             transform: translateY(20px) scale(0.98); transition: transform 0.35s ease;
             box-shadow: 0 24px 80px rgba(0,0,0,0.25);
         }
@@ -1079,7 +1079,7 @@
 <style>
 .mp-overlay{position:fixed;inset:0;background:rgba(255,255,255,.65);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
 .mp-overlay.open{opacity:1;pointer-events:auto}
-.mp-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
+.mp-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;border:1px solid #cecece;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
 .mp-overlay.open .mp-modal{transform:translateY(0) scale(1)}
 .mp-close{position:absolute;top:-20px;right:-20px;z-index:20;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.85);border:2px solid rgba(10,15,28,0.33);border-radius:50%;cursor:pointer;font-size:18px;color:#0A0F1C;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.5)}
 .mp-close:hover{background:#FFFFFF;transform:scale(1.1)}
