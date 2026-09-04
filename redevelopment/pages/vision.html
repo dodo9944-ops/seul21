@@ -335,15 +335,10 @@
 
     /* ── 브랜드 비주얼 스트립 ── */
     .vs-visual {
-        display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
         border-radius: 16px; overflow: hidden;
     }
     .vs-visual img {
-        width: 100%; height: auto; object-fit: contain; border-radius: 12px;
-    }
-    @media(max-width:768px) {
-        .vs-visual { grid-template-columns: 1fr; }
-        .vs-visual img { height: 220px; }
+        width: 100%; height: auto; display: block; border-radius: 12px;
     }
     .vs-video-wrap { margin-top: 20px; }
     .vs-video-wrap video {
@@ -798,8 +793,7 @@
             <div class="section-label">Brand Space</div>
             <h2 class="vs-title">공간으로 증명하는 신뢰</h2>
             <div class="vs-visual">
-                <img src="../jpg/vs_visual_left.jpg" alt="빛세움 브랜드 아이덴티티">
-                <img src="../jpg/visseum_office_exterior.png" alt="㈜빛세움 사옥 외관 전경">
+                <img src="../jpg/vs_brandspace_poster.png" alt="㈜빛세움 브랜드 스페이스 — 사옥 외관 및 로비·휴게공간·회의실·업무공간">
             </div>
             <div class="vs-video-wrap">
                 <video controls preload="metadata" poster="../jpg/visseum_office_exterior.png" playsinline>
