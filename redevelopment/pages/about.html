@@ -15,7 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260902g">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905q">
+    <link rel="stylesheet" href="../assets/css/flipbook.css?v=20260905a">
     <style>
     /* ================================================================
        ABOUT PAGE — Premium Company Introduction
@@ -237,8 +238,8 @@
     /* ── SECTION SPACING ── */
     .about-section {
         margin-bottom: 0;
-        padding: 25px 0;
-    }
+        padding: 20px 0;
+    } /* 단락 간 여백 25px→20px 통일 (2026-09-05 대장 지시) */
     .about-section:last-child { padding-bottom: 0; }
     /* 히어로 밑 여백 = about-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 첫 섹션 상단 보정(48px) = 총 60px */
     @media (min-width: 601px) {
@@ -284,7 +285,7 @@
         border: 1px solid #cecece;
         border-top: 3px solid var(--visseum-gold);
         border-radius: 14px;
-        padding: 28px 24px; text-align: center;
+        padding: 18px 24px; text-align: center;
         transition: all 0.25s;
         box-shadow: 0 4px 16px rgba(20,28,38,.045);
     }
@@ -418,9 +419,11 @@
         object-fit: contain;
         box-shadow: none; border-radius: 0;
     }
+    .cert-stacked .cert-photo img.cert-2015-wide { width: 480px; border: 1px solid #1a1a1a; box-sizing: border-box; } /* 좌우폭 확장 + 좌측(2008) 등록증과 유사한 색의 외곽선 (대장 지시 2026-09-05) */
     @media (max-width: 1024px) {
         .cert-stacked .cert-photo { gap: 18px; padding: 36px 15px; }
         .cert-stacked .cert-photo img { height: 502px; }
+        .cert-stacked .cert-photo img.cert-2015-wide { width: 380px; }
     }
     @media (max-width: 768px) {
         .cert-stacked .cert-photo { flex-direction: column; justify-content: center; padding: 32px 20px; gap: 24px; }
@@ -507,6 +510,45 @@
         .cert-text { padding: 24px 20px; }
         .cert-title { font-size: 18px; }
         .cert-desc { font-size: 13px; }
+    }
+
+    /* ── 디지털 지명원 배너 — CEO/대표이사 섹션과 동일한 골드(#B8860B) 계열 (대장 지시 2026-09-05) ── */
+    .dp-banner {
+        margin-top: 22px; border-radius: 16px; overflow: hidden;
+        background: linear-gradient(120deg, #171C26 0%, #232B3D 100%);
+        display: flex; align-items: center; justify-content: space-between; gap: 24px;
+        padding: 30px 34px; box-shadow: 0 10px 30px rgba(10,15,28,.14);
+        position: relative;
+    }
+    .dp-banner::before {
+        content: ''; position: absolute; inset: 0;
+        background-image: radial-gradient(circle at 12% 20%, rgba(184,134,11,.18) 0%, transparent 45%),
+                           radial-gradient(circle at 88% 85%, rgba(255,196,0,.10) 0%, transparent 40%);
+    }
+    .dp-left { display: flex; align-items: center; gap: 18px; position: relative; z-index: 1; min-width: 0; }
+    .dp-icon {
+        width: 54px; height: 54px; border-radius: 14px; flex-shrink: 0;
+        background: linear-gradient(135deg, #B8860B, #FFC400);
+        display: flex; align-items: center; justify-content: center;
+        color: #171C26; font-size: 22px; box-shadow: 0 6px 16px rgba(184,134,11,.35);
+    }
+    .dp-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #FFC400; text-transform: uppercase; margin-bottom: 4px; }
+    .dp-title { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.3px; margin-bottom: 6px; }
+    .dp-desc { font-size: 13px; color: rgba(255,255,255,.68); line-height: 1.6; max-width: 520px; }
+    .dp-btn {
+        position: relative; z-index: 1; flex-shrink: 0;
+        display: inline-flex; align-items: center; gap: 9px;
+        padding: 14px 26px; border-radius: 10px; border: none; cursor: pointer;
+        background: linear-gradient(120deg, #B8860B, #D6A419);
+        color: #171C26; font-size: 14.5px; font-weight: 700; letter-spacing: -.2px;
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .dp-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(184,134,11,.4); }
+    @media (max-width: 700px) {
+        .dp-banner { flex-direction: column; align-items: stretch; text-align: center; padding: 26px 22px; }
+        .dp-left { flex-direction: column; text-align: center; }
+        .dp-desc { max-width: 100%; }
+        .dp-btn { justify-content: center; }
     }
 
     /* ── 4. COMPANY HISTORY ── */
@@ -691,7 +733,7 @@
         background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
         border-radius: 16px; padding: 0; overflow: hidden;
         display: flex; align-items: center; justify-content: center;
-        box-shadow: 0 12px 40px rgba(10,15,28,0.2);
+        box-shadow: 0 12px 40px rgba(10,15,28,0.2); border: 1px solid #cecece;
     }
     .ci-img-area img {
         width: 100%; height: auto; display: block;
@@ -954,7 +996,7 @@
                         <img src="../jpg/registration_cert_2008.png" alt="정비사업전문관리업 등록증 (2008년 최초등록, 제2008-22호)">
                     </a>
                     <a href="../jpg/registration_cert_2015.png" target="_blank" rel="noopener" title="원본 등록증 보기(2015)">
-                        <img src="../jpg/registration_cert_2015.png" alt="정비사업전문관리업 등록증 (2015년 재등록, 제2015-4호)">
+                        <img src="../jpg/registration_cert_2015.png" alt="정비사업전문관리업 등록증 (2015년 재등록, 제2015-04호)" class="cert-2015-wide">
                     </a>
                 </div>
                 <div class="cert-text">
@@ -975,6 +1017,21 @@
                         <div class="cm-item"><span class="cm-key">업력</span><span class="cm-val">2008년 ~ 현재</span></div>
                     </div>
                 </div>
+            </div>
+
+            <!-- 디지털 지명원 (PDF Flipbook) -->
+            <div class="dp-banner" id="digitalProfile">
+                <div class="dp-left">
+                    <div class="dp-icon"><i class="fa-solid fa-book-open"></i></div>
+                    <div>
+                        <div class="dp-label">Digital Company Profile</div>
+                        <h3 class="dp-title">디지털 지명원</h3>
+                        <p class="dp-desc">㈜빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 실제 책자를 넘기듯 온라인에서 바로 확인하실 수 있습니다.</p>
+                    </div>
+                </div>
+                <button class="dp-btn" id="dpOpenBtn" type="button">
+                    <i class="fa-solid fa-book-open"></i> 지명원 보기
+                </button>
             </div>
 
         </div>
@@ -1164,9 +1221,23 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260905a"></script>
+<script src="../assets/data/mock-data.js?v=20260905d"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260902f"></script>
+<script src="../assets/js/common.js?v=20260905c"></script>
+<script src="../assets/js/flipbook.js?v=20260905a"></script>
+<script>
+(function () {
+    var btn = document.getElementById('dpOpenBtn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+        Flipbook.open({
+            pdfUrl: '../pdf/visseum-profile.pdf',
+            title: '(주)빛세움 지명원',
+            subtitle: 'DIGITAL COMPANY PROFILE'
+        });
+    });
+})();
+</script>
 <script>
 (function() {
     var info = MOCK.companyInfo;
@@ -1195,7 +1266,7 @@
         '</div>';
     }).join('');
 
-    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260902f
+    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260905c
        mock-data.businessAreas 는 다른 영역(services.html 등)에서 사용되므로 본 섹션은 override 하지 않는다. */
 })();
 </script>

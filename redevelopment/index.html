@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260902g">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260905q">
     <link rel="stylesheet" href="assets/css/download-view.css?v=20260830c">
     <style>
         /* ============================================================
@@ -307,20 +307,20 @@
 
         /* 헤드라인 */
         .hero-section h1 {
-            font-size: 46px; font-weight: 700; letter-spacing: 0.2px;
+            font-size: 46px; font-weight: 920; letter-spacing: 0.5px;
             color: #141820; line-height: 1.3; margin-bottom: 12px;
-            max-width: 560px;
-        }
+            max-width: 620px;
+        } /* 굵기 15%↑(800→920), 좌측 고정·우측으로 폭 확장(560→620px) (2026-09-05 대장 지시) */
         .hero-section h1 em {
-            font-style: normal; color: #A77600;
-            -webkit-text-fill-color: #A77600; background: none;
+            font-style: normal; color: #C58B00;
+            -webkit-text-fill-color: #C58B00; background: none;
         }
 
         /* 서브카피 */
         .hero-subtitle {
-            font-size: 15.5px; font-weight: 400; color: #494E57;
-            letter-spacing: 0.2px;
-            line-height: 1.72; margin-bottom: 12px; max-width: 620px;
+            font-size: 15.5px; font-weight: 575; color: #494E57;
+            letter-spacing: 0.4px;
+            line-height: 1.72; margin-bottom: 12px; max-width: 680px;
             word-break: keep-all;
         }
 
@@ -531,7 +531,9 @@
            날짜 줄까지 항상 행 안에 온전히 들어오도록 함(잘림 방지) */
         #mainCommunity .news-body h4 { max-height: 24px; -webkit-line-clamp: 1; }
         /* 갤러리 썸네일 3건 — 밝은 배경과 경계가 흐려 보이는 사진 가독성 보완을 위한 자연스러운 외곽선 */
-        #mainCommunity .news-thumb-photo img { border: 1px solid rgba(10,15,28,0.132); box-shadow: 0 0 0 1px rgba(255,255,255,0.4) inset; }
+        #mainCommunity .news-thumb-photo img { border: 1px solid #cecece; box-shadow: 0 0 0 1px rgba(255,255,255,0.4) inset; }
+        /* 갤러리 썸네일 사진 12% 확대 + 가장자리까지 채우고 상하좌우 여백(크롭) 비율 동일하게 (대장 지시 2026-09-05) */
+        #mainCommunity .news-thumb-photo img { width: 100%; height: 100%; margin-left: 0; object-position: center; transform: scale(1.12); }
         /* 갤러리 카드 우측하단 조회수 표시 (대장 지시) */
         #mainCommunity .news-date { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
         #mainCommunity .news-date .views { display: flex; align-items: center; gap: 4px; flex-shrink: 0; color: #9A9DA2; }
@@ -587,7 +589,7 @@
         .pm-modal {
             background: #fff; border-radius: 16px; width: 640px; max-width: 92vw;
             max-height: 85vh; overflow: hidden; display: flex; flex-direction: column;
-            position: relative;
+            position: relative; border: 1px solid #cecece;
             transform: translateY(20px) scale(0.98); transition: transform 0.35s ease;
             box-shadow: 0 24px 80px rgba(0,0,0,0.25);
         }
@@ -619,7 +621,7 @@
             font-size: 16px; cursor: pointer; transition: all 0.2s;
         }
         .pm-close:hover { background: rgba(255,255,255,0.12); color: #0A0F1C; }
-        .pm-body { padding: 32px 36px; overflow-y: auto; flex: 1; }
+        .pm-body { padding: 18px 36px; overflow-y: auto; flex: 1; }
         .pm-section { margin-bottom: 28px; }
         .pm-section:last-child { margin-bottom: 0; }
         .pm-section-title {
@@ -895,7 +897,7 @@
                 .sv-main .sv-hd{padding:18px 20px 10px}
                 .sv-main .sv-nm{font-size:16px}
                 .sv-main .sv-bd{padding:14px 20px 20px}
-                .sv-main .sv-bd p{font-size:13.5px;line-height:1.75}
+                .sv-main .sv-bd p{font-size:13.5px;line-height:1.5619}
             }
             .sv-main .sv-item:nth-child(1){--sv-accent:#171C26;--sv-icon:#171C26;--sv-accent-bg:rgba(23,28,38,.08);}
             .sv-main .sv-item:nth-child(2){--sv-accent:#009A44;--sv-icon:#009A44;--sv-accent-bg:rgba(0,154,68,.08);}
@@ -910,8 +912,8 @@
             .sv-main .sv-ic i{color:var(--sv-icon);font-size:16px;}
             .sv-main .sv-nm{font-size:15px;font-weight:800;color:#171C26;}
             .sv-main .sv-en{font-size:10px;color:var(--sv-icon);margin-top:2px;opacity:.75;}
-            .sv-main .sv-bd{padding:14px 22px 18px;background:#fff;}
-            .sv-main .sv-bd p{font-size:12.5px;color:#5F646C;line-height:1.7;margin-bottom:10px;}
+            .sv-main .sv-bd{padding:13px 22px 16px;background:#fff;}
+            .sv-main .sv-bd p{font-size:12.5px;color:#5F646C;line-height:1.5173;margin-bottom:9px;}
             .sv-main .sv-tg{display:flex;flex-wrap:wrap;gap:4px;}
             .sv-main .sv-tg span{font-size:10px;padding:3px 8px;border-radius:4px;background:#FAF7EF;color:#666;}
         </style>
@@ -1077,7 +1079,7 @@
 <style>
 .mp-overlay{position:fixed;inset:0;background:rgba(255,255,255,.65);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .25s}
 .mp-overlay.open{opacity:1;pointer-events:auto}
-.mp-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
+.mp-modal{background:#fff;border-radius:18px;width:100%;max-width:720px;margin:40px auto;overflow:visible;position:relative;border:1px solid #cecece;box-shadow:0 24px 64px rgba(0,0,0,.3);transform:translateY(20px) scale(.97);transition:transform .3s}
 .mp-overlay.open .mp-modal{transform:translateY(0) scale(1)}
 .mp-close{position:absolute;top:-20px;right:-20px;z-index:20;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.85);border:2px solid rgba(10,15,28,0.33);border-radius:50%;cursor:pointer;font-size:18px;color:#0A0F1C;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.5)}
 .mp-close:hover{background:#FFFFFF;transform:scale(1.1)}
@@ -1094,7 +1096,7 @@
 .mp-hero-fb[data-t=c]{background:linear-gradient(135deg,#FFF3C4,#1e3a5f,#FFFFFF)}
 .mp-hero-fb[data-t=s]{background:linear-gradient(135deg,#1a2a40,#243a55,#B8860B)}
 .mp-hero-fb .mp-title-area{background:linear-gradient(to top,rgba(255,255,255,.6),transparent)}
-.mp-body{padding:32px}
+.mp-body{padding:18px 32px}
 .mp-sec{margin-bottom:28px}.mp-sec:last-child{margin-bottom:0}
 .mp-sec-title{font-size:13px;font-weight:700;color:#B8860B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .mp-sec-title::after{content:'';flex:1;height:1px;background:#eee}
@@ -1145,9 +1147,9 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260905a"></script>
+<script src="assets/data/mock-data.js?v=20260905d"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260902f"></script>
+<script src="assets/js/common.js?v=20260905c"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1387,7 +1389,8 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         var newsFileMap={
 'news0817a':'downloads/news_20260817a.html','news0817b':'downloads/news_20260817b.html','news0817c':'downloads/news_20260817c.html','news0817d':'downloads/news_20260817d.html','news0817e':'downloads/news_20260817e.html','news0817f':'downloads/news_20260817f.html','news0817g':'downloads/news_20260817g.html','news0817h':'downloads/news_20260817h.html','news0817i':'downloads/news_20260817i.html','news0818a':'downloads/news_20260818a.html','news0818b':'downloads/news_20260818b.html','news0818c':'downloads/news_20260818c.html','news0818d':'downloads/news_20260818d.html','news0818e':'downloads/news_20260818e.html','news0818f':'downloads/news_20260818f.html','news0818g':'downloads/news_20260818g.html','news0818h':'downloads/news_20260818h.html','news0818i':'downloads/news_20260818i.html','news0818j':'downloads/news_20260818j.html','news0818k':'downloads/news_20260818k.html','news0819a':'downloads/news_20260819a.html','news0819b':'downloads/news_20260819b.html','news0819c':'downloads/news_20260819c.html','news0819d':'downloads/news_20260819d.html','news0819e':'downloads/news_20260819e.html','news0819f':'downloads/news_20260819f.html','news0819g':'downloads/news_20260819g.html','news0820a':'downloads/news_20260820a.html','news0820b':'downloads/news_20260820b.html','news0820c':'downloads/news_20260820c.html','news0820d':'downloads/news_20260820d.html','news0820e':'downloads/news_20260820e.html','news0820f':'downloads/news_20260820f.html','news0820g':'downloads/news_20260820g.html','news0820h':'downloads/news_20260820h.html','news0820i':'downloads/news_20260820i.html','news0820j':'downloads/news_20260820j.html','news0821a':'downloads/news_20260821a.html','news0821b':'downloads/news_20260821b.html','news0821c':'downloads/news_20260821c.html','news0821d':'downloads/news_20260821d.html','news0821e':'downloads/news_20260821e.html','news0821f':'downloads/news_20260821f.html','news0821g':'downloads/news_20260821g.html','news0821h':'downloads/news_20260821h.html','news0821i':'downloads/news_20260821i.html','news0822a':'downloads/news_20260822a.html','news0822b':'downloads/news_20260822b.html','news0822c':'downloads/news_20260822c.html','news0822d':'downloads/news_20260822d.html','news0822e':'downloads/news_20260822e.html','news0823a':'downloads/news_20260823a.html','news0823b':'downloads/news_20260823b.html','news0823c':'downloads/news_20260823c.html','news0823d':'downloads/news_20260823d.html','news0823e':'downloads/news_20260823e.html','news0823f':'downloads/news_20260823f.html','news0823g':'downloads/news_20260823g.html','news0823h':'downloads/news_20260823h.html','news0824a':'downloads/news_20260824a.html','news0824b':'downloads/news_20260824b.html','news0824c':'downloads/news_20260824c.html','news0824d':'downloads/news_20260824d.html','news0824e':'downloads/news_20260824e.html','news0824f':'downloads/news_20260824f.html','news0824g':'downloads/news_20260824g.html','news0824h':'downloads/news_20260824h.html','news0824i':'downloads/news_20260824i.html','news0824j':'downloads/news_20260824j.html','news0828a':'downloads/news_20260828a.html','news0828b':'downloads/news_20260828b.html','news0829a':'downloads/news_20260829a.html','news0829b':'downloads/news_20260829b.html','news0831a':'downloads/news_20260831a.html','news0831b':'downloads/news_20260831b.html','news0831c':'downloads/news_20260831c.html','news0901a':'downloads/news_20260901a.html','news0901b':'downloads/news_20260901b.html','news0901c':'downloads/news_20260901c.html','news0902a':'downloads/news_20260902a.html','news0902b':'downloads/news_20260902b.html','news0902c':'downloads/news_20260902c.html',
 'news0903a':'downloads/news_20260903a.html','news0903b':'downloads/news_20260903b.html','news0903c':'downloads/news_20260903c.html',
-'news0904a':'downloads/news_20260904a.html','news0904b':'downloads/news_20260904b.html','news0904c':'downloads/news_20260904c.html',};
+'news0904a':'downloads/news_20260904a.html','news0904b':'downloads/news_20260904b.html','news0904c':'downloads/news_20260904c.html',
+'news0905a':'downloads/news_20260905a.html','news0905b':'downloads/news_20260905b.html','news0905c':'downloads/news_20260905c.html',};
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){

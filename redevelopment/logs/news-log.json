@@ -394,5 +394,61 @@
       "library_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(catDefs 기존 '주요뉴스' 매핑 재사용, fileMap 신규 등록 확인, node --check 구문검사 통과)만 확인 완료"
     },
     "action_required": "① [8일·8회 연속 미해결] Vercel 커넥터 재인증 필요 — team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프 접근 권한을 claude.ai Vercel 커넥터 설정에서 재부여(재연결 또는 재인증) 해야 함. ② [8일 연속 미해결] 이 세션 환경의 아웃바운드 egress 프록시가 www.seul24.cloud를 계속 차단 중 — egress 허용 도메인 목록에 www.seul24.cloud 추가 필요. 코드 변경·커밋·푸시는 backup-bitseum-rebrand-20260824 브랜치에 정상 완료되었으며(커밋 222e3c82), ①·②가 해결되면 별도 재작업 없이 해당 브랜치를 production으로 배포하고 라이브 검수를 즉시 진행 가능. Claude가 자체적으로 해결할 수 없는 계정/네트워크 설정 문제로, 사용자의 직접 조치가 반드시 필요. 8일간 동일 미해결 상태가 지속 중이므로 이번에도 사용자에게 직접 알림(push notification) 발송."
+  },
+  {
+    "run_datetime_kst": "2026-09-05T06:38:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "searched_articles_count": 24,
+    "candidate_articles_count": 3,
+    "target_max": 3,
+    "shortfall_reason": "N/A — 목표 3건 충족",
+    "selected_articles": [
+      {
+        "id": "news0905a",
+        "title": "모아타운 속도 못 내자… 서울시, \"재개발급\" 관리체계 만든다",
+        "source": "조선비즈",
+        "source_url": "https://biz.chosun.com/real_estate/real_estate_general/2026/09/05/D7FQGTM6IZBA3IYUAAV7X6GCJ4/",
+        "download_html": "redevelopment/downloads/news_20260905a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260905a.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0905b",
+        "title": "용적률 더 주고 공공주택 줄이고···비강남 재건축 사업성 높인다",
+        "source": "시사저널e",
+        "source_url": "https://www.sisajournal-e.com/news/articleView.html?idxno=423532",
+        "download_html": "redevelopment/downloads/news_20260905b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260905b.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0905c",
+        "title": "[뉴스분석] \"닥공\" 외치지만…정비사업·규제완화 입법처리 지연에 與도 우려",
+        "source": "뉴스핌",
+        "source_url": "https://www.newspim.com/news/view/20260904000831",
+        "download_html": "redevelopment/downloads/news_20260905c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260905c.html",
+        "status": "posted"
+      }
+    ],
+    "posted_success_count": 3,
+    "posted_fail_count": 0,
+    "fail_reasons": [],
+    "dedup_check": "MOCK.library 전수 대조 완료(Grep: '모아타운 전략계획'·'사업성 보정계수'·'입법처리 지연'·'김남근'·'닥공'·'재개발급 관리체계' 기존 등록 이력 확인). 3건 모두 기존 등록 이력 0건으로 신규 게시. news0905c는 기존 news0902a·news0903c(용적률 1.2배 완화 여야 협의 경과)와 동일 사안 연장선이나, 이번 보도는 '입법처리 지연 자체'와 '국토부 장관 개각에 따른 협상 동력 약화 우려'라는 새로운 사실을 다루고 있어 중복이 아닌 것으로 판단해 게시(2026-08-31 이후 확립된 동일 원칙 적용).",
+    "commit_sha": "6bc29b25",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_status": "FAILED — mcp__Vercel__list_teams 결과 teams:[] (빈 배열), mcp__Vercel__get_project(projectId=lcw-coordinator, teamId=team_4OL3ZwhAAZCMeH0YaWVu0cGw) 결과 403 Forbidden. 2026-08-28부터 2026-09-04까지 8회 연속에 이어 2026-09-05까지 9회 연속 동일 오류 재현(2026-08-30 실행기록 누락 별개) — 이 세션의 Vercel 커넥터가 team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프에 대한 권한을 최소 9일째 보유하지 못한 상태. production 배포 트리거 불가.",
+    "verification": {
+      "news0905a_http_status": "NOT_CHECKED — WebFetch(www.seul24.cloud) EGRESS_BLOCKED (9일 연속 동일 증상)",
+      "news0905b_http_status": "NOT_CHECKED — 상동",
+      "news0905c_http_status": "NOT_CHECKED — 상동",
+      "index_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(newsFileMap 신규 등록 확인)만 확인 완료",
+      "library_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(catDefs 기존 '주요뉴스' 매핑 재사용, fileMap 신규 등록 확인, node --check 구문검사 통과)만 확인 완료"
+    },
+    "action_required": "① [9일·9회 연속 미해결] Vercel 커넥터 재인증 필요 — team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프 접근 권한을 claude.ai Vercel 커넥터 설정에서 재부여(재연결 또는 재인증) 해야 함. ② [9일 연속 미해결] 이 세션 환경의 아웃바운드 egress 프록시가 www.seul24.cloud를 계속 차단 중 — egress 허용 도메인 목록에 www.seul24.cloud 추가 필요. 코드 변경·커밋·푸시는 backup-bitseum-rebrand-20260824 브랜치에 정상 완료되었으며(커밋 6bc29b25), ①·②가 해결되면 별도 재작업 없이 해당 브랜치를 production으로 배포하고 라이브 검수를 즉시 진행 가능. Claude가 자체적으로 해결할 수 없는 계정/네트워크 설정 문제로, 사용자의 직접 조치가 반드시 필요. 9일간 동일 미해결 상태가 지속 중이므로 이번에도 사용자에게 직접 알림(push notification) 발송."
   }
 ]

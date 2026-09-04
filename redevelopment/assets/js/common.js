@@ -47,14 +47,11 @@ const App = (() => {
       ]},
       { href:`${B}/pages/services.html`, label:'사업분야', icon:'fa-solid fa-diagram-project', sub:[
         { href:`${B}/pages/redevelopment-service.html`, label:'주택재개발' },
-        { href:`${B}/pages/redevelopment-service.html#land-transfer`, label:'국공유지 양도양수' },
         { href:`${B}/pages/reconstruction-service.html`, label:'주택재건축' },
         { href:`${B}/pages/small-reconstruction-service.html`, label:'소규모 정비사업' },
-        { href:`${B}/pages/garoju-service.html`, label:'도심복합개발' },
         { href:`${B}/pages/urbanplanning-service.html`, label:'도시계획/엔지니어링' },
         { href:`${B}/pages/pmcm-service.html`, label:'도시정비 PM/CM' },
-        { href:`${B}/pages/bunyang-service.html`, label:'분양사업' },
-        { href:`${B}/pages/gwanggo-service.html`, label:'광고사업' },
+        { href:`${B}/pages/services.html#sales-ad`, label:'분양 및 광고사업' },
       ]},
       { href:`${B}/pages/portfolio.html`, label:'업무실적', icon:'fa-solid fa-briefcase', sub:[
         { href:`${B}/pages/portfolio.html`, label:'전체 수행실적' },
@@ -80,12 +77,11 @@ const App = (() => {
     ];
     return `
     <div class="header-wrap" id="headerWrap">
-    <div class="util-bar"><div class="inner">
-      <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링그룹</span>
-    </div></div>
     <header class="header"><div class="inner">
       <a href="${B}/index.html" class="logo">
         <span class="logo-mark"><img src="${B}/jpg/visseum_logo2.png" alt="(주)빛세움 VISSEUM" style="width:100%;height:100%;object-fit:contain"></span>
+        <span class="logo-divider" aria-hidden="true"></span>
+        <span class="logo-tagline">도시정비 전문<br>엔지니어링그룹</span>
       </a>
       <nav class="gnb">
         ${navGroups.map(g => `<div class="gnb-item">

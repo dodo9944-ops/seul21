@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260902g">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905q">
     <style>
     /* 히어로 바로 아래 탭 메뉴와의 여백 축소 (공통 .page-body 상단 여백 갤러리 페이지 한정 축소) */
     .page-body{padding-top:28px}
@@ -58,7 +58,7 @@
     .gp-card:hover{border-color:#a6790a;box-shadow:0 8px 20px rgba(0,0,0,.08);transform:translateY(-2px)}
     .gp-card.active{border-color:#a6790a;box-shadow:0 0 0 2px rgba(184,134,11,.25)}
     .gp-img{aspect-ratio:4/3;background:linear-gradient(135deg,#FFF7DF,#FFFDF7);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:26px;overflow:hidden;position:relative}
-    .gp-img img{width:100%;height:100%;object-fit:cover;display:block}
+    .gp-img img{width:100%;height:100%;object-fit:cover;display:block;border:1px solid #cecece;box-sizing:border-box}
     .gp-body{padding:12px 13px 14px}
     .gp-cat{font-size:10.5px;font-weight:700;color:var(--gold);margin-bottom:4px}
     .gp-title{font-size:13.5px;font-weight:800;color:var(--gray-900);line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -82,14 +82,14 @@
     /* 상세 보기 패널 — 클릭 시 아래에 자연스럽게 펼쳐짐 */
     .gl-detail{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,opacity .3s ease;margin-top:0}
     .gl-detail.show{max-height:2400px;opacity:1;margin-top:32px}
-    .gl-detail-card{background:#fff;border:1.5px solid #cecece;border-radius:16px;padding:28px;position:relative}
+    .gl-detail-card{background:#fff;border:1.5px solid #cecece;border-radius:16px;padding:18px 28px;position:relative}
     .gl-detail-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:9px;border:1.5px solid #cecece;background:#fff;color:var(--gray-500);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
     .gl-detail-close:hover{border-color:#a6790a;color:var(--gold)}
     .gl-detail-cat{font-size:12px;font-weight:700;color:var(--gold);margin-bottom:8px}
     .gl-detail-title{font-size:20px;font-weight:800;color:var(--gray-900);line-height:1.4;margin-bottom:10px;padding-right:40px}
     .gl-detail-meta{display:flex;gap:14px;font-size:12.5px;color:var(--gray-400);margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #dbdbdb}
     .gl-detail-meta span{display:flex;align-items:center;gap:5px}
-    .gl-detail-photo{width:100%;border-radius:12px;overflow:hidden;margin-bottom:20px;background:var(--gray-50)}
+    .gl-detail-photo{width:100%;border-radius:12px;overflow:hidden;margin-bottom:20px;background:var(--gray-50);border:1px solid #cecece}
     .gl-detail-photo img{width:100%;display:block;max-height:520px;object-fit:cover}
     .gl-detail-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
     .gl-detail-photos button{display:block;width:100%;border:none;padding:0;background:none;border-radius:10px;overflow:hidden;aspect-ratio:4/3;cursor:zoom-in;font:inherit}
@@ -107,7 +107,7 @@
     .nt-stat-label{font-size:11.5px;color:var(--gray-500);margin-top:6px;font-weight:600}
     .nt-divider{height:1px;background:var(--gray-100);margin:26px 0}
     .nt-source-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-    .nt-source-card{border:1px solid #d3d5d8;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+    .nt-source-card{border:1px solid #cecece;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.04)}
     .nt-source-card .gl-lb-trigger{display:block;width:100%;border:none;padding:0;background:none;cursor:zoom-in;font:inherit}
     .nt-source-card .gl-lb-trigger img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .3s ease}
     .nt-source-card .gl-lb-trigger:hover img{transform:scale(1.04)}
@@ -174,9 +174,9 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260905a"></script>
+<script src="../assets/data/mock-data.js?v=20260905d"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260902f"></script>
+<script src="../assets/js/common.js?v=20260905c"></script>
 <script>
 (function(){
     var ICONS={ '주민총회':'fa-solid fa-people-group', '봉사활동':'fa-solid fa-hand-holding-heart',
