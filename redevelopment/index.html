@@ -532,6 +532,8 @@
         #mainCommunity .news-body h4 { max-height: 24px; -webkit-line-clamp: 1; }
         /* 갤러리 썸네일 3건 — 밝은 배경과 경계가 흐려 보이는 사진 가독성 보완을 위한 자연스러운 외곽선 */
         #mainCommunity .news-thumb-photo img { border: 1px solid rgba(10,15,28,0.132); box-shadow: 0 0 0 1px rgba(255,255,255,0.4) inset; }
+        /* 갤러리 썸네일 사진 12% 확대 + 가장자리까지 채우고 상하좌우 여백(크롭) 비율 동일하게 (대장 지시 2026-09-05) */
+        #mainCommunity .news-thumb-photo img { width: 100%; height: 100%; margin-left: 0; object-position: center; transform: scale(1.12); }
         /* 갤러리 카드 우측하단 조회수 표시 (대장 지시) */
         #mainCommunity .news-date { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
         #mainCommunity .news-date .views { display: flex; align-items: center; gap: 4px; flex-shrink: 0; color: #9A9DA2; }
