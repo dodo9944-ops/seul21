@@ -1,0 +1,157 @@
+/* ══════════════════════════════════════════════════════════
+   디지털 지명원 — PDF Flipbook Viewer
+   ㈜빛세움 골드/네이비 CI 통일
+   ══════════════════════════════════════════════════════════ */
+
+.fb-overlay {
+    position: fixed; inset: 0; z-index: 100000;
+    background: #0d1117;
+    display: flex; flex-direction: column;
+    opacity: 0; transition: opacity .25s ease;
+}
+.fb-overlay.fb-show { opacity: 1; }
+
+/* ── 상단 툴바 ── */
+.fb-topbar {
+    flex-shrink: 0; height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 20px; gap: 12px;
+    background: #171C26; border-bottom: 1px solid rgba(184,134,11,.25);
+}
+.fb-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.fb-brand-icon {
+    width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+    background: linear-gradient(135deg, #B8860B, #FFC400);
+    display: flex; align-items: center; justify-content: center;
+    color: #171C26; font-size: 14px;
+}
+.fb-brand-title { color: #fff; font-size: 14.5px; font-weight: 700; letter-spacing: -.2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fb-brand-sub { color: rgba(255,255,255,.4); font-size: 10.5px; letter-spacing: .5px; text-transform: uppercase; }
+
+.fb-tools { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.fb-btn {
+    width: 38px; height: 38px; border-radius: 9px; border: none;
+    background: rgba(255,255,255,.06); color: rgba(255,255,255,.75);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; cursor: pointer; transition: all .2s ease;
+}
+.fb-btn:hover { background: rgba(184,134,11,.25); color: #FFC400; }
+.fb-btn.fb-active { background: rgba(184,134,11,.35); color: #FFC400; }
+.fb-btn:disabled { opacity: .3; cursor: not-allowed; }
+.fb-btn:disabled:hover { background: rgba(255,255,255,.06); color: rgba(255,255,255,.75); }
+.fb-sep { width: 1px; height: 22px; background: rgba(255,255,255,.12); margin: 0 6px; }
+
+.fb-pageindicator {
+    color: #fff; font-size: 13px; font-weight: 600; letter-spacing: .2px;
+    padding: 0 12px; white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.fb-pageindicator span { color: rgba(255,255,255,.4); font-weight: 500; }
+
+.fb-close {
+    width: 38px; height: 38px; border-radius: 50%; border: none;
+    background: rgba(255,255,255,.08); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; cursor: pointer; transition: all .2s ease;
+}
+.fb-close:hover { background: #B8860B; color: #171C26; transform: rotate(90deg); }
+
+/* ── 본문 뷰어 영역 ── */
+.fb-stage {
+    flex: 1; position: relative; overflow: auto;
+    display: flex; align-items: center; justify-content: center;
+    padding: 28px; box-sizing: border-box;
+    background: radial-gradient(circle at 50% 40%, #1c2432 0%, #0d1117 70%);
+}
+.fb-zoomwrap {
+    width: 100%; height: 100%; max-width: 1200px;
+    transition: transform .25s ease; transform-origin: center center;
+    display: flex; align-items: center; justify-content: center;
+}
+#fb-book { box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+
+/* PageFlip 페이지(HTML 모드) 공통 스타일 */
+.fb-page {
+    background: #fdfcf8; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+}
+.fb-page-inner { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
+.fb-page canvas { width: 100%; height: 100%; display: block; }
+.fb-page-loading {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; color: #B8860B; width: 100%; height: 100%;
+}
+.fb-page-loading .fb-spin {
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 3px solid rgba(184,134,11,.2); border-top-color: #B8860B;
+    animation: fb-rotate .8s linear infinite;
+}
+.fb-page-loading span { font-size: 11px; color: #9a9488; letter-spacing: .5px; }
+@keyframes fb-rotate { to { transform: rotate(360deg); } }
+
+/* 표지 페이지 강조 */
+.fb-page.fb-cover { background: linear-gradient(155deg, #171C26 0%, #0d1117 100%); }
+.fb-page.fb-cover .fb-page-loading { color: #FFC400; }
+
+/* 초기 로딩 오버레이 */
+.fb-initloading {
+    position: absolute; inset: 0; z-index: 5;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px; background: transparent; color: #fff;
+}
+.fb-initloading .fb-spin-lg {
+    width: 52px; height: 52px; border-radius: 50%;
+    border: 4px solid rgba(184,134,11,.2); border-top-color: #FFC400;
+    animation: fb-rotate .9s linear infinite;
+}
+.fb-initloading p { font-size: 13.5px; color: rgba(255,255,255,.6); }
+.fb-initloading .fb-title-lg { font-size: 17px; font-weight: 700; color: #fff; }
+
+/* ── 썸네일 목차 드로어 ── */
+.fb-thumbs {
+    position: absolute; top: 0; right: 0; bottom: 0; width: 260px;
+    background: #12161f; border-left: 1px solid rgba(184,134,11,.2);
+    transform: translateX(100%); transition: transform .25s ease;
+    display: flex; flex-direction: column; z-index: 20;
+}
+.fb-thumbs.fb-open { transform: translateX(0); }
+.fb-thumbs-head {
+    padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,.08);
+    color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .3px;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.fb-thumbs-body { flex: 1; overflow-y: auto; padding: 14px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.fb-thumb {
+    border: 2px solid transparent; border-radius: 6px; overflow: hidden; cursor: pointer;
+    background: #1c2230; aspect-ratio: 3/4.2; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color .2s ease;
+}
+.fb-thumb:hover { border-color: rgba(184,134,11,.5); }
+.fb-thumb.fb-thumb-active { border-color: #FFC400; }
+.fb-thumb canvas, .fb-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.fb-thumb-num {
+    position: absolute; bottom: 3px; right: 4px; font-size: 9.5px; color: rgba(255,255,255,.6);
+    background: rgba(0,0,0,.5); padding: 1px 4px; border-radius: 3px;
+}
+.fb-thumb-spin { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(184,134,11,.25); border-top-color: #B8860B; animation: fb-rotate .8s linear infinite; }
+
+/* ── 하단 안내 ── */
+.fb-hint {
+    position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%);
+    color: rgba(255,255,255,.4); font-size: 11.5px; letter-spacing: .2px;
+    pointer-events: none; white-space: nowrap;
+    opacity: 1; transition: opacity .5s ease;
+}
+.fb-hint.fb-hide { opacity: 0; }
+
+@media (max-width: 768px) {
+    .fb-topbar { height: 52px; padding: 0 10px; gap: 6px; }
+    .fb-brand-sub { display: none; }
+    .fb-brand-title { font-size: 13px; }
+    .fb-btn { width: 34px; height: 34px; font-size: 13.5px; }
+    .fb-close { width: 34px; height: 34px; font-size: 15px; }
+    .fb-pageindicator { font-size: 11.5px; padding: 0 6px; }
+    .fb-sep { display: none; }
+    .fb-thumbs { width: 100%; }
+    .fb-hint { font-size: 10.5px; bottom: 8px; }
+}
