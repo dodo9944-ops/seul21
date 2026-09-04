@@ -1243,7 +1243,7 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
 @media(max-width:540px){.d-hero,.d-hero-fb{height:200px}.d-hero .d-title-area h2,.d-hero-fb .d-title-area h2{font-size:18px}}
 
 /* Detail Body */
-.d-body{padding:32px}
+.d-body{padding:18px 32px}
 @media(max-width:540px){.d-body{padding:20px}}
 
 /* Section labels in detail */
