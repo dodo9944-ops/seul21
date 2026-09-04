@@ -96,14 +96,31 @@
     .coord-more-btn i { font-size: 11px; color: var(--visseum-gold); }
 
     /* 코디네이터 위촉장·주요실적 모달(주요이력) — 공용 .d-* 상세모달 스타일 재사용 */
-    .d-hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; background: rgba(255,255,255,.85); backdrop-filter: blur(4px); font-size: 10.5px; font-weight: 700; letter-spacing: 1px; color: var(--gold); text-transform: uppercase; }
-    .coord-history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .d-hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; background: rgba(184,134,11,.1); font-size: 10.5px; font-weight: 700; letter-spacing: 1px; color: var(--gold); text-transform: uppercase; }
+    .coord-detail-head { padding: 32px 32px 8px; }
+    .coord-detail-head h2 { font-size: 21px; font-weight: 800; color: #0A0F1C; line-height: 1.35; margin: 12px 0 8px; }
+    .coord-detail-head .d-phase-plain { font-size: 13px; font-weight: 600; color: var(--gold); display: flex; align-items: center; gap: 6px; }
+    /* 얼굴사진 없이 1.위촉장 → 2.머릿돌 세로 배치, 사진을 크게 보이도록 구성 */
+    .coord-history-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
     .coord-history-item { border: 1px solid #dbdbdb; border-radius: 14px; overflow: hidden; background: #fff; }
-    .coord-history-item img { width: 100%; height: 220px; object-fit: cover; display: block; background: var(--gray-50); }
+    .ch-zoom-trigger { display: block; width: 100%; border: none; padding: 0; margin: 0; background: none; cursor: zoom-in; font: inherit; }
+    .ch-zoom-trigger img { width: 100%; height: 320px; object-fit: contain; display: block; background: var(--gray-50); transition: transform .3s ease; }
+    .ch-zoom-trigger:hover img { transform: scale(1.02); }
     .ch-cap { padding: 14px 16px; }
     .ch-title { font-size: 13.5px; font-weight: 800; color: var(--gray-900); line-height: 1.45; margin-bottom: 6px; }
     .ch-desc { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
-    @media(max-width:540px) { .coord-history-grid { grid-template-columns: 1fr; } .coord-history-item img { height: 260px; } }
+    @media(max-width:540px) { .ch-zoom-trigger img { height: 260px; } }
+
+    /* 사진 클릭 확대 — 별도 창 없이 화면 위에 약 2배로 확대 표시 */
+    .ch-zoom-overlay {
+        position: fixed; inset: 0; z-index: 100010;
+        background: rgba(10,15,28,.78);
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; pointer-events: none; transition: opacity .2s ease;
+        padding: 24px; box-sizing: border-box; cursor: zoom-out;
+    }
+    .ch-zoom-overlay.open { opacity: 1; pointer-events: auto; }
+    .ch-zoom-overlay img { max-width: 100%; max-height: 100%; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
 
     /* 서울시 코디네이터 신뢰 바 */
     .coord-highlight {
@@ -792,30 +809,30 @@
 <div class="d-overlay" id="coordDetailOverlay">
     <div class="d-modal">
         <button class="d-close" id="coordDetailClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
-        <div class="d-hero">
-            <img src="../jpg/이창우.jpg?v=20260902" alt="이창우 서울시 정비사업 코디네이터">
-            <div class="ov"></div>
-            <div class="d-title-area">
-                <div class="badges"><span class="d-hero-badge"><i class="fa-solid fa-award"></i> Seoul City Coordinator</span></div>
-                <h2>이창우 — 위촉장 및 주요실적</h2>
-                <div class="d-phase"><i class="fa-solid fa-check"></i> 서울시·송파구·은평구 정비사업 코디네이터 위촉</div>
-            </div>
+        <div class="coord-detail-head">
+            <span class="d-hero-badge"><i class="fa-solid fa-award"></i> Seoul City Coordinator</span>
+            <h2>이창우 — 위촉장 및 주요실적</h2>
+            <div class="d-phase-plain"><i class="fa-solid fa-check"></i> 서울시·송파구·은평구 정비사업 코디네이터 위촉</div>
         </div>
         <div class="d-body">
             <div class="d-sec">
                 <div class="d-sec-title">주요이력</div>
                 <div class="coord-history-grid">
                     <div class="coord-history-item">
-                        <img src="../jpg/coord/leechangwoo_appointment.jpg" alt="서울특별시 정비사업 코디네이터 위촉장 — 이창우">
+                        <button type="button" class="ch-zoom-trigger" data-zoom-src="../jpg/coord/leechangwoo_appointment.jpg" data-zoom-alt="서울특별시 정비사업 코디네이터 위촉장 — 이창우" aria-label="위촉장 사진 확대">
+                            <img src="../jpg/coord/leechangwoo_appointment.jpg" alt="서울특별시 정비사업 코디네이터 위촉장 — 이창우">
+                        </button>
                         <div class="ch-cap">
-                            <div class="ch-title">서울특별시 정비사업 코디네이터 위촉장</div>
+                            <div class="ch-title">1. 위촉장 — 서울특별시 정비사업 코디네이터</div>
                             <div class="ch-desc">서울특별시장 위촉 (위촉기간 2025.02.20 ~ 2027.02.19)</div>
                         </div>
                     </div>
                     <div class="coord-history-item">
-                        <img src="../jpg/coord/leechangwoo_headstone.jpg" alt="더샵송파루미스타 아파트 재건축사업 머릿돌 — 서울특별시 정비사업 코디네이터 이창우 등재">
+                        <button type="button" class="ch-zoom-trigger" data-zoom-src="../jpg/coord/leechangwoo_headstone.jpg" data-zoom-alt="더샵송파루미스타 아파트 재건축사업 머릿돌 — 서울특별시 정비사업 코디네이터 이창우 등재" aria-label="머릿돌 사진 확대">
+                            <img src="../jpg/coord/leechangwoo_headstone.jpg" alt="더샵송파루미스타 아파트 재건축사업 머릿돌 — 서울특별시 정비사업 코디네이터 이창우 등재">
+                        </button>
                         <div class="ch-cap">
-                            <div class="ch-title">더샵송파루미스타 아파트 재건축사업 머릿돌 등재</div>
+                            <div class="ch-title">2. 머릿돌 — 더샵송파루미스타 아파트 재건축사업</div>
                             <div class="ch-desc">서울특별시 정비사업 코디네이터로 머릿돌에 등재</div>
                         </div>
                     </div>
@@ -825,10 +842,39 @@
     </div>
 </div>
 
+<!-- 위촉장·머릿돌 사진 클릭 확대(별도 창 없이 화면 위에 약 2배 표시) -->
+<div class="ch-zoom-overlay" id="chZoomOverlay">
+    <img id="chZoomImg" src="" alt="">
+</div>
+
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260905c"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260905c"></script>
+<script>
+(function () {
+    var zoomOverlay = document.getElementById('chZoomOverlay');
+    var zoomImg = document.getElementById('chZoomImg');
+    document.querySelectorAll('.ch-zoom-trigger').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var thumbImg = btn.querySelector('img');
+            var w = thumbImg.getBoundingClientRect().width * 2;
+            var maxW = Math.min(window.innerWidth * 0.9, 900);
+            zoomImg.style.width = Math.min(w, maxW) + 'px';
+            zoomImg.style.height = 'auto';
+            zoomImg.src = btn.getAttribute('data-zoom-src');
+            zoomImg.alt = btn.getAttribute('data-zoom-alt') || '';
+            zoomOverlay.classList.add('open');
+        });
+    });
+    zoomOverlay.addEventListener('click', function () {
+        zoomOverlay.classList.remove('open');
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && zoomOverlay.classList.contains('open')) zoomOverlay.classList.remove('open');
+    });
+})();
+</script>
 <script>
 (function () {
     var overlay = document.getElementById('coordDetailOverlay');
