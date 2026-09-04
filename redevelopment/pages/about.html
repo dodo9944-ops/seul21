@@ -419,9 +419,11 @@
         object-fit: contain;
         box-shadow: none; border-radius: 0;
     }
+    .cert-stacked .cert-photo img.cert-2015-wide { width: 480px; } /* 좌우폭 확장 (대장 지시 2026-09-05) */
     @media (max-width: 1024px) {
         .cert-stacked .cert-photo { gap: 18px; padding: 36px 15px; }
         .cert-stacked .cert-photo img { height: 502px; }
+        .cert-stacked .cert-photo img.cert-2015-wide { width: 380px; }
     }
     @media (max-width: 768px) {
         .cert-stacked .cert-photo { flex-direction: column; justify-content: center; padding: 32px 20px; gap: 24px; }
@@ -994,7 +996,7 @@
                         <img src="../jpg/registration_cert_2008.png" alt="정비사업전문관리업 등록증 (2008년 최초등록, 제2008-22호)">
                     </a>
                     <a href="../jpg/registration_cert_2015.jpg" target="_blank" rel="noopener" title="원본 등록증 보기(2015)">
-                        <img src="../jpg/registration_cert_2015.jpg" alt="정비사업전문관리업 등록증 (2015년 재등록, 제2015-04호)">
+                        <img src="../jpg/registration_cert_2015.jpg" alt="정비사업전문관리업 등록증 (2015년 재등록, 제2015-04호)" class="cert-2015-wide">
                     </a>
                 </div>
                 <div class="cert-text">
