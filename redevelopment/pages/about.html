@@ -510,38 +510,38 @@
         .cert-desc { font-size: 13px; }
     }
 
-    /* ── 디지털 지명원 배너 ── */
+    /* ── 디지털 지명원 배너 — Bitseum Blue(#0068B7) 원톤 (대장 지시 2026-09-05) ── */
     .dp-banner {
         margin-top: 22px; border-radius: 16px; overflow: hidden;
-        background: linear-gradient(120deg, #171C26 0%, #232B3D 100%);
+        background: linear-gradient(120deg, #0068B7 0%, #004F8C 100%);
         display: flex; align-items: center; justify-content: space-between; gap: 24px;
-        padding: 30px 34px; box-shadow: 0 10px 30px rgba(10,15,28,.12);
+        padding: 30px 34px; box-shadow: 0 10px 30px rgba(0,104,183,.18);
         position: relative;
     }
     .dp-banner::before {
         content: ''; position: absolute; inset: 0;
-        background-image: radial-gradient(circle at 12% 20%, rgba(184,134,11,.16) 0%, transparent 45%),
-                           radial-gradient(circle at 88% 85%, rgba(255,196,0,.10) 0%, transparent 40%);
+        background-image: radial-gradient(circle at 12% 20%, rgba(255,255,255,.14) 0%, transparent 45%),
+                           radial-gradient(circle at 88% 85%, rgba(255,255,255,.08) 0%, transparent 40%);
     }
     .dp-left { display: flex; align-items: center; gap: 18px; position: relative; z-index: 1; min-width: 0; }
     .dp-icon {
         width: 54px; height: 54px; border-radius: 14px; flex-shrink: 0;
-        background: linear-gradient(135deg, #B8860B, #FFC400);
+        background: linear-gradient(135deg, #FFFFFF, #CFE7FA);
         display: flex; align-items: center; justify-content: center;
-        color: #171C26; font-size: 22px; box-shadow: 0 6px 16px rgba(184,134,11,.3);
+        color: #0068B7; font-size: 22px; box-shadow: 0 6px 16px rgba(0,79,140,.35);
     }
-    .dp-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #FFC400; text-transform: uppercase; margin-bottom: 4px; }
+    .dp-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #CFE7FA; text-transform: uppercase; margin-bottom: 4px; }
     .dp-title { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.3px; margin-bottom: 6px; }
-    .dp-desc { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.6; max-width: 520px; }
+    .dp-desc { font-size: 13px; color: rgba(255,255,255,.68); line-height: 1.6; max-width: 520px; }
     .dp-btn {
         position: relative; z-index: 1; flex-shrink: 0;
         display: inline-flex; align-items: center; gap: 9px;
         padding: 14px 26px; border-radius: 10px; border: none; cursor: pointer;
-        background: linear-gradient(120deg, #B8860B, #D6A419);
-        color: #171C26; font-size: 14.5px; font-weight: 700; letter-spacing: -.2px;
+        background: linear-gradient(120deg, #FFFFFF, #EAF4FC);
+        color: #0068B7; font-size: 14.5px; font-weight: 700; letter-spacing: -.2px;
         transition: transform .2s ease, box-shadow .2s ease;
     }
-    .dp-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(184,134,11,.35); }
+    .dp-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,79,140,.4); }
     @media (max-width: 700px) {
         .dp-banner { flex-direction: column; align-items: stretch; text-align: center; padding: 26px 22px; }
         .dp-left { flex-direction: column; text-align: center; }
