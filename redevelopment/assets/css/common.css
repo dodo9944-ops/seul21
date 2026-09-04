@@ -173,9 +173,9 @@ button, input, select, textarea { font-family: inherit; }
 }
 
 /* ── 헤더 아래 본문 여백 ── */
-body { padding-top: 89.6px; } /* 25.6(util) + 64(header) — PC, 실제 헤더 높이와 정합 (2026-09-05 상하 여백 축소) */
+body { padding-top: 64px; } /* 64(header) — PC, 상단 util-bar 삭제로 여백 재정합 (2026-09-05) */
 @media (max-width: 1024px) and (min-width: 769px) {
-  body { padding-top: 121.6px; } /* 25.6(util) + 64(header) + 32(tab) */
+  body { padding-top: 96px; } /* 64(header) + 32(tab) */
 }
 @media (max-width: 768px) {
   .header .inner { height: 39px; }

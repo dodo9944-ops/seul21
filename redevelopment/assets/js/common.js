@@ -80,9 +80,6 @@ const App = (() => {
     ];
     return `
     <div class="header-wrap" id="headerWrap">
-    <div class="util-bar"><div class="inner">
-      <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링그룹</span>
-    </div></div>
     <header class="header"><div class="inner">
       <a href="${B}/index.html" class="logo">
         <span class="logo-mark"><img src="${B}/jpg/visseum_logo2.png" alt="(주)빛세움 VISSEUM" style="width:100%;height:100%;object-fit:contain"></span>
