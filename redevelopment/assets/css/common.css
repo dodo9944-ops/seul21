@@ -169,13 +169,13 @@ button, input, select, textarea { font-family: inherit; }
   border-bottom: 1px solid #cecece;
 }
 .header .inner {
-  display: flex; align-items: center; height: 72px; gap: 36px;
+  display: flex; align-items: center; height: 64px; gap: 36px;
 }
 
 /* ── 헤더 아래 본문 여백 ── */
-body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 높이와 정합 */
+body { padding-top: 89.6px; } /* 25.6(util) + 64(header) — PC, 실제 헤더 높이와 정합 (2026-09-05 상하 여백 축소) */
 @media (max-width: 1024px) and (min-width: 769px) {
-  body { padding-top: 129.6px; } /* 25.6(util) + 72(header) + 32(tab) */
+  body { padding-top: 121.6px; } /* 25.6(util) + 64(header) + 32(tab) */
 }
 @media (max-width: 768px) {
   .header .inner { height: 39px; }
@@ -251,16 +251,22 @@ body { padding-top: 97.6px; } /* 25.6(util) + 72(header) — PC, 실제 헤더 �
   font-size: 8.5px; font-weight: 500; letter-spacing: 2.2px;
   color: var(--gray-400); text-transform: uppercase; margin-top: 2px;
 }
+.logo-divider { width: 1px; height: 22px; background: var(--gray-300); flex-shrink: 0; }
+.logo-tagline {
+  font-size: 11.5px; font-weight: 600; line-height: 1.35;
+  letter-spacing: -0.2px; color: var(--gray-500); white-space: nowrap;
+}
 @media (max-width: 768px) {
   .logo-mark { width: 26px; height: 26px; }
   .header .logo-mark { width: 84.91px; height: 35.66px; }
   .logo-company { font-size: 13px; }
   .logo-sub { font-size: 7px; letter-spacing: 1.3px; margin-top: 1px; }
   .logo { gap: 8px; }
+  .logo-divider, .logo-tagline { display: none; }
 }
 
 /* ── GNB ── */
-.gnb { display: flex; align-items: center; gap: 26px; flex: 1; justify-content: flex-end; } /* 우측 검색 아이콘 옆으로 정렬 (2026-09-04) — 첨부 이미지 미수신, 추정 반영이니 확인 요망 */
+.gnb { display: flex; align-items: center; gap: 23.4px; flex: 1; justify-content: flex-end; } /* 우측 검색 아이콘 옆으로 정렬 (2026-09-04). 항목 간격 26px→23.4px(10%↓), 우측 정렬 기준 축소 (2026-09-05 대장 지시) */
 .gnb a {
   position: relative;
   padding: 8px 0; font-size: 14px; font-weight: 500;
