@@ -186,6 +186,32 @@
     @media(max-width:860px) { .vs-principles { grid-template-columns: repeat(2,1fr); } }
     @media(max-width:480px) { .vs-principles { grid-template-columns: 1fr; } }
 
+    /* ── 경영이념 (All4U · All4V) — 가로 와이드 2열 + 체크리스트형 ── */
+    .au-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .au-card {
+        background: #fff; border: 1px solid #cecece; border-radius: 14px;
+        padding: 32px; transition: all 0.25s;
+    }
+    .au-card:hover {
+        border-color: #a6790a; box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+        transform: translateY(-3px);
+    }
+    .au-card-head { display: flex; align-items: flex-start; gap: 16px; }
+    .au-icon {
+        width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
+        background: linear-gradient(135deg, #FFFFFF, #FFF3C4);
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 2px 8px rgba(10,15,28,0.18);
+    }
+    .au-icon i { color: #B8860B; font-size: 19px; }
+    .au-badge { font-size: 18px; font-weight: 800; color: #0d1420; letter-spacing: -0.3px; margin-bottom: 8px; }
+    .au-lead { font-size: 13.5px; color: var(--gray-500); line-height: 1.65; }
+    .au-divider { height: 1px; background: #e5e5e5; margin: 24px 0; }
+    .au-list { display: flex; flex-direction: column; gap: 13px; }
+    .au-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; color: #333; line-height: 1.5; }
+    .au-list li i { color: #B8860B; font-size: 11px; margin-top: 4px; flex-shrink: 0; }
+    @media(max-width:860px) { .au-grid { grid-template-columns: 1fr; } }
+
     /* ── 빛세움의 방식 (Process) ── */
     .vs-process {
         background: linear-gradient(135deg, #FFFDF7, #FFF7DF 50%, #FFF3C4);
@@ -318,6 +344,11 @@
     @media(max-width:768px) {
         .vs-visual { grid-template-columns: 1fr; }
         .vs-visual img { height: 220px; }
+    }
+    .vs-video-wrap { margin-top: 20px; }
+    .vs-video-wrap video {
+        display: block; width: 100%; max-width: 100%; border-radius: 16px;
+        background: #0A0F1C; box-shadow: 0 20px 50px rgba(10,15,28,.14);
     }
 
     /* ── CTA ── */
@@ -630,16 +661,38 @@
         <div class="vs" id="mission">
             <div class="section-label">Mission</div>
             <h2 class="vs-title">고객감동 실현 All 4 U 경영, 고객가치 창출 All 4 V 경영</h2>
-            <div class="vs-principles">
-                <div class="vs-prin-card">
-                    <div class="vs-prin-icon"><i class="fa-solid fa-heart"></i></div>
-                    <h4>All 4 U</h4>
-                    <p>조합(원)을 향한 능동적 선도 경영 · 조합(원)을 위한 믿음과 신뢰 경영<br>합리적 주민의견 수렴 · 신속한 동의서 징구 완료 · 예상 문제점 사전대응 · 공정/투명 사업관리</p>
+            <div class="au-grid">
+                <div class="au-card">
+                    <div class="au-card-head">
+                        <div class="au-icon"><i class="fa-solid fa-heart"></i></div>
+                        <div>
+                            <div class="au-badge">All 4 U · 고객감동 실현 경영</div>
+                            <p class="au-lead">조합(원)을 향한 능동적 선도 경영 · 조합(원)을 위한 믿음과 신뢰 경영</p>
+                        </div>
+                    </div>
+                    <div class="au-divider"></div>
+                    <ul class="au-list">
+                        <li><i class="fa-solid fa-check"></i> 합리적 주민의견 수렴</li>
+                        <li><i class="fa-solid fa-check"></i> 신속한 동의서 징구 완료</li>
+                        <li><i class="fa-solid fa-check"></i> 예상 문제점 사전대응</li>
+                        <li><i class="fa-solid fa-check"></i> 공정/투명 사업관리</li>
+                    </ul>
                 </div>
-                <div class="vs-prin-card">
-                    <div class="vs-prin-icon"><i class="fa-solid fa-chart-line"></i></div>
-                    <h4>All 4 V</h4>
-                    <p>사업의 이익 극대화를 위한 가치 경영 · 부가가치 창출을 위한 전문가그룹 관리<br>사업지 특성에 맞는 관리처분계획 · 철저한 사업관리로 사업기간 단축 · 사업경비 절감으로 분담금 최소화 · 조합원의 권리와 재산을 지키는 컨설팅</p>
+                <div class="au-card">
+                    <div class="au-card-head">
+                        <div class="au-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <div>
+                            <div class="au-badge">All 4 V · 고객가치 창출 경영</div>
+                            <p class="au-lead">사업의 이익 극대화를 위한 가치 경영 · 부가가치 창출을 위한 전문가그룹 관리</p>
+                        </div>
+                    </div>
+                    <div class="au-divider"></div>
+                    <ul class="au-list">
+                        <li><i class="fa-solid fa-check"></i> 사업지 특성에 맞는 관리처분계획</li>
+                        <li><i class="fa-solid fa-check"></i> 철저한 사업관리로 사업기간 단축</li>
+                        <li><i class="fa-solid fa-check"></i> 사업경비 절감으로 분담금 최소화</li>
+                        <li><i class="fa-solid fa-check"></i> 조합원의 권리와 재산을 지키는 컨설팅</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -746,7 +799,13 @@
             <h2 class="vs-title">공간으로 증명하는 신뢰</h2>
             <div class="vs-visual">
                 <img src="../jpg/vs_visual_left.jpg" alt="빛세움 브랜드 아이덴티티">
-                <img src="../jpg/visseum_headquarters.png" alt="빛세움 사옥">
+                <img src="../jpg/visseum_office_exterior.png" alt="㈜빛세움 사옥 외관 전경">
+            </div>
+            <div class="vs-video-wrap">
+                <video controls preload="metadata" poster="../jpg/visseum_office_exterior.png" playsinline>
+                    <source src="../video/visseum_promo.mp4" type="video/mp4">
+                    브라우저가 video 태그를 지원하지 않습니다.
+                </video>
             </div>
         </div>
 
