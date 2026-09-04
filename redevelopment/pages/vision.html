@@ -138,7 +138,7 @@
     }
 
     /* ── 왜 도시정비인가 ── */
-    .vs-why { display: flex; gap: 80px; align-items: flex-start; }
+    .vs-why { display: flex; gap: 80px; align-items: flex-end; } /* 카드 그룹을 좌측 텍스트 하단에 맞춰 정렬 (대장 지시 2026-09-05) */
     .vs-why-text { flex: 1; max-width: 520px; }
     .vs-why-text h2 {
         font-size: 24px; font-weight: 800; color: var(--brand-dark);
@@ -150,30 +150,30 @@
     }
     .vs-why-cards {
         flex-shrink: 0; width: 620px;
-        display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
     }
     .vs-why-card {
-        position: relative; padding: 26px 22px; border-radius: 14px;
+        position: relative; padding: 23.92px 20.24px; border-radius: 14px;
         background: #ffffff; border: 1px solid #cecece;
         box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-    }
+    } /* 박스 8%↓(padding 26/22→23.92/20.24), gap 16→20px로 사이 여백 확보 (대장 지시 2026-09-05) */
     .vs-why-card:hover {
         border-color: #a6790a;
         box-shadow: 0 10px 24px rgba(0,0,0,0.08);
         transform: translateY(-2px);
     }
     .vs-why-num {
-        position: absolute; top: 24px; right: 22px;
+        position: absolute; top: 22px; right: 20px;
         font-size: 13px; font-weight: 700; color: #C9CDD3; letter-spacing: 0.5px;
     }
     .vs-why-icon {
-        width: 44px; height: 44px; border-radius: 12px;
+        width: 40.5px; height: 40.5px; border-radius: 11px;
         background: linear-gradient(135deg, #FFF7DF, #FFE9A8);
         display: flex; align-items: center; justify-content: center;
-        margin-bottom: 18px;
+        margin-bottom: 16.5px;
     }
-    .vs-why-icon i { color: #B8860B; font-size: 18px; }
+    .vs-why-icon i { color: #B8860B; font-size: 16.5px; }
     .vs-why-card h4 {
         font-size: 15px; font-weight: 800; color: #0A0F1C;
         margin-bottom: 8px; letter-spacing: -0.2px;
@@ -725,7 +725,7 @@
         <div class="vs" style="margin-bottom:52px">
             <div class="vs-why">
                 <div class="vs-why-text">
-                    <h2>왜 도시정비에<br>집중하는가</h2>
+                    <h2>왜 도시정비에 집중하는가</h2>
                     <p style="font-size:20px;font-weight:800;color:var(--brand-dark);line-height:1.6;margin-bottom:24px;letter-spacing:-0.3px;border-left:3px solid #a6790a;padding-left:16px;">쉬운 길이 아니라 옳은 길을 택했고,<br>그 선택이 빛세움의 정체성이 되었습니다.</p>
                     <p>도시정비사업은 단순한 건설 행위가 아닙니다. 수십 년간 삶의 터전이었던 공간을 허물고, 그 위에 새로운 공동체를 세우는 일입니다.</p>
                     <p>수백, 수천 명의 재산권이 걸려 있고, 행정기관의 인허가와 법률적 판단이 매 단계마다 뒤따릅니다. 하나의 절차가 어긋나면 수년간의 노력이 무너질 수 있는, 가장 엄밀함을 요구하는 분야입니다.</p>
