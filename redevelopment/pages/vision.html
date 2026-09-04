@@ -367,11 +367,24 @@
     }
     .vs-content-kicker i { font-size: 12px; }
     .vs-visual {
-        border-radius: 16px; overflow: hidden;
+        border-radius: 16px; overflow: hidden; position: relative; cursor: zoom-in;
     }
     .vs-visual img {
         width: 100%; height: auto; display: block; border-radius: 12px;
+        transition: transform .4s ease;
     }
+    .vs-visual:hover img { transform: scale(1.015); }
+    .vs-visual-zoom {
+        position: absolute; top: 16px; right: 16px; z-index: 1;
+        width: 38px; height: 38px; border-radius: 50%;
+        background: rgba(10,15,28,.55); backdrop-filter: blur(4px);
+        color: #fff; font-size: 14px;
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; transform: scale(.85);
+        transition: opacity .25s ease, transform .25s ease, background .2s ease;
+        pointer-events: none;
+    }
+    .vs-visual:hover .vs-visual-zoom { opacity: 1; transform: scale(1); }
 
     /* ── 브랜드 필름(영상) — 사진과 명확히 구분되는 전용 카드 ── */
     .vs-film {
@@ -893,8 +906,9 @@
             <div class="section-label">Brand Space</div>
             <h2 class="vs-title">공간으로 증명하는 신뢰</h2>
             <div class="vs-content-kicker"><i class="fa-solid fa-images"></i> 회사 공간 사진 갤러리</div>
-            <div class="vs-visual">
+            <div class="vs-visual" id="vsVisualZoom" role="button" tabindex="0" aria-label="사진 확대 보기" title="클릭하면 확대해서 볼 수 있습니다">
                 <img src="../jpg/vs_brandspace_poster.png" alt="㈜빛세움 브랜드 스페이스 — 사옥 외관 및 로비·휴게공간·회의실·업무공간">
+                <span class="vs-visual-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
             </div>
 
             <div class="vs-film" id="vsFilm" role="button" tabindex="0" aria-label="빛세움 브랜드 영상 재생">
@@ -933,6 +947,49 @@
     film.addEventListener('click', playFilm);
     film.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playFilm(); }
+    });
+})();
+</script>
+<script>
+(function () {
+    var zoomEl = document.getElementById('vsVisualZoom');
+    if (!zoomEl) return;
+    var img = zoomEl.querySelector('img');
+
+    function escapeHtml(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+    function openPhotoWindow(src, alt) {
+        var title = alt || '사진 보기';
+        var probe = new Image();
+        probe.onload = function () {
+            var availW = screen.availWidth || window.innerWidth, availH = screen.availHeight || window.innerHeight;
+            var w = Math.min(probe.naturalWidth, availW - 80);
+            var h = Math.min(probe.naturalHeight, availH - 140);
+            if (w < 360) w = 360;
+            if (h < 280) h = 280;
+            var left = Math.max(0, Math.round((availW - w) / 2));
+            var top = Math.max(0, Math.round((availH - h) / 2));
+            var features = 'width=' + Math.round(w) + ',height=' + Math.round(h) + ',left=' + left + ',top=' + top +
+                ',resizable=yes,scrollbars=no,status=no,toolbar=no,menubar=no,location=no';
+            var win = window.open('', 'vsPhotoWin', features);
+            if (!win) { window.open(src, '_blank'); return; }
+            win.document.open();
+            win.document.write(
+                '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + escapeHtml(title) + '</title>' +
+                '<style>html,body{margin:0;padding:0;width:100%;height:100%;background:#0A0F1C;overflow:hidden}' +
+                'img{width:100%;height:100%;object-fit:contain;display:block}</style></head><body>' +
+                '<img src="' + src + '" alt="' + escapeHtml(alt || '') + '"></body></html>'
+            );
+            win.document.close();
+            win.focus();
+        };
+        probe.src = src;
+    }
+
+    function openZoom() { openPhotoWindow(img.getAttribute('src'), img.getAttribute('alt')); }
+    zoomEl.addEventListener('click', openZoom);
+    zoomEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openZoom(); }
     });
 })();
 </script>
