@@ -24,7 +24,7 @@
     .pf-hero .breadcrumb{margin-bottom:20px}
     .pf-hero h1{font-size:36px;font-weight:900;color:#0A0F1C;margin-bottom:14px;padding-left:18px;border-left:3px solid #a6790a}
     .pf-hero .hero-tag{font-size:17px;font-weight:600;color:var(--gold);margin-bottom:8px}
-    .pf-hero .hero-sub{font-size:14px;color:rgba(10,15,28,.5)}
+    .pf-hero .hero-sub{font-size:14px;color:rgba(10,15,28,.68)}
     @media(max-width:768px){.pf-hero{padding:40px 0 32px}.pf-hero h1{font-size:26px}}
 
     /* === KPI (좌측 아이콘 + 우측 텍스트, 가로형 카드) === */
@@ -577,6 +577,8 @@ window.PF={open:openDetail,close:closeDetail,page:function(n){curPage=n;renderAl
 renderTabCounts();renderTypeTabs();renderFeat();renderAll();
 // URL param ?type= 지원
 (function(){var p=new URLSearchParams(location.search).get('type');if(p){setType(p);document.querySelector('.pg-grid').scrollIntoView({behavior:'smooth',block:'start'});}})();
+// URL param ?status= 지원 (준공실적 등)
+(function(){var s=new URLSearchParams(location.search).get('status');if(s){document.getElementById('fStatus').value=s;curPage=1;renderAll();document.querySelector('.pg-grid').scrollIntoView({behavior:'smooth',block:'start'});}})();
 })();
 </script>
 </body>

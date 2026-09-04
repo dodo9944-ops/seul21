@@ -307,18 +307,19 @@
 
         /* 헤드라인 */
         .hero-section h1 {
-            font-size: 46px; font-weight: 700; letter-spacing: -1.2px;
-            color: #171C26; line-height: 1.3; margin-bottom: 12px;
+            font-size: 46px; font-weight: 700; letter-spacing: 0.2px;
+            color: #141820; line-height: 1.3; margin-bottom: 12px;
             max-width: 560px;
         }
         .hero-section h1 em {
-            font-style: normal; color: #C58B00;
-            -webkit-text-fill-color: #C58B00; background: none;
+            font-style: normal; color: #A77600;
+            -webkit-text-fill-color: #A77600; background: none;
         }
 
         /* 서브카피 */
         .hero-subtitle {
-            font-size: 15.5px; font-weight: 400; color: #565C66;
+            font-size: 15.5px; font-weight: 400; color: #494E57;
+            letter-spacing: 0.2px;
             line-height: 1.72; margin-bottom: 12px; max-width: 620px;
             word-break: keep-all;
         }
@@ -376,9 +377,9 @@
             .hero-label { font-size: 8px; letter-spacing: 1.4px; padding: 3.5px 9px; margin-bottom: 12px; border-color: rgba(184,134,11,0.198); }
             .hero-section h1 { font-size: clamp(22px, 6.8vw, 28px); letter-spacing: -.5px; line-height: 1.2; max-width: 100%; margin-bottom: 12px; word-break: keep-all; }
             /* 골드 포인트를 핵심 단어("가치창조") 1개로 제한 — 첫 <em>("사람을 위한")은 본문 색으로 */
-            .hero-section h1 em:first-of-type { color: #171C26; -webkit-text-fill-color: #171C26; }
+            .hero-section h1 em:first-of-type { color: #141820; -webkit-text-fill-color: #141820; }
 
-            .hero-subtitle { font-size: 13.5px; line-height: 1.7; margin-bottom: 16px; max-width: 94%; color: rgba(10,15,28,.82); }
+            .hero-subtitle { font-size: 13.5px; line-height: 1.7; margin-bottom: 16px; max-width: 94%; color: rgba(9,13,24,.82); letter-spacing: 0.2px; }
 
             .hero-actions { flex-direction: column; gap: 8px; width: 100%; }
             /* 상담 문의 — 채도 낮춘 고급 CI 골드톤, 높이 축소(46→42px, 약 9%) */
@@ -945,11 +946,10 @@
 
 
 <!-- ===== 사업 진행단계 ===== -->
-<section class="section" style="background: linear-gradient(180deg, #FFFDF7 0%, #FFF7DF 100%); padding: 28px 0 28px; border-top: 1px solid #CECECE; border-bottom: 1px solid #CECECE;">
+<section class="section" style="background: linear-gradient(180deg, #FFFDF7 0%, #FFF7DF 100%); padding: 18px 0; border-top: 1px solid #CECECE; border-bottom: 1px solid #CECECE;">
     <div class="inner">
-        <div class="section-label">Project Process</div>
-        <h2 class="section-title" style="margin-bottom:8px;color:#171C26">정비사업 추진 절차</h2>
-        <p style="color:#666B73;font-size:14px;margin-bottom:16px">빛세움이 각 단계에서 함께합니다</p>
+        <div class="section-label" style="margin-bottom:4px">Project Process</div>
+        <h2 class="section-title" style="margin-bottom:12px;color:#171C26">정비사업 추진 절차 <span style="font-size:14px;font-weight:400;color:#666B73">— 빛세움이 각 단계에서 함께합니다</span></h2>
 
         <div class="process-bar" id="processBar">
             <div class="p-step p-done" data-step="0">
