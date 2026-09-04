@@ -251,13 +251,14 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
   font-size: 8.5px; font-weight: 500; letter-spacing: 2.2px;
   color: var(--gray-400); text-transform: uppercase; margin-top: 2px;
 }
-.logo-divider { width: 1px; height: 22px; background: var(--gray-300); flex-shrink: 0; }
+.logo-divider { width: 1px; height: 22px; background: var(--gray-300); flex-shrink: 0; position: relative; top: 1.5px; left: -0.75px; }
 .logo-tagline {
   font-size: 10.35px; font-weight: 600; line-height: 1.35;
   letter-spacing: -0.2px; color: var(--gray-600); white-space: nowrap;
-  opacity: 0.8; position: relative; top: 3px;
+  opacity: 0.8; position: relative; top: 3px; left: -1.5px;
 } /* 글자크기 11.5→10.35px(10%↓), 밝기 #888→#666(25%↓) (2026-09-05).
-     opacity 0.8(20% 옅게) + 아래로 3px 이동 (2026-09-05 대장 지시) — 6px 추가 하강·구분선 이동은 원복(대장 지시) */
+     opacity 0.8(20% 옅게) + 아래로 3px 이동. 글자 좌측 1.5px 이동, 구분선은 로고·글자 사이
+     좌우상하 정중앙(top 1.5px, left -0.75px = 글자 이동폭의 절반)으로 재배치 (2026-09-05 대장 지시) */
 @media (max-width: 768px) {
   .logo-mark { width: 26px; height: 26px; }
   .header .logo-mark { width: 84.91px; height: 35.66px; }
