@@ -13,7 +13,7 @@
     <meta name="description" content="도시정비의 기준을 만들고, 절차의 신뢰를 세우며, 사업의 가치를 끝까지 완성하는 길 — (주)빛세움">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260905h">
     <style>
@@ -83,74 +83,58 @@
         .vs-hero-keywords { flex-direction: row; flex-wrap: wrap; }
     }
 
-    /* ── 브랜드 철학 (2026-09-05 대장 지시: 좌 텍스트 + 우 사진 배너로 재구성) ── */
+    /* ── 브랜드 철학 (2026-09-05 대장 지시: 사진 1장 + 하단 텍스트로 단순화) ── */
     .vs-philosophy {
-        display: flex; align-items: stretch; min-height: 340px;
         border-radius: 18px; overflow: hidden;
         box-shadow: 0 10px 30px rgba(10,15,28,.08);
+        background: #fff;
     }
-    .vs-phil-text {
-        flex: 0 0 38%; display: flex; flex-direction: column; justify-content: center;
-        padding: 40px 40px 40px 8px;
-        background: linear-gradient(120deg, #FFFDF7 0%, #FFF7E0 100%);
+    .vs-phil-photo-full { width: 100%; line-height: 0; }
+    .vs-phil-photo-full img { width: 100%; height: auto; display: block; }
+    .vs-phil-text-below {
+        position: relative; text-align: center;
+        padding: 52px 24px 56px;
+        background: linear-gradient(180deg, #FFFDF7 0%, #FFF7E0 100%);
+        overflow: hidden;
+    }
+    .vs-phil-text-below::before {
+        content: '\201C'; font-family: Georgia, serif; font-size: 170px;
+        color: var(--gold); opacity: .07; line-height: 1;
+        position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+        pointer-events: none; user-select: none;
     }
     .vs-phil-kicker {
+        position: relative; z-index: 1;
+        display: flex; align-items: center; justify-content: center; gap: 12px;
         font-size: 11px; color: var(--gold); letter-spacing: 2.5px;
-        font-weight: 700; text-transform: uppercase; margin-bottom: 18px;
-        display: flex; align-items: center; gap: 8px;
+        font-weight: 700; text-transform: uppercase; margin-bottom: 20px;
+        animation: philFadeUp .8s ease both;
     }
-    .vs-phil-kicker::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+    .vs-phil-kicker::before, .vs-phil-kicker::after { content: ''; width: 28px; height: 1px; background: var(--gold); }
     .vs-phil-headline {
-        font-size: 26px; font-weight: 800; color: #0A0F1C;
-        line-height: 1.45; margin-bottom: 20px; letter-spacing: -0.5px;
-        word-break: keep-all;
+        position: relative; z-index: 1;
+        font-family: 'Nanum Myeongjo', serif;
+        font-size: 32px; font-weight: 800; color: #0A0F1C;
+        line-height: 1.55; letter-spacing: -0.3px; word-break: keep-all;
+        max-width: 640px; margin: 0 auto;
+        animation: philFadeUp .9s ease .12s both;
     }
-    .vs-phil-headline strong { color: var(--brand-dark); font-weight: 900; }
-    .vs-phil-body p {
-        font-size: 14.5px; line-height: 1.9; color: var(--gray-600);
-        word-break: keep-all; font-weight: 400;
+    .vs-phil-headline strong { color: var(--gold); font-weight: 900; }
+    .vs-phil-underline {
+        position: relative; z-index: 1;
+        width: 40px; height: 3px; border-radius: 2px;
+        background: linear-gradient(90deg, #B8860B, #FFC400);
+        margin: 24px auto 0;
+        animation: philFadeUp 1s ease .22s both;
     }
-    .vs-phil-footer {
-        font-size: 10.5px; color: var(--gray-400); margin-top: 26px;
-        letter-spacing: 2px; font-weight: 600; text-transform: uppercase;
-        padding-top: 18px; border-top: 1px solid rgba(184,134,11,0.2);
+    @keyframes philFadeUp {
+        from { opacity: 0; transform: translateY(14px); }
+        to   { opacity: 1; transform: translateY(0); }
     }
-    .vs-phil-photo {
-        flex: 1; position: relative; min-width: 0;
-    }
-    .vs-phil-photo img {
-        position: absolute; inset: 0; width: 100%; height: 100%;
-        object-fit: cover; display: block;
-    }
-    .vs-phil-photo-overlay {
-        position: absolute; top: 0; right: 0; bottom: 0;
-        display: flex; flex-direction: column; align-items: flex-end; justify-content: center;
-        padding: 32px 40px; text-align: right;
-        background: linear-gradient(90deg, transparent 0%, rgba(10,15,28,.06) 55%, rgba(10,15,28,.16) 100%);
-    }
-    .vs-phil-cursive {
-        font-family: 'Sacramento', cursive; font-size: 34px; line-height: 1.25;
-        color: #C58B00; text-shadow: 0 2px 10px rgba(255,255,255,.5);
-        margin-bottom: 16px;
-    }
-    .vs-phil-caption {
-        font-size: 14px; font-weight: 600; color: #171C26; line-height: 1.6;
-        text-shadow: 0 1px 6px rgba(255,255,255,.6);
-    }
-    .vs-phil-caption strong { color: var(--gold); font-weight: 800; }
-    .vs-phil-caption-line { width: 26px; height: 2px; background: var(--gold); margin-top: 12px; }
-    @media(max-width:860px) {
-        .vs-philosophy { flex-direction: column; }
-        .vs-phil-text { flex: none; padding: 32px 28px; }
-        .vs-phil-photo { height: 260px; }
-        .vs-phil-photo-overlay { align-items: flex-start; text-align: left; padding: 24px; background: linear-gradient(180deg, rgba(10,15,28,.05) 0%, rgba(10,15,28,.22) 100%); }
-        .vs-phil-cursive { font-size: 26px; }
-    }
-    @media(max-width:480px) {
-        .vs-phil-headline { font-size: 21px; }
-        .vs-phil-body p { font-size: 14px; }
-        .vs-phil-cursive { font-size: 22px; }
-        .vs-phil-caption { font-size: 12.5px; }
+    @media(max-width:768px) {
+        .vs-phil-text-below { padding: 40px 22px 44px; }
+        .vs-phil-headline { font-size: 23px; }
+        .vs-phil-text-below::before { font-size: 110px; }
     }
 
     /* ── 왜 도시정비인가 ── */
@@ -713,23 +697,13 @@
         <!-- ══════ 브랜드 철학 ══════ -->
         <div class="vs" id="philosophy" style="margin-bottom:52px">
             <div class="vs-philosophy">
-                <div class="vs-phil-text">
+                <div class="vs-phil-photo-full">
+                    <img src="../jpg/vs_philosophy_banner.jpg" alt="㈜빛세움 — Building a Better Tomorrow, 사람을 위한 더 나은 도시 빛세움이 만듭니다">
+                </div>
+                <div class="vs-phil-text-below">
                     <div class="vs-phil-kicker">VISSEUM — BRAND PHILOSOPHY</div>
                     <div class="vs-phil-headline"><strong>빛세움(Visseum)</strong>은 '빛을 세우다'에서 출발합니다.</div>
-                    <div class="vs-phil-body">
-                        <p>고객의 자산을 빛나는 결실로 세우고, 흐트러진 절차를 바로 세우고,<br>
-                        도시와 사람을 아름답게 조화시켜 삶의 질을 높이는 것.<br>
-                        그것이 빛세움이 걸어가는 길입니다.</p>
-                    </div>
-                    <div class="vs-phil-footer">A Better Tomorrow with Visseum</div>
-                </div>
-                <div class="vs-phil-photo">
-                    <img src="../jpg/vs_philosophy_cityview.png" alt="㈜빛세움 임직원이 사무실 창밖으로 도시 전경을 바라보는 모습">
-                    <div class="vs-phil-photo-overlay">
-                        <div class="vs-phil-cursive">Building a<br>Better Tomorrow</div>
-                        <div class="vs-phil-caption">사람을 위한<br>더 나은 도시, <strong>빛세움</strong>이 만듭니다.</div>
-                        <div class="vs-phil-caption-line"></div>
-                    </div>
+                    <div class="vs-phil-underline"></div>
                 </div>
             </div>
         </div>
