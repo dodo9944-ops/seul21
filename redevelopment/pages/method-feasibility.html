@@ -17,6 +17,39 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260902g">
     <link rel="stylesheet" href="../assets/css/method.css?v=20260505a">
+    <style>
+    /* HUG 대출보증 — 핵심업무 확장 섹션 */
+    .hug-core-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;background:rgba(184,134,11,0.14);color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.5px;margin-bottom:16px}
+    .hug-core-badge i{font-size:12px}
+    .hug-overview{background:linear-gradient(135deg,#0A0F1C,#171C26);border-radius:16px;padding:40px 44px;color:#fff;margin-bottom:32px}
+    .hug-overview p{font-size:15.5px;line-height:1.95;color:rgba(255,255,255,0.88);margin:0}
+    .hug-table-wrap{overflow-x:auto;margin-bottom:32px;border-radius:14px;border:1px solid #cecece}
+    table.hug-table{width:100%;border-collapse:collapse;background:#fff;font-size:13.5px}
+    table.hug-table th{background:var(--gold);color:#171310;font-weight:800;padding:14px 18px;text-align:left;white-space:nowrap}
+    table.hug-table td{padding:13px 18px;border-top:1px solid #e4e4e4;color:var(--gray-700);line-height:1.7}
+    table.hug-table td.hug-cat{font-weight:700;color:var(--gray-900);white-space:nowrap;background:#FAFAFA}
+    .hug-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:32px}
+    .hug-flow-step{flex:1;min-width:110px;background:#fff;border:1.5px solid #cecece;border-radius:12px;padding:14px 12px;text-align:center;font-size:12.5px;font-weight:700;color:var(--gray-800)}
+    .hug-flow-step span{display:block;font-size:10.5px;font-weight:700;color:var(--gold);margin-bottom:4px}
+    .hug-flow-arrow{color:var(--gold);font-size:14px;flex-shrink:0}
+    .hug-type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-bottom:32px}
+    @media(max-width:860px){.hug-type-grid{grid-template-columns:1fr}}
+    .hug-type-card{background:#fff;border:1.5px solid #cecece;border-radius:14px;padding:28px 28px 24px}
+    .hug-type-card h4{font-size:16.5px;font-weight:800;color:var(--gray-900);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+    .hug-type-card h4 i{color:var(--gold);font-size:15px}
+    .hug-type-limit{font-size:12px;color:var(--gold);font-weight:700;margin-bottom:14px}
+    .hug-type-sub{font-size:11.5px;font-weight:700;color:var(--gray-500);letter-spacing:.5px;text-transform:uppercase;margin:14px 0 8px}
+    .hug-type-card ul{margin:0;padding-left:0;list-style:none}
+    .hug-type-card ul li{font-size:13px;color:var(--gray-600);line-height:1.75;padding:5px 0 5px 16px;position:relative}
+    .hug-type-card ul li::before{content:'';position:absolute;left:0;top:13px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+    .hug-type-process{font-size:12.5px;color:var(--gray-700);line-height:1.9;background:#FAF7F0;border-radius:8px;padding:10px 14px}
+    .hug-common-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:32px}
+    @media(max-width:860px){.hug-common-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.hug-common-grid{grid-template-columns:1fr}}
+    .hug-common-item{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--gray-700);line-height:1.6;background:#fff;border:1px solid #e4e4e4;border-radius:10px;padding:11px 13px}
+    .hug-common-item i{color:var(--gold);font-size:10px;margin-top:5px;flex-shrink:0}
+    .hug-fee-note{font-size:12px;color:var(--gray-500);margin-top:-18px;margin-bottom:32px}
+    </style>
 </head>
 <body>
 <div id="site-header"></div>
@@ -132,6 +165,164 @@
             </div>
         </div>
 
+        <div class="md-section" id="hug">
+            <div class="hug-core-badge"><i class="fa-solid fa-star"></i> VISSEUM CORE BUSINESS · 당사 핵심업무</div>
+            <div class="section-label">HUG Guarantee</div>
+            <h2 class="section-title">HUG 대출보증 업무</h2>
+            <div class="hug-overview">
+                <p>조합의 현황을 파악하여 정비사업의 성공을 위한 현금흐름분석과 관리처분인가 준비단계부터 체계적으로 조합사업진단, 정비사업자금 HUG 대출보증(조합사업비, 이주비, 조합원 분담금, 일반분양자 중도금)을 위한 솔루션을 제공합니다.</p>
+            </div>
+
+            <h3 style="font-size:16px;font-weight:800;color:var(--gray-900);margin-bottom:14px">보증서 발급 조건</h3>
+            <div class="hug-table-wrap">
+                <table class="hug-table">
+                    <thead><tr><th>구분</th><th>보증서 발급 조건</th></tr></thead>
+                    <tbody>
+                        <tr><td class="hug-cat" rowspan="4">시행자</td><td>조합설립인가, 사업시행인가, 관리처분계획인가 등 인허가 관련 행정소송 진행 여부</td></tr>
+                        <tr><td>심사평점 70점이상(사업비의 경우)</td></tr>
+                        <tr><td>총 건립규모 100세대이상 (단, 가로주택정비사업은 20세대이상)</td></tr>
+                        <tr><td>도시환경정비사업의 경우 주거면적비율이 60%이상</td></tr>
+                        <tr><td class="hug-cat" rowspan="2">시공자</td><td>신용평가등급 BB+이상 (가로주택정비사업은 B+이상)</td></tr>
+                        <tr><td>고객상시 모니터링 결과 정보등급에 해당되지 않아야 함</td></tr>
+                        <tr><td class="hug-cat" rowspan="2">조합원</td><td>조합원의 신용조사 결과 채무불이행, 조세체납 등 신용불량정보가 있는 경우 불허</td></tr>
+                        <tr><td>무허가, 미등기, 멸실된 건축물, 건물소유자(토지없는경우에 한함)의 경우 보증서 발급 제외</td></tr>
+                        <tr><td class="hug-cat">일반 분양 계약자</td><td>일반분양계약자의 신용조사 결과 채무불이행, 조세체납 등 신용불량정보가 있는 경우 불허</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:16px;font-weight:800;color:var(--gray-900);margin-bottom:14px">보증서 발급순서</h3>
+            <div class="hug-flow">
+                <div class="hug-flow-step"><span>1</span>보증취급신청</div>
+                <i class="fa-solid fa-chevron-right hug-flow-arrow"></i>
+                <div class="hug-flow-step"><span>2</span>보증취급심사</div>
+                <i class="fa-solid fa-chevron-right hug-flow-arrow"></i>
+                <div class="hug-flow-step"><span>3</span>보증채무약정</div>
+                <i class="fa-solid fa-chevron-right hug-flow-arrow"></i>
+                <div class="hug-flow-step"><span>4</span>확약서 제출</div>
+                <i class="fa-solid fa-chevron-right hug-flow-arrow"></i>
+                <div class="hug-flow-step"><span>5</span>사업약정</div>
+                <i class="fa-solid fa-chevron-right hug-flow-arrow"></i>
+                <div class="hug-flow-step"><span>6</span>사업부지 담보취득</div>
+                <i class="fa-solid fa-chevron-right hug-flow-arrow"></i>
+                <div class="hug-flow-step"><span>7</span>보증료 납부</div>
+                <i class="fa-solid fa-chevron-right hug-flow-arrow"></i>
+                <div class="hug-flow-step" style="background:var(--gold);border-color:var(--gold);color:#171310"><span style="color:#171310">8</span>보증서 발급</div>
+            </div>
+
+            <h3 style="font-size:16px;font-weight:800;color:var(--gray-900);margin-bottom:14px">보증 유형별 업무·절차</h3>
+            <div class="hug-type-grid">
+                <div class="hug-type-card">
+                    <h4><i class="fa-solid fa-house-chimney-user"></i> 이주비 대출보증</h4>
+                    <div class="hug-type-limit">용역비 별도제안 · 한도: 발주자(조합) 지역별 요건 고려</div>
+                    <div class="hug-type-sub">업무 내용</div>
+                    <ul>
+                        <li>관리처분인가서 내용검토</li>
+                        <li>HUG 사전협의 서류작성 및 협의업무</li>
+                        <li>HUG 심사서류 검토 및 작성업무</li>
+                        <li>HUG 이주비 보증신청 접수 및 협의업무</li>
+                        <li>조합원 명의변경 처리업무</li>
+                        <li>HUG 이주비 보증 취급승인서 발급업무</li>
+                        <li>금융기관 심사서류 검토 및 작성업무</li>
+                    </ul>
+                    <div class="hug-type-sub">추진 절차</div>
+                    <div class="hug-type-process">보증취급신청(전체 조합원 일괄) → 보증취급심사(HUG 협의) → 보증취급한도승인(집단대출승인서 발급) → 조합원 개인별 보증서 발급</div>
+                </div>
+                <div class="hug-type-card">
+                    <h4><i class="fa-solid fa-hand-holding-dollar"></i> 부담금 대출보증</h4>
+                    <div class="hug-type-limit">한도: 발주자(조합) 지역별 요건 고려</div>
+                    <div class="hug-type-sub">업무 내용</div>
+                    <ul>
+                        <li>조합원 중도금대출 금융기관 선정 지원 업무</li>
+                        <li>조합원 분양계약 명부 검토</li>
+                        <li>조합원 명의변경 처리 업무</li>
+                        <li>HUG 사전 협의 자료 작성 및 협의 업무</li>
+                        <li>HUG 부담금 보증신청 접수 및 협의 업무</li>
+                        <li>금융기관 대출관련 사전 협의업무</li>
+                        <li>HUG 부담금 보증 취급 승인서 발급 업무</li>
+                    </ul>
+                    <div class="hug-type-sub">추진 절차</div>
+                    <div class="hug-type-process">보증취급신청(분양계약 후) → 보증취급심사(서류검토) → 보증취급한도승인 → 조합원 부담금 대출 실행</div>
+                </div>
+                <div class="hug-type-card">
+                    <h4><i class="fa-solid fa-sack-dollar"></i> 사업비 대출보증</h4>
+                    <div class="hug-type-limit">취급승인(3년기준) · 용역비 별도제안 · 한도: 총 사업비의 50%</div>
+                    <div class="hug-type-sub">업무 내용</div>
+                    <ul>
+                        <li>조합 사업비내역 검토 및 정리</li>
+                        <li>시공사 대여금 내역검토 및 정리</li>
+                        <li>미대출자 이자비용 산출 및 관리</li>
+                        <li>사업진행사항 HUG보고 및 보증서 재승인 관련업무</li>
+                        <li>HUG 사전협의 및 심사서류 자료작성 및 협의업무</li>
+                        <li>HUG 사업비 보증신청 접수 및 협의업무</li>
+                        <li>HUG 사업비 보증 취급승인서 발급업무</li>
+                    </ul>
+                    <div class="hug-type-sub">추진 절차</div>
+                    <div class="hug-type-process">보증취급신청(조합업무 대행) → 보증취급심사(사업 안정성 평가) → 보증취급한도승인 → 최초 사업비 청구(매월 사업비 청구필요)</div>
+                </div>
+                <div class="hug-type-card">
+                    <h4><i class="fa-solid fa-people-roof"></i> 일반분양 대출보증</h4>
+                    <div class="hug-type-limit">용역비 별도제안</div>
+                    <div class="hug-type-sub">업무 내용</div>
+                    <ul>
+                        <li>일반분양 계약서 검토</li>
+                        <li>HUG 심사서류관련 자료 검토</li>
+                        <li>HUG 심사서류 작성업무</li>
+                        <li>HUG 일반분양 분양보증신청 접수 및 협의업무</li>
+                        <li>HUG 일반분양 중도금대출보증 업무지원</li>
+                        <li>금융기관 심사서류 검토 및 작성업무</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="font-size:16px;font-weight:800;color:var(--gray-900);margin-bottom:14px">HUG 대출보증업무 공통사항</h3>
+            <div class="hug-common-grid">
+                <div class="hug-common-item"><i class="fa-solid fa-circle"></i>HUG 대출관련 전반적인 컨설팅</div>
+                <div class="hug-common-item"><i class="fa-solid fa-circle"></i>HUG 대출 대상자 조정/분류 업무</div>
+                <div class="hug-common-item"><i class="fa-solid fa-circle"></i>HUG 대출 해당조합원대상 분류 업무</div>
+                <div class="hug-common-item"><i class="fa-solid fa-circle"></i>HUG 대출 해당 일반분양자 분류 업무</div>
+                <div class="hug-common-item"><i class="fa-solid fa-circle"></i>금융기관 알선 및 상담업무 관리감독</div>
+                <div class="hug-common-item"><i class="fa-solid fa-circle"></i>HUG 대출 자서장소 운영 관리감독</div>
+                <div class="hug-common-item"><i class="fa-solid fa-circle"></i>상담 및 업무지원인력의 배치 및 관리감독</div>
+                <div class="hug-common-item"><i class="fa-solid fa-circle"></i>HUG 대출자 제출서류 검수/확인</div>
+                <div class="hug-common-item"><i class="fa-solid fa-circle"></i>HUG 대출 진행사항 보고</div>
+            </div>
+
+            <h3 style="font-size:16px;font-weight:800;color:var(--gray-900);margin-bottom:14px">HUG 대출보증 용역비(HUG 보증 요율)</h3>
+            <div class="hug-table-wrap">
+                <table class="hug-table">
+                    <thead><tr><th>보증 종류</th><th>요율</th></tr></thead>
+                    <tbody>
+                        <tr><td class="hug-cat">조합원 이주비대출보증</td><td>0.304%</td></tr>
+                        <tr><td class="hug-cat">조합원 분담금대출보증</td><td>0.170%</td></tr>
+                        <tr><td class="hug-cat" rowspan="5">정비사업비 대출보증</td><td>1등급 0.427%</td></tr>
+                        <tr><td>2등급 0.512%</td></tr>
+                        <tr><td>3등급 0.568%</td></tr>
+                        <tr><td>4등급 0.766%</td></tr>
+                        <tr><td>5등급 0.858%</td></tr>
+                        <tr><td class="hug-cat">일반분양자 중도금대출보증</td><td>0.130%</td></tr>
+                        <tr><td class="hug-cat">자금관리 사무용역</td><td>해당 없음</td></tr>
+                        <tr><td class="hug-cat" style="font-weight:800">총 용역비</td><td style="font-weight:800;color:var(--gold)">별도제안</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="hug-fee-note">※ 상기의 요율은 사업방식 및 시공사/개인의 신용도 등에 따라 상이할 수 있습니다.</p>
+
+            <h3 style="font-size:16px;font-weight:800;color:var(--gray-900);margin-bottom:14px">정비사업 자금관리 사무용역</h3>
+            <div class="hug-type-card" style="margin-bottom:0">
+                <div class="hug-type-limit" style="margin-bottom:0">용역비 별도제안</div>
+                <ul style="margin-top:14px">
+                    <li>월별 사업비 집행 보고</li>
+                    <li>HUG 고분양가 심사관련 자문 및 서류작성</li>
+                    <li>정비사업비 예산계획 수립시 자문</li>
+                    <li>사업비 및 운영비 항목별 분류, 정리, 관리업무</li>
+                    <li>조합원 명의변경 처리업무</li>
+                    <li>대여금, 사업비 상환계획 수립</li>
+                    <li>관리처분 변경시 예산반영 등 자문업무</li>
+                </ul>
+            </div>
+        </div>
+
         <div class="md-section">
             <div class="section-label">Process</div>
             <h2 class="section-title">사업성 검토 절차</h2>
@@ -177,7 +368,7 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260904a"></script>
+<script src="../assets/data/mock-data.js?v=20260905a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260902f"></script>
 </body>

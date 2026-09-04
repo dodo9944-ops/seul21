@@ -26,86 +26,62 @@ const App = (() => {
       { href: `${B}/pages/services.html`, label: '사업분야', icon: 'fa-solid fa-diagram-project' },
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
-      { href: `${B}/pages/community.html`, label: '커뮤니티', icon: 'fa-solid fa-comments' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
     ];
     const navGroups = [
       { href:`${B}/pages/about.html`, label:'회사소개', icon:'fa-solid fa-building-columns', sub:[
+        { href:`${B}/pages/about.html#aboutFirstSection`, label:'회사개요' },
         { href:`${B}/pages/about.html#ceo`, label:'CEO 인사말' },
+        { href:`${B}/pages/about.html#registration`, label:'정비사업전문관리업 등록현황/인증' },
         { href:`${B}/pages/about.html#history`, label:'회사연혁' },
         { href:`${B}/pages/about.html#organization`, label:'조직도' },
-        { href:`${B}/pages/about.html#ci`, label:'CI 소개' },
+        { href:`${B}/pages/about.html#ci`, label:'CI/브랜드' },
       ]},
       { href:`${B}/pages/vision.html`, label:'빛세움의 길', icon:'fa-solid fa-road', sub:[
-        { href:`${B}/pages/vision.html#philosophy`, label:'빛세움 철학' },
-        { href:`${B}/pages/vision.html#principles`, label:'우리가 지키는 원칙' },
-        { href:`${B}/pages/vision.html#method`, label:'빛세움의 방식' },
-        { href:`${B}/pages/vision.html#visual`, label:'공간으로 증명하는 신뢰' },
+        { href:`${B}/pages/vision.html#method`, label:'정비사업 추진절차' },
+        { href:`${B}/pages/method-feasibility.html`, label:'사업성 검토' },
+        { href:`${B}/pages/method-permit.html`, label:'인허가 전략' },
+        { href:`${B}/pages/method-feasibility.html#hug`, label:'HUG/금융지원' },
+        { href:`${B}/pages/method-documentation.html`, label:'PM/CM 사업관리' },
+        { href:`${B}/pages/method-coordination.html`, label:'갈등관리/전문자문' },
       ]},
       { href:`${B}/pages/services.html`, label:'사업분야', icon:'fa-solid fa-diagram-project', sub:[
-        { href:`${B}/pages/services.html`, label:'사업분야 전체' },
-        { href:`${B}/pages/redevelopment-service.html`, label:'주택재개발 정비사업' },
-        { href:`${B}/pages/reconstruction-service.html`, label:'주택재건축 정비사업' },
+        { href:`${B}/pages/redevelopment-service.html`, label:'주택재개발' },
+        { href:`${B}/pages/redevelopment-service.html#land-transfer`, label:'국공유지 양도양수' },
+        { href:`${B}/pages/reconstruction-service.html`, label:'주택재건축' },
         { href:`${B}/pages/small-reconstruction-service.html`, label:'소규모 정비사업' },
+        { href:`${B}/pages/garoju-service.html`, label:'도심복합개발' },
+        { href:`${B}/pages/urbanplanning-service.html`, label:'도시계획/엔지니어링' },
+        { href:`${B}/pages/pmcm-service.html`, label:'도시정비 PM/CM' },
+        { href:`${B}/pages/bunyang-service.html`, label:'분양사업' },
+        { href:`${B}/pages/gwanggo-service.html`, label:'광고사업' },
       ]},
       { href:`${B}/pages/portfolio.html`, label:'업무실적', icon:'fa-solid fa-briefcase', sub:[
-        { href:`${B}/pages/portfolio.html`, label:'수행실적 전체' },
-        { href:`${B}/pages/portfolio.html?type=재개발`, label:'재개발 실적' },
-        { href:`${B}/pages/portfolio.html?type=재건축`, label:'재건축 실적' },
-        { href:`${B}/pages/portfolio.html?type=소규모정비`, label:'소규모정비 실적' },
+        { href:`${B}/pages/portfolio.html`, label:'전체 수행실적' },
+        { href:`${B}/pages/portfolio.html?type=재개발`, label:'재개발' },
+        { href:`${B}/pages/portfolio.html?type=재건축`, label:'재건축' },
+        { href:`${B}/pages/portfolio.html?type=소규모정비`, label:'소규모정비' },
+        { href:`${B}/pages/services.html#coordinator`, label:'서울시 정비사업 코디네이터/전문자문' },
       ]},
       { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open', sub:[
         { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
         { href:`${B}/pages/library.html?cat=법령`, label:'관계법령' },
         { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
+        { href:`${B}/pages/feasibility-check.html`, label:'개별사업성 분석' },
         { href:`${B}/pages/gallery.html`, label:'갤러리' },
+        { href:`${B}/pages/promo-video.html`, label:'홍보동영상' },
       ]},
-      { href:`${B}/pages/community.html`, label:'커뮤니티', icon:'fa-solid fa-comments' },
       { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
-        { href:`${B}/pages/contact.html`, label:'문의하기' },
-        { href:`${B}/pages/consultation.html`, label:'무료 상담 신청' },
         { href:`${B}/pages/notice.html`, label:'공지사항' },
-        { href:`${B}/pages/faq.html`, label:'자주 묻는 질문' },
+        { href:`${B}/pages/feasibility-check.html`, label:'사업성 검토' },
+        { href:`${B}/pages/consultation.html`, label:'상담문의' },
+        { href:`${B}/pages/contact.html#ctVisit`, label:'찾아오시는 길' },
       ]},
     ];
-    const moreLinks = [
-      { href: `${B}/pages/notice.html`, label: '공지사항', icon: 'fa-solid fa-bullhorn' },
-      { href: `${B}/pages/faq.html`, label: '자주 묻는 질문', icon: 'fa-solid fa-circle-question' },
-    ];
-
     return `
     <div class="header-wrap" id="headerWrap">
     <div class="util-bar"><div class="inner">
       <span class="util-left">(주)빛세움 · 도시정비 전문 엔지니어링그룹</span>
-      <div class="util-item-drop">
-        <a href="${B}/pages/feasibility.html">사업타당성검토</a>
-        <div class="util-drop-menu">
-          <a href="${B}/pages/feasibility.html">사업성 검토 소개</a>
-          <a href="${B}/pages/feasibility-check.html">사업타당성 분석</a>
-          <a href="${B}/pages/calculator.html">비례율 계산기</a>
-        </div>
-      </div>
-      <div class="util-item-drop">
-        <a href="${B}/pages/gallery.html">갤러리</a>
-        <div class="util-drop-menu">
-          <a href="${B}/pages/gallery.html">전체</a>
-          <a href="${B}/pages/gallery.html?cat=주민총회">주민총회</a>
-          <a href="${B}/pages/gallery.html?cat=봉사활동">봉사활동</a>
-          <a href="${B}/pages/gallery.html?cat=워크샵">워크샵</a>
-          <a href="${B}/pages/gallery.html?cat=현장스케치">현장스케치</a>
-          <a href="${B}/pages/gallery.html?cat=기타행사">기타행사</a>
-        </div>
-      </div>
-      <div class="util-item-drop">
-        <a href="${B}/pages/notice.html">공지사항</a>
-        <div class="util-drop-menu">
-          <a href="${B}/pages/notice.html">전체</a>
-          <a href="${B}/pages/notice.html?cat=수주">수주</a>
-          <a href="${B}/pages/notice.html?cat=외부">외부</a>
-          <a href="${B}/pages/notice.html?cat=내부">내부</a>
-          <a href="${B}/pages/notice.html?cat=기타">기타</a>
-        </div>
-      </div>
     </div></div>
     <header class="header"><div class="inner">
       <a href="${B}/index.html" class="logo">
@@ -198,18 +174,19 @@ const App = (() => {
           <a href="${B}/pages/about.html">회사소개</a>
           <a href="${B}/pages/services.html">사업분야</a>
           <a href="${B}/pages/portfolio.html">업무실적</a>
+          <a href="${B}/pages/vision.html">빛세움의 길</a>
         </div>
         <div class="footer-col">
-          <h5>자료·서비스</h5>
+          <h5>자료실</h5>
           <a href="${B}/pages/library.html?cat=주요뉴스">주요뉴스</a>
           <a href="${B}/pages/library.html">자료실</a>
-          <a href="${B}/pages/feasibility.html">사업성 검토</a>
+          <a href="${B}/pages/gallery.html">갤러리</a>
         </div>
         <div class="footer-col">
-          <h5>문의·지원</h5>
-          <a href="${B}/pages/contact.html">전화상담</a>
-          <a href="${B}/pages/feasibility-check.html">찾아오시는길</a>
-          <a href="${B}/pages/faq.html">자주 묻는 질문</a>
+          <h5>고객센터</h5>
+          <a href="${B}/pages/notice.html">공지사항</a>
+          <a href="${B}/pages/consultation.html">상담문의</a>
+          <a href="${B}/pages/contact.html#ctVisit">찾아오시는길</a>
         </div>
         <div class="footer-col footer-contact">
           <h5>고객센터</h5>

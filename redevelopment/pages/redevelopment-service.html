@@ -190,6 +190,22 @@
     .rd-tab.active { color:var(--gold); border-bottom-color:#a6790a; }
     .rd-tab-panel { display:none; }
     .rd-tab-panel.active { display:block; }
+
+    /* 국공유지 무상양도양수 — 강조 특화업무 */
+    .land-highlight{background:linear-gradient(135deg,#0A0F1C,#171C26);border-radius:18px;padding:48px 52px;position:relative;overflow:hidden;color:#fff}
+    .land-highlight::before{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(255,196,0,0.16),transparent 70%);border-radius:50%}
+    .land-highlight-inner{position:relative;z-index:1}
+    .land-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:20px;background:rgba(255,196,0,0.16);color:#FFC400;font-size:12px;font-weight:800;letter-spacing:.6px;margin-bottom:18px}
+    .land-highlight h3{font-size:26px;font-weight:900;margin-bottom:14px;letter-spacing:-.5px}
+    .land-highlight > .land-highlight-inner > p{font-size:15px;line-height:1.9;color:rgba(255,255,255,0.78);max-width:820px;margin-bottom:32px}
+    .land-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:32px}
+    .land-flow-step{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-radius:10px;padding:10px 16px;font-size:12.5px;font-weight:700;color:#fff}
+    .land-flow-arrow{color:#FFC400;font-size:13px}
+    .land-doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px}
+    @media(max-width:768px){.land-doc-grid{grid-template-columns:1fr}}
+    .land-doc-item{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.85)}
+    .land-doc-item i{color:#FFC400;font-size:11px;margin-top:5px;flex-shrink:0}
+    .land-benefit{background:rgba(255,196,0,0.1);border-left:3px solid #FFC400;border-radius:0 10px 10px 0;padding:18px 22px;font-size:14px;color:#fff;line-height:1.85}
     </style>
 </head>
 <body>
@@ -629,6 +645,44 @@
             </div>
         </div>
 
+        <!-- 국공유지 무상양도양수 — 강조 특화업무 -->
+        <div class="rd-section" id="land-transfer">
+            <div class="section-label">Special Service</div>
+            <h2 class="section-title">국공유지 무상양도양수 업무</h2>
+            <div class="land-highlight">
+                <div class="land-highlight-inner">
+                    <div class="land-badge"><i class="fa-solid fa-star"></i> 빛세움 특화 추가업무</div>
+                    <h3>정비기반시설 무상양도·양수, 조합 사업비를 직접 절감시키는 핵심 업무</h3>
+                    <p>재개발·재건축·도시환경정비사업 등 각종 정비사업의 시행에 있어 「도시 및 주거환경정비법」, 「국유재산법」, 「공유재산 및 물품관리법」 등 관계법령에 따른 정비기반시설의 무상양도·양수를 합법적인 범위 내에서 최대한 확보하여 <strong>조합의 사업비를 절감</strong>하고, 정비사업의 원활한 추진으로 <strong>조합원의 권익을 최대한 보호</strong>하고자 합니다.</p>
+
+                    <div class="land-flow">
+                        <div class="land-flow-step">국공유지 점유 측량</div>
+                        <i class="fa-solid fa-chevron-right land-flow-arrow"></i>
+                        <div class="land-flow-step">측량성과에 따른 감정평가</div>
+                        <i class="fa-solid fa-chevron-right land-flow-arrow"></i>
+                        <div class="land-flow-step">사업시행계획서 작성</div>
+                        <i class="fa-solid fa-chevron-right land-flow-arrow"></i>
+                        <div class="land-flow-step">사업시행계획인가 접수</div>
+                        <i class="fa-solid fa-chevron-right land-flow-arrow"></i>
+                        <div class="land-flow-step">관련기관 협의</div>
+                        <i class="fa-solid fa-chevron-right land-flow-arrow"></i>
+                        <div class="land-flow-step" style="background:#FFC400;border-color:#FFC400;color:#171310">사업시행계획인가 고시</div>
+                    </div>
+
+                    <div class="land-doc-grid">
+                        <div class="land-doc-item"><i class="fa-solid fa-circle"></i>정비기반시설 설치비용 내역</div>
+                        <div class="land-doc-item"><i class="fa-solid fa-circle"></i>용도폐지 정비기반시설 조서</div>
+                        <div class="land-doc-item"><i class="fa-solid fa-circle"></i>새로이 설치할 기반시설 조서</div>
+                        <div class="land-doc-item"><i class="fa-solid fa-circle"></i>사업시행자 무상양도·무상양수 조서</div>
+                    </div>
+
+                    <div class="land-benefit">
+                        철저한 사전 검토와 관련기관 사전협의를 통해 정비기반시설 무상양도·양수 범위를 최대한 확보하고, 사업시행계획인가 고시 단계에서 무상양도·무상양수 대상을 확정하여 <strong>조합의 사업비 절감과 사업의 원활한 추진</strong>이라는 최적의 결과를 도출합니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- 왜 빛세움인가 -->
         <div class="rd-section">
             <div class="section-label">Why Visseum</div>
@@ -722,7 +776,7 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260904a"></script>
+<script src="../assets/data/mock-data.js?v=20260905a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260902f"></script>
 <script>
