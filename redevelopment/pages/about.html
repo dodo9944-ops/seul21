@@ -37,7 +37,7 @@
         height: 100%;
         z-index: 0;
     }
-    .hero-bg-photo img {
+    .hero-bg-photo img, .hero-bg-photo video {
         width: 100%; height: 100%;
         object-fit: cover;
         object-position: center 30%;
@@ -872,7 +872,9 @@
         <span class="wave-line"></span>
     </div>
     <div class="hero-bg-photo">
-        <img src="../jpg/hero_about.png" alt="빛세움 사옥">
+        <video autoplay muted loop playsinline poster="../jpg/hero_about_poster.jpg" aria-hidden="true">
+            <source src="../video/hero_about.mp4" type="video/mp4">
+        </video>
     </div>
     <div class="hero-glow-br" aria-hidden="true"></div>
     <div class="inner">
