@@ -106,7 +106,7 @@
             <div class="pager" id="pager"></div>
             <div class="pager-per">
                 <span>페이지당</span>
-                <select id="perSelect"><option value="5">5개</option><option value="10">10개</option><option value="20">20개</option></select>
+                <select id="perSelect"><option value="6">6개</option><option value="10">10개</option><option value="20">20개</option></select>
             </div>
         </div>
     </div>
@@ -124,7 +124,7 @@
     const params = new URLSearchParams(location.search);
     const catParam = params.get('cat');
     let currentCat = validCats.includes(catParam) ? catParam : '전체';
-    let PER = 5, curPage = 1;
+    let PER = 6, curPage = 1; /* 공지사항 기본 6줄 (대장 지시 2026-09-05) */
 
     function noticeCat(n) {
         return validCats.includes(n.category) ? n.category : '기사소식';
