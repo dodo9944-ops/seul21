@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905q">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
     <style>
     /* ══════════════════════════════════════
        빛세움의 길 — 프리미엄 브랜드 스토리
@@ -25,63 +25,6 @@
     }
     .vs { margin-bottom: var(--vs-gap); }
     .vs:last-child { margin-bottom: 0; }
-
-    /* ── HERO ── */
-    .vs-hero {
-        position: relative; overflow: hidden;
-        background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 40%, #FFF3C4 100%);
-        padding: 0; margin-top: -1px;
-    }
-    .vs-hero-img {
-        position: absolute; inset: 0; z-index: 0;
-        background: url('../jpg/사옥 2청사1.png') center/cover no-repeat;
-        opacity: 0.45;
-    }
-    .vs-hero-inner {
-        position: relative; z-index: 1;
-        max-width: var(--maxw); margin: 0 auto;
-        padding: 80px 40px 72px;
-        display: flex; align-items: center; justify-content: space-between; gap: 48px;
-    }
-    .vs-hero-text { max-width: 580px; }
-    .vs-hero-label {
-        display: inline-block; font-size: 11px; font-weight: 600;
-        letter-spacing: 3px; color: var(--gold); text-transform: uppercase;
-        margin-bottom: 16px; opacity: 0.8;
-    }
-    .vs-hero-text h1 {
-        font-size: 38px; font-weight: 900; color: #0A0F1C;
-        line-height: 1.35; margin-bottom: 20px; letter-spacing: -1px;
-    }
-    .vs-hero-text h1 em { font-style: normal; color: var(--gold); }
-    .vs-hero-sub {
-        font-size: 15px; line-height: 1.9; color: rgba(10,15,28,0.55);
-        max-width: 480px;
-    }
-    .vs-hero-keywords {
-        display: flex; flex-direction: column; gap: 12px; flex-shrink: 0;
-    }
-    .vs-hero-kw {
-        padding: 14px 28px; border-radius: 10px;
-        background: rgba(255,255,255,0.04); border: 1px solid rgba(184,134,11,0.165);
-        font-size: 14px; font-weight: 600; color: rgba(10,15,28,0.7);
-        letter-spacing: 0.3px;
-    }
-    .vs-hero-kw span { color: var(--gold); margin-right: 8px; }
-    .vs-hero-scroll {
-        position: absolute; bottom: 24px; left: 50%;
-        transform: translateX(-50%); z-index: 2;
-        font-size: 11px; color: rgba(10,15,28,0.25);
-        display: flex; flex-direction: column; align-items: center; gap: 6px;
-    }
-    .vs-hero-scroll i { animation: scrollBounce 2s infinite; }
-    @keyframes scrollBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
-
-    @media(max-width:860px) {
-        .vs-hero-inner { flex-direction: column; padding: 56px 24px 48px; }
-        .vs-hero-text h1 { font-size: 28px; }
-        .vs-hero-keywords { flex-direction: row; flex-wrap: wrap; }
-    }
 
     /* ── 브랜드 철학 (2026-09-05 대장 지시: 사진 1장 + 하단 텍스트로 단순화) ── */
     .vs-philosophy {
@@ -936,7 +879,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260905d"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260905c"></script>
+<script src="../assets/js/common.js?v=20260905e"></script>
 <script>
 (function () {
     var film = document.getElementById('vsFilm');

@@ -580,6 +580,11 @@ const App = (() => {
     return Number(n).toLocaleString();
   }
 
+  /* ── XSS 방지: 사용자 입력을 innerHTML에 넣기 전 이스케이프 ── */
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
   function timeAgo(dateStr) {
     if (!dateStr) return '';
     const now = new Date();
@@ -651,7 +656,7 @@ const App = (() => {
     ov.addEventListener('click',function(e){if(e.target===ov)closeModal()});
   }
 
-  return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, heroDetail, basePath: () => B };
+  return { init, toast, renderPagination, confirm, getParam, comma, timeAgo, stageColor, headTags, heroDetail, basePath: () => B, esc };
 })();
 
 /**
