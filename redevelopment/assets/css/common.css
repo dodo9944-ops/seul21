@@ -288,7 +288,8 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
 .gnb { display: flex; align-items: center; gap: 23.4px; flex: 1; justify-content: flex-end; } /* 우측 검색 아이콘 옆으로 정렬 (2026-09-04). 항목 간격 26px→23.4px(10%↓), 우측 정렬 기준 축소 (2026-09-05 대장 지시) */
 .gnb a {
   position: relative;
-  padding: 8px 0; font-size: 14px; font-weight: 500;
+  left: 2px; top: 1px; /* 우측 2px·아래 1px 이동, 화살표(gnb-caret) 포함 함께 이동 (대장 지시 2026-09-05) */
+  padding: 8px 0; font-size: 12.6px; font-weight: 500; /* 글자크기 14px→12.6px (0.9배, 대장 지시 2026-09-05) */
   color: var(--gray-600);
   transition: color 0.25s ease;
 }
