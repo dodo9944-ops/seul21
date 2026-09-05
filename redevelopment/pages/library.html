@@ -463,7 +463,7 @@ return'<div class="lib-item'+pinCls+'">'+'<div class="lib-icon '+iconCls+'"><i c
 /* Pager */
 var pg=document.getElementById('pager');
 if(pages<=1){pg.innerHTML='';return}
-var blk=10,bStart=Math.floor((curPage-1)/blk)*blk+1,bEnd=Math.min(bStart+blk-1,pages);
+var blk=5,bStart=Math.floor((curPage-1)/blk)*blk+1,bEnd=Math.min(bStart+blk-1,pages); /* 페이지 번호 5개까지만 표시 (대장 지시 2026-09-05) */
 var bPrev=Math.max(1,bStart-blk),bNext=bEnd+1;
 var h='<button class="arr" '+(bStart===1?'disabled':'')+' onclick="LIB.page('+bPrev+')"><i class="fa-solid fa-chevron-left"></i></button>';
 for(var i=bStart;i<=bEnd;i++)h+='<button'+(i===curPage?' class="active"':'')+' onclick="LIB.page('+i+')">'+i+'</button>';
