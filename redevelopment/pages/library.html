@@ -221,7 +221,7 @@
     .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .uni-hero .uh-card { display: block; width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,0.088); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); cursor: pointer; position: relative; z-index: 5; text-decoration: none; color: inherit; }
     .uni-hero .uh-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
-    .uni-hero .uh-card.on { border-color: #a6790a; box-shadow: 0 0 0 2px rgba(184,134,11,.5), 0 12px 30px rgba(0,0,0,.16); }
+    /* 활성(on) 카드도 다른 카드와 동일한 외곽선으로 통일 — 평시 노란 테두리 제거 (대장 지시 2026-09-05) */
     .uni-hero .uh-ci { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,196,0,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
     .uni-hero .uh-ci i { font-size: 15px; color: #FFC400; }
     .uni-hero .uh-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
