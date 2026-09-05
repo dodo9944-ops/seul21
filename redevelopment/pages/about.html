@@ -432,6 +432,8 @@
         .cert-stacked .cert-photo { flex-direction: column; justify-content: center; padding: 32px 20px; gap: 24px; }
         .cert-stacked .cert-photo a { max-width: 100%; }
         .cert-stacked .cert-photo img { height: auto; width: 100%; max-width: 554px; }
+        /* 모바일 전용 — 2015 등록증 고정폭(380px)이 좁은 화면에서 넘치는 문제 수정, 다른 등록증과 동일하게 반응형으로 (대장 지시 2026-09-05) */
+        .cert-stacked .cert-photo img.cert-2015-wide { width: 100%; max-width: 554px; }
     }
     .cert-stacked .cert-text { transform: translateY(-22px); }
     .cert-photo {
