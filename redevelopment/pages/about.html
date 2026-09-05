@@ -27,9 +27,9 @@
         background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
         position: relative;
         overflow: hidden;
-        padding: 32px 0 12px;
+        padding: 32px 0 0;
         min-height: 360px;
-    }
+    } /* 하단 12px→0 (2026-09-05 대장 지시 — 히어로↔첫콘텐츠 간격 44px 통일, 상단보정으로 이관) */
     .hero-bg-photo {
         position: absolute;
         top: 0; right: 0;
@@ -228,7 +228,7 @@
         }
     }
     @media (max-width: 600px) {
-        .about-hero { padding: 28px 0 40px; min-height: auto; }
+        .about-hero { padding: 28px 0 0; min-height: auto; }
         .hero-text h1 { font-size: 28px; }
         .hero-sub { font-size: 14px; }
         .hero-cards-float { grid-template-columns: 1fr; gap: 10px; }
@@ -241,9 +241,13 @@
         padding: 20px 0;
     } /* 단락 간 여백 25px→20px 통일 (2026-09-05 대장 지시) */
     .about-section:last-child { padding-bottom: 0; }
-    /* 히어로 밑 여백 = about-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 첫 섹션 상단 보정(48px) = 총 60px */
+    /* 히어로 밑 여백 = about-hero 자체 하단(0, 2026-09-05 통일) + 첫 섹션 상단(44px) = 총 44px */
     @media (min-width: 601px) {
-        #aboutFirstSection { padding-top: 48px; }
+        #aboutFirstSection { padding-top: 44px; }
+    }
+    @media (max-width: 600px) {
+        /* 히어로↔본문 간격 44px 통일 — 모바일은 0.625배 비례 축소 */
+        #aboutFirstSection { padding-top: 28px; }
     }
     .about-section.bg-light { background: #FFFFFF; }
     .about-section.bg-dark {

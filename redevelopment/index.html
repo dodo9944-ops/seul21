@@ -145,7 +145,7 @@
             position: relative;
             overflow: hidden;
             background: #FFFFFF;
-            padding: 44.8px 0 56px; /* 상단여백 0.8배 축소(56→44.8), 하단은 유지 */
+            padding: 44.8px 0 0; /* 상단여백 0.8배 축소(56→44.8). 하단은 0으로 통일(2026-09-05 대장 지시 — 히어로↔첫콘텐츠 간격 44px 통일) */
             min-height: 400px;
             display: flex;
             align-items: center;
@@ -426,15 +426,19 @@
             .section-title::before { width: 3px; height: 16px; top: 3px; }
             /* LATEST NEWS 라벨과 주요뉴스 제목의 좌측 정렬 기준을 맞춤(라벨 텍스트 시작 위치 = 타이틀 텍스트 시작 위치 11px) */
             .section-label::before { width: 3px; }
-            /* 히어로→주요뉴스 상단 공백 축소 (26px→18px, 약 31%) */
-            #mainFirstSection { padding-top: 18px; }
+            /* 히어로↔주요뉴스 간격 44px 통일(2026-09-05 대장 지시) — 모바일은 0.625배 비례 축소 */
+            #mainFirstSection { padding-top: 28px; }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            /* 히어로↔주요뉴스 간격 44px 통일 — 태블릿은 0.75배 비례 축소 */
+            #mainFirstSection { padding-top: 33px; }
         }
         /* 마지막 섹션(자료실+갤러리) 하단여백 */
         #mainLastSection { padding-bottom: 70px; }
         @media (max-width: 768px) {
             #mainLastSection { padding-bottom: 60px; }
         }
-        /* 히어로 밑 여백 = hero-banner 자체 하단(56px, 히어로 레이아웃이라 유지) + 첫 섹션 상단 보정(44px) = 총 100px */
+        /* 히어로 밑 여백 = hero-banner 자체 하단(0, 2026-09-05 통일) + 첫 섹션 상단(44px) = 총 44px */
         @media (min-width: 1025px) {
             #mainFirstSection { padding-top: 44px; }
         }
