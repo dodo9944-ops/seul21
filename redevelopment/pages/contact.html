@@ -16,18 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905q">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
     <style>
-    /* === Hero === */
-    .ct-hero{padding:56px 0 48px;background:linear-gradient(135deg,#FFFFFF 0%,#FFFFFF 40%,#FFF3C4 100%);position:relative;overflow:hidden}
-    .ct-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,134,11,.3),transparent)}
-    .ct-hero h1{font-size:32px;font-weight:900;color:#0A0F1C;margin-bottom:10px;padding-left:18px;border-left:3px solid #a6790a}
-    .ct-hero .hero-sub{font-size:15px;color:rgba(10,15,28,.68);line-height:1.7}
-    .ct-hero .hero-badges{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-    .ct-hero .hb{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(10,15,28,0.088);border-radius:8px;font-size:12px;font-weight:600;color:rgba(10,15,28,.55)}
-    .ct-hero .hb i{color:var(--gold);font-size:11px}
-    @media(max-width:768px){.ct-hero{padding:40px 0 32px}.ct-hero h1{font-size:26px}}
-
     /* === Layout === */
     /* 히어로 밑 여백 = uni-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 본문 상단 보정(33px) = 총 45px */
     .uni-hero + .page-body { padding-top: 33px; }
@@ -46,8 +36,7 @@
     .ct-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
     @media(max-width:540px){.ct-row{grid-template-columns:1fr}}
     .ct-group{margin-bottom:16px}
-    .ct-label{display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px}
-    .ct-label .req{color:#EF4444;margin-left:2px}
+    .form-label .req{color:#EF4444;margin-left:2px}
     .ct-input,.ct-textarea{width:100%;height:44px;padding:0 14px;border:1.5px solid #cecece;border-radius:10px;font-size:14px;font-weight:500;color:var(--gray-800);background:#fff;font-family:var(--font);transition:all .2s}
     .ct-input:focus,.ct-textarea:focus{outline:none;border-color:#a6790a;box-shadow:0 0 0 3px rgba(184,134,11,.1)}
     .ct-input.err,.ct-textarea.err{border-color:#EF4444}
@@ -168,7 +157,7 @@
     .uni-hero .uh-bc i { font-size: 10px; }
     .uni-hero .uh-label { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #B8860B; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
     .uni-hero .uh-label::before { content: ''; width: 24px; height: 1px; background: #B8860B; }
-    .uni-hero .uh-text h1 { font-size: 38px; font-weight: 900; color: #171C26; line-height: 1.35; letter-spacing: -1px; margin-bottom: 16px; }
+    .uni-hero .uh-text h1 { font-size: 32px; font-weight: 856; color: #171C26; line-height: 1.35; letter-spacing: -0.5px; margin-bottom: 16px; }
     .uni-hero .uh-text h1 em { font-style: normal; color: #C58B00; }
     .uni-hero .uh-sub { font-size: 16px; color: #565C66; line-height: 1.7; max-width: 480px; }
     .uni-hero .uh-visual { flex-shrink: 0; align-self: center; width: 360px; position: relative; z-index: 2; }
@@ -182,7 +171,7 @@
     .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,.65); font-weight: 500; line-height: 1.5; }
     .uni-hero .uh-cards .uh-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
     @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
-    @media (max-width: 600px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 28px; } .uni-hero .uh-sub { font-size: 13px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
+    @media (max-width: 600px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     </style>
 </head>
@@ -231,23 +220,23 @@
             <form id="ctForm" novalidate>
                 <div class="ct-row">
                     <div>
-                        <label class="ct-label">이름 <span class="req">*</span></label>
+                        <label class="form-label">이름 <span class="req">*</span></label>
                         <input type="text" class="ct-input" id="cName" placeholder="이름" required>
                         <div class="ct-err" id="errName">이름을 입력해주세요.</div>
                     </div>
                     <div>
-                        <label class="ct-label">이메일 <span class="req">*</span></label>
+                        <label class="form-label">이메일 <span class="req">*</span></label>
                         <input type="email" class="ct-input" id="cEmail" placeholder="example@email.com" required>
                         <div class="ct-err" id="errEmail">올바른 이메일을 입력해주세요.</div>
                     </div>
                 </div>
                 <div class="ct-row">
                     <div>
-                        <label class="ct-label">연락처</label>
+                        <label class="form-label">연락처</label>
                         <input type="tel" class="ct-input" id="cPhone" placeholder="010-0000-0000">
                     </div>
                     <div>
-                        <label class="ct-label">문의유형 <span class="req">*</span></label>
+                        <label class="form-label">문의유형 <span class="req">*</span></label>
                         <div class="ct-select-wrap" id="selWrap">
                             <button type="button" class="ct-select-btn placeholder" id="selBtn">
                                 <span>문의유형을 선택해주세요</span>
@@ -267,17 +256,17 @@
                     </div>
                 </div>
                 <div class="ct-group">
-                    <label class="ct-label">제목 <span class="req">*</span></label>
+                    <label class="form-label">제목 <span class="req">*</span></label>
                     <input type="text" class="ct-input" id="cTitle" placeholder="문의 제목을 입력해주세요" required>
                     <div class="ct-err" id="errTitle">제목을 입력해주세요.</div>
                 </div>
                 <div class="ct-group">
-                    <label class="ct-label">내용 <span class="req">*</span></label>
+                    <label class="form-label">내용 <span class="req">*</span></label>
                     <textarea class="ct-textarea" id="cContent" placeholder="문의 내용을 상세히 작성해주세요. 사업 구역명, 현재 단계, 궁금한 점 등을 포함하면 더 정확한 답변이 가능합니다." rows="6" required></textarea>
                     <div class="ct-err" id="errContent">내용을 입력해주세요.</div>
                 </div>
                 <div class="ct-group">
-                    <label class="ct-label">첨부파일</label>
+                    <label class="form-label">첨부파일</label>
                     <div class="ct-upload" id="uploadArea">
                         <div class="up-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
                         <div class="up-text">파일을 드래그하거나 클릭하여 첨부하세요</div>
