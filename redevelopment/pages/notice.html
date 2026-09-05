@@ -158,9 +158,11 @@
         const bStart = Math.floor((curPage - 1) / blk) * blk + 1;
         const bEnd = Math.min(bStart + blk - 1, pages);
         const bPrev = Math.max(1, bStart - blk), bNext = bEnd + 1;
-        let h = '<button class="arr" ' + (bStart === 1 ? 'disabled' : '') + ' data-p="' + bPrev + '"><i class="fa-solid fa-chevron-left"></i></button>';
+        let h = '<button class="arr" ' + (curPage === 1 ? 'disabled' : '') + ' data-p="1"><i class="fa-solid fa-angles-left"></i></button>';
+        h += '<button class="arr" ' + (bStart === 1 ? 'disabled' : '') + ' data-p="' + bPrev + '"><i class="fa-solid fa-chevron-left"></i></button>';
         for (let i = bStart; i <= bEnd; i++) h += '<button' + (i === curPage ? ' class="active"' : '') + ' data-p="' + i + '">' + i + '</button>';
         h += '<button class="arr" ' + (bEnd === pages ? 'disabled' : '') + ' data-p="' + bNext + '"><i class="fa-solid fa-chevron-right"></i></button>';
+        h += '<button class="arr" ' + (curPage === pages ? 'disabled' : '') + ' data-p="' + pages + '"><i class="fa-solid fa-angles-right"></i></button>';
         pg.innerHTML = h;
     }
 

@@ -414,9 +414,11 @@ var PAGE_WIN=5; /* 페이지 번호 5개까지만 표시 (대장 지시 2026-09-
 var winStart=Math.floor((curPage-1)/PAGE_WIN)*PAGE_WIN+1;
 var winEnd=Math.min(winStart+PAGE_WIN-1,pages);
 var prevTarget=Math.max(1,winStart-PAGE_WIN),nextTarget=winEnd+1;
-var h='<button class="arr" '+(winStart===1?'disabled':'')+' onclick="PF.page('+prevTarget+')"><i class="fa-solid fa-chevron-left"></i></button>';
+var h='<button class="arr" '+(curPage===1?'disabled':'')+' onclick="PF.page(1)"><i class="fa-solid fa-angles-left"></i></button>';
+h+='<button class="arr" '+(winStart===1?'disabled':'')+' onclick="PF.page('+prevTarget+')"><i class="fa-solid fa-chevron-left"></i></button>';
 for(var i=winStart;i<=winEnd;i++)h+='<button'+(i===curPage?' class="active"':'')+' onclick="PF.page('+i+')">'+i+'</button>';
 h+='<button class="arr" '+(winEnd===pages?'disabled':'')+' onclick="PF.page('+nextTarget+')"><i class="fa-solid fa-chevron-right"></i></button>';
+h+='<button class="arr" '+(curPage===pages?'disabled':'')+' onclick="PF.page('+pages+')"><i class="fa-solid fa-angles-right"></i></button>';
 pg.innerHTML=h;}
 
 /* Detail */
