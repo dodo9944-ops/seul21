@@ -15,11 +15,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905s">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905t">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260905a">
     <style>
     /* === KPI (좌측 아이콘 + 우측 텍스트, 가로형 카드) === */
-    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:64px}
+    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:var(--space-section-to-title)} /* 64px 하드코딩 제거→48/35px 토큰 (2026-09-05 대장 지시 2차) */
     @media(max-width:1024px){.kpi-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
     @media(max-width:420px){.kpi-grid{grid-template-columns:1fr}}
     .kpi-card{background:#FFFFFF;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;text-align:left;position:relative;overflow:hidden;transition:transform .25s,border-color .25s;border:1px solid #cecece;box-shadow:0 1px 4px rgba(10,15,28,.05)}
@@ -57,7 +57,7 @@
     .pb-done{background:rgba(255,255,255,.9);color:#0A0F1C}
 
     /* === Featured Cards === */
-    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:64px}
+    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:var(--space-section-to-title)} /* 64px 하드코딩 제거→48/35px 토큰 (2026-09-05 대장 지시 2차) */
     @media(max-width:1024px){.feat-grid{grid-template-columns:1fr;gap:20px}}
     .fc{background:#fff;border:2px solid #bcbcbc;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.08)}
     .fc:hover{border-color:#a6790a;box-shadow:0 20px 48px rgba(184,134,11,.18);transform:translateY(-8px)}

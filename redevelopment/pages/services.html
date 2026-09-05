@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905s">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905t">
     <style>
     .sv-section:last-child { margin-bottom:0; }
     .sv-section .section-title { margin-bottom:28px; }
@@ -146,7 +146,7 @@
     /* 핵심 수치 바 */
     .sv-highlight {
         display:flex; gap:0; border-radius:var(--radius); overflow:hidden;
-        border:1px solid #cecece; margin-bottom:64px;
+        border:1px solid #cecece; margin-bottom:var(--space-section-to-title); /* 64px 하드코딩 제거→토큰 (2026-09-05 대장 지시 2차) */
     }
     .sv-highlight-item {
         flex:1; padding:24px 20px; text-align:center;
@@ -585,7 +585,7 @@
         </div>
 
         <!-- 특화사업 -->
-        <div class="sv-section" id="engineering" style="margin-top:64px">
+        <div class="sv-section" id="engineering">
             <div class="section-label">Engineering Services</div>
             <h2 class="section-title">엔지니어링사업</h2>
             <div class="sv-card-grid">
@@ -646,7 +646,7 @@
         </div>
 
         <!-- 분양·광고사업 -->
-        <div class="sv-section" id="sales-ad" style="margin-top:64px">
+        <div class="sv-section" id="sales-ad">
             <div class="section-label">Sales & Advertising</div>
             <h2 class="section-title">분양·광고사업</h2>
             <div class="sv-card-grid">
@@ -707,7 +707,7 @@
         </div>
 
         <!-- 그룹사 -->
-        <div class="sv-section" id="business" style="margin-top:64px">
+        <div class="sv-section" id="business">
             <div class="section-label">Group Companies</div>
             <h2 class="section-title">도시정비광고 등</h2>
             <div class="pro-grid group-grid" id="proGrid">
@@ -727,7 +727,7 @@
         </div>
 
         <!-- 서울시 정비사업 코디네이터 -->
-        <div class="sv-section" id="coordinator" style="margin-top:64px">
+        <div class="sv-section" id="coordinator">
             <div class="section-label">Public Advisory Service</div>
             <h2 class="section-title">서울시 정비사업 코디네이터·공공자문 업무</h2>
             <div class="coord-grid">

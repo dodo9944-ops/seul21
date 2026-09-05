@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260905s">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260905t">
     <link rel="stylesheet" href="assets/css/download-view.css?v=20260905a">
     <style>
         /* ============================================================
@@ -413,14 +413,14 @@
         .cat-item.active .cat-label { color: var(--gray-500); }
 
         /* ── SECTION (메인 고유) ── */
+        /* 상하 padding을 공용 섹션→섹션 토큰으로 통일(2026-09-05 대장 지시 2차) — 인접 섹션과 만나는 실제 간격이
+           48px(PC, 24+24)/35px(모바일, 17.5+17.5)가 되도록 절반씩 부담. 종전 32px(PC 64px 실제간격)/26px(모바일 52px)/
+           22px(태블릿 44px, 별도 분기였음) 전부 이 토큰 하나로 수렴. #mainFirstSection의 히어로 쪽 상단은
+           별도 변수(--space-hero-to-title)가 이어서 오버라이드하므로 충돌 없음. */
         .section {
-            padding: 32px 0;
-        }
-        @media (max-width: 1024px) {
-            .section { padding: 22px 0; }
+            padding: calc(var(--space-section-to-title) / 2) 0;
         }
         @media (max-width: 768px) {
-            .section { padding: 26px 0; }
             .section-head { margin-bottom: 18px; }
             .section-title { font-size: 19px; font-weight: 800; letter-spacing: -.3px; padding-left: 11px; }
             .section-title::before { width: 3px; height: 16px; top: 3px; }

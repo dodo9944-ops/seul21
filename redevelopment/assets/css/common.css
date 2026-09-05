@@ -51,7 +51,7 @@
   --space-hero-to-title: 44px;
   --space-title-to-body: 20px;
   --space-body-to-content: 25px;
-  --space-section-to-title: 52px;
+  --space-section-to-title: 48px; /* 52px→48px 재통일 (2026-09-05 대장 지시 2차) */
 
   --font: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-serif: 'Nanum Myeongjo', 'Noto Serif KR', serif;
@@ -68,7 +68,7 @@
     --space-hero-to-title: 32px;
     --space-title-to-body: 15px;
     --space-body-to-content: 18px;
-    --space-section-to-title: 38px;
+    --space-section-to-title: 35px; /* 48*0.73≈35px (2026-09-05 대장 지시 2차) */
   }
 }
 
@@ -691,16 +691,18 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
 .services-section:last-child,
 .featured-section:last-child { margin-bottom: 0; }
 
-/* ── 섹션 간격 표준 통일 (2026-09-05 대장 지시 — 세로 간격 표준 §4 섹션→섹션 토큰 적용) ──
+/* ── 섹션 간격 표준 통일 (2026-09-05 대장 지시 — 세로 간격 표준 §4 섹션→섹션 토큰 적용, 2차 개정 48px) ──
    대상: index.html(.mp-sec) · consultation.html(.cs-section) · 8개 사업분야 하위페이지(.rd-section)
         · library.html(.pop-sec) · sitemap.html(.sm-section) · gallery.html(.gl-section)
         · services.html(.sv-section) · permit-support.html(.ps-section)
+        · method-*.html 6개(.md-section — 기존 CSS 정의 자체가 없어 간격 0이던 것을 이번에 신규 편입)
    각 페이지의 <style> 블록에서 기존 margin-bottom 값은 삭제하고 이 공용 규칙만 적용받는다.
    --space-section-to-title 자체가 ≤768px에서 :root 재정의로 값이 바뀌므로 별도 미디어쿼리 불필요. */
 .mp-sec, .cs-section, .rd-section, .pop-sec,
-.sm-section, .gl-section, .sv-section, .ps-section {
+.sm-section, .gl-section, .sv-section, .ps-section, .md-section {
   margin-bottom: var(--space-section-to-title);
 }
+.md-section:last-child { margin-bottom: 0; }
 
 /* ── BREADCRUMB ── */
 .breadcrumb {
