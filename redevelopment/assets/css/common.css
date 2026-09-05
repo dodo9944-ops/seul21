@@ -664,7 +664,7 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
    .uni-hero / .about-hero / .vision-hero / .services-hero / .fh 와
    동일한 32px(데스크톱) · 28px(모바일) 로 통일한다. */
 .page-hero {
-  padding: 32px 0 0; /* 하단 40px→0 (2026-09-05, 세로 간격 표준 §1 — 히어로 자체 하단은 0, 간격은 .page-body 상단에서 전담) */
+  padding: 36px 0; /* 상하 대칭 패딩으로 복원 + 소폭 확대(32px→36px), 텍스트가 히어로 하단에 딱 붙어 불안정해 보이던 문제 수정 (2026-09-05 대장 지시) */
   background: linear-gradient(105deg, #FFFDF7 0%, #FFF8E7 25%, #FFE9A8 48%, rgba(255,196,0,0.20) 62%, transparent 76%), #FFFDF7;
   border-bottom: none;
 }
@@ -675,7 +675,7 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
 } /* 히어로 제목 굵기 1.07배(800→856, 1.15배→1.07배로 정정) 사이트 전역 통일 (2026-09-05 대장 지시) */
 .page-hero p { font-size: 15px; color: #565C66; }
 @media (max-width: 768px) {
-  .page-hero { padding: 28px 0 0; } /* 하단 28px→0 (2026-09-05, 세로 간격 표준 §1) */
+  .page-hero { padding: 30px 0; } /* 상하 대칭 패딩으로 복원 + 소폭 확대 (2026-09-05 대장 지시) */
   .page-hero h1 { font-size: 24px; }
 }
 
