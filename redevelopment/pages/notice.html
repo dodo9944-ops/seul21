@@ -106,7 +106,7 @@
             <div class="pager" id="pager"></div>
             <div class="pager-per">
                 <span>페이지당</span>
-                <select id="perSelect"><option value="6">6개</option><option value="10">10개</option><option value="20">20개</option></select>
+                <select id="perSelect"><option value="6">6개</option><option value="10" selected>10개</option><option value="20">20개</option></select>
             </div>
         </div>
     </div>
@@ -124,7 +124,7 @@
     const params = new URLSearchParams(location.search);
     const catParam = params.get('cat');
     let currentCat = validCats.includes(catParam) ? catParam : '전체';
-    let PER = 6, curPage = 1; /* 공지사항 기본 6줄 (대장 지시 2026-09-05) */
+    let PER = 10, curPage = 1; /* 공지사항 기본 10줄 (대장 지시 2026-09-05) */
 
     function noticeCat(n) {
         return validCats.includes(n.category) ? n.category : '기사소식';
@@ -154,7 +154,7 @@
     function renderPager(pages) {
         const pg = document.getElementById('pager');
         if (pages <= 1) { pg.innerHTML = ''; return; }
-        const blk = 10;
+        const blk = 5; /* 페이지 번호 5개까지만 표시, 화살표로 다음 묶음(6번~) 이동 (대장 지시 2026-09-05) */
         const bStart = Math.floor((curPage - 1) / blk) * blk + 1;
         const bEnd = Math.min(bStart + blk - 1, pages);
         const bPrev = Math.max(1, bStart - blk), bNext = bEnd + 1;
