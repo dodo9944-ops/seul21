@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905s">
     <link rel="stylesheet" href="../assets/css/flipbook.css?v=20260905a">
     <style>
     /* ================================================================
@@ -241,14 +241,9 @@
         padding: 20px 0;
     } /* 단락 간 여백 25px→20px 통일 (2026-09-05 대장 지시) */
     .about-section:last-child { padding-bottom: 0; }
-    /* 히어로 밑 여백 = about-hero 자체 하단(0, 2026-09-05 통일) + 첫 섹션 상단(44px) = 총 44px */
-    @media (min-width: 601px) {
-        #aboutFirstSection { padding-top: 44px; }
-    }
-    @media (max-width: 600px) {
-        /* 히어로↔본문 간격 44px 통일 — 모바일은 0.625배 비례 축소 */
-        #aboutFirstSection { padding-top: 28px; }
-    }
+    /* 히어로 밑 여백 = about-hero 자체 하단(0, 2026-09-05 통일) + 첫 섹션 상단(세로 간격 표준 §1 히어로→제목) = 총 44px(PC)/32px(모바일)
+       --space-hero-to-title 자체가 ≤768px에서 :root 재정의로 바뀌므로 별도 미디어쿼리 불필요 */
+    #aboutFirstSection { padding-top: var(--space-hero-to-title); }
     .about-section.bg-light { background: #FFFFFF; }
     .about-section.bg-dark {
         background: linear-gradient(160deg, #FFFFFF, #FFF3C4);
@@ -275,7 +270,9 @@
 
     /* ── 2. TRUST POSITION ── */
     .trust-intro {
-        max-width: 680px; margin-bottom: 48px;
+        max-width: 680px;
+        margin-top: var(--space-title-to-body); /* 제목→본문 — 세로 간격 표준 §2 (2026-09-05) */
+        margin-bottom: var(--space-body-to-content); /* 본문→콘텐츠(카드) — 세로 간격 표준 §3 */
     }
     .trust-intro p {
         font-size: 15px; color: var(--gray-600); line-height: 1.9;
@@ -314,6 +311,7 @@
 
     /* ── 3. CEO GREETING ── */
     .ceo-section {
+        margin-top: var(--space-body-to-content); /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
         display: flex; align-items: stretch;
         background: #FFFFFF;
         border-radius: 16px;
@@ -397,6 +395,7 @@
 
     /* ── 3-2. CEO CERTIFICATION (정비사업 코디네이터) ── */
     .cert-section {
+        margin-top: var(--space-body-to-content); /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
         display: flex; align-items: stretch; gap: 32px;
         background: var(--white);
         border-radius: 18px;
@@ -558,7 +557,7 @@
     /* ── 4. COMPANY HISTORY ── */
     .timeline-center {
         position: relative;
-        max-width: 800px; margin: 0 auto;
+        max-width: 800px; margin: var(--space-body-to-content) auto 0; /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
         padding: 0;
     }
     .timeline-center::before {
@@ -631,7 +630,7 @@
     }
 
     /* ── 5. ORGANIZATION CHART ── */
-    .org-chart { display: flex; flex-direction: column; align-items: center; }
+    .org-chart { display: flex; flex-direction: column; align-items: center; margin-top: var(--space-body-to-content); } /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
     .org-ceo-box {
         background: linear-gradient(135deg, #171C26, #2A3242);
         color: #FFFFFF; border-radius: 14px;
@@ -730,6 +729,7 @@
     /* ── 7. CORPORATE IDENTITY ── */
     .ci-layout {
         display: flex; gap: 48px; align-items: center;
+        margin-top: var(--space-body-to-content); /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
         margin-bottom: 40px;
     }
     .ci-img-area {
@@ -772,6 +772,7 @@
     /* ── 8. SYMBOL & COLOR ── */
     .symbol-layout {
         display: flex; gap: 40px; align-items: flex-start;
+        margin-top: var(--space-body-to-content); /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
         margin-bottom: 40px;
     }
     .symbol-mark-box {
@@ -992,7 +993,7 @@
             </div>
 
             <!-- 정비사업전문관리업 등록증 (2008 최초등록 / 2015 상호변경 재등록) -->
-            <div class="section-label" id="registration" style="margin-top:48px">Company Certification</div>
+            <div class="section-label" id="registration" style="margin-top:var(--space-section-to-title)">Company Certification</div>
             <h2 class="section-title">정비사업전문관리업 등록현황</h2>
             <div class="cert-section cert-stacked">
                 <div class="cert-photo">

@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260905s">
     <link rel="stylesheet" href="assets/css/download-view.css?v=20260905a">
     <style>
         /* ============================================================
@@ -426,22 +426,15 @@
             .section-title::before { width: 3px; height: 16px; top: 3px; }
             /* LATEST NEWS 라벨과 주요뉴스 제목의 좌측 정렬 기준을 맞춤(라벨 텍스트 시작 위치 = 타이틀 텍스트 시작 위치 11px) */
             .section-label::before { width: 3px; }
-            /* 히어로↔주요뉴스 간격 44px 통일(2026-09-05 대장 지시) — 모바일은 0.625배 비례 축소 */
-            #mainFirstSection { padding-top: 28px; }
-        }
-        @media (min-width: 769px) and (max-width: 1024px) {
-            /* 히어로↔주요뉴스 간격 44px 통일 — 태블릿은 0.75배 비례 축소 */
-            #mainFirstSection { padding-top: 33px; }
         }
         /* 마지막 섹션(자료실+갤러리) 하단여백 */
         #mainLastSection { padding-bottom: 70px; }
         @media (max-width: 768px) {
             #mainLastSection { padding-bottom: 60px; }
         }
-        /* 히어로 밑 여백 = hero-banner 자체 하단(0, 2026-09-05 통일) + 첫 섹션 상단(44px) = 총 44px */
-        @media (min-width: 1025px) {
-            #mainFirstSection { padding-top: 44px; }
-        }
+        /* 히어로 밑 여백 = hero-banner 자체 하단(0, 2026-09-05 통일) + 첫 섹션 상단(세로 간격 표준 §1 히어로→제목) = 총 44px(PC)/32px(모바일)
+           --space-hero-to-title 자체가 ≤768px에서 :root 재정의로 바뀌므로 별도 미디어쿼리 불필요 */
+        #mainFirstSection { padding-top: var(--space-hero-to-title); }
         /* ── CARD VISUAL (메인 전용) ── */
         .card-visual { display: flex; align-items: center; justify-content: center; border-radius: 12px; background: linear-gradient(135deg, #FFFFFF, #FFF3C4); }
         .card-visual i { color: rgba(184,134,11,0.4); }

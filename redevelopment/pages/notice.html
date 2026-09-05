@@ -15,12 +15,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905s">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260905a">
     <style>
-    /* 히어로 바로 아래 탭 메뉴와의 여백 — 갤러리(gallery.html) 페이지와 동일하게 통일 */
-    .page-body{padding-top:28px}
-    @media(max-width:768px){.page-body{padding-top:20px}}
+    /* 히어로→탭메뉴 간격 — 세로 간격 표준 §1 통일 (2026-09-05), 기존 28px/20px 충돌 규칙 제거 */
+    .page-body{padding-top:var(--space-hero-to-title)}
     .notice-row { cursor: pointer; }
     .notice-row:hover td:nth-child(2) { color: var(--accent); }
     .notice-row td:nth-child(2) { font-weight: 500; transition: color var(--transition); }

@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905s">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260905a">
     <style>
     /* ================================================================
@@ -34,13 +34,13 @@
 
     /* === Page Body (히어로 바로 아래 시작) === */
     /* 히어로 밑 여백 = uni-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 본문 상단 보정(33px) = 총 45px */
-    .page-body.lib-page{padding-top:33px}
+    .page-body.lib-page{padding-top:var(--space-hero-to-title)} /* 세로 간격 표준 §1 (2026-09-05), 기존 33px 충돌 규칙 제거 */
     .page-body.lib-page,
     .page-body.lib-page > .inner{overflow:hidden}
     .lib-item{min-width:0;max-width:100%}
 
     /* === 전체자료 타이틀 — 바로 위 '주요뉴스'(.pop-head h3)와 완전히 동일한 규격으로 통일 === */
-    .lib-all-title{margin-bottom:32px}
+    .lib-all-title{margin-bottom:var(--space-body-to-content)} /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05), 기존 32px 충돌 규칙 제거 */
     .lib-all-title .section-title{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;letter-spacing:normal;font-family:var(--font)}
     .lib-all-title .section-title::before{left:0;top:4px;width:3px;height:22px;border-radius:2px}
 
@@ -69,7 +69,7 @@
     @media(max-width:640px){.ctrl-bar{display:none}}
 
     /* === Popular Section === */
-    .pop-sec .pop-head{display:flex;align-items:center;gap:24px;margin-bottom:32px}
+    .pop-sec .pop-head{display:flex;align-items:center;gap:24px;margin-bottom:var(--space-body-to-content)} /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05), 기존 32px 충돌 규칙 제거 */
     .pop-sec .pop-head h3{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;position:relative}
     .pop-sec .pop-head h3::before{content:'';position:absolute;left:0;top:4px;width:3px;height:22px;border-radius:2px;background:linear-gradient(to bottom,var(--gold),rgba(184,134,11,.3))}
     .pop-sec .pop-head span{font-size:12px;color:var(--gray-400);font-weight:500}
@@ -168,7 +168,7 @@
     /* === Unified Hero (3안 패밀리) === */
     .uni-hero {
         background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
-        position: relative; overflow: hidden; padding: 32px 0 12px; min-height: 360px;
+        position: relative; overflow: hidden; padding: 32px 0 0; min-height: 360px;
     }
     .uni-hero .hero-bg-photo { position: absolute; top: 0; right: 0; width: 58%; height: 100%; z-index: 0; }
     .uni-hero .hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; filter: contrast(1.03) saturate(0.95); }
@@ -231,7 +231,7 @@
     html { scroll-behavior: smooth; }
     #libContent { scroll-margin-top: 88px; }
     @media (max-width: 1024px) { .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
-    @media (max-width: 600px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
+    @media (max-width: 600px) { .uni-hero { padding: 28px 0 0; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     </style>
 </head>

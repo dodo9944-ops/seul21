@@ -15,13 +15,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905s">
     <style>
-    /* 히어로 바로 아래 탭 메뉴와의 여백 축소 (공통 .page-body 상단 여백 갤러리 페이지 한정 축소) */
-    .page-body{padding-top:28px}
-    @media(max-width:768px){.page-body{padding-top:20px}}
+    /* 히어로→탭메뉴 간격 — 세로 간격 표준 §1 통일 (2026-09-05), 기존 28px/20px 충돌 규칙 제거 */
+    .page-body{padding-top:var(--space-hero-to-title)}
 
-    .gl-section-head{margin-bottom:16px}
+    .gl-section-head{margin-bottom:var(--space-body-to-content)} /* 제목→콘텐츠(탭/카드) — 세로 간격 표준 §3 (2026-09-05) */
     .gl-section-sub{font-size:12px;color:var(--gray-400);font-weight:500}
     /* 자료실 "전체자료" 제목과 동일한 규격(영문 라벨+골드 세로바)으로 통일 */
     .gl-section-head #glGridTitle{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;letter-spacing:normal;font-family:var(--font);position:relative}

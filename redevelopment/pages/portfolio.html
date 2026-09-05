@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905s">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260905a">
     <style>
     /* === KPI (좌측 아이콘 + 우측 텍스트, 가로형 카드) === */
@@ -101,8 +101,8 @@
     .fc.fc-primary .fc-img::after{content:'대표 실적';position:absolute;bottom:14px;right:14px;padding:4px 12px;background:rgba(184,134,11,.9);color:#0A0F1C;font-size:10px;font-weight:700;border-radius:5px;z-index:3;letter-spacing:.3px}
 
     /* === Top Key-map Tabs (히어로 바로 아래) — 자료실 .ctrl-bar와 크기·외곽선 통일 === */
-    /* 히어로 밑 여백 = uni-hero 자체 하단(12px, 히어로 레이아웃이라 유지) + 본문 상단 보정(33px) = 총 45px */
-    .page-body{padding-top:33px}
+    /* 히어로 밑 여백 = uni-hero 자체 하단(0, 2026-09-05 통일) + 본문 상단(세로 간격 표준 §1) = 총 44px(PC)/32px(모바일) */
+    .page-body{padding-top:var(--space-hero-to-title)}
     .pf-tabs-wrap{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid #cecece;box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
     /* html,body{overflow-x:hidden}(전역) 때문에 position:sticky가 무효화되어
        스크롤 감지 후 position:fixed로 직접 전환하는 방식 사용 — 폭/좌표는 JS로 고정 */
@@ -188,7 +188,7 @@
     /* === Unified Hero (3안 패밀리) === */
     .uni-hero {
         background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
-        position: relative; overflow: hidden; padding: 32px 0 12px; min-height: 360px;
+        position: relative; overflow: hidden; padding: 32px 0 0; min-height: 360px;
     }
     .uni-hero .hero-bg-photo { position: absolute; top: 0; right: 0; width: 58%; height: 100%; z-index: 0; }
     .uni-hero .hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; filter: contrast(1.03) saturate(0.95); }
@@ -242,7 +242,7 @@
     .uni-hero .uh-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
     .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,.65); line-height: 1.5; }
     @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
-    @media (max-width: 600px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
+    @media (max-width: 600px) { .uni-hero { padding: 28px 0 0; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     </style>
 </head>

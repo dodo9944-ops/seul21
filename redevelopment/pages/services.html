@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905s">
     <style>
     .sv-section:last-child { margin-bottom:0; }
     .sv-section .section-title { margin-bottom:28px; }
@@ -231,14 +231,9 @@
     }
 
     
-    /* 히어로 밑 여백 = services-hero 자체 하단(0, 2026-09-05 통일) + 본문 상단(44px) = 총 44px */
-    @media (min-width: 601px) {
-        .page-body { padding-top: 44px; }
-    }
-    @media (max-width: 600px) {
-        /* 히어로↔본문 간격 44px 통일 — 모바일은 0.625배 비례 축소 */
-        .page-body { padding-top: 28px; }
-    }
+    /* 히어로 밑 여백 = services-hero 자체 하단(0, 2026-09-05 통일) + 본문 상단(세로 간격 표준 §1 히어로→제목) = 총 44px(PC)/32px(모바일)
+       --space-hero-to-title 자체가 ≤768px에서 :root 재정의로 바뀌므로 별도 미디어쿼리 불필요 */
+    .page-body { padding-top: var(--space-hero-to-title); }
 
     /* === Services Hero (about-hero 3안 패밀리) === */
     .services-hero {
