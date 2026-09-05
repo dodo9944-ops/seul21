@@ -307,7 +307,7 @@
         <div class="pager" id="pager"></div>
         <div class="pager-per">
             <span>페이지당</span>
-            <select id="perSelect"><option value="10">10개</option><option value="20">20개</option><option value="50">50개</option></select>
+            <select id="perSelect"><option value="5">5개</option><option value="10">10개</option><option value="15">15개</option></select>
         </div>
     </div>
 
@@ -324,7 +324,7 @@ if(typeof MOCK!=='undefined'&&MOCK.community){var _cs=JSON.parse(localStorage.ge
 var now=new Date(),oneYearAgo=new Date(now.getTime()-365*864e5);
 var allItems=DataService.getAll('library').filter(function(i){if(i.category!=='주요뉴스')return true;return i.date&&new Date(i.date)>=oneYearAgo});
 
-var PER=10,curPage=1,curCat='주요뉴스',curSort='date',searchQ='';
+var PER=5,curPage=1,curCat='주요뉴스',curSort='date',searchQ='';
 
 var iconMap={hwp:{icon:'fa-file-lines',cls:'hwp'},pdf:{icon:'fa-file-pdf',cls:'pdf'},xlsx:{icon:'fa-file-excel',cls:'xlsx'}};
 function getIcon(ft){return iconMap[ft]||{icon:'fa-file',cls:'web'}}

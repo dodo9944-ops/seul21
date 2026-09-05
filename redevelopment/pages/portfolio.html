@@ -303,7 +303,7 @@
     <div class="pg-grid" id="pgGrid"></div>
     <div class="pager-wrap" id="pagerWrap">
         <div class="pager" id="pager"></div>
-        <div class="pager-per"><span>페이지당</span><select id="pfPerSelect"><option value="6">6개</option><option value="9">9개</option><option value="12">12개</option></select></div>
+        <div class="pager-per"><span>페이지당</span><select id="pfPerSelect"><option value="5">5개</option><option value="10">10개</option><option value="15">15개</option></select></div>
     </div>
 
 </div></div>
@@ -325,7 +325,7 @@
 <script src="../assets/js/common.js?v=20260905e"></script>
 <script>
 (function(){
-var D=MOCK.portfolio, PER=6, curPage=1, curType='전체';
+var D=MOCK.portfolio, PER=5, curPage=1, curType='전체';
 
 /* helpers */
 function ti(t){return{'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney','리모델링':'fa-arrows-rotate','코디네이터':'fa-user-tie','기타':'fa-ellipsis'}[t]||'fa-building-columns'}
