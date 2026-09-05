@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905t">
     <link rel="stylesheet" href="../assets/css/flipbook.css?v=20260905a">
     <style>
     /* ================================================================
@@ -37,7 +37,7 @@
         height: 100%;
         z-index: 0;
     }
-    .hero-bg-photo img {
+    .hero-bg-photo img, .hero-bg-photo video {
         width: 100%; height: 100%;
         object-fit: cover;
         object-position: center 30%;
@@ -241,14 +241,9 @@
         padding: 20px 0;
     } /* 단락 간 여백 25px→20px 통일 (2026-09-05 대장 지시) */
     .about-section:last-child { padding-bottom: 0; }
-    /* 히어로 밑 여백 = about-hero 자체 하단(0, 2026-09-05 통일) + 첫 섹션 상단(44px) = 총 44px */
-    @media (min-width: 601px) {
-        #aboutFirstSection { padding-top: 44px; }
-    }
-    @media (max-width: 600px) {
-        /* 히어로↔본문 간격 44px 통일 — 모바일은 0.625배 비례 축소 */
-        #aboutFirstSection { padding-top: 28px; }
-    }
+    /* 히어로 밑 여백 = about-hero 자체 하단(0, 2026-09-05 통일) + 첫 섹션 상단(세로 간격 표준 §1 히어로→제목) = 총 44px(PC)/32px(모바일)
+       --space-hero-to-title 자체가 ≤768px에서 :root 재정의로 바뀌므로 별도 미디어쿼리 불필요 */
+    #aboutFirstSection { padding-top: var(--space-hero-to-title); }
     .about-section.bg-light { background: #FFFFFF; }
     .about-section.bg-dark {
         background: linear-gradient(160deg, #FFFFFF, #FFF3C4);
@@ -275,7 +270,9 @@
 
     /* ── 2. TRUST POSITION ── */
     .trust-intro {
-        max-width: 680px; margin-bottom: 48px;
+        max-width: 680px;
+        margin-top: var(--space-title-to-body); /* 제목→본문 — 세로 간격 표준 §2 (2026-09-05) */
+        margin-bottom: var(--space-body-to-content); /* 본문→콘텐츠(카드) — 세로 간격 표준 §3 */
     }
     .trust-intro p {
         font-size: 15px; color: var(--gray-600); line-height: 1.9;
@@ -314,6 +311,7 @@
 
     /* ── 3. CEO GREETING ── */
     .ceo-section {
+        margin-top: var(--space-body-to-content); /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
         display: flex; align-items: stretch;
         background: #FFFFFF;
         border-radius: 16px;
@@ -397,6 +395,7 @@
 
     /* ── 3-2. CEO CERTIFICATION (정비사업 코디네이터) ── */
     .cert-section {
+        margin-top: var(--space-body-to-content); /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
         display: flex; align-items: stretch; gap: 32px;
         background: var(--white);
         border-radius: 18px;
@@ -423,7 +422,7 @@
         object-fit: contain;
         box-shadow: none; border-radius: 0;
     }
-    .cert-stacked .cert-photo img.cert-2015-wide { width: 480px; border: 1px solid #1a1a1a; box-sizing: border-box; } /* 좌우폭 확장 + 좌측(2008) 등록증과 유사한 색의 외곽선 (대장 지시 2026-09-05) */
+    .cert-stacked .cert-photo img.cert-2015-wide { width: 480px; border: none; box-sizing: border-box; } /* 좌우폭 확장, 외곽선 제거 (대장 지시 2026-09-05) */
     @media (max-width: 1024px) {
         .cert-stacked .cert-photo { gap: 18px; padding: 36px 15px; }
         .cert-stacked .cert-photo img { height: 502px; }
@@ -433,6 +432,8 @@
         .cert-stacked .cert-photo { flex-direction: column; justify-content: center; padding: 32px 20px; gap: 24px; }
         .cert-stacked .cert-photo a { max-width: 100%; }
         .cert-stacked .cert-photo img { height: auto; width: 100%; max-width: 554px; }
+        /* 모바일 전용 — 2015 등록증 고정폭(380px)이 좁은 화면에서 넘치는 문제 수정, 다른 등록증과 동일하게 반응형으로 (대장 지시 2026-09-05) */
+        .cert-stacked .cert-photo img.cert-2015-wide { width: 100%; max-width: 554px; }
     }
     .cert-stacked .cert-text { transform: translateY(-22px); }
     .cert-photo {
@@ -516,49 +517,27 @@
         .cert-desc { font-size: 13px; }
     }
 
-    /* ── 디지털 지명원 배너 — CEO/대표이사 섹션과 동일한 골드(#B8860B) 계열 (대장 지시 2026-09-05) ── */
+    /* ── 디지털 지명원 배너 — 이미지 디자인으로 업그레이드 (대장 지시 2026-09-05) ── */
     .dp-banner {
         margin-top: 22px; border-radius: 16px; overflow: hidden;
-        background: linear-gradient(120deg, #171C26 0%, #232B3D 100%);
-        display: flex; align-items: center; justify-content: space-between; gap: 24px;
-        padding: 30px 34px; box-shadow: 0 10px 30px rgba(10,15,28,.14);
-        position: relative;
+        display: block; width: 100%; position: relative;
+        box-shadow: 0 10px 30px rgba(10,15,28,.14);
+        background: #0B1E3D;
     }
-    .dp-banner::before {
-        content: ''; position: absolute; inset: 0;
-        background-image: radial-gradient(circle at 12% 20%, rgba(184,134,11,.18) 0%, transparent 45%),
-                           radial-gradient(circle at 88% 85%, rgba(255,196,0,.10) 0%, transparent 40%);
+    .dp-banner img { width: 100%; height: auto; display: block; }
+    /* 이미지 안의 "지명원 보기" 버튼 그래픽 위치에 정확히 맞춘 투명 클릭 오버레이 (대장 지시 2026-09-05) */
+    .dp-btn-overlay {
+        position: absolute; left: 80.1%; top: 64.5%; width: 16.4%; height: 15%;
+        background: transparent; border: none; padding: 0; margin: 0;
+        border-radius: 10px; cursor: pointer; transition: box-shadow .2s ease;
     }
-    .dp-left { display: flex; align-items: center; gap: 18px; position: relative; z-index: 1; min-width: 0; }
-    .dp-icon {
-        width: 54px; height: 54px; border-radius: 14px; flex-shrink: 0;
-        background: linear-gradient(135deg, #B8860B, #FFC400);
-        display: flex; align-items: center; justify-content: center;
-        color: #171C26; font-size: 22px; box-shadow: 0 6px 16px rgba(184,134,11,.35);
-    }
-    .dp-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #FFC400; text-transform: uppercase; margin-bottom: 4px; }
-    .dp-title { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.3px; margin-bottom: 6px; }
-    .dp-desc { font-size: 13px; color: rgba(255,255,255,.68); line-height: 1.6; max-width: 520px; }
-    .dp-btn {
-        position: relative; z-index: 1; flex-shrink: 0;
-        display: inline-flex; align-items: center; gap: 9px;
-        padding: 14px 26px; border-radius: 10px; border: none; cursor: pointer;
-        background: linear-gradient(120deg, #B8860B, #D6A419);
-        color: #171C26; font-size: 14.5px; font-weight: 700; letter-spacing: -.2px;
-        transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .dp-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(184,134,11,.4); }
-    @media (max-width: 700px) {
-        .dp-banner { flex-direction: column; align-items: stretch; text-align: center; padding: 26px 22px; }
-        .dp-left { flex-direction: column; text-align: center; }
-        .dp-desc { max-width: 100%; }
-        .dp-btn { justify-content: center; }
-    }
+    .dp-btn-overlay:hover { box-shadow: 0 0 0 3px rgba(255,255,255,.4) inset; }
+    .dp-btn-overlay:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
     /* ── 4. COMPANY HISTORY ── */
     .timeline-center {
         position: relative;
-        max-width: 800px; margin: 0 auto;
+        max-width: 800px; margin: var(--space-body-to-content) auto 0; /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
         padding: 0;
     }
     .timeline-center::before {
@@ -631,7 +610,7 @@
     }
 
     /* ── 5. ORGANIZATION CHART ── */
-    .org-chart { display: flex; flex-direction: column; align-items: center; }
+    .org-chart { display: flex; flex-direction: column; align-items: center; margin-top: var(--space-body-to-content); } /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
     .org-ceo-box {
         background: linear-gradient(135deg, #171C26, #2A3242);
         color: #FFFFFF; border-radius: 14px;
@@ -730,6 +709,7 @@
     /* ── 7. CORPORATE IDENTITY ── */
     .ci-layout {
         display: flex; gap: 48px; align-items: center;
+        margin-top: var(--space-body-to-content); /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
         margin-bottom: 40px;
     }
     .ci-img-area {
@@ -772,6 +752,7 @@
     /* ── 8. SYMBOL & COLOR ── */
     .symbol-layout {
         display: flex; gap: 40px; align-items: flex-start;
+        margin-top: var(--space-body-to-content); /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
         margin-bottom: 40px;
     }
     .symbol-mark-box {
@@ -992,7 +973,7 @@
             </div>
 
             <!-- 정비사업전문관리업 등록증 (2008 최초등록 / 2015 상호변경 재등록) -->
-            <div class="section-label" id="registration" style="margin-top:48px">Company Certification</div>
+            <div class="section-label" id="registration" style="margin-top:var(--space-section-to-title)">Company Certification</div>
             <h2 class="section-title">정비사업전문관리업 등록현황</h2>
             <div class="cert-section cert-stacked">
                 <div class="cert-photo">
@@ -1025,17 +1006,8 @@
 
             <!-- 디지털 지명원 (PDF Flipbook) -->
             <div class="dp-banner" id="digitalProfile">
-                <div class="dp-left">
-                    <div class="dp-icon"><i class="fa-solid fa-book-open"></i></div>
-                    <div>
-                        <div class="dp-label">Digital Company Profile</div>
-                        <h3 class="dp-title">디지털 지명원</h3>
-                        <p class="dp-desc">㈜빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 실제 책자를 넘기듯 온라인에서 바로 확인하실 수 있습니다.</p>
-                    </div>
-                </div>
-                <button class="dp-btn" id="dpOpenBtn" type="button">
-                    <i class="fa-solid fa-book-open"></i> 지명원 보기
-                </button>
+                <img src="../jpg/digital_profile_banner.png" alt="DIGITAL COMPANY PROFILE 디지털 지명원 — (주)빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 실제 책자를 넘기듯 온라인에서 바로 확인. 한눈에 보는 기업 경쟁력, 사업실적 및 주요 프로젝트, 전문인력 및 조직체계, 지속가능한 미래가치.">
+                <button class="dp-btn-overlay" id="dpOpenBtn" type="button" aria-label="지명원 보기 — (주)빛세움 디지털 지명원 열기"></button>
             </div>
 
         </div>

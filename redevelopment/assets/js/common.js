@@ -21,22 +21,14 @@ const App = (() => {
   /* ── 공통 헤더 HTML ── */
   function headerHTML() {
     const links = [
-      { href: `${B}/pages/about.html`, label: '회사소개', icon: 'fa-solid fa-building-columns' },
       { href: `${B}/pages/vision.html`, label: '빛세움의 길', icon: 'fa-solid fa-road' },
+      { href: `${B}/pages/about.html`, label: '회사소개', icon: 'fa-solid fa-building-columns' },
       { href: `${B}/pages/services.html`, label: '사업분야', icon: 'fa-solid fa-diagram-project' },
       { href: `${B}/pages/portfolio.html`, label: '업무실적', icon: 'fa-solid fa-briefcase' },
       { href: `${B}/pages/library.html`, label: '자료실', icon: 'fa-solid fa-folder-open' },
       { href: `${B}/pages/contact.html`, label: '고객센터', icon: 'fa-solid fa-envelope' },
     ];
     const navGroups = [
-      { href:`${B}/pages/about.html`, label:'회사소개', icon:'fa-solid fa-building-columns', sub:[
-        { href:`${B}/pages/about.html#aboutFirstSection`, label:'회사개요' },
-        { href:`${B}/pages/about.html#ceo`, label:'CEO 인사말' },
-        { href:`${B}/pages/about.html#registration`, label:'정비사업전문관리업 등록현황/인증' },
-        { href:`${B}/pages/about.html#history`, label:'회사연혁' },
-        { href:`${B}/pages/about.html#organization`, label:'조직도' },
-        { href:`${B}/pages/about.html#ci`, label:'CI/브랜드' },
-      ]},
       { href:`${B}/pages/vision.html`, label:'빛세움의 길', icon:'fa-solid fa-road', sub:[
         { href:`${B}/pages/vision.html#method`, label:'정비사업 추진절차' },
         { href:`${B}/pages/method-feasibility.html`, label:'사업성 검토' },
@@ -44,6 +36,14 @@ const App = (() => {
         { href:`${B}/pages/method-feasibility.html#hug`, label:'HUG/금융지원' },
         { href:`${B}/pages/method-documentation.html`, label:'PM/CM 사업관리' },
         { href:`${B}/pages/method-coordination.html`, label:'갈등관리/전문자문' },
+      ]},
+      { href:`${B}/pages/about.html`, label:'회사소개', icon:'fa-solid fa-building-columns', sub:[
+        { href:`${B}/pages/about.html#aboutFirstSection`, label:'회사개요' },
+        { href:`${B}/pages/about.html#ceo`, label:'CEO 인사말' },
+        { href:`${B}/pages/about.html#registration`, label:'정비사업전문관리업 등록현황/인증' },
+        { href:`${B}/pages/about.html#history`, label:'회사연혁' },
+        { href:`${B}/pages/about.html#organization`, label:'조직도' },
+        { href:`${B}/pages/about.html#ci`, label:'CI/브랜드' },
       ]},
       { href:`${B}/pages/services.html`, label:'사업분야', icon:'fa-solid fa-diagram-project', sub:[
         { href:`${B}/pages/redevelopment-service.html`, label:'주택재개발' },
@@ -167,10 +167,10 @@ const App = (() => {
         </div>
         <div class="footer-col">
           <h5>회사</h5>
+          <a href="${B}/pages/vision.html">빛세움의 길</a>
           <a href="${B}/pages/about.html">회사소개</a>
           <a href="${B}/pages/services.html">사업분야</a>
           <a href="${B}/pages/portfolio.html">업무실적</a>
-          <a href="${B}/pages/vision.html">빛세움의 길</a>
         </div>
         <div class="footer-col">
           <h5>자료실</h5>
@@ -267,7 +267,7 @@ const App = (() => {
       unlockScroll();
     }
 
-    /* ── 모바일: 가로 스크롤 강제 리셋 + 탭바 회사소개부터 표시 ── */
+    /* ── 모바일: 가로 스크롤 강제 리셋 + 탭바 첫 항목(빛세움의 길)부터 표시 ── */
     if (window.innerWidth <= 1024) {
       window.scrollTo({ left: 0, top: window.scrollY, behavior: 'auto' });
       document.documentElement.scrollLeft = 0;
@@ -477,7 +477,7 @@ const App = (() => {
         if (curIdx === -99) return;
       }
 
-      var lastIdx = menuList.length - 1; /* 고객센터 (0:로고 1:회사소개 2:빛세움의길 3:사업분야 4:업무실적 5:자료실 6:고객센터) */
+      var lastIdx = menuList.length - 1; /* 고객센터 (0:로고 1:빛세움의길 2:회사소개 3:사업분야 4:업무실적 5:자료실 6:고객센터) */
       var ps = { x0: 0, y0: 0, active: false };
       var skipSel = 'input,textarea,select,button,a,iframe,.leaflet-container,.swiper-container,.swiper,.slider,.carousel,.process-bar,.tab-scroll';
 
@@ -501,10 +501,10 @@ const App = (() => {
 
         var newIdx;
         if (dx < 0) {
-          /* 우→좌: 다음 메뉴 (로고→회사소개→빛세움의길→...→고객센터) */
+          /* 우→좌: 다음 메뉴 (로고→빛세움의길→회사소개→...→고객센터) */
           newIdx = curIdx + 1;
         } else {
-          /* 좌→우: 이전 메뉴 (회사소개→로고, 빛세움의길→회사소개, ...) 로고에서는 더 이상 이동 없음 */
+          /* 좌→우: 이전 메뉴 (빛세움의길→로고, 회사소개→빛세움의길, ...) 로고에서는 더 이상 이동 없음 */
           newIdx = curIdx - 1;
         }
         if (newIdx < 0 || newIdx > lastIdx) return;

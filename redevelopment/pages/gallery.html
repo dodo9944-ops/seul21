@@ -15,13 +15,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905t">
     <style>
-    /* 히어로 바로 아래 탭 메뉴와의 여백 축소 (공통 .page-body 상단 여백 갤러리 페이지 한정 축소) */
-    .page-body{padding-top:28px}
-    @media(max-width:768px){.page-body{padding-top:20px}}
+    /* 히어로→탭메뉴 간격 — 세로 간격 표준 §1 통일 (2026-09-05), 기존 28px/20px 충돌 규칙 제거 */
+    .page-body{padding-top:var(--space-hero-to-title)}
 
-    .gl-section-head{margin-bottom:16px}
+    .gl-section-head{margin-bottom:var(--space-body-to-content)} /* 제목→콘텐츠(탭/카드) — 세로 간격 표준 §3 (2026-09-05) */
     .gl-section-sub{font-size:12px;color:var(--gray-400);font-weight:500}
     /* 자료실 "전체자료" 제목과 동일한 규격(영문 라벨+골드 세로바)으로 통일 */
     .gl-section-head #glGridTitle{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;letter-spacing:normal;font-family:var(--font);position:relative}
@@ -49,7 +48,7 @@
     }
 
     /* 게시물 카드 */
-    .gl-row5{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+    .gl-row5{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
     @media(max-width:1024px){.gl-row5{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:600px){.gl-row5{grid-template-columns:repeat(2,1fr);gap:10px}}
 
@@ -61,7 +60,7 @@
     .gp-body{padding:12px 13px 14px}
     .gp-cat{font-size:10.5px;font-weight:700;color:var(--gold);margin-bottom:4px}
     .gp-title{font-size:13.5px;font-weight:800;color:var(--gray-900);line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .gp-meta{display:flex;align-items:center;justify-content:space-between;font-size:10.5px;color:var(--gray-400)}
+    .gp-meta{display:flex;align-items:center;justify-content:flex-end;gap:8px;font-size:10.5px;color:var(--gray-400)} /* 날짜·조회수 우측 한 줄 정렬 (대장 지시 2026-09-05) */
     .gp-meta .views{display:flex;align-items:center;gap:3px}
     @media(max-width:600px){.gp-body{padding:9px 10px 11px}.gp-title{font-size:12.5px}}
 
@@ -69,14 +68,17 @@
     .gl-empty i{font-size:36px;color:var(--gray-300);margin-bottom:12px;display:block}
     .gl-empty p{font-size:13.5px}
 
-    /* 페이지네이션 */
-    .pager-wrap{display:flex;align-items:center;justify-content:center;margin-top:32px}
+    /* 페이지네이션 — 자료실(library.html) 주요뉴스 하단 번호표와 동일 규격·프로그래밍 (대장 지시 2026-09-05) */
+    .pager-wrap{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:40px;padding-top:24px;border-top:1px solid #dbdbdb}
     .pager{display:flex;align-items:center;gap:4px}
     .pager button{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1.5px solid #cecece;border-radius:9px;background:#fff;color:var(--gray-600);font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
     .pager button:hover{border-color:#a6790a;color:var(--brand-dark);background:rgba(184,134,11,.04)}
     .pager button.active{color:var(--gold);border-color:var(--brand-dark);box-shadow:0 2px 8px rgba(10,15,28,.12)}
     .pager button.arr{color:var(--gray-400);font-size:12px}
     .pager button:disabled{opacity:.25;cursor:default;pointer-events:none}
+    .pager-per{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-400)}
+    .pager-per select{height:32px;padding:0 24px 0 8px;border:1px solid #cecece;border-radius:6px;font-size:12px;font-family:var(--font);color:var(--gray-600);cursor:pointer;appearance:auto}
+    @media(max-width:768px){.pager-wrap{flex-direction:column;gap:12px}}
 
     /* 상세 보기 패널 — 클릭 시 아래에 자연스럽게 펼쳐짐 */
     .gl-detail{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,opacity .3s ease;margin-top:0}
@@ -144,14 +146,20 @@
             <div class="gl-result" id="glResult"></div>
         </div>
 
-        <!-- 전체 게시물 (5×3 그리드 + 페이지네이션) -->
+        <!-- 전체 게시물 (4×2 그리드 기본 + 페이지네이션) -->
         <div class="gl-section">
             <div class="gl-section-head">
                 <div class="section-label">Gallery Posts</div>
                 <h2 id="glGridTitle">전체 게시물</h2>
             </div>
             <div class="gl-row5" id="glGrid"></div>
-            <div class="pager-wrap"><div class="pager" id="glPager"></div></div>
+            <div class="pager-wrap" id="glPagerWrap">
+                <div class="pager" id="glPager"></div>
+                <div class="pager-per">
+                    <span>페이지당</span>
+                    <select id="glPerSelect"><option value="8">8개</option><option value="16">16개</option><option value="24">24개</option></select>
+                </div>
+            </div>
         </div>
 
         <!-- 상세 보기 -->
@@ -183,8 +191,8 @@
     var items=(MOCK.gallery||[]).slice();
     var curCat='전체';
     var curPage=1;
-    var PER=15; /* 가로 5 × 세로 3 */
-    var PAGE_WIN=8;
+    var PER=8; /* 전체 게시물 기본 4열×2행 (대장 지시 2026-09-05) — 8/16/24 선택 가능 */
+    var PAGE_WIN=10; /* 자료실과 동일한 페이지 묶음 크기 */
 
     /* 브라우저 로컬 조회수 (자료실과 동일 방식) */
     function getViews(){ try{ return JSON.parse(localStorage.getItem('seul_gallery_views')||'{}') }catch(e){ return {} } }
@@ -213,9 +221,11 @@
         var winStart=Math.floor((curPage-1)/PAGE_WIN)*PAGE_WIN+1;
         var winEnd=Math.min(winStart+PAGE_WIN-1, totalPages);
         var winPrev=Math.max(1,winStart-PAGE_WIN),winNext=winEnd+1;
-        var h='<button class="arr" data-p="'+winPrev+'" '+(winStart===1?'disabled':'')+'><i class="fa-solid fa-chevron-left"></i></button>';
+        var h='<button class="arr" data-p="1" '+(curPage===1?'disabled':'')+'><i class="fa-solid fa-angles-left"></i></button>';
+        h+='<button class="arr" data-p="'+winPrev+'" '+(winStart===1?'disabled':'')+'><i class="fa-solid fa-chevron-left"></i></button>';
         for(var i=winStart;i<=winEnd;i++){ h+='<button'+(i===curPage?' class="active"':'')+' data-p="'+i+'">'+i+'</button>'; }
         h+='<button class="arr" data-p="'+winNext+'" '+(winEnd===totalPages?'disabled':'')+'><i class="fa-solid fa-chevron-right"></i></button>';
+        h+='<button class="arr" data-p="'+totalPages+'" '+(curPage===totalPages?'disabled':'')+'><i class="fa-solid fa-angles-right"></i></button>';
         el.innerHTML=h;
     }
 
@@ -235,9 +245,12 @@
         var totalPages=Math.max(1, Math.ceil(list.length/PER));
         if(curPage>totalPages) curPage=totalPages;
         var gridEl=document.getElementById('glGrid');
+        var pagerWrapEl=document.getElementById('glPagerWrap');
         if(!list.length){
             gridEl.innerHTML='<div class="gl-empty"><i class="fa-regular fa-images"></i><p>등록된 게시물이 없습니다.</p></div>';
+            pagerWrapEl.style.display='none';
         }else{
+            pagerWrapEl.style.display='';
             var start=(curPage-1)*PER;
             gridEl.innerHTML=list.slice(start,start+PER).map(function(it,i){ return cardHTML(it, list.length-(start+i)); }).join('');
         }
@@ -327,6 +340,9 @@
         curPage=parseInt(btn.dataset.p,10);
         renderGrid();
         document.getElementById('glGridTitle').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    document.getElementById('glPerSelect').addEventListener('change', function(){
+        PER=parseInt(this.value,10); curPage=1; renderGrid();
     });
     document.getElementById('glDetailClose').addEventListener('click', closeDetail);
 

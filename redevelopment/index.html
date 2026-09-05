@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260905t">
     <link rel="stylesheet" href="assets/css/download-view.css?v=20260905a">
     <style>
         /* ============================================================
@@ -155,7 +155,7 @@
         .hero-bg-photo {
             position: absolute; inset: 0; z-index: 0;
         }
-        .hero-bg-photo img {
+        .hero-bg-photo img, .hero-bg-photo video {
             width: 100%; height: 100%; object-fit: cover;
             object-position: center 25%;
             filter: contrast(1.03) saturate(0.95);
@@ -372,7 +372,7 @@
                 );
             }
             /* 우측 건축 이미지 — 선명도 강화 + 핵심 건물이 잘리지 않도록 프레이밍 보정 */
-            .hero-bg-photo img { filter: contrast(1.08) saturate(1.06); object-position: center 20%; }
+            .hero-bg-photo img, .hero-bg-photo video { filter: contrast(1.08) saturate(1.06); object-position: center 20%; }
 
             .hero-label { font-size: 8px; letter-spacing: 1.4px; padding: 3.5px 9px; margin-bottom: 12px; border-color: rgba(184,134,11,0.198); }
             .hero-section h1 { font-size: clamp(22px, 6.8vw, 28px); letter-spacing: -.5px; line-height: 1.2; max-width: 100%; margin-bottom: 12px; word-break: keep-all; }
@@ -396,7 +396,7 @@
             }
 
             .category-section { display: none; }
-            .process-bar { padding: 20px 0 8px; }
+            .process-bar { padding: 23px 0 9px; } /* 위아래 여백 15% 확대 (대장 지시 2026-09-05) */
         }
 
         /* ── CATEGORY NAV BELOW HERO ── */
@@ -413,35 +413,28 @@
         .cat-item.active .cat-label { color: var(--gray-500); }
 
         /* ── SECTION (메인 고유) ── */
+        /* 상하 padding을 공용 섹션→섹션 토큰으로 통일(2026-09-05 대장 지시 2차) — 인접 섹션과 만나는 실제 간격이
+           48px(PC, 24+24)/35px(모바일, 17.5+17.5)가 되도록 절반씩 부담. 종전 32px(PC 64px 실제간격)/26px(모바일 52px)/
+           22px(태블릿 44px, 별도 분기였음) 전부 이 토큰 하나로 수렴. #mainFirstSection의 히어로 쪽 상단은
+           별도 변수(--space-hero-to-title)가 이어서 오버라이드하므로 충돌 없음. */
         .section {
-            padding: 32px 0;
-        }
-        @media (max-width: 1024px) {
-            .section { padding: 22px 0; }
+            padding: calc(var(--space-section-to-title) / 2) 0;
         }
         @media (max-width: 768px) {
-            .section { padding: 26px 0; }
             .section-head { margin-bottom: 18px; }
             .section-title { font-size: 19px; font-weight: 800; letter-spacing: -.3px; padding-left: 11px; }
             .section-title::before { width: 3px; height: 16px; top: 3px; }
             /* LATEST NEWS 라벨과 주요뉴스 제목의 좌측 정렬 기준을 맞춤(라벨 텍스트 시작 위치 = 타이틀 텍스트 시작 위치 11px) */
             .section-label::before { width: 3px; }
-            /* 히어로↔주요뉴스 간격 44px 통일(2026-09-05 대장 지시) — 모바일은 0.625배 비례 축소 */
-            #mainFirstSection { padding-top: 28px; }
-        }
-        @media (min-width: 769px) and (max-width: 1024px) {
-            /* 히어로↔주요뉴스 간격 44px 통일 — 태블릿은 0.75배 비례 축소 */
-            #mainFirstSection { padding-top: 33px; }
         }
         /* 마지막 섹션(자료실+갤러리) 하단여백 */
         #mainLastSection { padding-bottom: 70px; }
         @media (max-width: 768px) {
             #mainLastSection { padding-bottom: 60px; }
         }
-        /* 히어로 밑 여백 = hero-banner 자체 하단(0, 2026-09-05 통일) + 첫 섹션 상단(44px) = 총 44px */
-        @media (min-width: 1025px) {
-            #mainFirstSection { padding-top: 44px; }
-        }
+        /* 히어로 밑 여백 = hero-banner 자체 하단(0, 2026-09-05 통일) + 첫 섹션 상단(세로 간격 표준 §1 히어로→제목) = 총 44px(PC)/32px(모바일)
+           --space-hero-to-title 자체가 ≤768px에서 :root 재정의로 바뀌므로 별도 미디어쿼리 불필요 */
+        #mainFirstSection { padding-top: var(--space-hero-to-title); }
         /* ── CARD VISUAL (메인 전용) ── */
         .card-visual { display: flex; align-items: center; justify-content: center; border-radius: 12px; background: linear-gradient(135deg, #FFFFFF, #FFF3C4); }
         .card-visual i { color: rgba(184,134,11,0.4); }
@@ -539,38 +532,39 @@
         /* 갤러리 썸네일 사진 12% 확대 + 가장자리까지 채우고 상하좌우 여백(크롭) 비율 동일하게 (대장 지시 2026-09-05) */
         #mainCommunity .news-thumb-photo img { width: 100%; height: 100%; margin-left: 0; object-position: center; transform: scale(1.12); }
         /* 갤러리 카드 우측하단 조회수 표시 (대장 지시) */
-        #mainCommunity .news-date { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-        #mainCommunity .news-date .views { display: flex; align-items: center; gap: 4px; flex-shrink: 0; color: #9A9DA2; }
-        #mainCommunity .news-date .views i { font-size: 11px; }
+        #mainCommunity .news-date, #mainLibrary .news-date { display: flex; align-items: center; justify-content: flex-end; gap: 8px; } /* 날짜·조회수 우측 한 줄 정렬 (대장 지시 2026-09-05) */
+        #mainCommunity .news-date .views, #mainLibrary .news-date .views { display: flex; align-items: center; gap: 4px; flex-shrink: 0; color: #9A9DA2; }
+        #mainCommunity .news-date .views i, #mainLibrary .news-date .views i { font-size: 11px; }
 
         /* ── PROCESS STEPS ── */
         .process-bar {
             display: flex; align-items: flex-start; gap: 0;
-            padding: 28px 0; overflow-x: auto;
+            padding: 32px 0; overflow-x: auto; /* 위아래 여백 15% 확대: 28px→32px (대장 지시 2026-09-05) */
             -webkit-overflow-scrolling: touch;
             touch-action: pan-x; overscroll-behavior-x: contain;
             scroll-behavior: smooth; scrollbar-width: none;
         }
         .process-bar::-webkit-scrollbar { display: none; }
+        /* 단계 박스 15% 축소 (대장 지시 2026-09-05): 원래 크기의 85% */
         .p-step {
             display: flex; flex-direction: column; align-items: center;
-            min-width: 108px; text-align: center; cursor: pointer;
+            min-width: 92px; text-align: center; cursor: pointer;
             transition: transform 0.2s ease;
             position: relative;
         }
         .p-step:hover { transform: translateY(-3px); }
-        .p-step:hover .p-dot { box-shadow: 0 0 0 6px rgba(184,134,11,0.2); }
-        .p-dot { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 12px; position: relative; z-index: 2; transition: box-shadow 0.2s ease; box-sizing: border-box; }
+        .p-step:hover .p-dot { box-shadow: 0 0 0 5px rgba(184,134,11,0.2); }
+        .p-dot { width: 37px; height: 37px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-bottom: 10px; position: relative; z-index: 2; transition: box-shadow 0.2s ease; box-sizing: border-box; }
         .p-done .p-dot { background: #C58B00; color: #FFFFFF; }
-        .p-now .p-dot { background: #FFFFFF; color: #C58B00; border: 2px solid #E6B000; box-shadow: 0 0 0 7px rgba(255,196,0,.12), 0 8px 18px rgba(197,139,0,.16); }
+        .p-now .p-dot { background: #FFFFFF; color: #C58B00; border: 2px solid #E6B000; box-shadow: 0 0 0 6px rgba(255,196,0,.12), 0 8px 18px rgba(197,139,0,.16); }
         .p-wait .p-dot { background: #FFFFFF; color: #9EA2A6; border: 1px solid #C2C2BF; }
-        .p-label { font-size: 12px; font-weight: 600; color: #8A8E93; line-height: 1.4; }
+        .p-label { font-size: 10px; font-weight: 600; color: #8A8E93; line-height: 1.4; }
         .p-done .p-label { color: #C58B00; }
         .p-now .p-label { color: #C58B00; font-weight: 700; }
-        .p-line { flex: 1; height: 3px; min-width: 32px; margin-top: 22px; }
+        .p-line { flex: 1; height: 2.5px; min-width: 27px; margin-top: 18.5px; }
         .p-line-done { background: #C58B00; }
         .p-line-wait { background: #6E6C64; } /* 선명하게 보이도록 짙은 회색 + 두께 3px로 강화 */
-        .p-step-hint { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); width: max-content; font-size: 9px; color: rgba(184,134,11,0.6); margin-top: 6px; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+        .p-step-hint { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); width: max-content; font-size: 8px; color: rgba(184,134,11,0.6); margin-top: 6px; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
         .p-step:hover .p-step-hint { opacity: 1; }
         /* 추진 절차 4단계 그룹 컬러 — 도입(Dark)·추진(Green)·사업시행(Blue)·완료(Gold), 완료된 단계에만 적용. 2026-08-25 지침: 레드계열 전면 미사용 → 도입 단계는 짙은 검정 계열로 대체 */
         .p-step[data-step="0"].p-done .p-dot, .p-step[data-step="1"].p-done .p-dot { background: #171C26; }
@@ -825,7 +819,9 @@
 <section class="hero-section">
     <div class="hero-banner">
         <div class="hero-bg-photo">
-            <img src="jpg/hero_feasibility.png" alt="도시정비 — 미래 도시 전경">
+            <video autoplay muted loop playsinline poster="jpg/hero_work_poster.jpg" aria-hidden="true">
+                <source src="video/hero_work.mp4" type="video/mp4">
+            </video>
         </div>
         <div class="hero-bg-grid"></div>
         <div class="hero-hline hero-hline-top"></div>
@@ -952,10 +948,10 @@
 
 
 <!-- ===== 사업 진행단계 ===== -->
-<section class="section" style="background: linear-gradient(180deg, #FFFDF7 0%, #FFF7DF 100%); padding: 18px 0; border-top: 1px solid #CECECE; border-bottom: 1px solid #CECECE;">
+<section class="section" style="background: linear-gradient(180deg, #FFFDF7 0%, #FFF7DF 100%); padding: 23px 0 18px; border-top: 1px solid #CECECE; border-bottom: 1px solid #CECECE;">
     <div class="inner">
         <div class="section-label" style="margin-bottom:4px">Project Process</div>
-        <h2 class="section-title" style="margin-bottom:12px;color:#171C26">정비사업 추진 절차 <span style="font-size:14px;font-weight:400;color:#666B73">— 빛세움이 각 단계에서 함께합니다</span></h2>
+        <h2 class="section-title" style="margin-bottom:12px;color:#171C26">정비사업 추진 절차</h2>
 
         <div class="process-bar" id="processBar">
             <div class="p-step p-done" data-step="0">
@@ -1466,6 +1462,8 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         window.mainLibDownload=function(id){
             location.href='pages/library.html?id='+encodeURIComponent(id);
         };
+        function libViews(){ try{ return JSON.parse(localStorage.getItem('seul_lib_views')||'{}') }catch(e){ return {} } }
+        function libViewsOf(i){ return (i.views||0) + (libViews()[i.id]||0); }
         libEl.innerHTML=libs.map(function(i){
             var isWeb=i.fileType==='web';
             var ftLabel=i.fileType==='pdf'?'PDF':i.fileType==='hwp'?'HWP':i.fileType==='xlsx'?'XLS':'WEB';
@@ -1473,7 +1471,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
                 '<div class="news-thumb '+v.cls+'"><i class="fa-solid '+v.icon+'"></i><span class="ft-label">'+v.badge+'</span></div>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
-                '<div class="news-date">'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></div></div></div>';
+                '<div class="news-date"><span>'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></span><span class="views"><i class="fa-regular fa-eye"></i> '+libViewsOf(i)+'</span></div></div></div>';
         }).join('');
     }
 

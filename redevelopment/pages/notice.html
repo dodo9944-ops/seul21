@@ -15,12 +15,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905t">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260905a">
     <style>
-    /* 히어로 바로 아래 탭 메뉴와의 여백 — 갤러리(gallery.html) 페이지와 동일하게 통일 */
-    .page-body{padding-top:28px}
-    @media(max-width:768px){.page-body{padding-top:20px}}
+    /* 히어로→탭메뉴 간격 — 세로 간격 표준 §1 통일 (2026-09-05), 기존 28px/20px 충돌 규칙 제거 */
+    .page-body{padding-top:var(--space-hero-to-title)}
     .notice-row { cursor: pointer; }
     .notice-row:hover td:nth-child(2) { color: var(--accent); }
     .notice-row td:nth-child(2) { font-weight: 500; transition: color var(--transition); }
@@ -52,6 +51,18 @@
       #noticeTabs::-webkit-scrollbar{display:none}
       #noticeTabs button{flex-shrink:0}
     }
+
+    /* 페이지네이션 — 자료실(library.html) 주요뉴스 하단 번호표와 동일 규격·프로그래밍 (대장 지시 2026-09-05) */
+    .pager-wrap{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:40px;padding-top:24px;border-top:1px solid #dbdbdb}
+    .pager{display:flex;align-items:center;gap:4px}
+    .pager button{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1.5px solid #cecece;border-radius:10px;background:#fff;color:var(--gray-600);font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s}
+    .pager button:hover{border-color:#a6790a;color:var(--brand-dark);background:rgba(184,134,11,.04)}
+    .pager button.active{background:#FFFFFF;color:var(--gold);border-color:var(--brand-dark);box-shadow:0 2px 8px rgba(10,15,28,.12)}
+    .pager button.arr{color:var(--gray-400);font-size:13px}
+    .pager button:disabled{opacity:.25;cursor:default;pointer-events:none}
+    .pager-per{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-400)}
+    .pager-per select{height:32px;padding:0 24px 0 8px;border:1px solid #cecece;border-radius:6px;font-size:12px;font-family:var(--font);color:var(--gray-600);cursor:pointer;appearance:auto}
+    @media(max-width:768px){.pager-wrap{flex-direction:column;gap:12px}}
     </style>
 </head>
 <body>
@@ -91,7 +102,13 @@
                 <tbody id="noticeBody"></tbody>
             </table>
         </div>
-        <div class="pagination" id="pagination"></div>
+        <div class="pager-wrap" id="pagerWrap">
+            <div class="pager" id="pager"></div>
+            <div class="pager-per">
+                <span>페이지당</span>
+                <select id="perSelect"><option value="6">6개</option><option value="10" selected>10개</option><option value="20">20개</option></select>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -107,6 +124,7 @@
     const params = new URLSearchParams(location.search);
     const catParam = params.get('cat');
     let currentCat = validCats.includes(catParam) ? catParam : '전체';
+    let PER = 10, curPage = 1; /* 공지사항 기본 10줄 (대장 지시 2026-09-05) */
 
     function noticeCat(n) {
         return validCats.includes(n.category) ? n.category : '기사소식';
@@ -133,16 +151,38 @@
         });
     }
 
+    function renderPager(pages) {
+        const pg = document.getElementById('pager');
+        if (pages <= 1) { pg.innerHTML = ''; return; }
+        const blk = 5; /* 페이지 번호 5개까지만 표시, 화살표로 다음 묶음(6번~) 이동 (대장 지시 2026-09-05) */
+        const bStart = Math.floor((curPage - 1) / blk) * blk + 1;
+        const bEnd = Math.min(bStart + blk - 1, pages);
+        const bPrev = Math.max(1, bStart - blk), bNext = bEnd + 1;
+        let h = '<button class="arr" ' + (curPage === 1 ? 'disabled' : '') + ' data-p="1"><i class="fa-solid fa-angles-left"></i></button>';
+        h += '<button class="arr" ' + (bStart === 1 ? 'disabled' : '') + ' data-p="' + bPrev + '"><i class="fa-solid fa-chevron-left"></i></button>';
+        for (let i = bStart; i <= bEnd; i++) h += '<button' + (i === curPage ? ' class="active"' : '') + ' data-p="' + i + '">' + i + '</button>';
+        h += '<button class="arr" ' + (bEnd === pages ? 'disabled' : '') + ' data-p="' + bNext + '"><i class="fa-solid fa-chevron-right"></i></button>';
+        h += '<button class="arr" ' + (curPage === pages ? 'disabled' : '') + ' data-p="' + pages + '"><i class="fa-solid fa-angles-right"></i></button>';
+        pg.innerHTML = h;
+    }
+
     function render() {
         const filtered = currentCat === '전체' ? notices : notices.filter(n => noticeCat(n) === currentCat);
         document.getElementById('noticeResult').innerHTML = '총 <strong>' + filtered.length + '</strong>건';
         const tbody = document.getElementById('noticeBody');
+        const pagerWrap = document.getElementById('pagerWrap');
         if (!filtered.length) {
             tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--gray-400);padding:40px 0;">등록된 공지사항이 없습니다.</td></tr>';
+            pagerWrap.style.display = 'none';
             return;
         }
-        tbody.innerHTML = filtered.map((n, i) => {
-            const num = filtered.length - i;
+        pagerWrap.style.display = '';
+        const pages = Math.ceil(filtered.length / PER);
+        if (curPage > pages) curPage = 1;
+        const start = (curPage - 1) * PER;
+        const slice = filtered.slice(start, start + PER);
+        tbody.innerHTML = slice.map((n, i) => {
+            const num = filtered.length - (start + i);
             const cat = noticeCat(n);
             const catBadge = `<span class="badge ${catBadgeCls[cat]}" style="margin-right:6px;">${cat}</span>`;
             const importantBadge = n.important ? '<span class="badge badge-important" style="margin-right:8px;">중요</span>' : '';
@@ -160,6 +200,8 @@
                 if (n) NoticeDetailModal.open(n);
             });
         });
+
+        renderPager(pages);
     }
 
     const tabsEl = document.getElementById('noticeTabs');
@@ -170,6 +212,21 @@
         tabsEl.querySelectorAll('button').forEach(b => b.classList.remove('on'));
         btn.classList.add('on');
         currentCat = btn.dataset.cat;
+        curPage = 1;
+        render();
+    });
+
+    document.getElementById('pager').addEventListener('click', e => {
+        const btn = e.target.closest('button[data-p]');
+        if (!btn || btn.disabled) return;
+        curPage = parseInt(btn.dataset.p, 10);
+        render();
+        document.querySelector('.tbl-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    document.getElementById('perSelect').addEventListener('change', function () {
+        PER = parseInt(this.value, 10);
+        curPage = 1;
         render();
     });
 

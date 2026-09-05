@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905r">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260905t">
     <style>
     /* === Tabs + Write === */
     .cm-toolbar{position:sticky;top:104px;z-index:9997;background:#fff;padding:8px 0;margin-top:28px;margin-bottom:-8px;border-bottom:1px solid #dbdbdb;transition:box-shadow .2s}
@@ -119,10 +119,10 @@
     /* === Unified Hero (3안 패밀리) === */
     .uni-hero {
         background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
-        position: relative; overflow: hidden; padding: 32px 0 12px; min-height: 360px;
+        position: relative; overflow: hidden; padding: 32px 0 0; min-height: 360px;
     }
     .uni-hero .hero-bg-photo { position: absolute; top: 0; right: 0; width: 58%; height: 100%; z-index: 0; }
-    .uni-hero .hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; filter: contrast(1.03) saturate(0.95); }
+    .uni-hero .hero-bg-photo img, .uni-hero .hero-bg-photo video { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; filter: contrast(1.03) saturate(0.95); }
     .uni-hero .hero-bg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,253,247,1.00) 0%, rgba(255,253,247,0.99) 18%, rgba(255,249,232,0.96) 28%, rgba(255,247,225,0.88) 36%, rgba(255,247,225,0.70) 43%, rgba(255,247,225,0.48) 49%, rgba(255,247,225,0.28) 55%, rgba(255,247,225,0.12) 61%, rgba(255,247,225,0.04) 66%, rgba(255,247,225,0.00) 72%); z-index: 1; }
     .uni-hero .hero-light-wave { position: absolute; left: 0; bottom: -14%; width: 50%; height: 58%; overflow: hidden; pointer-events: none; z-index: 1; opacity: 1; -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 62%, transparent 100%); mask-image: linear-gradient(90deg, #000 0%, #000 62%, transparent 100%); }
     .uni-hero .hero-light-wave::before { content: ''; position: absolute; left: 0; bottom: 0; width: 70%; height: 70%; background: radial-gradient(ellipse at 12% 100%, rgba(255,196,0,.40) 0%, rgba(255,196,0,.18) 30%, rgba(255,196,0,.07) 52%, transparent 74%); filter: blur(2px); }
@@ -175,7 +175,7 @@
     .uni-hero .uh-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
     .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,.65); line-height: 1.5; }
     @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
-    @media (max-width: 600px) { .uni-hero { padding: 28px 0 40px; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
+    @media (max-width: 600px) { .uni-hero { padding: 28px 0 0; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     </style>
 </head>
@@ -191,7 +191,7 @@
         <span class="wave-line"></span>
         <span class="wave-line"></span>
     </div>
-    <div class="hero-bg-photo"><img src="../jpg/hero_community.png?v=20260902a" alt="빛세움 커뮤니티"></div>
+    <div class="hero-bg-photo"><video autoplay muted loop playsinline poster="../jpg/hero_work_poster.jpg" aria-hidden="true"><source src="../video/hero_work.mp4" type="video/mp4"></video></div>
     <div class="inner">
         <div class="uh-text">
             <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>커뮤니티</span></div>
