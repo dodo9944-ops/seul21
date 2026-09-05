@@ -255,7 +255,7 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
 }
 .logo-mark { flex-shrink: 0; width: 36px; height: 36px; }
 .logo-mark svg { width: 100%; height: 100%; }
-.header .logo-mark { width: 140.88px; height: 59.02px; } /* 상단 헤더 로고 — 1.5배·1.2배 확대 후 1.13배 추가 확대, 4% 추가 확대(2026-09-05) */
+.header .logo-mark { width: 140.88px; height: 59.02px; position: relative; top: -0.5px; } /* 상단 헤더 로고 — 1.5배·1.2배 확대 후 1.13배 추가 확대, 4% 추가 확대(2026-09-05). 위로 0.5px 이동(2026-09-05 대장 지시) */
 .header .logo { margin-left: 1px; } /* 우측으로 3px 추가 이동 */
 .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
 .logo-company {
@@ -331,6 +331,7 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
   display: flex; align-items: center; justify-content: center;
   border-radius: 8px; color: var(--gray-500); font-size: 15px;
   transition: all var(--transition); background: none; border: none; cursor: pointer;
+  position: relative; top: 0.5px; left: -0.8px; /* 검색 아이콘 아래 0.5px·좌측 0.8px 이동 (2026-09-05 대장 지시) */
 }
 .header-actions .icon-btn:hover { background: var(--gray-50); color: var(--gray-900); }
 
