@@ -518,14 +518,19 @@
     /* ── 디지털 지명원 배너 — 이미지 디자인으로 업그레이드 (대장 지시 2026-09-05) ── */
     .dp-banner {
         margin-top: 22px; border-radius: 16px; overflow: hidden;
-        display: block; width: 100%; padding: 0; border: none; cursor: pointer;
+        display: block; width: 100%; position: relative;
         box-shadow: 0 10px 30px rgba(10,15,28,.14);
-        transition: transform .25s ease, box-shadow .25s ease;
         background: #0B1E3D;
     }
-    .dp-banner:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(10,15,28,.22); }
     .dp-banner img { width: 100%; height: auto; display: block; }
-    .dp-banner:focus-visible { outline: 2px solid #B8860B; outline-offset: 3px; }
+    /* 이미지 안의 "지명원 보기" 버튼 그래픽 위치에 정확히 맞춘 투명 클릭 오버레이 (대장 지시 2026-09-05) */
+    .dp-btn-overlay {
+        position: absolute; left: 79.8%; top: 68.5%; width: 13.2%; height: 18.5%;
+        background: transparent; border: none; padding: 0; margin: 0;
+        border-radius: 10px; cursor: pointer; transition: box-shadow .2s ease;
+    }
+    .dp-btn-overlay:hover { box-shadow: 0 0 0 3px rgba(255,255,255,.4) inset; }
+    .dp-btn-overlay:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
     /* ── 4. COMPANY HISTORY ── */
     .timeline-center {
@@ -998,9 +1003,10 @@
             </div>
 
             <!-- 디지털 지명원 (PDF Flipbook) -->
-            <button class="dp-banner" id="dpOpenBtn" type="button" aria-label="디지털 지명원 보기 — (주)빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 온라인으로 확인">
-                <img src="../jpg/digital_profile_banner.png" alt="DIGITAL COMPANY PROFILE 디지털 지명원 — (주)빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 실제 책자를 넘기듯 온라인에서 바로 확인. 한눈에 보는 기업 경쟁력, 사업실적 및 주요 프로젝트, 전문인력 및 조직체계, 지속가능한 미래가치. 지명원 보기">
-            </button>
+            <div class="dp-banner" id="digitalProfile">
+                <img src="../jpg/digital_profile_banner.png" alt="DIGITAL COMPANY PROFILE 디지털 지명원 — (주)빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 실제 책자를 넘기듯 온라인에서 바로 확인. 한눈에 보는 기업 경쟁력, 사업실적 및 주요 프로젝트, 전문인력 및 조직체계, 지속가능한 미래가치.">
+                <button class="dp-btn-overlay" id="dpOpenBtn" type="button" aria-label="지명원 보기 — (주)빛세움 디지털 지명원 열기"></button>
+            </div>
 
         </div>
     </div>
