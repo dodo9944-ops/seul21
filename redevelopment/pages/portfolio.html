@@ -303,7 +303,7 @@
     <div class="pg-grid" id="pgGrid"></div>
     <div class="pager-wrap" id="pagerWrap">
         <div class="pager" id="pager"></div>
-        <div class="pager-per"><span>페이지당</span><select id="pfPerSelect"><option value="5">5개</option><option value="10">10개</option><option value="20">20개</option></select></div>
+        <div class="pager-per"><span>페이지당</span><select id="pfPerSelect"><option value="6">6개</option><option value="12">12개</option><option value="18">18개</option></select></div>
     </div>
 
 </div></div>
@@ -325,7 +325,7 @@
 <script src="../assets/js/common.js?v=20260905e"></script>
 <script>
 (function(){
-var D=MOCK.portfolio, PER=5, curPage=1, curType='전체';
+var D=MOCK.portfolio, PER=6, curPage=1, curType='전체'; /* 전체수행실적 기본 3열×2행 (대장 지시 2026-09-05) */
 
 /* helpers */
 function ti(t){return{'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney','리모델링':'fa-arrows-rotate','코디네이터':'fa-user-tie','기타':'fa-ellipsis'}[t]||'fa-building-columns'}
@@ -410,7 +410,7 @@ return'<div class="pc" onclick="PF.open(\''+p.id+'\')">'+img+
 /* Pager */
 var pg=document.getElementById('pager');
 if(pages<=1){pg.innerHTML='';return}
-var PAGE_WIN=10;
+var PAGE_WIN=5; /* 페이지 번호 5개까지만 표시 (대장 지시 2026-09-05) */
 var winStart=Math.floor((curPage-1)/PAGE_WIN)*PAGE_WIN+1;
 var winEnd=Math.min(winStart+PAGE_WIN-1,pages);
 var prevTarget=Math.max(1,winStart-PAGE_WIN),nextTarget=winEnd+1;
