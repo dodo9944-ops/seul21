@@ -515,44 +515,17 @@
         .cert-desc { font-size: 13px; }
     }
 
-    /* ── 디지털 지명원 배너 — CEO/대표이사 섹션과 동일한 골드(#B8860B) 계열 (대장 지시 2026-09-05) ── */
+    /* ── 디지털 지명원 배너 — 이미지 디자인으로 업그레이드 (대장 지시 2026-09-05) ── */
     .dp-banner {
         margin-top: 22px; border-radius: 16px; overflow: hidden;
-        background: linear-gradient(120deg, #171C26 0%, #232B3D 100%);
-        display: flex; align-items: center; justify-content: space-between; gap: 24px;
-        padding: 30px 34px; box-shadow: 0 10px 30px rgba(10,15,28,.14);
-        position: relative;
+        display: block; width: 100%; padding: 0; border: none; cursor: pointer;
+        box-shadow: 0 10px 30px rgba(10,15,28,.14);
+        transition: transform .25s ease, box-shadow .25s ease;
+        background: #0B1E3D;
     }
-    .dp-banner::before {
-        content: ''; position: absolute; inset: 0;
-        background-image: radial-gradient(circle at 12% 20%, rgba(184,134,11,.18) 0%, transparent 45%),
-                           radial-gradient(circle at 88% 85%, rgba(255,196,0,.10) 0%, transparent 40%);
-    }
-    .dp-left { display: flex; align-items: center; gap: 18px; position: relative; z-index: 1; min-width: 0; }
-    .dp-icon {
-        width: 54px; height: 54px; border-radius: 14px; flex-shrink: 0;
-        background: linear-gradient(135deg, #B8860B, #FFC400);
-        display: flex; align-items: center; justify-content: center;
-        color: #171C26; font-size: 22px; box-shadow: 0 6px 16px rgba(184,134,11,.35);
-    }
-    .dp-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #FFC400; text-transform: uppercase; margin-bottom: 4px; }
-    .dp-title { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.3px; margin-bottom: 6px; }
-    .dp-desc { font-size: 13px; color: rgba(255,255,255,.68); line-height: 1.6; max-width: 520px; }
-    .dp-btn {
-        position: relative; z-index: 1; flex-shrink: 0;
-        display: inline-flex; align-items: center; gap: 9px;
-        padding: 14px 26px; border-radius: 10px; border: none; cursor: pointer;
-        background: linear-gradient(120deg, #B8860B, #D6A419);
-        color: #171C26; font-size: 14.5px; font-weight: 700; letter-spacing: -.2px;
-        transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .dp-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(184,134,11,.4); }
-    @media (max-width: 700px) {
-        .dp-banner { flex-direction: column; align-items: stretch; text-align: center; padding: 26px 22px; }
-        .dp-left { flex-direction: column; text-align: center; }
-        .dp-desc { max-width: 100%; }
-        .dp-btn { justify-content: center; }
-    }
+    .dp-banner:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(10,15,28,.22); }
+    .dp-banner img { width: 100%; height: auto; display: block; }
+    .dp-banner:focus-visible { outline: 2px solid #B8860B; outline-offset: 3px; }
 
     /* ── 4. COMPANY HISTORY ── */
     .timeline-center {
@@ -1025,19 +998,9 @@
             </div>
 
             <!-- 디지털 지명원 (PDF Flipbook) -->
-            <div class="dp-banner" id="digitalProfile">
-                <div class="dp-left">
-                    <div class="dp-icon"><i class="fa-solid fa-book-open"></i></div>
-                    <div>
-                        <div class="dp-label">Digital Company Profile</div>
-                        <h3 class="dp-title">디지털 지명원</h3>
-                        <p class="dp-desc">㈜빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 실제 책자를 넘기듯 온라인에서 바로 확인하실 수 있습니다.</p>
-                    </div>
-                </div>
-                <button class="dp-btn" id="dpOpenBtn" type="button">
-                    <i class="fa-solid fa-book-open"></i> 지명원 보기
-                </button>
-            </div>
+            <button class="dp-banner" id="dpOpenBtn" type="button" aria-label="디지털 지명원 보기 — (주)빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 온라인으로 확인">
+                <img src="../jpg/digital_profile_banner.png" alt="DIGITAL COMPANY PROFILE 디지털 지명원 — (주)빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 실제 책자를 넘기듯 온라인에서 바로 확인. 한눈에 보는 기업 경쟁력, 사업실적 및 주요 프로젝트, 전문인력 및 조직체계, 지속가능한 미래가치. 지명원 보기">
+            </button>
 
         </div>
     </div>
