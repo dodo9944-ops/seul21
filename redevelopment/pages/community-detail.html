@@ -181,7 +181,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260905d"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260905c"></script>
+<script src="../assets/js/common.js?v=20260905e"></script>
 <script>
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
@@ -227,9 +227,9 @@
             return 'fa-file';
         }
 
-        // 본문
-        const paragraphs = post.content.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
-        const imagesHTML = (post.images && post.images.length) ? '<div class="post-images" style="display:flex;flex-wrap:wrap;gap:12px;margin:20px 0">' + post.images.map(u => '<a href="' + u + '" target="_blank" style="flex:0 0 auto"><img src="' + u + '" style="max-width:100%;max-height:400px;border-radius:10px;border:1px solid #ced0d4;cursor:pointer" loading="lazy"></a>').join('') + '</div>' : '';
+        // 본문 (사용자 입력 — XSS 방지 위해 반드시 이스케이프 후 렌더링)
+        const paragraphs = post.content.split('\n\n').map(p => `<p>${App.esc(p).replace(/\n/g, '<br>')}</p>`).join('');
+        const imagesHTML = (post.images && post.images.length) ? '<div class="post-images" style="display:flex;flex-wrap:wrap;gap:12px;margin:20px 0">' + post.images.map(u => '<a href="' + App.esc(u) + '" target="_blank" style="flex:0 0 auto"><img src="' + App.esc(u) + '" style="max-width:100%;max-height:400px;border-radius:10px;border:1px solid #ced0d4;cursor:pointer" loading="lazy"></a>').join('') + '</div>' : '';
 
         // 첨부파일
         var attachHTML = '';
@@ -237,9 +237,9 @@
             attachHTML = '<div class="attachments-section"><h3><i class="fa-solid fa-paperclip"></i> 첨부파일 (' + post.attachments.length + ')</h3><div class="attach-list">' +
                 post.attachments.map(function(att) {
                     var ext = (att.name || '').split('.').pop().toLowerCase();
-                    return '<a class="attach-item" href="' + att.url + '" download="' + att.name + '">' +
+                    return '<a class="attach-item" href="' + App.esc(att.url) + '" download="' + App.esc(att.name) + '">' +
                         '<div class="att-icon ' + getAttIconClass(ext) + '"><i class="fa-solid ' + getAttIcon(ext) + '"></i></div>' +
-                        '<div class="att-info"><div class="att-name">' + att.name + '</div><div class="att-size">' + (att.size || '') + '</div></div>' +
+                        '<div class="att-info"><div class="att-name">' + App.esc(att.name) + '</div><div class="att-size">' + App.esc(att.size || '') + '</div></div>' +
                         '<span class="att-download"><i class="fa-solid fa-download"></i> 다운로드</span>' +
                     '</a>';
                 }).join('') +
@@ -250,15 +250,15 @@
             <div class="breadcrumb">
                 <a href="../index.html">홈</a> <i class="fa-solid fa-chevron-right"></i>
                 <a href="library.html?cat=갤러리">갤러리</a> <i class="fa-solid fa-chevron-right"></i>
-                <span>${post.title}</span>
+                <span>${App.esc(post.title)}</span>
             </div>
             <div class="detail-header">
                 <div class="top-row">
-                    <span class="category-badge cat-${post.category}">${post.category}</span>
+                    <span class="category-badge cat-${App.esc(post.category)}">${App.esc(post.category)}</span>
                 </div>
-                <h1>${post.title}</h1>
+                <h1>${App.esc(post.title)}</h1>
                 <div class="detail-meta">
-                    <span><i class="fa-regular fa-user"></i>${post.author}</span>
+                    <span><i class="fa-regular fa-user"></i>${App.esc(post.author)}</span>
                     <span><i class="fa-regular fa-calendar"></i>${App.timeAgo(post.date)}</span>
                     <span><i class="fa-regular fa-eye"></i>${App.comma(viewCount)}</span>
                 </div>
@@ -364,10 +364,10 @@
             commentEl.innerHTML = `
                 <div class="comment-header">
                     <div class="comment-avatar"><i class="fa-solid fa-user"></i></div>
-                    <span class="comment-author">${authorName}</span>
+                    <span class="comment-author">${App.esc(authorName)}</span>
                     <span class="comment-date">방금 전</span>
                 </div>
-                <div class="comment-body">${text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+                <div class="comment-body">${App.esc(text)}</div>
             `;
             document.querySelector('.comment-list').appendChild(commentEl);
             input.value = '';
