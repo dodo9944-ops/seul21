@@ -532,9 +532,9 @@
         /* 갤러리 썸네일 사진 12% 확대 + 가장자리까지 채우고 상하좌우 여백(크롭) 비율 동일하게 (대장 지시 2026-09-05) */
         #mainCommunity .news-thumb-photo img { width: 100%; height: 100%; margin-left: 0; object-position: center; transform: scale(1.12); }
         /* 갤러리 카드 우측하단 조회수 표시 (대장 지시) */
-        #mainCommunity .news-date { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-        #mainCommunity .news-date .views { display: flex; align-items: center; gap: 4px; flex-shrink: 0; color: #9A9DA2; }
-        #mainCommunity .news-date .views i { font-size: 11px; }
+        #mainCommunity .news-date, #mainLibrary .news-date { display: flex; align-items: center; justify-content: flex-end; gap: 8px; } /* 날짜·조회수 우측 한 줄 정렬 (대장 지시 2026-09-05) */
+        #mainCommunity .news-date .views, #mainLibrary .news-date .views { display: flex; align-items: center; gap: 4px; flex-shrink: 0; color: #9A9DA2; }
+        #mainCommunity .news-date .views i, #mainLibrary .news-date .views i { font-size: 11px; }
 
         /* ── PROCESS STEPS ── */
         .process-bar {
@@ -1460,6 +1460,8 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         window.mainLibDownload=function(id){
             location.href='pages/library.html?id='+encodeURIComponent(id);
         };
+        function libViews(){ try{ return JSON.parse(localStorage.getItem('seul_lib_views')||'{}') }catch(e){ return {} } }
+        function libViewsOf(i){ return (i.views||0) + (libViews()[i.id]||0); }
         libEl.innerHTML=libs.map(function(i){
             var isWeb=i.fileType==='web';
             var ftLabel=i.fileType==='pdf'?'PDF':i.fileType==='hwp'?'HWP':i.fileType==='xlsx'?'XLS':'WEB';
@@ -1467,7 +1469,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
                 '<div class="news-thumb '+v.cls+'"><i class="fa-solid '+v.icon+'"></i><span class="ft-label">'+v.badge+'</span></div>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
-                '<div class="news-date">'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></div></div></div>';
+                '<div class="news-date"><span>'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></span><span class="views"><i class="fa-regular fa-eye"></i> '+libViewsOf(i)+'</span></div></div></div>';
         }).join('');
     }
 
