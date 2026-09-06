@@ -475,11 +475,12 @@ const App = (() => {
 
       var lastIdx = menuList.length - 1; /* 고객센터 (0:로고 1:빛세움의길 2:회사소개 3:사업분야 4:업무실적 5:자료실 6:고객센터) */
       var ps = { x0: 0, y0: 0, active: false };
-      var skipSel = 'input,textarea,select,button,a,iframe,.leaflet-container,.swiper-container,.swiper,.slider,.carousel,.process-bar,.tab-scroll';
+      var skipSel = 'input,textarea,select,button,a,iframe,.leaflet-container,.swiper-container,.swiper,.slider,.carousel,.process-bar,.tab-scroll,.fb-overlay';
 
       document.addEventListener('touchstart', function(e) {
         if (window.innerWidth > 1024) return;
         if (e.target.closest && e.target.closest(skipSel)) { ps.active = false; return; }
+        if (document.querySelector('.fb-overlay')) { ps.active = false; return; }
         if (drawer && drawer.classList.contains('open')) { ps.active = false; return; }
         var t = e.touches[0];
         if (t.clientX < 30 || t.clientX > window.innerWidth - 30) { ps.active = false; return; }
