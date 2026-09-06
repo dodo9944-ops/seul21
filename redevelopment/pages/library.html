@@ -70,6 +70,7 @@
     @media(max-width:640px){.ctrl-bar{display:none}}
 
     /* === Popular Section === */
+    #libFeatured{margin-bottom:calc(var(--space-section-to-title) * 0.8)} /* 전체자료와의 간격 0.8배로 축소(자료실 전용 override), 대장 지시 2026-09-06 */
     .pop-sec .pop-head{display:flex;align-items:center;gap:24px;margin-bottom:var(--space-body-to-content)} /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05), 기존 32px 충돌 규칙 제거 */
     .pop-sec .pop-head h3{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;position:relative}
     .pop-sec .pop-head h3::before{content:'';position:absolute;left:0;top:4px;width:3px;height:22px;border-radius:2px;background:linear-gradient(to bottom,var(--gold),rgba(184,134,11,.3))}
