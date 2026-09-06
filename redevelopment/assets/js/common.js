@@ -202,9 +202,9 @@ const App = (() => {
           <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 14 15 14 15 21"/></svg>
           <span>홈</span>
         </a>
-        <a href="${B}/pages/services.html#business" class="${navActive('services.html')?'active':''}">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
-          <span>그룹사</span>
+        <a href="${B}/pages/about.html#digitalProfile" class="${navActive('about.html')?'active':''}">
+          <svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H2z"/><path d="M22 6a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h8z"/></svg>
+          <span>지명원</span>
         </a>
         <a href="${B}/pages/feasibility.html" class="${navActive('feasibility.html')?'active':''}">
           <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>

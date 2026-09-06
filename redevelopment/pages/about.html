@@ -1207,19 +1207,24 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260906a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906j"></script>
+<script src="../assets/js/common.js?v=20260906k"></script>
 <script src="../assets/js/flipbook.js?v=20260906a"></script>
 <script>
 (function () {
     var btn = document.getElementById('dpOpenBtn');
     if (!btn) return;
-    btn.addEventListener('click', function () {
+    function openProfile() {
         Flipbook.open({
             pdfUrl: '../pdf/visseum-profile.pdf',
             title: '(주)빛세움 지명원',
             subtitle: 'DIGITAL COMPANY PROFILE'
         });
-    });
+    }
+    btn.addEventListener('click', openProfile);
+    /* 하단 '지명원' 탭 등 #digitalProfile 해시로 진입 시 자동으로 열기 */
+    if (location.hash === '#digitalProfile') {
+        setTimeout(openProfile, 400);
+    }
 })();
 </script>
 <script>
@@ -1250,7 +1255,7 @@
         '</div>';
     }).join('');
 
-    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260906j
+    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260906k
        mock-data.businessAreas 는 다른 영역(services.html 등)에서 사용되므로 본 섹션은 override 하지 않는다. */
 })();
 </script>
