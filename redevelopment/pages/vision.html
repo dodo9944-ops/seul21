@@ -29,10 +29,8 @@
         box-shadow: 0 10px 30px rgba(10,15,28,.08);
         background: #fff; border: 1px solid #cecece;
     }
-    .vs-phil-photo-full { width: 100%; line-height: 0; position: relative; cursor: zoom-in; }
-    .vs-phil-photo-full img { width: 100%; height: auto; display: block; transition: transform .4s ease; }
-    .vs-phil-photo-full:hover img { transform: scale(1.015); }
-    .vs-phil-photo-full:hover .vs-visual-zoom { opacity: 1; transform: scale(1); }
+    .vs-phil-photo-full { width: 100%; line-height: 0; }
+    .vs-phil-photo-full img { width: 100%; height: auto; display: block; }
     .vs-phil-text-below {
         position: relative; text-align: center;
         padding: 52px 24px 56px;
@@ -680,9 +678,8 @@
         <!-- ══════ 브랜드 철학 ══════ -->
         <div class="vs" id="philosophy" style="margin-bottom:52px">
             <div class="vs-philosophy">
-                <div class="vs-phil-photo-full" id="vsPhilZoom" role="button" tabindex="0" aria-label="사진 확대 보기" title="클릭하면 확대해서 볼 수 있습니다">
+                <div class="vs-phil-photo-full">
                     <img src="../jpg/vs_philosophy_banner.jpg" alt="㈜빛세움 — Building a Better Tomorrow, 사람을 위한 더 나은 도시 빛세움이 만듭니다">
-                    <span class="vs-visual-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
                 </div>
                 <div class="vs-phil-text-below">
                     <div class="vs-phil-kicker">VISSEUM — BRAND PHILOSOPHY</div>
@@ -966,7 +963,6 @@
     }
 
     bindPhotoZoom('vsVisualZoom');
-    bindPhotoZoom('vsPhilZoom');
 })();
 </script>
 </body>
