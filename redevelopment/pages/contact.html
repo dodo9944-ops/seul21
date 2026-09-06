@@ -97,9 +97,25 @@
     .ct-info-card .ic-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;background:rgba(184,134,11,.08);border-radius:5px;font-size:10.5px;font-weight:600;color:var(--gold);margin-top:6px}
     .ic-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 12px;border:1.5px solid #cecece;border-radius:7px;background:#fff;font-size:11.5px;font-weight:600;color:var(--gray-600);cursor:pointer;transition:all .2s;font-family:inherit}
     .ic-copy-btn:hover{border-color:#a6790a;color:var(--gold);background:rgba(184,134,11,.06)}
-    .ct-location-poster{display:block;border-radius:14px;overflow:hidden;border:1.5px solid #cecece;margin:14px 0 10px;box-shadow:0 4px 16px rgba(0,0,0,.05);transition:all .25s}
+    .ct-location-poster{display:block;width:100%;border-radius:14px;overflow:hidden;border:1.5px solid #cecece;margin:14px 0 10px;box-shadow:0 4px 16px rgba(0,0,0,.05);transition:all .25s;padding:0;background:none;cursor:pointer;font:inherit}
     .ct-location-poster:hover{border-color:#a6790a;box-shadow:0 12px 30px rgba(184,134,11,.14);transform:translateY(-3px)}
     .ct-location-poster img{width:100%;display:block}
+
+    /* ── 오시는 길 확대 모달 — 실제 클릭 가능한 링크형 정보 6개 ── */
+    .ct-loc-modal-overlay{position:fixed;inset:0;z-index:100000;background:rgba(10,15,28,.72);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+    .ct-loc-modal-overlay.open{opacity:1;visibility:visible}
+    .ct-loc-modal{background:#fff;border-radius:18px;max-width:640px;width:100%;max-height:92vh;overflow-y:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.35);transform:translateY(12px);transition:transform .25s ease}
+    .ct-loc-modal-overlay.open .ct-loc-modal{transform:translateY(0)}
+    .ct-loc-modal-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:none;background:rgba(10,15,28,.06);color:var(--gray-700);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;transition:all .2s;z-index:2}
+    .ct-loc-modal-close:hover{background:var(--gold);color:#171C26;transform:rotate(90deg)}
+    .ct-loc-modal img{width:100%;display:block}
+    /* 모달(이미지) 폭에 비례해 아이콘·글자 크기가 함께 커지고 작아지도록 vw 기반 clamp 사용 */
+    .ct-loc-links{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e5e5e5}
+    .ct-loc-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(4px,1.8vw,8px);padding:clamp(10px,4vw,18px) clamp(4px,2vw,10px);background:#fff;text-decoration:none;color:inherit;transition:background .2s}
+    .ct-loc-item:hover{background:#FFF9E8}
+    .ct-loc-item .li-ic{width:clamp(26px,9vw,34px);height:clamp(26px,9vw,34px);border-radius:50%;background:linear-gradient(135deg,#C58B00,#FFC400);color:#171C26;display:flex;align-items:center;justify-content:center;font-size:clamp(10px,3.6vw,14px);flex-shrink:0}
+    .ct-loc-item strong{font-size:clamp(10px,2.9vw,12.5px);font-weight:800;color:var(--gray-900)}
+    .ct-loc-item span{font-size:clamp(9px,2.5vw,11px);color:var(--gray-500);line-height:1.4}
     .ct-address-copy{display:flex;align-items:center;gap:8px;width:100%;padding:11px 13px;border:1.5px solid #cecece;border-radius:9px;background:var(--gray-50);font-size:12px;font-weight:600;color:var(--gray-700);cursor:pointer;font-family:inherit;text-align:left;transition:all .2s;line-height:1.4}
     .ct-address-copy:hover{border-color:#a6790a;color:var(--gold);background:rgba(184,134,11,.06)}
     .ct-address-copy i{color:var(--gold);flex-shrink:0;font-size:13px}
@@ -337,15 +353,49 @@
                     <div class="ic-icon"><i class="fa-solid fa-building"></i></div>
                     <div><h3>방문 상담 · 찾아오시는 길</h3><span class="ic-sub">대면 상담 예약</span></div>
                 </div>
-                <a class="ct-location-poster" href="../jpg/visseum_location_poster.png" target="_blank" rel="noopener" aria-label="㈜빛세움 오시는 길 안내도 크게 보기">
+                <button type="button" class="ct-location-poster" id="ctLocOpenBtn" aria-label="㈜빛세움 오시는 길 안내도 크게 보기 — 확대 시 전화·주소·이메일·길찾기 링크 이용 가능">
                     <img src="../jpg/visseum_location_poster.png" alt="㈜빛세움 오시는 길 안내도 — 서울특별시 강동구 성내로6길 50 피스센터 5층, 5호선 둔촌동역·8호선 강동구청역 인근">
-                </a>
+                </button>
                 <button type="button" class="ct-address-copy" onclick="(function(btn){var addr='서울특별시 강동구 성내로6길 50, 피스센터 5층';function done(){if(window.App&&App.toast)App.toast('주소가 복사되었습니다.');var i=btn.querySelector('i');i.className='fa-solid fa-check';setTimeout(function(){i.className='fa-regular fa-copy'},2000)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(addr).then(done)}else{var ta=document.createElement('textarea');ta.value=addr;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);done()}})(this)">
                     <i class="fa-regular fa-copy"></i>
                     <span>서울특별시 강동구 성내로6길 50, 피스센터 5층 (클릭 시 주소 복사)</span>
                 </button>
                 <p style="margin-top:8px">TEL 02-478-7114 · FAX 02-478-6114<br><span style="font-size:11.5px;opacity:.75">영남·부산지사 — 부산시 부산진구 중앙대로 615, 평광빌딩 동관 1101호</span></p>
                 <div class="ic-tag"><i class="fa-solid fa-calendar-check"></i> 사전 예약 권장</div>
+            </div>
+
+            <!-- 오시는 길 확대 모달 -->
+            <div class="ct-loc-modal-overlay" id="ctLocModalOverlay">
+                <div class="ct-loc-modal">
+                    <button type="button" class="ct-loc-modal-close" id="ctLocModalClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+                    <img src="../jpg/visseum_location_poster.png" alt="㈜빛세움 오시는 길 안내도">
+                    <div class="ct-loc-links">
+                        <a class="ct-loc-item" href="tel:0247871144">
+                            <div class="li-ic"><i class="fa-solid fa-phone"></i></div>
+                            <strong>대표전화</strong><span>02-478-7114</span>
+                        </a>
+                        <a class="ct-loc-item" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%8F%99%EA%B5%AC%20%EC%84%B1%EB%82%B4%EB%A1%9C6%EA%B8%B8%2050" target="_blank" rel="noopener">
+                            <div class="li-ic"><i class="fa-solid fa-location-dot"></i></div>
+                            <strong>주소</strong><span>네이버 지도로 보기</span>
+                        </a>
+                        <a class="ct-loc-item" href="mailto:visseum@visseum.co.kr">
+                            <div class="li-ic"><i class="fa-solid fa-envelope"></i></div>
+                            <strong>이메일</strong><span>메일 보내기</span>
+                        </a>
+                        <a class="ct-loc-item" href="nmap://route/publictransit?dlat=37.5283&dlng=127.1223&dname=%28%EC%A3%BC%29%EB%B9%9B%EC%84%B8%EC%9B%80&appname=https%3A%2F%2Fwww.seul24.cloud" target="_blank" rel="noopener">
+                            <div class="li-ic"><i class="fa-solid fa-train-subway"></i></div>
+                            <strong>지하철</strong><span>네이버 길찾기</span>
+                        </a>
+                        <a class="ct-loc-item" href="nmap://route/publictransit?dlat=37.5283&dlng=127.1223&dname=%28%EC%A3%BC%29%EB%B9%9B%EC%84%B8%EC%9B%80&appname=https%3A%2F%2Fwww.seul24.cloud" target="_blank" rel="noopener">
+                            <div class="li-ic"><i class="fa-solid fa-bus"></i></div>
+                            <strong>버스</strong><span>네이버 길찾기</span>
+                        </a>
+                        <a class="ct-loc-item" href="nmap://route/car?dlat=37.5283&dlng=127.1223&dname=%28%EC%A3%BC%29%EB%B9%9B%EC%84%B8%EC%9B%80&appname=https%3A%2F%2Fwww.seul24.cloud" target="_blank" rel="noopener">
+                            <div class="li-ic"><i class="fa-solid fa-car"></i></div>
+                            <strong>자가용</strong><span>네이버 길찾기</span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <!-- 접수 흐름 -->
@@ -477,15 +527,28 @@ window.CT={removeFile:function(i){uploadedFiles.splice(i,1);renderFiles()}};
 })();
 </script>
 <script>
-/* 메뉴에서 '찾아오시는 길'(#ctVisit)로 진입 시 위치도 확대 모달 자동 표시 */
-if(location.hash==='#ctVisit'){
-    document.addEventListener('DOMContentLoaded',function(){
-        setTimeout(function(){
-            var link=document.getElementById('footerAddressLink');
-            if(link) link.click();
-        },400);
-    });
-}
+(function(){
+    var overlay=document.getElementById('ctLocModalOverlay');
+    var openBtn=document.getElementById('ctLocOpenBtn');
+    var closeBtn=document.getElementById('ctLocModalClose');
+    if(!overlay) return;
+    function openLocModal(){
+        overlay.classList.add('open');
+        document.body.style.overflow='hidden';
+    }
+    function closeLocModal(){
+        overlay.classList.remove('open');
+        document.body.style.overflow='';
+    }
+    if(openBtn) openBtn.addEventListener('click', openLocModal);
+    if(closeBtn) closeBtn.addEventListener('click', closeLocModal);
+    overlay.addEventListener('click', function(e){ if(e.target===overlay) closeLocModal(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLocModal(); });
+    /* 메뉴에서 '찾아오시는 길'(#ctVisit)로 진입 시 확대 모달 자동 표시 */
+    if(location.hash==='#ctVisit'){
+        setTimeout(openLocModal, 400);
+    }
+})();
 </script>
 </body>
 </html>
