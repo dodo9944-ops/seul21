@@ -30,12 +30,10 @@ const App = (() => {
     ];
     const navGroups = [
       { href:`${B}/pages/vision.html`, label:'빛세움의 길', icon:'fa-solid fa-road', sub:[
-        { href:`${B}/pages/vision.html#method`, label:'정비사업 추진절차' },
-        { href:`${B}/pages/method-feasibility.html`, label:'사업성 검토' },
-        { href:`${B}/pages/method-permit.html`, label:'인허가 전략' },
-        { href:`${B}/pages/method-feasibility.html#hug`, label:'HUG/금융지원' },
-        { href:`${B}/pages/method-documentation.html`, label:'PM/CM 사업관리' },
-        { href:`${B}/pages/method-coordination.html`, label:'갈등관리/전문자문' },
+        { href:`${B}/pages/vision.html#philosophy`, label:'빛을 세우다' },
+        { href:`${B}/pages/vision.html#mission`, label:'All 4 U · All 4 V' },
+        { href:`${B}/pages/vision.html#visual`, label:'공간으로 증명하는 신뢰' },
+        { href:`${B}/pages/vision.html#vsFilm`, label:'회사 홍보 영상' },
       ]},
       { href:`${B}/pages/about.html`, label:'회사소개', icon:'fa-solid fa-building-columns', sub:[
         { href:`${B}/pages/about.html#aboutFirstSection`, label:'회사개요' },
