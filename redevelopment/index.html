@@ -1175,7 +1175,7 @@
 <!-- 공통 JS -->
 <script src="assets/data/mock-data.js?v=20260906b"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260906q"></script>
+<script src="assets/js/common.js?v=20260906r"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1421,11 +1421,19 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
             var href=newsFileMap[i.id]||'pages/library.html?cat=주요뉴스';
-            return'<a href="'+href+'" class="news-item" style="gap:10px;padding:12px 20px;">'+
+            var modalAttr=newsFileMap[i.id]?' data-news-modal="'+i.id+'"':'';
+            return'<a href="'+href+'" class="news-item"'+modalAttr+' style="gap:10px;padding:12px 20px;">'+
                 '<span style="color:#C58B00;font-size:11px;flex-shrink:0;">●</span>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
                 '<div class="news-date">'+i.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">최근 7일간 등록된 주요뉴스가 없습니다.</p>';
+        newsEl.querySelectorAll('[data-news-modal]').forEach(function(a){
+            a.addEventListener('click',function(e){
+                e.preventDefault();
+                var item=news.find(function(x){return x.id===a.dataset.newsModal});
+                NewsDetailModal.open(a.getAttribute('href'),{category:item?item.category:'주요뉴스',title:item?item.title:''});
+            });
+        });
     }
 
     /* 공지사항: 최신 3건 */
@@ -1433,11 +1441,18 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     if(noticeEl && MOCK.notices){
         var notices=MOCK.notices.slice().sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         noticeEl.innerHTML=notices.length?notices.map(function(n){
-            return'<a href="pages/notice.html" class="news-item" style="gap:10px;padding:12px 20px;">'+
+            return'<a href="pages/notice.html" class="news-item" data-notice-modal="'+n.id+'" style="gap:10px;padding:12px 20px;">'+
                 '<span style="color:#C58B00;font-size:11px;flex-shrink:0;">●</span>'+
                 '<div class="news-body"><h4>'+n.title+'</h4>'+
                 '<div class="news-date">'+n.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">등록된 공지사항이 없습니다.</p>';
+        noticeEl.querySelectorAll('[data-notice-modal]').forEach(function(a){
+            a.addEventListener('click',function(e){
+                e.preventDefault();
+                var n=notices.find(function(x){return x.id===a.dataset.noticeModal});
+                if(n)NoticeDetailModal.open(n);
+            });
+        });
     }
 
     /* 자료실: 최신 3건 (주요뉴스 제외) */
