@@ -471,47 +471,19 @@ var form=document.getElementById('ctForm');
 function showErr(id,show){var el=document.getElementById(id);if(show)el.classList.add('show');else el.classList.remove('show')}
 function validEmail(e){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
 
+/* [2026-09-06 대장 지시] 상담 문의 접수 — 시스템 점검 안내창으로 대체 (정식 서비스 11월 예정) */
+function showCtMaintenanceNotice(){
+    var overlay=document.createElement('div');
+    overlay.className='modal-overlay open';
+    overlay.innerHTML='<div class="modal"><div class="modal-header"><h3>안내</h3><button class="modal-close" data-action="close"><i class="fa-solid fa-xmark"></i></button></div><div class="modal-body"><p>시스템 점검 중으로 11월 중 정식 서비스 예정입니다.</p></div><div class="modal-footer"><button class="btn btn-primary btn-sm" data-action="close">확인</button></div></div>';
+    document.body.appendChild(overlay);
+    overlay.querySelectorAll('[data-action="close"]').forEach(function(btn){btn.addEventListener('click',function(){overlay.remove()})});
+    overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.remove()});
+}
+
 form.addEventListener('submit',function(e){
     e.preventDefault();
-    var name=document.getElementById('cName').value.trim();
-    var email=document.getElementById('cEmail').value.trim();
-    var type=selInput.value;
-    var title=document.getElementById('cTitle').value.trim();
-    var content=document.getElementById('cContent').value.trim();
-    var ok=true;
-
-    showErr('errName',!name);if(!name){document.getElementById('cName').classList.add('err');ok=false}
-    showErr('errEmail',!email||!validEmail(email));if(!email||!validEmail(email)){document.getElementById('cEmail').classList.add('err');ok=false}
-    showErr('errType',!type);if(!type){selBtn.classList.add('err');ok=false}
-    showErr('errTitle',!title);if(!title){document.getElementById('cTitle').classList.add('err');ok=false}
-    showErr('errContent',!content);if(!content){document.getElementById('cContent').classList.add('err');ok=false}
-    var privacy=document.getElementById('cPrivacy').checked;
-    showErr('errPrivacy',!privacy);if(!privacy)ok=false
-
-    if(!ok){App.toast('필수 입력 항목을 확인해주세요.','error');return}
-
-    var btn=document.getElementById('submitBtn');
-    btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> 접수 중...';
-
-    var phone=document.getElementById('cPhone').value.trim();
-    var fd=new FormData();
-    fd.append('name',name);fd.append('email',email);fd.append('phone',phone);
-    fd.append('type',type);fd.append('title',title);fd.append('content',content);
-    uploadedFiles.forEach(function(f){fd.append('files',f,f.name)});
-    fetch('/api/inquiries',{method:'POST',body:fd
-    }).then(function(r){return r.json().then(function(d){return{ok:r.ok,data:d}})})
-    .then(function(res){
-        btn.disabled=false;
-        if(res.ok){
-            btn.innerHTML='<i class="fa-solid fa-circle-check"></i> 접수 완료';
-            btn.style.background='#059669';
-            App.toast('상담 문의가 접수되었습니다. 빠른 시일 내 답변드리겠습니다.','success');
-            setTimeout(function(){btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';btn.style.background='';form.reset();uploadedFiles=[];renderFiles();selBtn.innerHTML='<span>문의유형을 선택해주세요</span><i class="fa-solid fa-chevron-down"></i>';selBtn.classList.add('placeholder');selBtn.classList.remove('has-value');selInput.value=''},3000);
-        }else{
-            btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';
-            App.toast(res.data.error||'접수에 실패했습니다.','error');
-        }
-    }).catch(function(){btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> 상담 문의 접수';App.toast('서버 연결에 실패했습니다.','error')});
+    showCtMaintenanceNotice();
 });
 
 /* Clear errors on input */
