@@ -191,7 +191,7 @@ const App = (() => {
     <div class="location-modal-overlay" id="locationModalOverlay">
       <div class="location-modal">
         <button class="location-modal-close" id="locationModalClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
-        <img src="${B}/jpg/visseum_location_map.png" alt="(주)빛세움 오시는 길 약도 — 서울특별시 강동구 성내로6길 50 피스센터 5층">
+        <img id="locationModalImg" src="${B}/jpg/visseum_location_map.png" alt="(주)빛세움 오시는 길 약도 — 서울특별시 강동구 성내로6길 50 피스센터 5층. 모바일에서 탭하면 주소가 복사됩니다.">
       </div>
     </div>
     <button class="scroll-top" id="scrollTop" aria-label="맨 위로"><i class="fa-solid fa-chevron-up"></i></button>
@@ -412,6 +412,26 @@ const App = (() => {
       if (e.target === locationModalOverlay) {
         locationModalOverlay.classList.remove('open');
         unlockScroll();
+      }
+    });
+
+    // 모바일에서 확대된 약도를 탭하면 회사 주소 자동 복사
+    const locationModalImg = document.getElementById('locationModalImg');
+    if (locationModalImg) locationModalImg.addEventListener('click', e => {
+      if (window.innerWidth > 768) return;
+      e.stopPropagation();
+      const addr = '서울특별시 강동구 성내로6길 50, 피스센터 5층';
+      function done() { toast('주소가 복사되었습니다.'); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(done).catch(function () {
+          const ta = document.createElement('textarea');
+          ta.value = addr; document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); document.body.removeChild(ta); done();
+        });
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = addr; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta); done();
       }
     });
 
