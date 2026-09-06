@@ -209,7 +209,7 @@
     };
 
     FlipbookInstance.prototype.setZoom = function (z, silent) {
-        z = Math.max(1, Math.min(2.5, z));
+        z = Math.max(1, Math.min(3.75, z));
         this.zoom = z;
         if (z <= 1) { this.panX = 0; this.panY = 0; }
         this._clampPan();
@@ -218,7 +218,7 @@
         if (wrap) wrap.classList.toggle('fb-zoomed', z > 1);
         var zin = this.el.querySelector('[data-act="zoomin"]');
         var zout = this.el.querySelector('[data-act="zoomout"]');
-        if (zin) zin.disabled = z >= 2.5;
+        if (zin) zin.disabled = z >= 3.75;
         if (zout) zout.disabled = z <= 1;
     };
 
