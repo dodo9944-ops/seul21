@@ -82,7 +82,7 @@
 
     /* 상세 보기 패널 — 클릭 시 아래에 자연스럽게 펼쳐짐 */
     .gl-detail{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,opacity .3s ease;margin-top:0}
-    .gl-detail.show{max-height:2400px;opacity:1;margin-top:32px}
+    .gl-detail.show{max-height:12000px;opacity:1;margin-top:32px} /* 2400px 상한은 모바일 1열에서 사진 8장 게시물(최대 3,990px)을 잘라냄 → 상한 상향 (2026-09-07) */
     .gl-detail-card{background:#fff;border:1.5px solid #cecece;border-radius:16px;padding:18px 28px;position:relative}
     .gl-detail-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:9px;border:1.5px solid #cecece;background:#fff;color:var(--gray-500);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
     .gl-detail-close:hover{border-color:#a6790a;color:var(--gold)}

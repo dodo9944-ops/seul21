@@ -21,7 +21,6 @@
     /* === KPI (좌측 아이콘 + 우측 텍스트, 가로형 카드) === */
     .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:var(--space-section-to-title)} /* 64px 하드코딩 제거→48/35px 토큰 (2026-09-05 대장 지시 2차) */
     @media(max-width:1024px){.kpi-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
-    @media(max-width:420px){.kpi-grid{grid-template-columns:1fr}}
     .kpi-card{background:#FFFFFF;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;text-align:left;position:relative;overflow:hidden;transition:transform .25s,border-color .25s;border:1px solid #cecece;box-shadow:0 1px 4px rgba(10,15,28,.05)}
     .kpi-card:hover{transform:translateY(-3px);border-color:#a6790a}
     .kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3}
@@ -37,7 +36,26 @@
     .kpi-card.kpi-highlight{background:#FFF9E8;border-color:rgba(184,134,11,0.275)}
     .kpi-card.kpi-highlight::after{opacity:.6}
     .kpi-card.kpi-highlight .kv{color:var(--gold)}
-    @media(max-width:480px){.kpi-card{padding:14px 16px}.kpi-card .kv{font-size:18px}}
+    /* 모바일: 4개 카드가 세로로 길게 쌓여 스크롤이 과도해지는 문제 → 2열 압축 배치
+       (상하 여백은 base의 '여백 확대' 의도 반영해 14px 유지) */
+    @media(max-width:640px){
+      .kpi-grid{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:36px}
+      .kpi-card{padding:14px 13px;gap:10px;border-radius:12px}
+      .kpi-card .ki{width:32px;height:32px;font-size:14px}
+      .kpi-card .ki-bar{width:12px}
+      .kpi-card .kv{font-size:17px}
+      .kpi-card .kl{font-size:12px;margin-bottom:0}
+      .kpi-card .ks{display:none}
+    }
+    /* 소형 단말(360·390px 등): '약 NN,NNN세대'가 줄바꿈되어 카드 높이가 어긋나는 것 방지 */
+    @media(max-width:400px){
+      .kpi-grid{gap:8px}
+      .kpi-card{padding:13px 10px;gap:8px}
+      .kpi-card .ki{width:28px;height:28px;font-size:12px}
+      .kpi-card .kv{font-size:14.5px;letter-spacing:-.2px}
+      .kpi-card .kl{font-size:11px}
+    }
+    @media(max-width:320px){.kpi-grid{grid-template-columns:1fr}}
 
     /* === Section === */
     .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
