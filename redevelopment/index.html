@@ -8,7 +8,7 @@
     <meta property="og:title" content="(주)빛세움 — 도시정비 전문 엔지니어링">
     <meta property="og:description" content="정비사업 전 과정의 사업성 검토, 인허가 대응, 조합 운영지원, 이해관계 조율까지 체계적으로 수행합니다.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://seul21.com/jpg/hero_about.png">
+    <meta property="og:image" content="https://www.seul24.cloud/jpg/hero_about.png">
     <title>(주)빛세움 — 도시정비 전문 엔지니어링</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -1173,9 +1173,9 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260906a"></script>
+<script src="assets/data/mock-data.js?v=20260906b"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260906n"></script>
+<script src="assets/js/common.js?v=20260906r"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1421,11 +1421,19 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
             var href=newsFileMap[i.id]||'pages/library.html?cat=주요뉴스';
-            return'<a href="'+href+'" class="news-item" style="gap:10px;padding:12px 20px;">'+
+            var modalAttr=newsFileMap[i.id]?' data-news-modal="'+i.id+'"':'';
+            return'<a href="'+href+'" class="news-item"'+modalAttr+' style="gap:10px;padding:12px 20px;">'+
                 '<span style="color:#C58B00;font-size:11px;flex-shrink:0;">●</span>'+
                 '<div class="news-body"><h4>'+i.title+'</h4>'+
                 '<div class="news-date">'+i.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">최근 7일간 등록된 주요뉴스가 없습니다.</p>';
+        newsEl.querySelectorAll('[data-news-modal]').forEach(function(a){
+            a.addEventListener('click',function(e){
+                e.preventDefault();
+                var item=news.find(function(x){return x.id===a.dataset.newsModal});
+                NewsDetailModal.open(a.getAttribute('href'),{category:item?item.category:'주요뉴스',title:item?item.title:''});
+            });
+        });
     }
 
     /* 공지사항: 최신 3건 */
@@ -1433,11 +1441,18 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     if(noticeEl && MOCK.notices){
         var notices=MOCK.notices.slice().sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         noticeEl.innerHTML=notices.length?notices.map(function(n){
-            return'<a href="pages/notice.html" class="news-item" style="gap:10px;padding:12px 20px;">'+
+            return'<a href="pages/notice.html" class="news-item" data-notice-modal="'+n.id+'" style="gap:10px;padding:12px 20px;">'+
                 '<span style="color:#C58B00;font-size:11px;flex-shrink:0;">●</span>'+
                 '<div class="news-body"><h4>'+n.title+'</h4>'+
                 '<div class="news-date">'+n.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">등록된 공지사항이 없습니다.</p>';
+        noticeEl.querySelectorAll('[data-notice-modal]').forEach(function(a){
+            a.addEventListener('click',function(e){
+                e.preventDefault();
+                var n=notices.find(function(x){return x.id===a.dataset.noticeModal});
+                if(n)NoticeDetailModal.open(n);
+            });
+        });
     }
 
     /* 자료실: 최신 3건 (주요뉴스 제외) */
@@ -1488,17 +1503,18 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         window.mainLibDownload=function(id){
             location.href='pages/library.html?id='+encodeURIComponent(id);
         };
-        function libViews(){ try{ return JSON.parse(localStorage.getItem('seul_lib_views')||'{}') }catch(e){ return {} } }
-        function libViewsOf(i){ return (i.views||0) + (libViews()[i.id]||0); }
-        libEl.innerHTML=libs.map(function(i){
-            var isWeb=i.fileType==='web';
-            var ftLabel=i.fileType==='pdf'?'PDF':i.fileType==='hwp'?'HWP':i.fileType==='xlsx'?'XLS':'WEB';
-            var v=isWeb?getContentVisual(i.category):{icon:iconMap[i.fileType]||'fa-file',cls:i.fileType,badge:ftLabel};
-            return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
-                '<div class="news-thumb '+v.cls+'"><i class="fa-solid '+v.icon+'"></i><span class="ft-label">'+v.badge+'</span></div>'+
-                '<div class="news-body"><h4>'+i.title+'</h4>'+
-                '<div class="news-date"><span>'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></span><span class="views"><i class="fa-regular fa-eye"></i> '+libViewsOf(i)+'</span></div></div></div>';
-        }).join('');
+        (async function(){
+            var vmap=await ViewCounter.batch('library',libs.map(function(i){return i.id}));
+            libEl.innerHTML=libs.map(function(i){
+                var isWeb=i.fileType==='web';
+                var ftLabel=i.fileType==='pdf'?'PDF':i.fileType==='hwp'?'HWP':i.fileType==='xlsx'?'XLS':'WEB';
+                var v=isWeb?getContentVisual(i.category):{icon:iconMap[i.fileType]||'fa-file',cls:i.fileType,badge:ftLabel};
+                return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
+                    '<div class="news-thumb '+v.cls+'"><i class="fa-solid '+v.icon+'"></i><span class="ft-label">'+v.badge+'</span></div>'+
+                    '<div class="news-body"><h4>'+i.title+'</h4>'+
+                    '<div class="news-date"><span>'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></span><span class="views"><i class="fa-regular fa-eye"></i> '+(vmap[i.id]||0)+'</span></div></div></div>';
+            }).join('');
+        })();
     }
 
     /* 갤러리: 자료실 갤러리(MOCK.gallery) 연동 — 최신 3건 */
@@ -1512,20 +1528,21 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             var t=(g.content||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
             return t.length>90?t.slice(0,90)+'…':t;
         }
-        function galViews(){ try{ return JSON.parse(localStorage.getItem('seul_gallery_views')||'{}') }catch(e){ return {} } }
-        function galViewsOf(g){ return (g.views||0) + (galViews()[g.id]||0); }
         var pinnedGalIds=['ws2025_winter','site_hqoffice2026','jc_gongdeok2026'];
         var gals=pinnedGalIds.map(function(id){return MOCK.gallery.find(function(g){return g.id===id})}).filter(Boolean);
-        galEl.innerHTML=gals.map(function(g){
-            var cover=(g.images&&g.images.length)?g.images[0]:null;
-            var coverSrc=cover?cover.src.replace(/^\.\.\//,''):'';
-            var thumb=cover?'<img src="'+coverSrc+'" alt="'+(cover.alt||g.title||'')+'" loading="lazy">':'<i class="fa-solid fa-image"></i>';
-            return'<div class="news-item" style="cursor:pointer" onclick="mainGalleryOpen(\''+g.id+'\')">'+
-                '<div class="news-thumb-photo">'+thumb+'</div>'+
-                '<div class="news-body"><h4>'+g.title+'</h4>'+
-                '<div class="news-desc">'+galSummary(g)+'</div>'+
-                '<div class="news-date"><span>'+g.category+' · '+g.date+'</span><span class="views"><i class="fa-regular fa-eye"></i> '+galViewsOf(g)+'</span></div></div></div>';
-        }).join('');
+        (async function(){
+            var vmap=await ViewCounter.batch('gallery',gals.map(function(g){return g.id}));
+            galEl.innerHTML=gals.map(function(g){
+                var cover=(g.images&&g.images.length)?g.images[0]:null;
+                var coverSrc=cover?cover.src.replace(/^\.\.\//,''):'';
+                var thumb=cover?'<img src="'+coverSrc+'" alt="'+(cover.alt||g.title||'')+'" loading="lazy">':'<i class="fa-solid fa-image"></i>';
+                return'<div class="news-item" style="cursor:pointer" onclick="mainGalleryOpen(\''+g.id+'\')">'+
+                    '<div class="news-thumb-photo">'+thumb+'</div>'+
+                    '<div class="news-body"><h4>'+g.title+'</h4>'+
+                    '<div class="news-desc">'+galSummary(g)+'</div>'+
+                    '<div class="news-date"><span>'+g.category+' · '+g.date+'</span><span class="views"><i class="fa-regular fa-eye"></i> '+(vmap[g.id]||0)+'</span></div></div></div>';
+            }).join('');
+        })();
     }
 })();
 </script>

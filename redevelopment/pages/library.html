@@ -46,7 +46,7 @@
     .lib-all-title .section-title::before{left:0;top:4px;width:3px;height:22px;border-radius:2px}
 
     /* === Control Bar === */
-    .ctrl-bar{display:flex;align-items:center;gap:16px;margin-bottom:48px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid #cecece;box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
+    .ctrl-bar{display:flex;align-items:center;gap:16px;margin-bottom:22px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid #cecece;box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box} /* 48px→22px, 대장 지시 2026-09-06 */
     /* html,body{overflow-x:hidden}(전역) 때문에 position:sticky가 무효화되어
        업무실적(portfolio.html)과 동일하게 스크롤 감지 후 position:fixed로 전환하는 방식 사용 */
     .ctrl-bar.lib-stuck{position:fixed;z-index:50;margin-bottom:0}
@@ -70,6 +70,7 @@
     @media(max-width:640px){.ctrl-bar{display:none}}
 
     /* === Popular Section === */
+    #libFeatured{margin-bottom:calc(var(--space-section-to-title) * 0.8)} /* 전체자료와의 간격 0.8배로 축소(자료실 전용 override), 대장 지시 2026-09-06 */
     .pop-sec .pop-head{display:flex;align-items:center;gap:24px;margin-bottom:var(--space-body-to-content)} /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05), 기존 32px 충돌 규칙 제거 */
     .pop-sec .pop-head h3{font-size:24px;font-weight:800;color:var(--gray-900);padding-left:16px;position:relative}
     .pop-sec .pop-head h3::before{content:'';position:absolute;left:0;top:4px;width:3px;height:22px;border-radius:2px;background:linear-gradient(to bottom,var(--gold),rgba(184,134,11,.3))}
@@ -315,9 +316,9 @@
 </div></div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260906a"></script>
+<script src="../assets/data/mock-data.js?v=20260906b"></script>
 <script src="../assets/js/data-service.js?v=20260418k"></script>
-<script src="../assets/js/common.js?v=20260906n"></script>
+<script src="../assets/js/common.js?v=20260906r"></script>
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}
@@ -396,21 +397,19 @@ if(curSort==='title')return(a.title||'').localeCompare(b.title||'');
 return(b.date||'').localeCompare(a.date||'')});
 return items}
 
-/* 뉴스 로컬 조회수 추적 (정적 사이트 — 브라우저 localStorage 기준) */
-function getNewsViews(){try{return JSON.parse(localStorage.getItem('seul_lib_views')||'{}')}catch(e){return{}}}
-function addNewsView(id){var v=getNewsViews();v[id]=(v[id]||0)+1;try{localStorage.setItem('seul_lib_views',JSON.stringify(v))}catch(e){}return v[id]}
+/* 뉴스 조회수 — 서버(Redis) 기준 정식 집계, 동일 IP 24시간 내 1회 (대장 지시 2026-09-06) */
 function newsUrl(item,id){var dateStr=(item.date||'').replace(/-/g,'');var suffix=id.replace(/^news/,'');return'../downloads/news_'+dateStr+(suffix.match(/[a-z]$/)?suffix.slice(-1):'')+'.html'}
 function libItemUrl(id){var m=fileMap[id];if(m){if(m.web)return m.web;if(m.ext)return m.ext;}var item=allItems.find(function(x){return x.id===id});if(item&&item.category==='주요뉴스')return newsUrl(item,id);return null;}
-function openNewsPopup(id){var url=libItemUrl(id);if(url){addNewsView(id);window.open(url,'_blank','width=920,height=860,scrollbars=yes,resizable=yes');renderFeatured();}else{handleDownload(id);}}
+function openNewsPopup(id){var url=libItemUrl(id);if(url){ViewCounter.register('library',id).then(renderFeatured);window.open(url,'_blank','width=920,height=860,scrollbars=yes,resizable=yes');}else{handleDownload(id);}}
 
 /* 인기 자료 — 카테고리별 (커뮤니티 인기글과 동일 컨셉) */
-function renderFeatured(){
+async function renderFeatured(){
   var fb=document.getElementById('libFeatured');if(!fb)return;
   var items=allItems.slice();
   if(curCat!=='전체'){
   var d=catDefs.find(function(x){return x.key===curCat});var ks=d?d.keys:[curCat];items=items.filter(function(i){return ks.indexOf(i.category)>=0});
   }
-  var vmap=getNewsViews();
+  var vmap=await ViewCounter.batch('library',items.map(function(i){return i.id}));
   items.sort(function(a,b){var va=vmap[a.id]||0,vb=vmap[b.id]||0;if(vb!==va)return vb-va;return(a.date||'').localeCompare(b.date||'')});
   var top=items.slice(0,3);
   if(!top.length){fb.style.display='none';return}
@@ -671,7 +670,7 @@ var fileMap={
 };
 
 function handleDownload(id){
-addNewsView(id);
+ViewCounter.register('library',id).then(renderFeatured);
 var item=allItems.find(function(i){return i.id===id});
 var m=fileMap[id];
 if(m&&m.web){

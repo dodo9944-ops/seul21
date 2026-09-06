@@ -177,6 +177,45 @@
     @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
     @media (max-width: 600px) { .uni-hero { padding: 28px 0 0; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
+    /* === 게시글 상세 모달(CommunityDetailModal) 전용 — community-detail.html 좋아요·댓글·첨부 스타일 재사용 === */
+    .like-section { display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+    .like-btn { display: flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 24px; border: 1.5px solid #cecece; background: var(--white); font-size: 15px; font-weight: 600; color: var(--gray-600); cursor: pointer; transition: all var(--transition); font-family: var(--font); }
+    .like-btn:hover { border-color: var(--red); color: var(--red); background: #FFF5F5; }
+    .like-btn.liked { border-color: var(--red); color: var(--red); background: #FFF5F5; }
+    .like-btn i { font-size: 16px; }
+    .comments-section h2 { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--gray-900); }
+    .comment-list { display: flex; flex-direction: column; gap: 0; }
+    .comment-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--gray-100); display: flex; align-items: center; justify-content: center; color: var(--gray-400); font-size: 14px; }
+    .comment-item .comment-body { padding-left: 42px; }
+    .comment-form { margin-top: 24px; padding: 20px; background: var(--gray-50); border-radius: var(--radius); border: 1px solid #cecece; }
+    .comment-form textarea { width: 100%; min-height: 80px; padding: 12px 16px; border: 1.5px solid #cecece; border-radius: var(--radius-sm); font-size: 14px; font-family: var(--font); color: var(--gray-900); outline: none; resize: vertical; background: var(--white); transition: border-color var(--transition); }
+    .comment-form textarea:focus { border-color: var(--accent); }
+    .comment-form-actions { display: flex; justify-content: flex-end; margin-top: 10px; }
+    .attachments-section { margin-bottom: 24px; padding: 20px; background: var(--gray-50); border-radius: var(--radius); border: 1px solid #cecece; }
+    .attachments-section h3 { font-size: 14px; font-weight: 700; color: var(--gray-700); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .attachments-section h3 i { color: var(--gray-400); }
+    .attach-list { display: flex; flex-direction: column; gap: 8px; }
+    .attach-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--white); border-radius: 8px; border: 1px solid #cecece; text-decoration: none; transition: all .2s; cursor: pointer; }
+    .attach-item:hover { border-color: var(--accent); background: rgba(184,134,11,.03); }
+    .attach-item .att-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .att-icon.pdf { background: #FEE2E2; color: #DC2626; }
+    .att-icon.hwp { background: #DBEAFE; color: #2563EB; }
+    .att-icon.doc { background: #DBEAFE; color: #2563EB; }
+    .att-icon.xls { background: #D1FAE5; color: #059669; }
+    .att-icon.ppt { background: #FFE4C4; color: #EA580C; }
+    .att-icon.zip { background: #F3E8FF; color: #7C3AED; }
+    .att-icon.default { background: var(--gray-100); color: var(--gray-500); }
+    .attach-item .att-info { flex: 1; min-width: 0; }
+    .attach-item .att-name { font-size: 13px; font-weight: 600; color: var(--gray-800); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .attach-item .att-size { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+    .attach-item .att-download { font-size: 13px; color: var(--accent); font-weight: 600; display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .owner-actions { display: flex; gap: 8px; margin-top: 14px; }
+    .owner-actions .btn-mini { display: inline-flex; align-items: center; gap: 5px; padding: 7px 14px; border-radius: 8px; border: 1.5px solid #cecece; background: var(--white); font-size: 12.5px; font-weight: 600; color: var(--gray-700); cursor: pointer; transition: all .2s; font-family: var(--font); }
+    .owner-actions .btn-mini i { font-size: 11px; }
+    .owner-actions .btn-edit:hover { border-color: var(--accent); color: var(--accent); background: rgba(184,134,11,.05); }
+    .owner-actions .btn-del { color: var(--red); border-color: rgba(239,68,68,.2); }
+    .owner-actions .btn-del:hover { background: #FEE2E2; border-color: var(--red); }
+
     </style>
 </head>
 <body>
@@ -224,9 +263,9 @@
 </div></div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260906a"></script>
+<script src="../assets/data/mock-data.js?v=20260906b"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906n"></script>
+<script src="../assets/js/common.js?v=20260906r"></script>
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.community){var s=JSON.parse(localStorage.getItem('rdc_community')||'[]');if(s.length!==MOCK.community.length)localStorage.setItem('rdc_community',JSON.stringify(MOCK.community))}
@@ -265,19 +304,20 @@ function renderTabs(){
     }).join('');
 }
 
-/* Featured posts (top 3 by likes) */
-function renderFeatured(){
-    var top=allPosts.slice().sort(function(a,b){var va=a.views||0,vb=b.views||0;if(vb!==va)return vb-va;return(a.date||'').localeCompare(b.date||'')}).slice(0,3);
+/* Featured posts (top 3 by views) */
+async function renderFeatured(){
+    var vmap=await ViewCounter.batch('community',allPosts.map(function(p){return p.id}));
+    var top=allPosts.slice().sort(function(a,b){var va=vmap[a.id]||0,vb=vmap[b.id]||0;if(vb!==va)return vb-va;return(a.date||'').localeCompare(b.date||'')}).slice(0,3);
     if(!top.length){document.getElementById('cmFeatured').style.display='none';return}
     var html='<div class="cf-head"><div class="cf-icon"><i class="fa-solid fa-comments"></i></div><h3>커뮤니티</h3><span style="font-size:12px;color:var(--gray-400);font-weight:500">열람순 · 인기순</span></div><div class="cf-grid">';
     top.forEach(function(p){
-        html+='<div class="cf-card" onclick="location.href=\'community-detail.html?id='+p.id+'\'">'+
+        html+='<div class="cf-card" onclick="CM.openPost(\''+p.id+'\')">'+
             '<div class="cf-hot"><i class="fa-solid fa-fire"></i></div>'+
             '<div class="cf-cat"><span class="cb cb-'+App.esc(p.category)+'">'+App.esc(p.category)+'</span></div>'+
             '<div class="cf-title">'+App.esc(p.title)+'</div>'+
             '<div class="cf-meta">'+
                 '<span>'+App.esc(p.author)+'</span>'+
-                '<span><i class="fa-solid fa-eye"></i> '+App.comma(p.views)+'</span>'+
+                '<span><i class="fa-solid fa-eye"></i> '+App.comma(vmap[p.id]||0)+'</span>'+
                 '<span><i class="fa-solid fa-heart" style="color:var(--gold)"></i> '+(p.likes||0)+'</span>'+
                 '<span><i class="fa-solid fa-comment"></i> '+(p.comments||0)+'</span>'+
             '</div></div>';
@@ -287,11 +327,12 @@ function renderFeatured(){
 }
 
 /* Post list */
-function render(){
+async function render(){
     var filtered=curCat==='전체'?allPosts:allPosts.filter(function(p){return p.category===curCat});
     var total=filtered.length,pages=Math.ceil(total/PER);
     if(curPage>pages)curPage=1;
     var start=(curPage-1)*PER,slice=filtered.slice(start,start+PER);
+    var vmap=await ViewCounter.batch('community',slice.map(function(p){return p.id}));
 
     document.getElementById('cmCount').innerHTML='총 <strong>'+total+'</strong>건';
     var list=document.getElementById('cmList'),empty=document.getElementById('cmEmpty');
@@ -306,13 +347,13 @@ function render(){
     if(isGalleryView){
         list.innerHTML=slice.map(function(p){
             var cover=(p.images&&p.images[0])?'<img class="cm-gallery-thumb" src="'+App.esc(p.images[0])+'" alt="'+App.esc(p.title)+'" loading="lazy">':'<div class="cm-gallery-thumb-empty"><i class="fa-solid fa-image"></i></div>';
-            return'<div class="cm-gallery-card" onclick="location.href=\'community-detail.html?id='+p.id+'\'">'+
+            return'<div class="cm-gallery-card" onclick="CM.openPost(\''+p.id+'\')">'+
                 cover+
                 '<div class="cm-gallery-body">'+
                     '<div class="cm-gallery-title">'+App.esc(p.title)+'</div>'+
                     '<div class="cm-gallery-meta">'+
                         '<span>'+App.esc(p.author)+'</span>'+
-                        '<span><i class="fa-solid fa-eye"></i> '+App.comma(p.views)+' &nbsp;<i class="fa-solid fa-heart" style="color:var(--gold)"></i> '+(p.likes||0)+'</span>'+
+                        '<span><i class="fa-solid fa-eye"></i> '+App.comma(vmap[p.id]||0)+' &nbsp;<i class="fa-solid fa-heart" style="color:var(--gold)"></i> '+(p.likes||0)+'</span>'+
                     '</div>'+
                 '</div>'+
             '</div>';
@@ -323,7 +364,7 @@ function render(){
         var isHot=(p.likes||0)>=50;
         var preview=App.esc((p.content||'').replace(/\n/g,' ').substring(0,80));
 
-        return'<div class="cm-post'+(isHot?' is-hot':'')+'" onclick="location.href=\'community-detail.html?id='+p.id+'\'">'+
+        return'<div class="cm-post'+(isHot?' is-hot':'')+'" onclick="CM.openPost(\''+p.id+'\')">'+
             '<span class="cb cb-'+App.esc(p.category)+'">'+App.esc(p.category)+'</span>'+
             '<div class="cm-post-body">'+
                 '<div class="cm-post-title">'+App.esc(p.title)+
@@ -337,7 +378,7 @@ function render(){
                 '<span class="pm-author">'+App.esc(p.author)+'</span>'+
                 '<div class="pm-stats">'+
                     '<span>'+App.timeAgo(p.date)+'</span>'+
-                    '<span><i class="fa-solid fa-eye"></i> '+App.comma(p.views)+'</span>'+
+                    '<span><i class="fa-solid fa-eye"></i> '+App.comma(vmap[p.id]||0)+'</span>'+
                     '<span class="likes"><i class="fa-solid fa-heart"></i> '+(p.likes||0)+'</span>'+
                 '</div>'+
             '</div>'+
@@ -371,7 +412,8 @@ window.addEventListener('scroll',function(){
 },{passive:true});
 
 /* Global */
-window.CM={page:function(n){curPage=n;render();window.scrollTo({top:toolbar.offsetTop-80,behavior:'smooth'})}};
+window.CM={page:function(n){curPage=n;render();window.scrollTo({top:toolbar.offsetTop-80,behavior:'smooth'})},openPost:function(id){var p=allPosts.find(function(x){return x.id===id});if(p)CommunityDetailModal.open(p)}};
+window.onCommunityPostDeleted=function(id){allPosts=allPosts.filter(function(x){return x.id!==id});renderTabs();renderFeatured();render()};
 
 renderTabs();renderFeatured();render();
 })();

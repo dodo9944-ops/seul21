@@ -28,11 +28,11 @@
         border-radius: 18px; overflow: hidden;
         box-shadow: 0 10px 30px rgba(10,15,28,.08);
         background: #fff; border: 1px solid #cecece;
+        transition: opacity 1s cubic-bezier(.16,.8,.24,1), transform 1s cubic-bezier(.16,.8,.24,1); /* 스크롤 접근 시 잔잔한 페이드업 효과, 대장 지시 2026-09-06 */
     }
-    .vs-phil-photo-full { width: 100%; line-height: 0; position: relative; cursor: zoom-in; }
-    .vs-phil-photo-full img { width: 100%; height: auto; display: block; transition: transform .4s ease; }
-    .vs-phil-photo-full:hover img { transform: scale(1.015); }
-    .vs-phil-photo-full:hover .vs-visual-zoom { opacity: 1; transform: scale(1); }
+    .vs-philosophy.vs-pre { opacity: 0; transform: translateY(26px); }
+    .vs-phil-photo-full { width: 100%; line-height: 0; }
+    .vs-phil-photo-full img { width: 100%; height: auto; display: block; }
     .vs-phil-text-below {
         position: relative; text-align: center;
         padding: 52px 24px 56px;
@@ -587,7 +587,7 @@
     }
     /* 앵커 점프 시 sticky 헤더 가림 방지 */
     html { scroll-behavior: smooth; }
-    #philosophy, #principles, #method, #visual { scroll-margin-top: 88px; }
+    #philosophy, #principles, #method, #visual, #mission { scroll-margin-top: 88px; }
     .vision-hero .hero-card-icon {
         width: 38px; height: 38px; border-radius: 10px;
         background: linear-gradient(135deg, rgba(255,196,0,0.24), rgba(255,196,0,0.08));
@@ -650,22 +650,22 @@
             <p class="hero-sub">정비사업의 기준을 바로 세우고, 사업의 가치를 끝까지 완성하는 빛세움의 길</p>
         </div>
         <div class="hero-cards-float">
-            <a class="hero-card" href="#method">
+            <a class="hero-card" href="#philosophy">
                 <div class="hero-card-icon"><i class="fa-solid fa-compass"></i></div>
                 <h4>방향을 세우다</h4>
                 <p>올바른 사업의 시작</p>
             </a>
-            <a class="hero-card" href="method-feasibility.html">
+            <a class="hero-card" href="#mission">
                 <div class="hero-card-icon"><i class="fa-solid fa-chart-line"></i></div>
                 <h4>가치를 만들다</h4>
                 <p>사업성과 재산가치 극대화</p>
             </a>
-            <a class="hero-card" href="method-permit.html">
+            <a class="hero-card" href="#method">
                 <div class="hero-card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
                 <h4>원칙을 지키다</h4>
                 <p>법과 절차 기반 사업관리</p>
             </a>
-            <a class="hero-card" href="method-documentation.html">
+            <a class="hero-card" href="#visual">
                 <div class="hero-card-icon"><i class="fa-solid fa-flag-checkered"></i></div>
                 <h4>결과를 완성하다</h4>
                 <p>끝까지 책임지는 실행력</p>
@@ -680,9 +680,8 @@
         <!-- ══════ 브랜드 철학 ══════ -->
         <div class="vs" id="philosophy" style="margin-bottom:52px">
             <div class="vs-philosophy">
-                <div class="vs-phil-photo-full" id="vsPhilZoom" role="button" tabindex="0" aria-label="사진 확대 보기" title="클릭하면 확대해서 볼 수 있습니다">
+                <div class="vs-phil-photo-full">
                     <img src="../jpg/vs_philosophy_banner.jpg" alt="㈜빛세움 — Building a Better Tomorrow, 사람을 위한 더 나은 도시 빛세움이 만듭니다">
-                    <span class="vs-visual-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
                 </div>
                 <div class="vs-phil-text-below">
                     <div class="vs-phil-kicker">VISSEUM — BRAND PHILOSOPHY</div>
@@ -903,9 +902,9 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260906a"></script>
+<script src="../assets/data/mock-data.js?v=20260906b"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906n"></script>
+<script src="../assets/js/common.js?v=20260906r"></script>
 <script>
 (function () {
     var film = document.getElementById('vsFilm');
@@ -954,6 +953,21 @@
         probe.src = src;
     }
 
+    /* 브랜드 철학 사진 — 스크롤로 접근할 때 잔잔하게 페이드업 (대장 지시 2026-09-06) */
+    var philSec = document.querySelector('.vs-philosophy');
+    if (philSec && 'IntersectionObserver' in window) {
+        philSec.classList.add('vs-pre');
+        var philIO = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    philSec.classList.remove('vs-pre');
+                    philIO.unobserve(philSec);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+        philIO.observe(philSec);
+    }
+
     function bindPhotoZoom(id) {
         var zoomEl = document.getElementById(id);
         if (!zoomEl) return;
@@ -966,7 +980,6 @@
     }
 
     bindPhotoZoom('vsVisualZoom');
-    bindPhotoZoom('vsPhilZoom');
 })();
 </script>
 </body>

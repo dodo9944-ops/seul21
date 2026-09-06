@@ -181,9 +181,9 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260906a"></script>
+<script src="../assets/data/mock-data.js?v=20260906b"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906n"></script>
+<script src="../assets/js/common.js?v=20260906r"></script>
 <script>
 (function(){
     var ICONS={ '주민총회':'fa-solid fa-people-group', '봉사활동':'fa-solid fa-hand-holding-heart',
@@ -194,16 +194,11 @@
     var PER=8; /* 전체 게시물 기본 4열×2행 (대장 지시 2026-09-05) — 8/16/24 선택 가능 */
     var PAGE_WIN=10; /* 자료실과 동일한 페이지 묶음 크기 */
 
-    /* 브라우저 로컬 조회수 (자료실과 동일 방식) */
-    function getViews(){ try{ return JSON.parse(localStorage.getItem('seul_gallery_views')||'{}') }catch(e){ return {} } }
-    function addView(id){ var v=getViews(); v[id]=(v[id]||0)+1; try{ localStorage.setItem('seul_gallery_views',JSON.stringify(v)) }catch(e){} return v[id]; }
-    function viewsOf(it){ return (it.views||0) + (getViews()[it.id]||0); }
-
     function listOf(cat){ return cat==='전체' ? items : items.filter(function(it){ return it.category===cat }); }
 
     function coverOf(it){ return (it.images&&it.images.length) ? it.images[0] : (it.src?{src:it.src,alt:it.alt}:null); }
 
-    function cardHTML(it,num){
+    function cardHTML(it,num,vc){
         var icon=ICONS[it.category]||'fa-solid fa-image';
         var cover=coverOf(it);
         return '<button class="gp-card" data-id="'+it.id+'">'+
@@ -211,7 +206,7 @@
                '<div class="gp-body">'+
                '<div class="gp-cat">'+it.category+'</div>'+
                '<div class="gp-title">'+(it.title||'')+'</div>'+
-               '<div class="gp-meta"><span>'+(it.date||'')+'</span><span class="views"><i class="fa-regular fa-eye"></i> '+viewsOf(it)+'</span></div>'+
+               '<div class="gp-meta"><span>'+(it.date||'')+'</span><span class="views"><i class="fa-regular fa-eye"></i> '+(vc||0)+'</span></div>'+
                '</div></button>';
     }
 
@@ -238,7 +233,7 @@
         });
     }
 
-    function renderGrid(){
+    async function renderGrid(){
         document.getElementById('glGridTitle').textContent=curCat==='전체'?'전체 게시물':curCat;
         var list=listOf(curCat);
         document.getElementById('glResult').innerHTML='총 <strong>'+list.length+'</strong>건';
@@ -252,19 +247,20 @@
         }else{
             pagerWrapEl.style.display='';
             var start=(curPage-1)*PER;
-            gridEl.innerHTML=list.slice(start,start+PER).map(function(it,i){ return cardHTML(it, list.length-(start+i)); }).join('');
+            var pageItems=list.slice(start,start+PER);
+            var vmap=await ViewCounter.batch('gallery',pageItems.map(function(it){return it.id}));
+            gridEl.innerHTML=pageItems.map(function(it,i){ return cardHTML(it, list.length-(start+i), vmap[it.id]||0); }).join('');
         }
         renderPager(totalPages);
     }
 
-    function openDetail(id){
+    async function openDetail(id){
         var it=items.find(function(x){ return x.id===id });
         if(!it) return;
-        addView(id);
         document.getElementById('glDCat').textContent=it.category;
         document.getElementById('glDTitle').textContent=it.title||'';
         document.getElementById('glDDate').textContent=it.date||'';
-        document.getElementById('glDViews').textContent='조회 '+viewsOf(it);
+        document.getElementById('glDViews').textContent='조회 '+((await ViewCounter.register('gallery',id))||0);
         var photoEl=document.getElementById('glDPhoto');
         if(it.images&&it.images.length){
             photoEl.innerHTML='<div class="nt-source-gallery">'+it.images.map(function(im){

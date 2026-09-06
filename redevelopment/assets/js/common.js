@@ -61,12 +61,11 @@ const App = (() => {
         { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
         { href:`${B}/pages/library.html?cat=법령`, label:'관계법령' },
         { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
-        { href:`${B}/pages/feasibility-check.html`, label:'사업타당성 검토' },
         { href:`${B}/pages/gallery.html`, label:'갤러리' },
       ]},
       { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
         { href:`${B}/pages/notice.html`, label:'공지사항' },
-        { href:`${B}/pages/feasibility.html`, label:'개별 사업성 검토' },
+        { href:`${B}/pages/feasibility.html`, label:'사업성 검토' },
         { href:`${B}/pages/contact.html`, label:'상담문의' },
         { href:`${B}/pages/contact.html#ctVisit`, label:'찾아오시는 길' },
       ]},
@@ -170,6 +169,7 @@ const App = (() => {
         </div>
         <div class="footer-col">
           <h5>자료실</h5>
+          <a href="${B}/pages/sitemap.html">사이트맵</a>
           <a href="${B}/pages/library.html?cat=주요뉴스">주요뉴스</a>
           <a href="${B}/pages/library.html">자료실</a>
           <a href="${B}/pages/gallery.html">갤러리</a>
@@ -677,6 +677,40 @@ const App = (() => {
 })();
 
 /**
+ * 조회수 정식 집계 — 서버(Vercel KV/Redis) 기준, 동일 IP는 24시간 내 1회로 집계 (대장 지시 2026-09-06)
+ * 브라우저 localStorage/sessionStorage 기반 구 방식(자료실 seul_lib_views, 공지사항 seul_notice_views,
+ * 갤러리 seul_gallery_views 등)을 전면 대체. scope별로 id를 구분해 카운트한다.
+ */
+const ViewCounter = (() => {
+  async function register(scope, id) {
+    try {
+      const r = await fetch('/api/views', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ scope, id })
+      });
+      const d = await r.json();
+      return typeof d.count === 'number' ? d.count : 0;
+    } catch (e) { return null; }
+  }
+  async function batch(scope, ids) {
+    const uniq = Array.from(new Set((ids || []).filter(Boolean)));
+    if (!uniq.length) return {};
+    try {
+      const r = await fetch('/api/views', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'batch', scope, ids: uniq })
+      });
+      const d = await r.json();
+      return d.counts || {};
+    } catch (e) { return {}; }
+  }
+  return { register, batch };
+})();
+window.ViewCounter = ViewCounter;
+
+/**
  * 주요뉴스 상세 모달 — 업무실적 상세 모달(.d-overlay/.d-modal/.d-hero-fb/.d-body/.d-sec 등)과
  * 동일한 DOM/CSS를 재사용해 downloads/news_*.html 문서를 팝업으로 표시한다.
  */
@@ -818,6 +852,183 @@ const NoticeDetailModal = (() => {
   return { open, close };
 })();
 window.NoticeDetailModal = NoticeDetailModal;
+
+/**
+ * 커뮤니티 게시글 상세 모달 — 주요뉴스/공지사항 상세 모달과 동일한 d-overlay/d-modal 셸을 재사용한다.
+ * community-detail.html의 좋아요·댓글·첨부파일·작성자 수정/삭제 기능을 모달 안에서 그대로 제공한다.
+ * 좋아요/댓글/첨부 CSS(.like-btn, .comment-list, .attach-* 등)는 이 모달을 사용하는 페이지(community.html)의
+ * <style>에 정의되어 있어야 한다.
+ */
+const CommunityDetailModal = (() => {
+  let ov = null, heroEl = null, bodyEl = null;
+
+  function ensure() {
+    if (ov) return;
+    ov = document.createElement('div');
+    ov.className = 'd-overlay';
+    ov.innerHTML =
+      '<div class="d-modal">' +
+        '<div class="nd-hero"></div>' +
+        '<button class="d-close" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>' +
+        '<div class="d-body nd-body"></div>' +
+        '<div class="d-footer"><button type="button"><i class="fa-solid fa-xmark"></i> 닫기</button></div>' +
+      '</div>';
+    document.body.appendChild(ov);
+    heroEl = ov.querySelector('.nd-hero');
+    bodyEl = ov.querySelector('.nd-body');
+    ov.querySelectorAll('.d-close, .d-footer button').forEach(b => b.addEventListener('click', close));
+    ov.addEventListener('click', e => { if (e.target === ov) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && ov.classList.contains('open')) close(); });
+  }
+
+  function close() {
+    if (!ov) return;
+    ov.classList.remove('open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+
+  function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function attIconClass(ext) {
+    if (ext === 'pdf') return 'pdf';
+    if (ext === 'hwp' || ext === 'hwpx') return 'hwp';
+    if (ext === 'doc' || ext === 'docx') return 'doc';
+    if (ext === 'xls' || ext === 'xlsx' || ext === 'csv') return 'xls';
+    if (ext === 'ppt' || ext === 'pptx') return 'ppt';
+    if (ext === 'zip' || ext === 'rar' || ext === '7z') return 'zip';
+    return 'default';
+  }
+  function attIcon(ext) {
+    if (ext === 'pdf') return 'fa-file-pdf';
+    if (ext === 'hwp' || ext === 'hwpx') return 'fa-file-lines';
+    if (ext === 'doc' || ext === 'docx') return 'fa-file-word';
+    if (ext === 'xls' || ext === 'xlsx' || ext === 'csv') return 'fa-file-excel';
+    if (ext === 'ppt' || ext === 'pptx') return 'fa-file-powerpoint';
+    if (ext === 'zip' || ext === 'rar' || ext === '7z') return 'fa-file-zipper';
+    return 'fa-file';
+  }
+
+  async function open(post) {
+    if (!post) return;
+    ensure();
+    const id = post.id;
+
+    heroEl.innerHTML =
+      '<div class="d-hero-fb" data-t="news"><div class="d-title-area">' +
+        '<div class="badges"><span class="d-newsbadge">' + esc(post.category || '커뮤니티') + '</span></div>' +
+        '<h2>' + esc(post.title || '') + '</h2>' +
+        '<div class="d-phase"><i class="fa-regular fa-user"></i> ' + esc(post.author || '') + '</div>' +
+      '</div></div>';
+    bodyEl.innerHTML = '<div style="text-align:center;padding:60px 0;color:var(--gray-400)"><i class="fa-solid fa-spinner fa-spin" style="font-size:22px"></i></div>';
+    ov.scrollTop = 0;
+    ov.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = (window.innerWidth - document.documentElement.clientWidth) + 'px';
+
+    const viewCount = (await ViewCounter.register('community', id)) || 0;
+
+    const likeKey = 'rdc_like_' + id;
+    let liked = localStorage.getItem(likeKey) === '1';
+    let likeCount = post.likes || 0;
+
+    const paragraphs = (post.content || '').split('\n\n').map(p => '<p>' + esc(p).replace(/\n/g, '<br>') + '</p>').join('');
+    const imagesHTML = (post.images && post.images.length) ? '<div class="post-images" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:16px">' + post.images.map(u => '<a href="' + esc(u) + '" target="_blank" style="flex:0 0 auto"><img src="' + esc(u) + '" style="max-width:100%;max-height:400px;border-radius:10px;border:1px solid #ced0d4;cursor:pointer" loading="lazy"></a>').join('') + '</div>' : '';
+
+    let attachHTML = '';
+    if (post.attachments && post.attachments.length) {
+      attachHTML = '<div class="attachments-section"><h3><i class="fa-solid fa-paperclip"></i> 첨부파일 (' + post.attachments.length + ')</h3><div class="attach-list">' +
+        post.attachments.map(function (att) {
+          const ext = (att.name || '').split('.').pop().toLowerCase();
+          return '<a class="attach-item" href="' + esc(att.url) + '" download="' + esc(att.name) + '">' +
+            '<div class="att-icon ' + attIconClass(ext) + '"><i class="fa-solid ' + attIcon(ext) + '"></i></div>' +
+            '<div class="att-info"><div class="att-name">' + esc(att.name) + '</div><div class="att-size">' + esc(att.size || '') + '</div></div>' +
+            '<span class="att-download"><i class="fa-solid fa-download"></i> 다운로드</span>' +
+          '</a>';
+        }).join('') +
+      '</div></div>';
+    }
+
+    bodyEl.innerHTML =
+      '<div class="d-sec"><div class="d-phase" style="margin-bottom:14px"><i class="fa-regular fa-calendar"></i> ' + esc(App.timeAgo(post.date)) + '&nbsp;&nbsp;<i class="fa-regular fa-eye"></i> ' + App.comma(viewCount) + '</div>' +
+      '<div class="d-desc">' + paragraphs + '</div>' + imagesHTML +
+      '<div class="owner-actions" id="cmModalOwnerActions" style="display:none"><button type="button" class="btn-mini btn-edit" id="cmModalEditBtn"><i class="fa-solid fa-pen"></i> 수정</button><button type="button" class="btn-mini btn-del" id="cmModalDeleteBtn"><i class="fa-solid fa-trash"></i> 삭제</button></div></div>' +
+      attachHTML +
+      '<div class="like-section"><button class="like-btn' + (liked ? ' liked' : '') + '" id="cmModalLikeBtn"><i class="fa-' + (liked ? 'solid' : 'regular') + ' fa-heart"></i><span>좋아요</span><strong id="cmModalLikeCount">' + likeCount + '</strong></button></div>' +
+      '<div class="comments-section"><h2>댓글</h2><div class="comment-list" id="cmModalCommentList"></div><div class="comment-form"><textarea id="cmModalCommentInput" placeholder="댓글을 작성해주세요."></textarea><div class="comment-form-actions"><button class="btn btn-accent btn-sm" id="cmModalCommentSubmit">댓글 등록</button></div></div></div>';
+    ov.scrollTop = 0;
+
+    const currentUser = DataService.getCurrentUser();
+    const isOwner = !!(currentUser && currentUser.id && post.ownerId && String(currentUser.id) === String(post.ownerId));
+    if (isOwner) {
+      const actions = bodyEl.querySelector('#cmModalOwnerActions');
+      if (actions) actions.style.display = 'flex';
+      bodyEl.querySelector('#cmModalEditBtn').addEventListener('click', function () {
+        location.href = 'community-write.html?id=' + encodeURIComponent(id);
+      });
+      bodyEl.querySelector('#cmModalDeleteBtn').addEventListener('click', function () {
+        if (!confirm('이 게시글을 삭제하시겠습니까?')) return;
+        const btn = this;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 삭제 중...';
+        fetch('/api/community', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json', 'x-owner-id': String(currentUser.id) },
+          body: JSON.stringify({ id: id })
+        })
+        .then(r => r.json().then(j => ({ ok: r.ok, body: j })))
+        .then(out => {
+          if (!out.ok) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-trash"></i> 삭제';
+            App.toast(out.body.error || '삭제 실패', 'error');
+            return;
+          }
+          DataService.remove('community', id);
+          App.toast('게시글이 삭제되었습니다.', 'success');
+          close();
+          if (typeof window.onCommunityPostDeleted === 'function') window.onCommunityPostDeleted(id);
+        })
+        .catch(() => {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-trash"></i> 삭제';
+          App.toast('삭제 중 오류가 발생했습니다.', 'error');
+        });
+      });
+    }
+
+    bodyEl.querySelector('#cmModalLikeBtn').addEventListener('click', function () {
+      if (liked) { App.toast('이미 좋아요를 누르셨습니다.', 'info'); return; }
+      liked = true; likeCount++;
+      localStorage.setItem(likeKey, '1');
+      DataService.update('community', id, { likes: likeCount });
+      post.likes = likeCount;
+      bodyEl.querySelector('#cmModalLikeCount').textContent = likeCount;
+      this.classList.add('liked');
+      this.querySelector('i').className = 'fa-solid fa-heart';
+      App.toast('좋아요를 눌렀습니다.', 'success');
+    });
+
+    bodyEl.querySelector('#cmModalCommentSubmit').addEventListener('click', function () {
+      const input = bodyEl.querySelector('#cmModalCommentInput');
+      const text = input.value.trim();
+      if (!text) { App.toast('댓글 내용을 입력해주세요.', 'error'); return; }
+      const user = DataService.getCurrentUser();
+      const authorName = (user && user.name) ? user.name : '방문자';
+      const commentEl = document.createElement('div');
+      commentEl.className = 'comment-item';
+      commentEl.innerHTML =
+        '<div class="comment-header"><div class="comment-avatar"><i class="fa-solid fa-user"></i></div><span class="comment-author">' + esc(authorName) + '</span><span class="comment-date">방금 전</span></div>' +
+        '<div class="comment-body">' + esc(text) + '</div>';
+      bodyEl.querySelector('#cmModalCommentList').appendChild(commentEl);
+      input.value = '';
+      App.toast('댓글이 등록되었습니다.', 'success');
+    });
+  }
+
+  return { open, close };
+})();
+window.CommunityDetailModal = CommunityDetailModal;
 
 /* DOM Ready */
 document.addEventListener('DOMContentLoaded', () => {

@@ -18,6 +18,12 @@
     .sm-link:hover{border-color:#a6790a;color:var(--gray-900);background:rgba(184,134,11,.04)}
     .sm-link i{width:18px;text-align:center;color:var(--gold);font-size:14px}
     @media(max-width:540px){.sm-grid{grid-template-columns:1fr}}
+    /* 빠른 이동 칩 — 전체 구조를 한눈에 훑고 원하는 섹션으로 바로 이동 (대장 지시 2026-09-06) */
+    html{scroll-behavior:smooth}
+    .sm-section{scroll-margin-top:88px}
+    .sm-quicknav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;padding:16px 20px;background:#fff;border:1px solid #cecece;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+    .sm-quicknav a{padding:7px 16px;border-radius:20px;background:var(--gray-50);color:var(--gray-700);font-size:13px;font-weight:700;border:1px solid #dbdbdb;transition:all .2s}
+    .sm-quicknav a:hover{background:rgba(184,134,11,.08);border-color:#a6790a;color:var(--brand-dark)}
     </style>
 </head>
 <body>
@@ -32,32 +38,51 @@
 
 <div style="max-width:960px;margin:40px auto;padding:0 20px;">
 
-    <div class="sm-section">
+    <div class="sm-quicknav">
+        <a href="../index.html"><i class="fa-solid fa-house"></i> 홈</a>
+        <a href="#sm-vision">빛세움의 길</a>
+        <a href="#sm-about">회사소개</a>
+        <a href="#sm-services">사업분야</a>
+        <a href="#sm-portfolio">업무실적</a>
+        <a href="#sm-library">자료실</a>
+        <a href="#sm-contact">고객센터</a>
+        <a href="#sm-etc">기타</a>
+    </div>
+
+    <div class="sm-section" id="sm-vision">
         <h2 class="sm-title">빛세움의 길</h2>
         <div class="sm-grid">
-            <a href="vision.html#method" class="sm-link"><i class="fa-solid fa-road"></i> 정비사업 추진절차</a>
-            <a href="method-feasibility.html" class="sm-link"><i class="fa-solid fa-magnifying-glass-chart"></i> 사업성 검토</a>
-            <a href="method-permit.html" class="sm-link"><i class="fa-solid fa-file-signature"></i> 인허가 전략</a>
+            <a href="vision.html" class="sm-link"><i class="fa-solid fa-road"></i> 빛세움의 길 (개요)</a>
+            <a href="vision.html#philosophy" class="sm-link"><i class="fa-solid fa-quote-left"></i> 빛을 세우다 (브랜드 철학)</a>
+            <a href="vision.html#mission" class="sm-link"><i class="fa-solid fa-bullseye"></i> Mission · All 4U·All 4V</a>
+            <a href="vision.html#method" class="sm-link"><i class="fa-solid fa-diagram-project"></i> 빛세움의 방식 (추진절차)</a>
+            <a href="method-diagnosis.html" class="sm-link"><i class="fa-solid fa-stethoscope"></i> ① 기초 진단</a>
+            <a href="method-feasibility.html" class="sm-link"><i class="fa-solid fa-magnifying-glass-chart"></i> ② 사업성 검토</a>
+            <a href="method-coordination.html" class="sm-link"><i class="fa-solid fa-people-arrows"></i> ③ 이해관계 조율</a>
+            <a href="method-documentation.html" class="sm-link"><i class="fa-solid fa-folder-tree"></i> ④ 행정·문서 체계화</a>
+            <a href="method-permit.html" class="sm-link"><i class="fa-solid fa-file-signature"></i> ⑤ 인허가 및 추진 지원</a>
+            <a href="method-completion.html" class="sm-link"><i class="fa-solid fa-flag-checkered"></i> ⑥ 사업 완성 및 안정화</a>
             <a href="method-feasibility.html#hug" class="sm-link"><i class="fa-solid fa-hand-holding-dollar"></i> HUG/금융지원</a>
-            <a href="method-documentation.html" class="sm-link"><i class="fa-solid fa-folder-tree"></i> PM/CM 사업관리</a>
-            <a href="method-coordination.html" class="sm-link"><i class="fa-solid fa-people-arrows"></i> 갈등관리/전문자문</a>
+            <a href="vision.html#visual" class="sm-link"><i class="fa-solid fa-images"></i> 공간으로 증명하는 신뢰</a>
+            <a href="vision.html#vsFilm" class="sm-link"><i class="fa-solid fa-clapperboard"></i> 회사 홍보 영상</a>
         </div>
     </div>
 
-    <div class="sm-section">
+    <div class="sm-section" id="sm-about">
         <h2 class="sm-title">회사소개</h2>
         <div class="sm-grid">
             <a href="about.html" class="sm-link"><i class="fa-solid fa-building-columns"></i> 회사소개</a>
             <a href="about.html#aboutFirstSection" class="sm-link"><i class="fa-solid fa-building-columns"></i> 회사개요</a>
             <a href="about.html#ceo" class="sm-link"><i class="fa-solid fa-user-tie"></i> CEO 인사말</a>
             <a href="about.html#registration" class="sm-link"><i class="fa-solid fa-stamp"></i> 정비사업전문관리업 등록현황/인증</a>
+            <a href="about.html#digitalProfile" class="sm-link"><i class="fa-solid fa-id-card"></i> 디지털 지명원</a>
             <a href="about.html#history" class="sm-link"><i class="fa-solid fa-timeline"></i> 회사연혁</a>
             <a href="about.html#organization" class="sm-link"><i class="fa-solid fa-sitemap"></i> 조직도</a>
             <a href="about.html#ci" class="sm-link"><i class="fa-solid fa-palette"></i> CI/브랜드</a>
         </div>
     </div>
 
-    <div class="sm-section">
+    <div class="sm-section" id="sm-services">
         <h2 class="sm-title">사업분야</h2>
         <div class="sm-grid">
             <a href="services.html" class="sm-link"><i class="fa-solid fa-diagram-project"></i> 사업분야</a>
@@ -73,7 +98,7 @@
         </div>
     </div>
 
-    <div class="sm-section">
+    <div class="sm-section" id="sm-portfolio">
         <h2 class="sm-title">업무실적</h2>
         <div class="sm-grid">
             <a href="portfolio.html" class="sm-link"><i class="fa-solid fa-briefcase"></i> 전체 수행실적</a>
@@ -84,7 +109,7 @@
         </div>
     </div>
 
-    <div class="sm-section">
+    <div class="sm-section" id="sm-library">
         <h2 class="sm-title">자료실</h2>
         <div class="sm-grid">
             <a href="library.html?cat=주요뉴스" class="sm-link"><i class="fa-solid fa-newspaper"></i> 주요뉴스</a>
@@ -96,9 +121,10 @@
         </div>
     </div>
 
-    <div class="sm-section">
+    <div class="sm-section" id="sm-contact">
         <h2 class="sm-title">고객센터</h2>
         <div class="sm-grid">
+            <a href="contact.html" class="sm-link"><i class="fa-solid fa-envelope"></i> 고객센터 (개요)</a>
             <a href="notice.html" class="sm-link"><i class="fa-solid fa-bullhorn"></i> 공지사항</a>
             <a href="feasibility-check.html" class="sm-link"><i class="fa-solid fa-calculator"></i> 사업성 검토</a>
             <a href="consultation.html" class="sm-link"><i class="fa-solid fa-paper-plane"></i> 상담문의</a>
@@ -106,7 +132,7 @@
         </div>
     </div>
 
-    <div class="sm-section">
+    <div class="sm-section" id="sm-etc">
         <h2 class="sm-title">기타</h2>
         <div class="sm-grid">
             <a href="feasibility.html" class="sm-link"><i class="fa-solid fa-calculator"></i> 사업타당성검토 소개</a>
@@ -124,8 +150,8 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260906a"></script>
+<script src="../assets/data/mock-data.js?v=20260906b"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906n"></script>
+<script src="../assets/js/common.js?v=20260906r"></script>
 </body>
 </html>
