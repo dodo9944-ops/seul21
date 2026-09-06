@@ -1196,7 +1196,7 @@ git push -u origin master --force-with-lease
 
 ## 📱 빛세움(seul24.cloud) 작업 기록 — 2026-09-07 (대장 지시)
 
-> **소스 브랜치 안내**: 빛세움 모바일 홈페이지(seul24.cloud)의 배포 소스는 `master`(세울21)가 아니라 `claude/bitseum-mobile-attachment-layout-o5a0sp` 브랜치이다(라이브 `pages/vision.html`과 바이트 단위 일치 확인, 2026-09-06). 대장 커밋은 `backup-bitseum-rebrand-20260824`에 쌓인 뒤 위 브랜치로 머지된다. **빛세움 지시는 반드시 이 브랜치 기준으로 작업한다** — `master` 기준으로 조사·수정하면 엉뚱한 사이트(seul21.com)를 손대게 된다.
+> **소스 브랜치 안내 (2026-09-07 정정)**: 빛세움 모바일 홈페이지(seul24.cloud)의 **라이브 배포 브랜치는 `backup-bitseum-rebrand-20260824`** 이다(라이브 `pages/portfolio.html`이 이 브랜치와만 일치함을 확인). `claude/bitseum-mobile-attachment-layout-o5a0sp` 는 그 앞단 작업 브랜치로, PR #44 를 통해 배포 브랜치로 머지된다. **빛세움 지시는 반드시 이 두 브랜치 기준으로 작업하고, "라이브 배포" 지시는 `backup-bitseum-rebrand-20260824` 반영을 뜻한다** — `master` 기준으로 조사·수정하면 엉뚱한 사이트(seul21.com)를 손대게 된다.
 
 ### 1. 갤러리 상세보기 본문 끝부분 잘림 — 버그 수정
 
@@ -1223,5 +1223,5 @@ git push -u origin master --force-with-lease
 
 - 지시문 중 범위 밖 항목(「VISSEUM SYSTEM — 사람과 시스템으로 전문성을 증명합니다」, 마무리 「원칙을 세우고, 결과로 답하겠습니다」)은 대장 지정 범위에 포함되지 않아 **미반영** — 별도 지시 시 「공간으로 증명하는 신뢰」·「앞으로의 방향」 섹션에 대응 반영.
 - 검수: 1440/1280/1024/820/769/768/390/360px 가로 넘침 0 · JS 오류 0. 앵커 `#mission`·`#principles`·`#method` 유지.
-- 라이브 배포: 대장 지시("라이브 배포")에 따라 PR #53 을 배포 브랜치 `claude/bitseum-mobile-attachment-layout-o5a0sp`에 머지 → seul24.cloud.
+- 라이브 배포: 대장 지시("라이브 배포")에 따라 PR #53(→ o5a0sp) 머지 후, 실제 배포 브랜치 `backup-bitseum-rebrand-20260824` 에는 동일 3커밋을 체리픽한 별도 PR 로 반영 → seul24.cloud.
 - 복원 토큰: 변경 전 커밋 `6ef383a5`.
