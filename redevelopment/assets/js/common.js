@@ -823,12 +823,15 @@ window.NoticeDetailModal = NoticeDetailModal;
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
   if (!location.pathname.includes('/admin/') && !location.pathname.includes('/intranet/')) {
-    /* 텍스트 복사 금지 + 이미지 다운로드 금지 — 임시 해제 (2026-04-19) */
-    // document.addEventListener('copy', e => e.preventDefault());
-    // document.addEventListener('selectstart', e => { if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault(); });
-    // document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-    // document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-    document.querySelectorAll('img').forEach(i => { i.setAttribute('draggable', 'false'); i.style.pointerEvents = 'none'; });
-    new MutationObserver(muts => { muts.forEach(m => m.addedNodes.forEach(n => { if (n.querySelectorAll) n.querySelectorAll('img').forEach(i => { i.setAttribute('draggable', 'false'); i.style.pointerEvents = 'none'; }); })); }).observe(document.body, { childList: true, subtree: true });
+    /* 텍스트 복사 금지 + 이미지 다운로드 금지 (PC·모바일 공통, 2026-09-06 재적용) */
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('selectstart', e => { if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault(); });
+    document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+    document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+    // 클릭으로 동작해야 하는 이미지(약도 탭 복사 등)는 pointer-events 차단에서 제외
+    var IMG_CLICK_EXCEPT = '#locationModalImg';
+    function lockImg(i) { if (i.closest(IMG_CLICK_EXCEPT) || i.matches(IMG_CLICK_EXCEPT)) return; i.setAttribute('draggable', 'false'); i.style.pointerEvents = 'none'; }
+    document.querySelectorAll('img').forEach(lockImg);
+    new MutationObserver(muts => { muts.forEach(m => m.addedNodes.forEach(n => { if (n.querySelectorAll) n.querySelectorAll('img').forEach(lockImg); })); }).observe(document.body, { childList: true, subtree: true });
   }
 });
