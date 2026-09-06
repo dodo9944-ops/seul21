@@ -67,6 +67,9 @@
     transition: transform .25s ease; transform-origin: center center;
     display: flex; align-items: center; justify-content: center;
 }
+/* 확대 상태 — 드래그로 상하좌우 이동(팬) 가능 */
+.fb-zoomwrap.fb-zoomed { cursor: grab; }
+.fb-zoomwrap.fb-grabbing { cursor: grabbing; transition: none; }
 #fb-book { box-shadow: 0 30px 80px rgba(0,0,0,.5); }
 
 /* PageFlip 페이지(HTML 모드) 공통 스타일 */
