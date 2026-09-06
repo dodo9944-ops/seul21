@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905t">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260906c">
     <link rel="stylesheet" href="../assets/css/download-view.css?v=20260905a">
     <style>
     /* ================================================================
@@ -219,10 +219,10 @@
     .uni-hero .uh-visual { flex-shrink: 0; align-self: center; width: 360px; position: relative; z-index: 2; }
     .uni-hero .uh-photo { display: none; }
     .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .uni-hero .uh-card { display: block; width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,0.088); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); cursor: pointer; position: relative; z-index: 5; text-decoration: none; color: inherit; }
-    .uni-hero .uh-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
+    .uni-hero .uh-card { display: flex; flex-direction: column; justify-content: center; width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: linear-gradient(155deg, rgba(30,35,46,0.88), rgba(20,24,32,0.88)); border: 1px solid rgba(255,255,255,0.088); border-top: 2px solid rgba(255,196,0,0.45); border-radius: 14px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); cursor: pointer; position: relative; z-index: 5; text-decoration: none; color: inherit; }
+    .uni-hero .uh-card:hover { transform: translateY(-2px); border-top-color: rgba(255,196,0,0.75); box-shadow: 0 12px 30px rgba(0,0,0,.2); }
     /* 활성(on) 카드도 다른 카드와 동일한 외곽선으로 통일 — 평시 노란 테두리 제거 (대장 지시 2026-09-05) */
-    .uni-hero .uh-ci { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,196,0,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+    .uni-hero .uh-ci { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, rgba(255,196,0,0.24), rgba(255,196,0,0.08)); box-shadow: 0 2px 6px rgba(255,196,0,0.12), inset 0 0 0 1px rgba(255,196,0,0.14); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; flex-shrink: 0; }
     .uni-hero .uh-ci i { font-size: 15px; color: #FFC400; }
     .uni-hero .uh-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
     .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,.65); line-height: 1.5; }
@@ -231,7 +231,7 @@
     html { scroll-behavior: smooth; }
     #libContent { scroll-margin-top: 88px; }
     @media (max-width: 1024px) { .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
-    @media (max-width: 600px) { .uni-hero { padding: 28px 0 0; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
+    @media (max-width: 600px) { .uni-hero { padding: 28px 0 0; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; } .uni-hero .uh-card { width: 100%; height: auto; aspect-ratio: 1 / 1; padding: 16px 14px; border-radius: 16px; } .uni-hero .uh-ci { width: 34px; height: 34px; margin-bottom: 10px; } .uni-hero .uh-card h4 { font-size: 13px; } .uni-hero .uh-card p { font-size: 10.5px; line-height: 1.45; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     </style>
 </head>
@@ -259,10 +259,10 @@
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_library.jpg?v=20260825a" alt="빛세움 자료실"></div>
             <div class="uh-cards" id="heroCards">
-                <div class="uh-card" data-cat="주요뉴스"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정비사업 최신 뉴스</p></div>
-                <div class="uh-card" data-cat="법령"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>도시정비법 등 각종 판례</p></div>
-                <div class="uh-card" data-cat="서식가이드"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>서식·양식 및 매뉴얼</p></div>
-                <a class="uh-card" href="gallery.html"><div class="uh-ci"><i class="fa-solid fa-images"></i></div><h4>갤러리</h4><p>현장 갤러리·소통공간</p></a>
+                <div class="uh-card" data-cat="주요뉴스"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정책·시장 주요 동향</p></div>
+                <div class="uh-card" data-cat="법령"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>법령·판례·지침</p></div>
+                <div class="uh-card" data-cat="서식가이드"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>실무 서식·업무지침</p></div>
+                <a class="uh-card" href="gallery.html"><div class="uh-ci"><i class="fa-solid fa-images"></i></div><h4>갤러리</h4><p>현장·총회·행사 기록</p></a>
             </div>
         </div>
     </div>
@@ -316,7 +316,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260906a"></script>
 <script src="../assets/js/data-service.js?v=20260418k"></script>
-<script src="../assets/js/common.js?v=20260905e"></script>
+<script src="../assets/js/common.js?v=20260906j"></script>
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}

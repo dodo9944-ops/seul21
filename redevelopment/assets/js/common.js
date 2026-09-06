@@ -30,20 +30,17 @@ const App = (() => {
     ];
     const navGroups = [
       { href:`${B}/pages/vision.html`, label:'빛세움의 길', icon:'fa-solid fa-road', sub:[
-        { href:`${B}/pages/vision.html#method`, label:'정비사업 추진절차' },
-        { href:`${B}/pages/method-feasibility.html`, label:'사업성 검토' },
-        { href:`${B}/pages/method-permit.html`, label:'인허가 전략' },
-        { href:`${B}/pages/method-feasibility.html#hug`, label:'HUG/금융지원' },
-        { href:`${B}/pages/method-documentation.html`, label:'PM/CM 사업관리' },
-        { href:`${B}/pages/method-coordination.html`, label:'갈등관리/전문자문' },
+        { href:`${B}/pages/vision.html#philosophy`, label:'빛을 세우다' },
+        { href:`${B}/pages/vision.html#mission`, label:'All 4 U · All 4 V' },
+        { href:`${B}/pages/vision.html#visual`, label:'공간으로 증명하는 신뢰' },
+        { href:`${B}/pages/vision.html#vsFilm`, label:'회사 홍보 영상' },
       ]},
       { href:`${B}/pages/about.html`, label:'회사소개', icon:'fa-solid fa-building-columns', sub:[
-        { href:`${B}/pages/about.html#aboutFirstSection`, label:'회사개요' },
         { href:`${B}/pages/about.html#ceo`, label:'CEO 인사말' },
-        { href:`${B}/pages/about.html#registration`, label:'정비사업전문관리업 등록현황/인증' },
-        { href:`${B}/pages/about.html#history`, label:'회사연혁' },
+        { href:`${B}/pages/about.html#registration`, label:'정비사업전문관리업 등록현황' },
+        { href:`${B}/pages/about.html#digitalProfile`, label:'디지털 지명원' },
         { href:`${B}/pages/about.html#organization`, label:'조직도' },
-        { href:`${B}/pages/about.html#ci`, label:'CI/브랜드' },
+        { href:`${B}/pages/about.html#ci`, label:'CI / 브랜드' },
       ]},
       { href:`${B}/pages/services.html`, label:'사업분야', icon:'fa-solid fa-diagram-project', sub:[
         { href:`${B}/pages/redevelopment-service.html`, label:'주택재개발' },
@@ -58,20 +55,19 @@ const App = (() => {
         { href:`${B}/pages/portfolio.html?type=재개발`, label:'재개발' },
         { href:`${B}/pages/portfolio.html?type=재건축`, label:'재건축' },
         { href:`${B}/pages/portfolio.html?type=소규모정비`, label:'소규모정비' },
-        { href:`${B}/pages/services.html#coordinator`, label:'서울시 정비사업 코디네이터/전문자문' },
+        { href:`${B}/pages/portfolio.html?type=코디네이터`, label:'서울시 정비사업 코디네이터/전문자문' },
       ]},
       { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open', sub:[
         { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
         { href:`${B}/pages/library.html?cat=법령`, label:'관계법령' },
         { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
-        { href:`${B}/pages/feasibility-check.html`, label:'개별사업성 분석' },
+        { href:`${B}/pages/feasibility-check.html`, label:'사업타당성 검토' },
         { href:`${B}/pages/gallery.html`, label:'갤러리' },
-        { href:`${B}/pages/promo-video.html`, label:'홍보동영상' },
       ]},
       { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
         { href:`${B}/pages/notice.html`, label:'공지사항' },
-        { href:`${B}/pages/feasibility-check.html`, label:'사업성 검토' },
-        { href:`${B}/pages/consultation.html`, label:'상담문의' },
+        { href:`${B}/pages/feasibility.html`, label:'개별 사업성 검토' },
+        { href:`${B}/pages/contact.html`, label:'상담문의' },
         { href:`${B}/pages/contact.html#ctVisit`, label:'찾아오시는 길' },
       ]},
     ];
@@ -181,7 +177,7 @@ const App = (() => {
         <div class="footer-col">
           <h5>고객센터</h5>
           <a href="${B}/pages/notice.html">공지사항</a>
-          <a href="${B}/pages/consultation.html">상담문의</a>
+          <a href="${B}/pages/contact.html">상담문의</a>
           <a href="${B}/pages/contact.html#ctVisit">찾아오시는길</a>
         </div>
         <div class="footer-col footer-contact">

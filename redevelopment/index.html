@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css?v=20260905t">
+    <link rel="stylesheet" href="assets/css/common.css?v=20260906c">
     <link rel="stylesheet" href="assets/css/download-view.css?v=20260905a">
     <style>
         /* ============================================================
@@ -1149,7 +1149,7 @@
 <!-- 공통 JS -->
 <script src="assets/data/mock-data.js?v=20260906a"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260905e"></script>
+<script src="assets/js/common.js?v=20260906j"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1488,7 +1488,8 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         }
         function galViews(){ try{ return JSON.parse(localStorage.getItem('seul_gallery_views')||'{}') }catch(e){ return {} } }
         function galViewsOf(g){ return (g.views||0) + (galViews()[g.id]||0); }
-        var gals=MOCK.gallery.slice().sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
+        var pinnedGalIds=['ws2025_winter','site_hqoffice2026','jc_gongdeok2026'];
+        var gals=pinnedGalIds.map(function(id){return MOCK.gallery.find(function(g){return g.id===id})}).filter(Boolean);
         galEl.innerHTML=gals.map(function(g){
             var cover=(g.images&&g.images.length)?g.images[0]:null;
             var coverSrc=cover?cover.src.replace(/^\.\.\//,''):'';

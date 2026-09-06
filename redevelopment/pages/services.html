@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905t">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260906c">
     <style>
     .sv-section:last-child { margin-bottom:0; }
     .sv-section .section-title { margin-bottom:28px; }
@@ -354,25 +354,29 @@
     .services-hero .hero-card {
         width: 174px; height: 130px; box-sizing: border-box;
         overflow: hidden;
-        background: rgba(24,28,34,.78);
+        background: linear-gradient(155deg, rgba(30,35,46,0.88), rgba(20,24,32,0.88));
         border: 1px solid rgba(255,255,255,0.088);
-        border-radius: 12px; padding: 22px 18px;
+        border-top: 2px solid rgba(255,196,0,0.45);
+        border-radius: 14px; padding: 22px 18px;
         transition: all 0.3s;
         backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 8px 24px rgba(0,0,0,.10);
-        display: block; text-decoration: none; color: inherit;
+        display: flex; flex-direction: column; justify-content: center;
+        text-decoration: none; color: inherit;
         cursor: pointer;
         position: relative; z-index: 5;
     }
     .services-hero .hero-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 12px 30px rgba(0,0,0,.16);
+        border-top-color: rgba(255,196,0,0.75);
+        box-shadow: 0 12px 30px rgba(0,0,0,.2);
     }
     .services-hero .hero-card-icon {
-        width: 36px; height: 36px; border-radius: 8px;
-        background: rgba(255,196,0,.15);
+        width: 38px; height: 38px; border-radius: 10px;
+        background: linear-gradient(135deg, rgba(255,196,0,0.24), rgba(255,196,0,0.08));
+        box-shadow: 0 2px 6px rgba(255,196,0,0.12), inset 0 0 0 1px rgba(255,196,0,0.14);
         display: flex; align-items: center; justify-content: center;
-        margin-bottom: 12px;
+        margin-bottom: 12px; flex-shrink: 0;
     }
     .services-hero .hero-card-icon i { font-size: 15px; color: #FFC400; }
     .services-hero .hero-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
@@ -389,7 +393,11 @@
         .services-hero { padding: 28px 0 0; min-height: auto; }
         .services-hero .hero-text h1 { font-size: 28px; }
         .services-hero .hero-sub { font-size: 14px; }
-        .services-hero .hero-cards-float { grid-template-columns: 1fr; gap: 10px; }
+        .services-hero .hero-cards-float { grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; max-width: none; }
+        .services-hero .hero-card { width: 100%; height: auto; aspect-ratio: 1 / 1; padding: 16px 14px; border-radius: 16px; }
+        .services-hero .hero-card-icon { width: 34px; height: 34px; margin-bottom: 10px; }
+        .services-hero .hero-card h4 { font-size: 13px; }
+        .services-hero .hero-card p { font-size: 10.5px; line-height: 1.45; }
         .services-hero .hero-bg-photo { opacity: 0.15; }
     }
 
@@ -423,25 +431,25 @@
             <p class="hero-sub">재개발·재건축·소규모정비·도시계획·CM/PM — 사업 초기부터 준공까지 체계적으로 수행합니다</p>
         </div>
         <div class="hero-cards-float">
-            <a class="hero-card" href="#overview">
-                <div class="hero-card-icon"><i class="fa-solid fa-circle-info"></i></div>
-                <h4>사업분야</h4>
-                <p>전 영역 통합 수행 안내</p>
-            </a>
             <a class="hero-card" href="#urban-renewal">
                 <div class="hero-card-icon"><i class="fa-solid fa-building"></i></div>
                 <h4>정비사업</h4>
-                <p>재개발·재건축·소규모</p>
+                <p>재개발·재건축·소규모정비</p>
             </a>
             <a class="hero-card" href="#engineering">
-                <div class="hero-card-icon"><i class="fa-solid fa-drafting-compass"></i></div>
-                <h4>엔지니어링사업</h4>
-                <p>도시계획 · PM/CM 관리</p>
+                <div class="hero-card-icon"><i class="fa-solid fa-city"></i></div>
+                <h4>도시개발·계획</h4>
+                <p>도심복합개발·도시계획</p>
             </a>
-            <a class="hero-card" href="garoju-service.html">
-                <div class="hero-card-icon"><i class="fa-solid fa-road"></i></div>
-                <h4>도심복합개발</h4>
-                <p>역세권 재개발사업 등</p>
+            <a class="hero-card" href="pmcm-service.html">
+                <div class="hero-card-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                <h4>PM/CM 사업관리</h4>
+                <p>공사비·일정·리스크 관리</p>
+            </a>
+            <a class="hero-card" href="#sales-ad">
+                <div class="hero-card-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                <h4>분양·광고사업</h4>
+                <p>분양·MD·홍보·마케팅</p>
             </a>
         </div>
     </div>
@@ -848,7 +856,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260906a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260905e"></script>
+<script src="../assets/js/common.js?v=20260906j"></script>
 <script>
 (function () {
     var zoomOverlay = document.getElementById('chZoomOverlay');

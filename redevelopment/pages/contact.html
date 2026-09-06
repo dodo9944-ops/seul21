@@ -15,8 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260905t">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260906c">
     <style>
     /* === Layout === */
     /* 히어로 밑 여백 = uni-hero 자체 하단(0, 2026-09-05 통일) + 본문 상단(세로 간격 표준 §1) = 총 44px(PC)/32px(모바일) */
@@ -98,12 +97,12 @@
     .ct-info-card .ic-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;background:rgba(184,134,11,.08);border-radius:5px;font-size:10.5px;font-weight:600;color:var(--gold);margin-top:6px}
     .ic-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 12px;border:1.5px solid #cecece;border-radius:7px;background:#fff;font-size:11.5px;font-weight:600;color:var(--gray-600);cursor:pointer;transition:all .2s;font-family:inherit}
     .ic-copy-btn:hover{border-color:#a6790a;color:var(--gold);background:rgba(184,134,11,.06)}
-    .ct-map{margin:12px 0;height:190px;border-radius:10px;overflow:hidden;border:1.5px solid #cecece;background:var(--gray-50)}
-    .ct-map .leaflet-popup-content-wrapper{border-radius:8px;box-shadow:0 6px 20px rgba(10,15,28,.14)}
-    .ct-map .leaflet-popup-content{margin:9px 12px;font-size:12px;font-weight:700;color:var(--gray-900);font-family:inherit}
-    .ct-map .leaflet-popup-tip{box-shadow:none}
-    .ct-map .vs-pin{width:30px;height:30px;border-radius:50% 50% 50% 0;background:linear-gradient(135deg,#C58B00,#FFC400);transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(10,15,28,.3);border:2px solid #e6e6e6}
-    .ct-map .vs-pin i{transform:rotate(45deg);color:#171C26;font-size:13px}
+    .ct-location-poster{display:block;border-radius:14px;overflow:hidden;border:1.5px solid #cecece;margin:14px 0 10px;box-shadow:0 4px 16px rgba(0,0,0,.05);transition:all .25s}
+    .ct-location-poster:hover{border-color:#a6790a;box-shadow:0 12px 30px rgba(184,134,11,.14);transform:translateY(-3px)}
+    .ct-location-poster img{width:100%;display:block}
+    .ct-address-copy{display:flex;align-items:center;gap:8px;width:100%;padding:11px 13px;border:1.5px solid #cecece;border-radius:9px;background:var(--gray-50);font-size:12px;font-weight:600;color:var(--gray-700);cursor:pointer;font-family:inherit;text-align:left;transition:all .2s;line-height:1.4}
+    .ct-address-copy:hover{border-color:#a6790a;color:var(--gold);background:rgba(184,134,11,.06)}
+    .ct-address-copy i{color:var(--gold);flex-shrink:0;font-size:13px}
 
     /* Process (compact) */
     .ct-process{background:var(--gray-50);border:1px solid #dbdbdb;border-radius:12px;padding:16px 18px;margin-top:12px}
@@ -163,15 +162,15 @@
     .uni-hero .uh-visual { flex-shrink: 0; align-self: center; width: 360px; position: relative; z-index: 2; }
     .uni-hero .uh-photo { display: none; }
     .uni-hero .uh-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .uni-hero .uh-card { width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: rgba(24,28,34,.78); border: 1px solid rgba(255,255,255,0.088); border-radius: 12px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); position: relative; z-index: 5; }
-    .uni-hero .uh-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.16); }
-    .uni-hero .uh-ci { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,196,0,.15); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+    .uni-hero .uh-card { display: flex; flex-direction: column; justify-content: center; width: 174px; height: 130px; box-sizing: border-box; overflow: hidden; background: linear-gradient(155deg, rgba(30,35,46,0.88), rgba(20,24,32,0.88)); border: 1px solid rgba(255,255,255,0.088); border-top: 2px solid rgba(255,196,0,0.45); border-radius: 14px; padding: 22px 18px; transition: all 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(0,0,0,.10); position: relative; z-index: 5; }
+    .uni-hero .uh-card:hover { transform: translateY(-2px); border-top-color: rgba(255,196,0,0.75); box-shadow: 0 12px 30px rgba(0,0,0,.2); }
+    .uni-hero .uh-ci { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, rgba(255,196,0,0.24), rgba(255,196,0,0.08)); box-shadow: 0 2px 6px rgba(255,196,0,0.12), inset 0 0 0 1px rgba(255,196,0,0.14); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; flex-shrink: 0; }
     .uni-hero .uh-ci i { font-size: 15px; color: #FFC400; }
     .uni-hero .uh-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
     .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,.65); font-weight: 500; line-height: 1.5; }
     .uni-hero .uh-cards .uh-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
     @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
-    @media (max-width: 600px) { .uni-hero { padding: 28px 0 0; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: 1fr; width: 100%; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
+    @media (max-width: 600px) { .uni-hero { padding: 28px 0 0; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; } .uni-hero .uh-card { width: 100%; height: auto; aspect-ratio: 1 / 1; padding: 16px 14px; border-radius: 16px; } .uni-hero .uh-ci { width: 34px; height: 34px; margin-bottom: 10px; } .uni-hero .uh-card h4 { font-size: 13px; } .uni-hero .uh-card p { font-size: 10.5px; line-height: 1.45; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     </style>
 </head>
@@ -198,7 +197,7 @@
         </div>
         <div class="uh-visual">
             <div class="uh-photo"><img src="../jpg/hero_contact.png?v=20260825a" alt="빛세움 고객센터"></div>
-            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="location.href='notice.html'"><div class="uh-ci"><i class="fa-solid fa-bullhorn"></i></div><h4>공지사항</h4><p>수주·회사 소식 보기</p></div><div class="uh-card" style="cursor:pointer" onclick="location.href='feasibility-check.html'"><div class="uh-ci"><i class="fa-solid fa-magnifying-glass-chart"></i></div><h4>사업성 검토</h4><p>무료 사업타당성 분석</p></div><div class="uh-card" style="cursor:pointer" onclick="document.getElementById('ctForm').scrollIntoView({behavior:'smooth',block:'start'})"><div class="uh-ci"><i class="fa-solid fa-paper-plane"></i></div><h4>사업문의</h4><p>온라인 상담 신청</p></div><div class="uh-card" style="cursor:pointer" onclick="document.getElementById('ctVisit').scrollIntoView({behavior:'smooth',block:'start'})"><div class="uh-ci"><i class="fa-solid fa-location-dot"></i></div><h4>찾아오시는 길</h4><p>강동구 성내로6길 50</p></div></div>
+            <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="location.href='notice.html'"><div class="uh-ci"><i class="fa-solid fa-bullhorn"></i></div><h4>공지사항</h4><p>주요 안내 및 회사 소식</p></div><div class="uh-card" style="cursor:pointer" onclick="location.href='feasibility-check.html'"><div class="uh-ci"><i class="fa-solid fa-magnifying-glass-chart"></i></div><h4>사업성 상담</h4><p>사업타당성·분담금 검토</p></div><div class="uh-card" style="cursor:pointer" onclick="document.getElementById('ctForm').scrollIntoView({behavior:'smooth',block:'start'})"><div class="uh-ci"><i class="fa-solid fa-paper-plane"></i></div><h4>상담문의</h4><p>사업·용역·제휴 문의 접수</p></div><div class="uh-card" style="cursor:pointer" onclick="document.getElementById('ctVisit').scrollIntoView({behavior:'smooth',block:'start'})"><div class="uh-ci"><i class="fa-solid fa-location-dot"></i></div><h4>찾아오시는 길</h4><p>본사 위치·방문상담 안내</p></div></div>
         </div>
     </div>
 </div>
@@ -338,9 +337,14 @@
                     <div class="ic-icon"><i class="fa-solid fa-building"></i></div>
                     <div><h3>방문 상담 · 찾아오시는 길</h3><span class="ic-sub">대면 상담 예약</span></div>
                 </div>
-                <p>서울특별시 강동구 성내로6길 50, 피스센터 5층<br>㈜빛세움 본사<br>TEL 02-478-7114 · FAX 02-478-6114<br><span style="font-size:11.5px;opacity:.75">영남·부산지사 — 부산시 부산진구 중앙대로 615, 평광빌딩 동관 1101호</span></p>
-                <button type="button" class="ic-copy-btn" onclick="event.stopPropagation();(function(btn){var addr='서울특별시 강동구 성내로6길 50, 피스센터 5층';function done(){if(window.App&&App.toast)App.toast('주소가 복사되었습니다.');var s=btn.querySelector('span');var orig=s.textContent;s.textContent='복사 완료';setTimeout(function(){s.textContent=orig},2000)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(addr).then(done)}else{var ta=document.createElement('textarea');ta.value=addr;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);done()}})(this)"><i class="fa-solid fa-copy"></i> <span>주소 복사</span></button>
-                <div id="ctMap" class="ct-map"></div>
+                <a class="ct-location-poster" href="../jpg/visseum_location_poster.png" target="_blank" rel="noopener" aria-label="㈜빛세움 오시는 길 안내도 크게 보기">
+                    <img src="../jpg/visseum_location_poster.png" alt="㈜빛세움 오시는 길 안내도 — 서울특별시 강동구 성내로6길 50 피스센터 5층, 5호선 둔촌동역·8호선 강동구청역 인근">
+                </a>
+                <button type="button" class="ct-address-copy" onclick="(function(btn){var addr='서울특별시 강동구 성내로6길 50, 피스센터 5층';function done(){if(window.App&&App.toast)App.toast('주소가 복사되었습니다.');var i=btn.querySelector('i');i.className='fa-solid fa-check';setTimeout(function(){i.className='fa-regular fa-copy'},2000)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(addr).then(done)}else{var ta=document.createElement('textarea');ta.value=addr;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);done()}})(this)">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>서울특별시 강동구 성내로6길 50, 피스센터 5층 (클릭 시 주소 복사)</span>
+                </button>
+                <p style="margin-top:8px">TEL 02-478-7114 · FAX 02-478-6114<br><span style="font-size:11.5px;opacity:.75">영남·부산지사 — 부산시 부산진구 중앙대로 615, 평광빌딩 동관 1101호</span></p>
                 <div class="ic-tag"><i class="fa-solid fa-calendar-check"></i> 사전 예약 권장</div>
             </div>
 
@@ -362,7 +366,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260906a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260905e"></script>
+<script src="../assets/js/common.js?v=20260906j"></script>
 <script>
 (function(){
 /* 로그인 상태: 이름·이메일 자동 채움 (비회원도 문의 가능) */
@@ -472,18 +476,16 @@ form.addEventListener('submit',function(e){
 window.CT={removeFile:function(i){uploadedFiles.splice(i,1);renderFiles()}};
 })();
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-(function(){
-    var el = document.getElementById('ctMap');
-    if(!el || typeof L === 'undefined') return;
-    var lat = 37.5283, lng = 127.1223;
-    var map = L.map('ctMap', {zoomControl:false, attributionControl:false, scrollWheelZoom:false}).setView([lat, lng], 16);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19}).addTo(map);
-    L.control.zoom({position:'bottomright'}).addTo(map);
-    var pin = L.divIcon({className:'', html:'<div class="vs-pin"><i class="fa-solid fa-building"></i></div>', iconSize:[30,30], iconAnchor:[15,28], popupAnchor:[0,-26]});
-    L.marker([lat, lng], {icon:pin}).addTo(map).bindPopup('㈜빛세움 본사<br>성내로6길 50, 피스센터 5층').openPopup();
-})();
+/* 메뉴에서 '찾아오시는 길'(#ctVisit)로 진입 시 위치도 확대 모달 자동 표시 */
+if(location.hash==='#ctVisit'){
+    document.addEventListener('DOMContentLoaded',function(){
+        setTimeout(function(){
+            var link=document.getElementById('footerAddressLink');
+            if(link) link.click();
+        },400);
+    });
+}
 </script>
 </body>
 </html>
