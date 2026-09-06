@@ -55,7 +55,7 @@ const App = (() => {
         { href:`${B}/pages/portfolio.html?type=재개발`, label:'재개발' },
         { href:`${B}/pages/portfolio.html?type=재건축`, label:'재건축' },
         { href:`${B}/pages/portfolio.html?type=소규모정비`, label:'소규모정비' },
-        { href:`${B}/pages/services.html#coordinator`, label:'서울시 정비사업 코디네이터/전문자문' },
+        { href:`${B}/pages/portfolio.html?type=코디네이터`, label:'서울시 정비사업 코디네이터/전문자문' },
       ]},
       { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open', sub:[
         { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
