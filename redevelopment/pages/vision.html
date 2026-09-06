@@ -152,6 +152,23 @@
     @media(max-width:860px) { .vs-principles { grid-template-columns: repeat(2,1fr); } }
     @media(max-width:480px) { .vs-principles { grid-template-columns: 1fr; } }
 
+    /* ── 모바일 전용: 아이콘+제목 한 줄 배치로 박스 상하 여백 축소 (PC 레이아웃 영향 없음) ── */
+    @media (max-width: 600px) {
+        .vs-why-card { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 16px 18px 18px; }
+        .vs-why-card .vs-why-icon { margin-bottom: 0; width: 34px; height: 34px; flex-shrink: 0; }
+        .vs-why-card .vs-why-icon i { font-size: 15px; }
+        .vs-why-card h4 { margin-bottom: 0; font-size: 14px; flex: 1; min-width: 0; }
+        .vs-why-card p { flex-basis: 100%; margin-top: 4px; font-size: 12px; }
+        .vs-why-card .vs-why-line { flex-basis: 100%; }
+        .vs-why-num { top: 14px; right: 14px; }
+
+        .vs-prin-card { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 14px 18px; min-height: auto; }
+        .vs-prin-icon { margin-bottom: 0; width: 36px; height: 36px; flex-shrink: 0; }
+        .vs-prin-icon i { font-size: 15px; }
+        .vs-prin-card h4 { margin-bottom: 0; font-size: 14px; flex: 1; min-width: 0; }
+        .vs-prin-card p { flex-basis: 100%; margin-top: 4px; font-size: 12px; }
+    }
+
     /* ── 경영이념 (All4U · All4V) — 가로 와이드 2열 + 체크리스트형 ── */
     .au-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .au-card {
