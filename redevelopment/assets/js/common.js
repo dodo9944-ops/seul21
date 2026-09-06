@@ -67,7 +67,7 @@ const App = (() => {
       { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
         { href:`${B}/pages/notice.html`, label:'공지사항' },
         { href:`${B}/pages/feasibility.html`, label:'개별 사업성 검토' },
-        { href:`${B}/pages/contact.html#ctForm`, label:'상담문의' },
+        { href:`${B}/pages/contact.html`, label:'상담문의' },
         { href:`${B}/pages/contact.html#ctVisit`, label:'찾아오시는 길' },
       ]},
     ];
@@ -177,7 +177,7 @@ const App = (() => {
         <div class="footer-col">
           <h5>고객센터</h5>
           <a href="${B}/pages/notice.html">공지사항</a>
-          <a href="${B}/pages/contact.html#ctForm">상담문의</a>
+          <a href="${B}/pages/contact.html">상담문의</a>
           <a href="${B}/pages/contact.html#ctVisit">찾아오시는길</a>
         </div>
         <div class="footer-col footer-contact">
