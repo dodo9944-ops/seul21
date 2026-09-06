@@ -686,7 +686,7 @@
     }
     @media (max-width: 700px) { .org-aux-row::before { display: none; } }
     .org-aux-box:hover { box-shadow: 0 12px 28px rgba(20,28,38,.09); transform: translateY(-3px); }
-    .org-aux-box .org-aux-title { font-size: 16.5px; font-weight: 800; color: var(--visseum-ink); } /* 14px → 16.5px (2026-09-07 대장 지시) */
+    .org-aux-box .org-aux-title { font-size: 14px; font-weight: 800; color: var(--visseum-ink); }
     .org-aux-box .org-aux-desc { font-size: 12px; color: var(--visseum-muted); font-weight: 600; margin-top: 4px; }
     .org-branch { width: 100%; display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; }
     .org-branch-h { position: relative; width: min(760px, 92%); height: 1px; background: linear-gradient(90deg, transparent, rgba(197,139,0,.45) 8%, rgba(197,139,0,.45) 92%, transparent); }
@@ -723,7 +723,7 @@
         border-bottom: 1px solid #dbdbdb;
     }
     .org-dept-header h4 {
-        font-size: 16.5px; font-weight: 800; /* 13.5px → 16.5px (2026-09-07 대장 지시 "조직도 헤드글자 크게") */
+        font-size: 13.5px; font-weight: 800;
     }
     .org-dept-body { padding: 14px 18px; }
     .org-dept-body ul { list-style: none; }
@@ -1033,6 +1033,9 @@
                         <div class="sig-name"><span class="sig-title">㈜빛세움 대표이사</span><span id="ceoNameDisplay">조구형</span></div>
                     </div>
                 </div>
+                <div class="ceo-photo-area">
+                    <img src="../jpg/visseum_logo.jpg" alt="㈜빛세움 CI" style="object-fit:contain;background:#fff">
+                </div>
             </div>
 
             <!-- 정비사업전문관리업 등록증 (2008 최초등록 / 2015 상호변경 재등록) -->
@@ -1083,7 +1086,11 @@
         <div class="inner">
             <div class="section-label">History</div>
             <h2 class="section-title">경험이 쌓일수록 책임의 기준도 높아졌습니다</h2>
-            <div class="timeline-center" id="timeline"></div>
+            <div class="timeline-center" id="timeline">
+                <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-year">2008</div><ul class="tl-events"><li>서울특별시 정비사업전문관리업 최초등록</li><li>제2008-22호</li></ul></div></div>
+                <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><div class="tl-year">2015</div><ul class="tl-events"><li>상호 및 소재지 변경에 따른 재등록</li><li>제2015-4호</li></ul></div></div>
+                <div class="tl-item tl-recent"><div class="tl-dot"></div><div class="tl-content"><div class="tl-year">현재</div><ul class="tl-events"><li>정비사업전문관리를 중심으로 도시계획, PM·CM, 공사비·사업비 관리, HUG 보증업무, 분양·상가MD·광고 분야까지 전문영역 확대</li></ul></div></div>
+            </div>
             <div class="trust-intro" style="margin-bottom:0">
                 <p>빛세움은 사업의 규모보다 맡은 업무의 완성도를 우선하며, 수행 경험을 조직의 지식과 관리체계로 축적해 왔습니다.</p>
             </div>
@@ -1323,20 +1330,7 @@
         ceoNameEl.textContent = info.ceoName;
     }
 
-    /* ── 회사연혁 — center timeline (2026-09-07 대장 지시 "연혁 기존거로" — mock-data history 기반 렌더 복원) ── */
-    var recentYears = ['2026','2025','2024'];
-    document.getElementById('timeline').innerHTML = info.history.map(function(h, i) {
-        var isRecent = recentYears.indexOf(h.year) !== -1;
-        return '<div class="tl-item' + (isRecent ? ' tl-recent' : '') + '">' +
-            '<div class="tl-dot"></div>' +
-            '<div class="tl-content">' +
-                '<div class="tl-year">' + h.year + '</div>' +
-                '<ul class="tl-events">' +
-                    h.items.map(function(item) { return '<li>' + item + '</li>'; }).join('') +
-                '</ul>' +
-            '</div>' +
-        '</div>';
-    }).join('');
+    /* 회사연혁은 2026-09-07 대장 지시 본문으로 about.html 에 직접 기재 (mock-data history 미사용) */
 
     /* ── 전문 업무분야 ── 메뉴(common.js?v=20260906r
        mock-data.businessAreas 는 다른 영역(services.html 등)에서 사용되므로 본 섹션은 override 하지 않는다. */
