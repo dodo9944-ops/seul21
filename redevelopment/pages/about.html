@@ -27,7 +27,7 @@
         background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
         position: relative;
         overflow: hidden;
-        padding: 20px 0 0;
+        padding: 25px 0 0; /* 업무실적과 상단 간격 통일, 대장 지시 2026-09-06 */
         min-height: 360px;
     } /* 하단 12px→0 (2026-09-05 대장 지시 — 히어로↔첫콘텐츠 간격 44px 통일, 상단보정으로 이관) */
     .hero-bg-photo {
@@ -220,6 +220,7 @@
         line-height: 1.5;
     }
     @media (max-width: 1024px) {
+        .about-hero { padding: 20px 0 0; }
         .about-hero .inner { flex-direction: column; gap: 16px; }
         .hero-cards-float { width: 100%; max-width: 420px; }
         .hero-bg-photo { width: 100%; opacity: 0.25; }

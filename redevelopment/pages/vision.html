@@ -29,8 +29,10 @@
         box-shadow: 0 10px 30px rgba(10,15,28,.08);
         background: #fff; border: 1px solid #cecece;
     }
-    .vs-phil-photo-full { width: 100%; line-height: 0; }
-    .vs-phil-photo-full img { width: 100%; height: auto; display: block; }
+    .vs-phil-photo-full { width: 100%; line-height: 0; position: relative; cursor: zoom-in; }
+    .vs-phil-photo-full img { width: 100%; height: auto; display: block; transition: transform .4s ease; }
+    .vs-phil-photo-full:hover img { transform: scale(1.015); }
+    .vs-phil-photo-full:hover .vs-visual-zoom { opacity: 1; transform: scale(1); }
     .vs-phil-text-below {
         position: relative; text-align: center;
         padding: 52px 24px 56px;
@@ -454,7 +456,7 @@
     .vision-hero {
         background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
         position: relative; overflow: hidden;
-        padding: 20px 0 12px; min-height: 360px;
+        padding: 25px 0 12px; min-height: 360px; /* 업무실적과 상단 간격 통일, 대장 지시 2026-09-06 */
     }
     .vision-hero .hero-bg-photo {
         position: absolute; top: 0; right: 0;
@@ -597,6 +599,7 @@
     .vision-hero .hero-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; letter-spacing: -0.1px; }
     .vision-hero .hero-card p { font-size: 11.5px; color: rgba(255,255,255,0.65); line-height: 1.5; }
     @media (max-width: 1024px) {
+        .vision-hero { padding: 20px 0 12px; }
         .vision-hero .inner { flex-direction: column; gap: 16px; }
         .vision-hero .hero-cards-float { width: 100%; max-width: 420px; margin-right: 0; }
         .vision-hero .hero-bg-photo { width: 100%; opacity: 0.25; }
@@ -677,8 +680,9 @@
         <!-- ══════ 브랜드 철학 ══════ -->
         <div class="vs" id="philosophy" style="margin-bottom:52px">
             <div class="vs-philosophy">
-                <div class="vs-phil-photo-full">
+                <div class="vs-phil-photo-full" id="vsPhilZoom" role="button" tabindex="0" aria-label="사진 확대 보기" title="클릭하면 확대해서 볼 수 있습니다">
                     <img src="../jpg/vs_philosophy_banner.jpg" alt="㈜빛세움 — Building a Better Tomorrow, 사람을 위한 더 나은 도시 빛세움이 만듭니다">
+                    <span class="vs-visual-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
                 </div>
                 <div class="vs-phil-text-below">
                     <div class="vs-phil-kicker">VISSEUM — BRAND PHILOSOPHY</div>
@@ -920,10 +924,6 @@
 </script>
 <script>
 (function () {
-    var zoomEl = document.getElementById('vsVisualZoom');
-    if (!zoomEl) return;
-    var img = zoomEl.querySelector('img');
-
     function escapeHtml(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
     function openPhotoWindow(src, alt) {
@@ -954,11 +954,19 @@
         probe.src = src;
     }
 
-    function openZoom() { openPhotoWindow(img.getAttribute('src'), img.getAttribute('alt')); }
-    zoomEl.addEventListener('click', openZoom);
-    zoomEl.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openZoom(); }
-    });
+    function bindPhotoZoom(id) {
+        var zoomEl = document.getElementById(id);
+        if (!zoomEl) return;
+        var img = zoomEl.querySelector('img');
+        function openZoom() { openPhotoWindow(img.getAttribute('src'), img.getAttribute('alt')); }
+        zoomEl.addEventListener('click', openZoom);
+        zoomEl.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openZoom(); }
+        });
+    }
+
+    bindPhotoZoom('vsVisualZoom');
+    bindPhotoZoom('vsPhilZoom');
 })();
 </script>
 </body>
