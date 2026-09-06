@@ -356,12 +356,18 @@
         this._preloadAround(0);
     };
 
-    FlipbookInstance.prototype.close = function () {
+    FlipbookInstance.prototype.close = function (skipHistory) {
         var self = this;
         document.removeEventListener('keydown', this._escHandler);
+        if (this._popHandler) window.removeEventListener('popstate', this._popHandler);
         if (document.fullscreenElement) { (document.exitFullscreen || function () {}).call(document); }
         this.el.classList.remove('fb-show');
         document.body.style.overflow = '';
+        // 뒤로가기로 닫힌 게 아니라 닫기 버튼/ESC로 닫은 경우, 열 때 추가했던 히스토리 항목을 되돌려
+        // 사용자가 페이지를 한 번 더 뒤로가기 눌러야 이전 화면으로 나가는 상황을 방지
+        if (!skipHistory && this._historyPushed && history.state && history.state.flipbookOpen) {
+            history.back();
+        }
         setTimeout(function () {
             if (self.pageFlip && self.pageFlip.destroy) { try { self.pageFlip.destroy(); } catch (e) {} }
             if (self.el && self.el.parentNode) self.el.parentNode.removeChild(self.el);
@@ -376,6 +382,14 @@
             var inst = new FlipbookInstance(opts);
             inst._buildDom();
             inst._init();
+            // 지명원이 열려있는 동안 모바일 뒤로가기(제스처/버튼)를 누르면
+            // 곧바로 홈페이지 등 이전 화면으로 나가지 않고, 먼저 지명원만 닫히도록 처리
+            history.pushState({ flipbookOpen: true }, '', location.href);
+            inst._historyPushed = true;
+            inst._popHandler = function () {
+                inst.close(true);
+            };
+            window.addEventListener('popstate', inst._popHandler);
             return inst;
         }
     };

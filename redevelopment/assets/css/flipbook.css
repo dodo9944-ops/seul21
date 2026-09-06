@@ -154,4 +154,6 @@
     .fb-sep { display: none; }
     .fb-thumbs { width: 100%; }
     .fb-hint { font-size: 10.5px; bottom: 8px; }
+    /* 지명원 뷰어를 위아래로 조금 더 크게(여백 축소) */
+    .fb-stage { padding: 10px 6px; }
 }
