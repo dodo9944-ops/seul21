@@ -53,9 +53,12 @@
         this.rendered = {};       // pageNum -> true
         this.rendering = {};      // pageNum -> Promise
         this.zoom = 1;
+        this.panX = 0;
+        this.panY = 0;
         this.el = null;
         this.thumbsBuilt = false;
         this._pinch = null;
+        this._pan = null;
     }
 
     FlipbookInstance.prototype._buildDom = function () {
@@ -143,6 +146,45 @@
         stage.addEventListener('touchend', function (e) {
             if (e.touches.length < 2) self._pinch = null;
         }, { passive: true });
+
+        // 확대된 상태에서 한 손가락/마우스로 드래그하여 상하좌우 이동(팬)
+        // zoom이 1(기본)일 때는 그대로 두어 책장넘기기(PageFlip) 드래그가 정상 동작하도록 하고,
+        // zoom > 1일 때만 이 핸들러가 먼저 가로채(capture) 페이지 넘김과 충돌하지 않게 함
+        function panStart(clientX, clientY, e) {
+            if (self.zoom <= 1) return false;
+            self._pan = { x0: clientX, y0: clientY, px0: self.panX, py0: self.panY };
+            var wrap = self.el.querySelector('#fbZoomWrap');
+            wrap.classList.add('fb-grabbing');
+            if (e && e.stopPropagation) e.stopPropagation();
+            return true;
+        }
+        function panMove(clientX, clientY) {
+            if (!self._pan) return;
+            var dx = clientX - self._pan.x0;
+            var dy = clientY - self._pan.y0;
+            self.panX = self._pan.px0 + dx;
+            self.panY = self._pan.py0 + dy;
+            self._clampPan();
+            self._applyTransform();
+        }
+        function panEnd() {
+            if (!self._pan) return;
+            self._pan = null;
+            var wrap = self.el.querySelector('#fbZoomWrap');
+            if (wrap) wrap.classList.remove('fb-grabbing');
+        }
+        stage.addEventListener('mousedown', function (e) {
+            if (panStart(e.clientX, e.clientY, e)) e.preventDefault();
+        }, true);
+        document.addEventListener('mousemove', function (e) { panMove(e.clientX, e.clientY); });
+        document.addEventListener('mouseup', panEnd);
+        stage.addEventListener('touchstart', function (e) {
+            if (e.touches.length === 1) panStart(e.touches[0].clientX, e.touches[0].clientY, e);
+        }, { capture: true, passive: true });
+        stage.addEventListener('touchmove', function (e) {
+            if (e.touches.length === 1 && self._pan) panMove(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+        stage.addEventListener('touchend', panEnd, { passive: true });
     };
 
     FlipbookInstance.prototype._touchDist = function (e) {
@@ -151,14 +193,32 @@
         return Math.sqrt(dx * dx + dy * dy);
     };
 
-    FlipbookInstance.prototype.setZoom = function (z, silent) {
-        z = Math.max(1, Math.min(2.5, z));
-        this.zoom = z;
+    FlipbookInstance.prototype._applyTransform = function () {
         var wrap = this.el.querySelector('#fbZoomWrap');
-        wrap.style.transform = 'scale(' + z + ')';
+        if (wrap) wrap.style.transform = 'translate(' + this.panX + 'px, ' + this.panY + 'px) scale(' + this.zoom + ')';
+    };
+
+    FlipbookInstance.prototype._clampPan = function () {
+        var wrap = this.el.querySelector('#fbZoomWrap');
+        var stage = this.el.querySelector('#fbStage');
+        if (!wrap || !stage) return;
+        var maxX = Math.max(0, (wrap.offsetWidth * this.zoom - stage.clientWidth) / 2);
+        var maxY = Math.max(0, (wrap.offsetHeight * this.zoom - stage.clientHeight) / 2);
+        this.panX = Math.max(-maxX, Math.min(maxX, this.panX));
+        this.panY = Math.max(-maxY, Math.min(maxY, this.panY));
+    };
+
+    FlipbookInstance.prototype.setZoom = function (z, silent) {
+        z = Math.max(1, Math.min(3.75, z));
+        this.zoom = z;
+        if (z <= 1) { this.panX = 0; this.panY = 0; }
+        this._clampPan();
+        this._applyTransform();
+        var wrap = this.el.querySelector('#fbZoomWrap');
+        if (wrap) wrap.classList.toggle('fb-zoomed', z > 1);
         var zin = this.el.querySelector('[data-act="zoomin"]');
         var zout = this.el.querySelector('[data-act="zoomout"]');
-        if (zin) zin.disabled = z >= 2.5;
+        if (zin) zin.disabled = z >= 3.75;
         if (zout) zout.disabled = z <= 1;
     };
 
@@ -356,12 +416,18 @@
         this._preloadAround(0);
     };
 
-    FlipbookInstance.prototype.close = function () {
+    FlipbookInstance.prototype.close = function (skipHistory) {
         var self = this;
         document.removeEventListener('keydown', this._escHandler);
+        if (this._popHandler) window.removeEventListener('popstate', this._popHandler);
         if (document.fullscreenElement) { (document.exitFullscreen || function () {}).call(document); }
         this.el.classList.remove('fb-show');
         document.body.style.overflow = '';
+        // 뒤로가기로 닫힌 게 아니라 닫기 버튼/ESC로 닫은 경우, 열 때 추가했던 히스토리 항목을 되돌려
+        // 사용자가 페이지를 한 번 더 뒤로가기 눌러야 이전 화면으로 나가는 상황을 방지
+        if (!skipHistory && this._historyPushed && history.state && history.state.flipbookOpen) {
+            history.back();
+        }
         setTimeout(function () {
             if (self.pageFlip && self.pageFlip.destroy) { try { self.pageFlip.destroy(); } catch (e) {} }
             if (self.el && self.el.parentNode) self.el.parentNode.removeChild(self.el);
@@ -376,6 +442,14 @@
             var inst = new FlipbookInstance(opts);
             inst._buildDom();
             inst._init();
+            // 지명원이 열려있는 동안 모바일 뒤로가기(제스처/버튼)를 누르면
+            // 곧바로 홈페이지 등 이전 화면으로 나가지 않고, 먼저 지명원만 닫히도록 처리
+            history.pushState({ flipbookOpen: true }, '', location.href);
+            inst._historyPushed = true;
+            inst._popHandler = function () {
+                inst.close(true);
+            };
+            window.addEventListener('popstate', inst._popHandler);
             return inst;
         }
     };

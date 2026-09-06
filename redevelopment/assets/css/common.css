@@ -86,10 +86,18 @@ body {
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
   overflow-wrap: break-word;
+  /* 텍스트 무단 복사 방지(PC·모바일 공통) — 폼 입력 요소는 아래에서 예외 처리 */
+  -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
+  -webkit-touch-callout: none; /* iOS 길게 눌러 복사/저장 메뉴 차단 */
+}
+/* 입력·편집 가능 요소는 정상적으로 선택·복사 가능해야 함 */
+input, textarea, select, [contenteditable="true"], [contenteditable=""] {
+  -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;
+  -webkit-touch-callout: default;
 }
 a { text-decoration: none; color: inherit; }
 ul, ol { list-style: none; }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; -webkit-user-drag: none; }
 button, input, select, textarea { font-family: inherit; }
 
 .inner {

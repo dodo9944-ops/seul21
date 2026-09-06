@@ -191,7 +191,7 @@ const App = (() => {
     <div class="location-modal-overlay" id="locationModalOverlay">
       <div class="location-modal">
         <button class="location-modal-close" id="locationModalClose" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
-        <img src="${B}/jpg/visseum_location_map.png" alt="(주)빛세움 오시는 길 약도 — 서울특별시 강동구 성내로6길 50 피스센터 5층">
+        <img id="locationModalImg" src="${B}/jpg/visseum_location_map.png" alt="(주)빛세움 오시는 길 약도 — 서울특별시 강동구 성내로6길 50 피스센터 5층. 모바일에서 탭하면 주소가 복사됩니다.">
       </div>
     </div>
     <button class="scroll-top" id="scrollTop" aria-label="맨 위로"><i class="fa-solid fa-chevron-up"></i></button>
@@ -202,9 +202,9 @@ const App = (() => {
           <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 14 15 14 15 21"/></svg>
           <span>홈</span>
         </a>
-        <a href="${B}/pages/services.html#business" class="${navActive('services.html')?'active':''}">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
-          <span>그룹사</span>
+        <a href="${B}/pages/about.html#digitalProfile" class="${navActive('about.html')?'active':''}">
+          <svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H2z"/><path d="M22 6a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h8z"/></svg>
+          <span>지명원</span>
         </a>
         <a href="${B}/pages/feasibility.html" class="${navActive('feasibility.html')?'active':''}">
           <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
@@ -415,6 +415,26 @@ const App = (() => {
       }
     });
 
+    // 모바일에서 확대된 약도를 탭하면 회사 주소 자동 복사
+    const locationModalImg = document.getElementById('locationModalImg');
+    if (locationModalImg) locationModalImg.addEventListener('click', e => {
+      if (window.innerWidth > 768) return;
+      e.stopPropagation();
+      const addr = '서울특별시 강동구 성내로6길 50, 피스센터 5층';
+      function done() { toast('주소가 복사되었습니다.'); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(done).catch(function () {
+          const ta = document.createElement('textarea');
+          ta.value = addr; document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); document.body.removeChild(ta); done();
+        });
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = addr; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta); done();
+      }
+    });
+
     // ESC
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
@@ -475,11 +495,12 @@ const App = (() => {
 
       var lastIdx = menuList.length - 1; /* 고객센터 (0:로고 1:빛세움의길 2:회사소개 3:사업분야 4:업무실적 5:자료실 6:고객센터) */
       var ps = { x0: 0, y0: 0, active: false };
-      var skipSel = 'input,textarea,select,button,a,iframe,.leaflet-container,.swiper-container,.swiper,.slider,.carousel,.process-bar,.tab-scroll';
+      var skipSel = 'input,textarea,select,button,a,iframe,.leaflet-container,.swiper-container,.swiper,.slider,.carousel,.process-bar,.tab-scroll,.fb-overlay';
 
       document.addEventListener('touchstart', function(e) {
         if (window.innerWidth > 1024) return;
         if (e.target.closest && e.target.closest(skipSel)) { ps.active = false; return; }
+        if (document.querySelector('.fb-overlay')) { ps.active = false; return; }
         if (drawer && drawer.classList.contains('open')) { ps.active = false; return; }
         var t = e.touches[0];
         if (t.clientX < 30 || t.clientX > window.innerWidth - 30) { ps.active = false; return; }
@@ -802,12 +823,15 @@ window.NoticeDetailModal = NoticeDetailModal;
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
   if (!location.pathname.includes('/admin/') && !location.pathname.includes('/intranet/')) {
-    /* 텍스트 복사 금지 + 이미지 다운로드 금지 — 임시 해제 (2026-04-19) */
-    // document.addEventListener('copy', e => e.preventDefault());
-    // document.addEventListener('selectstart', e => { if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault(); });
-    // document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-    // document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
-    document.querySelectorAll('img').forEach(i => { i.setAttribute('draggable', 'false'); i.style.pointerEvents = 'none'; });
-    new MutationObserver(muts => { muts.forEach(m => m.addedNodes.forEach(n => { if (n.querySelectorAll) n.querySelectorAll('img').forEach(i => { i.setAttribute('draggable', 'false'); i.style.pointerEvents = 'none'; }); })); }).observe(document.body, { childList: true, subtree: true });
+    /* 텍스트 복사 금지 + 이미지 다운로드 금지 (PC·모바일 공통, 2026-09-06 재적용) */
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('selectstart', e => { if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault(); });
+    document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+    document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+    // 클릭으로 동작해야 하는 이미지(약도 탭 복사 등)는 pointer-events 차단에서 제외
+    var IMG_CLICK_EXCEPT = '#locationModalImg';
+    function lockImg(i) { if (i.closest(IMG_CLICK_EXCEPT) || i.matches(IMG_CLICK_EXCEPT)) return; i.setAttribute('draggable', 'false'); i.style.pointerEvents = 'none'; }
+    document.querySelectorAll('img').forEach(lockImg);
+    new MutationObserver(muts => { muts.forEach(m => m.addedNodes.forEach(n => { if (n.querySelectorAll) n.querySelectorAll('img').forEach(lockImg); })); }).observe(document.body, { childList: true, subtree: true });
   }
 });

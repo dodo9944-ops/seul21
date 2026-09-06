@@ -67,6 +67,9 @@
     transition: transform .25s ease; transform-origin: center center;
     display: flex; align-items: center; justify-content: center;
 }
+/* 확대 상태 — 드래그로 상하좌우 이동(팬) 가능 */
+.fb-zoomwrap.fb-zoomed { cursor: grab; }
+.fb-zoomwrap.fb-grabbing { cursor: grabbing; transition: none; }
 #fb-book { box-shadow: 0 30px 80px rgba(0,0,0,.5); }
 
 /* PageFlip 페이지(HTML 모드) 공통 스타일 */
@@ -145,13 +148,20 @@
 .fb-hint.fb-hide { opacity: 0; }
 
 @media (max-width: 768px) {
-    .fb-topbar { height: 52px; padding: 0 10px; gap: 6px; }
+    .fb-topbar { height: 52px; padding: 0 8px; gap: 4px; }
+    .fb-brand { flex-shrink: 1; min-width: 0; }
+    .fb-brand-icon { flex-shrink: 0; }
     .fb-brand-sub { display: none; }
     .fb-brand-title { font-size: 13px; }
-    .fb-btn { width: 34px; height: 34px; font-size: 13.5px; }
-    .fb-close { width: 34px; height: 34px; font-size: 15px; }
-    .fb-pageindicator { font-size: 11.5px; padding: 0 6px; }
+    .fb-btn { width: 34px; height: 34px; font-size: 13.5px; flex-shrink: 0; }
+    .fb-close { width: 34px; height: 34px; font-size: 15px; flex-shrink: 0; }
+    .fb-pageindicator { font-size: 11.5px; padding: 0 6px; flex-shrink: 0; }
     .fb-sep { display: none; }
+    /* 도구 버튼이 화면폭보다 넓어져도 닫기 버튼을 밀어내지 않도록 이 영역만 가로 스크롤 */
+    .fb-tools { flex-shrink: 1; min-width: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .fb-tools::-webkit-scrollbar { display: none; }
     .fb-thumbs { width: 100%; }
     .fb-hint { font-size: 10.5px; bottom: 8px; }
+    /* 지명원 뷰어를 위아래로 조금 더 크게(여백 축소) */
+    .fb-stage { padding: 10px 6px; }
 }

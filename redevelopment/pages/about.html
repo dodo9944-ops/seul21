@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260906c">
-    <link rel="stylesheet" href="../assets/css/flipbook.css?v=20260905a">
+    <link rel="stylesheet" href="../assets/css/flipbook.css?v=20260906c">
     <style>
     /* ================================================================
        ABOUT PAGE — Premium Company Introduction
@@ -27,7 +27,7 @@
         background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
         position: relative;
         overflow: hidden;
-        padding: 32px 0 0;
+        padding: 25px 0 0; /* 업무실적과 상단 간격 통일, 대장 지시 2026-09-06 */
         min-height: 360px;
     } /* 하단 12px→0 (2026-09-05 대장 지시 — 히어로↔첫콘텐츠 간격 44px 통일, 상단보정으로 이관) */
     .hero-bg-photo {
@@ -220,6 +220,7 @@
         line-height: 1.5;
     }
     @media (max-width: 1024px) {
+        .about-hero { padding: 20px 0 0; }
         .about-hero .inner { flex-direction: column; gap: 16px; }
         .hero-cards-float { width: 100%; max-width: 420px; }
         .hero-bg-photo { width: 100%; opacity: 0.25; }
@@ -232,10 +233,10 @@
         }
     }
     @media (max-width: 600px) {
-        .about-hero { padding: 28px 0 0; min-height: auto; }
+        .about-hero { padding: 16px 0 0; min-height: auto; }
         .hero-text h1 { font-size: 28px; }
         .hero-sub { font-size: 14px; }
-        .hero-cards-float { grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; max-width: none; }
+        .hero-cards-float { grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; max-width: none; margin-bottom: 24px; }
         .hero-card { width: 100%; height: auto; aspect-ratio: 1 / 1; padding: 16px 14px; border-radius: 16px; }
         .hero-card-icon { width: 34px; height: 34px; margin-bottom: 10px; }
         .hero-card h4 { font-size: 13px; }
@@ -541,6 +542,10 @@
     }
     .dp-btn-overlay:hover { box-shadow: 0 0 0 3px rgba(255,255,255,.4) inset; }
     .dp-btn-overlay:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    /* 모바일에서는 배너 전체를 터치해도 지명원으로 이동(작은 버튼 영역만 누르기 어려운 문제 개선) */
+    @media (max-width: 768px) {
+        .dp-btn-overlay { left: 0; top: 0; width: 100%; height: 100%; border-radius: 16px; }
+    }
 
     /* ── 4. COMPANY HISTORY ── */
     .timeline-center {
@@ -1207,19 +1212,24 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260906a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906j"></script>
-<script src="../assets/js/flipbook.js?v=20260905a"></script>
+<script src="../assets/js/common.js?v=20260906n"></script>
+<script src="../assets/js/flipbook.js?v=20260906c"></script>
 <script>
 (function () {
     var btn = document.getElementById('dpOpenBtn');
     if (!btn) return;
-    btn.addEventListener('click', function () {
+    function openProfile() {
         Flipbook.open({
             pdfUrl: '../pdf/visseum-profile.pdf',
             title: '(주)빛세움 지명원',
             subtitle: 'DIGITAL COMPANY PROFILE'
         });
-    });
+    }
+    btn.addEventListener('click', openProfile);
+    /* 하단 '지명원' 탭 등 #digitalProfile 해시로 진입 시 자동으로 열기 */
+    if (location.hash === '#digitalProfile') {
+        setTimeout(openProfile, 400);
+    }
 })();
 </script>
 <script>
@@ -1250,7 +1260,7 @@
         '</div>';
     }).join('');
 
-    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260906j
+    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260906n
        mock-data.businessAreas 는 다른 영역(services.html 등)에서 사용되므로 본 섹션은 override 하지 않는다. */
 })();
 </script>
