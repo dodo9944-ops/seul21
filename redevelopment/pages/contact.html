@@ -362,7 +362,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260906a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906h"></script>
+<script src="../assets/js/common.js?v=20260906i"></script>
 <script>
 (function(){
 /* 로그인 상태: 이름·이메일 자동 채움 (비회원도 문의 가능) */
@@ -484,6 +484,17 @@ window.CT={removeFile:function(i){uploadedFiles.splice(i,1);renderFiles()}};
     var pin = L.divIcon({className:'', html:'<div class="vs-pin"><i class="fa-solid fa-building"></i></div>', iconSize:[30,30], iconAnchor:[15,28], popupAnchor:[0,-26]});
     L.marker([lat, lng], {icon:pin}).addTo(map).bindPopup('㈜빛세움 본사<br>성내로6길 50, 피스센터 5층').openPopup();
 })();
+</script>
+<script>
+/* 메뉴에서 '찾아오시는 길'(#ctVisit)로 진입 시 위치도 확대 모달 자동 표시 */
+if(location.hash==='#ctVisit'){
+    document.addEventListener('DOMContentLoaded',function(){
+        setTimeout(function(){
+            var link=document.getElementById('footerAddressLink');
+            if(link) link.click();
+        },400);
+    });
+}
 </script>
 </body>
 </html>
