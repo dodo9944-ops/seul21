@@ -74,19 +74,11 @@ const App = (() => {
     return `
     <div class="header-wrap" id="headerWrap">
     <header class="header"><div class="inner">
-      <div class="logo-item">
-        <a href="${B}/index.html" class="logo">
-          <span class="logo-mark"><img src="${B}/jpg/visseum_logo2.png" alt="(주)빛세움 VISSEUM" style="width:100%;height:100%;object-fit:contain"></span>
-          <span class="logo-divider" aria-hidden="true"></span>
-          <span class="logo-tagline">도시정비 전문<br>엔지니어링그룹</span>
-        </a>
-        <div class="logo-drop">
-          ${navGroups.map(g => `<div class="logo-drop-col">
-            <a href="${g.href}" class="logo-drop-head"><i class="${g.icon}"></i>${g.label}</a>
-            ${(g.sub||[]).map(s=>`<a href="${s.href}" class="logo-drop-sub">${s.label}</a>`).join('')}
-          </div>`).join('')}
-        </div>
-      </div>
+      <a href="${B}/index.html" class="logo">
+        <span class="logo-mark"><img src="${B}/jpg/visseum_logo2.png" alt="(주)빛세움 VISSEUM" style="width:100%;height:100%;object-fit:contain"></span>
+        <span class="logo-divider" aria-hidden="true"></span>
+        <span class="logo-tagline">도시정비 전문<br>엔지니어링그룹</span>
+      </a>
       <nav class="gnb">
         ${navGroups.map(g => `<div class="gnb-item">
           <a href="${g.href}"${navActive(g.href)?' class="active"':''}>${g.label}${g.sub?' <i class="fa-solid fa-chevron-down gnb-caret"></i>':''}</a>
