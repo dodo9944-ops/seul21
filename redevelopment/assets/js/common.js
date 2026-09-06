@@ -61,7 +61,7 @@ const App = (() => {
         { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
         { href:`${B}/pages/library.html?cat=법령`, label:'관계법령' },
         { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
-        { href:`${B}/pages/feasibility-check.html`, label:'사업성 분석' },
+        { href:`${B}/pages/feasibility-check.html`, label:'사업타당성 검토' },
         { href:`${B}/pages/gallery.html`, label:'갤러리' },
       ]},
       { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
