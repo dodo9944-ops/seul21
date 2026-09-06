@@ -188,8 +188,7 @@
     /* === Unified Hero (3안 패밀리) === */
     .uni-hero {
         background: linear-gradient(135deg, #FFFFFF 0%, #FFF3C4 40%, #FFFFFF 100%);
-        position: relative; overflow: hidden; padding: 0; min-height: 360px;
-        display: flex; align-items: center; /* PC: 콘텐츠 수직 중앙 정렬(상하 여백 동일), 대장 지시 2026-09-06 */
+        position: relative; overflow: hidden; padding: 20px 0 0; min-height: 360px;
     }
     .uni-hero .hero-bg-photo { position: absolute; top: 0; right: 0; width: 58%; height: 100%; z-index: 0; }
     .uni-hero .hero-bg-photo img, .uni-hero .hero-bg-photo video { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; filter: contrast(1.03) saturate(0.95); }
@@ -221,9 +220,9 @@
             linear-gradient(90deg, rgba(184,134,11,0.015) 1px, transparent 1px);
         background-size: 60px 60px; pointer-events: none; z-index: 1;
     }
-    .uni-hero .inner { position: relative; z-index: 2; display: flex; align-items: stretch; gap: 48px; width: 100%; }
-    .uni-hero .uh-text { flex: 1; min-width: 0; position: relative; display: flex; flex-direction: column; justify-content: center; }
-    .uni-hero .uh-bc { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(10,15,28,0.4); position: absolute; top: 0; left: 0; margin-bottom: 0; }
+    .uni-hero .inner { position: relative; z-index: 2; display: flex; align-items: flex-start; gap: 48px; }
+    .uni-hero .uh-text { flex: 1; min-width: 0; }
+    .uni-hero .uh-bc { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(10,15,28,0.4); margin-bottom: 13px; }
     .uni-hero .uh-bc a { color: rgba(10,15,28,0.4); transition: color 0.2s; }
     .uni-hero .uh-bc a:hover { color: #B8860B; }
     .uni-hero .uh-bc span { color: #B8860B; font-weight: 600; }
@@ -242,7 +241,7 @@
     .uni-hero .uh-ci i { font-size: 15px; color: #FFC400; }
     .uni-hero .uh-card h4 { font-size: 14px; font-weight: 800; color: #FFFFFF; margin-bottom: 4px; }
     .uni-hero .uh-card p { font-size: 11.5px; color: rgba(255,255,255,.65); line-height: 1.5; }
-    @media (max-width: 1024px) { .uni-hero { display: block; padding: 20px 0 0; } .uni-hero .inner { flex-direction: column; align-items: flex-start; gap: 16px; width: auto; } .uni-hero .uh-text { display: block; } .uni-hero .uh-bc { position: static; margin-bottom: 13px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
+    @media (max-width: 1024px) { .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
     @media (max-width: 600px) { .uni-hero { padding: 16px 0 0; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; margin-bottom: 24px; } .uni-hero .uh-card { width: 100%; height: auto; aspect-ratio: 1 / 1; padding: 16px 14px; border-radius: 16px; } .uni-hero .uh-ci { width: 34px; height: 34px; margin-bottom: 10px; } .uni-hero .uh-card h4 { font-size: 13px; } .uni-hero .uh-card p { font-size: 10.5px; line-height: 1.45; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
     </style>
