@@ -46,10 +46,29 @@
            ══════════════════════════════════════ */
         .splash {
             position: fixed; inset: 0; z-index: 99999;
-            background: #FFFFFF;
+            background: var(--visseum-ink);
             display: flex; align-items: center; justify-content: center;
             flex-direction: column;
             pointer-events: none;
+            overflow: hidden;
+        }
+        .splash-video-bg {
+            position: absolute; inset: 0; z-index: 0;
+            opacity: 0; animation: splVideoFade 1.3s ease .05s forwards;
+        }
+        .splash-video-bg video {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: brightness(.5) saturate(1.08);
+            transform: scale(1.08);
+            animation: splVideoZoom 3.2s ease-out forwards;
+        }
+        @keyframes splVideoFade { to { opacity: 1; } }
+        @keyframes splVideoZoom { from { transform: scale(1.14); } to { transform: scale(1.0); } }
+        .splash-scrim {
+            position: absolute; inset: 0; z-index: 1;
+            background:
+                linear-gradient(180deg, rgba(10,15,28,.55) 0%, rgba(10,15,28,.30) 45%, rgba(10,15,28,.72) 100%),
+                radial-gradient(ellipse at 50% 55%, transparent 0%, rgba(10,15,28,.45) 78%);
         }
         .splash.hidden { display: none !important; }
         body.splash-active { overflow: hidden; }
@@ -58,15 +77,15 @@
         .splash-active .section { visibility: visible; }
 
         .splash-grid {
-            position: absolute; inset: 0;
+            position: absolute; inset: 0; z-index: 2;
             background-image:
-                linear-gradient(rgba(184,134,11,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(184,134,11,0.03) 1px, transparent 1px);
+                linear-gradient(rgba(255,196,0,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,196,0,0.05) 1px, transparent 1px);
             background-size: 60px 60px;
         }
         .splash-glow {
-            position: absolute; width: 500px; height: 500px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(184,134,11,0.07) 0%, transparent 70%);
+            position: absolute; z-index: 2; width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,196,0,0.14) 0%, transparent 70%);
             top: 50%; left: 50%; transform: translate(-50%,-50%);
             animation: splGlow 3s ease-in-out infinite;
         }
@@ -75,7 +94,7 @@
             50% { opacity:1; transform: translate(-50%,-50%) scale(1.1); }
         }
         .splash-content {
-            position: relative; z-index: 1;
+            position: relative; z-index: 3;
             display: flex; flex-direction: column; align-items: center; gap: 0;
             margin-bottom: -30px;
         }
@@ -83,7 +102,7 @@
             width: 135px; height: 135px; object-fit: contain;
             opacity: 0; transform: translateY(50px) scale(.85);
             animation: logoRise 1s cubic-bezier(.16,.8,.24,1) 0.2s forwards;
-            filter: drop-shadow(0 10px 26px rgba(184,134,11,.28));
+            filter: drop-shadow(0 10px 26px rgba(0,0,0,.45)) drop-shadow(0 0 24px rgba(255,196,0,.20));
         }
         @keyframes logoRise {
             0% { opacity: 0; transform: translateY(50px) scale(.85); }
@@ -101,15 +120,16 @@
         }
         .splash-company {
             font-size: 26px; font-weight: 800; letter-spacing: -.5px;
-            color: #0A0F1C; margin-bottom: 8px;
+            color: #FFFDF7; margin-bottom: 8px;
+            text-shadow: 0 2px 14px rgba(0,0,0,.5);
         }
         .splash-sub {
             font-size: 11px; font-weight: 500; letter-spacing: 4px;
-            color: rgba(184,134,11,.85); text-transform: uppercase;
+            color: rgba(255,196,0,.92); text-transform: uppercase;
         }
         .splash-underline {
             width: 0; height: 2px; margin: 10px auto 0;
-            background: linear-gradient(90deg, transparent, #B8860B 20%, #D6A419 50%, #B8860B 80%, transparent);
+            background: linear-gradient(90deg, transparent, #D6A419 20%, #FFC400 50%, #D6A419 80%, transparent);
             animation: underlineGrow .45s cubic-bezier(.4,0,.2,1) 1.2s forwards;
         }
         @keyframes underlineGrow { to { width: 90px; } }
@@ -781,6 +801,12 @@
 
 <!-- ═══════════ SPLASH (풀스크린 인트로) ═══════════ -->
 <div class="splash" id="splashScreen">
+    <div class="splash-video-bg">
+        <video autoplay muted loop playsinline poster="jpg/hero_work_poster.jpg" aria-hidden="true">
+            <source src="video/hero_work.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="splash-scrim"></div>
     <div class="splash-grid"></div>
     <div class="splash-glow"></div>
     <div class="splash-content">
@@ -1290,15 +1316,15 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         // ★ 첫 접속: 로고+글자+밑줄 다 보여준 후 짧은 정지 → 짧게 페이드아웃 후 제거
         sessionStorage.setItem('seul_splash', '1');
         setTimeout(function(){
-            sp.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+            sp.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
             sp.style.opacity = '0';
             sp.style.transform = 'scale(1.03)';
             document.body.classList.remove('splash-active');
             document.body.style.overflow = '';
             setTimeout(function(){
                 if(sp.parentNode) sp.parentNode.removeChild(sp);
-            }, 450);
-        }, 1860);
+            }, 550);
+        }, 2700);
     }
 
     // 뒤로가기 시 잔상 방지
