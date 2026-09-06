@@ -37,6 +37,7 @@
     .page-body.lib-page{padding-top:var(--space-hero-to-title)} /* 세로 간격 표준 §1 (2026-09-05), 기존 33px 충돌 규칙 제거 */
     .page-body.lib-page,
     .page-body.lib-page > .inner{overflow:hidden}
+    @media(max-width:768px){ .page-body.lib-page{padding-top:17px} } /* 모바일 히어로-첫제목 간격 15px 축소 (32px→17px) */
     .lib-item{min-width:0;max-width:100%}
 
     /* === 전체자료 타이틀 — 바로 위 '주요뉴스'(.pop-head h3)와 완전히 동일한 규격으로 통일 === */
