@@ -25,6 +25,15 @@
     .notice-detail td { background: var(--gray-50); padding: 24px 20px !important; }
     .notice-detail-content { font-size: 14px; line-height: 1.85; color: var(--gray-700); white-space: pre-line; }
     .badge-important { background: var(--red); color: var(--white); }
+
+    /* [모바일 전용] 공지사항 번호 열 가림 (2026-09-06 대장 지시)
+       - 이 페이지 자체 <style> 안에만 선언하여 다른 페이지·공유 CSS 미영향
+       - 769px 이상(데스크탑)은 미선언이므로 번호 열 그대로 노출
+       - .notice-detail 의 colspan 셀은 .notice-row 가 아니므로 숨김 대상 아님 */
+    @media (max-width: 768px) {
+        .tbl thead th:first-child,
+        .notice-row td:first-child { display: none; }
+    }
     </style>
 </head>
 <body>
