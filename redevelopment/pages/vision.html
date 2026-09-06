@@ -28,7 +28,9 @@
         border-radius: 18px; overflow: hidden;
         box-shadow: 0 10px 30px rgba(10,15,28,.08);
         background: #fff; border: 1px solid #cecece;
+        transition: opacity 1s cubic-bezier(.16,.8,.24,1), transform 1s cubic-bezier(.16,.8,.24,1); /* 스크롤 접근 시 잔잔한 페이드업 효과, 대장 지시 2026-09-06 */
     }
+    .vs-philosophy.vs-pre { opacity: 0; transform: translateY(26px); }
     .vs-phil-photo-full { width: 100%; line-height: 0; }
     .vs-phil-photo-full img { width: 100%; height: auto; display: block; }
     .vs-phil-text-below {
@@ -949,6 +951,21 @@
             win.focus();
         };
         probe.src = src;
+    }
+
+    /* 브랜드 철학 사진 — 스크롤로 접근할 때 잔잔하게 페이드업 (대장 지시 2026-09-06) */
+    var philSec = document.querySelector('.vs-philosophy');
+    if (philSec && 'IntersectionObserver' in window) {
+        philSec.classList.add('vs-pre');
+        var philIO = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    philSec.classList.remove('vs-pre');
+                    philIO.unobserve(philSec);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+        philIO.observe(philSec);
     }
 
     function bindPhotoZoom(id) {
