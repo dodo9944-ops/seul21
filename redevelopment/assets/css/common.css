@@ -324,6 +324,31 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
 .gnb-drop a::after { content: none; }
 .gnb-drop a:hover { background: var(--gold-light); color: var(--gold); }
 
+/* ── 로고 호버 — 전체 메뉴 미리보기 패널 ── */
+.logo-item { position: relative; }
+.logo-drop {
+  position: absolute; top: 100%; left: 0; margin-top: 14px; width: 720px; max-width: 88vw;
+  background: rgba(255,255,255,0.86); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid #cecece; border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(10,15,28,0.16);
+  padding: 24px 26px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 28px;
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  z-index: 10001;
+}
+.logo-item:hover .logo-drop,
+.logo-item:focus-within .logo-drop { opacity: 1; visibility: visible; transform: translateY(0); }
+.logo-drop-col { display: flex; flex-direction: column; gap: 2px; }
+.logo-drop-head {
+  display: flex; align-items: center; gap: 8px; padding-bottom: 8px; margin-bottom: 6px;
+  border-bottom: 1px solid #e5e5e5; font-size: 14px; font-weight: 700; color: var(--gray-900);
+}
+.logo-drop-head i { font-size: 13px; color: var(--gold); width: 16px; text-align: center; }
+.logo-drop-head:hover { color: var(--gold); }
+.logo-drop-col a.logo-drop-sub { padding: 5px 4px; border-radius: 6px; font-size: 12.5px; font-weight: 500; color: var(--gray-600); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.logo-drop-col a.logo-drop-sub:hover { background: var(--gold-light); color: var(--gold); }
+@media (max-width: 1024px) { .logo-drop { display: none; } }
+
 /* ── HEADER ACTIONS ── */
 .header-actions { display: flex; align-items: center; gap: 2px; flex-shrink: 0; margin-left: 4px; }
 .header-actions .icon-btn {
