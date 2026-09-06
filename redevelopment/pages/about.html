@@ -318,24 +318,6 @@
     @media (max-width: 1024px) { .trust-cards { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) { .trust-cards { grid-template-columns: 1fr; } }
 
-    .trust-intro p + p { margin-top: 14px; }
-    .trust-sub { font-size: 16px; font-weight: 800; color: var(--visseum-ink); margin: 0 0 16px; }
-    /* ── 2-1. CORE COMPETITIVENESS (2026-09-07 대장 지시 회사소개 본문 교체로 신설, trust-card 톤 재사용) ── */
-    .core-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: var(--space-body-to-content); }
-    .core-card {
-        background: var(--white); border: 1px solid #cecece; border-top: 3px solid var(--visseum-gold);
-        border-radius: 14px; padding: 22px 22px 20px; transition: all 0.25s;
-        box-shadow: 0 4px 16px rgba(20,28,38,.045);
-    }
-    .core-card:hover { box-shadow: 0 12px 30px rgba(20,28,38,.09); transform: translateY(-4px); }
-    .core-icon { width: 42px; height: 42px; border-radius: 11px; background: linear-gradient(135deg, #FFF7DF, #FFE9A8); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
-    .core-icon i { color: #B8860B; font-size: 17px; }
-    .core-card h4 { font-size: 15px; font-weight: 800; color: var(--visseum-ink); margin-bottom: 8px; letter-spacing: -0.2px; word-break: keep-all; }
-    .core-card p { font-size: 13px; color: var(--gray-600); line-height: 1.7; word-break: keep-all; }
-    @media (max-width: 1024px) { .core-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .core-grid { grid-template-columns: 1fr; } }
-    .color-desc { font-size: 11.5px; color: var(--gray-600); margin-top: 6px; line-height: 1.5; }
-
     /* ── 3. CEO GREETING ── */
     .ceo-section {
         margin-top: var(--space-body-to-content); /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
@@ -686,7 +668,7 @@
     }
     @media (max-width: 700px) { .org-aux-row::before { display: none; } }
     .org-aux-box:hover { box-shadow: 0 12px 28px rgba(20,28,38,.09); transform: translateY(-3px); }
-    .org-aux-box .org-aux-title { font-size: 16.5px; font-weight: 800; color: var(--visseum-ink); } /* 14px → 16.5px (2026-09-07 대장 지시) */
+    .org-aux-box .org-aux-title { font-size: 14px; font-weight: 800; color: var(--visseum-ink); }
     .org-aux-box .org-aux-desc { font-size: 12px; color: var(--visseum-muted); font-weight: 600; margin-top: 4px; }
     .org-branch { width: 100%; display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; }
     .org-branch-h { position: relative; width: min(760px, 92%); height: 1px; background: linear-gradient(90deg, transparent, rgba(197,139,0,.45) 8%, rgba(197,139,0,.45) 92%, transparent); }
@@ -723,7 +705,7 @@
         border-bottom: 1px solid #dbdbdb;
     }
     .org-dept-header h4 {
-        font-size: 16.5px; font-weight: 800; /* 13.5px → 16.5px (2026-09-07 대장 지시 "조직도 헤드글자 크게") */
+        font-size: 13.5px; font-weight: 800;
     }
     .org-dept-body { padding: 14px 18px; }
     .org-dept-body ul { list-style: none; }
@@ -915,9 +897,9 @@
                 <i class="fa-solid fa-chevron-right"></i>
                 <span>회사소개</span>
             </div>
-            <div class="hero-label">Company Profile</div>
-            <h1>도시정비의 <em>경험</em>을<br>전문조직의 <em>실행력</em>으로 연결합니다</h1>
-            <p class="hero-sub">2008년 서울특별시 정비사업전문관리업 최초등록 이후,<br>재개발·재건축·소규모정비사업의 전 과정을 수행해 온 도시정비 전문기업입니다.</p>
+            <div class="hero-label">Visseum</div>
+            <h1>도시정비의 <em>기준</em>을 세우고,<br>사업의 <em>완성</em>까지 함께합니다</h1>
+            <p class="hero-sub">재개발·재건축·소규모정비사업의 실무를 책임지는<br>도시정비 전문 파트너</p>
         </div>
         <div class="hero-cards-float">
             <a class="hero-card" href="#ceo">
@@ -951,66 +933,31 @@
          ============================================================ -->
     <div class="about-section" id="aboutFirstSection">
         <div class="inner">
-            <div class="section-label">Company Overview</div>
-            <h2 class="section-title">사업의 처음과 끝을 연결하는 도시정비 전문기업</h2>
+            <div class="section-label">Trust Position</div>
+            <h2 class="section-title">(주)빛세움</h2>
             <div class="trust-intro">
-                <p>㈜빛세움은 사업성 검토, 조합설립, 인허가, 조합운영, 시공사 선정, 관리처분, 이주·철거와 PM·CM까지 정비사업의 전 과정을 통합적으로 관리합니다.</p>
-                <p>사업 단계별 업무를 단순히 처리하는 데 그치지 않고, 행정·법률·사업성·공사비·금융·이해관계를 하나의 흐름으로 연결하여 사업이 안정적으로 추진될 수 있도록 지원합니다.</p>
-                <p>축적된 현장 경험과 분야별 전문조직을 바탕으로 조합과 토지등소유자의 권리를 보호하고, 사업기간과 비용에 영향을 미치는 위험요인을 선제적으로 관리합니다.</p>
+                <p>(주)빛세움은 재개발·재건축·소규모정비사업 전 과정을 직접 수행하는 도시정비 전문 엔지니어링 회사입니다. 사업성 검토부터 인허가 전략, 조합 운영, 시공사 선정, CM·PM 사업관리까지 정비사업의 처음과 끝을 책임집니다.</p>
             </div>
-            <h3 class="trust-sub">빛세움 주요 현황</h3>
             <div class="trust-cards">
                 <div class="trust-card">
-                    <div class="trust-card-value">2008</div>
-                    <div class="trust-card-unit">Registered</div>
-                    <p>서울특별시 정비사업전문관리업<br>최초등록</p>
+                    <div class="trust-card-value">20+</div>
+                    <div class="trust-card-unit">Years</div>
+                    <p>정비사업 수행<br>업력 20년 이상</p>
                 </div>
                 <div class="trust-card">
                     <div class="trust-card-value">50+</div>
                     <div class="trust-card-unit">Projects</div>
-                    <p>재개발·재건축·소규모정비사업<br>수행</p>
+                    <p>재개발 · 재건축<br>수행 프로젝트</p>
                 </div>
                 <div class="trust-card">
                     <div class="trust-card-value">38,000+</div>
                     <div class="trust-card-unit">Households</div>
-                    <p>누적 관리 세대수</p>
+                    <p>관리 세대수<br>누적 실적</p>
                 </div>
                 <div class="trust-card">
-                    <div class="trust-card-value">10+</div>
-                    <div class="trust-card-unit">Major Builders</div>
-                    <p>주요 건설사 참여 사업장<br>수행실적</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================================
-         2-1. CORE COMPETITIVENESS (2026-09-07 대장 지시 회사소개 본문 교체로 신설)
-         ============================================================ -->
-    <div class="about-section bg-light" id="core">
-        <div class="inner">
-            <div class="section-label">Core Competitiveness</div>
-            <h2 class="section-title">경험을 넘어, 사업을 움직이는 전문성</h2>
-            <div class="core-grid">
-                <div class="core-card">
-                    <div class="core-icon"><i class="fa-solid fa-diagram-project"></i></div>
-                    <h4>전 과정 통합관리</h4>
-                    <p>사업 초기 검토부터 준공·입주·청산까지 단계별 업무와 위험요인을 하나의 관리체계로 연결합니다.</p>
-                </div>
-                <div class="core-card">
-                    <div class="core-icon"><i class="fa-solid fa-user-tie"></i></div>
-                    <h4>행정과 현장을 아는 전문인력</h4>
-                    <p>도시정비 실무경력과 행정조정 경험을 갖춘 전문인력이 인허가와 현장의 주요 쟁점에 직접 대응합니다.</p>
-                </div>
-                <div class="core-card">
-                    <div class="core-icon"><i class="fa-solid fa-coins"></i></div>
-                    <h4>사업비·공사비·금융관리</h4>
-                    <p>사업비와 공사비의 적정성을 검토하고, HUG 보증과 이주비·사업비 등 주요 금융업무를 체계적으로 지원합니다.</p>
-                </div>
-                <div class="core-card">
-                    <div class="core-icon"><i class="fa-solid fa-people-group"></i></div>
-                    <h4>분야별 전문가 협업체계</h4>
-                    <p>법률·세무회계·감정평가·설계·홍보 등 분야별 전문기관과 협업하여 복합적인 문제에 종합적으로 대응합니다.</p>
+                    <div class="trust-card-value">10곳+</div>
+                    <div class="trust-card-unit">1군시공사</div>
+                    <p>HIGH-END BRAND</p>
                 </div>
             </div>
         </div>
@@ -1026,12 +973,15 @@
             <div class="ceo-section">
                 <div class="ceo-text-area">
                     <div class="ceo-quote">&ldquo;</div>
-                    <div class="ceo-headline">정확한 판단과 책임 있는 실행으로<br>도시정비의 가치를 높이겠습니다</div>
+                    <div class="ceo-headline">도시의 가치를 높이고,<br>주민의 삶을 바꾸는 정비사업을 만들겠습니다.</div>
                     <div class="ceo-accent-line"></div>
-                    <div class="ceo-greeting" id="ceoGreeting">안녕하십니까.<br>㈜빛세움 대표이사 조구형입니다.<br><br>도시정비사업은 주민의 오랜 삶의 터전과 소중한 재산을 다루는 사업입니다. 수많은 이해관계와 행정절차가 맞물려 있기 때문에 작은 판단 하나가 사업기간과 사업비, 조합원의 부담을 크게 바꿀 수 있습니다.<br><br>㈜빛세움은 2008년 서울특별시 정비사업전문관리업 등록 이후 다양한 재개발·재건축·소규모정비사업 현장에서 경험을 축적해 왔습니다. 그 과정에서 사업의 성패는 화려한 계획보다 정확한 절차와 투명한 의사결정, 끝까지 책임지는 실행력에 달려 있다는 사실을 배웠습니다.<br><br>앞으로도 관련 법령과 원칙을 준수하고, 객관적인 자료를 바탕으로 사업의 방향을 제시하겠습니다. 예상되는 문제를 먼저 검토하고, 조합원과 사업 참여자에게 필요한 정보를 투명하게 제공하겠습니다.<br><br>고객의 신뢰를 가장 중요한 자산으로 여기며, 맡은 사업이 안정적으로 완성될 때까지 함께하는 책임 있는 동반자가 되겠습니다.<br><br>감사합니다.</div>
+                    <div class="ceo-greeting" id="ceoGreeting"></div>
                     <div class="ceo-signature">
-                        <div class="sig-name"><span class="sig-title">㈜빛세움 대표이사</span><span id="ceoNameDisplay">조구형</span></div>
+                        <div class="sig-name"><span class="sig-title">대표이사</span><span id="ceoNameDisplay">조구형</span></div>
                     </div>
+                </div>
+                <div class="ceo-photo-area">
+                    <img src="../jpg/visseum_logo.jpg" alt="㈜빛세움 CI" style="object-fit:contain;background:#fff">
                 </div>
             </div>
 
@@ -1052,17 +1002,17 @@
                     <h3 class="cert-title">정비사업전문관리업 <em>등록증</em></h3>
                     <div class="cert-issuer">등록기관 — <strong>서울특별시장</strong> · 2008년 최초등록 이후 계속 운영</div>
                     <p class="cert-desc">
-                        ㈜빛세움은 <strong style="color:var(--visseum-ink)">2008년 9월</strong> 서울특별시장에게 정비사업전문관리업체로
-                        <strong style="color:var(--gold)">최초 등록</strong>한 이후, 상호 및 소재지 변경에 따른 2015년 재등록을 거쳐
-                        <strong style="color:var(--visseum-ink)">현재까지 정비사업전문관리 업무를 계속 수행</strong>하고 있습니다.
+                        ㈜빛세움은 <strong style="color:var(--visseum-ink)">2008년 9월</strong> 정비사업전문관리업체로 서울특별시에
+                        <strong style="color:var(--gold)">최초 등록(제2008-22호)</strong>한 이래, 상호변경(소재지 변경)에 따른 재등록(2015년, 제2015-4호)을 거쳐
+                        <strong style="color:var(--visseum-ink)">현재까지 오랜 기간 정비사업 전문관리 업무를 수행</strong>해 온 전문 기업입니다.
+                        오랜 실무 경험과 축적된 신뢰를 바탕으로 재개발·재건축·소규모정비사업 현장에서 조합 및 토지등소유자와 함께하고 있습니다.
+                        현재는 <strong style="color:var(--visseum-ink)">빛세움 그룹사</strong>로 사업 영역을 확장하여, 정비사업 전문관리를 넘어 CM·PM·상가MD·정비사업광고·분양대행까지 정비사업분야 전반에 걸쳐 폭넓게 사업을 운영하고 있습니다.
                     </p>
                     <div class="cert-meta">
-                        <div class="cm-item"><span class="cm-key">회사명</span><span class="cm-val">㈜빛세움</span></div>
-                        <div class="cm-item"><span class="cm-key">등록업종</span><span class="cm-val">정비사업전문관리업</span></div>
-                        <div class="cm-item"><span class="cm-key">최초등록</span><span class="cm-val">2008년 9월 11일 · 서울특별시 제2008-22호</span></div>
-                        <div class="cm-item"><span class="cm-key">현재등록</span><span class="cm-val">2015년 3월 19일 · 서울특별시 제2015-4호</span></div>
+                        <div class="cm-item"><span class="cm-key">최초등록</span><span class="cm-val">2008.09.11 (제2008-22호)</span></div>
+                        <div class="cm-item"><span class="cm-key">현재등록</span><span class="cm-val">2015.03.19 (제2015-4호)</span></div>
                         <div class="cm-item"><span class="cm-key">등록기관</span><span class="cm-val">서울특별시장</span></div>
-                        <div class="cm-item"><span class="cm-key">주요 업무</span><span class="cm-val">재개발·재건축·소규모정비사업 전문관리, 도시계획, PM·CM, 사업성·공사비 검토 및 관련 업무지원</span></div>
+                        <div class="cm-item"><span class="cm-key">업력</span><span class="cm-val">2008년 ~ 현재</span></div>
                     </div>
                 </div>
             </div>
@@ -1082,11 +1032,8 @@
     <div class="about-section" id="history">
         <div class="inner">
             <div class="section-label">History</div>
-            <h2 class="section-title">경험이 쌓일수록 책임의 기준도 높아졌습니다</h2>
+            <h2 class="section-title">회사연혁</h2>
             <div class="timeline-center" id="timeline"></div>
-            <div class="trust-intro" style="margin-bottom:0">
-                <p>빛세움은 사업의 규모보다 맡은 업무의 완성도를 우선하며, 수행 경험을 조직의 지식과 관리체계로 축적해 왔습니다.</p>
-            </div>
         </div>
     </div>
 
@@ -1096,10 +1043,7 @@
     <div class="about-section bg-light" id="organization">
         <div class="inner">
             <div class="section-label">Organization</div>
-            <h2 class="section-title">분야별 전문조직이 하나의 사업을 함께 관리합니다</h2>
-            <div class="trust-intro">
-                <p>빛세움은 사업부문 간 업무가 단절되지 않도록 협업체계를 구축하고 있습니다. 경영지원부터 정비사업, PM·CM, 분양·광고까지 분야별 조직이 사업의 목표와 정보를 공유하며 통합적으로 대응합니다.</p>
-            </div>
+            <h2 class="section-title">조직도</h2>
             <div class="org-chart">
                 <div class="org-ceo-box">
                     <div class="org-role">CEO</div>
@@ -1112,8 +1056,8 @@
                             <div class="org-aux-title">감사</div>
                         </div>
                         <div class="org-aux-box">
-                            <div class="org-aux-title">경영지원부문</div>
-                            <div class="org-aux-desc">총무·인사 및 회계·재무 · 계약 및 문서관리 · 사업장 행정지원</div>
+                            <div class="org-aux-title">경영지원본부</div>
+                            <div class="org-aux-desc">총무인사 · 회계재무</div>
                         </div>
                     </div>
                 </div>
@@ -1123,59 +1067,57 @@
                 </div>
                 <div class="org-dept-grid">
                     <div class="org-dept-card">
-                        <div class="org-dept-header"><h4>정비사업부문</h4></div>
+                        <div class="org-dept-header"><h4>정비사업그룹</h4></div>
                         <div class="org-dept-body">
                             <ul>
-                                <li>재개발·재건축·공공재개발</li>
-                                <li>소규모정비사업 및 리모델링</li>
-                                <li>조합설립·사업시행·관리처분 지원</li>
-                                <li>HUG 보증 및 금융업무 지원</li>
-                                <li>도급계약·공사비·국공유지 관련 업무</li>
+                                <li>정비사업 · 공공재개발</li>
+                                <li>소규모정비사업 · 리모델링</li>
+                                <li>HUG 대출보증(이주비·사업비·부담금·일반분양)</li>
+                                <li>사업관리 PM(도급계약·공사비검토·국공유지양도양수)</li>
                             </ul>
                         </div>
                     </div>
                     <div class="org-dept-card">
-                        <div class="org-dept-header"><h4>PM·CM 및 공사관리부문</h4></div>
+                        <div class="org-dept-header"><h4>분양사업그룹</h4></div>
                         <div class="org-dept-body">
                             <ul>
-                                <li>사업일정·원가·품질·위험관리</li>
-                                <li>시공사·설계자·감리자 등 협력업체 조정</li>
-                                <li>정비기반시설 및 관련 공사관리</li>
-                                <li>사업 단계별 보고·의사결정 관리</li>
+                                <li>분양대행</li>
+                                <li>근생 일괄매입</li>
+                                <li>MD 상환경플랜</li>
+                                <li>상환경 조성</li>
                             </ul>
                         </div>
                     </div>
                     <div class="org-dept-card">
-                        <div class="org-dept-header"><h4>분양·상가MD부문</h4></div>
-                        <div class="org-dept-body">
-                            <ul>
-                                <li>주택 및 상가 분양대행</li>
-                                <li>근린생활시설 매입·운영 검토</li>
-                                <li>상가MD 및 상환경계획</li>
-                                <li>분양전략 수립</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="org-dept-card">
-                        <div class="org-dept-header"><h4>광고·커뮤니케이션부문</h4></div>
+                        <div class="org-dept-header"><h4>광고사업그룹</h4></div>
                         <div class="org-dept-body">
                             <ul>
                                 <li>온라인 커뮤니케이션</li>
-                                <li>총회·홍보관 운영지원</li>
-                                <li>홍보·판촉물 제작</li>
-                                <li>광고 및 홍보대행</li>
+                                <li>라이브커머스</li>
+                                <li>홍보 판촉물 제작</li>
+                                <li>광고 및 홍보 대행</li>
                             </ul>
                         </div>
                     </div>
                     <div class="org-dept-card">
-                        <div class="org-dept-header"><h4>외부 전문기관 협력체계</h4></div>
+                        <div class="org-dept-header"><h4>건설공사관리그룹</h4></div>
+                        <div class="org-dept-body">
+                            <ul>
+                                <li>정비기반시설 공사</li>
+                                <li>홍보관 등 공사</li>
+                                <li>건설공사관리 업무</li>
+                                <li>Re-TS사업(부동산 개발)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="org-dept-card">
+                        <div class="org-dept-header"><h4>협력업체</h4></div>
                         <div class="org-dept-body">
                             <ul>
                                 <li>법무법인</li>
-                                <li>세무·회계법인</li>
+                                <li>세무/회계법인</li>
+                                <li>홍보컨설팅 용역</li>
                                 <li>감정평가법인</li>
-                                <li>설계·홍보 전문기관</li>
-                                <li>사업별 쟁점에 전문적으로 대응</li>
                             </ul>
                         </div>
                     </div>
@@ -1190,14 +1132,14 @@
     <div class="about-section bg-light" id="ci">
         <div class="inner">
             <div class="section-label">Corporate Identity</div>
-            <h2 class="section-title">빛세움, 도시의 미래를 밝히고 기준을 세우다</h2>
+            <h2 class="section-title">CI 소개</h2>
             <div class="ci-layout">
                 <div class="ci-img-area">
                     <img src="../jpg/ci_guide.jpg" alt="㈜빛세움 CI 가이드">
                 </div>
                 <div class="ci-text-area">
-                    \1                    <p>‘빛세움’은 미래와 희망을 의미하는 빛과 올바른 기준을 바로 세운다는 세움을 결합한 이름입니다.</p>
-                    <p>빛세움의 CI는 도시의 가치를 높이고, 신뢰할 수 있는 정비사업의 기준을 세우겠다는 기업의 의지를 담고 있습니다.</p>
+                    <h3><em>빛세움(Visseum)</em> = 빛을 세우다</h3>
+                    <p>빛세움은 미래·희망·행복을 의미하는 '빛'과 '세움'을 조합하여 '빛을 세우다'를 뜻합니다. 즉, 인간의 삶을 행복하고 풍요롭게 창조한다는 Living-Value's Creation을 의미하며, Visseum의 'vis'는 '힘'이라는 뜻을 담고 있습니다. 'seum'은 유명 건축물인 Colosseum에서 아름답고 웅장하며 오래도록 기억되는, 세상 누구나 아는 건축물이라는 의미를 차용한 것으로, 기업을 힘 있고 웅대하게 번창시킨다는 Enterprise-Value's Growth를 의미합니다.</p>
                     <div class="ci-keywords">
                         <span class="ci-keyword"><i class="fa-solid fa-ruler-combined"></i> 기준</span>
                         <span class="ci-keyword"><i class="fa-solid fa-handshake"></i> 신뢰</span>
@@ -1220,31 +1162,21 @@
                     <img src="../jpg/visseum_logo_transparent.png" alt="빛세움 심볼마크">
                 </div>
                 <div class="symbol-desc">
+                    <p>빛세움의 심볼마크는 '빛'을 상징하는 삼색(적·녹·금) 삼각형과 건물의 기둥·보 구조를 결합한 기하학적 형태입니다. 상승하는 화살표는 도시의 가치를 높이겠다는 의지를 상징합니다.</p>
                     <div class="symbol-meaning">
-                        <strong>심볼이 담고 있는 의미</strong><br>
-                        · 빛 — 미래·희망·가능성을 밝히는 방향<br>
-                        · 구조 — 견고한 도시와 정확한 엔지니어링<br>
-                        · 상승 — 도시가치의 향상과 지속적인 발전<br>
-                        · 열림 — 투명한 사업운영과 열린 소통
+                        <strong>디자인 의미</strong><br>
+                        · 수직·수평선의 교차 — 건축 구조의 견고함과 정밀한 엔지니어링<br>
+                        · 상단 화살표 — 도시의 미래를 향한 상승, 발전, 혁신<br>
+                        · 열린 구조 — 투명한 사업 운영과 열린 소통
                     </div>
                 </div>
             </div>
-            <h3 class="trust-sub">브랜드 컬러</h3>
             <div class="brand-colors">
-                <div class="color-card" style="box-shadow:0 0 0 2px #FFC400">
-                    <div class="color-swatch" style="background:#FFC400;"></div>
-                    <div class="color-info">
-                        <div class="color-name">Bitseum Yellow <span style="font-size:10px;font-weight:800;color:#B8860B;border:1px solid #A6790A;border-radius:4px;padding:1px 6px;margin-left:4px">MAIN</span></div>
-                        <div class="color-hex">#FFC400</div>
-                        <div class="color-desc">빛·미래·가능성을 상징하는 대표색</div>
-                    </div>
-                </div>
                 <div class="color-card">
-                    <div class="color-swatch" style="background:#0068B7;"></div>
+                    <div class="color-swatch" style="background:#E60012;"></div>
                     <div class="color-info">
-                        <div class="color-name">Bitseum Blue</div>
-                        <div class="color-hex">#0068B7</div>
-                        <div class="color-desc">전문성·신뢰·안정성</div>
+                        <div class="color-name">Bitseum Red</div>
+                        <div class="color-hex">#E60012</div>
                     </div>
                 </div>
                 <div class="color-card">
@@ -1252,35 +1184,25 @@
                     <div class="color-info">
                         <div class="color-name">Bitseum Green</div>
                         <div class="color-hex">#009A44</div>
-                        <div class="color-desc">도시의 성장과 지속가능성</div>
                     </div>
                 </div>
                 <div class="color-card">
-                    <div class="color-swatch" style="background:#E60012;"></div>
+                    <div class="color-swatch" style="background:#0068B7;"></div>
                     <div class="color-info">
-                        <div class="color-name">Bitseum Red</div>
-                        <div class="color-hex">#E60012</div>
-                        <div class="color-desc">실행력·열정·도전정신</div>
+                        <div class="color-name">Bitseum Blue</div>
+                        <div class="color-hex">#0068B7</div>
+                    </div>
+                </div>
+                <div class="color-card" style="box-shadow:0 0 0 2px #FFC400">
+                    <div class="color-swatch" style="background:#FFC400;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Bitseum Yellow <span style="font-size:10px;font-weight:800;color:#B8860B;border:1px solid #A6790A;border-radius:4px;padding:1px 6px;margin-left:4px">MAIN</span></div>
+                        <div class="color-hex">#FFC400</div>
                     </div>
                 </div>
             </div>
             <div style="text-align:right;">
                 <a href="../jpg/visseum_logo.jpg" download class="ci-dl-btn"><i class="fa-solid fa-download"></i> CI 다운로드</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================================
-         9. CLOSING (2026-09-07 대장 지시 회사소개 본문 교체로 신설)
-         ============================================================ -->
-    <div class="about-section bg-light" id="closing">
-        <div class="inner">
-            <div class="section-label">Visseum</div>
-            <h2 class="section-title">도시정비의 시작부터 완성까지</h2>
-            <div class="trust-intro" style="margin-bottom:0">
-                <p>㈜빛세움은 실적과 사람, 조직과 시스템으로 전문성을 증명하겠습니다.</p>
-                <p>고객의 입장에서 판단하고 전문가의 기준으로 실행하며, 맡은 사업을 끝까지 책임지는 도시정비 전문기업이 되겠습니다.</p>
-                <p><strong>도시정비의 기준을 세우는 기업, ㈜빛세움입니다.</strong></p>
             </div>
         </div>
     </div>
@@ -1315,7 +1237,7 @@
     var info = MOCK.companyInfo;
 
     /* ── CEO 인사말 ── */
-    /* CEO 인사말은 2026-09-07 대장 지시 본문으로 about.html 에 직접 기재 (mock-data ceoGreeting 미사용) */
+    document.getElementById('ceoGreeting').innerHTML = info.ceoGreeting.replace(/\n/g, '<br>');
 
     /* ── CEO 이름 ── */
     var ceoNameEl = document.getElementById('ceoNameDisplay');
@@ -1323,7 +1245,7 @@
         ceoNameEl.textContent = info.ceoName;
     }
 
-    /* ── 회사연혁 — center timeline (2026-09-07 대장 지시 "연혁 기존거로" — mock-data history 기반 렌더 복원) ── */
+    /* ── 회사연혁 — center timeline ── */
     var recentYears = ['2026','2025','2024'];
     document.getElementById('timeline').innerHTML = info.history.map(function(h, i) {
         var isRecent = recentYears.indexOf(h.year) !== -1;
