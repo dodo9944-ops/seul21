@@ -97,7 +97,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260906a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906p"></script>
+<script src="../assets/js/common.js?v=20260906q"></script>
 <script>
 (function() {
     function badgeClass(cat) {
@@ -105,7 +105,7 @@
         return map[cat] || 'badge-gray';
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
         const id = App.getParam('id');
         if (!id) { location.href = 'library.html?cat=주요뉴스'; return; }
 
@@ -115,8 +115,8 @@
             return;
         }
 
-        // 조회수 증가
-        DataService.update('news', id, { views: (news.views || 0) + 1 });
+        // 조회수 — 서버(Redis) 기준 정식 집계, 동일 IP 24시간 내 1회 (대장 지시 2026-09-06)
+        const viewCount = (await ViewCounter.register('news', id)) || 0;
 
         App.headTags(news.title, news.summary);
 
@@ -152,7 +152,7 @@
                 <div class="detail-meta">
                     <span><i class="fa-regular fa-user"></i>${news.author}</span>
                     <span><i class="fa-regular fa-calendar"></i>${news.date}</span>
-                    <span><i class="fa-regular fa-eye"></i>${App.comma(news.views + 1)}</span>
+                    <span><i class="fa-regular fa-eye"></i>${App.comma(viewCount)}</span>
                 </div>
             </div>
             <div class="detail-body">${paragraphs}</div>

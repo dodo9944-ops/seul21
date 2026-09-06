@@ -1175,7 +1175,7 @@
 <!-- 공통 JS -->
 <script src="assets/data/mock-data.js?v=20260906a"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260906p"></script>
+<script src="assets/js/common.js?v=20260906q"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1488,17 +1488,18 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         window.mainLibDownload=function(id){
             location.href='pages/library.html?id='+encodeURIComponent(id);
         };
-        function libViews(){ try{ return JSON.parse(localStorage.getItem('seul_lib_views')||'{}') }catch(e){ return {} } }
-        function libViewsOf(i){ return (i.views||0) + (libViews()[i.id]||0); }
-        libEl.innerHTML=libs.map(function(i){
-            var isWeb=i.fileType==='web';
-            var ftLabel=i.fileType==='pdf'?'PDF':i.fileType==='hwp'?'HWP':i.fileType==='xlsx'?'XLS':'WEB';
-            var v=isWeb?getContentVisual(i.category):{icon:iconMap[i.fileType]||'fa-file',cls:i.fileType,badge:ftLabel};
-            return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
-                '<div class="news-thumb '+v.cls+'"><i class="fa-solid '+v.icon+'"></i><span class="ft-label">'+v.badge+'</span></div>'+
-                '<div class="news-body"><h4>'+i.title+'</h4>'+
-                '<div class="news-date"><span>'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></span><span class="views"><i class="fa-regular fa-eye"></i> '+libViewsOf(i)+'</span></div></div></div>';
-        }).join('');
+        (async function(){
+            var vmap=await ViewCounter.batch('library',libs.map(function(i){return i.id}));
+            libEl.innerHTML=libs.map(function(i){
+                var isWeb=i.fileType==='web';
+                var ftLabel=i.fileType==='pdf'?'PDF':i.fileType==='hwp'?'HWP':i.fileType==='xlsx'?'XLS':'WEB';
+                var v=isWeb?getContentVisual(i.category):{icon:iconMap[i.fileType]||'fa-file',cls:i.fileType,badge:ftLabel};
+                return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
+                    '<div class="news-thumb '+v.cls+'"><i class="fa-solid '+v.icon+'"></i><span class="ft-label">'+v.badge+'</span></div>'+
+                    '<div class="news-body"><h4>'+i.title+'</h4>'+
+                    '<div class="news-date"><span>'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></span><span class="views"><i class="fa-regular fa-eye"></i> '+(vmap[i.id]||0)+'</span></div></div></div>';
+            }).join('');
+        })();
     }
 
     /* 갤러리: 자료실 갤러리(MOCK.gallery) 연동 — 최신 3건 */
@@ -1512,20 +1513,21 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             var t=(g.content||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
             return t.length>90?t.slice(0,90)+'…':t;
         }
-        function galViews(){ try{ return JSON.parse(localStorage.getItem('seul_gallery_views')||'{}') }catch(e){ return {} } }
-        function galViewsOf(g){ return (g.views||0) + (galViews()[g.id]||0); }
         var pinnedGalIds=['ws2025_winter','site_hqoffice2026','jc_gongdeok2026'];
         var gals=pinnedGalIds.map(function(id){return MOCK.gallery.find(function(g){return g.id===id})}).filter(Boolean);
-        galEl.innerHTML=gals.map(function(g){
-            var cover=(g.images&&g.images.length)?g.images[0]:null;
-            var coverSrc=cover?cover.src.replace(/^\.\.\//,''):'';
-            var thumb=cover?'<img src="'+coverSrc+'" alt="'+(cover.alt||g.title||'')+'" loading="lazy">':'<i class="fa-solid fa-image"></i>';
-            return'<div class="news-item" style="cursor:pointer" onclick="mainGalleryOpen(\''+g.id+'\')">'+
-                '<div class="news-thumb-photo">'+thumb+'</div>'+
-                '<div class="news-body"><h4>'+g.title+'</h4>'+
-                '<div class="news-desc">'+galSummary(g)+'</div>'+
-                '<div class="news-date"><span>'+g.category+' · '+g.date+'</span><span class="views"><i class="fa-regular fa-eye"></i> '+galViewsOf(g)+'</span></div></div></div>';
-        }).join('');
+        (async function(){
+            var vmap=await ViewCounter.batch('gallery',gals.map(function(g){return g.id}));
+            galEl.innerHTML=gals.map(function(g){
+                var cover=(g.images&&g.images.length)?g.images[0]:null;
+                var coverSrc=cover?cover.src.replace(/^\.\.\//,''):'';
+                var thumb=cover?'<img src="'+coverSrc+'" alt="'+(cover.alt||g.title||'')+'" loading="lazy">':'<i class="fa-solid fa-image"></i>';
+                return'<div class="news-item" style="cursor:pointer" onclick="mainGalleryOpen(\''+g.id+'\')">'+
+                    '<div class="news-thumb-photo">'+thumb+'</div>'+
+                    '<div class="news-body"><h4>'+g.title+'</h4>'+
+                    '<div class="news-desc">'+galSummary(g)+'</div>'+
+                    '<div class="news-date"><span>'+g.category+' · '+g.date+'</span><span class="views"><i class="fa-regular fa-eye"></i> '+(vmap[g.id]||0)+'</span></div></div></div>';
+            }).join('');
+        })();
     }
 })();
 </script>

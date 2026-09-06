@@ -181,7 +181,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260906a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906p"></script>
+<script src="../assets/js/common.js?v=20260906q"></script>
 <script>
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
@@ -190,15 +190,9 @@
 
         var post = DataService.getById('community', id);
 
-        function renderPost(post) {
-        /* 조회수: 세션당 1회만 증가 */
-        var viewKey = 'rdc_viewed_' + id;
-        var viewCount = post.views || 0;
-        if (!sessionStorage.getItem(viewKey)) {
-            viewCount++;
-            DataService.update('community', id, { views: viewCount });
-            sessionStorage.setItem(viewKey, '1');
-        }
+        async function renderPost(post) {
+        /* 조회수 — 서버(Redis) 기준 정식 집계, 동일 IP 24시간 내 1회 (대장 지시 2026-09-06) */
+        var viewCount = (await ViewCounter.register('community', id)) || 0;
 
         App.headTags(post.title, post.content.substring(0, 100));
 

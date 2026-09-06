@@ -116,7 +116,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260906a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906p"></script>
+<script src="../assets/js/common.js?v=20260906q"></script>
 <script>
 (function() {
     const notices = DataService.getAll('notices');
@@ -143,10 +143,6 @@
 
     const catBadgeCls = { '수주소식': 'badge-order', '회사소식': 'badge-company', '조합소식': 'badge-union', '기사소식': 'badge-press' };
 
-    /* 공지사항 조회수 — 브라우저 localStorage 기준 누적(초기화 없음) */
-    function getNoticeViews() { try { return JSON.parse(localStorage.getItem('seul_notice_views') || '{}'); } catch (e) { return {}; } }
-    function addNoticeView(id) { const v = getNoticeViews(); v[id] = (v[id] || 0) + 1; try { localStorage.setItem('seul_notice_views', JSON.stringify(v)); } catch (e) {} return v[id]; }
-
     function renderTabCounts() {
         document.querySelectorAll('#noticeTabs button[data-cat]').forEach(b => {
             const cat = b.dataset.cat;
@@ -171,7 +167,7 @@
         pg.innerHTML = h;
     }
 
-    function render() {
+    async function render() {
         const filtered = currentCat === '전체' ? notices : notices.filter(n => noticeCat(n) === currentCat);
         document.getElementById('noticeResult').innerHTML = '총 <strong>' + filtered.length + '</strong>건';
         const tbody = document.getElementById('noticeBody');
@@ -186,7 +182,7 @@
         if (curPage > pages) curPage = 1;
         const start = (curPage - 1) * PER;
         const slice = filtered.slice(start, start + PER);
-        const viewMap = getNoticeViews();
+        const viewMap = await ViewCounter.batch('notice', slice.map(n => n.id));
         tbody.innerHTML = slice.map((n) => {
             const cat = noticeCat(n);
             const catBadge = `<span class="badge ${catBadgeCls[cat]}">${cat}</span>`;
@@ -204,7 +200,7 @@
         tbody.querySelectorAll('.notice-row').forEach(row => {
             row.addEventListener('click', () => {
                 const n = notices.find(x => x.id === row.dataset.id);
-                if (n) { addNoticeView(n.id); NoticeDetailModal.open(n); render(); }
+                if (n) { ViewCounter.register('notice', n.id).then(render); NoticeDetailModal.open(n); }
             });
         });
 
@@ -241,7 +237,7 @@
     render();
     if (openId) {
         const target = notices.find(n => n.id === openId);
-        if (target) { addNoticeView(target.id); NoticeDetailModal.open(target); render(); }
+        if (target) { ViewCounter.register('notice', target.id).then(render); NoticeDetailModal.open(target); }
     }
 })();
 </script>

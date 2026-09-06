@@ -226,7 +226,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260906a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906p"></script>
+<script src="../assets/js/common.js?v=20260906q"></script>
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.community){var s=JSON.parse(localStorage.getItem('rdc_community')||'[]');if(s.length!==MOCK.community.length)localStorage.setItem('rdc_community',JSON.stringify(MOCK.community))}
@@ -265,9 +265,10 @@ function renderTabs(){
     }).join('');
 }
 
-/* Featured posts (top 3 by likes) */
-function renderFeatured(){
-    var top=allPosts.slice().sort(function(a,b){var va=a.views||0,vb=b.views||0;if(vb!==va)return vb-va;return(a.date||'').localeCompare(b.date||'')}).slice(0,3);
+/* Featured posts (top 3 by views) */
+async function renderFeatured(){
+    var vmap=await ViewCounter.batch('community',allPosts.map(function(p){return p.id}));
+    var top=allPosts.slice().sort(function(a,b){var va=vmap[a.id]||0,vb=vmap[b.id]||0;if(vb!==va)return vb-va;return(a.date||'').localeCompare(b.date||'')}).slice(0,3);
     if(!top.length){document.getElementById('cmFeatured').style.display='none';return}
     var html='<div class="cf-head"><div class="cf-icon"><i class="fa-solid fa-comments"></i></div><h3>커뮤니티</h3><span style="font-size:12px;color:var(--gray-400);font-weight:500">열람순 · 인기순</span></div><div class="cf-grid">';
     top.forEach(function(p){
@@ -277,7 +278,7 @@ function renderFeatured(){
             '<div class="cf-title">'+App.esc(p.title)+'</div>'+
             '<div class="cf-meta">'+
                 '<span>'+App.esc(p.author)+'</span>'+
-                '<span><i class="fa-solid fa-eye"></i> '+App.comma(p.views)+'</span>'+
+                '<span><i class="fa-solid fa-eye"></i> '+App.comma(vmap[p.id]||0)+'</span>'+
                 '<span><i class="fa-solid fa-heart" style="color:var(--gold)"></i> '+(p.likes||0)+'</span>'+
                 '<span><i class="fa-solid fa-comment"></i> '+(p.comments||0)+'</span>'+
             '</div></div>';
@@ -287,11 +288,12 @@ function renderFeatured(){
 }
 
 /* Post list */
-function render(){
+async function render(){
     var filtered=curCat==='전체'?allPosts:allPosts.filter(function(p){return p.category===curCat});
     var total=filtered.length,pages=Math.ceil(total/PER);
     if(curPage>pages)curPage=1;
     var start=(curPage-1)*PER,slice=filtered.slice(start,start+PER);
+    var vmap=await ViewCounter.batch('community',slice.map(function(p){return p.id}));
 
     document.getElementById('cmCount').innerHTML='총 <strong>'+total+'</strong>건';
     var list=document.getElementById('cmList'),empty=document.getElementById('cmEmpty');
@@ -312,7 +314,7 @@ function render(){
                     '<div class="cm-gallery-title">'+App.esc(p.title)+'</div>'+
                     '<div class="cm-gallery-meta">'+
                         '<span>'+App.esc(p.author)+'</span>'+
-                        '<span><i class="fa-solid fa-eye"></i> '+App.comma(p.views)+' &nbsp;<i class="fa-solid fa-heart" style="color:var(--gold)"></i> '+(p.likes||0)+'</span>'+
+                        '<span><i class="fa-solid fa-eye"></i> '+App.comma(vmap[p.id]||0)+' &nbsp;<i class="fa-solid fa-heart" style="color:var(--gold)"></i> '+(p.likes||0)+'</span>'+
                     '</div>'+
                 '</div>'+
             '</div>';
@@ -337,7 +339,7 @@ function render(){
                 '<span class="pm-author">'+App.esc(p.author)+'</span>'+
                 '<div class="pm-stats">'+
                     '<span>'+App.timeAgo(p.date)+'</span>'+
-                    '<span><i class="fa-solid fa-eye"></i> '+App.comma(p.views)+'</span>'+
+                    '<span><i class="fa-solid fa-eye"></i> '+App.comma(vmap[p.id]||0)+'</span>'+
                     '<span class="likes"><i class="fa-solid fa-heart"></i> '+(p.likes||0)+'</span>'+
                 '</div>'+
             '</div>'+

@@ -677,6 +677,40 @@ const App = (() => {
 })();
 
 /**
+ * 조회수 정식 집계 — 서버(Vercel KV/Redis) 기준, 동일 IP는 24시간 내 1회로 집계 (대장 지시 2026-09-06)
+ * 브라우저 localStorage/sessionStorage 기반 구 방식(자료실 seul_lib_views, 공지사항 seul_notice_views,
+ * 갤러리 seul_gallery_views 등)을 전면 대체. scope별로 id를 구분해 카운트한다.
+ */
+const ViewCounter = (() => {
+  async function register(scope, id) {
+    try {
+      const r = await fetch('/api/views', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ scope, id })
+      });
+      const d = await r.json();
+      return typeof d.count === 'number' ? d.count : 0;
+    } catch (e) { return null; }
+  }
+  async function batch(scope, ids) {
+    const uniq = Array.from(new Set((ids || []).filter(Boolean)));
+    if (!uniq.length) return {};
+    try {
+      const r = await fetch('/api/views', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'batch', scope, ids: uniq })
+      });
+      const d = await r.json();
+      return d.counts || {};
+    } catch (e) { return {}; }
+  }
+  return { register, batch };
+})();
+window.ViewCounter = ViewCounter;
+
+/**
  * 주요뉴스 상세 모달 — 업무실적 상세 모달(.d-overlay/.d-modal/.d-hero-fb/.d-body/.d-sec 등)과
  * 동일한 DOM/CSS를 재사용해 downloads/news_*.html 문서를 팝업으로 표시한다.
  */
