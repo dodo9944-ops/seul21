@@ -541,6 +541,10 @@
     }
     .dp-btn-overlay:hover { box-shadow: 0 0 0 3px rgba(255,255,255,.4) inset; }
     .dp-btn-overlay:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    /* 모바일에서는 배너 전체를 터치해도 지명원으로 이동(작은 버튼 영역만 누르기 어려운 문제 개선) */
+    @media (max-width: 768px) {
+        .dp-btn-overlay { left: 0; top: 0; width: 100%; height: 100%; border-radius: 16px; }
+    }
 
     /* ── 4. COMPANY HISTORY ── */
     .timeline-center {
