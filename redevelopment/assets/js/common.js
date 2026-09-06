@@ -36,12 +36,11 @@ const App = (() => {
         { href:`${B}/pages/vision.html#vsFilm`, label:'회사 홍보 영상' },
       ]},
       { href:`${B}/pages/about.html`, label:'회사소개', icon:'fa-solid fa-building-columns', sub:[
-        { href:`${B}/pages/about.html#aboutFirstSection`, label:'회사개요' },
         { href:`${B}/pages/about.html#ceo`, label:'CEO 인사말' },
-        { href:`${B}/pages/about.html#registration`, label:'정비사업전문관리업 등록현황/인증' },
-        { href:`${B}/pages/about.html#history`, label:'회사연혁' },
+        { href:`${B}/pages/about.html#registration`, label:'정비사업전문관리업 등록현황' },
+        { href:`${B}/pages/about.html#digitalProfile`, label:'디지털 지명원' },
         { href:`${B}/pages/about.html#organization`, label:'조직도' },
-        { href:`${B}/pages/about.html#ci`, label:'CI/브랜드' },
+        { href:`${B}/pages/about.html#ci`, label:'CI / 브랜드' },
       ]},
       { href:`${B}/pages/services.html`, label:'사업분야', icon:'fa-solid fa-diagram-project', sub:[
         { href:`${B}/pages/redevelopment-service.html`, label:'주택재개발' },
