@@ -458,8 +458,19 @@ URL·코드·숫자에는 `break-all` 예외를 두어 가로 넘침을 방지�
 | 경위 | 대장 지시(모바일 「빛세움의 길」 본문 교체)의 대상은 **빛세움 홈페이지(seul24.cloud)** 였으나, 해당 저장소가 접근 불가하여 본 저장소 `pages/vision.html` 에 반영(`2df52c2`, PR #65)하고 라이브 배포함 |
 | 원복 | `2df52c2` 를 `git revert` — `pages/vision.html` 은 변경 전(`f0ce564` 시점)과 **캐시버스터 외 0줄 차이**. 데이터 파일 무변경 |
 | 복원 토큰 | 교체본이 필요하면 `git checkout 2df52c2 -- redevelopment/pages/vision.html` |
-| 이식 대상 | 빛세움 홈페이지(seul24.cloud) 저장소 — 소스 저장소명·접근 권한 확보 후 동일 패턴(모바일 전용 `vm-only` 블록, 768px 이하 한정)으로 반영. 라이브 소스 기준 패치는 검증 완료(데스크탑 1440~769px 해시 동일, 390/360px 넘침 0) |
-| 교훈 | **「빛세움 모바일 홈페이지」 = seul24.cloud 배포본.** 세울엔지니어링 홈페이지(seul21.com)와 다른 저장소다. 강력 제3조의 작업 대상이 seul21 저장소가 아닐 수 있으므로, 빛세움 관련 지시는 대상 저장소를 먼저 확인한다 |
+| 이식 대상 | **본 저장소(seul21)의 브랜치 `backup-bitseum-rebrand-20260824`** — 별도 저장소가 아니다(아래 §11-1). 해당 브랜치에는 이미 「빛세움의 길」 수정본(`3f7e43047`, PR #61)이 반영되어 있어 별도 이식 불요 |
+| 교훈 | **「빛세움 모바일 홈페이지」 = seul24.cloud = seul21 저장소의 `backup-bitseum-rebrand-20260824` 브랜치.** `master`(seul21.com)와 브랜치가 다를 뿐 같은 저장소다. 빛세움 지시는 반드시 이 브랜치 기준으로 조사·수정한다. 원격 브랜치 조사 시 `git fetch origin --prune` 으로 전체 브랜치(60개 이상)를 받아 확인할 것 — 얕은 클론의 `git branch -r` 2개만 보고 "저장소가 없다"고 판단한 것이 본 건 오판의 원인 |
+
+#### 11-1. 빛세움(seul24.cloud) 배포 구조 (2026-09-07 확인)
+
+| 항목 | 내용 |
+|------|------|
+| 소스 | seul21 저장소 브랜치 `backup-bitseum-rebrand-20260824` (작업 브랜치 `claude/bitseum-mobile-attachment-layout-o5a0sp` → PR 로 머지) |
+| Vercel | 팀 `dodo9944-ops`(slug) / 프로젝트 **`lcw-coordinator`** (`prj_EEFpjvdEOgs7j7C8DOyWu84gI0wF`). 도메인 `www.seul24.cloud`·`lcw-coordinator.vercel.app` |
+| 배포 방식 | **GitHub 연동 없음** — Vercel CLI(`vercel --prod`) 수동 배포(`source: cli`). 푸시만으로는 라이브에 반영되지 않는다 |
+| 자동화 | `.github/workflows/deploy-seul24.yml`(브랜치 `claude/bitseum-mobile-gallery-cutoff-2xs6au-live`)이 있으나 저장소 Secret `VERCEL_TOKEN` 미등록으로 실패(run 34088463744). Secret 등록 시 트리거 파일 푸시로 배포 가능 |
+| 조회 | Vercel MCP 는 `teamId: "dodo9944-ops"`(slug) 로만 접근됨(`team_…` ID 는 403). `get_deployment("www.seul24.cloud")` 로 현재 라이브 커밋 확인 가능 |
+| 2026-09-07 라이브 | `dpl_3hzAkj3oUFP191wL5eGjqJVzSWHQ` — 브랜치 헤드 `c91518ae0`(빛세움의 길 수정본 + 갤러리 잘림 수정) 18:54 KST 프로덕션 배포. 라이브 `vision.html` = 브랜치 파일과 CRLF 외 0줄 차이 |
 
 ---
 
