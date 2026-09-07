@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>업무보고 - 세울엔지니어링 사무자동화시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/office.css">
+<style>
+.report-detail{display:none;margin-top:12px;padding:16px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-100)}
+.report-detail.open{display:block}
+.task-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:13px}
+.task-row:last-child{border-bottom:none}
+.task-name{flex:1;color:var(--gray-700);font-weight:500}
+.task-progress{width:60px;text-align:right;font-weight:600;font-size:12px;color:var(--gray-500)}
+.modal-task-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius)}
+.modal-task-row input[type="text"]{flex:1}
+.modal-task-row select{width:100px}
+.modal-task-row input[type="range"]{width:80px}
+.modal-task-row .range-val{width:36px;text-align:center;font-size:12px;font-weight:600;color:var(--gray-600)}
+.modal-task-row .btn-remove{background:none;border:none;color:var(--gray-400);cursor:pointer;font-size:14px;padding:4px}
+.modal-task-row .btn-remove:hover{color:var(--danger)}
+.tag.daily{background:#DBEAFE;color:#1D4ED8}
+.tag.weekly{background:#D1FAE5;color:#15803D}
+.tag.monthly{background:#FEF3C7;color:#B45309}
+</style>
+</head>
+<body>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">SE</div>
+      <div>
+        <div class="logo-text">세울엔지니어링</div>
+        <span class="logo-sub">사무자동화시스템</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <ul class="sidebar-menu">
+          <li><a href="index.html"><i class="fas fa-chart-pie"></i> 대시보드</a></li>
+          <li><a href="approval.html"><i class="fas fa-file-signature"></i> 전자결재 <span class="badge" id="approvalBadge">0</span></a></li>
+          <li><a href="documents.html"><i class="fas fa-folder-open"></i> 문서관리</a></li>
+          <li><a href="reports.html"><i class="fas fa-clipboard-list"></i> 업무보고</a></li>
+          <li><a href="attendance.html"><i class="fas fa-clock"></i> 근태관리</a></li>
+          <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> 일정관리</a></li>
+          <li><a href="board.html"><i class="fas fa-comments"></i> 게시판</a></li>
+          <li><a href="contacts.html"><i class="fas fa-address-book"></i> 주소록</a></li>
+          <li><a href="mypage.html"><i class="fas fa-user-cog"></i> 마이페이지</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar"></div>
+      <div class="user-info">
+        <div class="user-name" id="userName"></div>
+        <div class="user-role" id="userRole"></div>
+      </div>
+      <button class="user-logout" onclick="Office.Auth.logout()" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main -->
+  <main class="main-content">
+    <header class="top-header">
+      <div class="top-header-left">
+        <button class="menu-toggle" onclick="Office.UI.toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">홈</a><span class="sep">/</span>
+          <span>업무관리</span><span class="sep">/</span>
+          <span class="current">업무보고</span>
+        </div>
+      </div>
+      <div class="top-header-right">
+        <span class="header-clock" id="headerClock"></span>
+        <button class="header-btn" title="알림"><i class="fas fa-bell"></i><span class="notif-dot" id="notifDot"></span></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <div class="page-header-actions">
+          <h1>업무보고</h1>
+          <button class="btn btn-primary" onclick="openReportModal()"><i class="fas fa-plus"></i> 새 보고서 작성</button>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" data-type="전체">전체</button>
+        <button class="tab-btn" data-type="일일업무">일일업무</button>
+        <button class="tab-btn" data-type="주간업무">주간업무</button>
+        <button class="tab-btn" data-type="월간업무">월간업무</button>
+      </div>
+
+      <!-- Report List -->
+      <div id="reportList"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Report Modal -->
+<div class="modal-overlay" id="reportModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h3>새 보고서 작성</h3>
+      <button class="modal-close" onclick="Office.UI.closeModal('reportModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>보고유형 <span class="required">*</span></label>
+        <select class="form-control" id="reportType">
+          <option value="일일업무">일일업무</option>
+          <option value="주간업무">주간업무</option>
+          <option value="월간업무">월간업무</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>제목 <span class="required">*</span></label>
+        <input type="text" class="form-control" id="reportTitle" placeholder="보고서 제목을 입력하세요">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>보고기간 시작일</label>
+          <input type="date" class="form-control" id="reportStart">
+        </div>
+        <div class="form-group">
+          <label>보고기간 종료일</label>
+          <input type="date" class="form-control" id="reportEnd">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>업무 목록</label>
+        <div id="taskList"></div>
+        <button class="btn btn-outline btn-sm" onclick="addTaskRow()" style="margin-top:8px"><i class="fas fa-plus"></i> 업무 추가</button>
+      </div>
+      <div class="form-group">
+        <label>내용</label>
+        <textarea class="form-control" id="reportContent" placeholder="보고 내용을 입력하세요" style="min-height:120px"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="Office.UI.closeModal('reportModal')">취소</button>
+      <button class="btn btn-primary" onclick="submitReport()"><i class="fas fa-paper-plane"></i> 제출</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="assets/js/office-data.js"></script>
+<script src="assets/js/office.js"></script>
+<script>
+Office.init();
+
+var currentType = '전체';
+var taskCounter = 0;
+
+function getTypeTag(type) {
+  switch (type) {
+    case '일일업무': return '<span class="tag daily">일일업무</span>';
+    case '주간업무': return '<span class="tag weekly">주간업무</span>';
+    case '월간업무': return '<span class="tag monthly">월간업무</span>';
+    default: return '<span class="tag">' + type + '</span>';
+  }
+}
+
+function getStatusBadge(status) {
+  switch (status) {
+    case '완료': return '<span class="badge-status completed"><i class="fas fa-check" style="margin-right:3px;font-size:10px"></i>완료</span>';
+    case '진행중': return '<span class="badge-status in-progress">진행중</span>';
+    case '보류': return '<span class="badge-status pending">보류</span>';
+    default: return '<span class="badge-status draft">' + status + '</span>';
+  }
+}
+
+function renderReports() {
+  var reports;
+  if (currentType === '전체') {
+    reports = Office.Report.getAll();
+  } else {
+    reports = Office.Report.getAll(currentType);
+  }
+  var container = document.getElementById('reportList');
+  if (reports.length === 0) {
+    container.innerHTML = '<div class="empty-state"><i class="fas fa-clipboard-list"></i><h3>보고서가 없습니다</h3><p>새 보고서를 작성하세요.</p></div>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < reports.length; i++) {
+    var r = reports[i];
+    var tasks = r.tasks || [];
+    var done = 0;
+    var totalProgress = 0;
+    for (var j = 0; j < tasks.length; j++) {
+      if (tasks[j].status === '완료') done++;
+      totalProgress += (tasks[j].progress || 0);
+    }
+    var pct = tasks.length > 0 ? Math.round(totalProgress / tasks.length) : 0;
+    var barColor = pct >= 80 ? 'green' : 'blue';
+
+    // Task detail rows
+    var detailHtml = '';
+    for (var k = 0; k < tasks.length; k++) {
+      var t = tasks[k];
+      detailHtml += '<div class="task-row">' +
+        '<span class="task-name">' + (t.task || '') + '</span>' +
+        getStatusBadge(t.status) +
+        '<span class="task-progress">' + (t.progress || 0) + '%</span>' +
+        '</div>';
+    }
+
+    html += '<div class="report-card" onclick="toggleDetail(this)">' +
+      '<div class="report-header">' +
+        getTypeTag(r.type) +
+        '<span style="font-size:12px;color:var(--gray-400)">' + Office.UI.formatDate(r.createdAt) + '</span>' +
+      '</div>' +
+      '<div class="report-title">' + (r.title || '') + '</div>' +
+      '<div class="report-meta"><i class="fas fa-user" style="margin-right:4px"></i>' + (r.author || '') + ' &middot; ' + (r.authorDept || '') + '</div>' +
+      '<div class="report-tasks" style="margin-bottom:8px">' + tasks.length + '개 업무 중 ' + done + '개 완료</div>' +
+      '<div class="progress-bar"><div class="fill ' + barColor + '" style="width:' + pct + '%"></div></div>' +
+      '<div class="report-detail">' +
+        '<div style="font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:8px">업무 상세</div>' +
+        detailHtml +
+        (r.content ? '<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-200);font-size:13px;color:var(--gray-600);line-height:1.7">' + r.content.replace(/\n/g, '<br>') + '</div>' : '') +
+        '<div style="margin-top:8px;font-size:11px;color:var(--gray-400)"><i class="fas fa-comment" style="margin-right:3px"></i>댓글 ' + (r.comments || 0) + '개</div>' +
+      '</div>' +
+      '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function toggleDetail(card) {
+  var detail = card.querySelector('.report-detail');
+  if (detail) {
+    detail.classList.toggle('open');
+  }
+}
+
+// Tab clicks
+var tabBtns = document.querySelectorAll('.tab-btn');
+for (var i = 0; i < tabBtns.length; i++) {
+  tabBtns[i].addEventListener('click', function() {
+    for (var j = 0; j < tabBtns.length; j++) tabBtns[j].classList.remove('active');
+    this.classList.add('active');
+    currentType = this.getAttribute('data-type');
+    renderReports();
+  });
+}
+
+// Modal helpers
+function openReportModal() {
+  taskCounter = 0;
+  document.getElementById('reportType').value = '일일업무';
+  document.getElementById('reportTitle').value = '';
+  document.getElementById('reportStart').value = '';
+  document.getElementById('reportEnd').value = '';
+  document.getElementById('reportContent').value = '';
+  document.getElementById('taskList').innerHTML = '';
+  addTaskRow();
+  Office.UI.showModal('reportModal');
+}
+
+function addTaskRow() {
+  taskCounter++;
+  var row = document.createElement('div');
+  row.className = 'modal-task-row';
+  row.id = 'taskRow_' + taskCounter;
+  var rid = taskCounter;
+  row.innerHTML =
+    '<input type="text" class="form-control" placeholder="업무명" data-field="task">' +
+    '<select class="form-control" data-field="status"><option value="진행중">진행중</option><option value="완료">완료</option><option value="보류">보류</option></select>' +
+    '<input type="range" min="0" max="100" step="10" value="0" data-field="progress" oninput="this.nextElementSibling.textContent=this.value+\'%\'">' +
+    '<span class="range-val">0%</span>' +
+    '<button class="btn-remove" onclick="removeTaskRow(' + rid + ')" title="삭제"><i class="fas fa-times"></i></button>';
+  document.getElementById('taskList').appendChild(row);
+}
+
+function removeTaskRow(id) {
+  var row = document.getElementById('taskRow_' + id);
+  if (row) row.remove();
+}
+
+function submitReport() {
+  var type = document.getElementById('reportType').value;
+  var title = document.getElementById('reportTitle').value.trim();
+  var content = document.getElementById('reportContent').value.trim();
+  var startDate = document.getElementById('reportStart').value;
+  var endDate = document.getElementById('reportEnd').value;
+
+  if (!title) {
+    Office.UI.showToast('제목을 입력하세요.', 'error');
+    return;
+  }
+
+  var tasks = [];
+  var rows = document.querySelectorAll('#taskList .modal-task-row');
+  for (var i = 0; i < rows.length; i++) {
+    var taskInput = rows[i].querySelector('[data-field="task"]');
+    var statusInput = rows[i].querySelector('[data-field="status"]');
+    var progressInput = rows[i].querySelector('[data-field="progress"]');
+    var taskName = taskInput ? taskInput.value.trim() : '';
+    if (taskName) {
+      tasks.push({
+        task: taskName,
+        status: statusInput ? statusInput.value : '진행중',
+        progress: progressInput ? parseInt(progressInput.value) : 0
+      });
+    }
+  }
+
+  Office.Report.create({
+    type: type,
+    title: title,
+    content: content,
+    startDate: startDate,
+    endDate: endDate,
+    tasks: tasks
+  });
+
+  Office.UI.showToast('보고서가 제출되었습니다.', 'success');
+  Office.UI.closeModal('reportModal');
+  renderReports();
+}
+
+renderReports();
+</script>
+
+</body>
+</html>
