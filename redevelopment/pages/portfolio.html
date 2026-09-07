@@ -182,24 +182,6 @@
     .pager-per select{height:32px;padding:0 24px 0 8px;border:1px solid #cecece;border-radius:6px;font-size:12px;font-family:var(--font);color:var(--gray-600);cursor:pointer;appearance:auto}
     @media(max-width:768px){.pager-wrap{flex-direction:column;gap:12px}}
 
-    /* === 지역별 수행 현황 / 주요 협력 시공사 / 공공자문 하이라이트 === */
-    .region-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:var(--space-section-to-title)}
-    .region-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;background:#fff;border:1px solid #cecece;font-size:13px;font-weight:600;color:var(--gray-700)}
-    .region-chip strong{color:var(--gold);font-weight:800}
-    .builder-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-    .builder-chip{padding:9px 18px;border-radius:8px;background:var(--gray-50);border:1px solid #cecece;font-size:13.5px;font-weight:700;color:var(--gray-800)}
-    .pa-highlight{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;background:linear-gradient(160deg,#FFFFFF,#FFF3C4);border-radius:16px;padding:24px 28px;margin-bottom:var(--space-section-to-title)}
-    .pa-highlight .pa-text{font-size:15px;font-weight:700;color:#0A0F1C}
-    .pa-highlight .pa-text span{color:var(--gold)}
-    .pa-highlight .pa-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:8px;font-size:13.5px;font-weight:700;background:#0A0F1C;color:#fff;border:none;cursor:pointer;font-family:var(--font)}
-    .pf-cta{background:linear-gradient(160deg,#FFFFFF,#FFF3C4);border-radius:20px;padding:40px 44px;text-align:center;margin-top:var(--space-section-to-title)}
-    .pf-cta p{font-size:19px;font-weight:700;color:#0A0F1C;line-height:1.6;margin-bottom:24px}
-    .pf-cta .btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
-    .pf-cta a{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none}
-    .pf-cta a.primary{background:#B8860B;color:#0A0F1C}
-    .pf-cta a.outline{background:transparent;color:rgba(10,15,28,0.7);border:1px solid rgba(10,15,28,0.22)}
-    @media(max-width:600px){.pa-highlight{flex-direction:column;align-items:flex-start}}
-
     /* DETAIL MODAL(d-overlay, d-modal, d-close, d-hero, d-body, d-sec, d-footer 등)는
        common.css로 이동 — 주요뉴스 상세 모달(NewsDetailModal)과 공유 */
 
@@ -312,18 +294,9 @@
     <div id="pfTabsPlaceholder" style="display:none"></div>
     <div class="kpi-grid" id="kpiGrid"></div>
 
-    <div class="section-label">Regional Coverage</div>
-    <div class="sec-head"><h2 class="sec-title">지역별 수행 현황</h2></div>
-    <div class="region-chips" id="regionChips"></div>
-
     <div class="section-label">Key Projects</div>
     <div class="sec-head"><h2 class="sec-title">주요 수행실적</h2></div>
     <div class="feat-grid" id="featGrid"></div>
-
-    <div class="pa-highlight">
-        <div class="pa-text">서울시 정비사업 코디네이터 수행실적 <span id="paCount">0</span>건 — 갈등관리·행정협의 중심 공공자문 실적을 확인하세요</div>
-        <button type="button" class="pa-btn" onclick="PF.filter('코디네이터')">공공자문 실적 보기 <i class="fa-solid fa-arrow-right"></i></button>
-    </div>
 
     <div class="section-label">All Projects</div>
     <div class="sec-head"><h2 class="sec-title">전체 수행실적</h2></div>
@@ -331,19 +304,6 @@
     <div class="pager-wrap" id="pagerWrap">
         <div class="pager" id="pager"></div>
         <div class="pager-per"><span>페이지당</span><select id="pfPerSelect"><option value="6">6개</option><option value="12">12개</option><option value="18">18개</option></select></div>
-    </div>
-
-    <div class="section-label">Partners</div>
-    <div class="sec-head"><h2 class="sec-title">주요 협력 시공사</h2></div>
-    <p style="font-size:13px;color:var(--gray-500);margin-bottom:0">빛세움이 정비사업전문관리·PM 업무를 수행한 사업장에 실제 참여한 시공사입니다. (시공사 유치 실적이 아닌, 해당 사업장의 시공 이력 표기)</p>
-    <div class="builder-chips" id="builderChips"></div>
-
-    <div class="pf-cta">
-        <p>수행실적에 대해 더 자세히 알고 싶으신가요?<br>빛세움 전문가가 직접 사업 상담을 도와드립니다.</p>
-        <div class="btns">
-            <a href="contact.html" class="primary"><i class="fa-solid fa-comments"></i> 사업 상담 신청</a>
-            <a href="services.html" class="outline"><i class="fa-solid fa-list-check"></i> 사업분야 보기</a>
-        </div>
     </div>
 
 </div></div>
@@ -384,25 +344,6 @@ kpi('fa-building',t+'건','총 수행실적','축적된 수행 경험')+
 kpi('fa-spinner',i+'건','진행중 사업','현재 수행 중인 현장')+
 kpi('fa-circle-check',d+'건','완료 사업','성공적으로 완료한 사업','kpi-highlight','ki-solid')+
 kpi('fa-house-chimney','약 '+u.toLocaleString()+'세대','총 관리세대','축적된 사업관리 규모','kpi-highlight')}();
-
-/* 지역별 수행 현황 — 실데이터 집계, 상위 10개 지역만 표시 */
-!function(){
-var counts={};
-D.forEach(function(p){var d=p.district;if(!d||d==='-')return;counts[d]=(counts[d]||0)+1});
-var arr=Object.keys(counts).map(function(k){return{name:k,n:counts[k]}}).sort(function(a,b){return b.n-a.n}).slice(0,10);
-document.getElementById('regionChips').innerHTML=arr.map(function(r){return'<span class="region-chip">'+r.name+' <strong>'+r.n+'건</strong></span>'}).join('');
-}();
-
-/* 서울시 코디네이터 실적 건수 */
-document.getElementById('paCount').textContent=D.filter(function(p){return p.type==='코디네이터'}).length;
-
-/* 주요 협력 시공사 — 실데이터에서 '-'·미확인 제외하고 집계 */
-!function(){
-var builders={};
-D.forEach(function(p){var c=p.constructor;if(!c||c==='-')return;builders[c]=true});
-var names=Object.keys(builders).sort();
-document.getElementById('builderChips').innerHTML=names.map(function(n){return'<span class="builder-chip">'+n+'</span>'}).join('');
-}();
 
 /* Featured */
 function renderFeat(){
