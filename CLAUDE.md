@@ -449,35 +449,17 @@ URL·코드·숫자에는 `break-all` 예외를 두어 가로 넘침을 방지�
   (인라인 → 클래스 이관이 데스크탑 렌더에 영향 없음을 픽셀로 확인)
 - 스와이프 네비게이션 기능 스위트 23/23 재통과
 
-### 11. 구현 이력 — 모바일 「빛세움의 길」 본문 교체 (2026-09-07 · 대장 지시 · 현재 반영)
+### 11. 원복 기록 — 「빛세움의 길」 모바일 본문 교체분 seul21 반영 취소 (2026-09-07 · 대장 지시)
 
-> **대장 지시 (2026-09-07 KST)**: "모바일 빛세움의길 본문 첨부사진부터 사진까지 내용을 수정한다" —
-> 브랜드 철학 카드부터 「공간으로 증명하는 신뢰」 사진 직전까지를 지시 문안으로 교체.
+> **대장 지시 (2026-09-07 KST)**: "https://seul21.com/pages/vision.html 이게 잘못 나갔어 빛세움 홈페이지로 나가야해"
 
 | 항목 | 내용 |
 |------|------|
-| 파일 | `pages/vision.html` **단일** (공유 CSS·JS·데이터 무변경 → 캐시버스터 동기화 불요) |
-| 적용 경계 | `@media (max-width: 768px)` 단일 블록. 769px 이상은 `.vm-only { display:none }` 으로 완전 차단 |
-| 교체 범위 (모바일) | 브랜드 철학 → MISSION → OUR PRINCIPLES(4) → HOW WE WORK(6) → VISSEUM SYSTEM → 마무리 선언. 이어지는 「공간으로 증명하는 신뢰」 이하는 불변 |
-| 데스크탑 보존 방식 | 기존 블록(`.vs-philosophy`·왜 도시정비인가 `.vs`·`.vs-title`·`.vs-principles`·`.vs-process`)에 `vm-hide` 클래스만 부여 → 모바일에서만 `display:none`. 마크업·문구·스타일은 그대로 (§8-1 패턴) |
-| 앵커 유지 | `#philosophy`·`#principles`·`#method` 래퍼 안에 데스크탑·모바일 자식을 함께 두어 히어로 카드 앵커가 양 뷰포트에서 동작. 모바일 전용 `#mission`·`#system` 신설 |
-| HOW WE WORK 링크 | 6단계 카드는 데스크탑과 동일하게 `method-*.html` 로 연결 (03 추진전략 수립 → `method-coordination.html`) |
-| 신설 클래스 | `vm-only`·`vm-hide`·`vm-sec`·`vm-kicker`·`vm-h2`·`vm-p`·`vm-quote`·`vm-cards/card`·`vm-list/item/num`·`vm-steps/step`·`vm-close`·`vm-nowrap` (모두 `vm-` 접두, 페이지 내부 `<style>` 한정) |
-| 금지사항 준수 | `!important` 0건 · `:root` 토큰 변경 0건 · 전역 선언은 `.vm-only{display:none}` 1건(모바일 전용 요소 숨김) · Font Awesome 의존 없는 CSS 불릿 사용 |
-| 브랜딩 | 지시 문안 그대로 「빛세움(Visseum)」·「㈜빛세움」 표기. 데스크탑은 종전 「세울엔지니어링」 문안 유지 |
-
-#### 11-1. 검수 (Playwright · 로컬 서빙)
-
-- **1440 / 1280 / 1024 / 820 / 769px 전체 페이지 스크린샷 md5 대조 — 변경 전후 전부 동일 (회귀 0건)**
-- 390 / 360px — 가로 넘침 0px, JS 오류 0건, `vm-hide` 5개 전부 `none`, `vm-only` 6개 전부 `block`
-- 페이지 높이 390px 기준 10,161px → 10,119px (교체 범위 4,893px)
-
-#### 11-2. 주의 — seul24.cloud(빛세움 리브랜딩 배포)는 본 저장소가 아님
-
-대장이 첨부한 캡처는 `seul24.cloud` 이며, 해당 배포본은 `common.js?v=20260906r` 등
-본 저장소(`seul21`)와 **다른 이력의 소스**다. 접근 가능한 GitHub 저장소(`seul21`·`813700`·`activepieces`)에
-빛세움 소스가 없어 본 작업은 `seul21` 의 `vision.html` 에 반영하였다.
-seul24.cloud 에 동일 반영이 필요하면 해당 저장소 접근 권한(add_repo) 부여 후 본 §11 과 동일 패턴으로 이식한다.
+| 경위 | 대장 지시(모바일 「빛세움의 길」 본문 교체)의 대상은 **빛세움 홈페이지(seul24.cloud)** 였으나, 해당 저장소가 접근 불가하여 본 저장소 `pages/vision.html` 에 반영(`2df52c2`, PR #65)하고 라이브 배포함 |
+| 원복 | `2df52c2` 를 `git revert` — `pages/vision.html` 은 변경 전(`f0ce564` 시점)과 **캐시버스터 외 0줄 차이**. 데이터 파일 무변경 |
+| 복원 토큰 | 교체본이 필요하면 `git checkout 2df52c2 -- redevelopment/pages/vision.html` |
+| 이식 대상 | 빛세움 홈페이지(seul24.cloud) 저장소 — 소스 저장소명·접근 권한 확보 후 동일 패턴(모바일 전용 `vm-only` 블록, 768px 이하 한정)으로 반영. 라이브 소스 기준 패치는 검증 완료(데스크탑 1440~769px 해시 동일, 390/360px 넘침 0) |
+| 교훈 | **「빛세움 모바일 홈페이지」 = seul24.cloud 배포본.** 세울엔지니어링 홈페이지(seul21.com)와 다른 저장소다. 강력 제3조의 작업 대상이 seul21 저장소가 아닐 수 있으므로, 빛세움 관련 지시는 대상 저장소를 먼저 확인한다 |
 
 ---
 

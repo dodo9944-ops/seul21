@@ -598,104 +598,6 @@
         .vision-hero .hero-bg-photo { opacity: 0.15; }
     }
 
-
-    /* ══════════════════════════════════════
-       모바일 전용 본문 (768px 이하) — 대장 지시 2026-09-07
-       데스크탑(769px 이상)은 .vm-only 가 display:none 이라 미변경
-       ══════════════════════════════════════ */
-    .vm-only { display: none; }
-    @media (max-width: 768px) {
-        .vm-hide { display: none; }
-        .vm-only { display: block; }
-        .vm-sec { margin-bottom: 52px; }
-        .vm-kicker {
-            display: flex; align-items: center; gap: 10px;
-            font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
-            color: var(--gold); text-transform: uppercase; margin-bottom: 14px;
-        }
-        .vm-kicker::before { content: ''; width: 22px; height: 1px; background: var(--gold); flex-shrink: 0; }
-        .vm-h2 {
-            font-size: 22px; font-weight: 800; color: var(--brand-dark);
-            line-height: 1.4; letter-spacing: -0.6px; word-break: keep-all;
-            margin-bottom: 18px;
-        }
-        .vm-h2 em { font-style: normal; color: #A87410; }
-        .vm-p {
-            font-size: 15px; line-height: 1.85; color: var(--gray-600);
-            word-break: keep-all; overflow-wrap: break-word; margin-bottom: 14px;
-        }
-        .vm-p:last-child { margin-bottom: 0; }
-        .vm-p.lead { font-size: 16px; font-weight: 600; color: #0A0F1C; }
-        .vm-quote {
-            margin-top: 22px; padding: 18px 18px 18px 20px;
-            background: #FBF7EE; border-left: 3px solid var(--gold); border-radius: 0 12px 12px 0;
-            font-size: 15.5px; font-weight: 700; line-height: 1.7; color: var(--brand-dark);
-            word-break: keep-all; letter-spacing: -0.3px;
-        }
-        /* MISSION 카드 */
-        .vm-cards { display: flex; flex-direction: column; gap: 14px; }
-        .vm-card {
-            background: #fff; border: 1px solid var(--gray-200); border-radius: 14px;
-            padding: 22px 20px;
-        }
-        .vm-card-en { font-size: 11px; font-weight: 800; letter-spacing: 2px; color: var(--gold); margin-bottom: 8px; }
-        .vm-card h3 { font-size: 18px; font-weight: 800; color: #0A0F1C; letter-spacing: -0.4px; margin-bottom: 10px; word-break: keep-all; }
-        .vm-card p { font-size: 14.5px; line-height: 1.8; color: var(--gray-600); word-break: keep-all; margin-bottom: 14px; }
-        .vm-card ul { list-style: none; margin: 0; padding: 14px 0 0; border-top: 1px solid var(--gray-100); }
-        .vm-card li {
-            position: relative; padding-left: 20px; font-size: 14px; line-height: 1.65;
-            color: var(--gray-700); word-break: keep-all; margin-bottom: 8px;
-        }
-        .vm-card li:last-child { margin-bottom: 0; }
-        .vm-card li::before {
-            content: ''; position: absolute; left: 4px; top: 9px;
-            width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
-        }
-        .vm-nowrap { white-space: nowrap; }
-        /* PRINCIPLES · SYSTEM 리스트 */
-        .vm-list { display: flex; flex-direction: column; gap: 12px; }
-        .vm-item {
-            display: flex; gap: 14px; align-items: flex-start;
-            background: #fff; border: 1px solid var(--gray-200); border-radius: 14px; padding: 18px 18px;
-        }
-        .vm-num {
-            flex-shrink: 0; width: 38px; height: 38px; border-radius: 10px;
-            background: linear-gradient(135deg, #0A0F1C, #1a2d50);
-            color: var(--gold); font-size: 13px; font-weight: 800;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .vm-item h4 { font-size: 16.5px; font-weight: 800; color: #0d1420; letter-spacing: -0.3px; margin-bottom: 6px; word-break: keep-all; }
-        .vm-item p { font-size: 14px; line-height: 1.75; color: var(--gray-600); word-break: keep-all; }
-        /* HOW WE WORK 단계 */
-        .vm-steps { display: flex; flex-direction: column; gap: 10px; }
-        .vm-step {
-            display: block; text-decoration: none; color: inherit;
-            background: linear-gradient(135deg, #0A0F1C, #101B30 60%, #142644);
-            border: 1px solid rgba(195,165,105,0.22); border-radius: 14px; padding: 20px 18px;
-            position: relative;
-        }
-        .vm-step-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-        .vm-step-badge {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 30px; height: 30px; border-radius: 8px;
-            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
-            font-size: 12px; font-weight: 800; color: var(--gold);
-        }
-        .vm-step h4 { font-size: 17px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
-        .vm-step p { font-size: 14px; line-height: 1.75; color: rgba(255,255,255,0.7); word-break: keep-all; }
-        .vm-step-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 12px; font-weight: 700; color: var(--gold); opacity: .8; }
-        /* 마무리 선언 */
-        .vm-close {
-            background: linear-gradient(135deg, #0D1B38, #142644 50%, #1C3560);
-            border-radius: 16px; padding: 40px 24px; text-align: center;
-        }
-        .vm-close .vm-kicker { justify-content: center; }
-        .vm-close .vm-kicker::before { display: none; }
-        .vm-close h2 { font-size: 23px; font-weight: 900; color: #fff; line-height: 1.4; letter-spacing: -0.6px; word-break: keep-all; margin-bottom: 18px; }
-        .vm-close-line { width: 40px; height: 2px; background: #D4AF5A; opacity: .6; margin: 0 auto 20px; }
-        .vm-close p { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,0.82); word-break: keep-all; margin-bottom: 12px; }
-        .vm-close .vm-decl { margin-top: 22px; font-size: 16.5px; font-weight: 800; color: #D4AF5A; letter-spacing: -0.2px; }
-    }
     </style>
 </head>
 <body>
@@ -747,7 +649,7 @@
 
         <!-- ══════ 브랜드 철학 ══════ -->
         <div class="vs" id="philosophy" style="margin-bottom:52px">
-            <div class="vs-philosophy vm-hide">
+            <div class="vs-philosophy">
                 <div class="vs-phil-mark">&ldquo;</div>
                 <div class="vs-phil-inner">
                     <div class="vs-phil-headline"><strong>세울(SEUL)</strong>은 '바로 세우다'에서 출발합니다.</div>
@@ -760,20 +662,10 @@
                     <div class="vs-phil-sig">SEUL ENGINEERING — Brand Philosophy</div>
                 </div>
             </div>
-            <!-- 모바일 전용 · 브랜드 철학 (대장 지시 2026-09-07) -->
-            <div class="vm-only vm-phil">
-                <div class="vm-kicker">VISSEUM — BRAND PHILOSOPHY</div>
-                <h2 class="vm-h2">빛을 세우듯,<br>도시정비의 <em>기준</em>을 세웁니다</h2>
-                <p class="vm-p lead">빛세움은 ‘빛을 세우다’라는 의미에서 출발했습니다.</p>
-                <p class="vm-p">우리는 복잡한 정비사업의 방향을 밝히고, 법과 원칙에 근거한 기준을 세우며, 계획이 실질적인 성과로 이어질 때까지 책임집니다.</p>
-                <p class="vm-p">도시정비사업은 단순히 건물을 새로 짓는 일이 아닙니다. 주민의 삶과 재산, 오랜 공동체의 미래를 다시 설계하는 일입니다. 수많은 이해관계와 행정절차가 맞물리는 만큼 작은 판단 하나가 사업기간과 사업비, 조합원의 부담에 큰 영향을 줄 수 있습니다.</p>
-                <p class="vm-p">그래서 빛세움은 빠른 결과만을 앞세우지 않습니다. 바른 절차와 정확한 판단, 투명한 소통을 바탕으로 지속 가능한 사업의 가치를 만들어갑니다.</p>
-                <div class="vm-quote">«좋은 정비사업은 바른 절차에서 시작되고, 끝까지 책임지는 실행으로 완성됩니다.»</div>
-            </div>
         </div>
 
         <!-- ══════ 왜 도시정비인가 ══════ -->
-        <div class="vs vm-hide" style="margin-bottom:52px">
+        <div class="vs" style="margin-bottom:52px">
             <div class="vs-why">
                 <div class="vs-why-text">
                     <h2>왜 도시정비에<br>집중하는가</h2>
@@ -804,40 +696,10 @@
             </div>
         </div>
 
-        <!-- ══════ 모바일 전용 · MISSION (대장 지시 2026-09-07) ══════ -->
-        <div class="vs vm-only vm-sec" id="mission">
-            <div class="vm-kicker">MISSION</div>
-            <h2 class="vm-h2">고객의 신뢰를<br>사업의 가치로 완성합니다</h2>
-            <div class="vm-cards">
-                <div class="vm-card">
-                    <div class="vm-card-en">ALL FOR YOU</div>
-                    <h3>고객을 향한 신뢰경영</h3>
-                    <p>조합원과 주민의 의견을 정확히 듣고, 합리적인 의사결정이 이루어질 수 있도록 지원합니다. 예상되는 쟁점은 선제적으로 검토하고, 사업의 일정과 절차·주요 정보를 투명하게 공유합니다.</p>
-                    <ul>
-                        <li>주민의견에 대한 체계적인 수렴과 분석</li>
-                        <li>주요 쟁점과 사업위험의 사전 검토</li>
-                        <li>투명한 의사결정과 문서관리</li>
-                        <li>조합원의 권리와 재산 보호를 위한 실무지원</li>
-                    </ul>
-                </div>
-                <div class="vm-card">
-                    <div class="vm-card-en">ALL FOR VALUE</div>
-                    <h3>사업을 완성하는 가치경영</h3>
-                    <p>사업지의 여건과 목표에 맞는 현실적인 추진전략을 수립하고, 일정·사업비·인허가·협력업체를 통합적으로 관리합니다. 단기적인 성과보다 사업 전체의 안정성과 지속 가능한 가치를 우선합니다.</p>
-                    <ul>
-                        <li>사업지 특성에 맞는 추진전략 수립</li>
-                        <li>사업기간과 주요 위험요인의 체계적 관리</li>
-                        <li>합리적인 사업비 검토와 대안 제시</li>
-                        <li>조합원 부담 완화와 사업가치 향상 지원</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
         <!-- ══════ 우리가 지키는 원칙 ══════ -->
         <div class="vs" id="principles">
-            <h2 class="vs-title vm-hide">우리가 지키는 원칙</h2>
-            <div class="vs-principles vm-hide">
+            <h2 class="vs-title">우리가 지키는 원칙</h2>
+            <div class="vs-principles">
                 <div class="vs-prin-card">
                     <div class="vs-prin-icon"><i class="fa-solid fa-gavel"></i></div>
                     <h4>절차의 정합성</h4>
@@ -869,46 +731,11 @@
                     <p>조합 운영의 모든 과정을 투명하게 공개하고, 신뢰를 기반으로 소통합니다.</p>
                 </div>
             </div>
-            <!-- 모바일 전용 · OUR PRINCIPLES (대장 지시 2026-09-07) -->
-            <div class="vm-only">
-                <div class="vm-kicker">OUR PRINCIPLES</div>
-                <h2 class="vm-h2">빛세움이 지키는<br>네 가지 원칙</h2>
-                <div class="vm-list">
-                    <div class="vm-item">
-                        <div class="vm-num">01</div>
-                        <div>
-                            <h4>바른 절차</h4>
-                            <p>관련 법령과 행정지침에 근거하여 사업의 모든 절차를 정확하게 관리합니다. 절차의 정합성이 사업의 안정성을 결정한다는 원칙을 지킵니다.</p>
-                        </div>
-                    </div>
-                    <div class="vm-item">
-                        <div class="vm-num">02</div>
-                        <div>
-                            <h4>정확한 판단</h4>
-                            <p>사업성·사업비·일정과 위험요인을 객관적인 자료로 분석합니다. 유리한 결과만 제시하지 않고, 가능한 대안과 판단기준을 함께 제공합니다.</p>
-                        </div>
-                    </div>
-                    <div class="vm-item">
-                        <div class="vm-num">03</div>
-                        <div>
-                            <h4>투명한 소통</h4>
-                            <p>조합원·행정기관·시공사·설계자 등 사업 참여자 간의 정보를 정확하게 공유하고, 어느 한쪽에 치우치지 않는 합리적인 조정안을 마련합니다.</p>
-                        </div>
-                    </div>
-                    <div class="vm-item">
-                        <div class="vm-num">04</div>
-                        <div>
-                            <h4>끝까지 책임지는 실행</h4>
-                            <p>계획과 보고서에 머무르지 않습니다. 인허가와 사업추진, 착공·준공·입주와 청산까지 각 단계의 과제를 현장에서 해결하며 사업을 완결합니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- ══════ 세울의 방식 ══════ -->
         <div class="vs" id="method">
-            <div class="vs-process vm-hide">
+            <div class="vs-process">
                 <h2>세울의 방식</h2>
                 <div class="vs-process-sub">HOW WE WORK — 정비사업의 처음부터 끝까지</div>
                 <!-- Row 1: 진단 → 검토 → 조율 -->
@@ -961,63 +788,6 @@
                         <span class="vs-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
                     </a>
                 </div>
-            </div>
-            <!-- 모바일 전용 · HOW WE WORK (대장 지시 2026-09-07) -->
-            <div class="vm-only">
-                <div class="vm-kicker">HOW WE WORK</div>
-                <h2 class="vm-h2">처음부터 끝까지,<br>하나의 기준으로 관리합니다</h2>
-                <div class="vm-steps">
-                    <a class="vm-step" href="method-diagnosis.html">
-                        <div class="vm-step-top"><span class="vm-step-badge">01</span><h4>기초진단</h4></div>
-                        <p>대상지의 법적·물리적 현황과 사업추진 여건을 분석하여 사업 가능성과 주요 쟁점을 진단합니다.</p>
-                        <span class="vm-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                    <a class="vm-step" href="method-feasibility.html">
-                        <div class="vm-step-top"><span class="vm-step-badge">02</span><h4>사업성 검토</h4></div>
-                        <p>총사업비·비례율·분담금·사업기간을 종합적으로 분석하고 사업의 경제적 타당성과 대안을 검토합니다.</p>
-                        <span class="vm-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                    <a class="vm-step" href="method-coordination.html">
-                        <div class="vm-step-top"><span class="vm-step-badge">03</span><h4>추진전략 수립</h4></div>
-                        <p>사업지의 특성과 주민의 요구를 반영하여 단계별 목표와 일정, 인허가 및 이해관계 조정전략을 수립합니다.</p>
-                        <span class="vm-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                    <a class="vm-step" href="method-documentation.html">
-                        <div class="vm-step-top"><span class="vm-step-badge">04</span><h4>행정·문서 체계화</h4></div>
-                        <p>인허가 서류와 총회자료·공문·의사록 등 주요 문서를 법적 기준에 맞게 작성하고 체계적으로 관리합니다.</p>
-                        <span class="vm-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                    <a class="vm-step" href="method-permit.html">
-                        <div class="vm-step-top"><span class="vm-step-badge">05</span><h4>인허가 및 사업관리</h4></div>
-                        <p>행정기관 및 분야별 협력업체와의 실무협의를 통해 핵심 인허가와 사업일정을 통합적으로 관리합니다.</p>
-                        <span class="vm-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                    <a class="vm-step" href="method-completion.html">
-                        <div class="vm-step-top"><span class="vm-step-badge">06</span><h4>사업완성 및 안정화</h4></div>
-                        <p>이주·철거·착공부터 준공·입주·청산까지 마지막 단계의 위험요인을 관리하고 사업을 안정적으로 마무리합니다.</p>
-                        <span class="vm-step-more">자세히 보기 <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- ══════ 모바일 전용 · VISSEUM SYSTEM (대장 지시 2026-09-07) ══════ -->
-        <div class="vs vm-only vm-sec" id="system">
-            <div class="vm-kicker">VISSEUM SYSTEM</div>
-            <h2 class="vm-h2">사람과 시스템으로<br>전문성을 증명합니다</h2>
-            <p class="vm-p">빛세움의 전문성은 구호가 아니라 사람과 업무방식에서 시작됩니다. 분야별 전문인력이 하나의 기준으로 협업하고, 모든 의사결정과 추진과정을 기록하며, 현장에서 발생하는 문제에 신속하게 대응합니다.</p>
-            <p class="vm-p">체계적인 업무공간과 회의시스템, 축적된 실무자료와 협업체계는 사업의 정확성과 실행력을 뒷받침하는 빛세움의 기반입니다.</p>
-        </div>
-
-        <!-- ══════ 모바일 전용 · 마무리 선언 (대장 지시 2026-09-07) ══════ -->
-        <div class="vs vm-only vm-sec">
-            <div class="vm-close">
-                <div class="vm-kicker">VISSEUM</div>
-                <h2>원칙을 세우고,<br>결과로 답하겠습니다</h2>
-                <div class="vm-close-line"></div>
-                <p>정비사업의 시작부터 완성까지 흔들리지 않는 기준이 필요합니다.</p>
-                <p>빛세움은 고객의 입장에서 판단하고, 전문가의 원칙으로 실행하며, 맡은 사업을 끝까지 책임지겠습니다.</p>
-                <div class="vm-decl">정비사업의 기준을 세우는 기업,<br><span class="vm-nowrap">㈜빛세움입니다.</span></div>
             </div>
         </div>
 
