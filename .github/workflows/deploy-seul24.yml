@@ -1,0 +1,87 @@
+name: 빛세움 seul24.cloud 배포 (Vercel CLI)
+
+# 대장 지시(2026-09-07 "니가 배포해"): seul24.cloud 는 GitHub 연동이 없어 푸시로 배포되지 않는다.
+# 저장소 Secret VERCEL_TOKEN 으로 Vercel CLI 프로덕션 배포를 수행한다.
+# 필요 Secret: VERCEL_TOKEN (Vercel → Account Settings → Tokens)
+# 사용: Actions → 본 워크플로 → Run workflow. mode=list 로 프로젝트/도메인 확인 후 mode=deploy 로 배포.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'list = 프로젝트·도메인 확인만 / deploy = 프로덕션 배포'
+        required: true
+        default: 'list'
+        type: choice
+        options: [list, deploy]
+      project:
+        description: 'Vercel 프로젝트명 (deploy 모드 필수)'
+        required: false
+        default: ''
+        type: string
+      scope:
+        description: 'Vercel 팀/계정 slug (선택)'
+        required: false
+        default: ''
+        type: string
+      ref:
+        description: '배포할 브랜치'
+        required: false
+        default: 'backup-bitseum-rebrand-20260824'
+        type: string
+
+jobs:
+  vercel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Secret 확인
+        env:
+          VT: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -z "$VT" ]; then
+            echo "::error::VERCEL_TOKEN Secret 이 저장소에 등록되어 있지 않습니다 (Settings → Secrets and variables → Actions)"
+            exit 1
+          fi
+          echo "VERCEL_TOKEN: 등록됨"
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.ref }}
+
+      - name: Vercel CLI 설치
+        run: npm i -g vercel@latest
+
+      - name: 계정·프로젝트·도메인 확인
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          SCOPE_ARG=""
+          [ -n "${{ github.event.inputs.scope }}" ] && SCOPE_ARG="--scope ${{ github.event.inputs.scope }}"
+          echo "== whoami"; vercel whoami --token "$VERCEL_TOKEN" || true
+          echo "== teams"; vercel teams ls --token "$VERCEL_TOKEN" || true
+          echo "== projects"; vercel project ls --token "$VERCEL_TOKEN" $SCOPE_ARG || true
+          echo "== domains"; vercel domains ls --token "$VERCEL_TOKEN" $SCOPE_ARG || true
+          echo "== seul24.cloud"; vercel domains inspect seul24.cloud --token "$VERCEL_TOKEN" $SCOPE_ARG || true
+
+      - name: 프로덕션 배포
+        if: ${{ github.event.inputs.mode == 'deploy' }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          PROJECT="${{ github.event.inputs.project }}"
+          if [ -z "$PROJECT" ]; then echo "::error::project 입력이 필요합니다"; exit 1; fi
+          if [ "$PROJECT" = "seul21" ]; then echo "::error::seul21(세울21) 프로젝트는 대상이 아닙니다"; exit 1; fi
+          SCOPE_ARG=""
+          [ -n "${{ github.event.inputs.scope }}" ] && SCOPE_ARG="--scope ${{ github.event.inputs.scope }}"
+          vercel link --yes --project "$PROJECT" $SCOPE_ARG --token "$VERCEL_TOKEN"
+          vercel deploy --prod --yes $SCOPE_ARG --token "$VERCEL_TOKEN" 2>&1 | tee deploy.log
+          echo "== 라이브 확인 (최대 3분)"
+          for i in $(seq 1 9); do
+            sleep 20
+            V=$(curl -sS -L "https://www.seul24.cloud/pages/vision.html?x=$RANDOM" | grep -c '빛세움이 지키는 네 가지 원칙' || true)
+            G=$(curl -sS -L "https://www.seul24.cloud/pages/gallery.html?x=$RANDOM" | grep -c 'max-height:12000px' || true)
+            echo "try $i: vision=$V gallery=$G"
+            if [ "$V" -ge 1 ] && [ "$G" -ge 1 ]; then echo "LIVE_OK"; exit 0; fi
+          done
+          echo "::warning::배포는 실행되었으나 seul24.cloud 에서 신규 내용이 아직 검출되지 않음 (도메인이 다른 프로젝트에 연결되어 있을 수 있음)"
