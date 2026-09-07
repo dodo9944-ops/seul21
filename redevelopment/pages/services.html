@@ -213,18 +213,6 @@
         background:rgba(255,255,255,0.05); border:1px solid rgba(20,38,68,0.088);
     }
 
-    /* PM/CM 독립 하이라이트 섹션 */
-    .pmcm-section { background: linear-gradient(160deg, #FFFFFF, #FFF3C4); border-radius: 20px; padding: 40px 44px; }
-    .pmcm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .pmcm-item {
-        background: var(--white); border: 1px solid #cecece; border-top: 3px solid var(--visseum-gold);
-        border-radius: 12px; padding: 18px 16px; text-align: center;
-    }
-    .pmcm-en { font-size: 12px; font-weight: 800; color: var(--visseum-gold); letter-spacing: 1.5px; margin-bottom: 6px; }
-    .pmcm-ko { font-size: 14px; font-weight: 700; color: var(--visseum-ink); }
-    @media (max-width: 860px) { .pmcm-section { padding: 32px 24px; } .pmcm-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 480px) { .pmcm-grid { grid-template-columns: 1fr; } }
-
     /* Hero keyword badges */
     .hero-badges { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; justify-content:center; }
     .hero-badge {
@@ -362,7 +350,7 @@
     }
     /* 앵커 점프 시 sticky 헤더 가림 방지 */
     html { scroll-behavior: smooth; }
-    #overview, #highlights, #urban-renewal, #engineering, #pmcm, #coordinator, #selected-projects, #network { scroll-margin-top: 88px; }
+    #overview, #highlights, #urban-renewal, #engineering, #business, #coordinator { scroll-margin-top: 88px; }
     .services-hero .hero-card {
         width: 174px; height: 130px; box-sizing: border-box;
         overflow: hidden;
@@ -440,8 +428,8 @@
                 <span>사업분야</span>
             </div>
             <div class="hero-label">Business Areas</div>
-            <h1>도시정비의 전 과정을<br><em>하나의 체계</em>로 관리합니다</h1>
-            <p class="hero-sub">재개발·재건축·소규모정비부터 도시계획·PM/CM까지<br>사업기획, 인허가, 공사비, 일정, 리스크를 통합 관리합니다</p>
+            <h1>정비사업의 <em>모든 영역</em>을<br>책임집니다</h1>
+            <p class="hero-sub">재개발·재건축·소규모정비·도시계획·CM/PM — 사업 초기부터 준공까지 체계적으로 수행합니다</p>
         </div>
         <div class="hero-cards-float">
             <a class="hero-card" href="#urban-renewal">
@@ -451,10 +439,10 @@
             </a>
             <a class="hero-card" href="#engineering">
                 <div class="hero-card-icon"><i class="fa-solid fa-city"></i></div>
-                <h4>도시계획·엔지니어링</h4>
-                <p>도시계획·도심복합개발</p>
+                <h4>도시개발·계획</h4>
+                <p>도심복합개발·도시계획</p>
             </a>
-            <a class="hero-card" href="#pmcm">
+            <a class="hero-card" href="pmcm-service.html">
                 <div class="hero-card-icon"><i class="fa-solid fa-diagram-project"></i></div>
                 <h4>PM/CM 사업관리</h4>
                 <p>공사비·일정·리스크 관리</p>
@@ -476,17 +464,16 @@
             <div class="section-label">Business Overview</div>
             <h2 class="section-title">사업개요</h2>
             <p class="sv-intro">
-                정비사업은 행정, 도시계획, 사업성, 금융, 설계, 시공과 이해관계 조정이 동시에 움직이는 복합사업입니다. 빛세움은 개별 업무를 단순히 대행하지 않습니다.<br>
-                <strong>사업기획 → 정비계획 → 조합운영 → 인허가 → 시공사 선정 → 공사비 관리 → PM·CM → 준공</strong> — 각 단계를 하나의 사업관리 체계로 연결하여 사업기간을 관리하고 리스크를 줄이며 사업의 완성도를 높입니다.
+                빛세움은 재개발·재건축·소규모정비사업을 중심으로, 도시정비사업의 실제 추진을 지원하는 전문조직입니다. 사업성 검토, 인허가 대응, 문서체계화, 이해관계 조율, 추진관리까지 분리하지 않고 하나의 흐름으로 통합 지원합니다.
             </p>
         </div>
 
         <!-- 핵심 수치 -->
         <div class="sv-highlight" id="highlights">
-            <div class="sv-highlight-item"><div class="hl-num"><span>20+</span> YEARS</div><div class="hl-desc">정비사업 실무경험</div></div>
-            <div class="sv-highlight-item"><div class="hl-num"><span>FULL</span> PROCESS</div><div class="hl-desc">사업 전 과정 관리</div></div>
-            <div class="sv-highlight-item"><div class="hl-num"><span>ONE</span> SYSTEM</div><div class="hl-desc">행정·기술·사업 통합</div></div>
-            <div class="sv-highlight-item"><div class="hl-num"><span>FIELD</span> DRIVEN</div><div class="hl-desc">현장 중심 실행관리</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">20<span>년+</span></div><div class="hl-desc">정비사업 실무경험 기반</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">전 <span>과정</span></div><div class="hl-desc">기획부터 인허가·추진까지</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">통합 <span>대응</span></div><div class="hl-desc">행정·사업성·문서 통합</div></div>
+            <div class="sv-highlight-item"><div class="hl-num">실행 <span>중심</span></div><div class="hl-desc">현장 중심 사업관리</div></div>
         </div>
 
         <!-- 정비사업 -->
@@ -576,45 +563,10 @@
                     </div>
                 </a>
 
-            </div>
-        </div>
-
-        <!-- 도시계획·개발 -->
-        <div class="sv-section" id="engineering">
-            <div class="section-label">Engineering &amp; Development</div>
-            <h2 class="section-title">도시계획·개발</h2>
-            <div class="sv-card-grid">
-
-                <a href="urbanplanning-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
-                    <div class="sv-card-header">
-                        <div class="sv-card-num">04</div>
-                        <div>
-                            <h3>도시계획·엔지니어링</h3>
-                            <div class="sv-sub">Urban Planning & Engineering — 상세보기 →</div>
-                        </div>
-                    </div>
-                    <div class="sv-card-body">
-                        <p class="sv-desc">
-                            사업구조와 계획기준을 검토하고, 정비사업과 연결되는 실행 가능한 계획 수립을 지원합니다.
-                        </p>
-                        <ul class="sv-strengths">
-                            <li><i class="fa-solid fa-check"></i>사업구조 및 사업성 검토</li>
-                            <li><i class="fa-solid fa-check"></i>계획기준 및 정비계획 연계</li>
-                            <li><i class="fa-solid fa-check"></i>실행 가능한 계획 수립 지원</li>
-                        </ul>
-                        <div class="sv-tags">
-                            <span class="sv-tag">도시계획</span>
-                            <span class="sv-tag">사업성검토</span>
-                            <span class="sv-tag">정비계획</span>
-                            <span class="sv-tag">실행전략</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- 도심복합개발 (구 정비사업 04 → 엔지니어링 05로 재분류) -->
+                <!-- 4. 도심복합개발 -->
                 <a href="garoju-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
                     <div class="sv-card-header">
-                        <div class="sv-card-num">05</div>
+                        <div class="sv-card-num">04</div>
                         <div>
                             <h3>도심복합개발</h3>
                             <div class="sv-sub">Urban Complex Development — 상세보기 →</div>
@@ -641,23 +593,64 @@
             </div>
         </div>
 
-        <!-- PM/CM — 독립 하이라이트 섹션 -->
-        <div class="sv-section pmcm-section" id="pmcm">
-            <div class="section-label">Project Management</div>
-            <h2 class="section-title">사업을 관리하는 능력이<br>사업의 결과를 바꿉니다</h2>
-            <p class="sv-intro" style="margin-bottom:32px">
-                정비사업은 시간이 길어질수록 공사비·일정·계약·의사결정·행정 리스크가 누적됩니다. 빛세움은 사업 전 과정을 PM 관점에서 관리하여 각 단계의 의사결정을 연결하고 사업 추진력을 높입니다.
-            </p>
-            <div class="pmcm-grid">
-                <div class="pmcm-item"><div class="pmcm-en">COST</div><div class="pmcm-ko">공사비 관리</div></div>
-                <div class="pmcm-item"><div class="pmcm-en">SCHEDULE</div><div class="pmcm-ko">일정관리</div></div>
-                <div class="pmcm-item"><div class="pmcm-en">CONTRACT</div><div class="pmcm-ko">계약관리</div></div>
-                <div class="pmcm-item"><div class="pmcm-en">RISK</div><div class="pmcm-ko">사업 리스크</div></div>
-                <div class="pmcm-item"><div class="pmcm-en">PARTNER</div><div class="pmcm-ko">협력업체 관리</div></div>
-                <div class="pmcm-item"><div class="pmcm-en">ADMINISTRATION</div><div class="pmcm-ko">대관·인허가</div></div>
-            </div>
-            <div style="margin-top:24px">
-                <a href="pmcm-service.html" class="pro-card-more" style="font-size:15px">PM/CM 상세보기 <i class="fa-solid fa-arrow-right"></i></a>
+        <!-- 특화사업 -->
+        <div class="sv-section" id="engineering">
+            <div class="section-label">Engineering Services</div>
+            <h2 class="section-title">엔지니어링사업</h2>
+            <div class="sv-card-grid">
+
+                <a href="urbanplanning-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">05</div>
+                        <div>
+                            <h3>도시계획(엔지니어링)</h3>
+                            <div class="sv-sub">Urban Planning & Engineering — 상세보기 →</div>
+                        </div>
+                    </div>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            사업구조와 계획기준을 검토하고, 정비사업과 연결되는 실행 가능한 계획 수립을 지원합니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>사업구조 및 사업성 검토</li>
+                            <li><i class="fa-solid fa-check"></i>계획기준 및 정비계획 연계</li>
+                            <li><i class="fa-solid fa-check"></i>실행 가능한 계획 수립 지원</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">도시계획</span>
+                            <span class="sv-tag">사업성검토</span>
+                            <span class="sv-tag">정비계획</span>
+                            <span class="sv-tag">실행전략</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pmcm-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                    <div class="sv-card-header">
+                        <div class="sv-card-num">06</div>
+                        <div>
+                            <h3>도시정비 PM/CM</h3>
+                            <div class="sv-sub">Project & Construction Management — 상세보기 →</div>
+                        </div>
+                    </div>
+                    <div class="sv-card-body">
+                        <p class="sv-desc">
+                            일정, 리스크, 협력사, 문서체계를 통합 관리하여 사업의 추진력을 높입니다. 단순 자문을 넘어 실제 사업관리 관점에서 추진체계를 정비합니다.
+                        </p>
+                        <ul class="sv-strengths">
+                            <li><i class="fa-solid fa-check"></i>일정 및 단계별 실행관리</li>
+                            <li><i class="fa-solid fa-check"></i>리스크 및 협력사 관리</li>
+                            <li><i class="fa-solid fa-check"></i>문서체계 및 추진체계 정비</li>
+                        </ul>
+                        <div class="sv-tags">
+                            <span class="sv-tag">PM</span>
+                            <span class="sv-tag">CM</span>
+                            <span class="sv-tag">일정관리</span>
+                            <span class="sv-tag">추진체계</span>
+                        </div>
+                    </div>
+                </a>
+
             </div>
         </div>
 
@@ -719,6 +712,26 @@
                     </div>
                 </a>
 
+            </div>
+        </div>
+
+        <!-- 그룹사 -->
+        <div class="sv-section" id="business">
+            <div class="section-label">Group Companies</div>
+            <h2 class="section-title">도시정비광고 등</h2>
+            <div class="pro-grid group-grid" id="proGrid">
+                <a class="pro-card pro-card-blue" href="http://www.comwayblue.co.kr/" target="_blank" rel="noopener">
+                    <div class="group-card-logo"><img src="../jpg/group_comwayblue_logo.png" alt="컴웨이블루 로고"></div>
+                    <h4>컴웨이블루 <span style="font-weight:500;color:var(--visseum-muted);font-size:12.5px">COMWAYBLUE</span></h4>
+                    <p>분양광고·정비사업광고·영상제작에 특화된 광고기획사입니다. 시장조사부터 기획·카피·디자인·제작까지 온·오프라인 광고를 종합적으로 수행합니다.</p>
+                    <span class="pro-card-more">홈페이지 바로가기 <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                </a>
+                <a class="pro-card pro-card-red" href="http://www.hanwoorired.co.kr/" target="_blank" rel="noopener">
+                    <div class="group-card-logo"><img src="../jpg/group_hanwoorired_logo.png" alt="한우리레드 로고"></div>
+                    <h4>한우리레드 <span style="font-weight:500;color:var(--visseum-muted);font-size:12.5px">HANWOORIRED</span></h4>
+                    <p>고객제일주의 경영을 실현하는 완벽한 파트너. 동감(同感)·동행(同行)·동승(同乘) 3동의 파트너십으로 고객과 함께 동반성장을 실현하며, 윤리경영·상생경영을 바탕으로 사회적 책임을 다하는 기업입니다.</p>
+                    <span class="pro-card-more">홈페이지 바로가기 <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                </a>
             </div>
         </div>
 
@@ -789,74 +802,10 @@
             </div>
 
             <div class="coord-highlight">
-                <div class="coord-hl-item"><div class="coord-hl-num"><span class="hl-gold">3</span></div><div class="coord-hl-desc">서울시 정비사업 코디네이터</div></div>
-                <div class="coord-hl-item"><div class="coord-hl-num"><span class="hl-gold">20+</span> YEARS</div><div class="coord-hl-desc">정비사업 실무경험</div></div>
-                <div class="coord-hl-item"><div class="coord-hl-num"><span class="hl-gold">PUBLIC</span></div><div class="coord-hl-desc">행정기관 협의</div></div>
-                <div class="coord-hl-item"><div class="coord-hl-num"><span class="hl-gold">COORDINATION</span></div><div class="coord-hl-desc">갈등·이해관계 조정</div></div>
-            </div>
-        </div>
-
-        <!-- Selected Projects -->
-        <div class="sv-section" id="selected-projects">
-            <div class="section-label">Selected Projects</div>
-            <h2 class="section-title">실제 사업 수행실적</h2>
-            <div class="sv-card-grid" style="grid-template-columns:repeat(3,1fr)">
-                <a href="portfolio.html?type=재건축" class="sv-card" style="text-decoration:none;color:inherit;">
-                    <div class="sv-card-body" style="padding:24px 26px">
-                        <div class="sv-sub" style="margin-bottom:8px">재건축 · 강남구 · 완료</div>
-                        <h3 style="font-size:17px;font-weight:800;color:#0A0F1C;margin-bottom:10px;line-height:1.4">개포주공1단지<br>주택재건축정비사업</h3>
-                        <div class="sv-tags"><span class="sv-tag">사업관리</span><span class="sv-tag">6,702세대</span></div>
-                    </div>
-                </a>
-                <a href="portfolio.html?type=소규모정비" class="sv-card" style="text-decoration:none;color:inherit;">
-                    <div class="sv-card-body" style="padding:24px 26px">
-                        <div class="sv-sub" style="margin-bottom:8px">소규모재건축 · 구로구 · 진행중</div>
-                        <h3 style="font-size:17px;font-weight:800;color:#0A0F1C;margin-bottom:10px;line-height:1.4">구로동 우성아파트<br>소규모재건축정비사업</h3>
-                        <div class="sv-tags"><span class="sv-tag">정비사업 수행</span><span class="sv-tag">552세대</span></div>
-                    </div>
-                </a>
-                <a href="portfolio.html?type=코디네이터" class="sv-card" style="text-decoration:none;color:inherit;">
-                    <div class="sv-card-body" style="padding:24px 26px">
-                        <div class="sv-sub" style="margin-bottom:8px">서울시 코디네이터 · 송파구 · 진행중</div>
-                        <h3 style="font-size:17px;font-weight:800;color:#0A0F1C;margin-bottom:10px;line-height:1.4">한양3차아파트<br>재건축정비사업</h3>
-                        <div class="sv-tags"><span class="sv-tag">갈등관리</span><span class="sv-tag">행정협의</span></div>
-                    </div>
-                </a>
-            </div>
-            <div style="margin-top:24px;text-align:right">
-                <a href="portfolio.html" class="pro-card-more" style="font-size:15px">전체 수행실적 보기 <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-        </div>
-
-        <!-- VISSEUM 네트워크 -->
-        <div class="sv-section" id="network">
-            <div class="section-label">VISSEUM Network</div>
-            <h2 class="section-title">전문영역을 하나의 네트워크로 연결합니다</h2>
-            <p class="sv-intro" style="margin-bottom:28px">
-                빛세움은 도시정비·도시계획·PM/CM을 중심으로, 분양·광고 전문기업과의 네트워크를 통해 정비사업의 처음부터 끝까지 함께합니다.
-            </p>
-            <div class="pro-grid group-grid" id="proGrid">
-                <a class="pro-card pro-card-blue" href="http://www.comwayblue.co.kr/" target="_blank" rel="noopener">
-                    <div class="group-card-logo"><img src="../jpg/group_comwayblue_logo.png" alt="컴웨이블루 로고"></div>
-                    <h4>컴웨이블루 <span style="font-weight:500;color:var(--visseum-muted);font-size:12.5px">COMWAYBLUE</span></h4>
-                    <p>분양광고·정비사업광고·영상제작 전문 광고기획사입니다.</p>
-                    <span class="pro-card-more">홈페이지 바로가기 <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-                </a>
-                <a class="pro-card pro-card-red" href="http://www.hanwoorired.co.kr/" target="_blank" rel="noopener">
-                    <div class="group-card-logo"><img src="../jpg/group_hanwoorired_logo.png" alt="한우리레드 로고"></div>
-                    <h4>한우리레드 <span style="font-weight:500;color:var(--visseum-muted);font-size:12.5px">HANWOORIRED</span></h4>
-                    <p>분양·사업지원·MD 전문 파트너사입니다.</p>
-                    <span class="pro-card-more">홈페이지 바로가기 <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-                </a>
-            </div>
-        </div>
-
-        <!-- CTA -->
-        <div class="sv-section" style="background:linear-gradient(160deg,#FFFFFF,#FFF3C4);border-radius:20px;padding:40px 44px;text-align:center">
-            <p style="font-size:19px;font-weight:700;color:#0A0F1C;line-height:1.6;margin-bottom:24px;letter-spacing:-0.3px">어떤 사업 단계에서든, 빛세움과 함께 다음 단계를 설계하세요.</p>
-            <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
-                <a href="contact.html" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;background:#B8860B;color:#0A0F1C"><i class="fa-solid fa-comments"></i> 사업 상담 신청</a>
-                <a href="portfolio.html" style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;background:transparent;color:rgba(10,15,28,0.7);border:1px solid rgba(10,15,28,0.22)"><i class="fa-solid fa-list-check"></i> 수행실적 보기</a>
+                <div class="coord-hl-item"><div class="coord-hl-num">업계 <span class="hl-gold">최대</span></div><div class="coord-hl-desc">서울시 코디네이터 전문인력 3인</div></div>
+                <div class="coord-hl-item"><div class="coord-hl-num"><span class="hl-gold">20년+</span> 실무경험</div><div class="coord-hl-desc">정비사업 현장 경험 기반</div></div>
+                <div class="coord-hl-item"><div class="coord-hl-num">갈등 <span class="hl-gold">조정</span></div><div class="coord-hl-desc">이해관계 조율·공사비 협상 지원</div></div>
+                <div class="coord-hl-item"><div class="coord-hl-num">대관·조합 <span class="hl-gold">지원</span></div><div class="coord-hl-desc">행정기관 협의부터 사업 추진까지</div></div>
             </div>
         </div>
 
