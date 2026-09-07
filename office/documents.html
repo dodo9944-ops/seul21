@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>문서관리 - 세울엔지니어링 사무자동화시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/office.css">
+</head>
+<body>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">SE</div>
+      <div>
+        <div class="logo-text">세울엔지니어링</div>
+        <span class="logo-sub">사무자동화시스템</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <ul class="sidebar-menu">
+          <li><a href="index.html"><i class="fas fa-chart-pie"></i> 대시보드</a></li>
+          <li><a href="approval.html"><i class="fas fa-file-signature"></i> 전자결재 <span class="badge" id="approvalBadge">0</span></a></li>
+          <li><a href="documents.html"><i class="fas fa-folder-open"></i> 문서관리</a></li>
+          <li><a href="reports.html"><i class="fas fa-clipboard-list"></i> 업무보고</a></li>
+          <li><a href="attendance.html"><i class="fas fa-clock"></i> 근태관리</a></li>
+          <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> 일정관리</a></li>
+          <li><a href="board.html"><i class="fas fa-comments"></i> 게시판</a></li>
+          <li><a href="contacts.html"><i class="fas fa-address-book"></i> 주소록</a></li>
+          <li><a href="mypage.html"><i class="fas fa-user-cog"></i> 마이페이지</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar"></div>
+      <div class="user-info">
+        <div class="user-name" id="userName"></div>
+        <div class="user-role" id="userRole"></div>
+      </div>
+      <button class="user-logout" onclick="Office.Auth.logout()" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main -->
+  <main class="main-content">
+    <header class="top-header">
+      <div class="top-header-left">
+        <button class="menu-toggle" onclick="Office.UI.toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">홈</a><span class="sep">/</span>
+          <span>업무관리</span><span class="sep">/</span>
+          <span class="current">문서관리</span>
+        </div>
+      </div>
+      <div class="top-header-right">
+        <span class="header-clock" id="headerClock"></span>
+        <button class="header-btn" title="알림"><i class="fas fa-bell"></i><span class="notif-dot" id="notifDot"></span></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <div class="page-header-actions">
+          <h1>문서관리</h1>
+          <button class="btn btn-primary" onclick="Office.UI.showModal('uploadModal')"><i class="fas fa-upload"></i> 문서 업로드</button>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" data-cat="전체">전체</button>
+        <button class="tab-btn" data-cat="계약서">계약서</button>
+        <button class="tab-btn" data-cat="보고서">보고서</button>
+        <button class="tab-btn" data-cat="신청서">신청서</button>
+        <button class="tab-btn" data-cat="회의록">회의록</button>
+        <button class="tab-btn" data-cat="기타">기타</button>
+      </div>
+
+      <!-- Search -->
+      <div class="search-box mb-20">
+        <i class="fas fa-search"></i>
+        <input type="text" class="form-control" id="docSearch" placeholder="문서명으로 검색...">
+      </div>
+
+      <!-- Document Grid -->
+      <div class="grid-3" id="docGrid"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Upload Modal -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>문서 업로드</h3>
+      <button class="modal-close" onclick="Office.UI.closeModal('uploadModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>카테고리 <span class="required">*</span></label>
+        <select class="form-control" id="uploadCategory">
+          <option value="">카테고리 선택</option>
+          <option value="계약서">계약서</option>
+          <option value="보고서">보고서</option>
+          <option value="신청서">신청서</option>
+          <option value="회의록">회의록</option>
+          <option value="기타">기타</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>문서 제목 <span class="required">*</span></label>
+        <input type="text" class="form-control" id="uploadTitle" placeholder="문서 제목을 입력하세요">
+      </div>
+      <div class="form-group">
+        <label>설명</label>
+        <textarea class="form-control" id="uploadDesc" placeholder="문서에 대한 설명을 입력하세요"></textarea>
+      </div>
+      <div class="form-group">
+        <label>파일 첨부</label>
+        <div class="file-drop" id="fileDrop">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>파일을 드래그하거나 클릭하여 업로드</p>
+          <p class="text-sm text-muted" style="margin-top:4px">최대 10MB (PDF, DOCX, XLSX, HWP)</p>
+        </div>
+        <div id="fileInfo" style="display:none;margin-top:8px;padding:8px 12px;background:var(--gray-50);border-radius:var(--radius);font-size:13px;color:var(--gray-700)">
+          <i class="fas fa-file"></i> <span id="fileName"></span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="Office.UI.closeModal('uploadModal')">취소</button>
+      <button class="btn btn-primary" onclick="handleUpload()"><i class="fas fa-upload"></i> 업로드</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="assets/js/office-data.js"></script>
+<script src="assets/js/office.js"></script>
+<script>
+Office.init();
+
+var currentCat = '전체';
+var searchQuery = '';
+
+function getIconInfo(category) {
+  switch (category) {
+    case '계약서': return { icon: 'fa-file-contract', color: 'blue' };
+    case '보고서': return { icon: 'fa-file-alt', color: 'green' };
+    case '신청서': return { icon: 'fa-file-invoice', color: 'yellow' };
+    case '회의록': return { icon: 'fa-file-lines', color: 'cyan' };
+    default:      return { icon: 'fa-file', color: 'gray' };
+  }
+}
+
+function getIconBg(color) {
+  switch (color) {
+    case 'blue': return 'background:var(--primary-100);color:var(--primary)';
+    case 'green': return 'background:var(--success-bg);color:var(--success)';
+    case 'yellow': return 'background:var(--warning-bg);color:var(--warning)';
+    case 'cyan': return 'background:var(--info-bg);color:var(--info)';
+    default: return 'background:var(--gray-100);color:var(--gray-500)';
+  }
+}
+
+function getTagClass(category) {
+  switch (category) {
+    case '계약서': return 'blue';
+    case '보고서': return 'green';
+    case '신청서': return '';
+    case '회의록': return '';
+    default: return '';
+  }
+}
+
+function renderDocs() {
+  var docs = Office.Document.getAll();
+  if (currentCat !== '전체') {
+    docs = docs.filter(function(d) { return d.category === currentCat; });
+  }
+  if (searchQuery) {
+    var q = searchQuery.toLowerCase();
+    docs = docs.filter(function(d) {
+      return (d.title && d.title.toLowerCase().indexOf(q) > -1) || (d.description && d.description.toLowerCase().indexOf(q) > -1);
+    });
+  }
+  var grid = document.getElementById('docGrid');
+  if (docs.length === 0) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-folder-open"></i><h3>문서가 없습니다</h3><p>검색 조건을 변경하거나 새 문서를 업로드하세요.</p></div>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < docs.length; i++) {
+    var d = docs[i];
+    var info = getIconInfo(d.category);
+    var tagCls = getTagClass(d.category);
+    html += '<div class="doc-card">' +
+      '<div class="doc-icon" style="' + getIconBg(info.color) + '"><i class="fas ' + info.icon + '"></i></div>' +
+      '<div class="doc-title">' + (d.title || '') + '</div>' +
+      '<div class="doc-desc">' + (d.description || '') + '</div>' +
+      '<div style="margin-bottom:12px"><span class="tag' + (tagCls ? ' ' + tagCls : '') + '">' + (d.category || '기타') + '</span></div>' +
+      '<div class="doc-meta"><span>' + Office.UI.formatDate(d.lastModified) + '</span><span><i class="fas fa-download" style="margin-right:3px"></i>' + (d.downloads || 0) + '</span><span>' + (d.fileSize || '-') + '</span></div>' +
+      '<button class="btn btn-outline btn-sm" style="width:100%;margin-top:12px" onclick="handleDownload(\'' + d.id + '\')"><i class="fas fa-download"></i> 다운로드</button>' +
+      '</div>';
+  }
+  grid.innerHTML = html;
+}
+
+function handleDownload(id) {
+  Office.Document.incrementDownload(id);
+  var doc = Office.Document.getById(id);
+  Office.UI.showToast((doc ? doc.title : '문서') + ' 다운로드를 시작합니다.', 'success');
+  renderDocs();
+}
+
+function handleUpload() {
+  var category = document.getElementById('uploadCategory').value;
+  var title = document.getElementById('uploadTitle').value.trim();
+  var desc = document.getElementById('uploadDesc').value.trim();
+  if (!category || !title) {
+    Office.UI.showToast('카테고리와 제목을 입력하세요.', 'error');
+    return;
+  }
+  Office.Document.create({
+    category: category,
+    title: title,
+    description: desc,
+    fileSize: '0KB'
+  });
+  Office.UI.showToast('문서가 업로드되었습니다.', 'success');
+  Office.UI.closeModal('uploadModal');
+  document.getElementById('uploadCategory').value = '';
+  document.getElementById('uploadTitle').value = '';
+  document.getElementById('uploadDesc').value = '';
+  document.getElementById('fileInfo').style.display = 'none';
+  renderDocs();
+}
+
+// Tab clicks
+var tabBtns = document.querySelectorAll('.tab-btn');
+for (var i = 0; i < tabBtns.length; i++) {
+  tabBtns[i].addEventListener('click', function() {
+    for (var j = 0; j < tabBtns.length; j++) tabBtns[j].classList.remove('active');
+    this.classList.add('active');
+    currentCat = this.getAttribute('data-cat');
+    renderDocs();
+  });
+}
+
+// Search
+document.getElementById('docSearch').addEventListener('input', function() {
+  searchQuery = this.value.trim();
+  renderDocs();
+});
+
+// File drop zone
+var fileDrop = document.getElementById('fileDrop');
+fileDrop.addEventListener('click', function() {
+  var inp = document.createElement('input');
+  inp.type = 'file';
+  inp.accept = '.pdf,.docx,.xlsx,.hwp,.hwpx';
+  inp.onchange = function() {
+    if (inp.files.length) {
+      document.getElementById('fileName').textContent = inp.files[0].name;
+      document.getElementById('fileInfo').style.display = 'block';
+    }
+  };
+  inp.click();
+});
+fileDrop.addEventListener('dragover', function(e) { e.preventDefault(); fileDrop.classList.add('dragover'); });
+fileDrop.addEventListener('dragleave', function() { fileDrop.classList.remove('dragover'); });
+fileDrop.addEventListener('drop', function(e) {
+  e.preventDefault();
+  fileDrop.classList.remove('dragover');
+  if (e.dataTransfer.files.length) {
+    document.getElementById('fileName').textContent = e.dataTransfer.files[0].name;
+    document.getElementById('fileInfo').style.display = 'block';
+  }
+});
+
+renderDocs();
+</script>
+
+</body>
+</html>

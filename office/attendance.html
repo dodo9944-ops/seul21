@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>근태관리 - 세울엔지니어링 사무자동화시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/office.css">
+<style>
+.leave-balance{display:flex;align-items:center;gap:24px;padding:20px;background:var(--primary-50);border-radius:var(--radius-lg);margin-bottom:20px}
+.leave-balance .balance-circle{width:80px;height:80px;border-radius:50%;border:4px solid var(--primary);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.leave-balance .balance-circle .used{font-size:22px;font-weight:800;color:var(--primary);line-height:1}
+.leave-balance .balance-circle .total{font-size:11px;color:var(--gray-500);margin-top:2px}
+.leave-balance .balance-info{flex:1}
+.leave-balance .balance-info h4{font-size:15px;font-weight:700;color:var(--gray-800);margin-bottom:4px}
+.leave-balance .balance-info p{font-size:13px;color:var(--gray-500)}
+.leave-bar{height:8px;background:var(--gray-200);border-radius:4px;margin-top:8px;overflow:hidden}
+.leave-bar .fill{height:100%;background:var(--primary);border-radius:4px;transition:width .5s ease}
+.month-nav{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.month-nav .month-label{font-size:15px;font-weight:700;color:var(--gray-800);min-width:140px;text-align:center}
+.month-nav button{width:32px;height:32px;border:1px solid var(--gray-300);background:#fff;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray-600);transition:var(--transition);font-size:13px}
+.month-nav button:hover{background:var(--gray-50);border-color:var(--gray-400)}
+.badge-status.normal{background:var(--success-bg);color:#15803D}
+.badge-status.late{background:var(--warning-bg);color:#B45309}
+.badge-status.early{background:var(--info-bg);color:#0E7490}
+.badge-status.absent{background:var(--danger-bg);color:#B91C1C}
+.badge-status.vacation{background:#F3E8FF;color:#7C3AED}
+@media(max-width:768px){
+  .leave-balance{flex-direction:column;text-align:center}
+  .clock-buttons{flex-direction:column;align-items:center}
+  .clock-btn{width:100%;max-width:260px}
+  .attendance-status{flex-wrap:wrap;gap:16px}
+}
+</style>
+</head>
+<body>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">SE</div>
+      <div>
+        <div class="logo-text">세울엔지니어링</div>
+        <span class="logo-sub">사무자동화시스템</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">메인</div>
+        <ul class="sidebar-menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> 대시보드</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">업무관리</div>
+        <ul class="sidebar-menu">
+          <li><a href="approval.html"><i class="fas fa-file-signature"></i> 전자결재 <span class="badge" id="approvalBadge">0</span></a></li>
+          <li><a href="documents.html"><i class="fas fa-folder-open"></i> 문서관리</a></li>
+          <li><a href="reports.html"><i class="fas fa-chart-bar"></i> 업무보고</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">근태/일정</div>
+        <ul class="sidebar-menu">
+          <li><a href="attendance.html" class="active"><i class="fas fa-clock"></i> 근태관리</a></li>
+          <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> 일정관리</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">커뮤니티</div>
+        <ul class="sidebar-menu">
+          <li><a href="board.html"><i class="fas fa-clipboard-list"></i> 게시판</a></li>
+          <li><a href="contacts.html"><i class="fas fa-address-book"></i> 주소록</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">설정</div>
+        <ul class="sidebar-menu">
+          <li><a href="mypage.html"><i class="fas fa-user-cog"></i> 마이페이지</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar">--</div>
+      <div class="user-info">
+        <div class="user-name" id="userName">사용자</div>
+        <div class="user-role" id="userRole">-</div>
+      </div>
+      <button class="user-logout" onclick="Office.Auth.logout()" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main -->
+  <main class="main-content">
+    <header class="top-header">
+      <div class="top-header-left">
+        <button class="menu-toggle" onclick="Office.UI.toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">홈</a><span class="sep">/</span>
+          <span>근태/일정</span><span class="sep">/</span>
+          <span class="current">근태관리</span>
+        </div>
+      </div>
+      <div class="top-header-right">
+        <span class="header-clock" id="headerClock">00:00:00</span>
+        <button class="header-btn" title="알림"><i class="fas fa-bell"></i><span class="notif-dot" id="notifDot"></span></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <h1><i class="fas fa-clock" style="color:var(--primary);margin-right:8px"></i>근태관리</h1>
+        <p>출퇴근 기록 및 휴가를 관리합니다.</p>
+      </div>
+
+      <!-- Clock Card -->
+      <div class="card mb-24">
+        <div class="attendance-clock">
+          <div class="clock-time" id="attendanceClock">00:00:00</div>
+          <div class="clock-date" id="attendanceDate">-</div>
+          <div class="clock-buttons">
+            <button class="clock-btn in" id="btnClockIn" onclick="handleClockIn()"><i class="fas fa-sign-in-alt"></i> 출근</button>
+            <button class="clock-btn out" id="btnClockOut" onclick="handleClockOut()"><i class="fas fa-sign-out-alt"></i> 퇴근</button>
+          </div>
+          <div class="attendance-status" id="attendanceStatus">
+            <div class="status-item">
+              <div class="label">출근시간</div>
+              <div class="value" id="statusClockIn">--:--</div>
+            </div>
+            <div class="status-item">
+              <div class="label">퇴근시간</div>
+              <div class="value" id="statusClockOut">--:--</div>
+            </div>
+            <div class="status-item">
+              <div class="label">근무시간</div>
+              <div class="value" id="statusWorkHours">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fas fa-calendar-check"></i></div>
+          <div class="stat-info">
+            <h4>총 출근일수</h4>
+            <div class="stat-value" id="statWorkDays">0</div>
+            <div class="stat-sub">이번 달</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon yellow"><i class="fas fa-exclamation-triangle"></i></div>
+          <div class="stat-info">
+            <h4>지각</h4>
+            <div class="stat-value" id="statLate">0</div>
+            <div class="stat-sub">이번 달</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon cyan"><i class="fas fa-running"></i></div>
+          <div class="stat-info">
+            <h4>조퇴</h4>
+            <div class="stat-value" id="statEarly">0</div>
+            <div class="stat-sub">이번 달</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fas fa-business-time"></i></div>
+          <div class="stat-info">
+            <h4>총 근무시간</h4>
+            <div class="stat-value" id="statTotalHours">0</div>
+            <div class="stat-sub">이번 달 (시간)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="card">
+        <div class="card-body" style="padding-bottom:0">
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="tabRecords">출퇴근 기록</button>
+            <button class="tab-btn" data-tab="tabLeave">휴가 관리</button>
+          </div>
+        </div>
+
+        <!-- Tab 1: Records -->
+        <div class="tab-content active" id="tabRecords">
+          <div class="card-body">
+            <div class="month-nav">
+              <button onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+              <span class="month-label" id="monthLabel">2026년 4월</span>
+              <button onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>날짜</th>
+                    <th>요일</th>
+                    <th class="text-center">출근</th>
+                    <th class="text-center">퇴근</th>
+                    <th class="text-center">근무시간</th>
+                    <th class="text-center">초과근무</th>
+                    <th class="text-center">상태</th>
+                    <th>비고</th>
+                  </tr>
+                </thead>
+                <tbody id="recordsBody"></tbody>
+              </table>
+            </div>
+            <div class="empty-state" id="recordsEmpty" style="display:none">
+              <i class="fas fa-clipboard-list"></i>
+              <h3>기록이 없습니다</h3>
+              <p>해당 월의 출퇴근 기록이 없습니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Leave -->
+        <div class="tab-content" id="tabLeave">
+          <div class="card-body">
+            <div class="leave-balance">
+              <div class="balance-circle">
+                <span class="used" id="leaveUsed">3</span>
+                <span class="total">/ 15일</span>
+              </div>
+              <div class="balance-info">
+                <h4>연차 휴가 현황</h4>
+                <p>총 15일 중 <strong id="leaveUsedText">3</strong>일 사용 / <strong id="leaveRemainText">12</strong>일 잔여</p>
+                <div class="leave-bar"><div class="fill" id="leaveBar" style="width:20%"></div></div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+              <h3 style="font-size:15px;font-weight:700;color:var(--gray-800)">휴가 사용 내역</h3>
+              <button class="btn btn-primary btn-sm" onclick="Office.UI.showModal('leaveModal')"><i class="fas fa-plus"></i> 휴가 신청</button>
+            </div>
+
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>휴가종류</th>
+                    <th>기간</th>
+                    <th class="text-center">일수</th>
+                    <th>사유</th>
+                    <th class="text-center">상태</th>
+                  </tr>
+                </thead>
+                <tbody id="leaveBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Leave Modal -->
+<div class="modal-overlay" id="leaveModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fas fa-umbrella-beach" style="color:var(--primary);margin-right:8px"></i>휴가 신청</h3>
+      <button class="modal-close" onclick="Office.UI.closeModal('leaveModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>휴가종류 <span class="required">*</span></label>
+        <select class="form-control" id="leaveType">
+          <option value="연차">연차</option>
+          <option value="오전반차">오전반차</option>
+          <option value="오후반차">오후반차</option>
+          <option value="병가">병가</option>
+          <option value="경조사">경조사</option>
+          <option value="공가">공가</option>
+          <option value="특별휴가">특별휴가</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>시작일 <span class="required">*</span></label>
+          <input type="date" class="form-control" id="leaveStart">
+        </div>
+        <div class="form-group">
+          <label>종료일 <span class="required">*</span></label>
+          <input type="date" class="form-control" id="leaveEnd">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>사유 <span class="required">*</span></label>
+        <textarea class="form-control" id="leaveReason" placeholder="휴가 사유를 입력하세요" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="Office.UI.closeModal('leaveModal')">취소</button>
+      <button class="btn btn-primary" onclick="submitLeave()"><i class="fas fa-paper-plane"></i> 신청</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="assets/js/office-data.js"></script>
+<script src="assets/js/office.js"></script>
+<script>
+Office.init();
+
+var currentYear, currentMonth;
+var DAY_NAMES = ['일','월','화','수','목','금','토'];
+
+// Leave data (stored in localStorage)
+var LEAVE_KEY = 'office_leaves';
+function getLeaves() { try { return JSON.parse(localStorage.getItem(LEAVE_KEY)) || defaultLeaves(); } catch(e) { return defaultLeaves(); } }
+function setLeaves(data) { localStorage.setItem(LEAVE_KEY, JSON.stringify(data)); }
+function defaultLeaves() {
+  var d = [
+    { id: 'lv1', type: '연차', startDate: '2026-03-10', endDate: '2026-03-10', days: 1, reason: '개인 사유', status: '승인' },
+    { id: 'lv2', type: '오전반차', startDate: '2026-02-14', endDate: '2026-02-14', days: 0.5, reason: '병원 진료', status: '승인' },
+    { id: 'lv3', type: '연차', startDate: '2026-01-27', endDate: '2026-01-28', days: 2, reason: '가족 행사', status: '승인' }
+  ];
+  setLeaves(d);
+  return d;
+}
+
+// Live clock
+function tickAttendanceClock() {
+  var now = new Date();
+  var h = String(now.getHours()).padStart(2,'0');
+  var m = String(now.getMinutes()).padStart(2,'0');
+  var s = String(now.getSeconds()).padStart(2,'0');
+  var el = document.getElementById('attendanceClock');
+  if (el) el.textContent = h + ':' + m + ':' + s;
+
+  var dateEl = document.getElementById('attendanceDate');
+  if (dateEl) {
+    dateEl.textContent = now.getFullYear() + '년 ' + (now.getMonth()+1) + '월 ' + now.getDate() + '일 (' + DAY_NAMES[now.getDay()] + ')';
+  }
+}
+tickAttendanceClock();
+setInterval(tickAttendanceClock, 1000);
+
+// Today record state
+function refreshTodayStatus() {
+  var rec = Office.Attendance.getTodayRecord();
+  var btnIn = document.getElementById('btnClockIn');
+  var btnOut = document.getElementById('btnClockOut');
+  var sIn = document.getElementById('statusClockIn');
+  var sOut = document.getElementById('statusClockOut');
+  var sWork = document.getElementById('statusWorkHours');
+
+  if (rec) {
+    sIn.textContent = rec.clockIn || '--:--';
+    sOut.textContent = rec.clockOut || '--:--';
+    if (rec.clockIn) { btnIn.disabled = true; }
+    if (rec.clockOut) { btnOut.disabled = true; sWork.textContent = rec.workHours + 'h'; }
+    else if (rec.clockIn) { btnOut.disabled = false; sWork.textContent = '근무 중'; }
+  } else {
+    sIn.textContent = '--:--';
+    sOut.textContent = '--:--';
+    sWork.textContent = '-';
+    btnIn.disabled = false;
+    btnOut.disabled = true;
+  }
+}
+
+function handleClockIn() {
+  var rec = Office.Attendance.clockIn();
+  if (rec) {
+    Office.UI.showToast('출근이 기록되었습니다. (' + rec.clockIn + ')', rec.status === '지각' ? 'error' : 'success');
+    refreshTodayStatus();
+    refreshStats();
+    renderRecords();
+  }
+}
+
+function handleClockOut() {
+  var rec = Office.Attendance.clockOut();
+  if (rec) {
+    Office.UI.showToast('퇴근이 기록되었습니다. (' + rec.clockOut + ', 근무 ' + rec.workHours + '시간)', 'success');
+    refreshTodayStatus();
+    refreshStats();
+    renderRecords();
+  } else {
+    Office.UI.showToast('출근 기록이 없습니다.', 'error');
+  }
+}
+
+// Stats
+function refreshStats() {
+  var stats = Office.Attendance.getStats();
+  document.getElementById('statWorkDays').textContent = stats.workDays;
+  document.getElementById('statLate').textContent = stats.late;
+  document.getElementById('statEarly').textContent = stats.earlyLeave;
+  document.getElementById('statTotalHours').textContent = stats.totalHours;
+}
+
+// Month navigation
+function initMonth() {
+  var now = new Date();
+  currentYear = now.getFullYear();
+  currentMonth = now.getMonth() + 1;
+  renderMonthLabel();
+  renderRecords();
+}
+
+function changeMonth(dir) {
+  currentMonth += dir;
+  if (currentMonth > 12) { currentMonth = 1; currentYear++; }
+  if (currentMonth < 1) { currentMonth = 12; currentYear--; }
+  renderMonthLabel();
+  renderRecords();
+}
+
+function renderMonthLabel() {
+  document.getElementById('monthLabel').textContent = currentYear + '년 ' + currentMonth + '월';
+}
+
+function renderRecords() {
+  var records = Office.Attendance.getMonthlyRecords(currentYear, currentMonth);
+  var tbody = document.getElementById('recordsBody');
+  var emptyEl = document.getElementById('recordsEmpty');
+
+  if (records.length === 0) {
+    tbody.innerHTML = '';
+    emptyEl.style.display = 'block';
+    return;
+  }
+  emptyEl.style.display = 'none';
+
+  var html = '';
+  for (var i = 0; i < records.length; i++) {
+    var r = records[i];
+    var d = new Date(r.date);
+    var dayName = DAY_NAMES[d.getDay()];
+    var statusClass = 'normal';
+    if (r.status === '지각') statusClass = 'late';
+    else if (r.status === '조퇴') statusClass = 'early';
+    else if (r.status === '결근') statusClass = 'absent';
+    else if (r.status === '휴가') statusClass = 'vacation';
+
+    html += '<tr>'
+      + '<td>' + Office.UI.formatDate(r.date) + '</td>'
+      + '<td>' + dayName + '</td>'
+      + '<td class="text-center">' + (r.clockIn || '-') + '</td>'
+      + '<td class="text-center">' + (r.clockOut || '-') + '</td>'
+      + '<td class="text-center">' + (r.workHours ? r.workHours + 'h' : '-') + '</td>'
+      + '<td class="text-center">' + (r.overtime ? r.overtime + 'h' : '-') + '</td>'
+      + '<td class="text-center"><span class="badge-status ' + statusClass + '">' + r.status + '</span></td>'
+      + '<td>' + (r.note || '') + '</td>'
+      + '</tr>';
+  }
+  tbody.innerHTML = html;
+}
+
+// Leave management
+function renderLeaves() {
+  var leaves = getLeaves();
+  var tbody = document.getElementById('leaveBody');
+  var totalUsed = 0;
+
+  var html = '';
+  for (var i = 0; i < leaves.length; i++) {
+    var lv = leaves[i];
+    totalUsed += lv.days;
+    var statusClass = lv.status === '승인' ? 'approved' : lv.status === '반려' ? 'rejected' : 'pending';
+    var period = Office.UI.formatDate(lv.startDate);
+    if (lv.startDate !== lv.endDate) period += ' ~ ' + Office.UI.formatDate(lv.endDate);
+
+    html += '<tr>'
+      + '<td><span class="tag blue">' + lv.type + '</span></td>'
+      + '<td>' + period + '</td>'
+      + '<td class="text-center">' + lv.days + '일</td>'
+      + '<td>' + lv.reason + '</td>'
+      + '<td class="text-center"><span class="badge-status ' + statusClass + '">' + lv.status + '</span></td>'
+      + '</tr>';
+  }
+  tbody.innerHTML = html;
+
+  // Update balance
+  var remain = 15 - totalUsed;
+  document.getElementById('leaveUsed').textContent = totalUsed;
+  document.getElementById('leaveUsedText').textContent = totalUsed;
+  document.getElementById('leaveRemainText').textContent = remain;
+  document.getElementById('leaveBar').style.width = Math.round((totalUsed / 15) * 100) + '%';
+}
+
+function submitLeave() {
+  var type = document.getElementById('leaveType').value;
+  var start = document.getElementById('leaveStart').value;
+  var end = document.getElementById('leaveEnd').value;
+  var reason = document.getElementById('leaveReason').value.trim();
+
+  if (!start || !end) { Office.UI.showToast('시작일과 종료일을 입력하세요.', 'error'); return; }
+  if (!reason) { Office.UI.showToast('사유를 입력하세요.', 'error'); return; }
+  if (end < start) { Office.UI.showToast('종료일이 시작일보다 빠릅니다.', 'error'); return; }
+
+  var days = 1;
+  if (start !== end) {
+    var s = new Date(start), e = new Date(end);
+    days = Math.round((e - s) / 86400000) + 1;
+  }
+  if (type === '오전반차' || type === '오후반차') days = 0.5;
+
+  var leaves = getLeaves();
+  leaves.unshift({
+    id: 'lv_' + Office.UI.genId(),
+    type: type,
+    startDate: start,
+    endDate: end,
+    days: days,
+    reason: reason,
+    status: '대기'
+  });
+  setLeaves(leaves);
+
+  Office.UI.closeModal('leaveModal');
+  document.getElementById('leaveType').value = '연차';
+  document.getElementById('leaveStart').value = '';
+  document.getElementById('leaveEnd').value = '';
+  document.getElementById('leaveReason').value = '';
+  renderLeaves();
+  Office.UI.showToast('휴가 신청이 완료되었습니다.', 'success');
+}
+
+// Initialize
+refreshTodayStatus();
+refreshStats();
+initMonth();
+renderLeaves();
+</script>
+
+</body>
+</html>

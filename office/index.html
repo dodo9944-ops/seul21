@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>대시보드 - 세울엔지니어링 사무자동화시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/office.css">
+<style>
+.quick-links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.quick-link{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 8px;border-radius:var(--radius);border:1px solid var(--gray-200);cursor:pointer;transition:var(--transition);text-decoration:none;color:var(--gray-700);font-size:12px;font-weight:600;text-align:center}
+.quick-link:hover{background:var(--primary-50);border-color:var(--primary-200);color:var(--primary)}
+.quick-link i{font-size:20px;color:var(--primary)}
+.greeting{margin-bottom:24px}
+.greeting h2{font-size:20px;font-weight:700;color:var(--gray-900);margin-bottom:4px}
+.greeting p{font-size:13.5px;color:var(--gray-500)}
+</style>
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">SE</div>
+      <div><div class="logo-text">세울엔지니어링</div><span class="logo-sub">사무자동화시스템</span></div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">메인</div>
+        <ul class="sidebar-menu"><li><a href="index.html"><i class="fas fa-home"></i> 대시보드</a></li></ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">업무관리</div>
+        <ul class="sidebar-menu">
+          <li><a href="approval.html"><i class="fas fa-file-signature"></i> 전자결재 <span class="badge" id="approvalBadge">0</span></a></li>
+          <li><a href="documents.html"><i class="fas fa-folder-open"></i> 문서관리</a></li>
+          <li><a href="reports.html"><i class="fas fa-chart-bar"></i> 업무보고</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">근태/일정</div>
+        <ul class="sidebar-menu">
+          <li><a href="attendance.html"><i class="fas fa-clock"></i> 근태관리</a></li>
+          <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> 일정관리</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">커뮤니티</div>
+        <ul class="sidebar-menu">
+          <li><a href="board.html"><i class="fas fa-clipboard-list"></i> 게시판</a></li>
+          <li><a href="contacts.html"><i class="fas fa-address-book"></i> 주소록</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">설정</div>
+        <ul class="sidebar-menu"><li><a href="mypage.html"><i class="fas fa-user-cog"></i> 마이페이지</a></li></ul>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar">--</div>
+      <div class="user-info"><div class="user-name" id="userName">-</div><div class="user-role" id="userRole">-</div></div>
+      <button class="user-logout" onclick="Office.Auth.logout()" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </nav>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Top Header -->
+    <header class="top-header">
+      <div class="top-header-left">
+        <button class="menu-toggle" onclick="Office.UI.toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="breadcrumb"><a href="index.html">홈</a><span class="sep">/</span><span class="current">대시보드</span></div>
+      </div>
+      <div class="top-header-right">
+        <span class="header-clock" id="headerClock">--:--:--</span>
+        <button class="header-btn" title="알림" onclick="Office.UI.showModal('notifModal')"><i class="fas fa-bell"></i><span class="notif-dot" id="notifDot" style="display:none"></span></button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+
+      <!-- Greeting -->
+      <div class="greeting">
+        <h2 id="greetingText">안녕하세요</h2>
+        <p id="greetingDate"></p>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="stat-grid">
+        <div class="stat-card" onclick="location.href='approval.html'">
+          <div class="stat-icon blue"><i class="fas fa-file-signature"></i></div>
+          <div class="stat-info"><h4>대기중 결재</h4><div class="stat-value" id="statApproval">0</div><div class="stat-sub">건</div></div>
+        </div>
+        <div class="stat-card" onclick="location.href='attendance.html'">
+          <div class="stat-icon green"><i class="fas fa-calendar-check"></i></div>
+          <div class="stat-info"><h4>이번 달 출근일</h4><div class="stat-value" id="statAttendance">0</div><div class="stat-sub">일</div></div>
+        </div>
+        <div class="stat-card" onclick="location.href='reports.html'">
+          <div class="stat-icon yellow"><i class="fas fa-chart-bar"></i></div>
+          <div class="stat-info"><h4>이번 달 보고서</h4><div class="stat-value" id="statReports">0</div><div class="stat-sub">건</div></div>
+        </div>
+        <div class="stat-card" onclick="location.href='calendar.html'">
+          <div class="stat-icon cyan"><i class="fas fa-calendar-day"></i></div>
+          <div class="stat-info"><h4>오늘의 일정</h4><div class="stat-value" id="statSchedule">0</div><div class="stat-sub">건</div></div>
+        </div>
+      </div>
+
+      <!-- Grid: Main + Right Sidebar -->
+      <div class="grid-sidebar">
+
+        <!-- LEFT COLUMN -->
+        <div>
+
+          <!-- Quick Attendance -->
+          <div class="card mb-20">
+            <div class="card-header"><h3><i class="fas fa-clock" style="margin-right:8px;color:var(--primary)"></i>빠른 출퇴근</h3></div>
+            <div class="card-body">
+              <div class="attendance-clock">
+                <div class="clock-time" id="dashClock">--:--:--</div>
+                <div class="clock-date" id="dashDate"></div>
+                <div class="clock-buttons">
+                  <button class="clock-btn in" id="btnClockIn" onclick="quickClockIn()"><i class="fas fa-sign-in-alt"></i> 출근</button>
+                  <button class="clock-btn out" id="btnClockOut" onclick="quickClockOut()" disabled><i class="fas fa-sign-out-alt"></i> 퇴근</button>
+                </div>
+                <div class="attendance-status" id="attendanceStatus" style="display:none">
+                  <div class="status-item"><div class="label">출근 시간</div><div class="value" id="attClockIn">-</div></div>
+                  <div class="status-item"><div class="label">퇴근 시간</div><div class="value" id="attClockOut">-</div></div>
+                  <div class="status-item"><div class="label">근무 상태</div><div class="value" id="attStatus">-</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pending Approvals -->
+          <div class="card mb-20">
+            <div class="card-header">
+              <h3><i class="fas fa-file-signature" style="margin-right:8px;color:var(--warning)"></i>대기중 결재</h3>
+              <a href="approval.html" class="btn btn-ghost btn-sm">전체보기 <i class="fas fa-chevron-right" style="font-size:10px"></i></a>
+            </div>
+            <div class="card-body" style="padding:0">
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th>유형</th><th>제목</th><th>요청자</th><th>요청일</th><th>상태</th></tr></thead>
+                  <tbody id="pendingApprovals"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Board Posts -->
+          <div class="card">
+            <div class="card-header">
+              <h3><i class="fas fa-clipboard-list" style="margin-right:8px;color:var(--success)"></i>최근 게시글</h3>
+              <a href="board.html" class="btn btn-ghost btn-sm">전체보기 <i class="fas fa-chevron-right" style="font-size:10px"></i></a>
+            </div>
+            <div class="card-body" style="padding:0">
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th>분류</th><th>제목</th><th>작성자</th><th>작성일</th><th class="text-center">조회</th></tr></thead>
+                  <tbody id="recentPosts"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+
+          <!-- Today's Schedule -->
+          <div class="card mb-20">
+            <div class="card-header">
+              <h3><i class="fas fa-calendar-day" style="margin-right:8px;color:var(--info)"></i>오늘의 일정</h3>
+              <a href="calendar.html" class="btn btn-ghost btn-sm">전체보기</a>
+            </div>
+            <div class="card-body" style="padding:12px 20px">
+              <ul class="activity-list" id="todaySchedule"></ul>
+            </div>
+          </div>
+
+          <!-- Notifications -->
+          <div class="card mb-20">
+            <div class="card-header">
+              <h3><i class="fas fa-bell" style="margin-right:8px;color:var(--warning)"></i>알림</h3>
+              <span class="text-sm text-muted" id="unreadCount"></span>
+            </div>
+            <div class="card-body" style="padding:12px 20px">
+              <ul class="activity-list" id="notifList"></ul>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="card">
+            <div class="card-header"><h3><i class="fas fa-th-large" style="margin-right:8px;color:var(--gray-500)"></i>바로가기</h3></div>
+            <div class="card-body">
+              <div class="quick-links">
+                <a href="approval.html" class="quick-link"><i class="fas fa-file-signature"></i>전자결재</a>
+                <a href="attendance.html" class="quick-link"><i class="fas fa-clock"></i>근태관리</a>
+                <a href="reports.html" class="quick-link"><i class="fas fa-chart-bar"></i>업무보고</a>
+                <a href="calendar.html" class="quick-link"><i class="fas fa-calendar-alt"></i>일정관리</a>
+                <a href="documents.html" class="quick-link"><i class="fas fa-folder-open"></i>문서관리</a>
+                <a href="board.html" class="quick-link"><i class="fas fa-clipboard-list"></i>게시판</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div><!-- /grid-sidebar -->
+
+    </div><!-- /page-content -->
+
+  </div><!-- /main-content -->
+
+</div><!-- /app-layout -->
+
+<!-- Notification Modal -->
+<div class="modal-overlay" id="notifModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>알림</h3>
+      <button class="modal-close" onclick="Office.UI.closeModal('notifModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" id="notifModalBody" style="padding:0">
+      <ul class="widget-list" id="notifModalList" style="padding:0 20px"></ul>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" onclick="markAllRead()">모두 읽음 처리</button>
+      <button class="btn btn-primary btn-sm" onclick="Office.UI.closeModal('notifModal')">닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="assets/js/office-data.js"></script>
+<script src="assets/js/office.js"></script>
+<script>
+Office.init();
+
+(function() {
+  var user = Office.Auth.getCurrentUser();
+  if (!user) return;
+
+  // Greeting
+  var now = new Date();
+  var hour = now.getHours();
+  var timeGreet = hour < 12 ? '좋은 아침입니다' : hour < 18 ? '좋은 오후입니다' : '수고하셨습니다';
+  document.getElementById('greetingText').textContent = timeGreet + ', ' + user.name + '님!';
+
+  var days = ['일','월','화','수','목','금','토'];
+  var dateStr = now.getFullYear() + '년 ' + (now.getMonth()+1) + '월 ' + now.getDate() + '일 (' + days[now.getDay()] + '요일)';
+  document.getElementById('greetingDate').textContent = dateStr;
+
+  // Stat cards
+  var apStats = Office.Approval.getStats();
+  document.getElementById('statApproval').textContent = apStats.pending;
+
+  var attStats = Office.Attendance.getStats();
+  document.getElementById('statAttendance').textContent = attStats.workDays;
+
+  var reports = Office.Report.getAll();
+  var thisMonth = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0');
+  var monthReports = reports.filter(function(r){ return r.createdAt && r.createdAt.indexOf(thisMonth) === 0; });
+  document.getElementById('statReports').textContent = monthReports.length;
+
+  var today = now.toISOString().split('T')[0];
+  var todayEvents = Office.Storage.get('calendar').filter(function(e){
+    return e.startDate <= today && (e.endDate ? e.endDate >= today : e.startDate >= today);
+  });
+  document.getElementById('statSchedule').textContent = todayEvents.length;
+
+  // Dashboard clock
+  var dashClockEl = document.getElementById('dashClock');
+  var dashDateEl = document.getElementById('dashDate');
+  function updateDashClock() {
+    var n = new Date();
+    dashClockEl.textContent = [n.getHours(), n.getMinutes(), n.getSeconds()].map(function(v){return String(v).padStart(2,'0')}).join(':');
+    dashDateEl.textContent = n.getFullYear() + '.' + String(n.getMonth()+1).padStart(2,'0') + '.' + String(n.getDate()).padStart(2,'0') + ' (' + days[n.getDay()] + ')';
+  }
+  updateDashClock();
+  setInterval(updateDashClock, 1000);
+
+  // Attendance status
+  var todayRec = Office.Attendance.getTodayRecord();
+  if (todayRec) {
+    document.getElementById('attendanceStatus').style.display = 'flex';
+    document.getElementById('attClockIn').textContent = todayRec.clockIn || '-';
+    document.getElementById('attClockOut').textContent = todayRec.clockOut || '-';
+    document.getElementById('attStatus').textContent = todayRec.status || '-';
+    if (todayRec.clockIn) {
+      document.getElementById('btnClockIn').disabled = true;
+      document.getElementById('btnClockOut').disabled = !!todayRec.clockOut;
+    }
+  }
+
+  // Pending approvals (top 5)
+  var pending = Office.Approval.getAll('대기').slice(0, 5);
+  var tbody = document.getElementById('pendingApprovals');
+  if (pending.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted" style="padding:24px">대기중인 결재가 없습니다.</td></tr>';
+  } else {
+    var html = '';
+    for (var i = 0; i < pending.length; i++) {
+      var ap = pending[i];
+      html += '<tr>';
+      html += '<td><span class="tag blue">' + (ap.type || '-') + '</span></td>';
+      html += '<td><a href="approval.html" style="font-weight:600">' + ap.title + '</a></td>';
+      html += '<td>' + ap.requester + '</td>';
+      html += '<td>' + Office.UI.formatDate(ap.createdAt) + '</td>';
+      html += '<td><span class="badge-status pending">대기</span></td>';
+      html += '</tr>';
+    }
+    tbody.innerHTML = html;
+  }
+
+  // Recent board posts (top 5)
+  var posts = Office.Board.getPosts(null, 1, 5);
+  var ptbody = document.getElementById('recentPosts');
+  if (posts.data.length === 0) {
+    ptbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted" style="padding:24px">게시글이 없습니다.</td></tr>';
+  } else {
+    var phtml = '';
+    for (var j = 0; j < posts.data.length; j++) {
+      var p = posts.data[j];
+      var catClass = p.category === '공지사항' ? 'red' : p.category === '부서게시판' ? 'green' : '';
+      phtml += '<tr>';
+      phtml += '<td><span class="tag ' + catClass + '">' + p.category + '</span></td>';
+      phtml += '<td><a href="board.html" style="font-weight:600">' + p.title + '</a>' + (p.isPinned ? ' <i class="fas fa-thumbtack" style="color:var(--warning);font-size:11px"></i>' : '') + '</td>';
+      phtml += '<td>' + p.author + '</td>';
+      phtml += '<td>' + Office.UI.formatDate(p.createdAt) + '</td>';
+      phtml += '<td class="text-center">' + (p.views || 0) + '</td>';
+      phtml += '</tr>';
+    }
+    ptbody.innerHTML = phtml;
+  }
+
+  // Today's schedule
+  var scheduleEl = document.getElementById('todaySchedule');
+  if (todayEvents.length === 0) {
+    scheduleEl.innerHTML = '<li class="activity-item" style="border:none;justify-content:center"><span class="text-muted" style="font-size:13px">오늘 일정이 없습니다.</span></li>';
+  } else {
+    var shtml = '';
+    var typeColors = { '회의': 'var(--primary)', '출장': 'var(--warning)', '업무': 'var(--success)', '공휴일': 'var(--danger)' };
+    var typeIcons = { '회의': 'fa-users', '출장': 'fa-car', '업무': 'fa-briefcase', '공휴일': 'fa-star' };
+    for (var k = 0; k < todayEvents.length; k++) {
+      var ev = todayEvents[k];
+      var tc = typeColors[ev.type] || 'var(--gray-500)';
+      var ti = typeIcons[ev.type] || 'fa-calendar';
+      shtml += '<li class="activity-item">';
+      shtml += '<div class="activity-icon" style="background:' + tc + '20;color:' + tc + '"><i class="fas ' + ti + '"></i></div>';
+      shtml += '<div class="activity-info"><div class="title">' + ev.title + '</div><div class="desc">' + (ev.time || '종일') + (ev.location ? ' | ' + ev.location : '') + '</div></div>';
+      shtml += '</li>';
+    }
+    scheduleEl.innerHTML = shtml;
+  }
+
+  // Notifications (unread, top 5)
+  var notifs = Office.Notification.getAll();
+  var unread = notifs.filter(function(n){ return !n.isRead; });
+  document.getElementById('unreadCount').textContent = unread.length > 0 ? '읽지 않음 ' + unread.length + '건' : '';
+  var notifEl = document.getElementById('notifList');
+  var displayNotifs = unread.length > 0 ? unread.slice(0, 5) : notifs.slice(0, 5);
+  if (displayNotifs.length === 0) {
+    notifEl.innerHTML = '<li class="activity-item" style="border:none;justify-content:center"><span class="text-muted" style="font-size:13px">알림이 없습니다.</span></li>';
+  } else {
+    var nhtml = '';
+    var nIcons = { 'approval': 'fa-file-signature', 'board': 'fa-clipboard-list', 'calendar': 'fa-calendar', 'attendance': 'fa-clock', 'system': 'fa-cog' };
+    var nColors = { 'approval': 'var(--primary)', 'board': 'var(--success)', 'calendar': 'var(--info)', 'attendance': 'var(--warning)', 'system': 'var(--gray-500)' };
+    for (var m = 0; m < displayNotifs.length; m++) {
+      var n = displayNotifs[m];
+      var nc = nColors[n.type] || 'var(--gray-500)';
+      var ni = nIcons[n.type] || 'fa-bell';
+      nhtml += '<li class="activity-item"' + (n.isRead ? ' style="opacity:.6"' : '') + '>';
+      nhtml += '<div class="activity-icon" style="background:' + nc + '20;color:' + nc + '"><i class="fas ' + ni + '"></i></div>';
+      nhtml += '<div class="activity-info"><div class="title">' + n.title + '</div><div class="desc">' + n.message + '</div></div>';
+      nhtml += '<div class="activity-time">' + Office.UI.timeAgo(n.createdAt) + '</div>';
+      nhtml += '</li>';
+    }
+    notifEl.innerHTML = nhtml;
+  }
+
+  // Notification modal content
+  renderNotifModal();
+})();
+
+function renderNotifModal() {
+  var allNotifs = Office.Notification.getAll();
+  var ml = document.getElementById('notifModalList');
+  if (allNotifs.length === 0) {
+    ml.innerHTML = '<li style="padding:24px;text-align:center;color:var(--gray-400)">알림이 없습니다.</li>';
+    return;
+  }
+  var h = '';
+  for (var i = 0; i < allNotifs.length; i++) {
+    var n = allNotifs[i];
+    h += '<li style="' + (n.isRead ? 'opacity:.6' : 'font-weight:600') + '">';
+    h += '<span style="flex:1">' + (n.isRead ? '' : '<i class="fas fa-circle" style="font-size:6px;color:var(--primary);margin-right:6px;vertical-align:middle"></i>') + n.message + '</span>';
+    h += '<span style="font-size:11px;color:var(--gray-400);white-space:nowrap">' + Office.UI.timeAgo(n.createdAt) + '</span>';
+    h += '</li>';
+  }
+  ml.innerHTML = h;
+}
+
+function markAllRead() {
+  Office.Notification.markAllRead();
+  var dot = document.getElementById('notifDot');
+  if (dot) dot.style.display = 'none';
+  document.getElementById('unreadCount').textContent = '';
+  renderNotifModal();
+  Office.UI.showToast('모든 알림을 읽음 처리했습니다.', 'success');
+}
+
+function quickClockIn() {
+  var rec = Office.Attendance.clockIn();
+  if (rec) {
+    document.getElementById('btnClockIn').disabled = true;
+    document.getElementById('btnClockOut').disabled = false;
+    document.getElementById('attendanceStatus').style.display = 'flex';
+    document.getElementById('attClockIn').textContent = rec.clockIn;
+    document.getElementById('attClockOut').textContent = '-';
+    document.getElementById('attStatus').textContent = rec.status;
+    Office.UI.showToast('출근 처리되었습니다. (' + rec.clockIn + ')', 'success');
+    // Update stat
+    var attStats = Office.Attendance.getStats();
+    document.getElementById('statAttendance').textContent = attStats.workDays;
+  }
+}
+
+function quickClockOut() {
+  var rec = Office.Attendance.clockOut();
+  if (rec) {
+    document.getElementById('btnClockOut').disabled = true;
+    document.getElementById('attClockOut').textContent = rec.clockOut;
+    document.getElementById('attStatus').textContent = rec.status;
+    Office.UI.showToast('퇴근 처리되었습니다. (' + rec.clockOut + ')', 'success');
+  } else {
+    Office.UI.showToast('퇴근 처리에 실패했습니다.', 'error');
+  }
+}
+</script>
+
+</body>
+</html>
