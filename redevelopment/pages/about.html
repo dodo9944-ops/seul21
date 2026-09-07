@@ -551,85 +551,39 @@
         .dp-btn-overlay { left: 0; top: 0; width: 100%; height: 100%; border-radius: 16px; }
     }
 
-    /* ── 4. COMPANY HISTORY ── */
-    .timeline-center {
-        position: relative;
-        max-width: 800px; margin: var(--space-body-to-content) auto 0; /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
-        padding: 0;
+    /* ── 4. COMPANY HISTORY — 성장 스토리 카드 그리드 ── */
+    .growth-grid {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        margin-top: var(--space-body-to-content); /* 제목→콘텐츠 — 세로 간격 표준 §3 */
     }
-    .timeline-center::before {
-        content: ''; position: absolute;
-        left: 50%; top: 0; bottom: 0;
-        width: 2px; background: var(--gray-200);
-        transform: translateX(-50%);
+    .growth-card {
+        background: var(--white); border: 1px solid #cecece; border-radius: 16px;
+        padding: 28px 26px; transition: all 0.25s;
+        box-shadow: 0 4px 16px rgba(20,28,38,.045);
     }
-    .tl-item {
-        display: flex; align-items: flex-start;
-        position: relative; margin-bottom: 28px;
+    .growth-card:hover {
+        box-shadow: 0 12px 28px rgba(20,28,38,.09);
+        transform: translateY(-3px);
     }
-    .tl-item:last-child { margin-bottom: 0; }
-    .tl-left {
-        width: calc(50% - 28px); text-align: right;
-        padding-right: 0;
+    .growth-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px; }
+    .growth-icon {
+        width: 44px; height: 44px; border-radius: 10px;
+        background: linear-gradient(135deg, #171C26, #2A3242);
+        display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .tl-right {
-        width: calc(50% - 28px); text-align: left;
-        padding-left: 0;
+    .growth-icon i { font-size: 18px; color: var(--visseum-gold); }
+    .growth-chapter {
+        font-size: 11px; font-weight: 700; color: var(--visseum-muted);
+        letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px;
     }
-    .tl-dot {
-        position: absolute; left: 50%; top: 4px;
-        width: 14px; height: 14px; border-radius: 50%;
-        background: var(--visseum-gold); border: 3px solid #e6e6e6;
-        box-shadow: 0 0 0 1px var(--visseum-border), 0 2px 6px rgba(20,28,38,.12);
-        transform: translateX(-50%);
-        z-index: 2;
-    }
-    .tl-item.tl-recent .tl-dot {
-        width: 18px; height: 18px; top: 2px;
-        background: var(--visseum-yellow);
-        box-shadow: 0 0 0 5px rgba(255,196,0,.14), 0 2px 8px rgba(20,28,38,.16);
-    }
-    .tl-year {
-        font-size: 26px; font-weight: 900; color: #B8860B;
-        margin-bottom: 8px;
-    }
-    .tl-phase {
-        display: inline-block; font-size: 11px; font-weight: 800;
-        color: var(--visseum-gold); letter-spacing: 1px; text-transform: uppercase;
-        margin-bottom: 6px;
-    }
-    .tl-item.tl-recent .tl-year {
-        font-size: 26px;
-    }
-    .tl-item:nth-child(-n+3) .tl-year { font-weight: 900; }
-    .tl-events { list-style: none; }
-    .tl-events li {
-        font-size: 14px; color: var(--gray-600); line-height: 1.9;
-        position: relative;
-    }
-    .tl-item.tl-recent .tl-events li {
-        font-weight: 700; color: var(--gray-900);
-    }
-    .tl-item.tl-recent .tl-events li::before {
-        background: var(--gold);
-    }
-    /* alternate layout: even items content on left, odd on right */
-    .tl-item:nth-child(odd) { justify-content: flex-start; }
-    .tl-item:nth-child(odd) .tl-content { margin-left: calc(50% + 28px); }
-    .tl-item:nth-child(even) .tl-content {
-        margin-right: calc(50% + 28px);
-        text-align: right;
-    }
-    .tl-content { width: calc(50% - 28px); }
-    @media (max-width: 768px) {
-        .timeline-center::before { left: 16px; }
-        .tl-dot { left: 16px; }
-        .tl-item:nth-child(odd) .tl-content,
-        .tl-item:nth-child(even) .tl-content {
-            margin-left: 48px; margin-right: 0;
-            text-align: left; width: auto;
-        }
-    }
+    .growth-year { font-size: 34px; font-weight: 900; color: var(--visseum-ink); line-height: 1; margin-bottom: 12px; }
+    .growth-rule { width: 32px; height: 3px; border-radius: 2px; background: var(--visseum-gold); margin-bottom: 16px; }
+    .growth-title { font-size: 15px; margin-bottom: 10px; }
+    .growth-title .en { font-weight: 800; color: var(--visseum-ink); }
+    .growth-title .ko { font-weight: 600; color: var(--visseum-muted); margin-left: 6px; }
+    .growth-desc { font-size: 13.5px; color: var(--gray-600); line-height: 1.7; word-break: keep-all; }
+    @media (max-width: 1024px) { .growth-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .growth-grid { grid-template-columns: 1fr; } }
 
     /* ── 5. ORGANIZATION CHART ── */
     .org-chart { display: flex; flex-direction: column; align-items: center; margin-top: var(--space-body-to-content); } /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
@@ -1105,8 +1059,8 @@
     <div class="about-section" id="history">
         <div class="inner">
             <div class="section-label">History</div>
-            <h2 class="section-title">회사연혁</h2>
-            <div class="timeline-center" id="timeline"></div>
+            <h2 class="section-title">성장 스토리</h2>
+            <div class="growth-grid" id="timeline"></div>
         </div>
     </div>
 
@@ -1356,7 +1310,7 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260906b"></script>
+<script src="../assets/data/mock-data.js?v=20260908a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260906r"></script>
 <script src="../assets/js/flipbook.js?v=20260906c"></script>
@@ -1391,20 +1345,27 @@
         ceoNameEl.textContent = info.ceoName;
     }
 
-    /* ── 회사연혁 — center timeline ── */
-    var recentYears = ['2026','2025','2024'];
-    var phaseLabel = { '2006':'설립', '2008':'정비사업전문관리업 등록', '2015':'상호 변경', '2019':'M&A', '2023':'사업 영역 확장', '2024':'전문조직 강화' };
-    document.getElementById('timeline').innerHTML = info.history.map(function(h, i) {
-        var isRecent = recentYears.indexOf(h.year) !== -1;
-        return '<div class="tl-item' + (isRecent ? ' tl-recent' : '') + '">' +
-            '<div class="tl-dot"></div>' +
-            '<div class="tl-content">' +
-                '<div class="tl-year">' + h.year + '</div>' +
-                (phaseLabel[h.year] ? '<div class="tl-phase">' + phaseLabel[h.year] + '</div>' : '') +
-                '<ul class="tl-events">' +
-                    h.items.map(function(item) { return '<li>' + item + '</li>'; }).join('') +
-                '</ul>' +
+    /* ── 회사연혁 — 성장 스토리 카드 그리드 ── */
+    var chapterMeta = {
+        '2006': { en:'Foundation',       ko:'법인 설립',    icon:'fa-flag' },
+        '2008': { en:'Registration',     ko:'전문관리 등록', icon:'fa-stamp' },
+        '2015': { en:'Identity',         ko:'상호 변경',    icon:'fa-fingerprint' },
+        '2019': { en:'Expansion',        ko:'M&A',         icon:'fa-handshake' },
+        '2023': { en:'Diversification',  ko:'사업 확장',    icon:'fa-compass' },
+        '2024': { en:'Specialization',   ko:'전문화',       icon:'fa-layer-group' }
+    };
+    var sortedHistory = info.history.slice().sort(function(a, b) { return parseInt(a.year) - parseInt(b.year); });
+    document.getElementById('timeline').innerHTML = sortedHistory.map(function(h, i) {
+        var meta = chapterMeta[h.year] || { en:'Milestone', ko:'', icon:'fa-star' };
+        return '<div class="growth-card">' +
+            '<div class="growth-head">' +
+                '<div class="growth-icon"><i class="fa-solid ' + meta.icon + '"></i></div>' +
+                '<div class="growth-chapter">Chapter ' + String(i + 1).padStart(2, '0') + '</div>' +
             '</div>' +
+            '<div class="growth-year">' + h.year + '</div>' +
+            '<div class="growth-rule"></div>' +
+            '<div class="growth-title"><span class="en">' + meta.en + '</span>' + (meta.ko ? '<span class="ko">' + meta.ko + '</span>' : '') + '</div>' +
+            '<div class="growth-desc">' + h.items.join(' · ') + '</div>' +
         '</div>';
     }).join('');
 
