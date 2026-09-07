@@ -6,6 +6,9 @@ name: 빛세움 seul24.cloud 배포 (Vercel CLI)
 # 사용: Actions → 본 워크플로 → Run workflow. mode=list 로 프로젝트/도메인 확인 후 mode=deploy 로 배포.
 
 on:
+  push:
+    branches: [backup-bitseum-rebrand-20260824, claude/bitseum-mobile-gallery-cutoff-2xs6au-live]
+    paths: ['.github/seul24-deploy-trigger/**']
   workflow_dispatch:
     inputs:
       mode:
@@ -46,8 +49,27 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: 입력값 결정 (dispatch 입력 또는 트리거 파일)
+        id: cfg
+        run: |
+          MODE="${{ github.event.inputs.mode }}"; PROJECT="${{ steps.cfg.outputs.project }}"; SCOPE="${{ github.event.inputs.scope }}"; REF="${{ github.event.inputs.ref }}"
+          if [ -z "$MODE" ]; then
+            F=$(ls -t .github/seul24-deploy-trigger/*.txt 2>/dev/null | head -1)
+            echo "trigger file: $F"; [ -n "$F" ] && cat "$F"
+            MODE=$(grep -E '^mode=' "$F" | cut -d= -f2- | tr -d '\r'); PROJECT=$(grep -E '^project=' "$F" | cut -d= -f2- | tr -d '\r'); SCOPE=$(grep -E '^scope=' "$F" | cut -d= -f2- | tr -d '\r'); REF=$(grep -E '^ref=' "$F" | cut -d= -f2- | tr -d '\r')
+          fi
+          [ -z "$REF" ] && REF="backup-bitseum-rebrand-20260824"
+          echo "mode=$MODE"    >> $GITHUB_OUTPUT
+          echo "project=$PROJECT" >> $GITHUB_OUTPUT
+          echo "scope=$SCOPE"  >> $GITHUB_OUTPUT
+          echo "ref=$REF"      >> $GITHUB_OUTPUT
+          echo "mode=$MODE project=$PROJECT scope=$SCOPE ref=$REF"
+
+      - name: 배포 대상 브랜치 Checkout
+        uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.ref }}
+          ref: ${{ steps.cfg.outputs.ref }}
 
       - name: Vercel CLI 설치
         run: npm i -g vercel@latest
@@ -57,7 +79,7 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           SCOPE_ARG=""
-          [ -n "${{ github.event.inputs.scope }}" ] && SCOPE_ARG="--scope ${{ github.event.inputs.scope }}"
+          [ -n "${{ steps.cfg.outputs.scope }}" ] && SCOPE_ARG="--scope ${{ steps.cfg.outputs.scope }}"
           echo "== whoami"; vercel whoami --token "$VERCEL_TOKEN" || true
           echo "== teams"; vercel teams ls --token "$VERCEL_TOKEN" || true
           echo "== projects"; vercel project ls --token "$VERCEL_TOKEN" $SCOPE_ARG || true
@@ -65,15 +87,15 @@ jobs:
           echo "== seul24.cloud"; vercel domains inspect seul24.cloud --token "$VERCEL_TOKEN" $SCOPE_ARG || true
 
       - name: 프로덕션 배포
-        if: ${{ github.event.inputs.mode == 'deploy' }}
+        if: ${{ steps.cfg.outputs.mode == 'deploy' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          PROJECT="${{ github.event.inputs.project }}"
+          PROJECT="${{ steps.cfg.outputs.project }}"
           if [ -z "$PROJECT" ]; then echo "::error::project 입력이 필요합니다"; exit 1; fi
           if [ "$PROJECT" = "seul21" ]; then echo "::error::seul21(세울21) 프로젝트는 대상이 아닙니다"; exit 1; fi
           SCOPE_ARG=""
-          [ -n "${{ github.event.inputs.scope }}" ] && SCOPE_ARG="--scope ${{ github.event.inputs.scope }}"
+          [ -n "${{ steps.cfg.outputs.scope }}" ] && SCOPE_ARG="--scope ${{ steps.cfg.outputs.scope }}"
           vercel link --yes --project "$PROJECT" $SCOPE_ARG --token "$VERCEL_TOKEN"
           vercel deploy --prod --yes $SCOPE_ARG --token "$VERCEL_TOKEN" 2>&1 | tee deploy.log
           echo "== 라이브 확인 (최대 3분)"

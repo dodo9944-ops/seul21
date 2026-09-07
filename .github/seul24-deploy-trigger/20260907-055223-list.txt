@@ -1,0 +1,4 @@
+mode=list
+project=
+scope=
+ref=backup-bitseum-rebrand-20260824
