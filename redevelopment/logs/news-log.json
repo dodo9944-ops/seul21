@@ -492,5 +492,64 @@
       "library_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(catDefs 기존 주요뉴스 매핑 재사용, fileMap 신규 등록 확인, node --check 구문검사 통과)만 확인 완료"
     },
     "action_required": "① [10일·10회 연속 미해결] Vercel 커넥터 재인증 필요 — team_4OL3ZwhAAZCMeH0YaWVu0cGw(dodo9944-ops-projects) 스코프 접근 권한을 claude.ai Vercel 커넥터 설정에서 재부여 필요. ② [10일 연속 미해결] 세션 환경의 아웃바운드 egress 프록시가 www.seul24.cloud 및 대부분의 언론사 원문 도메인을 계속 차단 중 — egress 허용 도메인 목록에 www.seul24.cloud 추가 필요. 코드 변경·커밋·푸시는 backup-bitseum-rebrand-20260824 브랜치에 정상 완료 예정이며, ①·②가 해결되면 별도 재작업 없이 해당 브랜치를 production으로 배포하고 라이브 검수를 즉시 진행 가능. Claude가 자체적으로 해결할 수 없는 계정/네트워크 설정 문제로, 사용자의 직접 조치가 반드시 필요. 10일간 동일 미해결 상태가 지속 중이므로 이번에도 사용자에게 직접 알림(push notification) 발송."
+  },
+  {
+    "run_datetime_kst": "2026-09-08T06:38:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "searched_articles_count": 35,
+    "candidate_articles_count": 3,
+    "target_max": 3,
+    "shortfall_reason": "N/A — 목표 3건 충족",
+    "note_vercel_auth_status_change": "[중요 변경] 지난 10일(08-28~09-06) 연속 발생하던 'Vercel 커넥터 teams:[] 빈 배열/403 Forbidden' 문제가 이번 실행에서는 재현되지 않음. CLAUDE.md §11-1 기록대로 teamId를 team_4OL3ZwhAAZCMeH0YaWVu0cGw(숫자 ID) 대신 'dodo9944-ops'(슬러그)로 호출하니 mcp__Vercel__get_project·get_deployment 모두 정상 응답(200) 확인. 즉 계정 인증 문제는 해결된 것으로 판단됨.",
+    "selected_articles": [
+      {
+        "id": "news0908a",
+        "title": "서울 아파트 착공 44.4%↑…정비사업이 81.4% 차지",
+        "source": "연합뉴스",
+        "source_url": "https://www.yna.co.kr/view/AKR20260907044600004",
+        "download_html": "redevelopment/downloads/news_20260908a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260908a.html",
+        "status": "posted_not_deployed"
+      },
+      {
+        "id": "news0908b",
+        "title": "강남구, 은마아파트 인가 이후 \"AS 넘어 BS\"…후속 절차 관리 강화",
+        "source": "문화경제(CNB저널)",
+        "source_url": "https://www.cnbizm.com/news/articleView.html?idxno=314235",
+        "download_html": "redevelopment/downloads/news_20260908b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260908b.html",
+        "status": "posted_not_deployed"
+      },
+      {
+        "id": "news0908c",
+        "title": "서울 정비사업 \"경쟁 실종\"…건설사, 사업성부터 따진다",
+        "source": "쿠키뉴스",
+        "source_url": "https://www.kukinews.com/article/view/kuk202609070121",
+        "download_html": "redevelopment/downloads/news_20260908c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260908c.html",
+        "status": "posted_not_deployed"
+      }
+    ],
+    "posted_success_count": 3,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "배포(9단계)만 미완료 — 게시 자체(mock-data.js·downloads html·fileMap·newsFileMap 등록·커밋·푸시)는 3건 전부 정상 완료"
+    ],
+    "dedup_check": "MOCK.library 전수 대조 완료(Grep: '신속화합'·'경쟁 실종'·'착공.*44'·'압구정5구역' 등). news0906b(잠실주공5단지 타당성검증·명도소송 입찰)와 09-07자 후속 보도(잠실주공5단지 이주 임박·관리처분계획 인가 신청)는 사실상 동일 사안 연장 보도로 판단해 후보에서 제외. 강남구 신화 프로젝트는 기존 news0823h(8/23, TF 운영 현황 일반)와 결이 다른 09-02 은마아파트 후속절차 점검회의라는 신규 특정 사실이라 중복 아님으로 판단.",
+    "commit_sha": "e871b1b0",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_status": "FAILED — [신규 원인, 기존 10일간의 Vercel 인증 문제와 무관] Vercel 계정 접근 자체는 정상화됐으나(teamId='dodo9944-ops' 슬러그 사용 시 get_project/get_deployment 200 정상 확인), 이 세션에서 유일하게 제공되는 배포 수단인 mcp__Vercel__deploy_to_vercel 도구는 배포할 전체 파일 내용을 tool call에 인라인으로 담아 전송해야 하는 구조. 그런데 redevelopment/ 전체 용량이 약 694MB(jpg 344M·downloads/files 139M·video 83M·pdf 30M·assets/images 88M 등 바이너리 자산이 대부분)로, 이 세션의 컨텍스트/툴콜 처리 한계를 수백 배 초과하여 물리적으로 전송이 불가능함. 로컬 vercel CLI는 이 환경에 설치되어 있지 않고 VERCEL_TOKEN 환경변수도 없어 CLI 우회도 불가. 불완전한 파일셋으로 production 배포를 강행하면 라이브 사이트가 파손될 위험이 있어 시도하지 않음(강력 제2조·정비사업 데이터 무결성 원칙에 따른 보수적 판단).",
+    "verification": {
+      "news0908a_http_status": "NOT_CHECKED — 배포 자체가 안 됐으므로 라이브에 반영되지 않음. www.seul24.cloud 도메인 자체는 egress 프록시로 여전히 직접 curl/WebFetch 불가(EGRESS_BLOCKED, connect_rejected)하여 배포되었더라도 이 세션에서 직접 200 확인은 어려웠을 것으로 추정",
+      "news0908b_http_status": "NOT_CHECKED — 상동",
+      "news0908c_http_status": "NOT_CHECKED — 상동",
+      "index_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(newsFileMap 신규 등록 확인)만 확인 완료",
+      "library_exposure_checked": "NOT_CHECKED — 상동, 코드 레벨(catDefs 기존 '주요뉴스' 매핑 재사용, fileMap 신규 등록 확인, node --check 구문검사 통과)만 확인 완료"
+    },
+    "action_required": "① [신규] 프로덕션 배포 방식 자체를 바꿔야 함 — 현재 세션에서 제공되는 Vercel MCP deploy_to_vercel 도구는 694MB급 정적 자산 사이트에 구조적으로 부적합(전체 파일 인라인 전송 방식, 증분/CLI 배포 미지원). 권장안: (a) GitHub Actions 워크플로(.github/workflows/deploy-seul24.yml, CLAUDE.md §11-1 기록상 브랜치 claude/bitseum-mobile-gallery-cutoff-2xs6au-live에 존재)에 리포지토리 Secret으로 VERCEL_TOKEN을 등록하면, 해당 워크플로가 GitHub Actions 러너(자체 디스크·CLI 환경)에서 'vercel --prod'를 실행해 이 세션의 컨텍스트 크기 제약 없이 정상 배포 가능. Claude는 실제 토큰 값을 발급하거나 보유할 수 없으므로 대장이 Vercel 대시보드에서 토큰 발급 후 GitHub 저장소 Settings→Secrets에 직접 등록 필요. (b) 또는 로컬(대장 PC 등) vercel CLI가 설치된 환경에서 'git pull' 후 'vercel --prod' 수동 실행. ② 코드 변경·커밋·푸시(news0908a~c 3건)는 backup-bitseum-rebrand-20260824 브랜치(커밋 e871b1b0)에 정상 완료된 상태이며, ①의 배포 경로만 확보되면 별도 재작업 없이 즉시 라이브 반영 가능. 이번 실행에서 Vercel 계정 인증 자체는 정상화를 확인했다는 점에서 지난 10일간의 문제와는 다른 신규 블로커이므로 사용자에게 직접 알림(push notification) 발송."
   }
 ]
