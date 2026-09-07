@@ -193,6 +193,16 @@
     @media(max-width:860px){ .sv-card-header h3 { font-size:20px; } }
     @media(max-width:480px){ .sv-card-header h3 { font-size:18px; } .sv-card-header { padding:14px 18px; } }
 
+    /* 05/06 큰 제목 아래 ①②로 세분화된 업무 그룹 */
+    .sv-group { margin-bottom:40px; }
+    .sv-group:last-child { margin-bottom:0; }
+    .sv-group-head { display:flex; align-items:center; gap:16px; margin-bottom:20px; }
+    .sv-group-head h3 { font-size:20px; font-weight:800; color:#0A0F1C; letter-spacing:-0.3px; }
+    .sv-group-head .sv-sub { font-size:12px; color:rgba(10,15,28,0.55); margin-top:3px; }
+    .sv-card-num-sm { width:30px; height:30px; border-radius:8px; font-size:13px; }
+    .sv-sub-grid .sv-card-header h3 { font-size:17px; }
+    @media(max-width:480px){ .sv-group-head h3 { font-size:18px; } }
+
     .sv-card-body { padding:18px 32px; flex:1; } /* 상하 패딩 18px 통일 (2026-09-05 대장 지시) */
     .sv-card-body .sv-desc {
         font-size:14px; line-height:1.6511; color:var(--gray-700); margin-bottom:18px;
@@ -597,60 +607,133 @@
         <div class="sv-section" id="engineering">
             <div class="section-label">Engineering Services</div>
             <h2 class="section-title">엔지니어링사업</h2>
-            <div class="sv-card-grid">
+            <!-- 05. 신속통합기획 업무 -->
+            <div class="sv-group">
+                <div class="sv-group-head">
+                    <div class="sv-card-num">05</div>
+                    <div><h3>신속통합기획 업무</h3><div class="sv-sub">Fast-Track Integrated Planning</div></div>
+                </div>
+                <div class="sv-card-grid sv-sub-grid">
+                    <a href="urbanplanning-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                        <div class="sv-card-header">
+                            <div class="sv-card-num sv-card-num-sm">①</div>
+                            <div>
+                                <h3>신속통합기획 사전기획·신청</h3>
+                                <div class="sv-sub">상세보기 →</div>
+                            </div>
+                        </div>
+                        <div class="sv-card-body">
+                            <p class="sv-desc">
+                                사업 초기 단계에서 사업여건과 도시계획 조건을 분석하고 신속통합기획 신청 및 초기 대응을 지원합니다.
+                            </p>
+                            <ul class="sv-strengths">
+                                <li><i class="fa-solid fa-check"></i>대상지 현황 및 사업여건 분석</li>
+                                <li><i class="fa-solid fa-check"></i>토지이용·용도지역·높이·용적률 검토</li>
+                                <li><i class="fa-solid fa-check"></i>사업성 및 개발 가능 규모 검토</li>
+                                <li><i class="fa-solid fa-check"></i>신속통합기획 신청자료 작성</li>
+                                <li><i class="fa-solid fa-check"></i>주민·조합 의견수렴 및 대응전략 수립</li>
+                            </ul>
+                            <div class="sv-tags">
+                                <span class="sv-tag">사업성검토</span>
+                                <span class="sv-tag">기본구상</span>
+                                <span class="sv-tag">신속통합기획 신청</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="urbanplanning-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                        <div class="sv-card-header">
+                            <div class="sv-card-num sv-card-num-sm">②</div>
+                            <div>
+                                <h3>정비계획 수립·도시계획 협의</h3>
+                                <div class="sv-sub">상세보기 →</div>
+                            </div>
+                        </div>
+                        <div class="sv-card-body">
+                            <p class="sv-desc">
+                                서울시 가이드라인을 사업계획에 반영하고 정비계획 결정까지 행정·전문가 협의를 체계적으로 관리합니다.
+                            </p>
+                            <ul class="sv-strengths">
+                                <li><i class="fa-solid fa-check"></i>정비계획 및 개발구상안 수립</li>
+                                <li><i class="fa-solid fa-check"></i>용적률·높이·배치계획 검토</li>
+                                <li><i class="fa-solid fa-check"></i>서울시·자치구 및 관계부서 협의</li>
+                                <li><i class="fa-solid fa-check"></i>자문·위원회 심의 대응</li>
+                                <li><i class="fa-solid fa-check"></i>정비구역 지정 및 후속 인허가 연계</li>
+                            </ul>
+                            <div class="sv-tags">
+                                <span class="sv-tag">정비계획</span>
+                                <span class="sv-tag">도시계획</span>
+                                <span class="sv-tag">행정협의</span>
+                                <span class="sv-tag">심의대응</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-                <a href="urbanplanning-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
-                    <div class="sv-card-header">
-                        <div class="sv-card-num">05</div>
-                        <div>
-                            <h3>도시계획(엔지니어링)</h3>
-                            <div class="sv-sub">Urban Planning & Engineering — 상세보기 →</div>
+            <!-- 06. CM/PM 업무 -->
+            <div class="sv-group">
+                <div class="sv-group-head">
+                    <div class="sv-card-num">06</div>
+                    <div><h3>CM/PM 업무</h3><div class="sv-sub">Project &amp; Construction Management</div></div>
+                </div>
+                <div class="sv-card-grid sv-sub-grid">
+                    <a href="pmcm-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                        <div class="sv-card-header">
+                            <div class="sv-card-num sv-card-num-sm">①</div>
+                            <div>
+                                <h3>PM — 사업관리</h3>
+                                <div class="sv-sub">상세보기 →</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="sv-card-body">
-                        <p class="sv-desc">
-                            사업구조와 계획기준을 검토하고, 정비사업과 연결되는 실행 가능한 계획 수립을 지원합니다.
-                        </p>
-                        <ul class="sv-strengths">
-                            <li><i class="fa-solid fa-check"></i>사업구조 및 사업성 검토</li>
-                            <li><i class="fa-solid fa-check"></i>계획기준 및 정비계획 연계</li>
-                            <li><i class="fa-solid fa-check"></i>실행 가능한 계획 수립 지원</li>
-                        </ul>
-                        <div class="sv-tags">
-                            <span class="sv-tag">도시계획</span>
-                            <span class="sv-tag">사업성검토</span>
-                            <span class="sv-tag">정비계획</span>
-                            <span class="sv-tag">실행전략</span>
+                        <div class="sv-card-body">
+                            <p class="sv-desc">
+                                사업기획부터 준공까지 사업비·일정·계약·의사결정을 종합 관리하여 사업의 목표를 실현합니다.
+                            </p>
+                            <ul class="sv-strengths">
+                                <li><i class="fa-solid fa-check"></i>사업추진전략 및 종합 일정관리</li>
+                                <li><i class="fa-solid fa-check"></i>사업비·공사비·자금계획 관리</li>
+                                <li><i class="fa-solid fa-check"></i>설계·시공사·협력업체 관리</li>
+                                <li><i class="fa-solid fa-check"></i>계약조건 및 변경계약 검토</li>
+                                <li><i class="fa-solid fa-check"></i>인허가·총회·의사결정 일정관리</li>
+                                <li><i class="fa-solid fa-check"></i>사업 리스크 분석 및 대응</li>
+                            </ul>
+                            <div class="sv-tags">
+                                <span class="sv-tag">사업관리</span>
+                                <span class="sv-tag">공사비</span>
+                                <span class="sv-tag">일정관리</span>
+                                <span class="sv-tag">계약관리</span>
+                            </div>
                         </div>
-                    </div>
-                </a>
-
-                <a href="pmcm-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
-                    <div class="sv-card-header">
-                        <div class="sv-card-num">06</div>
-                        <div>
-                            <h3>도시정비 PM/CM</h3>
-                            <div class="sv-sub">Project & Construction Management — 상세보기 →</div>
+                    </a>
+                    <a href="pmcm-service.html" class="sv-card" style="text-decoration:none;color:inherit;">
+                        <div class="sv-card-header">
+                            <div class="sv-card-num sv-card-num-sm">②</div>
+                            <div>
+                                <h3>CM — 건설사업관리</h3>
+                                <div class="sv-sub">상세보기 →</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="sv-card-body">
-                        <p class="sv-desc">
-                            일정, 리스크, 협력사, 문서체계를 통합 관리하여 사업의 추진력을 높입니다. 단순 자문을 넘어 실제 사업관리 관점에서 추진체계를 정비합니다.
-                        </p>
-                        <ul class="sv-strengths">
-                            <li><i class="fa-solid fa-check"></i>일정 및 단계별 실행관리</li>
-                            <li><i class="fa-solid fa-check"></i>리스크 및 협력사 관리</li>
-                            <li><i class="fa-solid fa-check"></i>문서체계 및 추진체계 정비</li>
-                        </ul>
-                        <div class="sv-tags">
-                            <span class="sv-tag">PM</span>
-                            <span class="sv-tag">CM</span>
-                            <span class="sv-tag">일정관리</span>
-                            <span class="sv-tag">추진체계</span>
+                        <div class="sv-card-body">
+                            <p class="sv-desc">
+                                설계부터 시공·준공까지 기술적 관점에서 품질·공정·원가를 관리합니다.
+                            </p>
+                            <ul class="sv-strengths">
+                                <li><i class="fa-solid fa-check"></i>설계도서 및 시공성 검토</li>
+                                <li><i class="fa-solid fa-check"></i>공사비·물량·내역 적정성 검토</li>
+                                <li><i class="fa-solid fa-check"></i>공정·품질·안전관리 지원</li>
+                                <li><i class="fa-solid fa-check"></i>설계변경 및 추가공사 검토</li>
+                                <li><i class="fa-solid fa-check"></i>시공사 기성·공사비 검증</li>
+                                <li><i class="fa-solid fa-check"></i>준공·하자·사후관리 지원</li>
+                            </ul>
+                            <div class="sv-tags">
+                                <span class="sv-tag">설계관리</span>
+                                <span class="sv-tag">공정관리</span>
+                                <span class="sv-tag">품질관리</span>
+                                <span class="sv-tag">원가관리</span>
+                            </div>
                         </div>
-                    </div>
-                </a>
-
+                    </a>
+                </div>
             </div>
         </div>
 
