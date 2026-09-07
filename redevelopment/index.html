@@ -49,7 +49,7 @@
             background: var(--visseum-ink);
             display: flex; align-items: center; justify-content: center;
             flex-direction: column;
-            pointer-events: none;
+            cursor: pointer;
             overflow: hidden;
         }
         .splash-video-bg {
@@ -1315,16 +1315,25 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     } else {
         // ★ 첫 접속: 로고+글자+밑줄 다 보여준 후 짧은 정지 → 짧게 페이드아웃 후 제거
         sessionStorage.setItem('seul_splash', '1');
-        setTimeout(function(){
-            sp.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+        var dismissed = false;
+        function dismiss(fast){
+            if(dismissed) return;
+            dismissed = true;
+            clearTimeout(autoTimer);
+            var dur = fast ? 0.25 : 0.55;
+            sp.style.transition = 'opacity '+dur+'s ease, transform '+dur+'s ease';
             sp.style.opacity = '0';
             sp.style.transform = 'scale(1.03)';
             document.body.classList.remove('splash-active');
             document.body.style.overflow = '';
             setTimeout(function(){
                 if(sp.parentNode) sp.parentNode.removeChild(sp);
-            }, 550);
-        }, 2700);
+            }, dur*1000);
+        }
+        // 클릭·터치 시 메인메뉴로 즉시 이동(스플래시 즉시 스킵)
+        sp.addEventListener('click', function(){ dismiss(true); });
+        sp.addEventListener('touchstart', function(){ dismiss(true); }, {passive:true});
+        var autoTimer = setTimeout(function(){ dismiss(false); }, 2700);
     }
 
     // 뒤로가기 시 잔상 방지
