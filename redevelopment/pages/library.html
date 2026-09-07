@@ -96,6 +96,20 @@
     .pop-card .pop-info{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--gray-500);font-weight:600}
     .pop-card .pop-info i{font-size:10px;color:var(--gold)}
 
+    /* === 전체 탭 — 카테고리별 구분 칸 === */
+    .lib-cat-box{background:var(--gray-50,#f7f7f8);border:1px solid #dbdbdb;border-radius:16px;padding:20px 20px 22px;margin-bottom:22px}
+    .lib-cat-box:last-child{margin-bottom:0}
+    .lib-cat-box .lib-list{background:transparent}
+    .lib-cat-box-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+    .lib-cat-box-head h3{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800;color:var(--gray-900);margin:0}
+    .lib-cat-box-head h3 i{font-size:14px;color:var(--gold)}
+    .lib-cat-box-count{font-size:11.5px;font-weight:600;color:var(--gray-400)}
+    .lib-cat-more{margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--gold);font-size:12.5px;font-weight:700;cursor:pointer;font-family:var(--font);padding:4px 0}
+    .lib-cat-more:hover{color:#9F7000}
+    .lib-cat-more i{font-size:10px}
+    .lib-cat-box .lib-item{background:#fff}
+    @media(max-width:600px){.lib-cat-box{padding:16px 14px 18px}.lib-cat-box-head h3{font-size:14.5px}}
+
     /* === Document List === */
     .lib-list{display:flex;flex-direction:column;gap:12px}
     .lib-item{display:flex;align-items:flex-start;gap:20px;padding:18px 26px;background:#fff;border:1.5px solid #d3d5d8;border-radius:14px;transition:all .25s;position:relative}
@@ -428,18 +442,8 @@ async function renderFeatured(){
   fb.innerHTML=html;
 }
 
-/* Render list */
-function render(){
-renderFeatured();
-var items=getFiltered(),total=items.length,pages=Math.ceil(total/PER);
-if(curPage>pages)curPage=1;
-var start=(curPage-1)*PER,slice=items.slice(start,start+PER);
-document.getElementById('resultCount').innerHTML='총 <strong>'+total+'</strong>건';
-var list=document.getElementById('libList'),empty=document.getElementById('emptyState');
-if(!slice.length){list.innerHTML='';empty.style.display='flex';document.getElementById('pagerWrap').style.display='none';return}
-empty.style.display='none';document.getElementById('pagerWrap').style.display='';
-
-list.innerHTML=slice.map(function(item){
+/* 자료 카드 1건 HTML — 전체보기(플랫 리스트)·카테고리 칸(그룹) 공용 */
+function itemHtml(item){
 var fi=getIcon(item.fileType),src=srcBadge(item);
 var badges='<span class="lb lb-cat">'+item.category+'</span>';
 if(src)badges+='<span class="lb lb-src">'+src+'</span>';
@@ -458,7 +462,57 @@ var ftBadge=isWeb?cv.badge:ftLabel;
 var btnIcon=isWeb?cv.icon:'fa-arrow-down';
 var btnText=isWeb?'문서보기':ftLabel+' 다운로드';
 
-return'<div class="lib-item'+pinCls+'">'+'<div class="lib-icon '+iconCls+'"><i class="fa-solid '+iconIcon+'"></i><span class="ft-label">'+ftBadge+'</span></div>'+'<div class="lib-content">'+'    <div class="lib-title" data-id="'+item.id+'">'+item.title+'</div>'+'    <div class="lib-desc">'+item.description+'</div>'+'    <div class="lib-meta-row">'+badges+'</div>'+'</div>'+'<div class="lib-action">'+'    <span class="lib-size">'+item.fileSize+'</span>'+'    <button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid '+btnIcon+'"></i> '+btnText+'</button>'+'</div></div>'}).join('');
+return'<div class="lib-item'+pinCls+'">'+'<div class="lib-icon '+iconCls+'"><i class="fa-solid '+iconIcon+'"></i><span class="ft-label">'+ftBadge+'</span></div>'+'<div class="lib-content">'+'    <div class="lib-title" data-id="'+item.id+'">'+item.title+'</div>'+'    <div class="lib-desc">'+item.description+'</div>'+'    <div class="lib-meta-row">'+badges+'</div>'+'</div>'+'<div class="lib-action">'+'    <span class="lib-size">'+item.fileSize+'</span>'+'    <button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid '+btnIcon+'"></i> '+btnText+'</button>'+'</div></div>';
+}
+
+function sortItems(items){
+items.sort(function(a,b){
+if(curSort==='downloads')return(b.downloads||0)-(a.downloads||0);
+if(curSort==='title')return(a.title||'').localeCompare(b.title||'');
+return(b.date||'').localeCompare(a.date||'')});
+return items;
+}
+
+/* 전체 탭 — 주요뉴스/관계법령/서식·매뉴얼을 각각 별도 칸(박스)으로 구분 표시 */
+var GROUP_N=5;
+function renderGrouped(){
+var list=document.getElementById('libList'),empty=document.getElementById('emptyState');
+var q=searchQ?searchQ.toLowerCase():'';
+var totalMatched=0,html='';
+catDefs.forEach(function(d){
+var items=allItems.filter(function(i){return d.keys.indexOf(i.category)>=0});
+if(q)items=items.filter(function(i){return(i.title||'').toLowerCase().indexOf(q)>=0||(i.description||'').toLowerCase().indexOf(q)>=0||(i.tags||[]).some(function(t){return t.toLowerCase().indexOf(q)>=0})});
+items=sortItems(items.slice());
+totalMatched+=items.length;
+if(!items.length)return;
+var top=items.slice(0,GROUP_N);
+html+='<div class="lib-cat-box">'+
+  '<div class="lib-cat-box-head"><h3><i class="fa-solid '+d.icon+'"></i>'+d.label+'<span class="lib-cat-box-count">'+items.length+'건</span></h3>'+
+  (items.length>GROUP_N?'<button class="lib-cat-more" onclick="switchCat(\''+d.key+'\')">전체보기 <i class="fa-solid fa-arrow-right"></i></button>':'')+
+  '</div>'+
+  '<div class="lib-list">'+top.map(itemHtml).join('')+'</div>'+
+'</div>';
+});
+document.getElementById('resultCount').innerHTML='총 <strong>'+totalMatched+'</strong>건';
+document.getElementById('pagerWrap').style.display='none';
+if(!html){list.innerHTML='';empty.style.display='flex';return}
+empty.style.display='none';
+list.innerHTML=html;
+}
+
+/* Render list */
+function render(){
+renderFeatured();
+if(curCat==='전체'){renderGrouped();return}
+var items=getFiltered(),total=items.length,pages=Math.ceil(total/PER);
+if(curPage>pages)curPage=1;
+var start=(curPage-1)*PER,slice=items.slice(start,start+PER);
+document.getElementById('resultCount').innerHTML='총 <strong>'+total+'</strong>건';
+var list=document.getElementById('libList'),empty=document.getElementById('emptyState');
+if(!slice.length){list.innerHTML='';empty.style.display='flex';document.getElementById('pagerWrap').style.display='none';return}
+empty.style.display='none';document.getElementById('pagerWrap').style.display='';
+
+list.innerHTML=slice.map(itemHtml).join('');
 
 /* Pager */
 var pg=document.getElementById('pager');
