@@ -549,6 +549,8 @@
         #mainCommunity .news-body h4 { max-height: 24px; -webkit-line-clamp: 1; }
         /* 갤러리 썸네일 3건 — 밝은 배경과 경계가 흐려 보이는 사진 가독성 보완을 위한 자연스러운 외곽선 */
         #mainCommunity .news-thumb-photo img { border: 1px solid #cecece; box-shadow: 0 0 0 1px rgba(255,255,255,0.4) inset; }
+        /* 자료실 최신자료 — 제목 앞 [법령·조례] 등 카테고리 태그를 로고와 본문 사이에 구분 표시 */
+        #mainLibrary .lib-title-tag { color: #C58B00; font-weight: 800; }
         /* 갤러리 썸네일 사진 12% 확대 + 가장자리까지 채우고 상하좌우 여백(크롭) 비율 동일하게 (대장 지시 2026-09-05) */
         #mainCommunity .news-thumb-photo img { width: 100%; height: 100%; margin-left: 0; object-position: center; transform: scale(1.12); }
         /* 갤러리 카드 우측하단 조회수 표시 (대장 지시) */
@@ -883,20 +885,8 @@
 </section>
 
 
-<!-- ===== 주요뉴스 ===== -->
-<section class="section" id="mainFirstSection">
-    <div class="inner">
-        <div class="section-label">Latest News</div>
-        <div class="section-head">
-            <h2 class="section-title">주요뉴스</h2>
-            <a href="pages/library.html?cat=주요뉴스" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
-        </div>
-        <div id="mainNews"></div>
-    </div>
-</section>
-
 <!-- ===== 공지사항 ===== -->
-<section class="section">
+<section class="section" id="mainFirstSection">
     <div class="inner">
         <div class="section-label">Notices</div>
         <div class="section-head">
@@ -904,6 +894,18 @@
             <a href="pages/notice.html" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
         </div>
         <div id="mainNotice"></div>
+    </div>
+</section>
+
+<!-- ===== 주요뉴스 ===== -->
+<section class="section">
+    <div class="inner">
+        <div class="section-label">Latest News</div>
+        <div class="section-head">
+            <h2 class="section-title">주요뉴스</h2>
+            <a href="pages/library.html?cat=주요뉴스" class="panel-more">전체보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+        </div>
+        <div id="mainNews"></div>
     </div>
 </section>
 
@@ -961,11 +963,11 @@
                 <div class="sv-bd"><p>통합재건축, 신속통합기획, 민간도심복합개발, 역세권 개발 등 복합적 사업구조와 고밀 개발방식을 종합 검토</p><div class="sv-tg"><span>통합재건축</span><span>신속통합기획</span><span>역세권개발</span></div></div>
             </a>
             <a href="pages/urbanplanning-service.html" class="sv-item">
-                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-drafting-compass"></i></div><div><div class="sv-nm">도시계획 (엔지니어링)</div><div class="sv-en">Urban Planning & Engineering →</div></div></div>
+                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-forward-fast"></i></div><div><div class="sv-nm">신속통합기획 업무</div><div class="sv-en">Fast-Track Integrated Planning →</div></div></div>
                 <div class="sv-bd"><p>정비계획, 지구단위계획, 인허가 협의자료 작성, 서울시 신속통합기획 대응</p><div class="sv-tg"><span>정비계획</span><span>신속통합기획</span><span>인허가 전략</span></div></div>
             </a>
             <a href="pages/pmcm-service.html" class="sv-item">
-                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-diagram-project"></i></div><div><div class="sv-nm">도시정비 PM/CM</div><div class="sv-en">Project & Construction Management →</div></div></div>
+                <div class="sv-hd"><div class="sv-ic"><i class="fa-solid fa-diagram-project"></i></div><div><div class="sv-nm">CM·PM 업무</div><div class="sv-en">Project & Construction Management →</div></div></div>
                 <div class="sv-bd"><p>일정·원가·품질·리스크 통합 관리, 조합·시공사·설계·감리·행정기관 간 실무 조정</p><div class="sv-tg"><span>일정 관리</span><span>원가 관리</span><span>리스크 관리</span><span>이해관계 조율</span></div></div>
             </a>
         </div>
@@ -1175,7 +1177,7 @@
 <!-- 공통 JS -->
 <script src="assets/data/mock-data.js?v=20260908a"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260906r"></script>
+<script src="assets/js/common.js?v=20260908a"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1512,6 +1514,10 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         window.mainLibDownload=function(id){
             location.href='pages/library.html?id='+encodeURIComponent(id);
         };
+        function libTitleHtml(t){
+            var m=(t||'').match(/^(\[[^\]]+\])\s*(.*)$/s);
+            return m?'<span class="lib-title-tag">'+m[1]+'</span> '+m[2]:(t||'');
+        }
         (async function(){
             var vmap=await ViewCounter.batch('library',libs.map(function(i){return i.id}));
             libEl.innerHTML=libs.map(function(i){
@@ -1520,7 +1526,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
                 var v=isWeb?getContentVisual(i.category):{icon:iconMap[i.fileType]||'fa-file',cls:i.fileType,badge:ftLabel};
                 return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
                     '<div class="news-thumb '+v.cls+'"><i class="fa-solid '+v.icon+'"></i><span class="ft-label">'+v.badge+'</span></div>'+
-                    '<div class="news-body"><h4>'+i.title+'</h4>'+
+                    '<div class="news-body"><h4>'+libTitleHtml(i.title)+'</h4>'+
                     '<div class="news-date"><span>'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></span><span class="views"><i class="fa-regular fa-eye"></i> '+(vmap[i.id]||0)+'</span></div></div></div>';
             }).join('');
         })();

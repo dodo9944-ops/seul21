@@ -277,7 +277,7 @@
         <span class="wave-line"></span>
         <span class="wave-line"></span>
     </div>
-    <div class="hero-bg-photo"><img src="../jpg/hero_portfolio.png" alt="빛세움 업무실적"></div>
+    <div class="hero-bg-photo"><img src="../jpg/hero_portfolio.png?v=20260908d" alt="서울 한강과 잠실 롯데타워 노을 스카이라인"></div>
     <div class="inner">
         <div class="uh-text">
             <div class="uh-bc"><a href="../index.html">홈</a><i class="fa-solid fa-chevron-right"></i><span>업무실적</span></div>
@@ -286,7 +286,7 @@
             <p class="uh-sub">재개발·재건축·소규모정비사업의 다양한 현장에서<br>쌓은 실전 경험과 자문실적</p>
         </div>
         <div class="uh-visual">
-            <div class="uh-photo"><img src="../jpg/hero_portfolio.png" alt="빛세움 업무실적"></div>
+            <div class="uh-photo"><img src="../jpg/hero_portfolio.png?v=20260908d" alt="서울 한강과 잠실 롯데타워 노을 스카이라인"></div>
             <div class="uh-cards"><div class="uh-card" style="cursor:pointer" onclick="PF.filter('전체')"><div class="uh-ci"><i class="fa-solid fa-list"></i></div><h4>전체 수행실적</h4><p>축적된 도시정비 프로젝트</p></div><div class="uh-card" style="cursor:pointer" onclick="PF.filter('재개발')"><div class="uh-ci"><i class="fa-solid fa-building"></i></div><h4>재개발</h4><p>주택정비형·신속통합기획</p></div><div class="uh-card" style="cursor:pointer" onclick="PF.filter('재건축')"><div class="uh-ci"><i class="fa-solid fa-city"></i></div><h4>재건축</h4><p>대단지·통합재건축 관리</p></div><div class="uh-card" style="cursor:pointer" onclick="PF.filter('소규모정비')"><div class="uh-ci"><i class="fa-solid fa-house-chimney"></i></div><h4>소규모정비</h4><p>소규모재건축·가로주택정비</p></div></div>
         </div>
     </div>
@@ -321,7 +321,7 @@
     <div class="pg-grid" id="pgGrid"></div>
     <div class="pager-wrap" id="pagerWrap">
         <div class="pager" id="pager"></div>
-        <div class="pager-per"><span>페이지당</span><select id="pfPerSelect"><option value="6">6개</option><option value="12">12개</option><option value="18">18개</option></select></div>
+        <div class="pager-per"><span>페이지당</span><select id="pfPerSelect"><option value="9" selected>9개</option><option value="12">12개</option><option value="18">18개</option></select></div>
     </div>
 
 </div></div>
@@ -340,10 +340,10 @@
 <script src="../assets/data/mock-data.js?v=20260908a"></script>
 <script src="../assets/data/areas-data.js?v=20260411"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260906r"></script>
+<script src="../assets/js/common.js?v=20260908a"></script>
 <script>
 (function(){
-var D=MOCK.portfolio, PER=6, curPage=1, curType='전체'; /* 전체수행실적 기본 3열×2행 (대장 지시 2026-09-05) */
+var D=MOCK.portfolio, PER=9, curPage=1, curType='전체'; /* 전체수행실적 기본 3열×3행(가로3칸 세로3칸), 대장 지시 2026-09-08 */
 
 /* helpers */
 function ti(t){return{'재개발':'fa-building','재건축':'fa-city','소규모정비':'fa-house-chimney','리모델링':'fa-arrows-rotate','코디네이터':'fa-user-tie','기타':'fa-ellipsis'}[t]||'fa-building-columns'}

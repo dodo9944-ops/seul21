@@ -46,8 +46,8 @@ const App = (() => {
         { href:`${B}/pages/redevelopment-service.html`, label:'주택재개발' },
         { href:`${B}/pages/reconstruction-service.html`, label:'주택재건축' },
         { href:`${B}/pages/small-reconstruction-service.html`, label:'소규모 정비사업' },
-        { href:`${B}/pages/urbanplanning-service.html`, label:'도시계획/엔지니어링' },
-        { href:`${B}/pages/pmcm-service.html`, label:'도시정비 PM/CM' },
+        { href:`${B}/pages/urbanplanning-service.html`, label:'신속통합기획 업무' },
+        { href:`${B}/pages/pmcm-service.html`, label:'CM·PM 업무' },
         { href:`${B}/pages/services.html#sales-ad`, label:'분양 및 광고사업' },
       ]},
       { href:`${B}/pages/portfolio.html`, label:'업무실적', icon:'fa-solid fa-briefcase', sub:[
