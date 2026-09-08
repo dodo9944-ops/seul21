@@ -548,9 +548,9 @@
            날짜 줄까지 항상 행 안에 온전히 들어오도록 함(잘림 방지) */
         #mainCommunity .news-body h4 { max-height: 24px; -webkit-line-clamp: 1; }
         /* 갤러리 썸네일 3건 — 밝은 배경과 경계가 흐려 보이는 사진 가독성 보완을 위한 자연스러운 외곽선 */
-        #mainCommunity .news-thumb-photo img, #mainNotice .news-thumb-photo img { border: 1px solid #cecece; box-shadow: 0 0 0 1px rgba(255,255,255,0.4) inset; }
-        /* 공지사항 썸네일 — 이미지 없는 항목과 높이를 맞추기 위해 고정 크기 직사각형으로 표시 */
-        #mainNotice .news-thumb-photo { width: 96px; height: 64px; align-self: center; }
+        #mainCommunity .news-thumb-photo img { border: 1px solid #cecece; box-shadow: 0 0 0 1px rgba(255,255,255,0.4) inset; }
+        /* 자료실 최신자료 — 제목 앞 [법령·조례] 등 카테고리 태그를 로고와 본문 사이에 구분 표시 */
+        #mainLibrary .lib-title-tag { color: #C58B00; font-weight: 800; }
         /* 갤러리 썸네일 사진 12% 확대 + 가장자리까지 채우고 상하좌우 여백(크롭) 비율 동일하게 (대장 지시 2026-09-05) */
         #mainCommunity .news-thumb-photo img { width: 100%; height: 100%; margin-left: 0; object-position: center; transform: scale(1.12); }
         /* 갤러리 카드 우측하단 조회수 표시 (대장 지시) */
@@ -1450,18 +1450,12 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     /* 공지사항: 최신 3건 */
     var noticeEl=document.getElementById('mainNotice');
     if(noticeEl && MOCK.notices){
-        function noticeThumbSrc(n){
-            var m=(n.content||'').match(/<img[^>]+src=["']([^"']+)["']/);
-            return m?m[1].replace(/^\.\.\//,''):null;
-        }
         var notices=MOCK.notices.slice().sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         noticeEl.innerHTML=notices.length?notices.map(function(n){
-            var thumbSrc=noticeThumbSrc(n);
-            var thumb=thumbSrc?'<div class="news-thumb-photo"><img src="'+thumbSrc+'" alt="" loading="lazy"></div>':'';
             return'<a href="pages/notice.html" class="news-item" data-notice-modal="'+n.id+'" style="gap:10px;padding:12px 20px;">'+
                 '<span style="color:#C58B00;font-size:11px;flex-shrink:0;">●</span>'+
-                '<div class="news-body" style="flex:1;min-width:0"><h4>'+n.title+'</h4>'+
-                '<div class="news-date">'+n.date+'</div></div>'+thumb+'</a>';
+                '<div class="news-body"><h4>'+n.title+'</h4>'+
+                '<div class="news-date">'+n.date+'</div></div></a>';
         }).join(''):'<p style="padding:16px 20px;color:var(--gray-400);font-size:13px;">등록된 공지사항이 없습니다.</p>';
         noticeEl.querySelectorAll('[data-notice-modal]').forEach(function(a){
             a.addEventListener('click',function(e){
@@ -1520,6 +1514,10 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         window.mainLibDownload=function(id){
             location.href='pages/library.html?id='+encodeURIComponent(id);
         };
+        function libTitleHtml(t){
+            var m=(t||'').match(/^(\[[^\]]+\])\s*(.*)$/s);
+            return m?'<span class="lib-title-tag">'+m[1]+'</span> '+m[2]:(t||'');
+        }
         (async function(){
             var vmap=await ViewCounter.batch('library',libs.map(function(i){return i.id}));
             libEl.innerHTML=libs.map(function(i){
@@ -1528,7 +1526,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
                 var v=isWeb?getContentVisual(i.category):{icon:iconMap[i.fileType]||'fa-file',cls:i.fileType,badge:ftLabel};
                 return'<div class="news-item" style="cursor:pointer" onclick="mainLibDownload(\''+i.id+'\')">'+
                     '<div class="news-thumb '+v.cls+'"><i class="fa-solid '+v.icon+'"></i><span class="ft-label">'+v.badge+'</span></div>'+
-                    '<div class="news-body"><h4>'+i.title+'</h4>'+
+                    '<div class="news-body"><h4>'+libTitleHtml(i.title)+'</h4>'+
                     '<div class="news-date"><span>'+i.category+' · '+i.date+' <i class="fa-solid fa-download" style="font-size:10px;margin-left:4px;opacity:0.5"></i></span><span class="views"><i class="fa-regular fa-eye"></i> '+(vmap[i.id]||0)+'</span></div></div></div>';
             }).join('');
         })();
