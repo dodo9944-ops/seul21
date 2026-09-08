@@ -552,5 +552,80 @@
     },
     "github_actions_deploy_attempt": "대안 경로 확인차 .github/workflows/deploy-seul24.yml(브랜치 claude/bitseum-mobile-gallery-cutoff-2xs6au-live)을 mode=list로 workflow_dispatch 실행 시도. 직전 실행(run 34164658324, 2026-09-08 06:52 KST 완료)의 실제 job 로그 확인 결과 여전히 'VERCEL_TOKEN Secret 이 저장소에 등록되어 있지 않습니다' 오류로 즉시 실패 — GitHub Actions 경유 배포도 현재는 불가한 상태(Secret 미등록).",
     "action_required": "① [신규] 프로덕션 배포 방식 자체를 바꿔야 함 — 현재 세션에서 제공되는 Vercel MCP deploy_to_vercel 도구는 694MB급 정적 자산 사이트에 구조적으로 부적합(전체 파일 인라인 전송 방식, 증분/CLI 배포 미지원). 권장안: (a) GitHub Actions 워크플로(.github/workflows/deploy-seul24.yml, 브랜치 claude/bitseum-mobile-gallery-cutoff-2xs6au-live에 존재)에 리포지토리 Secret으로 VERCEL_TOKEN을 등록하면, 해당 워크플로가 GitHub Actions 러너(자체 디스크·CLI 환경)에서 'vercel --prod'를 실행해 이 세션의 컨텍스트 크기 제약 없이 정상 배포 가능 — 실제 확인 결과 이 Secret이 아직 등록되어 있지 않아 현재는 이 경로도 실패함(2026-09-08 06:52 KST 재확인). Claude는 실제 토큰 값을 발급하거나 보유할 수 없으므로 대장이 Vercel 대시보드(Account Settings→Tokens)에서 토큰 발급 후 GitHub 저장소 Settings→Secrets and variables→Actions에 VERCEL_TOKEN으로 직접 등록 필요. (b) 또는 로컬(대장 PC 등) vercel CLI가 설치된 환경에서 'git pull' 후 'vercel --prod' 수동 실행. ② 코드 변경·커밋·푸시(news0908a~c 3건)는 backup-bitseum-rebrand-20260824 브랜치(커밋 e871b1b0)에 정상 완료된 상태이며, ①의 배포 경로만 확보되면 별도 재작업 없이 즉시 라이브 반영 가능. 이번 실행에서 Vercel 계정 인증 자체는 정상화를 확인했다는 점에서 지난 10일간의 문제와는 다른 신규 블로커이므로 사용자에게 직접 알림(push notification) 발송."
+  },
+  {
+    "run_datetime_kst": "2026-09-09T06:38:00+09:00",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "searched_articles_count": 65,
+    "candidate_articles_count": 6,
+    "target_max": 3,
+    "selected_articles": [
+      {
+        "id": "news0909a",
+        "title": "與 \"재건축 일사천리 법안\" 발의… 신청후 60일 넘기면 자동 인가",
+        "source": "매일경제",
+        "source_url": "https://www.mk.co.kr/article/12147305",
+        "download_html": "redevelopment/downloads/news_20260909a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260909a.html",
+        "status": "posted_not_deployed"
+      },
+      {
+        "id": "news0909b",
+        "title": "서울 정비사업 \"이주 도미노\"…전월세 시장 \"엎친 데 덮친 격\"",
+        "source": "뉴스토마토",
+        "source_url": "https://www.newstomato.com/ReadNews.aspx?no=1312948",
+        "download_html": "redevelopment/downloads/news_20260909b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260909b.html",
+        "status": "posted_not_deployed"
+      },
+      {
+        "id": "news0909c",
+        "title": "김이탁 차관 \"신속 추진 정비사업에 인센티브 제공\"",
+        "source": "헤럴드경제",
+        "source_url": "https://biz.heraldcorp.com/article/10866554",
+        "download_html": "redevelopment/downloads/news_20260909c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260909c.html",
+        "status": "posted_not_deployed"
+      }
+    ],
+    "posted_success_count": 3,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "배포(8단계)만 미완료 — 게시 자체(mock-data.js·downloads html·fileMap·newsFileMap 등록·커밋·푸시)는 3건 전부 정상 완료"
+    ],
+    "shortfall_reason": "N/A — 목표 3건 충족",
+    "dedup_check": "MOCK.library 전수 대조 완료(Grep: 최근 30일 title 목록 전체 비교). 이미 게시된 '용적률 1.2배 완화 도시정비법', '성수2지구·목동12단지 단독입찰', '이주비 LTV' 등 기존 기사와 원문 URL·제목·핵심 사실 비교 결과 오늘 선정 3건은 신규 사실(60일 인가간주제 법안 발의, 2030년까지 18만가구 이주 전망 통계, 김이탁 차관 인센티브 발언)로 판단해 중복 아님. 성수2지구·목동12단지 2차 현설(9/9, DL이앤씨·GS건설)은 09/03 기존 게시분(1차 유찰)의 사실상 연장 보도로 판단해 후보에서 제외.",
+    "commit_sha": "e092a7d6",
+    "push_status": "success",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "FAILED — 기존 블로커 지속 확인(2026-09-07~09-08과 동일 원인)",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_attempts": [
+      {
+        "method": "mcp__Vercel__deploy_to_vercel (이 세션의 유일한 직접 배포 도구)",
+        "result": "시도하지 않음 — redevelopment/ 전체 용량 약 694MB(jpg·downloads/files·video·pdf·images 등 바이너리 자산)가 이 도구의 파일 인라인 전송 구조(전체 파일 내용을 tool call에 담아야 함) 한계를 수백 배 초과. 불완전한 파일셋으로 강행하면 라이브 파손 위험이 있어 시도하지 않음(강력 제2조·데이터 무결성 원칙에 따른 보수적 판단, 2026-09-08 판단과 동일)."
+      },
+      {
+        "method": "GitHub Actions workflow_dispatch (.github/workflows/deploy-seul24.yml, 브랜치 claude/bitseum-mobile-gallery-cutoff-2xs6au-live, mode=list)",
+        "run_id": 34282401437,
+        "run_url": "https://github.com/dodo9944-ops/seul21/actions/runs/34282401437",
+        "result": "FAILED — 'VERCEL_TOKEN Secret 이 저장소에 등록되어 있지 않습니다' 즉시 실패. 2026-09-07 21:52 KST 마지막 확인 이후 현재(2026-09-09 06:xx KST)까지 Secret 미등록 상태 그대로 지속 확인됨."
+      },
+      {
+        "method": "mcp__Vercel__get_project / get_deployment (teamId='dodo9944-ops' 슬러그)",
+        "result": "정상 응답(200). 현재 www.seul24.cloud 라이브 배포(dpl_4nyiT76gb5qrMdTyTmFwD8rJ3AfX)는 커밋 972f6c1d(backup-bitseum-rebrand-20260824, 오늘 커밋 e092a7d6 이전 시점) 기준으로, 09-08 게시분(news0908a~c) 및 오늘 09-09 게시분(news0909a~c) 모두 아직 라이브 미반영 상태."
+      }
+    ],
+    "verification": {
+      "news0909a_http_status": "NOT_CHECKED — 배포 자체가 안 됐으므로 라이브에 반영되지 않음",
+      "news0909b_http_status": "NOT_CHECKED — 상동",
+      "news0909c_http_status": "NOT_CHECKED — 상동",
+      "index_exposure_checked": "NOT_CHECKED — 코드 레벨(newsFileMap 신규 등록 확인)만 확인 완료",
+      "library_exposure_checked": "NOT_CHECKED — 코드 레벨(catDefs 기존 '주요뉴스' 매핑 재사용, fileMap 신규 등록 확인, node --check 구문검사 통과)만 확인 완료"
+    },
+    "action_required": "[반복 블로커, 3일 연속(09-07~09-09)] GitHub Secrets에 VERCEL_TOKEN 등록 필요(Settings → Secrets and variables → Actions). 등록되면 .github/workflows/deploy-seul24.yml 을 브랜치 claude/bitseum-mobile-gallery-cutoff-2xs6au-live 에서 workflow_dispatch(mode=deploy, project=lcw-coordinator, ref=backup-bitseum-rebrand-20260824)로 실행 시 GitHub Actions 러너(이 세션과 무관한 별도 디스크·CLI 환경)에서 'vercel deploy --prod' 를 수행해 세션 컨텍스트 크기 제약 없이 정상 배포 가능. 또는 대장 PC 등 로컬 환경에서 'git fetch && git checkout backup-bitseum-rebrand-20260824 && vercel --prod' 수동 실행도 대안. 코드 변경(뉴스 게시)은 이미 커밋 e092a7d6 로 브랜치에 정상 반영되어 있으므로, 배포 경로만 확보되면 별도 재작업 없이 즉시 라이브 반영 가능. 현재 09-08~09-09 게시분(총 6건)이 배포 대기 중.",
+    "note": "Vercel MCP 계정 인증 자체는 정상(teamId 슬러그 사용). 배포 실패는 오직 (1) 이 세션 도구의 파일 크기 구조적 한계 (2) GitHub Actions Secret 미등록, 2가지 원인으로 3일째 동일하게 재현됨."
   }
 ]
