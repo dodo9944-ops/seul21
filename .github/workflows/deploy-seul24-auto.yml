@@ -1,0 +1,106 @@
+name: 빛세움 seul24.cloud 자동배포
+
+# 대장 지시(2026-09-09 "매일 자동배포해").
+# 배포 브랜치 backup-bitseum-rebrand-20260824 에 push 될 때마다, 그리고 매일 07:00 KST 안전망으로
+# Vercel 프로젝트 lcw-coordinator(www.seul24.cloud) 프로덕션 배포를 수행한다.
+# 필요 Secret: VERCEL_TOKEN (Vercel → Account Settings → Tokens 에서 발급 후
+#              GitHub 저장소 Settings → Secrets and variables → Actions 에 등록)
+# 선택 Secret: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID (있으면 결과를 텔레그램으로 통지)
+
+on:
+  push:
+    branches: [backup-bitseum-rebrand-20260824]
+    paths-ignore:
+      - '.github/**'
+  schedule:
+    - cron: '0 22 * * *'   # 매일 07:00 KST (뉴스 자동게시 06:30 KST 이후 안전망)
+  workflow_dispatch:
+
+concurrency:
+  group: seul24-production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: team_4OL3ZwhAAZCMeH0YaWVu0cGw
+      VERCEL_PROJECT_ID: prj_EEFpjvdEOgs7j7C8DOyWu84gI0wF
+      DEPLOY_BRANCH: backup-bitseum-rebrand-20260824
+      LIVE_ORIGIN: https://www.seul24.cloud
+    steps:
+      - name: VERCEL_TOKEN Secret 확인
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::error::VERCEL_TOKEN Secret 이 저장소에 등록되어 있지 않습니다. Vercel → Account Settings → Tokens 에서 발급한 토큰을 GitHub 저장소 Settings → Secrets and variables → Actions → New repository secret (이름: VERCEL_TOKEN) 으로 등록해야 자동배포가 동작합니다."
+            exit 1
+          fi
+          echo "VERCEL_TOKEN: 등록됨"
+
+      - name: 배포 브랜치 Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.DEPLOY_BRANCH }}
+
+      - name: Node 준비
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Vercel CLI 설치
+        run: npm i -g vercel@latest
+
+      - name: 프로젝트 설정 조회 (Root Directory 판별)
+        id: cfg
+        run: |
+          vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
+          RD=$(node -e "const p=require('./.vercel/project.json');console.log((p.settings&&p.settings.rootDirectory)||'')")
+          echo "Vercel rootDirectory=[$RD]"
+          # 프로젝트에 Root Directory 가 없으면 사이트 폴더(redevelopment)에서 직접 배포하고,
+          # 이미 redevelopment 로 설정돼 있으면 저장소 루트에서 배포한다.
+          if [ -z "$RD" ]; then DIR="redevelopment"; else DIR="."; fi
+          echo "dir=$DIR" >> "$GITHUB_OUTPUT"
+          echo "배포 기준 디렉터리: $DIR"
+
+      - name: 프로덕션 배포
+        id: deploy
+        working-directory: ${{ steps.cfg.outputs.dir }}
+        run: |
+          vercel deploy --prod --yes --token "$VERCEL_TOKEN" 2>&1 | tee "$RUNNER_TEMP/deploy.log"
+          URL=$(grep -Eo 'https://[a-z0-9.-]+\.vercel\.app' "$RUNNER_TEMP/deploy.log" | tail -1 || true)
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+
+      - name: 라이브 반영 확인 (최대 4분)
+        id: verify
+        run: |
+          LATEST=$(ls redevelopment/downloads/news_*.html | sort | tail -1 | xargs -n1 basename)
+          tr -d '\r' < redevelopment/assets/data/mock-data.js > "$RUNNER_TEMP/repo-mock.js"
+          for i in $(seq 1 16); do
+            sleep 15
+            CODE=$(curl -s -o /dev/null -w '%{http_code}' "$LIVE_ORIGIN/downloads/$LATEST?x=$RANDOM" || echo 000)
+            curl -s "$LIVE_ORIGIN/assets/data/mock-data.js?x=$RANDOM" | tr -d '\r' > "$RUNNER_TEMP/live-mock.js" || true
+            if cmp -s "$RUNNER_TEMP/live-mock.js" "$RUNNER_TEMP/repo-mock.js"; then SAME=yes; else SAME=no; fi
+            echo "try $i: $LATEST=$CODE, mock-data.js 라이브=git 동일: $SAME"
+            if [ "$CODE" = "200" ] && [ "$SAME" = "yes" ]; then
+              echo "LIVE_OK"
+              echo "latest=$LATEST" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          done
+          echo "::error::배포 명령은 실행됐으나 4분 내 라이브(www.seul24.cloud)에 최신 내용이 반영되지 않았습니다."
+          exit 1
+
+      - name: 텔레그램 통지 (Secret 있을 때만)
+        if: always()
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$TG_TOKEN" ] || [ -z "$TG_CHAT" ]; then echo "텔레그램 Secret 없음 — 통지 생략"; exit 0; fi
+          if [ "${{ job.status }}" = "success" ]; then
+            TEXT="[빛세움] seul24.cloud 자동배포 성공 (${{ github.event_name }}) — 최신 뉴스 ${{ steps.verify.outputs.latest }} 라이브 반영 확인"
+          else
+            TEXT="[빛세움] seul24.cloud 자동배포 실패 (${{ github.event_name }}) — ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          fi
+          curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" --data-urlencode "chat_id=${TG_CHAT}" --data-urlencode "text=${TEXT}" > /dev/null || true
