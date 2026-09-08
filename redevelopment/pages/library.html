@@ -135,6 +135,7 @@
     .lib-content{flex:1;min-width:0;max-width:100%}
     .lib-title{font-size:15.5px;font-weight:700;color:var(--gray-900);margin-bottom:5px;line-height:1.45;cursor:pointer;transition:color .2s;letter-spacing:-.2px;word-break:break-word;overflow-wrap:anywhere}
     .lib-title:hover{color:var(--gold)}
+    .lib-title-tag{color:var(--gold);font-weight:800}
     .lib-desc{font-size:13px;color:var(--gray-500);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word;overflow-wrap:anywhere}
     .lib-meta-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;min-width:0;max-width:100%}
 
@@ -355,6 +356,17 @@ function getContentVisual(category){
     var m=contentVisualMap.find(function(v){return v.keys.indexOf(category)>=0});
     return m||{icon:'fa-newspaper',cls:'news',badge:'NEWS'};
 }
+/* 제목 앞의 "[주요뉴스][연합뉴스][날짜]" 같은 대괄호 태그를 분리 —
+   로고(아이콘)와 본문 사이에 첫 대괄호 태그만 별도 표시, 나머지는 본문에 유지 */
+function splitTitle(t){
+var m=(t||'').match(/^(\[[^\]]+\])\s*(.*)$/s);
+if(m)return{tag:m[1],rest:m[2]};
+return{tag:null,rest:t||''};
+}
+function titleHtml(t){
+var st=splitTitle(t);
+return(st.tag?'<span class="lib-title-tag">'+st.tag+'</span> ':'')+st.rest;
+}
 function isNew(d){return d&&(now-new Date(d))<7*864e5}
 function isHot(dl){return dl>=200}
 
@@ -436,7 +448,7 @@ async function renderFeatured(){
   var html='<div class="section-label">'+enLabel+'</div><div class="pop-head"><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
   top.forEach(function(item,idx){
     var isWeb=item.fileType==='web';var fi=isWeb?getContentVisual(item.category):getIcon(item.fileType);var vc=vmap[item.id]||0;
-    html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+item.title+'</div><div class="pop-info"><span><i class="fa-solid fa-eye"></i> '+vc+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
+    html+='<div class="pop-card" onclick="handleDownload(\''+item.id+'\')"><div class="pop-icon '+fi.cls+'"><i class="fa-solid '+fi.icon+'"></i></div><div class="pop-body"><div class="pop-title">'+titleHtml(item.title)+'</div><div class="pop-info"><span><i class="fa-solid fa-eye"></i> '+vc+'</span><span><i class="fa-solid fa-calendar"></i> '+item.date+'</span></div></div></div>';
   });
   html+='</div>';
   fb.innerHTML=html;
@@ -462,7 +474,7 @@ var ftBadge=isWeb?cv.badge:ftLabel;
 var btnIcon=isWeb?cv.icon:'fa-arrow-down';
 var btnText=isWeb?'문서보기':ftLabel+' 다운로드';
 
-return'<div class="lib-item'+pinCls+'">'+'<div class="lib-icon '+iconCls+'"><i class="fa-solid '+iconIcon+'"></i><span class="ft-label">'+ftBadge+'</span></div>'+'<div class="lib-content">'+'    <div class="lib-title" data-id="'+item.id+'">'+item.title+'</div>'+'    <div class="lib-desc">'+item.description+'</div>'+'    <div class="lib-meta-row">'+badges+'</div>'+'</div>'+'<div class="lib-action">'+'    <span class="lib-size">'+item.fileSize+'</span>'+'    <button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid '+btnIcon+'"></i> '+btnText+'</button>'+'</div></div>';
+return'<div class="lib-item'+pinCls+'">'+'<div class="lib-icon '+iconCls+'"><i class="fa-solid '+iconIcon+'"></i><span class="ft-label">'+ftBadge+'</span></div>'+'<div class="lib-content">'+'    <div class="lib-title" data-id="'+item.id+'">'+titleHtml(item.title)+'</div>'+'    <div class="lib-desc">'+item.description+'</div>'+'    <div class="lib-meta-row">'+badges+'</div>'+'</div>'+'<div class="lib-action">'+'    <span class="lib-size">'+item.fileSize+'</span>'+'    <button class="btn-dl" data-id="'+item.id+'"><i class="fa-solid '+btnIcon+'"></i> '+btnText+'</button>'+'</div></div>';
 }
 
 function sortItems(items){
