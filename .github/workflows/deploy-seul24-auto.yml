@@ -1,11 +1,14 @@
 name: 빛세움 seul24.cloud 자동배포
 
 # 대장 지시(2026-09-09 "매일 자동배포해").
-# 배포 브랜치 backup-bitseum-rebrand-20260824 에 push 될 때마다, 그리고 매일 07:00 KST 안전망으로
+# 배포 브랜치 backup-bitseum-rebrand-20260824 에 push 될 때마다(매일 06:30 KST 뉴스 자동게시 push 포함)
 # Vercel 프로젝트 lcw-coordinator(www.seul24.cloud) 프로덕션 배포를 수행한다.
 # 필요 Secret: VERCEL_TOKEN (Vercel → Account Settings → Tokens 에서 발급 후
 #              GitHub 저장소 Settings → Secrets and variables → Actions 에 등록)
 # 선택 Secret: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID (있으면 결과를 텔레그램으로 통지)
+# 참고: GitHub 규칙상 schedule(정시 실행)과 Actions 화면의 수동 실행 버튼은 이 파일이 기본 브랜치(master)에도
+#       있을 때만 동작한다. 현재는 push 트리거가 매일 배포를 담당하며, 07:00 KST 안전망이 필요하면
+#       이 파일을 master 에 그대로 복사하면 된다(master 의 사이트 내용은 건드리지 않음).
 
 on:
   push:
@@ -13,7 +16,7 @@ on:
     paths-ignore:
       - '.github/**'
   schedule:
-    - cron: '0 22 * * *'   # 매일 07:00 KST (뉴스 자동게시 06:30 KST 이후 안전망)
+    - cron: '0 22 * * *'   # 매일 07:00 KST (기본 브랜치에 파일이 있을 때만 동작)
   workflow_dispatch:
 
 concurrency:

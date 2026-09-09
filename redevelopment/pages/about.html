@@ -2,11 +2,11 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20260909a">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260909a">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260909a">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260909a">
+    <link rel="manifest" href="/site.webmanifest?v=20260909a">
     <meta name="theme-color" content="#FFFFFF">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회사소개 — (주)빛세움</title>
@@ -242,6 +242,28 @@
         .hero-card h4 { font-size: 13px; }
         .hero-card p { font-size: 10.5px; line-height: 1.45; }
         .hero-bg-photo { opacity: 0.15; }
+    }
+
+    /* ══════ 모바일 히어로 30% 종합 축소 (2026-09-09 대장 지시, PC 769px 이상 무변경) ══════ */
+    @media (max-width: 768px) {
+        .about-hero { padding-top: 10px; padding-bottom: 10px; }
+        .about-hero .inner { gap: 17px; }
+        .hero-breadcrumb { font-size: 10.4px; margin-bottom: 8px; }
+        .hero-label { display: flex; font-size: 9px; gap: 8px; color: #CDAA54; margin-bottom: 16px; }
+        .hero-label::before { width: 7px; }
+        .hero-text h1 { font-size: 21px; line-height: 1.25; letter-spacing: -0.3px; margin-top: 5px; margin-bottom: 12px; }
+        .hero-sub { font-size: 13.5px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
+        .hero-cards-float { gap: 8px; margin-bottom: 20px; }
+        .hero-card {
+            aspect-ratio: auto; height: auto; padding: 12px; border-radius: 12px;
+            display: flex; flex-flow: row wrap; align-items: center; column-gap: 10px;
+        }
+        .hero-card-icon { width: 28px; height: 28px; margin-bottom: 0; }
+        .hero-card h4 { font-size: 11.5px; margin-bottom: 0; flex: 1; min-width: 0; }
+        .hero-card p { font-size: 8.5px; line-height: 1.3; flex-basis: 100%; margin-top: 6px; }
+        .hero-text { min-height: 163px; }
+        .page-body { zoom: 0.85; }
+        .section-title { font-size: 20.4px; }
     }
 
     /* ── SECTION SPACING ── */
@@ -892,6 +914,34 @@
     @media (max-width: 600px) {
         .cta-section p { font-size: 17px; }
         .cta-btn-primary, .cta-btn-outline { padding: 12px 28px; font-size: 14px; }
+    }
+
+    /* ══════ 성장 스토리·전문가 카드 모바일 재배치 (2026-09-09 대장 지시, PC 769px 이상 무변경) ══════ */
+    @media (max-width: 768px) {
+        /* 성장 스토리 카드 — 아이콘 우측에 연도(제목) 배치, 불필요한 세로 공간 제거 */
+        .growth-card {
+            padding: 14px 16px;
+            display: grid;
+            grid-template-columns: 44px 1fr;
+            grid-template-areas: "icon year" "chapter chapter" "rule rule" "title title" "desc desc";
+            column-gap: 12px; row-gap: 4px; align-items: center;
+        }
+        .growth-head { display: contents; }
+        .growth-icon { grid-area: icon; margin: 0; }
+        .growth-chapter { grid-area: chapter; margin-top: 0; font-size: 9.5px; }
+        .growth-year { grid-area: year; margin-bottom: 0; font-size: 26px; align-self: center; }
+        .growth-rule { grid-area: rule; margin-bottom: 4px; }
+        .growth-title { grid-area: title; margin-bottom: 4px; }
+        .growth-desc { grid-area: desc; }
+        /* 전문가 카드 — 아이콘 우측에 제목 배치, 불필요한 세로 공간 제거 */
+        .expert-card {
+            padding: 14px 16px;
+            display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px;
+        }
+        .expert-icon { margin-bottom: 0; }
+        .expert-card h4 { margin-bottom: 0; flex: 1; min-width: 0; }
+        .expert-card p { flex-basis: 100%; margin-top: 6px; }
+        .about-section .section-title { margin-bottom: 32px; }
     }
     </style>
 </head>

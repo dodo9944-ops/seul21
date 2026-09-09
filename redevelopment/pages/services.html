@@ -2,11 +2,11 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20260909a">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260909a">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260909a">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260909a">
+    <link rel="manifest" href="/site.webmanifest?v=20260909a">
     <meta name="theme-color" content="#FFFFFF">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>사업분야 — (주)빛세움</title>
@@ -402,6 +402,28 @@
         .services-hero .hero-bg-photo { opacity: 0.15; }
     }
 
+    /* ══════ 모바일 히어로 30% 종합 축소 (2026-09-09 대장 지시, PC 769px 이상 무변경) ══════ */
+    @media (max-width: 768px) {
+        .services-hero { padding-top: 10px; padding-bottom: 10px; }
+        .services-hero .inner { gap: 17px; }
+        .services-hero .hero-breadcrumb { font-size: 10.4px; margin-bottom: 8px; }
+        .services-hero .hero-label { display: flex; font-size: 9px; gap: 8px; color: #CDAA54; margin-bottom: 16px; }
+        .services-hero .hero-label::before { width: 7px; }
+        .services-hero .hero-text h1 { font-size: 21px; line-height: 1.25; letter-spacing: -0.3px; margin-top: 5px; margin-bottom: 12px; }
+        .services-hero .hero-sub { font-size: 13.5px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
+        .services-hero .hero-cards-float { gap: 8px; margin-bottom: 20px; }
+        .services-hero .hero-card {
+            aspect-ratio: auto; height: auto; padding: 12px; border-radius: 12px;
+            display: flex; flex-flow: row wrap; align-items: center; column-gap: 10px;
+        }
+        .services-hero .hero-card-icon { width: 28px; height: 28px; margin-bottom: 0; }
+        .services-hero .hero-card h4 { font-size: 11.5px; margin-bottom: 0; flex: 1; min-width: 0; }
+        .services-hero .hero-card p { font-size: 8.5px; line-height: 1.3; flex-basis: 100%; margin-top: 6px; }
+        .services-hero .hero-text { min-height: 163px; }
+        .page-body { zoom: 0.85; }
+        .section-title { font-size: 20.4px; }
+    }
+
     </style>
 </head>
 <body>
@@ -439,7 +461,7 @@
             </a>
             <a class="hero-card" href="#engineering">
                 <div class="hero-card-icon"><i class="fa-solid fa-forward-fast"></i></div>
-                <h4>신속통합기획 업무</h4>
+                <h4>신속통합기획</h4>
                 <p>사전기획·정비계획 협의</p>
             </a>
             <a class="hero-card" href="#cmpm">
