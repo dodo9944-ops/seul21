@@ -1242,6 +1242,10 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
   .page-body { padding-bottom: calc(52px + env(safe-area-inset-bottom, 0px)) !important; }
   .footer { padding-bottom: calc(46px + env(safe-area-inset-bottom, 0px)); }
   .scroll-top { bottom: calc(96px + env(safe-area-inset-bottom, 0px)); right: 32px; background: rgba(255,255,255,0.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  /* 모바일 상단·하단 메뉴 가독성 강화 — 글자크기·레이아웃 무변경, 색상만 진하게 (2026-09-09 대장 지시) */
+  .mobile-tab-bar .tab-item { color: #444444; }
+  .mobile-bottom-nav a { color: #666666; }
+  .mobile-bottom-nav a svg { stroke: #666666; }
 }
 @media (min-width: 769px) {
   .mobile-bottom-nav { display: none !important; }
