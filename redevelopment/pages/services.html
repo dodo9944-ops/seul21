@@ -404,18 +404,22 @@
 
     /* ══════ 모바일 히어로 30% 종합 축소 (2026-09-09 대장 지시, PC 769px 이상 무변경) ══════ */
     @media (max-width: 768px) {
-        .services-hero { padding-top: 8px; }
-        .services-hero .inner { gap: 8px; }
-        .services-hero .hero-breadcrumb { margin-bottom: 2px; line-height: 1.2; }
-        .services-hero .hero-label { display: flex; font-size: 8px; margin-bottom: 8px; color: #CDAA54; }
-        .services-hero .hero-text h1 { font-size: 21px; line-height: 1.2; margin-top: 3px; margin-bottom: 8px; }
-        .services-hero .hero-sub { font-size: 11.5px; line-height: 1.4; }
-        .services-hero .hero-cards-float { gap: 6px; margin-bottom: 11px; }
-        .services-hero .hero-card { aspect-ratio: 1 / 0.53; padding: 8px; border-radius: 10px; }
-        .services-hero .hero-card-icon { width: 20px; height: 20px; margin-bottom: 5px; }
-        .services-hero .hero-card h4 { font-size: 10.2px; }
-        .services-hero .hero-card p { font-size: 7.9px; line-height: 1.25; }
+        .services-hero { padding-top: 10px; padding-bottom: 10px; }
+        .services-hero .inner { gap: 17px; }
+        .services-hero .hero-breadcrumb { font-size: 10.4px; margin-bottom: 8px; }
+        .services-hero .hero-label { display: none; }
+        .services-hero .hero-text h1 { font-size: 21px; line-height: 1.25; margin-top: 5px; margin-bottom: 12px; }
+        .services-hero .hero-sub { font-size: 13.5px; line-height: 1.5; }
+        .services-hero .hero-cards-float { gap: 8px; margin-bottom: 20px; }
+        .services-hero .hero-card {
+            aspect-ratio: auto; height: auto; padding: 12px; border-radius: 12px;
+            display: flex; flex-flow: row wrap; align-items: center; column-gap: 10px;
+        }
+        .services-hero .hero-card-icon { width: 28px; height: 28px; margin-bottom: 0; }
+        .services-hero .hero-card h4 { font-size: 11.5px; margin-bottom: 0; flex: 1; min-width: 0; }
+        .services-hero .hero-card p { font-size: 8.5px; line-height: 1.3; flex-basis: 100%; margin-top: 6px; }
         .page-body { zoom: 0.85; }
+        .section-title { font-size: 20.4px; }
     }
 
     </style>
