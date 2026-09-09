@@ -244,6 +244,22 @@
         .hero-bg-photo { opacity: 0.15; }
     }
 
+    /* ══════ 모바일 히어로 30% 종합 축소 (2026-09-09 대장 지시, PC 769px 이상 무변경) ══════ */
+    @media (max-width: 768px) {
+        .about-hero { padding-top: 8px; }
+        .about-hero .inner { gap: 8px; }
+        .hero-breadcrumb { margin-bottom: 2px; line-height: 1.2; }
+        .hero-label { display: flex; font-size: 8px; margin-bottom: 8px; color: #CDAA54; }
+        .hero-text h1 { font-size: 18px; line-height: 1.2; margin-bottom: 8px; }
+        .hero-sub { font-size: 10px; line-height: 1.4; }
+        .hero-cards-float { gap: 6px; margin-bottom: 11px; }
+        .hero-card { aspect-ratio: 1 / 0.53; padding: 8px; border-radius: 10px; }
+        .hero-card-icon { width: 20px; height: 20px; margin-bottom: 5px; }
+        .hero-card h4 { font-size: 9px; }
+        .hero-card p { font-size: 7px; line-height: 1.25; }
+        .page-body { zoom: 0.85; }
+    }
+
     /* ── SECTION SPACING ── */
     .about-section {
         margin-bottom: 0;

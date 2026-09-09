@@ -188,6 +188,22 @@
     @media (max-width: 1024px) { .uni-hero { padding: 20px 0 0; } .uni-hero .inner { flex-direction: column; gap: 16px; } .uni-hero .uh-visual { width: 100%; max-width: 420px; } .uni-hero .hero-bg-photo { width: 100%; opacity: 0.25; } .uni-hero .hero-bg-photo::after { background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.7) 100%); } }
     @media (max-width: 600px) { .uni-hero { padding: 16px 0 0; min-height: auto; } .uni-hero .uh-text h1 { font-size: 24px; } .uni-hero .uh-cards { grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; margin-bottom: 24px; } .uni-hero .uh-card { width: 100%; height: auto; aspect-ratio: 1 / 1; padding: 16px 14px; border-radius: 16px; } .uni-hero .uh-ci { width: 34px; height: 34px; margin-bottom: 10px; } .uni-hero .uh-card h4 { font-size: 13px; } .uni-hero .uh-card p { font-size: 10.5px; line-height: 1.45; } .uni-hero .hero-bg-photo { opacity: 0.15; } }
 
+    /* ══════ 모바일 히어로 30% 종합 축소 (2026-09-09 대장 지시, PC 769px 이상 무변경) ══════ */
+    @media (max-width: 768px) {
+        .uni-hero { padding-top: 8px; }
+        .uni-hero .inner { gap: 8px; }
+        .uni-hero .uh-bc { margin-bottom: 2px; line-height: 1.2; }
+        .uni-hero .uh-label { display: flex; font-size: 8px; margin-bottom: 8px; color: #CDAA54; }
+        .uni-hero .uh-text h1 { font-size: 18px; line-height: 1.2; margin-bottom: 8px; }
+        .uni-hero .uh-sub { font-size: 10px; line-height: 1.4; }
+        .uni-hero .uh-cards { gap: 6px; margin-bottom: 11px; }
+        .uni-hero .uh-card { aspect-ratio: 1 / 0.53; padding: 8px; border-radius: 10px; }
+        .uni-hero .uh-ci { width: 20px; height: 20px; margin-bottom: 5px; }
+        .uni-hero .uh-card h4 { font-size: 9px; }
+        .uni-hero .uh-card p { font-size: 7px; line-height: 1.25; }
+        .page-body { zoom: 0.85; }
+    }
+
     </style>
 </head>
 <body>
