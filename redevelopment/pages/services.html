@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260906c">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260909c">
     <style>
     .sv-section:last-child { margin-bottom:0; }
     .sv-section .section-title { margin-bottom:28px; }
@@ -410,7 +410,7 @@
         .services-hero .hero-label { display: flex; font-size: 9px; gap: 8px; color: #CDAA54; margin-bottom: 16px; }
         .services-hero .hero-label::before { width: 7px; }
         .services-hero .hero-text h1 { font-size: 21px; line-height: 1.25; letter-spacing: -0.3px; margin-top: 5px; margin-bottom: 12px; }
-        .services-hero .hero-sub { font-size: 13.5px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; }
+        .services-hero .hero-sub { font-size: 13.5px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; color: #3E434B; }
         .services-hero .hero-cards-float { gap: 8px; margin-bottom: 20px; }
         .services-hero .hero-card {
             aspect-ratio: auto; height: auto; padding: 12px; border-radius: 12px;
@@ -422,6 +422,14 @@
         .services-hero .hero-text { min-height: 163px; }
         .page-body { zoom: 0.85; }
         .section-title { font-size: 20.4px; }
+        /* 사업성검토 히어로처럼 우측 배경사진 노출 (2026-09-09 대장 지시, PC 무변경) */
+        .services-hero .hero-bg-photo { width: 58%; opacity: 1; }
+        .services-hero .hero-bg-photo::after {
+            background: linear-gradient(90deg,
+                rgba(255,253,247,1.00) 0%, rgba(255,253,247,0.99) 23.4%, rgba(255,249,232,0.96) 36.4%,
+                rgba(255,247,225,0.88) 46.8%, rgba(255,247,225,0.70) 55.9%, rgba(255,247,225,0.48) 63.7%,
+                rgba(255,247,225,0.28) 71.5%, rgba(255,247,225,0.12) 79.3%, rgba(255,247,225,0.04) 85.8%, rgba(255,247,225,0.00) 93.6%);
+        }
     }
 
     </style>

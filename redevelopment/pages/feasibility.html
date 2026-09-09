@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260906c">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260909c">
     <style>
     /* Hero — 서비스 선택 포함 */
     .fh{padding:25px 0 0;min-height:360px;background:linear-gradient(135deg,#FFFFFF 0%,#FFF3C4 40%,#FFFFFF 100%);position:relative;overflow:hidden} /* 회사소개 히어로와 PC 상단 간격 통일, 대장 지시 2026-09-06 */
@@ -238,6 +238,39 @@
     .fs-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;background:var(--gold);color:#0A0F1C;border-radius:10px;font-size:15px;font-weight:800;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0}
     .fs-cta-btn:hover{background:#d4b56a;box-shadow:0 8px 24px rgba(184,134,11,.3)}
     @media(max-width:640px){.fs-cta{flex-direction:column;padding:28px 22px;text-align:center}}
+
+    /* ══════ 모바일 히어로 30% 종합 축소 (회사소개 등과 동일 적용, 2026-09-09 대장 지시, PC 769px 이상 무변경) ══════ */
+    @media (max-width: 768px) {
+        .fh { padding-top: 10px; padding-bottom: 10px; }
+        .fh .inner { gap: 17px; }
+        .fh .breadcrumb { font-size: 10.4px; margin-bottom: 8px; }
+        .fh .fh-label { display: flex; font-size: 9px; gap: 8px; color: #CDAA54; margin-bottom: 16px; }
+        .fh .fh-label::before { width: 7px; }
+        .fh h1 { font-size: 21px; line-height: 1.25; letter-spacing: -0.3px; margin-top: 5px; margin-bottom: 12px; }
+        .fh .fh-sub { font-size: 13.5px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; color: #3E434B; }
+        .fh .hero-selector { gap: 8px; margin-bottom: 20px; }
+        .fh .hero-opt {
+            aspect-ratio: auto; height: auto; min-height: 0; padding: 12px; border-radius: 12px;
+            display: flex; flex-flow: row wrap; align-items: center; column-gap: 10px;
+        }
+        .fh .hero-opt .ho-icon { width: 28px; height: 28px; margin-bottom: 0; }
+        .fh .hero-opt .ho-title { font-size: 11.5px; margin-bottom: 0; flex: 1; min-width: 0; }
+        .fh .hero-opt .ho-desc { font-size: 8.5px; line-height: 1.3; flex-basis: 100%; margin-top: 6px; }
+        .fh .hero-text { min-height: 163px; }
+        .page-body { zoom: 0.85; }
+        .fs-h h2 { font-size: 20.4px; }
+    }
+
+    /* ══════ 개별 검토 서비스 카드 모바일 간격 정리 (2026-09-09 대장 지시, PC 769px 이상 무변경) ══════ */
+    @media (max-width: 768px) {
+        .sv-grid { gap: 10px; margin-bottom: 24px; }
+        .sv-card { padding: 16px 14px; }
+        .sv-card .si { width: 34px; height: 34px; margin-bottom: 8px; font-size: 16px; }
+        .sv-card h3 { font-size: 15px; margin-bottom: 4px; }
+        .sv-card .sd { font-size: 12.5px; line-height: 1.5; margin-bottom: 8px; }
+        .sv-card .sv-btn { height: 34px; font-size: 12px; }
+    }
+
     </style>
 </head>
 <body>
