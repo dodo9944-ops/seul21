@@ -264,6 +264,14 @@
         .hero-text { min-height: 163px; }
         .page-body { zoom: 0.85; }
         .section-title { font-size: 20.4px; }
+        /* 사업성검토 히어로처럼 우측 배경사진 노출 (2026-09-09 대장 지시, PC 무변경) */
+        .hero-bg-photo { width: 58%; opacity: 1; }
+        .hero-bg-photo::after {
+            background: linear-gradient(90deg,
+                rgba(255,253,247,1.00) 0%, rgba(255,253,247,0.99) 23.4%, rgba(255,249,232,0.96) 36.4%,
+                rgba(255,247,225,0.88) 46.8%, rgba(255,247,225,0.70) 55.9%, rgba(255,247,225,0.48) 63.7%,
+                rgba(255,247,225,0.28) 71.5%, rgba(255,247,225,0.12) 79.3%, rgba(255,247,225,0.04) 85.8%, rgba(255,247,225,0.00) 93.6%);
+        }
     }
 
     /* ── SECTION SPACING ── */
