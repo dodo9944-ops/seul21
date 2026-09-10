@@ -450,7 +450,7 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
 
 /* === 모바일 한정 — 우측 drawer 메뉴: 화면 넘침 방지 + footer 세로 축소 === */
 @media (max-width: 768px) {
-  .drawer { width: 224px; max-width: 64vw; background: rgba(255,255,255,0.95); }
+  .drawer { width: 224px; max-width: 64vw; background: rgba(255,255,255,0.915); }
   .drawer-footer {
     flex-direction: column;
     gap: 6px;
