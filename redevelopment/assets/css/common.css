@@ -450,7 +450,7 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
 
 /* === 모바일 한정 — 우측 drawer 메뉴: 화면 넘침 방지 + footer 세로 축소 === */
 @media (max-width: 768px) {
-  .drawer { width: 196px; max-width: 56vw; background: rgba(255,255,255,0.7); }
+  .drawer { width: 224px; max-width: 64vw; background: rgba(255,255,255,0.85); }
   .drawer-footer {
     flex-direction: column;
     gap: 6px;
@@ -460,8 +460,8 @@ body { padding-top: 69px; } /* 5(상단여백) + 64(header) — PC (2026-09-05) 
     flex: none; width: 100%;
     padding: 8px 10px; font-size: 12.5px; min-height: 0; line-height: 1.2;
   }
-  .drawer-nav a, .drawer-group-btn { padding: 11px 22px; font-size: 9.8px; }
-  .drawer-sub a { padding-top: 7px; padding-bottom: 7px; font-size: 9.1px; }
+  .drawer-nav a, .drawer-group-btn { padding: 11px 22px; font-size: 12.32px; }
+  .drawer-sub a { padding-top: 7px; padding-bottom: 7px; font-size: 11.44px; }
   .drawer-header { padding: 16px 22px; }
 }
 
