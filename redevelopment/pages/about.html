@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/common.css?v=20260909c">
+    <link rel="stylesheet" href="../assets/css/common.css?v=20260910f">
     <link rel="stylesheet" href="../assets/css/flipbook.css?v=20260906c">
     <style>
     /* ================================================================
@@ -724,7 +724,7 @@
     }
     .org-dept-body ul li:last-child { border-bottom: none; }
     @media (max-width: 1024px) { .org-dept-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
-    @media (max-width: 700px) { .org-dept-grid { grid-template-columns: repeat(2, 1fr); } .org-aux-row { flex-direction: column; gap: 12px; } }
+    @media (max-width: 700px) { .org-dept-grid { grid-template-columns: repeat(2, 1fr); } .org-aux-row { flex-direction: column; gap: 12px; align-items: center; } .org-aux-box::before { display: none; } }
     @media (max-width: 460px) { .org-dept-grid { grid-template-columns: 1fr; } }
 
     /* ── 6. PROFESSIONAL EXPERTISE ── */
@@ -1370,7 +1370,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260909a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260908a"></script>
+<script src="../assets/js/common.js?v=20260910d"></script>
 <script src="../assets/js/flipbook.js?v=20260906c"></script>
 <script>
 (function () {
@@ -1427,7 +1427,7 @@
         '</div>';
     }).join('');
 
-    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260908a
+    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260910d
        mock-data.businessAreas 는 다른 영역(services.html 등)에서 사용되므로 본 섹션은 override 하지 않는다. */
 })();
 </script>
