@@ -702,5 +702,83 @@
     },
     "action_required": "[반복 블로커, 4일 연속(09-07~09-10)] GitHub 저장소 Settings → Secrets and variables → Actions 에 VERCEL_TOKEN 등록 필요. 등록되면 push 트리거만으로 deploy-seul24-auto.yml 이 자동으로 'vercel deploy --prod' 를 실행해 매일 자동 배포된다(추가 조치 불요). 코드 변경(뉴스 게시)은 이미 커밋 591cab97 로 브랜치에 정상 반영되어 있으므로, Secret만 등록되면 별도 재작업 없이 다음 워크플로 재실행(workflow_dispatch)으로 즉시 라이브 반영 가능. 현재 09-08~09-10 게시분(총 9건: news0908a~c, news0909a~c, news0910a~c)이 배포 대기 중.",
     "note": "직전 세션 로그(09-09 06:38 기록)는 '별도 경로로 배포 성공 가능성'을 언급했으나, 이번 회차에 GitHub Actions 로그를 직접 대조한 결과 이 워크플로 자체는 09-07부터 지금까지 한 번도 VERCEL_TOKEN 확인 스텝을 통과한 적이 없음을 확인. 즉 www.seul24.cloud 라이브가 09-09 21:57 KST에 b7950e08로 갱신된 것은 이 자동 워크플로의 성과가 아니라 별도 세션의 수동 배포로 추정되며, 오늘처럼 세션이 mcp__Vercel__deploy_to_vercel 수동 배포를 시도하지 않는 날에는 라이브가 갱신되지 않는다는 뜻— 매일 06:30 KST 무인 실행되는 이 루틴만으로는 Secret 등록 전까지 구조적으로 라이브 반영이 불가능함."
+  },
+  {
+    "run_datetime_kst": "2026-09-11T06:37:00+09:00",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "searched_articles_count": 34,
+    "candidate_articles_count": 6,
+    "target_max": 3,
+    "selected_articles": [
+      {
+        "id": "news0911a",
+        "title": "서울을 세계 3대 도시로… 오세훈 「G3 플랜」에 86조 투입",
+        "source": "파이낸셜뉴스",
+        "source_url": "https://www.fnnews.com/news/202609101826420132",
+        "download_html": "redevelopment/downloads/news_20260911a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260911a.html",
+        "status": "posted_not_deployed"
+      },
+      {
+        "id": "news0911b",
+        "title": "재개발·재건축 정비사업 구역지정부터 준공까지 14.1년…4년간 위법·부적정 700건 적발",
+        "source": "대한경제",
+        "source_url": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202609101439511740492",
+        "download_html": "redevelopment/downloads/news_20260911b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260911b.html",
+        "status": "posted_not_deployed"
+      },
+      {
+        "id": "news0911c",
+        "title": "공사비 내리랬더니 1천만원 더 올렸다… 정비사업장 편법 난무",
+        "source": "파이낸셜뉴스",
+        "source_url": "https://www.fnnews.com/news/202609101827485337",
+        "download_html": "redevelopment/downloads/news_20260911c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260911c.html",
+        "status": "posted_not_deployed"
+      }
+    ],
+    "posted_success_count": 3,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "배포(8단계)만 미완료 — 게시 자체(mock-data.js·downloads html·fileMap·newsFileMap 등록·커밋·푸시)는 3건 전부 정상 완료. node --check 통과."
+    ],
+    "shortfall_reason": "N/A — 목표 3건 충족",
+    "dedup_check": "MOCK.library 전수 대조(id/title/URL grep). 기존 27건(news0901a~news0910c)과 오늘 선정 3건(G3 서울플랜 9/10, 정비사업 위법·부적정 700건 적발 9/10, 공사비 편법증액 9/10) 비교 결과 URL·제목 중복 0건. 08-25 보도된 '여의도 시범아파트 삼성물산 단독입찰'은 24~48시간 신선도 기준 미충족으로 후보에서 제외.",
+    "commit_sha": "2ee51f3c",
+    "push_status": "success",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "FAILED — 기존 블로커 지속 확인 (VERCEL_TOKEN Secret 미등록). 2026-09-07~09-11 [적어도] 5일 연속 이 자동배포 워크플로 자체는 매번 동일 원인으로 실패. 단, 같은 기간 별도의 claude-code 에이전트 세션들이 mcp__Vercel__deploy_to_vercel 로 직접 프로덕션 배포에 성공한 이력이 다수 확인됨(예: 커밋 adc3cf91 포함 최근 20건, 2026-09-09~09-10 사이 전부 target:production/READY, actor: claude-code_2-1-263~267_agent) — 즉 라이브가 새 내용을 반영해온 것은 이 자동 워크플로가 아니라 매 세션이 수동으로 성공시킨 별도 배포였음. 이번 세션은 동일한 수동 배포를 시도했으나 성공하지 못함(사유는 deploy_attempts 참조).",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_attempts": [
+      {
+        "method": "GitHub Actions push 트리거 (.github/workflows/deploy-seul24-auto.yml)",
+        "run_id": 34534691543,
+        "run_url": "https://github.com/dodo9944-ops/seul21/actions/runs/34534691543",
+        "result": "FAILED — 'VERCEL_TOKEN Secret 확인' 스텝에서 즉시 실패. 로그 원문: \"VERCEL_TOKEN Secret 이 저장소에 등록되어 있지 않습니다...\". 텔레그램 Secret(TG_TOKEN/TG_CHAT)은 등록되어 있어 워크플로가 실패 시 텔레그램으로 실패 알림을 자동 발송함(대장이 이미 여러 차례 이 알림을 받았을 가능성 높음)."
+      },
+      {
+        "method": "mcp__Vercel__deploy_to_vercel (target:preview, 프로브 1개 파일)",
+        "result": "READY 성공 확인. 그러나 결과 프리뷰 URL이 Vercel Deployment Protection(403 Forbidden)에 걸려 있어, index.html 등 이번 배포에 포함하지 않은 기존 경로가 이전 배포에서 자동으로 이어지는지(증분 배포) 아니면 완전 교체(스냅샷)되는지 실제로 검증하지 못함. mcp__Vercel__web_fetch_vercel_url 로도 동일하게 403."
+      },
+      {
+        "method": "mcp__Vercel__deploy_to_vercel (target:production, 전체 파일트리)",
+        "result": "시도하지 않음 — redevelopment/ 전체 약 689MB(jpg 340MB·downloads/files 143MB·assets/images 87MB·video 83MB·pdf 30MB)를 이 세션이 tool 호출 인자(files[].data)로 인라인 전송하는 것은 기술적으로 불가능(모델이 직접 생성해야 하는 텍스트 분량이 수억 토큰 규모로 세션 토큰 예산을 초과). 이미지·비디오·PDF를 제외한 텍스트 파일만 보내는 부분 배포는 Vercel 배포가 매번 완전한 스냅샷이라는 점(증분 병합 불가가 표준 동작)을 감안하면 라이브 사이트의 이미지·첨부파일이 전부 깨지는 결과로 이어질 위험이 매우 높아 강력 제2조(데이터·사이트 무결성) 원칙에 따라 시도하지 않음."
+      },
+      {
+        "method": "로컬 vercel CLI (npx vercel)",
+        "result": "미인증 상태(Logged out)이며 이 세션 환경에 VERCEL_TOKEN 등 인증정보가 전혀 없음. 또한 api.vercel.com 직접 접속 자체가 이 세션의 네트워크 egress 프록시 정책(organization policy)으로 차단됨(CONNECT 403). 지시문의 '로컬 vercel CLI는 사용할 수 없음' 경고와 일치함을 실측으로 재확인."
+      }
+    ],
+    "verification": {
+      "news0911a_http_status": "NOT_CHECKED — 배포 자체가 안 됐으므로 라이브에 반영되지 않음(사실상 404로 추정). 이 세션은 www.seul24.cloud·*.vercel.app 에 대한 직접 HTTP 확인 도구(WebFetch, mcp__Vercel__web_fetch_vercel_url, curl)가 모두 egress 차단/403 으로 막혀 실측 확인 자체가 불가능했음.",
+      "news0911b_http_status": "NOT_CHECKED — 상동",
+      "news0911c_http_status": "NOT_CHECKED — 상동",
+      "index_exposure_checked": "NOT_CHECKED — 코드 레벨(newsFileMap 신규 등록 확인)만 확인 완료",
+      "library_exposure_checked": "NOT_CHECKED — 코드 레벨(catDefs 기존 '주요뉴스' 매핑 재사용, fileMap 신규 등록 확인, node --check 구문검사 통과)만 확인 완료"
+    },
+    "action_required": "[반복 블로커, 5일 이상 연속(09-07~09-11)] GitHub 저장소 Settings → Secrets and variables → Actions 에 VERCEL_TOKEN 등록 필요. 등록되면 push 트리거만으로 deploy-seul24-auto.yml 이 자동으로 'vercel deploy --prod' 를 실행해 매일 자동 배포된다. 코드 변경(뉴스 게시)은 이미 커밋 2ee51f3c 로 브랜치에 정상 반영되어 있으므로, Secret만 등록되면 재작업 없이 다음 워크플로 재실행(workflow_dispatch 또는 다음 push)으로 즉시 라이브 반영 가능. 현재 09-08~09-11 게시분(총 12건: news0908a~c, news0909a~c, news0910a~c, news0911a~c)이 이 워크플로 기준으로는 배포 대기 중이나, 그중 09-08~09-10 9건은 별도 세션의 수동 mcp__Vercel__deploy_to_vercel 성공으로 이미 라이브 반영되었을 가능성이 높음(현재 라이브 커밋이 09-10 09-10f 시점 adc3cf91 임을 확인). 09-11 신규 3건만 아직 라이브 미반영 상태. 대안으로 Vercel 프로젝트(prj_EEFpjvdEOgs7j7C8DOyWu84gI0wF)를 GitHub 저장소에 네이티브로 연동(mcp__Vercel__create_git_project 등)하면 커스텀 워크플로·수동 MCP 배포 없이도 push만으로 자동 빌드·배포되지만, 기존 미연동 프로젝트를 재연동하지 않고 신규 프로젝트를 만들 위험이 있어 대장 명시 승인 없이는 실행하지 않음."
   }
 ]
