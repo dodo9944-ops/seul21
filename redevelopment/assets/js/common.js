@@ -111,7 +111,7 @@ const App = (() => {
       <nav class="drawer-nav" id="drawerNav">
         ${navGroups.map(g => g.sub
           ? `<div class="drawer-group">
-              <button class="drawer-group-btn" onclick="(function(btn){var g=btn.closest('.drawer-group');g.classList.toggle('open');})(this)">
+              <button class="drawer-group-btn" onclick="(function(btn){var g=btn.closest('.drawer-group');var wasOpen=g.classList.contains('open');g.parentElement.querySelectorAll('.drawer-group.open').forEach(function(o){o.classList.remove('open')});if(!wasOpen)g.classList.add('open');})(this)">
                 <i class="${g.icon} dg-icon"></i>${g.label}<i class="fa-solid fa-chevron-down dg-arrow"></i>
               </button>
               <div class="drawer-sub">${g.sub.map(s=>`<a href="${s.href}">${s.label}</a>`).join('')}</div>
