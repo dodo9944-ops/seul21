@@ -780,5 +780,74 @@
       "library_exposure_checked": "NOT_CHECKED — 코드 레벨(catDefs 기존 '주요뉴스' 매핑 재사용, fileMap 신규 등록 확인, node --check 구문검사 통과)만 확인 완료"
     },
     "action_required": "[반복 블로커, 5일 이상 연속(09-07~09-11)] GitHub 저장소 Settings → Secrets and variables → Actions 에 VERCEL_TOKEN 등록 필요. 등록되면 push 트리거만으로 deploy-seul24-auto.yml 이 자동으로 'vercel deploy --prod' 를 실행해 매일 자동 배포된다. 코드 변경(뉴스 게시)은 이미 커밋 2ee51f3c 로 브랜치에 정상 반영되어 있으므로, Secret만 등록되면 재작업 없이 다음 워크플로 재실행(workflow_dispatch 또는 다음 push)으로 즉시 라이브 반영 가능. 현재 09-08~09-11 게시분(총 12건: news0908a~c, news0909a~c, news0910a~c, news0911a~c)이 이 워크플로 기준으로는 배포 대기 중이나, 그중 09-08~09-10 9건은 별도 세션의 수동 mcp__Vercel__deploy_to_vercel 성공으로 이미 라이브 반영되었을 가능성이 높음(현재 라이브 커밋이 09-10 09-10f 시점 adc3cf91 임을 확인). 09-11 신규 3건만 아직 라이브 미반영 상태. 대안으로 Vercel 프로젝트(prj_EEFpjvdEOgs7j7C8DOyWu84gI0wF)를 GitHub 저장소에 네이티브로 연동(mcp__Vercel__create_git_project 등)하면 커스텀 워크플로·수동 MCP 배포 없이도 push만으로 자동 빌드·배포되지만, 기존 미연동 프로젝트를 재연동하지 않고 신규 프로젝트를 만들 위험이 있어 대장 명시 승인 없이는 실행하지 않음."
+  },
+  {
+    "run_datetime_kst": "2026-09-12T06:39:00+09:00",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "searched_articles_count": 42,
+    "candidate_articles_count": 8,
+    "target_max": 3,
+    "selected_articles": [
+      {
+        "id": "news0912a",
+        "title": "국토부 「공사비 검증, 비용 낮추고 분쟁은 조정」",
+        "source": "위클리한국주택경제신문",
+        "source_url": "https://www.arunews.com/news/articleView.html?idxno=67123",
+        "download_html": "redevelopment/downloads/news_20260912a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260912a.html",
+        "status": "posted_not_deployed"
+      },
+      {
+        "id": "news0912b",
+        "title": "광명시 재개발·재건축 임대주택 비율 논란 「숨고르기」",
+        "source": "뉴시스",
+        "source_url": "https://www.newsis.com/view/NISX20260911_0003786379",
+        "download_html": "redevelopment/downloads/news_20260912b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260912b.html",
+        "status": "posted_not_deployed"
+      },
+      {
+        "id": "news0912c",
+        "title": "광진구, 자양4동 A구역 2999세대 재개발 조합설립인가",
+        "source": "아시아경제",
+        "source_url": "https://view.asiae.co.kr/article/2026091116510526944",
+        "download_html": "redevelopment/downloads/news_20260912c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260912c.html",
+        "status": "posted_not_deployed"
+      }
+    ],
+    "posted_success_count": 3,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "배포(8단계)만 미완료 — 게시 자체(mock-data.js·downloads html·fileMap·newsFileMap 등록·커밋·푸시)는 3건 전부 정상 완료. node --check 통과."
+    ],
+    "shortfall_reason": "N/A — 목표 3건 충족",
+    "dedup_check": "MOCK.library 전수 대조(id/title/URL grep) 및 이전 3일치(09-10~09-11) 이미 게시된 6건(단독입찰·수의계약 확산 아주경제 기사, G3서울플랜, 위법·부적정 700건, 공사비 편법증액 등)과 오늘 후보 8건 비교. 여의도·목동 단독응찰/수의계약 확산 주제(뉴스웨이·더퍼블릭 등 09-11자 후속보도 다수)는 news0910b(아주경제, 09-10)와 동일 주제 반복으로 제외. 서울시 이주비 LTV 70% 건의 기사는 2026-06-15 최초 보도로 신선도(24~48h) 기준 미충족 제외. 최종 선정 3건은 기존 게시분과 제목·URL·주제 중복 0건.",
+    "commit_sha": "1747d986",
+    "push_status": "success",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "FAILED — 동일 블로커 7일 연속 확인(2026-09-07~09-12, GitHub Actions VERCEL_TOKEN Secret 미등록). 이번 세션은 Vercel MCP로 현재 프로덕션 상태를 먼저 조회(get_deployment/get_project)하여 확인한 결과, 라이브는 여전히 커밋 adc3cf91(2026-09-10 12:59 KST, 모바일 햄버거 메뉴 투명도 정정)에 머물러 있고 news0910a~c·news0911a~c 6건과 오늘 news0912a~c 3건 등 최근 3일치 총 9건이 배포되지 않은 상태다. project.latestDeployment(dpl_3bhYb74xh5jH8PUgiVCyGBmMBF5P, target:null, alias 없음)는 이전 세션이 남긴 프로브용 preview 배포로 프로덕션에 반영되지 않았다. 저장소 크기(약 689MB, 이미지·동영상·PDF 포함) 때문에 mcp__Vercel__deploy_to_vercel 로 전체 파일트리를 인라인 전송하는 것은 세션 토큰 예산상 불가능하고, 텍스트 파일만 부분 전송하면 Vercel 배포가 완전 스냅샷 방식이라 라이브 이미지·첨부파일이 전부 깨질 위험이 커서 강력 제2조(사이트 무결성)에 따라 시도하지 않았다. mcp__Vercel__create_git_project 로 GitHub 저장소를 프로젝트에 연동하는 방안도 검토했으나, 기존 lcw-coordinator 프로젝트가 CLI로만 연동되어 있어(source:cli, 미git연동) 이 도구를 쓰면 기존 프로젝트를 재연동하는 대신 별도의 새 프로젝트가 생성될 위험이 있어 대장 명시 승인 없이는 실행하지 않았다. 결론: 이 자동화가 스스로 안전하게 배포까지 완결할 방법이 현재 인프라 설정상 없음 — 대장의 인프라 조치(VERCEL_TOKEN Secret 등록 또는 배포 연동 방식 결정)가 필요.",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_attempts": [
+      {
+        "method": "mcp__Vercel__get_deployment / get_project (읽기 전용 상태 확인)",
+        "result": "라이브 프로덕션 alias(www.seul24.cloud)는 dpl_B8qvBc71tkjNUNeuDPApM1DhQaJd, 커밋 adc3cf91(2026-09-10 12:59 KST) 그대로. 09-10~09-12 3일치 9건 미반영 확인."
+      },
+      {
+        "method": "mcp__Vercel__deploy_to_vercel (target:production, 전체 파일트리)",
+        "result": "시도하지 않음 — 사유는 deploy_status 참조 (689MB 인라인 전송 불가, 부분 전송 시 사이트 무결성 위험)"
+      },
+      {
+        "method": "mcp__Vercel__create_git_project",
+        "result": "시도하지 않음 — 기존 미git연동 프로젝트 재연동이 보장되지 않아 별도 프로젝트 생성 위험. 대장 승인 필요 사안으로 판단, 실행 보류"
+      },
+      {
+        "method": "GitHub Actions push 트리거 (.github/workflows/deploy-seul24-auto.yml)",
+        "result": "재확인 결과 VERCEL_TOKEN Secret 미등록 지속 — 7일 연속 동일 실패 예상되어 재실행 생략(직전 세션 run_id 34534691543 실패 로그와 동일 원인)"
+      }
+    ],
+    "action_required": "[반복 블로커, 7일 연속(09-07~09-12)] GitHub 저장소 Settings → Secrets and variables → Actions 에 VERCEL_TOKEN 등록 필요. 등록 시 다음 push 또는 workflow_dispatch로 즉시 자동 배포 가능. 현재 09-10~09-12 3일치 9건(news0910a~c, news0911a~c, news0912a~c)이 브랜치에는 정상 반영되어 있으나 라이브(www.seul24.cloud)에는 전혀 노출되지 않고 있어 자료실 이용자 관점에서는 신규 뉴스가 3일째 보이지 않는 상태."
   }
 ]
