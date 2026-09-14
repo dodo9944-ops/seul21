@@ -1088,8 +1088,7 @@ const MOCK = {
         { src:'../jpg/gallery/sindang10_2023_thumbnail.png', alt:'신당10구역재개발 조합설립 임시총회에서 정비사업관리업체 빛세움과 설계자 건원 대표가 조합원들에게 인사하는 모습' },
         { src:'../jpg/gallery/sindang10_2023_staff_guide.jpg', alt:'「정비업체 ㈜빛세움」 어깨띠를 두른 임직원들이 미스바홀 입구에서 참석 조합원을 안내하는 모습' },
         { src:'../jpg/gallery/sindang10_2023_hall_wide.jpg', alt:'창립총회장 전경 — 참석 조합원과 「창립총회 운영과 진행」 안내 화면' },
-        { src:'../jpg/gallery/sindang10_2023_flowers.jpg', alt:'창립총회 현장에서 진행된 감사 꽃다발 전달' },
-        { src:'../jpg/gallery/sindang10_2023_selection_notice.png', alt:'서울시 중구청, 신당10구역 정비업체로 (주)빛세움 선정 소식(2023.08.29)' }
+        { src:'../jpg/gallery/sindang10_2023_flowers.jpg', alt:'창립총회 현장에서 진행된 감사 꽃다발 전달' }
       ] },
     { id:'ws2024_halong', category:'워크샵', title:'2024 빛세움 워크샵 in 베트남 하롱베이', date:'2024-08-22',
       excerpt:'베트남 하롱베이에서 보낸 2024 빛세움 워크샵 — 유람선 투어와 만찬으로 다진 팀워크',
