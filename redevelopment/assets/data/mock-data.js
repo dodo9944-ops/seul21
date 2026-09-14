@@ -1085,10 +1085,11 @@ const MOCK = {
       excerpt:'신속통합기획 조합설립 1호 신당제10구역 창립총회 — 빛세움 임직원이 주말 현장에 자발적으로 나와 접수·안내를 지원했습니다.',
       content:'<div class="nt-lead">기타행사 · 조합 창립총회 지원</div><p>2023년 12월 9일 토요일, 서울 중구 신당중앙교회 미스바홀에서 <strong>신당제10구역 공공지원 조합직접설립을 위한 창립총회</strong>가 열렸습니다. ㈜빛세움은 조합설립주민협의체·서울 중구청과 함께 행사주체로 참여했고, 정비업체 선정을 포함한 총회 안건 진행을 현장에서 지원했습니다.</p><div class="nt-stats"><div class="nt-stat-card"><div class="nt-stat-num">36일</div><div class="nt-stat-label">조합동의율 75% 돌파까지 걸린 기간</div></div><div class="nt-stat-card"><div class="nt-stat-num">1호</div><div class="nt-stat-label">신속통합기획 조합설립 1호</div></div><div class="nt-stat-card"><div class="nt-stat-num">토요일</div><div class="nt-stat-label">2023.12.09(토) 13:00 개최</div></div></div><p>총회는 휴일 낮에 열렸습니다. 조합원들이 생업을 비우고 모이는 자리인 만큼, <strong>빛세움 임직원들도 자발적으로 주말 현장에 나와</strong> 접수 데스크와 입구 안내를 맡았습니다. 「정비업체 ㈜빛세움」 어깨띠를 두른 직원들이 미스바홀 입구에서 참석 조합원을 맞이하고 동선을 안내했으며, 총회장 안에서는 의사 진행과 질서 유지를 도왔습니다.</p><p>정비업체 선정은 조합이 앞으로 수년간 함께할 파트너를 정하는 안건입니다. 빛세움은 선정 여부를 떠나, 조합원이 충분한 설명을 듣고 스스로 판단할 수 있도록 현장 진행을 뒷받침하는 것이 정비사업전문관리업자의 기본이라고 보았습니다.</p><div class="nt-divider"></div><p>동의율 75%를 36일 만에 넘기고 신속통합기획 조합설립 1호라는 기록을 남긴 것은 무엇보다 조합원들의 결집된 뜻이었습니다. 빛세움은 그 자리를 곁에서 거들 수 있었던 것을 자산으로 삼아, 앞으로도 현장에서 발로 뛰겠습니다.</p>',
       images:[
-        { src:'../jpg/gallery/sindang10_2023_banner_stage.jpg', alt:'신당제10구역 공공지원 조합직접설립을 위한 창립총회 개최 현수막과 총회 진행 화면 (2023.12.09, 신당중앙교회 미스바홀)' },
+        { src:'../jpg/gallery/sindang10_2023_thumbnail.png', alt:'신당10구역재개발 조합설립 임시총회에서 정비사업관리업체 빛세움과 설계자 건원 대표가 조합원들에게 인사하는 모습' },
         { src:'../jpg/gallery/sindang10_2023_staff_guide.jpg', alt:'「정비업체 ㈜빛세움」 어깨띠를 두른 임직원들이 미스바홀 입구에서 참석 조합원을 안내하는 모습' },
         { src:'../jpg/gallery/sindang10_2023_hall_wide.jpg', alt:'창립총회장 전경 — 참석 조합원과 「창립총회 운영과 진행」 안내 화면' },
-        { src:'../jpg/gallery/sindang10_2023_flowers.jpg', alt:'창립총회 현장에서 진행된 감사 꽃다발 전달' }
+        { src:'../jpg/gallery/sindang10_2023_flowers.jpg', alt:'창립총회 현장에서 진행된 감사 꽃다발 전달' },
+        { src:'../jpg/gallery/sindang10_2023_selection_notice.png', alt:'서울시 중구청, 신당10구역 정비업체로 (주)빛세움 선정 소식(2023.08.29)' }
       ] },
     { id:'ws2024_halong', category:'워크샵', title:'2024 빛세움 워크샵 in 베트남 하롱베이', date:'2024-08-22',
       excerpt:'베트남 하롱베이에서 보낸 2024 빛세움 워크샵 — 유람선 투어와 만찬으로 다진 팀워크',
