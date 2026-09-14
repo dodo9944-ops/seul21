@@ -835,10 +835,9 @@ const NoticeDetailModal = (() => {
 
   function open(notice) {
     ensure();
-    const important = notice.important ? '<span class="badge badge-important" style="margin-left:6px">중요</span>' : '';
     heroEl.innerHTML =
       '<div class="d-hero-fb" data-t="news"><div class="d-title-area">' +
-        '<div class="badges"><span class="d-newsbadge">' + esc(notice.category || '공지사항') + '</span>' + important + '</div>' +
+        '<div class="badges"><span class="d-newsbadge">' + esc(notice.category || '공지사항') + '</span></div>' +
         '<h2>' + esc(notice.title || '') + '</h2>' +
         '<div class="d-phase"><i class="fa-solid fa-calendar"></i> ' + esc(notice.date || '') + '</div>' +
       '</div></div>';
@@ -852,6 +851,113 @@ const NoticeDetailModal = (() => {
   return { open, close };
 })();
 window.NoticeDetailModal = NoticeDetailModal;
+
+/**
+ * 갤러리(활동 소식) 상세 모달 — 주요뉴스/공지사항 상세 모달과 동일한 d-overlay/d-modal 셸을 재사용한다.
+ * 갤러리 데이터(MOCK.gallery)는 이미 로드돼 있으므로 fetch 없이 즉시 렌더링하고,
+ * 해당 게시물 1건만 보여준다(목록/다른 게시물 탐색 없음).
+ */
+const GalleryDetailModal = (() => {
+  let ov = null, heroEl = null, bodyEl = null;
+
+  function ensure() {
+    if (ov) return;
+    ov = document.createElement('div');
+    ov.className = 'd-overlay';
+    ov.innerHTML =
+      '<div class="d-modal">' +
+        '<div class="nd-hero"></div>' +
+        '<button class="d-close" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>' +
+        '<div class="d-body nd-body"></div>' +
+        '<div class="d-footer"><button type="button"><i class="fa-solid fa-xmark"></i> 닫기</button></div>' +
+      '</div>';
+    document.body.appendChild(ov);
+    heroEl = ov.querySelector('.nd-hero');
+    bodyEl = ov.querySelector('.nd-body');
+    ov.querySelectorAll('.d-close, .d-footer button').forEach(b => b.addEventListener('click', close));
+    ov.addEventListener('click', e => { if (e.target === ov) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && ov.classList.contains('open')) close(); });
+    ov.addEventListener('click', e => {
+      var trig = e.target.closest('.gl-lb-trigger');
+      if (trig) openPhotoWindow(trig.dataset.src, trig.dataset.alt);
+    });
+  }
+
+  function close() {
+    if (!ov) return;
+    ov.classList.remove('open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+
+  function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  /* 갤러리 데이터의 이미지 경로는 pages/ 하위 기준 상대경로(../jpg/...)로 저장돼 있음.
+     이 모달을 루트(index.html)에서 열 때만 앞의 ../ 를 제거해 루트 기준 경로로 맞추고,
+     pages/ 하위(gallery.html 등)에서 열 때는 원래 경로를 그대로 사용한다. */
+  function rootSrc(s) {
+    s = String(s || '');
+    var inPages = /\/pages\//.test(location.pathname);
+    return inPages ? s : s.replace(/^\.\.\//, '');
+  }
+
+  function openPhotoWindow(src, alt) {
+    var title = alt || '사진 보기';
+    var probe = new Image();
+    probe.onload = function () {
+      var availW = screen.availWidth || window.innerWidth, availH = screen.availHeight || window.innerHeight;
+      var w = Math.min(probe.naturalWidth, availW - 80);
+      var h = Math.min(probe.naturalHeight, availH - 140);
+      if (w < 360) w = 360; if (h < 280) h = 280;
+      var left = Math.max(0, Math.round((availW - w) / 2));
+      var top = Math.max(0, Math.round((availH - h) / 2));
+      var features = 'width=' + Math.round(w) + ',height=' + Math.round(h) + ',left=' + left + ',top=' + top +
+        ',resizable=yes,scrollbars=no,status=no,toolbar=no,menubar=no,location=no';
+      var win = window.open('', 'glPhotoWin', features);
+      if (!win) { window.open(src, '_blank'); return; }
+      win.document.open();
+      win.document.write(
+        '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + esc(title) + '</title>' +
+        '<style>html,body{margin:0;padding:0;width:100%;height:100%;background:#0A0F1C;overflow:hidden}' +
+        'img{width:100%;height:100%;object-fit:cover;display:block}</style></head><body>' +
+        '<img src="' + src + '" alt="' + esc(alt || '') + '"></body></html>'
+      );
+      win.document.close();
+      win.focus();
+    };
+    probe.src = src;
+  }
+
+  function photosHtml(item) {
+    var imgs = (item.images && item.images.length) ? item.images : (item.src ? [{ src: item.src, alt: item.alt }] : []);
+    if (!imgs.length) return '';
+    return '<div class="d-sec"><div class="nt-source-gallery">' + imgs.map(function (im) {
+      var src = rootSrc(im.src), alt = esc(im.alt || item.title || '');
+      return '<div class="nt-source-card"><button type="button" class="gl-lb-trigger" data-src="' + src + '" data-alt="' + alt + '" title="확대 보기" style="border:none;padding:0;background:none;width:100%;cursor:zoom-in">' +
+        '<img src="' + src + '" alt="' + alt + '"></button>' +
+        (im.alt ? '<div class="nt-source-cap">' + esc(im.alt) + '</div>' : '') + '</div>';
+    }).join('') + '</div></div>';
+  }
+
+  function open(item) {
+    ensure();
+    item = item || {};
+    heroEl.innerHTML =
+      '<div class="d-hero-fb" data-t="news"><div class="d-title-area">' +
+        '<div class="badges"><span class="d-newsbadge">' + esc(item.category || '갤러리') + '</span></div>' +
+        '<h2>' + esc(item.title || '') + '</h2>' +
+        '<div class="d-phase"><i class="fa-solid fa-calendar"></i> ' + esc(item.date || '') + '</div>' +
+      '</div></div>';
+    bodyEl.innerHTML = photosHtml(item) + '<div class="d-sec"><div class="notice-detail-content">' + (item.content || '') + '</div></div>';
+    ov.scrollTop = 0;
+    ov.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = (window.innerWidth - document.documentElement.clientWidth) + 'px';
+  }
+
+  return { open, close };
+})();
+window.GalleryDetailModal = GalleryDetailModal;
 
 /**
  * 커뮤니티 게시글 상세 모달 — 주요뉴스/공지사항 상세 모달과 동일한 d-overlay/d-modal 셸을 재사용한다.

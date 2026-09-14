@@ -1175,9 +1175,9 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260914d"></script>
+<script src="assets/data/mock-data.js?v=20260915f"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260910d"></script>
+<script src="assets/js/common.js?v=20260915d"></script>
 
 <!-- 정비사업 절차 모달 -->
 <script>
@@ -1428,7 +1428,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
 'news0903a':'downloads/news_20260903a.html','news0903b':'downloads/news_20260903b.html','news0903c':'downloads/news_20260903c.html',
 'news0904a':'downloads/news_20260904a.html','news0904b':'downloads/news_20260904b.html','news0904c':'downloads/news_20260904c.html',
 'news0905a':'downloads/news_20260905a.html','news0905b':'downloads/news_20260905b.html','news0905c':'downloads/news_20260905c.html','news0906a':'downloads/news_20260906a.html','news0906b':'downloads/news_20260906b.html','news0906c':'downloads/news_20260906c.html','news0908a':'downloads/news_20260908a.html','news0908b':'downloads/news_20260908b.html','news0908c':'downloads/news_20260908c.html','news0909a':'downloads/news_20260909a.html','news0909b':'downloads/news_20260909b.html','news0909c':'downloads/news_20260909c.html','news0910a':'downloads/news_20260910a.html','news0910b':'downloads/news_20260910b.html','news0910c':'downloads/news_20260910c.html','news0911a':'downloads/news_20260911a.html','news0911b':'downloads/news_20260911b.html','news0911c':'downloads/news_20260911c.html','news0912a':'downloads/news_20260912a.html','news0912b':'downloads/news_20260912b.html','news0912c':'downloads/news_20260912c.html','news0913a':'downloads/news_20260913a.html','news0913b':'downloads/news_20260913b.html','news0913c':'downloads/news_20260913c.html',
-'news0914a':'downloads/news_20260914a.html','news0914b':'downloads/news_20260914b.html','news0914c':'downloads/news_20260914c.html','news0914d':'downloads/news_20260914d.html','news0914e':'downloads/news_20260914e.html','news0914f':'downloads/news_20260914f.html',};
+'news0914a':'downloads/news_20260914a.html','news0914b':'downloads/news_20260914b.html','news0914c':'downloads/news_20260914c.html','news0914d':'downloads/news_20260914d.html','news0914e':'downloads/news_20260914e.html','news0914f':'downloads/news_20260914f.html','news0915a':'downloads/news_20260915a.html','news0915b':'downloads/news_20260915b.html',};
         var news=MOCK.library.filter(function(i){return i.category==='주요뉴스' && i.date>=cutStr})
             .sort(function(a,b){return(b.date||'').localeCompare(a.date||'')}).slice(0,3);
         newsEl.innerHTML=news.length?news.map(function(i){
@@ -1513,6 +1513,34 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
         };
         var _catKeyMap={'법령':'법령','법령·조례':'법령','관련판례':'법령','지침':'법령','판례·질의회신':'법령','서식':'서식가이드','가이드':'서식가이드','절차·서류':'서식가이드','주요뉴스':'주요뉴스','칼럼':'주요뉴스','정책':'주요뉴스','일반':'주요뉴스','사례':'사례'};
         window.mainLibDownload=function(id){
+            var item=MOCK.library.find(function(x){return x.id===id});
+            var m=window._libFileMap[id];
+            if(m&&m.web){
+                ViewCounter.register('library',id);
+                NewsDetailModal.open(m.web,{category:item?item.category:'',title:item?item.title:''});
+                return;
+            }
+            if(m&&m.ext){
+                ViewCounter.register('library',id);
+                var a=document.createElement('a');a.href=m.ext;a.download=m.ext.split('/').pop();
+                document.body.appendChild(a);a.click();document.body.removeChild(a);
+                return;
+            }
+            /* _libFileMap은 초기 시드 항목(lib1~48)만 커버함. 이후 매일 자동수집되는
+               법령·판례·서식·칼럼 항목은 ID+날짜 규칙(예: law0905a, date 2026-09-05
+               → downloads/law_20260905a.html)이 항상 일정하므로 이를 그대로 유도해
+               library.html의 fileMap과 동일한 URL로 모달을 연다 (대장 지시 2026-09-15) */
+            if(item&&item.fileType==='web'){
+                var prefixM=id.match(/^[a-z]+/);
+                var suffixM=id.match(/[a-z]$/);
+                var dateStr=(item.date||'').replace(/-/g,'');
+                if(prefixM&&dateStr){
+                    ViewCounter.register('library',id);
+                    NewsDetailModal.open('downloads/'+prefixM[0]+'_'+dateStr+(suffixM?suffixM[0]:'')+'.html',
+                        {category:item.category,title:item.title});
+                    return;
+                }
+            }
             location.href='pages/library.html?id='+encodeURIComponent(id);
         };
         function libTitleHtml(t){
@@ -1537,7 +1565,10 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
     var galEl=document.getElementById('mainCommunity');
     if(galEl && MOCK.gallery){
         window.mainGalleryOpen=function(id){
-            location.href='pages/gallery.html?id='+encodeURIComponent(id);
+            var g=MOCK.gallery.find(function(x){return x.id===id});
+            if(!g){ location.href='pages/gallery.html?id='+encodeURIComponent(id); return; }
+            ViewCounter.register('gallery',id);
+            GalleryDetailModal.open(g);
         };
         function galSummary(g){
             if(g.excerpt) return g.excerpt;

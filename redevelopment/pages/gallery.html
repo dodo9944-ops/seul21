@@ -181,9 +181,9 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260914d"></script>
+<script src="../assets/data/mock-data.js?v=20260915f"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260910d"></script>
+<script src="../assets/js/common.js?v=20260915d"></script>
 <script>
 (function(){
     var ICONS={ '주민총회':'fa-solid fa-people-group', '봉사활동':'fa-solid fa-hand-holding-heart',
@@ -329,7 +329,10 @@
 
     document.getElementById('glGrid').addEventListener('click', function(e){
         var btn=e.target.closest('.gp-card'); if(!btn) return;
-        openDetail(btn.dataset.id);
+        var it=items.find(function(x){ return x.id===btn.dataset.id });
+        if(!it) return;
+        ViewCounter.register('gallery',it.id);
+        GalleryDetailModal.open(it);
     });
     document.getElementById('glPager').addEventListener('click', function(e){
         var btn=e.target.closest('button[data-p]'); if(!btn || btn.disabled) return;
@@ -357,23 +360,9 @@
     }
 
     var qid=new URLSearchParams(location.search).get('id');
-    if(qid && items.some(function(it){ return it.id===qid })){
-        openDetail(qid);
-        /* 메인화면 등 외부에서 특정 게시물로 바로 들어온 경우, 목록이 먼저 보이지 않도록
-           펼침 애니메이션 + 전역 scroll-behavior:smooth 를 모두 일시적으로 끄고
-           즉시(behavior:auto) 해당 게시물 위치로 점프한 뒤 원상 복구 */
-        var dEl=document.getElementById('glDetail');
-        var htmlEl=document.documentElement;
-        var prevScrollBehavior=htmlEl.style.scrollBehavior;
-        var prevTransition=dEl.style.transition;
-        htmlEl.style.scrollBehavior='auto';
-        dEl.style.transition='none';
-        void dEl.offsetHeight; /* 강제 리플로우 — max-height 즉시 반영 */
-        dEl.scrollIntoView({block:'start', behavior:'auto'});
-        requestAnimationFrame(function(){
-            htmlEl.style.scrollBehavior=prevScrollBehavior;
-            dEl.style.transition=prevTransition;
-        });
+    if(qid){
+        var qit=items.find(function(it){ return it.id===qid });
+        if(qit){ ViewCounter.register('gallery',qit.id); GalleryDetailModal.open(qit); }
     }
 })();
 </script>

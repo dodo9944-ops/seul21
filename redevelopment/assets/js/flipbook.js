@@ -394,7 +394,7 @@
             height: baseHeight,
             size: 'stretch',
             minWidth: 240,
-            maxWidth: 1400,
+            maxWidth: 1900,
             minHeight: 320,
             maxHeight: 1900,
             maxShadowOpacity: 0.45,

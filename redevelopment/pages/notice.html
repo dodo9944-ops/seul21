@@ -87,7 +87,7 @@
             <button data-cat="수주소식">수주소식<span class="notice-tab-count"></span></button>
             <button data-cat="회사소식">회사소식<span class="notice-tab-count"></span></button>
             <button data-cat="조합소식">조합소식<span class="notice-tab-count"></span></button>
-            <button data-cat="기사소식">기사소식<span class="notice-tab-count"></span></button>
+            <button data-cat="보도자료">보도자료<span class="notice-tab-count"></span></button>
             <div class="notice-result" id="noticeResult"></div>
         </div>
         <div class="tbl-wrap">
@@ -114,21 +114,21 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260914d"></script>
+<script src="../assets/data/mock-data.js?v=20260915f"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260910d"></script>
+<script src="../assets/js/common.js?v=20260915d"></script>
 <script>
 (function() {
     const notices = DataService.getAll('notices');
 
-    const validCats = ['수주소식', '회사소식', '조합소식', '기사소식'];
+    const validCats = ['수주소식', '회사소식', '조합소식', '보도자료'];
     const params = new URLSearchParams(location.search);
     const catParam = params.get('cat');
     let currentCat = validCats.includes(catParam) ? catParam : '전체';
     let PER = 10, curPage = 1; /* 공지사항 기본 10줄 (대장 지시 2026-09-05) */
 
     function noticeCat(n) {
-        return validCats.includes(n.category) ? n.category : '기사소식';
+        return validCats.includes(n.category) ? n.category : '보도자료';
     }
 
     const idParam = params.get('id');
@@ -141,7 +141,7 @@
         }
     }
 
-    const catBadgeCls = { '수주소식': 'badge-order', '회사소식': 'badge-company', '조합소식': 'badge-union', '기사소식': 'badge-press' };
+    const catBadgeCls = { '수주소식': 'badge-order', '회사소식': 'badge-company', '조합소식': 'badge-union', '보도자료': 'badge-press' };
 
     function renderTabCounts() {
         document.querySelectorAll('#noticeTabs button[data-cat]').forEach(b => {
@@ -186,12 +186,11 @@
         tbody.innerHTML = slice.map((n) => {
             const cat = noticeCat(n);
             const catBadge = `<span class="badge ${catBadgeCls[cat]}">${cat}</span>`;
-            const importantBadge = n.important ? '<span class="badge badge-important" style="margin-right:8px;">중요</span>' : '';
             const vc = viewMap[n.id] || 0;
             return `
                 <tr class="notice-row" data-id="${n.id}">
                     <td style="text-align:center;">${catBadge}</td>
-                    <td>${importantBadge}${n.title}</td>
+                    <td>${n.title}</td>
                     <td style="color:var(--gray-400);font-size:13px;">${n.date}</td>
                     <td style="text-align:center;color:var(--gray-400);font-size:13px;"><i class="fa-solid fa-eye" style="font-size:11px;margin-right:4px;"></i>${vc}</td>
                 </tr>`;
