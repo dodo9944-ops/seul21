@@ -894,8 +894,13 @@ const GalleryDetailModal = (() => {
   function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
   /* 갤러리 데이터의 이미지 경로는 pages/ 하위 기준 상대경로(../jpg/...)로 저장돼 있음.
-     이 모달은 루트(index.html)에서 사용되므로 앞의 ../ 를 제거해 루트 기준 경로로 맞춘다. */
-  function rootSrc(s) { return String(s || '').replace(/^\.\.\//, ''); }
+     이 모달을 루트(index.html)에서 열 때만 앞의 ../ 를 제거해 루트 기준 경로로 맞추고,
+     pages/ 하위(gallery.html 등)에서 열 때는 원래 경로를 그대로 사용한다. */
+  function rootSrc(s) {
+    s = String(s || '');
+    var inPages = /\/pages\//.test(location.pathname);
+    return inPages ? s : s.replace(/^\.\.\//, '');
+  }
 
   function openPhotoWindow(src, alt) {
     var title = alt || '사진 보기';
