@@ -835,10 +835,9 @@ const NoticeDetailModal = (() => {
 
   function open(notice) {
     ensure();
-    const important = notice.important ? '<span class="badge badge-important" style="margin-left:6px">중요</span>' : '';
     heroEl.innerHTML =
       '<div class="d-hero-fb" data-t="news"><div class="d-title-area">' +
-        '<div class="badges"><span class="d-newsbadge">' + esc(notice.category || '공지사항') + '</span>' + important + '</div>' +
+        '<div class="badges"><span class="d-newsbadge">' + esc(notice.category || '공지사항') + '</span></div>' +
         '<h2>' + esc(notice.title || '') + '</h2>' +
         '<div class="d-phase"><i class="fa-solid fa-calendar"></i> ' + esc(notice.date || '') + '</div>' +
       '</div></div>';
