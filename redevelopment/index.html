@@ -1526,6 +1526,21 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
                 document.body.appendChild(a);a.click();document.body.removeChild(a);
                 return;
             }
+            /* _libFileMap은 초기 시드 항목(lib1~48)만 커버함. 이후 매일 자동수집되는
+               법령·판례·서식·칼럼 항목은 ID+날짜 규칙(예: law0905a, date 2026-09-05
+               → downloads/law_20260905a.html)이 항상 일정하므로 이를 그대로 유도해
+               library.html의 fileMap과 동일한 URL로 모달을 연다 (대장 지시 2026-09-15) */
+            if(item&&item.fileType==='web'){
+                var prefixM=id.match(/^[a-z]+/);
+                var suffixM=id.match(/[a-z]$/);
+                var dateStr=(item.date||'').replace(/-/g,'');
+                if(prefixM&&dateStr){
+                    ViewCounter.register('library',id);
+                    NewsDetailModal.open('downloads/'+prefixM[0]+'_'+dateStr+(suffixM?suffixM[0]:'')+'.html',
+                        {category:item.category,title:item.title});
+                    return;
+                }
+            }
             location.href='pages/library.html?id='+encodeURIComponent(id);
         };
         function libTitleHtml(t){
