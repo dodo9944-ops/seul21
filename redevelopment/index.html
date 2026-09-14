@@ -1175,7 +1175,7 @@
 <div id="site-footer"></div>
 
 <!-- 공통 JS -->
-<script src="assets/data/mock-data.js?v=20260914c"></script>
+<script src="assets/data/mock-data.js?v=20260914d"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
 <script src="assets/js/common.js?v=20260910d"></script>
 
@@ -1544,7 +1544,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.class
             var t=(g.content||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
             return t.length>90?t.slice(0,90)+'…':t;
         }
-        var pinnedGalIds=['ws2025_winter','site_hqoffice2026','jc_gongdeok2026'];
+        var pinnedGalIds=['etc_sindang10_2023','site_hqoffice2026','ws2025_winter'];
         var gals=pinnedGalIds.map(function(id){return MOCK.gallery.find(function(g){return g.id===id})}).filter(Boolean);
         (async function(){
             var vmap=await ViewCounter.batch('gallery',gals.map(function(g){return g.id}));

@@ -41,7 +41,20 @@
       @keyframes fzspin{to{transform:rotate(360deg)}}
       .fz-note{max-width:1200px;margin:14px auto 0;color:#94a3b8;font-size:12px;line-height:1.6;text-align:center}
       .fz-desc{max-width:1000px;margin:18px auto 0;color:#64748b;font-size:15px;line-height:1.7;text-align:center}
-      @media (max-width:640px){.fz-head h1{font-size:22px}.fz-frame-box{height:82vh}}
+      @media (max-width:640px){
+        .fz-head h1{font-size:22px}
+        /* 모바일은 기기를 세로로 들고 있어도 분석기 화면을 통째로 가로(landscape)로
+           회전시켜 전체화면 표시 — 원본이 가로형(1200px) 레이아웃이라 가로로 보여야
+           글자·지도가 잘리지 않음 (대장 지시 2026-09-14) */
+        .fz-frame-box{
+          position:fixed; top:100%; left:0;
+          width:100vh; height:100vw;
+          transform-origin:0 0; transform:rotate(-90deg);
+          border:0; border-radius:0; z-index:9999;
+          overflow:auto; -webkit-overflow-scrolling:touch;
+        }
+        .fz-frame-box iframe{position:absolute;top:0;left:0;transform-origin:0 0}
+      }
     </style>
 
     <div class="fz-wrap">
@@ -74,10 +87,32 @@
       var note=document.getElementById('fzNote');
       var openNew=document.getElementById('fzOpenNew');
       function showDown(){ loading.style.display='none'; wrap.style.display='none'; note.style.display='none'; down.style.display='block'; }
+
+      /* 모바일 전용: REB 분석기 원본이 고정폭(1200px, min-width:1024px) 레이아웃이라
+         폰 화면에서는 잘려 보임 → iframe을 가상 데스크톱 폭으로 렌더링 후 화면폭에 맞춰
+         CSS transform으로 축소해 전체 화면이 보이도록 함. PC(폭 641px 이상)는 이 로직이
+         동작하지 않아 기존 레이아웃(100%/100%) 그대로 유지됨. (대장 지시 2026-09-14) */
+      var MOBILE_MQ=window.matchMedia('(max-width:640px)');
+      var FZ_DESIGN_W=1300, FZ_DESIGN_H=1000;
+      function applyMobileScale(){
+        if(!MOBILE_MQ.matches){
+          frame.style.width=''; frame.style.height=''; frame.style.transform='';
+          return;
+        }
+        var w=wrap.clientWidth||window.innerWidth||FZ_DESIGN_W;
+        var scale=w/FZ_DESIGN_W;
+        frame.style.width=FZ_DESIGN_W+'px';
+        frame.style.height=FZ_DESIGN_H+'px';
+        frame.style.transform='scale('+scale+')';
+      }
+      window.addEventListener('resize', applyMobileScale);
+      window.addEventListener('orientationchange', applyMobileScale);
+
       function showFrame(target){
         frame.src=target; openNew.href=target;
         loading.style.display='none'; down.style.display='none';
         wrap.style.display='block'; note.style.display='block';
+        applyMobileScale();
       }
       fetch('/data/feasibility-endpoint.json?_='+Date.now())
         .then(function(r){ return r.ok ? r.json() : null; })
@@ -93,7 +128,7 @@
     <!-- (이전) Vercel /sotong 리버스 프록시 + /api/juso 방식은 정부서버 IP-바인딩 세션 문제로 폐기, 검증된 run_local 터널로 전환 -->
 </div></div>
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260914c"></script>
+<script src="../assets/data/mock-data.js?v=20260914d"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260910d"></script>
 </body>
