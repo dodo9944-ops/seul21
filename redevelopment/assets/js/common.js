@@ -878,6 +878,10 @@ const GalleryDetailModal = (() => {
     ov.querySelectorAll('.d-close, .d-footer button').forEach(b => b.addEventListener('click', close));
     ov.addEventListener('click', e => { if (e.target === ov) close(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && ov.classList.contains('open')) close(); });
+    ov.addEventListener('click', e => {
+      var trig = e.target.closest('.gl-lb-trigger');
+      if (trig) openPhotoWindow(trig.dataset.src, trig.dataset.alt);
+    });
   }
 
   function close() {
@@ -889,6 +893,48 @@ const GalleryDetailModal = (() => {
 
   function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
+  /* 갤러리 데이터의 이미지 경로는 pages/ 하위 기준 상대경로(../jpg/...)로 저장돼 있음.
+     이 모달은 루트(index.html)에서 사용되므로 앞의 ../ 를 제거해 루트 기준 경로로 맞춘다. */
+  function rootSrc(s) { return String(s || '').replace(/^\.\.\//, ''); }
+
+  function openPhotoWindow(src, alt) {
+    var title = alt || '사진 보기';
+    var probe = new Image();
+    probe.onload = function () {
+      var availW = screen.availWidth || window.innerWidth, availH = screen.availHeight || window.innerHeight;
+      var w = Math.min(probe.naturalWidth, availW - 80);
+      var h = Math.min(probe.naturalHeight, availH - 140);
+      if (w < 360) w = 360; if (h < 280) h = 280;
+      var left = Math.max(0, Math.round((availW - w) / 2));
+      var top = Math.max(0, Math.round((availH - h) / 2));
+      var features = 'width=' + Math.round(w) + ',height=' + Math.round(h) + ',left=' + left + ',top=' + top +
+        ',resizable=yes,scrollbars=no,status=no,toolbar=no,menubar=no,location=no';
+      var win = window.open('', 'glPhotoWin', features);
+      if (!win) { window.open(src, '_blank'); return; }
+      win.document.open();
+      win.document.write(
+        '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + esc(title) + '</title>' +
+        '<style>html,body{margin:0;padding:0;width:100%;height:100%;background:#0A0F1C;overflow:hidden}' +
+        'img{width:100%;height:100%;object-fit:cover;display:block}</style></head><body>' +
+        '<img src="' + src + '" alt="' + esc(alt || '') + '"></body></html>'
+      );
+      win.document.close();
+      win.focus();
+    };
+    probe.src = src;
+  }
+
+  function photosHtml(item) {
+    var imgs = (item.images && item.images.length) ? item.images : (item.src ? [{ src: item.src, alt: item.alt }] : []);
+    if (!imgs.length) return '';
+    return '<div class="d-sec"><div class="nt-source-gallery">' + imgs.map(function (im) {
+      var src = rootSrc(im.src), alt = esc(im.alt || item.title || '');
+      return '<div class="nt-source-card"><button type="button" class="gl-lb-trigger" data-src="' + src + '" data-alt="' + alt + '" title="확대 보기" style="border:none;padding:0;background:none;width:100%;cursor:zoom-in">' +
+        '<img src="' + src + '" alt="' + alt + '"></button>' +
+        (im.alt ? '<div class="nt-source-cap">' + esc(im.alt) + '</div>' : '') + '</div>';
+    }).join('') + '</div></div>';
+  }
+
   function open(item) {
     ensure();
     item = item || {};
@@ -898,7 +944,7 @@ const GalleryDetailModal = (() => {
         '<h2>' + esc(item.title || '') + '</h2>' +
         '<div class="d-phase"><i class="fa-solid fa-calendar"></i> ' + esc(item.date || '') + '</div>' +
       '</div></div>';
-    bodyEl.innerHTML = '<div class="d-sec"><div class="notice-detail-content">' + (item.content || '') + '</div></div>';
+    bodyEl.innerHTML = photosHtml(item) + '<div class="d-sec"><div class="notice-detail-content">' + (item.content || '') + '</div></div>';
     ov.scrollTop = 0;
     ov.classList.add('open');
     document.body.style.overflow = 'hidden';
