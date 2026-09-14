@@ -43,7 +43,16 @@
       .fz-desc{max-width:1000px;margin:18px auto 0;color:#64748b;font-size:15px;line-height:1.7;text-align:center}
       @media (max-width:640px){
         .fz-head h1{font-size:22px}
-        .fz-frame-box{height:82vh;overflow:auto;-webkit-overflow-scrolling:touch;position:relative}
+        /* 모바일은 기기를 세로로 들고 있어도 분석기 화면을 통째로 가로(landscape)로
+           회전시켜 전체화면 표시 — 원본이 가로형(1200px) 레이아웃이라 가로로 보여야
+           글자·지도가 잘리지 않음 (대장 지시 2026-09-14) */
+        .fz-frame-box{
+          position:fixed; top:100%; left:0;
+          width:100vh; height:100vw;
+          transform-origin:0 0; transform:rotate(-90deg);
+          border:0; border-radius:0; z-index:9999;
+          overflow:auto; -webkit-overflow-scrolling:touch;
+        }
         .fz-frame-box iframe{position:absolute;top:0;left:0;transform-origin:0 0}
       }
     </style>
