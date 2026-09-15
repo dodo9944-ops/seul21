@@ -41,12 +41,21 @@
       @keyframes fzspin{to{transform:rotate(360deg)}}
       .fz-note{max-width:1200px;margin:14px auto 0;color:#94a3b8;font-size:12px;line-height:1.6;text-align:center}
       .fz-desc{max-width:1000px;margin:18px auto 0;color:#64748b;font-size:15px;line-height:1.7;text-align:center}
+      .fz-mobile-note{display:none}
       @media (max-width:640px){
         .fz-head h1{font-size:22px}
         /* 모바일은 세로(portrait) 그대로 표시 — 가로형(1200px 설계) 원본을
            JS(applyMobileScale)로 폭에 맞춰 축소하므로 박스 높이도 축소된 실제
            표시 높이에 맞춰 함께 줄여 빈 여백이 남지 않도록 함 (대장 지시 2026-09-15) */
         .fz-frame-box{height:auto;min-height:0}
+        /* 모바일 PC 이용 권장 안내 (대장 지시 2026-09-15) */
+        .fz-mobile-note{
+          display:flex; align-items:flex-start; gap:8px;
+          max-width:1200px; margin:0 auto 14px; padding:12px 14px;
+          background:#FFF9E8; border:1px solid rgba(184,134,11,0.33); border-radius:10px;
+          color:#7a5b00; font-size:12.5px; line-height:1.6; text-align:left;
+        }
+        .fz-mobile-note i{color:#B8860B; font-size:14px; margin-top:1px; flex-shrink:0}
       }
     </style>
 
@@ -59,6 +68,11 @@
       <div id="fzDown" class="fz-state" style="display:none">
         <h2>분석기 준비 중</h2>
         <p>현재 사업타당성 분석 서버에 연결할 수 없습니다.<br>잠시 후 다시 시도해 주세요. 문제가 지속되면 관리자에게 문의 바랍니다.</p>
+      </div>
+
+      <div class="fz-mobile-note">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>모바일 화면에서는 사업타당성 분석기 화면이 작게 축소되어 표시됩니다. 정확한 확인을 위해 가급적 <strong>PC 이용을 권장</strong>합니다.</span>
       </div>
 
       <div id="fzFrameWrap" class="fz-frame-box" style="display:none">
