@@ -1146,5 +1146,89 @@
       "indirect_verification": "get_deployment로 READY 상태·www.seul24.cloud 별칭 연결(aliasError:null) 확인, get_deployment_build_logs로 커밋 fb3c7a8 정상 클론·빌드·배포(2초 빌드, 5초 배포) 확인. node --check로 mock-data.js 구문 검증 통과. fileMap(library.html)·newsFileMap(index.html) 등록 및 mock-data.js 캐시버스터(?v=20260916b→20260917a) 58개 HTML 전수 동기화(잔존 0건) 완료, 신규 downloads html 3개는 기존 정상 동작 중인 news_20260916[ab].html과 동일 템플릿·CSS/JS 버전으로 생성함."
     },
     "action_required": "라이브 URL 200 응답 직접 확인(9단계) 실패 — 전일(2026-09-16)과 동일하게 이 세션의 네트워크 egress 프록시가 조직 정책으로 www.seul24.cloud 도메인 CONNECT를 전면 차단(curl exit 56 'CONNECT tunnel failed, response 403')하여 curl 사용 불가. 대체 수단 mcp__Vercel__web_fetch_vercel_url도 'Failed to check deployment: 403 Forbidden' 응답. mcp__Vercel__get_runtime_errors도 403 Forbidden으로 사용 불가(이 세션의 Vercel MCP 토큰에 팀 로그 조회 스코프 미부여 — 전일과 동일한 제약, 미해결 상태로 이월). 대장 또는 네트워크 제약이 없는 세션에서 https://www.seul24.cloud/downloads/news_20260917a.html · b.html · c.html 200 응답 및 홈페이지/자료실 노출을 브라우저로 추가 확인 필요. 재발 방지 제안: 이 Vercel MCP 토큰에 팀(dodo9944-ops-projects) 로그 조회 스코프를 부여하면 get_runtime_errors로 간접 검증이 가능해짐."
+  },
+  {
+    "run_datetime_kst": "2026-09-18T06:30:00+09:00",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "searched_articles_count": 44,
+    "candidate_articles_count": 8,
+    "target_max": "4~6건 (2026-09-17 세울 동일 기준 확정 이후 상한 폐지)",
+    "selected_articles": [
+      {
+        "id": "news0918a",
+        "title": "서울시 소규모 재건축 용적률 최대 300%까지 완화…강남권 조합설립 속도",
+        "source": "서울경제",
+        "source_url": "https://www.sedaily.com/article/20091366",
+        "download_html": "redevelopment/downloads/news_20260918a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260918a.html",
+        "status": "posted_and_deployed"
+      },
+      {
+        "id": "news0918b",
+        "title": "한남3·미아2·미아11·가재울9구역 통합심의 통과…1만809가구 공급",
+        "source": "헤럴드경제",
+        "source_url": "https://biz.heraldcorp.com/article/10874889",
+        "download_html": "redevelopment/downloads/news_20260918b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260918b.html",
+        "status": "posted_and_deployed"
+      },
+      {
+        "id": "news0918c",
+        "title": "서울 정비사업 멸실·이주가구 통계 오류 다수 확인…서울시 정확도 개선",
+        "source": "KBS",
+        "source_url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8666509",
+        "download_html": "redevelopment/downloads/news_20260918c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260918c.html",
+        "status": "posted_and_deployed"
+      },
+      {
+        "id": "news0918d",
+        "title": "목동3단지, 대형 평형 소유주와 협상 전면 중단…조합설립 다시 제동",
+        "source": "한국경제",
+        "source_url": "https://www.hankyung.com/article/2026091720211",
+        "download_html": "redevelopment/downloads/news_20260918d.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260918d.html",
+        "status": "posted_and_deployed"
+      },
+      {
+        "id": "news0918e",
+        "title": "토허구역 실거주 의무 유예 신청기한 1년 연장…2027년 말까지",
+        "source": "국토교통부·국민일보",
+        "source_url": "https://www.kmib.co.kr/article/view.asp?arcid=9000013188",
+        "download_html": "redevelopment/downloads/news_20260918e.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260918e.html",
+        "status": "posted_and_deployed"
+      }
+    ],
+    "posted_success_count": 5,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "해당 없음 — 5건 전부 게시 성공."
+    ],
+    "target_shortfall_reason": "해당 없음 — 목표 4~6건 범위 내 5건 게시.",
+    "network_note": "이 세션도 전일과 동일하게 개별 언론사 도메인(sedaily.com, biz.heraldcorp.com, news.kbs.co.kr, hankyung.com, kmib.co.kr 등) 및 www.seul24.cloud 자체에 대한 WebFetch/curl이 조직 egress 정책으로 전면 차단(EGRESS_BLOCKED / 000 응답)되어, 원문 전문은 WebFetch로 열 수 없었다. CLAUDE.md 신설 기준(2026-09-17)이 요구하는 WebFetch 원문 열람 의무를 기술적으로 이행할 수 없어, 대신 mcp__PlayMCP__NaverSearch-search_news 로 각 후보 기사를 서로 다른 검색어로 재조회해 여러 매체의 스니펫을 상호 대조하는 방식으로 발행일·매체명·기자명·수치를 교차 검증했다(예: 목동3단지 기사는 한경 11:36판과 17:33판 2개 기사로 동일 사실 재확인, 토허구역 유예는 국민일보·조선일보·중앙일보·세계일보·뉴스토마토 5개 매체 스니펫으로 교차확인). 수치가 매체 간 스니펫만으로 확정되지 않는 후보는 선정하지 않았다. Vercel MCP web_fetch_vercel_url 및 get_runtime_errors 도 403 Forbidden으로 라이브 페이지 직접 열람이 불가했다.",
+    "websearch_verification_method": "WebFetch 직접 열람 대체 — NaverSearch 복수 검색어·복수 매체 스니펫 교차검증(발행일·기자명·핵심수치 일치 확인 후 선정)",
+    "commit_sha": "5cd068471ed1386712c9d235432890f2153764c6",
+    "deploy_status": "성공 — push 직후 Vercel 네이티브 GitHub 연동으로 프로덕션 빌드 자동 트리거됨. dpl_E8iB2fEiuxg6EhvwScqviv8pqwxK 배포가 커밋 5cd0684 기준 21:45:22(UTC)/06:45:22(KST) READY 상태로 완료, www.seul24.cloud 별칭에 정상 연결됨(aliasError:null).",
+    "deploy_url": "https://www.seul24.cloud (dpl_E8iB2fEiuxg6EhvwScqviv8pqwxK, commit 5cd0684)",
+    "deploy_attempts": [
+      {
+        "method": "Vercel 네이티브 GitHub 연동 자동 배포 (push 트리거)",
+        "result": "성공 — get_deployment(dpl_E8iB2fEiuxg6EhvwScqviv8pqwxK) state:READY, alias에 www.seul24.cloud 포함, aliasError:null. get_deployment_build_logs로 정확한 커밋(5cd0684) 클론·빌드(3초)·배포(5초) 완료 확인(21:44:56~21:45:22 UTC)."
+      }
+    ],
+    "verification": {
+      "news0918a_http_status": "NOT_CHECKED — curl/WebFetch/Vercel web_fetch_vercel_url 전부 EGRESS_BLOCKED 또는 403으로 직접 확인 불가",
+      "news0918b_http_status": "NOT_CHECKED — 동일 사유",
+      "news0918c_http_status": "NOT_CHECKED — 동일 사유",
+      "news0918d_http_status": "NOT_CHECKED — 동일 사유",
+      "news0918e_http_status": "NOT_CHECKED — 동일 사유",
+      "index_exposure_checked": "NOT_CHECKED — 직접 확인 불가",
+      "library_exposure_checked": "NOT_CHECKED — 직접 확인 불가",
+      "indirect_verification": "get_deployment로 READY 상태·정확한 commit sha(5cd0684)·www.seul24.cloud 별칭 연결(aliasError:null) 확인. get_deployment_build_logs로 5개 신규 downloads html이 포함된 커밋이 클론·빌드·배포되었음을 확인(빌드 오류 0건). node --check로 mock-data.js 구문 검증 통과. fileMap(library.html)·newsFileMap(index.html) 5건 등록, mock-data.js 캐시버스터(?v=20260917b→20260918a) 58개 HTML 전수 동기화(잔존 구버전 0건, 파라미터 없는 로드 0건) 완료. 신규 downloads html 5개는 기존 정상 동작 중인 news_20260917d.html과 동일 템플릿·CSS/JS 캐시버전으로 생성함."
+    },
+    "action_required": "대장 확인 요청: 라이브 HTTP 200 직접 확인이 이번에도 egress 차단으로 불가했습니다(전일과 동일 제약). 위 indirect_verification(빌드 성공·alias 연결·commit 일치)으로 배포 자체는 정상 완료된 것으로 판단하나, 브라우저(삼성 인터넷 권장)로 https://www.seul24.cloud/downloads/news_20260918a.html 등 5개 URL 직접 열람 확인을 권장합니다."
   }
 ]
