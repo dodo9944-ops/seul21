@@ -1461,5 +1461,81 @@
     },
     "action_required": "없음 — 커밋·푸시·프로덕션 배포 모두 정상 완료. 다만 이 세션의 egress 정책상(WebFetch 직접 차단 + Vercel web_fetch_vercel_url 403) 라이브 URL의 실제 HTTP 200 응답은 직접 확인하지 못했으므로, 대장께서 여유가 있으실 때 브라우저(삼성 인터넷 권장)로 https://www.seul24.cloud/downloads/news_20260921a.html / b.html / c.html 3개 URL 및 홈페이지·자료실 노출 여부 육안 확인을 권장드립니다.",
     "additional_notes": "작업 착수 시 CLAUDE.md 지침에 따라 master가 아닌 backup-bitseum-rebrand-20260824 브랜치로 즉시 전환(git fetch+checkout)했으며, 전환 시 master 계열의 미푸시 커밋 11개(2026-09-20 이후 seul21.com 일일수집분)는 그대로 두고 손대지 않음. news0921a 작성 중 ②출처③시사점④현장대응방안 섹션을 누락하는 실수를 커밋 전 자체 검증 단계에서 발견해 즉시 보완 — 향후 세션은 항목별 4단 구성(①②③④) 존재 여부를 커밋 전 grep으로 재확인할 것을 제안"
+  },
+  {
+    "run_datetime_kst": "2026-09-22T06:30:00+09:00",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_method": "WebSearch + PlayMCP NaverSearch(search_news, sort=date) 교차검증. WebFetch는 m.news.nate.com·fnnews.com·edaily.co.kr·newspim.com·housingherald.co.kr·lawissue.co.kr·enewstoday.co.kr 등 개별 언론사 도메인 전부 EGRESS_BLOCKED로 원문 직접 열람 불가 — NaverSearch API(다른 경로로 접근 가능)와 WebSearch 요약 결과를 다중 교차확인해 매체명·보도일·핵심수치를 특정한 뒤 작성",
+    "searched_articles_count": "약 70건 이상 (WebSearch 9회 + NaverSearch 6회 교차검증, 2026-09-14~22 KST 위주)",
+    "candidate_articles_count": 4,
+    "target_max": "3건 (본 프롬프트 §2 기준)",
+    "selected_articles": [
+      {
+        "id": "news0922a",
+        "title": "신통기획 214곳·모아주택 168곳…서울 정비사업 496곳 가동",
+        "source": "파이낸셜뉴스",
+        "source_url": "https://www.fnnews.com/news/202609210931391714",
+        "download_html": "redevelopment/downloads/news_20260922a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260922a.html",
+        "status": "posted_and_deployed"
+      },
+      {
+        "id": "news0922b",
+        "title": "박이강 서울시의원, 모아타운 등 소규모주택정비 지원 근거 마련 — 조례 개정안 본회의 통과",
+        "source": "한강타임즈",
+        "source_url": "https://www.hg-times.com/news/articleView.html?idxno=305490",
+        "download_html": "redevelopment/downloads/news_20260922b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260922b.html",
+        "status": "posted_and_deployed"
+      },
+      {
+        "id": "news0922c",
+        "title": "반포현대 재초환 청구서 초읽기…조합들 \"소송 불사\"",
+        "source": "서울경제",
+        "source_url": "https://www.sedaily.com/article/20090869",
+        "download_html": "redevelopment/downloads/news_20260922c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260922c.html",
+        "status": "posted_and_deployed"
+      }
+    ],
+    "rejected_candidates": [
+      {
+        "title": "은마아파트 재건축 상가 세입자 이주비 요구·집단행동 후속 보도 (파이낸셜뉴스·한경·enewstoday 등, 2026-09-13~16)",
+        "reason": "동일 소재가 news0916a(2026-09-14 보도, '은마아파트 재건축, 상가 세입자 집단행동…권리금·생계대책 보상 요구 본격화')로 이미 게시돼 중복 게시 방지 원칙(§6)에 따라 제외"
+      },
+      {
+        "title": "정비사업 수주전 '특화설계'와 '인허가안' 간극 — 신반포4차 사례 (lawissue.co.kr, 2026-09-17)",
+        "reason": "WebFetch·WebSearch 모두 짧은 스니펫만 확보되고 전문 열람이 EGRESS_BLOCKED로 불가해, 수주 당시 설계안과 통합심의 의결안의 구체적 차이(동수·가구수 변경폭 등)를 정확히 검증할 수 없어 부정확한 요약 위험이 있다고 판단해 제외 (오세훈 시장 대통령 발언 반박 정치적 논쟁 기사도 동일 성과공유회 소재로 news0922a와 중복되어 별도 게시하지 않음)"
+      }
+    ],
+    "posted_count": 3,
+    "failed_count": 0,
+    "failure_reasons": [],
+    "shortfall_reason": "해당 없음 — 목표 3건 충족",
+    "duplicate_check": "MOCK.library 기존 항목과 제목·원문URL·핵심소재(신통기획/모아주택 성과공유회, 모아타운 조례개정, 재초환/반포현대) 대조 결과 신규 3건 모두 중복 0건 (grep으로 오세훈·모아타운쾌속통합·재초환 관련 기존 게시물 사전 확인, news0818d의 재초환 규제완화 건의 기사와는 별개 소재임을 확인). 은마 상가 세입자 이주비 소재는 news0916a와 중복으로 판단해 사전 제외(위 rejected_candidates 참조)",
+    "syntax_check": "node --check redevelopment/assets/data/mock-data.js 통과 (PASS)",
+    "cache_buster_sync": "mock-data.js ?v=20260921b → 20260922a, 58개 HTML 전수 동기화 완료 (Grep 재검증: 구버전 잔존 0건, 파라미터 없는 로드 0건)",
+    "existing_data_protection": "기존 MOCK.library 항목·downloads html·fileMap/newsFileMap 등록 삭제·수정 0건. 오늘자 3건 신규 추가만 수행. 7일/1년 기한 기반 삭제 미수행",
+    "commit_sha": "4916cee493b2fb357ddbbc778df413a032890036",
+    "deploy_status": "READY — Vercel MCP create_deployment 1회 시도(gitSource github type, repoId/ref/sha 방식)로 정상 빌드·배포 완료. QUEUED→BUILDING→READY 전환까지 약 45초 소요, 에러 0건",
+    "deploy_url": "https://www.seul24.cloud (dpl_3qGaRZXr3kJMZ28LhkNTzpuWDiWx, alias에 www.seul24.cloud 포함, aliasError: null)",
+    "deploy_attempts": [
+      {
+        "method": "Vercel MCP create_deployment (target: production, gitSource type=github repoId=1200052936 ref=backup-bitseum-rebrand-20260824 sha=4916cee4, teamId 대신 slug=dodo9944-ops 사용 — teamId 사용 시 403 Forbidden 재확인됨)",
+        "result": "dpl_3qGaRZXr3kJMZ28LhkNTzpuWDiWx 생성 → READY 정상 완료 (1회 시도로 성공, 재시도 불필요)"
+      }
+    ],
+    "verification": {
+      "news0922a_http_status": "NOT_CHECKED — Bash curl 및 WebFetch로 www.seul24.cloud 접속 시 EGRESS_BLOCKED(network egress proxy, organization policy). 배포 전용 URL(lcw-coordinator-j4g3ue75l-....vercel.app)도 동일하게 EGRESS_BLOCKED. Vercel MCP web_fetch_vercel_url 도구도 'Failed to check deployment: 403 Forbidden' 응답으로 실패. list_deployment_files도 git 배포라 파일트리 미제공(404 Not Found)으로 실패 — 이 세션에서 라이브 HTTP 200 직접 확인 불가 (전일 09-21 실행과 동일한 세션 환경 제약)",
+      "news0922b_http_status": "NOT_CHECKED — 동일 사유",
+      "news0922c_http_status": "NOT_CHECKED — 동일 사유",
+      "index_exposure_checked": "NOT_CHECKED — 직접 확인 불가",
+      "library_exposure_checked": "NOT_CHECKED — 직접 확인 불가",
+      "indirect_verification": "node --check 구문검증 통과. fileMap(library.html)·newsFileMap(index.html) 3건 등록 확인(grep, news0922a/b/c 모두 존재). catDefs·_catKeyMap에 '주요뉴스' 매핑 기존 존재 확인. mock-data.js 캐시버스터(?v=20260921b→20260922a) 58개 HTML 전수 동기화(잔존 구버전 0건) 확인. Vercel get_deployment 재조회 시 readyState:READY·alias 목록에 www.seul24.cloud 포함·aliasError:null·githubCommitSha가 4916cee4(본 작업 커밋)와 일치함을 확인. 신규 downloads html 3개는 기존 정상 동작 중인 news_20260921a/b.html과 동일 템플릿·CSS/JS 캐시버전(common.css?v=20260910f, download-view.css?v=20260905a, common.js?v=20260915d)으로 생성함"
+    },
+    "action_required": "없음 — 커밋·푸시·프로덕션 배포 모두 정상 완료. 다만 이 세션의 egress 정책상(Bash curl·WebFetch 직접 차단 + Vercel web_fetch_vercel_url 403) 라이브 URL의 실제 HTTP 200 응답은 직접 확인하지 못했으므로, 대장께서 여유가 있으실 때 브라우저(삼성 인터넷 권장)로 https://www.seul24.cloud/downloads/news_20260922a.html / b.html / c.html 3개 URL 및 홈페이지·자료실 노출 여부 육안 확인을 권장드립니다.",
+    "additional_notes": "작업 착수 시 CLAUDE.md 지침에 따라 master가 아닌 backup-bitseum-rebrand-20260824 브랜치로 즉시 전환(git fetch+checkout)했으며, master 계열 커밋은 손대지 않음. 세션 시작 시 시스템이 제시한 UTC 오늘 날짜(2026-09-21)와 TZ=Asia/Seoul 실제 KST(2026-09-22 06:37)가 하루 차이가 남을 확인하고 KST 기준일 정의 원칙에 따라 2026-09-22를 '오늘'로 적용함(news0922 접두어 사용)"
   }
 ]
