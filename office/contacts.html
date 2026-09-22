@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>주소록 - 세울엔지니어링 사무자동화시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/office.css">
+<style>
+.dept-section { margin-bottom:20px }
+.dept-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius-lg); cursor:pointer; transition:var(--transition) }
+.dept-header:hover { background:var(--gray-100) }
+.dept-header h3 { font-size:15px; font-weight:700; color:var(--gray-800); display:flex; align-items:center; gap:10px }
+.dept-header .dept-color-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0 }
+.dept-header .dept-meta { font-size:12px; color:var(--gray-500) }
+.dept-header .chevron { transition:transform .2s; color:var(--gray-400); font-size:14px }
+.dept-header.open .chevron { transform:rotate(180deg) }
+.dept-body { display:none; border:1px solid var(--gray-200); border-top:none; border-radius:0 0 var(--radius-lg) var(--radius-lg); overflow:hidden }
+.dept-body.open { display:block }
+</style>
+</head>
+<body>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">SE</div>
+      <div>
+        <div class="logo-text">세울엔지니어링</div>
+        <span class="logo-sub">사무자동화시스템</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">메뉴</div>
+        <ul class="sidebar-menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> 대시보드</a></li>
+          <li><a href="approval.html"><i class="fas fa-file-signature"></i> 전자결재 <span class="badge" id="approvalBadge">0</span></a></li>
+          <li><a href="documents.html"><i class="fas fa-folder-open"></i> 문서관리</a></li>
+          <li><a href="reports.html"><i class="fas fa-chart-bar"></i> 업무보고</a></li>
+          <li><a href="attendance.html"><i class="fas fa-clock"></i> 근태관리</a></li>
+          <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> 일정관리</a></li>
+          <li><a href="board.html"><i class="fas fa-clipboard-list"></i> 게시판</a></li>
+          <li><a href="contacts.html"><i class="fas fa-address-book"></i> 주소록</a></li>
+          <li><a href="mypage.html"><i class="fas fa-user-cog"></i> 마이페이지</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar"></div>
+      <div class="user-info">
+        <div class="user-name" id="userName"></div>
+        <div class="user-role" id="userRole"></div>
+      </div>
+      <button class="user-logout" onclick="Office.Auth.logout()" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="top-header-left">
+        <button class="menu-toggle" onclick="Office.UI.toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">홈</a><span class="sep">/</span>
+          <span>커뮤니티</span><span class="sep">/</span>
+          <span class="current">주소록</span>
+        </div>
+      </div>
+      <div class="top-header-right">
+        <span class="header-clock" id="headerClock"></span>
+        <button class="header-btn" title="알림"><i class="fas fa-bell"></i><span class="notif-dot" id="notifDot"></span></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1>주소록</h1>
+        <p>사내 임직원 연락처 및 조직도</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="tabAll">전체 직원</button>
+        <button class="tab-btn" data-tab="tabDept">부서별 보기</button>
+      </div>
+
+      <!-- Search -->
+      <div style="margin-bottom:20px">
+        <div class="search-box" style="max-width:360px">
+          <i class="fas fa-search"></i>
+          <input type="text" class="form-control" id="contactSearch" placeholder="이름, 부서, 직급 검색..." oninput="renderContacts()">
+        </div>
+      </div>
+
+      <!-- Tab 1: All Employees -->
+      <div class="tab-content active" id="tabAll">
+        <div class="grid-3" id="contactGrid"></div>
+      </div>
+
+      <!-- Tab 2: By Department -->
+      <div class="tab-content" id="tabDept">
+        <div id="deptView"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Employee Detail Modal -->
+<div class="modal-overlay" id="employeeModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>직원 정보</h3>
+      <button class="modal-close" onclick="Office.UI.closeModal('employeeModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" style="text-align:center">
+      <div id="empModalAvatar" style="width:80px;height:80px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;margin-bottom:16px"></div>
+      <h2 id="empModalName" style="font-size:20px;font-weight:700;margin-bottom:4px"></h2>
+      <p id="empModalPosition" style="font-size:14px;color:var(--gray-500);margin-bottom:4px"></p>
+      <p id="empModalDept" style="font-size:14px;font-weight:600;margin-bottom:16px"></p>
+      <div style="text-align:left;background:var(--gray-50);border-radius:var(--radius);padding:16px;margin-bottom:20px">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-200)"><span class="text-muted text-sm">이메일</span><span id="empModalEmail" style="font-size:13px;font-weight:600"></span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-200)"><span class="text-muted text-sm">전화번호</span><span id="empModalPhone" style="font-size:13px;font-weight:600"></span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-200)"><span class="text-muted text-sm">입사일</span><span id="empModalJoinDate" style="font-size:13px;font-weight:600"></span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0"><span class="text-muted text-sm">상태</span><span id="empModalStatus"></span></div>
+      </div>
+      <div class="d-flex gap-8" style="justify-content:center">
+        <a id="empMailBtn" class="btn btn-primary btn-sm" href="#"><i class="fas fa-envelope"></i> 이메일 보내기</a>
+        <a id="empPhoneBtn" class="btn btn-outline btn-sm" href="#"><i class="fas fa-phone"></i> 전화 걸기</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="assets/js/office-data.js"></script>
+<script src="assets/js/office.js"></script>
+<script>
+Office.init();
+
+var DEPT_COLORS = {
+  '경영지원팀': '#2563EB',
+  '도시정비1팀': '#22C55E',
+  '도시정비2팀': '#F59E0B',
+  '기술팀': '#8B5CF6',
+  '영업팀': '#EF4444'
+};
+
+function getDeptColor(dept) {
+  return DEPT_COLORS[dept] || '#64748B';
+}
+
+function getInitials(name) {
+  return name ? name.slice(-2) : '';
+}
+
+function getStatusLabel(status) {
+  if (status === 'active') return '<span class="status-dot active"></span>재직';
+  if (status === 'leave') return '<span class="status-dot leave"></span>휴직';
+  return status || '';
+}
+
+function getFilteredEmployees() {
+  var employees = Office.Storage.get('employees');
+  var q = (document.getElementById('contactSearch').value || '').trim().toLowerCase();
+  if (q) {
+    employees = employees.filter(function(e) {
+      return e.name.toLowerCase().indexOf(q) >= 0 || e.department.toLowerCase().indexOf(q) >= 0 || e.position.toLowerCase().indexOf(q) >= 0;
+    });
+  }
+  return employees;
+}
+
+function renderContacts() {
+  var employees = getFilteredEmployees();
+
+  // Grid view
+  var grid = document.getElementById('contactGrid');
+  if (employees.length === 0) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-search"></i><h3>검색 결과가 없습니다</h3></div>';
+  } else {
+    var html = '';
+    for (var i = 0; i < employees.length; i++) {
+      var e = employees[i];
+      var color = getDeptColor(e.department);
+      html += '<div class="contact-card" onclick="openEmployeeModal(\'' + e.id + '\')" style="cursor:pointer">';
+      html += '<div class="avatar" style="background:' + color + '">' + getInitials(e.name) + '</div>';
+      html += '<div class="name">' + e.name + '</div>';
+      html += '<div class="position">' + e.position + '</div>';
+      html += '<div class="dept" style="color:' + color + '">' + e.department + '</div>';
+      html += '<div class="contact-info">';
+      html += '<a href="mailto:' + e.email + '"><i class="fas fa-envelope" style="width:16px;font-size:12px"></i> ' + e.email + '</a>';
+      html += '<a href="tel:' + e.phone + '"><i class="fas fa-phone" style="width:16px;font-size:12px"></i> ' + e.phone + '</a>';
+      html += '</div>';
+      html += '<div style="margin-top:8px;font-size:12px">' + getStatusLabel(e.status) + '</div>';
+      html += '</div>';
+    }
+    grid.innerHTML = html;
+  }
+
+  // Dept view
+  renderDeptView(employees);
+}
+
+function renderDeptView(employees) {
+  var depts = Office.Storage.get('departments');
+  var html = '';
+  for (var d = 0; d < depts.length; d++) {
+    var dept = depts[d];
+    var deptEmps = employees.filter(function(e) { return e.department === dept.name; });
+    html += '<div class="dept-section">';
+    html += '<div class="dept-header" onclick="toggleDept(this)">';
+    html += '<h3><span class="dept-color-dot" style="background:' + (dept.color || getDeptColor(dept.name)) + '"></span>' + dept.name + '</h3>';
+    html += '<div class="d-flex align-center gap-16">';
+    html += '<span class="dept-meta">팀장: ' + dept.head + ' | ' + deptEmps.length + '명</span>';
+    html += '<i class="fas fa-chevron-down chevron"></i>';
+    html += '</div></div>';
+    html += '<div class="dept-body">';
+    if (deptEmps.length === 0) {
+      html += '<div style="padding:20px;text-align:center;color:var(--gray-400);font-size:13px">해당 직원이 없습니다.</div>';
+    } else {
+      html += '<table class="data-table"><thead><tr><th>이름</th><th>직급</th><th>이메일</th><th>전화번호</th><th>상태</th></tr></thead><tbody>';
+      for (var i = 0; i < deptEmps.length; i++) {
+        var e = deptEmps[i];
+        html += '<tr style="cursor:pointer" onclick="openEmployeeModal(\'' + e.id + '\')">';
+        html += '<td style="font-weight:600">' + e.name + '</td>';
+        html += '<td>' + e.position + '</td>';
+        html += '<td><a href="mailto:' + e.email + '">' + e.email + '</a></td>';
+        html += '<td>' + e.phone + '</td>';
+        html += '<td>' + getStatusLabel(e.status) + '</td>';
+        html += '</tr>';
+      }
+      html += '</tbody></table>';
+    }
+    html += '</div></div>';
+  }
+  document.getElementById('deptView').innerHTML = html;
+}
+
+function toggleDept(header) {
+  header.classList.toggle('open');
+  var body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+function openEmployeeModal(id) {
+  var employees = Office.Storage.get('employees');
+  var emp = employees.find(function(e) { return e.id === id; });
+  if (!emp) return;
+
+  var color = getDeptColor(emp.department);
+  var av = document.getElementById('empModalAvatar');
+  av.style.background = color;
+  av.textContent = getInitials(emp.name);
+
+  document.getElementById('empModalName').textContent = emp.name;
+  document.getElementById('empModalPosition').textContent = emp.position;
+  var deptEl = document.getElementById('empModalDept');
+  deptEl.textContent = emp.department;
+  deptEl.style.color = color;
+  document.getElementById('empModalEmail').textContent = emp.email;
+  document.getElementById('empModalPhone').textContent = emp.phone;
+  document.getElementById('empModalJoinDate').textContent = Office.UI.formatDate(emp.joinDate);
+  document.getElementById('empModalStatus').innerHTML = getStatusLabel(emp.status);
+
+  document.getElementById('empMailBtn').href = 'mailto:' + emp.email;
+  document.getElementById('empPhoneBtn').href = 'tel:' + emp.phone;
+
+  Office.UI.showModal('employeeModal');
+}
+
+// Tab change callback
+window.onTabChange = function(label, tabId) {
+  renderContacts();
+};
+
+renderContacts();
+</script>
+
+</body>
+</html>

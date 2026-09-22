@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>새 결재 작성 - 세울엔지니어링 사무자동화시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/office.css">
+</head>
+<body>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">SE</div>
+      <div>
+        <div class="logo-text">세울엔지니어링</div>
+        <span class="logo-sub">사무자동화시스템</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">메인</div>
+        <ul class="sidebar-menu">
+          <li><a href="index.html"><i class="fas fa-chart-pie"></i> 대시보드</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">업무관리</div>
+        <ul class="sidebar-menu">
+          <li><a href="approval.html"><i class="fas fa-file-signature"></i> 전자결재 <span class="badge" id="approvalBadge">0</span></a></li>
+          <li><a href="documents.html"><i class="fas fa-folder-open"></i> 문서관리</a></li>
+          <li><a href="report.html"><i class="fas fa-clipboard-list"></i> 업무보고</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">근태/일정</div>
+        <ul class="sidebar-menu">
+          <li><a href="attendance.html"><i class="fas fa-clock"></i> 근태관리</a></li>
+          <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> 일정관리</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">커뮤니티</div>
+        <ul class="sidebar-menu">
+          <li><a href="board.html"><i class="fas fa-comments"></i> 게시판</a></li>
+          <li><a href="contacts.html"><i class="fas fa-address-book"></i> 주소록</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">설정</div>
+        <ul class="sidebar-menu">
+          <li><a href="mypage.html"><i class="fas fa-user-cog"></i> 마이페이지</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar">--</div>
+      <div class="user-info">
+        <div class="user-name" id="userName">-</div>
+        <div class="user-role" id="userRole">-</div>
+      </div>
+      <button class="user-logout" onclick="Office.Auth.logout()" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="top-header-left">
+        <button class="menu-toggle" onclick="Office.UI.toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">홈</a><span class="sep">/</span>
+          <span>업무관리</span><span class="sep">/</span>
+          <a href="approval.html">전자결재</a><span class="sep">/</span>
+          <span class="current">새 결재 작성</span>
+        </div>
+      </div>
+      <div class="top-header-right">
+        <span class="header-clock" id="headerClock">--:--:--</span>
+        <button class="header-btn" onclick="Office.UI.toggleFullscreen()" title="전체화면"><i class="fas fa-expand"></i></button>
+        <button class="header-btn" title="알림"><i class="fas fa-bell"></i><span class="notif-dot" id="notifDot"></span></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1><i class="fas fa-pen-fancy" style="color:var(--primary);margin-right:8px"></i>새 결재 작성</h1>
+      </div>
+
+      <!-- Form Card -->
+      <div class="card mb-24">
+        <div class="card-header">
+          <h3>결재 정보</h3>
+        </div>
+        <div class="card-body">
+          <form id="approvalForm">
+            <!-- 문서종류 & 긴급여부 -->
+            <div class="form-row">
+              <div class="form-group">
+                <label>문서종류 <span class="required">*</span></label>
+                <select class="form-control" id="docType" required>
+                  <option value="">선택하세요</option>
+                  <option value="지출결의서">지출결의서</option>
+                  <option value="휴가신청서">휴가신청서</option>
+                  <option value="출장신청서">출장신청서</option>
+                  <option value="품의서">품의서</option>
+                  <option value="기안서">기안서</option>
+                </select>
+              </div>
+              <div class="form-group" style="display:flex;align-items:flex-end;padding-bottom:10px">
+                <label class="form-check">
+                  <input type="checkbox" id="isUrgent">
+                  <span style="font-weight:600;color:var(--danger)"><i class="fas fa-exclamation-triangle"></i> 긴급</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 제목 -->
+            <div class="form-group">
+              <label>제목 <span class="required">*</span></label>
+              <input type="text" class="form-control" id="docTitle" placeholder="결재 문서 제목을 입력하세요" required>
+            </div>
+
+            <!-- Dynamic Fields: 지출결의서 -->
+            <div id="fieldsExpense" style="display:none">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>금액 <span class="required">*</span></label>
+                  <input type="number" class="form-control" id="expenseAmount" placeholder="금액을 입력하세요">
+                </div>
+                <div class="form-group">
+                  <label>지출항목</label>
+                  <input type="text" class="form-control" id="expenseItem" placeholder="예: 사무용품, 식대, 교통비">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>거래처</label>
+                <input type="text" class="form-control" id="expenseVendor" placeholder="거래처명을 입력하세요">
+              </div>
+            </div>
+
+            <!-- Dynamic Fields: 휴가신청서 -->
+            <div id="fieldsLeave" style="display:none">
+              <div class="form-group">
+                <label>휴가종류 <span class="required">*</span></label>
+                <select class="form-control" id="leaveType">
+                  <option value="연차">연차</option>
+                  <option value="반차">반차</option>
+                  <option value="병가">병가</option>
+                  <option value="경조사">경조사</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>시작일 <span class="required">*</span></label>
+                  <input type="date" class="form-control" id="leaveStart">
+                </div>
+                <div class="form-group">
+                  <label>종료일 <span class="required">*</span></label>
+                  <input type="date" class="form-control" id="leaveEnd">
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Fields: 출장신청서 -->
+            <div id="fieldsTrip" style="display:none">
+              <div class="form-group">
+                <label>출장지 <span class="required">*</span></label>
+                <input type="text" class="form-control" id="tripDestination" placeholder="출장지를 입력하세요">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>시작일 <span class="required">*</span></label>
+                  <input type="date" class="form-control" id="tripStart">
+                </div>
+                <div class="form-group">
+                  <label>종료일 <span class="required">*</span></label>
+                  <input type="date" class="form-control" id="tripEnd">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>출장목적</label>
+                  <input type="text" class="form-control" id="tripPurpose" placeholder="출장 목적을 입력하세요">
+                </div>
+                <div class="form-group">
+                  <label>예상비용</label>
+                  <input type="number" class="form-control" id="tripCost" placeholder="예상 비용을 입력하세요">
+                </div>
+              </div>
+            </div>
+
+            <!-- 내용 -->
+            <div class="form-group">
+              <label>내용</label>
+              <textarea class="form-control" id="docContent" placeholder="상세 내용을 입력하세요" rows="6"></textarea>
+            </div>
+
+            <!-- File Upload -->
+            <div class="form-group">
+              <label>첨부파일</label>
+              <div class="file-drop" id="fileDrop">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>파일을 드래그하여 놓거나 <strong style="color:var(--primary)">클릭하여 선택</strong>하세요</p>
+                <p class="text-sm text-muted mt-12">최대 10MB, PDF/DOC/XLS/IMG 형식</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Approval Line -->
+      <div class="card mb-24">
+        <div class="card-header">
+          <h3>결재선</h3>
+        </div>
+        <div class="card-body">
+          <div class="approval-flow" id="approvalFlow">
+            <div class="approval-step current">
+              <div class="step-avatar" id="flowRequester">기안</div>
+              <div class="step-name" id="flowRequesterName">-</div>
+              <div class="step-role">기안자</div>
+            </div>
+            <div class="approval-arrow"></div>
+            <div class="approval-step">
+              <div class="step-avatar"><i class="fas fa-hourglass-half"></i></div>
+              <div class="step-name">팀장</div>
+              <div class="step-role">1차 결재</div>
+            </div>
+            <div class="approval-arrow"></div>
+            <div class="approval-step">
+              <div class="step-avatar"><i class="fas fa-hourglass-half"></i></div>
+              <div class="step-name">이찬호</div>
+              <div class="step-role">대표이사</div>
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--gray-500);margin-top:8px"><i class="fas fa-info-circle" style="margin-right:4px"></i>결재선은 기안자 → 팀장 → 대표이사 순서로 진행됩니다.</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display:flex;justify-content:flex-end;gap:8px">
+        <a href="approval.html" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> 취소</a>
+        <button type="button" class="btn btn-outline" id="btnDraft" onclick="saveDraft()"><i class="fas fa-save"></i> 임시저장</button>
+        <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitApproval()"><i class="fas fa-paper-plane"></i> 제출</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="assets/js/office-data.js"></script>
+<script src="assets/js/office.js"></script>
+<script>
+(function() {
+  Office.init();
+
+  var user = Office.Auth.getCurrentUser();
+  if (user) {
+    var reqName = document.getElementById('flowRequesterName');
+    if (reqName) reqName.textContent = user.name;
+    var reqAvatar = document.getElementById('flowRequester');
+    if (reqAvatar) reqAvatar.textContent = user.name.slice(-2);
+  }
+
+  // Type change: toggle dynamic fields
+  var docType = document.getElementById('docType');
+  docType.addEventListener('change', function() {
+    var type = this.value;
+    document.getElementById('fieldsExpense').style.display = type === '지출결의서' ? 'block' : 'none';
+    document.getElementById('fieldsLeave').style.display = type === '휴가신청서' ? 'block' : 'none';
+    document.getElementById('fieldsTrip').style.display = type === '출장신청서' ? 'block' : 'none';
+  });
+
+  // File drop visual feedback
+  var fileDrop = document.getElementById('fileDrop');
+  fileDrop.addEventListener('dragover', function(e) { e.preventDefault(); this.classList.add('dragover'); });
+  fileDrop.addEventListener('dragleave', function() { this.classList.remove('dragover'); });
+  fileDrop.addEventListener('drop', function(e) { e.preventDefault(); this.classList.remove('dragover'); Office.UI.showToast('파일이 선택되었습니다. (데모)', 'info'); });
+  fileDrop.addEventListener('click', function() { Office.UI.showToast('파일 선택 (데모 모드)', 'info'); });
+})();
+
+function gatherFormData() {
+  var type = document.getElementById('docType').value;
+  var title = document.getElementById('docTitle').value.trim();
+  var content = document.getElementById('docContent').value.trim();
+  var urgent = document.getElementById('isUrgent').checked;
+  var user = Office.Auth.getCurrentUser();
+
+  var data = {
+    type: type,
+    title: title,
+    content: content,
+    priority: urgent ? '긴급' : '일반',
+    requester: user ? user.name : '',
+    requesterDept: user ? user.department : '',
+    attachments: 0,
+    approvalLine: [
+      { name: user ? user.name : '-', position: user ? user.role : '-', status: '요청', date: new Date().toISOString().split('T')[0] },
+      { name: '팀장', position: '팀장', status: '대기', date: '' },
+      { name: '이찬호', position: '대표이사', status: '대기', date: '' }
+    ]
+  };
+
+  if (type === '지출결의서') {
+    var amount = document.getElementById('expenseAmount').value;
+    data.amount = amount ? parseInt(amount) : 0;
+    data.content += (data.content ? '\n\n' : '') + '지출항목: ' + (document.getElementById('expenseItem').value || '-') + '\n거래처: ' + (document.getElementById('expenseVendor').value || '-');
+  } else if (type === '휴가신청서') {
+    data.content += (data.content ? '\n\n' : '') + '휴가종류: ' + document.getElementById('leaveType').value + '\n기간: ' + (document.getElementById('leaveStart').value || '-') + ' ~ ' + (document.getElementById('leaveEnd').value || '-');
+  } else if (type === '출장신청서') {
+    var tripCost = document.getElementById('tripCost').value;
+    data.amount = tripCost ? parseInt(tripCost) : 0;
+    data.content += (data.content ? '\n\n' : '') + '출장지: ' + (document.getElementById('tripDestination').value || '-') + '\n기간: ' + (document.getElementById('tripStart').value || '-') + ' ~ ' + (document.getElementById('tripEnd').value || '-') + '\n출장목적: ' + (document.getElementById('tripPurpose').value || '-') + '\n예상비용: ' + Office.UI.formatNumber(data.amount) + '원';
+  }
+
+  return data;
+}
+
+function submitApproval() {
+  var type = document.getElementById('docType').value;
+  var title = document.getElementById('docTitle').value.trim();
+
+  if (!type) {
+    Office.UI.showToast('문서종류를 선택해주세요.', 'error');
+    document.getElementById('docType').focus();
+    return;
+  }
+  if (!title) {
+    Office.UI.showToast('제목을 입력해주세요.', 'error');
+    document.getElementById('docTitle').focus();
+    return;
+  }
+
+  var data = gatherFormData();
+  Office.Approval.create(data);
+  Office.UI.showToast('결재가 제출되었습니다.', 'success');
+  setTimeout(function() { location.href = 'approval.html'; }, 1000);
+}
+
+function saveDraft() {
+  var type = document.getElementById('docType').value;
+  var title = document.getElementById('docTitle').value.trim();
+
+  if (!title) {
+    Office.UI.showToast('제목을 입력해주세요.', 'error');
+    document.getElementById('docTitle').focus();
+    return;
+  }
+
+  var data = gatherFormData();
+  Office.Approval.saveDraft(data);
+  Office.UI.showToast('임시저장되었습니다.', 'success');
+  setTimeout(function() { location.href = 'approval.html'; }, 1000);
+}
+</script>
+
+</body>
+</html>
