@@ -1613,5 +1613,85 @@
     },
     "action_required": "없음 — 커밋·푸시·프로덕션 배포 모두 정상 완료. 다만 이 세션의 egress 정책상(WebFetch 직접 차단 + Vercel web_fetch_vercel_url 접근 거부) 라이브 URL의 실제 HTTP 200 응답은 직접 확인하지 못했으므로, 대장께서 여유가 있으실 때 브라우저(삼성 인터넷 권장)로 https://www.seul24.cloud/downloads/news_20260923a.html / b.html / c.html 3개 URL 및 홈페이지·자료실 노출 여부 육안 확인을 권장드립니다.",
     "additional_notes": "작업 착수 시 CLAUDE.md 지침에 따라 master가 아닌 backup-bitseum-rebrand-20260824 브랜치로 즉시 전환(git fetch+checkout)했으며, master 계열 커밋은 손대지 않음. 세션 시작 시 시스템이 제시한 UTC 오늘 날짜(2026-09-22)와 TZ=Asia/Seoul 실제 KST(2026-09-23 06:36)가 하루 차이가 남을 확인하고 KST 기준일 정의 원칙에 따라 2026-09-23을 '오늘'로 적용함(news0923 접두어 사용)"
+  },
+  {
+    "run_datetime_kst": "2026-09-24T06:30:00+09:00",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_method": "PlayMCP NaverSearch(search_news, sort=date) 교차검증(재개발/재건축/정비사업, 도시정비법/조합설립/관리처분, 가로주택정비/모아타운/신속통합기획 등 3개 쿼리) + WebSearch 3회(후보 3건 상세 확인). 개별 언론사 원문(newsis.com/straightnews.co.kr/apnews.kr 등)은 WebFetch·n.news.naver.com 모두 EGRESS_BLOCKED/접근 불가로 직접 열람 불가 — NaverSearch API 스니펫 + WebSearch 결과의 동일 사안 교차보도(제목·날짜·수치 일치) 다중 확인으로 사실관계 특정",
+    "searched_articles_count": "약 60건 이상 (NaverSearch 3쿼리 × 20건 + WebSearch 3회, 2026-09-21~24 KST 위주)",
+    "candidate_articles_count": 3,
+    "target_max": "3건 (본 프롬프트 §2 기준)",
+    "selected_articles": [
+      {
+        "id": "news0924a",
+        "title": "동대문구, 정비사업 업무 사전 안내…재개발·재건축 촉진",
+        "source": "뉴시스",
+        "source_url": "https://www.newsis.com/view/NISX20260923_0003802537",
+        "download_html": "redevelopment/downloads/news_20260924a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260924a.html",
+        "status": "posted_not_yet_deployed"
+      },
+      {
+        "id": "news0924b",
+        "title": "경남, 첫 재개발·재건축 표준정관 만든다",
+        "source": "스트레이트뉴스",
+        "source_url": "https://www.straightnews.co.kr/news/articleView.html?idxno=311934",
+        "download_html": "redevelopment/downloads/news_20260924b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260924b.html",
+        "status": "posted_not_yet_deployed"
+      },
+      {
+        "id": "news0924c",
+        "title": "재개발·재건축 전자총회 활용률 9.5%…\"인센티브 등 도입해야\"",
+        "source": "에이피뉴스",
+        "source_url": "https://www.apnews.kr/news/articleView.html?idxno=3051499",
+        "download_html": "redevelopment/downloads/news_20260924c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260924c.html",
+        "status": "posted_not_yet_deployed"
+      }
+    ],
+    "rejected_candidates": [
+      {
+        "title": "홍제동 개미마을 신통기획 확정 / 창원시 재건축 통합심의 첫 시행 등",
+        "reason": "전일(news0923a/news0923c)에 이미 게시된 동일 소재로 중복 게시 방지 원칙(§6)에 따라 제외"
+      },
+      {
+        "title": "서울시 재건축·재개발로 공공임대 8.3만가구 공급 (한국경제, 2026.09.23)",
+        "reason": "news0923a(신통기획 214곳·모아주택 168곳, 2026.09.21 서울시 발표)와 동일 발표자료(서울시 주택정책 성과공유회)의 세부 통계 재인용 기사로 판단해, 신규성 있는 소재(동대문구·경남도·전자총회) 3건을 우선 선정"
+      }
+    ],
+    "posted_count": 3,
+    "failed_count": 0,
+    "failure_reasons": [],
+    "shortfall_reason": "해당 없음 — 목표 3건 충족",
+    "duplicate_check": "MOCK.library 기존 항목과 제목·원문URL·핵심소재(동대문구 알리미, 경남 표준정관, 전자총회 활용률) 대조 결과 신규 3건 모두 중복 0건",
+    "syntax_check": "node --check redevelopment/assets/data/mock-data.js 통과 (PASS)",
+    "cache_buster_sync": "mock-data.js ?v=20260923a → 20260924a, 58개 HTML 전수 동기화 완료 (Grep 재검증: 구버전 잔존 0건, 파라미터 없는 로드 0건)",
+    "existing_data_protection": "기존 MOCK.library 항목·downloads html·fileMap/newsFileMap 등록 삭제·수정 0건. 오늘자 3건 신규 추가만 수행. 7일/1년 기한 기반 삭제 미수행",
+    "commit_sha": "c92506923e8a2f253fdcefbae83e72ef91590739",
+    "deploy_status": "BLOCKED — git push는 정상 완료(origin/backup-bitseum-rebrand-20260824에 반영)했으나, Vercel MCP create_deployment(target:production, gitSource github, repoId=1200052936, ref=backup-bitseum-rebrand-20260824, sha=c9250692)를 2회 시도한 결과 3건의 배포가 모두 readyState=BLOCKED로 즉시 종료됨(buildingAt≈ready, 실제 빌드 미수행). get_project 조회 결과 프로젝트 live=false 상태이며 최근 project.updatedAt(1790155584792)이 오늘 오전 master 브랜치 배포 직후 시점과 일치 — Vercel 프로젝트가 일시정지(pause) 상태이거나 팀 spend/사용량 제한에 걸려 신규 production 배포가 차단된 것으로 추정됨. list_billing_charges 조회는 'Plan not found'(hobby 플랜 미지원)로 원인 확정에는 실패",
+    "deploy_url": "미반영 — 현재 www.seul24.cloud는 여전히 어제자 배포(dpl_wriDP4pVohzNxSmPgsL4SqSQBNJY, commit 152f356c, news0923a/b/c 상태)를 서빙 중. 오늘자 news0924a/b/c는 코드상 커밋·푸시는 완료됐으나 프로덕션에 반영되지 않음",
+    "deploy_attempts": [
+      {
+        "method": "Vercel MCP create_deployment #1 (target: production, gitSource type=github repoId=1200052936 ref=backup-bitseum-rebrand-20260824 sha=c9250692 축약형, slug=dodo9944-ops)",
+        "result": "dpl_DpmcbjQrV9TqdGWr8Ro34boLV1YP / dpl_4H1zEKM69GnruvqHNuErHGAF8vTG 생성 → 즉시 BLOCKED (빌드 시작 전 차단)"
+      },
+      {
+        "method": "Vercel MCP create_deployment #2 (동일 조건, sha 40자 전체 해시로 재시도)",
+        "result": "dpl_8nTFE2cuhQKzncaZCU7Ay8p67Nnu 생성 → 즉시 BLOCKED (동일 증상 재현, 재시도로 해결되지 않는 지속적 차단으로 판단)"
+      }
+    ],
+    "verification": {
+      "news0924a_http_status": "NOT_DEPLOYED — 프로덕션 배포가 BLOCKED 상태로 미완료되어 아직 라이브 URL이 존재하지 않음 (배포 전이므로 200/404 확인 대상 아님)",
+      "news0924b_http_status": "NOT_DEPLOYED — 동일 사유",
+      "news0924c_http_status": "NOT_DEPLOYED — 동일 사유",
+      "index_exposure_checked": "NOT_CHECKED — 프로덕션 미반영으로 확인 불가",
+      "library_exposure_checked": "NOT_CHECKED — 프로덕션 미반영으로 확인 불가",
+      "indirect_verification": "node --check 구문검증 통과. fileMap(library.html)·newsFileMap(index.html) 3건 등록 확인(grep, news0924a/b/c 모두 존재). catDefs·_catKeyMap에 '주요뉴스' 매핑 기존 존재 확인. mock-data.js 캐시버스터(?v=20260923a→20260924a) 58개 HTML 전수 동기화(잔존 구버전 0건) 확인. git push 성공 확인(152f356c..c9250692). Vercel get_deployment(www.seul24.cloud)로 현재 라이브가 여전히 152f356c(어제자)임을 확인 — 사이트 자체는 정상 서비스 중이며 장애 상태 아님, 단지 오늘자 신규 3건이 아직 노출되지 않은 상태"
+    },
+    "action_required": "예 — Vercel 프로젝트 lcw-coordinator(팀 dodo9944-ops)가 일시정지 상태로 추정되어 프로덕션 배포가 BLOCKED됨. Claude는 원인이 spend/사용량 제한인지 수동 일시정지인지 확정할 수 없고, unpause_project 등 프로젝트 상태를 되돌리는 조치는 대장의 의도(비용 통제 등)를 침해할 수 있어 자동 실행하지 않았습니다. 대장께서 Vercel 대시보드(vercel.com/dodo9944-ops-projects/lcw-coordinator)에서 프로젝트 일시정지 사유(Settings 또는 상단 배너)를 확인하시고, 정상화(재개) 후 '재배포 진행'을 말씀해 주시면 즉시 동일 커밋(c9250692)으로 재배포하겠습니다. 코드 변경 자체(3건 추가, fileMap/newsFileMap 등록, 캐시버스터 동기화)는 모두 정상 커밋·푸시되어 있어 재개 즉시 배포 가능한 상태입니다.",
+    "additional_notes": "작업 착수 시 CLAUDE.md 지침에 따라 master가 아닌 backup-bitseum-rebrand-20260824 브랜치로 즉시 전환(git fetch+checkout)했으며, master 계열 커밋은 손대지 않음. TZ=Asia/Seoul 실제 KST(2026-09-24 06:37)를 기준일로 확인 후 news0924 접두어를 사용함. list_deployments 조회 중 master 브랜치의 별도 뉴스 자동게시 커밋(064f3280, news0923f-j)과 claude/bitseum-mobile-attachment-layout-o5a0sp 브랜치의 병합 배포를 확인했으나 이는 본 작업(backup-bitseum-rebrand-20260824 브랜치)과 무관한 별도 세션의 활동으로 판단, 손대지 않음"
   }
 ]
