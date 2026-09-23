@@ -1537,5 +1537,81 @@
     },
     "action_required": "없음 — 커밋·푸시·프로덕션 배포 모두 정상 완료. 다만 이 세션의 egress 정책상(Bash curl·WebFetch 직접 차단 + Vercel web_fetch_vercel_url 403) 라이브 URL의 실제 HTTP 200 응답은 직접 확인하지 못했으므로, 대장께서 여유가 있으실 때 브라우저(삼성 인터넷 권장)로 https://www.seul24.cloud/downloads/news_20260922a.html / b.html / c.html 3개 URL 및 홈페이지·자료실 노출 여부 육안 확인을 권장드립니다.",
     "additional_notes": "작업 착수 시 CLAUDE.md 지침에 따라 master가 아닌 backup-bitseum-rebrand-20260824 브랜치로 즉시 전환(git fetch+checkout)했으며, master 계열 커밋은 손대지 않음. 세션 시작 시 시스템이 제시한 UTC 오늘 날짜(2026-09-21)와 TZ=Asia/Seoul 실제 KST(2026-09-22 06:37)가 하루 차이가 남을 확인하고 KST 기준일 정의 원칙에 따라 2026-09-22를 '오늘'로 적용함(news0922 접두어 사용)"
+  },
+  {
+    "run_datetime_kst": "2026-09-23T06:30:00+09:00",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_method": "PlayMCP NaverSearch(search_news, sort=date) 교차검증(재개발/재건축/정비사업, 모아타운/신속통합기획, 도시정비법/관리처분계획 등 4개 쿼리) + WebSearch 1회. 개별 언론사 원문(hankyung.com/sisaon.co.kr/idomin.com 등)은 WebFetch 시도 시 EGRESS_BLOCKED로 직접 열람 불가 — NaverSearch API 스니펫과 동일 사안 교차보도(제목/날짜/핵심수치 일치) 다중 확인으로 사실관계 특정",
+    "searched_articles_count": "약 45건 이상 (NaverSearch 4쿼리 × 10~20건 + WebSearch 1회, 2026-09-21~23 KST 위주)",
+    "candidate_articles_count": 3,
+    "target_max": "3건 (본 프롬프트 §2 기준)",
+    "selected_articles": [
+      {
+        "id": "news0923a",
+        "title": "홍제동 개미·문화마을·옛 홍제4구역 통합 재개발…신통기획 확정, 최고 30층 2520가구",
+        "source": "한국경제",
+        "source_url": "https://www.hankyung.com/article/2026092215751",
+        "download_html": "redevelopment/downloads/news_20260923a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260923a.html",
+        "status": "posted_and_deployed"
+      },
+      {
+        "id": "news0923b",
+        "title": "신반포2차, 사업시행계획 임시총회 가결…10월 인가 신청·연내 마무리 추진",
+        "source": "시사오늘",
+        "source_url": "https://www.sisaon.co.kr/news/articleView.html?idxno=204654",
+        "download_html": "redevelopment/downloads/news_20260923b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260923b.html",
+        "status": "posted_and_deployed"
+      },
+      {
+        "id": "news0923c",
+        "title": "창원시, 재건축 통합심의 첫 시행…가음1구역 신청, 건축·경관·교육 심의 일괄처리",
+        "source": "경남도민일보",
+        "source_url": "https://www.idomin.com/news/articleView.html?idxno=2015609",
+        "download_html": "redevelopment/downloads/news_20260923c.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260923c.html",
+        "status": "posted_and_deployed"
+      }
+    ],
+    "rejected_candidates": [
+      {
+        "title": "서울시 정비사업 조합설립 기간 1년→4개월 단축 공정촉진 개선안 (2026-08-18 시행)",
+        "reason": "동일 소재가 news0921/0922 이전 8월 하순 다수 게시물(예: 8/19·8/21·8/23·8/24)로 이미 반복 게시돼 중복 게시 방지 원칙(§6)에 따라 제외"
+      },
+      {
+        "title": "은마아파트 재건축 상가 세입자 이주 임박 - 철탑 발언·영업보상 근거 법적 쟁점 (ekn.kr, 2026-09-23)",
+        "reason": "은마아파트 소재는 news0820b·news0907·news0916a로 이미 3차례 게시돼 동일 단지 반복 보도로 판단해 우선순위에서 제외, 대신 미게시 신규 소재(홍제동/신반포2차/창원시) 3건을 선정"
+      }
+    ],
+    "posted_count": 3,
+    "failed_count": 0,
+    "failure_reasons": [],
+    "shortfall_reason": "해당 없음 — 목표 3건 충족",
+    "duplicate_check": "MOCK.library 기존 항목과 제목·원문URL·핵심소재(홍제동/개미마을, 신반포2차 사업시행계획, 창원시 통합심의) 대조 결과 신규 3건 모두 중복 0건. 신반포2차는 기존에 상가조합원 비례율 대법원 판례 다수(2026.03~08) 게시돼 있으나, 이번 건은 별개 사안인 '사업시행계획서(안) 임시총회 가결·인가 신청' 진행 단계 뉴스로 중복 아님을 확인",
+    "syntax_check": "node --check redevelopment/assets/data/mock-data.js 통과 (PASS)",
+    "cache_buster_sync": "mock-data.js ?v=20260922a → 20260923a, 58개 HTML 전수 동기화 완료 (Grep 재검증: 구버전 잔존 0건, 파라미터 없는 로드 0건)",
+    "existing_data_protection": "기존 MOCK.library 항목·downloads html·fileMap/newsFileMap 등록 삭제·수정 0건. 오늘자 3건 신규 추가만 수행. 7일/1년 기한 기반 삭제 미수행",
+    "commit_sha": "a8d3ae31bf0f50d6aa04421ace0147f4196335d0",
+    "deploy_status": "READY — Vercel MCP create_deployment 1회 시도(gitSource github type, repoId/ref/sha 방식, slug=dodo9944-ops)로 정상 빌드·배포 완료. QUEUED 상태가 이례적으로 길게 유지(약 4분)되었다가 BUILDING 전환 후 정상 완료 — 클론 17.3초, vercel build 1.9초, 'Deploying outputs...' 이후 READY, 에러 0건",
+    "deploy_url": "https://www.seul24.cloud (dpl_2npce8TFjhXz5CVjaPCFn2bSW6Kv, alias에 www.seul24.cloud 포함, aliasError: null)",
+    "deploy_attempts": [
+      {
+        "method": "Vercel MCP create_deployment (target: production, gitSource type=github repoId=1200052936 ref=backup-bitseum-rebrand-20260824 sha=a8d3ae31, teamId 대신 slug=dodo9944-ops 사용)",
+        "result": "dpl_2npce8TFjhXz5CVjaPCFn2bSW6Kv 생성 → QUEUED(~4분, 평소보다 지연)→BUILDING→READY 정상 완료 (1회 시도로 성공, 재시도 불필요)"
+      }
+    ],
+    "verification": {
+      "news0923a_http_status": "NOT_CHECKED — WebFetch로 www.seul24.cloud 접속 시 EGRESS_BLOCKED(network egress proxy). Vercel MCP web_fetch_vercel_url 도구로 3개 URL 모두 시도했으나 'Vercel denied access to this deployment' 응답으로 실패. get_deployment_file_contents도 401 Unauthorized로 실패 — 이 세션에서 라이브 HTTP 200 직접 확인 불가 (전일 이전 실행과 동일한 세션 환경 제약)",
+      "news0923b_http_status": "NOT_CHECKED — 동일 사유",
+      "news0923c_http_status": "NOT_CHECKED — 동일 사유",
+      "index_exposure_checked": "NOT_CHECKED — 직접 확인 불가",
+      "library_exposure_checked": "NOT_CHECKED — 직접 확인 불가",
+      "indirect_verification": "node --check 구문검증 통과. fileMap(library.html)·newsFileMap(index.html) 3건 등록 확인(grep, news0923a/b/c 모두 존재). catDefs·_catKeyMap에 '주요뉴스' 매핑 기존 존재 확인. mock-data.js 캐시버스터(?v=20260922a→20260923a) 58개 HTML 전수 동기화(잔존 구버전 0건) 확인. Vercel get_deployment 재조회 시 readyState:READY·alias 목록에 www.seul24.cloud 포함·aliasError:null·githubCommitSha가 a8d3ae31(본 작업 커밋)와 일치함을 확인. 신규 downloads html 3개는 기존 정상 동작 중인 news_20260922a/b/c.html과 동일 템플릿·CSS/JS 캐시버전(common.css?v=20260910f, download-view.css?v=20260905a, common.js?v=20260915d)으로 생성함"
+    },
+    "action_required": "없음 — 커밋·푸시·프로덕션 배포 모두 정상 완료. 다만 이 세션의 egress 정책상(WebFetch 직접 차단 + Vercel web_fetch_vercel_url 접근 거부) 라이브 URL의 실제 HTTP 200 응답은 직접 확인하지 못했으므로, 대장께서 여유가 있으실 때 브라우저(삼성 인터넷 권장)로 https://www.seul24.cloud/downloads/news_20260923a.html / b.html / c.html 3개 URL 및 홈페이지·자료실 노출 여부 육안 확인을 권장드립니다.",
+    "additional_notes": "작업 착수 시 CLAUDE.md 지침에 따라 master가 아닌 backup-bitseum-rebrand-20260824 브랜치로 즉시 전환(git fetch+checkout)했으며, master 계열 커밋은 손대지 않음. 세션 시작 시 시스템이 제시한 UTC 오늘 날짜(2026-09-22)와 TZ=Asia/Seoul 실제 KST(2026-09-23 06:36)가 하루 차이가 남을 확인하고 KST 기준일 정의 원칙에 따라 2026-09-23을 '오늘'로 적용함(news0923 접두어 사용)"
   }
 ]
