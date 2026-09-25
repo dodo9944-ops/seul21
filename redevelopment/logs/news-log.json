@@ -1773,5 +1773,63 @@
     },
     "action_required": "예(긴급, 2일 연속) — Vercel 프로젝트 lcw-coordinator(팀 dodo9944-ops / team_4OL3ZwhAAZCMeH0YaWVu0cGw)가 09-24 오전부터 09-25 오전까지 24시간 이상 연속으로 production 배포가 전부 BLOCKED 상태이며, 이는 backup-bitseum-rebrand-20260824 브랜치뿐 아니라 master·claude/bitseum-mobile-attachment-layout-o5a0sp 등 이 계정의 다른 브랜치 배포 시도에도 동일하게 적용되어 계정/프로젝트 단위 차단으로 판단됨. Claude는 원인(billing/spend 한도 또는 수동 일시정지)을 확정할 수 없고 unpause_project 등 프로젝트 상태를 되돌리는 조치는 대장의 의도(비용 통제 등)를 침해할 수 있어 자동 실행하지 않음. 대장께서 Vercel 대시보드(vercel.com/dodo9944-ops-projects/lcw-coordinator, 상단 배너 또는 Settings > Billing/Usage)에서 차단 사유를 확인하시고 정상화해 주시면, 즉시 최신 커밋(310943aa, news0924a~c+news0925a~c 포함)으로 재배포하겠습니다. 코드 변경 자체는 2일치 모두 정상 커밋·푸시되어 있어 재개 즉시 배포 가능합니다.",
     "additional_notes": "작업 착수 시 CLAUDE.md 지침에 따라 master가 아닌 backup-bitseum-rebrand-20260824 브랜치로 즉시 전환(git fetch+checkout)했으며, master 계열 커밋은 손대지 않음. 세션 시작 시 시스템이 제시한 날짜(2026-09-24)와 TZ=Asia/Seoul 실제 KST(2026-09-25 06:36)가 하루 이상 차이남을 확인하고 KST 기준일 정의 원칙에 따라 2026-09-25를 '오늘'로 적용함(news0925 접두어 사용). 어제(09-24) 로그에 기록된 배포 차단이 24시간 넘게 미해결 상태로 이어지고 있어 2일 연속 배포 실패로 확인됨에 따라 이번 로그의 action_required를 '긴급'으로 격상함"
+  },
+  {
+    "run_datetime_kst": "2026-09-26T06:37:00+09:00",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_method": "WebSearch 17회 (재개발/재건축/정비사업 전반, 도시정비법 개정, 조합설립 동의율, 공사비 검증·중재기구, 강동/성북/동작/영등포 등 자치구별, 1기 신도시, 판결, 전자총회, 성수 시공사 등 다각도 검색). PlayMCP NaverSearch 도구는 이번 세션 툴셋에서 미탐지되어 WebSearch로 전량 대체.",
+    "searched_articles_count": "약 150건 이상 (WebSearch 17회, 링크·요약 기준)",
+    "candidate_articles_count": 1,
+    "target_max": "3건 (본 프롬프트 §2 기준)",
+    "selected_articles": [
+      {
+        "id": "news0926a",
+        "title": "강동역세권1구역, 장기전세주택 재개발 정비계획 주민공람…추정비례율 105.59%",
+        "source": "위클리한국주택경제신문·서울특별시 강동구",
+        "source_url": "https://www.arunews.com/news/articleView.html?idxno=67421",
+        "download_html": "redevelopment/downloads/news_20260926a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260926a.html",
+        "status": "posted_not_yet_deployed"
+      }
+    ],
+    "rejected_candidates": [
+      {
+        "title": "재개발 조합설립 동의율 75→70% 완화 서울시-국토부 입장차(파이낸셜뉴스 9/22) / 서울시 조합설립 1년→4개월 단축(뉴스1) / 재개발·재건축 전자총회 활용률 9.5%(쿠키뉴스 9/23, apnews) / 정비사업 공사비 전문 중재기구 신설(도정법 개정) / 목동6단지 조합직접설립 / 성수3지구 삼성물산 시공사 선정",
+        "reason": "모두 이 브랜치(backup-bitseum-rebrand-20260824) MOCK.library에 2026-08-17~2026-09-25 사이 이미 1회 이상(최대 5회) 게시된 동일·동일계열 소재로 확인(Grep: '동의율.*75.*70'·'중재기구'·'조합직접설립'·'1년.*4개월'·'전자총회'·news0817e·news0818a·news0819b·news0820g·news0821d·news0823a·news0824d·news0824h·news0904a·news0924c 등). 중복 게시 방지 원칙(§6)에 따라 전부 제외"
+      },
+      {
+        "title": "국토부 정비사업 정책설명회(10월 1일 서울·3일 대전, 8·13대책 후속) / 창원시 재건축 통합심의 첫 시행 / 서울 재개발·재건축 6곳 심의 통과(강북·성동·구로)",
+        "reason": "WebSearch 결과 검증 과정에서 실제 보도일이 각각 2026-08-30(정책설명회, news0901a와 동일 사안의 반복 보도 확인) 및 2026-03-05(6곳 심의)로 확인되어 24~48시간 기준 미충족 또는 기존 게시분(news0901a)과 동일 사안으로 판단해 제외. 창원시 건은 09-24 실행 로그에 이미 중복 사유로 기각 기록됨"
+      }
+    ],
+    "posted_count": 1,
+    "failed_count": 0,
+    "failure_reasons": [],
+    "shortfall_reason": "1건만 충족 — 이 브랜치가 2026-08-17부터 매일 3건씩 정비사업 주요뉴스를 게시해오며 국토부·서울시 정책(동의율 완화, 조합설립 기간 단축, 공사비 중재기구, 전자총회, 용적률 1.2배 완화 등) 대부분의 반복 소재를 이미 소진한 상태로 확인됨. WebSearch 17회로 자치구별·주제별 폭넓게 검토했으나 24~48시간 이내 보도이면서 기존 게시 이력과 겹치지 않는 실무 중요도 상위 기사는 강동역세권1구역 1건만 확정. 품질 낮은 기사로 목표 건수를 억지로 채우지 않는 지침(§2)에 따라 1건만 게시",
+    "duplicate_check": "MOCK.library 전수 대조 완료(Grep: '동의율'·'깔딱고개'·'75.*70'·'중재기구'·'조합직접설립'·'1년.*4개월'·'전자총회'·'강동역세권'·'6곳 심의'·'장기전세' 등). news0926a(강동역세권1구역)는 기존 등록 이력 0건 확인 후 게시.",
+    "syntax_check": "node --check redevelopment/assets/data/mock-data.js 통과 (PASS)",
+    "cache_buster_sync": "mock-data.js ?v=20260925a → 20260926a, 58개 HTML 전수 동기화 완료 (Grep 재검증: 구버전 잔존 0건, 파라미터 없는 로드 0건)",
+    "existing_data_protection": "기존 MOCK.library 항목·downloads html·fileMap/newsFileMap 등록 삭제·수정 0건. 오늘자 1건 신규 추가만 수행. 7일/1년 기한 기반 삭제 미수행",
+    "commit_sha": "f47985a62aba6339357f5d4838b8a618f61105ff",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_status": "BLOCKED (3일 연속) — git push는 정상 완료(origin/backup-bitseum-rebrand-20260824에 반영)했으나, Vercel MCP create_deployment(target:production, gitSource github, repoId=1200052936, ref=backup-bitseum-rebrand-20260824, sha=f47985a6)가 dpl_2VaK7hHYNNaNB3h6hKuh4TYHtATG 생성 즉시 readyState=BLOCKED로 종료됨. get_project(prj_EEFpjvdEOgs7j7C8DOyWu84gI0wF) 조회 결과 live:false 상태가 09-24부터 09-26까지 변화 없이 유지됨 — 09-24, 09-25에 이어 09-26까지 3일 연속 동일 증상. 09-25 오후(마스터 브랜치 news0925f~h, commit b2e6ff59) 배포 시도도 동일하게 BLOCKED로 확인되어 특정 브랜치·커밋 문제가 아닌 프로젝트/계정 단위 지속 차단으로 재확인됨. 전 세션들이 반복 요청한 Vercel 대시보드 확인이 아직 반영되지 않은 것으로 판단, 재시도는 1회로 제한(계정 단위 차단은 재시도로 해결되지 않음을 이미 다수 회 확인)하고 대장께 직접 알림 발송",
+    "deploy_url": "미반영 — 현재 www.seul24.cloud는 여전히 09-23자 배포(dpl_wriDP4pVohzNxSmPgsL4SqSQBNJY, commit 152f356c, news0923a/b/c 상태)를 서빙 중으로 추정. 09-24·09-25·09-26자 신규 게시분(news0924a~c, news0925a~c, news0926a)이 모두 코드상 커밋·푸시는 완료됐으나 프로덕션에 3일째 반영되지 않음",
+    "deploy_attempts": [
+      {
+        "method": "Vercel MCP create_deployment (target: production, gitSource type=github repoId=1200052936 ref=backup-bitseum-rebrand-20260824 sha=f47985a6, slug=dodo9944-ops)",
+        "result": "dpl_2VaK7hHYNNaNB3h6hKuh4TYHtATG 생성 → 즉시 BLOCKED (09-24·09-25와 동일 증상 3일째 재현)"
+      }
+    ],
+    "verification": {
+      "news0926a_http_status": "NOT_DEPLOYED — 프로덕션 배포가 BLOCKED 상태로 미완료되어 라이브 URL 미존재",
+      "index_exposure_checked": "NOT_CHECKED — 프로덕션 미반영으로 확인 불가",
+      "library_exposure_checked": "NOT_CHECKED — 프로덕션 미반영으로 확인 불가",
+      "indirect_verification": "node --check 구문검증 통과. fileMap(library.html)·newsFileMap(index.html) news0926a 등록 확인(grep). catDefs·_catKeyMap '주요뉴스' 매핑 기존 존재 확인. mock-data.js 캐시버스터(?v=20260925a→20260926a) 58개 HTML 전수 동기화(잔존 구버전 0건) 확인. git push 성공 확인(0b660999..f47985a6)."
+    },
+    "action_required": "예(긴급, 3일 연속) — Vercel 프로젝트 lcw-coordinator(팀 dodo9944-ops/team_4OL3ZwhAAZCMeH0YaWVu0cGw)가 2026-09-24 오전부터 2026-09-26 오전까지 최소 48시간 이상 연속으로 production 배포가 전부 BLOCKED 상태(get_project 결과 live:false 유지). backup-bitseum-rebrand-20260824·master·claude/* 등 이 계정의 모든 브랜치 배포 시도에 동일하게 적용되어 프로젝트 또는 팀 계정 단위의 차단(추정: 결제/사용량 한도 초과 또는 관리자에 의한 프로젝트 일시정지)으로 재확인됨. Claude는 unpause_project 등 프로젝트 상태를 되돌리는 조치를 대장의 명시 지시 없이 자동 실행하지 않음. 대장께서 Vercel 대시보드(vercel.com/dodo9944-ops-projects/lcw-coordinator, Settings > Billing/Usage 또는 상단 배너)에서 차단 사유를 확인·해제해 주시면, 즉시 최신 커밋(f47985a6, news0924a~c+news0925a~c+news0926a 전체 포함)으로 재배포합니다. 코드 변경 자체는 3일치 모두 정상 커밋·푸시되어 있어 재개 즉시 배포 가능합니다. 3일 연속 미해결로 이번에도 대장에게 직접 알림(push notification) 발송.",
+    "additional_notes": "작업 착수 시 CLAUDE.md/지시 지침에 따라 master가 아닌 backup-bitseum-rebrand-20260824 브랜치로 즉시 전환(git fetch+checkout)했으며, master 계열 커밋은 손대지 않음. TZ=Asia/Seoul 실제 KST(2026-09-26 06:37)를 '오늘' 기준으로 적용(news0926 접두어 사용). 이번 세션 툴셋에서 PlayMCP NaverSearch가 검색되지 않아 WebSearch만으로 검색을 수행했으며, 개별 언론사 원문 페이지는 egress 프록시 차단(jjmagazin.com, news.seoul.go.kr 등)으로 WebFetch 직접 열람이 불가해 WebSearch 스니펫 교차 확인으로 사실관계를 특정함."
   }
 ]
