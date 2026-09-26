@@ -1831,5 +1831,59 @@
     },
     "action_required": "예(긴급, 3일 연속) — Vercel 프로젝트 lcw-coordinator(팀 dodo9944-ops/team_4OL3ZwhAAZCMeH0YaWVu0cGw)가 2026-09-24 오전부터 2026-09-26 오전까지 최소 48시간 이상 연속으로 production 배포가 전부 BLOCKED 상태(get_project 결과 live:false 유지). backup-bitseum-rebrand-20260824·master·claude/* 등 이 계정의 모든 브랜치 배포 시도에 동일하게 적용되어 프로젝트 또는 팀 계정 단위의 차단(추정: 결제/사용량 한도 초과 또는 관리자에 의한 프로젝트 일시정지)으로 재확인됨. Claude는 unpause_project 등 프로젝트 상태를 되돌리는 조치를 대장의 명시 지시 없이 자동 실행하지 않음. 대장께서 Vercel 대시보드(vercel.com/dodo9944-ops-projects/lcw-coordinator, Settings > Billing/Usage 또는 상단 배너)에서 차단 사유를 확인·해제해 주시면, 즉시 최신 커밋(f47985a6, news0924a~c+news0925a~c+news0926a 전체 포함)으로 재배포합니다. 코드 변경 자체는 3일치 모두 정상 커밋·푸시되어 있어 재개 즉시 배포 가능합니다. 3일 연속 미해결로 이번에도 대장에게 직접 알림(push notification) 발송.",
     "additional_notes": "작업 착수 시 CLAUDE.md/지시 지침에 따라 master가 아닌 backup-bitseum-rebrand-20260824 브랜치로 즉시 전환(git fetch+checkout)했으며, master 계열 커밋은 손대지 않음. TZ=Asia/Seoul 실제 KST(2026-09-26 06:37)를 '오늘' 기준으로 적용(news0926 접두어 사용). 이번 세션 툴셋에서 PlayMCP NaverSearch가 검색되지 않아 WebSearch만으로 검색을 수행했으며, 개별 언론사 원문 페이지는 egress 프록시 차단(jjmagazin.com, news.seoul.go.kr 등)으로 WebFetch 직접 열람이 불가해 WebSearch 스니펫 교차 확인으로 사실관계를 특정함."
+  },
+  {
+    "run_datetime_kst": "2026-09-27T06:36:00+09:00",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_method": "WebSearch 약 20회(재개발/재건축/정비사업 전반, 도시정비법·특례법 국회 처리 현황, 통합심의·조합설립인가, 공사비 갈등·시공사 선정, 한남·흑석·여의도·목동·성수·압구정 등 주요 정비구역, 법원 판결·소송, 이주비 대출·HUG, 모아타운·가로주택정비, 공사비 검증 중재기구, 안전진단 완화, 대통령 주택공급 발언 등 다각도 검색). 다수 검색 결과가 실제로는 2024~2026년 3월 등 과거 기사이거나 이미 게시된 소재의 재인용으로 확인되어(WebSearch 요약이 발행연도를 실제와 다르게 제시하는 오류 다수 발견, 예: '모아타운 4차 소위 9/26' 언급 기사가 실제로는 2026-03-27자 기사였음·'도정법 개정안 국토위 26일 통과' 언급 기사가 실제로는 2024-09-26자 기사였음) 후보에서 제외. PlayMCP NaverSearch 도구는 이번 세션 툴셋에서도 미탐지되어 WebSearch로 전량 대체.",
+    "searched_articles_count": "약 150건 이상 (WebSearch 약 20회, 링크·요약 기준)",
+    "candidate_articles_count": 1,
+    "target_max": "3건 (본 프롬프트 §2 기준)",
+    "selected_articles": [
+      {
+        "id": "news0927a",
+        "title": "부산 재개발조합 시공사 손해배상소송 항소심 10월 개시…\"추석선물 등 향응, 입찰 무효\" 1심 조합 승소",
+        "source": "아시아경제",
+        "source_url": "https://view.asiae.co.kr/article/2026092116473569402",
+        "download_html": "redevelopment/downloads/news_20260927a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260927a.html",
+        "status": "posted_not_yet_deployed"
+      }
+    ],
+    "rejected_candidates": [
+      {
+        "title": "목동10단지 현대건설 우선협상자 선정(2조6135억) / 재건축·재개발 촉진 특례법·도정법 개정안 국회 처리 / 성수4지구 시공사 선정 총회 / 북가좌6구역 사업시행인가(1953세대) / 이재명 대통령 주택공급 총동원 발언 / 정비사업 인가 간주제 도입(황희 의원 발의) / 모아타운 60곳 사업성보정계수 통합심의 / 노량진·북아현 이주 쓰나미 / 정비사업 전문 중재기구 신설",
+        "reason": "WebFetch로 원문 확인 시도했으나 www.seul24.cloud 포함 대부분 언론사 도메인이 세션 egress 프록시에 의해 차단되어 직접 열람 불가. WebSearch 요약과 검색결과 링크에 담긴 실제 발행일(기사 URL 슬러그·타 매체 교차보도 일자)을 대조 검증한 결과 모두 2026-08-20~2026-09-18 사이 기존 보도이거나 이미 이 브랜치에 게시 이력이 있는 소재(목동10단지: news0820g 계열 다수, 도정법 개정안: news0902a·news0903c, 성수4지구: 2026-07-05 기 종료된 사안, 북가좌6구역: 2026-09-16~18 보도, 중재기구: 09-26 로그에 이미 중복 기각)로 확인되어 24~48시간 기준 및 중복 게시 방지 원칙(§6) 모두에 따라 제외"
+      }
+    ],
+    "posted_count": 1,
+    "failed_count": 0,
+    "failure_reasons": [],
+    "shortfall_reason": "1건만 충족 — 이 브랜치가 2026-08-17부터 41일 연속 매일 1~3건씩 정비사업 주요뉴스를 게시해오며 국토부·서울시 정책(동의율 완화, 조합설립 기간 단축, 공사비 중재기구, 전자총회, 용적률 1.2배·1.3배 완화, 인가 간주제 등) 및 주요 정비구역(압구정·목동·성수·여의도·한남·흑석·잠실·노량진 등) 관련 반복 소재를 대부분 소진한 상태로 확인됨. WebSearch 약 20회로 폭넓게 검토했으나 24~48시간 이내 보도이면서 기존 게시 이력과 겹치지 않고 실무 중요도가 상위인 기사는 부산 재개발조합 시공사 손해배상소송 1건만 확정. 해당 기사도 원 보도일은 2026-09-21이나(항소심 첫 변론기일이 10월 16일로 새로 지정된 점 및 시공사 선정 관련 법률리스크의 중요도를 감안해 예외적으로 선정), 이 이상 인위적으로 목표 3건을 채우기 위해 저품질·중복·과거 기사를 게시하지 않는 지침(§2)을 준수함",
+    "duplicate_check": "MOCK.library 전수 대조 완료(Grep: '부산', '사전내정', '향응', '금품·시공사', '입찰.*무효.*판결', '시공사.*교체.*손해배상' 등). news0927a(부산 재개발조합 vs 건설사 4곳 손해배상소송)는 기존 등록 이력 0건 확인 후 게시. 유사 주제인 동작구 흑석동 시공사 선정 무효 판결(2026-04-08 기 게시)과는 사건·지역·당사자가 모두 달라 별개 사안으로 확인",
+    "syntax_check": "node --check redevelopment/assets/data/mock-data.js 통과 (PASS)",
+    "cache_buster_sync": "mock-data.js ?v=20260926a → 20260927a, 58개 HTML 전수 동기화 완료 (Grep 재검증: 구버전 잔존 0건, 파라미터 없는 로드 0건)",
+    "existing_data_protection": "기존 MOCK.library 항목·downloads html·fileMap/newsFileMap 등록 삭제·수정 0건. 오늘자 1건 신규 추가만 수행. 7일/1년 기한 기반 삭제 미수행",
+    "commit_sha": "4f7d1ba62",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_status": "BLOCKED (4일 연속) — git push는 정상 완료(origin/backup-bitseum-rebrand-20260824에 반영)했으나, Vercel MCP create_deployment(target:production, gitSource github, repoId=1200052936, ref=backup-bitseum-rebrand-20260824, sha=4f7d1ba62)가 dpl_2jh8iaZJNKabhT2zfYdfLaDcfo17 생성 즉시 readyState=BLOCKED로 종료됨. get_project(prj_EEFpjvdEOgs7j7C8DOyWu84gI0wF) 조회 결과 live:false·updatedAt(1790155584792) 모두 09-24 이후 변화 없이 유지됨 — 09-24, 09-25, 09-26에 이어 09-27까지 4일 연속 동일 증상. list_deployments(state=READY, target=production) 최상단 결과가 여전히 dpl_wriDP4pVohzNxSmPgsL4SqSQBNJY(commit 152f356c, 09-23자 news0923a/b/c 상태)로, 라이브 사이트가 4일 전 시점에 멈춰있음을 재확인. list_teams 결과도 teams:[] (빈 배열)로 이 세션의 Vercel 계정 접근 범위 자체가 team_4OL3ZwhAAZCMeH0YaWVu0cGw 밖에 있음을 재확인. 재시도는 1회로 제한(계정/프로젝트 단위 차단은 재시도로 해결되지 않음을 이미 다수 회 확인)",
+    "deploy_url": "미반영 — 현재 www.seul24.cloud는 여전히 09-23자 배포(dpl_wriDP4pVohzNxSmPgsL4SqSQBNJY, commit 152f356c, news0923a/b/c 상태)를 서빙 중. 09-24·09-25·09-26·09-27자 신규 게시분(news0924a~c, news0925a~c, news0926a, news0927a)이 모두 코드상 커밋·푸시는 완료됐으나 프로덕션에 4일째 반영되지 않음",
+    "deploy_attempts": [
+      {
+        "method": "Vercel MCP create_deployment (target: production, gitSource type=github repoId=1200052936 ref=backup-bitseum-rebrand-20260824 sha=4f7d1ba62, slug=dodo9944-ops)",
+        "result": "dpl_2jh8iaZJNKabhT2zfYdfLaDcfo17 생성 → 즉시 BLOCKED (09-24·09-25·09-26과 동일 증상 4일째 재현)"
+      }
+    ],
+    "verification": {
+      "news0927a_http_status": "NOT_DEPLOYED — 프로덕션 배포가 BLOCKED 상태로 미완료되어 라이브 URL 미존재",
+      "index_exposure_checked": "NOT_CHECKED — 프로덕션 미반영으로 확인 불가",
+      "library_exposure_checked": "NOT_CHECKED — 프로덕션 미반영으로 확인 불가",
+      "indirect_verification": "node --check 구문검증 통과. fileMap(library.html)·newsFileMap(index.html) news0927a 등록 확인(grep). catDefs·_catKeyMap '주요뉴스' 매핑 기존 존재 확인. mock-data.js 캐시버스터(?v=20260926a→20260927a) 58개 HTML 전수 동기화(잔존 구버전 0건) 확인. git push 성공 확인(c6abdcfbe..4f7d1ba62). WebFetch로 www.seul24.cloud 직접 접속 시도 시 EGRESS_BLOCKED 재확인(4일 연속 동일 제약)."
+    },
+    "action_required": "예(긴급, 4일 연속) — Vercel 프로젝트 lcw-coordinator(팀 dodo9944-ops/team_4OL3ZwhAAZCMeH0YaWVu0cGw)가 2026-09-24 오전부터 2026-09-27 오전까지 최소 72시간 이상 연속으로 production 배포가 전부 BLOCKED 상태(get_project 결과 live:false 유지). Claude는 unpause_project 등 프로젝트 상태를 되돌리는 조치를 대장의 명시 지시 없이 자동 실행하지 않음. 대장께서 Vercel 대시보드(vercel.com/dodo9944-ops-projects/lcw-coordinator, Settings > Billing/Usage 또는 상단 배너)에서 차단 사유를 확인·해제해 주시면, 즉시 최신 커밋(4f7d1ba62, news0924a~c+news0925a~c+news0926a+news0927a 전체 포함)으로 재배포합니다. 코드 변경 자체는 4일치 모두 정상 커밋·푸시되어 있어 재개 즉시 배포 가능합니다. 4일 연속 미해결로 대장에게 직접 알림(push notification) 발송.",
+    "additional_notes": "작업 착수 시 CLAUDE.md/지시 지침에 따라 master가 아닌 backup-bitseum-rebrand-20260824 브랜치로 즉시 전환(git fetch+checkout)했으며, master 계열 커밋은 손대지 않음. TZ=Asia/Seoul 실제 KST(2026-09-27 06:36)를 '오늘' 기준으로 적용(news0927 접두어 사용). 이번 세션에서 WebSearch 요약문이 기사 발행연도를 실제와 다르게(예: 2024/2025년 기사를 2026-09-26 사건처럼) 제시하는 사례를 다수 발견해, 후보 선정 시 검색결과 링크의 URL 슬러그·타 매체 교차보도 일자를 반드시 대조해 실제 발행일을 재검증하는 절차를 거쳤음(재발 방지 차원에서 기록)."
   }
 ]
