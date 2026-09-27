@@ -16,7 +16,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/common.css?v=20260910f">
-    <link rel="stylesheet" href="../assets/css/flipbook.css?v=20260915a">
     <style>
     /* ================================================================
        ABOUT PAGE — Premium Company Introduction
@@ -560,27 +559,6 @@
         .cert-desc { font-size: 13px; }
     }
 
-    /* ── 디지털 지명원 배너 — 이미지 디자인으로 업그레이드 (대장 지시 2026-09-05) ── */
-    .dp-banner {
-        margin-top: 22px; border-radius: 16px; overflow: hidden;
-        display: block; width: 100%; position: relative;
-        box-shadow: 0 10px 30px rgba(10,15,28,.14);
-        background: #0B1E3D;
-    }
-    .dp-banner img { width: 100%; height: auto; display: block; }
-    /* 이미지 안의 "지명원 보기" 버튼 그래픽 위치에 정확히 맞춘 투명 클릭 오버레이 (대장 지시 2026-09-05) */
-    .dp-btn-overlay {
-        position: absolute; left: 80.1%; top: 64.5%; width: 16.4%; height: 15%;
-        background: transparent; border: none; padding: 0; margin: 0;
-        border-radius: 10px; cursor: pointer; transition: box-shadow .2s ease;
-    }
-    .dp-btn-overlay:hover { box-shadow: 0 0 0 3px rgba(255,255,255,.4) inset; }
-    .dp-btn-overlay:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-    /* 모바일에서는 배너 전체를 터치해도 지명원으로 이동(작은 버튼 영역만 누르기 어려운 문제 개선) */
-    @media (max-width: 768px) {
-        .dp-btn-overlay { left: 0; top: 0; width: 100%; height: 100%; border-radius: 16px; }
-    }
-
     /* ── 4. COMPANY HISTORY — 성장 스토리 카드 그리드 ── */
     .growth-grid {
         display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
@@ -1102,12 +1080,6 @@
                 </div>
             </div>
 
-            <!-- 디지털 지명원 (PDF Flipbook) -->
-            <div class="dp-banner" id="digitalProfile">
-                <img src="../jpg/digital_profile_banner.png" alt="DIGITAL COMPANY PROFILE 디지털 지명원 — (주)빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 실제 책자를 넘기듯 온라인에서 바로 확인. 한눈에 보는 기업 경쟁력, 사업실적 및 주요 프로젝트, 전문인력 및 조직체계, 지속가능한 미래가치.">
-                <button class="dp-btn-overlay" id="dpOpenBtn" type="button" aria-label="지명원 보기 — (주)빛세움 디지털 지명원 열기"></button>
-            </div>
-
         </div>
     </div>
 
@@ -1370,26 +1342,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260927a"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260915d"></script>
-<script src="../assets/js/flipbook.js?v=20260915a"></script>
-<script>
-(function () {
-    var btn = document.getElementById('dpOpenBtn');
-    if (!btn) return;
-    function openProfile() {
-        Flipbook.open({
-            pdfUrl: '../pdf/visseum-profile.pdf',
-            title: '(주)빛세움 지명원',
-            subtitle: 'DIGITAL COMPANY PROFILE'
-        });
-    }
-    btn.addEventListener('click', openProfile);
-    /* 하단 '지명원' 탭 등 #digitalProfile 해시로 진입 시 자동으로 열기 */
-    if (location.hash === '#digitalProfile') {
-        setTimeout(openProfile, 400);
-    }
-})();
-</script>
+<script src="../assets/js/common.js?v=20260927b"></script>
 <script>
 (function() {
     var info = MOCK.companyInfo;
@@ -1427,7 +1380,7 @@
         '</div>';
     }).join('');
 
-    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260915d
+    /* ── 전문 업무분야 ── 메뉴(common.js?v=20260927b
        mock-data.businessAreas 는 다른 영역(services.html 등)에서 사용되므로 본 섹션은 override 하지 않는다. */
 })();
 </script>

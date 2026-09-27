@@ -1338,3 +1338,39 @@ git push -u origin master --force-with-lease
 ### 3-4. 갤러리 잘림 수정 재반영 (2026-09-07 대장 지시 "갤러리도 수정한거 반영해")
 
 - `pages/gallery.html` 상세보기 `max-height 2400px → 12000px`(커밋 `e2a35796`) 재반영. 이로써 원복 후 재반영 상태: **빛세움의 길 · 갤러리 = 수정본**, **회사소개 = 원복(교체 전)**.
+
+---
+
+## 📇 빛세움 디지털 지명원 위치 이동 (2026-09-27 대장 지시)
+
+> **대장 지시 원문(2026-09-27 KST)**: "빛세움 홈페이지 디지털 지명원을 세울의 길 회사 홍보영상 위에다 이동"
+
+### 1. 이동 내용
+
+| 항목 | 구 | 신 |
+|------|----|----|
+| 게재 페이지 | `pages/about.html`(회사소개) — 「정비사업전문관리업 등록현황」 섹션 끝 | `pages/vision.html`(빛세움의 길) — 「공간으로 증명하는 신뢰」 섹션 내, **「회사 홍보 영상」 바로 위** |
+| 앵커 | `about.html#digitalProfile` | `vision.html#digitalProfile` (앵커 id 자체는 `digitalProfile` 유지) |
+| 배너 디자인 | `.dp-banner` / `.dp-btn-overlay` | **동일 CSS 그대로 이식** (색상·좌표·반응형 규칙 1px도 변경 없음) |
+| Flipbook 연동 | `flipbook.css` / `flipbook.js` / `dpOpenBtn` IIFE — about.html | 동일 코드 vision.html 로 이전, about.html 에서 제거 |
+
+### 2. 링크 전수 동기화 (`digitalProfile` 참조 4곳 — 잔존 0건 검증 완료)
+
+| 파일 | 위치 | 조치 |
+|------|------|------|
+| `assets/js/common.js` | 드로어 서브메뉴 | 「회사소개」 그룹에서 제거 → **「빛세움의 길」 그룹 「회사 홍보 영상」 위**로 이동(페이지 순서와 일치) |
+| `assets/js/common.js` | 모바일 하단 탭바 「지명원」 | `about.html#digitalProfile` → `vision.html#digitalProfile`, `navActive('about.html')` → `navActive('vision.html')` |
+| `pages/sitemap.html` | 사이트맵 | 「회사소개」 섹션에서 제거 → **「빛세움의 길」 섹션 「회사 홍보 영상」 위**로 이동 |
+| `pages/vision.html` | 해시 자동 열기 | `location.hash === '#digitalProfile'` 진입 시 Flipbook 자동 열기 로직 그대로 이전 |
+
+### 3. 캐시버스터
+
+- `common.js?v=20260915d → 20260927b` — 로드하는 전 HTML **516개소 일괄 동기화**, 구버전·무버전 잔존 **0건**
+- 공유 JS 변경에 따른 **부수 갱신**이므로 강력 제2조 §4 #8(단독 갱신 금지) 해당 없음
+
+### 4. 준수 확인
+
+- 배너 이미지·문구·alt·PDF 경로(`../pdf/visseum-profile.pdf`)·버튼 좌표 **무변경** — 이동만 수행
+- 지시 범위 외 레이아웃·색상·간격 **부수 변경 0건** (강력 제2조 §7 #4)
+- `node --check common.js` 통과, `about/vision/sitemap` `<div>`↔`</div>` 균형 일치
+- 원복 무결성: `common.css` base 동일 유지 / `common.js` 는 본 지시로 nav 링크 3줄만 base 대비 변경 / `library.html` 은 캐시버스터 1줄만 변경
