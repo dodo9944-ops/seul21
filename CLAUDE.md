@@ -1338,3 +1338,59 @@ git push -u origin master --force-with-lease
 ### 3-4. 갤러리 잘림 수정 재반영 (2026-09-07 대장 지시 "갤러리도 수정한거 반영해")
 
 - `pages/gallery.html` 상세보기 `max-height 2400px → 12000px`(커밋 `e2a35796`) 재반영. 이로써 원복 후 재반영 상태: **빛세움의 길 · 갤러리 = 수정본**, **회사소개 = 원복(교체 전)**.
+
+---
+
+## 📇 빛세움 디지털 지명원 위치 이동 (2026-09-27 대장 지시)
+
+> **대장 지시 원문(2026-09-27 KST)**: "빛세움 홈페이지 디지털 지명원을 세울의 길 회사 홍보영상 위에다 이동"
+
+### 1. 이동 내용
+
+| 항목 | 구 | 신 |
+|------|----|----|
+| 게재 페이지 | `pages/about.html`(회사소개) — 「정비사업전문관리업 등록현황」 섹션 끝 | `pages/vision.html`(빛세움의 길) — 「공간으로 증명하는 신뢰」 섹션 내, **「회사 홍보 영상」 바로 위** |
+| 앵커 | `about.html#digitalProfile` | `vision.html#digitalProfile` (앵커 id 자체는 `digitalProfile` 유지) |
+| 배너 디자인 | `.dp-banner` / `.dp-btn-overlay` | **동일 CSS 그대로 이식** (색상·좌표·반응형 규칙 1px도 변경 없음) |
+| Flipbook 연동 | `flipbook.css` / `flipbook.js` / `dpOpenBtn` IIFE — about.html | 동일 코드 vision.html 로 이전, about.html 에서 제거 |
+
+### 2. 링크 전수 동기화 (`digitalProfile` 참조 4곳 — 잔존 0건 검증 완료)
+
+| 파일 | 위치 | 조치 |
+|------|------|------|
+| `assets/js/common.js` | 드로어 서브메뉴 | 「회사소개」 그룹에서 제거 → **「빛세움의 길」 그룹 「회사 홍보 영상」 위**로 이동(페이지 순서와 일치) |
+| `assets/js/common.js` | 모바일 하단 탭바 「지명원」 | `about.html#digitalProfile` → `vision.html#digitalProfile`, `navActive('about.html')` → `navActive('vision.html')` |
+| `pages/sitemap.html` | 사이트맵 | 「회사소개」 섹션에서 제거 → **「빛세움의 길」 섹션 「회사 홍보 영상」 위**로 이동 |
+| `pages/vision.html` | 해시 자동 열기 | `location.hash === '#digitalProfile'` 진입 시 Flipbook 자동 열기 로직 그대로 이전 |
+
+### 3. 캐시버스터
+
+- `common.js?v=20260915d → 20260927b` — **실제 `<script src=…>` 로드 513개소** 일괄 동기화, 구버전·무버전 잔존 **0건**
+- 공유 JS 변경에 따른 **부수 갱신**이므로 강력 제2조 §4 #8(단독 갱신 금지) 해당 없음
+
+#### 3-1. 캐시버스터 일괄 치환 시 비-스크립트 문맥 제외 (2026-09-27 신설 · 전수조사·일괄수정 원칙 보강)
+
+> **`?v=` 일괄 치환은 반드시 `<script src=…>` · `<link href=…>` 로드 경로에만 적용한다. 안내 문구·주석 등 비-스크립트 문맥은 치환 대상이 아니다.**
+
+- 본 작업 1차 치환에서 `sed 's/common.js?v=구/신/g'` 가 다음 **3개소(로드 아님)** 까지 함께 치환 → 즉시 base 값으로 복원하여 제외
+  | 파일 | 행 | 문맥 |
+  |------|----|------|
+  | `admin/menus.html` | 83 | 관리자 안내 `<p>` 문구 — `메뉴 변경은 common.js?v=…` (문구는 강력 제2조 §1 잠금 대상) |
+  | `admin/menus.html` | 153 | JS 주석 `// GNB menu items (from common.js?v=…` |
+  | `pages/about.html` | 1383 | CSS 주석 `/* ── 전문 업무분야 ── 메뉴(common.js?v=…` |
+- **선행 잔재 발견(미수정·대장 지시 대기)**: 위 3개소의 `?v=` 자체가 **과거 세션의 무조건 일괄 치환 잔재**다. 원문은 `common.js` 였을 것이며, 현재 `menus.html:83` 은 문장이 끊겨 있고(`메뉴 변경은 common.js?v=20260915d` 로 종료) `menus.html:153`·`about.html:1383` 은 괄호가 닫히지 않은 상태다. **문구·주석 복원은 강력 제2조 §1(문구) 잠금 대상이므로 대장 명시 지시 전까지 수정하지 않는다.**
+- **필수 검증 명령** (치환 후 4개 지표 전부 0/1종이어야 한다)
+  ```bash
+  grep -rc 'script src=.*common\.js?v=신버전' redevelopment --include=*.html | grep -v ':0' | awk -F: '{s+=$2} END{print s}'   # 실제 로드 건수
+  grep -rn 'common\.js?v=신버전' redevelopment --include=*.html | grep -v 'script src=' | grep -v 'href=' | wc -l              # 비-스크립트 오염 = 0
+  grep -rc 'script src=.*common\.js?v=구버전' redevelopment --include=*.html | grep -v ':0' | wc -l                            # 구버전 잔존 = 0
+  grep -rn 'script src=.*common\.js"' redevelopment --include=*.html | wc -l                                                  # 무버전 = 0
+  ```
+
+### 4. 준수 확인
+
+- 배너 이미지·문구·alt·PDF 경로(`../pdf/visseum-profile.pdf`)·버튼 좌표 **무변경** — 이동만 수행
+- 지시 범위 외 레이아웃·색상·간격 **부수 변경 0건** (강력 제2조 §7 #4)
+- `node --check common.js` 통과, `about/vision/sitemap` `<div>`↔`</div>` 균형 일치
+- 원복 무결성: `common.css` base 동일 유지 / `common.js` 는 본 지시로 nav 링크 3줄만 base 대비 변경 / `library.html` 은 캐시버스터 1줄만 변경
+- `admin/menus.html` base 대비 diff **0줄**(비-스크립트 치환 복원 완료) — 캐시버스터 치환은 실제 로드 경로에만 남음

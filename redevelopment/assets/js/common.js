@@ -33,12 +33,12 @@ const App = (() => {
         { href:`${B}/pages/vision.html#philosophy`, label:'빛을 세우다' },
         { href:`${B}/pages/vision.html#mission`, label:'All 4 U · All 4 V' },
         { href:`${B}/pages/vision.html#visual`, label:'공간으로 증명하는 신뢰' },
+        { href:`${B}/pages/vision.html#digitalProfile`, label:'디지털 지명원' },
         { href:`${B}/pages/vision.html#vsFilm`, label:'회사 홍보 영상' },
       ]},
       { href:`${B}/pages/about.html`, label:'회사소개', icon:'fa-solid fa-building-columns', sub:[
         { href:`${B}/pages/about.html#ceo`, label:'CEO 인사말' },
         { href:`${B}/pages/about.html#registration`, label:'정비사업전문관리업 등록현황' },
-        { href:`${B}/pages/about.html#digitalProfile`, label:'디지털 지명원' },
         { href:`${B}/pages/about.html#organization`, label:'조직도' },
         { href:`${B}/pages/about.html#ci`, label:'CI / 브랜드' },
       ]},
@@ -202,7 +202,7 @@ const App = (() => {
           <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 14 15 14 15 21"/></svg>
           <span>홈</span>
         </a>
-        <a href="${B}/pages/about.html#digitalProfile" class="${navActive('about.html')?'active':''}">
+        <a href="${B}/pages/vision.html#digitalProfile" class="${navActive('vision.html')?'active':''}">
           <svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H2z"/><path d="M22 6a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h8z"/></svg>
           <span>지명원</span>
         </a>
