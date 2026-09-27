@@ -1885,5 +1885,72 @@
     },
     "action_required": "예(긴급, 4일 연속) — Vercel 프로젝트 lcw-coordinator(팀 dodo9944-ops/team_4OL3ZwhAAZCMeH0YaWVu0cGw)가 2026-09-24 오전부터 2026-09-27 오전까지 최소 72시간 이상 연속으로 production 배포가 전부 BLOCKED 상태(get_project 결과 live:false 유지). Claude는 unpause_project 등 프로젝트 상태를 되돌리는 조치를 대장의 명시 지시 없이 자동 실행하지 않음. 대장께서 Vercel 대시보드(vercel.com/dodo9944-ops-projects/lcw-coordinator, Settings > Billing/Usage 또는 상단 배너)에서 차단 사유를 확인·해제해 주시면, 즉시 최신 커밋(4f7d1ba62, news0924a~c+news0925a~c+news0926a+news0927a 전체 포함)으로 재배포합니다. 코드 변경 자체는 4일치 모두 정상 커밋·푸시되어 있어 재개 즉시 배포 가능합니다. 4일 연속 미해결로 대장에게 직접 알림(push notification) 발송.",
     "additional_notes": "작업 착수 시 CLAUDE.md/지시 지침에 따라 master가 아닌 backup-bitseum-rebrand-20260824 브랜치로 즉시 전환(git fetch+checkout)했으며, master 계열 커밋은 손대지 않음. TZ=Asia/Seoul 실제 KST(2026-09-27 06:36)를 '오늘' 기준으로 적용(news0927 접두어 사용). 이번 세션에서 WebSearch 요약문이 기사 발행연도를 실제와 다르게(예: 2024/2025년 기사를 2026-09-26 사건처럼) 제시하는 사례를 다수 발견해, 후보 선정 시 검색결과 링크의 URL 슬러그·타 매체 교차보도 일자를 반드시 대조해 실제 발행일을 재검증하는 절차를 거쳤음(재발 방지 차원에서 기록)."
+  },
+  {
+    "run_datetime_kst": "2026-09-28T05:30:00+09:00",
+    "run_type": "deploy_only",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "trigger": "대장 지시 \"빛세움 주요뉴스 배포해\" (2026-09-28 KST)",
+    "purpose": "2026-09-23 22:41 KST ~ 2026-09-27 09:45 KST 사이 Vercel 계정 레벨 DEPLOYMENT_PAUSED 로 프로덕션 배포가 차단되어 게시만 되고 라이브에 반영되지 않은 주요뉴스 8건을 배포한다. 일시중지는 2026-09-27 09:45 KST 해제 확인되었으나 이후 base 브랜치에 신규 푸시가 없어 재배포가 트리거되지 않았고, 프로덕션은 2026-09-23 빌드(mock-data.js?v=20260923a)를 계속 서빙 중이었다. 본 커밋 푸시로 Git 연동 프로덕션 배포를 트리거한다.",
+    "searched_articles_count": 0,
+    "candidate_articles_count": 0,
+    "target_max": "해당 없음 (신규 수집 없음 · 배포 전용 회차)",
+    "selected_articles": [],
+    "deployed_backlog": [
+      {
+        "id": "news0924a",
+        "date": "2026-09-24",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260924a.html"
+      },
+      {
+        "id": "news0924b",
+        "date": "2026-09-24",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260924b.html"
+      },
+      {
+        "id": "news0924c",
+        "date": "2026-09-24",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260924c.html"
+      },
+      {
+        "id": "news0925a",
+        "date": "2026-09-25",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260925a.html"
+      },
+      {
+        "id": "news0925b",
+        "date": "2026-09-25",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260925b.html"
+      },
+      {
+        "id": "news0925c",
+        "date": "2026-09-24",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260925c.html",
+        "note": "date 오기 — 게시일은 2026-09-25 (CLAUDE.md 「빛세움 주요뉴스」 §2-5 위반). 대장 승인 대기로 본 회차에서 교정하지 않음"
+      },
+      {
+        "id": "news0926a",
+        "date": "2026-09-25",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260926a.html",
+        "note": "date 오기 — 게시일은 2026-09-26. 대장 승인 대기로 미교정"
+      },
+      {
+        "id": "news0927a",
+        "date": "2026-09-21",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260927a.html",
+        "note": "date 오기 — 게시일은 2026-09-27(6일 차이). 홈 주요뉴스 7일 필터(cutoff=오늘-7일) 경계에 걸려 2026-09-29 부터 홈에서 조기 이탈 예상. 대장 승인 대기로 미교정"
+      }
+    ],
+    "pre_deploy_verification": {
+      "mock_data_entries": "8/8 존재",
+      "download_html": "8/8 존재",
+      "library_fileMap": "8/8 등록",
+      "index_newsFileMap": "8/8 등록",
+      "cachebuster": "mock-data.js?v=20260927a (58개 HTML 1종·무버전 0건) — 라이브 20260923a 보다 신규이므로 배포만으로 브라우저 캐시 무효화됨. 캐시버스터 단독 갱신 없음(강력 제2조 §4 #8 준수)"
+    },
+    "data_changes": "없음 — MOCK.library 무변경, 신규 뉴스 추가 0건, 기존 뉴스 삭제·수정 0건. 본 커밋은 본 로그 파일 1개만 변경한다",
+    "additional_notes": "Vercel MCP 는 dodo9944-ops-projects 스코프 403(재인증 필요), 컨테이너에 vercel CLI·VERCEL_TOKEN 없음 → 프로덕션 배포 트리거 수단은 본 배포 브랜치 푸시(Git 연동)뿐이었다. /api/report 텔레그램은 TELEGRAM_BOT_TOKEN·TELEGRAM_CHAT_ID 미설정으로 발송 불가."
   }
 ]
