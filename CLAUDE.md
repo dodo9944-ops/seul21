@@ -1365,8 +1365,27 @@ git push -u origin master --force-with-lease
 
 ### 3. 캐시버스터
 
-- `common.js?v=20260915d → 20260927b` — 로드하는 전 HTML **516개소 일괄 동기화**, 구버전·무버전 잔존 **0건**
+- `common.js?v=20260915d → 20260927b` — **실제 `<script src=…>` 로드 513개소** 일괄 동기화, 구버전·무버전 잔존 **0건**
 - 공유 JS 변경에 따른 **부수 갱신**이므로 강력 제2조 §4 #8(단독 갱신 금지) 해당 없음
+
+#### 3-1. 캐시버스터 일괄 치환 시 비-스크립트 문맥 제외 (2026-09-27 신설 · 전수조사·일괄수정 원칙 보강)
+
+> **`?v=` 일괄 치환은 반드시 `<script src=…>` · `<link href=…>` 로드 경로에만 적용한다. 안내 문구·주석 등 비-스크립트 문맥은 치환 대상이 아니다.**
+
+- 본 작업 1차 치환에서 `sed 's/common.js?v=구/신/g'` 가 다음 **3개소(로드 아님)** 까지 함께 치환 → 즉시 base 값으로 복원하여 제외
+  | 파일 | 행 | 문맥 |
+  |------|----|------|
+  | `admin/menus.html` | 83 | 관리자 안내 `<p>` 문구 — `메뉴 변경은 common.js?v=…` (문구는 강력 제2조 §1 잠금 대상) |
+  | `admin/menus.html` | 153 | JS 주석 `// GNB menu items (from common.js?v=…` |
+  | `pages/about.html` | 1383 | CSS 주석 `/* ── 전문 업무분야 ── 메뉴(common.js?v=…` |
+- **선행 잔재 발견(미수정·대장 지시 대기)**: 위 3개소의 `?v=` 자체가 **과거 세션의 무조건 일괄 치환 잔재**다. 원문은 `common.js` 였을 것이며, 현재 `menus.html:83` 은 문장이 끊겨 있고(`메뉴 변경은 common.js?v=20260915d` 로 종료) `menus.html:153`·`about.html:1383` 은 괄호가 닫히지 않은 상태다. **문구·주석 복원은 강력 제2조 §1(문구) 잠금 대상이므로 대장 명시 지시 전까지 수정하지 않는다.**
+- **필수 검증 명령** (치환 후 4개 지표 전부 0/1종이어야 한다)
+  ```bash
+  grep -rc 'script src=.*common\.js?v=신버전' redevelopment --include=*.html | grep -v ':0' | awk -F: '{s+=$2} END{print s}'   # 실제 로드 건수
+  grep -rn 'common\.js?v=신버전' redevelopment --include=*.html | grep -v 'script src=' | grep -v 'href=' | wc -l              # 비-스크립트 오염 = 0
+  grep -rc 'script src=.*common\.js?v=구버전' redevelopment --include=*.html | grep -v ':0' | wc -l                            # 구버전 잔존 = 0
+  grep -rn 'script src=.*common\.js"' redevelopment --include=*.html | wc -l                                                  # 무버전 = 0
+  ```
 
 ### 4. 준수 확인
 
@@ -1374,3 +1393,4 @@ git push -u origin master --force-with-lease
 - 지시 범위 외 레이아웃·색상·간격 **부수 변경 0건** (강력 제2조 §7 #4)
 - `node --check common.js` 통과, `about/vision/sitemap` `<div>`↔`</div>` 균형 일치
 - 원복 무결성: `common.css` base 동일 유지 / `common.js` 는 본 지시로 nav 링크 3줄만 base 대비 변경 / `library.html` 은 캐시버스터 1줄만 변경
+- `admin/menus.html` base 대비 diff **0줄**(비-스크립트 치환 복원 완료) — 캐시버스터 치환은 실제 로드 경로에만 남음
