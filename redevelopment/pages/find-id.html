@@ -85,8 +85,6 @@
         <div class="auth-links">
             <a href="login.html">로그인</a>
             <span class="sep">|</span>
-            <a href="reset-password.html">비밀번호 재설정</a>
-            <span class="sep">|</span>
             <a href="register.html">회원가입</a>
         </div>
     </div>
@@ -145,8 +143,7 @@
             document.getElementById('resultEmail').textContent = maskEmail(found.email);
             document.getElementById('resultDesc').textContent = '가입일: ' + found.joinDate;
             document.getElementById('resultActions').innerHTML =
-                '<a href="login.html" class="btn btn-accent btn-md">로그인하기</a>' +
-                '<a href="reset-password.html" class="btn btn-outline btn-md">비밀번호 재설정</a>';
+                '<a href="login.html" class="btn btn-accent btn-md">로그인하기</a>';
         } else {
             resultBox.className = 'result-box not-found';
             document.getElementById('resultIcon').innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
