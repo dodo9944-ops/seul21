@@ -207,7 +207,7 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260929d"></script>
+<script src="../assets/data/mock-data.js?v=20260929e"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260929c"></script>
 <script>
@@ -237,7 +237,7 @@
 
         // 취소
         document.getElementById('cancelBtn').addEventListener('click', function() {
-            location.href = 'library.html?cat=갤러리';
+            location.href = 'community.html';
         });
 
         /* ── 이미지 업로드 ── */
@@ -423,11 +423,11 @@
                         applyEditPrefill(found);
                     } else {
                         App.toast('수정 권한이 없거나 게시글을 찾을 수 없습니다.', 'error');
-                        setTimeout(function(){ location.href = 'library.html?cat=갤러리'; }, 1000);
+                        setTimeout(function(){ location.href = 'community.html'; }, 1000);
                     }
                 }).catch(function(){
                     App.toast('게시글을 불러올 수 없습니다.', 'error');
-                    setTimeout(function(){ location.href = 'library.html?cat=갤러리'; }, 1000);
+                    setTimeout(function(){ location.href = 'community.html'; }, 1000);
                 });
             }
         }
@@ -563,7 +563,7 @@
                 newPost.id = res.id || Date.now().toString(36);
                 DataService.create('community', newPost);
                 App.toast('게시글이 등록되었습니다.', 'success');
-                setTimeout(function() { location.href = 'library.html?cat=갤러리'; }, 800);
+                setTimeout(function() { location.href = 'community.html'; }, 800);
             })
             .catch(function() {
                 submitBtn.disabled = false;
@@ -571,7 +571,7 @@
                 newPost.id = Date.now().toString(36);
                 DataService.create('community', newPost);
                 App.toast('게시글이 등록되었습니다.', 'success');
-                setTimeout(function() { location.href = 'library.html?cat=갤러리'; }, 800);
+                setTimeout(function() { location.href = 'community.html'; }, 800);
             });
         });
 

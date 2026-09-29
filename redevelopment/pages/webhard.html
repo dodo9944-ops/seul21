@@ -256,8 +256,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--gray-900);font-siz
 <script>
 const WH_KEY = 'seul_webhard';
 const WH_FOLDER_KEY = 'seul_webhard_folders';
-const WH_PW = '1234';
-const WH_ADMIN_PW = '813700hb';
+/* 비밀번호 원문 노출 제거 (2026-09-29 대장 지시) — SHA-256(솔트+비밀번호) 해시로만 비교. 비밀번호 변경 시 해시값만 교체 */
+const WH_SALT = 'visseum-webhard:';
+const WH_PW_HASH = '2654457c9c9225c3bf4ac6539871af7c17d4c9f6dfa926b8c98058514416c46e';
+const WH_ADMIN_PW_HASH = '5cd1d2d52ded455af1023d2873ecd4e92680504f57ee01164395ba2db6ee36c1';
+async function whHash(pw){ const b=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(WH_SALT+(pw||''))); return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join(''); }
 let currentFolder = '/';
 let isAdmin = false;
 
@@ -308,11 +311,11 @@ let isAdmin = false;
     if(changed) localStorage.setItem(WH_FOLDER_KEY, JSON.stringify(folders));
 })();
 
-function authLogin(){
-    const pw = document.getElementById('authPw').value;
-    if(pw === WH_PW || pw === WH_ADMIN_PW){
+async function authLogin(){
+    const h = await whHash(document.getElementById('authPw').value);
+    if(h === WH_PW_HASH || h === WH_ADMIN_PW_HASH){
         sessionStorage.setItem('wh_auth','1');
-        if(pw === WH_ADMIN_PW){ isAdmin=true; sessionStorage.setItem('wh_admin','1'); }
+        if(h === WH_ADMIN_PW_HASH){ isAdmin=true; sessionStorage.setItem('wh_admin','1'); }
         document.getElementById('authScreen').style.display='none';
         document.getElementById('mainScreen').style.display='';
         if(isAdmin) document.getElementById('gdriveSection').style.display='flex';
@@ -352,12 +355,12 @@ function createFolder(){
     saveFolders(folders);
     renderAll();
 }
-function checkAdmin(){
+async function checkAdmin(){
     const pw = prompt('삭제 권한 비밀번호:');
-    return pw === WH_ADMIN_PW;
+    return (await whHash(pw)) === WH_ADMIN_PW_HASH;
 }
-function deleteFolder(path){
-    if(!checkAdmin()){ alert('삭제 권한이 없습니다.'); return; }
+async function deleteFolder(path){
+    if(!(await checkAdmin())){ alert('삭제 권한이 없습니다.'); return; }
     if(!confirm('"'+path.split('/').pop()+'" 폴더를 삭제하시겠습니까?\n(폴더 내 파일도 함께 삭제됩니다)')) return;
     let folders = getFolders().filter(f => f !== path && !f.startsWith(path+'/'));
     saveFolders(folders);
@@ -438,8 +441,8 @@ function handleFiles(fileList){
         reader.readAsDataURL(f);
     });
 }
-function deleteFile(id){
-    if(!checkAdmin()){ alert('삭제 권한이 없습니다.'); return; }
+async function deleteFile(id){
+    if(!(await checkAdmin())){ alert('삭제 권한이 없습니다.'); return; }
     if(!confirm('삭제하시겠습니까?')) return;
     saveFiles(getFiles().filter(f=>f.id!==id));
     renderAll();

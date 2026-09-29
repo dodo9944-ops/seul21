@@ -394,7 +394,7 @@
 </div></div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260929d"></script>
+<script src="../assets/data/mock-data.js?v=20260929e"></script>
 <script src="../assets/js/data-service.js?v=20260418k"></script>
 <script src="../assets/js/common.js?v=20260929c"></script>
 <script>
@@ -635,7 +635,7 @@ list.innerHTML=html;
 /* Render list */
 function render(){
 renderFeatured();
-document.getElementById('libAllTitle').textContent=CAT_NAME[curCat]||'전체자료';
+document.getElementById('libAllTitle').textContent=(CAT_NAME[curCat]||'전체자료')+(searchQ&&curCat!=='갤러리'?' — “'+searchQ.replace(/[<>&]/g,'')+'” 검색 결과':'');
 document.getElementById('libAllLabel').textContent=CAT_EN[curCat]||'All Resources';
 var isGal=curCat==='갤러리';
 document.getElementById('libList').style.display=isGal?'none':'';
@@ -687,6 +687,8 @@ document.getElementById('galWrap').addEventListener('click',function(e){var sb=e
 var validCats=catDefs.map(function(d){return d.key}).concat('전체','갤러리');
 var urlCat=new URLSearchParams(location.search).get('cat');
 if(urlCat&&validCats.indexOf(urlCat)>=0){curCat=urlCat}
+/* 통합검색(헤더 검색 → library.html?search=) 검색어 적용 — 기존엔 무시되어 주요뉴스 탭이 그대로 떴음 (2026-09-29) */
+var urlSearch=(new URLSearchParams(location.search).get('search')||'').trim();if(urlSearch){searchQ=urlSearch;if(!urlCat||validCats.indexOf(urlCat)<0||urlCat==='갤러리')curCat='전체'}
 var urlGsub=new URLSearchParams(location.search).get('gcat');if(urlGsub&&GAL_SUBS.indexOf(urlGsub)>=0){galSub=urlGsub}
 window.addEventListener('popstate',function(){var c=new URLSearchParams(location.search).get('cat');if(!c||validCats.indexOf(c)<0)c='주요뉴스';curCat=c;curPage=1;renderTabs();render();});
 

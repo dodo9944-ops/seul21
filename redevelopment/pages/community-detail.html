@@ -179,14 +179,14 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260929d"></script>
+<script src="../assets/data/mock-data.js?v=20260929e"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260929c"></script>
 <script>
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
         const id = App.getParam('id');
-        if (!id) { location.href = 'library.html?cat=갤러리'; return; }
+        if (!id) { location.href = 'community.html'; return; }
 
         var post = DataService.getById('community', id);
 
@@ -317,7 +317,7 @@
                     }
                     DataService.remove('community', id);
                     App.toast('게시글이 삭제되었습니다.', 'success');
-                    setTimeout(function() { location.href = 'library.html?cat=갤러리'; }, 700);
+                    setTimeout(function() { location.href = 'community.html'; }, 700);
                 })
                 .catch(function() {
                     btn.disabled = false;

@@ -62,7 +62,7 @@
 
     /* 통계 카드 */
     .my-stats {
-        display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px;
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; /* 관심매물(부동산 템플릿 잔재) 제거로 4→3열 (2026-09-29) */
     }
     @media (max-width: 768px) { .my-stats { grid-template-columns: repeat(2, 1fr); } }
     .stat-card {
@@ -141,10 +141,6 @@
                             <div class="stat-label">관심구역</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-num" id="statListings">0</div>
-                            <div class="stat-label">관심매물</div>
-                        </div>
-                        <div class="stat-card">
                             <div class="stat-num" id="statPosts">0</div>
                             <div class="stat-label">내 글</div>
                         </div>
@@ -194,12 +190,6 @@
                     <div id="favAreasContent"></div>
                 </div>
 
-                <!-- 관심매물 (준비 중) -->
-                <div class="my-section" id="sec-listings">
-                    <h2 class="my-section-title">관심매물</h2>
-                    <p class="my-section-desc">즐겨찾기한 매물 목록입니다.</p>
-                    <div id="favListingsContent"></div>
-                </div>
 
                 <!-- 내 글 -->
                 <div class="my-section" id="sec-posts">
@@ -220,7 +210,7 @@
 </div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260929d"></script>
+<script src="../assets/data/mock-data.js?v=20260929e"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
 <script src="../assets/js/common.js?v=20260929c"></script>
 <script>
@@ -255,12 +245,10 @@
 
     // 통계
     var favAreas = DataService.getFavorites('areas');
-    var favListings = DataService.getFavorites('listings');
     var myPosts = DataService.getAll('community').filter(function(p) { return p.authorId === user.id || p.author === user.name; });
     var myInquiries = DataService.getAll('inquiries').filter(function(q) { return q.email === user.email || q.authorId === user.id; });
 
     document.getElementById('statAreas').textContent = favAreas.length;
-    document.getElementById('statListings').textContent = favListings.length;
     document.getElementById('statPosts').textContent = myPosts.length;
     document.getElementById('statInquiries').textContent = myInquiries.length;
 
@@ -276,7 +264,6 @@
 
             // 콘텐츠 로드
             if (tab === 'areas') renderFavAreas();
-            if (tab === 'listings') renderFavListings();
             if (tab === 'posts') renderMyPosts();
             if (tab === 'inquiries') renderMyInquiries();
         });
@@ -307,24 +294,6 @@
         bindFavButtons(container);
     }
 
-    // 관심매물 렌더링
-    function renderFavListings() {
-        var container = document.getElementById('favListingsContent');
-        var ids = DataService.getFavorites('listings');
-        if (ids.length === 0) {
-            container.innerHTML = '<div class="empty-state"><i class="fa-regular fa-heart"></i><h3>관심매물이 없습니다</h3><p>매물 목록에서 관심매물을 추가해보세요.</p><span class="btn btn-accent btn-sm" style="opacity:0.6;cursor:default;">준비 중</span></div>';
-            return;
-        }
-        var html = '';
-        ids.forEach(function(id) {
-            var listing = DataService.getById('listings', id);
-            if (!listing) return;
-            html += '<div class="my-list-item"><div><div class="my-list-title">' + listing.title + ' <span style="font-size:11px;color:var(--gray-400);">(상세페이지 준비 중)</span></div><div class="my-list-meta">' + (listing.areaName || '') + ' · ' + App.comma(listing.price) + '만원</div></div><button class="fav-btn active" data-type="listings" data-id="' + listing.id + '" title="즐겨찾기 해제"><i class="fa-solid fa-star"></i></button></div>';
-        });
-        container.innerHTML = html;
-        bindFavButtons(container);
-    }
-
     // 즐겨찾기 버튼 바인딩
     function bindFavButtons(container) {
         container.querySelectorAll('.fav-btn').forEach(function(btn) {
@@ -335,10 +304,8 @@
                 App.toast('즐겨찾기가 해제되었습니다.', 'success');
                 // 통계 업데이트
                 document.getElementById('statAreas').textContent = DataService.getFavorites('areas').length;
-                document.getElementById('statListings').textContent = DataService.getFavorites('listings').length;
                 // 다시 렌더링
                 if (type === 'areas') renderFavAreas();
-                else renderFavListings();
             });
         });
     }
