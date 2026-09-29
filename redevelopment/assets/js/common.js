@@ -61,7 +61,7 @@ const App = (() => {
         { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
         { href:`${B}/pages/library.html?cat=법령`, label:'관계법령' },
         { href:`${B}/pages/library.html?cat=서식가이드`, label:'서식·매뉴얼' },
-        { href:`${B}/pages/gallery.html`, label:'갤러리' },
+        { href:`${B}/pages/library.html?cat=갤러리`, label:'갤러리' },
       ]},
       { href:`${B}/pages/contact.html`, label:'고객센터', icon:'fa-solid fa-envelope', sub:[
         { href:`${B}/pages/notice.html`, label:'공지사항' },
@@ -172,7 +172,7 @@ const App = (() => {
           <a href="${B}/pages/sitemap.html">사이트맵</a>
           <a href="${B}/pages/library.html?cat=주요뉴스">주요뉴스</a>
           <a href="${B}/pages/library.html">자료실</a>
-          <a href="${B}/pages/gallery.html">갤러리</a>
+          <a href="${B}/pages/library.html?cat=갤러리">갤러리</a>
         </div>
         <div class="footer-col">
           <h5>고객센터</h5>
@@ -210,7 +210,7 @@ const App = (() => {
           <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
           <span>사업성검토</span>
         </a>
-        <a href="${B}/pages/gallery.html" class="${navActive('gallery.html')?'active':''}">
+        <a href="${B}/pages/library.html?cat=갤러리" class="${(navActive('gallery.html')||(navActive('library.html')&&new URLSearchParams(location.search).get('cat')==='갤러리'))?'active':''}">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
           <span>갤러리</span>
         </a>

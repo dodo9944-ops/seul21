@@ -96,6 +96,38 @@
     .pop-card .pop-info{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--gray-500);font-weight:600}
     .pop-card .pop-info i{font-size:10px;color:var(--gold)}
 
+    /* === 갤러리 탭 — gallery.html 레이아웃을 자료실 안으로 이식 (2026-09-29 대장 지시: 히어로·탭바·인기자료 레이아웃 공통) === */
+    .gl-tabs-wrap{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px 24px;background:#fff;border-radius:14px;border:1px solid #cecece;box-shadow:0 2px 8px rgba(0,0,0,.03);flex-wrap:wrap;box-sizing:border-box}
+    #glTabs{gap:0}
+    #glTabs button{padding:6px 14px;border-right:1px solid #cecece;position:relative;display:inline-flex;align-items:center;gap:6px}
+    #glTabs button:first-child{padding-left:0}
+    #glTabs button:last-child{border-right:none}
+    .gl-tab-count{font-size:11px;font-weight:600;color:#111}
+    #glTabs button.on{background:none;color:var(--gold);font-weight:700}
+    #glTabs button.on::after{content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:20px;height:2px;border-radius:1px;background:var(--gold)}
+    @media(max-width:640px){
+      .gl-tabs-wrap{padding:14px 16px}
+      #glTabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+      #glTabs::-webkit-scrollbar{display:none}
+      #glTabs button{flex-shrink:0}
+    }
+    .gl-row5{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    @media(max-width:1024px){.gl-row5{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.gl-row5{grid-template-columns:repeat(2,1fr);gap:10px}}
+    .gp-card{display:flex;flex-direction:column;text-align:left;background:#fff;border:1.5px solid #cecece;border-radius:14px;overflow:hidden;cursor:pointer;transition:all .25s;padding:0;font-family:inherit}
+    .gp-card:hover{border-color:#a6790a;box-shadow:0 8px 20px rgba(0,0,0,.08);transform:translateY(-2px)}
+    .gp-img{aspect-ratio:4/3;background:linear-gradient(135deg,#FFF7DF,#FFFDF7);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:26px;overflow:hidden;position:relative}
+    .gp-img img{width:100%;height:100%;object-fit:cover;display:block;border:1px solid #cecece;box-sizing:border-box}
+    .gp-body{padding:12px 13px 14px}
+    .gp-cat{font-size:10.5px;font-weight:700;color:var(--gold);margin-bottom:4px}
+    .gp-title{font-size:13.5px;font-weight:800;color:var(--gray-900);line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .gp-meta{display:flex;align-items:center;justify-content:flex-end;gap:8px;font-size:10.5px;color:var(--gray-400)}
+    .gp-meta .views{display:flex;align-items:center;gap:3px}
+    @media(max-width:600px){.gp-body{padding:9px 10px 11px}.gp-title{font-size:12.5px}}
+    .gl-empty{padding:56px 20px;text-align:center;color:var(--gray-400);grid-column:1/-1}
+    .gl-empty i{font-size:36px;color:var(--gray-300);margin-bottom:12px;display:block}
+    .gl-empty p{font-size:13.5px}
+
     /* === 전체 탭 — 카테고리별 구분 칸 === */
     .lib-cat-box{background:var(--gray-50,#f7f7f8);border:1px solid #dbdbdb;border-radius:16px;padding:20px 20px 22px;margin-bottom:22px}
     .lib-cat-box:last-child{margin-bottom:0}
@@ -309,7 +341,7 @@
                 <div class="uh-card" data-cat="주요뉴스"><div class="uh-ci"><i class="fa-solid fa-newspaper"></i></div><h4>주요뉴스</h4><p>정책·시장 주요 동향</p></div>
                 <div class="uh-card" data-cat="법령"><div class="uh-ci"><i class="fa-solid fa-scale-balanced"></i></div><h4>관계법령</h4><p>법령·판례·지침</p></div>
                 <div class="uh-card" data-cat="서식가이드"><div class="uh-ci"><i class="fa-solid fa-file-pen"></i></div><h4>서식·매뉴얼</h4><p>실무 서식·업무지침</p></div>
-                <a class="uh-card" href="gallery.html"><div class="uh-ci"><i class="fa-solid fa-images"></i></div><h4>갤러리</h4><p>현장·총회·행사 기록</p></a>
+                <div class="uh-card" data-cat="갤러리"><div class="uh-ci"><i class="fa-solid fa-images"></i></div><h4>갤러리</h4><p>현장·총회·행사 기록</p></div>
             </div>
         </div>
     </div>
@@ -323,7 +355,7 @@
             <button data-cat="주요뉴스">주요뉴스<span class="ctrl-nav-count"></span></button>
             <button data-cat="법령">관계법령<span class="ctrl-nav-count"></span></button>
             <button data-cat="서식가이드">서식·매뉴얼<span class="ctrl-nav-count"></span></button>
-            <a href="gallery.html">갤러리<span class="ctrl-nav-count" id="galCtrlCount"></span></a>
+            <button data-cat="갤러리">갤러리<span class="ctrl-nav-count" id="galCtrlCount"></span></button>
         </div>
         <div class="ctrl-sort">
             <label>정렬</label>
@@ -339,10 +371,11 @@
 
     <div class="pop-sec" id="libFeatured"></div>
 
-    <div class="section-label">All Resources</div>
-    <div class="section-head lib-all-title"><h2 class="section-title">전체자료</h2></div>
+    <div class="section-label" id="libAllLabel">All Resources</div>
+    <div class="section-head lib-all-title"><h2 class="section-title" id="libAllTitle">전체자료</h2></div>
 
     <div class="lib-list" id="libList"></div>
+    <div id="galWrap" style="display:none"></div>
 
     <div class="lib-empty" id="emptyState" style="display:none">
         <i class="fa-solid fa-folder-open"></i>
@@ -363,7 +396,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260929d"></script>
 <script src="../assets/js/data-service.js?v=20260418k"></script>
-<script src="../assets/js/common.js?v=20260929b"></script>
+<script src="../assets/js/common.js?v=20260929c"></script>
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}
@@ -372,6 +405,14 @@ var now=new Date(),oneYearAgo=new Date(now.getTime()-365*864e5);
 var allItems=DataService.getAll('library').filter(function(i){if(i.category!=='주요뉴스')return true;return i.date&&new Date(i.date)>=oneYearAgo});
 
 var PER=8,curPage=1,curCat='주요뉴스',curSort='date',searchQ='';
+/* 탭별 명칭 — 인기자료 제목(「○○ 인기 자료」)·하단 목록 제목에 공통 사용 (2026-09-29 대장 지시) */
+var CAT_NAME={'전체':'전체자료','주요뉴스':'주요뉴스','법령':'관계법령','서식가이드':'서식·매뉴얼','갤러리':'갤러리'};
+var CAT_EN={'전체':'All Resources','주요뉴스':'Latest News','법령':'Laws & Regulations','서식가이드':'Forms & Guides','갤러리':'Gallery'};
+/* 갤러리 — gallery.html에서 자료실 탭으로 통합 */
+var galItems=(typeof MOCK!=='undefined'&&MOCK.gallery)?MOCK.gallery.slice():[];
+var galSub='전체';
+var GAL_SUBS=['전체','주민총회','봉사활동','워크샵','현장스케치','기타행사'];
+var GAL_ICONS={'주민총회':'fa-people-group','봉사활동':'fa-hand-holding-heart','워크샵':'fa-chalkboard-user','현장스케치':'fa-camera-retro','기타행사':'fa-calendar-days'};
 
 var iconMap={hwp:{icon:'fa-file-lines',cls:'hwp'},pdf:{icon:'fa-file-pdf',cls:'pdf'},xlsx:{icon:'fa-file-excel',cls:'xlsx'}};
 function getIcon(ft){return iconMap[ft]||{icon:'fa-file',cls:'web'}}
@@ -423,12 +464,13 @@ function renderCtrlNavCounts(){
     var counts=getCatCounts();
     document.querySelectorAll('#ctrlNav button[data-cat]').forEach(function(b){
         var cat=b.dataset.cat;
+        if(cat==='갤러리')return;
         var n=cat==='전체'?allItems.length:(counts[cat]||0);
         var span=b.querySelector('.ctrl-nav-count');
         if(span)span.textContent=n+'건';
     });
     var galEl=document.getElementById('galCtrlCount');
-    if(galEl&&window.MOCK&&MOCK.gallery)galEl.textContent=MOCK.gallery.length+'건';
+    if(galEl)galEl.textContent=galItems.length+'건';
 }
 
 /* Tabs */
@@ -461,6 +503,7 @@ function openNewsPopup(id){var url=libItemUrl(id);if(url){ViewCounter.register('
 /* 인기 자료 — 카테고리별 (커뮤니티 인기글과 동일 컨셉) */
 async function renderFeatured(){
   var fb=document.getElementById('libFeatured');if(!fb)return;
+  if(curCat==='갤러리'){return renderFeaturedGallery(fb)}
   var items=allItems.slice();
   if(curCat!=='전체'){
   var d=catDefs.find(function(x){return x.key===curCat});var ks=d?d.keys:[curCat];items=items.filter(function(i){return ks.indexOf(i.category)>=0});
@@ -470,10 +513,8 @@ async function renderFeatured(){
   var top=items.slice(0,3);
   if(!top.length){fb.style.display='none';return}
   fb.style.display='';
-  var nameMap={'주요뉴스':'주요뉴스','법령':'관계법령','서식가이드':'서식·매뉴얼'};
-  var labelMap={'주요뉴스':'LATEST NEWS','법령':'LAWS & REGULATIONS','서식가이드':'FORMS & GUIDES'};
-  var title=nameMap[curCat]||'인기 자료';
-  var enLabel=labelMap[curCat]||'POPULAR';
+  var title=popTitle();
+  var enLabel='POPULAR';
   var sub='열람순 · 인기순';
   var html='<div class="section-label">'+enLabel+'</div><div class="pop-head"><h3>'+title+'</h3><span>'+sub+'</span></div><div class="pop-grid">';
   top.forEach(function(item,idx){
@@ -482,6 +523,55 @@ async function renderFeatured(){
   });
   html+='</div>';
   fb.innerHTML=html;
+}
+
+/* 인기 자료 제목 — 전체: 「인기 자료」, 그 외: 「○○ 인기 자료」 */
+function popTitle(){return curCat==='전체'?'인기 자료':CAT_NAME[curCat]+' 인기 자료'}
+/* 갤러리 인기 자료 — 다른 탭과 동일한 카드 레이아웃(pop-card), 조회수 기준 상위 3건 */
+async function renderFeaturedGallery(fb){
+  var items=galItems.slice();
+  var vmap=await ViewCounter.batch('gallery',items.map(function(i){return i.id}));
+  items.sort(function(a,b){var va=vmap[a.id]||0,vb=vmap[b.id]||0;if(vb!==va)return vb-va;return(b.date||'').localeCompare(a.date||'')});
+  var top=items.slice(0,3);
+  if(!top.length){fb.style.display='none';return}
+  fb.style.display='';
+  var html='<div class="section-label">POPULAR</div><div class="pop-head"><h3>'+popTitle()+'</h3><span>열람순 · 인기순</span></div><div class="pop-grid">';
+  top.forEach(function(it){
+    html+='<div class="pop-card" onclick="LIB.openGal(\''+it.id+'\')"><div class="pop-icon web"><i class="fa-solid '+(GAL_ICONS[it.category]||'fa-images')+'"></i></div><div class="pop-body"><div class="pop-title">'+(it.title||'')+'</div><div class="pop-info"><span><i class="fa-solid fa-eye"></i> '+(vmap[it.id]||0)+'</span><span><i class="fa-solid fa-calendar"></i> '+(it.date||'')+'</span></div></div></div>';
+  });
+  fb.innerHTML=html+'</div>';
+}
+
+/* 갤러리 목록 — 하위분류 탭 + 사진 카드(4열) + 자료실 공통 페이지네이션 */
+function galCoverOf(it){return(it.images&&it.images.length)?it.images[0]:(it.src?{src:it.src,alt:it.alt}:null)}
+async function renderGallery(){
+var wrap=document.getElementById('galWrap');
+var list=galSub==='전체'?galItems.slice():galItems.filter(function(it){return it.category===galSub});
+list.sort(function(a,b){if(curSort==='title')return(a.title||'').localeCompare(b.title||'');return(b.date||'').localeCompare(a.date||'')});
+var total=list.length,pages=Math.max(1,Math.ceil(total/PER));
+if(curPage>pages)curPage=1;
+document.getElementById('resultCount').innerHTML='총 <strong>'+total+'</strong>건';
+var tabs='<div class="gl-tabs-wrap"><div class="tabs" id="glTabs">'+GAL_SUBS.map(function(c){
+  var n=c==='전체'?galItems.length:galItems.filter(function(it){return it.category===c}).length;
+  return'<button data-gsub="'+c+'"'+(c===galSub?' class="on"':'')+'>'+c+'<span class="gl-tab-count">'+n+'건</span></button>'}).join('')+'</div></div>';
+var start=(curPage-1)*PER,slice=list.slice(start,start+PER);
+var grid;
+if(!slice.length){grid='<div class="gl-row5"><div class="gl-empty"><i class="fa-regular fa-images"></i><p>등록된 게시물이 없습니다.</p></div></div>'}
+else{
+  var vmap=await ViewCounter.batch('gallery',slice.map(function(it){return it.id}));
+  grid='<div class="gl-row5">'+slice.map(function(it){
+    var cover=galCoverOf(it);
+    return'<button class="gp-card" data-gid="'+it.id+'"><div class="gp-img">'+(cover?'<img src="'+cover.src+'" alt="'+(cover.alt||it.title||'')+'" loading="lazy">':'<i class="fa-solid '+(GAL_ICONS[it.category]||'fa-image')+'"></i>')+'</div>'+
+    '<div class="gp-body"><div class="gp-cat">'+it.category+'</div><div class="gp-title">'+(it.title||'')+'</div><div class="gp-meta"><span>'+(it.date||'')+'</span><span class="views"><i class="fa-regular fa-eye"></i> '+(vmap[it.id]||0)+'</span></div></div></button>'}).join('')+'</div>';
+}
+wrap.innerHTML=tabs+grid;
+document.getElementById('pagerWrap').style.display=total?'':'none';
+renderPager(pages);
+}
+function openGal(id){
+var it=galItems.find(function(x){return x.id===id});if(!it)return;
+ViewCounter.register('gallery',id).then(function(){if(curCat==='갤러리')render()});
+if(window.GalleryDetailModal)GalleryDetailModal.open(it);
 }
 
 /* 자료 카드 1건 HTML — 전체보기(플랫 리스트)·카테고리 칸(그룹) 공용 */
@@ -545,6 +635,12 @@ list.innerHTML=html;
 /* Render list */
 function render(){
 renderFeatured();
+document.getElementById('libAllTitle').textContent=CAT_NAME[curCat]||'전체자료';
+document.getElementById('libAllLabel').textContent=CAT_EN[curCat]||'All Resources';
+var isGal=curCat==='갤러리';
+document.getElementById('libList').style.display=isGal?'none':'';
+document.getElementById('galWrap').style.display=isGal?'':'none';
+if(isGal){document.getElementById('emptyState').style.display='none';renderGallery();return}
 if(curCat==='전체'){renderGrouped();return}
 var items=getFiltered(),total=items.length,pages=Math.ceil(total/PER);
 if(curPage>pages)curPage=1;
@@ -555,8 +651,10 @@ if(!slice.length){list.innerHTML='';empty.style.display='flex';document.getEleme
 empty.style.display='none';document.getElementById('pagerWrap').style.display='';
 
 list.innerHTML=slice.map(itemHtml).join('');
+renderPager(pages)}
 
-/* Pager */
+/* Pager — 자료 목록·갤러리 공용 */
+function renderPager(pages){
 var pg=document.getElementById('pager');
 if(pages<=1){pg.innerHTML='';return}
 var blk=5,bStart=Math.floor((curPage-1)/blk)*blk+1,bEnd=Math.min(bStart+blk-1,pages); /* 페이지 번호 5개까지만 표시 (대장 지시 2026-09-05) */
@@ -584,10 +682,12 @@ document.getElementById('ctrlNav').addEventListener('click',function(e){var btn=
 document.getElementById('sortSelect').addEventListener('change',function(){curSort=this.value;curPage=1;render()});
 document.getElementById('perSelect').addEventListener('change',function(){PER=parseInt(this.value);curPage=1;render()});
 document.getElementById('libList').addEventListener('click',function(e){var btn=e.target.closest('.btn-dl')||e.target.closest('.lib-title');if(btn)handleDownload(btn.dataset.id)});
+document.getElementById('galWrap').addEventListener('click',function(e){var sb=e.target.closest('button[data-gsub]');if(sb){galSub=sb.dataset.gsub;curPage=1;render();return}var card=e.target.closest('.gp-card');if(card)openGal(card.dataset.gid)});
 
-var validCats=catDefs.map(function(d){return d.key}).concat('전체');
+var validCats=catDefs.map(function(d){return d.key}).concat('전체','갤러리');
 var urlCat=new URLSearchParams(location.search).get('cat');
 if(urlCat&&validCats.indexOf(urlCat)>=0){curCat=urlCat}
+var urlGsub=new URLSearchParams(location.search).get('gcat');if(urlGsub&&GAL_SUBS.indexOf(urlGsub)>=0){galSub=urlGsub}
 window.addEventListener('popstate',function(){var c=new URLSearchParams(location.search).get('cat');if(!c||validCats.indexOf(c)<0)c='주요뉴스';curCat=c;curPage=1;renderTabs();render();});
 
 /* 상단 카테고리 메뉴바 스크롤 고정 — portfolio.html 상단 키맵 메뉴와 동일 방식 (position:fixed 전환) */
@@ -781,11 +881,11 @@ else if(m.gov){window.open(m.gov,'_blank');App.toast((m.label||'공식 사이트
 if(item){item.downloads=(item.downloads||0)+1}render()}
 
 window.handleDownload=handleDownload;window.openNewsPopup=openNewsPopup;
-window.LIB={page:function(n){curPage=n;render();window.scrollTo({top:document.querySelector('.ctrl-bar').offsetTop-80,behavior:'smooth'})}};
+window.LIB={openGal:openGal,page:function(n){curPage=n;render();window.scrollTo({top:document.querySelector('.ctrl-bar').offsetTop-80,behavior:'smooth'})}};
 
 renderTabs();renderCtrlNavCounts();render();
 var urlId=new URLSearchParams(location.search).get('id');
-if(urlId){handleDownload(urlId)}
+if(urlId){if(curCat==='갤러리')openGal(urlId);else handleDownload(urlId)}
 })();
 </script>
 </body>

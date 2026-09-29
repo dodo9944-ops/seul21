@@ -888,7 +888,7 @@
                 <div class="section-label" style="padding:16px 24px 0">Gallery</div>
                 <div class="panel-head">
                     <h3 class="panel-title">갤러리</h3>
-                    <a href="pages/gallery.html" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
+                    <a href="pages/library.html?cat=갤러리" class="panel-more">더보기 <i class="fa-solid fa-chevron-right" style="font-size:10px"></i></a>
                 </div>
                 <div id="mainCommunity"></div>
             </div>
@@ -970,7 +970,7 @@
 <!-- 공통 JS -->
 <script src="assets/data/mock-data.js?v=20260929d"></script>
 <script src="assets/js/data-service.js?v=20260418q"></script>
-<script src="assets/js/common.js?v=20260929b"></script>
+<script src="assets/js/common.js?v=20260929c"></script>
 
 <script>
 (function(){
@@ -1237,7 +1237,7 @@
     if(galEl && MOCK.gallery){
         window.mainGalleryOpen=function(id){
             var g=MOCK.gallery.find(function(x){return x.id===id});
-            if(!g){ location.href='pages/gallery.html?id='+encodeURIComponent(id); return; }
+            if(!g){ location.href='pages/library.html?cat='+encodeURIComponent('갤러리')+'&id='+encodeURIComponent(id); return; }
             ViewCounter.register('gallery',id);
             GalleryDetailModal.open(g);
         };
