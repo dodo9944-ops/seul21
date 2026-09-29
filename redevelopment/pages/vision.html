@@ -427,6 +427,7 @@
     .vs-film.vs-film-playing video { display: block; }
     .vs-film.vs-film-playing { cursor: default; }
     @media(max-width:600px) {
+        .vs-film { margin-top: 32px; }
         .vs-film-play { width: 56px; height: 56px; font-size: 17px; }
         .vs-film-title { font-size: 14.5px; }
         .vs-film-tag { top: 16px; left: 18px; }
@@ -887,9 +888,22 @@
         <div class="vs" id="visual">
             <div class="section-label">At a Glance</div>
             <h2 class="vs-title">한눈에 보는 빛세움</h2>
-            <div class="vs-content-kicker"><i class="fa-solid fa-video"></i> 회사 홍보 영상</div>
+            <div class="vs-content-kicker"><i class="fa-solid fa-images"></i> 회사 공간 사진 갤러리</div>
+            <div class="vs-visual" id="vsVisualZoom" role="button" tabindex="0" aria-label="사진 확대 보기" title="클릭하면 확대해서 볼 수 있습니다">
+                <img src="../jpg/vs_brandspace_poster.png" alt="㈜빛세움 브랜드 스페이스 — 사옥 외관 및 로비·휴게공간·회의실·업무공간">
+                <span class="vs-visual-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            </div>
+
+            <div class="vs-content-kicker" style="margin-top:44px"><i class="fa-solid fa-id-card"></i> 디지털 지명원</div>
+            <!-- 디지털 지명원 (PDF Flipbook) — 회사소개에서 이동 (대장 지시 2026-09-29) -->
+            <div class="dp-banner" id="digitalProfile">
+                <img src="../jpg/digital_profile_banner.png" alt="DIGITAL COMPANY PROFILE 디지털 지명원 — (주)빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 실제 책자를 넘기듯 온라인에서 바로 확인. 한눈에 보는 기업 경쟁력, 사업실적 및 주요 프로젝트, 전문인력 및 조직체계, 지속가능한 미래가치.">
+                <button class="dp-btn-overlay" id="dpOpenBtn" type="button" aria-label="지명원 보기 — (주)빛세움 디지털 지명원 열기"></button>
+            </div>
+
+            <div class="vs-content-kicker" style="margin-top:44px"><i class="fa-solid fa-video"></i> 회사 홍보 영상</div>
             <div class="vs-film" id="vsFilm" role="button" tabindex="0" aria-label="빛세움 브랜드 영상 재생">
-                <img class="vs-film-poster" src="../jpg/gallery/office2026_openoffice.png" alt="㈜빛세움 브랜드 필름 썸네일">
+                <img class="vs-film-poster" src="../jpg/visseum_office_exterior.png" alt="㈜빛세움 브랜드 필름 썸네일">
                 <div class="vs-film-scrim"></div>
                 <span class="vs-film-tag"><i class="fa-solid fa-clapperboard"></i> BRAND FILM</span>
                 <div class="vs-film-center">
@@ -902,19 +916,6 @@
                     브라우저가 video 태그를 지원하지 않습니다.
                 </video>
             </div>
-
-            <div class="vs-content-kicker" style="margin-top:44px"><i class="fa-solid fa-images"></i> 회사 공간 사진 갤러리</div>
-            <div class="vs-visual" id="vsVisualZoom" role="button" tabindex="0" aria-label="사진 확대 보기" title="클릭하면 확대해서 볼 수 있습니다">
-                <img src="../jpg/vs_brandspace_poster.png" alt="㈜빛세움 브랜드 스페이스 — 사옥 외관 및 로비·휴게공간·회의실·업무공간">
-                <span class="vs-visual-zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
-            </div>
-
-            <div class="vs-content-kicker" style="margin-top:44px"><i class="fa-solid fa-id-card"></i> 디지털 지명원</div>
-            <!-- 디지털 지명원 (PDF Flipbook) — 회사소개에서 이동 (대장 지시 2026-09-29) -->
-            <div class="dp-banner" id="digitalProfile">
-                <img src="../jpg/digital_profile_banner.png" alt="DIGITAL COMPANY PROFILE 디지털 지명원 — (주)빛세움의 회사소개·연혁·업무실적·조직을 담은 공식 지명원을 실제 책자를 넘기듯 온라인에서 바로 확인. 한눈에 보는 기업 경쟁력, 사업실적 및 주요 프로젝트, 전문인력 및 조직체계, 지속가능한 미래가치.">
-                <button class="dp-btn-overlay" id="dpOpenBtn" type="button" aria-label="지명원 보기 — (주)빛세움 디지털 지명원 열기"></button>
-            </div>
         </div>
 
     </div>
@@ -923,7 +924,7 @@
 <div id="site-footer"></div>
 <script src="../assets/data/mock-data.js?v=20260929d"></script>
 <script src="../assets/js/data-service.js?v=20260418q"></script>
-<script src="../assets/js/common.js?v=20260929a"></script>
+<script src="../assets/js/common.js?v=20260929b"></script>
 <script src="../assets/js/flipbook.js?v=20260915a"></script>
 <script>
 (function () {
