@@ -31,8 +31,6 @@
             </div>
             <div class="admin-nav-group">
                 <div class="admin-nav-group-title">콘텐츠 관리</div>
-                <a href="areas.html"><i class="fa-solid fa-map-location-dot"></i> 구역 관리</a>
-                <a href="listings.html"><i class="fa-solid fa-building"></i> 매물 관리</a>
                 <a href="news.html"><i class="fa-solid fa-newspaper"></i> 자료실 관리</a>
                 <a href="columns.html"><i class="fa-solid fa-pen-fancy"></i> 칼럼 관리</a>
                 <a href="community.html"><i class="fa-solid fa-comments"></i> 게시글 관리</a>
@@ -47,7 +45,6 @@
                 <div class="admin-nav-group-title">사이트 관리</div>
                 <a href="banners.html"><i class="fa-solid fa-images"></i> 배너 관리</a>
                 <a href="schedule.html"><i class="fa-solid fa-calendar-days"></i> 일정 관리</a>
-                <a href="members.html"><i class="fa-solid fa-users"></i> 회원 관리</a>
                 <a href="menus.html" class="active"><i class="fa-solid fa-bars"></i> 메뉴 관리</a>
             </div>
             <div class="admin-nav-group">
@@ -152,24 +149,20 @@
 
     // GNB menu items (from common.js?v=20260929c
     const gnbMenus = [
-        { order: 1, name: '구역 정보', url: '/pages/areas.html', active: true },
-        { order: 2, name: '매물 정보', url: '/pages/listings.html', active: true },
-        { order: 3, name: '뉴스', url: '/pages/news.html', active: true },
-        { order: 4, name: '칼럼', url: '/pages/columns.html', active: true },
-        { order: 5, name: '커뮤니티', url: '/pages/community.html', active: true },
-        { order: 6, name: '비례율 계산기', url: '/pages/calculator.html', active: true },
-        { order: 7, name: '법률·세금', url: '/pages/legal-guide.html', active: true },
-        { order: 8, name: '상담 문의', url: '/pages/contact.html', active: true }
+        { order: 1, name: '뉴스', url: '/pages/news.html', active: true },
+        { order: 2, name: '칼럼', url: '/pages/columns.html', active: true },
+        { order: 3, name: '커뮤니티', url: '/pages/community.html', active: true },
+        { order: 4, name: '비례율 계산기', url: '/pages/calculator.html', active: true },
+        { order: 5, name: '법률·세금', url: '/pages/legal-guide.html', active: true },
+        { order: 6, name: '상담 문의', url: '/pages/contact.html', active: true }
     ];
 
     const footerMenus = [
         { order: 1, name: '회사 소개', url: '#', active: true },
         { order: 2, name: '이용약관', url: '#', active: true },
         { order: 3, name: '개인정보처리방침', url: '#', active: true },
-        { order: 4, name: '구역 정보', url: '/pages/areas.html', active: true },
-        { order: 5, name: '매물 정보', url: '/pages/listings.html', active: true },
-        { order: 6, name: '뉴스', url: '/pages/news.html', active: true },
-        { order: 7, name: '상담 문의', url: '/pages/contact.html', active: true }
+        { order: 4, name: '뉴스', url: '/pages/news.html', active: true },
+        { order: 5, name: '상담 문의', url: '/pages/contact.html', active: true }
     ];
 
     function renderTable(items, tbodyId) {

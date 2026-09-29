@@ -1,6 +1,5 @@
 {
   "rewrites": [
-    { "source": "/api/chat", "destination": "/api/chat" },
     { "source": "/api/chat-expert", "destination": "/api/chat-expert" },
     { "source": "/api/chat-expert-webhook", "destination": "/api/chat-expert-webhook" },
     { "source": "/api/chat-expert-poll", "destination": "/api/chat-expert-poll" },
@@ -8,8 +7,6 @@
     { "source": "/api/alimtalk", "destination": "/api/alimtalk" },
     { "source": "/api/community", "destination": "/api/community" },
     { "source": "/api/inquiries", "destination": "/api/inquiries" },
-    { "source": "/api/members", "destination": "/api/members" },
-    { "source": "/api/social-login", "destination": "/api/social-login" },
     { "source": "/api/status", "destination": "/api/status" },
     { "source": "/api/report", "destination": "/api/report" },
     { "source": "/api/library", "destination": "/api/library" },

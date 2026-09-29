@@ -18,13 +18,13 @@
     <link rel="stylesheet" href="../assets/css/admin.css">
     <style>
     /* Dashboard Enhanced */
-    .admin-kpi-grid{grid-template-columns:repeat(3,1fr)}
+    .admin-kpi-grid{grid-template-columns:1fr} /* 구역·회원 KPI 삭제(2026-09-30) */
     .admin-kpi{position:relative;overflow:hidden;transition:all .25s}
     .admin-kpi:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-2px)}
     .admin-kpi .kpi-trend{font-size:11px;font-weight:600;margin-top:4px;display:flex;align-items:center;gap:3px}
     .admin-kpi .kpi-trend.up{color:var(--green)}
     .admin-kpi .kpi-trend.down{color:var(--red)}
-    .kpi-row-2{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+    .kpi-row-2{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
     .kpi-mini{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:16px 18px;display:flex;align-items:center;gap:12px;transition:all .25s;cursor:pointer;text-decoration:none}
     .kpi-mini:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.06)}
     .kpi-mini-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
@@ -80,9 +80,7 @@
             </div>
             <div class="admin-nav-group">
                 <div class="admin-nav-group-title">콘텐츠 관리</div>
-                <a href="areas.html"><i class="fa-solid fa-building"></i> 구역 관리</a>
                 <a href="news.html"><i class="fa-solid fa-newspaper"></i> 자료실 관리</a>
-                <a href="listings.html"><i class="fa-solid fa-tag"></i> 매물 관리</a>
                 <a href="columns.html"><i class="fa-solid fa-pen-fancy"></i> 칼럼 관리</a>
                 <a href="community.html"><i class="fa-solid fa-comments"></i> 게시글 관리</a>
             </div>
@@ -91,7 +89,6 @@
                 <a href="inquiries.html"><i class="fa-solid fa-envelope"></i> 문의 관리 <span class="nav-badge" id="pendingCount"></span></a>
                 <a href="banners.html"><i class="fa-solid fa-image"></i> 배너 관리</a>
                 <a href="schedule.html"><i class="fa-solid fa-calendar"></i> 일정 관리</a>
-                <a href="members.html"><i class="fa-solid fa-users"></i> 회원 관리</a>
             </div>
             <div class="admin-nav-group">
                 <div class="admin-nav-group-title">알림 서비스</div>
@@ -129,24 +126,8 @@
         <!-- Page Content -->
         <div class="admin-content">
 
-            <!-- 주요 KPI Cards (1행 3개) -->
+            <!-- 주요 KPI Cards -->
             <div class="admin-kpi-grid">
-                <div class="admin-kpi">
-                    <div class="admin-kpi-icon blue"><i class="fa-solid fa-building"></i></div>
-                    <div class="admin-kpi-info">
-                        <div class="label">총 구역수</div>
-                        <div class="value" id="kpiAreas">0</div>
-                        <div class="kpi-trend up" id="kpiAreasTrend"></div>
-                    </div>
-                </div>
-                <div class="admin-kpi">
-                    <div class="admin-kpi-icon orange"><i class="fa-solid fa-users"></i></div>
-                    <div class="admin-kpi-info">
-                        <div class="label">총 회원수</div>
-                        <div class="value" id="kpiMembers">0</div>
-                        <div class="kpi-trend up" id="kpiMembersTrend"></div>
-                    </div>
-                </div>
                 <div class="admin-kpi">
                     <div class="admin-kpi-icon red"><i class="fa-solid fa-envelope"></i></div>
                     <div class="admin-kpi-info">
@@ -164,13 +145,6 @@
                     <div class="kpi-mini-info">
                         <div class="mini-label">자료실</div>
                         <div class="mini-value" id="kpiLibrary">0</div>
-                    </div>
-                </a>
-                <a href="listings.html" class="kpi-mini">
-                    <div class="kpi-mini-icon teal"><i class="fa-solid fa-tag"></i></div>
-                    <div class="kpi-mini-info">
-                        <div class="mini-label">매물</div>
-                        <div class="mini-value" id="kpiListings">0</div>
                     </div>
                 </a>
                 <a href="community.html" class="kpi-mini">
@@ -199,17 +173,9 @@
                         <i class="fa-solid fa-folder-open"></i>
                         <span>자료실 관리</span>
                     </a>
-                    <a href="listings.html" class="quick-card">
-                        <i class="fa-solid fa-tag"></i>
-                        <span>매물 관리</span>
-                    </a>
                     <a href="inquiries.html" class="quick-card" id="qcInquiry">
                         <i class="fa-solid fa-envelope"></i>
                         <span>문의 확인</span>
-                    </a>
-                    <a href="members.html" class="quick-card">
-                        <i class="fa-solid fa-users"></i>
-                        <span>회원 관리</span>
                     </a>
                     <a href="send-report.html" class="quick-card">
                         <i class="fa-brands fa-telegram"></i>
@@ -348,13 +314,10 @@
     var stats = DataService.getDashboardStats();
 
     // 주요 KPI
-    document.getElementById('kpiAreas').textContent = stats.totalAreas.toLocaleString();
-    document.getElementById('kpiMembers').textContent = stats.totalMembers.toLocaleString();
     document.getElementById('kpiPending').textContent = stats.pendingInquiries.toLocaleString();
 
     // 보조 KPI
     document.getElementById('kpiLibrary').textContent = (stats.totalNews || 0).toLocaleString();
-    document.getElementById('kpiListings').textContent = (stats.totalListings || 0).toLocaleString();
     document.getElementById('kpiPosts').textContent = (stats.totalPosts || 0).toLocaleString();
     document.getElementById('kpiColumns').textContent = (stats.totalColumns || 0).toLocaleString();
 
@@ -362,11 +325,6 @@
     if (typeof MOCK !== 'undefined' && MOCK.library) {
         document.getElementById('kpiLibrary').textContent = MOCK.library.length.toLocaleString();
     }
-
-    // 실시간 API: 회원수
-    fetch('/api/members', {headers: {'x-admin-key': 'admin123'}}).then(function(r) {return r.json()}).then(function(d) {
-        if (d.total) document.getElementById('kpiMembers').textContent = d.total;
-    }).catch(function() {});
 
     // 실시간 API: 문의
     fetch('/api/inquiries', {headers: {'x-admin-key': 'admin123'}}).then(function(r) {return r.json()}).then(function(d) {
@@ -406,16 +364,6 @@
         var activityEl = document.getElementById('recentActivity');
         var items = [];
 
-        // 최근 구역
-        var areas = (typeof MOCK !== 'undefined' && MOCK.areas) ? MOCK.areas : DataService.getAll('areas');
-        areas.slice(0, 3).forEach(function(a) {
-            items.push({
-                icon: 'fa-building', iconClass: 'blue',
-                text: '<strong>' + a.name + '</strong> 구역 등록',
-                date: a.createdAt || ''
-            });
-        });
-
         // 최근 뉴스/자료실
         var library = (typeof MOCK !== 'undefined' && MOCK.library) ? MOCK.library : DataService.getAll('library');
         library.sort(function(a, b) {return (b.date || '').localeCompare(a.date || '')});
@@ -424,26 +372,6 @@
                 icon: 'fa-newspaper', iconClass: 'orange',
                 text: '<strong>' + (n.title || '').substring(0, 25) + '</strong> 자료 등록',
                 date: n.date || ''
-            });
-        });
-
-        // 최근 매물
-        var listings = DataService.getAll('listings');
-        listings.slice(0, 2).forEach(function(l) {
-            items.push({
-                icon: 'fa-tag', iconClass: 'green',
-                text: '<strong>' + (l.areaName || l.district || '매물') + '</strong> ' + (l.type || '') + ' 등록',
-                date: l.createdAt || ''
-            });
-        });
-
-        // 최근 회원
-        var members = DataService.getAll('members');
-        members.slice(0, 2).forEach(function(m) {
-            items.push({
-                icon: 'fa-user-plus', iconClass: 'blue',
-                text: '<strong>' + (m.name || '회원') + '</strong> 가입',
-                date: m.joinDate || m.createdAt || ''
             });
         });
 
