@@ -31,7 +31,7 @@ const App = (() => {
     const navGroups = [
       { href:`${B}/pages/vision.html`, label:'빛세움의 길', icon:'fa-solid fa-road', sub:[
         { href:`${B}/pages/vision.html#philosophy`, label:'빛을 세우다' },
-        { href:`${B}/pages/vision.html#mission`, label:'All 4 U · All 4 V' },
+        { href:`${B}/pages/vision.html#mission`, label:'ALL FOR YOU · ALL FOR VALUE' },
         { href:`${B}/pages/vision.html#visual`, label:'한눈에 보는 빛세움' },
         { href:`${B}/pages/vision.html#vsFilm`, label:'회사 홍보 영상' },
         { href:`${B}/pages/vision.html#digitalProfile`, label:'디지털 지명원' },
@@ -55,7 +55,7 @@ const App = (() => {
         { href:`${B}/pages/portfolio.html?type=재개발`, label:'재개발' },
         { href:`${B}/pages/portfolio.html?type=재건축`, label:'재건축' },
         { href:`${B}/pages/portfolio.html?type=소규모정비`, label:'소규모정비' },
-        { href:`${B}/pages/portfolio.html?type=코디네이터`, label:'서울시 정비사업 코디네이터/전문자문' },
+        { href:`${B}/pages/portfolio.html?type=코디네이터`, label:'서울시 정비사업 코디네이터/공공자문' },
       ]},
       { href:`${B}/pages/library.html`, label:'자료실', icon:'fa-solid fa-folder-open', sub:[
         { href:`${B}/pages/library.html?cat=주요뉴스`, label:'주요뉴스' },
@@ -178,7 +178,7 @@ const App = (() => {
           <h5>고객센터</h5>
           <a href="${B}/pages/notice.html">공지사항</a>
           <a href="${B}/pages/contact.html">상담문의</a>
-          <a href="${B}/pages/contact.html#ctVisit">찾아오시는길</a>
+          <a href="${B}/pages/contact.html#ctVisit">찾아오시는 길</a>
         </div>
         <div class="footer-col footer-contact">
           <h5>고객센터</h5>
@@ -208,7 +208,7 @@ const App = (() => {
         </a>
         <a href="${B}/pages/feasibility.html" class="${navActive('feasibility.html')?'active':''}">
           <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-          <span>사업성분석</span>
+          <span>사업성검토</span>
         </a>
         <a href="${B}/pages/gallery.html" class="${navActive('gallery.html')?'active':''}">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>

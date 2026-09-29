@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#FFFFFF">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자료실 — (주)빛세움</title>
-    <meta name="description" content="재개발·재건축 관련 서식, 법령, 지침, 가이드 자료를 다운로드하세요.">
+    <meta name="description" content="재개발·재건축 관련 주요뉴스, 관계법령, 서식·매뉴얼 자료를 확인하고 다운로드하세요.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
@@ -347,7 +347,7 @@
     <div class="lib-empty" id="emptyState" style="display:none">
         <i class="fa-solid fa-folder-open"></i>
         <h3>검색 결과가 없습니다</h3>
-        <p>다른 검색어 또는 카테고리를 선택해주세요</p>
+        <p>다른 검색어를 입력하거나 카테고리를 선택해주세요</p>
     </div>
 
     <div class="pager-wrap" id="pagerWrap">
@@ -361,9 +361,9 @@
 </div></div>
 
 <div id="site-footer"></div>
-<script src="../assets/data/mock-data.js?v=20260929c"></script>
+<script src="../assets/data/mock-data.js?v=20260929d"></script>
 <script src="../assets/js/data-service.js?v=20260418k"></script>
-<script src="../assets/js/common.js?v=20260915d"></script>
+<script src="../assets/js/common.js?v=20260929a"></script>
 <script>
 (function(){
 if(typeof MOCK!=='undefined'&&MOCK.library){localStorage.setItem('rdc_library',JSON.stringify(MOCK.library))}
@@ -470,7 +470,7 @@ async function renderFeatured(){
   var top=items.slice(0,3);
   if(!top.length){fb.style.display='none';return}
   fb.style.display='';
-  var nameMap={'주요뉴스':'주요뉴스','법령':'관계법령','서식가이드':'서식 매뉴얼'};
+  var nameMap={'주요뉴스':'주요뉴스','법령':'관계법령','서식가이드':'서식·매뉴얼'};
   var labelMap={'주요뉴스':'LATEST NEWS','법령':'LAWS & REGULATIONS','서식가이드':'FORMS & GUIDES'};
   var title=nameMap[curCat]||'인기 자료';
   var enLabel=labelMap[curCat]||'POPULAR';
