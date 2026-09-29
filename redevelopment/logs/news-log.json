@@ -2052,5 +2052,61 @@
     },
     "data_changes": "MOCK.library에 news0929a 1건 순수 추가만 수행. 기존 항목 삭제·수정 0건. downloads/ 기존 파일 삭제 0건. library.html fileMap·index.html newsFileMap 기존 등록 변경 0건(신규 1건 추가만).",
     "additional_notes": "목표 3건 대비 1건만 게시한 사유는 shortfall_reason 참조 — 품질 낮은 기사로 억지로 채우지 않는다는 원칙(작업지시 §2)에 따라 신규성·정확성 요건을 충족하지 못한 후보 4건은 게시하지 않았다. 다음 실행 시 참고사항: (1) 금천구 시흥동 959번지 분쟁조정 기사는 보도일 상충 문제만 해소되면(원문 직접 열람 가능한 경로 확보 시) 재검토 가치가 있음. (2) 다수 주요 언론사 도메인(mt.co.kr, fnnews.com, segye.com, newsa.co.kr, thepublic.kr 등)이 egress 정책상 WebFetch 차단 상태로, WebSearch 요약에만 의존해 원문 대조가 제한적이었다 — 가능하면 여러 매체의 corroborating 보도로 교차검증했다. (3) 배포는 이번 실행에서 시도하지 않았으며 07:30 일괄배포 담당자가 본 건(news0929a)을 포함해 배포 후 라이브 URL 200 검수를 수행해야 한다."
+  },
+  {
+    "run_datetime_kst": "2026-09-30T06:30:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "searched_articles_count": 20,
+    "candidate_articles_count": 5,
+    "target_max": 3,
+    "shortfall_reason": "5개 후보 중 2건만 최종 게시 요건(신규성·정확성·비중복)을 충족했다. ①서울시 재개발·재건축 규제완화 10건 국토부 건의(이주비 LTV 40→70%, 조합원 지위양도 완화 등) — WebSearch 결과 실제 보도 원문(newdaily.co.kr, ajunews.com 등 URL)이 2026-06-15로 확인되어 이미 3개월 이상 경과한 과거 보도의 반복 노출로 판단, 24~48h 신규성 기준 미충족으로 제외. ②남양주 퇴계원4구역 재개발 동부건설 시공사 선정 — 다수 매체 URL이 2026-09-22로 확인되어(viva100·hankyung·sisaon·kmecnews 등) 이미 1주일 이상 경과, 게시 시점 기준 24~48h를 초과해 제외. ③대법원, 토지등소유자 방식 재개발 지주협의회 대의원회 의사록 의무공개 대상 아니라는 판결(열람·복사 대상에는 해당) — 원문 기사 idxno(66888)가 9/18~9/29 기간 보도 기사군(idxno 67100번대~67600번대)보다 현저히 낮아 훨씬 이전 보도로 추정되고 정확한 판결일(\"지난 3일\"이 몇 월인지)을 원문 직접 열람 없이 확정할 수 없어 정확성 우선 원칙에 따라 제외. ④법무법인 경국 칼럼(대법원 2025다217884, 인도지연 손해배상) — 개별 법무법인의 판례 해설 칼럼으로 특정 사건의 신규 보도라기보다 기존 대법원 판결(2025.6.26 선고)에 대한 사후 해설 성격이 강해 '보도' 기준에 부합하지 않는다고 판단해 제외. 최종적으로 ⑤김남근 의원 등 15인 도시정비법 개정법률안(2026.9.18 발의, 재개발 조합설립동의율 70%·공사비 산출내역서 허위제출 처벌 신설)과 ⑥광명 하안주공6·7단지 재건축 2차 현장설명회 유찰(2026.9.29, IPARK현대산업개발 단독응찰)만 하우징헤럴드·파이낸셜뉴스·위클리한국주택경제신문(아루뉴스)·뉴스핌 등 다수 매체 교차검증을 거쳐 게시했다. 참고: housingherald.co.kr, arunews.com, fnnews.com, sisaon.co.kr, imnews.imbc.com 등 원문 도메인 다수가 이번 회차에도 네트워크 egress 정책상 WebFetch로 직접 열람되지 않아, WebSearch 요약 결과의 다중 매체 교차검증으로 사실관계를 확인했다(원문 인용 URL은 WebSearch 검색결과에 노출된 기사 URL을 그대로 기재).",
+    "selected_articles": [
+      {
+        "id": "news0930a",
+        "title": "김남근 의원 등 15인, 도시정비법 개정법률안 발의…재개발 조합설립동의율 70%로, 공사비 산출내역서 허위제출 처벌 신설",
+        "source": "하우징헤럴드",
+        "source_url": "https://www.housingherald.co.kr/news/articleView.html?idxno=62966",
+        "source_report_date": "2026-09-18",
+        "download_html": "redevelopment/downloads/news_20260930a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260930a.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0930b",
+        "title": "광명 하안주공6·7단지 재건축, 2차 현장설명회도 IPARK현대산업개발 단독 참석…유찰",
+        "source": "위클리한국주택경제신문(아루뉴스)",
+        "source_url": "https://www.arunews.com/news/articleView.html?idxno=67463",
+        "source_report_date": "2026-09-29",
+        "download_html": "redevelopment/downloads/news_20260930b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260930b.html",
+        "status": "posted"
+      }
+    ],
+    "posted_success_count": 2,
+    "posted_fail_count": 0,
+    "fail_reasons": [],
+    "commit_sha": "(본 커밋 자신 — 로그를 뉴스 게시와 동일 커밋에 포함시켜 커밋 생성 전에는 자신의 SHA를 알 수 없어 사전 기재 불가. 'git log -1 --format=%H origin/backup-bitseum-rebrand-20260824' 로 확인 가능. 커밋 직전 브랜치 HEAD는 d2dd55235fd80cf6441509340dd586f2d7de418e)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_status": "07:30 일괄배포 대기 — 2026-09-28 대장 지시(무료 요금제·일괄배포 원칙)에 따라 이번 실행에서도 Vercel MCP·CLI 등 어떤 방식으로도 배포를 시도하지 않았다. 제1호 PC 의 07:30 KST 일괄 배포 작업이 본 커밋을 포함해 배포·검수·보고할 예정.",
+    "verification": {
+      "news0930a_http_status": "NOT_CHECKED — 정책상 배포 미실행. 07:30 일괄배포 이후 확인 필요",
+      "news0930b_http_status": "NOT_CHECKED — 상동",
+      "index_home_display": "NOT_CHECKED — 상동",
+      "library_page_display": "NOT_CHECKED — 상동"
+    },
+    "pre_deploy_verification": {
+      "mock_data_entries": "2/2 추가 확인 (news0930a, news0930b)",
+      "download_html": "2/2 생성 확인 (downloads/news_20260930a.html, news_20260930b.html)",
+      "library_fileMap": "2/2 등록 확인",
+      "index_newsFileMap": "2/2 등록 확인",
+      "node_check": "node --check redevelopment/assets/data/mock-data.js 통과",
+      "cachebuster": "mock-data.js?v=20260929e→20260930a (57개 HTML 전수 동기화, 잔존 구버전 0건·무버전 0건, git diff 확인 결과 mock-data.js는 2건 순수 추가만 발생하고 삭제 0줄)"
+    },
+    "data_changes": "MOCK.library에 news0930a·news0930b 2건 순수 추가만 수행. 기존 항목 삭제·수정 0건. downloads/ 기존 파일 삭제 0건. library.html fileMap·index.html newsFileMap 기존 등록 변경 0건(신규 2건 추가만).",
+    "additional_notes": "목표 3건 대비 2건만 게시한 사유는 shortfall_reason 참조 — 품질 낮은 기사로 억지로 채우지 않는다는 원칙(작업지시 §2)에 따라 신규성·정확성 요건을 충족하지 못한 후보 3건은 게시하지 않았다. 다음 실행 시 참고사항: (1) 대법원 지주협의회 대의원회 의사록 판결 기사는 원문 직접 열람이 가능해지면 정확한 선고일 확인 후 재검토 가치가 있음. (2) 김남근 의원 개정법률안(news0930a)은 기존 law0725a(2026-07-25, 엄태영·천준호 의원안)와 핵심 취지(재개발 동의율 70%)는 겹치나, 발의자·발의일(9/18)·신규 조항(공사비 산출내역서 허위제출 처벌, 공공시행자 동의요건 60% 완화, 비조합원 추진위원장 허용)이 다른 별개 법안으로 판단해 게시했다 — 향후 유사 사례 발생 시 이 판단 기준(발의자·조문 신규성)을 참고할 것. (3) 하안주공6·7단지(news0930b)는 9월 18일 1차 유찰에 이은 9월 29일 2차 유찰 소식으로, 수의계약 전환 여부가 10월 2일 집행부 회의에서 결정될 예정이므로 후속 보도를 다음 회차 검색 시 확인할 것. (4) 다수 언론사 도메인(housingherald.co.kr, arunews.com, fnnews.com, sisaon.co.kr, imnews.imbc.com)이 egress 정책상 WebFetch 차단 상태가 지속되고 있어, WebSearch 요약에만 의존해 원문 대조가 제한적이었다. (5) 배포는 이번 실행에서 시도하지 않았으며 07:30 일괄배포 담당자가 본 건(news0930a·b)을 포함해 배포 후 라이브 URL 200 검수를 수행해야 한다."
   }
 ]
