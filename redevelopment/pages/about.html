@@ -435,6 +435,11 @@
         .ceo-photo-area { height: 340px; }
     }
 
+    /* 태블릿 폭에서는 세로 인물사진이 눈 위까지만 보이던 문제 보정 — 얼굴 중심으로 (2026-09-29 CEO 사진 교체) */
+    @media (min-width: 481px) and (max-width: 860px) {
+        .ceo-photo-area img { object-position: center 30%; }
+    }
+
     /* ── 3-2. CEO CERTIFICATION (정비사업 코디네이터) ── */
     .cert-section {
         margin-top: var(--space-body-to-content); /* 제목→콘텐츠 — 세로 간격 표준 §3 (2026-09-05) */
@@ -1044,7 +1049,7 @@
                     </div>
                 </div>
                 <div class="ceo-photo-area">
-                    <img src="../jpg/visseum_logo.jpg" alt="㈜빛세움 CI" style="object-fit:contain;background:#fff">
+                    <img src="../jpg/ceo_chokuhyung.jpg" alt="㈜빛세움 대표이사 조구형">
                 </div>
             </div>
 
