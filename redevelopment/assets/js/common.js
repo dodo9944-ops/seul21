@@ -32,7 +32,7 @@ const App = (() => {
       { href:`${B}/pages/vision.html`, label:'빛세움의 길', icon:'fa-solid fa-road', sub:[
         { href:`${B}/pages/vision.html#philosophy`, label:'빛을 세우다' },
         { href:`${B}/pages/vision.html#mission`, label:'All 4 U · All 4 V' },
-        { href:`${B}/pages/vision.html#visual`, label:'눈으로 확인하는 빛세움' },
+        { href:`${B}/pages/vision.html#visual`, label:'빛세움을 만나다' },
         { href:`${B}/pages/vision.html#digitalProfile`, label:'디지털 지명원' },
         { href:`${B}/pages/vision.html#vsFilm`, label:'회사 홍보 영상' },
       ]},
