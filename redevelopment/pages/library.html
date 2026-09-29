@@ -525,8 +525,8 @@ async function renderFeatured(){
   fb.innerHTML=html;
 }
 
-/* 인기 자료 제목 — 전체: 「인기 자료」, 그 외: 「○○ 인기 자료」 */
-function popTitle(){return curCat==='전체'?'인기 자료':CAT_NAME[curCat]+' 인기 자료'}
+/* 인기자료 제목 — 「인기자료(탭명)」 형식으로 전 탭 병렬 통일 (2026-09-29 대장 지시) */
+function popTitle(){return'인기자료('+(curCat==='전체'?'전체':CAT_NAME[curCat])+')'}
 /* 갤러리 인기 자료 — 다른 탭과 동일한 카드 레이아웃(pop-card), 조회수 기준 상위 3건 */
 async function renderFeaturedGallery(fb){
   var items=galItems.slice();
