@@ -1952,5 +1952,105 @@
     },
     "data_changes": "없음 — MOCK.library 무변경, 신규 뉴스 추가 0건, 기존 뉴스 삭제·수정 0건. 본 커밋은 본 로그 파일 1개만 변경한다",
     "additional_notes": "Vercel MCP 는 dodo9944-ops-projects 스코프 403(재인증 필요), 컨테이너에 vercel CLI·VERCEL_TOKEN 없음 → 프로덕션 배포 트리거 수단은 본 배포 브랜치 푸시(Git 연동)뿐이었다. /api/report 텔레그램은 TELEGRAM_BOT_TOKEN·TELEGRAM_CHAT_ID 미설정으로 발송 불가."
+  },
+  {
+    "run_datetime_kst": "2026-09-28T06:30:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "searched_articles_count": 14,
+    "candidate_articles_count": 5,
+    "target_max": 3,
+    "shortfall_reason": "5개 후보(①재개발 조합설립 동의율 75%→70% 완화·파이낸셜뉴스 09.22, ②노원구 중계주공4·상계마들대림 추진위 승인·파이낸셜뉴스 09.22, ③원자재값 상승 공사비 갈등·뉴스웨이 09.22, ④서울시 8만5천호 신속착공 발표·오인 후 확인 결과 2026.02.26 보도로 판명되어 24~48h 기준 미충족 제외, ⑤재건축초과이익환수 부담금 1.8만명·머니투데이 09.23) 중 ①은 2026-05-01 시행된 law0502a(재건축 동의율 75→70 시행 기사)와 법리적으로 혼동 소지가 있어 정확성 우려로 제외, ②는 기존 news0925c(2026.09.25 게시, 동일 사안 파이낸셜뉴스 09.22 기사를 관련 출처로 이미 인용)와 완전 중복되어 제외. 잔여 2건만 최종 신규성·정확성 검증을 통과해 게시. 검색 시점(2026-09-28 KST) 기준 정비사업 주요 매체의 최신 기사가 2026.09.22~23 보도분에 몰려 있어 24~48시간 이내 기사는 확보하지 못함(사유: 네트워크 egress 정책상 언론사 원문 도메인 직접 WebFetch 불가 — WebSearch 요약 결과로만 교차검증, 24h 이내 신규 보도 미검색됨).",
+    "selected_articles": [
+      {
+        "id": "news0928a",
+        "title": "원자재값 급등에 조합-시공사 공사비 갈등 확산…철근값 최대 11.8%↑",
+        "source": "뉴스웨이",
+        "source_url": "https://www.newsway.co.kr/news/view?ud=2026092214452465517",
+        "source_report_date": "2026-09-22",
+        "download_html": "redevelopment/downloads/news_20260928a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260928a.html",
+        "status": "posted"
+      },
+      {
+        "id": "news0928b",
+        "title": "1.8만명 서울 재건축 조합원에 '재초환 청구서'…46개 단지 부담금 2조1690억",
+        "source": "머니투데이",
+        "source_url": "https://www.mt.co.kr/estate/2026/09/23/2026092219471859019",
+        "source_report_date": "2026-09-23",
+        "download_html": "redevelopment/downloads/news_20260928b.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260928b.html",
+        "status": "posted"
+      }
+    ],
+    "posted_success_count": 2,
+    "posted_fail_count": 0,
+    "fail_reasons": [],
+    "commit_sha": "d77d547eae842ed4212af746586d46ad80d4b628",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_status": "FAILED — 3회 시도 전부 CANCELED. (1) create_deployment(gitSource, target=production, forceNew=1) → dpl_GxPWWBDSLPkoXBgQmvSGpqswBUUK CANCELED. (2) 동일 파라미터 재시도 → dpl_31K3dKcKev2umyTRHzVzqmzbqJ7d CANCELED. (3) 기존 READY 프로덕션 배포(dpl_2UnaC3G1aoe585wTQcYExEQ4FGep)에서 deploymentId+withLatestCommit=true 로 redeploy → dpl_G1Kdho3S3U2NFp3RZ4zXz9Ei2ifZ CANCELED. 3건 모두 errorLink=https://vercel.com/docs/platform/projects#ignored-build-step 동일 사유로 취소. get_project 결과 프로젝트 live:false, latestDeployment 상태 BLOCKED(errorLink: team-configuration). Vercel 대시보드의 'Ignored Build Step' 설정 또는 팀 레벨 구성 문제로 판단되며 API 호출만으로는 원인 규명·해제 불가. 라이브(www.seul24.cloud)는 기존 배포(dpl_2UnaC3G1aoe585wTQcYExEQ4FGep, 커밋 598c56e4)를 계속 서빙 중 — 오류 없이 정상 작동하나 오늘자 news0928a·b는 미반영.",
+    "verification": {
+      "news0928a_http_status": "NOT_CHECKED — 배포 미반영으로 신규 URL 검증 대상 없음 (코드 레벨 STEP1~6 전수 확인은 완료: mock-data.js node --check 통과, fileMap/newsFileMap 등록 확인, 다운로드 HTML 2개 생성 확인)",
+      "news0928b_http_status": "NOT_CHECKED — 상동",
+      "index_home_display": "NOT_CHECKED — 배포 미반영",
+      "library_page_display": "NOT_CHECKED — 배포 미반영"
+    },
+    "pre_deploy_verification": {
+      "mock_data_entries": "2/2 추가 확인 (news0928a, news0928b)",
+      "download_html": "2/2 생성 확인",
+      "library_fileMap": "2/2 등록 확인",
+      "index_newsFileMap": "2/2 등록 확인",
+      "cachebuster": "mock-data.js?v=20260928a→20260928b (58개 HTML 전수 동기화, 잔존 구버전 0건·무버전 0건)"
+    },
+    "data_changes": "MOCK.library에 news0928a·news0928b 2건 순수 추가만 수행. 기존 항목 삭제·수정 0건. downloads/ 기존 파일 삭제 0건.",
+    "additional_notes": "다음 실행(익일 06:30 또는 대장 수동 지시) 시 최우선 조치: (1) 본 회차 배포 실패분(news0928a·b, 커밋 d77d547e) 을 최우선 재배포 시도 — 과거 사례(9/23~9/27 DEPLOYMENT_PAUSED 4일 지속 후 해제)처럼 시간 경과로 자연 해제될 가능성 있음. (2) Vercel 프로젝트 lcw-coordinator 의 'Ignored Build Step' 대시보드 설정 확인은 Claude 세션 권한 밖 — 대장의 Vercel 대시보드 직접 확인 필요 사항으로 보고. (3) 본 회차 후보 중 재개발 조합설립 동의율 75→70 완화 기사(①)는 기존 law0502a(재건축 동의율, 2026-05-01 시행)와의 관계(재건축 vs 재개발 별도 법률 트랙인지, 동일 개정의 2단계 시행인지)가 원문 미확인으로 불명확 — 원문 열람 가능한 세션에서 사실관계 확인 후 게시 여부 재검토 권장."
+  },
+  {
+    "run_datetime_kst": "2026-09-29T06:30:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "searched_articles_count": 13,
+    "candidate_articles_count": 4,
+    "target_max": 3,
+    "shortfall_reason": "4개 후보 중 1건만 최종 게시 요건(24~48h 이내 신규성·정확성·비중복)을 충족했다. ①모아타운 등 소규모주택정비 지원 조례 개정(박이강 서울시의원, 9월 11일 서울시의회 본회의 통과) — 기존 news0921c(한강타임즈, '모아타운 등 소규모주택정비 지원 조례 개정안 서울시의회 본회의 통과')와 완전 동일 사안으로 판단되어 중복 제외. ②지방 정비사업 76곳, 한국부동산원 공사비 검증 후에도 평균 46.6%(대구 78.1%) 증액 확인(2026 국정감사, 김종양 의원 자료 인용 보도) — 매일신문·신아일보 등 보도일이 2026-09-21로 24~48h 기준을 초과하고, 주제도 기존 news0928a(공사비 갈등)와 유사해 제외. ③금천구 시흥동 959번지 가로주택정비사업 분쟁조정 관련 기사(뉴스에이) — WebSearch 결과 간 분쟁조정 1차 회의 일자가 '9월 26일'과 '8월 26일'로 상충되어 확정 불가. 원문 도메인(newsa.co.kr)이 네트워크 egress 정책상 WebFetch 차단되어 직접 대조가 불가능했고, 교차검증 가능한 타 매체 보도도 확인되지 않아 정확성 우선 원칙에 따라 이번 회차 제외. ④재건축·재개발 이주비 대출 HF(주택금융공사) 공적보증 신설 검토 — 6~8월 다수 매체에 이미 광범위하게 보도된 사안의 반복 확산으로, 9월 26~28일 특정 신규 발표를 뒷받침하는 근거를 확인하지 못해 제외. 최종적으로 ⑤서울시 모아주택 1호(강변역 센트럴 아이파크, 광진구 한양연립 일대) 준공·입주 및 오세훈 시장 현장방문(2026-09-28)만 파이낸셜뉴스·머니투데이·세계일보·이비엔뉴스 등 다수 매체 교차검증을 거쳐 게시했다. 참고: mt.co.kr·fnnews.com·segye.com·newsa.co.kr 등 주요 언론사 원문 도메인 다수가 네트워크 egress 정책상 WebFetch로 직접 열람되지 않아, 이번 회차는 WebSearch 요약 결과의 다중 매체 교차검증으로 사실관계를 확인했다(원문 인용 URL은 WebSearch 검색결과에 노출된 기사 URL을 그대로 기재).",
+    "selected_articles": [
+      {
+        "id": "news0929a",
+        "title": "빌라촌이 한강뷰 아파트로...오세훈 \"모아주택 도입 4년 만에 첫 결실\"",
+        "source": "파이낸셜뉴스",
+        "source_url": "https://www.fnnews.com/news/202609281345209415",
+        "source_report_date": "2026-09-28",
+        "download_html": "redevelopment/downloads/news_20260929a.html",
+        "live_url": "https://www.seul24.cloud/downloads/news_20260929a.html",
+        "status": "posted"
+      }
+    ],
+    "posted_success_count": 1,
+    "posted_fail_count": 0,
+    "fail_reasons": [],
+    "commit_sha": "(본 커밋 자신 — CLAUDE.md 지침에 따라 로그를 뉴스 게시와 동일 커밋에 포함시켰기 때문에 커밋 생성 전에는 자신의 SHA를 알 수 없어 사전 기재 불가. 이 로그가 포함된 브랜치 backup-bitseum-rebrand-20260824 의 최신 커밋이 본 항목에 해당하는 커밋이다. 'git log -1 --format=%H origin/backup-bitseum-rebrand-20260824' 로 확인 가능)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "push_status": "success",
+    "deploy_url": "NOT_DEPLOYED",
+    "deploy_status": "07:30 일괄배포 대기 — 2026-09-28 대장 지시(무료 요금제·일괄배포 원칙)에 따라 이번 실행에서는 Vercel MCP·CLI 등 어떤 방식으로도 배포를 시도하지 않았다. 제1호 PC 의 07:30 KST 일괄 배포 작업이 본 커밋을 포함해 배포·검수·보고할 예정.",
+    "verification": {
+      "news0929a_http_status": "NOT_CHECKED — 정책상 배포 미실행. 07:30 일괄배포 이후 확인 필요",
+      "index_home_display": "NOT_CHECKED — 상동",
+      "library_page_display": "NOT_CHECKED — 상동"
+    },
+    "pre_deploy_verification": {
+      "mock_data_entries": "1/1 추가 확인 (news0929a)",
+      "download_html": "1/1 생성 확인 (downloads/news_20260929a.html)",
+      "library_fileMap": "1/1 등록 확인",
+      "index_newsFileMap": "1/1 등록 확인",
+      "node_check": "node --check redevelopment/assets/data/mock-data.js 통과",
+      "cachebuster": "mock-data.js?v=20260928b→20260929a (58개 HTML 전수 동기화, 잔존 구버전 0건·무버전 0건, git diff 확인 결과 mock-data.js는 1줄 순수 추가만 발생하고 삭제 0줄)"
+    },
+    "data_changes": "MOCK.library에 news0929a 1건 순수 추가만 수행. 기존 항목 삭제·수정 0건. downloads/ 기존 파일 삭제 0건. library.html fileMap·index.html newsFileMap 기존 등록 변경 0건(신규 1건 추가만).",
+    "additional_notes": "목표 3건 대비 1건만 게시한 사유는 shortfall_reason 참조 — 품질 낮은 기사로 억지로 채우지 않는다는 원칙(작업지시 §2)에 따라 신규성·정확성 요건을 충족하지 못한 후보 4건은 게시하지 않았다. 다음 실행 시 참고사항: (1) 금천구 시흥동 959번지 분쟁조정 기사는 보도일 상충 문제만 해소되면(원문 직접 열람 가능한 경로 확보 시) 재검토 가치가 있음. (2) 다수 주요 언론사 도메인(mt.co.kr, fnnews.com, segye.com, newsa.co.kr, thepublic.kr 등)이 egress 정책상 WebFetch 차단 상태로, WebSearch 요약에만 의존해 원문 대조가 제한적이었다 — 가능하면 여러 매체의 corroborating 보도로 교차검증했다. (3) 배포는 이번 실행에서 시도하지 않았으며 07:30 일괄배포 담당자가 본 건(news0929a)을 포함해 배포 후 라이브 URL 200 검수를 수행해야 한다."
   }
 ]
