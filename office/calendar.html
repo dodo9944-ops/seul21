@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>일정관리 - 세울엔지니어링 사무자동화시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/office.css">
+<style>
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.cal-nav-center{display:flex;align-items:center;gap:12px}
+.cal-nav-center .cal-title{font-size:20px;font-weight:800;color:var(--gray-900);min-width:160px;text-align:center}
+.cal-nav-center button{width:36px;height:36px;border:1px solid var(--gray-300);background:#fff;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray-600);transition:var(--transition);font-size:14px}
+.cal-nav-center button:hover{background:var(--gray-50);border-color:var(--gray-400)}
+.upcoming-card{position:sticky;top:calc(var(--header-height) + 28px)}
+.upcoming-list{list-style:none}
+.upcoming-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:var(--transition)}
+.upcoming-item:last-child{border-bottom:none}
+.upcoming-item:hover{background:var(--gray-50);margin:0 -12px;padding-left:12px;padding-right:12px;border-radius:var(--radius)}
+.upcoming-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.upcoming-info{flex:1;min-width:0}
+.upcoming-info .ev-title{font-size:13px;font-weight:600;color:var(--gray-800);margin-bottom:2px}
+.upcoming-info .ev-date{font-size:12px;color:var(--gray-500)}
+.upcoming-info .ev-time{font-size:11px;color:var(--gray-400)}
+.ev-type-tag{display:inline-flex;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500}
+.ev-type-tag.meeting{background:var(--primary-100);color:var(--primary-dark)}
+.ev-type-tag.task{background:var(--success-bg);color:#15803D}
+.ev-type-tag.holiday{background:var(--danger-bg);color:#B91C1C}
+.ev-type-tag.personal{background:var(--warning-bg);color:#B45309}
+.ev-type-tag.trip{background:#F3E8FF;color:#7C3AED}
+.detail-row{display:flex;gap:12px;padding:8px 0;font-size:13px;border-bottom:1px solid var(--gray-100)}
+.detail-row:last-child{border-bottom:none}
+.detail-row .detail-label{width:80px;color:var(--gray-500);font-weight:600;flex-shrink:0}
+.detail-row .detail-value{color:var(--gray-700);flex:1}
+@media(max-width:768px){
+  .cal-nav{flex-direction:column;align-items:stretch}
+  .cal-nav-center{justify-content:center}
+  .calendar-cell{min-height:60px;padding:4px}
+  .cell-event{font-size:10px;padding:1px 4px}
+}
+</style>
+</head>
+<body>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">SE</div>
+      <div>
+        <div class="logo-text">세울엔지니어링</div>
+        <span class="logo-sub">사무자동화시스템</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">메인</div>
+        <ul class="sidebar-menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> 대시보드</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">업무관리</div>
+        <ul class="sidebar-menu">
+          <li><a href="approval.html"><i class="fas fa-file-signature"></i> 전자결재 <span class="badge" id="approvalBadge">0</span></a></li>
+          <li><a href="documents.html"><i class="fas fa-folder-open"></i> 문서관리</a></li>
+          <li><a href="reports.html"><i class="fas fa-chart-bar"></i> 업무보고</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">근태/일정</div>
+        <ul class="sidebar-menu">
+          <li><a href="attendance.html"><i class="fas fa-clock"></i> 근태관리</a></li>
+          <li><a href="calendar.html" class="active"><i class="fas fa-calendar-alt"></i> 일정관리</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">커뮤니티</div>
+        <ul class="sidebar-menu">
+          <li><a href="board.html"><i class="fas fa-clipboard-list"></i> 게시판</a></li>
+          <li><a href="contacts.html"><i class="fas fa-address-book"></i> 주소록</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">설정</div>
+        <ul class="sidebar-menu">
+          <li><a href="mypage.html"><i class="fas fa-user-cog"></i> 마이페이지</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar">--</div>
+      <div class="user-info">
+        <div class="user-name" id="userName">사용자</div>
+        <div class="user-role" id="userRole">-</div>
+      </div>
+      <button class="user-logout" onclick="Office.Auth.logout()" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main -->
+  <main class="main-content">
+    <header class="top-header">
+      <div class="top-header-left">
+        <button class="menu-toggle" onclick="Office.UI.toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">홈</a><span class="sep">/</span>
+          <span>근태/일정</span><span class="sep">/</span>
+          <span class="current">일정관리</span>
+        </div>
+      </div>
+      <div class="top-header-right">
+        <span class="header-clock" id="headerClock">00:00:00</span>
+        <button class="header-btn" title="알림"><i class="fas fa-bell"></i><span class="notif-dot" id="notifDot"></span></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <div class="page-header-actions">
+          <div>
+            <h1><i class="fas fa-calendar-alt" style="color:var(--primary);margin-right:8px"></i>일정관리</h1>
+            <p>팀 일정과 개인 일정을 관리합니다.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openNewEventModal()"><i class="fas fa-plus"></i> 새 일정</button>
+        </div>
+      </div>
+
+      <!-- Calendar Navigation -->
+      <div class="cal-nav">
+        <div class="cal-nav-center">
+          <button onclick="changeCalMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+          <span class="cal-title" id="calTitle">2026년 4월</span>
+          <button onclick="changeCalMonth(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="goToday()"><i class="fas fa-calendar-day"></i> 오늘</button>
+      </div>
+
+      <!-- Grid Layout -->
+      <div class="grid-sidebar">
+        <!-- Calendar Grid -->
+        <div class="card">
+          <div class="card-body" style="padding:12px">
+            <div class="calendar-grid" id="calendarGrid"></div>
+          </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="card upcoming-card">
+          <div class="card-header">
+            <h3><i class="fas fa-list-ul" style="margin-right:8px;color:var(--primary)"></i>다가오는 일정</h3>
+          </div>
+          <div class="card-body">
+            <ul class="upcoming-list" id="upcomingList"></ul>
+            <div class="empty-state" id="upcomingEmpty" style="display:none;padding:24px 12px">
+              <i class="fas fa-calendar-check"></i>
+              <h3>예정 일정 없음</h3>
+              <p>다가오는 일정이 없습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Event Detail Modal -->
+<div class="modal-overlay" id="eventDetailModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="detailTitle">일정 상세</h3>
+      <button class="modal-close" onclick="Office.UI.closeModal('eventDetailModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="detailContent"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger btn-sm" id="detailDeleteBtn" onclick="deleteCurrentEvent()"><i class="fas fa-trash"></i> 삭제</button>
+      <button class="btn btn-outline" onclick="Office.UI.closeModal('eventDetailModal')">닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- New Event Modal -->
+<div class="modal-overlay" id="newEventModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h3><i class="fas fa-calendar-plus" style="color:var(--primary);margin-right:8px"></i>새 일정</h3>
+      <button class="modal-close" onclick="Office.UI.closeModal('newEventModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>제목 <span class="required">*</span></label>
+        <input type="text" class="form-control" id="evTitle" placeholder="일정 제목을 입력하세요">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>유형 <span class="required">*</span></label>
+          <select class="form-control" id="evType">
+            <option value="회의">회의</option>
+            <option value="업무">업무</option>
+            <option value="공휴일">공휴일</option>
+            <option value="개인">개인</option>
+            <option value="출장">출장</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>시간</label>
+          <input type="text" class="form-control" id="evTime" placeholder="예: 10:00~11:00">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>시작일 <span class="required">*</span></label>
+          <input type="date" class="form-control" id="evStartDate">
+        </div>
+        <div class="form-group">
+          <label>종료일</label>
+          <input type="date" class="form-control" id="evEndDate">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>장소</label>
+          <input type="text" class="form-control" id="evLocation" placeholder="장소를 입력하세요">
+        </div>
+        <div class="form-group">
+          <label>참석자</label>
+          <input type="text" class="form-control" id="evAttendees" placeholder="참석자를 입력하세요">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>설명</label>
+        <textarea class="form-control" id="evDescription" placeholder="일정에 대한 설명을 입력하세요" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="Office.UI.closeModal('newEventModal')">취소</button>
+      <button class="btn btn-primary" onclick="saveNewEvent()"><i class="fas fa-check"></i> 저장</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="assets/js/office-data.js"></script>
+<script src="assets/js/office.js"></script>
+<script>
+Office.init();
+
+var calYear, calMonth;
+var currentDetailEventId = null;
+var DAY_HEADERS = ['일','월','화','수','목','금','토'];
+var TYPE_CLASS_MAP = { '회의': 'meeting', '업무': 'task', '공휴일': 'holiday', '개인': 'personal', '출장': 'personal' };
+var TYPE_COLOR_MAP = { '회의': '#2563EB', '업무': '#22C55E', '공휴일': '#EF4444', '개인': '#F59E0B', '출장': '#8B5CF6' };
+var TYPE_TAG_MAP = { '회의': 'meeting', '업무': 'task', '공휴일': 'holiday', '개인': 'personal', '출장': 'trip' };
+
+function initCalendar() {
+  var now = new Date();
+  calYear = now.getFullYear();
+  calMonth = now.getMonth() + 1;
+  renderAll();
+}
+
+function changeCalMonth(dir) {
+  calMonth += dir;
+  if (calMonth > 12) { calMonth = 1; calYear++; }
+  if (calMonth < 1) { calMonth = 12; calYear--; }
+  renderAll();
+}
+
+function goToday() {
+  var now = new Date();
+  calYear = now.getFullYear();
+  calMonth = now.getMonth() + 1;
+  renderAll();
+}
+
+function renderAll() {
+  document.getElementById('calTitle').textContent = calYear + '년 ' + calMonth + '월';
+  renderCalendar(calYear, calMonth);
+  renderUpcoming();
+}
+
+function renderCalendar(year, month) {
+  var grid = document.getElementById('calendarGrid');
+  var today = new Date();
+  var todayStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+
+  // Get events for this month (and surrounding for overlap)
+  var events = Office.Calendar.getEvents(year, month);
+
+  // Also get prev/next month events for cells that show other-month dates
+  var prevM = month === 1 ? 12 : month - 1;
+  var prevY = month === 1 ? year - 1 : year;
+  var nextM = month === 12 ? 1 : month + 1;
+  var nextY = month === 12 ? year + 1 : year;
+  var prevEvents = Office.Calendar.getEvents(prevY, prevM);
+  var nextEvents = Office.Calendar.getEvents(nextY, nextM);
+  var allEvents = events.concat(prevEvents).concat(nextEvents);
+  // Deduplicate by id
+  var seen = {};
+  var uniqueEvents = [];
+  for (var e = 0; e < allEvents.length; e++) {
+    if (!seen[allEvents[e].id]) { seen[allEvents[e].id] = true; uniqueEvents.push(allEvents[e]); }
+  }
+
+  var firstDay = new Date(year, month - 1, 1).getDay();
+  var daysInMonth = new Date(year, month, 0).getDate();
+  var prevMonthDays = new Date(year, month - 1, 0).getDate();
+
+  var html = '';
+
+  // Header cells
+  for (var h = 0; h < 7; h++) {
+    html += '<div class="calendar-header-cell">' + DAY_HEADERS[h] + '</div>';
+  }
+
+  // Calculate total cells needed
+  var totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+
+  for (var i = 0; i < totalCells; i++) {
+    var dayNum, dateStr, isOther = false;
+
+    if (i < firstDay) {
+      // Previous month
+      dayNum = prevMonthDays - firstDay + i + 1;
+      var pm = month === 1 ? 12 : month - 1;
+      var py = month === 1 ? year - 1 : year;
+      dateStr = py + '-' + String(pm).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+      isOther = true;
+    } else if (i - firstDay >= daysInMonth) {
+      // Next month
+      dayNum = i - firstDay - daysInMonth + 1;
+      var nm = month === 12 ? 1 : month + 1;
+      var ny = month === 12 ? year + 1 : year;
+      dateStr = ny + '-' + String(nm).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+      isOther = true;
+    } else {
+      dayNum = i - firstDay + 1;
+      dateStr = year + '-' + String(month).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+    }
+
+    var classes = 'calendar-cell';
+    if (isOther) classes += ' other-month';
+    if (dateStr === todayStr) classes += ' today';
+
+    html += '<div class="' + classes + '" onclick="onCellClick(\'' + dateStr + '\')">';
+
+    if (dateStr === todayStr) {
+      html += '<div class="cell-date"><div style="background:var(--primary);color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center">' + dayNum + '</div></div>';
+    } else {
+      html += '<div class="cell-date">' + dayNum + '</div>';
+    }
+
+    // Events on this date
+    var dayEvents = getEventsForDate(uniqueEvents, dateStr);
+    for (var de = 0; de < dayEvents.length && de < 3; de++) {
+      var ev = dayEvents[de];
+      var evClass = TYPE_CLASS_MAP[ev.type] || 'task';
+      html += '<div class="cell-event ' + evClass + '" onclick="event.stopPropagation();showEventDetail(\'' + ev.id + '\')">' + ev.title + '</div>';
+    }
+    if (dayEvents.length > 3) {
+      html += '<div style="font-size:11px;color:var(--gray-500);padding:1px 6px">+' + (dayEvents.length - 3) + '개 더</div>';
+    }
+
+    html += '</div>';
+  }
+
+  grid.innerHTML = html;
+}
+
+function getEventsForDate(events, dateStr) {
+  var result = [];
+  for (var i = 0; i < events.length; i++) {
+    var ev = events[i];
+    var start = ev.startDate;
+    var end = ev.endDate || ev.startDate;
+    if (dateStr >= start && dateStr <= end) {
+      result.push(ev);
+    }
+  }
+  return result;
+}
+
+function renderUpcoming() {
+  var upcoming = Office.Calendar.getUpcoming(7);
+  var list = document.getElementById('upcomingList');
+  var emptyEl = document.getElementById('upcomingEmpty');
+
+  if (upcoming.length === 0) {
+    list.innerHTML = '';
+    emptyEl.style.display = 'block';
+    return;
+  }
+  emptyEl.style.display = 'none';
+
+  var html = '';
+  for (var i = 0; i < upcoming.length; i++) {
+    var ev = upcoming[i];
+    var color = TYPE_COLOR_MAP[ev.type] || '#64748B';
+    var tagClass = TYPE_TAG_MAP[ev.type] || 'task';
+
+    html += '<li class="upcoming-item" onclick="showEventDetail(\'' + ev.id + '\')">'
+      + '<div class="upcoming-dot" style="background:' + color + '"></div>'
+      + '<div class="upcoming-info">'
+      + '<div class="ev-title">' + ev.title + '</div>'
+      + '<div class="ev-date">' + Office.UI.formatDate(ev.startDate) + (ev.endDate && ev.endDate !== ev.startDate ? ' ~ ' + Office.UI.formatDate(ev.endDate) : '') + '</div>'
+      + (ev.time ? '<div class="ev-time"><i class="fas fa-clock" style="margin-right:4px"></i>' + ev.time + '</div>' : '')
+      + '</div>'
+      + '<span class="ev-type-tag ' + tagClass + '">' + ev.type + '</span>'
+      + '</li>';
+  }
+  list.innerHTML = html;
+}
+
+// Cell click -> open new event with date pre-filled
+function onCellClick(dateStr) {
+  document.getElementById('evStartDate').value = dateStr;
+  document.getElementById('evEndDate').value = dateStr;
+  document.getElementById('evTitle').value = '';
+  document.getElementById('evType').value = '회의';
+  document.getElementById('evTime').value = '';
+  document.getElementById('evLocation').value = '';
+  document.getElementById('evAttendees').value = '';
+  document.getElementById('evDescription').value = '';
+  Office.UI.showModal('newEventModal');
+}
+
+function openNewEventModal() {
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById('evStartDate').value = today;
+  document.getElementById('evEndDate').value = today;
+  document.getElementById('evTitle').value = '';
+  document.getElementById('evType').value = '회의';
+  document.getElementById('evTime').value = '';
+  document.getElementById('evLocation').value = '';
+  document.getElementById('evAttendees').value = '';
+  document.getElementById('evDescription').value = '';
+  Office.UI.showModal('newEventModal');
+}
+
+// Show event detail
+function showEventDetail(id) {
+  var allEvents = Office.Storage.get('calendar');
+  var ev = null;
+  for (var i = 0; i < allEvents.length; i++) {
+    if (allEvents[i].id === id) { ev = allEvents[i]; break; }
+  }
+  if (!ev) return;
+
+  currentDetailEventId = id;
+  var tagClass = TYPE_TAG_MAP[ev.type] || 'task';
+
+  document.getElementById('detailTitle').innerHTML = '<i class="fas fa-calendar-alt" style="color:var(--primary);margin-right:8px"></i>' + ev.title;
+
+  var html = '<div style="margin-bottom:12px"><span class="ev-type-tag ' + tagClass + '" style="font-size:12px;padding:4px 12px">' + ev.type + '</span></div>';
+  html += '<div class="detail-row"><div class="detail-label"><i class="fas fa-calendar" style="margin-right:6px"></i>날짜</div><div class="detail-value">' + Office.UI.formatDate(ev.startDate);
+  if (ev.endDate && ev.endDate !== ev.startDate) html += ' ~ ' + Office.UI.formatDate(ev.endDate);
+  html += '</div></div>';
+  if (ev.time) {
+    html += '<div class="detail-row"><div class="detail-label"><i class="fas fa-clock" style="margin-right:6px"></i>시간</div><div class="detail-value">' + ev.time + '</div></div>';
+  }
+  if (ev.location) {
+    html += '<div class="detail-row"><div class="detail-label"><i class="fas fa-map-marker-alt" style="margin-right:6px"></i>장소</div><div class="detail-value">' + ev.location + '</div></div>';
+  }
+  if (ev.attendees) {
+    html += '<div class="detail-row"><div class="detail-label"><i class="fas fa-users" style="margin-right:6px"></i>참석자</div><div class="detail-value">' + ev.attendees + '</div></div>';
+  }
+  if (ev.description) {
+    html += '<div class="detail-row"><div class="detail-label"><i class="fas fa-align-left" style="margin-right:6px"></i>설명</div><div class="detail-value">' + ev.description + '</div></div>';
+  }
+
+  document.getElementById('detailContent').innerHTML = html;
+  Office.UI.showModal('eventDetailModal');
+}
+
+function deleteCurrentEvent() {
+  if (!currentDetailEventId) return;
+  if (!confirm('이 일정을 삭제하시겠습니까?')) return;
+
+  Office.Calendar.deleteEvent(currentDetailEventId);
+  Office.UI.closeModal('eventDetailModal');
+  currentDetailEventId = null;
+  renderAll();
+  Office.UI.showToast('일정이 삭제되었습니다.', 'success');
+}
+
+function saveNewEvent() {
+  var title = document.getElementById('evTitle').value.trim();
+  var type = document.getElementById('evType').value;
+  var startDate = document.getElementById('evStartDate').value;
+  var endDate = document.getElementById('evEndDate').value || startDate;
+  var time = document.getElementById('evTime').value.trim();
+  var location = document.getElementById('evLocation').value.trim();
+  var attendees = document.getElementById('evAttendees').value.trim();
+  var description = document.getElementById('evDescription').value.trim();
+
+  if (!title) { Office.UI.showToast('제목을 입력하세요.', 'error'); return; }
+  if (!startDate) { Office.UI.showToast('시작일을 입력하세요.', 'error'); return; }
+  if (endDate < startDate) { Office.UI.showToast('종료일이 시작일보다 빠릅니다.', 'error'); return; }
+
+  var color = TYPE_COLOR_MAP[type] || '#64748B';
+
+  Office.Calendar.createEvent({
+    title: title,
+    type: type,
+    startDate: startDate,
+    endDate: endDate,
+    time: time,
+    location: location,
+    attendees: attendees,
+    description: description,
+    color: color
+  });
+
+  Office.UI.closeModal('newEventModal');
+  renderAll();
+  Office.UI.showToast('일정이 등록되었습니다.', 'success');
+}
+
+// Init
+initCalendar();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마이페이지 - 세울엔지니어링 사무자동화시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/office.css">
+<style>
+.profile-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:20px; font-size:11.5px; font-weight:600; background:var(--success-bg); color:#15803D }
+.profile-badge i { font-size:10px }
+.info-row { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--gray-100) }
+.info-row:last-child { border-bottom:none }
+.info-row .info-label { font-size:13px; font-weight:600; color:var(--gray-500); min-width:80px }
+.info-row .info-value { font-size:14px; font-weight:500; color:var(--gray-800) }
+.pw-req { font-size:12px; color:var(--gray-500); margin-top:8px; line-height:1.6 }
+.pw-req li { margin-bottom:2px }
+</style>
+</head>
+<body>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">SE</div>
+      <div>
+        <div class="logo-text">세울엔지니어링</div>
+        <span class="logo-sub">사무자동화시스템</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">메뉴</div>
+        <ul class="sidebar-menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> 대시보드</a></li>
+          <li><a href="approval.html"><i class="fas fa-file-signature"></i> 전자결재 <span class="badge" id="approvalBadge">0</span></a></li>
+          <li><a href="documents.html"><i class="fas fa-folder-open"></i> 문서관리</a></li>
+          <li><a href="reports.html"><i class="fas fa-chart-bar"></i> 업무보고</a></li>
+          <li><a href="attendance.html"><i class="fas fa-clock"></i> 근태관리</a></li>
+          <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> 일정관리</a></li>
+          <li><a href="board.html"><i class="fas fa-clipboard-list"></i> 게시판</a></li>
+          <li><a href="contacts.html"><i class="fas fa-address-book"></i> 주소록</a></li>
+          <li><a href="mypage.html"><i class="fas fa-user-cog"></i> 마이페이지</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar"></div>
+      <div class="user-info">
+        <div class="user-name" id="userName"></div>
+        <div class="user-role" id="userRole"></div>
+      </div>
+      <button class="user-logout" onclick="Office.Auth.logout()" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="top-header-left">
+        <button class="menu-toggle" onclick="Office.UI.toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">홈</a><span class="sep">/</span>
+          <span>설정</span><span class="sep">/</span>
+          <span class="current">마이페이지</span>
+        </div>
+      </div>
+      <div class="top-header-right">
+        <span class="header-clock" id="headerClock"></span>
+        <button class="header-btn" title="알림"><i class="fas fa-bell"></i><span class="notif-dot" id="notifDot"></span></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- Profile Card -->
+      <div class="profile-card">
+        <div class="profile-avatar" id="profileAvatar" style="background:var(--primary)"></div>
+        <div class="profile-info">
+          <h2 id="profileName"></h2>
+          <p class="profile-meta" id="profileMeta"></p>
+          <div style="margin-top:8px" class="d-flex align-center gap-12" style="flex-wrap:wrap">
+            <span class="text-sm text-muted"><i class="fas fa-envelope"></i> <span id="profileEmail"></span></span>
+            <span class="text-sm text-muted"><i class="fas fa-phone"></i> <span id="profilePhone"></span></span>
+            <span class="text-sm text-muted"><i class="fas fa-calendar-check"></i> <span id="profileJoinDate"></span></span>
+            <span class="profile-badge" id="profileStatusBadge"><i class="fas fa-circle"></i> 재직</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="tabInfo">내 정보</button>
+        <button class="tab-btn" data-tab="tabPassword">비밀번호 변경</button>
+        <button class="tab-btn" data-tab="tabApprovals">내 결재함</button>
+        <button class="tab-btn" data-tab="tabActivity">내 활동</button>
+      </div>
+
+      <!-- Tab 1: My Info -->
+      <div class="tab-content active" id="tabInfo">
+        <div class="card">
+          <div class="card-header">
+            <h3>기본 정보</h3>
+            <button class="btn btn-outline btn-sm" id="editToggleBtn" onclick="toggleEdit()"><i class="fas fa-pen"></i> 수정</button>
+          </div>
+          <div class="card-body">
+            <div class="info-row"><span class="info-label">이름</span><span class="info-value" id="infoName"></span></div>
+            <div class="info-row"><span class="info-label">아이디</span><span class="info-value" id="infoUsername"></span></div>
+            <div class="info-row">
+              <span class="info-label">이메일</span>
+              <span class="info-value" id="infoEmailDisplay"></span>
+              <input type="email" class="form-control" id="infoEmailInput" style="display:none;max-width:260px">
+            </div>
+            <div class="info-row">
+              <span class="info-label">연락처</span>
+              <span class="info-value" id="infoPhoneDisplay"></span>
+              <input type="tel" class="form-control" id="infoPhoneInput" style="display:none;max-width:200px">
+            </div>
+            <div class="info-row"><span class="info-label">부서</span><span class="info-value" id="infoDept"></span></div>
+            <div class="info-row"><span class="info-label">직급</span><span class="info-value" id="infoPosition"></span></div>
+            <div class="info-row"><span class="info-label">입사일</span><span class="info-value" id="infoJoinDate"></span></div>
+          </div>
+          <div class="card-footer" id="editFooter" style="display:none">
+            <div style="text-align:right">
+              <button class="btn btn-outline btn-sm" onclick="cancelEdit()">취소</button>
+              <button class="btn btn-primary btn-sm" onclick="saveProfile()"><i class="fas fa-save"></i> 저장</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Password -->
+      <div class="tab-content" id="tabPassword">
+        <div class="card">
+          <div class="card-header"><h3>비밀번호 변경</h3></div>
+          <div class="card-body" style="max-width:440px">
+            <div class="form-group">
+              <label>현재 비밀번호 <span class="required">*</span></label>
+              <input type="password" class="form-control" id="pwCurrent" placeholder="현재 비밀번호">
+            </div>
+            <div class="form-group">
+              <label>새 비밀번호 <span class="required">*</span></label>
+              <input type="password" class="form-control" id="pwNew" placeholder="새 비밀번호">
+            </div>
+            <div class="form-group">
+              <label>새 비밀번호 확인 <span class="required">*</span></label>
+              <input type="password" class="form-control" id="pwConfirm" placeholder="새 비밀번호 확인">
+            </div>
+            <ul class="pw-req">
+              <li>8자 이상 입력하세요.</li>
+              <li>영문, 숫자, 특수문자를 포함하세요.</li>
+              <li>현재 비밀번호와 다르게 설정하세요.</li>
+            </ul>
+            <div style="margin-top:20px">
+              <button class="btn btn-primary" onclick="changePassword()"><i class="fas fa-lock"></i> 비밀번호 변경</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: My Approvals -->
+      <div class="tab-content" id="tabApprovals">
+        <div class="card">
+          <div class="card-header"><h3>내 결재 내역</h3></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>문서종류</th>
+                  <th>제목</th>
+                  <th>날짜</th>
+                  <th>상태</th>
+                </tr>
+              </thead>
+              <tbody id="myApprovalsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: My Activity -->
+      <div class="tab-content" id="tabActivity">
+        <div class="card">
+          <div class="card-header"><h3>최근 활동</h3></div>
+          <div class="card-body">
+            <ul class="activity-list" id="activityList"></ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="assets/js/office-data.js"></script>
+<script src="assets/js/office.js"></script>
+<script>
+Office.init();
+
+var user = Office.Auth.getCurrentUser();
+var isEditing = false;
+
+function loadProfile() {
+  if (!user) return;
+
+  // Find employee record for extra data
+  var emps = Office.Storage.get('employees');
+  var emp = null;
+  for (var i = 0; i < emps.length; i++) {
+    if (emps[i].name === user.name) { emp = emps[i]; break; }
+  }
+
+  var joinDate = emp ? emp.joinDate : '';
+  var status = emp ? emp.status : 'active';
+
+  // Profile card
+  var initials = user.name ? user.name.slice(-2) : '';
+  document.getElementById('profileAvatar').textContent = initials;
+  document.getElementById('profileName').textContent = user.name;
+  document.getElementById('profileMeta').textContent = (user.department || '') + ' / ' + (user.role || '');
+  document.getElementById('profileEmail').textContent = user.email || '';
+  document.getElementById('profilePhone').textContent = user.phone || '';
+  document.getElementById('profileJoinDate').textContent = joinDate ? '입사 ' + Office.UI.formatDate(joinDate) : '';
+
+  var badge = document.getElementById('profileStatusBadge');
+  if (status === 'active') {
+    badge.innerHTML = '<i class="fas fa-circle"></i> 재직';
+    badge.style.background = 'var(--success-bg)';
+    badge.style.color = '#15803D';
+  } else {
+    badge.innerHTML = '<i class="fas fa-circle"></i> 휴직';
+    badge.style.background = 'var(--warning-bg)';
+    badge.style.color = '#B45309';
+  }
+
+  // Info tab
+  document.getElementById('infoName').textContent = user.name;
+  document.getElementById('infoUsername').textContent = user.username || '';
+  document.getElementById('infoEmailDisplay').textContent = user.email || '';
+  document.getElementById('infoEmailInput').value = user.email || '';
+  document.getElementById('infoPhoneDisplay').textContent = user.phone || '';
+  document.getElementById('infoPhoneInput').value = user.phone || '';
+  document.getElementById('infoDept').textContent = user.department || '';
+  document.getElementById('infoPosition').textContent = user.role || '';
+  document.getElementById('infoJoinDate').textContent = joinDate ? Office.UI.formatDate(joinDate) : '-';
+}
+
+function toggleEdit() {
+  isEditing = !isEditing;
+  var btn = document.getElementById('editToggleBtn');
+  var footer = document.getElementById('editFooter');
+
+  if (isEditing) {
+    btn.innerHTML = '<i class="fas fa-times"></i> 취소';
+    footer.style.display = 'block';
+    document.getElementById('infoEmailDisplay').style.display = 'none';
+    document.getElementById('infoEmailInput').style.display = 'block';
+    document.getElementById('infoPhoneDisplay').style.display = 'none';
+    document.getElementById('infoPhoneInput').style.display = 'block';
+  } else {
+    cancelEdit();
+  }
+}
+
+function cancelEdit() {
+  isEditing = false;
+  document.getElementById('editToggleBtn').innerHTML = '<i class="fas fa-pen"></i> 수정';
+  document.getElementById('editFooter').style.display = 'none';
+  document.getElementById('infoEmailDisplay').style.display = '';
+  document.getElementById('infoEmailInput').style.display = 'none';
+  document.getElementById('infoPhoneDisplay').style.display = '';
+  document.getElementById('infoPhoneInput').style.display = 'none';
+  // reset inputs
+  document.getElementById('infoEmailInput').value = user.email || '';
+  document.getElementById('infoPhoneInput').value = user.phone || '';
+}
+
+function saveProfile() {
+  var newEmail = document.getElementById('infoEmailInput').value.trim();
+  var newPhone = document.getElementById('infoPhoneInput').value.trim();
+
+  if (!newEmail) { Office.UI.showToast('이메일을 입력하세요.', 'error'); return; }
+
+  user.email = newEmail;
+  user.phone = newPhone;
+  sessionStorage.setItem('office_user', JSON.stringify(user));
+
+  // Update employee record too
+  var emps = Office.Storage.get('employees');
+  for (var i = 0; i < emps.length; i++) {
+    if (emps[i].name === user.name) {
+      emps[i].email = newEmail;
+      emps[i].phone = newPhone;
+      break;
+    }
+  }
+  Office.Storage.set('employees', emps);
+
+  cancelEdit();
+  loadProfile();
+  Office.UI.showToast('정보가 저장되었습니다.', 'success');
+}
+
+function changePassword() {
+  var current = document.getElementById('pwCurrent').value;
+  var newPw = document.getElementById('pwNew').value;
+  var confirm = document.getElementById('pwConfirm').value;
+
+  if (!current) { Office.UI.showToast('현재 비밀번호를 입력하세요.', 'error'); return; }
+  if (!newPw) { Office.UI.showToast('새 비밀번호를 입력하세요.', 'error'); return; }
+  if (newPw.length < 8) { Office.UI.showToast('비밀번호는 8자 이상이어야 합니다.', 'error'); return; }
+  if (newPw === current) { Office.UI.showToast('현재 비밀번호와 다르게 설정하세요.', 'error'); return; }
+  if (newPw !== confirm) { Office.UI.showToast('새 비밀번호가 일치하지 않습니다.', 'error'); return; }
+
+  // Simple validation pass (no real backend)
+  document.getElementById('pwCurrent').value = '';
+  document.getElementById('pwNew').value = '';
+  document.getElementById('pwConfirm').value = '';
+  Office.UI.showToast('비밀번호가 변경되었습니다.', 'success');
+}
+
+function renderMyApprovals() {
+  if (!user) return;
+  var all = Office.Approval.getAll();
+  var mine = all.filter(function(a) {
+    return a.requester === user.name;
+  });
+
+  var tbody = document.getElementById('myApprovalsBody');
+  if (mine.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" class="text-center" style="padding:32px;color:var(--gray-400)">결재 내역이 없습니다.</td></tr>';
+    return;
+  }
+
+  var html = '';
+  for (var i = 0; i < mine.length; i++) {
+    var a = mine[i];
+    var statusClass = '';
+    if (a.status === '대기') statusClass = 'pending';
+    else if (a.status === '승인') statusClass = 'approved';
+    else if (a.status === '반려') statusClass = 'rejected';
+    else if (a.status === '임시저장') statusClass = 'draft';
+
+    html += '<tr>';
+    html += '<td><span class="tag">' + (a.type || '') + '</span></td>';
+    html += '<td style="font-weight:600">' + (a.title || '') + '</td>';
+    html += '<td>' + Office.UI.formatDate(a.createdAt) + '</td>';
+    html += '<td><span class="badge-status ' + statusClass + '">' + a.status + '</span></td>';
+    html += '</tr>';
+  }
+  tbody.innerHTML = html;
+}
+
+function renderActivity() {
+  if (!user) return;
+  var items = [];
+
+  // Attendance records
+  var attendance = Office.Storage.get('attendance');
+  for (var i = 0; i < attendance.length && items.length < 5; i++) {
+    var att = attendance[i];
+    if (att.employeeName === user.name) {
+      var desc = att.clockIn ? '출근 ' + att.clockIn : '';
+      if (att.clockOut) desc += ' / 퇴근 ' + att.clockOut;
+      if (att.status === '지각') desc += ' (지각)';
+      items.push({
+        icon: 'fa-clock',
+        iconBg: 'var(--primary-100)',
+        iconColor: 'var(--primary)',
+        title: '근태 기록',
+        desc: att.date + ' - ' + desc,
+        time: att.date
+      });
+    }
+  }
+
+  // Approval actions
+  var approvals = Office.Approval.getAll();
+  for (var i = 0; i < approvals.length && items.length < 10; i++) {
+    var ap = approvals[i];
+    if (ap.requester === user.name) {
+      items.push({
+        icon: 'fa-file-signature',
+        iconBg: ap.status === '승인' ? 'var(--success-bg)' : ap.status === '반려' ? 'var(--danger-bg)' : 'var(--warning-bg)',
+        iconColor: ap.status === '승인' ? 'var(--success)' : ap.status === '반려' ? 'var(--danger)' : 'var(--warning)',
+        title: ap.type + ' ' + ap.status,
+        desc: ap.title,
+        time: ap.createdAt
+      });
+    }
+  }
+
+  // Board posts
+  var boards = Office.Storage.get('boards');
+  for (var i = 0; i < boards.length && items.length < 15; i++) {
+    var bd = boards[i];
+    if (bd.author === user.name) {
+      items.push({
+        icon: 'fa-clipboard-list',
+        iconBg: 'var(--info-bg)',
+        iconColor: 'var(--info)',
+        title: '게시글 작성',
+        desc: '[' + bd.category + '] ' + bd.title,
+        time: bd.createdAt
+      });
+    }
+  }
+
+  // sort by time desc
+  items.sort(function(a, b) { return new Date(b.time) - new Date(a.time); });
+  items = items.slice(0, 10);
+
+  var list = document.getElementById('activityList');
+  if (items.length === 0) {
+    list.innerHTML = '<li class="activity-item" style="border:none;justify-content:center;color:var(--gray-400)">활동 내역이 없습니다.</li>';
+    return;
+  }
+
+  var html = '';
+  for (var i = 0; i < items.length; i++) {
+    var it = items[i];
+    html += '<li class="activity-item">';
+    html += '<div class="activity-icon" style="background:' + it.iconBg + ';color:' + it.iconColor + '"><i class="fas ' + it.icon + '"></i></div>';
+    html += '<div class="activity-info"><div class="title">' + it.title + '</div><div class="desc">' + it.desc + '</div></div>';
+    html += '<div class="activity-time">' + Office.UI.timeAgo(it.time) + '</div>';
+    html += '</li>';
+  }
+  list.innerHTML = html;
+}
+
+loadProfile();
+renderMyApprovals();
+renderActivity();
+</script>
+
+</body>
+</html>

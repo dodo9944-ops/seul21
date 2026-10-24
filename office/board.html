@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>게시판 - 세울엔지니어링 사무자동화시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/office.css">
+</head>
+<body>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">SE</div>
+      <div>
+        <div class="logo-text">세울엔지니어링</div>
+        <span class="logo-sub">사무자동화시스템</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">메뉴</div>
+        <ul class="sidebar-menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> 대시보드</a></li>
+          <li><a href="approval.html"><i class="fas fa-file-signature"></i> 전자결재 <span class="badge" id="approvalBadge">0</span></a></li>
+          <li><a href="documents.html"><i class="fas fa-folder-open"></i> 문서관리</a></li>
+          <li><a href="reports.html"><i class="fas fa-chart-bar"></i> 업무보고</a></li>
+          <li><a href="attendance.html"><i class="fas fa-clock"></i> 근태관리</a></li>
+          <li><a href="calendar.html"><i class="fas fa-calendar-alt"></i> 일정관리</a></li>
+          <li><a href="board.html"><i class="fas fa-clipboard-list"></i> 게시판</a></li>
+          <li><a href="contacts.html"><i class="fas fa-address-book"></i> 주소록</a></li>
+          <li><a href="mypage.html"><i class="fas fa-user-cog"></i> 마이페이지</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar"></div>
+      <div class="user-info">
+        <div class="user-name" id="userName"></div>
+        <div class="user-role" id="userRole"></div>
+      </div>
+      <button class="user-logout" onclick="Office.Auth.logout()" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="top-header-left">
+        <button class="menu-toggle" onclick="Office.UI.toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="breadcrumb">
+          <a href="index.html">홈</a><span class="sep">/</span>
+          <span>커뮤니티</span><span class="sep">/</span>
+          <span class="current">게시판</span>
+        </div>
+      </div>
+      <div class="top-header-right">
+        <span class="header-clock" id="headerClock"></span>
+        <button class="header-btn" title="알림"><i class="fas fa-bell"></i><span class="notif-dot" id="notifDot"></span></button>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="page-header-actions">
+          <h1>게시판</h1>
+          <button class="btn btn-primary" onclick="openNewPostModal()"><i class="fas fa-pen"></i> 새 글 작성</button>
+        </div>
+      </div>
+
+      <!-- Board List View -->
+      <div id="boardListView">
+        <!-- Tabs -->
+        <div class="tabs" id="boardTabs">
+          <button class="tab-btn active" data-category="">전체</button>
+          <button class="tab-btn" data-category="공지사항">공지사항</button>
+          <button class="tab-btn" data-category="자유게시판">자유게시판</button>
+          <button class="tab-btn" data-category="부서게시판">부서게시판</button>
+        </div>
+
+        <!-- Search -->
+        <div style="margin-bottom:16px">
+          <div class="search-box" style="max-width:360px">
+            <i class="fas fa-search"></i>
+            <input type="text" class="form-control" id="boardSearch" placeholder="제목, 작성자 검색..." oninput="renderBoard()">
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th class="text-center" style="width:60px">No.</th>
+                  <th style="width:90px">카테고리</th>
+                  <th>제목</th>
+                  <th style="width:90px">작성자</th>
+                  <th style="width:100px">작성일</th>
+                  <th class="text-center" style="width:70px">조회수</th>
+                </tr>
+              </thead>
+              <tbody id="boardBody"></tbody>
+            </table>
+          </div>
+          <div class="card-footer">
+            <div class="pagination" id="boardPagination"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post Detail View -->
+      <div id="postDetail" hidden>
+        <div style="margin-bottom:16px">
+          <button class="btn btn-outline btn-sm" onclick="showList()"><i class="fas fa-arrow-left"></i> 목록으로</button>
+        </div>
+        <div class="post-detail">
+          <div class="post-detail-header">
+            <h2 id="detailTitle"></h2>
+            <div class="d-flex align-center gap-16" style="flex-wrap:wrap">
+              <span class="tag" id="detailCategory"></span>
+              <span class="text-sm text-muted"><i class="fas fa-user"></i> <span id="detailAuthor"></span> · <span id="detailDept"></span></span>
+              <span class="text-sm text-muted"><i class="fas fa-calendar"></i> <span id="detailDate"></span></span>
+              <span class="text-sm text-muted"><i class="fas fa-eye"></i> <span id="detailViews"></span></span>
+            </div>
+          </div>
+          <div class="post-detail-body" id="detailContent"></div>
+          <div class="post-detail-footer">
+            <h4 style="font-size:14px;font-weight:700;margin-bottom:12px"><i class="fas fa-comments"></i> 댓글 <span id="detailCommentCount"></span></h4>
+            <div id="detailComments"></div>
+          </div>
+        </div>
+        <div style="margin-top:16px;text-align:center">
+          <button class="btn btn-outline" onclick="showList()"><i class="fas fa-list"></i> 목록으로 돌아가기</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- New Post Modal -->
+<div class="modal-overlay" id="newPostModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>새 글 작성</h3>
+      <button class="modal-close" onclick="Office.UI.closeModal('newPostModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>카테고리 <span class="required">*</span></label>
+        <select class="form-control" id="newPostCategory">
+          <option value="공지사항">공지사항</option>
+          <option value="자유게시판" selected>자유게시판</option>
+          <option value="부서게시판">부서게시판</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>제목 <span class="required">*</span></label>
+        <input type="text" class="form-control" id="newPostTitle" placeholder="제목을 입력하세요">
+      </div>
+      <div class="form-group">
+        <label>내용 <span class="required">*</span></label>
+        <textarea class="form-control" id="newPostContent" placeholder="내용을 입력하세요" style="min-height:200px"></textarea>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="newPostPinned">
+        <label for="newPostPinned">공지 고정</label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="Office.UI.closeModal('newPostModal')">취소</button>
+      <button class="btn btn-primary" onclick="createPost()"><i class="fas fa-check"></i> 등록</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="assets/js/office-data.js"></script>
+<script src="assets/js/office.js"></script>
+<script>
+Office.init();
+
+var currentCategory = '';
+var currentPage = 1;
+var PAGE_SIZE = 10;
+var searchKeyword = '';
+
+// Tab click
+var tabBtns = document.querySelectorAll('#boardTabs .tab-btn');
+for (var i = 0; i < tabBtns.length; i++) {
+  (function(btn) {
+    btn.addEventListener('click', function() {
+      tabBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentCategory = btn.getAttribute('data-category');
+      currentPage = 1;
+      renderBoard();
+    });
+  })(tabBtns[i]);
+}
+
+function renderBoard() {
+  searchKeyword = (document.getElementById('boardSearch').value || '').trim().toLowerCase();
+  var allPosts = Office.Storage.get('boards');
+
+  // filter by category
+  if (currentCategory) {
+    allPosts = allPosts.filter(function(p) { return p.category === currentCategory; });
+  }
+
+  // filter by search
+  if (searchKeyword) {
+    allPosts = allPosts.filter(function(p) {
+      return p.title.toLowerCase().indexOf(searchKeyword) >= 0 || p.author.toLowerCase().indexOf(searchKeyword) >= 0;
+    });
+  }
+
+  // sort: pinned first, then by date
+  allPosts.sort(function(a, b) {
+    if (a.isPinned !== b.isPinned) return a.isPinned ? -1 : 1;
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+
+  var total = allPosts.length;
+  var totalPages = Math.ceil(total / PAGE_SIZE) || 1;
+  if (currentPage > totalPages) currentPage = totalPages;
+  var start = (currentPage - 1) * PAGE_SIZE;
+  var pageData = allPosts.slice(start, start + PAGE_SIZE);
+
+  var tbody = document.getElementById('boardBody');
+  if (pageData.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center" style="padding:40px;color:var(--gray-400)">게시글이 없습니다.</td></tr>';
+  } else {
+    var html = '';
+    for (var i = 0; i < pageData.length; i++) {
+      var p = pageData[i];
+      var num = total - start - i;
+      var catClass = p.category === '공지사항' ? 'red' : p.category === '부서게시판' ? 'blue' : '';
+      var pinIcon = p.isPinned ? '<i class="fas fa-thumbtack text-danger" style="font-size:12px;margin-right:4px" title="고정"></i>' : '';
+      var commentBadge = (p.comments && p.comments > 0) ? ' <span style="color:var(--primary);font-weight:600;font-size:12px">[' + p.comments + ']</span>' : '';
+      html += '<tr style="cursor:pointer" onclick="viewPost(\'' + p.id + '\')">';
+      html += '<td class="text-center">' + pinIcon + num + '</td>';
+      html += '<td><span class="tag ' + catClass + '">' + p.category + '</span></td>';
+      html += '<td style="font-weight:600;color:var(--gray-800)">' + escHtml(p.title) + commentBadge + '</td>';
+      html += '<td>' + escHtml(p.author) + '</td>';
+      html += '<td>' + Office.UI.formatDate(p.createdAt) + '</td>';
+      html += '<td class="text-center">' + (p.views || 0) + '</td>';
+      html += '</tr>';
+    }
+    tbody.innerHTML = html;
+  }
+
+  // pagination
+  var pagEl = document.getElementById('boardPagination');
+  if (totalPages <= 1) { pagEl.innerHTML = ''; return; }
+  var ph = '';
+  ph += '<button ' + (currentPage === 1 ? 'disabled' : '') + ' onclick="goPage(' + (currentPage - 1) + ')"><i class="fas fa-chevron-left"></i></button>';
+  for (var pg = 1; pg <= totalPages; pg++) {
+    ph += '<button class="' + (pg === currentPage ? 'active' : '') + '" onclick="goPage(' + pg + ')">' + pg + '</button>';
+  }
+  ph += '<button ' + (currentPage === totalPages ? 'disabled' : '') + ' onclick="goPage(' + (currentPage + 1) + ')"><i class="fas fa-chevron-right"></i></button>';
+  pagEl.innerHTML = ph;
+}
+
+function goPage(p) {
+  currentPage = p;
+  renderBoard();
+}
+
+function viewPost(id) {
+  var post = Office.Board.getPost(id);
+  if (!post) return;
+  document.getElementById('detailTitle').textContent = post.title;
+  var catEl = document.getElementById('detailCategory');
+  catEl.textContent = post.category;
+  catEl.className = 'tag ' + (post.category === '공지사항' ? 'red' : post.category === '부서게시판' ? 'blue' : '');
+  document.getElementById('detailAuthor').textContent = post.author;
+  document.getElementById('detailDept').textContent = post.authorDept || '';
+  document.getElementById('detailDate').textContent = Office.UI.formatDateTime(post.createdAt);
+  document.getElementById('detailViews').textContent = post.views || 0;
+  document.getElementById('detailContent').innerHTML = escHtml(post.content || '').replace(/\n/g, '<br>');
+  document.getElementById('detailCommentCount').textContent = post.comments || 0;
+
+  // simple comments placeholder
+  var commentsHtml = '';
+  if (post.comments && post.comments > 0) {
+    for (var c = 0; c < post.comments; c++) {
+      commentsHtml += '<div class="comment-item"><div class="activity-icon" style="background:var(--gray-100);color:var(--gray-500)"><i class="fas fa-user"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:4px">직원' + (c + 1) + '</div><div style="font-size:13px;color:var(--gray-600)">댓글 내용입니다.</div></div><div class="activity-time">' + Office.UI.timeAgo(post.createdAt) + '</div></div>';
+    }
+  } else {
+    commentsHtml = '<p class="text-muted text-sm" style="padding:12px 0">댓글이 없습니다.</p>';
+  }
+  document.getElementById('detailComments').innerHTML = commentsHtml;
+
+  document.getElementById('boardListView').hidden = true;
+  document.getElementById('postDetail').hidden = false;
+}
+
+function showList() {
+  document.getElementById('postDetail').hidden = true;
+  document.getElementById('boardListView').hidden = false;
+  renderBoard();
+}
+
+function openNewPostModal() {
+  document.getElementById('newPostTitle').value = '';
+  document.getElementById('newPostContent').value = '';
+  document.getElementById('newPostPinned').checked = false;
+  document.getElementById('newPostCategory').value = '자유게시판';
+  Office.UI.showModal('newPostModal');
+}
+
+function createPost() {
+  var title = document.getElementById('newPostTitle').value.trim();
+  var content = document.getElementById('newPostContent').value.trim();
+  var category = document.getElementById('newPostCategory').value;
+  var isPinned = document.getElementById('newPostPinned').checked;
+
+  if (!title) { Office.UI.showToast('제목을 입력하세요.', 'error'); return; }
+  if (!content) { Office.UI.showToast('내용을 입력하세요.', 'error'); return; }
+
+  Office.Board.createPost({
+    category: category,
+    title: title,
+    content: content,
+    isPinned: isPinned
+  });
+
+  Office.UI.closeModal('newPostModal');
+  Office.UI.showToast('게시글이 등록되었습니다.', 'success');
+  currentPage = 1;
+  renderBoard();
+}
+
+function escHtml(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str || ''));
+  return div.innerHTML;
+}
+
+renderBoard();
+</script>
+
+</body>
+</html>
