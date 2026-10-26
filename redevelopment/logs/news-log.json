@@ -2108,5 +2108,139 @@
     },
     "data_changes": "MOCK.library에 news0930a·news0930b 2건 순수 추가만 수행. 기존 항목 삭제·수정 0건. downloads/ 기존 파일 삭제 0건. library.html fileMap·index.html newsFileMap 기존 등록 변경 0건(신규 2건 추가만).",
     "additional_notes": "목표 3건 대비 2건만 게시한 사유는 shortfall_reason 참조 — 품질 낮은 기사로 억지로 채우지 않는다는 원칙(작업지시 §2)에 따라 신규성·정확성 요건을 충족하지 못한 후보 3건은 게시하지 않았다. 다음 실행 시 참고사항: (1) 대법원 지주협의회 대의원회 의사록 판결 기사는 원문 직접 열람이 가능해지면 정확한 선고일 확인 후 재검토 가치가 있음. (2) 김남근 의원 개정법률안(news0930a)은 기존 law0725a(2026-07-25, 엄태영·천준호 의원안)와 핵심 취지(재개발 동의율 70%)는 겹치나, 발의자·발의일(9/18)·신규 조항(공사비 산출내역서 허위제출 처벌, 공공시행자 동의요건 60% 완화, 비조합원 추진위원장 허용)이 다른 별개 법안으로 판단해 게시했다 — 향후 유사 사례 발생 시 이 판단 기준(발의자·조문 신규성)을 참고할 것. (3) 하안주공6·7단지(news0930b)는 9월 18일 1차 유찰에 이은 9월 29일 2차 유찰 소식으로, 수의계약 전환 여부가 10월 2일 집행부 회의에서 결정될 예정이므로 후속 보도를 다음 회차 검색 시 확인할 것. (4) 다수 언론사 도메인(housingherald.co.kr, arunews.com, fnnews.com, sisaon.co.kr, imnews.imbc.com)이 egress 정책상 WebFetch 차단 상태가 지속되고 있어, WebSearch 요약에만 의존해 원문 대조가 제한적이었다. (5) 배포는 이번 실행에서 시도하지 않았으며 07:30 일괄배포 담당자가 본 건(news0930a·b)을 포함해 배포 후 라이브 URL 200 검수를 수행해야 한다."
+  },
+  {
+    "run_datetime_kst": "2026-10-27 08:54 KST",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "trigger": "대장 지시 수동 실행(제1호 PC) — 원격 루틴 trig_01TXMDLyXKA6tAoqutA3QBkX가 ROUTINE_RUN_FAILURE_REASON_ACCESS_DENIED로 실패해 9/30 이후 게시 중단 상태였음",
+    "searched_articles_count": 30,
+    "candidate_articles_count": 7,
+    "target_max": 3,
+    "shortfall_reason": null,
+    "selected_articles": [
+      {
+        "id": "news1027a",
+        "title": "단계마다 ‘도장’ 찍던 재개발·재건축 확 뚫린다",
+        "media": "파이낸셜뉴스",
+        "published": "2026.10.26",
+        "url": "https://www.fnnews.com/news/202610261832423243"
+      },
+      {
+        "id": "news1027b",
+        "title": "국토부 장관 “정비사업 조합원지위 양도 제한 완화 검토”",
+        "media": "서울경제",
+        "published": "2026.10.23",
+        "url": "https://www.sedaily.com/article/20105477"
+      },
+      {
+        "id": "news1027c",
+        "title": "국토교통부, 정비사업 조합 위법행위 특별현장점검 실시",
+        "media": "뉴스다",
+        "published": "2026.10.14",
+        "url": "https://www.newsda.net/news/article.html?no=591553"
+      }
+    ],
+    "cleanup_list_http_status": 200,
+    "cleanup_checked_count": 10,
+    "cleanup_new_count": 9,
+    "cleanup_backlog_note": "원칙상 등록일 오늘-3일 이내만 신규이나, 루틴 실패로 누락된 9/28 이후 미게시 공고 9건(하루 안전한도 10건 이내)을 일괄 게시. 12430(이주비 융자) 접수기간 10/15 마감 사실 본문 명시.",
+    "cleanup_posted_items": [
+      {
+        "bbsSn": "13133",
+        "title": "상계미도아파트 재건축사업 조합설립추진위원회 구성을 위한 예비추진위원장 · 예비감사 선거 후보자 등록 공고",
+        "org": "노원구",
+        "registered": "2026.10.26",
+        "id": "news1027d",
+        "url": "https://cleanup.seoul.go.kr/cleanup/bbs/vscr.do?bbsClCode=100&ctgryClCode=100&bbs.bbsSn=13133"
+      },
+      {
+        "bbsSn": "13132",
+        "title": "상계미도아파트 재건축사업 조합설립추진위원회 구성을 위한 예비추진위원장 · 예비감사 선거 선거인명부 열람 공고",
+        "org": "노원구",
+        "registered": "2026.10.26",
+        "id": "news1027e",
+        "url": "https://cleanup.seoul.go.kr/cleanup/bbs/vscr.do?bbsClCode=100&ctgryClCode=100&bbs.bbsSn=13132"
+      },
+      {
+        "bbsSn": "12525",
+        "title": "2026년 모아주택 조합설립 공공지원 대상지 공모 공고",
+        "org": "서울특별시",
+        "registered": "2026.10.20",
+        "id": "news1027f",
+        "url": "https://cleanup.seoul.go.kr/cleanup/bbs/vscr.do?bbsClCode=100&ctgryClCode=100&bbs.bbsSn=12525"
+      },
+      {
+        "bbsSn": "12500",
+        "title": "2026년도 서울시 정비사업 융자금(초기사업비) 추가 지원계획 공고",
+        "org": "서울특별시",
+        "registered": "2026.10.19",
+        "id": "news1027g",
+        "url": "https://cleanup.seoul.go.kr/cleanup/bbs/vscr.do?bbsClCode=100&ctgryClCode=100&bbs.bbsSn=12500"
+      },
+      {
+        "bbsSn": "12455",
+        "title": "모아통합기획 모아타운 후보지 선정 공모 공고",
+        "org": "서울특별시",
+        "registered": "2026.10.12",
+        "id": "news1027h",
+        "url": "https://cleanup.seoul.go.kr/cleanup/bbs/vscr.do?bbsClCode=100&ctgryClCode=100&bbs.bbsSn=12455"
+      },
+      {
+        "bbsSn": "12446",
+        "title": "정비사업전문관리업자 행정처분(업무정지) 취소 공고",
+        "org": "서울특별시",
+        "registered": "2026.10.06",
+        "id": "news1027i",
+        "url": "https://cleanup.seoul.go.kr/cleanup/bbs/vscr.do?bbsClCode=100&ctgryClCode=100&bbs.bbsSn=12446"
+      },
+      {
+        "bbsSn": "12430",
+        "title": "2026년도 서울특별시 주택공급 정상화 사업비(이주비) 융자 지원을 위한 접수 안내",
+        "org": "서울특별시",
+        "registered": "2026.09.30",
+        "id": "news1027j",
+        "url": "https://cleanup.seoul.go.kr/cleanup/bbs/vscr.do?bbsClCode=100&ctgryClCode=100&bbs.bbsSn=12430"
+      },
+      {
+        "bbsSn": "12425",
+        "title": "사근동 293번지 일대 재개발사업 조합설립계획 공고",
+        "org": "성동구",
+        "registered": "2026.09.28",
+        "id": "news1027k",
+        "url": "https://cleanup.seoul.go.kr/cleanup/bbs/vscr.do?bbsClCode=100&ctgryClCode=100&bbs.bbsSn=12425"
+      },
+      {
+        "bbsSn": "12423",
+        "title": "정비사업전문관리업자 행정처분(업무정지) 취소 공고",
+        "org": "서울특별시",
+        "registered": "2026.09.28",
+        "id": "news1027l",
+        "url": "https://cleanup.seoul.go.kr/cleanup/bbs/vscr.do?bbsClCode=100&ctgryClCode=100&bbs.bbsSn=12423"
+      }
+    ],
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ],
+    "posted_success_count": 12,
+    "posted_news_count": 3,
+    "posted_cleanup_count": 9,
+    "posted_fail_count": 0,
+    "fail_reasons": [],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "대장 지시로 batch_deploy.py 수동 1회 실행 예정",
+    "pre_deploy_verification": "downloads/news_20261027a~l.html 12개 생성, library.html fileMap·index.html newsFileMap 12건 등록, node --check 통과, MOCK.library 503건(신규 12) 로드 확인, mock-data.js?v=20261027a 49개 HTML 동기화",
+    "data_changes": "기존 MOCK.library·downloads·fileMap 삭제·수정 0건(순수 추가만)",
+    "additional_notes": "정비몽땅 공고 첨부 PDF는 CSRF 폼 다운로드로 원문을 받아 기한·요건을 확인함(제1호 PC 국내 IP에서 정상 접속). 원격 루틴 ACCESS_DENIED 원인은 미해결 — GitHub 저장소 접근 권한(dodo9944-ops/seul21) 재연결 필요."
   }
 ]
