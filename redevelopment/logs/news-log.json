@@ -2242,5 +2242,106 @@
     "pre_deploy_verification": "downloads/news_20261027a~l.html 12개 생성, library.html fileMap·index.html newsFileMap 12건 등록, node --check 통과, MOCK.library 503건(신규 12) 로드 확인, mock-data.js?v=20261027a 49개 HTML 동기화",
     "data_changes": "기존 MOCK.library·downloads·fileMap 삭제·수정 0건(순수 추가만)",
     "additional_notes": "정비몽땅 공고 첨부 PDF는 CSRF 폼 다운로드로 원문을 받아 기한·요건을 확인함(제1호 PC 국내 IP에서 정상 접속). 원격 루틴 ACCESS_DENIED 원인은 미해결 — GitHub 저장소 접근 권한(dodo9944-ops/seul21) 재연결 필요."
+  },
+  {
+    "run_datetime_kst": "2026-10-28 06:38 KST",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "trigger": "매일 06:30 KST 자동 스케줄 실행",
+    "searched_articles_count": 30,
+    "candidate_articles_count": 2,
+    "target_max": 3,
+    "shortfall_reason": "품질 기준(실무 중요도 1~7순위)을 충족하는 신규·비중복 기사가 2건만 확인됨. 10/27 검색에서 발견된 fnnews/sedaily/newsda 상위 기사는 전일(2026-10-27) news1027a~c로 이미 게시되어 제외, 모아통합기획 관련 MTN 기사(10/12)는 이미 게시된 정비몽땅 공고 news1027f와 동일 사안으로 중복 제외. 품질 낮은 기사로 억지로 3건을 채우지 않음(CLAUDE.md §2 선정 기준 준수).",
+    "selected_articles": [
+      {
+        "id": "news1028a",
+        "title": "“공급 속도전 외치더니”…신상진 성남시장, 국토부 재건축 딴지에 정면 반발",
+        "media": "파이낸셜뉴스",
+        "published": "2026.10.27",
+        "url": "https://www.fnnews.com/news/202610271124584444"
+      },
+      {
+        "id": "news1028b",
+        "title": "[단독]은마재건축조합 “정태수 한보 회장 땅” 대법 승소 확정",
+        "media": "머니투데이방송(MTN)",
+        "published": "2026.10.11",
+        "url": "https://news.mtn.co.kr/news-detail/2026101117275273355"
+      }
+    ],
+    "cleanup_list_http_status": null,
+    "cleanup_checked_count": 0,
+    "cleanup_new_count": 0,
+    "cleanup_backlog_note": null,
+    "cleanup_fail_reason": "cleanup.seoul.go.kr 접속 실패 — 이 클라우드 세션의 에이전트 프록시가 해당 호스트 연결을 거부함(curl: connect_rejected / WebFetch: getaddrinfo ENOTFOUND, 세션 네트워크 허용 목록에 미포함). 제1호 PC(국내 IP)에서는 정상 접속되던 호스트로, 추측 게시 없이 목록 조회 자체를 중단함. 뉴스 게시는 지시 §1-2(7)에 따라 정상 진행함.",
+    "cleanup_posted_items": [],
+    "cleanup_posted": [],
+    "posted_success_count": 2,
+    "posted_news_count": 2,
+    "posted_cleanup_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, 세션 네트워크 허용 목록 미포함) — 공고 게시 0건"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "downloads/news_20261028a~b.html 2개 생성, library.html fileMap·index.html newsFileMap 2건 등록, node --check 통과, MOCK.library 505건 로드 확인(신규 2건, 기존 503건 변경 0건), mock-data.js?v=20261028a 49개 HTML 전수 동기화(잔존 구버전 참조 0건)",
+    "data_changes": "기존 MOCK.library·downloads·fileMap·newsFileMap 삭제·수정 0건(순수 추가만 수행)",
+    "additional_notes": "이 세션(클라우드 컨테이너)은 cleanup.seoul.go.kr, news.mtn.co.kr, www.fnnews.com, www.seoul.co.kr 등 다수 언론·공공 사이트에 대한 직접 WebFetch/curl 접속이 네트워크 정책상 차단됨. 뉴스 선정은 WebSearch 도구가 반환한 기사 발췌(원문 직접 인용 포함)를 근거로 ①요약~④현장대응방안을 작성했으며, 본문 전체 원문 대조는 하지 못했다. 정비몽땅 공고 수집은 다음 실행 시 네트워크 허용 목록에 cleanup.seoul.go.kr 추가가 필요하다(환경설정 변경은 대장 승인 필요 — environment.network 참조)."
+  },
+  {
+    "run_datetime_kst": "2026-10-29 06:31 KST",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "trigger": "매일 06:30 KST 자동 스케줄 실행",
+    "searched_articles_count": 30,
+    "candidate_articles_count": 3,
+    "target_max": 3,
+    "shortfall_reason": null,
+    "selected_articles": [
+      {
+        "id": "news1029a",
+        "title": "당정 \"민간 용적률 120%로 상향…도정법, 최대한 빨리 처리할 것\"",
+        "media": "헤럴드경제",
+        "published": "2026.10.28",
+        "url": "https://biz.heraldcorp.com/article/10917369"
+      },
+      {
+        "id": "news1029b",
+        "title": "서초구, 반포 현대 재초환 부담금 연내 부과 예고…재건축 시장 영향 커져",
+        "media": "아시아투데이",
+        "published": "2026.10.25",
+        "url": "https://www.asiatoday.co.kr/kn/view.php?key=20261025010008486"
+      },
+      {
+        "id": "news1029c",
+        "title": "공사비 검증 누락 사업장 138곳 특별점검",
+        "media": "파이낸셜뉴스",
+        "published": "2026.10.14",
+        "url": "https://www.fnnews.com/news/202610141829103064"
+      }
+    ],
+    "cleanup_list_http_status": 403,
+    "cleanup_checked_count": 0,
+    "cleanup_new_count": 0,
+    "cleanup_backlog_note": null,
+    "cleanup_fail_reason": "cleanup.seoul.go.kr 접속 실패 — curl이 에이전트 프록시(127.0.0.1:38001)를 통해 CONNECT 터널을 시도했으나 HTTP 403 Forbidden 응답(세션 네트워크 허용 목록 미포함). WebFetch도 동일 호스트에서 getaddrinfo ENOTFOUND 오류로 실패. 전일(2026-10-28)과 동일한 네트워크 정책 제한으로, 추측 게시 없이 목록 조회 자체를 중단함. 뉴스 게시는 지시 §1-2(7)에 따라 정상 진행함.",
+    "cleanup_posted_items": [],
+    "cleanup_posted": [],
+    "posted_success_count": 3,
+    "posted_news_count": 3,
+    "posted_cleanup_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, HTTP 403 — 세션 네트워크 허용 목록 미포함) — 공고 게시 0건"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "downloads/news_20261029a~c.html 3개 생성, library.html fileMap·index.html newsFileMap 3건 등록, node --check 통과, MOCK.library 508건 로드 확인(신규 3건, 기존 505건 변경 0건), mock-data.js?v=20261029a 49개 HTML 전수 동기화(잔존 구버전?v=20261028a 참조 0건, 무버전 참조 0건)",
+    "data_changes": "기존 MOCK.library·downloads·fileMap·newsFileMap 삭제·수정 0건(순수 추가만 수행)",
+    "additional_notes": "이 세션(클라우드 컨테이너)은 cleanup.seoul.go.kr, biz.heraldcorp.com, www.asiatoday.co.kr, www.fnnews.com, edaily.co.kr, www.sedaily.com, www.insight.co.kr 등 다수 언론·공공 사이트에 대한 직접 WebFetch/curl 접속이 네트워크 정책상 차단됨(getaddrinfo ENOTFOUND 또는 프록시 403). 뉴스 선정은 WebSearch 도구(standard/extended)가 반환한 기사 발췌·요약을 근거로 ①요약~④현장대응방안을 작성했으며, 본문 전체 원문 대조는 하지 못했다. 선정 과정에서 특정 수치(예: 이데일리 '법적상한용적률 95% 이상 활용 73곳' 보도, 인사이트 'IPARK현산 서울 2곳 우선협상자 선정·연 10조원 목표' 보도)는 재검색으로 교차 확인이 되지 않아 채택하지 않고 제외했다. 채택한 3건은 모두 동일 사실을 보도한 복수 매체(각 2~3곳)로 교차 확인했다. 정비몽땅 공고 수집은 다음 실행 시에도 네트워크 허용 목록에 cleanup.seoul.go.kr 추가가 필요하다(환경설정 변경은 대장 승인 필요 — environment.network 참조)."
   }
 ]
