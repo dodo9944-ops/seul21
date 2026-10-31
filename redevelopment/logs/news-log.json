@@ -2343,5 +2343,123 @@
     "pre_deploy_verification": "downloads/news_20261029a~c.html 3개 생성, library.html fileMap·index.html newsFileMap 3건 등록, node --check 통과, MOCK.library 508건 로드 확인(신규 3건, 기존 505건 변경 0건), mock-data.js?v=20261029a 49개 HTML 전수 동기화(잔존 구버전?v=20261028a 참조 0건, 무버전 참조 0건)",
     "data_changes": "기존 MOCK.library·downloads·fileMap·newsFileMap 삭제·수정 0건(순수 추가만 수행)",
     "additional_notes": "이 세션(클라우드 컨테이너)은 cleanup.seoul.go.kr, biz.heraldcorp.com, www.asiatoday.co.kr, www.fnnews.com, edaily.co.kr, www.sedaily.com, www.insight.co.kr 등 다수 언론·공공 사이트에 대한 직접 WebFetch/curl 접속이 네트워크 정책상 차단됨(getaddrinfo ENOTFOUND 또는 프록시 403). 뉴스 선정은 WebSearch 도구(standard/extended)가 반환한 기사 발췌·요약을 근거로 ①요약~④현장대응방안을 작성했으며, 본문 전체 원문 대조는 하지 못했다. 선정 과정에서 특정 수치(예: 이데일리 '법적상한용적률 95% 이상 활용 73곳' 보도, 인사이트 'IPARK현산 서울 2곳 우선협상자 선정·연 10조원 목표' 보도)는 재검색으로 교차 확인이 되지 않아 채택하지 않고 제외했다. 채택한 3건은 모두 동일 사실을 보도한 복수 매체(각 2~3곳)로 교차 확인했다. 정비몽땅 공고 수집은 다음 실행 시에도 네트워크 허용 목록에 cleanup.seoul.go.kr 추가가 필요하다(환경설정 변경은 대장 승인 필요 — environment.network 참조)."
+  },
+  {
+    "run_datetime_kst": "2026-10-30 06:39 KST",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "trigger": "매일 06:30 KST 자동 스케줄 실행",
+    "searched_articles_count": 33,
+    "candidate_articles_count": 3,
+    "target_max": 3,
+    "shortfall_reason": null,
+    "selected_articles": [
+      {
+        "id": "news1030a",
+        "title": "서울시, '모아통합기획' 도입…모아타운 관리계획·조합설립 병행 추진",
+        "media": "서울경제",
+        "published": "2026.10.12",
+        "url": "https://m.sedaily.com/article/20100388"
+      },
+      {
+        "id": "news1030b",
+        "title": "은마재건축조합, '한보 정태수 회장 땅' 소유권 반환 대법 승소 확정",
+        "media": "MTN",
+        "published": "2026.10.11",
+        "url": "https://news.mtn.co.kr/news-detail/2026101117275273355"
+      },
+      {
+        "id": "news1030c",
+        "title": "\"중도금·이주비 대출, 강화된 LTV 규제 적용 안 받는다는 보도는 사실 아님\"",
+        "media": "금융위원회",
+        "published": "2026.10.22",
+        "url": "https://www.korea.kr/briefing/actuallyView.do?newsId=148953306"
+      }
+    ],
+    "cleanup_list_http_status": 403,
+    "cleanup_checked_count": 0,
+    "cleanup_new_count": 0,
+    "cleanup_backlog_note": null,
+    "cleanup_fail_reason": "cleanup.seoul.go.kr 접속 실패 — curl이 에이전트 프록시(127.0.0.1:38001 등)를 통해 CONNECT 터널을 시도했으나 HTTP 403 Forbidden 응답(세션 네트워크 허용 목록 미포함, status 엔드포인트에 connect_rejected 기록됨). WebFetch도 동일 호스트에서 getaddrinfo ENOTFOUND 오류로 실패. 전일(2026-10-29)과 동일한 네트워크 정책 제한으로, 추측 게시 없이 목록 조회 자체를 중단함. 뉴스 게시는 지시 §1-2(7)에 따라 정상 진행함.",
+    "cleanup_posted_items": [],
+    "cleanup_posted": [],
+    "posted_success_count": 3,
+    "posted_news_count": 3,
+    "posted_cleanup_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, HTTP 403 — 세션 네트워크 허용 목록 미포함) — 공고 게시 0건"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "downloads/news_20261030a~c.html 3개 생성, library.html fileMap·index.html newsFileMap 3건 등록, node --check 통과, MOCK.library 511건 로드 확인(신규 3건, 기존 508건 변경 0건), mock-data.js?v=20261030a 49개 HTML 전수 동기화(잔존 구버전?v=20261029a 참조 0건, 무버전 참조 0건)",
+    "data_changes": "기존 MOCK.library·downloads·fileMap·newsFileMap 삭제·수정 0건(순수 추가만 수행)",
+    "additional_notes": "이 세션(클라우드 컨테이너)은 cleanup.seoul.go.kr, news.mtn.co.kr, www.korea.kr, www.fsc.go.kr 등 다수 언론·공공 사이트에 대한 직접 WebFetch/curl 접속이 네트워크 정책상 차단됨(getaddrinfo ENOTFOUND 또는 프록시 403 CONNECT 거부). 뉴스 선정은 WebSearch 도구(standard/extended)가 반환한 기사 발췌·요약을 근거로 ①요약~④현장대응방안을 작성했으며, 본문 전체 원문 대조는 하지 못했다. 전일 게시분(news1029a~c: 용적률 120%, 반포현대 재초환, 공사비검증 138곳)과 중복 여부를 사전 대조해 제외했다 — 특히 '국토부 공사비 검증 16곳 특별점검(fnnews 2026-10-14, news.mtn.co.kr/article/2026101416394379917 보도분)'은 전일 news1029c와 동일 사안(같은 fnnews 원문 URL)으로 확인되어 후보에서 배제했다. news1030b(은마 대법원 판결)는 MTN 단독보도로만 확인되어 복수매체 교차확인에는 실패했으나, 보도 신뢰도와 실무 중요도(법원 판결·토지분쟁 해소)를 근거로 '단독' 표기와 함께 채택했다. 정비몽땅 공고 수집은 다음 실행 시에도 네트워크 허용 목록에 cleanup.seoul.go.kr 추가가 필요하다(환경설정 변경은 대장 승인 필요 — environment.network 참조)."
+  },
+  {
+    "run_datetime_kst": "2026-10-31 06:42 KST",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "trigger": "매일 06:30 KST 자동 스케줄 실행",
+    "searched_articles_count": 41,
+    "candidate_articles_count": 3,
+    "target_max": 3,
+    "shortfall_reason": null,
+    "selected_articles": [
+      {
+        "id": "news1031a",
+        "title": "\"용적률 1.2배, 우리가 먼저 제안\"...홍지선에 반박한 서울시",
+        "media": "파이낸셜뉴스",
+        "published": "2026.10.30",
+        "url": "https://www.fnnews.com/news/202610301830109936"
+      },
+      {
+        "id": "news1031b",
+        "title": "대구시, 건축·주택·정비사업 통합심의 11월 1일부터 전면 확대",
+        "media": "경북도민일보",
+        "published": "2026.10.26",
+        "url": "https://www.hidomin.com/news/articleView.html?idxno=726502"
+      },
+      {
+        "id": "news1031c",
+        "title": "[단독]흑석2구역 재개발, 사업시행계획 수립 주민총회 성료",
+        "media": "하우징타임즈",
+        "published": "2026.10.17",
+        "url": "https://www.housingtimes.co.kr/news/articleView.html?idxno=2600"
+      }
+    ],
+    "cleanup_list_http_status": 0,
+    "cleanup_checked_count": 0,
+    "cleanup_new_count": 0,
+    "cleanup_backlog_note": null,
+    "cleanup_fail_reason": "cleanup.seoul.go.kr 접속 실패 — curl이 에이전트 프록시를 통해 연결을 시도했으나 HTTP_STATUS:000(연결 자체 실패, 세션 네트워크 허용 목록 미포함)으로 응답. WebFetch도 동일 호스트에서 getaddrinfo ENOTFOUND 오류로 실패(세션 허용 도메인 목록 밖). 전일(2026-10-30)과 동일한 네트워크 정책 제한으로, 추측 게시 없이 목록 조회 자체를 중단함. 뉴스 게시는 지시 §1-2(7)에 따라 정상 진행함.",
+    "cleanup_posted_items": [],
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ],
+    "posted_success_count": 3,
+    "posted_news_count": 3,
+    "posted_cleanup_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, 연결 자체 거부/ENOTFOUND — 세션 네트워크 허용 목록 미포함) — 공고 게시 0건"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "downloads/news_20261031a~c.html 3개 생성, library.html fileMap·index.html newsFileMap 3건 등록, node --check 통과, MOCK.library 신규 3건(기존 511건 변경·삭제 0건), mock-data.js?v=20261031a 49개 HTML 전수 동기화(잔존 구버전?v=20261030a 참조 0건, 무버전 참조 0건)",
+    "data_changes": "기존 MOCK.library·downloads·fileMap·newsFileMap 삭제·수정 0건(순수 추가만 수행)",
+    "additional_notes": "이 세션은 cleanup.seoul.go.kr, biz.sbs.co.kr, kbmaeil.com, news.mtn.co.kr 등 다수 언론·공공 사이트에 대한 직접 WebFetch/curl 접속이 네트워크 정책상 차단됨(getaddrinfo ENOTFOUND 또는 연결 자체 실패). 뉴스 선정은 WebSearch 도구(standard/extended)가 반환한 기사 발췌·요약을 근거로 ①요약~④현장대응방안을 작성했으며, 본문 전체 원문 대조는 하지 못했다. 전일 게시분(news1027~1030: 용적률 120% 당정협의, 조합원지위양도 완화검토, 반포현대 재초환, 공사비검증 138곳, 모아통합기획, 은마재건축 대법원, LTV 해명 등)과 중복 여부를 사전 대조해 제외했다 — 특히 '국토부 재개발·재건축 조합 16곳 특별점검(newspim 2026-10-14)'은 news1029c(공사비 검증 누락 138곳 특별점검)와 동일 사안으로 확인되어 배제했고, '조합원 지위 양도 제한 완화 검토(홍지선 장관, 10/23 국감)'는 news1027b(서울경제 2026.10.23)와 완전히 동일한 사안으로 확인되어 배제했으며, '분당 재건축 특별정비구역 교통영향평가 갈등'은 news1028a(파이낸셜뉴스 2026.10.27)와 동일 사안으로 확인되어 배제했다. 대신 동일 갈등의 후속 전개인 '홍지선 장관 상계2구역 현장방문 발언에 서울시 반박'(10/30, 새로운 사실관계)을 news1031a로 선정했다. 정비몽땅 공고 수집은 다음 실행 시에도 네트워크 허용 목록에 cleanup.seoul.go.kr 추가가 필요하다(환경설정 변경은 대장 승인 필요 — environment.network 참조)."
   }
 ]
