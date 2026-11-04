@@ -2699,5 +2699,56 @@
     "pre_deploy_verification": "downloads/news_20261104a~b.html 2개 생성, library.html fileMap·index.html newsFileMap 2건 등록, node --check 통과, MOCK.library 신규 2건 추가(기존 항목 변경·삭제 0건), mock-data.js?v=20261104a 49개 HTML 전수 동기화(잔존 구버전 ?v=20261103a 참조 0건, 무버전 참조 0건)",
     "data_changes": "기존 MOCK.library·downloads·fileMap·newsFileMap 삭제·수정 0건(순수 추가만 수행)",
     "additional_notes": "이 세션도 cleanup.seoul.go.kr을 포함한 다수 언론·공공 사이트에 대한 직접 WebFetch/curl 접속이 네트워크 정책상 차단됨(getaddrinfo ENOTFOUND 또는 CONNECT 403/connect_rejected). 뉴스 선정·작성은 WebSearch 도구(standard/extended)가 반환한 기사 발췌·요약 및 실제 검색결과 타이틀·URL을 근거로 했으며, 본문 전체 원문 대조는 하지 못했다. news1104a(목동9단지)는 머니투데이 기사 제목·URL이 WebSearch 색인 결과로 확인됐으나 동일 세부사항(참석사 명단)을 재검색으로 재확인하지는 못해, 요약은 최초 검색 결과에 기재된 사실에 한정해 보수적으로 작성했다. news1104b(하안주공10·11단지)도 위클리한국주택경제신문 기사 제목·URL을 근거로 동일하게 보수적으로 작성했다. '모아통합기획', '용적률 1.2배', '공사비 검증 특별점검' 등은 기존 게시분과 사실상 동일 사안이라 중복 게시하지 않았다. 정비몽땅 공고 수집은 다음 실행 시에도 네트워크 허용 목록에 cleanup.seoul.go.kr 추가가 필요하다(환경설정 변경은 대장 승인 필요 — environment.network 참조)."
+  },
+  {
+    "run_datetime_kst": "2026-11-05 06:31 KST",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "trigger": "매일 06:30 KST 자동 스케줄 실행",
+    "searched_articles_count": 16,
+    "candidate_articles_count": 1,
+    "target_max": 3,
+    "shortfall_reason": "WebSearch(standard/extended) 16회로 재개발·재건축·정비사업·도시정비법·모아타운·공사비·HUG 이주비 등을 광범위 검색. 1순위(정책·제도 변경) 범주에서 이재명 대통령의 11/4 장위9구역 공공재개발 현장 방문·재개발 조합설립 동의율 75%→70% 완화 추진·민간→공공재개발 전환 방안 지시 기사 1건을 확인·게시했다. 그 외 후보: ①대구시 통합심의위원회 운영기준(11/1 시행)은 실제 신청이 연말~내년 초로 예상되어 당장 실무 영향이 없는 예고성 기사로 제외, ②HUG의 가로주택정비 대출 회수 강화·117곳 중 57곳 조합설립 3년 경과 기사는 정확한 보도 시점을 확인하지 못해 '24~48시간 이내' 기준 미충족으로 제외, ③마천2구역 협력사 선정·신속통합기획 관련 기사도 정확한 최신 날짜를 확인하지 못해 제외, ④재개발 조합설립 동의율 완화(75→70%) 자체는 기존 게시분에 이미 다수 보도되어 있어 중복 판단, 다만 이번 대통령 현장 방문·공공전환 지시는 신규 사안으로 판단해 게시. 품질 낮은 기사로 3건을 억지로 채우지 않음(CLAUDE.md §2 준수).",
+    "selected_articles": [
+      {
+        "id": "news1105a",
+        "title": "장위동 재개발 현장 찾은 李 \"수도권 집값 안정은 모두의 핵심 사안\"",
+        "media": "아시아경제",
+        "published": "2026.11.04",
+        "url": "https://view.asiae.co.kr/article/2026110417113571192"
+      }
+    ],
+    "cleanup_list_http_status": 0,
+    "cleanup_checked_count": 0,
+    "cleanup_new_count": 0,
+    "cleanup_backlog_note": null,
+    "cleanup_fail_reason": "cleanup.seoul.go.kr 접속 실패 — ① curl(에이전트 프록시 경유): 'CONNECT tunnel failed, response 403'(호스트가 세션 네트워크 허용 목록 미포함). ② WebFetch 재시도: 'getaddrinfo ENOTFOUND cleanup.seoul.go.kr'(동일 원인, 세션 허용 도메인 외). 10/28~11/4과 동일한 네트워크 정책 제한으로, 추측 게시 없이 목록 조회 자체를 중단함. 뉴스 게시는 지시 §1-2(7)에 따라 정상 진행함.",
+    "cleanup_posted_items": [],
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ],
+    "posted_success_count": 1,
+    "posted_news_count": 1,
+    "posted_cleanup_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, CONNECT 403/ENOTFOUND — 세션 네트워크 허용 목록 미포함) — 공고 게시 0건",
+      "1순위 외 후보 다수가 보도 시점 미확인·기존 게시분과 중복으로 확인되어 제외 — 목표 3건 중 2건 미달(1건만 게시)"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "downloads/news_20261105a.html 1개 생성, library.html fileMap·index.html newsFileMap 1건 등록, node --check 통과, MOCK.library 신규 1건 추가(기존 항목 변경·삭제 0건), mock-data.js?v=20261104a → 20261105a 49개 HTML 전수 동기화(잔존 구버전 ?v=20261104a 참조 0건, 무버전 참조 0건)",
+    "data_changes": "기존 MOCK.library·downloads·fileMap·newsFileMap 삭제·수정 0건(순수 추가만 수행)",
+    "additional_notes": "이 세션도 cleanup.seoul.go.kr을 포함한 다수 언론·공공 사이트에 대한 직접 WebFetch/curl 접속이 네트워크 정책상 차단됨(getaddrinfo ENOTFOUND 또는 CONNECT 403). 뉴스 선정·작성은 WebSearch 도구(standard/extended)가 반환한 기사 발췌·요약 및 실제 검색결과 타이틀·URL을 근거로 했으며, 본문 전체 원문 대조는 하지 못했다. news1105a(장위9구역/이재명 대통령 현장방문)는 아시아경제 기사 제목·URL·보도시각(2026.11.04 17:11)이 WebSearch 색인 결과로 확인됐고, 데일리한국 등 타 매체 보도로 핵심 사실(장위9구역 방문, 조합설립 동의율 75→70% 완화 추진, 민간→공공재개발 전환 지시, 23만4000호 착공 목표)이 교차 확인되어 보수적으로 작성했다. 대구 통합심의 운영기준·HUG 가로주택 대출 회수 강화·마천2구역 협력사 선정 등은 보도 시점이 불명확하거나 즉시 실무 영향이 적어 게시하지 않았다. 정비몽땅 공고 수집은 다음 실행 시에도 네트워크 허용 목록에 cleanup.seoul.go.kr 추가가 필요하다(환경설정 변경은 대장 승인 필요 — environment.network 참조)."
   }
 ]
