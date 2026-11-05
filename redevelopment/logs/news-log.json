@@ -2750,5 +2750,63 @@
     "pre_deploy_verification": "downloads/news_20261105a.html 1개 생성, library.html fileMap·index.html newsFileMap 1건 등록, node --check 통과, MOCK.library 신규 1건 추가(기존 항목 변경·삭제 0건), mock-data.js?v=20261104a → 20261105a 49개 HTML 전수 동기화(잔존 구버전 ?v=20261104a 참조 0건, 무버전 참조 0건)",
     "data_changes": "기존 MOCK.library·downloads·fileMap·newsFileMap 삭제·수정 0건(순수 추가만 수행)",
     "additional_notes": "이 세션도 cleanup.seoul.go.kr을 포함한 다수 언론·공공 사이트에 대한 직접 WebFetch/curl 접속이 네트워크 정책상 차단됨(getaddrinfo ENOTFOUND 또는 CONNECT 403). 뉴스 선정·작성은 WebSearch 도구(standard/extended)가 반환한 기사 발췌·요약 및 실제 검색결과 타이틀·URL을 근거로 했으며, 본문 전체 원문 대조는 하지 못했다. news1105a(장위9구역/이재명 대통령 현장방문)는 아시아경제 기사 제목·URL·보도시각(2026.11.04 17:11)이 WebSearch 색인 결과로 확인됐고, 데일리한국 등 타 매체 보도로 핵심 사실(장위9구역 방문, 조합설립 동의율 75→70% 완화 추진, 민간→공공재개발 전환 지시, 23만4000호 착공 목표)이 교차 확인되어 보수적으로 작성했다. 대구 통합심의 운영기준·HUG 가로주택 대출 회수 강화·마천2구역 협력사 선정 등은 보도 시점이 불명확하거나 즉시 실무 영향이 적어 게시하지 않았다. 정비몽땅 공고 수집은 다음 실행 시에도 네트워크 허용 목록에 cleanup.seoul.go.kr 추가가 필요하다(환경설정 변경은 대장 승인 필요 — environment.network 참조)."
+  },
+  {
+    "run_datetime_kst": "2026-11-06 06:37 KST",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator",
+    "trigger": "매일 06:30 KST 자동 스케줄 실행",
+    "searched_articles_count": 25,
+    "candidate_articles_count": 2,
+    "target_max": 3,
+    "shortfall_reason": "WebSearch(standard/extended) 25회로 재개발·재건축·정비사업·모아타운·도시정비법·공사비·HUG 이주비·조합설립인가·시공사 선정·법원 판결 등을 광범위하게 검색. 1순위(정책 충돌)에서 이재명 대통령의 공공재개발 발언에 서울시(오세훈 시장)가 공개 반박한 사안 1건, 6순위(분담금·사업성)에서 은마아파트 추정분담금 급증·매물 5배 증가 사안 1건을 확인·게시했다. 그 외 후보: ①서울시 '모아통합기획' 후보지 공모(접수 11/2 개시)는 10/27·10/30에 이미 상세 게시된 사안의 반복이라 중복으로 제외, ②성동구 금호23구역·종로구 연건동305 공공재개발 후보지 취소는 2025년 12월 결정 사항을 11/5 아주경제가 회고성으로 재인용한 것이라 '최근 24~48시간 신규 사실' 기준에 맞지 않아 제외, ③신월시영 재건축 1차 입�찰 유찰(대우건설 단독)은 10/26 발생으로 시점이 맞지 않아 제외, ④용적률 1.2배 도정법 개정 국회 처리 여부는 11월 본회의 통과를 확인하지 못해(10월 말 계류 상태까지만 확인) 제외, ⑤부동산개발사업법상 '신속 인·허가 지원센터' 11/13 시행은 정비사업 직접 연계 근거가 불명확해 제외. 품질 낮은 기사로 3건을 억지로 채우지 않음(CLAUDE.md §2 준수). 본 세션은 다수 언론사 사이트에 대한 WebFetch/curl 직접 접속이 네트워크 정책상 전부 차단되어(getaddrinfo ENOTFOUND 또는 CONNECT 403) WebSearch 색인 결과(제목·발췌·날짜가 인코딩된 URL)만으로 사실을 교차확인했으며, 원문 전문 대조는 하지 못했다.",
+    "selected_articles": [
+      {
+        "id": "news1106a",
+        "title": "서울시 \"민간 재개발 죄악시 안돼\"...이재명 대통령 발언에 반박",
+        "media": "아시아경제",
+        "published": "2026.11.05",
+        "url": "https://view.asiae.co.kr/article/2026110516593805784"
+      },
+      {
+        "id": "news1106b",
+        "title": "\"치솟는 분담금 무서워\"...매물 5배 불어난 은마, 가격은 8억 '뚝'",
+        "media": "머니투데이(네이트뉴스 전재)",
+        "published": "2026.11.05",
+        "url": "https://news.nate.com/view/20261105n25488"
+      }
+    ],
+    "cleanup_list_http_status": 0,
+    "cleanup_checked_count": 0,
+    "cleanup_new_count": 0,
+    "cleanup_backlog_note": null,
+    "cleanup_fail_reason": "cleanup.seoul.go.kr 접속 실패 — ① curl(에이전트 프록시 경유): 'CONNECT tunnel failed, response 403'(호스트가 세션 네트워크 허용 목록 미포함). ② WebFetch 재시도: 'getaddrinfo ENOTFOUND cleanup.seoul.go.kr'(동일 원인, 세션 허용 도메인 외). 10/28~11/5과 동일한 네트워크 정책 제한으로, 추측 게시 없이 목록 조회 자체를 중단함. 뉴스 게시는 지시 §1-2(7)에 따라 정상 진행함.",
+    "cleanup_posted_items": [],
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ],
+    "posted_success_count": 2,
+    "posted_news_count": 2,
+    "posted_cleanup_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, CONNECT 403/ENOTFOUND — 세션 네트워크 허용 목록 미포함) — 공고 게시 0건",
+      "1순위 외 다수 후보가 시점 불일치(2025년말/10월 결정 사항의 재인용) 또는 국회 처리 여부 미확정으로 제외되어 목표 3건 중 1건 미달(2건만 게시)"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "downloads/news_20261106a.html, news_20261106b.html 2개 생성, library.html fileMap·index.html newsFileMap 각 2건 등록, node --check 통과, MOCK.library 신규 2건 추가(기존 항목 변경·삭제 0건), mock-data.js?v=20261105a → 20261106a 49개 HTML 전수 동기화(잔존 구버전 참조 0건, 무버전 참조 0건)",
+    "data_changes": "기존 MOCK.library·downloads·fileMap·newsFileMap 삭제·수정 0건(순수 추가만 수행)",
+    "additional_notes": "이 세션도 cleanup.seoul.go.kr을 포함한 다수 언론·공공 사이트에 대한 직접 WebFetch/curl 접속이 네트워크 정책상 차단됨(getaddrinfo ENOTFOUND 또는 CONNECT 403). 뉴스 선정·작성은 WebSearch 도구(standard/extended)가 반환한 기사 발췌·요약 및 실제 검색결과 타이틀·URL을 근거로 했으며, 본문 전체 원문 대조는 하지 못했다. news1106a(서울시 공공재개발 반박)는 아시아경제·이투데이·아주경제 등 복수 매체가 같은 사실(오세훈 시장 90% 발언, 공공재개발 착공 0건, 후보지 3곳 취소)을 일치되게 보도해 신뢰도가 높다고 판단했다. news1106b(은마 분담금·매물)는 머니투데이 원문을 직접 확인하지 못해 네이트뉴스 전재 링크를 출처로 사용했으며, 핵심 수치(매물 454건, 분담금 4억4800만원, 실거래가 34억3000만원 등)는 이투데이의 교차 보도로 방향성을 재확인했다."
   }
 ]
