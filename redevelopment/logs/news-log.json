@@ -2937,5 +2937,74 @@
     "pre_deploy_verification": "게시 항목 0건이므로 downloads/fileMap/newsFileMap 변경 없음. node --check redevelopment/assets/data/mock-data.js 통과(기존 데이터 무변경 재확인). 기존 MOCK.library·downloads·fileMap·newsFileMap 삭제·수정 0건",
     "data_changes": "기존 MOCK.library·downloads·fileMap·newsFileMap 삭제·수정 0건, 신규 추가도 0건(이번 실행은 로그 파일만 갱신)",
     "additional_notes": "cleanup.seoul.go.kr 접속 차단이 2026-10-28경부터 13회 연속(cleanup_list_http_status:0) 지속되고 있음. 뉴스 0건도 11-07·11-08에 이어 3일 연속으로, 최근 보도가 대부분 10월 하순 이전 사안의 재인용·전망성 기사뿐이고 당일·전일 신규 사실 보도가 검색 색인에 없었음을 의미한다(네트워크 정책상 언론사 원문 직접 접속이 전부 차단되어 WebSearch 색인 발췌만으로 판단한 결과이므로, 실제로는 더 많은 신규 기사가 존재할 가능성을 배제할 수 없음). 뉴스 0건은 실패가 아니라 CLAUDE.md §2·§6(품질 낮은/중복/미검증 기사로 억지 채우기 금지) 준수에 따른 정상 종료."
+  },
+  {
+    "run_datetime_kst": "2026-11-10 06:38 KST",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator (team dodo9944-ops)",
+    "trigger": "scheduled task — 매일 06:30 KST 빛세움 주요뉴스 자동 게시",
+    "searched_articles_count": 18,
+    "candidate_articles_count": 5,
+    "target_max": 3,
+    "shortfall_reason": null,
+    "selected_articles": [
+      {
+        "id": "news1110a",
+        "title": "[단독] 주택 공급 속도 내는 與…'2만㎡ 미만' 정비 구역, 자치구에 인허가권",
+        "source": "서울신문",
+        "reported_date": "2026-11-09",
+        "url": "https://www.seoul.co.kr/news/politics/2026/11/09/20261109500372"
+      },
+      {
+        "id": "news1110b",
+        "title": "정비사업 속도내면 인센티브…서울시, 자치구·조합 15곳 뽑아 보상",
+        "source": "아시아경제",
+        "reported_date": "2026-11-08",
+        "url": "https://view.asiae.co.kr/article/2026110807383778049"
+      },
+      {
+        "id": "news1110c",
+        "title": "은마 조합원 1인당 추정 재초환 부담 '4.6억'…재건축 빨간불",
+        "source": "아시아경제",
+        "reported_date": "2026-11-06",
+        "url": "https://view.asiae.co.kr/article/2026110616303205202"
+      }
+    ],
+    "rejected_candidates": [
+      "홍지선 국토장관 '올해 수도권 정비사업 5.3만 가구 착공 전망'(이투데이, 2026.11.04 보도, etoday.co.kr/news/view/2644123) — 장위9구역 이재명 대통령·홍지선 장관 동행 방문 건으로, 기존 news1105a(아시아경제 2026.11.04 보도)와 사실상 동일 사안이라 중복 배제",
+      "정비사업 늦추는 '조합원 지위양도제한'...목동·잠실주공5 등 서울 128곳 해당(헤럴드경제, biz.heraldcorp.com/article/10814903) — 검색 결과 상대시점(111일 전)과 교차 기사 날짜로 볼 때 2026.07.21 보도로 확인되어 최신성 기준 미달로 배제",
+      "법원 '은마 땅 240평(대치동 1020-2) 정태수 상속인에' 판결(2026.10.30경 보도, 서울중앙지법 민사합의33부) — 기존 news1028b·news1030b(대치동 1020-1 부지, 대법원 승소 확정)와 동일 소송군(정태수 상속인 대 은마 관련 토지 분쟁)으로, 혼선 방지를 위해 이번 회차에는 배제하고 후속 확인 필요"
+    ],
+    "cleanup_list_http_status": 0,
+    "cleanup_checked_count": 0,
+    "cleanup_new_count": 0,
+    "cleanup_backlog_note": null,
+    "cleanup_fail_reason": "cleanup.seoul.go.kr 접속 실패 — curl(에이전트 프록시 경유) 'connect_rejected'(세션 네트워크 정책이 limited이며 allowed_hosts가 비어 있어 해당 호스트가 허용 목록에 없음, get_environment로 재확인: network.type=limited, allowed_hosts=[]). 2026-10-28부터 이어진 동일한 네트워크 정책 제한이 본 실행에서도 지속되어(연속 14회차), 추측 게시 없이 목록 조회 자체를 중단함. 본 실행은 사용자 승인 없이 진행되는 무인 스케줄 실행이라 update_environment 등 네트워크 허용 목록 변경 승인 절차를 시도하지 않음(승인 주체 부재) — 대장 확인 시 cleanup.seoul.go.kr 허용 호스트 등록을 건의.",
+    "cleanup_posted_items": [],
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ],
+    "posted_success_count": 3,
+    "posted_news_count": 3,
+    "posted_cleanup_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, connect_rejected — 세션 네트워크 허용 목록 미포함) — 공고 게시 0건"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1110a/b/c 3건에 대해 downloads/news_20261110[a-c].html 3개 신규 생성 확인, pages/library.html fileMap 3건 등록 확인, index.html newsFileMap 3건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(신규 추가 3건만 발생). gov 외부링크 미사용(전부 web 자체 상세페이지).",
+    "data_changes": "MOCK.library 신규 추가 3건(news1110a/b/c), downloads/ 신규 파일 3개, fileMap 신규 3건, newsFileMap 신규 3건. 기존 항목 삭제·수정 0건.",
+    "additional_notes": "cleanup.seoul.go.kr 접속 차단이 2026-10-28경부터 14회 연속(cleanup_list_http_status:0) 지속되고 있음 — 네트워크 허용 목록에 해당 호스트 등록이 필요함을 재차 확인. 뉴스는 2026-11-07~09 3일 연속 0건이었다가 금일 재개. WebFetch로 news.google.com 등 외부 뉴스 원문 직접 접속도 동일한 네트워크 정책(connect_rejected, DNS 미해결)으로 차단되어, 이번 회차도 WebSearch 색인 발췌와 복수 매체 교차확인만으로 날짜·사실관계를 검증함(원문 전체 본문 대조는 불가). 선정 3건은 1순위(서울시·자치구 인허가 권한 이양 법안, 서울시 자치구 종합평가·인센티브) 2건 + 6순위(재초환 분담금 현실화) 1건으로, 복수 매체 교차확인을 거쳤고 기존 MOCK.library 수록분과 제목·URL·내용을 대조해 중복이 아님을 확인함. 후보 중 2건은 기존 게재분과 동일 사안(장위동 방문 건) 또는 동일 소송군(은마 1020-1/1020-2 토지 분쟁) 중복 우려로 의도적으로 배제함(rejected_candidates 참조)."
   }
 ]
