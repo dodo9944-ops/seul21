@@ -3075,5 +3075,62 @@
     "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1111a/b/c 3건에 대해 downloads/news_20261111[a-c].html 3개 신규 생성 확인, pages/library.html fileMap 3건 등록 확인, index.html newsFileMap 3건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(신규 추가 3건만 발생, 522→525건). gov 외부링크 미사용(전부 web 자체 상세페이지). 공유 데이터 파일 mock-data.js 버전 20261106a→20261111a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건).",
     "data_changes": "MOCK.library 신규 추가 3건(news1111a/b/c), downloads/ 신규 파일 3개, fileMap 신규 3건, newsFileMap 신규 3건. 기존 항목 삭제·수정 0건. mock-data.js?v= 캐시버스터 49개 HTML 전수 갱신(20261106a→20261111a).",
     "additional_notes": "WebFetch로 cleanup.seoul.go.kr 외 go.seoul.co.kr, newstomato.com 등 뉴스 원문 직접 접속도 동일한 네트워크 정책(getaddrinfo ENOTFOUND, DNS 미해결)으로 차단되어, 이번 회차도 WebSearch 색인 발췌와 복수 매체 교차확인만으로 날짜·사실관계를 검증함(원문 전체 본문 대조는 불가). 선정 3건은 1순위(서울시의회 건축조례 개정·일조사선 완화, 11.12 시행) 1건 + 3순위(미아2구역 시공사 선정 유찰 해석 갈등, 인허가·행정절차) 1건 + 공사비(한국부동산원 계약단계 분쟁예방 제언) 1건으로, 모두 3개 이상 매체 교차확인을 거쳤다. 일조사선 조례 건은 본회의 통과 자체는 2026.09.11이나 시행일이 2026.11.12로 임박해 있어 1순위 '정책/제도 변경' 기준으로 선정했다. 후보 중 북아현2구역 이주 개시 건은 기존 news0920c와 동일 사안(북아현2구역 이주)의 연속 보도로 판단해 의도적으로 배제했다(rejected_candidates 참조)."
+  },
+  {
+    "run_datetime_kst": "2026-11-12 06:46 KST",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator (team dodo9944-ops)",
+    "trigger": "scheduled task — 매일 06:30 KST 빛세움 주요뉴스 자동 게시",
+    "searched_articles_count": 14,
+    "candidate_articles_count": 1,
+    "target_max": 3,
+    "shortfall_reason": "WebSearch로 재개발·재건축·정비사업 관련 14회 질의(국토부·서울시 정책, 도시정비법 개정, 모아통합기획, 이주비·HUG, 시공사 선정, 판례, 1기신도시 등) 후보 다수 검토했으나, 24~48시간 이내 신규 사안 대부분이 기존 MOCK.library 항목과 동일 사안의 연속 보도로 판정되어 중복 배제됨(장위9구역 공공재개발 재추진→news1105a/1106a 기보도, 모아통합기획 후보지 공모→news(10.12) 기보도, 서울 213곳/231곳 구청장 인허가권 이양→news1110a 기보도, 북아현2구역 이주·명도소송→기보도 다수). 검증 가능하고 중복이 없는 신규 사안은 1건(약수역 도심복합사업 설계·시공통합공모)만 확인되어 품질 기준에 따라 1건만 게시함.",
+    "selected_articles": [
+      {
+        "id": "news1112a",
+        "title": "홍지선 국토부 장관, 약수역 도심복합사업 현장 방문…1616세대 공급 점검",
+        "source": "디벨로퍼뉴스 (교차확인: 노컷뉴스, 중부뉴스통신)",
+        "reported_date": "2026-11-11",
+        "url": "https://www.dpnews.co.kr/news/articleView.html?idxno=2743"
+      }
+    ],
+    "rejected_candidates": [
+      "서울 재건축·재개발 213곳/231곳 구청장 인허가권 이양(서울신문, 2026.11.09~10 보도) — 기존 news1110a와 동일 사안으로 중복 게시 방지 원칙에 따라 배제",
+      "장위9구역 공공재개발 재추진 관련 후속 보도(2026.11.04~05) — 기존 news1105a·news1106a와 동일 사안 연속 보도로 배제",
+      "서울시 '모아통합기획' 후보지 공모(2026.10.12 서울경제 등 보도) — 기존 MOCK.library 항목(2026.10.12 보도)과 동일 사안으로 배제, 11월 2일 접수 개시 후속 보도도 신규성 부족으로 배제",
+      "북아현2구역 11월 9일 이주 개시·명도소송 순차 접수(뉴시스 등) — 기존 MOCK.library 항목(북아현2구역 이주·1+1분양 분쟁 다수 건)과 동일 사안 연속 보도로 배제",
+      "1기 신도시(산본) 선도지구 시공사 선정 절차(2026.11.02 비즈워치 보도) — 보도 시점이 약 9일 전으로 최신성 기준 미달 및 재건축·재개발 핵심 범주 밖(노후계획도시특별법)으로 배제"
+    ],
+    "cleanup_list_http_status": 0,
+    "cleanup_checked_count": 0,
+    "cleanup_new_count": 0,
+    "cleanup_posted_items": [],
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ],
+    "cleanup_backlog_note": null,
+    "cleanup_fail_reason": "cleanup.seoul.go.kr 접속 실패 — getaddrinfo ENOTFOUND(DNS 미해결). 세션 네트워크 정책이 limited·allowed_hosts=[]로 설정되어 있어 curl(agent-proxy connect_rejected)과 WebFetch(DNS 미해결) 모두 차단됨. 전일(2026-11-11) 실행과 동일한 차단 양상으로, 이번 회차도 공고 게시 0건.",
+    "posted_success_count": 1,
+    "posted_news_count": 1,
+    "posted_cleanup_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, DNS 미해결 — 세션 네트워크 허용 목록 미포함) — 공고 게시 0건",
+      "WebFetch로 뉴스 원문 사이트(dazabi.com, housingherald.co.kr, molit.go.kr, news.mtn.co.kr, search.naver.com 등) 직접 접속 전부 동일한 네트워크 정책(getaddrinfo ENOTFOUND)으로 차단되어, WebSearch 색인 발췌와 복수 매체 교차확인만으로 사실관계를 검증함(원문 전체 본문 대조는 불가)"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1112a 1건에 대해 downloads/news_20261112a.html 신규 생성 확인, pages/library.html fileMap 1건 등록 확인, index.html newsFileMap 1건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(신규 추가 1건만 발생). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261111a→20261112a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건, Grep 재검증 완료).",
+    "additional_notes": "정비몽땅 공고 수집은 2026-11-10 이후 세션 네트워크 정책(limited, allowed_hosts=[])으로 계속 차단 중. cleanup.seoul.go.kr을 환경 허용 목록에 추가하면 해결 가능하나, 본 세션은 무인 예약 실행(스케줄 트리거)으로 사용자 승인을 기다릴 수 없어 update_environment 호출은 시도하지 않고 실패만 기록함 — 대장 확인 후 환경 설정에서 허용 추가를 검토 필요. 선정 기사 1건은 3개 매체 교차확인을 거쳤다. 후보 중 다수가 기존 보도의 연속 사안으로 판정되어 중복 배제되었고, 적합한 신규 기사가 3건보다 적어 품질 기준에 따라 1건만 게시함(CLAUDE.md 2026-05-01 예외조항 §2-2 기준 충족: 추가만 수행, 카테고리 주요뉴스, ID 충돌 없음, 다운로드 HTML 동시 생성, fileMap/newsFileMap 동시 등록)."
   }
 ]
