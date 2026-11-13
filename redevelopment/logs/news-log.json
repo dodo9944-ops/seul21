@@ -3205,5 +3205,64 @@
     "deploy_status": "07:30 일괄배포 대기",
     "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1113a/b/c 3건에 대해 downloads/news_20261113[a-c].html 신규 생성 확인, pages/library.html fileMap 3건 등록 확인, index.html newsFileMap 3건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(신규 추가 3건만 발생). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261112a→20261113a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
     "additional_notes": "정비몽땅 공고 수집은 2026-11-08 이후 세션 네트워크 정책(limited, allowed_hosts=[])으로 계속 차단 중(이번 회차는 proxy가 403으로 명시 거부). 선정 기사 3건 모두 2개 이상 매체 교차확인을 거쳤다. 후보 중 다수가 기존 보도의 연속 사안이거나 최신성 기준(24~48시간) 미달로 중복·배제되었다. news1113c(사당21구역 신통기획 취소 검토)는 1차 보도(MTN, 10.21)보다 서울시의회 질타 후속 보도(국토매일, 11.05)를 주 출처로 선택하여 최신 진행 상황을 반영했다. 사당21구역 사안은 서울시 선정위원회 결론이 '이달 말' 예정으로 미확정 상태이며, 결론이 나오면 후속 보도 여부를 다음 회차에서 확인할 필요가 있다. CLAUDE.md 2026-05-01 예외조항 §2 기준 충족(추가만 수행, 카테고리 주요뉴스, ID 충돌 없음, 다운로드 HTML 동시 생성, fileMap/newsFileMap 동시 등록)."
+  },
+  {
+    "run_datetime_kst": "2026-11-14 06:37 KST",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator (team dodo9944-ops)",
+    "trigger": "scheduled task — 매일 06:30 KST 빛세움 주요뉴스 자동 게시",
+    "searched_articles_count": 14,
+    "candidate_articles_count": 1,
+    "target_max": 3,
+    "shortfall_reason": "24~48시간 이내 보도 중 정비사업 실무 중요도 기준(1~7순위)을 충족하고, 기존 MOCK.library 항목과 중복되지 않으며 2개 이상 매체로 사실관계가 교차확인되는 기사가 1건만 확인됨. 흑석11구역 관리처분계획 소송 기각(하우징워치), 방배13구역 GS건설 공사비 협의(서울경제) 등은 발행일을 특정할 수 없거나(검색 결과에 '일(日)'만 표기되고 월·연도 불명) 보도 시점이 2주 이상 지나 24~48시간 최신성 기준 미달로 제외함. 품질 기준 미달 기사로 억지로 3건을 채우지 않음(CLAUDE.md §2 지침).",
+    "selected_articles": [
+      {
+        "id": "news1114a",
+        "title": "서울시, \"안전엔 양보없지만 리모델링 인허가 통합해 기간 단축\"",
+        "source": "머니투데이방송(MTN) (교차확인: 머니투데이방송(MTN) 11.09 사전보도, 한국경제 11.12 보도)",
+        "reported_date": "2026-11-12",
+        "url": "https://news.mtn.co.kr/article/2026111217161524543"
+      }
+    ],
+    "rejected_candidates": [
+      "흑석11구역 관리처분계획(안) 인가취소 소송 기각(추가 1주택 조합원 34인, 하우징워치) — 기사 본문에 '26일'만 표기되고 월·연도가 특정되지 않아(검색 결과 '약 63일 전'으로 표시, 11월 기준 환산 시 약 9월 추정) 24~48시간 최신성 기준 미달로 배제",
+      "방배13구역 GS건설 공사비 3.3㎡당 485만원→800만원대 중반 협의(서울경제 2026.10.29 보도) — 보도 시점이 약 2주 전으로 최신성 기준 미달 배제",
+      "서울시 연내 3만호 착공 11개 정비사업장 협약·집중관리(한남3구역 등) — 협약 체결 보도가 2026.10.13자이고 11월 신규 발표 확인 안 됨, 기존 보도의 연속 사안으로 신규성 부족 배제",
+      "청담건영아파트 리모델링 2차 안전진단 말뚝 재하시험 미달·보강 필요(MTN 2026.10.19~20 보도) — 보도 시점이 약 3주 전으로 최신성 기준 미달 배제(news1114a가 동일 쟁점의 후속·정책대응 보도로 대체 선정)",
+      "모아통합기획 후보지 공모(2026.10.13~11.02 접수) — 기존 MOCK.library 항목(news1027h, news1030a 등)과 동일 사안으로 중복 배제",
+      "재건축초과이익환수제 폐지 법안 국회 심사 — 2026년 11월 기준 신규 진전 보도 확인 안 됨(국회 계류 지속 추정), 신규 사실관계 없어 배제",
+      "정비사업 이주비 대출 LTV 완화(금융위 소관) — 2026년 8월 공급대책 이후 11월 신규 발표 확인 안 됨, 신규성 부족 배제"
+    ],
+    "cleanup_list_http_status": "connect_rejected(agent-proxy 403, cleanup.seoul.go.kr)",
+    "cleanup_checked_count": 0,
+    "cleanup_new_count": 0,
+    "cleanup_posted_items": [],
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ],
+    "cleanup_backlog_note": null,
+    "cleanup_fail_reason": "cleanup.seoul.go.kr 접속 실패 — curl 시도 시 agent-proxy가 CONNECT 요청을 connect_rejected(세션 네트워크 정책 limited·allowed_hosts=[] 미포함)로 거부. WebFetch 재시도 역시 getaddrinfo ENOTFOUND(허용 목록 외 호스트)로 동일하게 차단됨. 2026-11-08 이후 계속된 차단과 동일 양상으로, 이번 회차도 공고 게시 0건. 무인 예약 실행(스케줄 트리거)으로 사용자 승인을 기다릴 수 없어 update_environment(허용 호스트 추가) 호출은 시도하지 않고 실패만 기록함 — 대장 확인 후 환경 설정에서 cleanup.seoul.go.kr 허용 추가를 검토 필요.",
+    "posted_success_count": 1,
+    "posted_news_count": 1,
+    "posted_cleanup_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, agent-proxy connect_rejected — 세션 네트워크 허용 목록 미포함) — 공고 게시 0건",
+      "WebFetch로 뉴스 원문 사이트(news.mtn.co.kr, hankyung.com, housingwatch.co.kr, housingherald.co.kr 등) 직접 접속 전부 동일한 네트워크 정책(getaddrinfo ENOTFOUND)으로 차단되어, WebSearch 색인 발췌와 복수 매체 교차확인만으로 사실관계를 검증함(원문 전체 본문 대조는 불가). 이로 인해 흑석11구역 사례처럼 날짜가 불명확한 기사는 신뢰도 부족으로 배제 처리함"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1114a 1건에 대해 downloads/news_20261114a.html 신규 생성 확인, pages/library.html fileMap 1건 등록 확인, index.html newsFileMap 1건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(신규 추가 1건만 발생, git diff로 재확인). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261113a→20261114a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
+    "additional_notes": "정비몽땅 공고 수집은 2026-11-08 이후 세션 네트워크 정책(limited, allowed_hosts=[])으로 계속 차단 중. 선정 기사 1건은 3개 출처(MTN 11.09 사전보도·MTN 11.12 후속보도·한국경제 11.12 보도)로 교차확인을 거쳤다. 후보 중 다수가 최신성(24~48시간) 기준 미달 또는 기존 보도의 연속 사안으로 배제되어 적합한 신규 기사가 1건뿐이었음(CLAUDE.md 2026-05-01 예외조항 §2 기준 충족: 추가만 수행, 카테고리 주요뉴스, ID 충돌 없음, 다운로드 HTML 동시 생성, fileMap/newsFileMap 동시 등록). cleanup_posted 배열은 직전 실행값을 그대로 유지(이번 회차 신규 게시 0건)."
   }
 ]
