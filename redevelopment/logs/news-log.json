@@ -3264,5 +3264,85 @@
     "deploy_status": "07:30 일괄배포 대기",
     "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1114a 1건에 대해 downloads/news_20261114a.html 신규 생성 확인, pages/library.html fileMap 1건 등록 확인, index.html newsFileMap 1건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(신규 추가 1건만 발생, git diff로 재확인). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261113a→20261114a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
     "additional_notes": "정비몽땅 공고 수집은 2026-11-08 이후 세션 네트워크 정책(limited, allowed_hosts=[])으로 계속 차단 중. 선정 기사 1건은 3개 출처(MTN 11.09 사전보도·MTN 11.12 후속보도·한국경제 11.12 보도)로 교차확인을 거쳤다. 후보 중 다수가 최신성(24~48시간) 기준 미달 또는 기존 보도의 연속 사안으로 배제되어 적합한 신규 기사가 1건뿐이었음(CLAUDE.md 2026-05-01 예외조항 §2 기준 충족: 추가만 수행, 카테고리 주요뉴스, ID 충돌 없음, 다운로드 HTML 동시 생성, fileMap/newsFileMap 동시 등록). cleanup_posted 배열은 직전 실행값을 그대로 유지(이번 회차 신규 게시 0건)."
+  },
+  {
+    "run_datetime_kst": "2026-11-15T06:30:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator (team dodo9944-ops)",
+    "trigger": "scheduled task — 매일 06:30 KST 빛세움 주요뉴스 자동 게시",
+    "searched_articles_count": "WebSearch 약 20회 쿼리 실행, 색인에 노출된 기사·보도자료 약 160여건 검토(WebFetch는 전부 getaddrinfo ENOTFOUND로 차단되어 WebSearch 요약·교차확인만으로 사실관계 확인)",
+    "candidate_articles_count": 8,
+    "target_max": 3,
+    "shortfall_reason": "후보 8건 중 7건이 기존 MOCK.library 게시분과 중복으로 확인되어 배제(아래 rejected_candidates 참조). 적합한 신규 기사가 1건뿐이어서 CLAUDE.md '품질 낮은 기사로 억지로 채우지 않음' 원칙에 따라 1건만 게시.",
+    "selected_articles": [
+      {
+        "id": "news1115a",
+        "title": "성남 상대원2구역, 11월 14일 조합장·이사·대의원 해임총회 잇달아 개최",
+        "source": "서울신문(2026.11.03 보도) + MTN 3건 교차확인",
+        "url": "https://www.seoul.co.kr/news/newsView.php?id=20261103500240"
+      }
+    ],
+    "rejected_candidates": [
+      {
+        "topic": "국토부 공사비 미검증 138곳 특별점검(2차 11.9~20)",
+        "reason": "news1027c·news1029c·news1111c에 동일 통계·사실관계 이미 게시(중복)"
+      },
+      {
+        "topic": "서울시 정비사업 자치구평가·신통2.0 공정촉진 모범조합 표창(추천기한 11.20)",
+        "reason": "news1110b에 동일 내용 상세 게시(중복)"
+      },
+      {
+        "topic": "미아2구역 재입찰(10.12 유찰·입찰참여확약서 조건 삭제·11.26 마감)",
+        "reason": "news1111b가 동일 10.12 현장설명회·유찰 해석 공방을 이미 게시(중복)"
+      },
+      {
+        "topic": "서계통합구역 삼성물산 입찰 불참·GS·대우 2파전",
+        "reason": "news1113a 배경설명에 동일 MTN 11.10 보도가 이미 교차확인 인용됨(중복)"
+      },
+      {
+        "topic": "공공재개발 5년 착공 0·이재명 대통령 발언·서울시 반박",
+        "reason": "mock-data.js 내 기존 항목에 이미 상세 게시(중복, 서울시 반박분 포함)"
+      },
+      {
+        "topic": "뉴스토마토 공사비 4조 감액·검증 권고 한계",
+        "reason": "news1113b와 완전 동일 기사(중복)"
+      },
+      {
+        "topic": "HUG 정비사업비대출보증 한도 60% 확대 1년 연장",
+        "reason": "정확한 발표일이 출처마다 불일치(2027.6말/12말 혼재)하여 신뢰도 부족으로 배제(날짜 불명확 기사 배제 원칙)"
+      }
+    ],
+    "cleanup_list_http_status": "connect_rejected(agent-proxy 403, cleanup.seoul.go.kr)",
+    "cleanup_checked_count": 0,
+    "cleanup_new_count": 0,
+    "cleanup_posted_items": [],
+    "cleanup_backlog_note": null,
+    "cleanup_fail_reason": "cleanup.seoul.go.kr 접속 실패 — curl 시도 시 agent-proxy가 CONNECT 요청을 403(connect_rejected)로 거부. WebFetch 재시도 역시 getaddrinfo ENOTFOUND(허용 목록 외 호스트)로 동일하게 차단됨. 2026-11-08 이후 계속된 차단과 동일 양상으로, 이번 회차도 공고 게시 0건. 무인 예약 실행(스케줄 트리거)으로 사용자 승인을 기다릴 수 없어 update_environment(허용 호스트 추가) 호출은 시도하지 않고 실패만 기록함 — 대장 확인 후 환경 설정에서 cleanup.seoul.go.kr 허용 추가를 검토 필요.",
+    "posted_success_count": 1,
+    "posted_news_count": 1,
+    "posted_cleanup_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, agent-proxy 403 connect_rejected) — 공고 게시 0건",
+      "WebFetch로 뉴스 원문 사이트(seoul.co.kr, news.mtn.co.kr 등) 직접 접속 전부 getaddrinfo ENOTFOUND로 차단되어, WebSearch 색인 발췌와 복수 매체 교차확인만으로 사실관계를 검증함(원문 전체 본문 대조는 불가)",
+      "탐색한 후보 8건 중 7건이 최근 5일 내 이미 게시된 기사와 중복되어 배제됨 — 가용한 신선한(24~48시간 이내) 기사 풀이 매우 협소했음"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과(중첩 단일인용부호 2곳을 「」로 치환 후 재검증 통과). news1115a 1건에 대해 downloads/news_20261115a.html 신규 생성 확인, pages/library.html fileMap 1건 등록 확인, index.html newsFileMap 1건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(git diff로 재확인, mock-data.js 순삭제 라인 0건). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261114a→20261115a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
+    "additional_notes": "선정 기사 1건(상대원2구역 해임총회)은 서울신문 11.3 예고 보도 + MTN 3건(4.4/5.22/7.13)의 동일 사업장 갈등 경과로 교차확인했다. 14일 총회의 실제 표결 결과(가결/부결)는 이번 검색 시점(11.15 06:30 KST)까지 보도되지 않아 확인 불가 — 총회 '개최 사실·일정·배경'만 사실관계로 기재했고 결과를 추측하여 기재하지 않았다. 탐색한 나머지 7개 후보는 모두 최근 5일(11.10~11.14) 게시분과 실질적으로 동일한 사안이어서 CLAUDE.md §6(동일 사건 중복 게시 금지) 원칙에 따라 제외했다. HUG PF보증 연장 기사는 발표일자·특례만료 시점이 매체마다 다르게 보도되어(2027.6말 vs 2027.12말) 전일(11.14) 로그의 '날짜 불명확 기사 배제' 원칙을 재적용해 제외했다. cleanup_posted 배열은 직전 실행값을 그대로 유지(이번 회차 신규 게시 0건, 네트워크 차단 지속).",
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ]
   }
 ]
