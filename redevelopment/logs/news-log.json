@@ -3344,5 +3344,70 @@
       "12425",
       "12423"
     ]
+  },
+  {
+    "run_datetime_kst": "2026-11-16T06:30:00+09:00",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "site": "https://www.seul24.cloud",
+    "vercel_project": "lcw-coordinator (team dodo9944-ops)",
+    "trigger": "scheduled task — 매일 06:30 KST 빛세움 주요뉴스 자동 게시",
+    "searched_articles_count": "WebSearch 약 13회 쿼리 실행(국토부 정책, 모아통합기획, 재초환, 시공자 선정 분쟁, 법원 판결, 국회 법안 등), 색인에 노출된 기사·보도자료 약 120여건 검토(WebFetch는 news.mtn.co.kr 등 전부 getaddrinfo ENOTFOUND로 차단되어 WebSearch 요약·복수 매체 교차확인만으로 사실관계 확인)",
+    "candidate_articles_count": 2,
+    "target_max": 3,
+    "shortfall_reason": "탐색한 후보 중 서계통합구역·리모델링 2차안전진단·상대원2구역 등 다수가 11/11~11/15 기존 게시분과 동일 사안이어서 제외. 모아통합기획 후보지 공모(접수 시작 11/2)·목동8단지 재입찰·법원 판결 등은 보도마다 날짜·수치가 엇갈려(선정 규모, 마감일 등) 사실관계를 확정할 수 없어 보수적으로 배제. 최종적으로 사실관계가 다수 매체로 명확히 교차확인되고 기존 게시분과 중복되지 않는 기사 2건만 선정함.",
+    "selected_articles": [
+      {
+        "id": "news1116a",
+        "title": "국토부, '주택공급 통합지원센터' 국장급으로 신설 추진",
+        "source": "헤럴드경제 외 5개 매체(서울파이낸스·아시아경제·시대일보·센TV 등)",
+        "url": "https://biz.heraldcorp.com/article/10927810",
+        "report_date": "2026-11-06"
+      },
+      {
+        "id": "news1116b",
+        "title": "서초구, 반포현대에 재초환 부담금 예정액 179억원 통지…부과시한 국토부와 해석 이견",
+        "source": "YTN 외(코리안센터·서울경제 교차확인)",
+        "url": "https://www.ytn.co.kr/_ln/0102_202611092026044174",
+        "report_date": "2026-11-09"
+      }
+    ],
+    "rejected_candidates": [
+      "서울시 모아통합기획 후보지 공모(2026.10.12~) — 접수 시작은 11/2이나 연간 선정 규모·목표 가구수가 매체마다 달라(20곳 vs 22곳, 8만호 vs 12만호) 사실관계 확정 불가로 배제",
+      "목동8단지 대우건설 재입찰 — 마감일이 보도마다 불일치하여 '11월16일 마감' 사실관계 확인 불가로 배제",
+      "상계주공5단지·GS건설 손해배상 1심(일부승소) — 2026년 7월 보도로 신선도 기준(24~48시간) 미충족, 이미 지난 사안이라 배제",
+      "재초환 개정안(면제 1억원 상향 등) 국회 법안소위 — 상정 여부 확정 보도 없어 배제",
+      "국토부 리모델링 수평증축 2차안전진단(11/12 간담회) — news1114a(2026-11-14 게시)와 동일 사안으로 중복 배제"
+    ],
+    "cleanup_list_http_status": "403 Forbidden (agent-proxy, CONNECT tunnel failed) — curl -sL -A Mozilla/5.0 및 WebFetch 모두 동일 사유로 차단 확인(WebFetch는 getaddrinfo ENOTFOUND)",
+    "cleanup_checked_count": 0,
+    "cleanup_new_count": 0,
+    "cleanup_posted_items": [],
+    "cleanup_backlog_note": "cleanup.seoul.go.kr 접속 차단이 11/14~11/16 3일 연속 반복됨. update_environment(허용 호스트 추가) 호출은 시도하지 않고 실패만 기록함 — 대장 확인 후 환경 설정에서 cleanup.seoul.go.kr 허용 추가를 검토 필요.",
+    "cleanup_fail_reason": "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, agent-proxy 403 connect_rejected / WebFetch getaddrinfo ENOTFOUND) — 공고 게시 0건",
+    "posted_success_count": 2,
+    "posted_news_count": 2,
+    "posted_cleanup_count": 0,
+    "posted_fail_count": 0,
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, agent-proxy 403 connect_rejected) — 공고 게시 0건",
+      "WebFetch로 뉴스 원문 사이트(news.mtn.co.kr, cleanup.seoul.go.kr 등) 직접 접속 전부 getaddrinfo ENOTFOUND로 차단되어, WebSearch 색인 발췌와 복수 매체 교차확인만으로 사실관계를 검증함(원문 전체 본문 대조는 불가)",
+      "목표 3건 대비 1건 부족 — 신선하고(가능한 한 최근) 중복이 없으며 매체 간 사실관계가 일치하는 후보가 2건뿐이었음. 모아통합기획·목동8단지 등 3건째 후보는 매체 간 수치 불일치로 보수적으로 배제함"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1116a·news1116b 2건에 대해 downloads/news_20261116a.html, downloads/news_20261116b.html 신규 생성 확인, pages/library.html fileMap 2건 등록 확인, index.html newsFileMap 2건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(git diff로 재확인, mock-data.js 순삭제 라인 0건). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261115a→20261116a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
+    "additional_notes": "오늘(KST 2026-11-16) 기준 24~48시간 이내 신선한 기사 풀이 매우 협소했다(전일 로그와 동일한 패턴). 선정한 2건 모두 보도일이 11/6, 11/9로 기준보다 다소 오래되었으나, (1) 기존 MOCK.library에 중복 사안이 없고 (2) 각각 5개·3개 이상 매체로 사실관계가 명확히 교차확인되며 (3) 정비사업 실무(인허가·금융 지원체계, 재초환 부과절차)에 직접 영향을 주는 정책·제도 사안이라는 점에서 품질 기준(CLAUDE.md §2 '적합한 기사가 3건보다 적으면 있는 만큼만 게시, 품질 낮은 기사로 억지로 채우지 않음')에 따라 2건만 게시하고 3건째는 억지로 채우지 않았다. cleanup.seoul.go.kr 접속 차단이 3일 연속 지속되고 있어 대장 확인 후 환경설정에서 해당 호스트 허용 검토가 필요하다. cleanup_posted 배열은 직전 실행값을 그대로 유지(이번 회차 신규 게시 0건, 네트워크 차단 지속).",
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ]
   }
 ]
