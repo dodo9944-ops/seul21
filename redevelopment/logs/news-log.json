@@ -3463,7 +3463,7 @@
       "WebFetch로 뉴스 원문 사이트(news.mtn.co.kr, www.sidae.com, www.housingwatch.co.kr 등) 직접 접속 전부 getaddrinfo ENOTFOUND로 차단되어, WebSearch 색인 발췌와 복수 매체 교차확인만으로 사실관계를 검증함(원문 전체 본문 대조는 불가)",
       "목표 3건 대비 1건 부족 — 24~48시간 이내 신선한 정비사업 뉴스 후보 자체가 매우 적었고(지난 며칠과 동일한 패턴 지속), 확인 가능한 후보 대부분이 기존 등록 사안과 중복되어 비중복·사실교차확인 가능 후보가 2건뿐이었음"
     ],
-    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json 로 확인)",
+    "commit_sha": "4e720740a5aea17f4e1578e3d824b879d8ba2e25",
     "pushed_branch": "backup-bitseum-rebrand-20260824",
     "deploy_status": "07:30 일괄배포 대기",
     "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1117a·news1117b 2건에 대해 downloads/news_20261117a.html, downloads/news_20261117b.html 신규 생성 확인, pages/library.html fileMap 2건 등록 확인, index.html newsFileMap 2건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(git diff --numstat 재확인: mock-data.js 2줄 추가/0줄 삭제, library.html·index.html 각 2줄 추가/2줄 삭제=캐시버스터 버전 치환뿐). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261116a→20261117a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
