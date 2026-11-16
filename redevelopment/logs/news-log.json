@@ -3409,5 +3409,81 @@
       "12425",
       "12423"
     ]
+  },
+  {
+    "run_datetime_kst": "2026-11-17 06:36 KST",
+    "run_type": "daily_news_auto_post",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "news_search": {
+      "searched_queries_count": 20,
+      "note": "WebFetch로 뉴스 원문 사이트 직접 접속 전부 getaddrinfo ENOTFOUND로 차단되어(news.mtn.co.kr, www.sidae.com, www.housingwatch.co.kr, cleanup.seoul.go.kr 등 전부 동일 현상), WebSearch 색인 발췌와 복수 매체 교차확인만으로 사실관계를 검증함(원문 전체 본문 직접 대조는 불가).",
+      "candidate_articles_reviewed": 18,
+      "candidates_excluded_as_duplicate": [
+        "수평증축 리모델링 2차 안전진단 간담회(news1114a와 동일 사안)",
+        "한국부동산원 공사비 분쟁 계약단계 방지(news1111c와 동일 사안)",
+        "국토부 주택공급 통합지원센터 신설(news1116a와 동일 사안)",
+        "서초구 반포현대 재초환 통지(news1116b와 동일 사안)",
+        "모아통합기획·모아주택 조합설립 공공지원(news0922a·news1027f·news1027h·news1030a 등 기존 다수 보도)",
+        "상계2구역·석수역·잠원 리모델링(news1031a·news0913b·news0923b 등 기존 보도)"
+      ],
+      "candidates_excluded_as_stale_or_unverified": [
+        "노량진6구역 공사비 합의(2025년 6월 사례, 24~48시간 기준 과도하게 초과)",
+        "여의도 한양 현대건설 공사비 1206억 증액(최신 진행 결과 미확인, 수개월째 정체)",
+        "잠실장미 재건축 시공사 선정계획서 이사회 부결(10/8 보도 이후 후속 결과 미확인으로 보수적 배제)",
+        "전농제12구역 입찰공고(공고일자 특정 불가로 보수적 배제)"
+      ],
+      "selected_articles": [
+        {
+          "id": "news1117a",
+          "title": "삼성물산, 목동13단지 재건축 시공사 최종 선정…'래미안 모브13'으로 목동 첫 진출",
+          "source": "헤럴드경제 외 복수매체(서울경제TV·아이뉴스24·하우징헤럴드·시대일보)",
+          "report_date": "2026-11-09",
+          "url": "https://biz.heraldcorp.com/article/10930388"
+        },
+        {
+          "id": "news1117b",
+          "title": "한신양재 가로주택정비, 시공자 선정 무응찰 유찰 후 재입찰…16일 현장설명회",
+          "source": "위클리한국주택경제신문 외(하우징헤럴드·AU경제)",
+          "report_date": "2026-11-06",
+          "url": "https://www.arunews.com/news/articleView.html?idxno=69155"
+        }
+      ]
+    },
+    "posted_news_ids": [
+      "news1117a",
+      "news1117b"
+    ],
+    "posted_news_count": 2,
+    "posted_cleanup_count": 0,
+    "posted_success_count": 2,
+    "posted_fail_count": 0,
+    "target_vs_actual": "목표 3건 대비 2건 게시. 가장 신뢰도 높은 후보 상당수가 최근 2~3일(news1116 회차 포함) 사이 이미 상세히 다룬 사안과 동일 사안이거나(통합지원센터·재초환·수평증축리모델링·공사비계약단계), 확인 가능한 후보가 모두 보도일 기준 8~12일 경과(목동13단지 11/9, 한신양재 11/6)여서, 3번째 후보로 검토한 잠실장미·전농제12구역 등은 보도 시점이 불명확하거나 후속 결과가 확인되지 않아 품질 기준(CLAUDE.md §2 '품질 낮은 기사로 억지로 채우지 않음')에 따라 제외함.",
+    "fail_reasons": [
+      "정비몽땅 공고 목록 접속 실패(cleanup.seoul.go.kr, curl 결과 CONNECT tunnel failed response 403 / WebFetch getaddrinfo ENOTFOUND) — 4일 연속 차단, 공고 게시 0건",
+      "WebFetch로 뉴스 원문 사이트(news.mtn.co.kr, www.sidae.com, www.housingwatch.co.kr 등) 직접 접속 전부 getaddrinfo ENOTFOUND로 차단되어, WebSearch 색인 발췌와 복수 매체 교차확인만으로 사실관계를 검증함(원문 전체 본문 대조는 불가)",
+      "목표 3건 대비 1건 부족 — 24~48시간 이내 신선한 정비사업 뉴스 후보 자체가 매우 적었고(지난 며칠과 동일한 패턴 지속), 확인 가능한 후보 대부분이 기존 등록 사안과 중복되어 비중복·사실교차확인 가능 후보가 2건뿐이었음"
+    ],
+    "commit_sha": "이 로그가 포함된 커밋(git log -1 -- redevelopment/logs/news-log.json 로 확인)",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1117a·news1117b 2건에 대해 downloads/news_20261117a.html, downloads/news_20261117b.html 신규 생성 확인, pages/library.html fileMap 2건 등록 확인, index.html newsFileMap 2건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(git diff --numstat 재확인: mock-data.js 2줄 추가/0줄 삭제, library.html·index.html 각 2줄 추가/2줄 삭제=캐시버스터 버전 치환뿐). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261116a→20261117a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
+    "cleanup_mongttang": {
+      "list_access_result": "접속 실패 — curl: CONNECT tunnel failed, response 403 (agent-proxy) / WebFetch: getaddrinfo ENOTFOUND cleanup.seoul.go.kr",
+      "checked_announcements_count": 0,
+      "new_announcements_count": 0,
+      "posted_announcement_ids": [],
+      "note": "4일 연속(11/14~11/17) 동일 호스트 차단 지속. 대장 확인 후 세션 환경설정(네트워크 allowlist)에서 cleanup.seoul.go.kr 허용 검토 필요."
+    },
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ]
   }
 ]
