@@ -3485,5 +3485,50 @@
       "12425",
       "12423"
     ]
+  },
+  {
+    "run_at_kst": "2026-11-18 06:30",
+    "search_summary": "WebSearch로 재개발·재건축·정비사업 관련 뉴스 20여 건 질의(1순위 정책/제도, 소규모주택정비법 개정, 시공자 선정, 재초환, 공사비 분쟁, 리모델링 안전진단, 법원 판결 등)를 실시했으나, 최근 24~48시간 이내 신선한 기사 후보는 거의 없었고 확인된 후보 다수가 news1108~news1117(11/3~11/17)에 이미 등록된 사안(공사비검증 164곳 감액, 반포현대·은마 재초환, 상대원2구역 해임총회, 수평증축 리모델링 간담회, 당정 용적률 120% 합의, 서계통합구역 급제동 등)과 사실상 동일해 중복 제외했다. 2026 도시정비 주택브랜드대상 시상식은 WebSearch 결과 표기 오류로 '11월 17일'로 보였으나 교차 확인 결과 실제 보도일은 2026년 6월 17일로 확인되어 후보에서 제외함.",
+    "candidate_count": 4,
+    "final_selected": [
+      {
+        "id": "news1118a",
+        "title": "[주요뉴스][뉴스웨이][2026.11.08 보도] LH \"공공재개발, 속도 빠르고 부정부패 우려 적어\"…서울시 주장 반박",
+        "url": "https://www.newsway.co.kr/news/view?ud=2026110821185109452",
+        "reason_selected": "1순위(국토부 산하기관·서울시 정책 공방). 11/5 기존 등록분(서울시, 이재명 대통령 발언 반박)의 후속으로 LH가 구체적 수치(22개 구역·3만9천가구, 수수료 3%→1% 인하, 후보지 취소 2곳 등)를 들어 재반박한 새 사실관계이며 기존 등록분과 중복되지 않음을 확인함."
+      },
+      {
+        "id": "news1118b",
+        "title": "[주요뉴스][서울신문][2026.10.29 보도] 12년 만에 재개발 재시동…흑석10구역 신속통합기획 가이드라인 확정, 최고 23층 817세대",
+        "url": "https://go.seoul.co.kr/news/newsView.php?id=20261030018010",
+        "reason_selected": "3순위(인허가·행정절차, 신속통합기획 가이드라인 확정). 보도일이 11/18 기준 20일 경과해 신선도는 다소 낮으나, 기존 자료실에 흑석10구역 관련 등록이 전혀 없고(Grep 확인) 사업 재추진 사례로 실무 참고가치가 있어 선정함. 더 신선한 후보가 부족해 품질 기준상 다음 순위로 포함."
+      }
+    ],
+    "post_success_count": 2,
+    "post_fail_count": 0,
+    "fail_reasons": [],
+    "shortfall_reason": "목표 3건 중 1건 부족. 검토한 후보 다수(공사비검증 164곳, 반포현대/은마 재초환, 상대원2구역 11/14 해임총회 결과, 당정 용적률 120% 합의, 도시정비 주택브랜드대상)가 기존 등록분과 동일 사안이거나(중복 게시 금지, CLAUDE.md 6번) 11/14 해임총회처럼 결과를 확인할 수 없는 예정 일정뿐이라 추측 게시를 배제함(CLAUDE.md 최상위 원칙 - 사실 확인 전 게시 금지 취지). 품질 낮은 기사로 억지로 채우지 않는다는 기준(CLAUDE.md §2)에 따라 2건만 게시함.",
+    "commit_sha": "PENDING",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1118a·news1118b 2건에 대해 downloads/news_20261118a.html, downloads/news_20261118b.html 신규 생성 확인, pages/library.html fileMap 2건 등록 확인(grep -o 'news1118a'/'news1118b' 각 2건, library.html+index.html), index.html newsFileMap 2건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(git diff --numstat 검증: mock-data.js 2줄 추가/0줄 삭제, library.html·index.html 각 2줄 추가/2줄 삭제=캐시버스터 버전 치환 1줄+신규 등록으로 인한 치환 1줄뿐, 그 외 47개 HTML은 캐시버스터 1줄 추가/1줄 삭제뿐). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261117a→20261118a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
+    "cleanup_mongttang": {
+      "list_access_result": "접속 실패 — curl: CONNECT tunnel failed, response 403 (agent-proxy) / WebFetch: getaddrinfo ENOTFOUND cleanup.seoul.go.kr",
+      "checked_announcements_count": 0,
+      "new_announcements_count": 0,
+      "posted_announcement_ids": [],
+      "note": "5일 연속(11/14~11/18) 동일 호스트 차단 지속. 대장 확인 후 세션 환경설정(네트워크 allowlist)에서 cleanup.seoul.go.kr 허용 검토 필요."
+    },
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ]
   }
 ]
