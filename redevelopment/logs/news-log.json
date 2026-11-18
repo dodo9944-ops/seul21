@@ -3565,7 +3565,7 @@
     "post_fail_count": 0,
     "fail_reasons": [],
     "shortfall_reason": "목표 3건 중 1건 부족. 24~48시간 이내 신선도 요건을 충족하면서도 기존 게시분(news1101~news1118, 특히 11/16~11/18 통합지원센터·공공재개발 논쟁 등)과 중복되지 않고 다수 매체로 사실관계가 교차확인되는 후보가 2건뿐이었음. 압구정3구역 가처분 등 추가 후보는 결정일자를 확인할 수 없어 품질 기준(CLAUDE.md §2 '품질 낮은 기사로 억지로 채우지 않음')에 따라 보수적으로 배제함.",
-    "commit_sha": "PENDING",
+    "commit_sha": "0ebd66588",
     "pushed_branch": "backup-bitseum-rebrand-20260824",
     "deploy_status": "07:30 일괄배포 대기 (Vercel 배포는 이 작업에서 직접 실행하지 않음 — 2026-09-28 대장님 지시)",
     "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1119a·news1119b 2건에 대해 downloads/news_20261119a.html, downloads/news_20261119b.html 신규 생성 확인, pages/library.html fileMap 2건 등록 확인(grep -o 'news1119a'/'news1119b' 각 1건), index.html newsFileMap 2건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(git diff --stat 검증: mock-data.js 2줄 추가/0줄 삭제, library.html·index.html 각 2줄 추가/2줄 삭제=캐시버스터 버전 치환 1줄+신규 등록 추가 1줄, 그 외 47개 HTML은 캐시버스터 1줄 추가/1줄 삭제뿐, 총 50개 파일 53줄 추가/51줄 삭제로 예상치와 일치). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261118a→20261119a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
