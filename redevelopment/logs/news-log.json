@@ -3587,5 +3587,63 @@
       "12425",
       "12423"
     ]
+  },
+  {
+    "run_at_kst": "2026-11-20 06:37",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_summary": "WebSearch로 재개발·재건축·정비사업 관련 뉴스 15건 질의(정책·제도, 신통기획·모아통합기획, 조합설립·시공자선정, 재초환·공사비, 가로주택정비·빈집법 시행령, 이주비·PF금융, 법원 판결, 국토부·서울시 보도자료 등). WebFetch로 news.bizwatch.co.kr, news.mtn.co.kr, www.newspim.com 원문 직접 접속 시도 — 전부 getaddrinfo ENOTFOUND로 세션 네트워크 허용목록 밖임을 확인, WebSearch가 서버측에서 가져온 색인 발췌와 복수 매체 교차확인(각 후보 최소 3개 매체)만으로 사실관계를 검증함.",
+    "candidate_articles_reviewed": 14,
+    "candidates_excluded_as_duplicate_or_stale": [
+      "국토부 공공재개발 사업수수료 인하 관련 LH vs 서울시 32곳 착공 0 논쟁 재인용 기사 — news1118a와 동일 사안으로 중복 배제(단, 후속 조치인 수수료 인하 발표 자체는 신규 사실관계로 news1120b로 별도 채택)",
+      "서울시 모아통합기획 후보지 공모(11/2 접수 개시) — 모아통합기획 제도 자체는 MOCK.library에 이미 3건 등록돼 있고 11/2 공모 개시 외 신규 사실관계 없어 배제",
+      "서초구 반포현대 재초환 부담금 179억원 통지 — news1116b와 동일 사안(부과시한 해석 차이 포함)으로 중복 배제",
+      "은마아파트 재건축부담금 1인당 4억6334만원 통지 — 반포현대와 유사한 재초환 통지 사례이나 결정·통지일자가 11/6 전후로 24~48시간 신선도 요건 미달 및 재초환 주제 중복(news1116b)으로 배제",
+      "국토부 장관 '조합원 지위양도 제한 완화 검토' 발언 — 검색 결과마다 장관 성명(홍지선/김윤덕)과 보도 시점이 서로 달라 사실관계를 특정할 수 없어 보수적으로 배제",
+      "성남 상대원2구역 조합장 해임총회(성남 소재, 서울 사업장 아님이나 참고 검토) — news1115a와 동일 사안 연속보도로 신규성 없어 배제",
+      "주금공법 시행령 개정 자체(동일기업 보증한도 확대) — news1120a로 채택하되, 이미 8/13·8/24 등록분에 '2027년 추가 이주비 보증 상품 출시 예정'이 예고돼 있어 이번 입법예고(10/26 공고, 동일기업 한도 2배 수치 포함)의 신규성만 선별 반영",
+      "민간 정비사업 용적률 120~130% 상향 법안 — 수개월째 국회 계류 중으로 가결·부결 등 새 사실관계 없어 배제(기존 배제 이력과 동일)"
+    ],
+    "final_selected": [
+      {
+        "id": "news1120a",
+        "title": "[주요뉴스][뉴스핌][2026.11.13 보도] 주금공 동일기업 보증한도 2배로…정비사업 보증 내년 1월 시행 목표",
+        "source_url": "https://www.newspim.com/news/view/20261113000509",
+        "report_date": "2026-11-13",
+        "reason_selected": "5순위(공사비·금융·HUG·이주비). 금융위원회가 10/26 입법예고한 주금공법 시행령 개정안(동일기업 보증한도 5%→10% 2배 확대, 정비사업 사업비·분담금·이주비 대출 보증 근거 신설, 2027년 1월 시행 목표)으로, 뉴스핌·비즈워치·뉴스1 등 3개 이상 매체로 교차확인됨. '동일기업 보증한도 2배' 수치는 기존 등록분(8/17f·8/18c·8/24i)에 없던 신규 사실관계로 중복 아님."
+      },
+      {
+        "id": "news1120b",
+        "title": "[주요뉴스][비즈워치][2026.11.12 보도] 공공재개발 사업수수료 3%→1% 한시 인하…구역당 130억원 경감",
+        "source_url": "https://news.bizwatch.co.kr/article/real_estate/2026/11/12/0007",
+        "report_date": "2026-11-12",
+        "reason_selected": "1순위(국토부·서울시 정책 변경). 국토부·LH가 공공재개발 신규 후보지 신청 구역의 사업수수료를 3%에서 1%로 한시 인하(~2027.12.31)한다고 발표, korea.kr 정책브리핑·노컷뉴스로 교차확인됨. news1118a(LH의 수수료 150억원 비판 반박)의 후속 정책 대응으로 사실관계가 다르며, 용적률 1.2배·동의요건 60% 등 이미 등록된 부분은 본문에서 반복하지 않고 수수료 인하분만 선별 서술하여 중복 최소화함."
+      }
+    ],
+    "post_success_count": 2,
+    "post_fail_count": 0,
+    "fail_reasons": [],
+    "shortfall_reason": "목표 3건 중 1건 부족. WebFetch가 news.bizwatch.co.kr·news.mtn.co.kr·www.newspim.com 등 거의 모든 언론사 원문 호스트에서 ENOTFOUND로 차단되어 WebSearch 색인 발췌에만 의존해야 했고, 이 때문에 24~48시간 이내로 신선도가 명확히 확인되면서 기존 게시분(news1101~news1119)과 중복되지 않는 후보를 3건째까지 확보하지 못함. 조합원 지위양도 완화 관련 기사는 매체 간 장관 성명·시점이 불일치해 품질 기준(CLAUDE.md §2)에 따라 보수적으로 배제함.",
+    "commit_sha": "94c8a6729",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기 (Vercel 배포는 이 작업에서 직접 실행하지 않음 — 2026-09-28 대장님 지시)",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과. news1120a·news1120b 2건에 대해 downloads/news_20261120a.html, downloads/news_20261120b.html 신규 생성 확인, pages/library.html fileMap 2건 등록 확인(grep -o 'news1120a'/'news1120b' 각 1건), index.html newsFileMap 2건 등록 확인. 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(git diff --numstat 확인: mock-data.js 2줄 추가/0줄 삭제, library.html·index.html 각 2줄 추가/2줄 삭제=캐시버스터 버전 치환 1줄+신규 등록 추가 1줄, 그 외 47개 HTML은 캐시버스터 1줄 추가/1줄 삭제뿐, 총 49개 수정 파일+2개 신규 파일로 예상치와 일치). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261119a→20261120a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
+    "cleanup_mongttang": {
+      "list_access_result": "접속 실패 — curl: connect_rejected (agent-proxy, \"host not allowed for this session\") / WebFetch도 동일 사유로 차단",
+      "checked_announcements_count": 0,
+      "new_announcements_count": 0,
+      "posted_announcement_ids": [],
+      "note": "7일 연속(11/14~11/20) 동일 호스트(cleanup.seoul.go.kr) 차단 지속. 대장 확인 후 세션 환경설정(네트워크 allowlist)에서 cleanup.seoul.go.kr 허용 검토가 계속 필요함."
+    },
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ]
   }
 ]
