@@ -3645,5 +3645,61 @@
       "12425",
       "12423"
     ]
+  },
+  {
+    "run_at_kst": "2026-11-21 06:30",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_summary": "WebSearch로 재개발·재건축·정비사업 관련 뉴스 9건 질의(정책·제도/권한이양, 리모델링 안전진단, 신통기획·모아통합기획, 통합심의·관리처분, 공사비 분쟁, 금융·PF, 법원 판결, 정비사업 1184곳 분양 등). WebFetch로 www.etoday.co.kr, m.news.nate.com, newspim.com, search.naver.com 원문 직접 접속 시도 — 전부 getaddrinfo ENOTFOUND(세션 네트워크 허용목록 밖)로 확인, WebSearch가 서버측에서 가져온 색인 발췌와 복수 매체 교차확인(각 후보 최소 3개 매체)만으로 사실관계를 검증함.",
+    "candidate_articles_reviewed": 9,
+    "candidates_excluded_as_duplicate_or_stale": [
+      "서울시 리모델링 수평증축 2차 안전진단 조합장 간담회(MTN, 11/12 보도) — 24~48시간 신선도 기준 미달이며 간담회 결과로 안전진단 기준이 실제로 조정됐는지 확인되지 않아 보수적으로 배제",
+      "서울 신속통합기획 후보지 6곳(독산·대림·쌍문·천호·대조·용두) 추가 선정 — 선정위원회 개최 10/30·11/12, 발표 11/13으로 신선도 미달, 신통기획 후보지 선정 사례는 기존에도 다수 등록돼 신규성 낮음",
+      "메이플자이 GS건설-하도급업체 공사비 제3자 감정 80% 인정 합의(아시아투데이, 11/16 보도) — 인터뷰 기사 1건에만 근거해 청구금액·감정결과 등 세부 수치 교차확인이 불충분했고, 조합-시공사 간 분쟁이 아닌 하도급업체 분쟁이라 조합 실무 관련성이 낮아 배제",
+      "EBN 「서울 곳곳 재개발·재건축…정비사업 1184곳, 연말까지 분양 잇따라」 — 분양 일정 소개 위주의 홍보성 기사로 제외기준(단순 분양 홍보성 기사) 해당",
+      "홍지선 국토부 장관 연내 서울 민간정비사업 3.1만가구 착공 목표(10/30 보도) — 신선도 기준 미달, 용적률 1.2배 협의 등 기존 등록분과 사실관계 중복",
+      "서울행정법원, 재건축조합 상대 총회결의무효 확인소송 상가소유주 승소(한국경제, 11/12 보도) — 신선도 기준 미달 및 사건번호 등 세부사실 추가 교차확인 필요로 배제"
+    ],
+    "final_selected": [
+      {
+        "id": "news1121a",
+        "title": "[주요뉴스][한국경제][2026.11.20 보도] 목동 5·12·14단지 재건축 통합심의 통과…최고 49층·1만1863가구",
+        "source_url": "https://www.hankyung.com/article/202611209634i",
+        "report_date": "2026-11-20",
+        "reason_selected": "3순위(재개발·재건축 인허가/행정절차). 서울시 제23차 정비사업 통합심의위원회(11/19 개최, 11/20 발표)가 목동 5·12·14단지(합산 1만1863가구) 재건축 정비계획을 조건부 의결, 아시아경제·헤럴드경제·서울신문 등 복수 매체로 세대수·층수·용적률 수치를 교차확인함. 기존 등록분에 목동 관련 사실관계 없어 중복 아님."
+      },
+      {
+        "id": "news1121b",
+        "title": "[주요뉴스][뉴스핌][2026.11.20 보도] 차인영 서울시의원 \"500세대 이하 재개발·재건축 자치구 이양, 역량 검증부터\"",
+        "source_url": "https://www.newspim.com/news/view/20261120001219",
+        "report_date": "2026-11-20",
+        "reason_selected": "1순위(국토부·서울시·자치구 정책/제도 변경 논쟁). 서울시의회 차인영 의원이 11/19 본회의 발언에서 500세대 이하 정비사업 심의 권한의 자치구 이양 방침에 처리기간(자치구 197일 vs 서울시 84일 등) 근거로 역량 검증을 요구, 서울세계타임즈·서울신문·웹이코노미 등 다수 매체로 발언 요지·수치를 교차확인함. 신규 정책 쟁점으로 기존 등록분과 중복 없음."
+      }
+    ],
+    "post_success_count": 2,
+    "post_fail_count": 0,
+    "fail_reasons": [],
+    "shortfall_reason": "목표 3건 중 1건 부족. 공사비 분쟁(메이플자이 하도급) 후보는 인터뷰 기사 1건에만 의존해 세부 수치 교차확인이 불충분했고, 그 외 검토한 후보(리모델링 안전진단 간담회·신통기획 추가선정·국토부 장관 발언·법원판결)는 24~48시간 신선도 기준을 충족하지 못하거나 기존 등록분과 사실관계가 중복되어 CLAUDE.md §2 품질기준에 따라 보수적으로 배제함. 품질 낮은 기사로 억지로 3건을 채우지 않음.",
+    "commit_sha": "PENDING",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기 (Vercel 배포는 이 작업에서 직접 실행하지 않음 — 2026-09-28 대장님 지시)",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과(최초 중첩 홑따옴표 구문오류 2건을 「」로 치환해 수정 후 통과). news1121a·news1121b 2건에 대해 downloads/news_20261121a.html, downloads/news_20261121b.html 신규 생성 확인, pages/library.html fileMap 2건 등록 확인(grep -o 'news1121a'/'news1121b' 각 1건), index.html newsFileMap 2건 등록 확인(각 1건). 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(git diff --numstat 확인: mock-data.js 2줄 추가/0줄 삭제, library.html·index.html 각 2줄 추가/2줄 삭제=캐시버스터 버전 치환 1줄+신규 등록 추가 1줄, 그 외 47개 HTML은 캐시버스터 1줄 추가/1줄 삭제뿐, 총 49개 수정 파일+2개 신규 파일로 예상치와 일치). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261120a→20261121a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
+    "cleanup_mongttang": {
+      "list_access_result": "접속 시도 전 사전 확인 — curl -v 결과 agent-proxy가 \"403 Forbidden (no rule or network setting allows this host)\"로 즉시 차단 확인(8일 연속, 11/14~11/21). 이번 세션에서 update_environment로 cleanup.seoul.go.kr 허용목록 추가를 요청했으나, 자동 실행(스케줄) 세션에는 승인자가 없어 '사람이 Run now로 직접 실행 시 승인 필요' 사유로 거부됨 — 네트워크 설정 변경 자체가 불가함을 확인.",
+      "checked_announcements_count": 0,
+      "new_announcements_count": 0,
+      "posted_announcement_ids": [],
+      "note": "8일 연속(11/14~11/21) 동일 호스트(cleanup.seoul.go.kr) 차단 지속. 세션 자동화로는 네트워크 허용목록을 바꿀 수 없음을 이번에 확인했으므로, 대장이 직접 이 스케줄 작업을 'Run now'로 실행하며 update_environment 승인을 처리해주어야 해제 가능."
+    },
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ]
   }
 ]
