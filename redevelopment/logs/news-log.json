@@ -3679,7 +3679,7 @@
     "post_fail_count": 0,
     "fail_reasons": [],
     "shortfall_reason": "목표 3건 중 1건 부족. 공사비 분쟁(메이플자이 하도급) 후보는 인터뷰 기사 1건에만 의존해 세부 수치 교차확인이 불충분했고, 그 외 검토한 후보(리모델링 안전진단 간담회·신통기획 추가선정·국토부 장관 발언·법원판결)는 24~48시간 신선도 기준을 충족하지 못하거나 기존 등록분과 사실관계가 중복되어 CLAUDE.md §2 품질기준에 따라 보수적으로 배제함. 품질 낮은 기사로 억지로 3건을 채우지 않음.",
-    "commit_sha": "PENDING",
+    "commit_sha": "88fc48aba",
     "pushed_branch": "backup-bitseum-rebrand-20260824",
     "deploy_status": "07:30 일괄배포 대기 (Vercel 배포는 이 작업에서 직접 실행하지 않음 — 2026-09-28 대장님 지시)",
     "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과(최초 중첩 홑따옴표 구문오류 2건을 「」로 치환해 수정 후 통과). news1121a·news1121b 2건에 대해 downloads/news_20261121a.html, downloads/news_20261121b.html 신규 생성 확인, pages/library.html fileMap 2건 등록 확인(grep -o 'news1121a'/'news1121b' 각 1건), index.html newsFileMap 2건 등록 확인(각 1건). 기존 MOCK.library·downloads·fileMap·newsFileMap 항목 삭제·수정 0건(git diff --numstat 확인: mock-data.js 2줄 추가/0줄 삭제, library.html·index.html 각 2줄 추가/2줄 삭제=캐시버스터 버전 치환 1줄+신규 등록 추가 1줄, 그 외 47개 HTML은 캐시버스터 1줄 추가/1줄 삭제뿐, 총 49개 수정 파일+2개 신규 파일로 예상치와 일치). gov 외부링크 미사용(자체 web 상세페이지만 사용). 공유 데이터 파일 mock-data.js 버전 20261120a→20261121a로 전수 동기화(49개 HTML 전부, 잔존 구버전 0건·미버전 0건, Grep 재검증 완료).",
