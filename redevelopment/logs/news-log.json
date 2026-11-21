@@ -3701,5 +3701,54 @@
       "12425",
       "12423"
     ]
+  },
+  {
+    "run_at_kst": "2026-11-22 06:37",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_summary": "WebSearch로 재개발·재건축·정비사업 관련 뉴스 약 15건 질의(정책/제도·국토부 주택법시행령·성수2지구 시공사선정·목동9/13단지·신속통합기획·모아타운·공사비분쟁·조합 대의원해임·재초환·HUG 등). WebFetch로 cleanup.seoul.go.kr, www.smarttoday.co.kr, www.korea.kr 원문 직접 접속 시도 — 전부 getaddrinfo ENOTFOUND(세션 네트워크 허용목록 밖)로 확인, WebSearch 서버측 색인 발췌와 복수 매체 교차확인만으로 사실관계를 검증함.",
+    "candidate_articles_reviewed": 15,
+    "candidates_excluded_as_duplicate_or_stale": [
+      "성수전략정비구역 2지구(아크로 성수) DL이앤씨 수의계약·시공사 선정총회 11/21 — 핵심 출처 기사(smarttoday 등)가 '다음 달 21일 총회 예정'이라는 10월 초 보도로 추정되어 24~48시간 신선도 기준 크게 미달. 금일 총회 실제 결과를 보도한 기사도 검색에서 확인되지 않아 결과 미확정 상태로 보수적으로 배제",
+      "서울신문 '재건축·재개발 213곳 구청장 인허가권 이양'(11/10 보도, 기준 '500가구 미만→2만㎡ 미만' 변경 논의) — 11/21 기존 등록분(news1121b, 차인영 의원 500세대 이하 자치구 이양 발언)과 사실관계·쟁점이 실질적으로 중복되어 배제",
+      "목동9·13단지 재건축 제20차 통합심의 조건부 의결(중앙일보 추정) — 기사 발행일이 확인되지 않아 최근 소식인지 검증 불가, 보수적으로 배제",
+      "성남 상대원2구역 조합 임원·대의원 해임총회(11/14) — 경기 성남시 소재로 추정되어 서울 정비사업 범위 밖일 가능성, 날짜도 24~48시간 기준 미달로 배제",
+      "서울시 모아타운 4곳 심의 통과(11/17, 6319가구) — 원출처가 서울시 공식 자료가 아닌 블로그 정리글에만 의존해 세부 수치 재확인이 불충분하여 배제",
+      "국토부 재초환 폐지·감면 요구 지속(YTN, 11/1 보도) — 신선도 기준 크게 미달 및 기존에도 재초환 관련 등록분 다수로 신규성 낮아 배제"
+    ],
+    "final_selected": [
+      {
+        "id": "news1122a",
+        "title": "[주요뉴스][뉴스서울][2026.11.17 보도] 국토부 '주택법 시행령' 개정안 국무회의 의결…리모델링 동의율 75%→70%",
+        "source_url": "https://newsseoul.co.kr/news/view/1065611421184680",
+        "report_date": "2026-11-17",
+        "reason_selected": "1순위(국토부 정책/제도 변경). 국토교통부가 11/17 국무회의에서 주택법 시행령 개정안을 의결, 리모델링 허가 동의율(75%→70%)을 완화하고 수직증축 안전성 검토기관에 한국부동산원을 추가함. 뉴스서울·코리안센터·비즈워치·정책브리핑(korea.kr) 등 정부 발표 포함 복수 출처로 교차확인됨. 보도일(11/17)이 24~48시간 기준보다 다소 지났으나, 국무회의 의결이라는 확정된 공식 조치이고 기존 등록분에 리모델링 동의율 관련 사실관계가 없어 1순위 정책변경 기준상 게시 결정. 24~48시간 이내로 더 신선하고 사실관계가 충분히 검증된 다른 후보(위 제외 목록)가 없어 이 1건만 선정."
+      }
+    ],
+    "post_success_count": 1,
+    "post_fail_count": 0,
+    "fail_reasons": [],
+    "shortfall_reason": "목표 3건 중 2건 부족. 검색된 후보 중 24~48시간 이내로 신선하면서 기존 등록분과 중복되지 않고 사실관계가 복수 매체로 충분히 교차확인되는 기사가 1건 외에는 없었음(위 candidates_excluded_as_duplicate_or_stale 참조). 성수2지구 시공사 선정총회(11/21 예정)는 원출처 기사 자체가 10월 초 보도로 추정되어 신선도 기준에 크게 못 미치고 금일 실제 결과 보도도 확인되지 않아 제외. 품질 낮은 기사로 억지로 3건을 채우지 않음.",
+    "commit_sha": "738f2d36a",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기 (Vercel 배포는 이 작업에서 직접 실행하지 않음 — 2026-09-28 대장님 지시)",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과(구문오류 없음). news1122a 1건에 대해 downloads/news_20261122a.html 신규 생성 확인, pages/library.html fileMap 1건 등록 확인(grep -o 'news1122a' 1건), index.html newsFileMap 1건 등록 확인(1건). _catKeyMap에 '주요뉴스':'주요뉴스' 매핑 기존 존재 확인. 기존 MOCK.library 항목·downloads/*.html·fileMap/newsFileMap 기존 등록은 삭제·수정하지 않음(오늘자 신규 항목 추가만 수행). mock-data.js 캐시버스터 20261121a→20261122a 49개 HTML 전수 동기화(잔존 구버전 0건, grep 재검증 완료).",
+    "cleanup_mongttang": {
+      "list_access_result": "접속 시도 전 사전 확인 — curl -v 결과 agent-proxy가 \"CONNECT tunnel failed, response 403\"(no rule or network setting allows this host)로 즉시 차단 확인(9일 연속, 11/14~11/22). WebFetch로도 getaddrinfo ENOTFOUND로 동일 차단 확인. 자동 실행(스케줄) 세션에는 승인자가 없어 update_environment 재요청은 시도하지 않음(직전 11/21 실행에서 동일 사유로 거부된 선례 확인).",
+      "checked_announcements_count": 0,
+      "new_announcements_count": 0,
+      "posted_announcement_ids": [],
+      "note": "9일 연속(11/14~11/22) 동일 호스트(cleanup.seoul.go.kr) 차단 지속. 대장이 직접 이 스케줄 작업을 'Run now'로 실행하며 update_environment 승인을 처리해주어야 해제 가능 — 11/21 로그와 동일한 결론."
+    },
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ]
   }
 ]
