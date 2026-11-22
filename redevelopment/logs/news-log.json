@@ -3750,5 +3750,61 @@
       "12425",
       "12423"
     ]
+  },
+  {
+    "run_at_kst": "2026-11-23 06:37",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_summary": "WebSearch로 재개발·재건축·정비사업 관련 뉴스 약 16건 질의(국토부·서울시 정책, 재초환 제척기간, 공사비 검증, 신통기획 후보지, 도시정비법 용적률 당정합의, 이주비 LTV, 압구정·여의도·성수, 모아타운 보정계수, 법원 판결 등). curl -sS -A Mozilla/5.0 및 WebFetch로 cleanup.seoul.go.kr 접속 시도 — agent-proxy가 'CONNECT tunnel failed, response 403' 및 getaddrinfo ENOTFOUND로 즉시 차단 확인(10일 연속, 11/14~11/23). 뉴스 원문 개별 기사(koreancenter.or.kr, news.mtn.co.kr, specialtimes.co.kr, www.koreancenter.or.kr 등)도 WebFetch 시도 시 전부 getaddrinfo ENOTFOUND로 확인되어, WebSearch 서버측 색인 발췌와 복수 매체 교차확인만으로 사실관계를 검증함.",
+    "candidate_articles_reviewed": 16,
+    "candidates_excluded_as_duplicate_or_stale": [
+      "서울시 신통기획 후보지 6곳 추가 선정(금천 독산동 992, 영등포 대림동 680 등, 11/13 발표) — MOCK.library에 이미 동일 사실관계(독산동 992, 대림동 680, 쌍문동 710, 천호동 137-1, 대조동 212, 용두동 39 등 전체 지역명·권리산정기준일 포함)가 기존 등록되어 있어 중복 배제",
+      "도시정비법 개정안 용적률(공공 1.3배·민간 1.2배) 당정 합의 — 검색 결과만으로는 2026년 11월 중 실제 국회 본회의 통과·공포 여부를 확인할 수 없었고(가장 최근 확인 가능한 진행 상황은 2026년 2~3월 국토교통위 의결 단계), 기존 등록분에도 1.2배/1.3배 관련 서술이 다수(38건) 존재해 신규성 낮음. 보수적으로 배제",
+      "서울시 이주비 대출 LTV 70% 완화·HF 보증 신설 검토 — 검색 결과로 11월 기준 확정 발표를 확인할 수 없었고 가장 최근 확인 가능한 내용은 8·13 공급대책(LTV 40% 산정 기준 변경)으로 신선도 기준 크게 미달. 배제",
+      "압구정2구역 사업시행계획안 가결, 용산 서계통합구역·성수2지구 시공사 선정 경쟁 — 보도 시점이 불명확하거나 3월 전후로 추정되어 24~48시간 신선도 기준에 크게 못 미쳐 배제",
+      "모아타운 60곳 사업성 보정계수 반영 관리계획 변경안 통합심의 수정가결 — 핵심 출처가 2026년 3월 26일 통합심의로 확인되어 신선도 기준 크게 미달. 배제",
+      "성남 상대원2구역 시공사·조합장 해임 총회 효력정지 분쟁 — 가장 최근 확인된 진행 상황이 10월 말(이의신청 기각)로, 11월 중 신규 진전 사실을 확인하지 못해 배제"
+    ],
+    "final_selected": [
+      {
+        "id": "news1123a",
+        "title": "[주요뉴스][코리안센터][2026.11.19 보도] 국토부, 재초환 제척기간 유권해석…반포현대 부과시한 12월30일 확정",
+        "source_url": "https://www.koreancenter.or.kr/news/articleView.html?idxno=1442090",
+        "report_date": "2026-11-19",
+        "reason_selected": "1순위(국토부 정책/제도 관련 공식 법률해석). 국토부가 11/19 재초환 부담금 부과 제척기간에 대한 법률 검토 결과(준공인가일+5개월부터 5년, 2029년 특례 불인정)를 서초구 등에 전달해 반포현대 부과시한이 12/30로 확정됨. 코리안센터(idxno=1442090, 1442162)·스페셜타임스·데일리안 등 복수 매체로 교차확인됨. 기존 등록분(news0922c)은 '부과권 제척기간이 올해 말 만료'라는 일반적 서술에 그쳤던 반면, 이번 건은 국토부의 구체적 유권해석·확정 시한이라는 새로운 사실관계로 신규성 인정. 보도일(11/19)이 24~48시간 기준보다 다소 지났으나, 전국 58개 단지에 영향을 미치는 확정적 공식 조치라 1순위 기준상 게시 결정."
+      },
+      {
+        "id": "news1123b",
+        "title": "[주요뉴스][뉴스토마토][2026.11.11 보도] 정비사업 공사비 검증 164곳 중 98.8% 감액…4.16조원 깎여도 갈등은 그대로",
+        "source_url": "https://newstomato.com/ReadNews.aspx?no=1320080",
+        "report_date": "2026-11-11",
+        "reason_selected": "5순위(공사비·금융 관련 실무 영향). 복기왕 의원실·한국부동산원 자료 기반으로 최근 5년간 검증 166곳 중 164곳(98.8%) 감액, 4조1600억원 감액이라는 구체적 통계가 처음 등록되는 사실관계이며 기존 등록분에 동일 통계 없음(검증 확인). 검증 결과가 권고에 불과해 구속력이 없다는 제도적 한계를 보여주는 사례(은평구 조합 증액계약 사례 포함)로 실무 영향이 큼. 보도일(11/11)이 24~48시간 기준보다 지났으나, 24~48시간 이내 신선도를 충족하면서 중복되지 않는 다른 후보가 없어(위 제외 목록 참조) 2번째로 선정."
+      }
+    ],
+    "post_success_count": 2,
+    "post_fail_count": 0,
+    "fail_reasons": [],
+    "shortfall_reason": "목표 3건 중 1건 부족. 검색된 후보 중 24~48시간 이내로 신선하면서 기존 등록분과 중복되지 않고 사실관계가 복수 매체로 충분히 교차확인되는 기사가 2건 외에는 없었음(위 candidates_excluded_as_duplicate_or_stale 참조). 당정 용적률 합의·이주비 LTV 완화 등은 11월 중 확정 여부를 검색만으로 확인할 수 없어 품질 낮은 기사로 억지로 3건을 채우지 않음.",
+    "commit_sha": "PENDING_WILL_BE_FIXED_IN_FOLLOWUP_COMMIT",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기 (Vercel 배포는 이 작업에서 직접 실행하지 않음 — 2026-09-28 대장님 지시)",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과(구문오류 없음). news1123a·news1123b 2건에 대해 downloads/news_20261123a.html, news_20261123b.html 신규 생성 확인, pages/library.html fileMap 2건 등록 확인(grep 'news1123a','news1123b' 각 1건), index.html newsFileMap 2건 등록 확인. _catKeyMap에 '주요뉴스':'주요뉴스' 매핑 기존 존재 확인. 기존 MOCK.library 항목·downloads/*.html·fileMap/newsFileMap 기존 등록은 삭제·수정하지 않음(오늘자 신규 항목 추가만 수행). mock-data.js 캐시버스터 20261122a→20261123a 49개 HTML 전수 동기화(잔존 구버전 0건, grep 재검증 완료).",
+    "cleanup_mongttang": {
+      "list_access_result": "접속 시도 전 사전 확인 — curl -sS -A Mozilla/5.0 결과 agent-proxy가 'CONNECT tunnel failed, response 403'(no rule or network setting allows this host)로 즉시 차단 확인(10일 연속, 11/14~11/23). WebFetch로도 getaddrinfo ENOTFOUND로 동일 차단 확인. 자동 실행(스케줄) 세션에는 승인자가 없어 update_environment 재요청은 시도하지 않음(직전 11/22 실행에서 동일 사유로 거부된 선례 확인).",
+      "checked_announcements_count": 0,
+      "new_announcements_count": 0,
+      "posted_announcement_ids": [],
+      "note": "10일 연속(11/14~11/23) 동일 호스트(cleanup.seoul.go.kr) 차단 지속. 대장이 직접 이 스케줄 작업을 'Run now'로 실행하며 update_environment 승인을 처리해주어야 해제 가능 — 11/22 로그와 동일한 결론."
+    },
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ]
   }
 ]
