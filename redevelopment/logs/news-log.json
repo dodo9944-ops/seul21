@@ -3806,5 +3806,56 @@
       "12425",
       "12423"
     ]
+  },
+  {
+    "run_at_kst": "2026-11-24 06:30",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_summary": "WebSearch로 재개발·재건축·정비사업 관련 뉴스 약 17건 질의(정책 발표 최신순, 인허가·금융 통합지원센터, 공공재개발 수수료 인하, 수평증축 리모델링 안전진단, 서계통합구역 시공사 경쟁, 이주비 대출 LTV, 재건축 대법원 판결, 용적률·분담금, 시공자 선정 유찰, 공사비 갈등·소송, HUG PF보증, 도시정비법·노후계획도시 특별법 시행령 입법예고, 모아타운 신규 지정, 공공재개발 착공 현황 등). curl -sS -A Mozilla/5.0 및 WebFetch로 cleanup.seoul.go.kr 접속 시도 — agent-proxy가 'CONNECT tunnel failed, response 403' 및 getaddrinfo ENOTFOUND로 즉시 차단 확인(11일 연속, 11/14~11/24). 뉴스 원문 개별 기사(housingherald.co.kr, koreancenter.or.kr, newstomato.com)도 WebFetch 시도 시 전부 getaddrinfo ENOTFOUND(세션 네트워크 허용 목록 외부)로 확인되어, WebSearch 서버측 색인·요약과 복수 매체 교차확인만으로 사실관계를 검증함.",
+    "candidate_articles_reviewed": 17,
+    "candidates_excluded_as_duplicate_or_stale": [
+      "국토부 '주택공급 인허가·금융 통합지원센터' 11월 말 출범 — 기존 등록분(news1116a)에 이미 동일 사실관계 등록되어 있어 중복 배제",
+      "공공재개발 사업수수료 3%→1% 한시 인하(국토부·LH, 2027.12.31까지) — 기존 등록분(news1118a, news1120b)에 이미 등록되어 있어 중복 배제",
+      "서울시 수평증축 리모델링 2차 안전진단 기준 조합장 간담회(11/12 MTN 보도) — 기존 등록분(news1114a)에 이미 등록되어 있어 중복 배제",
+      "노후계획도시 정비 특별법 시행규칙 개정(동의서 서식, 10/23 입법예고) — 기존 등록분(news1027a)에 이미 동일 사실관계로 등록되어 있어 중복 배제",
+      "서계통합구역 재개발 시공사 경쟁(삼성물산 불참, GS건설·대우건설 2파전) — 핵심 보도 시점이 11/10 전후로 확인되고 '내년 초 시공사 선정 공고' 등 일정이 미확정 상태라 24~48시간 신선도 기준에 못 미치며, 최종 결론(입찰 참여 확정 여부)이 나지 않아 사실관계 확정성 부족으로 배제",
+      "성수2지구 시공사 선정 총회(DL이앤씨 우선협상대상자) — 검색 결과만으로 11월 총회 실제 개최일(11/21 여부)과 결과를 확정할 수 없어(기사 간 날짜 불일치) 추측 게시 금지 원칙에 따라 배제",
+      "이투데이 '시공사 바꾸자' 계약해지 소송전 종합기사(반포 강남원효성빌라·성남 상대원2구역 등) — 핵심 사례(강남원효성빌라·상대원2구역)가 기존 등록분(news0913c, news1115a)과 사실상 동일해 중복 배제, 기사 자체 발행일도 불명확",
+      "HUG PF·정비사업자금대출보증 확대·보증료 인하 — 검색 결과에 적용 시점이 2026년 1월~8월로 혼재돼 있어 11월 신규성 확인 불가, 신선도 기준 크게 미달로 배제"
+    ],
+    "final_selected": [
+      {
+        "id": "news1124a",
+        "title": "[주요뉴스][뉴스토마토][2026.11.06 보도] 공공재개발 5년, 착공 '0'…국토부·서울시 평행선",
+        "source_url": "https://newstomato.com/ReadNews.aspx?no=1319545",
+        "report_date": "2026-11-06",
+        "reason_selected": "1순위(국토부·서울시 정책 성과를 둘러싼 입장차 및 공공재개발 제도 실효성 문제). 2021년 선정된 서울 공공재개발 후보지 35곳 중 32곳이 추진 중이나 사업시행인가 4곳 외 관리처분인가·착공은 전무하다는 구체적 통계가 처음 등록되는 사실관계이며 기존 등록분에 동일 통계 없음(검증 확인). 뉴스토마토 보도 외 아주경제(2026.11.05, ajunews.com/view/20261105145446202)·이데일리·네이트뉴스로 복수 매체 교차확인됨. 11/4 대통령의 장위동 공공재개발 현장 방문·제도 개선 지시와도 직결되는 시의성 있는 사실관계. 보도일(11/6)이 24~48시간 기준보다 지났으나, 서계통합구역·성수2지구 등 날짜·결과가 불확실한 후보와 이미 등록된 중복 후보들을 제외하면 사실관계가 복수 매체로 충분히 교차확인되면서 신규성이 인정되는 유일한 후보라 선정."
+      }
+    ],
+    "post_success_count": 1,
+    "post_fail_count": 0,
+    "fail_reasons": [],
+    "shortfall_reason": "목표 3건 중 2건 부족. 금일 검색된 후보 대부분이 (1) 기존 등록분과 사실상 동일한 정책·사례의 재탕이거나, (2) 보도 시점·결론이 불확실해 추측 게시 금지 원칙(지시 3번)에 따라 배제 대상이었음(위 candidates_excluded_as_duplicate_or_stale 참조). 품질이 낮거나 사실관계가 불확정인 기사로 억지로 3건을 채우지 않았음. WebFetch가 housingherald.co.kr·koreancenter.or.kr·newstomato.com 등 전문매체 원문 접근에서 모두 세션 네트워크 허용 목록 외부로 차단되어, WebSearch 합성 요약 이상의 1차 확인이 불가능했던 점도 신규 후보 발굴을 제약함.",
+    "commit_sha": "PENDING",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기 (Vercel 배포는 이 작업에서 직접 실행하지 않음 — 2026-09-28 대장님 지시)",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과(구문오류 없음). news1124a 1건에 대해 downloads/news_20261124a.html 신규 생성 확인, pages/library.html fileMap 1건 등록 확인(grep 'news1124a' 1건), index.html newsFileMap 1건 등록 확인. _catKeyMap에 '주요뉴스':'주요뉴스' 매핑 기존 존재 확인. 기존 MOCK.library 항목·downloads/*.html·fileMap/newsFileMap 기존 등록은 삭제·수정하지 않음(오늘자 신규 항목 추가만 수행). mock-data.js 캐시버스터 20261123a→20261124a 49개 HTML 전수 동기화(잔존 구버전 0건, grep 재검증 완료).",
+    "cleanup_mongttang": {
+      "list_access_result": "접속 시도 전 사전 확인 — curl -sS -A Mozilla/5.0 결과 agent-proxy가 'CONNECT tunnel failed, response 403'(no rule or network setting allows this host)로 즉시 차단 확인(11일 연속, 11/14~11/24). WebFetch로도 getaddrinfo ENOTFOUND로 동일 차단 확인. 자동 실행(스케줄) 세션에는 승인자가 없어 update_environment 재요청은 시도하지 않음(직전 11/22·11/23 실행에서 동일 사유로 거부된 선례 확인).",
+      "checked_announcements_count": 0,
+      "new_announcements_count": 0,
+      "posted_announcement_ids": [],
+      "note": "11일 연속(11/14~11/24) 동일 호스트(cleanup.seoul.go.kr) 차단 지속. 대장이 직접 이 스케줄 작업을 'Run now'로 실행하며 update_environment 승인을 처리해주어야 해제 가능 — 11/22·11/23 로그와 동일한 결론."
+    },
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ]
   }
 ]
