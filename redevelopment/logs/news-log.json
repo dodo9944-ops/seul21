@@ -3835,7 +3835,7 @@
     "post_fail_count": 0,
     "fail_reasons": [],
     "shortfall_reason": "목표 3건 중 2건 부족. 금일 검색된 후보 대부분이 (1) 기존 등록분과 사실상 동일한 정책·사례의 재탕이거나, (2) 보도 시점·결론이 불확실해 추측 게시 금지 원칙(지시 3번)에 따라 배제 대상이었음(위 candidates_excluded_as_duplicate_or_stale 참조). 품질이 낮거나 사실관계가 불확정인 기사로 억지로 3건을 채우지 않았음. WebFetch가 housingherald.co.kr·koreancenter.or.kr·newstomato.com 등 전문매체 원문 접근에서 모두 세션 네트워크 허용 목록 외부로 차단되어, WebSearch 합성 요약 이상의 1차 확인이 불가능했던 점도 신규 후보 발굴을 제약함.",
-    "commit_sha": "PENDING",
+    "commit_sha": "13210d62c",
     "pushed_branch": "backup-bitseum-rebrand-20260824",
     "deploy_status": "07:30 일괄배포 대기 (Vercel 배포는 이 작업에서 직접 실행하지 않음 — 2026-09-28 대장님 지시)",
     "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과(구문오류 없음). news1124a 1건에 대해 downloads/news_20261124a.html 신규 생성 확인, pages/library.html fileMap 1건 등록 확인(grep 'news1124a' 1건), index.html newsFileMap 1건 등록 확인. _catKeyMap에 '주요뉴스':'주요뉴스' 매핑 기존 존재 확인. 기존 MOCK.library 항목·downloads/*.html·fileMap/newsFileMap 기존 등록은 삭제·수정하지 않음(오늘자 신규 항목 추가만 수행). mock-data.js 캐시버스터 20261123a→20261124a 49개 HTML 전수 동기화(잔존 구버전 0건, grep 재검증 완료).",
