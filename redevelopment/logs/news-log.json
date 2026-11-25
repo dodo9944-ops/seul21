@@ -3915,5 +3915,56 @@
       "12425",
       "12423"
     ]
+  },
+  {
+    "run_at_kst": "2026-11-26 06:30",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_summary": "WebSearch로 재개발·재건축·정비사업 관련 뉴스 약 20건 질의(서울시·국토부 규제완화 공방, 모아통합기획·모아타운 심의, 도시정비법/재초환 개정 동향, 가로주택정비사업 공사비·분담금, 재건축 시공사 선정, 조합설립/사업시행/관리처분 인가 현황, 법원 판결·분쟁, 공사비 갈등, 빈집 및 소규모주택정비법 입법예고, 안전진단·리모델링, 분양가상한제, 공공재개발 수수료 인하, 정비사업 신속처리 법안 국회 계류 등). curl -sS -A Mozilla/5.0 로 cleanup.seoul.go.kr 접속 시도 — agent-proxy가 'CONNECT tunnel failed, response 403'으로 즉시 차단 확인(13일 연속, 11/14~11/26). 개별 언론사 원문(ajunews.com, seoul.co.kr, hankyung.com, specialtimes.co.kr, supple.kr 등)도 WebFetch 시도 시 전부 getaddrinfo ENOTFOUND(세션 네트워크 허용 목록 외부)로 확인되어, WebSearch 서버측 색인·요약과 복수 매체 교차확인만으로 사실관계를 검증함.",
+    "candidate_articles_reviewed": 20,
+    "candidates_excluded_as_duplicate_or_stale": [
+      "오세훈 시장의 규제 완화 촉구(이주비 대출·지위양도·재초환, 2026.11.24) — 기존 등록분(news1125a)에 이미 등록되어 있어 중복 배제(단, 이에 대한 국토부 11/25 반응·서울시 재반박은 신규 사실관계로 news1126a로 선정)",
+      "공공재개발 사업수수료 3%→1% 인하(2026.11.12 발표) — 기존 등록분(news1120b)에 이미 등록되어 있어 중복 배제",
+      "재초환 제척기간 유권해석·반포현대 부과시한(2026.11.19) — 기존 등록분(news1123a)에 이미 등록되어 있어 중복 배제",
+      "정비사업 공사비 검증 164곳 98.8% 감액(2026.11.11) — 기존 등록분(news1123b)에 이미 등록되어 있어 중복 배제",
+      "공공재개발 5년 착공 0(2026.11.06) — 기존 등록분(news1124a)에 이미 등록되어 있어 중복 배제",
+      "서울시, 조합설립 112일 단축·송파한양1차 사례(2026.11.24) — 기존 등록분(news1125b)에 이미 등록되어 있어 중복 배제",
+      "모아통합기획 후보지 접수(11/2 시작)·소위원회 11/10·11/17 심의 통과 — 보도·심의 시점이 모두 9일 이상 지나 24~48시간 신선도 기준에 크게 못 미쳐 배제",
+      "재건축 안전진단 면제·리모델링 수직증축, 분양가상한제, 빈집 및 소규모주택정비법 하위법령 개정(2025.10.22 입법예고 40일) — 검색 결과에 11월 24~26일 신규 사실관계가 없거나 입법예고 시점이 1년 이상 지나 신선도 기준 미달로 배제",
+      "정비사업 신속처리 법안 국회 계류(대통령 당부 11/5, 민주당 의원 촉구 11/9, 국토부 포럼 입장 11/5) — 보도 시점이 모두 15일 이상 지나 신선도 기준 미달로 배제"
+    ],
+    "final_selected": [
+      {
+        "id": "news1126a",
+        "title": "[주요뉴스][아주경제][2026.11.25 보도] 국토부, 서울시 정비사업 규제완화 요구에 \"신중한 검토 필요\"…서울시 \"구체적 대안 없다\" 재반박",
+        "url": "https://www.ajunews.com/view/20261125165517058",
+        "reason_selected": "1순위(국토부·서울시 정책/제도 공방)에 해당하며, 24~48시간 신선도 기준(2026.11.25 보도)을 충족. 기존 등록분(news1125a, 오세훈 시장의 요구 자체)과는 별개로 국토부의 공식 반응(신중론)과 서울시의 재반박이라는 신규 사실관계를 담고 있어 중복이 아님을 확인(교차확인: 서울신문·한국경제)."
+      }
+    ],
+    "post_success_count": 1,
+    "post_fail_count": 0,
+    "fail_reasons": [],
+    "shortfall_reason": "목표 3건 중 2건 부족. 금일 검색된 후보 대부분이 (1) 기존 등록분(news1120b·news1123a·news1123b·news1124a·news1125a·news1125b)과 사실상 동일한 정책·사례의 재탕이거나, (2) 보도·심의 시점이 9일 이상 지나 24~48시간 신선도 기준에 크게 못 미치거나, (3) 입법예고·시행령 개정 등 검색만으로 사실관계를 확정할 수 없어 추측 게시 금지 원칙(지시 3번)에 따라 배제 대상이었음(위 candidates_excluded_as_duplicate_or_stale 참조). 품질이 낮거나 사실관계가 불확정인 기사로 억지로 3건을 채우지 않았음.",
+    "commit_sha": "PENDING_FILLED_IN_FOLLOWUP_COMMIT",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "07:30 일괄배포 대기 (Vercel 배포는 이 작업에서 직접 실행하지 않음 — 2026-09-28 대장님 지시)",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과(구문오류 없음). news1126a 1건에 대해 downloads/news_20261126a.html 신규 생성 확인, pages/library.html fileMap 1건 등록 확인(grep 'news1126a' 1건), index.html newsFileMap 1건 등록 확인(grep 'news1126a' 1건). _catKeyMap에 '주요뉴스':'주요뉴스' 매핑 기존 존재 확인. 기존 MOCK.library 항목·downloads/*.html·fileMap/newsFileMap 기존 등록은 삭제·수정하지 않음(오늘자 신규 항목 추가만 수행). mock-data.js 캐시버스터 20261125a→20261126a 49개 HTML 전수 동기화(잔존 구버전 0건, grep 재검증 완료).",
+    "cleanup_mongttang": {
+      "list_access_result": "접속 시도 전 사전 확인 — curl -sS -A Mozilla/5.0 결과 agent-proxy가 'CONNECT tunnel failed, response 403'(no rule or network setting allows this host)로 즉시 차단 확인(13일 연속, 11/14~11/26). 자동 실행(스케줄) 세션에는 승인자가 없어 update_environment 재요청은 시도하지 않음(직전 11/22~11/25 실행에서 동일 사유로 거부된 선례 확인).",
+      "checked_announcements_count": 0,
+      "new_announcements_count": 0,
+      "posted_announcement_ids": [],
+      "note": "13일 연속(11/14~11/26) 동일 호스트(cleanup.seoul.go.kr) 차단 지속. 대장이 직접 이 스케줄 작업을 'Run now'로 실행하며 update_environment 승인을 처리해주어야 해제 가능 — 11/22~11/25 로그와 동일한 결론."
+    },
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ]
   }
 ]
