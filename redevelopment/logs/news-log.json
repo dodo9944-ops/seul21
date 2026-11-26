@@ -3995,7 +3995,7 @@
     "post_fail_count": 0,
     "fail_reasons": [],
     "shortfall_reason": "목표 3건 중 2건 부족. 금일은 WebFetch가 모든 외부 호스트(언론사 원문뿐 아니라 google.com 등 범용 도메인 포함)에 대해 getaddrinfo ENOTFOUND로 전면 차단되어, 1차 소스 원문을 직접 열어 세부 사실(날짜·경위·법안 진행 상황 등)을 확정하는 작업이 전혀 불가능했음. 이로 인해 WebSearch 결과 요약만으로는 매체 간 사실관계가 엇갈리거나(예: 고시 번호 불일치) 확정할 수 없는 후보(신월7동1구역 단독입찰, 1기 신도시 재초환, 북아현2구역 벌금 등)는 추측 게시 금지 원칙(지시 3번)에 따라 모두 배제함. 유일하게 9개 이상 매체가 동일한 세부 사실을 일치되게 보도해 WebFetch 없이도 확정 가능했던 한남3구역 착공 1건만 게시함. 품질이 낮거나 사실관계가 불확정인 기사로 억지로 3건을 채우지 않았음.",
-    "commit_sha": "PENDING_FILLED_IN_FOLLOWUP_COMMIT",
+    "commit_sha": "f4f5af42a",
     "pushed_branch": "backup-bitseum-rebrand-20260824",
     "deploy_status": "07:30 일괄배포 대기 (Vercel 배포는 이 작업에서 직접 실행하지 않음 — 2026-09-28 대장님 지시)",
     "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과(구문오류 없음). news1127a 1건에 대해 downloads/news_20261127a.html 신규 생성 확인, pages/library.html fileMap 1건 등록 확인(grep 'news1127a' 1건), index.html newsFileMap 1건 등록 확인(grep 'news1127a' 1건). _catKeyMap에 '주요뉴스':'주요뉴스' 매핑, catDefs에 '주요뉴스' key(keys 배열에 '주요뉴스' 포함) 기존 존재 확인. 기존 MOCK.library 항목·downloads/*.html·fileMap/newsFileMap 기존 등록은 삭제·수정하지 않음(오늘자 신규 항목 추가만 수행). 신규 항목과 기존 13건의 '한남3구역' 언급(s1·pf67·cs01, 모두 다른 카테고리의 과거 데이터)을 대조해 주요뉴스 중복 없음을 확인. 공유 CSS/JS 캐시버전(common.css?v=20260910f, download-view.css?v=20260905a, common.js?v=20260929c)은 기존 news1126a와 동일값 그대로 사용(이 브랜치는 버전 변경 없이 고정값 운영 중이며 본 작업에서 공유 파일 자체를 변경하지 않았으므로 캐시버스터 갱신 대상 아님).",
