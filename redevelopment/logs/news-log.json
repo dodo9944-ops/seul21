@@ -4017,5 +4017,49 @@
       "12425",
       "12423"
     ]
+  },
+  {
+    "run_at_kst": "2026-11-28 06:30",
+    "branch": "backup-bitseum-rebrand-20260824",
+    "search_summary": "WebSearch로 재개발·재건축·정비사업 관련 뉴스 약 18건 질의(재초환·반포현대 부과시한, 모아통합기획 후보지 공모, 공사비 검증 164/166곳 감액, 조합원 지위 양도 제한 완화 검토, 1기 신도시 선도지구, 신속통합기획 후보지, 용적률 1.2배 완화, HUG·HF 이주비 보증, 판결·소송 동향, 노량진·흑석·압구정·여의도·성수 현장 소식, 도시정비법 시행령 입법예고 등). WebFetch로 koreancenter.or.kr, newstomato.com, mediahub.seoul.go.kr, molit.go.kr 원문 열람을 시도했으나 전부 getaddrinfo ENOTFOUND(세션 네트워크 허용 목록 외부)로 차단되어 1차 소스 직접 확인이 불가능했음(전일 로그와 동일한 세션 네트워크 제약). curl -sS -A Mozilla/5.0 로 cleanup.seoul.go.kr 접속 시도 — agent-proxy가 'CONNECT tunnel failed, response 403'으로 즉시 차단 확인(15일 연속, 11/14~11/28).",
+    "candidate_articles_reviewed": 18,
+    "candidates_excluded_as_duplicate_or_stale": [
+      "국토부, 재초환 제척기간 유권해석·반포현대 부과시한 12월30일 확정(코리안센터 등, 2026.11.19 보도) — 기존 등록분(news1123a)과 완전히 동일한 사실관계로 중복 배제",
+      "서울시 '신통기획' 후보지 6곳 추가 선정(독산·대림·쌍문·천호·대조·용두, 헤럴드경제 등, 2026.11.13 보도) — 기존 등록분(news1119a)과 완전히 동일한 사실관계로 중복 배제",
+      "서울시 '모아통합기획' 후보지 공모(접수 2026.11.2~, 6년→4.5년 단축) — 기존 등록분(news0922a·news1027h·news1030a) 3건과 중복이며, 추가로 공모 대상 면적 기준이 매체마다 1만㎡ 이상과 2만㎡ 이상으로 엇갈려(공고문 vs 아이뉴스24·MTN 보도) 신규 사실관계로도 확정 불가(추측 게시 금지 원칙)",
+      "정비사업 공사비 검증 166곳 중 164곳(98.8%) 감액, 4조1600억원(복기왕 의원실 자료, 뉴스토마토 등) — 기존 등록분(news0903c·news1031a·news1123b) 3건과 중복이며, 보도 시점(10.11~10.15)도 매체 간 엇갈려 신선도 기준에도 못 미침",
+      "홍지선 국토부 장관, 투기과열지구 조합원 지위 양도 제한 완화 '검토' 답변(국정감사, 2026.10.23 보도) — 기존 등록분(news1027b)과 완전히 동일한 사실관계로 중복 배제",
+      "1기 신도시 재건축 선도지구·구역지정 동향 — 검색된 자료가 대부분 2024~2025년 시점이거나 2026년 2월 보도까지만 확인되어 24~48시간 신선도 기준에 못 미침",
+      "노량진·흑석·압구정·여의도·성수 등 현장 동향(흑석2구역 통합심의, 노량진6구역 분양 등) — 검색 결과가 모두 2026년 3~5월 보도로 24~48시간 신선도 기준에 못 미치고, 11월 하순 신규 사실관계는 확인되지 않음",
+      "재건축·재개발 판결 동향(잠실 현금청산 소송·능곡1구역 공사비 대법원 확정·신반포2차 상가 비율) — 검색 결과가 모두 2026년 3~8월 보도로 11월 신규 선고 사례는 확인되지 않음",
+      "HUG·HF 이주비 보증 신설 추진 — 8~10월 검토·협의 단계 보도만 확인되고 11월 기준 확정 발표는 검색으로 확인되지 않아 배제"
+    ],
+    "final_selected": [],
+    "post_success_count": 0,
+    "post_fail_count": 0,
+    "fail_reasons": [],
+    "shortfall_reason": "목표 3건 중 3건 전부 부족(0건 게시). 금일 WebSearch로 확인된 후보는 전부 (1) 기존 MOCK.library 등록분과 사실관계가 완전히 동일한 중복 보도이거나, (2) 매체 간 핵심 사실(면적 기준, 보도일자 등)이 엇갈려 추측 게시 금지 원칙(지시 3번)에 따라 확정할 수 없거나, (3) 24~48시간 신선도 기준에 못 미치는 과거(2026.3~8월) 보도였음. WebFetch가 전 외부 호스트에서 getaddrinfo ENOTFOUND로 차단되어 1차 소스 원문으로 세부 사실을 직접 확정하는 작업도 불가능했음. 품질이 낮거나 중복·불확정 기사로 억지로 채우지 않고 0건으로 정상 종료함(지시 2번 '0건이면 게시 없이 로그에 사유를 남기고 정상 종료' 원칙 적용).",
+    "commit_sha": "PENDING",
+    "pushed_branch": "backup-bitseum-rebrand-20260824",
+    "deploy_status": "해당 없음 — 게시 0건으로 배포 대상 변경사항 없음(로그 파일만 커밋)",
+    "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과(구문오류 없음, 본 작업에서 데이터 파일 변경 없음). 신규 게시 항목이 없어 downloads/*.html 생성, fileMap/newsFileMap 등록 작업 자체가 발생하지 않음. 기존 MOCK.library 항목·downloads/*.html·fileMap/newsFileMap 기존 등록은 삭제·수정하지 않음.",
+    "cleanup_mongttang": {
+      "list_access_result": "접속 시도 전 사전 확인 — curl -sS -A Mozilla/5.0 결과 agent-proxy가 'CONNECT tunnel failed, response 403'(no rule or network setting allows this host)로 즉시 차단 확인(15일 연속, 11/14~11/28). 자동 실행(스케줄) 세션에는 승인자가 없어 update_environment 재요청은 시도하지 않음(직전 11/22~11/27 실행에서 동일 사유로 거부된 선례 확인).",
+      "checked_announcements_count": 0,
+      "new_announcements_count": 0,
+      "posted_announcement_ids": [],
+      "note": "15일 연속(11/14~11/28) 동일 호스트(cleanup.seoul.go.kr) 차단 지속. 대장이 직접 이 스케줄 작업을 'Run now'로 실행하며 update_environment 승인을 처리해주어야 해제 가능 — 11/19~11/27 로그와 동일한 결론."
+    },
+    "cleanup_posted": [
+      "13133",
+      "13132",
+      "12525",
+      "12500",
+      "12455",
+      "12446",
+      "12430",
+      "12425",
+      "12423"
+    ]
   }
 ]
