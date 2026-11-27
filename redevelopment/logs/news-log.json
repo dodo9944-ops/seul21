@@ -4039,7 +4039,7 @@
     "post_fail_count": 0,
     "fail_reasons": [],
     "shortfall_reason": "목표 3건 중 3건 전부 부족(0건 게시). 금일 WebSearch로 확인된 후보는 전부 (1) 기존 MOCK.library 등록분과 사실관계가 완전히 동일한 중복 보도이거나, (2) 매체 간 핵심 사실(면적 기준, 보도일자 등)이 엇갈려 추측 게시 금지 원칙(지시 3번)에 따라 확정할 수 없거나, (3) 24~48시간 신선도 기준에 못 미치는 과거(2026.3~8월) 보도였음. WebFetch가 전 외부 호스트에서 getaddrinfo ENOTFOUND로 차단되어 1차 소스 원문으로 세부 사실을 직접 확정하는 작업도 불가능했음. 품질이 낮거나 중복·불확정 기사로 억지로 채우지 않고 0건으로 정상 종료함(지시 2번 '0건이면 게시 없이 로그에 사유를 남기고 정상 종료' 원칙 적용).",
-    "commit_sha": "PENDING",
+    "commit_sha": "c2a4e8123",
     "pushed_branch": "backup-bitseum-rebrand-20260824",
     "deploy_status": "해당 없음 — 게시 0건으로 배포 대상 변경사항 없음(로그 파일만 커밋)",
     "pre_deploy_verification": "node --check redevelopment/assets/data/mock-data.js 통과(구문오류 없음, 본 작업에서 데이터 파일 변경 없음). 신규 게시 항목이 없어 downloads/*.html 생성, fileMap/newsFileMap 등록 작업 자체가 발생하지 않음. 기존 MOCK.library 항목·downloads/*.html·fileMap/newsFileMap 기존 등록은 삭제·수정하지 않음.",
